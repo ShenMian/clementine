@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ¿ØÖÆÌ¨×ÖÌåÊôĞÔ
+// æ§åˆ¶å°å­—ä½“å±æ€§
 
 #ifndef CLEM_ATTRIBUTE_H_
 #define CLEM_ATTRIBUTE_H_

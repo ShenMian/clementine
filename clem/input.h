@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ÊäÈë×é¼ş
+// è¾“å…¥ç»„ä»¶
 
 #ifndef CLEM_INPUT_COMPONENT_H_
 #define CLEM_INPUT_COMPONENT_H_
@@ -23,7 +23,7 @@ public:
 protected:
 	std::map<ushort, ushort> index;
 	std::vector<ushort>      events;
-	ushort                   interval = 150; // ÖØ¸´ÏìÓ¦³ÖĞøÏàÍ¬°´¼üµÄÊ±¼ä
+	ushort                   interval = 150; // é‡å¤å“åº”æŒç»­ç›¸åŒæŒ‰é”®çš„æ—¶é—´
 };
 
 #endif // CLEM_INPUT_COMPONENT_H_

@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ±»¹Û²ìÕß
+// è¢«è§‚å¯Ÿè€…
 
 #include "observable.h"
 #include "observer.h"

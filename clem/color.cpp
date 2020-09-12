@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ¿ØÖÆÌ¨×ÖÌåÊôĞÔ
+// æ§åˆ¶å°å­—ä½“å±æ€§
 
 #include "color.h"
 #include "os.h"
@@ -41,7 +41,7 @@ string Color::operator()(Mode m) const
 Color::Color()
 {
 #ifdef OS_WIN
-	// ¿ªÆô VT100Ä£Ê½
+	// å¼€å¯ VT100æ¨¡å¼
 	DWORD mode;
 	GetConsoleMode(hStdOut, &mode);
 	SetConsoleMode(hStdOut, mode | 4);

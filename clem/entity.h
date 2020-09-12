@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// 游戏对象
+// 娓告垙瀵硅薄
 
 #ifndef CLEM_GAME_OBJECT_H_
 #define CLEM_GAME_OBJECT_H_

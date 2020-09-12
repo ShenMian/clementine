@@ -1,11 +1,11 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ╠ЮрКй╠о╣мЁпео╒
+// Г╪√Х╞▒Ф≈╤ГЁ╩Г╩÷Д©║Ф│╞
 
 #ifndef CLEM_OS_H_
 #define CLEM_OS_H_
 
-// ╤╗рЕ╡ывВо╣мЁ╨Й, сцсзеп╤о╡ывВо╣мЁюЮпм
+// Е╝ Д╧┴Ф⌠█Д╫°ГЁ╩Г╩÷Е╝▐, Г■╗Д╨▌Е┬╓Ф√╜Ф⌠█Д╫°ГЁ╩Г╩÷Г╠╩Е·▀
 #ifdef _WIN32
 	#define OS_WIN // Windows
 	#ifdef _WIN64

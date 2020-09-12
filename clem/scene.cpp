@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ³¡¾°
+// åœºæ™¯
 
 #include "scene.h"
 #include "type.h"
@@ -29,7 +29,7 @@ Scene::Scene(const Size& size)
 {
 	Rect rect(0, this->size.y, size.x, size.y);
 
-  // Ìí¼ÓÄ¬ÈÏÉãÏñ»ú
+  // æ·»åŠ é»˜è®¤æ‘„åƒæœº
 	auto cam = new Camera(*this);
 	cam->setInputRect(rect);
 	cam->setOutputRect(rect);

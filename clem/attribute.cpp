@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ¿ØÖÆÌ¨×ÖÌåÊôĞÔ
+// æ§åˆ¶å°å­—ä½“å±æ€§
 
 #include "attribute.h"
 #include <stdio.h>
@@ -176,7 +176,7 @@ Attribute::Attribute()
 
 Attribute::Attribute(ushort attr)
 {
-	// »ñÈ¡µ±Ç°»º³åÇø×Ö·ûÊôĞÔ
+	// è·å–å½“å‰ç¼“å†²åŒºå­—ç¬¦å±æ€§
 	CONSOLE_SCREEN_BUFFER_INFO bufInfo;
 
 	auto ret = GetConsoleScreenBufferInfo(hStdOut, &bufInfo);
@@ -213,7 +213,7 @@ void Attribute::complie(ushort attr)
 	switch(mode)
 	{
 	case mode::bold:
-		attribute |= FOREGROUND_INTENSITY; // Ç°¾°É«¼ÓÇ¿
+		attribute |= FOREGROUND_INTENSITY; // å‰æ™¯è‰²åŠ å¼º
 		break;
 
 	case mode::underline:

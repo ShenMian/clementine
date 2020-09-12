@@ -11,11 +11,11 @@
 #include <clem/scene.h>
 #include <clem/camera.h>
 
-// äÖÈ¾Æ÷
+// æ¸²æŸ“å™¨
 #include <clem/renderer.h>
 #include <clem/common_renderer.h>
 
-// ÎïÀíÒıÇæ
+// ç‰©ç†å¼•æ“
 #include <clem/physics.h>
 #include <clem/simple_physics.h>
 
