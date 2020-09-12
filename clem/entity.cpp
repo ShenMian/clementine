@@ -5,6 +5,7 @@
 #include "entity.h"
 #include "scene.h"
 #include "component.h"
+#include <algorithm>
 #include <assert.h>
 
 Entity::Entity(const Texture& texture)
