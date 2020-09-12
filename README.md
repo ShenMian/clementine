@@ -7,6 +7,8 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/shenmian/clementine/badge)](https://www.codefactor.io/repository/github/shenmian/clementine)
 [![Forks](https://img.shields.io/github/forks/ShenMian/Clementine)](https://github.com/ShenMian/Clementine/network/members)
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ShenMian/Clementine)
+
 ### 简介
 C++命令行游戏框架.  
 
