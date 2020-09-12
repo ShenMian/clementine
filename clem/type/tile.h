@@ -6,8 +6,9 @@
 
 #include <clem/attribute.h>
 
-struct Tile
+class Tile
 {
+public:
 	char      ch;
 	Attribute attr;
 

@@ -5,8 +5,8 @@
 #ifndef CLEM_TYPE_RECT_HPP_
 #define CLEM_TYPE_RECT_HPP_
 
-struct Size;
-struct Vector;
+class Size;
+class Vector;
 
 typedef unsigned short ushort;
 

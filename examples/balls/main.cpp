@@ -5,6 +5,9 @@
 #include <time.h>
 #include <clem/clem.hpp>
 
+#include <clem/color.h>
+#include <iostream>
+
 #ifdef OS_WIN
 #include <windows.h>
 #define sleep(ms) Sleep(ms)
@@ -19,7 +22,7 @@ const int num = 5;
 
 int main()
 {
-	// Terminal::Cursor::hide();
+	Terminal::Cursor::hide();
 	srand(time(nullptr));
 
 	Scene          scene(Terminal::getWindowSize());

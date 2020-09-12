@@ -10,7 +10,7 @@
 #include <vector>
 
 class Entity;
-struct Rect;
+class Rect;
 
 class SimplePhysics : public Physics
 {

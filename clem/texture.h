@@ -10,9 +10,9 @@ typedef unsigned short ushort;
 #include <vector>
 #include "type.h"
 
-struct Tile;
-struct Rect;
-struct Point;
+class Tile;
+class Rect;
+class Point;
 
 class Texture
 {

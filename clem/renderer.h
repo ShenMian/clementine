@@ -8,7 +8,7 @@
 #include "type.h"
 
 class Texture;
-struct Vector;
+class Vector;
 
 class Renderer
 {
