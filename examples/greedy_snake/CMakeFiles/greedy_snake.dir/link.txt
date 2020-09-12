@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/greedy_snake.dir/main.cpp.o -o greedy_snake   -L"/home/sms/Clementine/D:/Program Files/Program/boost_1_73_0/stage/lib"  -L/home/sms/Clementine/lib  -Wl,-rpath,"/home/sms/Clementine/D:/Program Files/Program/boost_1_73_0/stage/lib:/home/sms/Clementine/lib" ../../lib/libclementine.a -lncurses 
