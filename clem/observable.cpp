@@ -15,14 +15,13 @@ void Observable::notifyObserver() const
 
 void Observable::addObserver(Observer* o)
 {
+	assert(o != nullptr);
 	observers.push_back(o);
 }
 
 void Observable::removeObserver(Observer* o)
 {
 	auto it = std::find(observers.begin(), observers.end(), o);
-	if(it != observers.end())
-		observers.erase(it);
-	else
-		assert(false);
+	assert(it == observers.end());
+	observers.erase(it);
 }
