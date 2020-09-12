@@ -5,6 +5,7 @@
 #include "entity.h"
 #include "scene.h"
 #include "component.h"
+#include <assert.h>
 
 Entity::Entity(const Texture& texture)
 		: texture(texture)
@@ -24,7 +25,11 @@ void Entity::addComponent(Component* com)
 
 void Entity::removeComponent(Component* com)
 {
-	// TODO
+	auto it = std::find(components.begin(), components.end(), com);
+	if(it != components.end())
+		components.erase(it);
+	else
+		assert(false);
 }
 
 void Entity::setPosition(const Point& pos)
