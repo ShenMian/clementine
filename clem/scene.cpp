@@ -38,6 +38,8 @@ Scene::Scene(const Size& size)
 
 void Scene::update()
 {
+	assert(physics != nullptr);
+
 	for(auto in : inputs)
 		in->update();
 
@@ -52,12 +54,15 @@ void Scene::update()
 
 void Scene::render()
 {
+	assert(renderer != nullptr);
+
   for(auto cam : cameras)
 		cam->render(*renderer, entitys);
 }
 
 void Scene::addEntity(Entity* obj)
 {
+	assert(obj != nullptr);
 	entitys.push_back(obj);
 }
 
@@ -72,6 +77,7 @@ void Scene::removeEntity(Entity* entity)
 
 void Scene::addInput(Input* in)
 {
+	assert(in != nullptr);
 	inputs.push_back(in);
 }
 
