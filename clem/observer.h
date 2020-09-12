@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ¹Û²ìÕß
+// è§‚å¯Ÿè€…
 
 #ifndef CLEM_OBSERVER_H_
 #define CLEM_OBSERVER_H_

@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ³¡¾°ÉãÏñ»ú
+// åœºæ™¯æ‘„åƒæœº
 
 #include "camera.h"
 #include <vector>

@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// 数据类型
+// 基本数据类型
 
 #ifndef CLEM_TYPE_TYPE_HPP_
 #define CLEM_TYPE_TYPE_HPP_

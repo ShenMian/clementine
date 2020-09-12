@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ¼üÅÌÊäÈë
+// é”®ç›˜è¾“å…¥
 
 #include "keyboard_input.h"
 #include <time.h>
@@ -25,7 +25,7 @@ void KeyboardInput::update()
 		lastTime   = now;
 	}
 
-	// TODO: Í¨Öª¹Û²ìÕß
+	// TODO: é€šçŸ¥è§‚å¯Ÿè€…
 }
 
 #ifdef OS_LINUX

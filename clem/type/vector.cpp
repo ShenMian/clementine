@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ÏòÁ¿
+// 2DçŸ¢é‡
 
 #include "vector.h"
 #include <math.h>

@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ¾ØÐÎ
+// çŸ©å½¢
 
 #ifndef CLEM_TYPE_RECT_HPP_
 #define CLEM_TYPE_RECT_HPP_

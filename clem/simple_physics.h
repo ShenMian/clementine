@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ¼òÒ×ÎïÀíÒıÇæ
+// ç®€æ˜“ç‰©ç†å¼•æ“
 
 #ifndef CLEM_SIMPLE_PHYSICS_H_
 #define CLEM_SIMPLE_PHYSICS_H_

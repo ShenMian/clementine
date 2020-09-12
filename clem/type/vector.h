@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// œÚ¡ø
+// 2DÁü¢Èáè
 
 #ifndef CLEM_TYPE_VECTOR_H_
 #define CLEM_TYPE_VECTOR_H_

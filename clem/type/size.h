@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ¥Û–°
+// Â§ßÂ∞è
 
 #ifndef CLEM_TYPE_SIZE_H_
 #define CLEM_TYPE_SIZE_H_

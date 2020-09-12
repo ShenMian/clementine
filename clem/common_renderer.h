@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// Í¨ÓÃäÖÈ¾Æ÷
+// é€šç”¨æ¸²æŸ“å™¨
 
 #ifndef CLEM_COMMON_RENDERER_H_
 #define CLEM_COMMON_RENDERER_H_
