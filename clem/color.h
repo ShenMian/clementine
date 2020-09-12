@@ -2,6 +2,9 @@
 // License(Apache-2.0)
 // 控制台字体属性
 
+#ifndef CLEM_COLOR_H_
+#define CLEM_COLOR_H_
+
 #include <map>
 #include <string>
 
@@ -58,3 +61,5 @@ enum class Mode
 	underscore = underline,
 	reverse    = 7
 };
+
+#endif // CLEM_COLOR_H_
