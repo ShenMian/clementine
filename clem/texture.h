@@ -28,12 +28,12 @@ public:
 
 	const Tile& operator[](const Point& pos) const;
 
-	const Size& size() const;
-	void        resize(Size size);
+	const Size& getSize() const;
+	void        setSize(Size size);
 	void        clear();
 
 private:
-	Size              size_;
+	Size              size;
 	std::vector<Tile> tiles;
 };
 

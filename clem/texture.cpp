@@ -17,9 +17,8 @@ Texture::Texture(Size size)
 }
 
 Texture::Texture(Size size, const Tile& tile)
-		: size_(size)
 {
-	resize(size);
+	setSize(size);
 
 	for(int i = 0; i < size.area(); i++)
 		tiles[i] = tile;
@@ -32,8 +31,8 @@ void Texture::draw(const Tile& tile, const Point& pos)
 
 void Texture::draw(const Texture& texture, const Point& pos)
 {
-	for(ushort i = 0; i < texture.size().y; i++)
-		for(ushort j = 0; j < texture.size().x; j++)
+	for(ushort i = 0; i < texture.getSize().y; i++)
+		for(ushort j = 0; j < texture.getSize().x; j++)
 			draw(texture[pos], {pos.x + i, pos.y + j});
 }
 
@@ -51,25 +50,25 @@ void Texture::drawRect(const Tile& tile, const Rect& rect)
 	}
 }
 
-const Size& Texture::size() const
+const Size& Texture::getSize() const
 {
-	return size_;
+	return size;
 }
 
-void Texture::resize(Size size)
+void Texture::setSize(Size size)
 {
-	size_ = size;
-	tiles.resize(size_.area());
+	size = size;
+	tiles.resize(size.area());
 }
 
 void Texture::clear()
 {
 	tiles.clear();
-	tiles.resize(size_.area());
+	tiles.resize(size.area());
 }
 
 const Tile& Texture::operator[](const Point& pos) const
 {
-	assert(pos.x <= size_.x && pos.y <= size_.y);
+	assert(pos.x <= size.x && pos.y <= size.y);
 	return tiles[pos.x + (pos.y * pos.x)];
 }
