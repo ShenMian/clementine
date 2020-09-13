@@ -10,52 +10,43 @@
 
 typedef unsigned short ushort;
 
-enum class Fore;
-enum class Back;
-enum class Mode;
-
 class Color
 {
 public:
-	static Color& instance();
-
-	std::string operator()(Fore f) const;
-	std::string operator()(Back b) const;
-	std::string operator()(Mode m) const;
+	Color(ushort attr);
+	void on() const;
+	void off() const;
 
 private:
-	Color();
+	ushort attribute;
+	static std::map<ushort, std::string> index;
+	std::string compile(ushort attr) const;
 };
 
-enum class Fore
+enum
 {
-	black,
-	red,
-	green,
-	yellow,
-	blue,
-	purple,
-	cyan,
-	aqua = cyan,
-	white
-};
+	fore_black,
+	fore_red,
+	fore_green,
+	fore_yellow,
+	fore_blue,
+	fore_purple,
+	fore_cyan,
+	fore_aqua = fore_cyan,
+	fore_white,
+	fore_normal,
 
-enum class Back
-{
-	black,
-	red,
-	green,
-	yellow,
-	blue,
-	purple,
-	cyan,
-	aqua = cyan,
-	white
-};
+	back_black,
+	back_red,
+	back_green,
+	back_yellow,
+	back_blue,
+	back_purple,
+	back_cyan,
+	back_aqua = back_cyan,
+	back_white,
+	back_normal,
 
-enum class Mode
-{
-	normal     = 0,
 	bold       = 1,
 	underline  = 4,
 	underscore = underline,

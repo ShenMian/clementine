@@ -22,6 +22,12 @@ const int num = 5;
 
 int main()
 {
+	Color green(fore_green);
+	green.on();
+	cout << "Green" << endl;
+	green.off();
+	getchar(); getchar();
+
 	Terminal::Cursor::hide();
 	srand(time(nullptr));
 
