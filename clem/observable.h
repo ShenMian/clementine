@@ -16,8 +16,12 @@ public:
 	virtual void addObserver(Observer* o);
 	virtual void removeObserver(Observer* o);
 
+	void setDirty(bool);
+	bool isDirty() const;
+
 private:
 	std::vector<Observer*> observers;
+	bool                   dirty;
 };
 
 #endif // CLEM_OBSERVABLE_H_

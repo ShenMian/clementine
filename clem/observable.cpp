@@ -9,8 +9,9 @@
 
 void Observable::notifyObserver() const
 {
-	for(auto o : observers)
-		o->onNotify(*this);
+	if(isDirty())
+		for(auto o : observers)
+			o->onNotify(*this);
 }
 
 void Observable::addObserver(Observer* o)
@@ -25,3 +26,14 @@ void Observable::removeObserver(Observer* o)
 	assert(it == observers.end());
 	observers.erase(it);
 }
+
+void Observable::setDirty(bool flag)
+{
+	dirty = flag;
+}
+
+bool Observable::isDirty() const
+{
+	return dirty;
+}
+
