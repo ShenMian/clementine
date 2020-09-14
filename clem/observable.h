@@ -19,9 +19,11 @@ public:
 	void setDirty(bool);
 	bool isDirty() const;
 
-private:
+protected:
 	std::vector<Observer*> observers;
-	bool                   dirty;
+
+private:
+	bool dirty;
 };
 
 #endif // CLEM_OBSERVABLE_H_

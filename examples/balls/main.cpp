@@ -4,8 +4,6 @@
 
 #include <time.h>
 #include <clem/clem.hpp>
-
-#include <clem/color.h>
 #include <iostream>
 
 #ifdef OS_WIN
