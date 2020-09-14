@@ -47,10 +47,10 @@ enum
 	back_white,
 	back_normal,
 
-	bold       = 1,
-	underline  = 4,
-	underscore = underline,
-	reverse    = 7
+	mode_bold       = 1,
+	mode_underline  = 4,
+	mode_underscore = mode_underline,
+	mode_reverse    = 7
 };
 
 #endif // CLEM_COLOR_H_

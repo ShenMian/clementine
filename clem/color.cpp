@@ -63,34 +63,3 @@ string Color::compile(ushort attr) const
 	return str;
 }
 
-/*
-string Color::operator()(Fore f) const
-{
-	auto attr = static_cast<int>(f);
-	assert(attr <= 8);
-
-	return "\x1b[3" + to_string(attr) + "m";
-}
-
-string Color::operator()(Back b) const
-{
-	auto attr = static_cast<int>(b);
-	assert(attr <= 8);
-
-	return "\x1b[4" + to_string(attr) + "m";
-}
-
-string Color::operator()(Mode m) const
-{
-	auto attr = static_cast<int>(m);
-
-	return "\x1b[" + to_string(attr) + "m";
-}
-
-#ifdef OS_WIN
-	// 开启 VT100模式
-	DWORD mode;
-	GetConsoleMode(hStdOut, &mode);
-	SetConsoleMode(hStdOut, mode | 4);
-#endif
-*/
