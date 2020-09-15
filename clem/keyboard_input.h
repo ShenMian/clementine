@@ -10,8 +10,6 @@
 class KeyboardInput : public Input
 {
 public:
-	void update() override;
-
 	void scan();
 };
 

@@ -1,0 +1,263 @@
+The system is: Android - 4.14.116 - aarch64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /data/data/com.termux/files/usr/bin/cc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is Clang, found in "/data/data/com.termux/files/home/Clementine/build/CMakeFiles/3.18.2/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /data/data/com.termux/files/usr/bin/c++ 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is Clang, found in "/data/data/com.termux/files/home/Clementine/build/CMakeFiles/3.18.2/CompilerIdCXX/a.out"
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /data/data/com.termux/files/home/Clementine/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/data/data/com.termux/files/usr/bin/make cmTC_533d4/fast && /data/data/com.termux/files/usr/bin/make  -f CMakeFiles/cmTC_533d4.dir/build.make CMakeFiles/cmTC_533d4.dir/build
+make[1]: Entering directory '/data/data/com.termux/files/home/Clementine/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_533d4.dir/CMakeCCompilerABI.c.o
+/data/data/com.termux/files/usr/bin/cc   -g   -v -o CMakeFiles/cmTC_533d4.dir/CMakeCCompilerABI.c.o -c /data/data/com.termux/files/usr/share/cmake-3.18/Modules/CMakeCCompilerABI.c
+clang version 10.0.1 (https://github.com/termux/termux-packages 2f1431d824f449f09ef50aa365cdd7ed5b8c159d)
+Target: aarch64-unknown-linux-android
+Thread model: posix
+InstalledDir: /data/data/com.termux/files/usr/bin
+ (in-process)
+ "/data/data/com.termux/files/usr/bin/clang-10" -cc1 -triple aarch64-unknown-linux-android -emit-obj -mrelax-all -mnoexecstack -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mthread-model posix -mframe-pointer=non-leaf -fno-rounding-math -masm-verbose -mconstructor-aliases -target-cpu generic -target-feature +neon -target-abi aapcs -mllvm -aarch64-fix-cortex-a53-835769=1 -fallow-half-arguments-and-returns -dwarf-column-info -fno-split-dwarf-inlining -debug-info-kind=limited -dwarf-version=4 -debugger-tuning=gdb -v -resource-dir /data/data/com.termux/files/usr/lib/clang/10.0.1 -isysroot /data/data/com.termux/files -internal-isystem /data/data/com.termux/files/usr/local/include -internal-isystem /data/data/com.termux/files/usr/lib/clang/10.0.1/include -internal-externc-isystem /data/data/com.termux/files/usr/include/aarch64-linux-android -internal-externc-isystem /data/data/com.termux/files/include -internal-externc-isystem /data/data/com.termux/files/usr/include -fdebug-compilation-dir /data/data/com.termux/files/home/Clementine/build/CMakeFiles/CMakeTmp -ferror-limit 19 -fmessage-length 0 -fno-signed-char -fgnuc-version=4.2.1 -fobjc-runtime=gcc -fdiagnostics-show-option -o CMakeFiles/cmTC_533d4.dir/CMakeCCompilerABI.c.o -x c /data/data/com.termux/files/usr/share/cmake-3.18/Modules/CMakeCCompilerABI.c
+clang -cc1 version 10.0.1 based upon LLVM 10.0.1 default target aarch64-linux-android
+ignoring nonexistent directory "/data/data/com.termux/files/usr/local/include"
+ignoring nonexistent directory "/data/data/com.termux/files/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /data/data/com.termux/files/usr/lib/clang/10.0.1/include
+ /data/data/com.termux/files/usr/include/aarch64-linux-android
+ /data/data/com.termux/files/usr/include
+End of search list.
+Linking C executable cmTC_533d4
+/data/data/com.termux/files/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_533d4.dir/link.txt --verbose=1
+/data/data/com.termux/files/usr/bin/cc -g  -v CMakeFiles/cmTC_533d4.dir/CMakeCCompilerABI.c.o -o cmTC_533d4 
+clang version 10.0.1 (https://github.com/termux/termux-packages 2f1431d824f449f09ef50aa365cdd7ed5b8c159d)
+Target: aarch64-unknown-linux-android
+Thread model: posix
+InstalledDir: /data/data/com.termux/files/usr/bin
+ "/data/data/com.termux/files/usr/bin/aarch64-linux-android-ld" --sysroot=/data/data/com.termux/files -pie -z noexecstack -EL --fix-cortex-a53-843419 --warn-shared-textrel -z now -z relro -z max-page-size=4096 --hash-style=gnu --enable-new-dtags -rpath=/data/data/com.termux/files/usr/lib --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_533d4 /data/data/com.termux/files/usr/lib/crtbegin_dynamic.o -L/data/data/com.termux/files/usr/lib -L/system/lib64 CMakeFiles/cmTC_533d4.dir/CMakeCCompilerABI.c.o -lgcc -ldl -lc -lgcc -ldl /data/data/com.termux/files/usr/lib/crtend_android.o
+make[1]: Leaving directory '/data/data/com.termux/files/home/Clementine/build/CMakeFiles/CMakeTmp'
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/data/data/com.termux/files/usr/lib/clang/10.0.1/include]
+    add: [/data/data/com.termux/files/usr/include/aarch64-linux-android]
+    add: [/data/data/com.termux/files/usr/include]
+  end of search list found
+  collapse include dir [/data/data/com.termux/files/usr/lib/clang/10.0.1/include] ==> [/data/data/com.termux/files/usr/lib/clang/10.0.1/include]
+  collapse include dir [/data/data/com.termux/files/usr/include/aarch64-linux-android] ==> [/data/data/com.termux/files/usr/include/aarch64-linux-android]
+  collapse include dir [/data/data/com.termux/files/usr/include] ==> [/data/data/com.termux/files/usr/include]
+  implicit include dirs: [/data/data/com.termux/files/usr/lib/clang/10.0.1/include;/data/data/com.termux/files/usr/include/aarch64-linux-android;/data/data/com.termux/files/usr/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /data/data/com.termux/files/home/Clementine/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/data/data/com.termux/files/usr/bin/make cmTC_533d4/fast && /data/data/com.termux/files/usr/bin/make  -f CMakeFiles/cmTC_533d4.dir/build.make CMakeFiles/cmTC_533d4.dir/build]
+  ignore line: [make[1]: Entering directory '/data/data/com.termux/files/home/Clementine/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_533d4.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/data/data/com.termux/files/usr/bin/cc   -g   -v -o CMakeFiles/cmTC_533d4.dir/CMakeCCompilerABI.c.o -c /data/data/com.termux/files/usr/share/cmake-3.18/Modules/CMakeCCompilerABI.c]
+  ignore line: [clang version 10.0.1 (https://github.com/termux/termux-packages 2f1431d824f449f09ef50aa365cdd7ed5b8c159d)]
+  ignore line: [Target: aarch64-unknown-linux-android]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /data/data/com.termux/files/usr/bin]
+  ignore line: [ (in-process)]
+  ignore line: [ "/data/data/com.termux/files/usr/bin/clang-10" -cc1 -triple aarch64-unknown-linux-android -emit-obj -mrelax-all -mnoexecstack -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mthread-model posix -mframe-pointer=non-leaf -fno-rounding-math -masm-verbose -mconstructor-aliases -target-cpu generic -target-feature +neon -target-abi aapcs -mllvm -aarch64-fix-cortex-a53-835769=1 -fallow-half-arguments-and-returns -dwarf-column-info -fno-split-dwarf-inlining -debug-info-kind=limited -dwarf-version=4 -debugger-tuning=gdb -v -resource-dir /data/data/com.termux/files/usr/lib/clang/10.0.1 -isysroot /data/data/com.termux/files -internal-isystem /data/data/com.termux/files/usr/local/include -internal-isystem /data/data/com.termux/files/usr/lib/clang/10.0.1/include -internal-externc-isystem /data/data/com.termux/files/usr/include/aarch64-linux-android -internal-externc-isystem /data/data/com.termux/files/include -internal-externc-isystem /data/data/com.termux/files/usr/include -fdebug-compilation-dir /data/data/com.termux/files/home/Clementine/build/CMakeFiles/CMakeTmp -ferror-limit 19 -fmessage-length 0 -fno-signed-char -fgnuc-version=4.2.1 -fobjc-runtime=gcc -fdiagnostics-show-option -o CMakeFiles/cmTC_533d4.dir/CMakeCCompilerABI.c.o -x c /data/data/com.termux/files/usr/share/cmake-3.18/Modules/CMakeCCompilerABI.c]
+  ignore line: [clang -cc1 version 10.0.1 based upon LLVM 10.0.1 default target aarch64-linux-android]
+  ignore line: [ignoring nonexistent directory "/data/data/com.termux/files/usr/local/include"]
+  ignore line: [ignoring nonexistent directory "/data/data/com.termux/files/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /data/data/com.termux/files/usr/lib/clang/10.0.1/include]
+  ignore line: [ /data/data/com.termux/files/usr/include/aarch64-linux-android]
+  ignore line: [ /data/data/com.termux/files/usr/include]
+  ignore line: [End of search list.]
+  ignore line: [Linking C executable cmTC_533d4]
+  ignore line: [/data/data/com.termux/files/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_533d4.dir/link.txt --verbose=1]
+  ignore line: [/data/data/com.termux/files/usr/bin/cc -g  -v CMakeFiles/cmTC_533d4.dir/CMakeCCompilerABI.c.o -o cmTC_533d4 ]
+  ignore line: [clang version 10.0.1 (https://github.com/termux/termux-packages 2f1431d824f449f09ef50aa365cdd7ed5b8c159d)]
+  ignore line: [Target: aarch64-unknown-linux-android]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /data/data/com.termux/files/usr/bin]
+  link line: [ "/data/data/com.termux/files/usr/bin/aarch64-linux-android-ld" --sysroot=/data/data/com.termux/files -pie -z noexecstack -EL --fix-cortex-a53-843419 --warn-shared-textrel -z now -z relro -z max-page-size=4096 --hash-style=gnu --enable-new-dtags -rpath=/data/data/com.termux/files/usr/lib --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_533d4 /data/data/com.termux/files/usr/lib/crtbegin_dynamic.o -L/data/data/com.termux/files/usr/lib -L/system/lib64 CMakeFiles/cmTC_533d4.dir/CMakeCCompilerABI.c.o -lgcc -ldl -lc -lgcc -ldl /data/data/com.termux/files/usr/lib/crtend_android.o]
+    arg [/data/data/com.termux/files/usr/bin/aarch64-linux-android-ld] ==> ignore
+    arg [--sysroot=/data/data/com.termux/files] ==> ignore
+    arg [-pie] ==> ignore
+    arg [-znoexecstack] ==> ignore
+    arg [-EL] ==> ignore
+    arg [--fix-cortex-a53-843419] ==> ignore
+    arg [--warn-shared-textrel] ==> ignore
+    arg [-znow] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-zmax-page-size=4096] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--enable-new-dtags] ==> ignore
+    arg [-rpath=/data/data/com.termux/files/usr/lib] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [aarch64linux] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/system/bin/linker64] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_533d4] ==> ignore
+    arg [/data/data/com.termux/files/usr/lib/crtbegin_dynamic.o] ==> ignore
+    arg [-L/data/data/com.termux/files/usr/lib] ==> dir [/data/data/com.termux/files/usr/lib]
+    arg [-L/system/lib64] ==> dir [/system/lib64]
+    arg [CMakeFiles/cmTC_533d4.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [-ldl] ==> lib [dl]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-ldl] ==> lib [dl]
+    arg [/data/data/com.termux/files/usr/lib/crtend_android.o] ==> ignore
+  collapse library dir [/data/data/com.termux/files/usr/lib] ==> [/data/data/com.termux/files/usr/lib]
+  collapse library dir [/system/lib64] ==> [/system/lib64]
+  implicit libs: [gcc;dl;c;gcc;dl]
+  implicit dirs: [/data/data/com.termux/files/usr/lib;/system/lib64]
+  implicit fwks: []
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /data/data/com.termux/files/home/Clementine/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/data/data/com.termux/files/usr/bin/make cmTC_e3005/fast && /data/data/com.termux/files/usr/bin/make  -f CMakeFiles/cmTC_e3005.dir/build.make CMakeFiles/cmTC_e3005.dir/build
+make[1]: Entering directory '/data/data/com.termux/files/home/Clementine/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_e3005.dir/CMakeCXXCompilerABI.cpp.o
+/data/data/com.termux/files/usr/bin/c++   -g   -v -o CMakeFiles/cmTC_e3005.dir/CMakeCXXCompilerABI.cpp.o -c /data/data/com.termux/files/usr/share/cmake-3.18/Modules/CMakeCXXCompilerABI.cpp
+clang version 10.0.1 (https://github.com/termux/termux-packages 2f1431d824f449f09ef50aa365cdd7ed5b8c159d)
+Target: aarch64-unknown-linux-android
+Thread model: posix
+InstalledDir: /data/data/com.termux/files/usr/bin
+ (in-process)
+ "/data/data/com.termux/files/usr/bin/clang-10" -cc1 -triple aarch64-unknown-linux-android -emit-obj -mrelax-all -mnoexecstack -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mthread-model posix -mframe-pointer=non-leaf -fno-rounding-math -masm-verbose -mconstructor-aliases -target-cpu generic -target-feature +neon -target-abi aapcs -mllvm -aarch64-fix-cortex-a53-835769=1 -fallow-half-arguments-and-returns -dwarf-column-info -fno-split-dwarf-inlining -debug-info-kind=limited -dwarf-version=4 -debugger-tuning=gdb -v -resource-dir /data/data/com.termux/files/usr/lib/clang/10.0.1 -isysroot /data/data/com.termux/files -internal-isystem /data/data/com.termux/files/usr/include/c++/v1 -internal-isystem /data/data/com.termux/files/usr/local/include -internal-isystem /data/data/com.termux/files/usr/lib/clang/10.0.1/include -internal-externc-isystem /data/data/com.termux/files/usr/include/aarch64-linux-android -internal-externc-isystem /data/data/com.termux/files/include -internal-externc-isystem /data/data/com.termux/files/usr/include -fdeprecated-macro -fdebug-compilation-dir /data/data/com.termux/files/home/Clementine/build/CMakeFiles/CMakeTmp -ferror-limit 19 -fmessage-length 0 -fno-signed-char -fgnuc-version=4.2.1 -fobjc-runtime=gcc -fcxx-exceptions -fexceptions -fdiagnostics-show-option -o CMakeFiles/cmTC_e3005.dir/CMakeCXXCompilerABI.cpp.o -x c++ /data/data/com.termux/files/usr/share/cmake-3.18/Modules/CMakeCXXCompilerABI.cpp
+clang -cc1 version 10.0.1 based upon LLVM 10.0.1 default target aarch64-linux-android
+ignoring nonexistent directory "/data/data/com.termux/files/usr/local/include"
+ignoring nonexistent directory "/data/data/com.termux/files/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /data/data/com.termux/files/usr/include/c++/v1
+ /data/data/com.termux/files/usr/lib/clang/10.0.1/include
+ /data/data/com.termux/files/usr/include/aarch64-linux-android
+ /data/data/com.termux/files/usr/include
+End of search list.
+Linking CXX executable cmTC_e3005
+/data/data/com.termux/files/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e3005.dir/link.txt --verbose=1
+/data/data/com.termux/files/usr/bin/c++ -g  -v CMakeFiles/cmTC_e3005.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_e3005 
+clang version 10.0.1 (https://github.com/termux/termux-packages 2f1431d824f449f09ef50aa365cdd7ed5b8c159d)
+Target: aarch64-unknown-linux-android
+Thread model: posix
+InstalledDir: /data/data/com.termux/files/usr/bin
+ "/data/data/com.termux/files/usr/bin/aarch64-linux-android-ld" --sysroot=/data/data/com.termux/files -pie -z noexecstack -EL --fix-cortex-a53-843419 --warn-shared-textrel -z now -z relro -z max-page-size=4096 --hash-style=gnu --enable-new-dtags -rpath=/data/data/com.termux/files/usr/lib --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_e3005 /data/data/com.termux/files/usr/lib/crtbegin_dynamic.o -L/data/data/com.termux/files/usr/lib -L/system/lib64 CMakeFiles/cmTC_e3005.dir/CMakeCXXCompilerABI.cpp.o -lc++_shared -lgcc -ldl -lm -lc -lgcc -ldl /data/data/com.termux/files/usr/lib/crtend_android.o
+make[1]: Leaving directory '/data/data/com.termux/files/home/Clementine/build/CMakeFiles/CMakeTmp'
+
+
+
+Parsed CXX implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/data/data/com.termux/files/usr/include/c++/v1]
+    add: [/data/data/com.termux/files/usr/lib/clang/10.0.1/include]
+    add: [/data/data/com.termux/files/usr/include/aarch64-linux-android]
+    add: [/data/data/com.termux/files/usr/include]
+  end of search list found
+  collapse include dir [/data/data/com.termux/files/usr/include/c++/v1] ==> [/data/data/com.termux/files/usr/include/c++/v1]
+  collapse include dir [/data/data/com.termux/files/usr/lib/clang/10.0.1/include] ==> [/data/data/com.termux/files/usr/lib/clang/10.0.1/include]
+  collapse include dir [/data/data/com.termux/files/usr/include/aarch64-linux-android] ==> [/data/data/com.termux/files/usr/include/aarch64-linux-android]
+  collapse include dir [/data/data/com.termux/files/usr/include] ==> [/data/data/com.termux/files/usr/include]
+  implicit include dirs: [/data/data/com.termux/files/usr/include/c++/v1;/data/data/com.termux/files/usr/lib/clang/10.0.1/include;/data/data/com.termux/files/usr/include/aarch64-linux-android;/data/data/com.termux/files/usr/include]
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /data/data/com.termux/files/home/Clementine/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/data/data/com.termux/files/usr/bin/make cmTC_e3005/fast && /data/data/com.termux/files/usr/bin/make  -f CMakeFiles/cmTC_e3005.dir/build.make CMakeFiles/cmTC_e3005.dir/build]
+  ignore line: [make[1]: Entering directory '/data/data/com.termux/files/home/Clementine/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_e3005.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/data/data/com.termux/files/usr/bin/c++   -g   -v -o CMakeFiles/cmTC_e3005.dir/CMakeCXXCompilerABI.cpp.o -c /data/data/com.termux/files/usr/share/cmake-3.18/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [clang version 10.0.1 (https://github.com/termux/termux-packages 2f1431d824f449f09ef50aa365cdd7ed5b8c159d)]
+  ignore line: [Target: aarch64-unknown-linux-android]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /data/data/com.termux/files/usr/bin]
+  ignore line: [ (in-process)]
+  ignore line: [ "/data/data/com.termux/files/usr/bin/clang-10" -cc1 -triple aarch64-unknown-linux-android -emit-obj -mrelax-all -mnoexecstack -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mthread-model posix -mframe-pointer=non-leaf -fno-rounding-math -masm-verbose -mconstructor-aliases -target-cpu generic -target-feature +neon -target-abi aapcs -mllvm -aarch64-fix-cortex-a53-835769=1 -fallow-half-arguments-and-returns -dwarf-column-info -fno-split-dwarf-inlining -debug-info-kind=limited -dwarf-version=4 -debugger-tuning=gdb -v -resource-dir /data/data/com.termux/files/usr/lib/clang/10.0.1 -isysroot /data/data/com.termux/files -internal-isystem /data/data/com.termux/files/usr/include/c++/v1 -internal-isystem /data/data/com.termux/files/usr/local/include -internal-isystem /data/data/com.termux/files/usr/lib/clang/10.0.1/include -internal-externc-isystem /data/data/com.termux/files/usr/include/aarch64-linux-android -internal-externc-isystem /data/data/com.termux/files/include -internal-externc-isystem /data/data/com.termux/files/usr/include -fdeprecated-macro -fdebug-compilation-dir /data/data/com.termux/files/home/Clementine/build/CMakeFiles/CMakeTmp -ferror-limit 19 -fmessage-length 0 -fno-signed-char -fgnuc-version=4.2.1 -fobjc-runtime=gcc -fcxx-exceptions -fexceptions -fdiagnostics-show-option -o CMakeFiles/cmTC_e3005.dir/CMakeCXXCompilerABI.cpp.o -x c++ /data/data/com.termux/files/usr/share/cmake-3.18/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [clang -cc1 version 10.0.1 based upon LLVM 10.0.1 default target aarch64-linux-android]
+  ignore line: [ignoring nonexistent directory "/data/data/com.termux/files/usr/local/include"]
+  ignore line: [ignoring nonexistent directory "/data/data/com.termux/files/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /data/data/com.termux/files/usr/include/c++/v1]
+  ignore line: [ /data/data/com.termux/files/usr/lib/clang/10.0.1/include]
+  ignore line: [ /data/data/com.termux/files/usr/include/aarch64-linux-android]
+  ignore line: [ /data/data/com.termux/files/usr/include]
+  ignore line: [End of search list.]
+  ignore line: [Linking CXX executable cmTC_e3005]
+  ignore line: [/data/data/com.termux/files/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e3005.dir/link.txt --verbose=1]
+  ignore line: [/data/data/com.termux/files/usr/bin/c++ -g  -v CMakeFiles/cmTC_e3005.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_e3005 ]
+  ignore line: [clang version 10.0.1 (https://github.com/termux/termux-packages 2f1431d824f449f09ef50aa365cdd7ed5b8c159d)]
+  ignore line: [Target: aarch64-unknown-linux-android]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /data/data/com.termux/files/usr/bin]
+  link line: [ "/data/data/com.termux/files/usr/bin/aarch64-linux-android-ld" --sysroot=/data/data/com.termux/files -pie -z noexecstack -EL --fix-cortex-a53-843419 --warn-shared-textrel -z now -z relro -z max-page-size=4096 --hash-style=gnu --enable-new-dtags -rpath=/data/data/com.termux/files/usr/lib --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_e3005 /data/data/com.termux/files/usr/lib/crtbegin_dynamic.o -L/data/data/com.termux/files/usr/lib -L/system/lib64 CMakeFiles/cmTC_e3005.dir/CMakeCXXCompilerABI.cpp.o -lc++_shared -lgcc -ldl -lm -lc -lgcc -ldl /data/data/com.termux/files/usr/lib/crtend_android.o]
+    arg [/data/data/com.termux/files/usr/bin/aarch64-linux-android-ld] ==> ignore
+    arg [--sysroot=/data/data/com.termux/files] ==> ignore
+    arg [-pie] ==> ignore
+    arg [-znoexecstack] ==> ignore
+    arg [-EL] ==> ignore
+    arg [--fix-cortex-a53-843419] ==> ignore
+    arg [--warn-shared-textrel] ==> ignore
+    arg [-znow] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-zmax-page-size=4096] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--enable-new-dtags] ==> ignore
+    arg [-rpath=/data/data/com.termux/files/usr/lib] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [aarch64linux] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/system/bin/linker64] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_e3005] ==> ignore
+    arg [/data/data/com.termux/files/usr/lib/crtbegin_dynamic.o] ==> ignore
+    arg [-L/data/data/com.termux/files/usr/lib] ==> dir [/data/data/com.termux/files/usr/lib]
+    arg [-L/system/lib64] ==> dir [/system/lib64]
+    arg [CMakeFiles/cmTC_e3005.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lc++_shared] ==> lib [c++_shared]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-ldl] ==> lib [dl]
+    arg [-lm] ==> lib [m]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-ldl] ==> lib [dl]
+    arg [/data/data/com.termux/files/usr/lib/crtend_android.o] ==> ignore
+  collapse library dir [/data/data/com.termux/files/usr/lib] ==> [/data/data/com.termux/files/usr/lib]
+  collapse library dir [/system/lib64] ==> [/system/lib64]
+  implicit libs: [c++_shared;gcc;dl;m;c;gcc;dl]
+  implicit dirs: [/data/data/com.termux/files/usr/lib;/system/lib64]
+  implicit fwks: []
+
+

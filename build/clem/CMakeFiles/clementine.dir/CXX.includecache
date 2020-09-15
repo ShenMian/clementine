@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/data/data/com.termux/files/home/Clementine/clem/input.cpp
+input.h
+/data/data/com.termux/files/home/Clementine/clem/input.h
+observer.h
+/data/data/com.termux/files/home/Clementine/clem/observer.h
+time.h
+-
+
+/data/data/com.termux/files/home/Clementine/clem/input.h
+map
+-
+vector
+-
+observable.h
+/data/data/com.termux/files/home/Clementine/clem/observable.h
+
+/data/data/com.termux/files/home/Clementine/clem/observable.h
+vector
+-
+
+/data/data/com.termux/files/home/Clementine/clem/observer.h
+observable.h
+/data/data/com.termux/files/home/Clementine/clem/observable.h
+

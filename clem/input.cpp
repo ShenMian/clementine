@@ -3,8 +3,44 @@
 // 输入
 
 #include "input.h"
+#include "observer.h"
+#include <time.h>
 
-void Input::bind(ushort code, ushort event)
+using std::vector;
+
+void Input::update()
+{
+				events.clear();
+				
+				scan();
+				
+				static vector<ushort> lastEvents;
+				static clock_t        lastTime;
+
+				auto now = clock();
+				if(events == lastEvents && now - lastTime < interval)
+								events.clear();
+				else
+				{
+								lastEvents = events;
+								lastTime   = now;
+				}
+
+				notifyObserver();
+}
+
+void Input::notifyObserver() const
+{
+	for(auto o : observers)
+		o->onNotify(*this);
+}
+
+const vector<InputEvent> Input::getEvents() const
+{
+				return events;
+}
+
+void Input::bind(ushort code, const InputEvent& event)
 {
 	auto ret = index.find(code);
 	if(ret == index.end())

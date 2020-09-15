@@ -5,7 +5,7 @@
 #ifndef CLEM_OBSERVER_H_
 #define CLEM_OBSERVER_H_
 
-class Observable;
+#include "observable.h"
 
 class Observer
 {

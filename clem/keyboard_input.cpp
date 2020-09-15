@@ -7,27 +7,6 @@
 
 using std::vector;
 
-void KeyboardInput::update()
-{
-	events.clear();
-
-	scan();
-
-	static vector<ushort> lastEvents;
-	static clock_t        lastTime;
-
-	auto now = clock();
-	if(events == lastEvents && now - lastTime < interval)
-		events.clear();
-	else
-	{
-		lastEvents = events;
-		lastTime   = now;
-	}
-
-	// TODO: 通知观察者
-}
-
 #ifdef OS_LINUX
 
 void KeyboardInput::scan()
