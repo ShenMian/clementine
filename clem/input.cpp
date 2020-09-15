@@ -4,7 +4,10 @@
 
 #include "input.h"
 #include "observer.h"
+<<<<<<< HEAD
 #include <time.h>
+=======
+>>>>>>> 12575117f2514294cdae55e48a930e11b55b93f6
 
 using std::vector;
 
