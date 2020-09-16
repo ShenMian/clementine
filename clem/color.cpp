@@ -20,6 +20,11 @@ Color::Color(ushort attr)
 		index.insert({attr, compile(attr)});
 }
 
+const string& Color::operator()() const
+{
+	return index[attribute];
+}
+
 void Color::on() const
 {
 	printf("%s", index[attribute].c_str());

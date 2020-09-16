@@ -14,6 +14,9 @@ class Color
 {
 public:
 	Color(ushort attr);
+
+	const std::string& operator()() const;
+
 	void on() const;
 	void off() const;
 
