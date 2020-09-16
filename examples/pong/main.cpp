@@ -16,14 +16,11 @@
 
 using namespace std;
 
-const int num = 5;
-
 int main()
 {
+	Color normal(mode_normal);
 	Color green(fore_green);
-	green.on();
-	cout << "Green" << endl;
-	green.off();
+	cout << green() << "Green" << normal() << endl;
 	getchar(); getchar();
 
 	Terminal::Cursor::hide();
@@ -39,13 +36,6 @@ int main()
 
 	Texture         texture(Size(1, 1), {'O', Attribute(fore::yellow)});
 	vector<Entity*> balls;
-
-	for(int i = 0; i < num; i++)
-	{
-		auto ball = new Entity(texture);
-		ball->setPosition({0, 0});
-		balls.push_back(ball);
-	}
 
 	while(true)
 	{

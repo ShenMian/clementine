@@ -28,7 +28,7 @@ private:
 
 enum
 {
-	fore_black,
+	fore_black = 0x0001,
 	fore_red,
 	fore_green,
 	fore_yellow,
@@ -37,23 +37,22 @@ enum
 	fore_cyan,
 	fore_aqua = fore_cyan,
 	fore_white,
-	fore_normal,
 
-	back_black,
-	back_red,
-	back_green,
-	back_yellow,
-	back_blue,
-	back_purple,
-	back_cyan,
-	back_aqua = back_cyan,
-	back_white,
-	back_normal,
+	back_black  = 0x0010,
+	back_red    = 0x0020,
+	back_green  = 0x0030,
+	back_yellow = 0x0040,
+	back_blue   = 0x0050,
+	back_purple = 0x0060,
+	back_cyan   = 0x0070,
+	back_aqua   = back_cyan,
+	back_white  = 0x0080,
 
-	mode_bold       = 1,
-	mode_underline  = 4,
+	mode_normal     = 0x0000,
+	mode_bold       = 0x0100,
+	mode_underline  = 0x0400,
 	mode_underscore = mode_underline,
-	mode_reverse    = 7
+	mode_reverse    = 0x0700
 };
 
 #endif // CLEM_COLOR_H_

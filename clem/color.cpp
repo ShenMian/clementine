@@ -43,17 +43,11 @@ string Color::compile(ushort attr) const
 
 	string str = "\x1b[";
 
-	if(fore != fore_normal)
-	{
-		assert(fore <= fore_normal);
-		str += '3' + to_string(fore) + ';';
-	}
+	if(fore)
+		str += '3' + to_string(fore - 1) + ';';
 
-	if(back != back_normal)
-	{
-		assert(back <= back_normal);
-		str += '4' + to_string(back) + ';';
-	}
+	if(back)
+		str += '4' + to_string(back - 1) + ';';
 
 	while(mode)
 	{
