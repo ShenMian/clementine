@@ -12,7 +12,7 @@ include_directories("D:/Program Files/Program/boost_1_73_0")
 link_directories("D:/Program Files/Program/boost_1_73_0/stage/lib")
 
 # 设置 lib 输出目录
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+set(LIBRARY_OUTPUT_PATH ../lib/)
 
 set(CMAKE_CXX_STANDARD 14)
 
