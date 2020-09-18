@@ -83,6 +83,8 @@ void Scene::setRenderer(Renderer* r)
 {
 	assert(r != nullptr);
 	this->renderer = r;
+	for(auto cam : cameras)
+		cam->setRenderer(r);
 }
 
 Renderer* Scene::getRenderer() const
