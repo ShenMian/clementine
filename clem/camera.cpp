@@ -7,6 +7,7 @@
 #include "entity.h"
 #include <vector>
 #include <algorithm>
+#include <assert.h>
 
 using std::vector;
 
