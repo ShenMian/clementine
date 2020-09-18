@@ -30,7 +30,7 @@ Scene::Scene(const Size& size)
 	Rect rect(0, this->size.y, size.x, size.y);
 
   // 添加默认摄像机
-	auto cam = new Camera(*this);
+	auto cam = new Camera();
 	cam->setInputRect(rect);
 	cam->setOutputRect(rect);
   addCamera(cam);
@@ -57,7 +57,7 @@ void Scene::render()
 	assert(renderer != nullptr);
 
   for(auto cam : cameras)
-		cam->render(*renderer, entitys);
+		cam->render(entitys);
 }
 
 void Scene::addEntity(Entity* obj)
@@ -93,6 +93,7 @@ Physics* Scene::getPhysics() const
 
 void Scene::setRenderer(Renderer* r)
 {
+	assert(r != nullptr);
 	this->renderer = r;
 }
 
@@ -104,7 +105,11 @@ Renderer* Scene::getRenderer() const
 
 void Scene::addCamera(Camera* cam)
 {
-  cameras.push_back(cam);
+	assert(cam != nullptr);
+	cam->setScene(this);
+	for(auto it = cameras.begin(); it != cameras.end(); ++it)
+		if((*it)->getDepth() <= cam->getDepth())
+			cameras.insert(it, cam);
 }
 
 void Scene::removeCamera(Camera* cam)

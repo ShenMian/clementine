@@ -15,9 +15,16 @@ class Entity;
 class Camera
 {
 public:
-	Camera(Scene& scene);
+	Camera();
 
-  void render(Renderer& renderer, const std::vector<Entity*>& objs);
+	void render();
+  void render(const std::vector<Entity*>& objs);
+
+	void setScene(Scene* s);
+	void setRenderer(Renderer* r);
+
+	void   setDepth(ushort depth);
+	ushort getDepth() const;
 
 	void setInputRect(const Rect& rect);
 	void setOutputRect(const Rect& rect);
@@ -25,10 +32,11 @@ public:
 private:
 	bool inSight(const Entity& obj) const;
 
-	Rect   inputRect;
-	Rect   outputRect;
-	Scene& scene;
-  ushort depth;
+	Rect      inputRect;
+	Rect      outputRect;
+	Scene*    scene;
+	Renderer* renderer;
+  ushort    depth;
 };
 
 #endif // CLEM_CAMERA_H_

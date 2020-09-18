@@ -3,25 +3,47 @@
 // 场景摄像机
 
 #include "camera.h"
-#include <vector>
-#include <algorithm>
 #include "renderer.h"
 #include "entity.h"
+#include <vector>
+#include <algorithm>
 
 using std::vector;
 
-Camera::Camera(Scene& scene)
-		: scene(scene), depth(0)
+Camera::Camera()
+		: depth(0)
 {
 }
 
-void Camera::render(Renderer& renderer, const vector<Entity*>& objs)
+void Camera::render(const vector<Entity*>& objs)
 {
 	for(auto obj : objs)
 		if(inSight(*obj))
-			renderer.draw(obj->getTexture(), obj->getPosition());
-	renderer.render(outputRect);
-	renderer.clear();
+			renderer->draw(obj->getTexture(), obj->getPosition());
+	renderer->render(outputRect);
+	renderer->clear();
+}
+
+void Camera::setScene(Scene* s)
+{
+	assert(s != nullptr);
+	scene = s;
+}
+
+void Camera::setRenderer(Renderer* r)
+{
+	assert(r = nullptr);
+	renderer = r;
+}
+
+void Camera::setDepth(ushort depth)
+{
+	this->depth = depth;
+}
+
+ushort Camera::getDepth() const
+{
+	return depth;
 }
 
 void Camera::setInputRect(const Rect& rect)
