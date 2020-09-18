@@ -54,8 +54,6 @@ void Scene::update()
 
 void Scene::render()
 {
-	assert(renderer != nullptr);
-
   for(auto cam : cameras)
 		cam->render(entitys);
 }
@@ -107,6 +105,7 @@ void Scene::addCamera(Camera* cam)
 {
 	assert(cam != nullptr);
 	cam->setScene(this);
+	// TODO: 使用二分法插入提高效率
 	for(auto it = cameras.begin(); it != cameras.end(); ++it)
 		if((*it)->getDepth() <= cam->getDepth())
 			cameras.insert(it, cam);
