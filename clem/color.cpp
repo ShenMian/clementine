@@ -13,21 +13,21 @@ using std::to_string;
 map<ushort, string> Color::index;
 
 Color::Color(ushort attr)
-	: attribute(attr)
 {
 	const auto it = index.find(attr);
 	if(it == index.end())
 		index.insert({attr, compile(attr)});
+	pStr = &it->second;
 }
 
 const string& Color::operator()() const
 {
-	return index[attribute];
+	return *pStr;
 }
 
 void Color::on() const
 {
-	printf("%s", index[attribute].c_str());
+	printf("%s", pStr->c_str());
 }
 
 void Color::off() const

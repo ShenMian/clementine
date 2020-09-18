@@ -21,7 +21,7 @@ public:
 	void off() const;
 
 private:
-	ushort attribute;
+	std::string* pStr;
 	static std::map<ushort, std::string> index;
 	std::string compile(ushort attr) const;
 };
