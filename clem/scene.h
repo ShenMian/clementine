@@ -21,6 +21,7 @@ public:
 	Scene(const Size& size);
 
 	void update();
+	void render();
 
 	void addEntity(Entity*);
 	void removeEntity(Entity*);
@@ -36,14 +37,13 @@ public:
 	const std::vector<Camera*>& getCameras() const;
 
 private:
-	void render();
+	void updateInput();
+	void updatePhysics();
 
 	Size size;
-
 	std::vector<Input*>  inputs;
 	Physics*             physics;
 	Renderer*            renderer;
-
 	std::vector<Camera*> cameras;
 	std::vector<Entity*> entitys;
 };

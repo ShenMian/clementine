@@ -38,18 +38,8 @@ Scene::Scene(const Size& size)
 
 void Scene::update()
 {
-	assert(physics != nullptr);
-
-	for(auto in : inputs)
-		in->update();
-
-  for(auto obj : entitys)
-	{
-		physics->update(*obj);
-		obj->update();
-	}
-
-	render();
+	updateInput();
+	updatePhysics();
 }
 
 void Scene::render()
@@ -124,3 +114,17 @@ const vector<Camera*>& Scene::getCameras() const
 {
 	return cameras;
 }
+
+void Scene::updateInput()
+{
+	for(auto input : inputs)
+		input->update();
+}
+
+void Scene::updatePhysics()
+{
+	assert(physics != nullptr);
+  for(auto obj : entitys)
+		physics->update(*obj);
+}
+
