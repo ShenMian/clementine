@@ -18,10 +18,6 @@ using namespace std;
 
 int main()
 {
-	Color normal(mode_normal);
-	Color green(fore_green);
-	cout << green() << "Green" << normal() << endl;
-
 	Terminal::Cursor::hide();
 	srand(time(nullptr));
 

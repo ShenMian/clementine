@@ -48,11 +48,11 @@ enum
 	back_aqua   = back_cyan,
 	back_white  = 0x0080,
 
-	mode_normal     = 0x0000,
-	mode_bold       = 0x0100,
-	mode_underline  = 0x0400,
+	mode_normal     = 0x0100,
+	mode_bold       = 0x0200,
+	mode_underline  = 0x0500,
 	mode_underscore = mode_underline,
-	mode_reverse    = 0x0700
+	mode_reverse    = 0x0800
 };
 
 #endif // CLEM_COLOR_H_
