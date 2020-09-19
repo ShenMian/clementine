@@ -71,6 +71,7 @@ void Scene::addInput(Input* in)
 
 void Scene::setPhysics(Physics* p)
 {
+	assert(p != nullptr);
 	this->physics = p;
 }
 
