@@ -1,6 +1,6 @@
 ﻿// Copyright 2020 SMS
 // License(Apache-2.0)
-// 球
+// 乒乓球
 
 #include <time.h>
 #include <clem/clem.hpp>
@@ -21,25 +21,16 @@ int main()
 	Color normal(mode_normal);
 	Color green(fore_green);
 	cout << green() << "Green" << normal() << endl;
-	getchar(); getchar();
 
 	Terminal::Cursor::hide();
 	srand(time(nullptr));
 
-	Scene          scene(Terminal::getWindowSize());
-	SimplePhysics  physics;
-	CommonRenderer renderer(Terminal::getWindowSize());
+	Scene scene(Terminal::getWindowSize());
 
-	scene.setPhysics(&physics);
-	scene.setRenderer(&renderer);
-	physics.addBorder(Rect(0, 25, 30, 15));
+	auto& director = Director::instance();
+	director.pushScene(&scene);
+	director.run();
 
-	Texture         texture(Size(1, 1), {'O', Attribute(fore::yellow)});
-	vector<Entity*> balls;
-
-	while(true)
-	{
-		scene.update();
-		sleep(50);
-	}
+	getchar();
+	getchar();
 }

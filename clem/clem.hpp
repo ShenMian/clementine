@@ -4,6 +4,8 @@
 #ifndef CLEM_CLEM_HPP_
 #define CLEM_CLEM_HPP_
 
+#include <clem/director.h>
+
 #include <clem/color.h>
 #include <clem/attribute.h>
 

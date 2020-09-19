@@ -5,6 +5,7 @@
 #define CLEM_DIRECTOR_H_
 
 #include <vector>
+#include <thread>
 
 typedef unsigned short ushort;
 class Scene;
@@ -12,19 +13,22 @@ class Scene;
 class Director
 {
 public:
-	Director& instance();
+	static Director& instance();
+
+	void run();
 
 	void setPerFrameInterval(ushort i);
 
 	void pushScene(Scene* s);
-	void popScene(Scene* s);
+	void popScene();
 
 private:
 	Director();
-	void mainLoop();
+	void loop();
 
 	ushort              perFrameInterval;
 	std::vector<Scene*> scenes;
+	std::thread         thread;
 };
 
 #endif // CLEM_DIRECTOR_H_
