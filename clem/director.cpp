@@ -1,6 +1,7 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
 
+#include "scene.h"
 #include "director.h"
 #include <assert.h>
 
@@ -45,5 +46,8 @@ void Director::loop()
 		if(scenes.empty())
 			return;
 		auto scene = scenes.back();
+
+		scene->update();
+		scene->render();
 	}
 }

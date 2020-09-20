@@ -26,9 +26,9 @@ private:
 	Director();
 	void loop();
 
-	ushort              perFrameInterval;
 	std::vector<Scene*> scenes;
 	std::thread         thread;
+	ushort              perFrameInterval;
 };
 
 #endif // CLEM_DIRECTOR_H_
