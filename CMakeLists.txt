@@ -22,3 +22,4 @@ add_subdirectory("clem")
 # 包含 其他子项目
 link_directories("lib")
 add_subdirectory("examples")
+add_subdirectory("test")
