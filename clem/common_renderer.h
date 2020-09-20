@@ -16,7 +16,6 @@ public:
 
   void render(const Rect& rect) const override;
 	void draw(const Texture& texture, const Point& coord) override;
-  void clear() override;
 
 private:
 	Size    size;

@@ -6,10 +6,8 @@
 
 void NocolorRenderer::render(const Rect& rect) const
 {
-
 }
 
 void NocolorRenderer::draw(const Texture& texture, const Point& pos)
 {
-
 }

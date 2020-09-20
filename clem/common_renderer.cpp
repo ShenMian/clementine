@@ -39,8 +39,3 @@ void CommonRenderer::draw(const Texture& texture, const Point& pos)
 {
 	buffer.draw(texture, pos);
 }
-
-void CommonRenderer::clear()
-{
-	buffer.clear();
-}
