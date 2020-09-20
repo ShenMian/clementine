@@ -19,9 +19,10 @@ class Scene
 public:
 	Scene();
 	Scene(const Size& size);
+	virtual ~Scene();
 
 	void update();
-	void render();
+	void render(Renderer* renderer);
 
 	void addEntity(Entity*);
 	void removeEntity(Entity*);
@@ -29,8 +30,6 @@ public:
 	void      addInput(Input* in);
 	void      setPhysics(Physics* p);
 	Physics*  getPhysics() const;
-	void      setRenderer(Renderer* r);
-	Renderer* getRenderer() const;
 
 	void                        addCamera(Camera* cam);
 	void                        removeCamera(Camera* cam);
@@ -43,7 +42,7 @@ private:
 	Size size;
 	std::vector<Input*>  inputs;
 	Physics*             physics;
-	Renderer*            renderer;
+	Camera*              defaultCamera;
 	std::vector<Camera*> cameras;
 	std::vector<Entity*> entitys;
 };

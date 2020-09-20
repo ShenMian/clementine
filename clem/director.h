@@ -8,7 +8,9 @@
 #include <thread>
 
 typedef unsigned short ushort;
+
 class Scene;
+class Renderer;
 
 class Director
 {
@@ -17,7 +19,7 @@ public:
 
 	void run();
 
-	void setPerFrameInterval(ushort i);
+	void setMsPerUpdate(ushort i);
 
 	void pushScene(Scene* s);
 	void popScene();
@@ -28,7 +30,8 @@ private:
 
 	std::vector<Scene*> scenes;
 	std::thread         thread;
-	ushort              perFrameInterval;
+	Renderer*           renderer;
+	ushort              msPerUpdate;
 };
 
 #endif // CLEM_DIRECTOR_H_

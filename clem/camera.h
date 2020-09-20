@@ -17,11 +17,10 @@ class Camera
 public:
 	Camera();
 
-	void render();
-  void render(const std::vector<Entity*>& objs);
+	void render(Renderer* renderer);
+	void render(Renderer* renderer, const std::vector<Entity*>& objs);
 
 	void setScene(Scene* s);
-	void setRenderer(Renderer* r);
 
 	void   setDepth(ushort depth);
 	ushort getDepth() const;
@@ -35,7 +34,6 @@ private:
 	Rect      inputRect;
 	Rect      outputRect;
 	Scene*    scene;
-	Renderer* renderer;
   ushort    depth;
 };
 

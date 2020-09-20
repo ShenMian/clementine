@@ -30,10 +30,15 @@ Scene::Scene(const Size& size)
 	Rect rect(0, this->size.y, size.x, size.y);
 
   // 添加默认摄像机
-	auto cam = new Camera();
-	cam->setInputRect(rect);
-	cam->setOutputRect(rect);
-  addCamera(cam);
+	defaultCamera = new Camera();
+	defaultCamera->setInputRect(rect);
+	defaultCamera->setOutputRect(rect);
+	addCamera(defaultCamera);
+}
+
+Scene::~Scene()
+{
+	delete defaultCamera;
 }
 
 void Scene::update()
@@ -42,10 +47,11 @@ void Scene::update()
 	updatePhysics();
 }
 
-void Scene::render()
+void Scene::render(Renderer* renderer)
 {
+	assert(renderer != nullptr);
   for(auto cam : cameras)
-		cam->render(entitys);
+		cam->render(renderer, entitys);
 }
 
 void Scene::addEntity(Entity* obj)
@@ -80,28 +86,17 @@ Physics* Scene::getPhysics() const
 	return this->physics;
 }
 
-void Scene::setRenderer(Renderer* r)
-{
-	assert(r != nullptr);
-	this->renderer = r;
-	for(auto cam : cameras)
-		cam->setRenderer(r);
-}
-
-Renderer* Scene::getRenderer() const
-{
-	return renderer;
-}
-
 
 void Scene::addCamera(Camera* cam)
 {
 	assert(cam != nullptr);
 	cam->setScene(this);
-	// TODO: 使用二分法插入提高效率
-	for(auto it = cameras.begin(); it != cameras.end(); ++it)
-		if((*it)->getDepth() <= cam->getDepth())
-			cameras.insert(it, cam);
+
+	auto it = std::lower_bound(cameras.begin(), cameras.end(), cam, [](const Camera* a, const Camera* b) {
+		return a->getDepth() - b->getDepth();
+	});
+
+	cameras.insert(it, cam);
 }
 
 void Scene::removeCamera(Camera* cam)

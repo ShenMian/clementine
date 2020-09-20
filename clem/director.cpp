@@ -3,6 +3,7 @@
 
 #include "scene.h"
 #include "director.h"
+#include "nocolor_renderer.h"
 #include <assert.h>
 
 Director& Director::instance()
@@ -17,9 +18,9 @@ void Director::run()
 	thread.detach();
 }
 
-void Director::setPerFrameInterval(ushort i)
+void Director::setMsPerUpdate(ushort i)
 {
-	perFrameInterval = i;
+	msPerUpdate = i;
 }
 
 void Director::pushScene(Scene* s)
@@ -35,7 +36,7 @@ void Director::popScene()
 }
 
 Director::Director()
-		: perFrameInterval(0)
+		: msPerUpdate(0), renderer(new NocolorRenderer())
 {
 }
 
@@ -48,6 +49,7 @@ void Director::loop()
 		auto scene = scenes.back();
 
 		scene->update();
-		scene->render();
+
+		scene->render(renderer);
 	}
 }

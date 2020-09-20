@@ -18,8 +18,8 @@ using namespace std;
 
 int main()
 {
-	Terminal::Cursor::hide();
 	srand(time(nullptr));
+	Terminal::Cursor::hide();
 
 	Scene scene(Terminal::getWindowSize());
 

@@ -16,7 +16,7 @@ Camera::Camera()
 {
 }
 
-void Camera::render(const vector<Entity*>& objs)
+void Camera::render(Renderer* renderer, const vector<Entity*>& objs)
 {
 	for(auto obj : objs)
 		if(inSight(*obj))
@@ -29,12 +29,6 @@ void Camera::setScene(Scene* s)
 {
 	assert(s != nullptr);
 	scene = s;
-}
-
-void Camera::setRenderer(Renderer* r)
-{
-	assert(r = nullptr);
-	renderer = r;
 }
 
 void Camera::setDepth(ushort depth)
