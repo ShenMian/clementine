@@ -5,17 +5,21 @@
 #ifndef CLEM_RENDERER_H_
 #define CLEM_RENDERER_H_
 
-#include "type.h"
+#include <vector>
 
+class Rect;
+class Point;
 class Texture;
-class Vector;
 
 class Renderer
 {
 public:
   virtual void render(const Rect&) const = 0;
 	virtual void draw(const Texture&, const Point&) = 0;
-  virtual void clear() = 0;
+  virtual void clear();
+
+protected:
+	std::vector<const Texture*> textures;
 };
 
 #endif // CLEM_RENDERER_H_
