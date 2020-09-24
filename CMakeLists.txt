@@ -5,8 +5,6 @@ cmake_minimum_required(VERSION 3.5)
 
 project("Clementine")
 
-include_directories(".")
-
 # 包含第三方库
 include_directories("include")
 link_directories("lib")
@@ -15,6 +13,8 @@ link_directories("lib")
 set(LIBRARY_OUTPUT_PATH ../lib/)
 
 set(CMAKE_CXX_STANDARD 14)
+
+include_directories(".")
 
 # 将 Clementine 编译到 lib 目录
 add_subdirectory("clem")

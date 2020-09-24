@@ -1,5 +1,19 @@
 # Copyright 2020 SMS
 # License(Apache-2.0)
 
+include(ExternalProject)
+ExternalProject_Add(googletest
+  GIT_REPOSITORY    https://github.com/google/googletest.git
+  GIT_TAG           release-1.10.0
+  SOURCE_DIR        "${CMAKE_CURRENT_BINARY_DIR}/googletest-src"
+  BINARY_DIR        "${CMAKE_CURRENT_BINARY_DIR}/googletest-build"
+  CONFIGURE_COMMAND ""
+  BUILD_COMMAND     ""
+  INSTALL_COMMAND   ""
+  TEST_COMMAND      ""
+)
+
+enable_testing()
+# find_package(GTest REQUIRED)
 add_executable(test "test.cpp")
-target_link_libraries(test clementine)
+# target_link_libraries(test PRIVATE GTest::GTest GTest::Main clementine)
