@@ -6,12 +6,10 @@
 
 void Renderer::render(const Rect&) const
 {
-
 }
 
 void Renderer::draw(const Texture&, const Point&)
 {
-
 }
 
 void Renderer::clear()

@@ -36,6 +36,14 @@ const string& Color::operator()() const
 	return *pStr;
 }
 
+void Color::push()
+{
+}
+
+void Color::pop()
+{
+}
+
 void Color::on() const
 {
 	printf("%s", pStr->c_str());

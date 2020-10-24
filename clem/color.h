@@ -6,6 +6,7 @@
 #define CLEM_COLOR_H_
 
 #include <map>
+#include <vector>
 #include <string>
 
 typedef unsigned short ushort;
@@ -17,12 +18,17 @@ public:
 
 	const std::string& operator()() const;
 
+	void push();
+	void pop();
+
 	void on() const;
 	void off() const;
 
 private:
-	std::string* pStr;
+	std::string*                         pStr;
 	static std::map<ushort, std::string> index;
+	static std::vector<Color*>           stack;
+
 	std::string compile(ushort attr) const;
 };
 
