@@ -3,7 +3,7 @@
 
 #include "scene.h"
 #include "director.h"
-#include "nocolor_renderer.h"
+#include "renderer.h"
 #include <assert.h>
 
 Director& Director::instance()
@@ -36,7 +36,7 @@ void Director::popScene()
 }
 
 Director::Director()
-		: msPerUpdate(0), renderer(new NocolorRenderer())
+		: msPerUpdate(0), renderer(new Renderer())
 {
 }
 

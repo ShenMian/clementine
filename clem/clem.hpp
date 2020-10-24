@@ -19,8 +19,6 @@
 
 // 渲染器
 #include <clem/renderer.h>
-#include <clem/nocolor_renderer.h>
-#include <clem/common_renderer.h>
 
 // 物理引擎
 #include <clem/physics.h>

@@ -14,8 +14,8 @@ class Texture;
 class Renderer
 {
 public:
-  virtual void render(const Rect&) const = 0;
-	virtual void draw(const Texture&, const Point&) = 0;
+  virtual void render(const Rect&) const;
+	virtual void draw(const Texture&, const Point&);
   virtual void clear();
 
 protected:

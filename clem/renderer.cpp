@@ -1,8 +1,18 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// äÖÈ¾Æ÷
+// æ¸²æŸ“å™¨
 
 #include "renderer.h"
+
+void Renderer::render(const Rect&) const
+{
+
+}
+
+void Renderer::draw(const Texture&, const Point&)
+{
+
+}
 
 void Renderer::clear()
 {
