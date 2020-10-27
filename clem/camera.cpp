@@ -4,7 +4,7 @@
 
 #include "camera.h"
 #include "renderer.h"
-#include "entity.h"
+#include "factor.h"
 #include <vector>
 #include <algorithm>
 #include <assert.h>
@@ -16,7 +16,7 @@ Camera::Camera()
 {
 }
 
-void Camera::render(Renderer* renderer, const vector<Entity*>& objs)
+void Camera::render(Renderer* renderer, const vector<Factor*>& objs)
 {
 	for(auto obj : objs)
 		if(inSight(*obj))
@@ -51,7 +51,7 @@ void Camera::setOutputRect(const Rect& rect)
 	outputRect = rect;
 }
 
-bool Camera::inSight(const Entity& obj) const
+bool Camera::inSight(const Factor& obj) const
 {
 	auto pos = obj.getPosition();
 	if(inputRect.x < pos.x && pos.x < inputRect.right() &&

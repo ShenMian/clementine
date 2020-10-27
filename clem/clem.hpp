@@ -9,7 +9,7 @@
 #include <clem/color.h>
 #include <clem/attribute.h>
 
-#include <clem/entity.h>
+#include <clem/factor.h>
 
 #include <clem/scene.h>
 #include <clem/camera.h>
@@ -22,7 +22,6 @@
 
 // 物理引擎
 #include <clem/physics.h>
-#include <clem/simple_physics.h>
 
 #include <clem/terminal.h>
 

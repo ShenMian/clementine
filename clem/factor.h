@@ -13,10 +13,10 @@ class Physics;
 class Component;
 class PhysicsComponent;
 
-class Entity
+class Factor
 {
 public:
-	Entity(const Texture& texture);
+	Factor(const Texture& texture);
 
 	virtual void update();
 

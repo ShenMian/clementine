@@ -2,29 +2,31 @@
 // License(Apache-2.0)
 // 游戏对象
 
-#include "entity.h"
+#include "factor.h"
 #include "scene.h"
 #include "component.h"
 #include <algorithm>
 #include <assert.h>
 
-Entity::Entity(const Texture& texture)
+Factor::Factor(const Texture& texture)
 		: texture(texture)
 {
 }
 
-void Entity::update()
+void Factor::update()
 {
+	/*
 	for(const auto& com : components)
 		com->update(*this);
+	*/
 }
 
-void Entity::addComponent(Component* com)
+void Factor::addComponent(Component* com)
 {
 	components.push_back(com);
 }
 
-void Entity::removeComponent(Component* com)
+void Factor::removeComponent(Component* com)
 {
 	auto it = std::find(components.begin(), components.end(), com);
 	if(it != components.end())
@@ -33,42 +35,42 @@ void Entity::removeComponent(Component* com)
 		assert(false);
 }
 
-void Entity::setPosition(const Point& pos)
+void Factor::setPosition(const Point& pos)
 {
 	this->position = pos;
 }
 
-void Entity::setTexture(const Texture& texture)
+void Factor::setTexture(const Texture& texture)
 {
 	this->texture = texture;
 }
 
-const Point& Entity::getPosition() const
+const Point& Factor::getPosition() const
 {
 	return position;
 }
 
-const Texture& Entity::getTexture() const
+const Texture& Factor::getTexture() const
 {
 	return texture;
 }
 
-void Entity::setVelocity(const Vector& v)
+void Factor::setVelocity(const Vector& v)
 {
 	velocity = v;
 }
 
-const Vector& Entity::getVelocity() const
+const Vector& Factor::getVelocity() const
 {
 	return velocity;
 }
 
-void Entity::setAccelerate(const Vector& a)
+void Factor::setAccelerate(const Vector& a)
 {
 	accelerate = a;
 }
 
-const Vector& Entity::getAccelerate() const
+const Vector& Factor::getAccelerate() const
 {
 	return accelerate;
 }

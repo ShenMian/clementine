@@ -10,7 +10,7 @@
 
 class Scene;
 class Renderer;
-class Entity;
+class Factor;
 
 class Camera
 {
@@ -18,7 +18,7 @@ public:
 	Camera();
 
 	void render(Renderer* renderer);
-	void render(Renderer* renderer, const std::vector<Entity*>& objs);
+	void render(Renderer* renderer, const std::vector<Factor*>& objs);
 
 	void setScene(Scene* s);
 
@@ -29,7 +29,7 @@ public:
 	void setOutputRect(const Rect& rect);
 
 private:
-	bool inSight(const Entity& obj) const;
+	bool inSight(const Factor& obj) const;
 
 	Rect      inputRect;
 	Rect      outputRect;

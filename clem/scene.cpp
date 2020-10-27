@@ -9,7 +9,7 @@
 #include "physics.h"
 #include "renderer.h"
 
-#include "entity.h"
+#include "factor.h"
 #include "camera.h"
 
 #include "terminal.h"
@@ -51,20 +51,20 @@ void Scene::render(Renderer* renderer)
 {
 	assert(renderer != nullptr);
   for(auto cam : cameras)
-		cam->render(renderer, entitys);
+		cam->render(renderer, factors);
 }
 
-void Scene::addEntity(Entity* obj)
+void Scene::addFactor(Factor* f)
 {
-	assert(obj != nullptr);
-	entitys.push_back(obj);
+	assert(f != nullptr);
+	factors.push_back(f);
 }
 
-void Scene::removeEntity(Entity* entity)
+void Scene::removeFactor(Factor* f)
 {
-	auto it = std::find(entitys.begin(), entitys.end(), entity);
-	if(it != entitys.end())
-		entitys.erase(it);
+	auto it = std::find(factors.begin(), factors.end(), f);
+	if(it != factors.end())
+		factors.erase(it);
 	else
 		assert(false);
 }
@@ -122,7 +122,7 @@ void Scene::updateInput()
 void Scene::updatePhysics()
 {
 	assert(physics != nullptr);
-  for(auto obj : entitys)
-		physics->update(*obj);
+  for(auto f : factors)
+		physics->update(*f);
 }
 

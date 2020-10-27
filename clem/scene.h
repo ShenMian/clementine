@@ -10,7 +10,7 @@
 
 class Input;
 class Camera;
-class Entity;
+class Factor;
 class Physics;
 class Renderer;
 
@@ -24,8 +24,8 @@ public:
 	void update();
 	void render(Renderer* renderer);
 
-	void addEntity(Entity*);
-	void removeEntity(Entity*);
+	void addFactor(Factor*);
+	void removeFactor(Factor*);
 
 	void      addInput(Input* in);
 	void      setPhysics(Physics* p);
@@ -44,7 +44,7 @@ private:
 	Physics*             physics;
 	Camera*              defaultCamera;
 	std::vector<Camera*> cameras;
-	std::vector<Entity*> entitys;
+	std::vector<Factor*> factors;
 };
 
 #endif // CLEM_SCENE_H_

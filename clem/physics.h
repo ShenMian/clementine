@@ -5,12 +5,12 @@
 #ifndef CLEM_PHYSICS_H_
 #define CLEM_PHYSICS_H_
 
-#include "entity.h"
+class Factor;
 
 class Physics
 {
 public:
-	virtual void update(Entity&) = 0;
+	virtual void update(Factor&);
 };
 
 #endif // CLEM_PHYSICS_H_
