@@ -18,6 +18,17 @@ void Director::run()
 	thread.detach();
 }
 
+
+void Director::pause()
+{
+	paused = true;	
+}
+
+void Director::resume()
+{
+	paused = false;
+}
+
 void Director::setMsPerUpdate(ushort i)
 {
 	msPerUpdate = i;
@@ -36,13 +47,13 @@ void Director::popScene()
 }
 
 Director::Director()
-		: msPerUpdate(0), renderer(new Renderer())
+		: msPerUpdate(0), renderer(new Renderer()), isPaused(false)
 {
 }
 
 void Director::loop()
 {
-	while(true)
+	while(!paused)
 	{
 		if(scenes.empty())
 			return;

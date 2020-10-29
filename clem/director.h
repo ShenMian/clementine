@@ -19,6 +19,9 @@ public:
 
 	void run();
 
+	void pause();
+	void resume();
+
 	void setMsPerUpdate(ushort i);
 
 	void pushScene(Scene* s);
@@ -32,6 +35,7 @@ private:
 	std::thread         thread;
 	Renderer*           renderer;
 	ushort              msPerUpdate;
+	bool                paused;
 };
 
 #endif // CLEM_DIRECTOR_H_
