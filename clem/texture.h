@@ -19,6 +19,7 @@ class Texture
 public:
 	Texture();
 	Texture(Size size);
+	Texture(const Tile& tile);
 	Texture(Size size, const Tile& tile);
 
 	void draw(const Tile& tile, const Point& pos);

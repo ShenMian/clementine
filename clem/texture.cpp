@@ -16,10 +16,15 @@ Texture::Texture(Size size)
 {
 }
 
+Texture::Texture(const Tile& tile)
+{
+	setSize(Size(1,1));
+	tiles[0] = tile;
+}
+
 Texture::Texture(Size size, const Tile& tile)
 {
 	setSize(size);
-
 	for(int i = 0; i < size.area(); i++)
 		tiles[i] = tile;
 }

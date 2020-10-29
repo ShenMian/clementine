@@ -12,6 +12,11 @@ Director& Director::instance()
 	return instance;
 }
 
+Director::Director()
+		: msPerUpdate(0), renderer(new Renderer()), paused(false)
+{
+}
+
 void Director::run()
 {
 	thread = std::thread(&Director::loop, this);
@@ -21,11 +26,13 @@ void Director::run()
 
 void Director::pause()
 {
+	assert(!paused);
 	paused = true;	
 }
 
 void Director::resume()
 {
+	assert(paused);
 	paused = false;
 }
 
@@ -44,11 +51,6 @@ void Director::popScene()
 {
 	assert(!scenes.empty());
 	scenes.pop_back();
-}
-
-Director::Director()
-		: msPerUpdate(0), renderer(new Renderer()), isPaused(false)
-{
 }
 
 void Director::loop()
