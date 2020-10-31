@@ -9,7 +9,12 @@ void Tile::put() const
 }
 
 Tile::Tile()
-		: Tile(' ', Attribute())
+		: Tile(' ')
+{
+}
+
+Tile::Tile(char ch)
+	: Tile(ch, Attribute())
 {
 }
 

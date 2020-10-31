@@ -15,6 +15,7 @@ public:
 	void put() const;
 
 	Tile();
+	Tile(char ch);
 	Tile(char ch, const Attribute& attr);
 };
 

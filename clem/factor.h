@@ -11,11 +11,11 @@
 class Scene;
 class Physics;
 class Component;
-class PhysicsComponent;
 
 class Factor
 {
 public:
+	Factor();
 	Factor(const Texture& texture);
 
 	virtual void update();

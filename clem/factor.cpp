@@ -8,6 +8,10 @@
 #include <algorithm>
 #include <assert.h>
 
+Factor::Factor()
+{
+}
+
 Factor::Factor(const Texture& texture)
 		: texture(texture)
 {

@@ -1,6 +1,5 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// 贪吃蛇
 
 #include <clem/clem.hpp>
 #include "snake.hpp"
@@ -18,16 +17,11 @@ const float snack_speed = 0.2;
 
 int main()
 {
-	srand(time(nullptr));                                // 初始化随机数发生器
-	Terminal::Cursor::hide();                            // 隐藏光标
-	auto          winSize = Terminal::getWindowSize();   // 获取终端窗口大小
-	Scene         scene;                                 // 创建场景
-	while(true)
-	{
-		scene.update();
-		sleep(50);
-	}
+	Scene scene;
+	Snake snake;
+	Director& director = Director::instance();
+	scene.addFactor(&snake);
+	director.pushScene(&scene);
 
-	(void)getchar();
 	return 0;
 }

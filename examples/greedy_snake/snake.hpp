@@ -9,22 +9,42 @@
 
 using std::vector;
 
-class Snake : public Observer
+const int len = 2;
+
+class Snake : public Factor
 {
 public:
-	Snake(Scene& scene)
+	Snake()
 	{
-	}
-
-	void onNotify(const Observable& o) override
-	{
-		const auto& input = dynamic_cast<const Input&>(o);
-		for(auto& e : input.getEvents())		
+		int x, y;
+		assert(y >= len);
+		for(int i = 0; i < len; i++)
 		{
+			auto f = new Factor(Texture());
+			f->setTexture(Tile('#'));
+			f->setPosition(Point(x, y - i));
+			body.push_back(f);
 		}
 	}
 
+	~Snake()
+	{
+		for(auto f : body)
+			delete f;
+	}
+
+	void update() override
+	{
+		
+	}
+
+	void increaseBody()
+	{
+		
+	}
+
 private:
-}
+	vector<Factor*> body;
+};
 
 #endif // CLEM_EXAMPLE_SNAKE_HPP_
