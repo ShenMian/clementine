@@ -54,6 +54,16 @@ void Director::popScene()
 	scenes.pop_back();
 }
 
+Scene* Director::getRunningScene() const
+{
+	return scenes.back();
+}
+
+Size Director::getWinSize() const
+{
+	return Size();
+}
+
 void Director::loop()
 {
 	while(!paused)

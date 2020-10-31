@@ -9,6 +9,7 @@
 
 typedef unsigned short ushort;
 
+class Size;
 class Scene;
 class Renderer;
 
@@ -22,10 +23,13 @@ public:
 	void pause();
 	void resume();
 
-	void setMsPerUpdate(ushort i);
+	void   pushScene(Scene* s);
+	void   popScene();
+	Scene* getRunningScene() const;
 
-	void pushScene(Scene* s);
-	void popScene();
+	Size getWinSize() const;
+	
+	void setMsPerUpdate(ushort i);
 
 private:
 	Director();
