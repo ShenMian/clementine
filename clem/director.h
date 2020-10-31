@@ -15,7 +15,7 @@ class Renderer;
 class Director
 {
 public:
-	static Director& instance();
+	static Director* instance();
 
 	void run();
 

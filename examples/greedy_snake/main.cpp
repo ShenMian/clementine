@@ -19,9 +19,13 @@ int main()
 {
 	Scene scene;
 	Snake snake;
-	Director& director = Director::instance();
+	auto director = Director::instance();
+	
 	scene.addFactor(&snake);
-	director.pushScene(&scene);
+	
+	director->pushScene(&scene);
+	director->run();
 
+	getchar();
 	return 0;
 }

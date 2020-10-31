@@ -22,10 +22,10 @@ int main()
 	Terminal::Cursor::hide();
 
 	Scene scene(Terminal::getWindowSize());
+	auto director = Director::instance();
 
-	auto& director = Director::instance();
-	director.pushScene(&scene);
-	director.run();
+	director->pushScene(&scene);
+	director->run();
 
 	getchar();
 	getchar();

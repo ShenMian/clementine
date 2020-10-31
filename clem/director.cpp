@@ -6,10 +6,10 @@
 #include "renderer.h"
 #include <assert.h>
 
-Director& Director::instance()
+Director* Director::instance()
 {
 	static Director instance;
-	return instance;
+	return &instance;
 }
 
 Director::Director()
