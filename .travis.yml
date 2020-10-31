@@ -20,3 +20,6 @@ arch:
 
 script:
 - ./build.sh
+  if: os = linux
+- ./build.bat
+  if: os = windows
