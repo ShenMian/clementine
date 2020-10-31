@@ -5,6 +5,7 @@
 #define CLEM_EXAMPLE_SNAKE_HPP_
 
 #include <vector>
+#include <assert.h>
 #include <clem/clem.hpp>
 
 using std::vector;
