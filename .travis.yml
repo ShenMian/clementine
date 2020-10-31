@@ -1,8 +1,5 @@
 language: cpp
 
-git:
-- depth: 1
-
 compiler:
 - gcc
 - clang
