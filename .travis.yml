@@ -1,20 +1,22 @@
 language: cpp
 
+git:
+- depth: 1
+
 compiler:
-  - gcc
-  - clang
+- gcc
+- clang
 
 os:
-  - linux
-  - windows
-  - osx
+- linux
+- windows
+- osx
 
 arch:
-  - amd64
-  - arm64
-  - ppc64le
-  - s390x
+- amd64
+- arm64
+- ppc64le
+- s390x
 
 script:
-  - ./build.sh
-
+- ./build.sh
