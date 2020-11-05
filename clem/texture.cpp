@@ -3,55 +3,68 @@
 // 材质
 
 #include "texture.h"
-#include "type.h"
 #include <assert.h>
+#include <math.h>
 
 Texture::Texture()
 		: Texture(Size(0, 0))
 {
 }
 
-Texture::Texture(Size size)
-		: Texture(size, Tile())
+Texture::Texture(Size s)
+		: Texture(s, Tile())
 {
 }
 
-Texture::Texture(const Tile& tile)
+Texture::Texture(const Tile& t)
 {
 	setSize(Size(1,1));
-	tiles[0] = tile;
+	tiles[0] = t;
 }
 
-Texture::Texture(Size size, const Tile& tile)
+Texture::Texture(Size s, const Tile& t)
 {
-	setSize(size);
+	setSize(s);
 	for(int i = 0; i < size.area(); i++)
-		tiles[i] = tile;
+		tiles[i] = t;
 }
 
-void Texture::draw(const Tile& tile, const Point& pos)
+void Texture::drawTile(const Tile& t, const Point& p)
 {
-	tiles[pos.x + (pos.y * pos.x)] = tile;
+	tiles[p.x + p.y * size.x] = t;
 }
 
-void Texture::draw(const Texture& texture, const Point& pos)
+void Texture::drawTexture(const Texture& t, const Point& p)
 {
-	for(ushort i = 0; i < texture.getSize().y; i++)
-		for(ushort j = 0; j < texture.getSize().x; j++)
-			draw(texture[pos], {pos.x + i, pos.y + j});
+	const auto s = t.getSize();
+	for(float x = 0; x < s.x; x++)
+		for(float y = 0; y < s.y; y++)
+			drawTile(at({x, y}), {p.x + x, p.y + y});
 }
 
-void Texture::drawRect(const Tile& tile, const Rect& rect)
+void Texture::drawRect(const Rect& rect, const Tile& t)
 {
 	for(float i = 0; i < rect.width; i++)
 	{
-		draw(tile, {rect.x + i, rect.y});
-		draw(tile, {rect.x + i, rect.bottom()});
+		drawTile(t, {rect.x + i, rect.y});
+		drawTile(t, {rect.x + i, rect.bottom()});
 	}
 	for(float i = 0; i < rect.height; i++)
 	{
-		draw(tile, {rect.x, rect.y + i});
-		draw(tile, {rect.right(), rect.y + i});
+		drawTile(t, {rect.x, rect.y + i});
+		drawTile(t, {rect.right(), rect.y + i});
+	}
+}
+
+void Texture::drawCycle(const Point& c, ushort r, const Tile& t)
+{
+	for(ushort x = 0; x <= r; x++)
+	{
+		ushort y = sqrt(r*r - x*x);
+		drawTile(t, {c.x + x, c.y + y});
+		drawTile(t, {c.x - x, c.y + y});
+		drawTile(t, {c.x - x, c.y - y});
+		drawTile(t, {c.x + x, c.y - y});
 	}
 }
 
@@ -60,9 +73,9 @@ const Size& Texture::getSize() const
 	return size;
 }
 
-void Texture::setSize(Size size)
+void Texture::setSize(Size s)
 {
-	size = size;
+	size = s;
 	tiles.resize(size.area());
 }
 
@@ -72,8 +85,14 @@ void Texture::clear()
 	tiles.resize(size.area());
 }
 
-const Tile& Texture::operator[](const Point& pos) const
+const Tile& Texture::at(const Point& p) const
 {
-	assert(pos.x <= size.x && pos.y <= size.y);
-	return tiles[pos.x + (pos.y * pos.x)];
+	assert(p.x <= size.x && p.y <= size.y);
+	return tiles[p.x + p.y * size.x];
 }
+
+const Tile& Texture::operator[](const Point& p) const
+{
+	return at(p);
+}
+

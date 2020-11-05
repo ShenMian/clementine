@@ -31,8 +31,6 @@ Scene::Scene(const Size& size)
 
   // 添加默认摄像机
 	defaultCamera = new Camera();
-	defaultCamera->setInputRect(rect);
-	defaultCamera->setOutputRect(rect);
 	addCamera(defaultCamera);
 }
 
@@ -47,11 +45,10 @@ void Scene::update()
 	updatePhysics();
 }
 
-void Scene::render(Renderer* renderer)
+void Scene::render()
 {
-	assert(renderer != nullptr);
   for(auto cam : cameras)
-		cam->render(renderer, factors);
+		cam->render();
 }
 
 void Scene::addFactor(Factor* f)
@@ -67,6 +64,11 @@ void Scene::removeFactor(Factor* f)
 		factors.erase(it);
 	else
 		assert(false);
+}
+
+const std::vector<Factor*>& Scene::getFactors() const
+{
+	return factors;
 }
 
 void Scene::addInput(Input* in)

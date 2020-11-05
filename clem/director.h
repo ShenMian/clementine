@@ -37,7 +37,6 @@ private:
 
 	std::vector<Scene*> scenes;
 	std::thread         thread;
-	Renderer*           renderer;
 	ushort              msPerUpdate;
 	bool                paused;
 };

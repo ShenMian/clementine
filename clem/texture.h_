@@ -10,20 +10,23 @@ typedef unsigned short ushort;
 #include <vector>
 #include "type.h"
 
+class Tile;
+class Rect;
+class Point;
+
 class Texture
 {
 public:
 	Texture();
-	Texture(const Tile& tile);
 	Texture(Size size);
+	Texture(const Tile& tile);
 	Texture(Size size, const Tile& tile);
 
-	void drawTile(const Tile& tile, const Point& pos);
-	void drawTexture(const Texture& texture, const Point& pos);
-	void drawRect(const Rect& rect, const Tile& t);
-	void drawCycle(const Point& center, ushort radius, const Tile& t);
+	void draw(const Tile& tile, const Point& pos);
+	void draw(const Texture& texture, const Point& pos);
+	void drawRect(const Tile& tile, const Rect& rect);
+	void drawCycle(const Tile& tile, ushort radius, Point center);
 
-	const Tile& at(const Point& pos) const;
 	const Tile& operator[](const Point& pos) const;
 
 	const Size& getSize() const;

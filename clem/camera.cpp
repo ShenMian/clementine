@@ -3,32 +3,53 @@
 // 场景摄像机
 
 #include "camera.h"
-#include "renderer.h"
-#include "factor.h"
 #include <vector>
 #include <algorithm>
 #include <assert.h>
+#include "scene.h"
+#include "director.h"
+#include "factor.h"
 
 using std::vector;
 
+Renderer Camera::renderer;
+
 Camera::Camera()
-		: depth(0)
+		: scene(nullptr), depth(0)
 {
 }
 
-void Camera::render(Renderer* renderer, const vector<Factor*>& objs)
+void Camera::render()
 {
-	for(auto obj : objs)
-		if(inSight(*obj))
-			renderer->draw(obj->getTexture(), obj->getPosition());
-	renderer->render(outputRect);
-	renderer->clear();
+	for(auto f : scene->getFactors())
+		if(true)
+			renderer.drawTexture(f->getTexture(), f->getPosition());
 }
 
 void Camera::setScene(Scene* s)
 {
 	assert(s != nullptr);
 	scene = s;
+}
+
+void Camera::setInputPosition(const Point& p)
+{
+	inPos = p;
+}
+
+void Camera::setOutputPosition(const Point& p)
+{
+	outPos = p;
+}
+
+void Camera::setSize(Size s)
+{
+	size = s;
+}
+
+Size Camera::getSize() const
+{
+	return size;
 }
 
 void Camera::setDepth(ushort depth)
@@ -41,22 +62,3 @@ ushort Camera::getDepth() const
 	return depth;
 }
 
-void Camera::setInputRect(const Rect& rect)
-{
-	inputRect = rect;
-}
-
-void Camera::setOutputRect(const Rect& rect)
-{
-	outputRect = rect;
-}
-
-bool Camera::inSight(const Factor& obj) const
-{
-	auto pos = obj.getPosition();
-	if(inputRect.x < pos.x && pos.x < inputRect.right() &&
-		 inputRect.y < pos.y && pos.y < inputRect.bottom())
-		return true;
-	else
-		return false;
-}

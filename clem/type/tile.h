@@ -4,19 +4,19 @@
 #ifndef CLEM_TYPE_TILE_H_
 #define CLEM_TYPE_TILE_H_
 
-#include <clem/attribute.h>
+#include <clem/color.h>
 
 class Tile
 {
 public:
-	char      ch;
-	Attribute attr;
+	char  ch;
+	Color color;
 
-	void put() const;
+	void print() const;
 
 	Tile();
 	Tile(char ch);
-	Tile(char ch, const Attribute& attr);
+	Tile(char ch, const Color& attr);
 };
 
 #endif // CLEM_TYPE_TILE_H_

@@ -2,10 +2,13 @@
 // License(Apache-2.0)
 
 #include "tile.h"
+#include <stdio.h>
+#include <clem/color.h>
 
-void Tile::put() const
+void Tile::print() const
 {
-	attr.putc(ch);
+	color.on();
+	putchar(ch);
 }
 
 Tile::Tile()
@@ -13,12 +16,13 @@ Tile::Tile()
 {
 }
 
-Tile::Tile(char ch)
-	: Tile(ch, Attribute())
+Tile::Tile(char c)
+	: Tile(c, Color())
 {
 }
 
-Tile::Tile(char ch, const Attribute& attr)
-		: ch(ch), attr(attr)
+Tile::Tile(char c, const Color& co)
+		: ch(c), color(co)
 {
 }
+

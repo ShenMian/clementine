@@ -7,6 +7,9 @@
 
 #include <vector>
 #include "type.h"
+#include "renderer.h"
+
+typedef unsigned short ushort;
 
 class Scene;
 class Renderer;
@@ -16,25 +19,27 @@ class Camera
 {
 public:
 	Camera();
+	Camera(Scene* scene);
 
-	void render(Renderer* renderer);
-	void render(Renderer* renderer, const std::vector<Factor*>& objs);
+	void render();
 
-	void setScene(Scene* s);
+	void setScene(Scene* scene);
 
+	void setInputPosition(const Point& pos);
+	void setOutputPosition(const Point& pos);
+
+	void setSize(Size size);
+	Size getSize() const;
+	
 	void   setDepth(ushort depth);
 	ushort getDepth() const;
 
-	void setInputRect(const Rect& rect);
-	void setOutputRect(const Rect& rect);
-
 private:
-	bool inSight(const Factor& obj) const;
-
-	Rect      inputRect;
-	Rect      outputRect;
-	Scene*    scene;
-  ushort    depth;
+	Scene* scene;
+	Point  inPos, outPos;
+	Size   size;
+  ushort depth;
+	static Renderer renderer;
 };
 
 #endif // CLEM_CAMERA_H_

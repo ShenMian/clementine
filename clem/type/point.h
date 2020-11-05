@@ -7,6 +7,8 @@
 
 class Vector;
 
+typedef unsigned short ushort;
+
 class Point
 {
 public:

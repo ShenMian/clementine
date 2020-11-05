@@ -13,7 +13,7 @@ Director* Director::instance()
 }
 
 Director::Director()
-		: msPerUpdate(0), renderer(new Renderer()), paused(false)
+		: msPerUpdate(0), paused(false)
 {
 }
 
@@ -74,6 +74,6 @@ void Director::loop()
 
 		scene->update();
 
-		scene->render(renderer);
+		scene->render();
 	}
 }
