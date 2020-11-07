@@ -4,6 +4,7 @@
 #include "scene.h"
 #include "director.h"
 #include "renderer.h"
+#include "terminal.h"
 #include <assert.h>
 
 Director* Director::instance()
@@ -61,7 +62,7 @@ Scene* Director::getRunningScene() const
 
 Size Director::getWinSize() const
 {
-	return Size();
+	return Terminal::getWinSize();
 }
 
 void Director::loop()

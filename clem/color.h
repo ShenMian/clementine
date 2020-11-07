@@ -23,6 +23,8 @@ public:
 	void push();
 	void pop();
 
+	const std::string& getString() const;
+
 private:
 	const std::string* pString;
 	std::string compile(ushort attr) const;

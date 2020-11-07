@@ -6,18 +6,12 @@
 
 void Renderer::render() const
 {
-	const auto s = texture.getSize();
-	for(float x = 0; x < s.x; x++)
-	{
-		for(float y = 0; y < s.y; y++)
-			texture.at({x, y}).print();
-		printf("\n");
-	}
+	assert(false);
 }
 
 void Renderer::drawTexture(const Texture& t, const Point& p)
 {
-	texture.drawTexture(t, p);
+	assert(false);
 }
 
 void Renderer::clear()

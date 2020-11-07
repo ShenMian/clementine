@@ -21,9 +21,24 @@ Camera::Camera()
 
 void Camera::render()
 {
+	Texture texture(size);
+
+	puts("A");
 	for(auto f : scene->getFactors())
 		if(true)
-			renderer.drawTexture(f->getTexture(), f->getPosition());
+			texture.drawTexture(f->getTexture(), f->getPosition() - inPos);
+
+	puts("B");
+	for(ushort y = 0; y < size.y; y++)
+	{
+		printf("\x1b[%d;%dH", (int)outPos.x, (int)outPos.y + y);
+		for(ushort x = 0; x < size.x; x++)
+		{
+			auto& tile = texture.at(Point(x, y));
+			printf("%s", texture.at(Point(x, y)).getString().c_str());
+		}
+	puts("C");
+	}
 }
 
 void Camera::setScene(Scene* s)

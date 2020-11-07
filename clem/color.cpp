@@ -45,15 +45,20 @@ void Color::pop()
 {
 	stack.pop_back();
 	if(stack.empty())
-		printf("%s", "");
+		printf("%s", "\x1b[0m");
 	else
 		printf("%s", stack.back()->c_str());
 }
 
+const string& Color::getString() const
+{
+	return *pString;
+}
+
 string Color::compile(ushort attr) const
 {
-	const auto fore = attr & fore_mask;
-	const auto back = (attr & back_mask) >> 4;
+	const auto fore  = attr & fore_mask;
+	const auto back  = (attr & back_mask) >> 4;
 	const auto style = (attr & style_mask) >> 8;
 
 	string str = "\x1b[";

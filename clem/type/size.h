@@ -13,10 +13,7 @@ public:
 	ushort x;
 	ushort y;
 
-	ushort area() const
-	{
-		return x * y;
-	}
+	ushort area() const;
 
 	Size operator+(const Size& size) const;
 

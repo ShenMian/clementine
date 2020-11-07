@@ -18,41 +18,43 @@ Texture::Texture(Size s)
 
 Texture::Texture(const Tile& t)
 {
-	setSize(Size(1,1));
+	setSize(Size(1, 1));
 	tiles[0] = t;
 }
 
 Texture::Texture(Size s, const Tile& t)
 {
+	printf("Texture::Texture Size'%hu %hu'\n", size.x, size.y);
 	setSize(s);
-	for(int i = 0; i < size.area(); i++)
+	for(ushort i = 0; i < size.area(); i++)
 		tiles[i] = t;
 }
 
 void Texture::drawTile(const Tile& t, const Point& p)
 {
+	assert(0 <= p.x && p.x <= size.x && 0 <= p.y && p.y <= size.y);
 	tiles[p.x + p.y * size.x] = t;
 }
 
 void Texture::drawTexture(const Texture& t, const Point& p)
 {
 	const auto s = t.getSize();
-	for(float x = 0; x < s.x; x++)
-		for(float y = 0; y < s.y; y++)
-			drawTile(at({x, y}), {p.x + x, p.y + y});
+	for(ushort x = 0; x < s.x; x++)
+		for(ushort y = 0; y < s.y; y++)
+			drawTile(at({x, y}), Point(p.x + x, p.y + y));
 }
 
 void Texture::drawRect(const Rect& rect, const Tile& t)
 {
 	for(float i = 0; i < rect.width; i++)
 	{
-		drawTile(t, {rect.x + i, rect.y});
-		drawTile(t, {rect.x + i, rect.bottom()});
+		drawTile(t, Point(rect.x + i, rect.y));
+		drawTile(t, Point(rect.x + i, rect.bottom()));
 	}
 	for(float i = 0; i < rect.height; i++)
 	{
-		drawTile(t, {rect.x, rect.y + i});
-		drawTile(t, {rect.right(), rect.y + i});
+		drawTile(t, Point(rect.x, rect.y + i));
+		drawTile(t, Point(rect.x, rect.right() + i));
 	}
 }
 
@@ -61,10 +63,10 @@ void Texture::drawCycle(const Point& c, ushort r, const Tile& t)
 	for(ushort x = 0; x <= r; x++)
 	{
 		ushort y = sqrt(r*r - x*x);
-		drawTile(t, {c.x + x, c.y + y});
-		drawTile(t, {c.x - x, c.y + y});
-		drawTile(t, {c.x - x, c.y - y});
-		drawTile(t, {c.x + x, c.y - y});
+		drawTile(t, Point(c.x + x, c.y + y));
+		drawTile(t, Point(c.x - x, c.y + y));
+		drawTile(t, Point(c.x - x, c.y - y));
+		drawTile(t, Point(c.x + x, c.y - y));
 	}
 }
 
@@ -77,17 +79,22 @@ void Texture::setSize(Size s)
 {
 	size = s;
 	tiles.resize(size.area());
+
+	printf("'%hu %hu'\n", size.x, size.y);
+	printf("'%hu'\n", size.area());
+	printf("'%lu'\n", tiles.size());
 }
 
 void Texture::clear()
 {
-	tiles.clear();
-	tiles.resize(size.area());
+	for(ushort i = 0; i < size.area(); i++)
+		tiles[i] = Tile();
 }
 
 const Tile& Texture::at(const Point& p) const
 {
-	assert(p.x <= size.x && p.y <= size.y);
+	assert(0 <= p.x && p.x <= size.x && 0 <= p.y && p.y <= size.y);
+	printf("at - %g %g %g\n", p.x, p.y, p.x + p.y * size.x);
 	return tiles[p.x + p.y * size.x];
 }
 

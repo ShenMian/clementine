@@ -14,6 +14,9 @@ fetch_googletest(
   ${PROJECT_BINARY_DIR}/googletest
 )
 
+set(CMAKE_BUILD_TYPE Debug)
+SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
+
 # 设置 lib 输出目录
 set(LIBRARY_OUTPUT_PATH ../lib/)
 

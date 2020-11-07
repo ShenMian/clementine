@@ -18,7 +18,6 @@ class Scene
 {
 public:
 	Scene();
-	Scene(const Size& size);
 	virtual ~Scene();
 
 	void update();
@@ -40,7 +39,6 @@ private:
 	void updateInput();
 	void updatePhysics();
 
-	Size size;
 	std::vector<Input*>  inputs;
 	Physics*             physics;
 	Camera*              defaultCamera;

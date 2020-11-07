@@ -8,7 +8,8 @@
 typedef unsigned short ushort;
 
 #include <vector>
-#include "type.h"
+#include <clem/tile.h>
+#include <clem/type.h>
 
 class Texture
 {

@@ -16,7 +16,13 @@ Size::Size(int x, int y)
 	assert(x >= 0 && y >= 0);
 }
 
+ushort Size::area() const
+{
+	return x * y;
+}
+
 Size Size::operator+(const Size& size) const
 {
 	return Size(x + size.x, y + size.y);
 }
+
