@@ -4,6 +4,7 @@
 #include "scene.h"
 #include "director.h"
 #include "renderer.h"
+#include "terminal.h"
 #include <assert.h>
 
 Director* Director::instance()
@@ -13,7 +14,7 @@ Director* Director::instance()
 }
 
 Director::Director()
-		: msPerUpdate(0), renderer(new Renderer()), paused(false)
+		: msPerUpdate(0), paused(false)
 {
 }
 
@@ -61,7 +62,7 @@ Scene* Director::getRunningScene() const
 
 Size Director::getWinSize() const
 {
-	return Size();
+	return Terminal::getWinSize();
 }
 
 void Director::loop()
@@ -74,6 +75,6 @@ void Director::loop()
 
 		scene->update();
 
-		scene->render(renderer);
+		scene->render();
 	}
 }

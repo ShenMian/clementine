@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 
-Size Terminal::getWindowSize()
+Size Terminal::getWinSize()
 {
   winsize winSize;
   ioctl(STDIN_FILENO, TIOCGWINSZ, &winSize);

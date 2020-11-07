@@ -20,38 +20,15 @@
 using std::vector;
 
 Scene::Scene()
-		: Scene(Size(Terminal::getWindowSize().x, Terminal::getWindowSize().y))
 {
-}
-
-Scene::Scene(const Size& size)
-		: size(size)
-{
-	Rect rect(0, this->size.y, size.x, size.y);
-
   // 添加默认摄像机
 	defaultCamera = new Camera();
-	defaultCamera->setInputRect(rect);
-	defaultCamera->setOutputRect(rect);
 	addCamera(defaultCamera);
 }
 
 Scene::~Scene()
 {
 	delete defaultCamera;
-}
-
-void Scene::update()
-{
-	updateInput();
-	updatePhysics();
-}
-
-void Scene::render(Renderer* renderer)
-{
-	assert(renderer != nullptr);
-  for(auto cam : cameras)
-		cam->render(renderer, factors);
 }
 
 void Scene::addFactor(Factor* f)
@@ -67,6 +44,11 @@ void Scene::removeFactor(Factor* f)
 		factors.erase(it);
 	else
 		assert(false);
+}
+
+const std::vector<Factor*>& Scene::getFactors() const
+{
+	return factors;
 }
 
 void Scene::addInput(Input* in)
@@ -111,6 +93,18 @@ void Scene::removeCamera(Camera* cam)
 const vector<Camera*>& Scene::getCameras() const
 {
 	return cameras;
+}
+
+void Scene::update()
+{
+	updateInput();
+	updatePhysics();
+}
+
+void Scene::render()
+{
+  for(auto cam : cameras)
+		cam->render();
 }
 
 void Scene::updateInput()

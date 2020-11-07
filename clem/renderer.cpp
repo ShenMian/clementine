@@ -4,15 +4,28 @@
 
 #include "renderer.h"
 
-void Renderer::render(const Rect&) const
+void Renderer::render() const
 {
+	assert(false);
 }
 
-void Renderer::draw(const Texture&, const Point&)
+void Renderer::drawTexture(const Texture& t, const Point& p)
 {
+	assert(false);
 }
 
 void Renderer::clear()
 {
-	textures.clear();
+	texture.clear();
 }
+
+void Renderer::setSize(Size s)
+{
+	texture.setSize(s);
+}
+
+Size Renderer::getSize() const
+{
+	return texture.getSize();
+}
+

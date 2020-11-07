@@ -17,9 +17,10 @@ const float snack_speed = 0.2;
 
 int main()
 {
+	puts("Greedy Snake");
+	auto director = Director::instance();
 	Scene scene;
 	Snake snake;
-	auto director = Director::instance();
 	
 	scene.addFactor(&snake);
 	

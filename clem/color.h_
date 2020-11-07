@@ -1,36 +1,35 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// 字体属性
+// 控制台字体属性
 
 #ifndef CLEM_COLOR_H_
 #define CLEM_COLOR_H_
 
-#include <string>
+#include <map>
 #include <vector>
-#include <unordered_map>
+#include <string>
 
 typedef unsigned short ushort;
 
 class Color
 {
 public:
-	Color();
 	Color(ushort attr);
 
-	void on() const;
-	void off() const;
+	const std::string& operator()() const;
 
 	void push();
 	void pop();
 
-	const std::string& getString() const;
+	void on() const;
+	void off() const;
 
 private:
-	const std::string* pString;
+	std::string*                         pStr;
+	static std::map<ushort, std::string> index;
+	static std::vector<Color*>           stack;
+
 	std::string compile(ushort attr) const;
-	
-	static std::unordered_map<ushort, std::string> index;
-	static std::vector<const std::string*> stack;
 };
 
 enum
@@ -44,7 +43,6 @@ enum
 	fore_cyan,
 	fore_aqua = fore_cyan,
 	fore_white,
-	fore_mask = 0x000F,
 
 	back_black  = 0x0010,
 	back_red    = 0x0020,
@@ -55,16 +53,12 @@ enum
 	back_cyan   = 0x0070,
 	back_aqua   = back_cyan,
 	back_white  = 0x0080,
-	back_mask   = 0x00F0,
 
-	style_normal     = 0x0100,
-	style_bold       = 0x0200,
-	style_underline  = 0x0500,
-	style_underscore = style_underline,
-	strle_reverse    = 0x0800,
-	style_mask       = 0x0F00
+	mode_normal     = 0x0100,
+	mode_bold       = 0x0200,
+	mode_underline  = 0x0500,
+	mode_underscore = mode_underline,
+	mode_reverse    = 0x0800
 };
 
 #endif // CLEM_COLOR_H_
-
-

@@ -6,20 +6,23 @@
 #define CLEM_RENDERER_H_
 
 #include <vector>
+#include "texture.h"
 
-class Rect;
 class Point;
-class Texture;
 
 class Renderer
 {
 public:
-  virtual void render(const Rect&) const;
-	virtual void draw(const Texture&, const Point&);
+  virtual void render() const;
+
+	virtual void drawTexture(const Texture&texture, const Point& position);
   virtual void clear();
 
+	void setSize(Size size);
+	Size getSize() const;
+
 protected:
-	std::vector<const Texture*> textures;
+	Texture texture;
 };
 
 #endif // CLEM_RENDERER_H_

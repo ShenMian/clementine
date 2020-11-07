@@ -5,6 +5,7 @@
 #include <time.h>
 #include <clem/clem.hpp>
 #include <iostream>
+#include <stdio.h>
 
 #ifdef OS_WIN
 #include <windows.h>
@@ -18,11 +19,16 @@ using namespace std;
 
 int main()
 {
-	srand(time(nullptr));
-	Terminal::Cursor::hide();
-
-	Scene scene(Terminal::getWindowSize());
 	auto director = Director::instance();
+	Size size = director->getWinSize();
+	getchar();
+
+	Texture texture(size);
+	texture.drawCycle(Point(size.x / 2, size.y / 2), 5, Tile('.', fore_green));
+	Factor factor(texture);
+	Scene scene;
+	scene.setPhysics(new Physics);
+	scene.addFactor(&factor);
 
 	director->pushScene(&scene);
 	director->run();

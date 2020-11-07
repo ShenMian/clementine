@@ -11,7 +11,7 @@
 class Terminal
 {
 public:
-  static Size getWindowSize();
+  static Size getWinSize();
 
   class Cursor
   {

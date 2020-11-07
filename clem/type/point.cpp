@@ -10,7 +10,7 @@ Point::Point()
 {
 }
 
-Point::Point(float x, float y)
+Point::Point(ushort x, ushort y)
 		: x(x), y(y)
 {
 }
@@ -20,12 +20,22 @@ Point::Point(const Vector& vec)
 {
 }
 
-Point Point::operator+(const Vector& vec) const
+Point Point::operator+(const Point& p) const
 {
-	return Point(x + vec.x, y + vec.y);
+	return Point(x + p.x, y + p.y);
 }
 
-Point Point::operator-(const Vector& vec) const
+Point Point::operator-(const Point& p) const
 {
-	return Point(x - vec.x, y - vec.y);
+	return Point(x - p.x, y - p.y);
+}
+
+Point Point::operator+(const Vector& v) const
+{
+	return Point(x + v.x, y + v.y);
+}
+
+Point Point::operator-(const Vector& v) const
+{
+	return Point(x - v.x, y - v.y);
 }

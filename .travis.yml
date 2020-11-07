@@ -1,20 +1,22 @@
 language: cpp
 
 compiler:
-  - gcc
-  - clang
+- gcc
+- clang
 
 os:
-  - linux
-  - windows
-  - osx
+- linux
+- windows
+- osx
 
 arch:
-  - amd64
-  - arm64
-  - ppc64le
-  - s390x
+- amd64
+- arm64
+- ppc64le
+- s390x
 
 script:
-  - ./build.sh
-
+- ./build.sh
+  if: os = linux
+- ./build.bat
+  if: os = windows

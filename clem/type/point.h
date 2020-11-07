@@ -7,6 +7,8 @@
 
 class Vector;
 
+typedef unsigned short ushort;
+
 class Point
 {
 public:
@@ -14,9 +16,11 @@ public:
 	float y;
 
 	Point();
-	Point(float x, float y);
+	Point(ushort x, ushort y);
 	Point(const Vector& vec);
 
+	Point operator+(const Point& pos) const;
+	Point operator-(const Point& pos) const;
 	Point operator+(const Vector& vec) const;
 	Point operator-(const Vector& vec) const;
 };

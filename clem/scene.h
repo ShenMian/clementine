@@ -18,14 +18,14 @@ class Scene
 {
 public:
 	Scene();
-	Scene(const Size& size);
 	virtual ~Scene();
 
 	void update();
-	void render(Renderer* renderer);
+	void render();
 
-	void addFactor(Factor*);
-	void removeFactor(Factor*);
+	void                       addFactor(Factor*);
+	void                       removeFactor(Factor*);
+	const std::vector<Factor*>& getFactors() const;
 
 	void      addInput(Input* in);
 	void      setPhysics(Physics* p);
@@ -39,7 +39,6 @@ private:
 	void updateInput();
 	void updatePhysics();
 
-	Size size;
 	std::vector<Input*>  inputs;
 	Physics*             physics;
 	Camera*              defaultCamera;
