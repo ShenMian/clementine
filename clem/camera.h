@@ -15,12 +15,13 @@ class Factor;
 class Camera
 {
 public:
-	Camera();
+	Camera(Scene* s);
 
 	void render(Renderer* renderer);
 	void render(Renderer* renderer, const std::vector<Factor*>& objs);
 
-	void setScene(Scene* s);
+	void   setScene(Scene* s);
+	Scene* getScene() const;
 
 	void   setDepth(ushort depth);
 	ushort getDepth() const;
@@ -31,10 +32,10 @@ public:
 private:
 	bool inSight(const Factor& obj) const;
 
+	Scene*    scene;
+	ushort    depth;
 	Rect      inputRect;
 	Rect      outputRect;
-	Scene*    scene;
-  ushort    depth;
 };
 
 #endif // CLEM_CAMERA_H_

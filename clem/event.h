@@ -13,6 +13,8 @@ public:
 		controller
 	};
 
+	Event(Type type);
+
 	Type getType() const;
 
 private:

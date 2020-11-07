@@ -11,8 +11,8 @@
 
 using std::vector;
 
-Camera::Camera()
-		: depth(0)
+Camera::Camera(Scene* s)
+		: scene(s), depth(0)
 {
 }
 
@@ -29,6 +29,11 @@ void Camera::setScene(Scene* s)
 {
 	assert(s != nullptr);
 	scene = s;
+}
+
+Scene* Camera::getScene() const
+{
+	return scene;
 }
 
 void Camera::setDepth(ushort depth)
