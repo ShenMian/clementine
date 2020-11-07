@@ -39,7 +39,7 @@ void Terminal::Cursor::hide()
 #include <assert.h>
 #include <windows.h>
 
-Size Terminal::getWindowSize()
+Size Terminal::getWinSize()
 {
 	CONSOLE_SCREEN_BUFFER_INFO screenInfo;
 	

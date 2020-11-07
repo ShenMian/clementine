@@ -41,7 +41,7 @@ void Texture::drawTexture(const Texture& t, const Point& p)
 	const auto s = t.getSize();
 	for(ushort x = 0; x < s.x; x++)
 		for(ushort y = 0; y < s.y; y++)
-			drawTile(at({x, y}), Point(p.x + x, p.y + y));
+			drawTile(at(Point(x, y)), Point(p.x + x, p.y + y));
 }
 
 void Texture::drawRect(const Rect& rect, const Tile& t)

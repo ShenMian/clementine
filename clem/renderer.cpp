@@ -4,6 +4,8 @@
 
 #include "renderer.h"
 
+#include <assert.h>
+
 void Renderer::render() const
 {
 	assert(false);

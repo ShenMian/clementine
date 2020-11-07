@@ -16,7 +16,7 @@ public:
 	float y;
 
 	Point();
-	Point(ushort x, ushort y);
+	Point(float x, float y);
 	Point(const Vector& vec);
 
 	Point operator+(const Point& pos) const;

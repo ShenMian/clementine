@@ -12,15 +12,13 @@
 
 using std::vector;
 
-<<<<<<< HEAD
-Camera::Camera(Scene* s)
-		: scene(s), depth(0)
-=======
-Renderer Camera::renderer;
-
 Camera::Camera()
-		: scene(nullptr), depth(0)
->>>>>>> bb08b426e997f6b9a83dcf3eed3b18de28ed7221
+		: Camera(nullptr)
+{
+}
+
+Camera::Camera(Scene* s)
+	: scene(s), depth(0)
 {
 }
 
@@ -28,12 +26,10 @@ void Camera::render()
 {
 	Texture texture(size);
 
-	puts("A");
 	for(auto f : scene->getFactors())
 		if(true)
 			texture.drawTexture(f->getTexture(), f->getPosition() - inPos);
 
-	puts("B");
 	for(ushort y = 0; y < size.y; y++)
 	{
 		printf("\x1b[%d;%dH", (int)outPos.x, (int)outPos.y + y);
@@ -42,7 +38,6 @@ void Camera::render()
 			auto& tile = texture.at(Point(x, y));
 			printf("%s", texture.at(Point(x, y)).getString().c_str());
 		}
-	puts("C");
 	}
 }
 
@@ -52,16 +47,12 @@ void Camera::setScene(Scene* s)
 	scene = s;
 }
 
-<<<<<<< HEAD
 Scene* Camera::getScene() const
 {
 	return scene;
 }
 
-void Camera::setDepth(ushort depth)
-=======
 void Camera::setInputPosition(const Point& p)
->>>>>>> bb08b426e997f6b9a83dcf3eed3b18de28ed7221
 {
 	inPos = p;
 }
@@ -81,9 +72,9 @@ Size Camera::getSize() const
 	return size;
 }
 
-void Camera::setDepth(ushort depth)
+void Camera::setDepth(ushort d)
 {
-	this->depth = depth;
+	depth = d;
 }
 
 ushort Camera::getDepth() const
