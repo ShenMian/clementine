@@ -36,12 +36,10 @@ public:
 
 	void update() override
 	{
-		
 	}
 
 	void increaseBody()
 	{
-		
 	}
 
 private:
