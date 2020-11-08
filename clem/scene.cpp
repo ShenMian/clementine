@@ -2,15 +2,15 @@
 // License(Apache-2.0)
 // 场景
 
-#include "scene.h"
-#include "type.h"
-
-#include "input.h"
-#include "physics.h"
-#include "renderer.h"
+#include <clem/scene.h>
+#include <clem/type.h>
+#include <clem/director.h>
 
 #include "factor.h"
 #include "camera.h"
+
+#include "input.h"
+#include "physics.h"
 
 #include <algorithm>
 #include <assert.h>
@@ -20,8 +20,11 @@ using std::vector;
 Scene::Scene()
 	: physics(new Physics)
 {
+	auto director = Director::instance();
+
   // 添加默认摄像机
 	defaultCamera = new Camera();
+	defaultCamera->setSize(director->getWinSize());
 	addCamera(defaultCamera);
 }
 
