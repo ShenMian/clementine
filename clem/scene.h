@@ -23,8 +23,8 @@ public:
 	void update();
 	void render();
 
-	void                       addFactor(Factor*);
-	void                       removeFactor(Factor*);
+	void                        addFactor(Factor*);
+	void                        removeFactor(Factor*);
 	const std::vector<Factor*>& getFactors() const;
 
 	void      addInput(Input* in);
@@ -34,6 +34,7 @@ public:
 	void                        addCamera(Camera* cam);
 	void                        removeCamera(Camera* cam);
 	const std::vector<Camera*>& getCameras() const;
+	Camera*                     getDefaultCamera() const;
 
 private:
 	void updateInput();

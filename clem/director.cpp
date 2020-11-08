@@ -21,8 +21,10 @@ Director::Director()
 void Director::run()
 {
 	assert(!scenes.empty());
-	thread = std::thread(&Director::loop, this);
-	thread.detach();
+	loop();
+
+	// thread = std::thread(&Director::loop, this);
+	// thread.detach();
 }
 
 

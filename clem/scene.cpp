@@ -12,14 +12,13 @@
 #include "factor.h"
 #include "camera.h"
 
-#include "terminal.h"
-
 #include <algorithm>
 #include <assert.h>
 
 using std::vector;
 
 Scene::Scene()
+	: physics(new Physics)
 {
   // 添加默认摄像机
 	defaultCamera = new Camera();
@@ -68,7 +67,6 @@ Physics* Scene::getPhysics() const
 	return this->physics;
 }
 
-
 void Scene::addCamera(Camera* cam)
 {
 	assert(cam != nullptr);
@@ -93,6 +91,11 @@ void Scene::removeCamera(Camera* cam)
 const vector<Camera*>& Scene::getCameras() const
 {
 	return cameras;
+}
+
+Camera* Scene::getDefaultCamera() const
+{
+	return defaultCamera;
 }
 
 void Scene::update()

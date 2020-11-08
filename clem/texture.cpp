@@ -24,7 +24,6 @@ Texture::Texture(const Tile& t)
 
 Texture::Texture(Size s, const Tile& t)
 {
-	printf("Texture::Texture Size'%hu %hu'\n", size.x, size.y);
 	setSize(s);
 	for(ushort i = 0; i < size.area(); i++)
 		tiles[i] = t;
@@ -79,10 +78,6 @@ void Texture::setSize(Size s)
 {
 	size = s;
 	tiles.resize(size.area());
-
-	printf("'%hu %hu'\n", size.x, size.y);
-	printf("'%hu'\n", size.area());
-	printf("'%lu'\n", tiles.size());
 }
 
 void Texture::clear()
@@ -94,7 +89,6 @@ void Texture::clear()
 const Tile& Texture::at(const Point& p) const
 {
 	assert(0 <= p.x && p.x <= size.x && 0 <= p.y && p.y <= size.y);
-	printf("at - %g %g %g\n", p.x, p.y, p.x + p.y * size.x);
 	return tiles[p.x + p.y * size.x];
 }
 

@@ -3,6 +3,7 @@
 // 终端
 
 #include "terminal.h"
+#include <stdio.h>
 
 #ifdef OS_LINUX
 

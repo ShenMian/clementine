@@ -7,8 +7,8 @@
 #include <algorithm>
 #include <assert.h>
 #include "scene.h"
-#include "director.h"
 #include "factor.h"
+#include "director.h"
 
 using std::vector;
 
@@ -24,6 +24,8 @@ Camera::Camera(Scene* s)
 
 void Camera::render()
 {
+	assert(size.area() != 0);
+
 	Texture texture(size);
 
 	for(auto f : scene->getFactors())
@@ -34,10 +36,7 @@ void Camera::render()
 	{
 		printf("\x1b[%d;%dH", (int)outPos.x, (int)outPos.y + y);
 		for(ushort x = 0; x < size.x; x++)
-		{
-			auto& tile = texture.at(Point(x, y));
 			printf("%s", texture.at(Point(x, y)).getString().c_str());
-		}
 	}
 }
 

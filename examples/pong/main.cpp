@@ -21,13 +21,14 @@ int main()
 {
 	auto director = Director::instance();
 	Size size = director->getWinSize();
-	getchar();
-
+	
 	Texture texture(size);
 	texture.drawCycle(Point(size.x / 2, size.y / 2), 5, Tile('.', fore_green));
+	
 	Factor factor(texture);
+	
 	Scene scene;
-	scene.setPhysics(new Physics);
+	scene.getDefaultCamera()->setSize(size);
 	scene.addFactor(&factor);
 
 	director->pushScene(&scene);
