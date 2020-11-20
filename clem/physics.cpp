@@ -5,7 +5,12 @@
 #include "physics.h"
 #include "factor.h"
 
-void Physics::update(Factor&)
+void Physics::update(Factor& f)
 {
+}
+
+bool Physics::collide(const Factor* a, const Factor* b)
+{
+	return false;
 }
 

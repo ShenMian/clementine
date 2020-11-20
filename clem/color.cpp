@@ -52,7 +52,7 @@ void Color::pop()
 
 const string& Color::getString() const
 {
-	return *pString;
+	return "\x1b]32m"; // *pString;
 }
 
 string Color::compile(ushort attr) const

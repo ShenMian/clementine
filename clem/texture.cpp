@@ -86,10 +86,15 @@ void Texture::clear()
 		tiles[i] = Tile();
 }
 
+const Tile& Texture::at(ushort x, ushort y) const
+{
+	assert(0 <= x && x <= size.x && 0 <= y && y <= size.y);
+	return tiles[x + y * size.x];
+}
+
 const Tile& Texture::at(const Point& p) const
 {
-	assert(0 <= p.x && p.x <= size.x && 0 <= p.y && p.y <= size.y);
-	return tiles[p.x + p.y * size.x];
+	return at(p.x, p.y);
 }
 
 const Tile& Texture::operator[](const Point& p) const

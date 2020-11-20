@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <assert.h>
+#include <clem/cursor.h>
 #include "scene.h"
 #include "factor.h"
 #include "director.h"
@@ -27,16 +28,24 @@ void Camera::render()
 	assert(size.area() != 0);
 
 	Texture texture(size);
+	texture.drawCycle(Point(size.x / 2, size.y / 2), 5, Tile('.', fore_green));
 
+	for(ushort y = 0; y < size.y; y++)
+	{
+		printf("\x1b[%d;%dH", (int)outPos.y + y, (int)outPos.x);
+		for(ushort x = 0; x < size.x; x++)
+			printf(" ");
+	}
+	
 	for(auto f : scene->getFactors())
 		if(true)
 			texture.drawTexture(f->getTexture(), f->getPosition() - inPos);
 
 	for(ushort y = 0; y < size.y; y++)
 	{
-		printf("\x1b[%d;%dH", (int)outPos.x, (int)outPos.y + y);
+		printf("\x1b[%d;%dH", (int)outPos.y + y, (int)outPos.x);
 		for(ushort x = 0; x < size.x; x++)
-			printf("%s", texture.at(Point(x, y)).getString().c_str());
+			printf("%s", texture.at(x, y).getString().c_str());
 	}
 }
 

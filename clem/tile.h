@@ -19,7 +19,7 @@ public:
 	void         setColor(const Color& color);
 	const Color& getColor() const;
 
-	std::string getString() const;
+	const std::string& getString() const;
 
 private:
 	char  ch;

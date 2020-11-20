@@ -25,6 +25,7 @@ public:
 	void drawCycle(const Point& center, ushort radius, const Tile& t);
 
 	const Tile& at(const Point& pos) const;
+	const Tile& at(ushort x, ushort y) const;
 	const Tile& operator[](const Point& pos) const;
 
 	const Size& getSize() const;

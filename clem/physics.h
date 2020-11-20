@@ -10,7 +10,8 @@ class Factor;
 class Physics
 {
 public:
-	virtual void update(Factor&);
+	void update(Factor& factor);
+	bool collide(const Factor* factorA, const Factor* factorB);
 };
 
 #endif // CLEM_PHYSICS_H_
