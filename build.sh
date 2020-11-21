@@ -3,7 +3,7 @@
 #!/bin/bash
 
 cd "$( cd "$( dirname "$0"  )" && pwd  )"
-if [ ! -d "/build" ]; then
+if [ ! -d "./build" ]; then
 	mkdir build
 fi
 cd build

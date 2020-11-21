@@ -3,5 +3,5 @@
 
 # 包含 子项目
 add_subdirectory("pong")
-add_subdirectory("greedy_snake")
+# add_subdirectory("greedy_snake")
 
