@@ -1,75 +1,30 @@
+// Copyright 2020 SMS
+// License(Apache-2.0)
+// 字体属性
 
 #include "color.h"
+#include <clem/assert.h>
 
 using std::string;
-using std::to_string;
-using std::vector;
-using std::unordered_map;
-
-unordered_map<ushort, string> Color::index;
-vector<const string*> Color::stack;
 
 Color::Color()
+		: Color(attr::white, attr::black)
 {
 }
 
-Color::Color(ushort attr)
+Color::Color(attr f)
+		: Color(f, attr::black)
 {
-	const auto it = index.find(attr);
-	if(it == index.end())
-	{
-		auto pair = index.insert({attr, compile(attr)});
-		pString = &pair.first->second;
-	}
-	else
-		pString = &it->second;
 }
 
-void Color::on() const
+Color::Color(attr f, attr b)
 {
-	printf("%s", pString->c_str());
+	assert(f < attr::max && b < attr::max, "无效的颜色属性");
+	fore = back = nullptr;
 }
 
-void Color::off() const
+const std::string& Color::getString() const
 {
-	printf("%s", "\x1b[0m");
+	assert(fore != nullptr && back != nullptr, "指针无效");
+	return string(fore) + string(back);
 }
-
-void Color::push()
-{
-	printf("%s", pString->c_str());
-	stack.push_back(pString);
-}
-
-void Color::pop()
-{
-	stack.pop_back();
-	if(stack.empty())
-		printf("%s", "\x1b[0m");
-	else
-		printf("%s", stack.back()->c_str());
-}
-
-const string& Color::getString() const
-{
-	return "\x1b]32m"; // *pString;
-}
-
-string Color::compile(ushort attr) const
-{
-	const auto fore  = attr & fore_mask;
-	const auto back  = (attr & back_mask) >> 4;
-	const auto style = (attr & style_mask) >> 8;
-
-	string str = "\x1b[";
-
-	if(fore)
-		str += '3' + to_string(fore - 1) + ';';
-	if(back)
-		str += '4' + to_string(back - 1) + ';';
-	
-	str.pop_back();
-	str += 'm';
-	return str;
-}
-

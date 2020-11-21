@@ -19,11 +19,19 @@ using namespace std;
 
 int main()
 {
+	#ifdef OS_WIN
+		// 开启 VT100模式
+		DWORD mode;
+		GetConsoleMode(hStdOut, &mode);
+		SetConsoleMode(hStdOut, mode | 4);
+	#endif
+
 	auto director = Director::instance();
 	Size size = director->getWinSize();
-	
+
 	Texture texture(size);
-	texture.drawCycle(Point(size.x / 2, size.y / 2), 5, Tile('.', fore_green));
+	Color   green(Color::attr::green);
+	texture.drawCycle(Point(size.x / 2, size.y / 2), 5, Tile('.', green));
 	
 	Factor factor(texture);
 	

@@ -28,13 +28,12 @@ void Camera::render()
 	assert(size.area() != 0);
 
 	Texture texture(size);
-	texture.drawCycle(Point(size.x / 2, size.y / 2), 5, Tile('.', fore_green));
 
-	for(ushort y = 0; y < size.y; y++)
+	for(ushort y = 1; y <= size.y; y++)
 	{
 		printf("\x1b[%d;%dH", (int)outPos.y + y, (int)outPos.x);
-		for(ushort x = 0; x < size.x; x++)
-			printf(" ");
+		for(ushort x = 1; x <= size.x; x++)
+			printf(".");
 	}
 	
 	for(auto f : scene->getFactors())
@@ -43,7 +42,7 @@ void Camera::render()
 
 	for(ushort y = 0; y < size.y; y++)
 	{
-		printf("\x1b[%d;%dH", (int)outPos.y + y, (int)outPos.x);
+		printf("\x1b[%d;%dH", (int)outPos.y + y + 1, (int)outPos.x + 1);
 		for(ushort x = 0; x < size.x; x++)
 			printf("%s", texture.at(x, y).getString().c_str());
 	}

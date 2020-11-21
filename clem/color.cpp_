@@ -1,52 +1,42 @@
-// Copyright 2020 SMS
-// License(Apache-2.0)
-// 控制台字体属性
 
 #include "color.h"
-#include "os.h"
-#include <assert.h>
 
-using std::map;
 using std::string;
 using std::to_string;
+using std::vector;
+using std::unordered_map;
 
-map<ushort, string> Color::index;
+unordered_map<ushort, string> Color::index;
+vector<const string*> Color::stack;
 
-Color::Color(ushort attr)
-{
+/*
 #ifdef OS_WIN
 	// 开启 VT100模式
 	DWORD mode;
 	GetConsoleMode(hStdOut, &mode);
 	SetConsoleMode(hStdOut, mode | 4);
 #endif
+*/
 
+Color::Color()
+{
+}
+
+Color::Color(ushort attr)
+{
 	const auto it = index.find(attr);
 	if(it == index.end())
 	{
 		auto pair = index.insert({attr, compile(attr)});
-		pStr = &pair.first->second;
+		pString = &pair.first->second;
 	}
 	else
-		pStr = &it->second;
-}
-
-const string& Color::operator()() const
-{
-	return *pStr;
-}
-
-void Color::push()
-{
-}
-
-void Color::pop()
-{
+		pString = &it->second;
 }
 
 void Color::on() const
 {
-	printf("%s", pStr->c_str());
+	printf("%s", pString->c_str());
 }
 
 void Color::off() const
@@ -54,11 +44,31 @@ void Color::off() const
 	printf("%s", "\x1b[0m");
 }
 
+void Color::push()
+{
+	printf("%s", pString->c_str());
+	stack.push_back(pString);
+}
+
+void Color::pop()
+{
+	stack.pop_back();
+	if(stack.empty())
+		printf("%s", "\x1b[0m");
+	else
+		printf("%s", stack.back()->c_str());
+}
+
+const string& Color::getString() const
+{
+	return "\x1b]32m"; // *pString;
+}
+
 string Color::compile(ushort attr) const
 {
-	const auto fore = attr & 0x000f;
-	const auto back = (attr & 0x00f0) >> 4;
-	const auto mode = (attr & 0x0f00) >> 8;
+	const auto fore  = attr & fore_mask;
+	const auto back  = (attr & back_mask) >> 4;
+	const auto style = (attr & style_mask) >> 8;
 
 	string str = "\x1b[";
 
@@ -66,12 +76,8 @@ string Color::compile(ushort attr) const
 		str += '3' + to_string(fore - 1) + ';';
 	if(back)
 		str += '4' + to_string(back - 1) + ';';
-	if(mode)
-		str += to_string(mode - 1) + ';';
-
-	if(str.back() == ';')
-		str.pop_back();
+	
+	str.pop_back();
 	str += 'm';
 	return str;
 }
-
