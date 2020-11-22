@@ -1,20 +1,20 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ╤оят
+// О©╫О©╫О©╫О©╫
 
 #ifndef CLEM_ASSERT_H_
 #define CLEM_ASSERT_H_
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #ifndef NDEBUG
 #define assert(expr, msg)                                 \
 	if(!(expr))                                             \
 	{                                                       \
 		fprintf(stderr,                                       \
-			"\x1b[31m[-]\x1b[0m "                               \
-			"Assertion '" #expr "' failed: " #msg " ("__FUNCTION__" " " " __FILE__ ":" __LINE__ ")"); \                  \
+						"Assertion '%s' failed: %s (%s %s:%d)",       \
+						#expr, #msg, __FUNCTION__, __FILE__, __LINE__); \
 		abort();                                              \
 	}
 #else
