@@ -29,11 +29,10 @@ void Camera::render()
 
 	Texture texture(size);
 
+	std::string line(size.x, ' ');
 	for(ushort y = 1; y <= size.y; y++)
 	{
-		printf("\x1b[%d;%dH", (int)outPos.y + y, (int)outPos.x);
-		for(ushort x = 1; x <= size.x; x++)
-			printf(".");
+		printf("\x1b[%d;%dH%s", (int)outPos.y + y, (int)outPos.x, line.c_str());
 	}
 	
 	for(auto f : scene->getFactors())
