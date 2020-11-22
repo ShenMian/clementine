@@ -6,26 +6,27 @@
 #define CLEM_COLOR_H_
 
 #include <string>
-#include <vector>
 #include <unordered_map>
+#include <vector>
+
+enum class Fore;
+enum class Back;
 
 class Color
 {
 public:
-	enum class attr;
-
 	Color();
-	Color(attr fore);
-	Color(attr fore, attr back /*, attr style*/);
+	Color(Fore fore);
+	Color(Fore fore, Back back);
 
-	const std::string& getString() const;
+	std::string getString() const;
 
 private:
 	char* fore;
 	char* back;
 };
 
-enum class Color::attr
+enum class Fore
 {
 	black,
 	red,
@@ -35,8 +36,20 @@ enum class Color::attr
 	purple,
 	cyan,
 	aqua = cyan,
-	white,
-	max,
+	white
+};
+
+enum class Back
+{
+	black,
+	red,
+	green,
+	yellow,
+	blue,
+	purple,
+	cyan,
+	aqua = cyan,
+	white
 };
 
 #endif // CLEM_COLOR_H_

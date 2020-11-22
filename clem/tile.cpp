@@ -42,7 +42,7 @@ const Color& Tile::getColor() const
 	return color;
 }
 
-const string& Tile::getString() const
+string Tile::getString() const
 {
 	return color.getString() + ch;
 }

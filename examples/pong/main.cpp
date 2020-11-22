@@ -30,7 +30,7 @@ int main()
 	Size size = director->getWinSize();
 
 	Texture texture(size);
-	Color   green(Color::attr::green);
+	Color   green(Fore::green);
 	texture.drawCycle(Point(size.x / 2, size.y / 2), 5, Tile('.', green));
 	
 	Factor factor(texture);
