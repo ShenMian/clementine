@@ -28,11 +28,6 @@ public:
 	void           setTexture(const Texture& texture);
 	const Texture& getTexture() const;
 
-	void          setVelocity(const Vector& v);
-	const Vector& getVelocity() const;
-	void          setAccelerate(const Vector& a);
-	const Vector& getAccelerate() const;
-
 	Scene& getScene() const;
 
 private:
@@ -40,9 +35,6 @@ private:
 
 	Point   position;
 	Texture texture;
-
-	Vector velocity;
-	Vector accelerate;
 };
 
 #endif // CLEM_GAME_OBJECT_H_

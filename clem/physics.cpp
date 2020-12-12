@@ -3,13 +3,29 @@
 // 物理引擎
 
 #include "physics.h"
-#include "factor.h"
+#include "entity.h"
 
-void Physics::update(Factor& f)
+using std::vector;
+
+void Physics::update(vector<Entity*>& entitys) const
 {
+	for(ushort i = 0; i < entitys.size() - 1; i ++)
+	{
+		entitys[i]->velocity += entitys[i]->accelerate;
+
+		for(ushort j = i + 1; j < entitys.size(); j++)
+			isCollide(entitys[i]->getHitbox(), entitys[j]->getHitbox());
+
+		entitys[i]->setPosition(entitys[i]->getPosition() + entitys[i]->velocity);
+	}
 }
 
-bool Physics::collide(const Factor* a, const Factor* b)
+bool Physics::isCollide(const Entity* a, const Entity* b) const
+{
+	return false;
+}
+
+bool Physics::isCollide(const Rect& a, const Rect& b) const
 {
 	return false;
 }

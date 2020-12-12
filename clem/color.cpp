@@ -3,7 +3,7 @@
 // 字体属性
 
 #include "color.h"
-#include <clem/assert.h>
+#include <assert.h>
 
 using std::string;
 
@@ -32,7 +32,7 @@ Color::Color(Fore f, Back b)
 		break;
 
 	default:
-		assert(false, "无效前景颜色属性");
+		assert(false); // 无效前景颜色属性
 	}
 
 	switch(b)
@@ -42,7 +42,7 @@ Color::Color(Fore f, Back b)
 		break;
 
 	default:
-		assert(false, "无效背景颜色属性");
+		assert(false); // "无效背景颜色属性"
 	}
 }
 

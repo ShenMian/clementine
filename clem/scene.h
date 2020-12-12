@@ -37,8 +37,8 @@ public:
 	Camera*                     getDefaultCamera() const;
 
 private:
-	void updateInput();
-	void updatePhysics();
+	void updateFactors();
+	void updateEntitys();
 
 	std::vector<Input*>  inputs;
 	Physics*             physics;

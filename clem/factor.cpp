@@ -18,10 +18,6 @@ Factor::Factor(const Texture& texture)
 
 void Factor::update()
 {
-	/*
-	for(const auto& com : components)
-		com->update(*this);
-	*/
 }
 
 void Factor::addComponent(Component* com)
@@ -56,24 +52,4 @@ const Point& Factor::getPosition() const
 const Texture& Factor::getTexture() const
 {
 	return texture;
-}
-
-void Factor::setVelocity(const Vector& v)
-{
-	velocity = v;
-}
-
-const Vector& Factor::getVelocity() const
-{
-	return velocity;
-}
-
-void Factor::setAccelerate(const Vector& a)
-{
-	accelerate = a;
-}
-
-const Vector& Factor::getAccelerate() const
-{
-	return accelerate;
 }

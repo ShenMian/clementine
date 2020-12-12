@@ -5,13 +5,19 @@
 #ifndef CLEM_PHYSICS_H_
 #define CLEM_PHYSICS_H_
 
-class Factor;
+#include <vector>
+
+class Rect;
+class Entity;
 
 class Physics
 {
 public:
-	void update(Factor& factor);
-	bool collide(const Factor* factorA, const Factor* factorB);
+	void update(std::vector<Entity*>& entitys) const;
+	bool isCollide(const Entity* a, const Entity* b) const;
+
+private:
+	bool isCollide(const Rect&, const Rect&) const;
 };
 
 #endif // CLEM_PHYSICS_H_

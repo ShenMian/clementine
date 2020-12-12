@@ -103,8 +103,8 @@ Camera* Scene::getDefaultCamera() const
 
 void Scene::update()
 {
-	updateInput();
-	updatePhysics();
+	updateFactors();
+	updateEntitys();
 }
 
 void Scene::render()
@@ -113,16 +113,23 @@ void Scene::render()
 		cam->render();
 }
 
+/*
 void Scene::updateInput()
 {
 	for(auto input : inputs)
 		input->update();
 }
+*/
 
-void Scene::updatePhysics()
+void Scene::updateFactors()
+{
+	for(auto f : factors)
+		f->update();
+}
+
+void Scene::updateEntitys()
 {
 	assert(physics != nullptr);
-  for(auto f : factors)
-		physics->update(*f);
+
 }
 
