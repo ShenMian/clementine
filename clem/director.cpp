@@ -6,6 +6,7 @@
 #include "renderer.h"
 #include "terminal.h"
 #include <assert.h>
+#include <chrono>
 
 Director* Director::instance()
 {
@@ -69,13 +70,26 @@ Size Director::getWinSize() const
 
 void Director::loop()
 {
-	while(!paused)
+	long long lag = 0;
+
+	while(true)
 	{
+		auto previous = std::chrono::steady_clock::now();
+		auto current  = std::chrono::steady_clock::now();
+		lag += std::chrono::duration_cast<std::chrono::microseconds>(current - previous).count();
+
+		if(paused)
+			continue;
+
 		if(scenes.empty())
 			return;
 		auto scene = scenes.back();
 
-		scene->update();
+		if(lag > msPerUpdate)
+		{
+			scene->update();
+			lag -= msPerUpdate;
+		}
 
 		scene->render();
 	}
