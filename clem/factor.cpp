@@ -20,20 +20,6 @@ void Factor::update()
 {
 }
 
-void Factor::addComponent(Component* com)
-{
-	components.push_back(com);
-}
-
-void Factor::removeComponent(Component* com)
-{
-	auto it = std::find(components.begin(), components.end(), com);
-	if(it != components.end())
-		components.erase(it);
-	else
-		assert(false);
-}
-
 void Factor::setPosition(const Point& pos)
 {
 	this->position = pos;

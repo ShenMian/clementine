@@ -53,21 +53,15 @@ const std::vector<Factor*>& Scene::getFactors() const
 	return factors;
 }
 
-void Scene::addInput(Input* in)
-{
-	assert(in != nullptr);
-	inputs.push_back(in);
-}
-
 void Scene::setPhysics(Physics* p)
 {
 	assert(p != nullptr);
-	this->physics = p;
+	physics = p;
 }
 
 Physics* Scene::getPhysics() const
 {
-	return this->physics;
+	return physics;
 }
 
 void Scene::addCamera(Camera* cam)
