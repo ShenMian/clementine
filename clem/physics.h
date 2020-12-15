@@ -8,6 +8,7 @@
 #include <vector>
 
 class Rect;
+class Point;
 class Entity;
 
 class Physics
@@ -18,6 +19,7 @@ public:
 
 private:
 	bool isCollide(const Rect&, const Rect&) const;
+	bool isCollide(const Point&, const Rect&) const;
 };
 
 #endif // CLEM_PHYSICS_H_
