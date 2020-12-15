@@ -1,12 +1,12 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
 
-#include "scene.h"
 #include "director.h"
-#include "renderer.h"
-#include "terminal.h"
 #include <assert.h>
 #include <chrono>
+#include "scene.h"
+#include "renderer.h"
+#include "terminal.h"
 
 Director* Director::instance()
 {
@@ -23,7 +23,6 @@ void Director::run()
 {
 	assert(!scenes.empty());
 	loop();
-
 	// thread = std::thread(&Director::loop, this);
 	// thread.detach();
 }
@@ -70,13 +69,14 @@ Size Director::getWinSize() const
 
 void Director::loop()
 {
-	long long lag = 0;
+	auto      previous = std::chrono::steady_clock::now();
+	long long lag      = 0;
 
 	while(true)
 	{
-		auto previous = std::chrono::steady_clock::now();
 		auto current  = std::chrono::steady_clock::now();
 		lag += std::chrono::duration_cast<std::chrono::microseconds>(current - previous).count();
+		previous = current;
 
 		if(paused)
 			continue;
