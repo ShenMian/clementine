@@ -2,6 +2,9 @@
 // License(Apache-2.0)
 // ΚµΜε
 
+#ifndef CLEM_ENTITY_H_
+#define CLEM_ENTITY_H_
+
 #include "factor.h"
 
 class Physics;
@@ -24,3 +27,5 @@ private:
 	Vector accelerate;
 	Rect   hitbox;
 };
+
+#endif // CLEM_ENTITY_H_
