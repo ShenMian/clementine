@@ -6,6 +6,7 @@
 #define CLEM_TYPE_RECT_HPP_
 
 class Size;
+class Point;
 class Vector;
 
 typedef unsigned short ushort;
@@ -20,6 +21,8 @@ public:
 
 	float right() const;
 	float bottom() const;
+
+	Point center() const;
 
 	Rect();
 	Rect(const Vector& vec, const Size& size);

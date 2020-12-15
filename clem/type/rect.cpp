@@ -4,6 +4,7 @@
 
 #include "rect.h"
 #include "size.h"
+#include "point.h"
 #include "vector.h"
 
 Rect::Rect()
@@ -29,4 +30,9 @@ float Rect::right() const
 float Rect::bottom() const
 {
 	return y - height;
+}
+
+Point Rect::center() const
+{
+	return Point(x + width/2, y - height/2);
 }
