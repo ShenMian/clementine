@@ -5,15 +5,14 @@
 #include "rect.h"
 #include "size.h"
 #include "point.h"
-#include "vector.h"
 
 Rect::Rect()
 		: Rect(0, 0, 0, 0)
 {
 }
 
-Rect::Rect(const Vector& vec, const Size& size)
-		: Rect(vec.x, vec.y, size.x, size.y)
+Rect::Rect(const Point& p, const Size& size)
+		: Rect(p.x, p.y, size.x, size.y)
 {
 }
 

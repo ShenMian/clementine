@@ -25,7 +25,7 @@ public:
 	Point center() const;
 
 	Rect();
-	Rect(const Vector& vec, const Size& size);
+	Rect(const Point& p, const Size& size);
 	Rect(ushort x, ushort y, ushort width, ushort height);
 };
 
