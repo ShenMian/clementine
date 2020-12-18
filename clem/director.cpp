@@ -21,20 +21,23 @@ Director::Director()
 
 void Director::run()
 {
-	assert(!scenes.empty());
+	if(scenes.empty())
+		assert(false);
 	loop();
 }
 
 
 void Director::pause()
 {
-	assert(!paused);
+	if(paused)
+		assert(false);
 	paused = true;	
 }
 
 void Director::resume()
 {
-	assert(paused);
+	if(!paused)
+		assert(false);
 	paused = false;
 }
 
