@@ -8,14 +8,14 @@
 #include "renderer.h"
 #include "terminal.h"
 
-Director* Director::instance()
+Director* Director::getInstance()
 {
-	static Director instance;
-	return &instance;
+	static Director getInstance;
+	return &getInstance;
 }
 
 Director::Director()
-		: msPerUpdate(0), paused(false)
+		: updateInterval(0), paused(false)
 {
 }
 
@@ -23,8 +23,6 @@ void Director::run()
 {
 	assert(!scenes.empty());
 	loop();
-	// thread = std::thread(&Director::loop, this);
-	// thread.detach();
 }
 
 
@@ -40,26 +38,26 @@ void Director::resume()
 	paused = false;
 }
 
-void Director::setMsPerUpdate(ushort i)
-{
-	msPerUpdate = i;
-}
-
 void Director::pushScene(Scene* s)
 {
-	assert(s != nullptr);
+	if(s == nullptr)
+		assert(false);
 	scenes.push_back(s);
 }
 
 void Director::popScene()
 {
-	assert(!scenes.empty());
+	if(scenes.empty())
+		assert(false);
 	scenes.pop_back();
 }
 
-Scene* Director::getRunningScene() const
+Scene* Director::getCurrentScene() const
 {
-	return scenes.back();
+	if(!scenes.empty())
+		return scenes.back();
+	else
+		return nullptr;
 }
 
 Size Director::getWinSize() const
@@ -67,30 +65,56 @@ Size Director::getWinSize() const
 	return Terminal::getWinSize();
 }
 
+#ifdef OS_WIN
+
+void Director::setMsPerUpdate(ushort ms)
+{
+	LARGE_INTEGER freq;
+	QueryPerformanceFrequency(&freq);
+	updateInterval = (LONGLONG)(ms / 1000 * freq.QuadPart);
+}
+
 void Director::loop()
 {
-	auto      previous = std::chrono::steady_clock::now();
-	long long lag      = 0;
+	LARGE_INTEGER current, previous;
+	LONGLONG      lag = 0;
+	QueryPerformanceCounter(&previous);
 
 	while(true)
 	{
-		auto current  = std::chrono::steady_clock::now();
-		lag += std::chrono::duration_cast<std::chrono::microseconds>(current - previous).count();
-		previous = current;
-
 		if(paused)
 			continue;
 
-		if(scenes.empty())
-			return;
-		auto scene = scenes.back();
+		auto scene = getCurrentScene();
+		if(scene == nullptr)
+			continue;
 
-		if(lag > msPerUpdate)
+		QueryPerformanceCounter(&current);
+		lag += current.QuadPart - previous.QuadPart;
+		previous.QuadPart = current.QuadPart;
+
+		if(lag >= updateInterval)
 		{
 			scene->update();
-			lag -= msPerUpdate;
+			lag -= updateInterval;
 		}
 
-		scene->render();
+		// scene->render();
 	}
 }
+
+#endif // OS_WIN
+
+#ifdef OS_LINUX
+
+void Director::setMsPerUpdate(ushort ms)
+{
+
+}
+
+void Director::loop()
+{
+
+}
+
+#endif // OS_LINUX

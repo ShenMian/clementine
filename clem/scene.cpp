@@ -20,7 +20,7 @@ using std::vector;
 Scene::Scene()
 	: physics(new Physics)
 {
-	auto director = Director::instance();
+	auto director = Director::getInstance();
 
   // 添加默认摄像机
 	defaultCamera = new Camera();

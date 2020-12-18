@@ -16,7 +16,7 @@ class Renderer;
 class Director
 {
 public:
-	static Director* instance();
+	static Director* getInstance();
 
 	void run();
 
@@ -25,7 +25,7 @@ public:
 
 	void   pushScene(Scene* s);
 	void   popScene();
-	Scene* getRunningScene() const;
+	Scene* getCurrentScene() const;
 
 	Size getWinSize() const;
 	
@@ -37,8 +37,8 @@ private:
 
 	std::vector<Scene*> scenes;
 	std::thread         thread;
-	ushort              msPerUpdate;
 	bool                paused;
+	long long           updateInterval;
 };
 
 #endif // CLEM_DIRECTOR_H_
