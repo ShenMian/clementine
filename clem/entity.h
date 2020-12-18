@@ -20,7 +20,7 @@ public:
 	const Vector& getAccelerate() const;
 
 	void        setHitbox(const Rect& hitbox);
-	const Rect& getHitbox() const;
+	const Rect& getHitbox();
 
 private:
 	Vector velocity;

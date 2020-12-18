@@ -28,7 +28,9 @@ void Entity::setHitbox(const Rect& h)
 {
 	hitbox = h;
 }
-const Rect& Entity::getHitbox() const
+const Rect& Entity::getHitbox()
 {
+	hitbox.x = position.x;
+	hitbox.y = position.y;
 	return hitbox;
 }

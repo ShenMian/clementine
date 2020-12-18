@@ -15,7 +15,7 @@ class Physics
 {
 public:
 	void update(std::vector<Entity*>& entitys) const;
-	bool isCollide(const Entity* a, const Entity* b) const;
+	bool isCollide(Entity* a, Entity* b);
 
 private:
 	bool isCollide(const Rect&, const Rect&) const;

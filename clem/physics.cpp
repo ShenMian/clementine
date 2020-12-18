@@ -16,11 +16,11 @@ void Physics::update(vector<Entity*>& entitys) const
 		for(ushort j = i + 1; j < entitys.size(); j++)
 			isCollide(entitys[i]->getHitbox(), entitys[j]->getHitbox());
 
-		entitys[i]->setPosition(entitys[i]->getPosition() + entitys[i]->velocity);
+		entitys[i]->position += entitys[i]->velocity;
 	}
 }
 
-bool Physics::isCollide(const Entity* a, const Entity* b) const
+bool Physics::isCollide(Entity* a, Entity* b)
 {
 	return isCollide(a->getHitbox(), b->getHitbox());
 }

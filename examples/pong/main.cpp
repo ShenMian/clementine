@@ -26,8 +26,8 @@ int main()
 		SetConsoleMode(hStdOut, mode | 4);
 	#endif
 
-	auto director = Director::instance();
-	Size size = director->getWinSize();
+	auto director = Director::getInstance();
+	auto size     = director->getWinSize();
 
 	Texture texture(size);
 	Color   green(Fore::green);

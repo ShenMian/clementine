@@ -24,8 +24,10 @@ public:
 	void           setTexture(const Texture& texture);
 	const Texture& getTexture() const;
 
+protected:
+	Point position;
+
 private:
-	Point   position;
 	Texture texture;
 };
 
