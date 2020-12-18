@@ -19,10 +19,12 @@ public:
 	Point(float x, float y);
 	Point(const Vector& vec);
 
-	Point operator+(const Point& pos) const;
-	Point operator-(const Point& pos) const;
-	Point operator+(const Vector& vec) const;
-	Point operator-(const Vector& vec) const;
+	Point operator+(const Point&) const;
+	Point operator-(const Point&) const;
+	Point operator+(const Vector&) const;
+	Point operator-(const Vector&) const;
+	const Point& operator+=(const Vector&);
+	const Point& operator-=(const Vector&);
 };
 
 #endif // CLEM_TYPE_COORD_H_

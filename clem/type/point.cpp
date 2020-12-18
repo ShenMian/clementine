@@ -39,3 +39,17 @@ Point Point::operator-(const Vector& v) const
 {
 	return Point(x - v.x, y - v.y);
 }
+
+const Point& Point::operator+=(const Vector& v)
+{
+	x += v.x;
+	y += v.y;
+	return *this;
+}
+
+const Point& Point::operator-=(const Vector& v)
+{
+	x -= v.x;
+	y -= v.y;
+	return *this;
+}
