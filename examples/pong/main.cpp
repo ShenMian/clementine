@@ -36,7 +36,6 @@ int main()
 	Factor factor(texture);
 	
 	Scene scene;
-	scene.getDefaultCamera()->setSize(size);
 	scene.addFactor(&factor);
 
 	director->pushScene(&scene);
