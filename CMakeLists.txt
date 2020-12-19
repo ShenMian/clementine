@@ -8,11 +8,11 @@ set(CMAKE_CXX_STANDARD 14)
 project("Clementine")
 
 # 添加 Google.Test
-include(cmake/googletest.cmake)
-fetch_googletest(
-  ${PROJECT_SOURCE_DIR}/cmake
-  ${PROJECT_BINARY_DIR}/googletest
-)
+# include(cmake/googletest.cmake)
+# fetch_googletest(
+#  ${PROJECT_SOURCE_DIR}/cmake
+#   ${PROJECT_BINARY_DIR}/googletest
+# )
 
 # 设置 编译选项
 set(CMAKE_BUILD_TYPE Debug)
@@ -31,5 +31,5 @@ add_subdirectory("clem")
 add_subdirectory("examples")
 
 # 单元测试
-enable_testing()
-add_subdirectory("test")
+# enable_testing()
+# add_subdirectory("test")
