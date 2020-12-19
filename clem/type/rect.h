@@ -7,7 +7,7 @@
 
 class Size;
 class Point;
-class Vector;
+class Vec2;
 
 typedef unsigned short ushort;
 

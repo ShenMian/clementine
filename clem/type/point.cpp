@@ -3,7 +3,7 @@
 // зјБъ
 
 #include "point.h"
-#include "vector.h"
+#include "vec2.h"
 
 Point::Point()
 		: Point(0, 0)
@@ -15,7 +15,7 @@ Point::Point(float x, float y)
 {
 }
 
-Point::Point(const Vector& vec)
+Point::Point(const Vec2& vec)
 		: Point(vec.x, vec.y)
 {
 }
@@ -30,24 +30,24 @@ Point Point::operator-(const Point& p) const
 	return Point(x - p.x, y - p.y);
 }
 
-Point Point::operator+(const Vector& v) const
+Point Point::operator+(const Vec2& v) const
 {
 	return Point(x + v.x, y + v.y);
 }
 
-Point Point::operator-(const Vector& v) const
+Point Point::operator-(const Vec2& v) const
 {
 	return Point(x - v.x, y - v.y);
 }
 
-const Point& Point::operator+=(const Vector& v)
+const Point& Point::operator+=(const Vec2& v)
 {
 	x += v.x;
 	y += v.y;
 	return *this;
 }
 
-const Point& Point::operator-=(const Vector& v)
+const Point& Point::operator-=(const Vec2& v)
 {
 	x -= v.x;
 	y -= v.y;

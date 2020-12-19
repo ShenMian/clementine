@@ -14,18 +14,17 @@ class Entity : public Factor
 	friend class Physics;
 
 public:
-	void          setVelocity(const Vector& v);
-	const Vector& getVelocity() const;
-	void          setAccelerate(const Vector& a);
-	const Vector& getAccelerate() const;
-
-	void        setHitbox(const Rect& hitbox);
-	const Rect& getHitbox();
+	void        setVelocity(const Vec2& v);
+	const Vec2& getVelocity() const;
+	void        setAccelerate(const Vec2& a);
+	const Vec2& getAccelerate() const;
+	void        setPhysicsBody(const Rect&);
+	const Rect& getPhysicsBody();
 
 private:
-	Vector velocity;
-	Vector accelerate;
-	Rect   hitbox;
+	Vec2 velocity;
+	Vec2 accelerate;
+	Rect physicsBody;
 };
 
 #endif // CLEM_ENTITY_H_

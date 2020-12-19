@@ -4,33 +4,34 @@
 
 #include "entity.h"
 
-void Entity::setVelocity(const Vector& v)
+void Entity::setVelocity(const Vec2& v)
 {
 	velocity = v;
 }
 
-const Vector& Entity::getVelocity() const
+const Vec2& Entity::getVelocity() const
 {
 	return velocity;
 }
 
-void Entity::setAccelerate(const Vector& a)
+void Entity::setAccelerate(const Vec2& a)
 {
 	accelerate = a;
 }
 
-const Vector& Entity::getAccelerate() const
+const Vec2& Entity::getAccelerate() const
 {
 	return accelerate;
 }
 
-void Entity::setHitbox(const Rect& h)
+void Entity::setPhysicsBody(const Rect& body)
 {
-	hitbox = h;
+	physicsBody = body;
 }
-const Rect& Entity::getHitbox()
+
+const Rect& Entity::getPhysicsBody()
 {
-	hitbox.x = position.x;
-	hitbox.y = position.y;
-	return hitbox;
+	physicsBody.x = position.x;
+	physicsBody.y = position.y;
+	return physicsBody;
 }

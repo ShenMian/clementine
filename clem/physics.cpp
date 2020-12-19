@@ -14,7 +14,7 @@ void Physics::update(vector<Entity*>& entitys) const
 		entitys[i]->velocity += entitys[i]->accelerate;
 
 		for(ushort j = i + 1; j < entitys.size(); j++)
-			isCollide(entitys[i]->getHitbox(), entitys[j]->getHitbox());
+			isCollide(entitys[i]->getPhysicsBody(), entitys[j]->getPhysicsBody());
 
 		entitys[i]->position += entitys[i]->velocity;
 	}
@@ -22,7 +22,7 @@ void Physics::update(vector<Entity*>& entitys) const
 
 bool Physics::isCollide(Entity* a, Entity* b)
 {
-	return isCollide(a->getHitbox(), b->getHitbox());
+	return isCollide(a->getPhysicsBody(), b->getPhysicsBody());
 }
 
 bool Physics::isCollide(const Rect& a, const Rect& b) const

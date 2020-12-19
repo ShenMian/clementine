@@ -5,8 +5,8 @@
 #ifndef CLEM_TYPE_TYPE_H_
 #define CLEM_TYPE_TYPE_H_
 
+#include "type/vec2.h"
 #include "type/point.h"
-#include "type/vector.h"
 #include "type/rect.h"
 #include "type/size.h"
 
