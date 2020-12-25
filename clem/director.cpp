@@ -85,24 +85,21 @@ void Director::loop()
 
 	while(true)
 	{
-		if(paused)
-			continue;
-
-		auto scene = getCurrentScene();
-		if(scene == nullptr)
-			continue;
-
 		QueryPerformanceCounter(&current);
 		lag += current.QuadPart - previous.QuadPart;
 		previous.QuadPart = current.QuadPart;
 
-		if(lag >= updateInterval)
+		auto scene = getCurrentScene();
+		if(paused || scene == nullptr)
+			continue;
+
+		while(lag >= updateInterval)
 		{
 			scene->update();
 			lag -= updateInterval;
 		}
 
-		// scene->render();
+		scene->render();
 	}
 }
 
