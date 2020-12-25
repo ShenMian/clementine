@@ -39,7 +39,6 @@ private:
 	std::thread         thread;
 	bool                paused;
 	long                msPerUpdate;
-	long long           updateInterval;
 };
 
 #endif // CLEM_DIRECTOR_H_

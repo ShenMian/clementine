@@ -15,7 +15,7 @@ Director* Director::getInstance()
 }
 
 Director::Director()
-		: updateInterval(0), paused(false)
+		: msPerUpdate(0), paused(false)
 {
 }
 
@@ -68,11 +68,16 @@ Size Director::getWinSize() const
 	return Terminal::getWinSize();
 }
 
+void Director::setMsPerUpdate(ushort ms)
+{
+	msPerUpdate = ms;
+}
+
 #ifdef OS_LINUX
 
 #include <sys/time.h>
 
-long getCurrentTime()
+long getCurrentMillSecond()
 {
 	struct timeval t;
 	gettimeofday(&t, NULL);
@@ -82,7 +87,7 @@ long getCurrentTime()
 void Director::loop()
 {
 	long current, previous, lag = 0;
-	previous = getCurrentTime();
+	previous = getCurrentMillSecond();
 
 	while(true)
 	{
@@ -93,7 +98,7 @@ void Director::loop()
 		if(scene == nullptr)
 			continue;
 
-		current = getCurrentTime();
+		current = getCurrentMillSecond();
 
 		if(lag >= msPerUpdate)
 		{
@@ -109,25 +114,15 @@ void Director::loop()
 
 #ifdef OS_WIN
 
-long getCurrentTime()
-{
-	LARGE_INTEGER t;
-	QueryPerformanceCounter(&t);
-	return t.QuadPart;
-}
-
-void Director::setMsPerUpdate(ushort ms)
-{
-	LARGE_INTEGER freq;
-	QueryPerformanceFrequency(&freq);
-	updateInterval = (LONGLONG)(ms / 1000 * freq.QuadPart);
-}
-
 void Director::loop()
 {
 	LARGE_INTEGER current, previous;
 	LONGLONG      lag = 0;
 	QueryPerformanceCounter(&previous);
+
+	LARGE_INTEGER freq;
+	QueryPerformanceFrequency(&freq);
+	const auto interval = (LONGLONG)(msPerUpdate / 1000 * freq.QuadPart);
 
 	while(true)
 	{
@@ -139,10 +134,10 @@ void Director::loop()
 		if(paused || scene == nullptr)
 			continue;
 
-		while(lag >= updateInterval)
+		while(lag >= interval)
 		{
 			scene->update();
-			lag -= updateInterval;
+			lag -= interval;
 		}
 
 		scene->render();
@@ -150,12 +145,3 @@ void Director::loop()
 }
 
 #endif // OS_WIN
-
-#ifdef OS_LINUX
-
-void Director::setMsPerUpdate(ushort ms)
-{
-	msPerUpdate = ms;
-}
-
-#endif // OS_LINUX
