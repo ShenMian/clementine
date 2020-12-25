@@ -87,4 +87,3 @@ ushort Camera::getDepth() const
 {
 	return depth;
 }
-

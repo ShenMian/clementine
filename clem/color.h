@@ -22,8 +22,8 @@ public:
 	std::string getString() const;
 
 private:
-	char* fore;
-	char* back;
+	const char* fore;
+	const char* back;
 };
 
 enum class Fore

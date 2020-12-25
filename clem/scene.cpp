@@ -10,7 +10,6 @@
 #include "camera.h"
 
 #include "input.h"
-#include "physics.h"
 
 #include <algorithm>
 #include <assert.h>
@@ -18,9 +17,8 @@
 using std::vector;
 
 Scene::Scene()
-	: physics(new Physics)
 {
-	auto director = Director::instance();
+	auto director = Director::getInstance();
 
   // 添加默认摄像机
 	defaultCamera = new Camera();
@@ -51,23 +49,6 @@ void Scene::removeFactor(Factor* f)
 const std::vector<Factor*>& Scene::getFactors() const
 {
 	return factors;
-}
-
-void Scene::addInput(Input* in)
-{
-	assert(in != nullptr);
-	inputs.push_back(in);
-}
-
-void Scene::setPhysics(Physics* p)
-{
-	assert(p != nullptr);
-	this->physics = p;
-}
-
-Physics* Scene::getPhysics() const
-{
-	return this->physics;
 }
 
 void Scene::addCamera(Camera* cam)
@@ -104,7 +85,7 @@ Camera* Scene::getDefaultCamera() const
 void Scene::update()
 {
 	updateFactors();
-	updateEntitys();
+	updatePhysics();
 }
 
 void Scene::render()
@@ -127,9 +108,6 @@ void Scene::updateFactors()
 		f->update();
 }
 
-void Scene::updateEntitys()
+void Scene::updatePhysics()
 {
-	assert(physics != nullptr);
-
 }
-

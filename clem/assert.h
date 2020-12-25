@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ����
+// 断言
 
 #ifndef CLEM_ASSERT_H_
 #define CLEM_ASSERT_H_

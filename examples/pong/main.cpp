@@ -19,15 +19,15 @@ using namespace std;
 
 int main()
 {
-	#ifdef OS_WIN
-		// 开启 VT100模式
-		DWORD mode;
-		GetConsoleMode(hStdOut, &mode);
-		SetConsoleMode(hStdOut, mode | 4);
-	#endif
+#ifdef OS_WIN
+	// 开启 VT100模式
+	DWORD mode;
+	GetConsoleMode(hStdOut, &mode);
+	SetConsoleMode(hStdOut, mode | 4);
+#endif
 
-	auto director = Director::instance();
-	Size size = director->getWinSize();
+	auto director = Director::getInstance();
+	auto size     = director->getWinSize();
 
 	Texture texture(size);
 	Color   green(Fore::green);
@@ -36,7 +36,6 @@ int main()
 	Factor factor(texture);
 	
 	Scene scene;
-	scene.getDefaultCamera()->setSize(size);
 	scene.addFactor(&factor);
 
 	director->pushScene(&scene);

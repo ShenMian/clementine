@@ -27,7 +27,6 @@ public:
 	void                        removeFactor(Factor*);
 	const std::vector<Factor*>& getFactors() const;
 
-	void      addInput(Input* in);
 	void      setPhysics(Physics* p);
 	Physics*  getPhysics() const;
 
@@ -38,10 +37,8 @@ public:
 
 private:
 	void updateFactors();
-	void updateEntitys();
+	void updatePhysics();
 
-	std::vector<Input*>  inputs;
-	Physics*             physics;
 	Camera*              defaultCamera;
 	std::vector<Camera*> cameras;
 	std::vector<Factor*> factors;
