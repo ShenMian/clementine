@@ -2,14 +2,15 @@
 // License(Apache-2.0)
 // 游戏对象
 
-#ifndef CLEM_GAME_OBJECT_H_
-#define CLEM_GAME_OBJECT_H_
+#ifndef CLEM_GAME_FACTOR_H_
+#define CLEM_GAME_FACTOR_H_
 
-#include "texture.h"
 #include <vector>
+#include "texture.h"
 
 class Scene;
 class Physics;
+class Component;
 
 class Factor
 {
@@ -18,6 +19,9 @@ public:
 	Factor(const Texture& texture);
 
 	virtual void update();
+
+	void addComponent(Component* com);
+	void removeComponent(Component* com);
 
 	void           setPosition(const Point& pos);
 	const Point&   getPosition() const;
@@ -31,4 +35,4 @@ private:
 	Texture texture;
 };
 
-#endif // CLEM_GAME_OBJECT_H_
+#endif // CLEM_GAME_FACTOR_H_
