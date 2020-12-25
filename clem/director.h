@@ -5,7 +5,6 @@
 #define CLEM_DIRECTOR_H_
 
 #include <vector>
-#include <thread>
 
 typedef unsigned short ushort;
 
