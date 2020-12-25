@@ -38,6 +38,7 @@ private:
 	std::vector<Scene*> scenes;
 	std::thread         thread;
 	bool                paused;
+	long                msPerUpdate;
 	long long           updateInterval;
 };
 

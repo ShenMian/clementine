@@ -68,7 +68,53 @@ Size Director::getWinSize() const
 	return Terminal::getWinSize();
 }
 
+#ifdef OS_LINUX
+
+#include <sys/time.h>
+
+long getCurrentTime()
+{
+	struct timeval t;
+	gettimeofday(&t, NULL);
+	return t.tv_sec * 1000 + t.tv_usec * 0.001; // milliseconds
+}
+
+void Director::loop()
+{
+	long current, previous, lag = 0;
+	previous = getCurrentTime();
+
+	while(true)
+	{
+		if(paused)
+			continue;
+
+		auto scene = getCurrentScene();
+		if(scene == nullptr)
+			continue;
+
+		current = getCurrentTime();
+
+		if(lag >= msPerUpdate)
+		{
+			scene->update();
+			lag -= msPerUpdate;
+		}
+
+		// scene->render();
+	}
+}
+
+#endif // OS_LINUX
+
 #ifdef OS_WIN
+
+long getCurrentTime()
+{
+	LARGE_INTEGER t;
+	QueryPerformanceCounter(&t);
+	return t.QuadPart;
+}
 
 void Director::setMsPerUpdate(ushort ms)
 {
@@ -109,12 +155,7 @@ void Director::loop()
 
 void Director::setMsPerUpdate(ushort ms)
 {
-
-}
-
-void Director::loop()
-{
-
+	msPerUpdate = ms;
 }
 
 #endif // OS_LINUX
