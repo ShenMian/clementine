@@ -37,7 +37,7 @@ public:
 
 private:
 	void updateFactors();
-	void updateEntitys();
+	void updatePhysics();
 
 	Physics*             physics;
 	Camera*              defaultCamera;

@@ -19,12 +19,12 @@ using namespace std;
 
 int main()
 {
-	#ifdef OS_WIN
-		// 开启 VT100模式
-		DWORD mode;
-		GetConsoleMode(hStdOut, &mode);
-		SetConsoleMode(hStdOut, mode | 4);
-	#endif
+#ifdef OS_WIN
+	// 开启 VT100模式
+	DWORD mode;
+	GetConsoleMode(hStdOut, &mode);
+	SetConsoleMode(hStdOut, mode | 4);
+#endif
 
 	auto director = Director::getInstance();
 	auto size     = director->getWinSize();

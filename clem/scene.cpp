@@ -98,7 +98,7 @@ Camera* Scene::getDefaultCamera() const
 void Scene::update()
 {
 	updateFactors();
-	updateEntitys();
+	updatePhysics();
 }
 
 void Scene::render()
@@ -121,9 +121,9 @@ void Scene::updateFactors()
 		f->update();
 }
 
-void Scene::updateEntitys()
+void Scene::updatePhysics()
 {
 	assert(physics != nullptr);
-
+	
 }
 
