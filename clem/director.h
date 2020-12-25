@@ -19,24 +19,24 @@ public:
 	static Director* getInstance();
 
 	void run();
-
 	void pause();
 	void resume();
+	void reset();
 
-	void   pushScene(Scene* s);
+	void   pushScene(Scene* scene);
 	void   popScene();
+	void   replaceScene(Scene* scene);
 	Scene* getCurrentScene() const;
-
-	Size getWinSize() const;
 	
 	void setMsPerUpdate(ushort i);
+
+	Size getWinSize() const;
 
 private:
 	Director();
 	void loop();
 
 	std::vector<Scene*> scenes;
-	std::thread         thread;
 	bool                paused;
 	long                msPerUpdate;
 };

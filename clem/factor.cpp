@@ -20,6 +20,7 @@ void Factor::update()
 {
 }
 
+/*
 void Factor::addComponent(Component* com)
 {
 	components.push_back(com);
@@ -33,6 +34,7 @@ void Factor::removeComponent(Component* com)
 	else
 		assert(false);
 }
+*/
 
 void Factor::setPosition(const Point& pos)
 {

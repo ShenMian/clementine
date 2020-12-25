@@ -5,7 +5,6 @@
 #include <assert.h>
 #include <chrono>
 #include "scene.h"
-#include "renderer.h"
 #include "terminal.h"
 
 Director* Director::getInstance()
@@ -26,7 +25,6 @@ void Director::run()
 	loop();
 }
 
-
 void Director::pause()
 {
 	if(paused)
@@ -39,6 +37,13 @@ void Director::resume()
 	if(!paused)
 		assert(false);
 	paused = false;
+}
+
+void Director::reset()
+{
+	msPerUpdate = 0;
+	paused      = false;
+	scenes.clear();
 }
 
 void Director::pushScene(Scene* s)
@@ -55,6 +60,13 @@ void Director::popScene()
 	scenes.pop_back();
 }
 
+void Director::replaceScene(Scene* s)
+{
+	if(scenes.empty())
+		assert(false);
+	scenes.back() = s;
+}
+
 Scene* Director::getCurrentScene() const
 {
 	if(!scenes.empty())
@@ -63,14 +75,14 @@ Scene* Director::getCurrentScene() const
 		return nullptr;
 }
 
-Size Director::getWinSize() const
-{
-	return Terminal::getWinSize();
-}
-
 void Director::setMsPerUpdate(ushort ms)
 {
 	msPerUpdate = ms;
+}
+
+Size Director::getWinSize() const
+{
+	return Terminal::getWinSize();
 }
 
 #ifdef OS_LINUX
