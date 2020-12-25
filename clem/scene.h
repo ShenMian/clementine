@@ -39,7 +39,6 @@ private:
 	void updateFactors();
 	void updatePhysics();
 
-	Physics*             physics;
 	Camera*              defaultCamera;
 	std::vector<Camera*> cameras;
 	std::vector<Factor*> factors;

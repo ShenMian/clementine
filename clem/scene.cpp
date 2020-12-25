@@ -10,7 +10,6 @@
 #include "camera.h"
 
 #include "input.h"
-#include "physics.h"
 
 #include <algorithm>
 #include <assert.h>
@@ -18,7 +17,6 @@
 using std::vector;
 
 Scene::Scene()
-	: physics(new Physics)
 {
 	auto director = Director::getInstance();
 
@@ -51,17 +49,6 @@ void Scene::removeFactor(Factor* f)
 const std::vector<Factor*>& Scene::getFactors() const
 {
 	return factors;
-}
-
-void Scene::setPhysics(Physics* p)
-{
-	assert(p != nullptr);
-	physics = p;
-}
-
-Physics* Scene::getPhysics() const
-{
-	return physics;
 }
 
 void Scene::addCamera(Camera* cam)
@@ -123,7 +110,4 @@ void Scene::updateFactors()
 
 void Scene::updatePhysics()
 {
-	assert(physics != nullptr);
-	
 }
-

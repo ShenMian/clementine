@@ -16,7 +16,7 @@ project("Clementine")
 
 # 设置 编译选项
 set(CMAKE_BUILD_TYPE Debug)
-SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g")
+SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS}")
 SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3")
 
 # 设置 lib 输出目录

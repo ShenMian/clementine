@@ -21,12 +21,14 @@ public:
 	ushort distance(const Vec2& vec) const;
 	ushort length() const;
 
-	bool    operator==(const Vec2& vec) const;
-	bool    operator!=(const Vec2& vec) const;
+	bool  operator==(const Vec2& vec) const;
+	bool  operator!=(const Vec2& vec) const;
+
 	Vec2  operator*(int n) const;
 	Vec2  operator/(int n) const;
 	Vec2  operator+(const Vec2& vec) const;
 	Vec2  operator-(const Vec2& vec) const;
+
 	Vec2& operator+=(const Vec2& vec);
 	Vec2& operator-=(const Vec2& vec);
 	Vec2& operator*=(int n);

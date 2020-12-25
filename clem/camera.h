@@ -7,12 +7,10 @@
 
 #include <vector>
 #include "type.h"
-#include "renderer.h"
 
 typedef unsigned short ushort;
 
 class Scene;
-class Renderer;
 class Factor;
 
 class Camera
