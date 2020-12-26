@@ -6,11 +6,8 @@
 
 #include <vector>
 
-typedef unsigned short ushort;
-
 class Size;
 class Scene;
-class Renderer;
 
 class Director
 {
@@ -27,7 +24,7 @@ public:
 	void   replaceScene(Scene* scene);
 	Scene* getCurrentScene() const;
 	
-	void setMsPerUpdate(ushort i);
+	void setMsPerUpdate(long i);
 
 	Size getWinSize() const;
 

@@ -5,7 +5,7 @@
 #include <assert.h>
 #include <chrono>
 #include "scene.h"
-#include "terminal.h"
+#include "os.h"
 
 Director* Director::getInstance()
 {
@@ -75,7 +75,7 @@ Scene* Director::getCurrentScene() const
 		return nullptr;
 }
 
-void Director::setMsPerUpdate(ushort ms)
+void Director::setMsPerUpdate(long ms)
 {
 	msPerUpdate = ms;
 }
