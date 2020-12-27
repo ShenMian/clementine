@@ -5,8 +5,7 @@
 #include <assert.h>
 #include <chrono>
 #include "scene.h"
-#include "renderer.h"
-#include "terminal.h"
+#include "os.h"
 
 Director* Director::getInstance()
 {
@@ -63,17 +62,22 @@ Scene* Director::getCurrentScene() const
 		return nullptr;
 }
 
-Size Director::getWinSize() const
-{
-	return Terminal::getWinSize();
-}
-
 void Director::setMsPerUpdate(ushort ms)
 {
 	msPerUpdate = ms;
 }
 
 #ifdef OS_LINUX
+
+#include <termios.h>
+#include <sys/ioctl.h>
+
+Size Director::getWinSize() const
+{
+	winsize winSize;
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &winSize);
+	return {winSize.ws_col, winSize.ws_row + 1};
+}
 
 #include <sys/time.h>
 
@@ -113,6 +117,19 @@ void Director::loop()
 #endif // OS_LINUX
 
 #ifdef OS_WIN
+
+Size Director::getWinSize() const
+{
+	static const auto out = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	CONSOLE_SCREEN_BUFFER_INFO screenInfo;
+
+	auto ret = GetConsoleScreenBufferInfo(out, &screenInfo);
+	if(!ret)
+		assert(false);
+
+	return Size(screenInfo.srWindow.Right + 1, screenInfo.srWindow.Bottom + 1);
+}
 
 void Director::loop()
 {
