@@ -2,8 +2,8 @@
 // License(Apache-2.0)
 // 游戏对象
 
-#ifndef CLEM_GAME_FACTOR_H_
-#define CLEM_GAME_FACTOR_H_
+#ifndef CLEM_FACTOR_H_
+#define CLEM_FACTOR_H_
 
 #include <vector>
 #include "texture.h"
@@ -37,4 +37,4 @@ private:
 	std::vector<Component*> components;
 };
 
-#endif // CLEM_GAME_FACTOR_H_
+#endif // CLEM_FACTOR_H_
