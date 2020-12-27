@@ -14,5 +14,5 @@ C++命令行游戏框架.
 - 支持多平台
 
 ### 联系
-[Gitter](https://gitter.im/ShenMian/Clementine)  
-
+- [Discussions](https://github.com/ShenMian/Clementine/discussions)  
+- QQ 1586379804  
