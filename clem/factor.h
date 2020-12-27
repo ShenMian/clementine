@@ -20,19 +20,21 @@ public:
 
 	virtual void update();
 
-	void addComponent(Component* com);
-	void removeComponent(Component* com);
-
-	void           setPosition(const Point& pos);
+	void           setPosition(const Point&);
 	const Point&   getPosition() const;
-	void           setTexture(const Texture& texture);
+
+	void           setTexture(const Texture&);
 	const Texture& getTexture() const;
+
+	void           addComponent(Component*);
+	void           removeComponent(Component*);
 
 protected:
 	Point position;
 
 private:
-	Texture texture;
+	Texture                 texture;
+	std::vector<Component*> components;
 };
 
 #endif // CLEM_GAME_FACTOR_H_

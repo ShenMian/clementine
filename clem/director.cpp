@@ -39,13 +39,6 @@ void Director::resume()
 	paused = false;
 }
 
-void Director::reset()
-{
-	msPerUpdate = 0;
-	paused      = false;
-	scenes.clear();
-}
-
 void Director::pushScene(Scene* s)
 {
 	if(s == nullptr)
@@ -64,7 +57,7 @@ void Director::replaceScene(Scene* s)
 {
 	if(scenes.empty())
 		assert(false);
-	scenes.back() = s;
+	scenes.front() = s;
 }
 
 Scene* Director::getCurrentScene() const
@@ -133,9 +126,9 @@ void Director::loop()
 
 Size Director::getWinSize() const
 {
-	static const auto          hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_SCREEN_BUFFER_INFO screenInfo;
+	static const auto hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
+	CONSOLE_SCREEN_BUFFER_INFO screenInfo;
 	auto ret = GetConsoleScreenBufferInfo(hOut, &screenInfo);
 	if(!ret)
 		assert(false);

@@ -17,14 +17,13 @@ public:
 	void run();
 	void pause();
 	void resume();
-	void reset();
 
-	void   pushScene(Scene* scene);
+	void   pushScene(Scene*);
 	void   popScene();
-	void   replaceScene(Scene* scene);
+	void   replaceScene(Scene*);
 	Scene* getCurrentScene() const;
 	
-	void setMsPerUpdate(long i);
+	void setMsPerUpdate(long);
 
 	Size getWinSize() const;
 
