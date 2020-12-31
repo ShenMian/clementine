@@ -73,6 +73,7 @@ bool Gamepad::isWireless() const
 void Gamepad::onButton(short keyCode)
 {
 	keyStatus[keyCode] = !keyStatus[keyCode];
-	
-	buttonEvent.gamepad = this;
+	buttonEvent.gamepad   = this;
+	buttonEvent.keyCode   = keyCode;
+	buttonEvent.keyStatus = keyStatus[keyCode];
 }

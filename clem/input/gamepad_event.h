@@ -19,14 +19,17 @@ public:
 
 	SubType getSubType() const;
 
-	int getKeyCode() const;
-	bool getKeyStatus();
+	short getKeyCode() const;
+	bool  getKeyStatus();
 
 	Gamepad* getGamepad() const;
 
 private:
 	SubType  subType;
 	Gamepad* gamepad;
+
+	short keyCode;
+	bool  keyStatus;
 
 friend class Gamepad;
 };
