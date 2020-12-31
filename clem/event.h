@@ -1,5 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
+// ÊÂ¼þ
 
 #ifndef CLEM_EVENT_H_
 #define CLEM_EVENT_H_
@@ -10,7 +11,7 @@ public:
 	enum class Type
 	{
 		keyboard,
-		controller
+		gamepad
 	};
 
 	Event(Type type);

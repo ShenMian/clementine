@@ -5,7 +5,8 @@
 #ifndef CLEM_GAMEPAD_H_
 #define CLEM_GAMEPAD_H_
 
-#include <unordered_map>
+#include <vector>
+#include "gamepad_event.h"
 
 struct _XINPUT_STATE;
 typedef _XINPUT_STATE XINPUT_STATE;
@@ -17,10 +18,8 @@ public:
 	{
 		BUTTON_A,
 		BUTTON_B,
-		BUTTON_C,
 		BUTTON_X,
 		BUTTON_Y,
-		BUTTON_Z,
 
 		BUTTON_DPAD_UP,
 		BUTTON_DPAD_DOWN,
@@ -44,23 +43,37 @@ public:
 
 		BUTTON_START,
 		BUTTON_SELECT,
-		BUTTON_PAUSE
+		BUTTON_PAUSE,
+
+		BUTTON_C,
+		BUTTON_Z,
+
+		MAX
 	};
 
 	Gamepad(short deviceId);
 	virtual ~Gamepad();
 
-	void update(XINPUT_STATE* state);
+	void update();
 
-	void handleButton();
-	void handleAxis();
+	short getDeviceId() const;
+	void  setVibration(unsigned short left, unsigned short right) const;
+
+	bool isWireless() const;
 	
 private:
 	short deviceId;
 	bool  connected;
+	bool  wireless;
+	bool  keyStatus[Key::MAX];
 
-	static std::unordered_map<short, Gamepad*> gamepads;
-	static void                                updateAll();
+	GamepadEvent buttonEvent;
+	GamepadEvent axisEvent;
+
+	void onButton(short keyCode);
+	void onAxis();
+
+	static std::vector<Gamepad*> gamepads;
 };
 
 #endif // CLEM_GAMEPAD_H_

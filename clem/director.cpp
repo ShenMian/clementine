@@ -139,7 +139,7 @@ Size Director::getWinSize() const
 void Director::loop()
 {
 	LARGE_INTEGER current, previous;
-	LONGLONG      lag = 0;
+	long          lag = 0;
 	QueryPerformanceCounter(&previous);
 
 	LARGE_INTEGER freq;
