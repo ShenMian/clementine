@@ -106,6 +106,4 @@ void Gamepad::onButton(short keyCode)
 	event->gamepad   = this;
 	event->keyCode   = keyCode;
 	event->keyStatus = keyStatus[keyCode];
-
-	printf("%s\t%d\n", event->keyStatus ? "Press" : "Release", keyCode);
 }
