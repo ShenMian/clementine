@@ -9,7 +9,7 @@ GamepadEvent::GamepadEvent(SubType subType, Gamepad* gamepad)
 {
 }
 
-SubType GamepadEvent::getSubType() const
+GamepadEvent::SubType GamepadEvent::getSubType() const
 {
 	return subType;
 }
