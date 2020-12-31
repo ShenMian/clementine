@@ -8,9 +8,6 @@
 #include <vector>
 #include "gamepad_event.h"
 
-struct _XINPUT_STATE;
-typedef _XINPUT_STATE XINPUT_STATE;
-
 class Gamepad
 {
 public:
@@ -58,8 +55,6 @@ public:
 
 	short getDeviceId() const;
 	void  setVibration(unsigned short left, unsigned short right) const;
-
-	bool isWireless() const;
 	
 private:
 	short deviceId;

@@ -5,6 +5,8 @@
 #include "gamepad.h"
 #include <assert.h>
 
+#ifdef OS_WIN
+
 #include <windows.h>
 #include <xinput.h> // #include "xinput.h"
 
@@ -21,12 +23,6 @@ Gamepad::Gamepad(short id)
 
 	if(capabilities.Type != XINPUT_DEVTYPE_GAMEPAD)
 		assert(false); // 设备不是游戏手柄 (可以发生这种情况吗?)
-
-	// 判断手柄相关属性
-	if(capabilities.Flags & XINPUT_CAPS_WIRELESS)
-		wireless = true;
-	else
-		wireless = false;
 }
 
 Gamepad::~Gamepad()
@@ -60,14 +56,11 @@ void Gamepad::setVibration(unsigned short left, unsigned short right) const
 	XInputSetState(deviceId, &v);
 }
 
+#endif // OS_WIN
+
 short Gamepad::getDeviceId() const
 {
 	return deviceId;
-}
-
-bool Gamepad::isWireless() const
-{
-	return wireless;
 }
 
 void Gamepad::onButton(short keyCode)
