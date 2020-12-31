@@ -1,6 +1,9 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// 
+// ∏’ÃÂ
+
+#ifndef CLEM_PHYSICS_PHYSICS_BODY_H_
+#define CLEM_PHYSICS_PHYSICS_BODY_H_
 
 #include <vector>
 #include "type.h"
@@ -9,6 +12,8 @@
 class PhysicsBody
 {
 public:
+	enum class Type;
+
 	void        setVelocity(const Vec2& v);
 	const Vec2& getVelocity() const;
 	void        setAccelerate(const Vec2& a);
@@ -21,9 +26,17 @@ public:
 	void removeAllShapes();
 
 private:
-	Vec2 velocity
+	Vec2 velocity;
 	Vec2 accelerate;
 
 	std::vector<PhysicsShape*> shapes;
 };
 
+enum class PhysicsBody::Type
+{
+	dynamic,
+	kinematic,
+	STATIC
+};
+
+#endif // CLEM_PHYSICS_PHYSICS_BODY_H_
