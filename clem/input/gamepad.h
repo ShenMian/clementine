@@ -22,13 +22,12 @@ public:
 		BUTTON_DPAD_DOWN,
 		BUTTON_DPAD_LEFT,
 		BUTTON_DPAD_RIGHT,
-		BUTTON_DPAD_CENTER,
 
 		BUTTON_LEFT_SHOULDER,
 		BUTTON_RIGHT_SHOULDER,
 
-		BUTTON_LEFT_THUMBSTICK,
-		BUTTON_RIGHT_THUMBSTICK,
+		BUTTON_LEFT_THUMB,
+		BUTTON_RIGHT_THUMB,
 
 		AXIS_LEFT_TRIGGER,
 		AXIS_RIGHT_TRIGGER,
@@ -39,13 +38,15 @@ public:
 		JOYSTICK_RIGHT_Y,
 
 		BUTTON_START,
-		BUTTON_SELECT,
-		BUTTON_PAUSE,
+		BUTTON_BACK,
 
 		BUTTON_C,
 		BUTTON_Z,
+		BUTTON_DPAD_CENTER,
+		BUTTON_SELECT,
+		BUTTON_PAUSE,
 
-		MAX
+		BUTTON_MAX
 	};
 
 	Gamepad(short deviceId);
@@ -59,11 +60,7 @@ public:
 private:
 	short deviceId;
 	bool  connected;
-	bool  wireless;
-	bool  keyStatus[Key::MAX];
-
-	GamepadEvent buttonEvent;
-	GamepadEvent axisEvent;
+	bool  keyStatus[BUTTON_MAX];
 
 	void onButton(short keyCode);
 	void onAxis();
