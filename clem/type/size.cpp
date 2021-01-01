@@ -3,7 +3,7 @@
 // 大小
 
 #include "size.h"
-#include <assert.h>
+#include <cassert>
 
 Size::Size()
 		: Size(0, 0)

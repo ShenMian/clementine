@@ -5,7 +5,7 @@
 #include "factor.h"
 #include "scene.h"
 #include <algorithm>
-#include <assert.h>
+#include <cassert>
 
 Factor::Factor()
 {

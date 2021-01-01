@@ -12,7 +12,7 @@
 #include "input.h"
 
 #include <algorithm>
-#include <assert.h>
+#include <cassert>
 
 using std::vector;
 

@@ -167,7 +167,7 @@ void Attribute::complie(ushort attr)
 #ifdef OS_WIN
 
 #include <windows.h>
-#include <assert.h>
+#include <cassert>
 
 Attribute::Attribute()
 		: Attribute(0)

@@ -17,19 +17,22 @@ public:
 
 	GamepadEvent(SubType, Gamepad*);
 
-	SubType getSubType() const;
+	SubType  getSubType() const;
+	Gamepad* getGamepad() const;
 
 	short getKeyCode() const;
-	bool  getKeyStatus();
 
-	Gamepad* getGamepad() const;
+	bool  getKeyStatus() const;
+	float getValue() const;
 
 private:
 	SubType  subType;
 	Gamepad* gamepad;
 
 	short keyCode;
+
 	bool  keyStatus;
+	float value;
 
 friend class Gamepad;
 };

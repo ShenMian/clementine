@@ -11,7 +11,7 @@
 class Gamepad
 {
 public:
-	enum Key
+	enum
 	{
 		BUTTON_A,
 		BUTTON_B,
@@ -60,7 +60,7 @@ private:
 	bool  keyStatus[BUTTON_MAX];
 
 	void onButton(short keyCode);
-	void onAxis();
+	void onAxis(short keyCode, float value);
 
 	static std::vector<Gamepad*> gamepads;
 };

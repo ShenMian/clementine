@@ -3,7 +3,7 @@
 // 字体属性
 
 #include "color.h"
-#include <assert.h>
+#include <cassert>
 
 using std::string;
 

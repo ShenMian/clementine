@@ -5,7 +5,7 @@
 #include "camera.h"
 #include <vector>
 #include <algorithm>
-#include <assert.h>
+#include <cassert>
 #include <clem/cursor.h>
 #include "scene.h"
 #include "factor.h"

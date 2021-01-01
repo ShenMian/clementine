@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "director.h"
-#include <assert.h>
+#include <cassert>
 #include <chrono>
 #include "scene.h"
 #include "platform.h"

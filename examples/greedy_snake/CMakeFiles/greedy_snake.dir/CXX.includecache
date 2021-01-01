@@ -49,7 +49,7 @@ clem/terminal.h
 clem/common.hpp
 stdio.h
 -
-assert.h
+cassert
 -
 platform.hpp
 clem/platform.hpp

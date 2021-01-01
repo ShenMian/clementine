@@ -3,7 +3,8 @@
 // сно╥йж╠З
 
 #include "gamepad.h"
-#include <assert.h>
+#include <cmath>
+#include <cassert>
 #include "clem/platform.h"
 
 #ifdef OS_WIN
@@ -82,6 +83,33 @@ void Gamepad::update()
 		onButton(BUTTON_START);
 	if((state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK) != keyStatus[BUTTON_BACK])
 		onButton(BUTTON_BACK);
+
+	const auto leftThumbDeadzone  = XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
+	const auto rightThumbDeadzone = XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE;
+	
+	const float LX = state.Gamepad.sThumbLX;
+	const float LY = state.Gamepad.sThumbLY;
+	const float RX = state.Gamepad.sThumbRX;
+	const float RY = state.Gamepad.sThumbRY;
+
+	auto leftMagnitude  = std::sqrt(LX * LX + LY * LY);
+	auto rightMagnitude = std::sqrt(RX * RX + RY * RY);
+
+	if(leftMagnitude > leftThumbDeadzone)
+	{
+		if(leftMagnitude > 32767)
+			leftMagnitude = 32767;
+		leftMagnitude -= leftThumbDeadzone;
+		onAxis(BUTTON_LEFT_THUMB, leftMagnitude);
+	}
+
+	if(rightMagnitude > rightThumbDeadzone)
+	{
+		if(rightMagnitude > 32767)
+			rightMagnitude = 32767;
+		rightMagnitude -= rightThumbDeadzone;
+		onAxis(BUTTON_RIGHT_THUMB, rightMagnitude);
+	}
 }
 
 void Gamepad::setVibration(unsigned short left, unsigned short right) const
@@ -102,8 +130,13 @@ void Gamepad::onButton(short keyCode)
 	keyStatus[keyCode] = !keyStatus[keyCode];
 
 	auto event = new GamepadEvent(GamepadEvent::SubType::button_status_changed, this);
-
-	event->gamepad   = this;
 	event->keyCode   = keyCode;
 	event->keyStatus = keyStatus[keyCode];
+}
+
+void Gamepad::onAxis(short keyCode, float value)
+{
+	auto event = new GamepadEvent(GamepadEvent::SubType::axis_status_changed, this);
+	event->keyCode = keyCode;
+	event->value = value;
 }

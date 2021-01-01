@@ -5,7 +5,7 @@
 #include "observable.h"
 #include "observer.h"
 #include <algorithm>
-#include <assert.h>
+#include <cassert>
 
 void Observable::notifyObserver() const
 {

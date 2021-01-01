@@ -3,7 +3,7 @@
 // 材质
 
 #include "texture.h"
-#include <assert.h>
+#include <cassert>
 #include <math.h>
 
 Texture::Texture()

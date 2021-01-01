@@ -37,7 +37,7 @@ void Terminal::Cursor::hide()
 
 #ifdef OS_WIN
 
-#include <assert.h>
+#include <cassert>
 #include <windows.h>
 
 Size Terminal::getWinSize()
