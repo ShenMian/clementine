@@ -5,8 +5,15 @@
 #include "gamepad_event.h"
 #include <cassert>
 
-GamepadEvent::GamepadEvent(SubType subType, Gamepad* gamepad)
-		: Event(Event::Type::gamepad), subType(subType), gamepad(gamepad)
+GamepadEvent::GamepadEvent(SubType, Gamepad*, short key, bool status)
+		: Event(Event::Type::gamepad), subType(subType), gamepad(gamepad),
+			keyCode(key), status(status)
+{
+}
+
+GamepadEvent::GamepadEvent(SubType, Gamepad*, short key, float value)
+		: Event(Event::Type::gamepad), subType(subType), gamepad(gamepad),
+			keyCode(key), value(value)
 {
 }
 
@@ -23,7 +30,7 @@ short GamepadEvent::getKeyCode() const
 bool GamepadEvent::getKeyStatus() const
 {
 	assert(subType == SubType::button_status_changed);
-	return keyStatus;
+	return status;
 }
 
 float GamepadEvent::getValue() const

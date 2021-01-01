@@ -46,7 +46,7 @@ public:
 		BUTTON_MAX
 	};
 
-	Gamepad(short deviceId);
+	Gamepad(short userIndex);
 	virtual ~Gamepad();
 
 	void update();
@@ -55,7 +55,7 @@ public:
 	void  setVibration(unsigned short left, unsigned short right) const;
 	
 private:
-	short deviceId;
+	short userIndex;
 	bool  connected;
 	bool  keyStatus[BUTTON_MAX];
 

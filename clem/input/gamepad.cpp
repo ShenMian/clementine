@@ -12,8 +12,8 @@
 #include <windows.h>
 #include <xinput.h> // #include "xinput.h"
 
-Gamepad::Gamepad(short id)
-		: deviceId(id), connected(false)
+Gamepad::Gamepad(short index)
+		: userIndex(index), connected(false)
 {
 	for(short i = 0; i < BUTTON_MAX; i++)
 		keyStatus[i] = false;
@@ -38,11 +38,11 @@ void Gamepad::update()
 	// 获取手柄数据
 	XINPUT_STATE state;
 	ZeroMemory(&state, sizeof(XINPUT_STATE));
-	auto ret = XInputGetState(deviceId, &state);
+	auto ret = XInputGetState(userIndex, &state);
+	if(ret == ERROR_DEVICE_NOT_CONNECTED)
+		return; // 设备离线
 	if(ret != ERROR_SUCCESS)
-		assert(false);
-	else if(ret == ERROR_DEVICE_NOT_CONNECTED)
-		assert(false); // 设备离线
+		assert(false); // 未知错误 
 
 	// 检测数据是否有更新
 	static DWORD lastPacketNum = -1;
@@ -115,28 +115,25 @@ void Gamepad::update()
 void Gamepad::setVibration(unsigned short left, unsigned short right) const
 {
 	XINPUT_VIBRATION v = {left, right};
-	XInputSetState(deviceId, &v);
+	XInputSetState(userIndex, &v);
 }
 
 #endif // OS_WIN
 
 short Gamepad::getDeviceId() const
 {
-	return deviceId;
+	return userIndex;
 }
 
 void Gamepad::onButton(short keyCode)
 {
 	keyStatus[keyCode] = !keyStatus[keyCode];
-
-	auto event = new GamepadEvent(GamepadEvent::SubType::button_status_changed, this);
-	event->keyCode   = keyCode;
-	event->keyStatus = keyStatus[keyCode];
+	auto event = new GamepadEvent(GamepadEvent::SubType::button_status_changed, this,
+                                keyCode, keyStatus[keyCode]);
 }
 
 void Gamepad::onAxis(short keyCode, float value)
 {
-	auto event = new GamepadEvent(GamepadEvent::SubType::axis_status_changed, this);
-	event->keyCode = keyCode;
-	event->value = value;
+	auto event = new GamepadEvent(GamepadEvent::SubType::button_status_changed, this,
+																keyCode, value);
 }

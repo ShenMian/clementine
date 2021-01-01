@@ -15,7 +15,8 @@ public:
 		axis_status_changed
 	};
 
-	GamepadEvent(SubType, Gamepad*);
+	GamepadEvent(SubType, Gamepad*, short keyCode, bool status);
+	GamepadEvent(SubType, Gamepad*, short keyCode, float value);
 
 	SubType  getSubType() const;
 	Gamepad* getGamepad() const;
@@ -28,11 +29,7 @@ public:
 private:
 	SubType  subType;
 	Gamepad* gamepad;
-
-	short keyCode;
-
-	bool  keyStatus;
-	float value;
-
-friend class Gamepad;
+	short    keyCode;
+	bool     status;
+	float    value;
 };
