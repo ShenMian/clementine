@@ -75,7 +75,7 @@ void Director::setMsPerUpdate(long ms)
 
 #ifdef OS_LINUX
 
-#include <termiplatform.h>
+#include <termios.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
 
