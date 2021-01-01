@@ -2,8 +2,8 @@
 // License(Apache-2.0)
 // ÓÎÏ·ÊÖ±ú
 
-#ifndef CLEM_GAMEPAD_H_
-#define CLEM_GAMEPAD_H_
+#ifndef CLEM_INPUT_GAMEPAD_H_
+#define CLEM_INPUT_GAMEPAD_H_
 
 #include <vector>
 #include "gamepad_event.h"
@@ -40,9 +40,6 @@ public:
 		BUTTON_START,
 		BUTTON_BACK,
 
-		BUTTON_C,
-		BUTTON_Z,
-		BUTTON_DPAD_CENTER,
 		BUTTON_SELECT,
 		BUTTON_PAUSE,
 
@@ -68,4 +65,4 @@ private:
 	static std::vector<Gamepad*> gamepads;
 };
 
-#endif // CLEM_GAMEPAD_H_
+#endif // CLEM_INPUT_GAMEPAD_H_

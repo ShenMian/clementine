@@ -5,7 +5,7 @@
 #include <assert.h>
 #include <chrono>
 #include "scene.h"
-#include "os.h"
+#include "platform.h"
 
 Director* Director::getInstance()
 {
@@ -75,7 +75,7 @@ void Director::setMsPerUpdate(long ms)
 
 #ifdef OS_LINUX
 
-#include <termios.h>
+#include <termiplatform.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
 

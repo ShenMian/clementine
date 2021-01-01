@@ -51,8 +51,8 @@ stdio.h
 -
 assert.h
 -
-os.hpp
-clem/os.hpp
+platform.hpp
+clem/platform.hpp
 coord.hpp
 clem/coord.hpp
 size.hpp
@@ -68,7 +68,7 @@ vector
 texture.hpp
 clem/texture.hpp
 
-clem/os.hpp
+clem/platform.hpp
 
 clem/renderer.h
 

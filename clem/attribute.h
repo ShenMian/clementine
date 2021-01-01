@@ -8,7 +8,7 @@
 typedef unsigned short ushort;
 
 #include <string>
-#include "os.h"
+#include "platform.h"
 
 class Attribute
 {

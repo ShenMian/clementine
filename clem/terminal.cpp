@@ -7,7 +7,7 @@
 
 #ifdef OS_LINUX
 
-#include <termios.h>
+#include <termiplatform.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
 

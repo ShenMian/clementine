@@ -4,7 +4,7 @@
 
 #include "gamepad.h"
 #include <assert.h>
-#include "clem/os.h"
+#include "clem/platform.h"
 
 #ifdef OS_WIN
 

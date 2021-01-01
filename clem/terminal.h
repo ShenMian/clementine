@@ -5,7 +5,7 @@
 #ifndef CLEM_TERMINAL_H_
 #define CLEM_TERMINAL_H_
 
-#include "os.h"
+#include "platform.h"
 #include "type.h"
 
 class Terminal
