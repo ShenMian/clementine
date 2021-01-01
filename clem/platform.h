@@ -11,14 +11,15 @@
 	#define OS_UNIX
 #elif defined(__linux__) || defined(__linux)
 	#define OS_LINUX
-#elif TARGET_OS_IPHONE
+#elif defined(TARGET_OS_IPHONE)
 	#define OS_IPHONE
-#elif TARGET_OS_MAC
+#elif defined(TARGET_OS_MAC)
 	#define OS_MAC
 #elif defined(ANDROID) || defined(_ANDROID_)
 	#define OS_ANDROID
 #else
 	#define OS_UNKNOWN
+	#define OS_LINUX // TODO(SMS): 部分系统不存在相关宏, 有待更好解决方案
 #endif
 
 #ifdef OS_WIN
