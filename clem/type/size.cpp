@@ -21,8 +21,18 @@ ushort Size::area() const
 	return x * y;
 }
 
-Size Size::operator+(const Size& size) const
+Size Size::operator+(const Size& s) const
 {
-	return Size(x + size.x, y + size.y);
+	return Size(x + s.x, y + s.y);
+}
+
+bool Size::operator==(const Size& s) const
+{
+	return x == s.x && y == s.y;
+}
+
+bool Size::operator!=(const Size& s) const
+{
+	return !(*this == s);
 }
 

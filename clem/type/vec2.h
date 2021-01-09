@@ -7,8 +7,6 @@
 
 #include <math.h>
 
-typedef unsigned short ushort;
-
 class Vec2
 {
 public:

@@ -23,7 +23,7 @@ public:
 	void   replaceScene(Scene*);
 	Scene* getCurrentScene() const;
 	
-	void setMsPerUpdate(long);
+	void setSecPerUpdate(float seconds);
 
 	Size getWinSize() const;
 
@@ -33,7 +33,7 @@ private:
 
 	std::vector<Scene*> scenes;
 	bool                paused;
-	long                msPerUpdate;
+	float               secPerUpdate;
 };
 
 #endif // CLEM_DIRECTOR_H_

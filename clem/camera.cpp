@@ -25,9 +25,12 @@ Camera::Camera(Scene* s)
 
 void Camera::render()
 {
-	// 渲染
+	puts(__FUNCTION__);
 	static Texture buffer;
-	buffer.setSize(size);
+
+	// 渲染
+	if(buffer.getSize() != size)
+		buffer.setSize(size);
 
 	Rect inputRect(inPos, size);
 

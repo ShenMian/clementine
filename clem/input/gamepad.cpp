@@ -50,7 +50,7 @@ void Gamepad::update()
 		return;
 	lastPacketNum = state.dwPacketNumber;
 
-	// 按键状态改变
+	// 按键
 	if((state.Gamepad.wButtons & XINPUT_GAMEPAD_A) != keyStatus[BUTTON_A])
 		onButton(BUTTON_A);
 	if((state.Gamepad.wButtons & XINPUT_GAMEPAD_B) != keyStatus[BUTTON_B])
@@ -84,6 +84,7 @@ void Gamepad::update()
 	if((state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK) != keyStatus[BUTTON_BACK])
 		onButton(BUTTON_BACK);
 
+	// 摇杆
 	const auto leftThumbDeadzone  = XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
 	const auto rightThumbDeadzone = XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE;
 	

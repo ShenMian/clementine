@@ -7,8 +7,6 @@
 
 class Vec2;
 
-typedef unsigned short ushort;
-
 class Point
 {
 public:

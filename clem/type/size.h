@@ -16,6 +16,8 @@ public:
 	ushort area() const;
 
 	Size operator+(const Size& size) const;
+	bool operator==(const Size& size) const;
+	bool operator!=(const Size& size) const;
 
 	Size();
 	Size(int x, int y);

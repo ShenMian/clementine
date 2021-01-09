@@ -14,7 +14,7 @@ Director* Director::getInstance()
 }
 
 Director::Director()
-		: msPerUpdate(0), paused(false)
+		: secPerUpdate(1), paused(false)
 {
 }
 
@@ -68,9 +68,10 @@ Scene* Director::getCurrentScene() const
 		return nullptr;
 }
 
-void Director::setMsPerUpdate(long ms)
+void Director::setSecPerUpdate(float sec)
 {
-	msPerUpdate = ms;
+	assert(sec > 0);
+	secPerUpdate = sec;
 }
 
 #ifdef OS_LINUX
@@ -139,13 +140,12 @@ Size Director::getWinSize() const
 
 void Director::loop()
 {
-	LARGE_INTEGER current, previous;
+	LARGE_INTEGER current, previous, freq;
 	long          lag = 0;
+	QueryPerformanceFrequency(&freq);
 	QueryPerformanceCounter(&previous);
 
-	LARGE_INTEGER freq;
-	QueryPerformanceFrequency(&freq);
-	const auto interval = (LONGLONG)(msPerUpdate / 1000 * freq.QuadPart);
+	const auto interval = (LONGLONG)(secPerUpdate * freq.QuadPart);
 
 	while(true)
 	{
