@@ -25,7 +25,20 @@ Camera::Camera(Scene* s)
 
 void Camera::render()
 {
-	assert(size.area() != 0);
+	// 渲染
+	static Texture buffer;
+	buffer.setSize(size);
+
+	Rect inputRect(inPos, size);
+
+	// 输出
+	for(ushort y = 0; y < size.x; y++)
+	{
+		for(ushort x = 0; x < size.x; x++)
+			printf("%s", buffer.at(x, y).getString().c_str());
+	}
+
+	/*assert(size.area() != 0);
 
 	Texture texture(size);
 
@@ -44,7 +57,7 @@ void Camera::render()
 		printf("\x1b[%d;%dH", (int)outPos.y + y + 1, (int)outPos.x + 1);
 		for(ushort x = 0; x < size.x; x++)
 			printf("%s", texture.at(x, y).getString().c_str());
-	}
+	}*/
 }
 
 void Camera::setScene(Scene* s)

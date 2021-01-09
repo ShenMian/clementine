@@ -3,6 +3,7 @@
 // зјБъ
 
 #include "point.h"
+#include <cmath>
 #include "vec2.h"
 
 Point::Point()
@@ -18,6 +19,11 @@ Point::Point(float x, float y)
 Point::Point(const Vec2& vec)
 		: Point(vec.x, vec.y)
 {
+}
+
+float Point::distance(const Point& p) const
+{
+	return std::sqrt(std::abs(x - p.x) + std::abs(y - p.y));
 }
 
 Point Point::operator+(const Point& p) const

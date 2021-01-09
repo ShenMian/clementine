@@ -7,14 +7,6 @@
 #include <iostream>
 #include <stdio.h>
 
-#ifdef OS_WIN
-#include <windows.h>
-#define sleep(ms) Sleep(ms)
-#else
-#include <unistd.h>
-#define sleep(ms) usleep(ms * 1000)
-#endif
-
 using namespace std;
 
 int main()
@@ -40,7 +32,4 @@ int main()
 
 	director->pushScene(&scene);
 	director->run();
-
-	getchar();
-	getchar();
 }

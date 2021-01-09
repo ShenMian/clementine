@@ -15,12 +15,7 @@ Vec2::Vec2(float x, float y)
 {
 }
 
-ushort Vec2::distance(const Vec2& vec) const
-{
-	return Vec2(fabs(x - vec.x), fabs(y - vec.y)).length();
-}
-
-ushort Vec2::length() const
+float Vec2::length() const
 {
 	return sqrtf(x * x + y * y);
 }

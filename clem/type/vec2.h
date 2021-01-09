@@ -18,8 +18,7 @@ public:
 	Vec2();
 	Vec2(float x, float y);
 
-	ushort distance(const Vec2& vec) const;
-	ushort length() const;
+	float length() const;
 
 	bool  operator==(const Vec2& vec) const;
 	bool  operator!=(const Vec2& vec) const;

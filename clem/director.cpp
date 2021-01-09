@@ -117,7 +117,7 @@ void Director::loop()
 			lag -= msPerUpdate;
 		}
 
-		// scene->render();
+		scene->render();
 	}
 }
 
