@@ -112,10 +112,10 @@ void Director::loop()
 
 		current = getCurrentMillSecond();
 
-		if(lag >= msPerUpdate)
+		if(lag >= secPerUpdate / 1000)
 		{
 			scene->update();
-			lag -= msPerUpdate;
+			lag -= secPerUpdate;
 		}
 
 		scene->render();
