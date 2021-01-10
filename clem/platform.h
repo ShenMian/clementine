@@ -5,7 +5,7 @@
 #ifndef CLEM_PLATFORM_H_
 #define CLEM_PLATFORM_H_
 
-#if defined(WIN32) || defined(_WIN32) || defined(_WIN32_) || defined(WIN64) || defined(_WIN64) || defined(_WIN64_)
+#if defined(WIN32) || defined(_WIN32) || defined(_WIN32_) || defined(__WIN32__) || defined(__MINGW32__) || defined(WIN64) || defined(_WIN64) || defined(_WIN64_)
 	#define OS_WIN
 #endif
 
