@@ -88,7 +88,7 @@ void Texture::clear()
 
 const Tile& Texture::at(ushort x, ushort y) const
 {
-	assert(0 <= x && x <= size.x && 0 <= y && y <= size.y);
+	assert(x < size.x && y < size.y);
 	return tiles[x + y * size.x];
 }
 
