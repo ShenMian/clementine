@@ -16,6 +16,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Download Submodules
+      shell: bash
+      run: git submodule update --init --recursive
+
     - name: Create Build Environment
       run: cmake -E make_directory ${{runner.workspace}}/build
 
@@ -34,7 +38,7 @@ jobs:
       shell: bash
       run: ctest -C $BUILD_TYPE
 
-    - name : Upload artifact
+    - name: Upload artifact
       uses: actions/upload-artifact@master
       with:
         name: Clementine
