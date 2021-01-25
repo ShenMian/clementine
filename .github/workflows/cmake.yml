@@ -38,8 +38,14 @@ jobs:
       shell: bash
       run: ctest -C $BUILD_TYPE
 
-    - name: Upload artifact
+    - name: Upload Library
       uses: actions/upload-artifact@master
       with:
         name: Clementine
         path: ${{runner.workspace}}/build/lib/libclementine.a
+
+    - name: Upload Examples
+      uses: actions/upload-artifact@master
+      with:
+        name: Clementine
+        path: ${{runner.workspace}}/build/examples
