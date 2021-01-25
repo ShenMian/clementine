@@ -36,8 +36,6 @@ void Camera::render()
 	for(auto f : scene->getFactors())
 		buffer.drawTexture(f->getTexture(), {0, 0});
 
-	buffer.drawCycle(Point(size.x / 2, size.y / 2), 10, Tile('*', Fore::green));
-
 	// 输出
 	for(ushort y = 0; y < size.y; y++)
 	{
@@ -45,27 +43,6 @@ void Camera::render()
 		for(ushort x = 0; x < size.x; x++)
 			printf("%s", buffer.at(x, y).getString().c_str());
 	}
-
-	/*assert(size.area() != 0);
-
-	Texture texture(size);
-
-	std::string line(size.x, ' ');
-	for(ushort y = 1; y <= size.y; y++)
-	{
-		printf("\x1b[%d;%dH%s", (int)outPos.y + y, (int)outPos.x, line.c_str());
-	}
-	
-	for(auto f : scene->getFactors())
-		if(true)
-			texture.drawTexture(f->getTexture(), f->getPosition() - inPos);
-
-	for(ushort y = 0; y < size.y; y++)
-	{
-		printf("\x1b[%d;%dH", (int)outPos.y + y + 1, (int)outPos.x + 1);
-		for(ushort x = 0; x < size.x; x++)
-			printf("%s", texture.at(x, y).getString().c_str());
-	}*/
 }
 
 void Camera::setScene(Scene* s)

@@ -23,7 +23,7 @@ int main()
 
 	Texture texture(size);
 	Color   green(Fore::green);
-	texture.drawCycle(Point(size.x / 2, size.y / 2), 5, Tile('.', green));
+	texture.drawCycle(Point(size.x / 2, size.y / 2), 10, Tile('*', green));
 	
 	Factor factor(texture);
 	
