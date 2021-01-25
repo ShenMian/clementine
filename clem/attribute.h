@@ -28,7 +28,7 @@ public:
 private:
 	void complie(ushort attr);
 
-#ifdef OS_LINUX
+#ifdef OS_UNIX
 	std::string attribute;
 #endif
 

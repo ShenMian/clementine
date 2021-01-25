@@ -67,6 +67,14 @@ void Texture::drawCycle(const Point& c, ushort r, const Tile& t)
 		drawTile(t, Point(c.x - x, c.y - y));
 		drawTile(t, Point(c.x + x, c.y - y));
 	}
+	for(ushort y = 0; y <= r; y++)
+	{
+		ushort x = sqrt(r * r - y * y);
+		drawTile(t, Point(c.x + x, c.y + y));
+		drawTile(t, Point(c.x - x, c.y + y));
+		drawTile(t, Point(c.x - x, c.y - y));
+		drawTile(t, Point(c.x + x, c.y - y));
+	}
 }
 
 const Size& Texture::getSize() const

@@ -6,6 +6,7 @@
 
 #include <clem/director.h>
 
+#include <clem/cursor.h>
 #include <clem/color.h>
 #include <clem/attribute.h>
 
@@ -16,7 +17,5 @@
 
 #include <clem/observer.h>
 #include <clem/input.h>
-
-#include <clem/terminal.h>
 
 #endif // CLEM_CLEM_HPP_

@@ -74,7 +74,7 @@ void Director::setSecPerUpdate(float sec)
 	secPerUpdate = sec;
 }
 
-#ifdef OS_LINUX
+#ifdef OS_UNIX
 
 #include <termios.h>
 #include <unistd.h>
@@ -122,7 +122,7 @@ void Director::loop()
 	}
 }
 
-#endif // OS_LINUX
+#endif // OS_UNIX
 
 #ifdef OS_WIN
 

@@ -35,7 +35,7 @@ bool Attribute::operator==(const Attribute& attr)
 		return false;
 }
 
-#ifdef OS_LINUX
+#ifdef OS_UNIX
 
 Attribute::Attribute()
 		: Attribute(0)
@@ -162,7 +162,7 @@ void Attribute::complie(ushort attr)
 	attribute += 'm';
 }
 
-#endif // OS_LINUX
+#endif // OS_UNIX
 
 #ifdef OS_WIN
 

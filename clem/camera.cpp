@@ -36,10 +36,12 @@ void Camera::render()
 	for(auto f : scene->getFactors())
 		buffer.drawTexture(f->getTexture(), {0, 0});
 
+	buffer.drawCycle(Point(size.x / 2, size.y / 2), 10, Tile('*', Fore::green));
+
 	// 输出
 	for(ushort y = 0; y < size.y; y++)
 	{
-		// Cursor::moveTo(0, y);
+		Cursor::moveTo(0, y);
 		for(ushort x = 0; x < size.x; x++)
 			printf("%s", buffer.at(x, y).getString().c_str());
 	}

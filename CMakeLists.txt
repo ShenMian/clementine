@@ -7,12 +7,8 @@ set(CMAKE_CXX_STANDARD 14)
 
 project("Clementine")
 
-# 添加 Google.Test
-include_directories("googletest/googletest/include")
-add_subdirectory("googletest")
-
 # 设置 编译选项
-set(CMAKE_BUILD_TYPE Debug)
+# set(CMAKE_BUILD_TYPE Debug)
 SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS}")
 SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3")
 
@@ -28,5 +24,8 @@ add_subdirectory("clem")
 add_subdirectory("examples")
 
 # 单元测试
+# 添加 Google.Test
+include_directories("googletest/googletest/include")
+add_subdirectory("googletest")
 enable_testing()
 add_subdirectory("test")
