@@ -9,20 +9,20 @@
 	#define OS_WIN
 #endif
 
-#if defined(__unix__) || defined(unix) || defined(__unix)
-	#define OS_UNIX
-#endif
-
-#if defined(__linux__) || defined(__linux)
-	#define OS_LINUX
-#endif
-
 #if defined(TARGET_OS_IPHONE)
 	#define OS_IPHONE
 #endif
 
 #if defined(TARGET_OS_MAC)
 	#define OS_MAC
+#endif
+
+#if defined(__unix__) || defined(unix) || defined(__unix) || defined(OS_MAC)
+	#define OS_UNIX
+#endif
+
+#if defined(__linux__) || defined(__linux)
+	#define OS_LINUX
 #endif
 
 #if defined(ANDROID) || defined(_ANDROID_)
