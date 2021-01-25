@@ -14,9 +14,4 @@
 #include <clem/cursor.h>
 #include <clem/color.h>
 
-/*
-#include <clem/observer.h>
-#include <clem/input.h>
-*/
-
 #endif // CLEM_CLEM_HPP_

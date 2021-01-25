@@ -47,5 +47,5 @@ jobs:
     - name: Upload Examples
       uses: actions/upload-artifact@master
       with:
-        name: Clementine
+        name: Examples
         path: ${{runner.workspace}}/build/examples
