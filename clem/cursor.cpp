@@ -1,3 +1,6 @@
+// Copyright 2020 SMS
+// License(Apache-2.0)
+// ¹â±ê
 
 #include "cursor.h"
 #include "platform.h"

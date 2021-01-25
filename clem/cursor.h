@@ -1,3 +1,6 @@
+// Copyright 2020 SMS
+// License(Apache-2.0)
+// ¹â±ê
 
 typedef unsigned short ushort;
 class Point;
@@ -10,10 +13,3 @@ public:
   
 	static void setVisible(bool);
 };
-
-/*
-	static void moveUp(ushort n);
-	static void moveDown(ushort n);
-	static void moveRight(ushort n);
-	static void moveLeft(ushort n);
-*/
