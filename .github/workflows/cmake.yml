@@ -38,4 +38,4 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: Clementine
-        path: ${{runner.workspace}}/build/clem
+        path: ${{runner.workspace}}/build/lib/libclementine.a
