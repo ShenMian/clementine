@@ -34,6 +34,8 @@ private:
 	std::vector<Scene*> scenes;
 	bool                paused;
 	float               secPerUpdate;
+
+	static Director instance;
 };
 
 #endif // CLEM_DIRECTOR_H_

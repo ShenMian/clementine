@@ -7,10 +7,11 @@
 #include "scene.h"
 #include "platform.h"
 
+Director Director::instance;
+
 Director* Director::getInstance()
 {
-	static Director getInstance;
-	return &getInstance;
+	return &instance;
 }
 
 Director::Director()
