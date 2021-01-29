@@ -13,7 +13,7 @@ void Cursor::moveTo(const Point& p)
 	moveTo(p.x, p.y);
 }
 
-#ifdef OS_UNIX
+#ifndef OS_WIN
 
 void Cursor::moveTo(short x, short y)
 {
@@ -28,13 +28,13 @@ void Cursor::setVisible(bool v)
 		printf("\e[?25l");
 }
 
-#endif // OS_UNIX
+#endif // !OS_WIN
 
 #ifdef OS_WIN
 
-void Cursor::moveTo(ushort x, ushort y)
+void Cursor::moveTo(short x, short y)
 {
-	SetConsoleCursorPosition(hStdOut, {(short)x, (short)y});
+	SetConsoleCursorPosition(hStdOut, {x, y});
 }
 
 void Cursor::setVisible(bool v)

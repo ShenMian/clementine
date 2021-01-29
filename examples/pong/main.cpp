@@ -2,10 +2,11 @@
 // License(Apache-2.0)
 // 乒乓球
 
-#include <time.h>
 #include <clem/clem.hpp>
 #include <iostream>
+#include <time.h>
 #include <stdio.h>
+#include <assert.h>
 
 using namespace std;
 
@@ -14,8 +15,10 @@ int main()
 #ifdef OS_WIN
 	// 开启 VT100模式
 	DWORD mode;
-	GetConsoleMode(hStdOut, &mode);
-	SetConsoleMode(hStdOut, mode | 4);
+	if(!GetConsoleMode(hStdOut, &mode))
+		assert(false);
+	if(!SetConsoleMode(hStdOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING)) // 开启 VT100模式
+		assert(false);
 #endif
 
 	auto director = Director::getInstance();
@@ -23,7 +26,8 @@ int main()
 
 	Texture texture(size);
 	Color   green(Fore::green);
-	texture.drawCycle(Point(size.x / 2, size.y / 2), 5, Tile('*', green));
+
+	texture.drawCycle(Point(size.x / 2, size.y / 2), 10, Tile('*', green));
 	
 	Factor factor(texture);
 	

@@ -17,7 +17,7 @@
 	#define OS_MAC
 #endif
 
-#if defined(__unix__) || defined(unix) || defined(__unix) || defined(OS_MAC)
+#if defined(__unix__) || defined(unix) || defined(__unix)
 	#define OS_UNIX
 #endif
 

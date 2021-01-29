@@ -29,31 +29,31 @@ Texture::Texture(Size s, const Tile& t)
 		tiles[i] = t;
 }
 
+void Texture::drawPoint(const Point& p, const Tile& t)
+{
+	assert(0 <= p.x && p.x <= size.x && 0 <= p.y && p.y <= size.y);
+	tiles[p.x + p.y * size.x] = t;
+}
+
 void Texture::drawLine(Point a, Point b, const Tile& t)
 {
 	if(a.x > b.x)
 	{
 		auto t = a;
-		a = b;
-		b = t;
+		a      = b;
+		b      = t;
 	}
 
-	auto xDis = b.x - a.x;
-	auto yDis = b.y - a.y;
-	float yDelta = yDis/xDis;
+	auto  xDis   = b.x - a.x;
+	auto  yDis   = b.y - a.y;
+	float yDelta = yDis / xDis;
 
-	auto y = a.y;
+	float y = a.y;
 	for(auto x = a.x; x <= b.x; x++)
 	{
 		drawPoint({x, y}, t);
 		y += yDelta;
 	}
-}
-
-void Texture::drawPoint(const Point& p, const Tile& t)
-{
-	assert(0 <= p.x && p.x <= size.x && 0 <= p.y && p.y <= size.y);
-	tiles[p.x + p.y * size.x] = t;
 }
 
 void Texture::drawRect(const Rect& rect, const Tile& t)
