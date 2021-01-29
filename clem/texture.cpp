@@ -29,7 +29,7 @@ Texture::Texture(Size s, const Tile& t)
 		tiles[i] = t;
 }
 
-void Texture::drawTile(const Tile& t, const Point& p)
+void Texture::drawPoint(const Point& p, const Tile& t)
 {
 	assert(0 <= p.x && p.x <= size.x && 0 <= p.y && p.y <= size.y);
 	tiles[p.x + p.y * size.x] = t;
@@ -40,20 +40,20 @@ void Texture::drawTexture(const Texture& t, const Point& p)
 	const auto size = t.getSize();
 	for(ushort x = 0; x < size.x; x++)
 		for(ushort y = 0; y < size.y; y++)
-			drawTile(t.at(x, y), Point(p.x + x, p.y + y));
+			drawPoint(Point(p.x + x, p.y + y), t.at(x, y));
 }
 
 void Texture::drawRect(const Rect& rect, const Tile& t)
 {
 	for(float i = 0; i < rect.width; i++)
 	{
-		drawTile(t, Point(rect.x + i, rect.y));
-		drawTile(t, Point(rect.x + i, rect.bottom()));
+		drawPoint(Point(rect.x + i, rect.y), t);
+		drawPoint(Point(rect.x + i, rect.bottom()), t);
 	}
 	for(float i = 0; i < rect.height; i++)
 	{
-		drawTile(t, Point(rect.x, rect.y + i));
-		drawTile(t, Point(rect.x, rect.right() + i));
+		drawPoint(Point(rect.x, rect.y + i), t);
+		drawPoint(Point(rect.x, rect.right() + i), t);
 	}
 }
 
@@ -62,18 +62,18 @@ void Texture::drawCycle(const Point& c, ushort r, const Tile& t)
 	for(ushort x = 0; x <= r; x++)
 	{
 		ushort y = sqrt(r*r - x*x);
-		drawTile(t, Point(c.x + x, c.y + y));
-		drawTile(t, Point(c.x - x, c.y + y));
-		drawTile(t, Point(c.x - x, c.y - y));
-		drawTile(t, Point(c.x + x, c.y - y));
+		drawPoint(Point(c.x + x, c.y + y), t);
+		drawPoint(Point(c.x - x, c.y + y), t);
+		drawPoint(Point(c.x - x, c.y - y), t);
+		drawPoint(Point(c.x + x, c.y - y), t);
 	}
 	for(ushort y = 0; y <= r; y++)
 	{
 		ushort x = sqrt(r * r - y * y);
-		drawTile(t, Point(c.x + x, c.y + y));
-		drawTile(t, Point(c.x - x, c.y + y));
-		drawTile(t, Point(c.x - x, c.y - y));
-		drawTile(t, Point(c.x + x, c.y - y));
+		drawPoint(Point(c.x + x, c.y + y), t);
+		drawPoint(Point(c.x - x, c.y + y), t);
+		drawPoint(Point(c.x - x, c.y - y), t);
+		drawPoint(Point(c.x + x, c.y - y), t);
 	}
 }
 
