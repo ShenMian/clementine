@@ -37,10 +37,10 @@ void Camera::render()
 		buffer.drawTexture(f->getTexture(), {0, 0});
 
 	// 输出
-	for(ushort y = 0; y < size.y; y++)
+	for(short y = 0; y < size.y; y++)
 	{
 		Cursor::moveTo(0, y);
-		for(ushort x = 0; x < size.x; x++)
+		for(short x = 0; x < size.x; x++)
 			printf("%s", buffer.at(x, y).getString().c_str());
 	}
 }

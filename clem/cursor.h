@@ -9,7 +9,7 @@ class Cursor
 {
 public:
 	static void moveTo(const Point& pos);
-	static void moveTo(ushort x, ushort y);
+	static void moveTo(short x, short y);
   
 	static void setVisible(bool);
 };

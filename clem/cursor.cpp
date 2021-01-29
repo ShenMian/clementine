@@ -15,9 +15,9 @@ void Cursor::moveTo(const Point& p)
 
 #ifdef OS_UNIX
 
-void Cursor::moveTo(ushort x, ushort y)
+void Cursor::moveTo(short x, short y)
 {
-	printf("\x1b[%u;%uH", x, y);
+	printf("\x1b[%d;%dH", x, y);
 }
 
 void Cursor::setVisible(bool v)

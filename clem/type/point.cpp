@@ -59,3 +59,4 @@ const Point& Point::operator-=(const Vec2& v)
 	y -= v.y;
 	return *this;
 }
+
