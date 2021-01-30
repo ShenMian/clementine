@@ -15,8 +15,8 @@ int main()
 	auto director = Director::getInstance();
 	auto size     = director->getWinSize();
 
-	Scene   scene;
-	Factor  factor(size);
+	Scene  scene;
+	Factor factor(size);
 	scene.addFactor(&factor);
 
 	auto& texture = factor.getTexture();

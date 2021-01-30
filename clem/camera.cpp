@@ -6,10 +6,9 @@
 #include <vector>
 #include <algorithm>
 #include <cassert>
-#include <clem/cursor.h>
+#include "cursor.h"
 #include "scene.h"
 #include "factor.h"
-#include "director.h"
 
 using std::vector;
 
