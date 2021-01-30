@@ -36,12 +36,34 @@ void Camera::render()
 		buffer.drawTexture(f->getTexture(), {0, 0});
 
 	// 输出
+#ifndef OS_WIN
 	for(short y = 0; y < size.y; y++)
 	{
 		Cursor::moveTo(0, y);
 		for(short x = 0; x < size.x; x++)
 			printf("%s", buffer.at(x, y).getString().c_str());
 	}
+#endif
+
+#ifdef OS_WIN
+	static auto lastSize = size;
+	if(lastSize != size)
+		assert(false);
+	static char* buf = new char(size.area());
+	for(short y = 0; y < size.y; y++)
+	{
+		Cursor::moveTo(0, y);
+		for(short x = 0; x < size.x; x++)
+			printf("%s", buffer.at(x, y).getString().c_str());
+	}
+	WriteConsole(
+		Windows::getStdOut(),
+		buf,
+		size.area();
+  	NULL,
+		NULL
+	);
+#endif
 }
 
 void Camera::setScene(Scene* s)

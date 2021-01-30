@@ -13,8 +13,6 @@ void Cursor::moveTo(const Point& p)
 	moveTo(p.x, p.y);
 }
 
-#ifndef OS_WIN
-
 void Cursor::moveTo(short x, short y)
 {
 	printf("\x1b[%d;%dH", y, x);
@@ -23,14 +21,12 @@ void Cursor::moveTo(short x, short y)
 void Cursor::setVisible(bool v)
 {
 	if(v)
-		printf("\e[?25h");
+		printf("\x1b[?25h");
 	else
-		printf("\e[?25l");
+		printf("\x1b[?25l");
 }
 
-#endif // !OS_WIN
-
-#ifdef OS_WIN
+/*
 
 #include "windows.h"
 
@@ -55,4 +51,4 @@ void Cursor::setVisible(bool v)
 		assert(false);
 }
 
-#endif
+*/

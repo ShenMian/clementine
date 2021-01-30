@@ -12,6 +12,7 @@ using namespace std;
 
 int main()
 {
+	Cursor::setVisible(false);
 	auto director = Director::getInstance();
 	auto size     = director->getWinSize();
 
@@ -20,9 +21,10 @@ int main()
 	scene.addFactor(&factor);
 
 	auto& texture = factor.getTexture();
-	texture.drawCycle(Point(size.x / 2, size.y / 2), 10, Tile('*', Fore::green));
-	texture.drawCycle(Point(size.x / 2, size.y / 2), 5, Tile('*', Fore::yellow));
-	texture.drawCycle(Point(size.x / 2, size.y / 2), 2, Tile('*', Fore::red));
+	auto r = min(size.x, size.y) / 2 - 1;
+	texture.drawCycle(Point(size.x / 2, size.y / 2), r, Tile('*', Fore::green));
+	texture.drawCycle(Point(size.x / 2, size.y / 2), r - 1, Tile('*', Fore::yellow));
+	texture.drawCycle(Point(size.x / 2, size.y / 2), r - 2, Tile('*', Fore::red));
 	
 	director->pushScene(&scene);
 	director->run();

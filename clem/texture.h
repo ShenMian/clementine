@@ -19,15 +19,14 @@ public:
 	Texture(Size size);
 	Texture(Size size, const Tile& tile);
 
-	void drawPoint(const Point& pos, const Tile& tile);
+	void drawPoint(const Point&, const Tile&);
 	void drawLine(Point a, Point b, const Tile& t);
-	void drawRect(const Rect& rect, const Tile& t);
-	void drawCycle(const Point& center, ushort radius, const Tile& t);
-	void drawTexture(const Texture& texture, const Point& pos);
+	void drawRect(const Rect&, const Tile& t);
+	void drawCycle(const Point& center, ushort radius, const Tile&);
+	void drawTexture(const Texture&, const Point&);
 
-	const Tile& at(const Point& pos) const;
+	const Tile& at(const Point&) const;
 	const Tile& at(ushort x, ushort y) const;
-	const Tile& operator[](const Point& pos) const;
 
 	const Size& getSize() const;
 	void        setSize(Size size);

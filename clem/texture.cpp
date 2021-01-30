@@ -39,22 +39,18 @@ void Texture::drawPoint(const Point& p, const Tile& t)
 
 void Texture::drawLine(Point a, Point b, const Tile& t)
 {
-	if(a.x > b.x)
-	{
-		auto t = a;
-		a      = b;
-		b      = t;
-	}
-
 	auto  xDis   = b.x - a.x;
 	auto  yDis   = b.y - a.y;
-	float yDelta = yDis / xDis;
+	auto  maxDis = std::max(abs(xDis), abs(yDis));
 
-	float y = a.y;
-	for(auto x = a.x; x <= b.x; x++)
+	float xDelta = xDis / maxDis;
+	float yDelta = yDis / maxDis;
+
+	float x = a.x, y = a.y;
+	for(short i = 1; i <= maxDis; i++)
 	{
-		drawPoint({x, y}, t);
-		y += yDelta;
+		drawPoint(Point(x + 0.5, y + 0.5), t);
+		x += xDelta, y += yDelta;
 	}
 }
 
@@ -126,10 +122,5 @@ const Tile& Texture::at(ushort x, ushort y) const
 const Tile& Texture::at(const Point& p) const
 {
 	return at(p.x, p.y);
-}
-
-const Tile& Texture::operator[](const Point& p) const
-{
-	return at(p);
 }
 
