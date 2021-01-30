@@ -1,35 +1,35 @@
-**en** | [zh]
+**zh** | [en]
 
 # Clementine
-This is a framework for building 2D console games.
+这是一个用于制作2D命令行游戏的框架.
 
 [![License](https://img.shields.io/github/license/ShenMian/Clementine)](https://github.com/ShenMian/Clementine/blob/master/LICENSE)
 [![CodeFactor](https://www.codefactor.io/repository/github/shenmian/clementine/badge)](https://www.codefactor.io/repository/github/shenmian/clementine)
 [![CMake](https://github.com/ShenMian/Clementine/workflows/CMake/badge.svg?branch=master)](https://github.com/ShenMian/Clementine/actions?query=workflow%3ACMake)
 
-## Features
-- Multi-platform: Linux, macOS, Windows, Unix
+## 特点
+- 多平台: Linux, macOS, Windows, Unix
 
-## Goals
-- Conformance
-- Performance
+## 目标
+- 规范
+- 性能
 
-## Build for Linux/macOs/Unix
+## 构建于Linux/macOs/Unix
 ```
 $ git clone https://github.com/ShenMian/Clementine.git
 $ cd Clementine
 $ ./build.sh
 ```
 
-## Build for Windows
+## 构建于Windows
 ```
 $ git clone https://github.com/ShenMian/Clementine.git
 $ cd Clementine
 $ ./build.bat
 ```
 
-## Forums
+## 论坛
 - [**Github Discussions**](https://github.com/ShenMian/Clementine/discussions)  
-- [**Telegram Group**](t.me/programmingzh)  
+- [**Telegram 群组**](t.me/programmingzh)  
 
-[zh]: README_zh-CN.md
+[en]: README.md
