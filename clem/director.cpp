@@ -14,15 +14,11 @@ Director* Director::getInstance()
 	return &instance;
 }
 
-Director::Director()
-		: secPerUpdate(1), paused(false)
-{
-}
-
 void Director::run()
 {
 	if(scenes.empty())
 		assert(false);
+
 	loop();
 }
 
@@ -30,6 +26,7 @@ void Director::pause()
 {
 	if(paused)
 		assert(false);
+
 	paused = true;	
 }
 
@@ -37,6 +34,7 @@ void Director::resume()
 {
 	if(!paused)
 		assert(false);
+
 	paused = false;
 }
 
@@ -44,6 +42,7 @@ void Director::pushScene(Scene* s)
 {
 	if(s == nullptr)
 		assert(false);
+
 	scenes.push_back(s);
 }
 
@@ -51,6 +50,7 @@ void Director::popScene()
 {
 	if(scenes.empty())
 		assert(false);
+
 	scenes.pop_back();
 }
 
@@ -58,6 +58,7 @@ void Director::replaceScene(Scene* s)
 {
 	if(scenes.empty())
 		assert(false);
+
 	scenes.front() = s;
 }
 
@@ -72,6 +73,7 @@ Scene* Director::getCurrentScene() const
 void Director::setSecPerUpdate(float sec)
 {
 	assert(sec > 0);
+
 	secPerUpdate = sec;
 }
 
@@ -80,6 +82,11 @@ void Director::setSecPerUpdate(float sec)
 #include <termios.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
+
+Director::Director()
+		: secPerUpdate(1), paused(false)
+{
+}
 
 Size Director::getWinSize() const
 {
@@ -126,6 +133,14 @@ void Director::loop()
 #endif // !OS_WIN
 
 #ifdef OS_WIN
+
+#include "windows.h"
+
+Director::Director()
+		: secPerUpdate(1), paused(false)
+{
+	Windows::initialize();
+}
 
 Size Director::getWinSize() const
 {

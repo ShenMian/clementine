@@ -11,8 +11,13 @@ Factor::Factor()
 {
 }
 
-Factor::Factor(const Texture& texture)
-		: texture(texture)
+Factor::Factor(const Size& s)
+		: texture(s)
+{
+}
+
+Factor::Factor(const Texture& t)
+		: texture(t)
 {
 }
 
@@ -49,7 +54,7 @@ const Point& Factor::getPosition() const
 	return position;
 }
 
-const Texture& Factor::getTexture() const
+Texture& Factor::getTexture()
 {
 	return texture;
 }

@@ -5,8 +5,8 @@
 #ifndef CLEM_FACTOR_H_
 #define CLEM_FACTOR_H_
 
-#include <vector>
 #include "texture.h"
+#include <vector>
 
 class Scene;
 class Physics;
@@ -16,18 +16,19 @@ class Factor
 {
 public:
 	Factor();
-	Factor(const Texture& texture);
+	Factor(const Size&);
+	Factor(const Texture&);
 
 	virtual void update();
 
-	void           setPosition(const Point&);
-	const Point&   getPosition() const;
+	void         setPosition(const Point&);
+	const Point& getPosition() const;
 
-	void           setTexture(const Texture&);
-	const Texture& getTexture() const;
+	void     setTexture(const Texture&);
+	Texture& getTexture();
 
-	void           addComponent(Component*);
-	void           removeComponent(Component*);
+	void addComponent(Component*);
+	void removeComponent(Component*);
 
 protected:
 	Point position;

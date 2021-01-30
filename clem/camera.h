@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// 场景摄像机
+// 摄像机
 
 #ifndef CLEM_CAMERA_H_
 #define CLEM_CAMERA_H_

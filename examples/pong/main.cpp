@@ -12,28 +12,18 @@ using namespace std;
 
 int main()
 {
-#ifdef OS_WIN
-	// 开启 VT100模式
-	DWORD mode;
-	if(!GetConsoleMode(hStdOut, &mode))
-		assert(false);
-	if(!SetConsoleMode(hStdOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING)) // 开启 VT100模式
-		assert(false);
-#endif
-
 	auto director = Director::getInstance();
 	auto size     = director->getWinSize();
 
-	Texture texture(size);
-	Color   green(Fore::green);
-
-	texture.drawCycle(Point(size.x / 2, size.y / 2), 10, Tile('*', green));
-	
-	Factor factor(texture);
-	
-	Scene scene;
+	Scene   scene;
+	Factor  factor(size);
 	scene.addFactor(&factor);
 
+	auto& texture = factor.getTexture();
+	texture.drawCycle(Point(size.x / 2, size.y / 2), 10, Tile('*', Fore::green));
+	texture.drawCycle(Point(size.x / 2, size.y / 2), 5, Tile('*', Fore::yellow));
+	texture.drawCycle(Point(size.x / 2, size.y / 2), 2, Tile('*', Fore::red));
+	
 	director->pushScene(&scene);
 	director->run();
 }

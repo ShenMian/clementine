@@ -32,9 +32,11 @@ void Cursor::setVisible(bool v)
 
 #ifdef OS_WIN
 
+#include "windows.h"
+
 void Cursor::moveTo(short x, short y)
 {
-	SetConsoleCursorPosition(hStdOut, {x, y});
+	SetConsoleCursorPosition(Windows::getStdOut(), {x, y});
 }
 
 void Cursor::setVisible(bool v)
@@ -42,13 +44,13 @@ void Cursor::setVisible(bool v)
 	CONSOLE_CURSOR_INFO cursorInfo;
 	bool                ret;
 
-	ret = GetConsoleCursorInfo(hStdOut, &cursorInfo);
+	ret = GetConsoleCursorInfo(Windows::getStdOut(), &cursorInfo);
 	if(!ret)
 		assert(false);
 
 	cursorInfo.bVisible = v;
 
-	ret = SetConsoleCursorInfo(hStdOut, &cursorInfo);
+	ret = SetConsoleCursorInfo(Windows::getStdOut(), &cursorInfo);
 	if(!ret)
 		assert(false);
 }

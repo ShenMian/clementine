@@ -37,14 +37,14 @@ void Terminal::Cursor::hide()
 
 #ifdef OS_WIN
 
-#include <cassert>
-#include <windows.h>
+#include <assert.h>
+#include "windows.h"
 
 Size Terminal::getWinSize()
 {
 	CONSOLE_SCREEN_BUFFER_INFO screenInfo;
 	
-	auto ret = GetConsoleScreenBufferInfo(hStdOut, &screenInfo);
+	auto ret = GetConsoleScreenBufferInfo(Windows::getStdOut(), &screenInfo);
 	if(!ret)
 		assert(false);
 
@@ -56,13 +56,13 @@ void Terminal::Cursor::show()
 	CONSOLE_CURSOR_INFO cursorInfo;
 	bool                ret;
 
-	ret = GetConsoleCursorInfo(hStdOut, &cursorInfo);
+	ret = GetConsoleCursorInfo(Windows::getStdOut(), &cursorInfo);
 	if(!ret)
     assert(false);
 
 	cursorInfo.bVisible = TRUE;
 
-	ret = SetConsoleCursorInfo(hStdOut, &cursorInfo);
+	ret = SetConsoleCursorInfo(Windows::getStdOut(), &cursorInfo);
 	if(!ret)
     assert(false);
 }
@@ -72,20 +72,20 @@ void Terminal::Cursor::hide()
 	CONSOLE_CURSOR_INFO cursorInfo;
 	bool                ret;
 
-	ret = GetConsoleCursorInfo(hStdOut, &cursorInfo);
+	ret = GetConsoleCursorInfo(Windows::getStdOut(), &cursorInfo);
 	if(!ret)
     assert(false);
 
 	cursorInfo.bVisible = FALSE;
 
-	ret = SetConsoleCursorInfo(hStdOut, &cursorInfo);
+	ret = SetConsoleCursorInfo(Windows::getStdOut(), &cursorInfo);
 	if(!ret)
     assert(false);
 }
 
 void Terminal::Cursor::moveTo(const Point& pos)
 {
-	SetConsoleCursorPosition(hStdOut, {(short)pos.x, (short)pos.y});
+	SetConsoleCursorPosition(Windows::getStdOut(), {(short)pos.x, (short)pos.y});
 }
 
 void Terminal::Cursor::moveUp(ushort n)
@@ -116,7 +116,7 @@ Point Terminal::Cursor::getCursorPosition()
 {
 	CONSOLE_SCREEN_BUFFER_INFO bufInfo;
 
-	GetConsoleScreenBufferInfo(hStdOut, &bufInfo);
+	GetConsoleScreenBufferInfo(Windows::getStdOut(), &bufInfo);
 
 	return Point(bufInfo.dwCursorPosition.X, bufInfo.dwCursorPosition.Y);
 }

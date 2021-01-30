@@ -31,7 +31,6 @@
 
 #ifdef OS_WIN
 	#include <windows.h>
-	#define hStdOut GetStdHandle(STD_OUTPUT_HANDLE)
 #endif
 
 #endif // CLEM_PLATFORM_H_
