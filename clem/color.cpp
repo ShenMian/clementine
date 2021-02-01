@@ -98,7 +98,7 @@ Color::Color(Fore f, Back b)
 	}
 }
 
-std::string Color::getString() const
+std::string Color::getAnsiCode() const
 {
 	return string(fore) + string(back);
 }

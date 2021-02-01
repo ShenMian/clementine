@@ -44,6 +44,6 @@ const Color& Tile::getColor() const
 
 string Tile::getString() const
 {
-	return color.getString() + ch;
+	return color.getAnsiCode() + ch;
 }
 
