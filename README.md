@@ -14,7 +14,8 @@ This is a framework for building 2D console games.
 - Conformance
 - Performance
 
-## Build for Linux/macOs/Unix
+## Build for Unix
+Also work on Linux and MacOS systems.  
 ```
 $ git clone https://github.com/ShenMian/Clementine.git
 $ cd Clementine

@@ -14,7 +14,8 @@
 - 规范
 - 性能
 
-## 构建于Linux/macOs/Unix
+## 构建于Unix
+同样适用于Linux和MacOS系统.  
 ```
 $ git clone https://github.com/ShenMian/Clementine.git
 $ cd Clementine
