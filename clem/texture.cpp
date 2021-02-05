@@ -32,7 +32,7 @@ Texture::Texture(Size s, const Tile& t)
 void Texture::drawPoint(const Point& p, const Tile& t)
 {
 	if(!(0 <= p.x && p.x < size.x && 0 <= p.y && p.y < size.y))
-		assert(false);
+		;
 
 	tiles[p.x + p.y * size.x] = t;
 	dirty = true;
