@@ -9,8 +9,6 @@
 #include <clem/tile.h>
 #include <clem/type.h>
 
-struct CHAR_INFO;
-
 class Texture
 {
 public:
@@ -38,12 +36,7 @@ private:
 	Size              size;
 	std::vector<Tile> tiles;
 	bool              dirty;
-
-#ifdef OS_UNIX
-	std::string buffer;
-#elif OS_WIN
-	std::vector<CHAR_INFO> buffer;
-#endif
+	std::string       buffer;
 };
 
 #endif // CLEM_TEXTURE_H_

@@ -125,23 +125,8 @@ const Tile& Texture::at(const Point& p) const
 	return at(p.x, p.y);
 }
 
-#ifdef OS_UNIX
-
 void Texture::render()
 {
 	dirty = false;
 }
-
-#elif OS_WIN
-
-#include <windows.h>
-
-void Texture::render()
-{
-	dirty = false;
-
-	// WriteConsoleOutput();
-}
-
-#endif
 
