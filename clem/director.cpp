@@ -139,7 +139,12 @@ void Director::loop()
 Director::Director()
 		: secPerUpdate(1), paused(false)
 {
-	Windows::initialize();
+	auto  hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	DWORD mode;
+	if(!GetConsoleMode(hStdOut, &mode))
+		assert(false);
+	if(!SetConsoleMode(hStdOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING)) // ¿ªÆô VT100Ä£Ê½
+		assert(false);
 }
 
 Size Director::getWinSize() const
