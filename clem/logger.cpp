@@ -3,21 +3,19 @@
 // 日志
 
 #include "logger.h"
-#include <cassert>
 #include <ctime>
+#include <cassert>
+#include <iostream>
 
 using std::map;
 using std::string;
 using std::ofstream;
 
-Logger Log;
-
 map<short, ofstream> Logger::index;
 
 ofstream& Logger::info(const string& msg)
 {
-	assert(index[0].is_open());
-	index[0] << "[INFO] " << msg;
+	index[0] << "[INFO] " << msg << std::endl;
 	return index[0];
 }
 

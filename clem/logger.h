@@ -36,6 +36,4 @@ enum class Level
 	fatal
 };
 
-extern Logger Log;
-
 #endif // !CLEM_LOGGER_H_
