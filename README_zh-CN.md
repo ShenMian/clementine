@@ -8,20 +8,21 @@
 [![CMake](https://github.com/ShenMian/Clementine/workflows/CMake/badge.svg?branch=master)](https://github.com/ShenMian/Clementine/actions?query=workflow%3ACMake)
 
 ## 特点
-- 多平台: Linux, macOS, Windows, Unix
+- 多平台: Linux, macOS, Windows 10
 
 ## 目标
 - 规范
 - 性能
 
-## 构建于Linux/macOs/Unix
+## 构建于Unix
+同样适用于Linux和MacOS系统.  
 ```
 $ git clone https://github.com/ShenMian/Clementine.git
 $ cd Clementine
 $ ./build.sh
 ```
 
-## 构建于Windows
+## 构建于Windows 10
 ```
 $ git clone https://github.com/ShenMian/Clementine.git
 $ cd Clementine

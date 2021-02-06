@@ -15,6 +15,7 @@
 
 #if defined(TARGET_OS_MAC)
 	#define OS_MAC
+	#define OS_UNIX
 #endif
 
 #if defined(__unix__) || defined(unix) || defined(__unix)

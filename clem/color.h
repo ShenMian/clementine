@@ -19,7 +19,7 @@ public:
 	Color(Fore fore);
 	Color(Fore fore, Back back);
 
-	std::string getString() const;
+	std::string getAnsiCode() const;
 
 private:
 	const char* fore;

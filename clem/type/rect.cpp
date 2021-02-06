@@ -16,8 +16,8 @@ Rect::Rect(const Point& p, const Size& size)
 {
 }
 
-Rect::Rect(ushort x, ushort y, ushort width, ushort height)
-		: x(x), y(y), width(width), height(height)
+Rect::Rect(float x, float y, float w, float h)
+		: x(x), y(y), width(w), height(h)
 {
 }
 
@@ -35,3 +35,22 @@ Point Rect::center() const
 {
 	return Point(x + width/2, y - height/2);
 }
+
+Size Rect::size() const
+{
+	return Size(width, height);
+}
+
+bool Rect::contains(const Point& a) const
+{
+	if(x <= a.x && a.x <= right() && y <= a.y && a.y <= bottom())
+		return true;
+	else
+		return false;
+}
+
+bool Rect::contains(const Rect& a) const
+{
+	return true;
+}
+

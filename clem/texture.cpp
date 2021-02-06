@@ -32,9 +32,10 @@ Texture::Texture(Size s, const Tile& t)
 void Texture::drawPoint(const Point& p, const Tile& t)
 {
 	if(!(0 <= p.x && p.x < size.x && 0 <= p.y && p.y < size.y))
-		assert(false);
+		;
 
 	tiles[p.x + p.y * size.x] = t;
+	dirty = true;
 }
 
 void Texture::drawLine(Point a, Point b, const Tile& t)
@@ -113,14 +114,19 @@ void Texture::clear()
 		tiles[i] = Tile();
 }
 
-const Tile& Texture::at(ushort x, ushort y) const
+const Tile& Texture::at(short x, short y) const
 {
-	assert(x < size.x && y < size.y);
+	assert(0 <= x && x < size.x && 0 <= y && y < size.y);
 	return tiles[x + y * size.x];
 }
 
 const Tile& Texture::at(const Point& p) const
 {
 	return at(p.x, p.y);
+}
+
+void Texture::render()
+{
+	dirty = false;
 }
 

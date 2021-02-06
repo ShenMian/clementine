@@ -39,7 +39,7 @@ void Camera::render()
 #ifndef OS_WIN
 	for(short y = 0; y < size.y; y++)
 	{
-		Cursor::moveTo(0, y);
+		Cursor::move(0, y);
 		for(short x = 0; x < size.x; x++)
 			printf("%s", buffer.at(x, y).getString().c_str());
 	}

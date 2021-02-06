@@ -8,20 +8,21 @@ This is a framework for building 2D console games.
 [![CMake](https://github.com/ShenMian/Clementine/workflows/CMake/badge.svg?branch=master)](https://github.com/ShenMian/Clementine/actions?query=workflow%3ACMake)
 
 ## Features
-- Multi-platform: Linux, macOS, Windows, Unix
+- Multi-platform: Linux, macOS, Windows 10
 
 ## Goals
 - Conformance
 - Performance
 
-## Build for Linux/macOs/Unix
+## Build for Unix
+Also work on Linux and MacOS systems.  
 ```
 $ git clone https://github.com/ShenMian/Clementine.git
 $ cd Clementine
 $ ./build.sh
 ```
 
-## Build for Windows
+## Build for Windows 10
 ```
 $ git clone https://github.com/ShenMian/Clementine.git
 $ cd Clementine

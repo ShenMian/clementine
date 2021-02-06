@@ -8,12 +8,18 @@
 #include <assert.h>
 #include <clem/type/point.h>
 
+<<<<<<< HEAD
 void Cursor::moveTo(const Point& p)
 { 
 	moveTo(p.x, p.y);
+=======
+void Cursor::move(const Point& p)
+{
+	move(p.x, p.y);
+>>>>>>> f902c4e6f166cfb60f87350bdb490a4d341da57c
 }
 
-void Cursor::moveTo(short x, short y)
+void Cursor::move(short x, short y)
 {
 	printf("\x1b[%d;%dH", y, x);
 }
@@ -26,29 +32,3 @@ void Cursor::setVisible(bool v)
 		printf("\x1b[?25l");
 }
 
-/*
-
-#include "windows.h"
-
-void Cursor::moveTo(short x, short y)
-{
-	SetConsoleCursorPosition(Windows::getStdOut(), {x, y});
-}
-
-void Cursor::setVisible(bool v)
-{
-	CONSOLE_CURSOR_INFO cursorInfo;
-	bool                ret;
-
-	ret = GetConsoleCursorInfo(Windows::getStdOut(), &cursorInfo);
-	if(!ret)
-		assert(false);
-
-	cursorInfo.bVisible = v;
-
-	ret = SetConsoleCursorInfo(Windows::getStdOut(), &cursorInfo);
-	if(!ret)
-		assert(false);
-}
-
-*/

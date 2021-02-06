@@ -8,8 +8,8 @@ class Point;
 class Cursor
 {
 public:
-	static void moveTo(const Point& pos);
-	static void moveTo(short x, short y);
+	static void move(const Point& pos);
+	static void move(short x, short y);
   
 	static void setVisible(bool);
 };

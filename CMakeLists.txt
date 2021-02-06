@@ -5,7 +5,10 @@ cmake_minimum_required(VERSION 3.5)
 
 set(CMAKE_CXX_STANDARD 14)
 
-project("Clementine")
+project(
+	"Clementine"
+	VERSION 0.0
+	LANGUAGES CXX)
 
 # 设置 编译选项
 # set(CMAKE_BUILD_TYPE Debug)
