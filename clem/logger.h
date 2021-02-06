@@ -14,10 +14,10 @@ enum class Level;
 class Logger
 {
 public:
-	static std::ofstream& info();
-	static std::ofstream& warn();
-	static std::ofstream& error();
-	static std::ofstream& fatal();
+	static std::ofstream& info(const std::string&);
+	static std::ofstream& warn(const std::string&);
+	static std::ofstream& error(const std::string&);
+	static std::ofstream& fatal(const std::string&);
 
 	static void write(short id, Level, const std::string msg);
 
@@ -25,7 +25,7 @@ public:
 	static void remove(short id);
 
 private:
-	// static std::map<short, std::ofstream> index;
+	static std::map<short, std::ofstream> index;
 };
 
 enum class Level

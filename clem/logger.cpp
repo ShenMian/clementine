@@ -6,10 +6,20 @@
 #include <cassert>
 #include <ctime>
 
+using std::map;
 using std::string;
 using std::ofstream;
 
 Logger Log;
+
+map<short, ofstream> Logger::index;
+
+ofstream& Logger::info(const string& msg)
+{
+	assert(index[0].is_open());
+	index[0] << "[INFO] " << msg;
+	return index[0];
+}
 
 void Logger::write(short id, Level level, const string msg)
 {
@@ -43,15 +53,15 @@ void Logger::write(short id, Level level, const string msg)
 		assert(false);
 	}
 
-	// index.at(id) << buf << std::endl;
+	index.at(id) << buf << std::endl;
 }
 
 void Logger::add(short id, const string path)
 {
-	// index.emplace(id, path);
+	index.emplace(id, path);
 }
 
 void Logger::remove(short id)
 {
-	// index.erase(id);
+	index.erase(id);
 }

@@ -22,12 +22,12 @@ int main()
 
 	auto& texture = factor.getTexture();
 	auto r = min(size.x, size.y) / 2 - 1;
-	texture.drawCycle(Point(size.x / 2, size.y / 2), r, Tile('*', Fore::green));
+	texture.drawCycle(Point(size.x / 2, size.y / 2), r,     Tile('*', Fore::green));
 	texture.drawCycle(Point(size.x / 2, size.y / 2), r - 1, Tile('*', Fore::yellow));
 	texture.drawCycle(Point(size.x / 2, size.y / 2), r - 2, Tile('*', Fore::red));
 	
-	Logger::add(0, "test.log");
-	Logger::write(0, Level::info, "It's a simple test.");
+	Logger::add(0, "logger.txt");
+	Logger::info("It's a simple test.");
 
 	director->pushScene(&scene);
 	director->run();
