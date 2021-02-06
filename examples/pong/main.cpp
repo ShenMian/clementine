@@ -26,6 +26,9 @@ int main()
 	texture.drawCycle(Point(size.x / 2, size.y / 2), r - 1, Tile('*', Fore::yellow));
 	texture.drawCycle(Point(size.x / 2, size.y / 2), r - 2, Tile('*', Fore::red));
 	
+	Logger::add(0, "test.log");
+	Logger::write(0, Level::info, "It's a simple test.");
+
 	director->pushScene(&scene);
 	director->run();
 }

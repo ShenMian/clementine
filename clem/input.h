@@ -32,4 +32,4 @@ protected:
 	ushort                       interval = 150; // 重复响应持续相同按键的时间
 };
 
-#endif // CLEM_INPUT_COMPONENT_H_
+#endif // !CLEM_INPUT_COMPONENT_H_

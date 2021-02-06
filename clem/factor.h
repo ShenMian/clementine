@@ -38,4 +38,4 @@ private:
 	std::vector<Component*> components;
 };
 
-#endif // CLEM_FACTOR_H_
+#endif // !CLEM_FACTOR_H_

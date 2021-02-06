@@ -1,17 +1,41 @@
+// Copyright 2020 SMS
+// License(Apache-2.0)
+// 日志
 
 #ifndef CLEM_LOGGER_H_
 #define CLEM_LOGGER_H_
 
+#include <map>
+#include <string>
+#include <fstream>
+
+enum class Level;
+
 class Logger
 {
 public:
-	void   write(short id, std::string msg);
-	static add(short id, std::string path);
-	static remove(short id);
+	static std::ofstream& info();
+	static std::ofstream& warn();
+	static std::ofstream& error();
+	static std::ofstream& fatal();
+
+	static void write(short id, Level, const std::string msg);
+
+	static void add(short id, const std::string path);
+	static void remove(short id);
 
 private:
-	static map<short, std::ofstream> index;
+	// static std::map<short, std::ofstream> index;
 };
 
-#endif // CLEM_LOGGER_H_
+enum class Level
+{
+	info,
+	warn,
+	error,
+	fatal
+};
 
+extern Logger Log;
+
+#endif // !CLEM_LOGGER_H_

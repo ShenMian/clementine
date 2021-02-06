@@ -40,4 +40,4 @@ private:
   ushort depth;
 };
 
-#endif // CLEM_CAMERA_H_
+#endif // !CLEM_CAMERA_H_

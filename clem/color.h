@@ -52,4 +52,4 @@ enum class Back
 	white
 };
 
-#endif // CLEM_COLOR_H_
+#endif // !CLEM_COLOR_H_
