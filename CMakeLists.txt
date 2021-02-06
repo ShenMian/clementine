@@ -26,8 +26,10 @@ include_directories(".")
 # 将 Clementine 编译到 lib 目录
 add_subdirectory("clem")
 
-# 包含其他子项目
-add_subdirectory("examples")
+# 例子
+#if(BUILD_EXAMPLES)
+	add_subdirectory("examples")
+#endif()
 
 # 单元测试
 #if(BUILD_TESTS)
