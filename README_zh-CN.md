@@ -14,20 +14,19 @@
 - 规范
 - 性能
 
-## 构建于Unix
-同样适用于Linux和MacOS系统.  
+## 编译
+
+### 构建脚本
 ```
-$ git clone https://github.com/ShenMian/Clementine.git
-$ cd Clementine
-$ ./build.sh
+> git clone https://github.com/ShenMian/Clementine.git
+> cd Clementine
+> ./build.bat    # Windows 10
+> ./build.sh     # Linux, MacOS
 ```
 
-## 构建于Windows 10
-```
-$ git clone https://github.com/ShenMian/Clementine.git
-$ cd Clementine
-$ ./build.bat
-```
+### CMake 选项 (默认 ON)
+- `BUILD_EXAMPLES` 构建示例
+- `BUILD_TESTS`    构建单元测试
 
 ## 论坛
 - [**Github Discussions**](https://github.com/ShenMian/Clementine/discussions)  

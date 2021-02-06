@@ -14,20 +14,19 @@ This is a framework for building 2D console games.
 - Conformance
 - Performance
 
-## Build for Unix
-Also work on Linux and MacOS systems.  
+## Compiling
+
+### Build Script
 ```
-$ git clone https://github.com/ShenMian/Clementine.git
-$ cd Clementine
-$ ./build.sh
+> git clone https://github.com/ShenMian/Clementine.git
+> cd Clementine
+> ./build.bat    # Windows 10
+> ./build.sh     # Linux, MacOS
 ```
 
-## Build for Windows 10
-```
-$ git clone https://github.com/ShenMian/Clementine.git
-$ cd Clementine
-$ ./build.bat
-```
+### CMake Options (default ON)
+- `BUILD_EXAMPLES` Build the examples
+- `BUILD_TESTS`    Build the unit tests
 
 ## Forums
 - [**Github Discussions**](https://github.com/ShenMian/Clementine/discussions)  
