@@ -14,4 +14,6 @@
 #include <clem/cursor.h>
 #include <clem/color.h>
 
-#endif // CLEM_CLEM_HPP_
+#include <clem/logger.h>
+
+#endif // !CLEM_CLEM_HPP_

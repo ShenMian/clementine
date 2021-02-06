@@ -9,7 +9,7 @@
 #include <clem/type/point.h>
 
 void Cursor::moveTo(const Point& p)
-{
+{ 
 	moveTo(p.x, p.y);
 }
 

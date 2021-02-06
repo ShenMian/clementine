@@ -22,5 +22,5 @@ private:
 	Type type;
 };
 
-#endif // CLEM_EVENT_H_
+#endif // !CLEM_EVENT_H_
 

@@ -21,4 +21,4 @@
 #define assert(expr, msg) ((void)0)
 #endif // NDEBUG
 
-#endif // CLEM_ASSERT_H_
+#endif // !CLEM_ASSERT_H_

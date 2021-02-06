@@ -38,5 +38,5 @@ private:
 	static Director instance;
 };
 
-#endif // CLEM_DIRECTOR_H_
+#endif // !CLEM_DIRECTOR_H_
 
