@@ -11,6 +11,8 @@
 
 enum class Level;
 
+#define LOG_INFO Logger::write(Level::info, __FILE__, __FUNCTION__, __LINE__)
+
 class Logger
 {
 public:
@@ -19,13 +21,10 @@ public:
 	static std::ofstream& error(const std::string&);
 	static std::ofstream& fatal(const std::string&);
 
-	static void write(short id, Level, const std::string msg);
-
-	static void add(short id, const std::string path);
-	static void remove(short id);
+	static void write(Level, const char* filename, const char* funcition, long line);
 
 private:
-	static std::map<short, std::ofstream> index;
+	static std::ofstream file;
 };
 
 enum class Level

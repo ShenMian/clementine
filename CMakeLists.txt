@@ -37,6 +37,6 @@ add_subdirectory("clem")
 	include_directories("googletest/googletest/include")
 	add_subdirectory("googletest")
 	enable_testing()
-	add_subdirectory("test")
+	add_subdirectory("tests")
 #endif()
 

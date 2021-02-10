@@ -5,6 +5,7 @@
 #include "texture.h"
 #include <cassert>
 #include <math.h>
+#include "cursor.h"
 
 Texture::Texture()
 		: Texture(Size(0, 0))
@@ -125,8 +126,12 @@ const Tile& Texture::at(const Point& p) const
 	return at(p.x, p.y);
 }
 
-void Texture::render()
+void Texture::render(Rect& rect)
 {
-	dirty = false;
+	for(short y = 0; y < size.y; y++)
+	{
+		Cursor::move(rect.x, rect.y + y);
+		for(short x = 0; x < size.x; x++)
+			printf("%s", at(x, y).getString().c_str());
+	}
 }
-

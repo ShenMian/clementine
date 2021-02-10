@@ -17,7 +17,7 @@ public:
 	Texture(Size size);
 	Texture(Size size, const Tile& tile);
 
-	void render();
+	void render(Rect&);
 
 	void drawPoint(const Point&, const Tile&);
 	void drawLine(Point a, Point b, const Tile& t);
@@ -33,10 +33,10 @@ public:
 	void        clear();
 
 private:
-	Size              size;
-	std::vector<Tile> tiles;
-	bool              dirty;
-	std::string       buffer;
+	Size                     size;
+	std::vector<Tile>        tiles;
+	bool                     dirty;
+	std::vector<std::string> buffer;
 };
 
 #endif // CLEM_TEXTURE_H_

@@ -35,4 +35,3 @@ bool Size::operator!=(const Size& s) const
 {
 	return !(*this == s);
 }
-

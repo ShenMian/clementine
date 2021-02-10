@@ -166,12 +166,12 @@ void Director::loop()
 	QueryPerformanceFrequency(&freq);
 	QueryPerformanceCounter(&previous);
 
-	const auto interval = (LONGLONG)(secPerUpdate * freq.QuadPart);
+	const long interval = secPerUpdate * freq.QuadPart;
 
 	while(true)
 	{
 		QueryPerformanceCounter(&current);
-		lag += current.QuadPart - previous.QuadPart;
+		lag += (long)(current.QuadPart - previous.QuadPart);
 		previous.QuadPart = current.QuadPart;
 
 		auto scene = getCurrentScene();

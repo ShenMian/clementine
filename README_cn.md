@@ -7,6 +7,8 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/shenmian/clementine/badge)](https://www.codefactor.io/repository/github/shenmian/clementine)
 [![CMake](https://github.com/ShenMian/Clementine/workflows/CMake/badge.svg?branch=master)](https://github.com/ShenMian/Clementine/actions?query=workflow%3ACMake)
 
+![Picture](docs/picture_0.png)  
+
 ## 特点
 - 多平台: Linux, macOS, Windows 10
 

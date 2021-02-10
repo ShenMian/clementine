@@ -3,9 +3,11 @@
 // 字体属性
 
 #include "color.h"
+#include <cstdio>
 #include <cassert>
 
 using std::string;
+using std::printf;
 
 Color::Color()
 		: Color(Fore::white, Back::black)
@@ -96,6 +98,11 @@ Color::Color(Fore f, Back b)
 	default:
 		assert(false); // 无效背景颜色属性
 	}
+}
+
+void Color::on()
+{
+	printf("%s%s", fore, back);
 }
 
 std::string Color::getAnsiCode() const

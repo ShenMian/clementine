@@ -11,23 +11,21 @@ using std::map;
 using std::string;
 using std::ofstream;
 
-map<short, ofstream> Logger::index;
+ofstream Logger::file;
 
 ofstream& Logger::info(const string& msg)
 {
-	index[0] << "[INFO] " << msg << std::endl;
-	return index[0];
+	file << "[INFO] " << msg << std::endl;
+	return file;
 }
 
-void Logger::write(short id, Level level, const string msg)
+void Logger::write(Level level, const char* filename, const char* func, long line)
 {
 	string buf;
 	
-	/*
 	time_t systemTime = std::time(NULL);
 	tm*    localTime  = std::localtime(&systemTime);
 	printf("local time is: %s\n", asctime(localTime));
-	*/
 
 	switch(level)
 	{
@@ -50,16 +48,4 @@ void Logger::write(short id, Level level, const string msg)
 	default:
 		assert(false);
 	}
-
-	index.at(id) << buf << std::endl;
-}
-
-void Logger::add(short id, const string path)
-{
-	index.emplace(id, path);
-}
-
-void Logger::remove(short id)
-{
-	index.erase(id);
 }

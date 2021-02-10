@@ -15,15 +15,26 @@ enum class Back;
 class Color
 {
 public:
+	enum class Type;
+
 	Color();
 	Color(Fore fore);
 	Color(Fore fore, Back back);
+
+	void on();
 
 	std::string getAnsiCode() const;
 
 private:
 	const char* fore;
 	const char* back;
+};
+
+enum class Color::Type
+{
+	palette2,
+	palette16,
+	palette256,
 };
 
 enum class Fore

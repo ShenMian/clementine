@@ -35,13 +35,7 @@ void Camera::render()
 	for(auto f : scene->getFactors())
 		buffer.drawTexture(f->getTexture(), {0, 0});
 
-	// 输出
-	for(short y = 0; y < size.y; y++)
-	{
-		Cursor::move(0, y);
-		for(short x = 0; x < size.x; x++)
-			printf("%s", buffer.at(x, y).getString().c_str());
-	}
+	buffer.render(Rect(outPos, size));
 }
 
 void Camera::setScene(Scene* s)
