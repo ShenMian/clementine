@@ -126,7 +126,7 @@ const Tile& Texture::at(const Point& p) const
 	return at(p.x, p.y);
 }
 
-void Texture::render(Rect& rect)
+void Texture::render(const Rect& rect)
 {
 	for(short y = 0; y < size.y; y++)
 	{

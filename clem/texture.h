@@ -17,7 +17,7 @@ public:
 	Texture(Size size);
 	Texture(Size size, const Tile& tile);
 
-	void render(Rect&);
+	void render(const Rect&);
 
 	void drawPoint(const Point&, const Tile&);
 	void drawLine(Point a, Point b, const Tile& t);
