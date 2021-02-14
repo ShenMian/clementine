@@ -3,15 +3,12 @@
 
 cmake_minimum_required(VERSION 3.5)
 
-set(CMAKE_CXX_STANDARD 14)
+project("Clementine")
 
 option(BUILD_TESTS    "Build unit test files" ON)
 option(BUILD_EXAMPLES "Build examples"        ON)
 
-project(
-	"Clementine"
-	VERSION 0.0
-	LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 14)
 
 # 设置 lib 输出目录
 set(LIBRARY_OUTPUT_PATH ../lib/)
@@ -22,16 +19,16 @@ include_directories(".")
 add_subdirectory("clem")
 
 # 例子
-#if(BUILD_EXAMPLES)
+if(BUILD_EXAMPLES)
 	add_subdirectory("examples")
-#endif()
+endif()
 
 # 单元测试
-#if(BUILD_TESTS)
+if(BUILD_TESTS)
 	# 添加 Google.Test
 	include_directories("googletest/googletest/include")
 	add_subdirectory("googletest")
 	enable_testing()
 	add_subdirectory("tests")
-#endif()
+endif()
 
