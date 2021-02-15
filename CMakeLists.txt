@@ -5,8 +5,8 @@ cmake_minimum_required(VERSION 3.5)
 
 project("Clementine")
 
-option(BUILD_TESTS    "Build unit test files" ON)
 option(BUILD_EXAMPLES "Build examples"        ON)
+option(BUILD_TESTS    "Build unit test files" ON)
 
 set(CMAKE_CXX_STANDARD 14)
 

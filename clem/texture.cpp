@@ -33,7 +33,7 @@ Texture::Texture(Size s, const Tile& t)
 void Texture::drawPoint(const Point& p, const Tile& t)
 {
 	if(!(0 <= p.x && p.x < size.x && 0 <= p.y && p.y < size.y))
-		;
+		return;
 
 	tiles[p.x + p.y * size.x] = t;
 	dirty = true;
@@ -65,9 +65,16 @@ void Texture::drawRect(const Rect& rect, const Tile& t)
 	}
 	for(float i = 0; i < rect.height; i++)
 	{
-		drawPoint(Point(rect.x, rect.y + i), t);
-		drawPoint(Point(rect.x, rect.right() + i), t);
+		drawPoint(Point(rect.x, rect.y - i), t);
+		drawPoint(Point(rect.right(), rect.y - i), t);
 	}
+}
+
+void Texture::drawRectFill(const Rect& rect, const Tile& t)
+{
+  for(int y = 0; y < size.y; y++)
+    for(int x = 0; x < size.x; x++)
+      drawPoint(Point(rect.x + x, rect.y - y), t);
 }
 
 void Texture::drawCycle(const Point& c, ushort r, const Tile& t)

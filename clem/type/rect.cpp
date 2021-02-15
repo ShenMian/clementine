@@ -21,14 +21,49 @@ Rect::Rect(float x, float y, float w, float h)
 {
 }
 
-float Rect::right() const
+float Rect::top() const
 {
-	return x + width;
+  return y;
 }
 
 float Rect::bottom() const
 {
 	return y - height;
+}
+
+float Rect::left() const
+{
+  return x;
+}
+
+float Rect::right() const
+{
+	return x + width;
+}
+
+Point Rect::tl() const
+{
+  return Point(left(), top());
+}
+
+Point Rect::tr() const
+{
+  return Point(right(), top());
+}
+
+Point Rect::bl() const
+{
+  return Point(left(), bottom());
+}
+
+Point Rect::br() const
+{
+  return Point(right(), bottom());
+}
+
+Point Rect::position() const
+{
+  return Point(x, y);
 }
 
 Point Rect::center() const
@@ -41,6 +76,11 @@ Size Rect::size() const
 	return Size(width, height);
 }
 
+float Rect::area() const
+{
+  return width * height;
+}
+
 bool Rect::contains(const Point& a) const
 {
 	if(x <= a.x && a.x <= right() && y <= a.y && a.y <= bottom())
@@ -51,6 +91,9 @@ bool Rect::contains(const Point& a) const
 
 bool Rect::contains(const Rect& a) const
 {
-	return true;
+  if(contains(a.tl()) || contains(a.tr()) || contains(a.bl()) || contains(a.br()))
+	  return true;
+  else
+    return false;
 }
 

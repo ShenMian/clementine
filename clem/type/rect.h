@@ -11,7 +11,12 @@ class Point;
 class Rect
 {
 public:
-	Rect();
+	float x;
+	float y;
+	float width;
+	float height;
+	
+  Rect();
 	Rect(const Point& p, const Size& size);
 	Rect(float x, float y, float width, float height);
 
@@ -25,19 +30,14 @@ public:
 	Point bl() const;
 	Point br() const;
 
-	Size  size() const;
+  Point position() const;
 	Point center() const;
+	Size  size() const;
 	float area() const;
 
 	Rect intsect(const Rect&) const;
 	bool contains(const Point&) const;
 	bool contains(const Rect&) const;
-
-public:
-	float x;
-	float y;
-	float width;
-	float height;
 };
 
 #endif // CLEM_TYPE_RECT_H_

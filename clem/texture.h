@@ -20,8 +20,9 @@ public:
 	void render(const Rect&);
 
 	void drawPoint(const Point&, const Tile&);
-	void drawLine(Point a, Point b, const Tile& t);
-	void drawRect(const Rect&, const Tile& t);
+	void drawLine(Point a, Point b, const Tile&);
+	void drawRect(const Rect&, const Tile&);
+  void drawRectFill(const Rect&, const Tile&);
 	void drawCycle(const Point& center, ushort radius, const Tile&);
 	void drawTexture(const Texture&, const Point&);
 

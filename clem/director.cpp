@@ -84,7 +84,7 @@ void Director::setSecPerUpdate(float sec)
 #include <sys/ioctl.h>
 
 Director::Director()
-		: secPerUpdate(1), paused(false)
+		: paused(false), secPerUpdate(1)
 {
 }
 
@@ -92,7 +92,7 @@ Size Director::getWinSize() const
 {
 	winsize winSize;
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &winSize);
-	return {winSize.ws_col, winSize.ws_row + 1};
+	return Size(winSize.ws_col, winSize.ws_row + 1);
 }
 
 #include <sys/time.h>

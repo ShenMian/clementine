@@ -25,6 +25,7 @@ int main()
 	texture.drawCycle(Point(size.x / 2, size.y / 2), r,     Tile('*', Fore::green));
 	texture.drawCycle(Point(size.x / 2, size.y / 2), r - 1, Tile('*', Fore::yellow));
 	texture.drawCycle(Point(size.x / 2, size.y / 2), r - 2, Tile('*', Fore::red));
+  texture.drawRect(Rect(Point(0, 0), Size(5, 5)), Tile('#', Fore::green));
 
 	director->pushScene(&scene);
 	director->run();

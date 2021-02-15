@@ -13,3 +13,4 @@ public:
   
 	static void setVisible(bool);
 };
+
