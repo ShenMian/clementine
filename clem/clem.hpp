@@ -17,3 +17,4 @@
 #include <clem/logger.h>
 
 #endif // !CLEM_CLEM_HPP_
+

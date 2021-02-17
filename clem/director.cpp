@@ -134,8 +134,6 @@ void Director::loop()
 
 #ifdef OS_WIN
 
-#include "windows.h"
-
 Director::Director()
 		: secPerUpdate(1), paused(false)
 {

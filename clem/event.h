@@ -8,18 +8,20 @@
 class Event
 {
 public:
-	enum class Type
-	{
-		keyboard,
-		gamepad
-	};
-
+	enum class Type;
+    
 	Event(Type type);
 
 	Type getType() const;
 
 private:
 	Type type;
+};
+
+enum class Event::Type
+{
+  keyboard,
+  gamepad
 };
 
 #endif // !CLEM_EVENT_H_
