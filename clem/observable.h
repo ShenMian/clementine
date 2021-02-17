@@ -6,8 +6,7 @@
 #define CLEM_OBSERVABLE_H_
 
 #include <vector>
-
-class Observer;
+#include "observer.h"
 
 class Observable
 {
@@ -26,4 +25,5 @@ private:
 	bool dirty;
 };
 
-#endif // CLEM_OBSERVABLE_H_
+#endif // !CLEM_OBSERVABLE_H_
+

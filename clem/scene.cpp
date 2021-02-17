@@ -9,8 +9,6 @@
 #include "factor.h"
 #include "camera.h"
 
-#include "input.h"
-
 #include <algorithm>
 #include <cassert>
 

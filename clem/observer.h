@@ -5,7 +5,7 @@
 #ifndef CLEM_OBSERVER_H_
 #define CLEM_OBSERVER_H_
 
-#include "observable.h"
+class Observable;
 
 class Observer
 {
@@ -13,4 +13,5 @@ public:
 	virtual void onNotify(const Observable&) = 0;
 };
 
-#endif // CLEM_OBSERVER_H_
+#endif // !CLEM_OBSERVER_H_
+

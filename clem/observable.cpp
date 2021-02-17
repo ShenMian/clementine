@@ -3,7 +3,6 @@
 // 被观察者
 
 #include "observable.h"
-#include "observer.h"
 #include <algorithm>
 #include <cassert>
 

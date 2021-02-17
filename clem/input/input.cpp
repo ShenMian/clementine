@@ -3,8 +3,8 @@
 // 输入
 
 #include "input.h"
-#include "observer.h"
 #include <time.h>
+#include <clem/observable.h>
 
 using std::vector;
 

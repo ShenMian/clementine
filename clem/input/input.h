@@ -7,7 +7,7 @@
 
 #include <map>
 #include <vector>
-#include "observable.h"
+#include <clem/observable.h>
 
 typedef unsigned short ushort;
 typedef ushort         InputEvent;
