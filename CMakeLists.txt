@@ -25,10 +25,7 @@ endif()
 
 # 单元测试
 if(BUILD_TESTS)
-	# 添加 Google.Test
-	include_directories("googletest/googletest/include")
-	add_subdirectory("googletest")
-	enable_testing()
+  enable_testing()
 	add_subdirectory("tests")
 endif()
 
