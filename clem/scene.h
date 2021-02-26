@@ -32,7 +32,8 @@ public:
 
 	void                        addCamera(Camera* cam);
 	void                        removeCamera(Camera* cam);
-	const std::vector<Camera*>& getCameras() const;
+	void                        sortCameras();
+  const std::vector<Camera*>& getCameras() const;
 	Camera*                     getDefaultCamera() const;
 
 private:

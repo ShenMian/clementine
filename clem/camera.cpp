@@ -72,6 +72,8 @@ Size Camera::getSize() const
 void Camera::setDepth(ushort d)
 {
 	depth = d;
+  if(scene)
+    scene->sortCameras();
 }
 
 ushort Camera::getDepth() const

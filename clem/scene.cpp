@@ -2,12 +2,12 @@
 // License(Apache-2.0)
 // 场景
 
-#include <clem/scene.h>
-#include <clem/type.h>
-#include <clem/director.h>
-
+#include "scene.h"
 #include "factor.h"
 #include "camera.h"
+
+#include <clem/type.h>
+#include <clem/director.h>
 
 #include <algorithm>
 #include <cassert>
@@ -52,12 +52,11 @@ const std::vector<Factor*>& Scene::getFactors() const
 void Scene::addCamera(Camera* cam)
 {
 	assert(cam != nullptr);
-	cam->setScene(this);
-
+	
+  cam->setScene(this);
 	auto it = std::lower_bound(cameras.begin(), cameras.end(), cam, [](const Camera* a, const Camera* b) {
 		return a->getDepth() - b->getDepth();
 	});
-
 	cameras.insert(it, cam);
 }
 
@@ -68,6 +67,13 @@ void Scene::removeCamera(Camera* cam)
 		cameras.erase(it);
 	else
 		assert(false);
+}
+
+void Scene::sortCameras()
+{
+  std::sort(cameras.begin(), cameras.end(), [](const Camera* a, const Camera* b) {
+		return a->getDepth() - b->getDepth();
+	});
 }
 
 const vector<Camera*>& Scene::getCameras() const
