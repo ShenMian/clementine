@@ -86,6 +86,13 @@ void Director::setSecPerUpdate(float sec)
 Director::Director()
 		: paused(false), secPerUpdate(1)
 {
+  // 开启 raw 模式
+  termios mode;
+  if(tcgetattr(STDOUT_FILENO, &mode) == -1)
+    assert(false);
+  mode.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+  if(tcsetattr(STDIN_FILENO, TCSAFLUSH, &mode) == -1)
+    assert(false);
 }
 
 Size Director::getWinSize() const
@@ -137,11 +144,12 @@ void Director::loop()
 Director::Director()
 		: secPerUpdate(1), paused(false)
 {
+  // 开启 VT100模式
 	auto  hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	DWORD mode;
 	if(!GetConsoleMode(hStdOut, &mode))
 		assert(false);
-	if(!SetConsoleMode(hStdOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING)) // 开启 VT100模式
+	if(!SetConsoleMode(hStdOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING))
 		assert(false);
 }
 
