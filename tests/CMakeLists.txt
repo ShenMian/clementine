@@ -8,5 +8,6 @@ add_test(
   NAME
     All
   COMMAND
-    ${CMAKE_BINARY_DIR}/test/unit_test
+    ${CMAKE_BINARY_DIR}/tests/unit_test
 )
+
