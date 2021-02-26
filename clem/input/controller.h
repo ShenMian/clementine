@@ -10,7 +10,9 @@
 class Controller : public InputComponent
 {
 public:
-    Controller();
+  Controller();
+
+  void update() override;
 
 private:
 };

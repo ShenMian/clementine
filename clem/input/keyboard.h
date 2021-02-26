@@ -17,6 +17,8 @@ public:
 
   Keyboard();
 
+  void update() override;
+
   void bind(Key, std::function<void()>&);
 
 private:

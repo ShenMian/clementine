@@ -10,9 +10,9 @@
 class InputComponent : public Component
 {
 public:
-    InputComponent();
+  InputComponent();
 
-private:
+  virtual void update() = 0;
 };
 
 #endif // !CLEM_INPUT_COMPONENT_H_
