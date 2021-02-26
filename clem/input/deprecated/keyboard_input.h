@@ -5,7 +5,7 @@
 #ifndef CLEM_KEYBOARD_INPUT_H_
 #define CLEM_KEYBOARD_INPUT_H_
 
-#include "input.h"
+#include "input.h_"
 
 class KeyboardInput : public Input
 {

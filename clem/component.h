@@ -2,6 +2,9 @@
 // License(Apache-2.0)
 // ×é¼þ
 
+#ifndef CLEM_COMPONENT_H_
+#define CLEM_COMPONENT_H_
+
 class Factor;
 
 class Component
@@ -9,18 +12,19 @@ class Component
 public:
 	Component();
 
-	virtual void update();
+	virtual void update() = 0;
 
-	virtual void onEnter();
-	virtual void onExit();
-	virtual void onAdd();
-	virtual void onRemove();
+	virtual void onEnter() = 0;
+	virtual void onExit() = 0;
+	virtual void onAdd() = 0;
+	virtual void onRemove() = 0;
 
 	Factor* getOwner() const;
 	void setOwner(Factor* owner);
 
 protected:
 	Factor* owner;
-
-private:
 };
+
+#endif // !CLEM_COMPONENT_H_
+
