@@ -4,6 +4,7 @@
 
 #include "factor.h"
 #include "scene.h"
+#include "component.h"
 #include <algorithm>
 #include <cassert>
 
@@ -23,6 +24,8 @@ Factor::Factor(const Texture& t)
 
 void Factor::update()
 {
+	for(auto c : components)
+		c->update();
 }
 
 void Factor::addComponent(Component* com)

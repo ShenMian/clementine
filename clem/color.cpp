@@ -100,12 +100,13 @@ Color::Color(Fore f, Back b)
 	}
 }
 
-void Color::on()
+void Color::on() const
 {
 	printf("%s%s", fore, back);
 }
 
 std::string Color::getAnsiCode() const
 {
+	// TODO(SMS): 存在内存访问BUG
 	return string(fore) + string(back);
 }

@@ -139,6 +139,9 @@ void Texture::render(const Rect& rect)
 	{
 		Cursor::move(rect.x, rect.y + y);
 		for(short x = 0; x < size.x; x++)
-			printf("%s", at(x, y).getString().c_str());
+		{
+			at(x, y).getColor().on();
+			printf("%s", at(x, y).getChar());
+		}
 	}
 }

@@ -37,7 +37,6 @@ private:
 	Size                     size;
 	std::vector<Tile>        tiles;
 	bool                     dirty;
-	std::vector<std::string> buffer;
 };
 
 #endif // CLEM_TEXTURE_H_

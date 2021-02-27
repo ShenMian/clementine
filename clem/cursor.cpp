@@ -15,7 +15,7 @@ void Cursor::move(const Point& p)
 
 void Cursor::move(short x, short y)
 {
-	printf("\x1b[%d;%dH", y, x);
+	printf("\x1b[%d;%dH", y + 1, x + 1);
 }
 
 void Cursor::setVisible(bool v)

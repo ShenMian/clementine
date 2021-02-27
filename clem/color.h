@@ -21,7 +21,7 @@ public:
 	Color(Fore fore);
 	Color(Fore fore, Back back);
 
-	void on();
+	void on() const;
 
 	std::string getAnsiCode() const;
 

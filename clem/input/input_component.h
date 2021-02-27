@@ -10,8 +10,6 @@
 class InputComponent : public Component
 {
 public:
-  InputComponent();
-
   virtual void update() = 0;
 };
 
