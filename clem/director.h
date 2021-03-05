@@ -18,9 +18,9 @@ public:
 	void pause();
 	void resume();
 
-	void   pushScene(Scene*);
+	void   pushScene(Scene&);
 	void   popScene();
-	void   replaceScene(Scene*);
+	void   replaceScene(Scene&);
 	Scene* getCurrentScene() const;
 	
 	void setSecPerUpdate(float seconds);

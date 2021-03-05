@@ -38,12 +38,9 @@ void Director::resume()
 	paused = false;
 }
 
-void Director::pushScene(Scene* s)
+void Director::pushScene(Scene& s)
 {
-	if(s == nullptr)
-		assert(false);
-
-	scenes.push_back(s);
+	scenes.push_back(&s);
 }
 
 void Director::popScene()
@@ -54,12 +51,12 @@ void Director::popScene()
 	scenes.pop_back();
 }
 
-void Director::replaceScene(Scene* s)
+void Director::replaceScene(Scene& s)
 {
 	if(scenes.empty())
 		assert(false);
 
-	scenes.front() = s;
+	scenes.front() = &s;
 }
 
 Scene* Director::getCurrentScene() const

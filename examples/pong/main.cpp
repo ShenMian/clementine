@@ -32,6 +32,6 @@ int main()
 	Scene scene;
 	scene.addFactor(&player);
 
-	director->pushScene(&scene);
+	director->pushScene(scene);
 	director->run();
 }
