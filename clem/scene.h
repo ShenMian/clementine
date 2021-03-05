@@ -36,6 +36,8 @@ public:
   const std::vector<Camera*>& getCameras() const;
 	Camera*                     getDefaultCamera() const;
 
+	Scene(const Scene&) = delete;
+
 private:
 	void updateFactors();
 	void updatePhysics();

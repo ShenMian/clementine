@@ -10,23 +10,28 @@
 
 using namespace std;
 
+#include <clem/input/keyboard.h>
+
 int main()
 {
 	Cursor::setVisible(false);
 	auto director = Director::getInstance();
 	auto size     = director->getWinSize();
 
-	Scene  scene;
 	Factor factor(size);
-	scene.addFactor(&factor);
 
-	auto& texture = factor.getTexture();
-	auto r = min(size.x, size.y) / 2 - 1;
-	texture.drawCycle(Point(size.x / 2, size.y / 2), r,     Tile('*', Fore::green));
-	texture.drawCycle(Point(size.x / 2, size.y / 2), r - 1, Tile('*', Fore::yellow));
-	texture.drawCycle(Point(size.x / 2, size.y / 2), r - 2, Tile('*', Fore::red));
-  texture.drawRect(Rect(Point(0, 0), Size(5, 5)), Tile('#', Fore::green));
+	Factor player(Tile('@', Fore::green));
+	/*
+	Keyboard keyboard;
+	keyboard.bind(Keyboard::Key::right, [&player]() {
+		player.setPosition(player.getPosition() + Point(0, 1));
+	});
 
-	director->pushScene(&scene);
+	player.addComponent(&keyboard);
+	*/
+	Scene scene;
+	scene.addFactor(&player);
+
+	director->pushScene(scene);
 	director->run();
 }
