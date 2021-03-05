@@ -11,6 +11,7 @@
 #include <clem/camera.h>
 #include <clem/factor.h>
 
+#include <clem/terminal.h>
 #include <clem/cursor.h>
 #include <clem/color.h>
 
