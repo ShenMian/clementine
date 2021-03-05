@@ -36,7 +36,6 @@ void Texture::drawPoint(const Point& p, const Tile& t)
 		return;
 
 	tiles[p.x + p.y * size.x] = t;
-	dirty = true;
 }
 
 void Texture::drawLine(Point a, Point b, const Tile& t)
@@ -141,7 +140,7 @@ void Texture::render(const Rect& rect)
 		for(short x = 0; x < size.x; x++)
 		{
 			at(x, y).getColor().on();
-			printf("%s", at(x, y).getChar());
+			printf("%c", at(x, y).getChar());
 		}
 	}
 }
