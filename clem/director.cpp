@@ -67,21 +67,46 @@ Scene* Director::getCurrentScene() const
 		return nullptr;
 }
 
-void Director::setSecPerUpdate(float sec)
+void Director::setMsPerUpdate(long ms)
 {
-	assert(sec > 0);
+	assert(ms > 0);
 
-	secPerUpdate = sec;
+	msPerUpdate = ms;
 }
 
-#ifndef OS_WIN
+void Director::loop()
+{
+	long current, previous, lag = 0;
+	previous = getCurrentMillSecond();
+
+	while(true)
+	{
+		current = getCurrentMillSecond();
+		lag += current - previous;
+		previous = current;
+
+		auto scene = getCurrentScene();
+		if(paused || scene == nullptr)
+			continue;
+
+		while(lag >= msPerUpdate)
+		{
+			scene->update();
+			lag -= msPerUpdate;
+		}
+
+		scene->render();
+	}
+}
+
+#ifdef OS_UNIX
 
 #include <termios.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
 
 Director::Director()
-		: paused(false), secPerUpdate(1)
+		: paused(false), msPerUpdate(16)
 {
   // 开启 raw 模式
   termios mode;
@@ -101,49 +126,23 @@ Size Director::getWinSize() const
 
 #include <sys/time.h>
 
-long getCurrentMillSecond()
+long Director::getCurrentMillSecond() const
 {
 	struct timeval t;
 	gettimeofday(&t, NULL);
-	return t.tv_sec * 1000 + t.tv_usec * 0.001; // milliseconds
+	return t.tv_sec * 1000 + t.tv_usec * 0.001;
 }
 
-void Director::loop()
-{
-	long current, previous, lag = 0;
-	previous = getCurrentMillSecond();
-
-	while(true)
-	{
-		if(paused)
-			continue;
-
-		auto scene = getCurrentScene();
-		if(scene == nullptr)
-			continue;
-
-		current = getCurrentMillSecond();
-
-		if(lag >= secPerUpdate / 1000)
-		{
-			scene->update();
-			lag -= secPerUpdate;
-		}
-
-		scene->render();
-	}
-}
-
-#endif // !OS_WIN
+#endif // OS_UNIX
 
 #ifdef OS_WIN
 
 Director::Director()
-		: secPerUpdate(1), paused(false)
+		: paused(false), msPerUpdate(16)
 {
   // 开启 VT100模式
-	auto  hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	DWORD mode;
+	const auto hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	DWORD      mode;
 	if(!GetConsoleMode(hStdOut, &mode))
 		assert(false);
 	if(!SetConsoleMode(hStdOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING))
@@ -162,6 +161,18 @@ Size Director::getWinSize() const
 	return Size(screenInfo.srWindow.Right + 1, screenInfo.srWindow.Bottom + 1);
 }
 
+long Director::getCurrentMillSecond() const
+{
+	LARGE_INTEGER freq;
+	BOOL          ret = QueryPerformanceFrequency(&freq);
+	assert(ret != 0);
+
+	LARGE_INTEGER time;
+	QueryPerformanceCounter(&time);
+	return time.QuadPart * 1000000 / freq.QuadPart;
+}
+
+/*
 void Director::loop()
 {
 	LARGE_INTEGER current, previous, freq;
@@ -190,5 +201,6 @@ void Director::loop()
 		scene->render();
 	}
 }
+*/
 
 #endif // OS_WIN

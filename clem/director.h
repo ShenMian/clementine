@@ -23,17 +23,18 @@ public:
 	void   replaceScene(Scene&);
 	Scene* getCurrentScene() const;
 	
-	void setSecPerUpdate(float seconds);
+	void setMsPerUpdate(long ms);
 
 	Size getWinSize() const;
 
 private:
 	Director();
 	void loop();
+	long getCurrentMillSecond() const;
 
 	std::vector<Scene*> scenes;
 	bool                paused;
-	float               secPerUpdate;
+	float               msPerUpdate;
 
 	static Director instance;
 };

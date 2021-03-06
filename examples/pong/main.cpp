@@ -24,15 +24,18 @@ int main()
 
 	Keyboard keyboard;
 	keyboard.bind(Keyboard::Key::esc, [&player](bool state) {
-		printf("KEY STATE CHANGED\n");
-		player.setPosition(player.getPosition() + Point(0, 1));
+		if(state)
+			printf("KEY DOWN\n");
+		else
+			printf("KEY UP\n");
+		// player.setPosition(player.getPosition() + Point(0, 1));
 	});
-
 	player.addComponent(keyboard);
-
+	
 	Scene scene;
-	scene.addFactor(&player);
+	scene.addFactor(player);
 
+	director->setMsPerUpdate(16);
 	director->pushScene(scene);
 	director->run();
 }
