@@ -57,6 +57,11 @@ const Point& Factor::getPosition() const
 	return position;
 }
 
+void Factor::setVelocity(const Vec2& v)
+{
+	velocity = v;
+}
+
 Texture& Factor::getTexture()
 {
 	return texture;

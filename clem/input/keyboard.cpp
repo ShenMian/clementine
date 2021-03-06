@@ -5,9 +5,16 @@
 #include "keyboard.h"
 #include "clem/platform.h"
 
-void Keyboard::bind(Key key, std::function<void()> callback)
+void Keyboard::bind(Key key, std::function<void(bool)> callback)
 {
-	onPressed.insert({key, callback});
+	callbacks[key] = callback;
+	keyStates[key] = false;
+}
+
+void Keyboard::clear()
+{
+	callbacks.clear();
+	keyStates.clear();
 }
 
 #ifdef OS_UNIX
@@ -24,18 +31,20 @@ void Keyboard::update()
 
 #ifdef OS_WIN
 
-#include <windows.h>
-
 Keyboard::Keyboard()
 {
 }
 
 void Keyboard::update()
 {
-	for(auto& pair : onPressed)
-		if(GetAsyncKeyState(static_cast<short>(pair.first)) & 0x8000)
-      pair.second();
+	for(auto& i : callbacks)
+	{
+		bool state = GetAsyncKeyState(static_cast<int>(i.first)) & 0x8000;
+		if(state == keyStates[i.first])
+			continue;
+		keyStates[i.first] = state;
+		i.second(state);
+	}
 }
 
 #endif // OS_WIN
-

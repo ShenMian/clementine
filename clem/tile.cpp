@@ -42,8 +42,3 @@ const Color& Tile::getColor() const
 	return color;
 }
 
-string Tile::getString() const
-{
-	return color.getAnsiCode() + ch;
-}
-

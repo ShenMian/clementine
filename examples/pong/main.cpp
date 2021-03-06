@@ -16,26 +16,25 @@ int main()
 {
 	Cursor::setVisible(false);
 	auto director = Director::getInstance();
-	auto size     = director->getWinSize();
 
-	// Factor factor(size);
-	// Factor player(Tile('@', Fore::green));
-	Factor player;
+	Scene scene;
 
+	//Factor   player; 
+	Factor player(Tile('@', Fore::green));
 	Keyboard keyboard;
-	keyboard.bind(Keyboard::Key::esc, [&player](bool state) {
+	keyboard.bind(Keyboard::Key::left, [&player](bool state) {
 		if(state)
-			printf("KEY DOWN\n");
-		else
-			printf("KEY UP\n");
-		// player.setPosition(player.getPosition() + Point(0, 1));
+			player.setPosition(player.getPosition() + Point(-1, 0));
+	});
+	keyboard.bind(Keyboard::Key::right, [&player](bool state) {
+		if(state)
+			player.setPosition(player.getPosition() + Point(1, 0));
 	});
 	player.addComponent(keyboard);
+	player.setPosition({10, 5});
 	
-	Scene scene;
 	scene.addFactor(player);
 
-	director->setMsPerUpdate(16);
 	director->pushScene(scene);
 	director->run();
 }

@@ -24,16 +24,12 @@ Camera::Camera(Scene* s)
 
 void Camera::render()
 {
-	static Texture buffer;
-
-	// 渲染
-	if(buffer.getSize() != size)
-		buffer.setSize(size);
+	Texture buffer(size);
 
 	Rect inputRect(inPos, size);
 
 	for(auto f : scene->getFactors())
-		buffer.drawTexture(f->getTexture(), {0, 0});
+		buffer.drawTexture(f->getTexture(), f->getPosition());
 
 	buffer.render(Rect(outPos, size));
 }

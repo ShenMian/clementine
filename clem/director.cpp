@@ -7,6 +7,8 @@
 #include "scene.h"
 #include "platform.h"
 
+#include "cursor.h"
+
 Director Director::instance;
 
 Director* Director::getInstance()
@@ -16,9 +18,6 @@ Director* Director::getInstance()
 
 void Director::run()
 {
-	if(scenes.empty())
-		assert(false);
-
 	loop();
 }
 
@@ -76,26 +75,39 @@ void Director::setMsPerUpdate(long ms)
 
 void Director::loop()
 {
-	long current, previous, lag = 0;
+	long current, previous;
+	long updateLag = 0, fpsLag = 0;
 	previous = getCurrentMillSecond();
 
 	while(true)
 	{
 		current = getCurrentMillSecond();
-		lag += current - previous;
+		updateLag += current - previous;
+		fpsLag    += current - previous;
 		previous = current;
 
 		auto scene = getCurrentScene();
 		if(paused || scene == nullptr)
 			continue;
 
-		while(lag >= msPerUpdate)
+		while(updateLag >= msPerUpdate)
 		{
 			scene->update();
-			lag -= msPerUpdate;
+			updateLag -= msPerUpdate;
 		}
 
 		scene->render();
+
+		static int fps    = 0;
+		static int frames = 0;
+		frames++;
+		if(fpsLag >= 1000)
+		{
+			fps    = frames;
+			frames = fpsLag = 0;
+		}
+		Cursor::move(114, 29);
+		printf("%d FPS", fps);
 	}
 }
 
@@ -173,7 +185,7 @@ long Director::getCurrentMillSecond() const
 
 	LARGE_INTEGER time;
 	QueryPerformanceCounter(&time);
-	return time.QuadPart * 1000000 / freq.QuadPart;
+	return time.QuadPart * 1000 / freq.QuadPart;
 }
 
 /*

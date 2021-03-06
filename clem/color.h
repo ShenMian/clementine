@@ -23,11 +23,9 @@ public:
 
 	void on() const;
 
-	std::string getAnsiCode() const;
-
 private:
-	const char* fore;
-	const char* back;
+	Fore fore;
+	Back back;
 };
 
 enum class Color::Type
