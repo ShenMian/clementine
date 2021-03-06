@@ -3,7 +3,7 @@
 //
 
 #include <vector>
-#include "physics_body.h"
+#include "body.h"
 
 class PhysicsWorld
 {

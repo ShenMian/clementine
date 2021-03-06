@@ -7,7 +7,7 @@
 
 #include <vector>
 #include "type.h"
-#include "physics_shape.h"
+#include "shape.h"
 
 class PhysicsBody
 {
