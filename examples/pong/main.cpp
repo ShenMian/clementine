@@ -18,17 +18,18 @@ int main()
 	auto director = Director::getInstance();
 	auto size     = director->getWinSize();
 
-	Factor factor(size);
+	// Factor factor(size);
+	// Factor player(Tile('@', Fore::green));
+	Factor player;
 
-	Factor player(Tile('@', Fore::green));
-	/*
 	Keyboard keyboard;
-	keyboard.bind(Keyboard::Key::right, [&player]() {
+	keyboard.bind(Keyboard::Key::esc, [&player](bool state) {
+		printf("KEY STATE CHANGED\n");
 		player.setPosition(player.getPosition() + Point(0, 1));
 	});
 
-	player.addComponent(&keyboard);
-	*/
+	player.addComponent(keyboard);
+
 	Scene scene;
 	scene.addFactor(&player);
 

@@ -23,15 +23,15 @@ public:
 	void update();
 	void render();
 
-	void                        addFactor(Factor*);
-	void                        removeFactor(Factor*);
+	void                        addFactor(Factor&);
+	void                        removeFactor(Factor&);
 	const std::vector<Factor*>& getFactors() const;
 
 	void      setPhysics(Physics* p);
 	Physics*  getPhysics() const;
 
-	void                        addCamera(Camera* cam);
-	void                        removeCamera(Camera* cam);
+	void                        addCamera(Camera& cam);
+	void                        removeCamera(Camera& cam);
 	void                        sortCameras();
   const std::vector<Camera*>& getCameras() const;
 	Camera*                     getDefaultCamera() const;
@@ -47,4 +47,4 @@ private:
 	std::vector<Factor*> factors;
 };
 
-#endif // CLEM_SCENE_H_
+#endif // !CLEM_SCENE_H_

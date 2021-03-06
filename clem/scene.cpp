@@ -21,7 +21,7 @@ Scene::Scene()
   // 添加默认摄像机
 	defaultCamera = new Camera();
 	defaultCamera->setSize(director->getWinSize());
-	addCamera(defaultCamera);
+	addCamera(*defaultCamera);
 }
 
 Scene::~Scene()
@@ -29,15 +29,14 @@ Scene::~Scene()
 	delete defaultCamera;
 }
 
-void Scene::addFactor(Factor* f)
+void Scene::addFactor(Factor& f)
 {
-	assert(f != nullptr);
-	factors.push_back(f);
+	factors.push_back(&f);
 }
 
-void Scene::removeFactor(Factor* f)
+void Scene::removeFactor(Factor& f)
 {
-	auto it = std::find(factors.begin(), factors.end(), f);
+	auto it = std::find(factors.begin(), factors.end(), &f);
 	if(it != factors.end())
 		factors.erase(it);
 	else
@@ -49,20 +48,18 @@ const std::vector<Factor*>& Scene::getFactors() const
 	return factors;
 }
 
-void Scene::addCamera(Camera* cam)
+void Scene::addCamera(Camera& cam)
 {
-	assert(cam != nullptr);
-	
-  cam->setScene(this);
-	auto it = std::lower_bound(cameras.begin(), cameras.end(), cam, [](const Camera* a, const Camera* b) {
+  cam.setScene(this);
+	auto it = std::lower_bound(cameras.begin(), cameras.end(), &cam, [](const Camera* a, const Camera* b) {
 		return a->getDepth() - b->getDepth();
 	});
-	cameras.insert(it, cam);
+	cameras.insert(it, &cam);
 }
 
-void Scene::removeCamera(Camera* cam)
+void Scene::removeCamera(Camera& cam)
 {
-	auto it = std::find(cameras.begin(), cameras.end(), cam);
+	auto it = std::find(cameras.begin(), cameras.end(), &cam);
 	if(it != cameras.end())
 		cameras.erase(it);
 	else
