@@ -27,8 +27,8 @@ public:
 	void     setTexture(const Texture&);
 	Texture& getTexture();
 
-	void addComponent(Component*);
-	void removeComponent(Component*);
+	void addComponent(Component&);
+	void removeComponent(Component&);
 
 protected:
 	Point position;

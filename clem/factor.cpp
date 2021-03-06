@@ -28,14 +28,14 @@ void Factor::update()
 		c->update();
 }
 
-void Factor::addComponent(Component* com)
+void Factor::addComponent(Component& com)
 {
-	components.push_back(com);
+	components.push_back(&com);
 }
 
-void Factor::removeComponent(Component* com)
+void Factor::removeComponent(Component& com)
 {
-	auto it = std::find(components.begin(), components.end(), com);
+	auto it = std::find(components.begin(), components.end(), &com);
 	if(it != components.end())
 		components.erase(it);
 	else
