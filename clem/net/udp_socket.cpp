@@ -14,7 +14,11 @@ bool UdpSocket::bind(const Address& addr)
 
 void UdpSocket::write(const void* buf, size_t size, const Address& addr)
 {
-	auto n = sendto(socket, buf, size, addr.getSockaddr(), addr.getSize());
+#ifdef OS_UNIX
+	auto n = sendto(socket, buf, size, 0, &addr.getSockaddr(), addr.getSize());
+#else
+	auto n = sendto(socket, buf, size, &addr.getSockaddr(), addr.getSize());
+#endif
 }
 
 void UdpSocket::write(const string& buf, const Address& addr)

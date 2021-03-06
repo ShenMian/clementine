@@ -22,7 +22,7 @@ public:
 	void read(std::string& buf, const Address& addr);
 
 private:
-	SOCKET socket;
+	socket_t socket;
 };
 
 #endif // !CLEM_NET_UDP_SOCKET_H_

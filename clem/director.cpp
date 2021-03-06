@@ -73,6 +73,8 @@ void Director::setMsPerUpdate(long ms)
 	msPerUpdate = ms;
 }
 
+#include <stdio.h>
+
 void Director::loop()
 {
 	long current, previous;

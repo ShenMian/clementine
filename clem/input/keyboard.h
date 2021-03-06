@@ -29,6 +29,10 @@ private:
 #ifdef OS_UNIX
 enum class Keyboard::Key
 {
+	left,
+	right,
+	up,
+	down,
 };
 #endif
 

@@ -1,60 +1,62 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ºÐÐÎÅö×²Ìå
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½
 
 #include "shape_box.h"
+#include "clem/type.h"
 
-PhysicsShapeBox(float x, float y, float w, float h)
+PhysicsShapeBox::PhysicsShapeBox(float x, float y, float w, float h)
 		: x(x), y(y), width(w), height(h)
 {
 }
 
-float Rect::top() const
+float PhysicsShapeBox::top() const
 {
 	return y;
 }
 
-float Rect::bottom() const
+float PhysicsShapeBox::bottom() const
 {
 	return y - height;
 }
 
-float Rect::left() const
+float PhysicsShapeBox::left() const
 {
 	return x;
 }
 
-float Rect::right() const
+float PhysicsShapeBox::right() const
 {
 	return x + width;
 }
 
-Point Rect::tl() const
+Point PhysicsShapeBox::tl() const
 {
 	return Point(left(), top());
 }
 
-Point Rect::tr() const
+Point PhysicsShapeBox::tr() const
 {
 	return Point(right(), top());
 }
 
-Point Rect::bl() const
+Point PhysicsShapeBox::bl() const
 {
 	return Point(left(), bottom());
 }
 
-Point Rect::br() const
+Point PhysicsShapeBox::br() const
 {
 	return Point(right(), bottom());
 }
 
-Point Rect::center() const
+Point PhysicsShapeBox::center() const
 {
 	return Point(x + width / 2, y - height / 2);
 }
 
-Size Rect::size() const
+Size PhysicsShapeBox::size() const
 {
 	return Size(width, height);
 }
+
