@@ -108,12 +108,16 @@ void Director::loop()
 Director::Director()
 		: paused(false), msPerUpdate(16)
 {
-  // ø™∆Ù raw ƒ£ Ω
+  // ÂºÄÂêØ raw Ê®°Âºè
   termios mode;
   if(tcgetattr(STDOUT_FILENO, &mode) == -1)
-    assert(false);
-  mode.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
-  if(tcsetattr(STDIN_FILENO, TCSAFLUSH, &mode) == -1)
+		assert(false);
+	mode.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+	mode.c_cflag |= (CS8);
+	mode.c_lflag &= ~(ECHO | ICANON | IEXTEN);
+	mode.c_cc[VMIN]  = 0;
+	mode.c_cc[VTIME] = 0;
+	if(tcsetattr(STDIN_FILENO, TCSAFLUSH, &mode) == -1)
     assert(false);
 }
 
@@ -140,7 +144,7 @@ long Director::getCurrentMillSecond() const
 Director::Director()
 		: paused(false), msPerUpdate(16)
 {
-  // ø™∆Ù VT100ƒ£ Ω
+  // ÂºÄÂêØ VT100Ê®°Âºè
 	const auto hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	DWORD      mode;
 	if(!GetConsoleMode(hStdOut, &mode))
