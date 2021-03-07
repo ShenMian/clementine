@@ -78,6 +78,8 @@ short Director::getFramesPerSecond() const
 	return framesPerSecond;
 }
 
+#include <stdio.h>
+
 void Director::loop()
 {
 	long current, previous;

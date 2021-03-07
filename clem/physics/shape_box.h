@@ -34,3 +34,4 @@ private:
 };
 
 #endif // !CLEM_PHYSICS_SHAPE_BOX_H_
+
