@@ -23,7 +23,8 @@ public:
 	void   replaceScene(Scene&);
 	Scene* getCurrentScene() const;
 	
-	void setMsPerUpdate(long ms);
+	void  setMsPerUpdate(long ms);
+	short getFramesPerSecond() const;
 
 	Size getWinSize() const;
 
@@ -35,6 +36,7 @@ private:
 	std::vector<Scene*> scenes;
 	bool                paused;
 	float               msPerUpdate;
+	short               framesPerSecond;
 
 	static Director instance;
 };

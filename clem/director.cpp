@@ -73,11 +73,18 @@ void Director::setMsPerUpdate(long ms)
 	msPerUpdate = ms;
 }
 
+short Director::getFramesPerSecond() const
+{
+	return framesPerSecond;
+}
+
 void Director::loop()
 {
 	long current, previous;
 	long updateLag = 0, fpsLag = 0;
 	previous = getCurrentMillSecond();
+
+	short frames = 0;
 
 	while(true)
 	{
@@ -96,18 +103,17 @@ void Director::loop()
 			updateLag -= msPerUpdate;
 		}
 
-		scene->render();
-
-		static int fps    = 0;
-		static int frames = 0;
 		frames++;
 		if(fpsLag >= 1000)
 		{
-			fps    = frames;
+			framesPerSecond = frames;
 			frames = fpsLag = 0;
 		}
-		Cursor::move(114, 29);
-		printf("%d FPS", fps);
+
+		scene->render();
+
+		Cursor::move(111, 29);
+		printf("%4d FPS", getFramesPerSecond());
 	}
 }
 
