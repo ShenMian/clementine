@@ -30,6 +30,8 @@ bool Terminal::getch(char& c)
 
 #include <windows.h>
 
+#include <conio.h>
+
 bool Terminal::getch(char& c)
 {
   char  buf[1];
@@ -37,7 +39,7 @@ bool Terminal::getch(char& c)
 
   if(!_kbhit())
     return false;
-  if(!ReadFile(, buf, 1, &n, nullptr))
+  if(!ReadFile(GetStdHandle(STD_INPUT_HANDLE), buf, 1, &n, nullptr))
     assert(false);
   if(n != 1)
     assert(false);
