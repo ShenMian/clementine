@@ -6,7 +6,6 @@
 
 #include "clem/platform.h"
 
-#include "clem/assert.h"
 #include "clem/log.h"
 
 #include "clem/director.h"
