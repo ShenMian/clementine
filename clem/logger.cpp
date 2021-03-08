@@ -11,15 +11,30 @@ using std::map;
 using std::string;
 using std::ofstream;
 
-ofstream Logger::file;
+ofstream Log::file;
 
-ofstream& Logger::info(const string& msg)
+ofstream& Log::info(const string& msg)
 {
 	file << "[INFO] " << msg << std::endl;
 	return file;
 }
 
-void Logger::write(Level level, const char* filename, const char* func, long line)
+std::ofstream& Log::warn(const std::string&)
+{
+	return file;
+}
+
+std::ofstream& Log::error(const std::string&)
+{
+	return file;
+}
+
+std::ofstream& Log::fatal(const std::string&)
+{
+	return file;
+}
+
+void Log::write(Level level, const char* filename, const char* func, size_t line)
 {
 	string buf;
 	
