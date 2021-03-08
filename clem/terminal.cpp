@@ -10,6 +10,10 @@
 #include <sys/ioctl.h>
 #include <cerrno>
 
+void Terminal::setTitle(const std::string&)
+{
+}
+
 bool Terminal::getch(char& c)
 {
   char buf[1];
@@ -31,6 +35,11 @@ bool Terminal::getch(char& c)
 #include <windows.h>
 
 #include <conio.h>
+
+void Terminal::setTitle(const std::string& str)
+{
+	SetConsoleTitleA(str.c_str());
+}
 
 bool Terminal::getch(char& c)
 {

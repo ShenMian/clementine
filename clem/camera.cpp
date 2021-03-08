@@ -29,9 +29,19 @@ void Camera::render()
 	Rect inputRect(inPos, size);
 
 	for(auto f : scene->getFactors())
-		buffer.drawTexture(f->getTexture(), f->getPosition());
+		if(inputRect.contains(Rect(f->getPosition(), f->getTexture().getSize())))
+			buffer.drawTexture(f->getTexture(), f->getPosition());
 
-	buffer.render(Rect(outPos, size));
+	auto& buf = buffer.getTiles();
+	for(ushort y = 0; y < size.y; y++)
+	{
+		Cursor::move(0, y);
+		for(ushort x = 0; x < size.x; x++)
+		{
+			buf[y * size.x + x].getColor().on();
+			printf("%c", buf[y * size.x + x].getChar());
+		}
+	}
 }
 
 void Camera::setScene(Scene* s)

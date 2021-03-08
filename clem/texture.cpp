@@ -121,6 +121,11 @@ void Texture::clear()
 		tiles[i] = Tile();
 }
 
+const std::vector<Tile>& Texture::getTiles() const
+{
+	return tiles;
+}
+
 const Tile& Texture::at(short x, short y) const
 {
 	assert(0 <= x && x < size.x && 0 <= y && y < size.y);

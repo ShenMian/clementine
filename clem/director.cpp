@@ -2,12 +2,15 @@
 // License(Apache-2.0)
 
 #include "director.h"
+#include "log.h"
+#include "platform.h"
+#include "scene.h"
 #include <cassert>
 #include <chrono>
-#include "scene.h"
-#include "platform.h"
+#include <thread>
 
-#include "cursor.h"
+using std::chrono::milliseconds;
+using std::this_thread::sleep_for;
 
 Director Director::instance;
 
@@ -18,22 +21,19 @@ Director* Director::getInstance()
 
 void Director::run()
 {
+	if(scenes.empty())
+		assert(false);
+
 	loop();
 }
 
 void Director::pause()
 {
-	if(paused)
-		assert(false);
-
 	paused = true;	
 }
 
 void Director::resume()
 {
-	if(!paused)
-		assert(false);
-
 	paused = false;
 }
 
@@ -44,7 +44,7 @@ void Director::pushScene(Scene& s)
 
 void Director::popScene()
 {
-	if(scenes.empty())
+	if(scenes.size() <= 1)
 		assert(false);
 
 	scenes.pop_back();
@@ -78,8 +78,6 @@ short Director::getFramesPerSecond() const
 	return framesPerSecond;
 }
 
-#include <stdio.h>
-
 void Director::loop()
 {
 	long current, previous, dt;
@@ -91,38 +89,49 @@ void Director::loop()
 		dt       = current - previous;
 		previous = current;
 
-		auto scene = getCurrentScene();
-		if(paused || scene == nullptr)
-			continue;
-
-		static long updateLag = 0;
-		updateLag += dt;
-		while(updateLag >= msPerUpdate)
+		if(paused)
 		{
-			scene->update(msPerUpdate);
-			updateLag -= msPerUpdate;
+			while(paused)
+				sleep_for(milliseconds(30));
+			previous = getCurrentMillSecond();
 		}
 
-		static long fpsLag = 0, frames = 0;
-		fpsLag += dt;
-		if(fpsLag >= 1000)
-		{
-			framesPerSecond = frames;
-			frames = fpsLag = 0;
-		}
+		update(dt);
+		render(dt);
 
-		static long renderLag   = 0;
-		const long  msPerRender = 16;
-		renderLag += dt;
-		while(renderLag >= msPerRender)
-		{
-			frames++;
-			scene->render();
-			renderLag -= msPerRender;
-		}
+		sleep_for(milliseconds(16 - dt));
+	}
+}
 
-		Cursor::move(111, 29);
-		printf("%4d FPS", getFramesPerSecond());
+void Director::update(long dt)
+{
+	auto scene = scenes.back();
+
+	static long updateLag = 0;
+	updateLag += dt;
+	while(updateLag >= msPerUpdate)
+	{
+		scene->update(msPerUpdate);
+		updateLag -= msPerUpdate;
+	}
+}
+
+#include "terminal.h"
+
+void Director::render(long dt)
+{
+	auto scene = scenes.back();
+
+	scene->render();
+
+	static long fpsLag = 0, frames = 0;
+	fpsLag += dt;
+	frames++;
+	if(fpsLag >= 1000)
+	{
+		framesPerSecond = frames;
+		frames = fpsLag = 0;
+		Terminal::setTitle("Clementine - " + std::to_string(getFramesPerSecond()) + "FPS");	
 	}
 }
 
@@ -133,7 +142,7 @@ void Director::loop()
 #include <sys/ioctl.h>
 
 Director::Director()
-		: paused(false), msPerUpdate(16)
+		: paused(false), msPerUpdate(16), framesPerSecond(0)
 {
   // 开启 raw 模式
   termios mode;
@@ -169,9 +178,9 @@ long Director::getCurrentMillSecond() const
 #ifdef OS_WIN
 
 Director::Director()
-		: paused(false), msPerUpdate(16)
+		: paused(false), msPerUpdate(16), framesPerSecond(0)
 {
-  // 开启 VT100模式
+  // 开启 VT100 模式
 	const auto hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	DWORD      mode;
 	if(!GetConsoleMode(hStdOut, &mode))

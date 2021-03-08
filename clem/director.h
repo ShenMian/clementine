@@ -15,6 +15,7 @@ public:
 	static Director* getInstance();
 
 	void run();
+
 	void pause();
 	void resume();
 
@@ -31,6 +32,8 @@ public:
 private:
 	Director();
 	void loop();
+	void update(long dt);
+	void render(long dt);
 	long getCurrentMillSecond() const;
 
 	std::vector<Scene*> scenes;

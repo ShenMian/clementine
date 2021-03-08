@@ -9,16 +9,16 @@
 #include <stdlib.h>
 
 #ifndef NDEBUG
-#define assert(expr, msg)                                   \
-	if(!(expr))                                               \
-	{                                                         \
-		fprintf(stderr,                                         \
-						"Assertion '%s' failed: %s (%s %s:%d)",         \
-						#expr, #msg, __FUNCTION__, __FILE__, __LINE__); \
-		abort();                                                \
-	}
+	#define assert(expr, msg)                                   \
+		if(!(expr))                                               \
+		{                                                         \
+			fprintf(stderr,                                         \
+							"Assertion '%s' failed: %s (%s %s:%d)",         \
+							#expr, #msg, __FUNCTION__, __FILE__, __LINE__); \
+			abort();                                                \
+		}
 #else
-#define assert(expr, msg) ((void)0)
+	#define assert(expr, msg) ((void)0)
 #endif // NDEBUG
 
 #endif // !CLEM_ASSERT_H_

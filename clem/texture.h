@@ -33,6 +33,8 @@ public:
 	void        setSize(Size size);
 	void        clear();
 
+	const std::vector<Tile>& getTiles() const;
+
 private:
 	Size              size;
 	std::vector<Tile> tiles;

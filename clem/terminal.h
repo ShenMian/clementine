@@ -1,9 +1,10 @@
 
+#include <string>
+
 class Terminal
 {
 public:
-  Terminal();
-
+  static void setTitle(const std::string&);
   static bool getch(char&);
 };
 

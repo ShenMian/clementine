@@ -28,7 +28,7 @@ float Rect::top() const
 
 float Rect::bottom() const
 {
-	return y - height;
+	return y + height;
 }
 
 float Rect::left() const
