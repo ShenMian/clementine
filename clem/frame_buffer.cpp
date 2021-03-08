@@ -38,6 +38,16 @@ void FrameBuffer::swapBuffer()
 	next      = temp;
 }
 
+#ifdef OS_UNIX
+
+void FrameBuffer::render(Point pos)
+{
+}
+
+#endif
+
+#ifdef OS_WIN
+
 void FrameBuffer::render(Point pos)
 {
 	SMALL_RECT writeRegion = {0, 0, pos.x, pos.y};
@@ -47,3 +57,6 @@ void FrameBuffer::render(Point pos)
 											{0, 0},
 											&writeRegion);
 }
+
+#endif // OS_WIN
+

@@ -14,7 +14,10 @@ class FrameBuffer
 {
 	#ifdef OS_WIN
 		typedef CHAR_INFO buffer_t;
-	#endif
+	#else
+    typedef char buffer_t;
+  #endif
+
 
 public:
 	FrameBuffer();
