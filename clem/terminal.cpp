@@ -3,15 +3,19 @@
 #include <cassert>
 #include "platform.h"
 
+using std::string;
+
 #ifdef OS_LINUX
 
 #include <termios.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <cerrno>
+#include <stdio.h>
 
-void Terminal::setTitle(const std::string&)
+void Terminal::setTitle(const string& s)
 {
+  printf("\033]0;%s\007", s.c_str());
 }
 
 bool Terminal::getch(char& c)
@@ -36,9 +40,9 @@ bool Terminal::getch(char& c)
 
 #include <conio.h>
 
-void Terminal::setTitle(const std::string& str)
+void Terminal::setTitle(const string& s)
 {
-	SetConsoleTitleA(str.c_str());
+	SetConsoleTitleA(s.c_str());
 }
 
 bool Terminal::getch(char& c)
