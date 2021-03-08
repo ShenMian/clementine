@@ -24,7 +24,9 @@ void Director::run()
 	if(scenes.empty())
 		assert(false);
 
-	loop();
+	static std::thread thread([this]() {
+		loop();
+	});
 }
 
 void Director::pause()
@@ -92,7 +94,7 @@ void Director::loop()
 		if(paused)
 		{
 			while(paused)
-				sleep_for(milliseconds(30));
+				sleep_for(milliseconds(500));
 			previous = getCurrentMillSecond();
 		}
 

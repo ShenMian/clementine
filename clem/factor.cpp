@@ -44,14 +44,14 @@ void Factor::removeComponent(Component& com)
 		assert(false);
 }
 
-void Factor::setPosition(const Point& pos)
+void Factor::setPosition(const Point& p)
 {
-	this->position = pos;
+	this->position = p;
 }
 
-void Factor::setTexture(const Texture& texture)
+void Factor::setTexture(const Texture& t)
 {
-	this->texture = texture;
+	this->texture = t;
 }
 
 const Point& Factor::getPosition() const
