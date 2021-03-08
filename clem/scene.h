@@ -20,7 +20,7 @@ public:
 	Scene();
 	virtual ~Scene();
 
-	void update();
+	void update(long dt);
 	void render();
 
 	void                        addFactor(Factor&);
@@ -38,8 +38,8 @@ public:
 	Scene(const Scene&) = delete;
 
 private:
-	void updateFactors();
-	void updatePhysics();
+	void updateFactors(long dt);
+	void updatePhysics(long dt);
 
 	Camera*              defaultCamera;
 	std::vector<Camera*> cameras;

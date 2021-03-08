@@ -19,7 +19,6 @@ int main()
 
 	Scene scene;
 
-	//Factor   player; 
 	Factor player(Tile('@', Fore::green));
 	Keyboard keyboard;
 	keyboard.bindOnPressed(Keyboard::Key::left, [&player]() {

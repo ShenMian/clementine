@@ -99,13 +99,14 @@ void Director::loop()
 			continue;
 
 		updateLag += dt;
+		fpsLag += dt;
+
 		while(updateLag >= msPerUpdate)
 		{
-			scene->update();
+			scene->update(msPerUpdate);
 			updateLag -= msPerUpdate;
 		}
 
-		fpsLag += dt;
 		frames++;
 		if(fpsLag >= 1000)
 		{

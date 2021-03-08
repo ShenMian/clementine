@@ -76,10 +76,10 @@ Camera* Scene::getDefaultCamera() const
 	return defaultCamera;
 }
 
-void Scene::update()
+void Scene::update(long dt)
 {
-	updateFactors();
-	updatePhysics();
+	updateFactors(dt);
+	updatePhysics(dt);
 }
 
 void Scene::render()
@@ -96,12 +96,12 @@ void Scene::updateInput()
 }
 */
 
-void Scene::updateFactors()
+void Scene::updateFactors(long dt)
 {
 	for(auto f : factors)
-		f->update();
+		f->update(dt);
 }
 
-void Scene::updatePhysics()
+void Scene::updatePhysics(long dt)
 {
 }
