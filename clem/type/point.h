@@ -7,24 +7,25 @@
 
 class Vec2;
 
+template<class T = float>
 class Point
 {
 public:
-	float x;
-	float y;
+	T x;
+	T y;
 
 	Point();
-	Point(float x, float y);
+	Point(T x, T y);
 	Point(const Vec2& vec);
 
-	float distance(const Point&) const;
+	float distance(const Point<T>&) const;
 
-	Point operator+(const Point&) const;
-	Point operator-(const Point&) const;
-	Point operator+(const Vec2&) const;
-	Point operator-(const Vec2&) const;
-	const Point& operator+=(const Vec2&);
-	const Point& operator-=(const Vec2&);
+	Point<T>        operator+(const Point<T>&) const;
+	Point<T>        operator-(const Point<T>&) const;
+	Point<T>        operator+(const Vec2&) const;
+	Point<T>        operator-(const Vec2&) const;
+	const Point<T>& operator+=(const Vec2&);
+	const Point<T>& operator-=(const Vec2&);
 };
 
 #endif // CLEM_TYPE_POINT_H_

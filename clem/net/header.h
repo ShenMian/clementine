@@ -2,6 +2,7 @@
 #include <clem/platform.h>
 
 #ifdef OS_UNIX
+#include <sys/types.h>
 #include <sys/socket.h>
 typedef int socket_t;
 #endif // !OS_UNIX
