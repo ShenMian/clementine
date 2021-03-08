@@ -22,13 +22,11 @@ int main()
 	//Factor   player; 
 	Factor player(Tile('@', Fore::green));
 	Keyboard keyboard;
-	keyboard.bind(Keyboard::Key::left, [&player](bool state) {
-		if(state)
-			player.setPosition(player.getPosition() + Point(-1, 0));
+	keyboard.bindOnPressed(Keyboard::Key::left, [&player]() {
+		player.setVelocity({-1, 0});
 	});
-	keyboard.bind(Keyboard::Key::right, [&player](bool state) {
-		if(state)
-			player.setPosition(player.getPosition() + Point(1, 0));
+	keyboard.bindOnPressed(Keyboard::Key::right, [&player]() {
+		player.setVelocity({1, 0});
 	});
 	player.addComponent(keyboard);
 	player.setPosition({10, 5});

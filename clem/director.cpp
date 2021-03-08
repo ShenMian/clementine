@@ -82,7 +82,7 @@ short Director::getFramesPerSecond() const
 
 void Director::loop()
 {
-	long current, previous;
+	long current, previous, dt;
 	long updateLag = 0, fpsLag = 0;
 	previous = getCurrentMillSecond();
 
@@ -90,21 +90,22 @@ void Director::loop()
 
 	while(true)
 	{
-		current = getCurrentMillSecond();
-		updateLag += current - previous;
-		fpsLag    += current - previous;
+		current  = getCurrentMillSecond();
+		dt       = current - previous;
 		previous = current;
 
 		auto scene = getCurrentScene();
 		if(paused || scene == nullptr)
 			continue;
 
+		updateLag += dt;
 		while(updateLag >= msPerUpdate)
 		{
 			scene->update();
 			updateLag -= msPerUpdate;
 		}
 
+		fpsLag += dt;
 		frames++;
 		if(fpsLag >= 1000)
 		{

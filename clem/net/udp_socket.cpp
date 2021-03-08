@@ -9,7 +9,7 @@ using std::string;
 
 bool UdpSocket::bind(const Address& addr)
 {
-	return ::bind(socket, &addr.getSockaddr(), addr.getSize());;
+	return ::bind(socket, &addr.getSockaddr(), addr.getSize());
 }
 
 void UdpSocket::write(const void* buf, size_t size, const Address& addr)

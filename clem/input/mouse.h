@@ -6,6 +6,7 @@
 #define CLEM_INPUT_MOUSE_H_
 
 #include "input_component.h"
+#include <functional>
 
 class Mouse : public InputComponent
 {

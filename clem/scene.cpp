@@ -66,13 +66,6 @@ void Scene::removeCamera(Camera& cam)
 		assert(false);
 }
 
-void Scene::sortCameras()
-{
-  std::sort(cameras.begin(), cameras.end(), [](const Camera* a, const Camera* b) {
-		return a->getDepth() - b->getDepth();
-	});
-}
-
 const vector<Camera*>& Scene::getCameras() const
 {
 	return cameras;

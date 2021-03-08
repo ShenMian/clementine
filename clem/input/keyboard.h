@@ -5,10 +5,10 @@
 #ifndef CLEM_INPUT_KEYBOARD_H_
 #define CLEM_INPUT_KEYBOARD_H_
 
-#include <functional>
-#include <unordered_map>
 #include "input_component.h"
 #include "clem/platform.h"
+#include <functional>
+#include <unordered_map>
 
 class Keyboard : public InputComponent
 {
@@ -18,11 +18,13 @@ public:
   Keyboard();
 
   void update() override;
-	void bind(Key key, std::function<void(bool)> callback);
+	void bindOnPressed(Key key, std::function<void()> callback);
+	void bindOnChanged(Key key, std::function<void(bool)> callback);
 	void clear();
 
 private:
-	std::unordered_map<Key, std::function<void(bool)>> callbacks;
+	std::unordered_map<Key, std::function<void()>>     onPressed;
+	std::unordered_map<Key, std::function<void(bool)>> onChanged;
 	std::unordered_map<Key, bool>                      keyStates;
 };
 

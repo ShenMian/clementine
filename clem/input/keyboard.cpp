@@ -5,15 +5,21 @@
 #include "keyboard.h"
 #include "clem/platform.h"
 
-void Keyboard::bind(Key key, std::function<void(bool)> callback)
+void Keyboard::bindOnPressed(Key key, std::function<void()> fun)
 {
-	callbacks[key] = callback;
+	onPressed[key] = fun;
+	keyStates[key] = false;
+}
+
+void Keyboard::bindOnChanged(Key key, std::function<void(bool)> callback)
+{
+	onChanged[key] = callback;
 	keyStates[key] = false;
 }
 
 void Keyboard::clear()
 {
-	callbacks.clear();
+	onChanged.clear();
 	keyStates.clear();
 }
 
@@ -37,7 +43,7 @@ Keyboard::Keyboard()
 
 void Keyboard::update()
 {
-	for(auto& i : callbacks)
+	for(auto& i : onChanged)
 	{
 		bool state = GetAsyncKeyState(static_cast<int>(i.first)) & 0x8000;
 		if(state == keyStates[i.first])
