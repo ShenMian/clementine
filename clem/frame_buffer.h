@@ -6,10 +6,9 @@
 #define CLEM_FRAME_BUFFER_H_
 
 #include "platform.h"
+#include "type.h"
 
 class Tile;
-class Size;
-class Point;
 
 class FrameBuffer
 {
@@ -27,7 +26,7 @@ public:
 
 	void setSize(Size);
 	void swapBuffer();
-	void render();
+	void render(Point pos);
 
 private:
 	buffer_t* current;
