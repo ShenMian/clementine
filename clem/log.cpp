@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 // 日志
 
-#include "logger.h"
+#include "log.h"
 #include <ctime>
 #include <cassert>
 #include <iostream>
