@@ -6,64 +6,64 @@
 #include <cmath>
 #include "vec2.h"
 
-template <class T>
-Point<T>::Point()
+
+Point::Point()
 		: Point(0, 0)
 {
 }
 
-template <class T>
-Point<T>::Point(T x, T y)
+
+Point::Point(float x, float y)
 		: x(x), y(y)
 {
 }
 
-template <class T>
-Point<T>::Point(const Vec2& vec)
+
+Point::Point(const Vec2& vec)
 		: Point(vec.x, vec.y)
 {
 }
 
-template <class T>
-float Point<T>::distance(const Point& p) const
+
+float Point::distance(const Point& p) const
 {
 	return std::sqrt(std::abs(x - p.x) + std::abs(y - p.y));
 }
 
-template <class T>
-Point<T> Point<T>::operator+(const Point& p) const
+
+Point Point::operator+(const Point& p) const
 {
 	return Point(x + p.x, y + p.y);
 }
 
-template <class T>
-Point<T> Point<T>::operator-(const Point& p) const
+
+Point Point::operator-(const Point& p) const
 {
 	return Point(x - p.x, y - p.y);
 }
 
-template <class T>
-Point<T> Point<T>::operator+(const Vec2& v) const
+
+Point Point::operator+(const Vec2& v) const
 {
 	return Point(x + v.x, y + v.y);
 }
 
-template <class T>
-Point<T> Point<T>::operator-(const Vec2& v) const
+
+Point Point::operator-(const Vec2& v) const
 {
 	return Point(x - v.x, y - v.y);
 }
 
-template <class T>
-const Point<T>& Point<T>::operator+=(const Vec2& v)
+
+const Point& Point::operator+=(const Vec2& v)
 {
 	x += v.x;
 	y += v.y;
 	return *this;
 }
 
-template <class T>
-const Point<T>& Point<T>::operator-=(const Vec2& v)
+
+const Point& Point::operator-=(const Vec2& v)
 {
 	x -= v.x;
 	y -= v.y;
