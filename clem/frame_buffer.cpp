@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// Ö¡»º³åÇø
+// å¸§ç¼“å†²åŒº
 
 #include "frame_buffer.h"
 #include "tile.h"
@@ -40,24 +40,6 @@ void FrameBuffer::swapBuffer()
 	next      = temp;
 }
 
-#ifdef OS_UNIX
-
-void FrameBuffer::render(Point pos)
-{
-}
-
-#endif
-
-#ifdef OS_WIN
-
-void FrameBuffer::drawPoint(Point p, const Tile& t)
-{
-	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
-		return;
-	next[(int)(p.y * size.x + p.x)].Char.AsciiChar = t.getChar();
-	next[(int)(p.y * size.x + p.x)].Attributes     = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY;
-}
-
 void FrameBuffer::drawRect(Rect r, const Tile& t)
 {
 	for(short x = r.left(); x <= r.right(); x++)
@@ -79,7 +61,29 @@ void FrameBuffer::drawRectFill(Rect r, const Tile& t)
 			drawPoint({r.x + x, r.y + y}, t);
 }
 
+#ifdef OS_UNIX
+
+void FrameBuffer::drawPoint(Point p, const Tile& t)
+{
+}
+
+void FrameBuffer::render()
+{
+}
+
+#endif
+
+#ifdef OS_WIN
+
 #include "director.h"
+
+void FrameBuffer::drawPoint(Point p, const Tile& t)
+{
+	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
+		return;
+	next[(int)(p.y * size.x + p.x)].Char.AsciiChar = t.getChar();
+	next[(int)(p.y * size.x + p.x)].Attributes     = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY;
+}
 
 void FrameBuffer::render()
 {
@@ -92,7 +96,7 @@ void FrameBuffer::render()
 										 {(short)size.x, (short)size.y},
 										 {0, 0},
 										 &writeRegion);
-										 //&bufInfo.srWindow);
+										 &bufInfo.srWindow);
 }
 
 #endif // OS_WIN

@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// Ö¡»º³åÇø
+// å¸§ç¼“å†²åŒº
 
 #ifndef CLEM_FRAME_BUFFER_H_
 #define CLEM_FRAME_BUFFER_H_
