@@ -32,16 +32,18 @@ int main()
 	Scene scene;
 
 	Factor player(Tile('@', Fore::green));
+
 	Keyboard keyboard;
+	const float speed = 4.5;
 	keyboard.bindOnChanged(Keyboard::Key::left, [&](bool state) {
 		if(state)
-			player.setVelocity({-4, 0});
+			player.setVelocity({-speed, 0});
 		else
 			player.setVelocity({0, 0});
 	});
 	keyboard.bindOnChanged(Keyboard::Key::right, [&](bool state) {
 		if(state)
-			player.setVelocity({4, 0});
+			player.setVelocity({speed, 0});
 		else
 			player.setVelocity({0, 0});
 	});

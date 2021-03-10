@@ -1,13 +1,13 @@
 **en** | [zh]
 
 # Clementine
-This is a framework for building 2D console games.
+This is a framework for building 2D console games.  
 
 [![License](https://img.shields.io/github/license/ShenMian/Clementine)](https://github.com/ShenMian/Clementine/blob/master/LICENSE)
 [![CodeFactor](https://www.codefactor.io/repository/github/shenmian/clementine/badge)](https://www.codefactor.io/repository/github/shenmian/clementine)
 [![CMake](https://github.com/ShenMian/Clementine/workflows/CMake/badge.svg?branch=master)](https://github.com/ShenMian/Clementine/actions?query=workflow%3ACMake)
 
-![Picture](docs/picture_0.png)  
+![Picture](docs/banner.png)  
 
 ## Features
 - Multi-platform: Linux, macOS, Windows 10
@@ -31,7 +31,7 @@ This is a framework for building 2D console games.
 - `BUILD_TESTS`    Build the unit tests
 
 ## Forums
-- [**Github Discussions**](https://github.com/ShenMian/Clementine/discussions)  
-- [**Telegram Group**](t.me/programmingzh)  
+- [**Github Discussions**](https://github.com/ShenMian/Clementine/discussions)
+- [**Telegram**](t.me/shenmian)
 
 [zh]: README_zh-CN.md
