@@ -19,7 +19,7 @@ public:
 	Factor(const Size&);
 	Factor(const Texture&);
 
-	virtual void update(long dt);
+	virtual void update(float dt);
 
 	void         setPosition(const Point&);
 	const Point& getPosition() const;

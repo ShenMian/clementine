@@ -33,12 +33,12 @@ bool Vec2::operator!=(const Vec2& vec) const
 	return !(*this == vec);
 }
 
-Vec2 Vec2::operator*(int n) const
+Vec2 Vec2::operator*(float n) const
 {
 	return Vec2(x * n, y * n);
 }
 
-Vec2 Vec2::operator/(int n) const
+Vec2 Vec2::operator/(float n) const
 {
 	return Vec2(x / n, y / n);
 }

@@ -25,24 +25,25 @@ int main()
 	auto winSize  = director->getWinSize();
 
 	FrameBuffer buffer(winSize);
-	buffer.drawRect(Rect(Point(1, 1), Size(3, 3)), Tile('@'));
+	buffer.drawRectFill(Rect(Point(0, 0), Size(120, 30)), Tile('.'));
 	buffer.swapBuffer();
 	buffer.render();
-
-	getchar();
-	getchar();
 
 	Scene scene;
 
 	Factor player(Tile('@', Fore::green));
 	Keyboard keyboard;
-	keyboard.bindOnPressed(Keyboard::Key::left, [&]() {
-		player.setPosition(player.getPosition() + Point(-1, 0));
-		// player.setVelocity({-1, 0});
+	keyboard.bindOnChanged(Keyboard::Key::left, [&](bool state) {
+		if(state)
+			player.setVelocity({-4, 0});
+		else
+			player.setVelocity({0, 0});
 	});
-	keyboard.bindOnPressed(Keyboard::Key::right, [&]() {
-		player.setPosition(player.getPosition() + Point(1, 0));
-		// player.setVelocity({1, 0});
+	keyboard.bindOnChanged(Keyboard::Key::right, [&](bool state) {
+		if(state)
+			player.setVelocity({4, 0});
+		else
+			player.setVelocity({0, 0});
 	});
 	player.addComponent(keyboard);
 	player.setPosition({10, 5});

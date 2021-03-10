@@ -22,12 +22,12 @@ Factor::Factor(const Texture& t)
 {
 }
 
-void Factor::update(long dt)
+void Factor::update(float dt)
 {
 	for(auto c : components)
 		c->update();
 
-	position += velocity * (dt / 1000);
+	position += velocity * dt;
 }
 
 void Factor::addComponent(Component& com)

@@ -21,8 +21,8 @@ public:
 	bool  operator==(const Vec2& vec) const;
 	bool  operator!=(const Vec2& vec) const;
 
-	Vec2  operator*(int n) const;
-	Vec2  operator/(int n) const;
+	Vec2  operator*(float n) const;
+	Vec2  operator/(float n) const;
 	Vec2  operator+(const Vec2& vec) const;
 	Vec2  operator-(const Vec2& vec) const;
 

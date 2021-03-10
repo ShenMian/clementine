@@ -98,36 +98,36 @@ void Director::loop()
 			previous = getCurrentMillSecond();
 		}
 
-		update(dt);
-		render(dt);
+		update((float)dt / 1000);
+		render((float)dt / 1000);
 
 		sleep_for(milliseconds(16 - dt));
 	}
 }
 
-void Director::update(long dt)
+void Director::update(float dt)
 {
 	auto scene = scenes.back();
 
 	static long updateLag = 0;
-	updateLag += dt;
+	updateLag += dt * 1000;
 	while(updateLag >= msPerUpdate)
 	{
-		scene->update(msPerUpdate);
+		scene->update(msPerUpdate / 1000);
 		updateLag -= msPerUpdate;
 	}
 }
 
 #include "terminal.h"
 
-void Director::render(long dt)
+void Director::render(float dt)
 {
 	auto scene = scenes.back();
 
 	scene->render();
 
 	static long fpsLag = 0, frames = 0;
-	fpsLag += dt;
+	fpsLag += dt * 1000;
 	frames++;
 	if(fpsLag >= 1000)
 	{
@@ -213,36 +213,5 @@ long Director::getCurrentMillSecond() const
 	QueryPerformanceCounter(&time);
 	return time.QuadPart * 1000 / freq.QuadPart;
 }
-
-/*
-void Director::loop()
-{
-	LARGE_INTEGER current, previous, freq;
-	long          lag = 0;
-	QueryPerformanceFrequency(&freq);
-	QueryPerformanceCounter(&previous);
-
-	const long interval = secPerUpdate * freq.QuadPart;
-
-	while(true)
-	{
-		QueryPerformanceCounter(&current);
-		lag += (long)(current.QuadPart - previous.QuadPart);
-		previous.QuadPart = current.QuadPart;
-
-		auto scene = getCurrentScene();
-		if(paused || scene == nullptr)
-			continue;
-
-		while(lag >= interval)
-		{
-			scene->update();
-			lag -= interval;
-		}
-
-		scene->render();
-	}
-}
-*/
 
 #endif // OS_WIN

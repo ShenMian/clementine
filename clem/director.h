@@ -32,8 +32,8 @@ public:
 private:
 	Director();
 	void loop();
-	void update(long dt);
-	void render(long dt);
+	void update(float dt);
+	void render(float dt);
 	long getCurrentMillSecond() const;
 
 	std::vector<Scene*> scenes;

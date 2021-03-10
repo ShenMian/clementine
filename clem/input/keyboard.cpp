@@ -49,16 +49,16 @@ void Keyboard::update()
 	{
 		bool state = GetAsyncKeyState(static_cast<int>(i.first)) & 0x8000;
 		
-		if(state)
-		{
-			keyStates[i.first] = state;
-			onPressed[i.first]();
-		}
-		
 		if(state != keyStates[i.first])
 		{
 			keyStates[i.first] = state;
 			onChanged[i.first](state);
+		}
+
+		if(state)
+		{
+			keyStates[i.first] = state;
+			onPressed[i.first]();
 		}
 	}
 }
