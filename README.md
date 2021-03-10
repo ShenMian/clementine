@@ -32,6 +32,6 @@ This is a framework for building 2D console games.
 
 ## Forums
 - [**Github Discussions**](https://github.com/ShenMian/Clementine/discussions)
-- [**Telegram**](t.me/shenmian)
+- [**Telegram**](https://t.me/shenmian)
 
-[zh]: README_zh-CN.md
+[zh]: README_zh.md

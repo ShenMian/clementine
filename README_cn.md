@@ -32,6 +32,6 @@
 
 ## 论坛
 - [**Github Discussions**](https://github.com/ShenMian/Clementine/discussions)
-- [**Telegram**](t.me/shenmian)
+- [**Telegram**](https://t.me/shenmian)
 
 [en]: README.md
