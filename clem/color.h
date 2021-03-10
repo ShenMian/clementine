@@ -14,6 +14,8 @@ enum class Back;
 
 class Color
 {
+	friend class FrameBuffer;
+
 public:
 	enum class Type;
 

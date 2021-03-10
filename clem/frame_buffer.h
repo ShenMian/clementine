@@ -24,12 +24,15 @@ public:
 	FrameBuffer(Size);
 	~FrameBuffer();
 
-	void drawPoint(Point, Tile);
-	void drawLine(Point, Point, Tile);
+	void drawPoint(Point, const Tile&);
+	void drawLine(Point, Point, const Tile&);
+	void drawRect(Rect, const Tile&);
+	void drawRectFill(Rect, const Tile&);
+	void drawCycle(Point, short radius, const Tile&);
 
 	void setSize(Size);
 	void swapBuffer();
-	void render(Point pos);
+	void render();
 
 private:
 	buffer_t* current;

@@ -16,11 +16,21 @@ using std::this_thread::sleep_for;
 using namespace std;
 
 #include <clem/input/keyboard.h>
+#include <clem/frame_buffer.h>
 
 int main()
 {
 	Cursor::setVisible(false);
 	auto director = Director::getInstance();
+	auto winSize  = director->getWinSize();
+
+	FrameBuffer buffer(winSize);
+	buffer.drawRect(Rect(Point(1, 1), Size(3, 3)), Tile('@'));
+	buffer.swapBuffer();
+	buffer.render();
+
+	getchar();
+	getchar();
 
 	Scene scene;
 

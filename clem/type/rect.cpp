@@ -28,7 +28,7 @@ float Rect::top() const
 
 float Rect::bottom() const
 {
-	return y + height;
+	return y + height - 1;
 }
 
 float Rect::left() const
@@ -38,7 +38,7 @@ float Rect::left() const
 
 float Rect::right() const
 {
-	return x + width;
+	return x + width - 1;
 }
 
 Point Rect::tl() const
