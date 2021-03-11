@@ -42,12 +42,12 @@ void FrameBuffer::swapBuffer()
 
 void FrameBuffer::drawRect(Rect r, const Tile& t)
 {
-	for(short x = r.left(); x <= r.right(); x++)
+	for(int x = r.left(); x <= r.right(); x++)
 	{
 		drawPoint(Point(x, r.top()), t);
 		drawPoint(Point(x, r.bottom()), t);
 	}
-	for(short y = r.top(); y <= r.bottom(); y++)
+	for(int y = r.top(); y <= r.bottom(); y++)
 	{
 		drawPoint(Point(r.left(), y), t);
 		drawPoint(Point(r.right(), y), t);
@@ -56,8 +56,8 @@ void FrameBuffer::drawRect(Rect r, const Tile& t)
 
 void FrameBuffer::drawRectFill(Rect r, const Tile& t)
 {
-	for(short y = 0; y < r.height; y++)
-		for(short x = 0; x < r.width; x++)
+	for(int y = 0; y < r.height; y++)
+		for(int x = 0; x < r.width; x++)
 			drawPoint({r.x + x, r.y + y}, t);
 }
 
