@@ -9,6 +9,7 @@
 #include "cursor.h"
 #include "scene.h"
 #include "factor.h"
+#include "frame_buffer.h"
 
 using std::vector;
 
@@ -24,7 +25,18 @@ Camera::Camera(Scene* s)
 
 void Camera::render()
 {
-	Texture buffer(size);
+	Rect inputRect(inPos, size);
+	for(auto f : scene->getFactors())
+		if(inputRect.contains(Rect(f->getPosition(), f->getTexture().getSize())))
+		{
+			auto buf = f->getTexture();
+			auto siz = buf.getSize();
+			for(int y = 0; y < siz.y; y++)
+				for(int x = 0; x < siz.x; x++)
+					frameBuffer.drawPoint({f->getPosition().x - inPos.x + outPos.x + x, f->getPosition().y - inPos.y + outPos.y + y}, buf.getTiles()[y * siz.x + x].getChar());
+		}
+
+	/*Texture buffer(size);
 
 	Rect inputRect(inPos, size);
 
@@ -41,7 +53,7 @@ void Camera::render()
 			buf[y * size.x + x].getColor().on();
 			printf("%c", buf[y * size.x + x].getChar());
 		}
-	}
+	}*/
 }
 
 void Camera::setScene(Scene* s)

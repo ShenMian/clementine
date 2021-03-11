@@ -12,16 +12,14 @@ class Tile;
 
 class FrameBuffer
 {
-	#ifdef OS_WIN
-		typedef CHAR_INFO buffer_t;
-	#else
-    typedef char buffer_t;
-  #endif
-
+#ifdef OS_WIN
+	typedef CHAR_INFO buffer_t;
+#else
+  typedef char buffer_t;
+#endif
 
 public:
 	FrameBuffer();
-	FrameBuffer(Size);
 	~FrameBuffer();
 
 	void drawPoint(Point, const Tile&);
@@ -29,15 +27,20 @@ public:
 	void drawRect(Rect, const Tile&);
 	void drawRectFill(Rect, const Tile&);
 	void drawCycle(Point, short radius, const Tile&);
+	void clear();
+
+	void swapBuffers();
+	void render();
 
 	void setSize(Size);
-	void swapBuffer();
-	void render();
+	Size getSize() const;
 
 private:
 	buffer_t* current;
 	buffer_t* next;
 	Size      size;
 };
+
+extern FrameBuffer frameBuffer;
 
 #endif // !CLEM_FRAME_BUFFER_H_

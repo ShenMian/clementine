@@ -3,17 +3,15 @@
 // 帧缓冲区
 
 #include "frame_buffer.h"
+#include "director.h"
 #include "tile.h"
+
+FrameBuffer frameBuffer;
 
 FrameBuffer::FrameBuffer()
 		: current(nullptr), next(nullptr)
 {
-}
-
-FrameBuffer::FrameBuffer(Size s)
-		: current(nullptr), next(nullptr)
-{
-	setSize(s);
+	setSize(Director::getInstance()->getWinSize());
 }
 
 FrameBuffer::~FrameBuffer()
@@ -22,18 +20,7 @@ FrameBuffer::~FrameBuffer()
 	delete[] next;
 }
 
-void FrameBuffer::setSize(Size s)
-{
-	size = s;
-	if(current != nullptr)
-		delete[] current;
-	if(current != nullptr)
-		delete[] next;
-	current = new buffer_t[size.area()]();
-	next    = new buffer_t[size.area()]();
-}
-
-void FrameBuffer::swapBuffer()
+void FrameBuffer::swapBuffers()
 {
 	auto temp = current;
 	current   = next;
@@ -61,6 +48,29 @@ void FrameBuffer::drawRectFill(Rect r, const Tile& t)
 			drawPoint({r.x + x, r.y + y}, t);
 }
 
+void FrameBuffer::clear()
+{
+	for(int y = 0; y < size.y; y++)
+		for(int x = 0; x < size.x; x++)
+			drawPoint(Point(x, y), Tile(' '));
+}
+
+void FrameBuffer::setSize(Size s)
+{
+	size = s;
+	if(current != nullptr)
+		delete[] current;
+	if(current != nullptr)
+		delete[] next;
+	current = new buffer_t[size.area()]();
+	next    = new buffer_t[size.area()]();
+}
+
+Size FrameBuffer::getSize() const
+{
+	return size;
+}
+
 #ifdef OS_UNIX
 
 void FrameBuffer::drawPoint(Point p, const Tile& t)
@@ -81,8 +91,8 @@ void FrameBuffer::drawPoint(Point p, const Tile& t)
 {
 	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
 		return;
-	next[(int)(p.y * size.x + p.x)].Char.AsciiChar = t.getChar();
-	next[(int)(p.y * size.x + p.x)].Attributes     = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY;
+	next[(int)p.y * size.x + (int)p.x].Char.AsciiChar = t.getChar();
+	next[(int)p.y * size.x + (int)p.x].Attributes     = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY;
 }
 
 void FrameBuffer::render()
@@ -99,4 +109,3 @@ void FrameBuffer::render()
 }
 
 #endif // OS_WIN
-

@@ -91,49 +91,49 @@ void Director::loop()
 		dt       = current - previous;
 		previous = current;
 
+		sleep_for(milliseconds(16 - dt));
+
+		update(dt);
+		render(dt);
+
 		if(paused)
 		{
 			while(paused)
 				sleep_for(milliseconds(500));
 			previous = getCurrentMillSecond();
 		}
-
-		update((float)dt / 1000);
-		render((float)dt / 1000);
-
-		sleep_for(milliseconds(16 - dt));
 	}
 }
 
-void Director::update(float dt)
+void Director::update(long dt)
 {
 	auto scene = scenes.back();
 
 	static long updateLag = 0;
-	updateLag += dt * 1000;
+	updateLag += dt;
 	while(updateLag >= msPerUpdate)
 	{
-		scene->update(msPerUpdate / 1000);
+		scene->update((float)msPerUpdate / 1000);
 		updateLag -= msPerUpdate;
 	}
 }
 
 #include "terminal.h"
 
-void Director::render(float dt)
+void Director::render(long dt)
 {
 	auto scene = scenes.back();
 
 	scene->render();
 
 	static long fpsLag = 0, frames = 0;
-	fpsLag += dt * 1000;
+	fpsLag += dt;
 	frames++;
 	if(fpsLag >= 1000)
 	{
 		framesPerSecond = frames;
 		frames = fpsLag = 0;
-		Terminal::setTitle("Clementine - " + std::to_string(getFramesPerSecond()) + "FPS");	
+		Terminal::setTitle("Clementine - " + std::to_string(getFramesPerSecond()) + "FPS");
 	}
 }
 

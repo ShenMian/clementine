@@ -3,12 +3,11 @@
 // 场景
 
 #include "scene.h"
-#include "factor.h"
 #include "camera.h"
-
-#include <clem/type.h>
-#include <clem/director.h>
-
+#include "director.h"
+#include "factor.h"
+#include "frame_buffer.h"
+#include "type.h"
 #include <algorithm>
 #include <cassert>
 
@@ -37,8 +36,13 @@ void Scene::update(float dt)
 
 void Scene::render()
 {
+	frameBuffer.clear();
+
 	for(auto cam : cameras)
 		cam->render();
+
+	frameBuffer.swapBuffers();
+	frameBuffer.render();
 }
 
 void Scene::addFactor(Factor& f)

@@ -23,22 +23,16 @@ int main()
 {
 	Cursor::setVisible(false);
 	auto director = Director::getInstance();
-	auto winSize  = director->getWinSize();
-
-	Random random;
-	random.uint32();
-
-	FrameBuffer buffer(winSize);
-	buffer.drawRectFill(Rect(Point(0, 0), Size(120, 30)), Tile('.'));
-	buffer.swapBuffer();
-	buffer.render();
 
 	Scene scene;
 
+	Texture bar(Size(10, 10));
+	bar.drawLine(Point(0, 0), Point(0, 4), Tile('#', Fore::green));
+	//Factor player(bar);
 	Factor player(Tile('#', Fore::green));
 
 	Keyboard keyboard;
-	const float speed = 4;
+	const float speed = 5;
 	keyboard.bindOnChanged(Keyboard::Key::up, [&](bool state) {
 		if(state)
 			player.setVelocity({0, -speed});
@@ -52,7 +46,7 @@ int main()
 			player.setVelocity({0, 0});
 	});
 	player.addComponent(keyboard);
-	player.setPosition({10, 5});
+	player.setPosition({1, 0});
 	
 	scene.addFactor(player);
 

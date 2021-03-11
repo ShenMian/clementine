@@ -32,13 +32,13 @@ public:
 private:
 	Director();
 	void loop();
-	void update(float dt);
-	void render(float dt);
+	void update(long dt);
+	void render(long dt);
 	long getCurrentMillSecond() const;
 
 	std::vector<Scene*> scenes;
 	bool                paused;
-	float               msPerUpdate;
+	long                msPerUpdate;
 	short               framesPerSecond;
 
 	static Director instance;

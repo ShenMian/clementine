@@ -11,7 +11,6 @@
 typedef unsigned short ushort;
 
 class Scene;
-class Factor;
 
 class Camera
 {

@@ -14,13 +14,13 @@ class Collider;
 class Rigidbody : public Component
 {
 public:
-	void onAdd() override;
-	void onRemove() override;
+	Vec2 velocity;
+	Vec2 accelerate;
 
 	void addCollider(Collider&);
 
-	Vec2 velocity;
-	Vec2 accelerate;
+	void onAdd() override;
+	void onRemove() override;
 
 private:
 	std::vector<Collider*> colliders;
