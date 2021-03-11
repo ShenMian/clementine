@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 // Table tennis
 
-#include <clem/clem.hpp>
+#include "clem/clem.hpp"
 #include <iostream>
 #include <time.h>
 #include <stdio.h>
@@ -17,12 +17,16 @@ using namespace std;
 
 #include <clem/input/keyboard.h>
 #include <clem/frame_buffer.h>
+#include <random>
 
 int main()
 {
 	Cursor::setVisible(false);
 	auto director = Director::getInstance();
 	auto winSize  = director->getWinSize();
+
+	Random random;
+	random.uint32();
 
 	FrameBuffer buffer(winSize);
 	buffer.drawRectFill(Rect(Point(0, 0), Size(120, 30)), Tile('.'));
@@ -31,19 +35,19 @@ int main()
 
 	Scene scene;
 
-	Factor player(Tile('@', Fore::green));
+	Factor player(Tile('#', Fore::green));
 
 	Keyboard keyboard;
-	const float speed = 4.5;
-	keyboard.bindOnChanged(Keyboard::Key::left, [&](bool state) {
+	const float speed = 4;
+	keyboard.bindOnChanged(Keyboard::Key::up, [&](bool state) {
 		if(state)
-			player.setVelocity({-speed, 0});
+			player.setVelocity({0, -speed});
 		else
 			player.setVelocity({0, 0});
 	});
-	keyboard.bindOnChanged(Keyboard::Key::right, [&](bool state) {
+	keyboard.bindOnChanged(Keyboard::Key::down, [&](bool state) {
 		if(state)
-			player.setVelocity({speed, 0});
+			player.setVelocity({0, speed});
 		else
 			player.setVelocity({0, 0});
 	});

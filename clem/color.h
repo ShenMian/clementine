@@ -47,7 +47,8 @@ enum class Fore
 	purple,
 	cyan,
 	aqua = cyan,
-	white
+	white,
+	max
 };
 
 enum class Back
@@ -60,7 +61,8 @@ enum class Back
 	purple,
 	cyan,
 	aqua = cyan,
-	white
+	white,
+	max
 };
 
 #endif // !CLEM_COLOR_H_

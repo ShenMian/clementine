@@ -18,19 +18,32 @@ Scene::Scene()
 {
 	auto director = Director::getInstance();
 
-  // 添加默认摄像机
-	defaultCamera = new Camera();
-	defaultCamera->setSize(director->getWinSize());
-	addCamera(*defaultCamera);
+	auto camera = new Camera();
+	camera->setSize(director->getWinSize());
+	addCamera(*camera); // 添加默认摄像机
 }
 
 Scene::~Scene()
 {
-	delete defaultCamera;
+	if(!cameras.empty() && cameras[0] != nullptr)
+		delete cameras[0]; // 删除默认摄像机
+}
+
+void Scene::update(float dt)
+{
+	updateFactors(dt);
+	updatePhysics(dt);
+}
+
+void Scene::render()
+{
+	for(auto cam : cameras)
+		cam->render();
 }
 
 void Scene::addFactor(Factor& f)
 {
+	f.setScene(this);
 	factors.push_back(&f);
 }
 
@@ -38,7 +51,10 @@ void Scene::removeFactor(Factor& f)
 {
 	auto it = std::find(factors.begin(), factors.end(), &f);
 	if(it != factors.end())
+	{
+		(*it)->setScene(nullptr);
 		factors.erase(it);
+	}
 	else
 		assert(false);
 }
@@ -71,21 +87,32 @@ const vector<Camera*>& Scene::getCameras() const
 	return cameras;
 }
 
-Camera* Scene::getDefaultCamera() const
+void Scene::addSprite(Sprite& s)
 {
-	return defaultCamera;
+	sprites.push_back(&s);
 }
 
-void Scene::update(float dt)
+void Scene::removeSprite(Sprite& s)
 {
-	updateFactors(dt);
-	updatePhysics(dt);
+	auto it = std::find(sprites.begin(), sprites.end(), &s);
+	if(it != sprites.end())
+		sprites.erase(it);
+	else
+		assert(false);
 }
 
-void Scene::render()
+void Scene::addRigidbody(Rigidbody& b)
 {
-  for(auto cam : cameras)
-		cam->render();
+	rigidbodies.push_back(&b);
+}
+
+void Scene::removeRigidbody(Rigidbody& b)
+{
+	auto it = std::find(rigidbodies.begin(), rigidbodies.end(), &b);
+	if(it != rigidbodies.end())
+		rigidbodies.erase(it);
+	else
+		assert(false);
 }
 
 /*

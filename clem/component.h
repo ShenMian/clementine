@@ -5,7 +5,7 @@
 #ifndef CLEM_COMPONENT_H_
 #define CLEM_COMPONENT_H_
 
-class Factor;
+#include "factor.h"
 
 class Component
 {

@@ -14,6 +14,9 @@ class Factor;
 class Physics;
 class Renderer;
 
+class Sprite;
+class Rigidbody;
+
 class Scene
 {
 public:
@@ -30,7 +33,11 @@ public:
 	void                        addCamera(Camera& cam);
 	void                        removeCamera(Camera& cam);
   const std::vector<Camera*>& getCameras() const;
-	Camera*                     getDefaultCamera() const;
+
+	void addSprite(Sprite&);
+	void removeSprite(Sprite&);
+	void addRigidbody(Rigidbody&);
+	void removeRigidbody(Rigidbody&);
 
 	Scene(const Scene&) = delete;
 
@@ -38,9 +45,11 @@ private:
 	void updateFactors(float dt);
 	void updatePhysics(float dt);
 
-	Camera*              defaultCamera;
 	std::vector<Camera*> cameras;
 	std::vector<Factor*> factors;
+
+	std::vector<Sprite*>    sprites;
+	std::vector<Rigidbody*> rigidbodies;
 };
 
 #endif // !CLEM_SCENE_H_

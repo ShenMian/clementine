@@ -32,6 +32,8 @@ void Factor::update(float dt)
 
 void Factor::addComponent(Component& com)
 {
+	com.setOwner(this);
+	com.onAdd();
 	components.push_back(&com);
 }
 
@@ -39,9 +41,23 @@ void Factor::removeComponent(Component& com)
 {
 	auto it = std::find(components.begin(), components.end(), &com);
 	if(it != components.end())
+	{
+		(*it)->onRemove();
+		(*it)->setOwner(nullptr);
 		components.erase(it);
+	}
 	else
 		assert(false);
+}
+
+void Factor::setScene(Scene* s)
+{
+	scene = s;
+}
+
+Scene* Factor::getScene() const
+{
+	return scene;
 }
 
 void Factor::setPosition(const Point& p)

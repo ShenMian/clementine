@@ -5,10 +5,10 @@
 #ifndef CLEM_FACTOR_H_
 #define CLEM_FACTOR_H_
 
+#include "scene.h"
 #include "texture.h"
 #include <vector>
 
-class Scene;
 class Physics;
 class Component;
 
@@ -32,11 +32,15 @@ public:
 	void addComponent(Component&);
 	void removeComponent(Component&);
 
+	void   setScene(Scene*);
+	Scene* getScene() const;
+
 protected:
 	Point position;
 	Vec2  velocity;
 
 private:
+	Scene*                  scene;
 	Texture                 texture;
 	std::vector<Component*> components;
 };

@@ -4,9 +4,10 @@
 #ifndef CLEM_CLEM_HPP_
 #define CLEM_CLEM_HPP_
 
-#include "clem/platform.h"
-
+#include "clem/random.h"
 #include "clem/log.h"
+
+#include "clem/platform.h"
 
 #include "clem/director.h"
 #include "clem/scene.h"
