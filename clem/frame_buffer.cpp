@@ -90,13 +90,12 @@ void FrameBuffer::render()
 	// CONSOLE_SCREEN_BUFFER_INFO bufInfo;
 	// GetConsoleScreenBufferInfo(hStdOut, &bufInfo);
 	auto       hStdOut     = GetStdHandle(STD_OUTPUT_HANDLE);
-	SMALL_RECT writeRegion = {0, 0, size.x, size.y};
+	SMALL_RECT writeRegion = {0, 0, (SHORT)size.x, (SHORT)size.y};
 	WriteConsoleOutput(hStdOut,
 										 current,
 										 {(short)size.x, (short)size.y},
 										 {0, 0},
 										 &writeRegion);
-										 &bufInfo.srWindow);
 }
 
 #endif // OS_WIN
