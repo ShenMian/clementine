@@ -11,10 +11,6 @@ This is a framework for building 2D console games.
 ## Features
 - Multi-platform: Linux, macOS, Windows 10
 
-## Goals
-- Conformance
-- Performance
-
 ## Compiling
 
 ### Build Script
@@ -28,6 +24,9 @@ This is a framework for building 2D console games.
 ### CMake Options (default ON)
 - `BUILD_EXAMPLES` Build the examples
 - `BUILD_TESTS`    Build the unit tests
+
+## Screenshots
+![](doc/picture_0.png)  
 
 ## Forums
 - [**Github Discussions**](https://github.com/ShenMian/Clementine/discussions)

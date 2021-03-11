@@ -29,6 +29,9 @@
 - `BUILD_EXAMPLES` 构建示例
 - `BUILD_TESTS`    构建单元测试
 
+## 截图
+![](doc/picture_0.png)  
+
 ## 论坛
 - [**Github Discussions**](https://github.com/ShenMian/Clementine/discussions)
 - [**Telegram**](https://t.me/shenmian)
