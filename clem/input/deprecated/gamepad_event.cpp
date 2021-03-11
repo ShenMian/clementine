@@ -5,15 +5,15 @@
 #include "gamepad_event.h"
 #include <cassert>
 
-GamepadEvent::GamepadEvent(SubType, Gamepad*, short key, bool status)
-		: Event(Event::Type::gamepad), subType(subType), gamepad(gamepad),
-			keyCode(key), status(status)
+GamepadEvent::GamepadEvent(SubType type, Gamepad* gamepad, short key, bool status)
+		: Event(Event::Type::gamepad), subType(type), gamepad(gamepad),
+			keyCode(key), status(status), value(0)
 {
 }
 
-GamepadEvent::GamepadEvent(SubType, Gamepad*, short key, float value)
-		: Event(Event::Type::gamepad), subType(subType), gamepad(gamepad),
-			keyCode(key), value(value)
+GamepadEvent::GamepadEvent(SubType type, Gamepad* gamepad, short key, float value)
+		: Event(Event::Type::gamepad), subType(type), gamepad(gamepad),
+			keyCode(key), status(false), value(value)
 {
 }
 
