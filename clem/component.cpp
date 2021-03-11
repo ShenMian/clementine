@@ -9,6 +9,10 @@ Component::Component()
 {
 }
 
+void Component::update()
+{
+}
+
 void Component::onEnter()
 {
 }

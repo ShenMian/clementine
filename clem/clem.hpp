@@ -14,6 +14,9 @@
 #include "clem/camera.h"
 #include "clem/factor.h"
 
+#include "sprite.h"
+#include "physics/rigidbody.h"
+
 #include "clem/terminal.h"
 #include "clem/cursor.h"
 

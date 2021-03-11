@@ -8,6 +8,7 @@
 #include <cassert>
 #include "cursor.h"
 #include "scene.h"
+#include "sprite.h"
 #include "factor.h"
 #include "frame_buffer.h"
 
@@ -23,9 +24,22 @@ Camera::Camera(Scene* s)
 {
 }
 
-void Camera::render()
+void Camera::render(const vector<Sprite*>& sprites)
 {
-	Rect inputRect(inPos, size);
+	Rect viewport(inPos, size);
+	for(auto s : sprites)
+	{
+		auto& pos = s->getOwner()->getPosition();
+		auto  size = s->getSize();
+		Rect box(pos, size);
+		if(!viewport.contains(box))
+			continue;
+		for(int y = 0; y < size.y; y++)
+			for(int x = 0; x < size.x; x++)
+				frameBuffer.drawPoint({pos.x + x, pos.y + y}, s->buffer[0]);
+	}
+
+	/*Rect inputRect(inPos, size);
 	for(auto f : scene->getFactors())
 		if(inputRect.contains(Rect(f->getPosition(), f->getTexture().getSize())))
 		{
@@ -34,7 +48,7 @@ void Camera::render()
 			for(int y = 0; y < siz.y; y++)
 				for(int x = 0; x < siz.x; x++)
 					frameBuffer.drawPoint({f->getPosition().x - inPos.x + outPos.x + x, f->getPosition().y - inPos.y + outPos.y + y}, buf.getTiles()[y * siz.x + x].getChar());
-		}
+		}*/
 
 	/*Texture buffer(size);
 

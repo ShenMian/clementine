@@ -39,7 +39,7 @@ void Scene::render()
 	frameBuffer.clear();
 
 	for(auto cam : cameras)
-		cam->render();
+		cam->render(sprites);
 
 	frameBuffer.swapBuffers();
 	frameBuffer.render();

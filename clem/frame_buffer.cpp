@@ -27,6 +27,23 @@ void FrameBuffer::swapBuffers()
 	next      = temp;
 }
 
+void FrameBuffer::drawLine(Point a, Point b, const Tile& t)
+{
+	auto xDis   = b.x - a.x + 1;
+	auto yDis   = b.y - a.y + 1;
+	auto maxDis = max(abs(xDis), abs(yDis));
+
+	float xDelta = xDis / maxDis;
+	float yDelta = yDis / maxDis;
+
+	float x = a.x, y = a.y;
+	for(short i = 0; i < maxDis; i++)
+	{
+		drawPoint(Point(x, y), t);
+		x += xDelta, y += yDelta;
+	}
+}
+
 void FrameBuffer::drawRect(Rect r, const Tile& t)
 {
 	for(int x = r.left(); x <= r.right(); x++)
@@ -91,14 +108,12 @@ void FrameBuffer::drawPoint(Point p, const Tile& t)
 {
 	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
 		return;
-	next[(int)p.y * size.x + (int)p.x].Char.AsciiChar = t.getChar();
-	next[(int)p.y * size.x + (int)p.x].Attributes     = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY;
+	next[(int)p.x + (int)p.y * size.x].Char.AsciiChar = t.getChar();
+	next[(int)p.x + (int)p.y * size.x].Attributes     = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY;
 }
 
 void FrameBuffer::render()
 {
-	// CONSOLE_SCREEN_BUFFER_INFO bufInfo;
-	// GetConsoleScreenBufferInfo(hStdOut, &bufInfo);
 	auto       hStdOut     = GetStdHandle(STD_OUTPUT_HANDLE);
 	SMALL_RECT writeRegion = {0, 0, (SHORT)size.x, (SHORT)size.y};
 	WriteConsoleOutput(hStdOut,

@@ -16,6 +16,7 @@ class Factor
 {
 public:
 	Factor();
+	Factor(Scene&);
 	Factor(const Size&);
 	Factor(const Texture&);
 

@@ -9,16 +9,22 @@
 #include <cassert>
 
 Factor::Factor()
+		: scene(nullptr)
 {
 }
 
+Factor::Factor(Scene& s)
+{
+	s.addFactor(*this);
+}
+
 Factor::Factor(const Size& s)
-		: texture(s)
+		: texture(s), scene(nullptr)
 {
 }
 
 Factor::Factor(const Texture& t)
-		: texture(t)
+		: texture(t), scene(nullptr)
 {
 }
 

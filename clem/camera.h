@@ -11,6 +11,7 @@
 typedef unsigned short ushort;
 
 class Scene;
+class Sprite;
 
 class Camera
 {
@@ -18,7 +19,7 @@ public:
 	Camera();
 	Camera(Scene* scene);
 
-	void render();
+	void render(const std::vector<Sprite*>&);
 
 	void   setScene(Scene* scene);
 	Scene* getScene() const;

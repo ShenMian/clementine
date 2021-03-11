@@ -32,25 +32,26 @@ Texture::Texture(Size s, const Tile& t)
 
 void Texture::drawPoint(const Point& p, const Tile& t)
 {
-	if(!(0 <= p.x && p.x < size.x && 0 <= p.y && p.y < size.y))
+	if(!(0 <= (int)p.x && (int)p.x < size.x && 0 <= (int)p.y && (int)p.y < size.y))
 		return;
 
-	tiles[p.x + p.y * size.x] = t;
+	auto i                              = (int)p.x + (int)p.y * size.x;
+	tiles[(int)p.x + (int)p.y * size.x] = t;
 }
 
 void Texture::drawLine(Point a, Point b, const Tile& t)
 {
-	auto  xDis   = b.x - a.x;
-	auto  yDis   = b.y - a.y;
+	auto  xDis   = b.x - a.x + 1;
+	auto  yDis   = b.y - a.y + 1;
 	auto  maxDis = std::max(abs(xDis), abs(yDis));
 
 	float xDelta = xDis / maxDis;
 	float yDelta = yDis / maxDis;
 
 	float x = a.x, y = a.y;
-	for(short i = 1; i <= maxDis; i++)
+	for(short i = 0; i < maxDis; i++)
 	{
-		drawPoint(Point(x + 0.5, y + 0.5), t);
+		drawPoint(Point(x, y), t);
 		x += xDelta, y += yDelta;
 	}
 }
