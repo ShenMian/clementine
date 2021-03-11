@@ -1,9 +1,13 @@
-#include "component.h"
 // Copyright 2020 SMS
 // License(Apache-2.0)
 // ×é¼þ
 
 #include "component.h"
+
+Component::Component()
+		: owner(nullptr)
+{
+}
 
 void Component::onEnter()
 {

@@ -27,12 +27,25 @@ void Keyboard::clear()
 
 #ifdef OS_UNIX
 
+#include <unistd.h>
+#include <termios.h>
+
 Keyboard::Keyboard()
 {
+	tcgetattr(0, &opts);          // grab old terminal i/o settings
+	opts.c_lflag &= ~ICANON;      // disable buffered i/o
+	opts.c_lflag &= ~ECHO;        // set echo mode
+	tcsetattr(0, TCSANOW, &opts); // use these new terminal i/o settings now
 }
 
 void Keyboard::update()
 {
+	auto key = getchar();
+	if(keyStates.find(key) == keyStates.end())
+		return;
+	for(auto key : keyStatus)
+		
+	onPressed[i.first]();
 }
 
 #endif

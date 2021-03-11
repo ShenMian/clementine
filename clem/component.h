@@ -10,6 +10,8 @@ class Factor;
 class Component
 {
 public:
+	Component();
+
 	virtual void update() = 0;
 
 	virtual void onEnter();
