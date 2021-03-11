@@ -1,13 +1,12 @@
 **zh** | [en]
 
-# Clementine
-这是一个用于制作2D命令行游戏的框架.  
+![Picture](docs/banner.png)  
 
 [![License](https://img.shields.io/github/license/ShenMian/Clementine)](https://github.com/ShenMian/Clementine/blob/master/LICENSE)
 [![CodeFactor](https://www.codefactor.io/repository/github/shenmian/clementine/badge)](https://www.codefactor.io/repository/github/shenmian/clementine)
 [![CMake](https://github.com/ShenMian/Clementine/workflows/CMake/badge.svg?branch=master)](https://github.com/ShenMian/Clementine/actions?query=workflow%3ACMake)
 
-![Picture](docs/banner.png)  
+这是一个用于制作2D命令行游戏的框架.   
 
 ## 特点
 - 多平台: Linux, macOS, Windows 10
