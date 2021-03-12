@@ -65,13 +65,13 @@ Size Sprite::getSize() const
 void Sprite::onAdd()
 {
 	auto scene = owner->getScene();
-	assert(scene);
+	assert(scene != nullptr);
 	scene->addSprite(*this);
 }
 
 void Sprite::onRemove()
 {
 	auto scene = owner->getScene();
-	assert(scene);
+	assert(scene != nullptr);
 	scene->removeSprite(*this);
 }
