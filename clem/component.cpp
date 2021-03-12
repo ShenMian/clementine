@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ×é¼þ
+// ç»„ä»¶
 
 #include "component.h"
 

@@ -49,11 +49,19 @@ void Director::resume()
 	paused = false;
 }
 
+/**
+ * @brief 压入场景
+ * 
+ * @param s 要压入的场景
+ */
 void Director::pushScene(Scene& s)
 {
 	scenes.push_back(&s);
 }
 
+/**
+ * @brief 弹出场景
+ */
 void Director::popScene()
 {
 	if(scenes.size() <= 1)
@@ -62,6 +70,11 @@ void Director::popScene()
 	scenes.pop_back();
 }
 
+/**
+ * @brief 替换场景
+ * 
+ * @param s 要替换的场景
+ */
 void Director::replaceScene(Scene& s)
 {
 	if(scenes.empty())
@@ -70,6 +83,11 @@ void Director::replaceScene(Scene& s)
 	scenes.front() = &s;
 }
 
+/**
+ * @brief 获取当前场景
+ * 
+ * @return Scene* 当前场景
+ */
 Scene* Director::getCurrentScene() const
 {
 	if(!scenes.empty())
@@ -138,6 +156,11 @@ void Director::loop()
 	}
 }
 
+/**
+ * @brief 更新场景
+ * 
+ * @param dt 
+ */
 void Director::update(long dt)
 {
 	auto scene = scenes.back();
@@ -153,6 +176,11 @@ void Director::update(long dt)
 
 #include "terminal.h"
 
+/**
+ * @brief 渲染场景
+ * 
+ * @param dt 
+ */
 void Director::render(long dt)
 {
 	auto scene = scenes.back();

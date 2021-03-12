@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// 随机数生成器
+// 闅忔満鏁扮敓鎴愬櫒
 
 #ifndef CLEM_RANDOM_H_
 #define CLEM_RANDOM_H_

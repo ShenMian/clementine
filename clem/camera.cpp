@@ -24,6 +24,11 @@ Camera::Camera(Scene* s)
 {
 }
 
+/**
+ * @brief 渲染视野内的画面
+ * 
+ * @param sprites 所有可能出现的画面
+ */
 void Camera::render(const vector<Sprite*>& sprites)
 {
 	Rect viewport(inPos, size);
@@ -40,37 +45,72 @@ void Camera::render(const vector<Sprite*>& sprites)
 	}
 }
 
+/**
+ * @brief 设置所属场景
+ * 
+ * @param s 所属场景
+ */
 void Camera::setScene(Scene* s)
 {
 	assert(s != nullptr);
 	scene = s;
 }
 
+/**
+ * @brief 获取所属场景
+ * 
+ * @return Scene* 所属场景
+ */
 Scene* Camera::getScene() const
 {
 	return scene;
 }
 
+/**
+ * @brief 设置输入区域左上角坐标
+ * 
+ * @param p 
+ */
 void Camera::setInputPosition(const Point& p)
 {
 	inPos = p;
 }
 
+/**
+ * @brief 设置输出区域左上角坐标
+ * 
+ * @param p 
+ */
 void Camera::setOutputPosition(const Point& p)
 {
 	outPos = p;
 }
 
+/**
+ * @brief 设置视野大小
+ * 
+ * @param s 
+ */
 void Camera::setSize(Size s)
 {
 	size = s;
 }
 
+/**
+ * @brief 获取视野大小
+ * 
+ * @return Size 
+ */
 Size Camera::getSize() const
 {
 	return size;
 }
 
+/**
+ * @brief 设置深度, 深度越低越先渲染
+ * 
+ * @param d 
+ */
 void Camera::setDepth(ushort d)
 {
 	depth = d;
@@ -81,6 +121,11 @@ void Camera::setDepth(ushort d)
 	}
 }
 
+/**
+ * @brief 获取深度
+ * 
+ * @return ushort 
+ */
 ushort Camera::getDepth() const
 {
 	return depth;

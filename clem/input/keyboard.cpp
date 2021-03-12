@@ -7,6 +7,12 @@
 
 using std::vector;
 
+/**
+ * @brief 回调绑定, 当按键处于按下状态
+ * 
+ * @param key 
+ * @param callback 
+ */
 void Keyboard::bindOnPressed(Key key, std::function<void()> callback)
 {
 	onPressed[key] = callback;
@@ -14,6 +20,12 @@ void Keyboard::bindOnPressed(Key key, std::function<void()> callback)
 	keyStates[key] = false;
 }
 
+/**
+ * @brief 回调绑定, 当按键状态发生改变
+ * 
+ * @param key 
+ * @param callback 
+ */
 void Keyboard::bindOnChanged(Key key, std::function<void(bool)> callback)
 {
 	onChanged[key] = callback;
@@ -21,6 +33,9 @@ void Keyboard::bindOnChanged(Key key, std::function<void(bool)> callback)
 	keyStates[key] = false;
 }
 
+/**
+ * @brief 清除回调绑定
+ */
 void Keyboard::clear()
 {
 	onChanged.clear();

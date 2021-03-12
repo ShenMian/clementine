@@ -1,11 +1,17 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ͼ��
+// 图像
 
 #include "sprite.h"
 #include "frame_buffer.h"
 #include <assert.h>
 
+/**
+ * @brief 绘制点
+ * 
+ * @param p 点的坐标
+ * @param t Tile
+ */
 void Sprite::drawPoint(Point p, const Tile& t)
 {
 	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
@@ -13,6 +19,13 @@ void Sprite::drawPoint(Point p, const Tile& t)
 	buffer[(int)p.x + (int)p.y * size.x] = t;
 }
 
+/**
+ * @brief 绘制直线
+ * 
+ * @param a 点A
+ * @param b 点B
+ * @param t Tile
+ */
 void Sprite::drawLine(Point a, Point b, const Tile& t)
 {
 	auto xDis   = b.x - a.x + 1;
@@ -30,6 +43,12 @@ void Sprite::drawLine(Point a, Point b, const Tile& t)
 	}
 }
 
+/**
+ * @brief 绘制空心矩形
+ * 
+ * @param r 矩形
+ * @param t Tile
+ */
 void Sprite::drawRect(Rect r, const Tile& t)
 {
 	for(int x = r.left(); x <= r.right(); x++)
@@ -44,6 +63,12 @@ void Sprite::drawRect(Rect r, const Tile& t)
 	}
 }
 
+/**
+ * @brief 绘制实心矩形
+ * 
+ * @param r 矩形
+ * @param t Tile
+ */
 void Sprite::drawRectFill(Rect r, const Tile& t)
 {
 	for(int y = 0; y < r.height; y++)
@@ -51,12 +76,22 @@ void Sprite::drawRectFill(Rect r, const Tile& t)
 			drawPoint({r.x + x, r.y + y}, t);
 }
 
+/**
+ * @brief 设置可绘制区域的大小
+ * 
+ * @param s 
+ */
 void Sprite::setSize(Size s)
 {
 	size = s;
 	buffer.resize(s.area());
 }
 
+/**
+ * @brief 获取可绘制区域的大小
+ * 
+ * @return Size 
+ */
 Size Sprite::getSize() const
 {
 	return size;
