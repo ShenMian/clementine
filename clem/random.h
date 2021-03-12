@@ -8,6 +8,7 @@
 #include <random>
 #include <stdint.h>
 
+/// 随机数生成器
 class Random
 {
 public:

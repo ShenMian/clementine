@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['drawline_124',['drawLine',['../class_sprite.html#ab307d00f165ac85f97fc3eef1ae440ab',1,'Sprite']]],
-  ['drawpoint_125',['drawPoint',['../class_sprite.html#a0364fb3aaab9dba0761c547f83993e1e',1,'Sprite']]],
-  ['drawrect_126',['drawRect',['../class_sprite.html#ad7c7a78193fdbf529b9f5516d1698dd1',1,'Sprite']]],
-  ['drawrectfill_127',['drawRectFill',['../class_sprite.html#a43bce22623447fadfb70bcf81c65a40c',1,'Sprite']]]
+  ['clear_136',['clear',['../class_keyboard.html#a7b409e9af9593acc2fa8bc6b846d16d1',1,'Keyboard']]]
 ];

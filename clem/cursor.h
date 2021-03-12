@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ¹â±ê
+// å…‰æ ‡
 
 typedef unsigned short ushort;
 class Point;

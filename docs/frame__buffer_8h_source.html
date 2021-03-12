@@ -98,41 +98,45 @@ $(document).ready(function(){initNavTree('frame__buffer_8h_source.html',''); ini
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span><a class="code" href="class_tile.html">Tile</a>;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_frame_buffer.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_frame_buffer.html">FrameBuffer</a></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#ifdef OS_WIN</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">typedef</span> CHAR_INFO <a class="code" href="class_tile.html">buffer_t</a>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keyword">typedef</span> <a class="code" href="class_tile.html">Tile</a> <a class="code" href="class_tile.html">buffer_t</a>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_frame_buffer.html">FrameBuffer</a>();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    ~<a class="code" href="class_frame_buffer.html">FrameBuffer</a>();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> drawPoint(<a class="code" href="class_point.html">Point</a>, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp;);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> drawLine(<a class="code" href="class_point.html">Point</a>, <a class="code" href="class_point.html">Point</a>, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp;);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> drawRect(<a class="code" href="class_rect.html">Rect</a>, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp;);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> drawRectFill(<a class="code" href="class_rect.html">Rect</a>, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp;);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> drawCycle(<a class="code" href="class_point.html">Point</a>, <span class="keywordtype">short</span> radius, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp;);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> clear();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> swapBuffers();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> render();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> setSize(<a class="code" href="class_size.html">Size</a>);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="class_size.html">Size</a> getSize() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="class_tile.html">buffer_t</a>* current;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_tile.html">buffer_t</a>* next;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="class_size.html">Size</a>      size;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">extern</span> <a class="code" href="class_frame_buffer.html">FrameBuffer</a> frameBuffer;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_FRAME_BUFFER_H_</span></div>
-<div class="ttc" id="aclass_frame_buffer_html"><div class="ttname"><a href="class_frame_buffer.html">FrameBuffer</a></div><div class="ttdef"><b>Definition:</b> frame_buffer.h:14</div></div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_frame_buffer.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_frame_buffer.html">FrameBuffer</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#ifdef OS_WIN</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">typedef</span> CHAR_INFO <a class="code" href="class_tile.html">buffer_t</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keyword">typedef</span> <a class="code" href="class_tile.html">Tile</a> <a class="code" href="class_tile.html">buffer_t</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_frame_buffer.html">FrameBuffer</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    ~<a class="code" href="class_frame_buffer.html">FrameBuffer</a>();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_frame_buffer.html#aace970c8b9ca54d8393b1aaf8ffe7abd">drawPoint</a>(<a class="code" href="class_point.html">Point</a>, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp;);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> drawLine(<a class="code" href="class_point.html">Point</a>, <a class="code" href="class_point.html">Point</a>, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp;);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> drawRect(<a class="code" href="class_rect.html">Rect</a>, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp;);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> drawRectFill(<a class="code" href="class_rect.html">Rect</a>, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp;);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> drawCycle(<a class="code" href="class_point.html">Point</a>, <span class="keywordtype">short</span> radius, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp;);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> clear();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_frame_buffer.html#abee2f66e863efed92bc480275f0b52e0">swapBuffers</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> render();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_frame_buffer.html#ab1f2e6e815e01d0bbaf157c3b0a70c8c">setSize</a>(<a class="code" href="class_size.html">Size</a>);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="class_size.html">Size</a> <a class="code" href="class_frame_buffer.html#a33d5d424b89551cbb58435f87b391b21">getSize</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_tile.html">buffer_t</a>* current;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="class_tile.html">buffer_t</a>* next;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_size.html">Size</a>      size;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">extern</span> <a class="code" href="class_frame_buffer.html">FrameBuffer</a> frameBuffer;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_FRAME_BUFFER_H_</span></div>
+<div class="ttc" id="aclass_frame_buffer_html"><div class="ttname"><a href="class_frame_buffer.html">FrameBuffer</a></div><div class="ttdoc">帧缓冲区</div><div class="ttdef"><b>Definition:</b> frame_buffer.h:15</div></div>
+<div class="ttc" id="aclass_frame_buffer_html_a33d5d424b89551cbb58435f87b391b21"><div class="ttname"><a href="class_frame_buffer.html#a33d5d424b89551cbb58435f87b391b21">FrameBuffer::getSize</a></div><div class="ttdeci">Size getSize() const</div><div class="ttdoc">获取缓冲区大小</div><div class="ttdef"><b>Definition:</b> frame_buffer.cpp:100</div></div>
+<div class="ttc" id="aclass_frame_buffer_html_aace970c8b9ca54d8393b1aaf8ffe7abd"><div class="ttname"><a href="class_frame_buffer.html#aace970c8b9ca54d8393b1aaf8ffe7abd">FrameBuffer::drawPoint</a></div><div class="ttdeci">void drawPoint(Point, const Tile &amp;)</div><div class="ttdoc">绘制点</div><div class="ttdef"><b>Definition:</b> frame_buffer.cpp:115</div></div>
+<div class="ttc" id="aclass_frame_buffer_html_ab1f2e6e815e01d0bbaf157c3b0a70c8c"><div class="ttname"><a href="class_frame_buffer.html#ab1f2e6e815e01d0bbaf157c3b0a70c8c">FrameBuffer::setSize</a></div><div class="ttdeci">void setSize(Size)</div><div class="ttdoc">设置缓冲区大小</div><div class="ttdef"><b>Definition:</b> frame_buffer.cpp:84</div></div>
+<div class="ttc" id="aclass_frame_buffer_html_abee2f66e863efed92bc480275f0b52e0"><div class="ttname"><a href="class_frame_buffer.html#abee2f66e863efed92bc480275f0b52e0">FrameBuffer::swapBuffers</a></div><div class="ttdeci">void swapBuffers()</div><div class="ttdoc">交换缓冲区</div><div class="ttdef"><b>Definition:</b> frame_buffer.cpp:27</div></div>
 <div class="ttc" id="aclass_point_html"><div class="ttname"><a href="class_point.html">Point</a></div><div class="ttdef"><b>Definition:</b> point.h:11</div></div>
 <div class="ttc" id="aclass_rect_html"><div class="ttname"><a href="class_rect.html">Rect</a></div><div class="ttdef"><b>Definition:</b> rect.h:12</div></div>
 <div class="ttc" id="aclass_size_html"><div class="ttname"><a href="class_size.html">Size</a></div><div class="ttdef"><b>Definition:</b> size.h:11</div></div>

@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ÊÂ¼þ
+// äº‹ä»¶
 
 #ifndef CLEM_EVENT_H_
 #define CLEM_EVENT_H_

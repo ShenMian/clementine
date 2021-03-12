@@ -9,13 +9,11 @@
 #include <string>
 #include <fstream>
 
-enum class Level;
-
-#define LOG_INFO Log::write(Level::info, __FILE__, __FUNCTION__, __LINE__)
-
 class Log
 {
 public:
+	enum class Level;
+
 	static std::ofstream& info(const std::string&);
 	static std::ofstream& warn(const std::string&);
 	static std::ofstream& error(const std::string&);
@@ -25,7 +23,7 @@ private:
 	static std::ofstream file;
 };
 
-enum class Level
+enum class Log::Level
 {
 	info,
 	warn,

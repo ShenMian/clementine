@@ -17,6 +17,7 @@ class Renderer;
 class Sprite;
 class Rigidbody;
 
+/// 场景
 class Scene
 {
 public:

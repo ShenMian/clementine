@@ -23,7 +23,7 @@ var annotated_dup =
     [ "InputComponent", "class_input_component.html", "class_input_component" ],
     [ "Keyboard", "class_keyboard.html", "class_keyboard" ],
     [ "KeyboardInput", "class_keyboard_input.html", "class_keyboard_input" ],
-    [ "Log", "class_log.html", null ],
+    [ "Log", "class_log.html", "class_log" ],
     [ "Mouse", "class_mouse.html", "class_mouse" ],
     [ "Observable", "class_observable.html", "class_observable" ],
     [ "Observer", "class_observer.html", "class_observer" ],

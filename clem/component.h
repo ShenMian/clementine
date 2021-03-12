@@ -7,6 +7,7 @@
 
 #include "factor.h"
 
+/// 组件
 class Component
 {
 public:

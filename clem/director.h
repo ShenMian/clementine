@@ -1,5 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
+// 导演
 
 #ifndef CLEM_DIRECTOR_H_
 #define CLEM_DIRECTOR_H_
@@ -9,6 +10,7 @@
 class Size;
 class Scene;
 
+/// 导演
 class Director
 {
 public:

@@ -12,6 +12,7 @@ class Physics;
 class Collider;
 class Component;
 
+/// 游戏对象
 class Factor
 {
 public:

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['bindonchanged_121',['bindOnChanged',['../class_keyboard.html#ab0f8d42921b0cd373cd147d9bdbdc6ae',1,'Keyboard']]],
-  ['bindonpressed_122',['bindOnPressed',['../class_keyboard.html#a596be2d706c5a32c1a2dee2a9d344c48',1,'Keyboard']]]
+  ['addcomponent_133',['addComponent',['../class_factor.html#a9874a86d25d9c1efa5be9578f8aa1261',1,'Factor']]]
 ];

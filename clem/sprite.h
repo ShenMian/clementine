@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ͼ��
+// 图像
 
 #ifndef CLEM_SPRITE_H_
 #define CLEM_SPRITE_H_
@@ -12,6 +12,7 @@
 
 class FrameBuffer;
 
+/// 图像
 class Sprite : public Component
 {
 	friend class Camera;

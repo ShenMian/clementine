@@ -10,6 +10,7 @@
 
 class Tile;
 
+/// 帧缓冲区
 class FrameBuffer
 {
 #ifdef OS_WIN
