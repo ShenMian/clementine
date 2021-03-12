@@ -7,6 +7,7 @@
 
 typedef unsigned short ushort;
 
+/// 2D大小
 class Size
 {
 public:

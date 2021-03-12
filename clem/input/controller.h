@@ -7,6 +7,7 @@
 
 #include "input_component.h"
 
+/// 游戏控制器
 class Controller : public InputComponent
 {
 public:

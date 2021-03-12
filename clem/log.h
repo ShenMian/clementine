@@ -9,6 +9,7 @@
 #include <string>
 #include <fstream>
 
+/// 日志
 class Log
 {
 public:

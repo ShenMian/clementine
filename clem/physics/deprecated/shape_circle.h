@@ -7,6 +7,7 @@
 
 #include "shape.h"
 
+/// (已弃用)
 class PhysicsShapeCircle : public PhysicsShape
 {
 public:

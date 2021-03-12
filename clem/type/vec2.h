@@ -7,6 +7,7 @@
 
 #include <math.h>
 
+/// 2D向量
 class Vec2
 {
 public:

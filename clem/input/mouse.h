@@ -8,6 +8,7 @@
 #include "input_component.h"
 #include <functional>
 
+/// 鼠标输入
 class Mouse : public InputComponent
 {
 public:

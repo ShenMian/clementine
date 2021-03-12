@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ¸ÕÌå
+// ï¿½ï¿½ï¿½ï¿½
 
 #ifndef CLEM_PHYSICS_PHYSICS_BODY_H_
 #define CLEM_PHYSICS_PHYSICS_BODY_H_
@@ -9,6 +9,7 @@
 #include "type.h"
 #include "shape.h"
 
+/// (å·²å¼ƒç”¨)
 class PhysicsBody
 {
 public:

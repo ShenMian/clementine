@@ -7,6 +7,7 @@
 
 class Observable;
 
+/// 观察者(已弃用)
 class Observer
 {
 public:

@@ -9,6 +9,7 @@
 #include <clem/tile.h>
 #include <clem/type.h>
 
+/// 材质(已弃用)
 class Texture
 {
 public:

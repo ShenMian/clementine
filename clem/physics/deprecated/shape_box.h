@@ -10,6 +10,7 @@
 class Size;
 class Point;
 
+/// (已弃用)
 class PhysicsShapeBox : public PhysicsShape
 {
 public:

@@ -5,6 +5,7 @@
 #include <vector>
 #include "body.h"
 
+/// (已弃用)
 class PhysicsWorld
 {
 public:

@@ -1,6 +1,7 @@
 
 #include <string>
 
+/// 终端
 class Terminal
 {
 public:

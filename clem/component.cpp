@@ -13,14 +13,6 @@ void Component::update(float)
 {
 }
 
-void Component::onEnter()
-{
-}
-
-void Component::onExit()
-{
-}
-
 /**
  * @brief 回调, 当组件被添加
  */

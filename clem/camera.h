@@ -13,6 +13,7 @@ typedef unsigned short ushort;
 class Scene;
 class Sprite;
 
+/// 摄像机
 class Camera
 {
 public:

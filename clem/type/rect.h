@@ -8,6 +8,7 @@
 class Size;
 class Point;
 
+/// 矩形
 class Rect
 {
 public:

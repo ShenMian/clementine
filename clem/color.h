@@ -12,6 +12,7 @@
 enum class Fore;
 enum class Back;
 
+/// 颜色属性
 class Color
 {
 	friend class FrameBuffer;

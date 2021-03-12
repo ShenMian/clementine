@@ -1,6 +1,7 @@
 
 class DataStream;
 
+/// 可被序列化
 class Serializable
 {
 public:

@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ��Ϸ�ֱ�
+// ��Ϸ�ֱ�
 
 #ifndef CLEM_INPUT_GAMEPAD_H_
 #define CLEM_INPUT_GAMEPAD_H_
@@ -8,6 +8,7 @@
 #include <vector>
 #include "gamepad_event.h"
 
+/// 游戏手柄(已弃用)
 class Gamepad
 {
 public:

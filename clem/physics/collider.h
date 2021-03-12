@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// Åö×²Ìå
+// ç¢°æ’žä½“
 
 #ifndef CLEM_COLLIDER_H_
 #define CLEM_COLLIDER_H_
@@ -10,6 +10,7 @@
 class Rigidbody;
 class CircleCollider;
 
+/// ç¢°æ’žä½“
 class Collider
 {
 public:

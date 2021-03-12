@@ -6,6 +6,7 @@
 
 #include <clem/color.h>
 
+/// 瓦片
 class Tile
 {
 public:

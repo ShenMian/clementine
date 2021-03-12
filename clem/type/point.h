@@ -7,6 +7,7 @@
 
 class Vec2;
 
+/// 点
 class Point
 {
 public:

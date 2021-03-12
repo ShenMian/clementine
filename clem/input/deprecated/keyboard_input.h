@@ -7,6 +7,7 @@
 
 #include "input.h_"
 
+/// (已弃用)
 class KeyboardInput : public Input
 {
 public:

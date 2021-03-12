@@ -7,6 +7,7 @@
 
 #include "clem/component.h"
 
+/// 输入组件
 class InputComponent : public Component
 {
 public:

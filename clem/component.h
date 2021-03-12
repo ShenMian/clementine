@@ -15,8 +15,6 @@ public:
 
 	virtual void update(float dt);
 
-	virtual void onEnter();
-	virtual void onExit();
 	virtual void onAdd();
 	virtual void onRemove();
 

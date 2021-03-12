@@ -1,11 +1,12 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// �ֱ��¼�
+// �ֱ��¼�
 
 #include "clem/event.h"
 
 class Gamepad;
 
+/// 游戏手柄事件(已弃用)
 class GamepadEvent : public Event
 {
 public:

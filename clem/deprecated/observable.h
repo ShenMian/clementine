@@ -8,6 +8,7 @@
 #include <vector>
 #include "observer.h"
 
+/// 被观察者(已弃用)
 class Observable
 {
 public:

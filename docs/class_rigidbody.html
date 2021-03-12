@@ -90,6 +90,11 @@ $(document).ready(function(){initNavTree('class_rigidbody.html',''); initResizab
 <div class="title">Rigidbody类 参考</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>刚体  
+ <a href="class_rigidbody.html#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="rigidbody_8h_source.html">rigidbody.h</a>&gt;</code></p>
 <div class="dynheader">
 类 Rigidbody 继承关系图:</div>
 <div class="dyncontent">
@@ -102,14 +107,14 @@ $(document).ready(function(){initNavTree('class_rigidbody.html',''); initResizab
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:ac8cd27b3518b9f5b9e8823ce0a0eea49"><td class="memItemLeft" align="right" valign="top"><a id="ac8cd27b3518b9f5b9e8823ce0a0eea49"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (float dt) override</td></tr>
+<tr class="memitem:ac8cd27b3518b9f5b9e8823ce0a0eea49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigidbody.html#ac8cd27b3518b9f5b9e8823ce0a0eea49">update</a> (float dt) override</td></tr>
+<tr class="memdesc:ac8cd27b3518b9f5b9e8823ce0a0eea49"><td class="mdescLeft">&#160;</td><td class="mdescRight">更新速度和坐标  <a href="class_rigidbody.html#ac8cd27b3518b9f5b9e8823ce0a0eea49">更多...</a><br /></td></tr>
 <tr class="separator:ac8cd27b3518b9f5b9e8823ce0a0eea49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8d7bbd8e65c3d9f6b6be23e61cee0f2"><td class="memItemLeft" align="right" valign="top"><a id="aa8d7bbd8e65c3d9f6b6be23e61cee0f2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addCollider</b> (<a class="el" href="class_collider.html">Collider</a> &amp;)</td></tr>
+<tr class="memitem:aa8d7bbd8e65c3d9f6b6be23e61cee0f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigidbody.html#aa8d7bbd8e65c3d9f6b6be23e61cee0f2">addCollider</a> (<a class="el" href="class_collider.html">Collider</a> &amp;)</td></tr>
+<tr class="memdesc:aa8d7bbd8e65c3d9f6b6be23e61cee0f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加碰撞体  <a href="class_rigidbody.html#aa8d7bbd8e65c3d9f6b6be23e61cee0f2">更多...</a><br /></td></tr>
 <tr class="separator:aa8d7bbd8e65c3d9f6b6be23e61cee0f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a943500b9ced40c992666008d78c68f0a"><td class="memItemLeft" align="right" valign="top"><a id="a943500b9ced40c992666008d78c68f0a"></a>
-const std::vector&lt; <a class="el" href="class_collider.html">Collider</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getColliders</b> () const</td></tr>
+<tr class="memitem:a943500b9ced40c992666008d78c68f0a"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="class_collider.html">Collider</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigidbody.html#a943500b9ced40c992666008d78c68f0a">getColliders</a> () const</td></tr>
+<tr class="memdesc:a943500b9ced40c992666008d78c68f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取全部碰撞体  <a href="class_rigidbody.html#a943500b9ced40c992666008d78c68f0a">更多...</a><br /></td></tr>
 <tr class="separator:a943500b9ced40c992666008d78c68f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3bacc9cb76fb592ccafd26886d3c357"><td class="memItemLeft" align="right" valign="top"><a id="ac3bacc9cb76fb592ccafd26886d3c357"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigidbody.html#ac3bacc9cb76fb592ccafd26886d3c357">onAdd</a> () override</td></tr>
@@ -120,12 +125,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:a5924c1467b0ee1b001fbd36fc695a45f"><td class="mdescLeft">&#160;</td><td class="mdescRight">回调, 当组件被移除 <br /></td></tr>
 <tr class="separator:a5924c1467b0ee1b001fbd36fc695a45f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_component"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_component')"><img src="closed.png" alt="-"/>&#160;Public 成员函数 继承自 <a class="el" href="class_component.html">Component</a></td></tr>
-<tr class="memitem:a5865a4bd6c9e2f759f4bfe204a9e43ff inherit pub_methods_class_component"><td class="memItemLeft" align="right" valign="top"><a id="a5865a4bd6c9e2f759f4bfe204a9e43ff"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>onEnter</b> ()</td></tr>
-<tr class="separator:a5865a4bd6c9e2f759f4bfe204a9e43ff inherit pub_methods_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac225bda692b9b0669c0be103ae02212f inherit pub_methods_class_component"><td class="memItemLeft" align="right" valign="top"><a id="ac225bda692b9b0669c0be103ae02212f"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>onExit</b> ()</td></tr>
-<tr class="separator:ac225bda692b9b0669c0be103ae02212f inherit pub_methods_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97cd7aab2c6e835371ef64e00c9618f1 inherit pub_methods_class_component"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_component.html#a97cd7aab2c6e835371ef64e00c9618f1">setOwner</a> (<a class="el" href="class_factor.html">Factor</a> *owner)</td></tr>
 <tr class="memdesc:a97cd7aab2c6e835371ef64e00c9618f1 inherit pub_methods_class_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置拥有者  <a href="class_component.html#a97cd7aab2c6e835371ef64e00c9618f1">更多...</a><br /></td></tr>
 <tr class="separator:a97cd7aab2c6e835371ef64e00c9618f1 inherit pub_methods_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,6 +148,91 @@ Public 属性</h2></td></tr>
 <a class="el" href="class_factor.html">Factor</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>owner</b></td></tr>
 <tr class="separator:a0de2d5a11f41b0768591e710e88b938a inherit pro_attribs_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>刚体 </p>
+</div><h2 class="groupheader">成员函数说明</h2>
+<a id="aa8d7bbd8e65c3d9f6b6be23e61cee0f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8d7bbd8e65c3d9f6b6be23e61cee0f2">&#9670;&nbsp;</a></span>addCollider()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Rigidbody::addCollider </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_collider.html">Collider</a> &amp;&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加碰撞体 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>碰撞体 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a943500b9ced40c992666008d78c68f0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a943500b9ced40c992666008d78c68f0a">&#9670;&nbsp;</a></span>getColliders()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const vector&lt; <a class="el" href="class_collider.html">Collider</a> * &gt; &amp; Rigidbody::getColliders </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取全部碰撞体 </p>
+<dl class="section return"><dt>返回</dt><dd>const vector&lt;Collider*&gt;&amp; </dd></dl>
+
+</div>
+</div>
+<a id="ac8cd27b3518b9f5b9e8823ce0a0eea49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8cd27b3518b9f5b9e8823ce0a0eea49">&#9670;&nbsp;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Rigidbody::update </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>dt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>更新速度和坐标 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dt</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>重载 <a class="el" href="class_component.html">Component</a> .</p>
+
+</div>
+</div>
 <hr/>该类的文档由以下文件生成:<ul>
 <li>clem/physics/<a class="el" href="rigidbody_8h_source.html">rigidbody.h</a></li>
 <li>clem/physics/rigidbody.cpp</li>

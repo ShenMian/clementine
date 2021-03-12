@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// ¸ÕÌå
+// åˆšä½“
 
 #ifndef CLEM_PHYSICS_RIGIDBODY_H_
 #define CLEM_PHYSICS_RIGIDBODY_H_
@@ -11,6 +11,7 @@
 
 class Collider;
 
+/// åˆšä½“
 class Rigidbody : public Component
 {
 public:
