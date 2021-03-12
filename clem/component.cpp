@@ -9,7 +9,7 @@ Component::Component()
 {
 }
 
-void Component::update()
+void Component::update(float)
 {
 }
 

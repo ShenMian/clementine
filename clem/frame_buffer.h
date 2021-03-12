@@ -15,7 +15,7 @@ class FrameBuffer
 #ifdef OS_WIN
 	typedef CHAR_INFO buffer_t;
 #else
-  typedef char buffer_t;
+  typedef Tile buffer_t;
 #endif
 
 public:

@@ -17,6 +17,8 @@ public:
 	Vec2 velocity;
 	Vec2 accelerate;
 
+	void update(float dt) override;
+
 	void addCollider(Collider&);
 
 	void onAdd() override;

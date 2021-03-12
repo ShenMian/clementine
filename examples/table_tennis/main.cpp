@@ -26,11 +26,15 @@ int main()
 	Cursor::setVisible(false);
 	auto director = Director::getInstance();
 	Scene scene;
+	
 
 	Player playerA(scene);
+	playerA.bind(Keyboard::Key::W, Keyboard::Key::S);
+	playerA.setPosition({1, 12});
+	
 	Player playerB(scene);
-	playerA.setPosition({1, 0});
-	playerB.setPosition({118, 0});
+	playerB.bind(Keyboard::Key::up, Keyboard::Key::down);
+	playerB.setPosition({118, 12});
 
 	director->pushScene(scene);
 	director->run();

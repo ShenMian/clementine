@@ -29,7 +29,7 @@ void Camera::render(const vector<Sprite*>& sprites)
 	Rect viewport(inPos, size);
 	for(auto s : sprites)
 	{
-		auto& pos = s->getOwner()->getPosition();
+		auto& pos  = s->getOwner()->getPosition();
 		auto  size = s->getSize();
 		Rect box(pos, size);
 		if(!viewport.contains(box))
@@ -38,36 +38,6 @@ void Camera::render(const vector<Sprite*>& sprites)
 			for(int x = 0; x < size.x; x++)
 				frameBuffer.drawPoint({pos.x + x, pos.y + y}, s->buffer[0]);
 	}
-
-	/*Rect inputRect(inPos, size);
-	for(auto f : scene->getFactors())
-		if(inputRect.contains(Rect(f->getPosition(), f->getTexture().getSize())))
-		{
-			auto buf = f->getTexture();
-			auto siz = buf.getSize();
-			for(int y = 0; y < siz.y; y++)
-				for(int x = 0; x < siz.x; x++)
-					frameBuffer.drawPoint({f->getPosition().x - inPos.x + outPos.x + x, f->getPosition().y - inPos.y + outPos.y + y}, buf.getTiles()[y * siz.x + x].getChar());
-		}*/
-
-	/*Texture buffer(size);
-
-	Rect inputRect(inPos, size);
-
-	for(auto f : scene->getFactors())
-		if(inputRect.contains(Rect(f->getPosition(), f->getTexture().getSize())))
-			buffer.drawTexture(f->getTexture(), f->getPosition());
-
-	auto& buf = buffer.getTiles();
-	for(ushort y = 0; y < size.y; y++)
-	{
-		Cursor::move(0, y);
-		for(ushort x = 0; x < size.x; x++)
-		{
-			buf[y * size.x + x].getColor().on();
-			printf("%c", buf[y * size.x + x].getChar());
-		}
-	}*/
 }
 
 void Camera::setScene(Scene* s)

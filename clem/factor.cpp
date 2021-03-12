@@ -31,9 +31,7 @@ Factor::Factor(const Texture& t)
 void Factor::update(float dt)
 {
 	for(auto c : components)
-		c->update();
-
-	position += velocity * dt;
+		c->update(dt);
 }
 
 void Factor::addComponent(Component& com)
@@ -79,11 +77,6 @@ void Factor::setTexture(const Texture& t)
 const Point& Factor::getPosition() const
 {
 	return position;
-}
-
-void Factor::setVelocity(const Vec2& v)
-{
-	velocity = v;
 }
 
 Texture& Factor::getTexture()

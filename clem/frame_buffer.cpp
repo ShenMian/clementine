@@ -90,12 +90,26 @@ Size FrameBuffer::getSize() const
 
 #ifdef OS_UNIX
 
+#include "cursor.h"
+
 void FrameBuffer::drawPoint(Point p, const Tile& t)
 {
+	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
+		return;
+	next[(int)p.x + (int)p.y * size.x] = t;
 }
 
 void FrameBuffer::render()
 {
+	for(int y = 0; y < size.y; y++)
+	{
+		Cursor::(0, y);
+		for(int x = 0; x < size.x; x++)
+		{
+			buffer[x + y * size.x].getColor().on();
+			printf("%c", buffer[x + y * size.x].getChar());
+		}
+	}
 }
 
 #endif

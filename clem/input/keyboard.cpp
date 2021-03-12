@@ -56,7 +56,7 @@ Keyboard::Keyboard()
 {
 }
 
-void Keyboard::update()
+void Keyboard::update(float)
 {
 	for(auto& i : keyStates)
 	{

@@ -12,7 +12,7 @@ class Component
 public:
 	Component();
 
-	virtual void update();
+	virtual void update(float dt);
 
 	virtual void onEnter();
 	virtual void onExit();

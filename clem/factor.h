@@ -25,8 +25,6 @@ public:
 	void         setPosition(const Point&);
 	const Point& getPosition() const;
 
-	void setVelocity(const Vec2&);
-
 	void     setTexture(const Texture&);
 	Texture& getTexture();
 
@@ -38,7 +36,6 @@ public:
 
 protected:
 	Point position;
-	Vec2  velocity;
 
 private:
 	Scene*                  scene;
