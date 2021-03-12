@@ -18,6 +18,11 @@ void Cursor::move(short x, short y)
 	printf("\x1b[%d;%dH", y + 1, x + 1);
 }
 
+/**
+ * @brief 设置光标可见性
+ * 
+ * @param v 
+ */
 void Cursor::setVisible(bool v)
 {
 	if(v)

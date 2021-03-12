@@ -19,6 +19,9 @@ Director* Director::getInstance()
 	return &instance;
 }
 
+/**
+ * @brief 在单独的线程中启动主循环
+ */
 void Director::run()
 {
 	if(scenes.empty())
@@ -29,11 +32,18 @@ void Director::run()
 	});
 }
 
+/**
+ * @brief 暂停主循环
+ */
 void Director::pause()
 {
 	paused = true;	
 }
 
+/**
+ * @brief 恢复主循环
+ * 
+ */
 void Director::resume()
 {
 	paused = false;
@@ -68,23 +78,41 @@ Scene* Director::getCurrentScene() const
 		return nullptr;
 }
 
+/**
+ * @brief 设置更新时间周期
+ * 
+ * @param ms 更新时间周期(ms)
+ */
 void Director::setMsPerUpdate(long ms)
 {
 	assert(ms > 0);
 	msPerUpdate = ms;
 }
 
+/**
+ * @brief 设置渲染时间周期
+ * 
+ * @param ms 渲染时间周期(ms)
+ */
 void Director::setMsPerRender(long ms)
 {
 	assert(ms > 0);
 	msPerRender = ms;
 }
 
+/**
+ * @brief 获取实时FPS
+ * 
+ * @return short 
+ */
 short Director::getFramesPerSecond() const
 {
 	return framesPerSecond;
 }
 
+/**
+ * @brief 主循环
+ */
 void Director::loop()
 {
 	long current, previous, dt;
