@@ -13,54 +13,26 @@ using std::ofstream;
 
 ofstream Log::file;
 
-ofstream& Log::info(const string& msg)
+ofstream& Log::info(const string& s)
 {
-	file << "[INFO] " << msg << std::endl;
+	file << "[INFO] " << s << std::endl;
 	return file;
 }
 
-std::ofstream& Log::warn(const std::string&)
+std::ofstream& Log::warn(const string& s)
 {
+	file << "[WARN] " << s << std::endl;
 	return file;
 }
 
-std::ofstream& Log::error(const std::string&)
+std::ofstream& Log::error(const string& s)
 {
+	file << "[ERROR] " << s << std::endl;
 	return file;
 }
 
-std::ofstream& Log::fatal(const std::string&)
+std::ofstream& Log::fatal(const string& s)
 {
+	file << "[FATAL] " << s << std::endl;
 	return file;
-}
-
-void Log::write(Level level, const char* filename, const char* func, size_t line)
-{
-	string buf;
-	
-	time_t systemTime = std::time(NULL);
-	tm*    localTime  = std::localtime(&systemTime);
-	printf("local time is: %s\n", asctime(localTime));
-
-	switch(level)
-	{
-	case Level::info:
-		buf += "[INFO]";
-		break;
-
-	case Level::warn:
-		buf += "[WARN]";
-		break;
-
-	case Level::error:
-		buf += "[ERROR]";
-		break;
-
-	case Level::fatal:
-		buf += "[FATAL]";
-		break;
-
-	default:
-		assert(false);
-	}
 }

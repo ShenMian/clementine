@@ -21,8 +21,6 @@ public:
 	static std::ofstream& error(const std::string&);
 	static std::ofstream& fatal(const std::string&);
 
-	static void write(Level, const char* filename, const char* funcition, size_t line);
-
 private:
 	static std::ofstream file;
 };

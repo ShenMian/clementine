@@ -227,6 +227,11 @@ Director::Director()
     assert(false);
 }
 
+/**
+ * @brief 获取终端缓冲区大小
+ * 
+ * @return Size 终端缓冲区大小
+ */
 Size Director::getWinSize() const
 {
 	winsize winSize;
@@ -236,6 +241,11 @@ Size Director::getWinSize() const
 
 #include <sys/time.h>
 
+/**
+ * @brief 获取当前毫秒数
+ * 
+ * @return long 当前毫秒数
+ */
 long Director::getCurrentMillSecond() const
 {
 	struct timeval t;
@@ -259,6 +269,11 @@ Director::Director()
 		assert(false);
 }
 
+/**
+ * @brief 获取终端缓冲区大小
+ * 
+ * @return Size 终端缓冲区大小
+ */
 Size Director::getWinSize() const
 {
 	static const auto hOut = GetStdHandle(STD_OUTPUT_HANDLE);

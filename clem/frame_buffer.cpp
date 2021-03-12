@@ -21,6 +21,9 @@ FrameBuffer::~FrameBuffer()
 	delete[] next;
 }
 
+/**
+ * @brief 交换缓冲区
+ */
 void FrameBuffer::swapBuffers()
 {
 	auto temp = current;
@@ -73,6 +76,11 @@ void FrameBuffer::clear()
 			drawPoint(Point(x, y), Tile(' '));
 }
 
+/**
+ * @brief 设置缓冲区大小
+ * 
+ * @param s 大小
+ */
 void FrameBuffer::setSize(Size s)
 {
 	size = s;
@@ -84,6 +92,11 @@ void FrameBuffer::setSize(Size s)
 	next    = new buffer_t[size.area()]();
 }
 
+/**
+ * @brief 获取缓冲区大小
+ * 
+ * @return Size 大小
+ */
 Size FrameBuffer::getSize() const
 {
 	return size;
@@ -93,6 +106,12 @@ Size FrameBuffer::getSize() const
 
 #include "cursor.h"
 
+/**
+ * @brief 绘制点
+ * 
+ * @param p 点的坐标
+ * @param t Tile
+ */
 void FrameBuffer::drawPoint(Point p, const Tile& t)
 {
 	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
