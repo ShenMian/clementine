@@ -53,10 +53,6 @@ private:
 
 int main()
 {
-	int fps;
-	printf("FPS: ");
-	scanf("%d", &fps);
-
 	Cursor::setVisible(false);
 	auto director = Director::getInstance();
 	Scene scene;
@@ -78,7 +74,7 @@ int main()
 	Ball testB(scene);
 	testB.setPosition({2, 14});
 
-	director->setMsPerRender(1000 / fps);
+	director->setMsPerRender(1000 / 60);
 	director->pushScene(scene);
 	director->run();
 	while(true)
