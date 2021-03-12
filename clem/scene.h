@@ -17,7 +17,7 @@ class Renderer;
 class Sprite;
 class Rigidbody;
 
-/// 场景
+/// 场景, 管理游戏对象
 class Scene
 {
 public:

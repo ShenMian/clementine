@@ -2,7 +2,7 @@ var searchData=
 [
   ['scene_76',['Scene',['../class_scene.html',1,'Scene'],['../class_scene.html#ad10176d75a9cc0da56626f682d083507',1,'Scene::Scene()']]],
   ['serializable_77',['Serializable',['../class_serializable.html',1,'']]],
-  ['setdepth_78',['setDepth',['../class_camera.html#aa1cf36d8b5d1cec76167110d6bbafcf9',1,'Camera']]],
+  ['setdepth_78',['setDepth',['../class_camera.html#adef724446082d86888f354a6d314ea51',1,'Camera']]],
   ['setinputposition_79',['setInputPosition',['../class_camera.html#a8d161d79b379422f5cd3ad86fb736149',1,'Camera']]],
   ['setmsperrender_80',['setMsPerRender',['../class_director.html#ae3614b15b1935eebd5aae74c6f1cc515',1,'Director']]],
   ['setmsperupdate_81',['setMsPerUpdate',['../class_director.html#aecb29841de86d14cf7ce4a52aff65f3b',1,'Director']]],

@@ -12,7 +12,7 @@ class Physics;
 class Collider;
 class Component;
 
-/// 游戏对象
+/// 游戏对象, 构成游戏的基本对象
 class Factor
 {
 public:

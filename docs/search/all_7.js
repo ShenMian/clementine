@@ -5,7 +5,7 @@ var searchData=
   ['getcameras_31',['getCameras',['../class_scene.html#af0c0e248aea303c7bb59318de10606b5',1,'Scene']]],
   ['getcolliders_32',['getColliders',['../class_rigidbody.html#a943500b9ced40c992666008d78c68f0a',1,'Rigidbody']]],
   ['getcurrentscene_33',['getCurrentScene',['../class_director.html#a27ab43521b357da8e3e669674911fb42',1,'Director']]],
-  ['getdepth_34',['getDepth',['../class_camera.html#aa8a2438c62dac9e5e94d2ea7d9e272fc',1,'Camera']]],
+  ['getdepth_34',['getDepth',['../class_camera.html#a6630e7160f6713a362333a4d7bc27715',1,'Camera']]],
   ['getfactors_35',['getFactors',['../class_scene.html#ae83fd7b017cb8140a8cbe588e65fc32d',1,'Scene']]],
   ['getframespersecond_36',['getFramesPerSecond',['../class_director.html#a0d69fd2ee20793ade3a6ca62f15bc9ce',1,'Director']]],
   ['getoffset_37',['getOffset',['../class_collider.html#a9767c6efe6f59d95783047598a6c1e1e',1,'Collider']]],

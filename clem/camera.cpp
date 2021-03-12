@@ -119,7 +119,7 @@ Size Camera::getSize() const
  * 
  * @param d 深度
  */
-void Camera::setDepth(ushort d)
+void Camera::setDepth(short d)
 {
 	depth = d;
 	if(scene)
@@ -132,9 +132,9 @@ void Camera::setDepth(ushort d)
 /**
  * @brief 获取深度
  * 
- * @return ushort 深度
+ * @return short 深度
  */
-ushort Camera::getDepth() const
+short Camera::getDepth() const
 {
 	return depth;
 }

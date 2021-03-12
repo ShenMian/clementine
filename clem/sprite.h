@@ -12,7 +12,7 @@
 
 class FrameBuffer;
 
-/// 图像
+/// 图像, 由瓦片组成的图像
 class Sprite : public Component
 {
 	friend class Camera;

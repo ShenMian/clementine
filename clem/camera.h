@@ -8,8 +8,6 @@
 #include <vector>
 #include "type.h"
 
-typedef unsigned short ushort;
-
 class Scene;
 class Sprite;
 
@@ -30,15 +28,15 @@ public:
 
 	void setSize(Size size);
 	Size getSize() const;
-	
-	void   setDepth(ushort depth);
-	ushort getDepth() const;
+
+	void  setDepth(short depth);
+	short getDepth() const;
 
 private:
 	Scene* scene;
 	Point  inPos, outPos;
 	Size   size;
-  ushort depth;
+  short  depth;
 };
 
 #endif // !CLEM_CAMERA_H_

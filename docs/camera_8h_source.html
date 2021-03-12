@@ -96,54 +96,52 @@ $(document).ready(function(){initNavTree('camera_8h_source.html',''); initResiza
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;type.h&quot;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> ushort;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">class </span><a class="code" href="class_scene.html">Scene</a>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">class </span><a class="code" href="class_sprite.html">Sprite</a>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_camera.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_camera.html">Camera</a></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_camera.html#a01f94c3543f56ede7af49dc778f19331">Camera</a>();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_camera.html#a01f94c3543f56ede7af49dc778f19331">Camera</a>(<a class="code" href="class_scene.html">Scene</a>* scene);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span><a class="code" href="class_scene.html">Scene</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">class </span><a class="code" href="class_sprite.html">Sprite</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_camera.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_camera.html">Camera</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_camera.html#a01f94c3543f56ede7af49dc778f19331">Camera</a>();</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_camera.html#a01f94c3543f56ede7af49dc778f19331">Camera</a>(<a class="code" href="class_scene.html">Scene</a>* scene);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_camera.html#a52a43becd053495ce3f994419e969ab8">render</a>(<span class="keyword">const</span> std::vector&lt;Sprite*&gt;&amp;);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_camera.html#a52a43becd053495ce3f994419e969ab8">render</a>(<span class="keyword">const</span> std::vector&lt;Sprite*&gt;&amp;);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span>   <a class="code" href="class_camera.html#ac35b13397b0add2c502bef10a46f0e17">setScene</a>(<a class="code" href="class_scene.html">Scene</a>* scene);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_scene.html">Scene</a>* <a class="code" href="class_camera.html#add9339dafe4888ad163c3f4b36966fde">getScene</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_camera.html#a8d161d79b379422f5cd3ad86fb736149">setInputPosition</a>(<span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp; pos);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_camera.html#aeeb8678958f232b5a4474e8a48dbe209">setOutputPosition</a>(<span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp; pos);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_camera.html#a41f5d6ed7aeffb62ab35268ca4a46773">setSize</a>(<a class="code" href="class_size.html">Size</a> size);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_size.html">Size</a> <a class="code" href="class_camera.html#a03150e9a4b4fc4013184b03d49577d5d">getSize</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span>   <a class="code" href="class_camera.html#aa1cf36d8b5d1cec76167110d6bbafcf9">setDepth</a>(ushort depth);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    ushort <a class="code" href="class_camera.html#aa8a2438c62dac9e5e94d2ea7d9e272fc">getDepth</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_scene.html">Scene</a>* scene;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="class_point.html">Point</a>  inPos, outPos;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_size.html">Size</a>   size;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  ushort depth;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_CAMERA_H_</span></div>
-<div class="ttc" id="aclass_camera_html"><div class="ttname"><a href="class_camera.html">Camera</a></div><div class="ttdoc">摄像机</div><div class="ttdef"><b>Definition:</b> camera.h:18</div></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span>   <a class="code" href="class_camera.html#ac35b13397b0add2c502bef10a46f0e17">setScene</a>(<a class="code" href="class_scene.html">Scene</a>* scene);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_scene.html">Scene</a>* <a class="code" href="class_camera.html#add9339dafe4888ad163c3f4b36966fde">getScene</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_camera.html#a8d161d79b379422f5cd3ad86fb736149">setInputPosition</a>(<span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp; pos);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_camera.html#aeeb8678958f232b5a4474e8a48dbe209">setOutputPosition</a>(<span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp; pos);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_camera.html#a41f5d6ed7aeffb62ab35268ca4a46773">setSize</a>(<a class="code" href="class_size.html">Size</a> size);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_size.html">Size</a> <a class="code" href="class_camera.html#a03150e9a4b4fc4013184b03d49577d5d">getSize</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span>  <a class="code" href="class_camera.html#adef724446082d86888f354a6d314ea51">setDepth</a>(<span class="keywordtype">short</span> depth);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">short</span> <a class="code" href="class_camera.html#a6630e7160f6713a362333a4d7bc27715">getDepth</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="class_scene.html">Scene</a>* scene;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="class_point.html">Point</a>  inPos, outPos;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_size.html">Size</a>   size;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordtype">short</span>  depth;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_CAMERA_H_</span></div>
+<div class="ttc" id="aclass_camera_html"><div class="ttname"><a href="class_camera.html">Camera</a></div><div class="ttdoc">摄像机</div><div class="ttdef"><b>Definition:</b> camera.h:16</div></div>
 <div class="ttc" id="aclass_camera_html_a01f94c3543f56ede7af49dc778f19331"><div class="ttname"><a href="class_camera.html#a01f94c3543f56ede7af49dc778f19331">Camera::Camera</a></div><div class="ttdeci">Camera()</div><div class="ttdoc">构造 Camera 对象</div><div class="ttdef"><b>Definition:</b> camera.cpp:20</div></div>
 <div class="ttc" id="aclass_camera_html_a03150e9a4b4fc4013184b03d49577d5d"><div class="ttname"><a href="class_camera.html#a03150e9a4b4fc4013184b03d49577d5d">Camera::getSize</a></div><div class="ttdeci">Size getSize() const</div><div class="ttdoc">获取视野大小</div><div class="ttdef"><b>Definition:</b> camera.cpp:112</div></div>
 <div class="ttc" id="aclass_camera_html_a41f5d6ed7aeffb62ab35268ca4a46773"><div class="ttname"><a href="class_camera.html#a41f5d6ed7aeffb62ab35268ca4a46773">Camera::setSize</a></div><div class="ttdeci">void setSize(Size size)</div><div class="ttdoc">设置视野大小</div><div class="ttdef"><b>Definition:</b> camera.cpp:102</div></div>
 <div class="ttc" id="aclass_camera_html_a52a43becd053495ce3f994419e969ab8"><div class="ttname"><a href="class_camera.html#a52a43becd053495ce3f994419e969ab8">Camera::render</a></div><div class="ttdeci">void render(const std::vector&lt; Sprite * &gt; &amp;)</div><div class="ttdoc">渲染视野内的画面</div><div class="ttdef"><b>Definition:</b> camera.cpp:40</div></div>
+<div class="ttc" id="aclass_camera_html_a6630e7160f6713a362333a4d7bc27715"><div class="ttname"><a href="class_camera.html#a6630e7160f6713a362333a4d7bc27715">Camera::getDepth</a></div><div class="ttdeci">short getDepth() const</div><div class="ttdoc">获取深度</div><div class="ttdef"><b>Definition:</b> camera.cpp:137</div></div>
 <div class="ttc" id="aclass_camera_html_a8d161d79b379422f5cd3ad86fb736149"><div class="ttname"><a href="class_camera.html#a8d161d79b379422f5cd3ad86fb736149">Camera::setInputPosition</a></div><div class="ttdeci">void setInputPosition(const Point &amp;pos)</div><div class="ttdoc">设置输入区域左上角坐标</div><div class="ttdef"><b>Definition:</b> camera.cpp:82</div></div>
-<div class="ttc" id="aclass_camera_html_aa1cf36d8b5d1cec76167110d6bbafcf9"><div class="ttname"><a href="class_camera.html#aa1cf36d8b5d1cec76167110d6bbafcf9">Camera::setDepth</a></div><div class="ttdeci">void setDepth(ushort depth)</div><div class="ttdoc">设置深度, 深度越低越先渲染</div><div class="ttdef"><b>Definition:</b> camera.cpp:122</div></div>
-<div class="ttc" id="aclass_camera_html_aa8a2438c62dac9e5e94d2ea7d9e272fc"><div class="ttname"><a href="class_camera.html#aa8a2438c62dac9e5e94d2ea7d9e272fc">Camera::getDepth</a></div><div class="ttdeci">ushort getDepth() const</div><div class="ttdoc">获取深度</div><div class="ttdef"><b>Definition:</b> camera.cpp:137</div></div>
 <div class="ttc" id="aclass_camera_html_ac35b13397b0add2c502bef10a46f0e17"><div class="ttname"><a href="class_camera.html#ac35b13397b0add2c502bef10a46f0e17">Camera::setScene</a></div><div class="ttdeci">void setScene(Scene *scene)</div><div class="ttdoc">设置所属场景</div><div class="ttdef"><b>Definition:</b> camera.cpp:61</div></div>
 <div class="ttc" id="aclass_camera_html_add9339dafe4888ad163c3f4b36966fde"><div class="ttname"><a href="class_camera.html#add9339dafe4888ad163c3f4b36966fde">Camera::getScene</a></div><div class="ttdeci">Scene * getScene() const</div><div class="ttdoc">获取所属场景</div><div class="ttdef"><b>Definition:</b> camera.cpp:72</div></div>
+<div class="ttc" id="aclass_camera_html_adef724446082d86888f354a6d314ea51"><div class="ttname"><a href="class_camera.html#adef724446082d86888f354a6d314ea51">Camera::setDepth</a></div><div class="ttdeci">void setDepth(short depth)</div><div class="ttdoc">设置深度, 深度越低越先渲染</div><div class="ttdef"><b>Definition:</b> camera.cpp:122</div></div>
 <div class="ttc" id="aclass_camera_html_aeeb8678958f232b5a4474e8a48dbe209"><div class="ttname"><a href="class_camera.html#aeeb8678958f232b5a4474e8a48dbe209">Camera::setOutputPosition</a></div><div class="ttdeci">void setOutputPosition(const Point &amp;pos)</div><div class="ttdoc">设置输出区域左上角坐标</div><div class="ttdef"><b>Definition:</b> camera.cpp:92</div></div>
 <div class="ttc" id="aclass_point_html"><div class="ttname"><a href="class_point.html">Point</a></div><div class="ttdoc">点</div><div class="ttdef"><b>Definition:</b> point.h:12</div></div>
-<div class="ttc" id="aclass_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdoc">场景</div><div class="ttdef"><b>Definition:</b> scene.h:22</div></div>
+<div class="ttc" id="aclass_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdoc">场景, 管理游戏对象</div><div class="ttdef"><b>Definition:</b> scene.h:22</div></div>
 <div class="ttc" id="aclass_size_html"><div class="ttname"><a href="class_size.html">Size</a></div><div class="ttdoc">2D大小</div><div class="ttdef"><b>Definition:</b> size.h:12</div></div>
-<div class="ttc" id="aclass_sprite_html"><div class="ttname"><a href="class_sprite.html">Sprite</a></div><div class="ttdoc">图像</div><div class="ttdef"><b>Definition:</b> sprite.h:17</div></div>
+<div class="ttc" id="aclass_sprite_html"><div class="ttname"><a href="class_sprite.html">Sprite</a></div><div class="ttdoc">图像, 由瓦片组成的图像</div><div class="ttdef"><b>Definition:</b> sprite.h:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

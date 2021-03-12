@@ -10,7 +10,7 @@
 class Size;
 class Scene;
 
-/// 导演
+/// 导演, 管理主循环和场景
 class Director
 {
 public:

@@ -4,7 +4,7 @@
 
 class Point;
 
-/// 光标
+/// 光标, 控制光标移动和设置相关属性
 class Cursor
 {
 public:

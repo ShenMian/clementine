@@ -9,11 +9,20 @@
 #include <algorithm>
 #include <cassert>
 
+/**
+ * @brief 构造 Factor 对象
+ * 
+ */
 Factor::Factor()
 		: scene(nullptr)
 {
 }
 
+/**
+ * @brief 构造 Factor 对象
+ * 
+ * @param s 所属场景
+ */
 Factor::Factor(Scene& s)
 {
 	s.addFactor(*this);
