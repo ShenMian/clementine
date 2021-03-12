@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['pause_152',['pause',['../class_director.html#ad0e2e9b810e39c939e25ead3918faf00',1,'Director']]],
-  ['popscene_153',['popScene',['../class_director.html#a92916c5c47d0f0a202fe1a5023841e8b',1,'Director']]],
-  ['pushscene_154',['pushScene',['../class_director.html#aa4827f2c29421764dd38913e70fe9e5b',1,'Director']]]
+  ['move_164',['move',['../class_cursor.html#a6765939773fd945fe261065f63858c27',1,'Cursor::move(const Point &amp;pos)'],['../class_cursor.html#adba7aea466336c66082b19455fef5df6',1,'Cursor::move(short x, short y)']]]
 ];

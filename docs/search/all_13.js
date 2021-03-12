@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['记录日志_86',['记录日志',['../class_xE8_xAE_xB0_xE5_xBD_x95_xE6_x97_xA5_xE5_xBF_x97.html',1,'']]]
+  ['_7eframebuffer_93',['~FrameBuffer',['../class_frame_buffer.html#aef8be9884e8cc0fc3f3692e6c6968fa1',1,'FrameBuffer']]],
+  ['_7escene_94',['~Scene',['../class_scene.html#a3b8cec2e32546713915f8c6303c951f1',1,'Scene']]]
 ];

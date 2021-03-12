@@ -9,12 +9,18 @@
 
 FrameBuffer frameBuffer;
 
+/**
+ * @brief 构造 FrameBuffer 对象
+ */
 FrameBuffer::FrameBuffer()
 		: current(nullptr), next(nullptr)
 {
 	setSize(Director::getInstance()->getWinSize());
 }
 
+/**
+ * @brief 析构 FrameBuffer 对象
+ */
 FrameBuffer::~FrameBuffer()
 {
 	delete[] current;

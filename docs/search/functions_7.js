@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['removecomponent_155',['removeComponent',['../class_factor.html#a72640c29fe7839055bc6f1b951ef6710',1,'Factor']]],
-  ['render_156',['render',['../class_camera.html#a52a43becd053495ce3f994419e969ab8',1,'Camera']]],
-  ['replacescene_157',['replaceScene',['../class_director.html#aa7ec2edfa6a61517ff31ee105687a40e',1,'Director']]],
-  ['resume_158',['resume',['../class_director.html#a851df0aed8d550cc85159063b0c85dac',1,'Director']]],
-  ['run_159',['run',['../class_director.html#aae0f1f042a6757196af74f5764ee36ad',1,'Director']]]
+  ['onadd_165',['onAdd',['../class_component.html#aa00407644782cacbbbb142383c661c4c',1,'Component::onAdd()'],['../class_rigidbody.html#ac3bacc9cb76fb592ccafd26886d3c357',1,'Rigidbody::onAdd()'],['../class_sprite.html#a855e2f6077d3d75fd0964d55b2a474f9',1,'Sprite::onAdd()']]],
+  ['oncollision_166',['onCollision',['../class_factor.html#a4ebfc0d778d27c0d8690da250895b0b2',1,'Factor']]],
+  ['onremove_167',['onRemove',['../class_component.html#a2b6d832c5909c5a0082b57ba4a210072',1,'Component::onRemove()'],['../class_rigidbody.html#a5924c1467b0ee1b001fbd36fc695a45f',1,'Rigidbody::onRemove()'],['../class_sprite.html#a7a0ba13245fa13a5656481fa6929838f',1,'Sprite::onRemove()']]]
 ];

@@ -2,9 +2,9 @@
 // License(Apache-2.0)
 // 光标
 
-typedef unsigned short ushort;
 class Point;
 
+/// 光标
 class Cursor
 {
 public:
@@ -13,4 +13,3 @@ public:
   
 	static void setVisible(bool);
 };
-

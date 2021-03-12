@@ -8,11 +8,22 @@
 #include <assert.h>
 #include <clem/type/point.h>
 
+/**
+ * @brief 移动光标到指定坐标
+ * 
+ * @param p 坐标
+ */
 void Cursor::move(const Point& p)
 { 
 	move(p.x, p.y);
 }
 
+/**
+ * @brief 移动光标到指定坐标
+ * 
+ * @param x x坐标
+ * @param y y坐标
+ */
 void Cursor::move(short x, short y)
 {
 	printf("\x1b[%d;%dH", y + 1, x + 1);
@@ -21,7 +32,7 @@ void Cursor::move(short x, short y)
 /**
  * @brief 设置光标可见性
  * 
- * @param v 
+ * @param v 可见性
  */
 void Cursor::setVisible(bool v)
 {

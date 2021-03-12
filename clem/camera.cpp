@@ -14,11 +14,19 @@
 
 using std::vector;
 
+/**
+ * @brief 构造 Camera 对象
+ */
 Camera::Camera()
 		: Camera(nullptr)
 {
 }
 
+/**
+ * @brief 构造 Camera 对象
+ * 
+ * @param s 所属的场景
+ */
 Camera::Camera(Scene* s)
 	: scene(s), depth(0)
 {
@@ -69,7 +77,7 @@ Scene* Camera::getScene() const
 /**
  * @brief 设置输入区域左上角坐标
  * 
- * @param p 
+ * @param p 左上角坐标
  */
 void Camera::setInputPosition(const Point& p)
 {
@@ -79,7 +87,7 @@ void Camera::setInputPosition(const Point& p)
 /**
  * @brief 设置输出区域左上角坐标
  * 
- * @param p 
+ * @param p 左上角坐标
  */
 void Camera::setOutputPosition(const Point& p)
 {
@@ -89,7 +97,7 @@ void Camera::setOutputPosition(const Point& p)
 /**
  * @brief 设置视野大小
  * 
- * @param s 
+ * @param s 视野大小
  */
 void Camera::setSize(Size s)
 {
@@ -99,7 +107,7 @@ void Camera::setSize(Size s)
 /**
  * @brief 获取视野大小
  * 
- * @return Size 
+ * @return Size 视野大小
  */
 Size Camera::getSize() const
 {
@@ -109,7 +117,7 @@ Size Camera::getSize() const
 /**
  * @brief 设置深度, 深度越低越先渲染
  * 
- * @param d 
+ * @param d 深度
  */
 void Camera::setDepth(ushort d)
 {
@@ -124,7 +132,7 @@ void Camera::setDepth(ushort d)
 /**
  * @brief 获取深度
  * 
- * @return ushort 
+ * @return ushort 深度
  */
 ushort Camera::getDepth() const
 {
