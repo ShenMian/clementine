@@ -43,7 +43,6 @@ var annotated_dup =
     [ "Size", "class_size.html", "class_size" ],
     [ "Sprite", "class_sprite.html", "class_sprite" ],
     [ "Terminal", "class_terminal.html", null ],
-    [ "Texture", "class_texture.html", "class_texture" ],
     [ "Tile", "class_tile.html", "class_tile" ],
     [ "UdpSocket", "class_udp_socket.html", "class_udp_socket" ],
     [ "Vec2", "class_vec2.html", "class_vec2" ]

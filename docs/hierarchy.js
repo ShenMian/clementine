@@ -50,7 +50,6 @@ var hierarchy =
     [ "Serializable", "class_serializable.html", null ],
     [ "Size", "class_size.html", null ],
     [ "Terminal", "class_terminal.html", null ],
-    [ "Texture", "class_texture.html", null ],
     [ "Tile", "class_tile.html", null ],
     [ "UdpSocket", "class_udp_socket.html", null ],
     [ "Vec2", "class_vec2.html", null ]

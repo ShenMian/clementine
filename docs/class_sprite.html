@@ -114,13 +114,13 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:ab307d00f165ac85f97fc3eef1ae440ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">绘制直线  <a href="class_sprite.html#ab307d00f165ac85f97fc3eef1ae440ab">更多...</a><br /></td></tr>
 <tr class="separator:ab307d00f165ac85f97fc3eef1ae440ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7c7a78193fdbf529b9f5516d1698dd1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#ad7c7a78193fdbf529b9f5516d1698dd1">drawRect</a> (<a class="el" href="class_rect.html">Rect</a>, const <a class="el" href="class_tile.html">Tile</a> &amp;)</td></tr>
-<tr class="memdesc:ad7c7a78193fdbf529b9f5516d1698dd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">绘制空心矩形  <a href="class_sprite.html#ad7c7a78193fdbf529b9f5516d1698dd1">更多...</a><br /></td></tr>
+<tr class="memdesc:ad7c7a78193fdbf529b9f5516d1698dd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">绘制矩形  <a href="class_sprite.html#ad7c7a78193fdbf529b9f5516d1698dd1">更多...</a><br /></td></tr>
 <tr class="separator:ad7c7a78193fdbf529b9f5516d1698dd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43bce22623447fadfb70bcf81c65a40c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a43bce22623447fadfb70bcf81c65a40c">drawRectFill</a> (<a class="el" href="class_rect.html">Rect</a>, const <a class="el" href="class_tile.html">Tile</a> &amp;)</td></tr>
 <tr class="memdesc:a43bce22623447fadfb70bcf81c65a40c"><td class="mdescLeft">&#160;</td><td class="mdescRight">绘制实心矩形  <a href="class_sprite.html#a43bce22623447fadfb70bcf81c65a40c">更多...</a><br /></td></tr>
 <tr class="separator:a43bce22623447fadfb70bcf81c65a40c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d120593625cec2c4c1d7038b0b1a744"><td class="memItemLeft" align="right" valign="top"><a id="a0d120593625cec2c4c1d7038b0b1a744"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>drawCycle</b> (<a class="el" href="class_point.html">Point</a>, short radius, const <a class="el" href="class_tile.html">Tile</a> &amp;)</td></tr>
+<tr class="memitem:a0d120593625cec2c4c1d7038b0b1a744"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a0d120593625cec2c4c1d7038b0b1a744">drawCycle</a> (<a class="el" href="class_point.html">Point</a>, short radius, const <a class="el" href="class_tile.html">Tile</a> &amp;)</td></tr>
+<tr class="memdesc:a0d120593625cec2c4c1d7038b0b1a744"><td class="mdescLeft">&#160;</td><td class="mdescRight">绘制圆  <a href="class_sprite.html#a0d120593625cec2c4c1d7038b0b1a744">更多...</a><br /></td></tr>
 <tr class="separator:a0d120593625cec2c4c1d7038b0b1a744"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17cf1063e1a13c25a4490dfa5bfc50aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a17cf1063e1a13c25a4490dfa5bfc50aa">setSize</a> (<a class="el" href="class_size.html">Size</a>)</td></tr>
 <tr class="memdesc:a17cf1063e1a13c25a4490dfa5bfc50aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置可绘制区域的大小  <a href="class_sprite.html#a17cf1063e1a13c25a4490dfa5bfc50aa">更多...</a><br /></td></tr>
@@ -163,6 +163,50 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Camera</b></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
 <div class="textblock"><p>图像, 由瓦片组成的图像 </p>
 </div><h2 class="groupheader">成员函数说明</h2>
+<a id="a0d120593625cec2c4c1d7038b0b1a744"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d120593625cec2c4c1d7038b0b1a744">&#9670;&nbsp;</a></span>drawCycle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sprite::drawCycle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_point.html">Point</a>&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">short&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_tile.html">Tile</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>绘制圆 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>圆心坐标 </td></tr>
+    <tr><td class="paramname">r</td><td>半径 </td></tr>
+    <tr><td class="paramname">t</td><td>瓦片 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ab307d00f165ac85f97fc3eef1ae440ab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab307d00f165ac85f97fc3eef1ae440ab">&#9670;&nbsp;</a></span>drawLine()</h2>
 
@@ -200,7 +244,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Camera</b></td></tr>
   <table class="params">
     <tr><td class="paramname">a</td><td>点A </td></tr>
     <tr><td class="paramname">b</td><td>点B </td></tr>
-    <tr><td class="paramname">t</td><td><a class="el" href="class_tile.html" title="瓦片">Tile</a> </td></tr>
+    <tr><td class="paramname">t</td><td>瓦片 </td></tr>
   </table>
   </dd>
 </dl>
@@ -237,7 +281,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Camera</b></td></tr>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
     <tr><td class="paramname">p</td><td>点的坐标 </td></tr>
-    <tr><td class="paramname">t</td><td><a class="el" href="class_tile.html" title="瓦片">Tile</a> </td></tr>
+    <tr><td class="paramname">t</td><td>瓦片 </td></tr>
   </table>
   </dd>
 </dl>
@@ -270,11 +314,11 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Camera</b></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>绘制空心矩形 </p>
+<p>绘制矩形 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
     <tr><td class="paramname">r</td><td>矩形 </td></tr>
-    <tr><td class="paramname">t</td><td><a class="el" href="class_tile.html" title="瓦片">Tile</a> </td></tr>
+    <tr><td class="paramname">t</td><td>瓦片 </td></tr>
   </table>
   </dd>
 </dl>
@@ -311,7 +355,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Camera</b></td></tr>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
     <tr><td class="paramname">r</td><td>矩形 </td></tr>
-    <tr><td class="paramname">t</td><td><a class="el" href="class_tile.html" title="瓦片">Tile</a> </td></tr>
+    <tr><td class="paramname">t</td><td>瓦片 </td></tr>
   </table>
   </dd>
 </dl>

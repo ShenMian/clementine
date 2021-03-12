@@ -10,7 +10,7 @@
  * @brief 绘制点
  * 
  * @param p 点的坐标
- * @param t Tile
+ * @param t 瓦片
  */
 void Sprite::drawPoint(Point p, const Tile& t)
 {
@@ -24,7 +24,7 @@ void Sprite::drawPoint(Point p, const Tile& t)
  * 
  * @param a 点A
  * @param b 点B
- * @param t Tile
+ * @param t 瓦片
  */
 void Sprite::drawLine(Point a, Point b, const Tile& t)
 {
@@ -36,7 +36,7 @@ void Sprite::drawLine(Point a, Point b, const Tile& t)
 	float yDelta = yDis / maxDis;
 
 	float x = a.x, y = a.y;
-	for(short i = 0; i < maxDis; i++)
+	for(int i = 0; i < maxDis; i++)
 	{
 		drawPoint(Point(x, y), t);
 		x += xDelta, y += yDelta;
@@ -44,13 +44,14 @@ void Sprite::drawLine(Point a, Point b, const Tile& t)
 }
 
 /**
- * @brief 绘制空心矩形
+ * @brief 绘制矩形
  * 
  * @param r 矩形
- * @param t Tile
+ * @param t 瓦片
  */
 void Sprite::drawRect(Rect r, const Tile& t)
 {
+	// TODO(SMS): 优化算法
 	for(int x = r.left(); x <= r.right(); x++)
 	{
 		drawPoint(Point(x, r.top()), t);
@@ -67,13 +68,40 @@ void Sprite::drawRect(Rect r, const Tile& t)
  * @brief 绘制实心矩形
  * 
  * @param r 矩形
- * @param t Tile
+ * @param t 瓦片
  */
 void Sprite::drawRectFill(Rect r, const Tile& t)
 {
 	for(int y = 0; y < r.height; y++)
 		for(int x = 0; x < r.width; x++)
 			drawPoint({r.x + x, r.y + y}, t);
+}
+
+/**
+ * @brief 绘制圆
+ * 
+ * @param c 圆心坐标
+ * @param r 半径
+ * @param t 瓦片
+ */
+void Sprite::drawCycle(Point c, short r, const Tile& t)
+{
+	for(int x = 0; x <= r; x++)
+	{
+		int y = sqrt(r * r - x * x);
+		drawPoint(Point(c.x + x, c.y + y), t);
+		drawPoint(Point(c.x - x, c.y + y), t);
+		drawPoint(Point(c.x - x, c.y - y), t);
+		drawPoint(Point(c.x + x, c.y - y), t);
+	}
+	for(int y = 0; y <= r; y++)
+	{
+		int x = sqrt(r * r - y * y);
+		drawPoint(Point(c.x + x, c.y + y), t);
+		drawPoint(Point(c.x - x, c.y + y), t);
+		drawPoint(Point(c.x - x, c.y - y), t);
+		drawPoint(Point(c.x + x, c.y - y), t);
+	}
 }
 
 /**

@@ -47,7 +47,7 @@ void FrameBuffer::drawLine(Point a, Point b, const Tile& t)
 	float yDelta = yDis / maxDis;
 
 	float x = a.x, y = a.y;
-	for(short i = 0; i < maxDis; i++)
+	for(int i = 0; i < maxDis; i++)
 	{
 		drawPoint(Point(x, y), t);
 		x += xDelta, y += yDelta;
