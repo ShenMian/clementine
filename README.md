@@ -26,7 +26,7 @@ This is a framework for building 2D console games.
 - `BUILD_TESTS`    Build the unit tests
 
 ## Screenshots
-![](doc/picture_0.png)  
+![](docs/picture_0.png)  
 
 ## Forums
 - [**Github Discussions**](https://github.com/ShenMian/Clementine/discussions)
