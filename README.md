@@ -1,6 +1,6 @@
 **en** | [cn]
 
-![Banner](docs/banner.png)  
+![Banner](docs/picture/banner.png)  
 
 [![License](https://img.shields.io/github/license/ShenMian/Clementine)](https://github.com/ShenMian/Clementine/blob/master/LICENSE)
 [![CodeFactor](https://www.codefactor.io/repository/github/shenmian/clementine/badge)](https://www.codefactor.io/repository/github/shenmian/clementine)
@@ -27,7 +27,7 @@ This is a framework for building 2D console games.
 - `BUILD_TESTS`    Build the unit tests
 
 ## Screenshots
-![](docs/picture_0.png)  
+![](docs/picture/picture_0.png)  
 
 ## Forums
 - [**Github Discussions**](https://github.com/ShenMian/Clementine/discussions)
