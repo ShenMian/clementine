@@ -5,9 +5,11 @@
 #include "keyboard.h"
 #include "clem/platform.h"
 
-void Keyboard::bindOnPressed(Key key, std::function<void()> fun)
+using std::vector;
+
+void Keyboard::bindOnPressed(Key key, std::function<void()> callback)
 {
-	onPressed[key] = fun;
+	onPressed[key] = callback;
 	onChanged[key] = [](bool) {};
 	keyStates[key] = false;
 }
@@ -29,23 +31,30 @@ void Keyboard::clear()
 
 #include <unistd.h>
 #include <termios.h>
+#include <algorithm>
 
 Keyboard::Keyboard()
 {
+    termios opts;
 	tcgetattr(0, &opts);          // grab old terminal i/o settings
 	opts.c_lflag &= ~ICANON;      // disable buffered i/o
 	opts.c_lflag &= ~ECHO;        // set echo mode
 	tcsetattr(0, TCSANOW, &opts); // use these new terminal i/o settings now
 }
 
-void Keyboard::update()
+void Keyboard::update(float)
 {
-	auto key = getchar();
+	auto code = getchar();
+    auto key  = static_cast<Key>(code);
 	if(keyStates.find(key) == keyStates.end())
 		return;
-	for(auto key : keyStatus)
-		
-	onPressed[i.first]();
+	onPressed[key]();
+    vector<Key> pressed;
+    if(keyStates[key] != true)
+    {
+        keyStates[key] = true;
+        onChanged[key](true);
+    }
 }
 
 #endif

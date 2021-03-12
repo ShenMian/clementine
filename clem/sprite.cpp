@@ -1,6 +1,6 @@
 // Copyright 2020 SMS
 // License(Apache-2.0)
-// Í¼Ïñ
+// Í¼ï¿½ï¿½
 
 #include "sprite.h"
 #include "frame_buffer.h"
@@ -17,7 +17,7 @@ void Sprite::drawLine(Point a, Point b, const Tile& t)
 {
 	auto xDis   = b.x - a.x + 1;
 	auto yDis   = b.y - a.y + 1;
-	auto maxDis = max(abs(xDis), abs(yDis));
+	auto maxDis = std::max(abs(xDis), abs(yDis));
 
 	float xDelta = xDis / maxDis;
 	float yDelta = yDis / maxDis;

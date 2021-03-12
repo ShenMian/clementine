@@ -5,6 +5,7 @@
 #include "frame_buffer.h"
 #include "director.h"
 #include "tile.h"
+#include <algorithm>
 
 FrameBuffer frameBuffer;
 
@@ -31,7 +32,7 @@ void FrameBuffer::drawLine(Point a, Point b, const Tile& t)
 {
 	auto xDis   = b.x - a.x + 1;
 	auto yDis   = b.y - a.y + 1;
-	auto maxDis = max(abs(xDis), abs(yDis));
+	auto maxDis = std::max(abs(xDis), abs(yDis));
 
 	float xDelta = xDis / maxDis;
 	float yDelta = yDis / maxDis;
@@ -103,11 +104,11 @@ void FrameBuffer::render()
 {
 	for(int y = 0; y < size.y; y++)
 	{
-		Cursor::(0, y);
+		Cursor::move(0, y);
 		for(int x = 0; x < size.x; x++)
 		{
-			buffer[x + y * size.x].getColor().on();
-			printf("%c", buffer[x + y * size.x].getChar());
+			current[x + y * size.x].getColor().on();
+			printf("%c", current[x + y * size.x].getChar());
 		}
 	}
 }
