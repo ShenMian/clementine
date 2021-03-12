@@ -14,12 +14,13 @@
 #include "clem/camera.h"
 #include "clem/factor.h"
 
-#include "sprite.h"
-#include "physics/rigidbody.h"
+#include "clem/sprite.h"
 
-#include "clem/terminal.h"
+#include "clem/physics/rigidbody.h"
+#include "clem/physics/collider.h"
+#include "clem/physics/circle_collider.h"
+
 #include "clem/cursor.h"
-
 #include "clem/color.h"
 
 #endif // !CLEM_CLEM_HPP_

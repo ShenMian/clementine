@@ -16,9 +16,9 @@ public:
 		addComponent(rigidbody);
 	}
 
+	const float speed = 5;
 	void bind(Keyboard::Key up, Keyboard::Key down)
 	{
-		static const float speed = 5;
 		keyboard.bindOnChanged(up, [&](bool state) {
 			if(state)
 				rigidbody.velocity = {0, -speed};

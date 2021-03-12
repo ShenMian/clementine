@@ -3,6 +3,28 @@
 // ¸ÕÌå
 
 #include "rigidbody.h"
+#include "collider.h"
+
+using std::vector;
+
+void Rigidbody::update(float dt)
+{
+	auto pos = owner->getPosition();
+	velocity += accelerate * dt;
+	pos += velocity * dt;
+	owner->setPosition(pos);
+}
+
+void Rigidbody::addCollider(Collider& c)
+{
+	c.setOwner(this);
+	colliders.push_back(&c);
+}
+
+const vector<Collider*>& Rigidbody::getColliders() const
+{
+	return colliders;
+}
 
 void Rigidbody::onAdd()
 {
@@ -12,17 +34,4 @@ void Rigidbody::onAdd()
 void Rigidbody::onRemove()
 {
 	owner->getScene()->removeRigidbody(*this);
-}
-
-void Rigidbody::update(float dt)
-{
-	auto pos = owner->getPosition();
-	velocity += accelerate * 0.0160000008;
-	pos += velocity * 0.0160000008;
-	owner->setPosition(pos);
-}
-
-void Rigidbody::addCollider(Collider& c)
-{
-	colliders.push_back(&c);
 }

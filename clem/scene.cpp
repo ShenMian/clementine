@@ -119,20 +119,28 @@ void Scene::removeRigidbody(Rigidbody& b)
 		assert(false);
 }
 
-/*
-void Scene::updateInput()
-{
-	for(auto input : inputs)
-		input->update();
-}
-*/
-
 void Scene::updateFactors(float dt)
 {
 	for(auto f : factors)
 		f->update(dt);
 }
 
+#include "physics/rigidbody.h"
+#include "physics/collider.h"
+#include "physics/circle_collider.h"
+
 void Scene::updatePhysics(float dt)
 {
+	vector<Collider*> colliders;
+	for(auto body : rigidbodies)
+		for(auto c : body->getColliders())
+			colliders.push_back(c);
+
+	for(size_t i = 0; i < colliders.size(); i++)
+		for(size_t j = i + 1; j < colliders.size(); j++)
+			if(Collider::collides(*dynamic_cast<CircleCollider*>(colliders[i]), *dynamic_cast<CircleCollider*>(colliders[j])))
+			{
+				colliders[i]->getOwner()->getOwner()->onCollision(*colliders[i], *colliders[j]);
+				colliders[j]->getOwner()->getOwner()->onCollision(*colliders[j], *colliders[i]);
+			}
 }

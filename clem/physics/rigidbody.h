@@ -19,7 +19,8 @@ public:
 
 	void update(float dt) override;
 
-	void addCollider(Collider&);
+	void                          addCollider(Collider&);
+	const std::vector<Collider*>& getColliders() const;
 
 	void onAdd() override;
 	void onRemove() override;

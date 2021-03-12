@@ -6,10 +6,10 @@
 #define CLEM_FACTOR_H_
 
 #include "scene.h"
-#include "texture.h"
 #include <vector>
 
 class Physics;
+class Collider;
 class Component;
 
 class Factor
@@ -18,15 +18,11 @@ public:
 	Factor();
 	Factor(Scene&);
 	Factor(const Size&);
-	Factor(const Texture&);
 
 	virtual void update(float dt);
 
 	void         setPosition(const Point&);
 	const Point& getPosition() const;
-
-	void     setTexture(const Texture&);
-	Texture& getTexture();
 
 	void addComponent(Component&);
 	void removeComponent(Component&);
@@ -34,12 +30,13 @@ public:
 	void   setScene(Scene*);
 	Scene* getScene() const;
 
+	virtual void onCollision(Collider, Collider);
+
 protected:
 	Point position;
 
 private:
 	Scene*                  scene;
-	Texture                 texture;
 	std::vector<Component*> components;
 };
 

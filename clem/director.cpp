@@ -71,8 +71,13 @@ Scene* Director::getCurrentScene() const
 void Director::setMsPerUpdate(long ms)
 {
 	assert(ms > 0);
-
 	msPerUpdate = ms;
+}
+
+void Director::setMsPerRender(long ms)
+{
+	assert(ms > 0);
+	msPerRender = ms;
 }
 
 short Director::getFramesPerSecond() const
@@ -91,7 +96,7 @@ void Director::loop()
 		dt       = current - previous;
 		previous = current;
 
-		sleep_for(milliseconds(16 - dt));
+		// sleep_for(milliseconds(8 - dt));
 
 		update(dt);
 		render(dt);
@@ -124,16 +129,23 @@ void Director::render(long dt)
 {
 	auto scene = scenes.back();
 
-	scene->render();
-
 	static long fpsLag = 0, frames = 0;
+	const long  target = 1000 / msPerRender;
 	fpsLag += dt;
-	frames++;
 	if(fpsLag >= 1000)
 	{
 		framesPerSecond = frames;
 		frames = fpsLag = 0;
-		Terminal::setTitle("Clementine - " + std::to_string(getFramesPerSecond()) + "FPS");
+		Terminal::setTitle("Clementine - " + std::to_string(getFramesPerSecond()) + "(" + std::to_string(target) + ")" + "FPS");
+	}
+
+	static long renderLag = 0;
+	renderLag += dt;
+	if(renderLag >= msPerRender)
+	{
+		scene->render();
+		renderLag = 0;
+		frames++;
 	}
 }
 
@@ -144,7 +156,7 @@ void Director::render(long dt)
 #include <sys/ioctl.h>
 
 Director::Director()
-		: paused(false), msPerUpdate(16), framesPerSecond(0)
+		: paused(false), msPerUpdate(16), msPerRender(16), framesPerSecond(0)
 {
   // 开启 raw 模式
   termios mode;
@@ -180,7 +192,7 @@ long Director::getCurrentMillSecond() const
 #ifdef OS_WIN
 
 Director::Director()
-		: paused(false), msPerUpdate(16), framesPerSecond(0)
+		: paused(false), msPerUpdate(16), msPerRender(16), framesPerSecond(0)
 {
   // 开启 VT100 模式
 	const auto hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);

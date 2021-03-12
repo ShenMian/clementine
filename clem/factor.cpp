@@ -5,6 +5,7 @@
 #include "factor.h"
 #include "scene.h"
 #include "component.h"
+#include "physics/collider.h"
 #include <algorithm>
 #include <cassert>
 
@@ -16,16 +17,6 @@ Factor::Factor()
 Factor::Factor(Scene& s)
 {
 	s.addFactor(*this);
-}
-
-Factor::Factor(const Size& s)
-		: texture(s), scene(nullptr)
-{
-}
-
-Factor::Factor(const Texture& t)
-		: texture(t), scene(nullptr)
-{
 }
 
 void Factor::update(float dt)
@@ -69,17 +60,11 @@ void Factor::setPosition(const Point& p)
 	this->position = p;
 }
 
-void Factor::setTexture(const Texture& t)
-{
-	this->texture = t;
-}
-
 const Point& Factor::getPosition() const
 {
 	return position;
 }
 
-Texture& Factor::getTexture()
+void Factor::onCollision(Collider, Collider)
 {
-	return texture;
 }

@@ -5,7 +5,7 @@
 #include "texture.h"
 #include <cassert>
 #include <math.h>
-#include "cursor.h"
+#include "clem/cursor.h"
 
 Texture::Texture()
 		: Texture(Size(0, 0))

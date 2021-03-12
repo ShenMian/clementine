@@ -25,6 +25,7 @@ public:
 	Scene* getCurrentScene() const;
 	
 	void  setMsPerUpdate(long ms);
+	void  setMsPerRender(long ms);
 	short getFramesPerSecond() const;
 
 	Size getWinSize() const;
@@ -39,6 +40,7 @@ private:
 	std::vector<Scene*> scenes;
 	bool                paused;
 	long                msPerUpdate;
+	long                msPerRender;
 	short               framesPerSecond;
 
 	static Director instance;

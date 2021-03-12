@@ -6,6 +6,7 @@
 #define CLEM_SPRITE_H_
 
 #include "clem/component.h"
+#include "tile.h"
 #include <string>
 #include <vector>
 

@@ -25,6 +25,7 @@ public:
 	Vec2  operator/(float n) const;
 	Vec2  operator+(const Vec2& vec) const;
 	Vec2  operator-(const Vec2& vec) const;
+	Vec2  operator-() const;
 
 	Vec2& operator+=(const Vec2& vec);
 	Vec2& operator-=(const Vec2& vec);
