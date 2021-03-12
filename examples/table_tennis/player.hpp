@@ -6,7 +6,7 @@
 class Player : public Factor
 {
 public:
-	Player(Scene& s)
+	explicit Player(Scene& s)
 			: Factor(s)
 	{
 		sprite.setSize({1, 5});

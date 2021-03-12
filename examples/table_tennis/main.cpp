@@ -24,7 +24,7 @@ using namespace std;
 class Ball : public Factor
 {
 public:
-	Ball(Scene& s)
+	explicit Ball(Scene& s)
 			: Factor(s)
 	{
 		sprite.setSize({1, 1});
