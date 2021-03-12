@@ -9,16 +9,19 @@
 
 This is a framework for building 2D console games.  
 
-## Features
-- Multi-platform: Linux, macOS, Windows 10
+👉 [**API Document**](https://shenmian.github.io/Clementine) (Chinese)  
 
-## Compiling
+## Features 🎄
+- Multi-platform: Linux, macOS, Windows
+- Lightweight
+
+## Compiling ⛓
 
 ### Build Script
 ``` bash
 > git clone https://github.com/ShenMian/Clementine.git
 > cd Clementine
-> ./build.bat    # Windows 10
+> ./build.bat    # Windows
 > ./build.sh     # Linux, MacOS
 ```
 
@@ -26,10 +29,10 @@ This is a framework for building 2D console games.
 - `BUILD_EXAMPLES` Build the examples
 - `BUILD_TESTS`    Build the unit tests
 
-## Screenshots
+## Screenshots ✨
 ![](docs/picture/picture_0.png)  
 
-## Forums
+## Forums 📢
 - [**Github Discussions**](https://github.com/ShenMian/Clementine/discussions)
 - [**Telegram**](https://t.me/shenmian)
 

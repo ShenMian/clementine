@@ -9,16 +9,19 @@
 
 这是一个用于制作2D命令行游戏的框架.   
 
-## 特点
-- 多平台: Linux, macOS, Windows 10
+👉 [**API文档**](https://shenmian.github.io/Clementine) (中文)  
 
-## 编译
+## 特点 🎄
+- 多平台: Linux, macOS, Windows
+- 轻量
+
+## 编译 ⛓
 
 ### 构建脚本
 ``` bash
 > git clone https://github.com/ShenMian/Clementine.git
 > cd Clementine
-> ./build.bat    # Windows 10
+> ./build.bat    # Windows
 > ./build.sh     # Linux, MacOS
 ```
 
@@ -26,10 +29,10 @@
 - `BUILD_EXAMPLES` 构建示例
 - `BUILD_TESTS`    构建单元测试
 
-## 截图
+## 截图 ✨
 ![](docs/picture/picture_0.png)  
 
-## 论坛
+## 论坛 📢
 - [**Github Discussions**](https://github.com/ShenMian/Clementine/discussions)
 - [**Telegram**](https://t.me/shenmian)
 
