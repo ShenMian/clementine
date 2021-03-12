@@ -1,8 +1,8 @@
 **zh** | [en]
 
-![Picture](docs/banner.png)  
+![横幅](docs/banner.png)  
 
-[![License](https://img.shields.io/github/license/ShenMian/Clementine)](https://github.com/ShenMian/Clementine/blob/master/LICENSE)
+[![许可证](https://img.shields.io/github/license/ShenMian/Clementine)](https://github.com/ShenMian/Clementine/blob/master/LICENSE)
 [![CodeFactor](https://www.codefactor.io/repository/github/shenmian/clementine/badge)](https://www.codefactor.io/repository/github/shenmian/clementine)
 [![CMake](https://github.com/ShenMian/Clementine/workflows/CMake/badge.svg?branch=master)](https://github.com/ShenMian/Clementine/actions?query=workflow%3ACMake)
 
@@ -11,14 +11,10 @@
 ## 特点
 - 多平台: Linux, macOS, Windows 10
 
-## 目标
-- 规范
-- 性能
-
 ## 编译
 
 ### 构建脚本
-```
+``` bash
 > git clone https://github.com/ShenMian/Clementine.git
 > cd Clementine
 > ./build.bat    # Windows 10

@@ -1,6 +1,6 @@
-**en** | [zh]
+**en** | [cn]
 
-![Picture](docs/banner.png)  
+![Banner](docs/banner.png)  
 
 [![License](https://img.shields.io/github/license/ShenMian/Clementine)](https://github.com/ShenMian/Clementine/blob/master/LICENSE)
 [![CodeFactor](https://www.codefactor.io/repository/github/shenmian/clementine/badge)](https://www.codefactor.io/repository/github/shenmian/clementine)
@@ -14,7 +14,7 @@ This is a framework for building 2D console games.
 ## Compiling
 
 ### Build Script
-```
+``` bash
 > git clone https://github.com/ShenMian/Clementine.git
 > cd Clementine
 > ./build.bat    # Windows 10
@@ -32,4 +32,4 @@ This is a framework for building 2D console games.
 - [**Github Discussions**](https://github.com/ShenMian/Clementine/discussions)
 - [**Telegram**](https://t.me/shenmian)
 
-[zh]: README_cn.md
+[cn]: README-cn.md
