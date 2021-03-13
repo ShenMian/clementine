@@ -1,11 +1,11 @@
-// Copyright 2020 SMS
+// Copyright 2021 SMS
 // License(Apache-2.0)
 // 碰撞体
 
 #ifndef CLEM_COLLIDER_H_
 #define CLEM_COLLIDER_H_
 
-#include "clem/type/point.h"
+#include "clem/math/point.h"
 
 class Rigidbody;
 class BoxCollider;

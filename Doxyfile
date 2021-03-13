@@ -866,7 +866,7 @@ WARN_LOGFILE           =
 
 INPUT                  = clem/physics \
                          clem/ \
-                         clem/type \
+                         clem/math \
                          clem/input \
                          README-cn.md
 

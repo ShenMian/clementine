@@ -1,10 +1,10 @@
-// Copyright 2020 SMS
+// Copyright 2021 SMS
 // License(Apache-2.0)
 // 矩形
 
 #include "rect.h"
 #include "size.h"
-#include "point.h"
+#include "clem/math/point.h"
 
 Rect::Rect()
 		: Rect(0, 0, 0, 0)

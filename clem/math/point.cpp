@@ -1,72 +1,62 @@
-// Copyright 2020 SMS
+// Copyright 2021 SMS
 // License(Apache-2.0)
-// зјБъ
 
 #include "point.h"
-#include <cmath>
 #include "vec2.h"
-
+#include <cmath>
 
 Point::Point()
-		: Point(0, 0)
+		: x(0), y(0)
 {
 }
-
 
 Point::Point(float x, float y)
 		: x(x), y(y)
 {
 }
 
-
-Point::Point(const Vec2& vec)
-		: Point(vec.x, vec.y)
+float Point::distance(const Point& o) const
 {
+	return std::sqrt(distanceSquared(o));
 }
 
-
-float Point::distance(const Point& p) const
+float Point::distanceSquared(const Point& o) const
 {
-	return std::sqrt(std::abs(x - p.x) + std::abs(y - p.y));
+	auto xDis = std::abs(x - o.x);
+	auto yDis = std::abs(y - o.y);
+	return xDis * xDis + yDis * yDis;
 }
-
 
 Point Point::operator+(const Point& p) const
 {
 	return Point(x + p.x, y + p.y);
 }
 
-
 Point Point::operator-(const Point& p) const
 {
 	return Point(x - p.x, y - p.y);
 }
-
 
 Point Point::operator+(const Vec2& v) const
 {
 	return Point(x + v.x, y + v.y);
 }
 
-
 Point Point::operator-(const Vec2& v) const
 {
 	return Point(x - v.x, y - v.y);
 }
 
-
-const Point& Point::operator+=(const Vec2& v)
+Point& Point::operator+=(const Vec2& v)
 {
 	x += v.x;
 	y += v.y;
 	return *this;
 }
 
-
-const Point& Point::operator-=(const Vec2& v)
+Point& Point::operator-=(const Vec2& v)
 {
 	x -= v.x;
 	y -= v.y;
 	return *this;
 }
-

@@ -2,7 +2,7 @@
 # License(Apache-2.0)
 
 # 添加 源文件
-file(GLOB_RECURSE  sources "*.cpp")
+file(GLOB_RECURSE sources "*.cpp")
 
 find_package(Threads REQUIRED)
 

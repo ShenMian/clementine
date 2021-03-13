@@ -1,0 +1,66 @@
+// Copyright 2021 SMS
+// License(Apache-2.0)
+
+#ifndef CLEM_MATH_POINT_H_
+#define CLEM_MATH_POINT_H_
+
+class Vec2;
+
+/**
+ * @addtogroup math
+ * @{
+ */
+
+/**
+ * 二维点.
+ */
+class Point
+{
+public:
+	float x, y;
+
+	/**
+	 * 构造函数.
+	 */
+	Point();
+
+	/**
+	 * 构造函数.
+	 * 
+	 * @param x x坐标.
+	 * @param y y坐标.
+	 */
+	Point(float x, float y);
+
+	/**
+	 * 获取到另一个点的距离.
+	 * 
+	 * @param other 另一个点.
+	 * 
+	 * @see	distanceSquared
+	 */
+	float distance(const Point& other) const;
+
+	/**
+	 * 获取到另一个点的距离的平方.
+	 * 
+	 * @param other 另一个点.
+	 * 
+	 * @see distance
+	 */
+	float distanceSquared(const Point& other) const;
+
+	Point  operator+(const Point&) const;
+	Point  operator-(const Point&) const;
+	Point  operator+(const Vec2&) const;
+	Point  operator-(const Vec2&) const;
+	Point& operator+=(const Vec2&);
+	Point& operator-=(const Vec2&);
+};
+
+/**
+ * end of math group
+ * @}
+ */
+
+#endif // !CLEM_MATH_POINT_H_

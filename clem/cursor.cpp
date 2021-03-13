@@ -1,4 +1,4 @@
-// Copyright 2020 SMS
+// Copyright 2021 SMS
 // License(Apache-2.0)
 // 光标
 
@@ -6,7 +6,7 @@
 #include "platform.h"
 #include <stdio.h>
 #include <assert.h>
-#include <clem/type/point.h>
+#include <clem/math/point.h>
 
 /**
  * @brief 移动光标到指定坐标

@@ -1,4 +1,4 @@
-// Copyright 2020 SMS
+// Copyright 2021 SMS
 // License(Apache-2.0)
 // 刚体
 
@@ -6,7 +6,7 @@
 #define CLEM_PHYSICS_RIGIDBODY_H_
 
 #include <vector>
-#include "clem/type/vec2.h"
+#include "clem/math/vec2.h"
 #include "clem/component.h"
 
 class Collider;
