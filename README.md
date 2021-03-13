@@ -11,7 +11,7 @@
 
 This is a framework for building 2D console games.  
 
-Documentation 
+Documentation
 -------------
 👉 **[API Document]** (Chinese)  
 
@@ -24,15 +24,7 @@ Compiling ⛓
 ---------
 1. [Set up Git] and [fork our repository].
    If you'd prefer not to use Git, use the 'Download ZIP' button on the right to get the source as a zip file.
-2. Open your source folder in Explorer and run 'build.bat'.
-
-### Build Script
-``` bash
-> git clone https://github.com/ShenMian/Clementine.git
-> cd Clementine
-> ./build.bat    # Windows
-> ./build.sh     # Linux, MacOS
-```
+2. Open your source folder in Explorer and run 'build.bat'. This will download submodules and use CMake to build project.
 
 ### CMake Options (default ON)
 - `BUILD_EXAMPLES` Build the examples

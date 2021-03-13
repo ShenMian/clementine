@@ -1,14 +1,18 @@
 **zh** | [en]
 
-![Banner](docs/picture/banner.png)  
+<div align="center">
+<img src="docs/picture/banner.png">
 
 [![License](https://img.shields.io/github/license/ShenMian/Clementine)](https://github.com/ShenMian/Clementine/blob/master/LICENSE)
 [![CodeFactor](https://www.codefactor.io/repository/github/shenmian/clementine/badge)](https://www.codefactor.io/repository/github/shenmian/clementine)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c09e10a19377466b99cc74d4f43ac214)](https://app.codacy.com/gh/ShenMian/Clementine?utm_source=github.com&utm_medium=referral&utm_content=ShenMian/Clementine&utm_campaign=Badge_Grade_Settings)
 [![CI](https://github.com/ShenMian/Clementine/actions/workflows/ci.yml/badge.svg)](https://github.com/ShenMian/Clementine/actions/workflows/ci.yml)
+</div>
 
 这是一个用于制作2D命令行游戏的框架.   
 
+文档
+----
 👉 **[API文档]** (中文)  
 
 特点 🎄
@@ -18,14 +22,8 @@
 
 编译 ⛓
 ----
-
-### 构建脚本
-``` bash
-> git clone https://github.com/ShenMian/Clementine.git
-> cd Clementine
-> ./build.bat    # Windows
-> ./build.sh     # Linux, MacOS
-```
+1. [设置Git]并[fork我们的仓库]. 如果你更倾向于不使用Git, 点击右上角的'Download ZIP'来下载zip格式的源代码.
+2. 在文件管理器中打开源代码文件夹并执行'build.bat'. 这将下载子模块并使用CMake构建项目.
 
 ### CMake 选项 (默认 ON)
 - `BUILD_EXAMPLES` 构建示例
@@ -33,14 +31,16 @@
 
 截图 ✨
 ----
-![](docs/picture/picture_0.png)  
+<img src="docs/picture/picture_0.png" width="50%" height="50%">
 
-联系 📢
+联系 💬
 ----
 - **[Github Discussions]**
 - **[Telegram]**
 
 [en]: README.md
 [API文档]: https://shenmian.github.io/Clementine
+[设置Git]: https://help.github.com/articles/set-up-git
+[fork我们的仓库]: https://help.github.com/articles/fork-a-repo
 [Github Discussions]: https://github.com/ShenMian/Clementine/discussions
 [Telegram]: https://t.me/shenmian
