@@ -5,13 +5,13 @@
 include_directories("googletest/googletest/include")
 add_subdirectory("googletest")
 
-add_executable(unit_test "main.cpp")
-target_link_libraries(unit_test gtest_main clementine)
+add_executable(math "math.cpp")
+target_link_libraries(math gtest_main clementine)
 
 add_test(
   NAME
     All
   COMMAND
-    ${CMAKE_BINARY_DIR}/tests/unit_test
+    ${CMAKE_BINARY_DIR}/tests/math
 )
 
