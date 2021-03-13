@@ -5,7 +5,7 @@
 include_directories("googletest/googletest/include")
 add_subdirectory("googletest")
 
-add_executable(math "math.cpp")
+add_executable(math "math_test.cpp")
 target_link_libraries(math gtest_main clementine)
 
 add_test(
