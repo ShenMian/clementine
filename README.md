@@ -1,19 +1,12 @@
 **en** | [cn]
 
-Clementine
-==========
-
-<!--
-![Banner](docs/picture/banner.png)  
--->
 <div align="center">
-<img src="docs/picture/banner.png" width="90%" height="90%">
+<img src="docs/picture/banner.png">
 
 [![License](https://img.shields.io/github/license/ShenMian/Clementine)](https://github.com/ShenMian/Clementine/blob/master/LICENSE)
 [![CodeFactor](https://www.codefactor.io/repository/github/shenmian/clementine/badge)](https://www.codefactor.io/repository/github/shenmian/clementine)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c09e10a19377466b99cc74d4f43ac214)](https://app.codacy.com/gh/ShenMian/Clementine?utm_source=github.com&utm_medium=referral&utm_content=ShenMian/Clementine&utm_campaign=Badge_Grade_Settings)
 [![CI](https://github.com/ShenMian/Clementine/actions/workflows/ci.yml/badge.svg)](https://github.com/ShenMian/Clementine/actions/workflows/ci.yml)
-
 </div>
 
 This is a framework for building 2D console games.  
