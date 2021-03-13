@@ -31,7 +31,7 @@ Vec2& Vec2::normalize()
 {
 	const auto len = length();
 	if(len < FLT_EPSILON)
-		return;
+		return *this;
 	return *this *= 1.0 / len;
 }
 
