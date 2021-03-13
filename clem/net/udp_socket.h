@@ -5,7 +5,6 @@
 #ifndef CLEM_NET_UDP_SOCKET_H_
 #define CLEM_NET_UDP_SOCKET_H_
 
-#include "header.h"
 #include <string>
 
 class Address;
