@@ -6,7 +6,7 @@ var annotated_dup =
     [ "_XINPUT_KEYSTROKE", "struct___x_i_n_p_u_t___k_e_y_s_t_r_o_k_e.html", "struct___x_i_n_p_u_t___k_e_y_s_t_r_o_k_e" ],
     [ "_XINPUT_STATE", "struct___x_i_n_p_u_t___s_t_a_t_e.html", "struct___x_i_n_p_u_t___s_t_a_t_e" ],
     [ "_XINPUT_VIBRATION", "struct___x_i_n_p_u_t___v_i_b_r_a_t_i_o_n.html", "struct___x_i_n_p_u_t___v_i_b_r_a_t_i_o_n" ],
-    [ "Address", "class_address.html", "class_address" ],
+    [ "BoxCollider", "class_box_collider.html", "class_box_collider" ],
     [ "Camera", "class_camera.html", "class_camera" ],
     [ "CircleCollider", "class_circle_collider.html", "class_circle_collider" ],
     [ "Collider", "class_collider.html", "class_collider" ],

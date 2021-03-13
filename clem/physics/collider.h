@@ -8,6 +8,7 @@
 #include "clem/type/point.h"
 
 class Rigidbody;
+class BoxCollider;
 class CircleCollider;
 
 /// 碰撞体
@@ -17,6 +18,8 @@ public:
 	Collider();
 	virtual ~Collider();
 
+	virtual bool collides(const Collider& other) const = 0;
+
 	Point getPosition() const;
 
 	void  setOffset(Point);
@@ -24,8 +27,6 @@ public:
 
 	void       setOwner(Rigidbody*);
 	Rigidbody* getOwner() const;
-
-	static bool collides(const CircleCollider&, const CircleCollider&);
 
 protected:
 	Point offset;

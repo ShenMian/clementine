@@ -11,6 +11,8 @@
 class CircleCollider : public Collider
 {
 public:
+	bool collides(const Collider& other) const override;
+
 	void  setRadius(float);
 	float getRadius() const;
 

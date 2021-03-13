@@ -65,11 +65,9 @@ void Keyboard::update(float)
 		return;
 	onPressed[key]();
     vector<Key> pressed;
-    if(keyStates[key] != true)
-    {
-        keyStates[key] = true;
-        onChanged[key](true);
-    }
+
+	keyStates[key] = true;
+	onChanged[key](true);
 }
 
 #endif

@@ -2,6 +2,7 @@ var class_collider =
 [
     [ "Collider", "class_collider.html#aa7186870221f868bbc74c3ae8609fa66", null ],
     [ "~Collider", "class_collider.html#a564acde9860f875a32a6638c573d87be", null ],
+    [ "collides", "class_collider.html#af5bb4516878cefd8823966df30eaaae0", null ],
     [ "getOffset", "class_collider.html#a9767c6efe6f59d95783047598a6c1e1e", null ],
     [ "getOwner", "class_collider.html#a0a2a0930d925ef0eb34e18c341430eb3", null ],
     [ "getPosition", "class_collider.html#a50ddf6893ca60567b869fca83e05f67a", null ],

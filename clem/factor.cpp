@@ -102,6 +102,6 @@ const Point& Factor::getPosition() const
 /**
  * @brief 回调, 当碰撞体发生碰撞时
  */
-void Factor::onCollision(Collider, Collider)
+void Factor::onCollision(Collider&, Collider&)
 {
 }

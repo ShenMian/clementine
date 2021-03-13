@@ -63,7 +63,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('class_collider.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('class_box_collider.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -83,21 +83,24 @@ $(document).ready(function(){initNavTree('class_collider.html',''); initResizabl
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Collider 成员列表</div>  </div>
+<div class="title">BoxCollider 成员列表</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>成员的完整列表，这些成员属于 <a class="el" href="class_collider.html">Collider</a>,包括所有继承而来的类成员</p>
+<p>成员的完整列表，这些成员属于 <a class="el" href="class_box_collider.html">BoxCollider</a>,包括所有继承而来的类成员</p>
 <table class="directory">
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Collider</b>() (定义于 <a class="el" href="class_collider.html">Collider</a>)</td><td class="entry"><a class="el" href="class_collider.html">Collider</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>collides</b>(const Collider &amp;other) const =0 (定义于 <a class="el" href="class_collider.html">Collider</a>)</td><td class="entry"><a class="el" href="class_collider.html">Collider</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_box_collider.html#aa69edc18f3df3df06be9b9b3f233fca9">collides</a>(const Collider &amp;other) const override</td><td class="entry"><a class="el" href="class_box_collider.html">BoxCollider</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_collider.html#a9767c6efe6f59d95783047598a6c1e1e">getOffset</a>() const</td><td class="entry"><a class="el" href="class_collider.html">Collider</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_collider.html#a0a2a0930d925ef0eb34e18c341430eb3">getOwner</a>() const</td><td class="entry"><a class="el" href="class_collider.html">Collider</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_collider.html#a50ddf6893ca60567b869fca83e05f67a">getPosition</a>() const</td><td class="entry"><a class="el" href="class_collider.html">Collider</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>getRect</b>() const (定义于 <a class="el" href="class_box_collider.html">BoxCollider</a>)</td><td class="entry"><a class="el" href="class_box_collider.html">BoxCollider</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_box_collider.html#a99d5c37746f1544ba67986ce1bdeddda">getSize</a>() const</td><td class="entry"><a class="el" href="class_box_collider.html">BoxCollider</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>offset</b> (定义于 <a class="el" href="class_collider.html">Collider</a>)</td><td class="entry"><a class="el" href="class_collider.html">Collider</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_collider.html#a4d19c8a7ea2396f1b4bd633ae2865643">setOffset</a>(Point)</td><td class="entry"><a class="el" href="class_collider.html">Collider</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_collider.html#a589928c70143b9170523146d94614ca6">setOwner</a>(Rigidbody *)</td><td class="entry"><a class="el" href="class_collider.html">Collider</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~Collider</b>() (定义于 <a class="el" href="class_collider.html">Collider</a>)</td><td class="entry"><a class="el" href="class_collider.html">Collider</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_box_collider.html#a264b7d64e37f69c11c5ccf06ce371e14">setSize</a>(Size)</td><td class="entry"><a class="el" href="class_box_collider.html">BoxCollider</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>~Collider</b>() (定义于 <a class="el" href="class_collider.html">Collider</a>)</td><td class="entry"><a class="el" href="class_collider.html">Collider</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

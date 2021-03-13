@@ -105,35 +105,34 @@ $(document).ready(function(){initNavTree('factor_8h_source.html',''); initResiza
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_factor.html#ac26c0b02faf21d3aaceea0deb07938ba">Factor</a>();</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_factor.html#ac26c0b02faf21d3aaceea0deb07938ba">Factor</a>(<a class="code" href="class_scene.html">Scene</a>&amp;);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_factor.html#ac26c0b02faf21d3aaceea0deb07938ba">Factor</a>(<span class="keyword">const</span> <a class="code" href="class_size.html">Size</a>&amp;);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_factor.html#a3e456131e400fda7516fa195b80a097f">update</a>(<span class="keywordtype">float</span> dt);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span>         <a class="code" href="class_factor.html#a6fcd2d223e650919f4c218ca8a191da5">setPosition</a>(<span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp;);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp; <a class="code" href="class_factor.html#a9a6b260d41556acc53f247d683b02391">getPosition</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_factor.html#a9874a86d25d9c1efa5be9578f8aa1261">addComponent</a>(<a class="code" href="class_component.html">Component</a>&amp;);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_factor.html#a72640c29fe7839055bc6f1b951ef6710">removeComponent</a>(<a class="code" href="class_component.html">Component</a>&amp;);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span>   setScene(<a class="code" href="class_scene.html">Scene</a>*);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_scene.html">Scene</a>* getScene() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_factor.html#a4ebfc0d778d27c0d8690da250895b0b2">onCollision</a>(<a class="code" href="class_collider.html">Collider</a>, <a class="code" href="class_collider.html">Collider</a>);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="class_point.html">Point</a> position;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_scene.html">Scene</a>*                  scene;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    std::vector&lt;Component*&gt; components;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_FACTOR_H_</span></div>
-<div class="ttc" id="aclass_collider_html"><div class="ttname"><a href="class_collider.html">Collider</a></div><div class="ttdoc">碰撞体</div><div class="ttdef"><b>Definition:</b> collider.h:15</div></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_factor.html#a3e456131e400fda7516fa195b80a097f">update</a>(<span class="keywordtype">float</span> dt);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span>         <a class="code" href="class_factor.html#a6fcd2d223e650919f4c218ca8a191da5">setPosition</a>(<span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp;);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp; <a class="code" href="class_factor.html#a9a6b260d41556acc53f247d683b02391">getPosition</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_factor.html#a9874a86d25d9c1efa5be9578f8aa1261">addComponent</a>(<a class="code" href="class_component.html">Component</a>&amp;);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_factor.html#a72640c29fe7839055bc6f1b951ef6710">removeComponent</a>(<a class="code" href="class_component.html">Component</a>&amp;);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span>   setScene(<a class="code" href="class_scene.html">Scene</a>*);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_scene.html">Scene</a>* getScene() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_factor.html#a3bfa7d0d3f9746f36968269afc7cfc0e">onCollision</a>(<a class="code" href="class_collider.html">Collider</a>&amp;, <a class="code" href="class_collider.html">Collider</a>&amp;);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="class_point.html">Point</a> position;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="class_scene.html">Scene</a>*                  scene;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    std::vector&lt;Component*&gt; components;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_FACTOR_H_</span></div>
+<div class="ttc" id="aclass_collider_html"><div class="ttname"><a href="class_collider.html">Collider</a></div><div class="ttdoc">碰撞体</div><div class="ttdef"><b>Definition:</b> collider.h:16</div></div>
 <div class="ttc" id="aclass_component_html"><div class="ttname"><a href="class_component.html">Component</a></div><div class="ttdoc">组件</div><div class="ttdef"><b>Definition:</b> component.h:12</div></div>
 <div class="ttc" id="aclass_factor_html"><div class="ttname"><a href="class_factor.html">Factor</a></div><div class="ttdoc">游戏对象, 构成游戏的基本对象</div><div class="ttdef"><b>Definition:</b> factor.h:17</div></div>
+<div class="ttc" id="aclass_factor_html_a3bfa7d0d3f9746f36968269afc7cfc0e"><div class="ttname"><a href="class_factor.html#a3bfa7d0d3f9746f36968269afc7cfc0e">Factor::onCollision</a></div><div class="ttdeci">virtual void onCollision(Collider &amp;, Collider &amp;)</div><div class="ttdoc">回调, 当碰撞体发生碰撞时</div><div class="ttdef"><b>Definition:</b> factor.cpp:105</div></div>
 <div class="ttc" id="aclass_factor_html_a3e456131e400fda7516fa195b80a097f"><div class="ttname"><a href="class_factor.html#a3e456131e400fda7516fa195b80a097f">Factor::update</a></div><div class="ttdeci">virtual void update(float dt)</div><div class="ttdoc">更新组件</div><div class="ttdef"><b>Definition:</b> factor.cpp:36</div></div>
-<div class="ttc" id="aclass_factor_html_a4ebfc0d778d27c0d8690da250895b0b2"><div class="ttname"><a href="class_factor.html#a4ebfc0d778d27c0d8690da250895b0b2">Factor::onCollision</a></div><div class="ttdeci">virtual void onCollision(Collider, Collider)</div><div class="ttdoc">回调, 当碰撞体发生碰撞时</div><div class="ttdef"><b>Definition:</b> factor.cpp:105</div></div>
 <div class="ttc" id="aclass_factor_html_a6fcd2d223e650919f4c218ca8a191da5"><div class="ttname"><a href="class_factor.html#a6fcd2d223e650919f4c218ca8a191da5">Factor::setPosition</a></div><div class="ttdeci">void setPosition(const Point &amp;)</div><div class="ttdoc">设置坐标</div><div class="ttdef"><b>Definition:</b> factor.cpp:87</div></div>
 <div class="ttc" id="aclass_factor_html_a72640c29fe7839055bc6f1b951ef6710"><div class="ttname"><a href="class_factor.html#a72640c29fe7839055bc6f1b951ef6710">Factor::removeComponent</a></div><div class="ttdeci">void removeComponent(Component &amp;)</div><div class="ttdoc">移除组件</div><div class="ttdef"><b>Definition:</b> factor.cpp:59</div></div>
 <div class="ttc" id="aclass_factor_html_a9874a86d25d9c1efa5be9578f8aa1261"><div class="ttname"><a href="class_factor.html#a9874a86d25d9c1efa5be9578f8aa1261">Factor::addComponent</a></div><div class="ttdeci">void addComponent(Component &amp;)</div><div class="ttdoc">添加组件</div><div class="ttdef"><b>Definition:</b> factor.cpp:47</div></div>
@@ -141,7 +140,6 @@ $(document).ready(function(){initNavTree('factor_8h_source.html',''); initResiza
 <div class="ttc" id="aclass_factor_html_ac26c0b02faf21d3aaceea0deb07938ba"><div class="ttname"><a href="class_factor.html#ac26c0b02faf21d3aaceea0deb07938ba">Factor::Factor</a></div><div class="ttdeci">Factor()</div><div class="ttdoc">构造 Factor 对象</div><div class="ttdef"><b>Definition:</b> factor.cpp:16</div></div>
 <div class="ttc" id="aclass_point_html"><div class="ttname"><a href="class_point.html">Point</a></div><div class="ttdoc">点</div><div class="ttdef"><b>Definition:</b> point.h:12</div></div>
 <div class="ttc" id="aclass_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdoc">场景, 管理游戏对象</div><div class="ttdef"><b>Definition:</b> scene.h:22</div></div>
-<div class="ttc" id="aclass_size_html"><div class="ttname"><a href="class_size.html">Size</a></div><div class="ttdoc">2D大小</div><div class="ttdef"><b>Definition:</b> size.h:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

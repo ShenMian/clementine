@@ -176,6 +176,7 @@ void Scene::updateFactors(float dt)
 
 #include "physics/rigidbody.h"
 #include "physics/collider.h"
+#include "physics/box_collider.h"
 #include "physics/circle_collider.h"
 
 /**
@@ -192,7 +193,7 @@ void Scene::updatePhysics(float dt)
 
 	for(size_t i = 0; i < colliders.size(); i++)
 		for(size_t j = i + 1; j < colliders.size(); j++)
-			if(Collider::collides(*dynamic_cast<CircleCollider*>(colliders[i]), *dynamic_cast<CircleCollider*>(colliders[j])))
+			if(colliders[i]->collides(*colliders[j]))
 			{
 				colliders[i]->getOwner()->getOwner()->onCollision(*colliders[i], *colliders[j]);
 				colliders[j]->getOwner()->getOwner()->onCollision(*colliders[j], *colliders[i]);

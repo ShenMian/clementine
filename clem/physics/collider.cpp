@@ -63,11 +63,3 @@ Rigidbody* Collider::getOwner() const
 {
 	return owner;
 }
-
-#include "circle_collider.h"
-
-bool Collider::collides(const CircleCollider& a, const CircleCollider& b)
-{
-	auto distance = a.getPosition().distance(b.getPosition());
-	return distance <= a.getRadius() + b.getRadius();
-}

@@ -19,6 +19,7 @@
 #include "clem/physics/rigidbody.h"
 #include "clem/physics/collider.h"
 #include "clem/physics/circle_collider.h"
+#include "clem/physics/box_collider.h"
 
 #include "clem/cursor.h"
 #include "clem/color.h"

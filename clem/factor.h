@@ -18,7 +18,6 @@ class Factor
 public:
 	Factor();
 	Factor(Scene&);
-	Factor(const Size&);
 
 	virtual void update(float dt);
 
@@ -31,7 +30,7 @@ public:
 	void   setScene(Scene*);
 	Scene* getScene() const;
 
-	virtual void onCollision(Collider, Collider);
+	virtual void onCollision(Collider&, Collider&);
 
 protected:
 	Point position;

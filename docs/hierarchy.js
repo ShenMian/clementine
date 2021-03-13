@@ -6,9 +6,9 @@ var hierarchy =
     [ "_XINPUT_KEYSTROKE", "struct___x_i_n_p_u_t___k_e_y_s_t_r_o_k_e.html", null ],
     [ "_XINPUT_STATE", "struct___x_i_n_p_u_t___s_t_a_t_e.html", null ],
     [ "_XINPUT_VIBRATION", "struct___x_i_n_p_u_t___v_i_b_r_a_t_i_o_n.html", null ],
-    [ "Address", "class_address.html", null ],
     [ "Camera", "class_camera.html", null ],
     [ "Collider", "class_collider.html", [
+      [ "BoxCollider", "class_box_collider.html", null ],
       [ "CircleCollider", "class_circle_collider.html", null ]
     ] ],
     [ "Color", "class_color.html", null ],

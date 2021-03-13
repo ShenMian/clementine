@@ -29,13 +29,16 @@ public:
 	{
 		sprite.setSize({1, 1});
 		sprite.drawPoint({0, 0}, Tile('O'));
-		collider.setRadius(0.5);
+
+		collider.setSize({1, 1});
+
 		body.addCollider(collider);
+
 		addComponent(sprite);
 		addComponent(body);
 	}
 
-	void onCollision(Collider, Collider) override
+	void onCollision(Collider&, Collider&) override
 	{
 		body.velocity = -body.velocity;
 	}
@@ -46,9 +49,32 @@ public:
 	}
 
 private:
-	Sprite         sprite;
-	Rigidbody      body;
-	CircleCollider collider;
+	Sprite      sprite;
+	Rigidbody   body;
+	BoxCollider collider;
+};
+
+class Bar : public Factor
+{
+public:
+	Bar(Scene& s)
+			: Factor(s)
+	{
+		sprite.setSize({1, 5});
+		sprite.drawLine({0, 0}, {0, 4}, Tile('#'));
+
+		collider.setSize({1, 5});
+
+		body.addCollider(collider);
+
+		addComponent(sprite);
+		addComponent(body);
+	}
+
+private:
+	Sprite      sprite;
+	Rigidbody   body;
+	BoxCollider collider;
 };
 
 int main()
@@ -57,6 +83,7 @@ int main()
 	auto director = Director::getInstance();
 	Scene scene;
 	
+	/*
 	Player playerA(scene);
 	playerA.bind(Keyboard::Key::W, Keyboard::Key::S);
 	playerA.setPosition({1, 12});
@@ -64,15 +91,21 @@ int main()
 	Player playerB(scene);
 	playerB.bind(Keyboard::Key::up, Keyboard::Key::down);
 	playerB.setPosition({118, 12});
+	*/
+
+	Bar bar(scene);
+	bar.setPosition({1, 12});
 
 	Ball ball(scene);
 	ball.setPosition({59, 14});
-	ball.setVelocity({30, 0});
+	ball.setVelocity({-30, 0});
 
+	/*
 	Ball testA(scene);
 	testA.setPosition({117, 14});
 	Ball testB(scene);
 	testB.setPosition({2, 14});
+	*/
 
 	director->setMsPerRender(1000 / 60);
 	director->pushScene(scene);

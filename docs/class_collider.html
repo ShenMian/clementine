@@ -84,11 +84,10 @@ $(document).ready(function(){initNavTree('class_collider.html',''); initResizabl
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public 成员函数</a> &#124;
-<a href="#pub-static-methods">静态 Public 成员函数</a> &#124;
 <a href="#pro-attribs">Protected 属性</a> &#124;
 <a href="class_collider-members.html">所有成员列表</a>  </div>
   <div class="headertitle">
-<div class="title">Collider类 参考</div>  </div>
+<div class="title">Collider类 参考<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -102,12 +101,16 @@ $(document).ready(function(){initNavTree('class_collider.html',''); initResizabl
  <div class="center">
   <img src="class_collider.png" usemap="#Collider_map" alt=""/>
   <map id="Collider_map" name="Collider_map">
-<area href="class_circle_collider.html" title="圆形碰撞体" alt="CircleCollider" shape="rect" coords="0,56,90,80"/>
+<area href="class_box_collider.html" title="盒形碰撞体" alt="BoxCollider" shape="rect" coords="0,56,90,80"/>
+<area href="class_circle_collider.html" title="圆形碰撞体" alt="CircleCollider" shape="rect" coords="100,56,190,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
+<tr class="memitem:af5bb4516878cefd8823966df30eaaae0"><td class="memItemLeft" align="right" valign="top"><a id="af5bb4516878cefd8823966df30eaaae0"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>collides</b> (const <a class="el" href="class_collider.html">Collider</a> &amp;other) const =0</td></tr>
+<tr class="separator:af5bb4516878cefd8823966df30eaaae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50ddf6893ca60567b869fca83e05f67a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_point.html">Point</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collider.html#a50ddf6893ca60567b869fca83e05f67a">getPosition</a> () const</td></tr>
 <tr class="memdesc:a50ddf6893ca60567b869fca83e05f67a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取坐标  <a href="class_collider.html#a50ddf6893ca60567b869fca83e05f67a">更多...</a><br /></td></tr>
 <tr class="separator:a50ddf6893ca60567b869fca83e05f67a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -123,12 +126,6 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a0a2a0930d925ef0eb34e18c341430eb3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_rigidbody.html">Rigidbody</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collider.html#a0a2a0930d925ef0eb34e18c341430eb3">getOwner</a> () const</td></tr>
 <tr class="memdesc:a0a2a0930d925ef0eb34e18c341430eb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取拥有者  <a href="class_collider.html#a0a2a0930d925ef0eb34e18c341430eb3">更多...</a><br /></td></tr>
 <tr class="separator:a0a2a0930d925ef0eb34e18c341430eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-静态 Public 成员函数</h2></td></tr>
-<tr class="memitem:aa0a0d13a90d68bb2680e0dc5ec1a559e"><td class="memItemLeft" align="right" valign="top"><a id="aa0a0d13a90d68bb2680e0dc5ec1a559e"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>collides</b> (const <a class="el" href="class_circle_collider.html">CircleCollider</a> &amp;, const <a class="el" href="class_circle_collider.html">CircleCollider</a> &amp;)</td></tr>
-<tr class="separator:aa0a0d13a90d68bb2680e0dc5ec1a559e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected 属性</h2></td></tr>
