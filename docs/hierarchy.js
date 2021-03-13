@@ -29,9 +29,7 @@ var hierarchy =
     [ "Log", "class_log.html", null ],
     [ "Point", "class_point.html", null ],
     [ "Random", "class_random.html", null ],
-    [ "Rect", "class_rect.html", null ],
     [ "Scene", "class_scene.html", null ],
-    [ "Size", "class_size.html", null ],
     [ "Terminal", "class_terminal.html", null ],
     [ "Tile", "class_tile.html", null ],
     [ "Vec2", "class_vec2.html", null ]

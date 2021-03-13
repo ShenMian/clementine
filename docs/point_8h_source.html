@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Clementine: clem/type/point.h 源文件</title>
+<title>Clementine: clem/math/point.h 源文件</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,42 +88,45 @@ $(document).ready(function(){initNavTree('point_8h_source.html',''); initResizab
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2021 SMS</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// License(Apache-2.0)</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// 坐标</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef CLEM_TYPE_POINT_H_</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define CLEM_TYPE_POINT_H_</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">class </span><a class="code" href="class_vec2.html">Vec2</a>;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_point.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_point.html">Point</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordtype">float</span> x;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">float</span> y;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="class_point.html">Point</a>();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_point.html">Point</a>(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_point.html">Point</a>(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp; vec);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">float</span> distance(<span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp;) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_point.html">Point</a>        operator+(<span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp;) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_point.html">Point</a>        operator-(<span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp;) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_point.html">Point</a>        operator+(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp;) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_point.html">Point</a>        operator-(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp;) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp; operator+=(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp;);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp; operator-=(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp;);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CLEM_TYPE_POINT_H_</span></div>
-<div class="ttc" id="aclass_point_html"><div class="ttname"><a href="class_point.html">Point</a></div><div class="ttdoc">点</div><div class="ttdef"><b>Definition:</b> point.h:12</div></div>
-<div class="ttc" id="aclass_vec2_html"><div class="ttname"><a href="class_vec2.html">Vec2</a></div><div class="ttdoc">2D向量</div><div class="ttdef"><b>Definition:</b> vec2.h:12</div></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef CLEM_MATH_POINT_H_</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define CLEM_MATH_POINT_H_</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">class </span><a class="code" href="class_vec2.html">Vec2</a>;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_point.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_point.html">Point</a></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">float</span> x, y;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_point.html#ad92f2337b839a94ce97dcdb439b4325a">Point</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_point.html#ad92f2337b839a94ce97dcdb439b4325a">Point</a>(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_point.html#a0d86d1c1e7a6202483fd83ddd065e14f">distance</a>(<span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp; other) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_point.html#a6add7cf3718356c587acd069addee793">distanceSquared</a>(<span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp; other) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="class_point.html">Point</a>  operator+(<span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp;) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="class_point.html">Point</a>  operator-(<span class="keyword">const</span> <a class="code" href="class_point.html">Point</a>&amp;) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="class_point.html">Point</a>  operator+(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp;) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="class_point.html">Point</a>  operator-(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp;) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="class_point.html">Point</a>&amp; operator+=(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp;);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="class_point.html">Point</a>&amp; operator-=(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp;);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_MATH_POINT_H_</span></div>
+<div class="ttc" id="aclass_point_html"><div class="ttname"><a href="class_point.html">Point</a></div><div class="ttdef"><b>Definition:</b> point.h:18</div></div>
+<div class="ttc" id="aclass_point_html_a0d86d1c1e7a6202483fd83ddd065e14f"><div class="ttname"><a href="class_point.html#a0d86d1c1e7a6202483fd83ddd065e14f">Point::distance</a></div><div class="ttdeci">float distance(const Point &amp;other) const</div><div class="ttdef"><b>Definition:</b> point.cpp:18</div></div>
+<div class="ttc" id="aclass_point_html_a6add7cf3718356c587acd069addee793"><div class="ttname"><a href="class_point.html#a6add7cf3718356c587acd069addee793">Point::distanceSquared</a></div><div class="ttdeci">float distanceSquared(const Point &amp;other) const</div><div class="ttdef"><b>Definition:</b> point.cpp:23</div></div>
+<div class="ttc" id="aclass_point_html_ad92f2337b839a94ce97dcdb439b4325a"><div class="ttname"><a href="class_point.html#ad92f2337b839a94ce97dcdb439b4325a">Point::Point</a></div><div class="ttdeci">Point()</div><div class="ttdef"><b>Definition:</b> point.cpp:8</div></div>
+<div class="ttc" id="aclass_vec2_html"><div class="ttname"><a href="class_vec2.html">Vec2</a></div><div class="ttdef"><b>Definition:</b> vec2.h:21</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_75e4ae1c219046b5a10ac81b39646bb7.html">clem</a></li><li class="navelem"><a class="el" href="dir_cd39e80d81d186eea3410d6f701a06e4.html">type</a></li><li class="navelem"><b>point.h</b></li>
+    <li class="navelem"><a class="el" href="dir_75e4ae1c219046b5a10ac81b39646bb7.html">clem</a></li><li class="navelem"><a class="el" href="dir_6b56cb91115215eece7493f017b6fcb6.html">math</a></li><li class="navelem"><b>point.h</b></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

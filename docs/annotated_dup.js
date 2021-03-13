@@ -1,12 +1,5 @@
 var annotated_dup =
 [
-    [ "特点 🎄", "md__r_e_a_d_m_e_cn.html#autotoc_md0", null ],
-    [ "编译 ⛓", "md__r_e_a_d_m_e_cn.html#autotoc_md1", [
-      [ "构建脚本", "md__r_e_a_d_m_e_cn.html#autotoc_md2", null ],
-      [ "CMake 选项 (默认 ON)", "md__r_e_a_d_m_e_cn.html#autotoc_md3", null ]
-    ] ],
-    [ "截图 ✨", "md__r_e_a_d_m_e_cn.html#autotoc_md4", null ],
-    [ "论坛 📢", "md__r_e_a_d_m_e_cn.html#autotoc_md5", null ],
     [ "_XINPUT_BATTERY_INFORMATION", "struct___x_i_n_p_u_t___b_a_t_t_e_r_y___i_n_f_o_r_m_a_t_i_o_n.html", "struct___x_i_n_p_u_t___b_a_t_t_e_r_y___i_n_f_o_r_m_a_t_i_o_n" ],
     [ "_XINPUT_CAPABILITIES", "struct___x_i_n_p_u_t___c_a_p_a_b_i_l_i_t_i_e_s.html", "struct___x_i_n_p_u_t___c_a_p_a_b_i_l_i_t_i_e_s" ],
     [ "_XINPUT_GAMEPAD", "struct___x_i_n_p_u_t___g_a_m_e_p_a_d.html", "struct___x_i_n_p_u_t___g_a_m_e_p_a_d" ],
@@ -31,10 +24,8 @@ var annotated_dup =
     [ "Mouse", "class_mouse.html", "class_mouse" ],
     [ "Point", "class_point.html", "class_point" ],
     [ "Random", "class_random.html", "class_random" ],
-    [ "Rect", "class_rect.html", "class_rect" ],
     [ "Rigidbody", "class_rigidbody.html", "class_rigidbody" ],
     [ "Scene", "class_scene.html", "class_scene" ],
-    [ "Size", "class_size.html", "class_size" ],
     [ "Sprite", "class_sprite.html", "class_sprite" ],
     [ "Terminal", "class_terminal.html", null ],
     [ "Tile", "class_tile.html", "class_tile" ],

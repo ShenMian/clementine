@@ -26,6 +26,7 @@ var NAVTREE =
 [
   [ "Clementine", "index.html", [
     [ "README-cn", "md__r_e_a_d_m_e_cn.html", null ],
+    [ "模块", "modules.html", "modules" ],
     [ "类", "annotated.html", [
       [ "类列表", "annotated.html", "annotated_dup" ],
       [ "类索引", "classes.html", null ],
@@ -41,7 +42,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"class_vec2.html#ab729c2193fd8968594e30c14baf593bd"
+"struct___x_i_n_p_u_t___g_a_m_e_p_a_d.html"
 ];
 
 var SYNCONMSG = '点击 关闭 面板同步';
