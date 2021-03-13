@@ -11,7 +11,7 @@ bool CircleCollider::collides(const Collider& other) const
 	if(auto o = dynamic_cast<const CircleCollider*>(&other))
 		return getPosition().distance(o->getPosition()) <= getRadius() + o->getRadius();
 	else if(auto o = dynamic_cast<const BoxCollider*>(&other))
-		o->collides(*this);
+		return o->collides(*this);
 	else
 		assert(false);
 }
