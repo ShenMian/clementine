@@ -13,7 +13,7 @@
 
 文档
 ----
-👉 **[API文档]** (中文)  
+👉 **[API参考]** (中文)  
 
 特点 🎄
 ----
@@ -39,7 +39,7 @@
 - **[Telegram]**
 
 [en]: README.md
-[API文档]: https://shenmian.github.io/Clementine
+[API参考]: https://shenmian.github.io/Clementine
 [设置Git]: https://help.github.com/articles/set-up-git
 [fork我们的仓库]: https://help.github.com/articles/fork-a-repo
 [Github Discussions]: https://github.com/ShenMian/Clementine/discussions

@@ -13,7 +13,7 @@ This is a framework for building 2D console games.
 
 Documentation
 -------------
-👉 **[API Document]** (Chinese)  
+👉 **[API Reference]** (Chinese)  
 
 Features 🎄
 --------
