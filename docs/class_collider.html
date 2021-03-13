@@ -93,8 +93,6 @@ $(document).ready(function(){initNavTree('class_collider.html',''); initResizabl
 
 <p>碰撞体  
  <a href="class_collider.html#details">更多...</a></p>
-
-<p><code>#include &lt;<a class="el" href="collider_8h_source.html">collider.h</a>&gt;</code></p>
 <div class="dynheader">
 类 Collider 继承关系图:</div>
 <div class="dyncontent">
@@ -108,8 +106,8 @@ $(document).ready(function(){initNavTree('class_collider.html',''); initResizabl
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:af5bb4516878cefd8823966df30eaaae0"><td class="memItemLeft" align="right" valign="top"><a id="af5bb4516878cefd8823966df30eaaae0"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>collides</b> (const <a class="el" href="class_collider.html">Collider</a> &amp;other) const =0</td></tr>
+<tr class="memitem:af5bb4516878cefd8823966df30eaaae0"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collider.html#af5bb4516878cefd8823966df30eaaae0">collides</a> (const <a class="el" href="class_collider.html">Collider</a> &amp;other) const =0</td></tr>
+<tr class="memdesc:af5bb4516878cefd8823966df30eaaae0"><td class="mdescLeft">&#160;</td><td class="mdescRight">检测是否与其他碰撞体发生碰撞  <a href="class_collider.html#af5bb4516878cefd8823966df30eaaae0">更多...</a><br /></td></tr>
 <tr class="separator:af5bb4516878cefd8823966df30eaaae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50ddf6893ca60567b869fca83e05f67a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_point.html">Point</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collider.html#a50ddf6893ca60567b869fca83e05f67a">getPosition</a> () const</td></tr>
 <tr class="memdesc:a50ddf6893ca60567b869fca83e05f67a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取坐标  <a href="class_collider.html#a50ddf6893ca60567b869fca83e05f67a">更多...</a><br /></td></tr>
@@ -136,6 +134,45 @@ Protected 属性</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
 <div class="textblock"><p>碰撞体 </p>
 </div><h2 class="groupheader">成员函数说明</h2>
+<a id="af5bb4516878cefd8823966df30eaaae0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5bb4516878cefd8823966df30eaaae0">&#9670;&nbsp;</a></span>collides()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool Collider::collides </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_collider.html">Collider</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检测是否与其他碰撞体发生碰撞 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>其他碰撞体 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true 发生碰撞 </dd>
+<dd>
+false 未发生碰撞 </dd></dl>
+
+<p>在 <a class="el" href="class_circle_collider.html#a4c028f17be973f78363519835d153dbb">CircleCollider</a> , 以及 <a class="el" href="class_box_collider.html#aa69edc18f3df3df06be9b9b3f233fca9">BoxCollider</a> 内被实现.</p>
+
+</div>
+</div>
 <a id="a9767c6efe6f59d95783047598a6c1e1e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9767c6efe6f59d95783047598a6c1e1e">&#9670;&nbsp;</a></span>getOffset()</h2>
 

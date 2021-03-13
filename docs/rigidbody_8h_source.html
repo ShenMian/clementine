@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('rigidbody_8h_source.html',''); initRes
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">class </span><a class="code" href="class_collider.html">Collider</a>;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_rigidbody.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_rigidbody.html">Rigidbody</a> : <span class="keyword">public</span> <a class="code" href="class_component.html">Component</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_rigidbody.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_rigidbody.html">Rigidbody</a> : <span class="keyword">public</span> Component</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a> velocity;</div>
@@ -110,8 +110,8 @@ $(document).ready(function(){initNavTree('rigidbody_8h_source.html',''); initRes
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span>                          <a class="code" href="class_rigidbody.html#aa8d7bbd8e65c3d9f6b6be23e61cee0f2">addCollider</a>(<a class="code" href="class_collider.html">Collider</a>&amp;);</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">const</span> std::vector&lt;Collider*&gt;&amp; <a class="code" href="class_rigidbody.html#a943500b9ced40c992666008d78c68f0a">getColliders</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_rigidbody.html#ac3bacc9cb76fb592ccafd26886d3c357">onAdd</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_rigidbody.html#a5924c1467b0ee1b001fbd36fc695a45f">onRemove</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> onAdd() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> onRemove() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    std::vector&lt;Collider*&gt; colliders;</div>
@@ -119,12 +119,9 @@ $(document).ready(function(){initNavTree('rigidbody_8h_source.html',''); initRes
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_PHYSICS_RIGIDBODY_H_</span></div>
 <div class="ttc" id="aclass_collider_html"><div class="ttname"><a href="class_collider.html">Collider</a></div><div class="ttdoc">碰撞体</div><div class="ttdef"><b>Definition:</b> collider.h:16</div></div>
-<div class="ttc" id="aclass_component_html"><div class="ttname"><a href="class_component.html">Component</a></div><div class="ttdoc">组件</div><div class="ttdef"><b>Definition:</b> component.h:12</div></div>
 <div class="ttc" id="aclass_rigidbody_html"><div class="ttname"><a href="class_rigidbody.html">Rigidbody</a></div><div class="ttdoc">刚体</div><div class="ttdef"><b>Definition:</b> rigidbody.h:16</div></div>
-<div class="ttc" id="aclass_rigidbody_html_a5924c1467b0ee1b001fbd36fc695a45f"><div class="ttname"><a href="class_rigidbody.html#a5924c1467b0ee1b001fbd36fc695a45f">Rigidbody::onRemove</a></div><div class="ttdeci">void onRemove() override</div><div class="ttdoc">回调, 当组件被移除</div><div class="ttdef"><b>Definition:</b> rigidbody.cpp:49</div></div>
 <div class="ttc" id="aclass_rigidbody_html_a943500b9ced40c992666008d78c68f0a"><div class="ttname"><a href="class_rigidbody.html#a943500b9ced40c992666008d78c68f0a">Rigidbody::getColliders</a></div><div class="ttdeci">const std::vector&lt; Collider * &gt; &amp; getColliders() const</div><div class="ttdoc">获取全部碰撞体</div><div class="ttdef"><b>Definition:</b> rigidbody.cpp:39</div></div>
 <div class="ttc" id="aclass_rigidbody_html_aa8d7bbd8e65c3d9f6b6be23e61cee0f2"><div class="ttname"><a href="class_rigidbody.html#aa8d7bbd8e65c3d9f6b6be23e61cee0f2">Rigidbody::addCollider</a></div><div class="ttdeci">void addCollider(Collider &amp;)</div><div class="ttdoc">添加碰撞体</div><div class="ttdef"><b>Definition:</b> rigidbody.cpp:28</div></div>
-<div class="ttc" id="aclass_rigidbody_html_ac3bacc9cb76fb592ccafd26886d3c357"><div class="ttname"><a href="class_rigidbody.html#ac3bacc9cb76fb592ccafd26886d3c357">Rigidbody::onAdd</a></div><div class="ttdeci">void onAdd() override</div><div class="ttdoc">回调, 当组件被添加</div><div class="ttdef"><b>Definition:</b> rigidbody.cpp:44</div></div>
 <div class="ttc" id="aclass_rigidbody_html_ac8cd27b3518b9f5b9e8823ce0a0eea49"><div class="ttname"><a href="class_rigidbody.html#ac8cd27b3518b9f5b9e8823ce0a0eea49">Rigidbody::update</a></div><div class="ttdeci">void update(float dt) override</div><div class="ttdoc">更新速度和坐标</div><div class="ttdef"><b>Definition:</b> rigidbody.cpp:15</div></div>
 <div class="ttc" id="aclass_vec2_html"><div class="ttname"><a href="class_vec2.html">Vec2</a></div><div class="ttdoc">2D向量</div><div class="ttdef"><b>Definition:</b> vec2.h:12</div></div>
 </div><!-- fragment --></div><!-- contents -->

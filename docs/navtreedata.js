@@ -25,6 +25,8 @@
 var NAVTREE =
 [
   [ "Clementine", "index.html", [
+    [ "README-cn", "md__r_e_a_d_m_e_cn.html", null ],
+    [ "README", "md__r_e_a_d_m_e.html", null ],
     [ "类", "annotated.html", [
       [ "类列表", "annotated.html", "annotated_dup" ],
       [ "类索引", "classes.html", null ],
@@ -33,17 +35,13 @@ var NAVTREE =
         [ "全部", "functions.html", null ],
         [ "函数", "functions_func.html", null ]
       ] ]
-    ] ],
-    [ "文件", "files.html", [
-      [ "文件列表", "files.html", "files_dup" ]
     ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"annotated.html",
-"class_rect.html#adb8e67fac1915a2ca1790ba6486fbe39"
+"annotated.html"
 ];
 
 var SYNCONMSG = '点击 关闭 面板同步';

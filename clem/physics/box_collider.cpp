@@ -6,13 +6,6 @@
 #include "circle_collider.h"
 #include <cassert>
 
-/**
- * @brief 检测是否与其他碰撞体发生碰撞
- * 
- * @param other 其他碰撞体
- * @return true 发生碰撞
- * @return false 未发生碰撞
- */
 bool BoxCollider::collides(const Collider& other) const
 {
 	if(auto o = dynamic_cast<const BoxCollider*>(&other))
