@@ -15,6 +15,12 @@ TEST(Vec2, length)
 	EXPECT_EQ(Vec2(3, 4).length(), 5);
 }
 
+TEST(Vec2, normorlize)
+{
+	EXPECT_EQ(Vec2(3, 4).normalize().length(), 1);
+	EXPECT_EQ(Vec2(3, 4).normalize(), Vec2(6, 8).normalize());
+}
+
 int main(int argc, char* argv[])
 {
 	testing::InitGoogleTest(&argc, argv);

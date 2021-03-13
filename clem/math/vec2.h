@@ -23,12 +23,12 @@ public:
 	float x, y;
 
 	/**
-	 * 构造函数.
+	 * @brief 构造函数.
 	 */
 	Vec2();
 
 	/**
-	 * 构造函数.
+	 * @brief 构造函数.
 	 * 
 	 * @param x x坐标.
 	 * @param y y坐标.
@@ -36,23 +36,26 @@ public:
 	Vec2(float x, float y);
 
 	/**
-	 * 获取长度.
+	 * @brief 获取长度.
 	 * 
 	 * @see lengthSquared
 	 */
 	float length() const;
 
 	/**
-	 * 获取长度平方.
+	 * @brief 获取长度平方.
 	 * 
 	 * @see length
 	 */
 	inline float lengthSquared() const;
 
-	void normalize();
+	/**
+	 * @brief 标准化成单位向量.
+	 */
+	Vec2& normalize();
 
 	/**
-	 * 裁剪.
+	 * @brief 裁剪到指定的范围内.
 	 * 
 	 * @param min 最小值.
 	 * @param max 最大值.

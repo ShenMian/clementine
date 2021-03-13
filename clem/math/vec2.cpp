@@ -27,12 +27,12 @@ float Vec2::lengthSquared() const
 	return x * x + y * y;
 }
 
-void Vec2::normalize()
+Vec2& Vec2::normalize()
 {
 	const auto len = length();
 	if(len < FLT_EPSILON)
 		return;
-	*this *= 1.0 / len;
+	return *this *= 1.0 / len;
 }
 
 void Vec2::clamp(Point min, Point max)

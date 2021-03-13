@@ -20,12 +20,12 @@ public:
 	float x, y;
 
 	/**
-	 * 构造函数.
+	 * @brief 构造函数.
 	 */
 	Point();
 
 	/**
-	 * 构造函数.
+	 * @brief 构造函数.
 	 * 
 	 * @param x x坐标.
 	 * @param y y坐标.
@@ -33,7 +33,7 @@ public:
 	Point(float x, float y);
 
 	/**
-	 * 获取到另一个点的距离.
+	 * @brief 获取到另一个点的距离.
 	 * 
 	 * @param other 另一个点.
 	 * 
@@ -42,7 +42,7 @@ public:
 	float distance(const Point& other) const;
 
 	/**
-	 * 获取到另一个点的距离的平方.
+	 * @brief 获取到另一个点的距离的平方.
 	 * 
 	 * @param other 另一个点.
 	 * 
