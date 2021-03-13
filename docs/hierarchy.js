@@ -6,20 +6,33 @@ var hierarchy =
     [ "_XINPUT_KEYSTROKE", "struct___x_i_n_p_u_t___k_e_y_s_t_r_o_k_e.html", null ],
     [ "_XINPUT_STATE", "struct___x_i_n_p_u_t___s_t_a_t_e.html", null ],
     [ "_XINPUT_VIBRATION", "struct___x_i_n_p_u_t___v_i_b_r_a_t_i_o_n.html", null ],
+    [ "Camera", "class_camera.html", null ],
     [ "Collider", "class_collider.html", [
       [ "BoxCollider", "class_box_collider.html", null ],
       [ "CircleCollider", "class_circle_collider.html", null ]
     ] ],
-    [ "Component", null, [
+    [ "Color", "class_color.html", null ],
+    [ "Component", "class_component.html", [
       [ "InputComponent", "class_input_component.html", [
         [ "Controller", "class_controller.html", null ],
         [ "Mouse", "class_mouse.html", null ]
       ] ],
       [ "Keyboard", "class_keyboard.html", null ],
-      [ "Rigidbody", "class_rigidbody.html", null ]
+      [ "Rigidbody", "class_rigidbody.html", null ],
+      [ "Sprite", "class_sprite.html", null ]
     ] ],
+    [ "Cursor", "class_cursor.html", null ],
+    [ "Director", "class_director.html", null ],
+    [ "Event", "class_event.html", null ],
+    [ "Factor", "class_factor.html", null ],
+    [ "FrameBuffer", "class_frame_buffer.html", null ],
+    [ "Log", "class_log.html", null ],
     [ "Point", "class_point.html", null ],
+    [ "Random", "class_random.html", null ],
     [ "Rect", "class_rect.html", null ],
+    [ "Scene", "class_scene.html", null ],
     [ "Size", "class_size.html", null ],
+    [ "Terminal", "class_terminal.html", null ],
+    [ "Tile", "class_tile.html", null ],
     [ "Vec2", "class_vec2.html", null ]
 ];
