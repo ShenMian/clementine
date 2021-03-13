@@ -13,11 +13,11 @@ set(CMAKE_CXX_STANDARD 14)
 # 设置 lib 输出目录
 set(LIBRARY_OUTPUT_PATH ../lib/)
 
-include_directories(".")
+include_directories("src")
 include_directories("thirdparty/asio/asio/include")
 
 # 将 Clementine 编译到 lib 目录
-add_subdirectory("clem")
+add_subdirectory("src/clem")
 
 # 例子
 if(BUILD_EXAMPLES)

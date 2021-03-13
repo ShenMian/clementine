@@ -27,6 +27,11 @@ float Point::distanceSquared(const Point& o) const
 	return xDis * xDis + yDis * yDis;
 }
 
+Point Point::getMidpoint(const Point& other) const
+{
+	return Point((x + other.x) / 2.0f, (y + other.y) / 2.0f);
+}
+
 Point Point::operator+(const Point& p) const
 {
 	return Point(x + p.x, y + p.y);

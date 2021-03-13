@@ -50,6 +50,13 @@ public:
 	 */
 	float distanceSquared(const Point& other) const;
 
+	/**
+	 * @brief 获取两点之间的中点.
+	 * 
+	 * @param other 另一个点.
+	 */
+	Point getMidpoint(const Point& other) const;
+
 	Point  operator+(const Point&) const;
 	Point  operator-(const Point&) const;
 	Point  operator+(const Vec2&) const;

@@ -32,7 +32,35 @@ Vec2& Vec2::normalize()
 	const auto len = length();
 	if(len < FLT_EPSILON)
 		return *this;
-	return *this *= 1.0 / len;
+	return *this *= 1.0f / len;
+}
+
+Vec2& Vec2::rotate(const Vec2& point, float angle)
+{
+	float sinAngle = std::sin(angle);
+	float cosAngle = std::cos(angle);
+
+	if(point == Vec2(0, 0))
+	{
+		float tempX = x * cosAngle - y * sinAngle;
+		y           = y * cosAngle + x * sinAngle;
+		x           = tempX;
+	}
+	else
+	{
+		float tempX = x - point.x;
+		float tempY = y - point.y;
+
+		x = tempX * cosAngle - tempY * sinAngle + point.x;
+		y = tempY * cosAngle + tempX * sinAngle + point.y;
+	}
+
+	return *this;
+}
+
+float Vec2::getAngle() const
+{
+	return std::atan2(y, x);
 }
 
 void Vec2::clamp(Point min, Point max)
@@ -101,3 +129,5 @@ Vec2& Vec2::operator/=(float n)
 {
 	return *this = *this / n;
 }
+
+const Vec2 Vec2::zero(0, 0);

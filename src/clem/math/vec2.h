@@ -55,6 +55,19 @@ public:
 	Vec2& normalize();
 
 	/**
+	 * @brief 旋转向量绕定点一定角度(弧度制).
+	 * 
+   * @param point 围绕旋转的点.
+   * @param angle 要旋转的角度(弧度制).
+	 */
+	Vec2& rotate(const Vec2& point, float angle);
+
+	/**
+	 * @brief 获取角度.
+	 */
+	float getAngle() const;
+
+	/**
 	 * @brief 裁剪到指定的范围内.
 	 * 
 	 * @param min 最小值.
@@ -74,6 +87,8 @@ public:
 	Vec2& operator-=(const Vec2& v);
 	Vec2& operator*=(float n);
 	Vec2& operator/=(float n);
+
+	static const Vec2 zero;
 };
 
 /**
