@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['_7eframebuffer_91',['~FrameBuffer',['../class_frame_buffer.html#aef8be9884e8cc0fc3f3692e6c6968fa1',1,'FrameBuffer']]],
-  ['_7escene_92',['~Scene',['../class_scene.html#a3b8cec2e32546713915f8c6303c951f1',1,'Scene']]]
+  ['vec2_91',['Vec2',['../class_vec2.html',1,'Vec2'],['../class_vec2.html#a76080feed7005893ecc634f903cfbae0',1,'Vec2::Vec2()'],['../class_vec2.html#a6256fecebf5a43b14d5d5341c58cfdc4',1,'Vec2::Vec2(float x, float y)']]]
 ];

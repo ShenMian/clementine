@@ -1,13 +1,7 @@
 var searchData=
 [
-  ['random_62',['Random',['../class_random.html',1,'']]],
-  ['readme_2dcn_63',['README-cn',['../md__r_e_a_d_m_e_cn.html',1,'']]],
-  ['removecamera_64',['removeCamera',['../class_scene.html#ab1d83c221ffc390313ac7677e14c721a',1,'Scene']]],
-  ['removecomponent_65',['removeComponent',['../class_factor.html#a72640c29fe7839055bc6f1b951ef6710',1,'Factor']]],
-  ['removefactor_66',['removeFactor',['../class_scene.html#a90b5128964a2dbbc1dc4af6cbb2d245b',1,'Scene']]],
-  ['render_67',['render',['../class_camera.html#a52a43becd053495ce3f994419e969ab8',1,'Camera::render()'],['../class_scene.html#a4ddf2d16f371ee9533b3faf1dd5ddfb1',1,'Scene::render()']]],
-  ['replacescene_68',['replaceScene',['../class_director.html#aa7ec2edfa6a61517ff31ee105687a40e',1,'Director']]],
-  ['resume_69',['resume',['../class_director.html#a851df0aed8d550cc85159063b0c85dac',1,'Director']]],
-  ['rigidbody_70',['Rigidbody',['../class_rigidbody.html',1,'']]],
-  ['run_71',['run',['../class_director.html#aae0f1f042a6757196af74f5764ee36ad',1,'Director']]]
+  ['pause_59',['pause',['../class_director.html#ad0e2e9b810e39c939e25ead3918faf00',1,'Director']]],
+  ['point_60',['Point',['../class_point.html',1,'Point'],['../class_point.html#ad92f2337b839a94ce97dcdb439b4325a',1,'Point::Point()'],['../class_point.html#a30bc8409287de4f43e160664be834636',1,'Point::Point(float x, float y)']]],
+  ['popscene_61',['popScene',['../class_director.html#a92916c5c47d0f0a202fe1a5023841e8b',1,'Director']]],
+  ['pushscene_62',['pushScene',['../class_director.html#aa4827f2c29421764dd38913e70fe9e5b',1,'Director']]]
 ];

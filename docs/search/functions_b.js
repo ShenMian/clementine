@@ -1,17 +1,10 @@
 var searchData=
 [
-  ['scene_172',['Scene',['../class_scene.html#ad10176d75a9cc0da56626f682d083507',1,'Scene']]],
-  ['setdepth_173',['setDepth',['../class_camera.html#adef724446082d86888f354a6d314ea51',1,'Camera']]],
-  ['setinputposition_174',['setInputPosition',['../class_camera.html#a8d161d79b379422f5cd3ad86fb736149',1,'Camera']]],
-  ['setmsperrender_175',['setMsPerRender',['../class_director.html#ae3614b15b1935eebd5aae74c6f1cc515',1,'Director']]],
-  ['setmsperupdate_176',['setMsPerUpdate',['../class_director.html#aecb29841de86d14cf7ce4a52aff65f3b',1,'Director']]],
-  ['setoffset_177',['setOffset',['../class_collider.html#a4d19c8a7ea2396f1b4bd633ae2865643',1,'Collider']]],
-  ['setoutputposition_178',['setOutputPosition',['../class_camera.html#aeeb8678958f232b5a4474e8a48dbe209',1,'Camera']]],
-  ['setowner_179',['setOwner',['../class_collider.html#a589928c70143b9170523146d94614ca6',1,'Collider::setOwner()'],['../class_component.html#a97cd7aab2c6e835371ef64e00c9618f1',1,'Component::setOwner()']]],
-  ['setposition_180',['setPosition',['../class_factor.html#a6fcd2d223e650919f4c218ca8a191da5',1,'Factor']]],
-  ['setradius_181',['setRadius',['../class_circle_collider.html#a705dc1d6ce04f3d1faec1405810b520f',1,'CircleCollider']]],
-  ['setscene_182',['setScene',['../class_camera.html#ac35b13397b0add2c502bef10a46f0e17',1,'Camera']]],
-  ['setsize_183',['setSize',['../class_box_collider.html#a264b7d64e37f69c11c5ccf06ce371e14',1,'BoxCollider::setSize()'],['../class_camera.html#a41f5d6ed7aeffb62ab35268ca4a46773',1,'Camera::setSize()'],['../class_frame_buffer.html#ab1f2e6e815e01d0bbaf157c3b0a70c8c',1,'FrameBuffer::setSize()'],['../class_sprite.html#a17cf1063e1a13c25a4490dfa5bfc50aa',1,'Sprite::setSize()']]],
-  ['setvisible_184',['setVisible',['../class_cursor.html#a99e1ea96e8ab6a46a7efef1e7ddd6bb1',1,'Cursor']]],
-  ['swapbuffers_185',['swapBuffers',['../class_frame_buffer.html#abee2f66e863efed92bc480275f0b52e0',1,'FrameBuffer']]]
+  ['removecamera_167',['removeCamera',['../class_scene.html#ab1d83c221ffc390313ac7677e14c721a',1,'Scene']]],
+  ['removecomponent_168',['removeComponent',['../class_factor.html#a72640c29fe7839055bc6f1b951ef6710',1,'Factor']]],
+  ['removefactor_169',['removeFactor',['../class_scene.html#a90b5128964a2dbbc1dc4af6cbb2d245b',1,'Scene']]],
+  ['render_170',['render',['../class_camera.html#a52a43becd053495ce3f994419e969ab8',1,'Camera::render()'],['../class_scene.html#a4ddf2d16f371ee9533b3faf1dd5ddfb1',1,'Scene::render()']]],
+  ['replacescene_171',['replaceScene',['../class_director.html#aa7ec2edfa6a61517ff31ee105687a40e',1,'Director']]],
+  ['resume_172',['resume',['../class_director.html#a851df0aed8d550cc85159063b0c85dac',1,'Director']]],
+  ['run_173',['run',['../class_director.html#aae0f1f042a6757196af74f5764ee36ad',1,'Director']]]
 ];
