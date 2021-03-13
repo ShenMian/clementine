@@ -40,7 +40,7 @@ Contact 💬
 - **[Telegram]**
 
 [cn]:                  README-cn.md
-[API Document]:        https://shenmian.github.io/Clementine
+[API Reference]:        https://shenmian.github.io/Clementine
 [Set up Git]:          https://help.github.com/articles/set-up-git
 [fork our repository]: https://help.github.com/articles/fork-a-repo
 [Github Discussions]:  https://github.com/ShenMian/Clementine/discussions
