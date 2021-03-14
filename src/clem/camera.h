@@ -16,7 +16,7 @@ class Camera
 {
 public:
 	Camera();
-	Camera(Scene* scene);
+	explicit Camera(Scene* scene);
 
 	void render(const std::vector<Sprite*>&);
 

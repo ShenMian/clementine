@@ -107,7 +107,7 @@ void FrameBuffer::setSize(Size s)
 	size = s;
 	if(current != nullptr)
 		delete[] current;
-	if(current != nullptr)
+	if(next != nullptr)
 		delete[] next;
 	current = new buffer_t[size.area()]();
 	next    = new buffer_t[size.area()]();

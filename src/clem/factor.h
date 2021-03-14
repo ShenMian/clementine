@@ -17,7 +17,7 @@ class Factor
 {
 public:
 	Factor();
-	Factor(Scene&);
+	explicit Factor(Scene&);
 
 	virtual void update(float dt);
 

@@ -1,6 +1,5 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
-// 刚体
 
 #ifndef CLEM_PHYSICS_RIGIDBODY_H_
 #define CLEM_PHYSICS_RIGIDBODY_H_
@@ -11,7 +10,14 @@
 
 class Collider;
 
-/// 刚体
+/**
+ * @addtogroup physics
+ * @{
+ */
+
+/**
+ * 刚体.
+ */
 class Rigidbody : public Component
 {
 public:
@@ -29,5 +35,10 @@ public:
 private:
 	std::vector<Collider*> colliders;
 };
+
+/**
+ * end of physics group
+ * @}
+ */
 
 #endif // !CLEM_PHYSICS_RIGIDBODY_H_

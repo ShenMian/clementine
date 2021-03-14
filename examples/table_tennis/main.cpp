@@ -17,9 +17,6 @@ using namespace std;
 
 #include <clem/input/keyboard.h>
 #include <clem/frame_buffer.h>
-#include <random>
-
-#include "player.hpp"
 
 // width / height = 80 / 25 => width * 25 = height * 80
 const short width  = 80;
@@ -84,6 +81,7 @@ private:
 
 int main()
 {
+	Log::init();
 	Cursor::setVisible(false);
 	auto director = Director::getInstance();
 	Scene scene;
@@ -95,16 +93,6 @@ int main()
 	sprite.setSize(winSize);
 	Factor debug(scene);
 	debug.addComponent(sprite);
-
-	/*
-	Player playerA(scene);
-	playerA.bind(Keyboard::Key::W, Keyboard::Key::S);
-	playerA.setPosition({1, 12});
-	
-	Player playerB(scene);
-	playerB.bind(Keyboard::Key::up, Keyboard::Key::down);
-	playerB.setPosition({118, 12});
-	*/
 
 	Bar bar(scene);
 	bar.setPosition({1, winSize.y / 2.0f - 2});

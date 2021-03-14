@@ -4,7 +4,7 @@
 
 #include "sprite.h"
 #include "frame_buffer.h"
-#include <assert.h>
+#include <cassert>
 
 void Sprite::drawPoint(int x, int y, const Tile& t)
 {

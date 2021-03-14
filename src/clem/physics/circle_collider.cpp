@@ -6,6 +6,15 @@
 #include "box_collider.h"
 #include <cassert>
 
+CircleCollider::CircleCollider()
+{
+}
+
+CircleCollider::CircleCollider(float radius)
+		: radius(radius)
+{
+}
+
 bool CircleCollider::collides(const Collider& other) const
 {
 	if(auto o = dynamic_cast<const CircleCollider*>(&other))

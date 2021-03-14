@@ -4,6 +4,7 @@
 
 #include "collider.h"
 #include "rigidbody.h"
+#include <cassert>
 
 Collider::Collider()
 		: owner(nullptr)
@@ -14,31 +15,17 @@ Collider::~Collider()
 {
 }
 
-/**
- * @brief 获取坐标
- * 
- * @return Point 坐标
- */
 Point Collider::getPosition() const
 {
+	assert(owner);
 	return owner->getOwner()->getPosition() + offset;
 }
 
-/**
- * @brief 设置偏移
- * 
- * @param o 偏移
- */
 void Collider::setOffset(Point o)
 {
 	offset = o;
 }
 
-/**
- * @brief 获取偏移
- * 
- * @return Point 偏移
- */
 Point Collider::getOffset() const
 {
 	return offset;

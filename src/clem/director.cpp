@@ -24,7 +24,10 @@ Director* Director::getInstance()
 void Director::run()
 {
 	if(scenes.empty())
-		assert(false);
+	{
+		CLEM_ENGINE_ERROR("Lunch main loop when the scenes is empty");
+		return;
+	}
 
 	running = true;
 	thread  = std::thread(&Director::loop, this);
@@ -67,9 +70,11 @@ void Director::pushScene(Scene& s)
  */
 void Director::popScene()
 {
-	if(scenes.size() <= 1)
-		assert(false);
-
+	if(scenes.empty())
+	{
+		CLEM_ENGINE_ERROR("Pop a scene when the scenes is empty");
+		return;
+	}
 	scenes.pop_back();
 }
 
@@ -81,8 +86,10 @@ void Director::popScene()
 void Director::replaceScene(Scene& s)
 {
 	if(scenes.empty())
-		assert(false);
-
+	{
+		CLEM_ENGINE_ERROR("Replace a scene when the scenes is empty");
+		return;
+	}
 	scenes.front() = &s;
 }
 
@@ -106,7 +113,11 @@ Scene* Director::getCurrentScene() const
  */
 void Director::setMsPerUpdate(long ms)
 {
-	assert(ms > 0);
+	if(ms <= 0)
+	{
+		CLEM_ENGINE_CRITICAL("Set ms per update non positive");
+		assert(false);
+	}
 	msPerUpdate = ms;
 }
 
@@ -117,7 +128,11 @@ void Director::setMsPerUpdate(long ms)
  */
 void Director::setMsPerRender(long ms)
 {
-	assert(ms > 0);
+	if(ms <= 0)
+	{
+		CLEM_ENGINE_CRITICAL("Set ms per render non positive");
+		assert(false);
+	}
 	msPerRender = ms;
 }
 
@@ -136,16 +151,15 @@ short Director::getFramesPerSecond() const
  */
 void Director::loop()
 {
-	long current, previous, dt;
-	previous = getCurrentMillSecond();
+	CLEM_ENGINE_INFO("Main loop started");
+
+	long previous = getCurrentMillSecond();
 
 	while(running)
 	{
-		current  = getCurrentMillSecond();
-		dt       = current - previous;
-		previous = current;
-
-		// sleep_for(milliseconds(8 - dt));
+		long current = getCurrentMillSecond();
+		long dt      = current - previous;
+		previous     = current;
 
 		update(dt);
 		render(dt);
@@ -157,6 +171,8 @@ void Director::loop()
 			previous = getCurrentMillSecond();
 		}
 	}
+
+	CLEM_ENGINE_INFO("Main loop stoped");
 }
 
 /**

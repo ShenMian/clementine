@@ -3,28 +3,31 @@
 
 #include "log.h"
 #include "spdlog/sinks/rotating_file_sink.h"
+#include <chrono>
 
 using namespace spdlog;
 
-std::shared_ptr<spdlog::logger> Log::logger;
+std::shared_ptr<logger> Log::engineLogger;
 
 void Log::init()
 {
-	set_pattern("[%T][%=8l] %n: %v");
 	try
 	{
-		logger = rotating_logger_mt("engine", "logs/clem.log", 1024 * 1024 * 5, 3);
+		engineLogger = rotating_logger_mt("engine", "logs/clem.log", 1024 * 1024 * 5, 3);
 	}
 	catch(const spdlog_ex& e)
 	{
 		assert(false);
 	}
 
-	logger->set_level(level::trace);
-	logger->flush_on(level::trace);
+	engineLogger->set_pattern("[%T][%=8l] %n: %v");
+	engineLogger->flush_on(level::err);
+
+	flush_every(std::chrono::seconds(5));
 }
 
-std::shared_ptr<spdlog::logger> Log::getLogger()
+std::shared_ptr<logger> Log::getLogger()
 {
-	return logger;
+	assert(engineLogger != nullptr);
+	return engineLogger;
 }
