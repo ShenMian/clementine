@@ -4,9 +4,6 @@
 [submodule "thirdparty/asio"]
 	path = thirdparty/asio
 	url = https://github.com/chriskohlhoff/asio.git
-[submodule "thirdparty/.\\thirdparty\\spdlog"]
-	path = thirdparty/.\\thirdparty\\spdlog
-	url = https://github.com/gabime/spdlog.git
 [submodule "thirdparty/spdlog"]
 	path = thirdparty/spdlog
 	url = https://github.com/gabime/spdlog.git
