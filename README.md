@@ -32,7 +32,8 @@ Compiling ⛓
 
 Screenshots ✨
 -----------
-<img src="docs/picture/picture_0.png" width="50%" height="50%">
+<img src="docs/picture/profiler.png" width="80%" height="80%">
+<img src="docs/picture/picture_0.png" width="80%" height="80%">
 
 Contact 💬
 -------
@@ -40,7 +41,7 @@ Contact 💬
 - **[Telegram]**
 
 [cn]:                  README-cn.md
-[API Reference]:        https://shenmian.github.io/Clementine
+[API Reference]:       https://shenmian.github.io/Clementine
 [Set up Git]:          https://help.github.com/articles/set-up-git
 [fork our repository]: https://help.github.com/articles/fork-a-repo
 [Github Discussions]:  https://github.com/ShenMian/Clementine/discussions

@@ -4,6 +4,7 @@
 #include "director.h"
 #include "log.h"
 #include "platform.h"
+#include "profiler.h"
 #include "scene.h"
 #include <cassert>
 #include <chrono>
@@ -44,7 +45,7 @@ void Director::stop()
  */
 void Director::pause()
 {
-	paused = true;	
+	paused = true;
 }
 
 /**
@@ -157,6 +158,8 @@ void Director::loop()
 
 	while(running)
 	{
+		PROFILE_FUNC();
+
 		long current = getCurrentMillSecond();
 		long dt      = current - previous;
 		previous     = current;
@@ -182,6 +185,8 @@ void Director::loop()
  */
 void Director::update(long dt)
 {
+	PROFILE_FUNC();
+
 	auto scene = scenes.back();
 
 	static long updateLag = 0;
@@ -202,6 +207,8 @@ void Director::update(long dt)
  */
 void Director::render(long dt)
 {
+	PROFILE_FUNC();
+
 	auto scene = scenes.back();
 
 	static long loopLag = 0, loopTimes = 0, loopFps = 0;
@@ -235,16 +242,16 @@ void Director::render(long dt)
 
 #ifdef OS_UNIX
 
+#include <sys/ioctl.h>
 #include <termios.h>
 #include <unistd.h>
-#include <sys/ioctl.h>
 
 Director::Director()
 		: running(false), paused(false), msPerUpdate(16), msPerRender(16), framesPerSecond(0)
 {
-  // 开启 raw 模式
-  termios mode;
-  if(tcgetattr(STDOUT_FILENO, &mode) == -1)
+	// 开启 raw 模式
+	termios mode;
+	if(tcgetattr(STDOUT_FILENO, &mode) == -1)
 		assert(false);
 	mode.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
 	mode.c_cflag |= (CS8);
@@ -252,7 +259,7 @@ Director::Director()
 	mode.c_cc[VMIN]  = 0;
 	mode.c_cc[VTIME] = 0;
 	if(tcsetattr(STDIN_FILENO, TCSAFLUSH, &mode) == -1)
-    assert(false);
+		assert(false);
 }
 
 /**
@@ -286,7 +293,7 @@ long Director::getCurrentMillSecond() const
 Director::Director()
 		: running(false), paused(false), msPerUpdate(16), msPerRender(16), framesPerSecond(0)
 {
-  // 开启 VT100 模式
+	// 开启 VT100 模式
 	const auto hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	DWORD      mode;
 	if(!GetConsoleMode(hStdOut, &mode))
@@ -305,7 +312,7 @@ Size Director::getWinSize() const
 	static const auto hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	CONSOLE_SCREEN_BUFFER_INFO screenInfo;
-	auto ret = GetConsoleScreenBufferInfo(hOut, &screenInfo);
+	auto                       ret = GetConsoleScreenBufferInfo(hOut, &screenInfo);
 	if(!ret)
 		assert(false);
 

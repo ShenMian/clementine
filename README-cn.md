@@ -31,16 +31,17 @@
 
 截图 ✨
 ----
-<img src="docs/picture/picture_0.png" width="50%" height="50%">
+<img src="docs/picture/profiler.png" width="80%" height="80%">
+<img src="docs/picture/picture_0.png" width="80%" height="80%">
 
 联系 💬
 ----
 - **[Github Discussions]**
 - **[Telegram]**
 
-[en]: README.md
-[API参考]: https://shenmian.github.io/Clementine
-[设置Git]: https://help.github.com/articles/set-up-git
-[fork我们的仓库]: https://help.github.com/articles/fork-a-repo
+[en]:                 README.md
+[API参考]:            https://shenmian.github.io/Clementine
+[设置Git]:            https://help.github.com/articles/set-up-git
+[fork我们的仓库]:      https://help.github.com/articles/fork-a-repo
 [Github Discussions]: https://github.com/ShenMian/Clementine/discussions
-[Telegram]: https://t.me/shenmian
+[Telegram]:           https://t.me/shenmian
