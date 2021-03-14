@@ -1,4 +1,4 @@
-﻿// Copyright 2021 SMS
+// Copyright 2021 SMS
 // License(Apache-2.0)
 // Table tennis
 
