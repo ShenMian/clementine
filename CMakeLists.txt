@@ -18,7 +18,6 @@ include_directories("src")
 include_directories("thirdparty/asio/asio/include")
 include_directories("thirdparty/spdlog/include")
 
-# 将 Clementine 编译到 lib 目录
 add_subdirectory("src/clem")
 
 # 例子
