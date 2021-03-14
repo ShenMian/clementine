@@ -188,6 +188,15 @@ void Director::render(long dt)
 {
 	auto scene = scenes.back();
 
+	static long loopLag = 0, loopTimes = 0, loopFps = 0;
+	loopTimes++;
+	loopLag += dt;
+	if(loopLag >= 1000)
+	{
+		loopFps = loopTimes;
+		loopLag = loopTimes = 0;
+	}
+
 	static long fpsLag = 0, frames = 0;
 	const long  target = 1000 / msPerRender;
 	fpsLag += dt;
@@ -195,7 +204,7 @@ void Director::render(long dt)
 	{
 		framesPerSecond = frames;
 		frames = fpsLag = 0;
-		Terminal::setTitle("Clementine - " + std::to_string(getFramesPerSecond()) + "(" + std::to_string(target) + ")" + "FPS");
+		Terminal::setTitle("Clementine | Render: " + std::to_string(getFramesPerSecond()) + "(" + std::to_string(target) + ")" + "FPS | Loop: " + std::to_string(loopFps / 1000) + "kHz");
 	}
 
 	static long renderLag = 0;

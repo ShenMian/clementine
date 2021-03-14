@@ -51,6 +51,14 @@ public:
 	float distanceSquared(const Point& other) const;
 
 	/**
+	 * @brief 裁剪到指定的范围内.
+	 * 
+	 * @param min 最小值.
+	 * @param max 最大值.
+	 */
+	void clamp(Point min, Point max);
+
+	/**
 	 * @brief 获取两点之间的中点.
 	 * 
 	 * @param other 另一个点.

@@ -9,32 +9,28 @@
 
 FrameBuffer frameBuffer;
 
-/**
- * @brief 构造 FrameBuffer 对象
- */
 FrameBuffer::FrameBuffer()
 		: current(nullptr), next(nullptr)
 {
 	setSize(Director::getInstance()->getWinSize());
 }
 
-/**
- * @brief 析构 FrameBuffer 对象
- */
 FrameBuffer::~FrameBuffer()
 {
 	delete[] current;
 	delete[] next;
 }
 
-/**
- * @brief 交换缓冲区
- */
 void FrameBuffer::swapBuffers()
 {
 	auto temp = current;
 	current   = next;
 	next      = temp;
+}
+
+void FrameBuffer::drawPoint(int x, int y, const Tile& t)
+{
+	drawPoint(Point(x, y), t);
 }
 
 void FrameBuffer::drawLine(Point a, Point b, const Tile& t)
@@ -49,7 +45,7 @@ void FrameBuffer::drawLine(Point a, Point b, const Tile& t)
 	float x = a.x, y = a.y;
 	for(int i = 0; i < maxDis; i++)
 	{
-		drawPoint(Point(x, y), t);
+		drawPoint(x, y, t);
 		x += xDelta, y += yDelta;
 	}
 }
@@ -58,13 +54,13 @@ void FrameBuffer::drawRect(Rect r, const Tile& t)
 {
 	for(int x = r.left(); x <= r.right(); x++)
 	{
-		drawPoint(Point(x, r.top()), t);
-		drawPoint(Point(x, r.bottom()), t);
+		drawPoint(x, r.top(), t);
+		drawPoint(x, r.bottom(), t);
 	}
 	for(int y = r.top(); y <= r.bottom(); y++)
 	{
-		drawPoint(Point(r.left(), y), t);
-		drawPoint(Point(r.right(), y), t);
+		drawPoint(r.left(), y, t);
+		drawPoint(r.right(), y, t);
 	}
 }
 
@@ -72,7 +68,28 @@ void FrameBuffer::fillRect(Rect r, const Tile& t)
 {
 	for(int y = 0; y < r.height; y++)
 		for(int x = 0; x < r.width; x++)
-			drawPoint({r.x + x, r.y + y}, t);
+			drawPoint(r.x + x, r.y + y, t);
+}
+
+void FrameBuffer::drawCycle(Point c, short r, const Tile& t)
+{
+	// TODO(SMS): 优化算法
+	for(int x = 0; x <= r; x++)
+	{
+		int y = sqrt(r * r - x * x);
+		drawPoint(c.x + x, c.y + y, t);
+		drawPoint(c.x - x, c.y + y, t);
+		drawPoint(c.x - x, c.y - y, t);
+		drawPoint(c.x + x, c.y - y, t);
+	}
+	for(int y = 0; y <= r; y++)
+	{
+		int x = sqrt(r * r - y * y);
+		drawPoint(c.x + x, c.y + y, t);
+		drawPoint(c.x - x, c.y + y, t);
+		drawPoint(c.x - x, c.y - y, t);
+		drawPoint(c.x + x, c.y - y, t);
+	}
 }
 
 void FrameBuffer::clear()

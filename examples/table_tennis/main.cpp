@@ -90,12 +90,12 @@ int main()
 
 	frameBuffer.setSize(winSize);
 
-	Sprite grid;
-	grid.setSize(winSize);
-	grid.drawRect(Rect({0, 0}, frameBuffer.getSize()), Tile('.'));
+	Random random;
+	Sprite sprite;
+	sprite.setSize(winSize);
 	Factor debug(scene);
-	debug.addComponent(grid);
-	
+	debug.addComponent(sprite);
+
 	/*
 	Player playerA(scene);
 	playerA.bind(Keyboard::Key::W, Keyboard::Key::S);
@@ -124,10 +124,10 @@ int main()
 	director->pushScene(scene);
 	director->run();
 
-	sleep_for(seconds(5));
-
-	director->stop();
-
 	while(true)
-		;
+	{
+		for(int y = 0; y < sprite.getSize().y; y++)
+			for(int x = 0; x < sprite.getSize().x; x++)
+				sprite.drawPoint(x, y, Tile('0' + random.int32(0, 9)));
+	}
 }

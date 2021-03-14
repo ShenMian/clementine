@@ -4,6 +4,8 @@
 #ifndef CLEM_CLEM_H_
 #define CLEM_CLEM_H_
 
+#define CLEM_API
+
 // Core
 #include "clem/camera.h"
 #include "clem/director.h"
@@ -30,5 +32,9 @@
 #include "clem/cursor.h"
 #include "clem/frame_buffer.h"
 #include "clem/sprite.h"
+
+#include "clem/log.h"
+#include "clem/random.h"
+#include "clem/terminal.h"
 
 #endif // !CLEM_CLEM_H_

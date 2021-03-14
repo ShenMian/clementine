@@ -20,17 +20,77 @@ class FrameBuffer
 #endif
 
 public:
+	/**
+	 * @brief 构造函数.
+	 */
 	FrameBuffer();
-	~FrameBuffer();
 
-	void drawPoint(Point, const Tile&);
-	void drawLine(Point, Point, const Tile&);
-	void drawRect(Rect, const Tile&);
-	void fillRect(Rect, const Tile&);
-	void drawCycle(Point, short radius, const Tile&);
+	/**
+	 * @brief 析构函数.
+	 */
+	~FrameBuffer();
+	
+	/**
+	 * @brief 绘制点.
+	 * 
+	 * @param x x坐标.
+	 * @param y y坐标.
+	 * @param t 瓦片.
+	 */
+	void drawPoint(int x, int y, const Tile& t);
+	
+	/**
+	 * @brief 绘制点.
+	 * 
+	 * @param p 点的坐标.
+	 * @param t 瓦片.
+	 */
+	void drawPoint(Point p, const Tile& t);
+
+	/**
+	 * @brief 绘制连接两点的直线.
+	 * 
+	 * @param a a点坐标.
+	 * @param b b点坐标.
+	 * @param t 瓦片.
+	 */
+	void drawLine(Point a, Point b, const Tile& t);
+	
+	/**
+	 * @brief 绘制矩形.
+	 * 
+	 * @param r 矩形.
+	 * @param t 瓦片.
+	 */
+	void drawRect(Rect r, const Tile& t);
+
+	/**
+	 * @brief 绘制实心矩形.
+	 * 
+	 * @param r 矩形.
+	 * @param t 瓦片.
+	 */
+	void fillRect(Rect r, const Tile& t);
+
+	/**
+	 * @brief 绘制圆形.
+	 * 
+	 * @param p 原点坐标.
+	 * @param radius 半径.
+	 * @param t 瓦片.
+	 */
+	void drawCycle(Point p, short radius, const Tile& t);
+	
+	/**
+	 * @brief 清除全部绘制内容.
+	 */
 	void clear();
 
+	/**
+	 * @brief 交换缓冲区.
+	 */
 	void swapBuffers();
+	
 	void render();
 
 	void setSize(Size);

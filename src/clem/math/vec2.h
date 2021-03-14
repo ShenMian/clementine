@@ -67,14 +67,6 @@ public:
 	 */
 	float getAngle() const;
 
-	/**
-	 * @brief 裁剪到指定的范围内.
-	 * 
-	 * @param min 最小值.
-	 * @param max 最大值.
-	 */
-	void clamp(Point min, Point max);
-
 	bool  operator==(const Vec2& v) const;
 	bool  operator!=(const Vec2& v) const;
 

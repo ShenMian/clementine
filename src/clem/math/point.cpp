@@ -4,6 +4,7 @@
 #include "point.h"
 #include "vec2.h"
 #include <cmath>
+#include <algorithm>
 
 Point::Point()
 		: x(0), y(0)
@@ -25,6 +26,14 @@ float Point::distanceSquared(const Point& o) const
 	auto xDis = std::abs(x - o.x);
 	auto yDis = std::abs(y - o.y);
 	return xDis * xDis + yDis * yDis;
+}
+
+void Point::clamp(Point min, Point max)
+{
+	x = std::max(x, min.x);
+	x = std::min(x, max.x);
+	y = std::max(y, min.y);
+	y = std::min(y, max.y);
 }
 
 Point Point::getMidpoint(const Point& other) const

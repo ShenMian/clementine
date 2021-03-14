@@ -6,6 +6,11 @@
 
 using std::uniform_int_distribution;
 
+Random::Random()
+{
+	generator.seed(std::random_device()());
+}
+
 void Random::seed(uint32_t seed)
 {
 	generator.seed(seed);

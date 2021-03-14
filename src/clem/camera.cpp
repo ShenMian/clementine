@@ -43,13 +43,13 @@ void Camera::render(const vector<Sprite*>& sprites)
 	for(auto s : sprites)
 	{
 		auto& pos  = s->getOwner()->getPosition();
-		auto  size = s->getSize();
-		Rect box(pos, size);
+		auto  siz = s->getSize();
+		Rect  box(pos, siz);
 		if(!viewport.contains(box))
 			continue;
-		for(int y = 0; y < size.y; y++)
-			for(int x = 0; x < size.x; x++)
-				frameBuffer.drawPoint({pos.x + x, pos.y + y}, s->buffer[0]);
+		for(int y = 0; y < siz.y; y++)
+			for(int x = 0; x < siz.x; x++)
+				frameBuffer.drawPoint({pos.x + x, pos.y + y}, s->buffer[x + y * siz.x]);
 	}
 }
 

@@ -5,7 +5,6 @@
 #include "point.h"
 #include <cmath>
 #include <cfloat>
-#include <algorithm>
 
 Vec2::Vec2()
 		: x(0), y(0)
@@ -61,14 +60,6 @@ Vec2& Vec2::rotate(const Vec2& point, float angle)
 float Vec2::getAngle() const
 {
 	return std::atan2(y, x);
-}
-
-void Vec2::clamp(Point min, Point max)
-{
-	x = std::min(x, min.x);
-	x = std::max(x, max.x);
-	y = std::min(y, min.y);
-	y = std::max(y, max.y);
 }
 
 bool Vec2::operator==(const Vec2& v) const

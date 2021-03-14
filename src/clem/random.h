@@ -12,6 +12,8 @@
 class Random
 {
 public:
+	Random();
+
 	void seed(uint32_t);
 
 	uint32_t uint32(uint32_t min = 0, uint32_t max = UINT32_MAX);
