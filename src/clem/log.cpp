@@ -21,6 +21,7 @@ void Log::init()
 	}
 
 	logger->set_level(level::trace);
+	logger->flush_on(level::trace);
 }
 
 std::shared_ptr<spdlog::logger> Log::getLogger()
