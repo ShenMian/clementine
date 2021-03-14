@@ -21,6 +21,11 @@ using namespace std;
 
 #include "player.hpp"
 
+// width / height = 80 / 25 => width * 25 = height * 80
+const short width  = 80;
+const short height = width * 25 / 80;
+const Size  winSize(width, height);
+
 class Ball : public Factor
 {
 public:
@@ -82,6 +87,14 @@ int main()
 	Cursor::setVisible(false);
 	auto director = Director::getInstance();
 	Scene scene;
+
+	frameBuffer.setSize(winSize);
+
+	Sprite grid;
+	grid.setSize(winSize);
+	grid.drawRect(Rect({0, 0}, frameBuffer.getSize()), Tile('.'));
+	Factor debug(scene);
+	debug.addComponent(grid);
 	
 	/*
 	Player playerA(scene);
@@ -94,10 +107,10 @@ int main()
 	*/
 
 	Bar bar(scene);
-	bar.setPosition({1, 12});
+	bar.setPosition({1, winSize.y / 2.0f - 2});
 
 	Ball ball(scene);
-	ball.setPosition({59, 14});
+	ball.setPosition({winSize.x / 2.0f, winSize.y / 2.0f});
 	ball.setVelocity({-30, 0});
 
 	/*
@@ -110,6 +123,11 @@ int main()
 	director->setMsPerRender(1000 / 60);
 	director->pushScene(scene);
 	director->run();
+
+	sleep_for(seconds(5));
+
+	director->stop();
+
 	while(true)
 		;
 }

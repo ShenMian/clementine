@@ -6,6 +6,7 @@
 #define CLEM_DIRECTOR_H_
 
 #include <vector>
+#include <thread>
 
 class Size;
 class Scene;
@@ -17,6 +18,7 @@ public:
 	static Director* getInstance();
 
 	void run();
+	void stop();
 
 	void pause();
 	void resume();
@@ -41,9 +43,11 @@ private:
 
 	std::vector<Scene*> scenes;
 	bool                paused;
+	bool                running;
 	long                msPerUpdate;
 	long                msPerRender;
 	short               framesPerSecond;
+	std::thread         thread;
 
 	static Director instance;
 };

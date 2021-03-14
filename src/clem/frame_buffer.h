@@ -26,7 +26,7 @@ public:
 	void drawPoint(Point, const Tile&);
 	void drawLine(Point, Point, const Tile&);
 	void drawRect(Rect, const Tile&);
-	void drawRectFill(Rect, const Tile&);
+	void fillRect(Rect, const Tile&);
 	void drawCycle(Point, short radius, const Tile&);
 	void clear();
 

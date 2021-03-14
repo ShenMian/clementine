@@ -68,7 +68,7 @@ void FrameBuffer::drawRect(Rect r, const Tile& t)
 	}
 }
 
-void FrameBuffer::drawRectFill(Rect r, const Tile& t)
+void FrameBuffer::fillRect(Rect r, const Tile& t)
 {
 	for(int y = 0; y < r.height; y++)
 		for(int x = 0; x < r.width; x++)
@@ -77,9 +77,7 @@ void FrameBuffer::drawRectFill(Rect r, const Tile& t)
 
 void FrameBuffer::clear()
 {
-	for(int y = 0; y < size.y; y++)
-		for(int x = 0; x < size.x; x++)
-			drawPoint(Point(x, y), Tile(' '));
+	fillRect(Rect({0, 0}, size), Tile(' '));
 }
 
 /**

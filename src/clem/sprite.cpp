@@ -70,7 +70,7 @@ void Sprite::drawRect(Rect r, const Tile& t)
  * @param r 矩形
  * @param t 瓦片
  */
-void Sprite::drawRectFill(Rect r, const Tile& t)
+void Sprite::fillRect(Rect r, const Tile& t)
 {
 	for(int y = 0; y < r.height; y++)
 		for(int x = 0; x < r.width; x++)
@@ -102,6 +102,11 @@ void Sprite::drawCycle(Point c, short r, const Tile& t)
 		drawPoint(Point(c.x - x, c.y - y), t);
 		drawPoint(Point(c.x + x, c.y - y), t);
 	}
+}
+
+void Sprite::clear()
+{
+	fillRect(Rect({0, 0}, size), Tile(' '));
 }
 
 /**

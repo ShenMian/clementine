@@ -7,7 +7,6 @@
 #include "scene.h"
 #include <cassert>
 #include <chrono>
-#include <thread>
 
 using std::chrono::milliseconds;
 using std::this_thread::sleep_for;
@@ -20,20 +19,25 @@ Director* Director::getInstance()
 }
 
 /**
- * @brief 在单独的线程中启动主循环
+ * @brief 在单独的线程中启动主循环.
  */
 void Director::run()
 {
 	if(scenes.empty())
 		assert(false);
 
-	static std::thread thread([this]() {
-		loop();
-	});
+	running = true;
+	thread  = std::thread(&Director::loop, this);
+	thread.detach();
+}
+
+void Director::stop()
+{
+	running = false;
 }
 
 /**
- * @brief 暂停主循环
+ * @brief 暂停主循环.
  */
 void Director::pause()
 {
@@ -41,8 +45,7 @@ void Director::pause()
 }
 
 /**
- * @brief 恢复主循环
- * 
+ * @brief 恢复主循环.
  */
 void Director::resume()
 {
@@ -50,9 +53,9 @@ void Director::resume()
 }
 
 /**
- * @brief 压入场景
+ * @brief 压入场景.
  * 
- * @param s 要压入的场景
+ * @param s 要压入的场景.
  */
 void Director::pushScene(Scene& s)
 {
@@ -60,7 +63,7 @@ void Director::pushScene(Scene& s)
 }
 
 /**
- * @brief 弹出场景
+ * @brief 弹出场景.
  */
 void Director::popScene()
 {
@@ -71,9 +74,9 @@ void Director::popScene()
 }
 
 /**
- * @brief 替换场景
+ * @brief 替换场景.
  * 
- * @param s 要替换的场景
+ * @param s 要替换的场景.
  */
 void Director::replaceScene(Scene& s)
 {
@@ -84,9 +87,9 @@ void Director::replaceScene(Scene& s)
 }
 
 /**
- * @brief 获取当前场景
+ * @brief 获取当前场景.
  * 
- * @return Scene* 当前场景
+ * @return Scene* 当前场景.
  */
 Scene* Director::getCurrentScene() const
 {
@@ -97,9 +100,9 @@ Scene* Director::getCurrentScene() const
 }
 
 /**
- * @brief 设置更新时间周期
+ * @brief 设置更新时间周期.
  * 
- * @param ms 更新时间周期(ms)
+ * @param ms 更新时间周期(ms).
  */
 void Director::setMsPerUpdate(long ms)
 {
@@ -108,9 +111,9 @@ void Director::setMsPerUpdate(long ms)
 }
 
 /**
- * @brief 设置渲染时间周期
+ * @brief 设置渲染时间周期.
  * 
- * @param ms 渲染时间周期(ms)
+ * @param ms 渲染时间周期(ms).
  */
 void Director::setMsPerRender(long ms)
 {
@@ -119,9 +122,9 @@ void Director::setMsPerRender(long ms)
 }
 
 /**
- * @brief 获取实时FPS
+ * @brief 获取实时FPS.
  * 
- * @return short 
+ * @return short .
  */
 short Director::getFramesPerSecond() const
 {
@@ -129,14 +132,14 @@ short Director::getFramesPerSecond() const
 }
 
 /**
- * @brief 主循环
+ * @brief 主循环.
  */
 void Director::loop()
 {
 	long current, previous, dt;
 	previous = getCurrentMillSecond();
 
-	while(true)
+	while(running)
 	{
 		current  = getCurrentMillSecond();
 		dt       = current - previous;
@@ -157,9 +160,9 @@ void Director::loop()
 }
 
 /**
- * @brief 更新场景
+ * @brief 更新场景.
  * 
- * @param dt 
+ * @param dt .
  */
 void Director::update(long dt)
 {
@@ -177,9 +180,9 @@ void Director::update(long dt)
 #include "terminal.h"
 
 /**
- * @brief 渲染场景
+ * @brief 渲染场景.
  * 
- * @param dt 
+ * @param dt .
  */
 void Director::render(long dt)
 {
@@ -212,7 +215,7 @@ void Director::render(long dt)
 #include <sys/ioctl.h>
 
 Director::Director()
-		: paused(false), msPerUpdate(16), msPerRender(16), framesPerSecond(0)
+		: running(false), paused(false), msPerUpdate(16), msPerRender(16), framesPerSecond(0)
 {
   // 开启 raw 模式
   termios mode;
@@ -228,9 +231,7 @@ Director::Director()
 }
 
 /**
- * @brief 获取终端缓冲区大小
- * 
- * @return Size 终端缓冲区大小
+ * @brief 获取终端缓冲区大小.
  */
 Size Director::getWinSize() const
 {
@@ -242,9 +243,9 @@ Size Director::getWinSize() const
 #include <sys/time.h>
 
 /**
- * @brief 获取当前毫秒数
+ * @brief 获取当前毫秒数.
  * 
- * @return long 当前毫秒数
+ * @return long 当前毫秒数.
  */
 long Director::getCurrentMillSecond() const
 {
@@ -258,7 +259,7 @@ long Director::getCurrentMillSecond() const
 #ifdef OS_WIN
 
 Director::Director()
-		: paused(false), msPerUpdate(16), msPerRender(16), framesPerSecond(0)
+		: running(false), paused(false), msPerUpdate(16), msPerRender(16), framesPerSecond(0)
 {
   // 开启 VT100 模式
 	const auto hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
