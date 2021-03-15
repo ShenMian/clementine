@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "profiler.h"
+#include "log.h"
 #include <cassert>
 #include <iomanip>
 
@@ -16,8 +17,8 @@ Instrumentor& Instrumentor::getInstance()
 void Instrumentor::begin(const char* filepath)
 {
 	assert(!session);
+	CLEM_ENGINE_WARN("Being of a profile session: {}", filepath);
 
-	std::lock_guard<std::mutex> lock(mutex);
 	session = true;
 	file.open(filepath);
 	assert(file.is_open());
@@ -27,6 +28,7 @@ void Instrumentor::begin(const char* filepath)
 void Instrumentor::end()
 {
 	assert(session);
+	CLEM_ENGINE_WARN("End of a profile session");
 
 	writeFooter();
 	file.close();
@@ -57,6 +59,7 @@ Instrumentor::~Instrumentor()
 {
 	if(session)
 		end();
+	std::lock_guard<std::mutex> lock(mutex);
 }
 
 void Instrumentor::writeHead()

@@ -32,12 +32,13 @@ void Director::run()
 
 	running = true;
 	thread  = std::thread(&Director::loop, this);
-	thread.detach();
 }
 
 void Director::stop()
 {
 	running = false;
+	assert(thread.joinable());
+	thread.join();
 }
 
 /**
@@ -153,17 +154,17 @@ short Director::getFramesPerSecond() const
 void Director::loop()
 {
 	CLEM_ENGINE_INFO("Main loop started");
+	PROFILE_SESSION_BEGIN();
 
 	long previous = getCurrentMillSecond();
 
 	while(running)
 	{
-		PROFILE_FUNC();
-
 		long current = getCurrentMillSecond();
 		long dt      = current - previous;
 		previous     = current;
 
+		PROFILE_SCOPE("main loop");
 		update(dt);
 		render(dt);
 
@@ -175,6 +176,7 @@ void Director::loop()
 		}
 	}
 
+	PROFILE_SESSION_END();
 	CLEM_ENGINE_INFO("Main loop stoped");
 }
 
@@ -185,14 +187,13 @@ void Director::loop()
  */
 void Director::update(long dt)
 {
-	PROFILE_FUNC();
-
 	auto scene = scenes.back();
 
 	static long updateLag = 0;
 	updateLag += dt;
 	while(updateLag >= msPerUpdate)
 	{
+		PROFILE_SCOPE("update");
 		scene->update((float)msPerUpdate / 1000);
 		updateLag -= msPerUpdate;
 	}
@@ -207,18 +208,7 @@ void Director::update(long dt)
  */
 void Director::render(long dt)
 {
-	PROFILE_FUNC();
-
 	auto scene = scenes.back();
-
-	static long loopLag = 0, loopTimes = 0, loopFps = 0;
-	loopTimes++;
-	loopLag += dt;
-	if(loopLag >= 1000)
-	{
-		loopFps = loopTimes;
-		loopLag = loopTimes = 0;
-	}
 
 	static long fpsLag = 0, frames = 0;
 	const long  target = 1000 / msPerRender;
@@ -227,13 +217,14 @@ void Director::render(long dt)
 	{
 		framesPerSecond = frames;
 		frames = fpsLag = 0;
-		Terminal::setTitle("Clementine | Render: " + std::to_string(getFramesPerSecond()) + "(" + std::to_string(target) + ")" + "FPS | Loop: " + std::to_string(loopFps / 1000) + "kHz");
+		Terminal::setTitle("Clementine | Render: " + std::to_string(getFramesPerSecond()) + "(" + std::to_string(target) + ")" + "FPS");
 	}
 
 	static long renderLag = 0;
 	renderLag += dt;
 	if(renderLag >= msPerRender)
 	{
+		PROFILE_SCOPE("render");
 		scene->render();
 		renderLag = 0;
 		frames++;

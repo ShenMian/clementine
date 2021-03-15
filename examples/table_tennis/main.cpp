@@ -79,8 +79,6 @@ private:
 	BoxCollider collider;
 };
 
-#include "clem/profiler.h"
-
 int main()
 {
 	Log::init();
@@ -112,16 +110,14 @@ int main()
 
 	director->setMsPerRender(1000 / 60);
 	director->pushScene(scene);
-
-	PROFILE_SESSION_BEGIN();
-
 	director->run();
-	for(int i = 0; i < 100; i++)
+
+	for(int i = 0; i < 1000; i++)
 	{
 		for(int y = 0; y < sprite.getSize().y; y++)
 			for(int x = 0; x < sprite.getSize().x; x++)
 				sprite.drawPoint(x, y, Tile('0' + random.int32(0, 9)));
 	}
 
-	PROFILE_SESSION_END();
+	director->stop();
 }

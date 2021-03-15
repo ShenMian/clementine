@@ -20,10 +20,14 @@ void Log::init()
 		assert(false);
 	}
 
-	engineLogger->set_pattern("[%T][%=8l] %n: %v");
+	engineLogger->set_pattern("[%T][%=8l] %n : %v");
+	engineLogger->flush_on(level::trace);
+	engineLogger->flush_on(level::info);
+	engineLogger->flush_on(level::warn);
 	engineLogger->flush_on(level::err);
+	engineLogger->flush_on(level::critical);
 
-	flush_every(std::chrono::seconds(5));
+	// flush_every(std::chrono::seconds(1));
 }
 
 std::shared_ptr<logger> Log::getLogger()

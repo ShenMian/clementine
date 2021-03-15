@@ -59,4 +59,9 @@ private:
 #define PROFILE_FUNC() PROFILE_SCOPE(__FUNCTION__)
 // #define PROFILE_FUNC() PROFILE_SCOPE(__FUNCSIG__)
 
+#define PROFILE_SCOPE_BEGIN(name) \
+	{                               \
+		PROFILE_SCOPE(name)
+#define PROFILE_SCOPE_END() }
+
 #endif // !CLEM_PROFILER_H_
