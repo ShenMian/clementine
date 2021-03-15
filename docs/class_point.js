@@ -2,8 +2,10 @@ var class_point =
 [
     [ "Point", "class_point.html#ad92f2337b839a94ce97dcdb439b4325a", null ],
     [ "Point", "class_point.html#a30bc8409287de4f43e160664be834636", null ],
+    [ "clamp", "class_point.html#a57ec0649498755f2ad938a965c209d71", null ],
     [ "distance", "class_point.html#a0d86d1c1e7a6202483fd83ddd065e14f", null ],
     [ "distanceSquared", "class_point.html#a6add7cf3718356c587acd069addee793", null ],
+    [ "getMidpoint", "class_point.html#ac57e6b10206aca3ed518f9bc3b240b25", null ],
     [ "operator+", "class_point.html#af4776ac2a3c97601a5e5cad198acc9af", null ],
     [ "operator+", "class_point.html#a8e046c90a3e32059551a5271316f1bf0", null ],
     [ "operator+=", "class_point.html#a08650e586d03f9cbab24f2d7367a7381", null ],

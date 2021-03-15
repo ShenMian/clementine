@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['distance_134',['distance',['../class_point.html#a0d86d1c1e7a6202483fd83ddd065e14f',1,'Point']]],
-  ['distancesquared_135',['distanceSquared',['../class_point.html#a6add7cf3718356c587acd069addee793',1,'Point']]],
-  ['drawcycle_136',['drawCycle',['../class_sprite.html#a0d120593625cec2c4c1d7038b0b1a744',1,'Sprite']]],
-  ['drawline_137',['drawLine',['../class_sprite.html#ab307d00f165ac85f97fc3eef1ae440ab',1,'Sprite']]],
-  ['drawpoint_138',['drawPoint',['../class_frame_buffer.html#aace970c8b9ca54d8393b1aaf8ffe7abd',1,'FrameBuffer::drawPoint()'],['../class_sprite.html#a0364fb3aaab9dba0761c547f83993e1e',1,'Sprite::drawPoint(Point, const Tile &amp;)']]],
-  ['drawrect_139',['drawRect',['../class_sprite.html#ad7c7a78193fdbf529b9f5516d1698dd1',1,'Sprite']]],
-  ['drawrectfill_140',['drawRectFill',['../class_sprite.html#a43bce22623447fadfb70bcf81c65a40c',1,'Sprite']]]
+  ['factor_151',['Factor',['../class_factor.html#ac26c0b02faf21d3aaceea0deb07938ba',1,'Factor::Factor()'],['../class_factor.html#a9441521e3cd48c5e8d6ac6d90714d76c',1,'Factor::Factor(Scene &amp;)']]],
+  ['fillrect_152',['fillRect',['../class_frame_buffer.html#aae84bad665c018a9e290c1b2fe8a6438',1,'FrameBuffer::fillRect()'],['../class_sprite.html#ae94a879be830518a92d921581fa188e6',1,'Sprite::fillRect()']]],
+  ['framebuffer_153',['FrameBuffer',['../class_frame_buffer.html#a6f3763f4551f221b86ca033e2b315c42',1,'FrameBuffer']]]
 ];

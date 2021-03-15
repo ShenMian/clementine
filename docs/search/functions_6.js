@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['length_156',['length',['../class_vec2.html#af9ebf7c8888fd5df9514e6d519b99fb2',1,'Vec2']]],
-  ['lengthsquared_157',['lengthSquared',['../class_vec2.html#a5dbc5e767907b2e217060479c52777bb',1,'Vec2']]]
+  ['move_171',['move',['../class_cursor.html#a6765939773fd945fe261065f63858c27',1,'Cursor::move(const Point &amp;pos)'],['../class_cursor.html#adba7aea466336c66082b19455fef5df6',1,'Cursor::move(short x, short y)']]]
 ];

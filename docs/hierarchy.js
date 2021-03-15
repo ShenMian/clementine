@@ -6,6 +6,7 @@ var hierarchy =
     [ "_XINPUT_KEYSTROKE", "struct___x_i_n_p_u_t___k_e_y_s_t_r_o_k_e.html", null ],
     [ "_XINPUT_STATE", "struct___x_i_n_p_u_t___s_t_a_t_e.html", null ],
     [ "_XINPUT_VIBRATION", "struct___x_i_n_p_u_t___v_i_b_r_a_t_i_o_n.html", null ],
+    [ "Application", "class_application.html", null ],
     [ "Camera", "class_camera.html", null ],
     [ "Collider", "class_collider.html", [
       [ "BoxCollider", "class_box_collider.html", null ],
@@ -17,7 +18,6 @@ var hierarchy =
         [ "Controller", "class_controller.html", null ],
         [ "Mouse", "class_mouse.html", null ]
       ] ],
-      [ "Keyboard", "class_keyboard.html", null ],
       [ "Rigidbody", "class_rigidbody.html", null ],
       [ "Sprite", "class_sprite.html", null ]
     ] ],
@@ -26,8 +26,13 @@ var hierarchy =
     [ "Event", "class_event.html", null ],
     [ "Factor", "class_factor.html", null ],
     [ "FrameBuffer", "class_frame_buffer.html", null ],
+    [ "InstrumentationCounter", "class_instrumentation_counter.html", null ],
+    [ "Instrumentor", "class_instrumentor.html", null ],
+    [ "Keyboard", "class_keyboard.html", null ],
     [ "Log", "class_log.html", null ],
+    [ "Main", "class_main.html", null ],
     [ "Point", "class_point.html", null ],
+    [ "ProfileRecord", "struct_profile_record.html", null ],
     [ "Random", "class_random.html", null ],
     [ "Scene", "class_scene.html", null ],
     [ "Terminal", "class_terminal.html", null ],

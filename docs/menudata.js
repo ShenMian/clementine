@@ -33,7 +33,6 @@ var menudata={children:[
 {text:"类成员",url:"functions.html",children:[
 {text:"全部",url:"functions.html",children:[
 {text:"a",url:"functions.html#index_a"},
-{text:"b",url:"functions.html#index_b"},
 {text:"c",url:"functions.html#index_c"},
 {text:"d",url:"functions.html#index_d"},
 {text:"f",url:"functions.html#index_f"},
@@ -50,7 +49,6 @@ var menudata={children:[
 {text:"~",url:"functions.html#index__7E"}]},
 {text:"函数",url:"functions_func.html",children:[
 {text:"a",url:"functions_func.html#index_a"},
-{text:"b",url:"functions_func.html#index_b"},
 {text:"c",url:"functions_func.html#index_c"},
 {text:"d",url:"functions_func.html#index_d"},
 {text:"f",url:"functions_func.html#index_f"},

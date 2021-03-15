@@ -74,6 +74,9 @@ private:
 	BoxCollider collider;
 };
 
+const short width  = 80;
+const short height = width * 25 / 80;
+
 //void func()
 int main()
 {
@@ -82,7 +85,8 @@ int main()
 	Cursor::setVisible(false);
 	Scene scene;
 
-	auto winSize = frameBuffer.getSize();
+	Size winSize(width, height);
+	frameBuffer.setSize(winSize);
 
 	Bar bar(scene);
 	bar.setPosition({1, winSize.y / 2.0f - 2});

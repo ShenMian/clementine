@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['terminal_121',['Terminal',['../class_terminal.html',1,'']]],
-  ['tile_122',['Tile',['../class_tile.html',1,'']]]
+  ['scene_131',['Scene',['../class_scene.html',1,'']]],
+  ['sprite_132',['Sprite',['../class_sprite.html',1,'']]]
 ];

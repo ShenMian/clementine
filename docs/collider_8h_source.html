@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Clementine: clem/physics/collider.h 源文件</title>
+<title>Clementine: src/clem/physics/collider.h 源文件</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,58 +88,58 @@ $(document).ready(function(){initNavTree('collider_8h_source.html',''); initResi
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2021 SMS</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// License(Apache-2.0)</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// 碰撞体</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef CLEM_COLLIDER_H_</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define CLEM_COLLIDER_H_</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;clem/math/point.h&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span><a class="code" href="class_rigidbody.html">Rigidbody</a>;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span><a class="code" href="class_box_collider.html">BoxCollider</a>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">class </span><a class="code" href="class_circle_collider.html">CircleCollider</a>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_collider.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_collider.html">Collider</a></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_collider.html">Collider</a>();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_collider.html">Collider</a>();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    </div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_collider.html#af5bb4516878cefd8823966df30eaaae0">   28</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_collider.html#af5bb4516878cefd8823966df30eaaae0">collides</a>(<span class="keyword">const</span> <a class="code" href="class_collider.html">Collider</a>&amp; other) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_point.html">Point</a> <a class="code" href="class_collider.html#a50ddf6893ca60567b869fca83e05f67a">getPosition</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span>  <a class="code" href="class_collider.html#a4d19c8a7ea2396f1b4bd633ae2865643">setOffset</a>(<a class="code" href="class_point.html">Point</a>);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_point.html">Point</a> <a class="code" href="class_collider.html#a9767c6efe6f59d95783047598a6c1e1e">getOffset</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span>       <a class="code" href="class_collider.html#a589928c70143b9170523146d94614ca6">setOwner</a>(<a class="code" href="class_rigidbody.html">Rigidbody</a>*);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="class_rigidbody.html">Rigidbody</a>* <a class="code" href="class_collider.html#a0a2a0930d925ef0eb34e18c341430eb3">getOwner</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="class_point.html">Point</a> offset;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_rigidbody.html">Rigidbody</a>* owner;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_COLLIDER_H_</span></div>
-<div class="ttc" id="aclass_box_collider_html"><div class="ttname"><a href="class_box_collider.html">BoxCollider</a></div><div class="ttdoc">盒形碰撞体</div><div class="ttdef"><b>Definition:</b> box_collider.h:13</div></div>
-<div class="ttc" id="aclass_circle_collider_html"><div class="ttname"><a href="class_circle_collider.html">CircleCollider</a></div><div class="ttdoc">圆形碰撞体</div><div class="ttdef"><b>Definition:</b> circle_collider.h:12</div></div>
-<div class="ttc" id="aclass_collider_html"><div class="ttname"><a href="class_collider.html">Collider</a></div><div class="ttdoc">碰撞体</div><div class="ttdef"><b>Definition:</b> collider.h:16</div></div>
-<div class="ttc" id="aclass_collider_html_a0a2a0930d925ef0eb34e18c341430eb3"><div class="ttname"><a href="class_collider.html#a0a2a0930d925ef0eb34e18c341430eb3">Collider::getOwner</a></div><div class="ttdeci">Rigidbody * getOwner() const</div><div class="ttdoc">获取拥有者</div><div class="ttdef"><b>Definition:</b> collider.cpp:62</div></div>
-<div class="ttc" id="aclass_collider_html_a4d19c8a7ea2396f1b4bd633ae2865643"><div class="ttname"><a href="class_collider.html#a4d19c8a7ea2396f1b4bd633ae2865643">Collider::setOffset</a></div><div class="ttdeci">void setOffset(Point)</div><div class="ttdoc">设置偏移</div><div class="ttdef"><b>Definition:</b> collider.cpp:32</div></div>
-<div class="ttc" id="aclass_collider_html_a50ddf6893ca60567b869fca83e05f67a"><div class="ttname"><a href="class_collider.html#a50ddf6893ca60567b869fca83e05f67a">Collider::getPosition</a></div><div class="ttdeci">Point getPosition() const</div><div class="ttdoc">获取坐标</div><div class="ttdef"><b>Definition:</b> collider.cpp:22</div></div>
-<div class="ttc" id="aclass_collider_html_a589928c70143b9170523146d94614ca6"><div class="ttname"><a href="class_collider.html#a589928c70143b9170523146d94614ca6">Collider::setOwner</a></div><div class="ttdeci">void setOwner(Rigidbody *)</div><div class="ttdoc">设置拥有者</div><div class="ttdef"><b>Definition:</b> collider.cpp:52</div></div>
-<div class="ttc" id="aclass_collider_html_a9767c6efe6f59d95783047598a6c1e1e"><div class="ttname"><a href="class_collider.html#a9767c6efe6f59d95783047598a6c1e1e">Collider::getOffset</a></div><div class="ttdeci">Point getOffset() const</div><div class="ttdoc">获取偏移</div><div class="ttdef"><b>Definition:</b> collider.cpp:42</div></div>
-<div class="ttc" id="aclass_collider_html_af5bb4516878cefd8823966df30eaaae0"><div class="ttname"><a href="class_collider.html#af5bb4516878cefd8823966df30eaaae0">Collider::collides</a></div><div class="ttdeci">virtual bool collides(const Collider &amp;other) const =0</div><div class="ttdoc">检测是否与其他碰撞体发生碰撞</div></div>
-<div class="ttc" id="aclass_point_html"><div class="ttname"><a href="class_point.html">Point</a></div><div class="ttdef"><b>Definition:</b> point.h:18</div></div>
-<div class="ttc" id="aclass_rigidbody_html"><div class="ttname"><a href="class_rigidbody.html">Rigidbody</a></div><div class="ttdoc">刚体</div><div class="ttdef"><b>Definition:</b> rigidbody.h:16</div></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef CLEM_COLLIDER_H_</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define CLEM_COLLIDER_H_</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;clem/math/point.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">class </span><a class="code" href="class_rigidbody.html">Rigidbody</a>;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span><a class="code" href="class_box_collider.html">BoxCollider</a>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span><a class="code" href="class_circle_collider.html">CircleCollider</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_collider.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_collider.html">Collider</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_collider.html">Collider</a>();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_collider.html">Collider</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="class_collider.html#af5bb4516878cefd8823966df30eaaae0">   32</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_collider.html#af5bb4516878cefd8823966df30eaaae0">collides</a>(<span class="keyword">const</span> <a class="code" href="class_collider.html">Collider</a>&amp; other) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="class_point.html">Point</a> <a class="code" href="class_collider.html#a50ddf6893ca60567b869fca83e05f67a">getPosition</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span>  <a class="code" href="class_collider.html#acd822ce813712dd7e60cb70b9db6c1d8">setOffset</a>(<a class="code" href="class_point.html">Point</a> offset);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="class_point.html">Point</a> <a class="code" href="class_collider.html#a9767c6efe6f59d95783047598a6c1e1e">getOffset</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span>       <a class="code" href="class_collider.html#afc1e4700089f7c6527e4a2eddddb0397">setOwner</a>(<a class="code" href="class_rigidbody.html">Rigidbody</a>* owner);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="class_rigidbody.html">Rigidbody</a>* <a class="code" href="class_collider.html#a0a2a0930d925ef0eb34e18c341430eb3">getOwner</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="class_point.html">Point</a> offset;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="class_rigidbody.html">Rigidbody</a>* owner;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_COLLIDER_H_</span></div>
+<div class="ttc" id="aclass_box_collider_html"><div class="ttname"><a href="class_box_collider.html">BoxCollider</a></div><div class="ttdef"><b>Definition:</b> box_collider.h:19</div></div>
+<div class="ttc" id="aclass_circle_collider_html"><div class="ttname"><a href="class_circle_collider.html">CircleCollider</a></div><div class="ttdef"><b>Definition:</b> circle_collider.h:18</div></div>
+<div class="ttc" id="aclass_collider_html"><div class="ttname"><a href="class_collider.html">Collider</a></div><div class="ttdoc">碰撞体</div><div class="ttdef"><b>Definition:</b> collider.h:20</div></div>
+<div class="ttc" id="aclass_collider_html_a0a2a0930d925ef0eb34e18c341430eb3"><div class="ttname"><a href="class_collider.html#a0a2a0930d925ef0eb34e18c341430eb3">Collider::getOwner</a></div><div class="ttdeci">Rigidbody * getOwner() const</div><div class="ttdoc">获取拥有者</div><div class="ttdef"><b>Definition:</b> collider.cpp:49</div></div>
+<div class="ttc" id="aclass_collider_html_a50ddf6893ca60567b869fca83e05f67a"><div class="ttname"><a href="class_collider.html#a50ddf6893ca60567b869fca83e05f67a">Collider::getPosition</a></div><div class="ttdeci">Point getPosition() const</div><div class="ttdoc">获取坐标.</div><div class="ttdef"><b>Definition:</b> collider.cpp:18</div></div>
+<div class="ttc" id="aclass_collider_html_a9767c6efe6f59d95783047598a6c1e1e"><div class="ttname"><a href="class_collider.html#a9767c6efe6f59d95783047598a6c1e1e">Collider::getOffset</a></div><div class="ttdeci">Point getOffset() const</div><div class="ttdoc">获取偏移量.</div><div class="ttdef"><b>Definition:</b> collider.cpp:29</div></div>
+<div class="ttc" id="aclass_collider_html_acd822ce813712dd7e60cb70b9db6c1d8"><div class="ttname"><a href="class_collider.html#acd822ce813712dd7e60cb70b9db6c1d8">Collider::setOffset</a></div><div class="ttdeci">void setOffset(Point offset)</div><div class="ttdoc">设置偏移量.</div><div class="ttdef"><b>Definition:</b> collider.cpp:24</div></div>
+<div class="ttc" id="aclass_collider_html_af5bb4516878cefd8823966df30eaaae0"><div class="ttname"><a href="class_collider.html#af5bb4516878cefd8823966df30eaaae0">Collider::collides</a></div><div class="ttdeci">virtual bool collides(const Collider &amp;other) const =0</div><div class="ttdoc">检测是否与其他碰撞体发生碰撞.</div></div>
+<div class="ttc" id="aclass_collider_html_afc1e4700089f7c6527e4a2eddddb0397"><div class="ttname"><a href="class_collider.html#afc1e4700089f7c6527e4a2eddddb0397">Collider::setOwner</a></div><div class="ttdeci">void setOwner(Rigidbody *owner)</div><div class="ttdoc">设置拥有者</div><div class="ttdef"><b>Definition:</b> collider.cpp:39</div></div>
+<div class="ttc" id="aclass_point_html"><div class="ttname"><a href="class_point.html">Point</a></div><div class="ttdef"><b>Definition:</b> Point.h:18</div></div>
+<div class="ttc" id="aclass_rigidbody_html"><div class="ttname"><a href="class_rigidbody.html">Rigidbody</a></div><div class="ttdef"><b>Definition:</b> rigidbody.h:22</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_75e4ae1c219046b5a10ac81b39646bb7.html">clem</a></li><li class="navelem"><a class="el" href="dir_0de151b40214faad3ddc4624501000b5.html">physics</a></li><li class="navelem"><b>collider.h</b></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_21de5814e600c9d8474607ccd7219e5e.html">clem</a></li><li class="navelem"><a class="el" href="dir_b9d5c249ff9f69f4eb041c9af737304b.html">physics</a></li><li class="navelem"><b>collider.h</b></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

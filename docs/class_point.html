@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('class_point.html',''); initResizable()
 <a href="#pub-attribs">Public 属性</a> &#124;
 <a href="class_point-members.html">所有成员列表</a>  </div>
   <div class="headertitle">
-<div class="title">Point类 参考<div class="ingroups"><a class="el" href="group__math.html">Math</a></div></div>  </div>
+<div class="title">Point类 参考<div class="ingroups"><a class="el" href="group___math.html">Math</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
@@ -106,6 +106,12 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a6add7cf3718356c587acd069addee793"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_point.html#a6add7cf3718356c587acd069addee793">distanceSquared</a> (const <a class="el" href="class_point.html">Point</a> &amp;other) const</td></tr>
 <tr class="memdesc:a6add7cf3718356c587acd069addee793"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取到另一个点的距离的平方.  <a href="class_point.html#a6add7cf3718356c587acd069addee793">更多...</a><br /></td></tr>
 <tr class="separator:a6add7cf3718356c587acd069addee793"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57ec0649498755f2ad938a965c209d71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_point.html#a57ec0649498755f2ad938a965c209d71">clamp</a> (<a class="el" href="class_point.html">Point</a> min, <a class="el" href="class_point.html">Point</a> max)</td></tr>
+<tr class="memdesc:a57ec0649498755f2ad938a965c209d71"><td class="mdescLeft">&#160;</td><td class="mdescRight">裁剪到指定的范围内.  <a href="class_point.html#a57ec0649498755f2ad938a965c209d71">更多...</a><br /></td></tr>
+<tr class="separator:a57ec0649498755f2ad938a965c209d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac57e6b10206aca3ed518f9bc3b240b25"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_point.html">Point</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_point.html#ac57e6b10206aca3ed518f9bc3b240b25">getMidpoint</a> (const <a class="el" href="class_point.html">Point</a> &amp;other) const</td></tr>
+<tr class="memdesc:ac57e6b10206aca3ed518f9bc3b240b25"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取两点之间的中点.  <a href="class_point.html#ac57e6b10206aca3ed518f9bc3b240b25">更多...</a><br /></td></tr>
+<tr class="separator:ac57e6b10206aca3ed518f9bc3b240b25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4776ac2a3c97601a5e5cad198acc9af"><td class="memItemLeft" align="right" valign="top"><a id="af4776ac2a3c97601a5e5cad198acc9af"></a>
 <a class="el" href="class_point.html">Point</a>&#160;</td><td class="memItemRight" valign="bottom"><b>operator+</b> (const <a class="el" href="class_point.html">Point</a> &amp;) const</td></tr>
 <tr class="separator:af4776ac2a3c97601a5e5cad198acc9af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,6 +181,43 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>y</b></td></tr>
 </div>
 </div>
 <h2 class="groupheader">成员函数说明</h2>
+<a id="a57ec0649498755f2ad938a965c209d71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57ec0649498755f2ad938a965c209d71">&#9670;&nbsp;</a></span>clamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Point::clamp </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_point.html">Point</a>&#160;</td>
+          <td class="paramname"><em>min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_point.html">Point</a>&#160;</td>
+          <td class="paramname"><em>max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>裁剪到指定的范围内. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">min</td><td>最小值. </td></tr>
+    <tr><td class="paramname">max</td><td>最大值. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a0d86d1c1e7a6202483fd83ddd065e14f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0d86d1c1e7a6202483fd83ddd065e14f">&#9670;&nbsp;</a></span>distance()</h2>
 
@@ -229,9 +272,35 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>y</b></td></tr>
 
 </div>
 </div>
+<a id="ac57e6b10206aca3ed518f9bc3b240b25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac57e6b10206aca3ed518f9bc3b240b25">&#9670;&nbsp;</a></span>getMidpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_point.html">Point</a> Point::getMidpoint </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_point.html">Point</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取两点之间的中点. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>另一个点. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>该类的文档由以下文件生成:<ul>
-<li>clem/math/<a class="el" href="point_8h_source.html">point.h</a></li>
-<li>clem/math/point.cpp</li>
+<li>src/clem/math/<a class="el" href="_point_8h_source.html">Point.h</a></li>
+<li>src/clem/math/Point.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

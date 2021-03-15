@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Clementine: clem/scene.h 源文件</title>
+<title>Clementine: src/clem/scene.h 源文件</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -143,25 +143,25 @@ $(document).ready(function(){initNavTree('scene_8h_source.html',''); initResizab
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_SCENE_H_</span></div>
 <div class="ttc" id="aclass_camera_html"><div class="ttname"><a href="class_camera.html">Camera</a></div><div class="ttdoc">摄像机</div><div class="ttdef"><b>Definition:</b> camera.h:16</div></div>
 <div class="ttc" id="aclass_factor_html"><div class="ttname"><a href="class_factor.html">Factor</a></div><div class="ttdoc">游戏对象, 构成游戏的基本对象</div><div class="ttdef"><b>Definition:</b> factor.h:17</div></div>
-<div class="ttc" id="aclass_rigidbody_html"><div class="ttname"><a href="class_rigidbody.html">Rigidbody</a></div><div class="ttdoc">刚体</div><div class="ttdef"><b>Definition:</b> rigidbody.h:16</div></div>
+<div class="ttc" id="aclass_rigidbody_html"><div class="ttname"><a href="class_rigidbody.html">Rigidbody</a></div><div class="ttdef"><b>Definition:</b> rigidbody.h:22</div></div>
 <div class="ttc" id="aclass_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdoc">场景, 管理游戏对象</div><div class="ttdef"><b>Definition:</b> scene.h:22</div></div>
-<div class="ttc" id="aclass_scene_html_a13be7230e86fb8c62d7b601be87f952d"><div class="ttname"><a href="class_scene.html#a13be7230e86fb8c62d7b601be87f952d">Scene::addCamera</a></div><div class="ttdeci">void addCamera(Camera &amp;cam)</div><div class="ttdoc">添加摄像机</div><div class="ttdef"><b>Definition:</b> scene.cpp:105</div></div>
-<div class="ttc" id="aclass_scene_html_a3b8cec2e32546713915f8c6303c951f1"><div class="ttname"><a href="class_scene.html#a3b8cec2e32546713915f8c6303c951f1">Scene::~Scene</a></div><div class="ttdeci">virtual ~Scene()</div><div class="ttdoc">析构 Scene 对象</div><div class="ttdef"><b>Definition:</b> scene.cpp:31</div></div>
-<div class="ttc" id="aclass_scene_html_a4bd876fa0a8118d169b7b31c9df7601b"><div class="ttname"><a href="class_scene.html#a4bd876fa0a8118d169b7b31c9df7601b">Scene::update</a></div><div class="ttdeci">void update(float dt)</div><div class="ttdoc">更新游戏对象和物理引擎</div><div class="ttdef"><b>Definition:</b> scene.cpp:42</div></div>
-<div class="ttc" id="aclass_scene_html_a4ddf2d16f371ee9533b3faf1dd5ddfb1"><div class="ttname"><a href="class_scene.html#a4ddf2d16f371ee9533b3faf1dd5ddfb1">Scene::render</a></div><div class="ttdeci">void render()</div><div class="ttdoc">渲染全部摄像机的画面</div><div class="ttdef"><b>Definition:</b> scene.cpp:51</div></div>
-<div class="ttc" id="aclass_scene_html_a59dae552adaab20d4aab310caa1e3e7d"><div class="ttname"><a href="class_scene.html#a59dae552adaab20d4aab310caa1e3e7d">Scene::addFactor</a></div><div class="ttdeci">void addFactor(Factor &amp;)</div><div class="ttdoc">添加游戏对象</div><div class="ttdef"><b>Definition:</b> scene.cpp:67</div></div>
-<div class="ttc" id="aclass_scene_html_a90b5128964a2dbbc1dc4af6cbb2d245b"><div class="ttname"><a href="class_scene.html#a90b5128964a2dbbc1dc4af6cbb2d245b">Scene::removeFactor</a></div><div class="ttdeci">void removeFactor(Factor &amp;)</div><div class="ttdoc">移除游戏对象</div><div class="ttdef"><b>Definition:</b> scene.cpp:78</div></div>
-<div class="ttc" id="aclass_scene_html_ab1d83c221ffc390313ac7677e14c721a"><div class="ttname"><a href="class_scene.html#ab1d83c221ffc390313ac7677e14c721a">Scene::removeCamera</a></div><div class="ttdeci">void removeCamera(Camera &amp;cam)</div><div class="ttdoc">移除摄像机</div><div class="ttdef"><b>Definition:</b> scene.cpp:119</div></div>
-<div class="ttc" id="aclass_scene_html_ad10176d75a9cc0da56626f682d083507"><div class="ttname"><a href="class_scene.html#ad10176d75a9cc0da56626f682d083507">Scene::Scene</a></div><div class="ttdeci">Scene()</div><div class="ttdoc">构造 Scene 对象</div><div class="ttdef"><b>Definition:</b> scene.cpp:19</div></div>
-<div class="ttc" id="aclass_scene_html_ae83fd7b017cb8140a8cbe588e65fc32d"><div class="ttname"><a href="class_scene.html#ae83fd7b017cb8140a8cbe588e65fc32d">Scene::getFactors</a></div><div class="ttdeci">const std::vector&lt; Factor * &gt; &amp; getFactors() const</div><div class="ttdoc">获取全部游戏对象</div><div class="ttdef"><b>Definition:</b> scene.cpp:95</div></div>
-<div class="ttc" id="aclass_scene_html_af0c0e248aea303c7bb59318de10606b5"><div class="ttname"><a href="class_scene.html#af0c0e248aea303c7bb59318de10606b5">Scene::getCameras</a></div><div class="ttdeci">const std::vector&lt; Camera * &gt; &amp; getCameras() const</div><div class="ttdoc">获取全部摄像机</div><div class="ttdef"><b>Definition:</b> scene.cpp:133</div></div>
+<div class="ttc" id="aclass_scene_html_a13be7230e86fb8c62d7b601be87f952d"><div class="ttname"><a href="class_scene.html#a13be7230e86fb8c62d7b601be87f952d">Scene::addCamera</a></div><div class="ttdeci">void addCamera(Camera &amp;cam)</div><div class="ttdoc">添加摄像机</div><div class="ttdef"><b>Definition:</b> scene.cpp:108</div></div>
+<div class="ttc" id="aclass_scene_html_a3b8cec2e32546713915f8c6303c951f1"><div class="ttname"><a href="class_scene.html#a3b8cec2e32546713915f8c6303c951f1">Scene::~Scene</a></div><div class="ttdeci">virtual ~Scene()</div><div class="ttdoc">析构 Scene 对象</div><div class="ttdef"><b>Definition:</b> scene.cpp:32</div></div>
+<div class="ttc" id="aclass_scene_html_a4bd876fa0a8118d169b7b31c9df7601b"><div class="ttname"><a href="class_scene.html#a4bd876fa0a8118d169b7b31c9df7601b">Scene::update</a></div><div class="ttdeci">void update(float dt)</div><div class="ttdoc">更新游戏对象和物理引擎</div><div class="ttdef"><b>Definition:</b> scene.cpp:43</div></div>
+<div class="ttc" id="aclass_scene_html_a4ddf2d16f371ee9533b3faf1dd5ddfb1"><div class="ttname"><a href="class_scene.html#a4ddf2d16f371ee9533b3faf1dd5ddfb1">Scene::render</a></div><div class="ttdeci">void render()</div><div class="ttdoc">渲染全部摄像机的画面</div><div class="ttdef"><b>Definition:</b> scene.cpp:52</div></div>
+<div class="ttc" id="aclass_scene_html_a59dae552adaab20d4aab310caa1e3e7d"><div class="ttname"><a href="class_scene.html#a59dae552adaab20d4aab310caa1e3e7d">Scene::addFactor</a></div><div class="ttdeci">void addFactor(Factor &amp;)</div><div class="ttdoc">添加游戏对象</div><div class="ttdef"><b>Definition:</b> scene.cpp:70</div></div>
+<div class="ttc" id="aclass_scene_html_a90b5128964a2dbbc1dc4af6cbb2d245b"><div class="ttname"><a href="class_scene.html#a90b5128964a2dbbc1dc4af6cbb2d245b">Scene::removeFactor</a></div><div class="ttdeci">void removeFactor(Factor &amp;)</div><div class="ttdoc">移除游戏对象</div><div class="ttdef"><b>Definition:</b> scene.cpp:81</div></div>
+<div class="ttc" id="aclass_scene_html_ab1d83c221ffc390313ac7677e14c721a"><div class="ttname"><a href="class_scene.html#ab1d83c221ffc390313ac7677e14c721a">Scene::removeCamera</a></div><div class="ttdeci">void removeCamera(Camera &amp;cam)</div><div class="ttdoc">移除摄像机</div><div class="ttdef"><b>Definition:</b> scene.cpp:122</div></div>
+<div class="ttc" id="aclass_scene_html_ad10176d75a9cc0da56626f682d083507"><div class="ttname"><a href="class_scene.html#ad10176d75a9cc0da56626f682d083507">Scene::Scene</a></div><div class="ttdeci">Scene()</div><div class="ttdoc">构造 Scene 对象</div><div class="ttdef"><b>Definition:</b> scene.cpp:20</div></div>
+<div class="ttc" id="aclass_scene_html_ae83fd7b017cb8140a8cbe588e65fc32d"><div class="ttname"><a href="class_scene.html#ae83fd7b017cb8140a8cbe588e65fc32d">Scene::getFactors</a></div><div class="ttdeci">const std::vector&lt; Factor * &gt; &amp; getFactors() const</div><div class="ttdoc">获取全部游戏对象</div><div class="ttdef"><b>Definition:</b> scene.cpp:98</div></div>
+<div class="ttc" id="aclass_scene_html_af0c0e248aea303c7bb59318de10606b5"><div class="ttname"><a href="class_scene.html#af0c0e248aea303c7bb59318de10606b5">Scene::getCameras</a></div><div class="ttdeci">const std::vector&lt; Camera * &gt; &amp; getCameras() const</div><div class="ttdoc">获取全部摄像机</div><div class="ttdef"><b>Definition:</b> scene.cpp:136</div></div>
 <div class="ttc" id="aclass_sprite_html"><div class="ttname"><a href="class_sprite.html">Sprite</a></div><div class="ttdoc">图像, 由瓦片组成的图像</div><div class="ttdef"><b>Definition:</b> sprite.h:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_75e4ae1c219046b5a10ac81b39646bb7.html">clem</a></li><li class="navelem"><b>scene.h</b></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_21de5814e600c9d8474607ccd7219e5e.html">clem</a></li><li class="navelem"><b>scene.h</b></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

@@ -1,4 +1,5 @@
 var modules =
 [
-    [ "Math", "group__math.html", "group__math" ]
+    [ "Math", "group___math.html", "group___math" ],
+    [ "Physics", "group__physics.html", "group__physics" ]
 ];

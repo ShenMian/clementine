@@ -1,11 +1,10 @@
 var searchData=
 [
-  ['director_23',['Director',['../class_director.html',1,'']]],
-  ['distance_24',['distance',['../class_point.html#a0d86d1c1e7a6202483fd83ddd065e14f',1,'Point']]],
-  ['distancesquared_25',['distanceSquared',['../class_point.html#a6add7cf3718356c587acd069addee793',1,'Point']]],
-  ['drawcycle_26',['drawCycle',['../class_sprite.html#a0d120593625cec2c4c1d7038b0b1a744',1,'Sprite']]],
-  ['drawline_27',['drawLine',['../class_sprite.html#ab307d00f165ac85f97fc3eef1ae440ab',1,'Sprite']]],
-  ['drawpoint_28',['drawPoint',['../class_frame_buffer.html#aace970c8b9ca54d8393b1aaf8ffe7abd',1,'FrameBuffer::drawPoint()'],['../class_sprite.html#a0364fb3aaab9dba0761c547f83993e1e',1,'Sprite::drawPoint(Point, const Tile &amp;)']]],
-  ['drawrect_29',['drawRect',['../class_sprite.html#ad7c7a78193fdbf529b9f5516d1698dd1',1,'Sprite']]],
-  ['drawrectfill_30',['drawRectFill',['../class_sprite.html#a43bce22623447fadfb70bcf81c65a40c',1,'Sprite']]]
+  ['director_22',['Director',['../class_director.html',1,'']]],
+  ['distance_23',['distance',['../class_point.html#a0d86d1c1e7a6202483fd83ddd065e14f',1,'Point']]],
+  ['distancesquared_24',['distanceSquared',['../class_point.html#a6add7cf3718356c587acd069addee793',1,'Point']]],
+  ['drawcycle_25',['drawCycle',['../class_frame_buffer.html#afb9eb2ec0005f74de559913d8b7e1b13',1,'FrameBuffer::drawCycle()'],['../class_sprite.html#ac0bac8f0a8ca1d3e33925fc1464366e0',1,'Sprite::drawCycle()']]],
+  ['drawline_26',['drawLine',['../class_frame_buffer.html#a43cf7ef5c26e9d97a1e09f6bce526e97',1,'FrameBuffer::drawLine()'],['../class_sprite.html#a91cd5b0e8255da3dce5b95d14f65a3ae',1,'Sprite::drawLine()']]],
+  ['drawpoint_27',['drawPoint',['../class_frame_buffer.html#acd11be0a1e753333e3c513db04a631ba',1,'FrameBuffer::drawPoint(int x, int y, const Tile &amp;t)'],['../class_frame_buffer.html#ac299f05349c191d48589a858aa7777d5',1,'FrameBuffer::drawPoint(Point p, const Tile &amp;t)'],['../class_sprite.html#a13e2e7e37058e34f124fae858b7e85b9',1,'Sprite::drawPoint(int x, int y, const Tile &amp;t)'],['../class_sprite.html#afa31e5374f7896ca5b44eb3723a57f46',1,'Sprite::drawPoint(Point p, const Tile &amp;t)']]],
+  ['drawrect_28',['drawRect',['../class_frame_buffer.html#a9baa73adcf54240377e55d2677a45fe1',1,'FrameBuffer::drawRect()'],['../class_sprite.html#a79d3549e9c2b9dc71fd9417a7652efab',1,'Sprite::drawRect()']]]
 ];

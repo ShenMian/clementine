@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Clementine: clem/sprite.h 源文件</title>
+<title>Clementine: src/clem/sprite.h 源文件</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -105,45 +105,55 @@ $(document).ready(function(){initNavTree('sprite_8h_source.html',''); initResiza
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_camera.html">Camera</a>;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a0364fb3aaab9dba0761c547f83993e1e">drawPoint</a>(<a class="code" href="class_point.html">Point</a>, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp;);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#ab307d00f165ac85f97fc3eef1ae440ab">drawLine</a>(<a class="code" href="class_point.html">Point</a>, <a class="code" href="class_point.html">Point</a>, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp;);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#ad7c7a78193fdbf529b9f5516d1698dd1">drawRect</a>(Rect, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp;);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a43bce22623447fadfb70bcf81c65a40c">drawRectFill</a>(Rect, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp;);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a0d120593625cec2c4c1d7038b0b1a744">drawCycle</a>(<a class="code" href="class_point.html">Point</a>, <span class="keywordtype">short</span> radius, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp;);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a17cf1063e1a13c25a4490dfa5bfc50aa">setSize</a>(Size);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    Size <a class="code" href="class_sprite.html#a376e564f826c34afae8c9b62295a2714">getSize</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a855e2f6077d3d75fd0964d55b2a474f9">onAdd</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a7a0ba13245fa13a5656481fa6929838f">onRemove</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    Size              size;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::vector&lt;Tile&gt; buffer;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a13e2e7e37058e34f124fae858b7e85b9">drawPoint</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a13e2e7e37058e34f124fae858b7e85b9">drawPoint</a>(<a class="code" href="class_point.html">Point</a> p, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_SPRITE_H_</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a91cd5b0e8255da3dce5b95d14f65a3ae">drawLine</a>(<a class="code" href="class_point.html">Point</a> a, <a class="code" href="class_point.html">Point</a> b, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a79d3549e9c2b9dc71fd9417a7652efab">drawRect</a>(Rect r, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#ae94a879be830518a92d921581fa188e6">fillRect</a>(Rect r, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#ac0bac8f0a8ca1d3e33925fc1464366e0">drawCycle</a>(<a class="code" href="class_point.html">Point</a> p, <span class="keywordtype">short</span> radius, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a36b20b1988778637e82ea71b03f24c36">clear</a>();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a25b334cef6d8ccee586182dc10f0b506">setSize</a>(Size s);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    Size <a class="code" href="class_sprite.html#a376e564f826c34afae8c9b62295a2714">getSize</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a855e2f6077d3d75fd0964d55b2a474f9">onAdd</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a7a0ba13245fa13a5656481fa6929838f">onRemove</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    Size              size;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    std::vector&lt;Tile&gt; buffer;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;};</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_SPRITE_H_</span></div>
 <div class="ttc" id="aclass_camera_html"><div class="ttname"><a href="class_camera.html">Camera</a></div><div class="ttdoc">摄像机</div><div class="ttdef"><b>Definition:</b> camera.h:16</div></div>
 <div class="ttc" id="aclass_component_html"><div class="ttname"><a href="class_component.html">Component</a></div><div class="ttdoc">组件</div><div class="ttdef"><b>Definition:</b> component.h:12</div></div>
 <div class="ttc" id="aclass_frame_buffer_html"><div class="ttname"><a href="class_frame_buffer.html">FrameBuffer</a></div><div class="ttdoc">帧缓冲区</div><div class="ttdef"><b>Definition:</b> frame_buffer.h:15</div></div>
-<div class="ttc" id="aclass_point_html"><div class="ttname"><a href="class_point.html">Point</a></div><div class="ttdef"><b>Definition:</b> point.h:18</div></div>
+<div class="ttc" id="aclass_point_html"><div class="ttname"><a href="class_point.html">Point</a></div><div class="ttdef"><b>Definition:</b> Point.h:18</div></div>
 <div class="ttc" id="aclass_sprite_html"><div class="ttname"><a href="class_sprite.html">Sprite</a></div><div class="ttdoc">图像, 由瓦片组成的图像</div><div class="ttdef"><b>Definition:</b> sprite.h:17</div></div>
-<div class="ttc" id="aclass_sprite_html_a0364fb3aaab9dba0761c547f83993e1e"><div class="ttname"><a href="class_sprite.html#a0364fb3aaab9dba0761c547f83993e1e">Sprite::drawPoint</a></div><div class="ttdeci">void drawPoint(Point, const Tile &amp;)</div><div class="ttdoc">绘制点</div><div class="ttdef"><b>Definition:</b> sprite.cpp:15</div></div>
-<div class="ttc" id="aclass_sprite_html_a0d120593625cec2c4c1d7038b0b1a744"><div class="ttname"><a href="class_sprite.html#a0d120593625cec2c4c1d7038b0b1a744">Sprite::drawCycle</a></div><div class="ttdeci">void drawCycle(Point, short radius, const Tile &amp;)</div><div class="ttdoc">绘制圆</div><div class="ttdef"><b>Definition:</b> sprite.cpp:87</div></div>
-<div class="ttc" id="aclass_sprite_html_a17cf1063e1a13c25a4490dfa5bfc50aa"><div class="ttname"><a href="class_sprite.html#a17cf1063e1a13c25a4490dfa5bfc50aa">Sprite::setSize</a></div><div class="ttdeci">void setSize(Size)</div><div class="ttdoc">设置可绘制区域的大小</div><div class="ttdef"><b>Definition:</b> sprite.cpp:112</div></div>
-<div class="ttc" id="aclass_sprite_html_a376e564f826c34afae8c9b62295a2714"><div class="ttname"><a href="class_sprite.html#a376e564f826c34afae8c9b62295a2714">Sprite::getSize</a></div><div class="ttdeci">Size getSize() const</div><div class="ttdoc">获取可绘制区域的大小</div><div class="ttdef"><b>Definition:</b> sprite.cpp:123</div></div>
-<div class="ttc" id="aclass_sprite_html_a43bce22623447fadfb70bcf81c65a40c"><div class="ttname"><a href="class_sprite.html#a43bce22623447fadfb70bcf81c65a40c">Sprite::drawRectFill</a></div><div class="ttdeci">void drawRectFill(Rect, const Tile &amp;)</div><div class="ttdoc">绘制实心矩形</div><div class="ttdef"><b>Definition:</b> sprite.cpp:73</div></div>
-<div class="ttc" id="aclass_sprite_html_a7a0ba13245fa13a5656481fa6929838f"><div class="ttname"><a href="class_sprite.html#a7a0ba13245fa13a5656481fa6929838f">Sprite::onRemove</a></div><div class="ttdeci">void onRemove() override</div><div class="ttdoc">回调, 当组件被移除</div><div class="ttdef"><b>Definition:</b> sprite.cpp:135</div></div>
-<div class="ttc" id="aclass_sprite_html_a855e2f6077d3d75fd0964d55b2a474f9"><div class="ttname"><a href="class_sprite.html#a855e2f6077d3d75fd0964d55b2a474f9">Sprite::onAdd</a></div><div class="ttdeci">void onAdd() override</div><div class="ttdoc">回调, 当组件被添加</div><div class="ttdef"><b>Definition:</b> sprite.cpp:128</div></div>
-<div class="ttc" id="aclass_sprite_html_ab307d00f165ac85f97fc3eef1ae440ab"><div class="ttname"><a href="class_sprite.html#ab307d00f165ac85f97fc3eef1ae440ab">Sprite::drawLine</a></div><div class="ttdeci">void drawLine(Point, Point, const Tile &amp;)</div><div class="ttdoc">绘制直线</div><div class="ttdef"><b>Definition:</b> sprite.cpp:29</div></div>
-<div class="ttc" id="aclass_sprite_html_ad7c7a78193fdbf529b9f5516d1698dd1"><div class="ttname"><a href="class_sprite.html#ad7c7a78193fdbf529b9f5516d1698dd1">Sprite::drawRect</a></div><div class="ttdeci">void drawRect(Rect, const Tile &amp;)</div><div class="ttdoc">绘制矩形</div><div class="ttdef"><b>Definition:</b> sprite.cpp:52</div></div>
+<div class="ttc" id="aclass_sprite_html_a13e2e7e37058e34f124fae858b7e85b9"><div class="ttname"><a href="class_sprite.html#a13e2e7e37058e34f124fae858b7e85b9">Sprite::drawPoint</a></div><div class="ttdeci">void drawPoint(int x, int y, const Tile &amp;t)</div><div class="ttdoc">绘制点.</div><div class="ttdef"><b>Definition:</b> sprite.cpp:9</div></div>
+<div class="ttc" id="aclass_sprite_html_a25b334cef6d8ccee586182dc10f0b506"><div class="ttname"><a href="class_sprite.html#a25b334cef6d8ccee586182dc10f0b506">Sprite::setSize</a></div><div class="ttdeci">void setSize(Size s)</div><div class="ttdoc">设置可绘制区域的大小</div><div class="ttdef"><b>Definition:</b> sprite.cpp:85</div></div>
+<div class="ttc" id="aclass_sprite_html_a36b20b1988778637e82ea71b03f24c36"><div class="ttname"><a href="class_sprite.html#a36b20b1988778637e82ea71b03f24c36">Sprite::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">清除全部绘制内容.</div><div class="ttdef"><b>Definition:</b> sprite.cpp:80</div></div>
+<div class="ttc" id="aclass_sprite_html_a376e564f826c34afae8c9b62295a2714"><div class="ttname"><a href="class_sprite.html#a376e564f826c34afae8c9b62295a2714">Sprite::getSize</a></div><div class="ttdeci">Size getSize() const</div><div class="ttdoc">获取可绘制区域的大小</div><div class="ttdef"><b>Definition:</b> sprite.cpp:91</div></div>
+<div class="ttc" id="aclass_sprite_html_a79d3549e9c2b9dc71fd9417a7652efab"><div class="ttname"><a href="class_sprite.html#a79d3549e9c2b9dc71fd9417a7652efab">Sprite::drawRect</a></div><div class="ttdeci">void drawRect(Rect r, const Tile &amp;t)</div><div class="ttdoc">绘制矩形.</div><div class="ttdef"><b>Definition:</b> sprite.cpp:38</div></div>
+<div class="ttc" id="aclass_sprite_html_a7a0ba13245fa13a5656481fa6929838f"><div class="ttname"><a href="class_sprite.html#a7a0ba13245fa13a5656481fa6929838f">Sprite::onRemove</a></div><div class="ttdeci">void onRemove() override</div><div class="ttdoc">回调, 当组件被移除</div><div class="ttdef"><b>Definition:</b> sprite.cpp:103</div></div>
+<div class="ttc" id="aclass_sprite_html_a855e2f6077d3d75fd0964d55b2a474f9"><div class="ttname"><a href="class_sprite.html#a855e2f6077d3d75fd0964d55b2a474f9">Sprite::onAdd</a></div><div class="ttdeci">void onAdd() override</div><div class="ttdoc">回调, 当组件被添加</div><div class="ttdef"><b>Definition:</b> sprite.cpp:96</div></div>
+<div class="ttc" id="aclass_sprite_html_a91cd5b0e8255da3dce5b95d14f65a3ae"><div class="ttname"><a href="class_sprite.html#a91cd5b0e8255da3dce5b95d14f65a3ae">Sprite::drawLine</a></div><div class="ttdeci">void drawLine(Point a, Point b, const Tile &amp;t)</div><div class="ttdoc">绘制连接两点的直线.</div><div class="ttdef"><b>Definition:</b> sprite.cpp:21</div></div>
+<div class="ttc" id="aclass_sprite_html_ac0bac8f0a8ca1d3e33925fc1464366e0"><div class="ttname"><a href="class_sprite.html#ac0bac8f0a8ca1d3e33925fc1464366e0">Sprite::drawCycle</a></div><div class="ttdeci">void drawCycle(Point p, short radius, const Tile &amp;t)</div><div class="ttdoc">绘制圆形.</div><div class="ttdef"><b>Definition:</b> sprite.cpp:59</div></div>
+<div class="ttc" id="aclass_sprite_html_ae94a879be830518a92d921581fa188e6"><div class="ttname"><a href="class_sprite.html#ae94a879be830518a92d921581fa188e6">Sprite::fillRect</a></div><div class="ttdeci">void fillRect(Rect r, const Tile &amp;t)</div><div class="ttdoc">绘制实心矩形.</div><div class="ttdef"><b>Definition:</b> sprite.cpp:52</div></div>
 <div class="ttc" id="aclass_tile_html"><div class="ttname"><a href="class_tile.html">Tile</a></div><div class="ttdoc">瓦片</div><div class="ttdef"><b>Definition:</b> tile.h:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_75e4ae1c219046b5a10ac81b39646bb7.html">clem</a></li><li class="navelem"><b>sprite.h</b></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_21de5814e600c9d8474607ccd7219e5e.html">clem</a></li><li class="navelem"><b>sprite.h</b></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

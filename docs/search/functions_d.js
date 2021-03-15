@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['update_188',['update',['../class_rigidbody.html#ac8cd27b3518b9f5b9e8823ce0a0eea49',1,'Rigidbody::update()'],['../class_factor.html#a3e456131e400fda7516fa195b80a097f',1,'Factor::update()'],['../class_scene.html#a4bd876fa0a8118d169b7b31c9df7601b',1,'Scene::update()']]]
+  ['vec2_203',['Vec2',['../class_vec2.html#a76080feed7005893ecc634f903cfbae0',1,'Vec2::Vec2()'],['../class_vec2.html#a6256fecebf5a43b14d5d5341c58cfdc4',1,'Vec2::Vec2(float x, float y)']]]
 ];

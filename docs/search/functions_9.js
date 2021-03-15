@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['onadd_160',['onAdd',['../class_rigidbody.html#ac3bacc9cb76fb592ccafd26886d3c357',1,'Rigidbody::onAdd()'],['../class_component.html#aa00407644782cacbbbb142383c661c4c',1,'Component::onAdd()'],['../class_sprite.html#a855e2f6077d3d75fd0964d55b2a474f9',1,'Sprite::onAdd()']]],
-  ['oncollision_161',['onCollision',['../class_factor.html#a3bfa7d0d3f9746f36968269afc7cfc0e',1,'Factor']]],
-  ['onremove_162',['onRemove',['../class_rigidbody.html#a5924c1467b0ee1b001fbd36fc695a45f',1,'Rigidbody::onRemove()'],['../class_component.html#a2b6d832c5909c5a0082b57ba4a210072',1,'Component::onRemove()'],['../class_sprite.html#a7a0ba13245fa13a5656481fa6929838f',1,'Sprite::onRemove()']]]
+  ['pause_176',['pause',['../class_director.html#ad0e2e9b810e39c939e25ead3918faf00',1,'Director']]],
+  ['point_177',['Point',['../class_point.html#ad92f2337b839a94ce97dcdb439b4325a',1,'Point::Point()'],['../class_point.html#a30bc8409287de4f43e160664be834636',1,'Point::Point(float x, float y)']]],
+  ['popscene_178',['popScene',['../class_director.html#a92916c5c47d0f0a202fe1a5023841e8b',1,'Director']]],
+  ['pushscene_179',['pushScene',['../class_director.html#aa4827f2c29421764dd38913e70fe9e5b',1,'Director']]]
 ];

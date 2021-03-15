@@ -10,5 +10,6 @@ var class_director =
     [ "resume", "class_director.html#a851df0aed8d550cc85159063b0c85dac", null ],
     [ "run", "class_director.html#aae0f1f042a6757196af74f5764ee36ad", null ],
     [ "setMsPerRender", "class_director.html#ae3614b15b1935eebd5aae74c6f1cc515", null ],
-    [ "setMsPerUpdate", "class_director.html#aecb29841de86d14cf7ce4a52aff65f3b", null ]
+    [ "setMsPerUpdate", "class_director.html#aecb29841de86d14cf7ce4a52aff65f3b", null ],
+    [ "stop", "class_director.html#a950c9f72c97dbb140d26c389aa82e660", null ]
 ];
