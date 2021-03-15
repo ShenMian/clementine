@@ -20,7 +20,7 @@ void Log::init()
 		assert(false);
 	}
 
-	engineLogger->set_pattern("[%T][%=8l] %n : %v");
+	engineLogger->set_pattern("[%T][%=8l] %n : %v.");
 	engineLogger->flush_on(level::trace);
 	engineLogger->flush_on(level::info);
 	engineLogger->flush_on(level::warn);
