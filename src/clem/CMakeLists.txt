@@ -8,7 +8,8 @@ find_package(Threads REQUIRED)
 
 # 创建 lib 库
 add_library(clementine STATIC ${sources})
-target_link_libraries(clementine PUBLIC Threads::Threads sdl2)
+# add_library(clementine SHARED ${sources})
+target_link_libraries(clementine PUBLIC Threads::Threads)
 
 # if(CMAKE_SYSTEM_NAME MATCHES "Windows")
 # 	file(GLOB PLATFORM_SOURCES "*.cpp")

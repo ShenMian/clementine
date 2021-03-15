@@ -18,11 +18,6 @@ using namespace std;
 #include <clem/input/keyboard.h>
 #include <clem/frame_buffer.h>
 
-// width / height = 80 / 25 => width * 25 = height * 80
-const short width  = 80;
-const short height = width * 25 / 80;
-const Size  winSize(width, height);
-
 class Ball : public Factor
 {
 public:
@@ -79,21 +74,15 @@ private:
 	BoxCollider collider;
 };
 
-//int main()
-void func()
+//void func()
+int main()
 {
 	Log::init();
 	auto director = Director::getInstance();
 	Cursor::setVisible(false);
 	Scene scene;
 
-	frameBuffer.setSize(winSize);
-
-	Random random;
-	Sprite sprite;
-	sprite.setSize(winSize);
-	Factor debug(scene);
-	debug.addComponent(sprite);
+	auto winSize = frameBuffer.getSize();
 
 	Bar bar(scene);
 	bar.setPosition({1, winSize.y / 2.0f - 2});
@@ -112,13 +101,8 @@ void func()
 	director->setMsPerRender(1000 / 60);
 	director->pushScene(scene);
 	director->run();
-
-	for(int i = 0; i < 1000; i++)
-	{
-		for(int y = 0; y < sprite.getSize().y; y++)
-			for(int x = 0; x < sprite.getSize().x; x++)
-				sprite.drawPoint(x, y, Tile('0' + random.int32(0, 9)));
-	}
-
+	sleep_for(seconds(5));
 	director->stop();
+	sleep_for(seconds(3));
+	return 0;
 }

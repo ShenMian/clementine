@@ -12,7 +12,7 @@ public:
 	Main(int argc, char* argv[]);
 
 private:
-	void initialize();
+	static void initialize();
 };
 
 #endif // !CLEM_CORE_MAIN_H_

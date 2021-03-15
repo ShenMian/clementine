@@ -8,9 +8,11 @@
 int main(int argc, char* argv[])
 {
 	Log::init();
+
 	PROFILE_SESSION_BEGIN();
 	Main main(argc, argv);
 	PROFILE_SESSION_END();
+
 	return 0;
 }
 
@@ -23,6 +25,12 @@ void Main::initialize()
 {
 	PROFILE_FUNC();
 
+	// width / height = 80 / 25 => width * 25 = height * 80
+	const short width  = 80;
+	const short height = width * 25 / 80;
+	frameBuffer.setSize({width, height});
+
+	/*
 	PROFILE_SCOPE_BEGIN(sdl_init);
 	// ≥ı ºªØ SDL
 	auto ret = SDL_Init(SDL_INIT_AUDIO | SDL_INIT_JOYSTICK | SDL_INIT_EVENTS);
@@ -31,4 +39,5 @@ void Main::initialize()
 		CLEM_CORE_ERROR("Initialize SDL failed");
 	}
 	PROFILE_SCOPE_END(sdl_init);
+	*/
 }

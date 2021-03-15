@@ -148,9 +148,6 @@ short Director::getFramesPerSecond() const
 	return framesPerSecond;
 }
 
-/**
- * @brief 主循环.
- */
 void Director::loop()
 {
 	CLEM_CORE_INFO("Main loop started");
@@ -160,8 +157,6 @@ void Director::loop()
 
 	while(running)
 	{
-		PROFILE_FUNC();
-
 		long current = getCurrentMillSecond();
 		long dt      = current - previous;
 		previous     = current;
@@ -224,12 +219,12 @@ void Director::render(long dt)
 
 	static long renderLag = 0;
 	renderLag += dt;
-	if(renderLag >= msPerRender)
+	while(renderLag >= msPerRender)
 	{
 		PROFILE_FUNC();
 
 		scene->render();
-		renderLag = 0;
+		renderLag -= msPerRender;
 		frames++;
 	}
 }
@@ -275,8 +270,6 @@ Size Director::getWinSize() const
  */
 long Director::getCurrentMillSecond() const
 {
-	PROFILE_FUNC();
-
 	struct timeval t;
 	gettimeofday(&t, NULL);
 	return t.tv_sec * 1000 + t.tv_usec * 0.001;
@@ -317,8 +310,6 @@ Size Director::getWinSize() const
 
 long Director::getCurrentMillSecond() const
 {
-	PROFILE_FUNC();
-
 	LARGE_INTEGER freq;
 	BOOL          ret = QueryPerformanceFrequency(&freq);
 	assert(ret != 0);
