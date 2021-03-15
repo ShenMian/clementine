@@ -10,7 +10,7 @@
 class Point;
 
 /**
- * @addtogroup math
+ * @addtogroup Math
  * @{
  */
 
@@ -84,7 +84,7 @@ public:
 };
 
 /**
- * end of math group
+ * end of Math group
  * @}
  */
 

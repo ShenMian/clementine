@@ -3,14 +3,15 @@
 // 摄像机
 
 #include "camera.h"
-#include <vector>
-#include <algorithm>
-#include <cassert>
 #include "cursor.h"
-#include "scene.h"
-#include "sprite.h"
 #include "factor.h"
 #include "frame_buffer.h"
+#include "profiler.h"
+#include "scene.h"
+#include "sprite.h"
+#include <algorithm>
+#include <cassert>
+#include <vector>
 
 using std::vector;
 
@@ -39,6 +40,8 @@ Camera::Camera(Scene* s)
  */
 void Camera::render(const vector<Sprite*>& sprites)
 {
+	PROFILE_FUNC();
+
 	Rect viewport(inPos, size);
 	for(auto s : sprites)
 	{

@@ -4,6 +4,7 @@
 
 #include "frame_buffer.h"
 #include "director.h"
+#include "profiler.h"
 #include "tile.h"
 #include <algorithm>
 
@@ -142,6 +143,8 @@ void FrameBuffer::drawPoint(Point p, const Tile& t)
 
 void FrameBuffer::render()
 {
+	PROFILE_FUNC();
+
 	for(int y = 0; y < size.y; y++)
 	{
 		Cursor::move(0, y);
@@ -169,6 +172,8 @@ void FrameBuffer::drawPoint(Point p, const Tile& t)
 
 void FrameBuffer::render()
 {
+	PROFILE_FUNC();
+
 	auto       hStdOut     = GetStdHandle(STD_OUTPUT_HANDLE);
 	SMALL_RECT writeRegion = {0, 0, (SHORT)size.x, (SHORT)size.y};
 	WriteConsoleOutput(hStdOut,

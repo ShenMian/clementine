@@ -160,7 +160,8 @@ void Director::loop()
 
 	while(running)
 	{
-		PROFILE_SCOPE(main_loop);
+		PROFILE_FUNC();
+
 		long current = getCurrentMillSecond();
 		long dt      = current - previous;
 		previous     = current;
@@ -193,7 +194,8 @@ void Director::update(long dt)
 	updateLag += dt;
 	while(updateLag >= msPerUpdate)
 	{
-		PROFILE_SCOPE(update);
+		PROFILE_FUNC();
+
 		scene->update((float)msPerUpdate / 1000);
 		updateLag -= msPerUpdate;
 	}
@@ -224,7 +226,8 @@ void Director::render(long dt)
 	renderLag += dt;
 	if(renderLag >= msPerRender)
 	{
-		PROFILE_SCOPE(render);
+		PROFILE_FUNC();
+
 		scene->render();
 		renderLag = 0;
 		frames++;
@@ -274,6 +277,8 @@ Size Director::getWinSize() const
  */
 long Director::getCurrentMillSecond() const
 {
+	PROFILE_FUNC();
+
 	struct timeval t;
 	gettimeofday(&t, NULL);
 	return t.tv_sec * 1000 + t.tv_usec * 0.001;
@@ -316,6 +321,8 @@ Size Director::getWinSize() const
 
 long Director::getCurrentMillSecond() const
 {
+	PROFILE_FUNC();
+
 	LARGE_INTEGER freq;
 	BOOL          ret = QueryPerformanceFrequency(&freq);
 	assert(ret != 0);

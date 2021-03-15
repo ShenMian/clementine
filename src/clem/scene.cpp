@@ -7,6 +7,7 @@
 #include "director.h"
 #include "factor.h"
 #include "frame_buffer.h"
+#include "profiler.h"
 #include "type.h"
 #include <algorithm>
 #include <cassert>
@@ -50,6 +51,8 @@ void Scene::update(float dt)
  */
 void Scene::render()
 {
+	PROFILE_FUNC();
+
 	frameBuffer.clear();
 
 	for(auto cam : cameras)
@@ -170,6 +173,8 @@ void Scene::removeRigidbody(Rigidbody& b)
  */
 void Scene::updateFactors(float dt)
 {
+	PROFILE_FUNC();
+
 	for(auto f : factors)
 		f->update(dt);
 }
@@ -186,6 +191,8 @@ void Scene::updateFactors(float dt)
  */
 void Scene::updatePhysics(float dt)
 {
+	PROFILE_FUNC();
+
 	vector<Collider*> colliders;
 	for(auto body : rigidbodies)
 		for(auto c : body->getColliders())

@@ -7,7 +7,7 @@
 class Vec2;
 
 /**
- * @addtogroup math
+ * @addtogroup Math
  * @{
  */
 
@@ -74,7 +74,7 @@ public:
 };
 
 /**
- * end of math group
+ * end of Math group
  * @}
  */
 
