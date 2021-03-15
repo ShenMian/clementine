@@ -4,6 +4,7 @@
 
 #include "circle_collider.h"
 #include "box_collider.h"
+#include "clem/profiler.h"
 #include <cassert>
 
 CircleCollider::CircleCollider()
@@ -17,6 +18,8 @@ CircleCollider::CircleCollider(float radius)
 
 bool CircleCollider::collides(const Collider& other) const
 {
+	PROFILE_FUNC();
+
 	if(auto o = dynamic_cast<const CircleCollider*>(&other))
 		return getPosition().distance(o->getPosition()) <= getRadius() + o->getRadius();
 	else if(auto o = dynamic_cast<const BoxCollider*>(&other))
