@@ -79,8 +79,10 @@ private:
 	BoxCollider collider;
 };
 
-int main()
+//int main()
+void func()
 {
+	Log::init();
 	auto director = Director::getInstance();
 	Cursor::setVisible(false);
 	Scene scene;

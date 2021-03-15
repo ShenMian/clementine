@@ -1,0 +1,6 @@
+
+class Application
+{
+public:
+	Application();
+};

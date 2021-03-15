@@ -7,6 +7,8 @@
 #define CLEM_API
 
 // Core
+#include "Clem/Core/Main.h"
+
 #include "clem/camera.h"
 #include "clem/director.h"
 #include "clem/factor.h"
@@ -34,6 +36,7 @@
 #include "clem/sprite.h"
 
 #include "clem/log.h"
+#include "clem/profiler.h"
 #include "clem/random.h"
 #include "clem/terminal.h"
 

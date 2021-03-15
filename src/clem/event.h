@@ -5,7 +5,9 @@
 #ifndef CLEM_EVENT_H_
 #define CLEM_EVENT_H_
 
-/// 事件
+/**
+ * @brief 事件.
+ */
 class Event
 {
 public:

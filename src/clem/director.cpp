@@ -26,7 +26,7 @@ void Director::run()
 {
 	if(scenes.empty())
 	{
-		CLEM_ENGINE_ERROR("Lunch main loop when the scenes is empty");
+		CLEM_CORE_ERROR("Lunch main loop when the scenes is empty");
 		return;
 	}
 
@@ -74,7 +74,7 @@ void Director::popScene()
 {
 	if(scenes.empty())
 	{
-		CLEM_ENGINE_ERROR("Pop a scene when the scenes is empty");
+		CLEM_CORE_ERROR("Pop a scene when the scenes is empty");
 		return;
 	}
 	scenes.pop_back();
@@ -89,7 +89,7 @@ void Director::replaceScene(Scene& s)
 {
 	if(scenes.empty())
 	{
-		CLEM_ENGINE_ERROR("Replace a scene when the scenes is empty");
+		CLEM_CORE_ERROR("Replace a scene when the scenes is empty");
 		return;
 	}
 	scenes.front() = &s;
@@ -117,7 +117,7 @@ void Director::setMsPerUpdate(long ms)
 {
 	if(ms <= 0)
 	{
-		CLEM_ENGINE_CRITICAL("Set ms per update non positive");
+		CLEM_CORE_CRITICAL("Set ms per update non positive");
 		assert(false);
 	}
 	msPerUpdate = ms;
@@ -132,7 +132,7 @@ void Director::setMsPerRender(long ms)
 {
 	if(ms <= 0)
 	{
-		CLEM_ENGINE_CRITICAL("Set ms per render non positive");
+		CLEM_CORE_CRITICAL("Set ms per render non positive");
 		assert(false);
 	}
 	msPerRender = ms;
@@ -153,7 +153,7 @@ short Director::getFramesPerSecond() const
  */
 void Director::loop()
 {
-	CLEM_ENGINE_INFO("Main loop started");
+	CLEM_CORE_INFO("Main loop started");
 	PROFILE_SESSION_BEGIN();
 
 	long previous = getCurrentMillSecond();
@@ -178,7 +178,7 @@ void Director::loop()
 	}
 
 	PROFILE_SESSION_END();
-	CLEM_ENGINE_INFO("Main loop stoped");
+	CLEM_CORE_INFO("Main loop stoped");
 }
 
 /**
@@ -243,8 +243,6 @@ void Director::render(long dt)
 Director::Director()
 		: running(false), paused(false), msPerUpdate(16), msPerRender(16), framesPerSecond(0)
 {
-	Log::init();
-
 	// 开启 raw 模式
 	termios mode;
 	if(tcgetattr(STDOUT_FILENO, &mode) == -1)
@@ -291,8 +289,6 @@ long Director::getCurrentMillSecond() const
 Director::Director()
 		: running(false), paused(false), msPerUpdate(16), msPerRender(16), framesPerSecond(0)
 {
-	Log::init();
-
 	// 开启 VT100 模式
 	const auto hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	DWORD      mode;

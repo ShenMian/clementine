@@ -15,8 +15,12 @@ set(LIBRARY_OUTPUT_PATH ../lib/)
 
 include_directories("src")
 
-include_directories("thirdparty/asio/asio/include")
+add_subdirectory("thirdparty/SDL")
+include_directories("thirdparty/SDL/include")
+
 include_directories("thirdparty/spdlog/include")
+
+include_directories("thirdparty/asio/asio/include")
 
 add_subdirectory("src/clem")
 

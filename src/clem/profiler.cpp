@@ -17,18 +17,21 @@ Instrumentor& Instrumentor::getInstance()
 void Instrumentor::begin(const char* filepath)
 {
 	assert(!session);
-	CLEM_ENGINE_WARN("Being of a profile session: {}", filepath);
 
 	session = true;
 	file.open(filepath);
-	assert(file.is_open());
+	if(!file.is_open())
+	{
+		return;
+	}
+	CLEM_CORE_WARN("Profile session begin: {}", filepath);
 	writeHead();
 }
 
 void Instrumentor::end()
 {
 	assert(session);
-	CLEM_ENGINE_WARN("End of a profile session");
+	CLEM_CORE_WARN("Profile session end");
 
 	writeFooter();
 	file.close();
