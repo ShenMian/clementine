@@ -15,8 +15,8 @@
 #include "clem/scene.h"
 
 // Math
-#include "clem/math/point.h"
-#include "clem/math/vec2.h"
+#include "clem/Math/Point.h"
+#include "clem/Math/Vec2.h"
 
 // Physics
 #include "clem/physics/box_collider.h"
@@ -36,7 +36,7 @@
 #include "clem/sprite.h"
 
 #include "clem/log.h"
-#include "clem/profiler.h"
+#include "clem/Profiler.h"
 #include "clem/random.h"
 #include "clem/terminal.h"
 

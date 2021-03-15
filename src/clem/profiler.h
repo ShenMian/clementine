@@ -19,6 +19,9 @@ struct ProfileRecord
 	std::thread::id                           threadId;
 };
 
+/**
+ * 性能分析器.
+ */
 class Instrumentor
 {
 public:
@@ -39,6 +42,9 @@ private:
 	bool          session = false;
 };
 
+/**
+ * 计时器.
+ */
 class InstrumentationCounter
 {
 public:
