@@ -81,9 +81,8 @@ private:
 
 int main()
 {
-	Log::init();
-	Cursor::setVisible(false);
 	auto director = Director::getInstance();
+	Cursor::setVisible(false);
 	Scene scene;
 
 	frameBuffer.setSize(winSize);

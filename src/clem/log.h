@@ -4,7 +4,9 @@
 #ifndef CLEM_LOG_H_
 #define CLEM_LOG_H_
 
+#pragma warning(push, 0)
 #include "spdlog/spdlog.h"
+#pragma warning(pop)
 
 class Log
 {

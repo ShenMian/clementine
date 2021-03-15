@@ -160,11 +160,11 @@ void Director::loop()
 
 	while(running)
 	{
+		PROFILE_SCOPE(main_loop);
 		long current = getCurrentMillSecond();
 		long dt      = current - previous;
 		previous     = current;
 
-		PROFILE_SCOPE("main loop");
 		update(dt);
 		render(dt);
 
@@ -193,7 +193,7 @@ void Director::update(long dt)
 	updateLag += dt;
 	while(updateLag >= msPerUpdate)
 	{
-		PROFILE_SCOPE("update");
+		PROFILE_SCOPE(update);
 		scene->update((float)msPerUpdate / 1000);
 		updateLag -= msPerUpdate;
 	}
@@ -224,7 +224,7 @@ void Director::render(long dt)
 	renderLag += dt;
 	if(renderLag >= msPerRender)
 	{
-		PROFILE_SCOPE("render");
+		PROFILE_SCOPE(render);
 		scene->render();
 		renderLag = 0;
 		frames++;
@@ -240,6 +240,8 @@ void Director::render(long dt)
 Director::Director()
 		: running(false), paused(false), msPerUpdate(16), msPerRender(16), framesPerSecond(0)
 {
+	Log::init();
+
 	// 开启 raw 模式
 	termios mode;
 	if(tcgetattr(STDOUT_FILENO, &mode) == -1)
@@ -284,6 +286,8 @@ long Director::getCurrentMillSecond() const
 Director::Director()
 		: running(false), paused(false), msPerUpdate(16), msPerRender(16), framesPerSecond(0)
 {
+	Log::init();
+
 	// 开启 VT100 模式
 	const auto hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	DWORD      mode;

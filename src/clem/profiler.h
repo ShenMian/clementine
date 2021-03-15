@@ -53,15 +53,14 @@ private:
 	std::chrono::time_point<std::chrono::steady_clock> begin;
 };
 
+#define STRING_(s) #s
+#define STRING(s) STRING_(s)
+
 #define PROFILE_SESSION_BEGIN(filepath) Instrumentor::getInstance().begin(filepath)
 #define PROFILE_SESSION_END() Instrumentor::getInstance().end()
-#define PROFILE_SCOPE(name) InstrumentationCounter counter##__LINE__(name)
-#define PROFILE_FUNC() PROFILE_SCOPE(__FUNCTION__)
-// #define PROFILE_FUNC() PROFILE_SCOPE(__FUNCSIG__)
-
-#define PROFILE_SCOPE_BEGIN(name) \
-	{                               \
-		PROFILE_SCOPE(name)
-#define PROFILE_SCOPE_END() }
+#define PROFILE_SCOPE(name) InstrumentationCounter counter_##name(STRING(name))
+#define PROFILE_SCOPE_BEGIN(name) PROFILE_SCOPE(STRING(name))
+#define PROFILE_SCOPE_END(name) counter_##name.~InstrumentationCounter()
+#define PROFILE_FUNC() PROFILE_SCOPE(__FUNCTION__) /* __FUNCSIG__ */
 
 #endif // !CLEM_PROFILER_H_
