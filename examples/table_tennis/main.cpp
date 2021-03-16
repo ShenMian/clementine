@@ -105,10 +105,8 @@ int main()
 	director->setMsPerRender(1000 / 60);
 	director->pushScene(scene);
 	director->run();
-	sleep_for(seconds(3));
-	director->stop();
-	PROFILE_SESSION_END();
 	while(true)
 		;
+	PROFILE_SESSION_END();
 	return 0;
 }

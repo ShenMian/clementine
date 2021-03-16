@@ -16,6 +16,7 @@ set(LIBRARY_OUTPUT_PATH ../lib/)
 include_directories("src")
 
 include_directories("thirdparty/SDL/include")
+include_directories("thirdparty/entt/include")
 include_directories("thirdparty/spdlog/include")
 include_directories("thirdparty/asio/asio/include")
 
