@@ -1,7 +1,7 @@
 
 #include "terminal.h"
-#include <cassert>
 #include "platform.h"
+#include <cassert>
 
 using std::string;
 

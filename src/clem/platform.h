@@ -9,15 +9,6 @@
 	#define OS_WIN
 #endif
 
-#if defined(TARGET_OS_IPHONE)
-	#define OS_IPHONE
-#endif
-
-#if defined(TARGET_OS_MAC)
-	#define OS_MAC
-	#define OS_UNIX
-#endif
-
 #if defined(__unix__) || defined(unix) || defined(__unix)
 	#define OS_UNIX
 #endif
@@ -28,6 +19,15 @@
 
 #if defined(ANDROID) || defined(_ANDROID_)
 	#define OS_ANDROID
+#endif
+
+#ifdef __APPLE__
+	#include <TargetConditionals.h>
+#endif
+
+#if defined(TARGET_OS_MAC)
+	#define OS_MAC
+	#define OS_UNIX
 #endif
 
 #ifdef OS_WIN

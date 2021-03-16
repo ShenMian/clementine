@@ -3,8 +3,9 @@
 // 帧缓冲区
 
 #include "frame_buffer.h"
-#include "director.h"
 #include "Profiler.h"
+#include "director.h"
+#include "platform.h"
 #include "tile.h"
 #include <algorithm>
 
