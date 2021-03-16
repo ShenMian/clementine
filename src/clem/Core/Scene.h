@@ -15,6 +15,7 @@ public:
 	void     destoryEntity(const NEntity&);
 
 private:
+	entt::registry registry;
 };
 
 #endif // !CLEM_CORE_SCENE
