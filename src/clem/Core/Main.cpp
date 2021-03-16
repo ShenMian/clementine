@@ -6,10 +6,12 @@
 #include "clem.h"
 #include "SDL.h"
 
+/*
 int main(int argc, char* argv[])
 {
 	return Main::entrypoint(argc, argv);
 }
+*/
 
 int Main::entrypoint(int argc, char* argv[])
 {
@@ -32,7 +34,7 @@ void Main::initialize()
 	frameBuffer.setSize({width, height});
 
 #ifdef OS_WIN
-	// ¿ªÆô VT100 Ä£Ê½
+	// ï¿½ï¿½ï¿½ï¿½ VT100 Ä£Ê½
 	const auto hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	DWORD      mode;
 	if(!GetConsoleMode(hStdOut, &mode))
@@ -43,7 +45,7 @@ void Main::initialize()
 
 	/*
 	PROFILE_SCOPE_BEGIN(sdl_init);
-	// ³õÊ¼»¯ SDL
+	// ï¿½ï¿½Ê¼ï¿½ï¿½ SDL
 	auto ret = SDL_Init(SDL_INIT_AUDIO | SDL_INIT_JOYSTICK | SDL_INIT_EVENTS);
 	if(ret == -1)
 	{

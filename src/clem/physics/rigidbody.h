@@ -5,7 +5,7 @@
 #define CLEM_PHYSICS_RIGIDBODY_H_
 
 #include <vector>
-#include "clem/math/vec2.h"
+#include "clem/Math/Vec2.h"
 #include "clem/component.h"
 
 class Collider;

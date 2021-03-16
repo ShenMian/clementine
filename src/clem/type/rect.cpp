@@ -4,7 +4,7 @@
 
 #include "rect.h"
 #include "size.h"
-#include "clem/math/point.h"
+#include "clem/Math/Point.h"
 
 Rect::Rect()
 		: Rect(0, 0, 0, 0)

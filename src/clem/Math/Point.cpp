@@ -1,8 +1,8 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "point.h"
-#include "vec2.h"
+#include "Point.h"
+#include "Vec2.h"
 #include <cmath>
 #include <algorithm>
 

@@ -7,7 +7,7 @@
 #include "director.h"
 #include "factor.h"
 #include "frame_buffer.h"
-#include "profiler.h"
+#include "Profiler.h"
 #include "type.h"
 #include <algorithm>
 #include <cassert>

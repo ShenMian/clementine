@@ -4,7 +4,7 @@
 #include "director.h"
 #include "log.h"
 #include "platform.h"
-#include "profiler.h"
+#include "Profiler.h"
 #include "scene.h"
 #include <cassert>
 #include <chrono>

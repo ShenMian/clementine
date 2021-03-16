@@ -4,7 +4,7 @@
 
 #include "circle_collider.h"
 #include "box_collider.h"
-#include "clem/profiler.h"
+#include "clem/Profiler.h"
 #include <cassert>
 
 CircleCollider::CircleCollider()

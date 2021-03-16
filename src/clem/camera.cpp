@@ -6,7 +6,7 @@
 #include "cursor.h"
 #include "factor.h"
 #include "frame_buffer.h"
-#include "profiler.h"
+#include "Profiler.h"
 #include "scene.h"
 #include "sprite.h"
 #include <algorithm>

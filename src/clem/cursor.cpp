@@ -4,9 +4,9 @@
 
 #include "cursor.h"
 #include "platform.h"
+#include "clem/Math/Point.h"
 #include <stdio.h>
 #include <assert.h>
-#include <clem/math/point.h>
 
 /**
  * @brief 移动光标到指定坐标

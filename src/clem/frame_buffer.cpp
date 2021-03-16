@@ -4,7 +4,7 @@
 
 #include "frame_buffer.h"
 #include "director.h"
-#include "profiler.h"
+#include "Profiler.h"
 #include "tile.h"
 #include <algorithm>
 

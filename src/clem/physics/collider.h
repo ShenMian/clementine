@@ -4,7 +4,7 @@
 #ifndef CLEM_COLLIDER_H_
 #define CLEM_COLLIDER_H_
 
-#include "clem/math/point.h"
+#include "clem/Math/Point.h"
 
 class Rigidbody;
 class BoxCollider;
