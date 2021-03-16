@@ -4,14 +4,12 @@
 #ifndef CLEM_CORE_MAIN_H_
 #define CLEM_CORE_MAIN_H_
 
-int main(int argc, char* argv[]);
+// int main(int argc, char* argv[]);
 
 class Main
 {
 public:
-	Main(int argc, char* argv[]);
-
-private:
+	static int  entrypoint(int argc, char* argv[]);
 	static void initialize();
 };
 

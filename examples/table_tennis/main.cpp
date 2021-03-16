@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 // Table tennis
 
-#include "clem/clem.hpp"
+#include "clem.h"
 #include <iostream>
 #include <time.h>
 #include <stdio.h>
@@ -80,7 +80,7 @@ const short height = width * 25 / 80;
 //void func()
 int main()
 {
-	Log::init();
+	Main::initialize();
 	auto director = Director::getInstance();
 	Cursor::setVisible(false);
 	Scene scene;
@@ -105,8 +105,7 @@ int main()
 	director->setMsPerRender(1000 / 60);
 	director->pushScene(scene);
 	director->run();
-	sleep_for(seconds(5));
-	director->stop();
-	sleep_for(seconds(3));
+	while(true)
+		;
 	return 0;
 }

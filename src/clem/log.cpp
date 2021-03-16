@@ -21,13 +21,7 @@ void Log::init()
 	}
 
 	coreLogger->set_pattern("[%T][%=8l] %n : %v.");
-	coreLogger->flush_on(level::trace);
-	coreLogger->flush_on(level::info);
-	coreLogger->flush_on(level::warn);
-	coreLogger->flush_on(level::err);
-	coreLogger->flush_on(level::critical);
-
-	// flush_every(std::chrono::seconds(1));
+	flush_every(std::chrono::seconds(1));
 }
 
 std::shared_ptr<logger> Log::getLogger()

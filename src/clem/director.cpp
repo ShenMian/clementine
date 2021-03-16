@@ -8,6 +8,7 @@
 #include "scene.h"
 #include <cassert>
 #include <chrono>
+#include <csignal>
 
 using std::chrono::milliseconds;
 using std::this_thread::sleep_for;
@@ -26,7 +27,7 @@ void Director::run()
 {
 	if(scenes.empty())
 	{
-		CLEM_CORE_ERROR("Lunch main loop when the scenes is empty");
+		CLEM_CORE_ERROR("lunch main loop when the scenes is empty");
 		return;
 	}
 
@@ -46,6 +47,8 @@ void Director::stop()
  */
 void Director::pause()
 {
+	if(paused)
+		CLEM_CORE_WARN("pause when the main loop is already paused");
 	paused = true;
 }
 
@@ -54,6 +57,8 @@ void Director::pause()
  */
 void Director::resume()
 {
+	if(!paused)
+		CLEM_CORE_WARN("resume when the main loop is not paused");
 	paused = false;
 }
 
@@ -74,7 +79,7 @@ void Director::popScene()
 {
 	if(scenes.empty())
 	{
-		CLEM_CORE_ERROR("Pop a scene when the scenes is empty");
+		CLEM_CORE_ERROR("pop a scene when the scenes is empty");
 		return;
 	}
 	scenes.pop_back();
@@ -89,10 +94,10 @@ void Director::replaceScene(Scene& s)
 {
 	if(scenes.empty())
 	{
-		CLEM_CORE_ERROR("Replace a scene when the scenes is empty");
+		CLEM_CORE_ERROR("replace a scene when the scenes is empty");
 		return;
 	}
-	scenes.front() = &s;
+	scenes.back() = &s;
 }
 
 /**
@@ -117,7 +122,7 @@ void Director::setMsPerUpdate(long ms)
 {
 	if(ms <= 0)
 	{
-		CLEM_CORE_CRITICAL("Set ms per update non positive");
+		CLEM_CORE_CRITICAL("set ms per update non positive");
 		assert(false);
 	}
 	msPerUpdate = ms;
@@ -132,7 +137,7 @@ void Director::setMsPerRender(long ms)
 {
 	if(ms <= 0)
 	{
-		CLEM_CORE_CRITICAL("Set ms per render non positive");
+		CLEM_CORE_CRITICAL("set ms per render non positive");
 		assert(false);
 	}
 	msPerRender = ms;
@@ -150,8 +155,7 @@ short Director::getFramesPerSecond() const
 
 void Director::loop()
 {
-	CLEM_CORE_INFO("Main loop started");
-	PROFILE_SESSION_BEGIN();
+	CLEM_CORE_INFO("main loop started");
 
 	long previous = getCurrentMillSecond();
 
@@ -172,8 +176,7 @@ void Director::loop()
 		}
 	}
 
-	PROFILE_SESSION_END();
-	CLEM_CORE_INFO("Main loop stoped");
+	CLEM_CORE_INFO("main loop stoped");
 }
 
 /**
@@ -213,8 +216,8 @@ void Director::render(long dt)
 	if(fpsLag >= 1000)
 	{
 		framesPerSecond = frames;
-		frames = fpsLag = 0;
 		Terminal::setTitle("Clementine | Render: " + std::to_string(getFramesPerSecond()) + "(" + std::to_string(target) + ")" + "FPS");
+		frames = fpsLag = 0;
 	}
 
 	static long renderLag = 0;
@@ -229,27 +232,31 @@ void Director::render(long dt)
 	}
 }
 
+Director::Director()
+		: running(false), paused(false), msPerUpdate(16), msPerRender(16), framesPerSecond(0)
+{
+	std::signal(SIGINT, onSignal);
+}
+
+void Director::onSignal(int signal)
+{
+	switch(signal)
+	{
+	case SIGINT:
+		CLEM_CORE_WARN("signal: external interrupt, usually initiated by the user");
+		instance.stop();
+		break;
+
+	default:
+		assert(false);
+	}
+}
+
 #ifdef OS_UNIX
 
 #include <sys/ioctl.h>
 #include <termios.h>
 #include <unistd.h>
-
-Director::Director()
-		: running(false), paused(false), msPerUpdate(16), msPerRender(16), framesPerSecond(0)
-{
-	// 开启 raw 模式
-	termios mode;
-	if(tcgetattr(STDOUT_FILENO, &mode) == -1)
-		assert(false);
-	mode.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
-	mode.c_cflag |= (CS8);
-	mode.c_lflag &= ~(ECHO | ICANON | IEXTEN);
-	mode.c_cc[VMIN]  = 0;
-	mode.c_cc[VTIME] = 0;
-	if(tcsetattr(STDIN_FILENO, TCSAFLUSH, &mode) == -1)
-		assert(false);
-}
 
 /**
  * @brief 获取终端缓冲区大小.
@@ -278,18 +285,6 @@ long Director::getCurrentMillSecond() const
 #endif // OS_UNIX
 
 #ifdef OS_WIN
-
-Director::Director()
-		: running(false), paused(false), msPerUpdate(16), msPerRender(16), framesPerSecond(0)
-{
-	// 开启 VT100 模式
-	const auto hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	DWORD      mode;
-	if(!GetConsoleMode(hStdOut, &mode))
-		assert(false);
-	if(!SetConsoleMode(hStdOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING))
-		assert(false);
-}
 
 /**
  * @brief 获取终端缓冲区大小
@@ -320,3 +315,18 @@ long Director::getCurrentMillSecond() const
 }
 
 #endif // OS_WIN
+
+/*
+* // Unix
+	// 开启 raw 模式
+	termios mode;
+	if(tcgetattr(STDOUT_FILENO, &mode) == -1)
+		assert(false);
+	mode.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+	mode.c_cflag |= (CS8);
+	mode.c_lflag &= ~(ECHO | ICANON | IEXTEN);
+	mode.c_cc[VMIN]  = 0;
+	mode.c_cc[VTIME] = 0;
+	if(tcsetattr(STDIN_FILENO, TCSAFLUSH, &mode) == -1)
+		assert(false);
+*/

@@ -49,6 +49,7 @@ private:
 	short               framesPerSecond;
 	std::thread         thread;
 
+	static void     onSignal(int);
 	static Director instance;
 };
 

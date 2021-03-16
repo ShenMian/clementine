@@ -2,33 +2,46 @@
 // License(Apache-2.0)
 
 #include "Main.h"
+#include "Application.h"
 #include "clem.h"
 #include "SDL.h"
 
 int main(int argc, char* argv[])
 {
-	Log::init();
+	return Main::entrypoint(argc, argv);
+}
 
-	PROFILE_SESSION_BEGIN();
-	Main main(argc, argv);
-	PROFILE_SESSION_END();
+int Main::entrypoint(int argc, char* argv[])
+{
+	initialize();
+
+	Application app;
 
 	return 0;
 }
 
-Main::Main(int argc, char* argv[])
-{
-	initialize();
-}
-
 void Main::initialize()
 {
+	Log::init();
+
+	PROFILE_SESSION_BEGIN();
+
 	PROFILE_FUNC();
 
 	// width / height = 80 / 25 => width * 25 = height * 80
 	const short width  = 80;
 	const short height = width * 25 / 80;
 	frameBuffer.setSize({width, height});
+
+#ifdef OS_WIN
+	// ¿ªÆô VT100 Ä£Ê½
+	const auto hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	DWORD      mode;
+	if(!GetConsoleMode(hStdOut, &mode))
+		assert(false);
+	if(!SetConsoleMode(hStdOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING))
+		assert(false);
+#endif
 
 	/*
 	PROFILE_SCOPE_BEGIN(sdl_init);
