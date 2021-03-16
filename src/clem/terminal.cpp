@@ -5,7 +5,7 @@
 
 using std::string;
 
-#ifdef OS_LINUX
+#ifdef OS_UNIX
 
 #include <termios.h>
 #include <unistd.h>
