@@ -7,8 +7,11 @@
 #define CLEM_API
 
 // Core
-#include "clem/Core/Main.h"
+#include "clem/Core/Application.h"
+#include "clem/Core/Scene.h"
+#include "clem/Core/Entity.h"
 
+// Core
 #include "clem/camera.h"
 #include "clem/director.h"
 #include "clem/factor.h"

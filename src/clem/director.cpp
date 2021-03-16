@@ -2,9 +2,10 @@
 // License(Apache-2.0)
 
 #include "director.h"
+#include "Profiler.h"
+#include "clem/Core/Application.h"
 #include "log.h"
 #include "platform.h"
-#include "Profiler.h"
 #include "scene.h"
 #include <cassert>
 #include <chrono>
@@ -21,25 +22,26 @@ Director* Director::getInstance()
 }
 
 /**
- * @brief 在单独的线程中启动主循环.
+ * @brief 启动主循环.
  */
 void Director::run()
 {
 	if(scenes.empty())
 	{
-		CLEM_CORE_ERROR("lunch main loop when the scenes is empty");
-		return;
+		CLEM_CORE_CRITICAL("lunch main loop when the scenes is empty is not allowed");
+		abort();
 	}
 
 	running = true;
-	thread  = std::thread(&Director::loop, this);
+	// thread  = std::thread(&Director::loop, this);
+	loop();
 }
 
 void Director::stop()
 {
 	running = false;
-	assert(thread.joinable());
-	thread.join();
+	// assert(thread.joinable());
+	// thread.join();
 }
 
 /**
@@ -79,8 +81,8 @@ void Director::popScene()
 {
 	if(scenes.empty())
 	{
-		CLEM_CORE_ERROR("pop a scene when the scenes is empty");
-		return;
+		CLEM_CORE_CRITICAL("pop a scene when the scenes is empty is not allowed");
+		abort();
 	}
 	scenes.pop_back();
 }
@@ -94,8 +96,8 @@ void Director::replaceScene(Scene& s)
 {
 	if(scenes.empty())
 	{
-		CLEM_CORE_ERROR("replace a scene when the scenes is empty");
-		return;
+		CLEM_CORE_CRITICAL("replace a scene when the scenes is empty is not allowed");
+		abort();
 	}
 	scenes.back() = &s;
 }
@@ -122,8 +124,8 @@ void Director::setMsPerUpdate(long ms)
 {
 	if(ms <= 0)
 	{
-		CLEM_CORE_CRITICAL("set ms per update non positive");
-		assert(false);
+		CLEM_CORE_CRITICAL("set ms per update non positive is not allowed");
+		abort();
 	}
 	msPerUpdate = ms;
 }
@@ -137,8 +139,8 @@ void Director::setMsPerRender(long ms)
 {
 	if(ms <= 0)
 	{
-		CLEM_CORE_CRITICAL("set ms per render non positive");
-		assert(false);
+		CLEM_CORE_CRITICAL("set ms per render non positive is not allowed");
+		abort();
 	}
 	msPerRender = ms;
 }
@@ -216,7 +218,7 @@ void Director::render(long dt)
 	if(fpsLag >= 1000)
 	{
 		framesPerSecond = frames;
-		Terminal::setTitle("Clementine | Render: " + std::to_string(getFramesPerSecond()) + "(" + std::to_string(target) + ")" + "FPS");
+		Terminal::setTitle(Application::getInstance().getName() + " | Render: " + std::to_string(getFramesPerSecond()) + "(" + std::to_string(target) + ")" + "FPS");
 		frames = fpsLag = 0;
 	}
 

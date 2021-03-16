@@ -1,6 +1,5 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
-// Table tennis
 
 #include "clem.h"
 #include <iostream>
@@ -74,15 +73,35 @@ private:
 	BoxCollider collider;
 };
 
-const short width  = 80;
-const short height = width * 25 / 80;
-
-//void func()
-int main()
+class Pong : public Application
 {
-	Main::initialize();
-	auto director = Director::getInstance();
+public:
+	Pong()
+			: Application("Pong")
+	{
+		auto director = Director::getInstance();
+		director->pushScene(scene);
+	}
+
+	~Pong()
+	{
+		getchar();
+	}
+
+private:
+	Scene scene;
+};
+
+Application* CreateApplication()
+{
+	return new Pong();
+}
+
+/*
+int func()
+{
 	Cursor::setVisible(false);
+	auto  director = Director::getInstance();
 	Scene scene;
 
 	Size winSize(width, height);
@@ -95,18 +114,16 @@ int main()
 	ball.setPosition({winSize.x / 2.0f, winSize.y / 2.0f});
 	ball.setVelocity({-30, 0});
 
-	/*
 	Ball testA(scene);
 	testA.setPosition({117, 14});
 	Ball testB(scene);
 	testB.setPosition({2, 14});
-	*/
 
 	director->setMsPerRender(1000 / 60);
 	director->pushScene(scene);
 	director->run();
 	while(true)
 		;
-	PROFILE_SESSION_END();
 	return 0;
 }
+*/

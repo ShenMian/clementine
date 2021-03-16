@@ -1,21 +1,26 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_CORE_SCENE
-#define CLEM_CORE_SCENE
+#ifndef CLEM_CORE_SCENE_H_
+#define CLEM_CORE_SCENE_H_
 
 #include "entt.hpp"
 
 class NEntity;
 
+/**
+ * 场景. 创建并管理实体.
+ */
 class NScene
 {
 public:
-	NEntity& createEntity();
-	void     destoryEntity(const NEntity&);
+	NEntity createEntity();
+	void    destoryEntity(NEntity);
 
 private:
 	entt::registry registry;
+
+	friend class NEntity;
 };
 
-#endif // !CLEM_CORE_SCENE
+#endif // !CLEM_CORE_SCENE_H_
