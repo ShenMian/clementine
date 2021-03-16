@@ -17,8 +17,10 @@
 
 特点 🎄
 ----
-- 多平台: Linux, macOS, Windows
-- 轻量
+- 多平台: Linux, macOS, Windows.
+- 轻量.
+- 拥有内置CPU性能分析器.
+- 使用实体-组件系统(ECS).
 
 编译 ⛓
 ----

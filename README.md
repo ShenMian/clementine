@@ -17,8 +17,10 @@ Documentation
 
 Features 🎄
 --------
-- Multi-platform: Linux, macOS, Windows
-- Lightweight
+- Multi-platform: Linux, macOS, Windows.
+- Lightweight.
+- Has a built-in CPU profiler.
+- Using entity-component-system(ECS).
 
 Compiling ⛓
 ---------

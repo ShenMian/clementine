@@ -15,8 +15,6 @@ int Main::entrypoint(int argc, char* argv[])
 {
 	initialize();
 
-	Application app;
-
 	return 0;
 }
 
