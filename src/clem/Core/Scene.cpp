@@ -26,6 +26,5 @@ void NScene::render(long dt)
 	{
 		Entity e(i, this);
 		auto& s = e.getComponent<NSprite>();
-		printf("%hd, %hd\n", s.getSize().x, s.getSize().y);
 	}
 }

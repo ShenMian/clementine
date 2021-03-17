@@ -33,6 +33,14 @@ public:
 		sprite.drawPoint({0, 0}, Tile('O'));
 
 		ball.addComponent<NSprite>(sprite);
+
+		puts(__FUNCTION__);
+		puts("Press Ctrl+C to exit.");
+	}
+
+	~Pong()
+	{
+		puts(__FUNCTION__);
 	}
 
 private:
