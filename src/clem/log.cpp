@@ -20,7 +20,7 @@ void Log::init()
 		assert(!"Log init failed.");
 	}
 
-	coreLogger->set_pattern("[%T][%=8l] %n : %v.");
+	coreLogger->set_pattern("[%D %T][thread %t][%L] %n : %v.");
 	flush_every(std::chrono::seconds(1));
 }
 

@@ -12,6 +12,7 @@
 #include <csignal>
 
 using std::string;
+using std::shared_ptr;
 using std::this_thread::sleep_for;
 using std::chrono::milliseconds;
 
@@ -42,7 +43,7 @@ Application::Application(const string& name)
 	if(instance != nullptr)
 	{
 		CLEM_CORE_CRITICAL("create the second application is not allowed");
-		abort();
+		assert(false);
 	}
 	instance = this;
 	PROFILE_FUNC();
@@ -124,7 +125,7 @@ void Application::setMsPerUpdate(long ms)
 	if(ms <= 0)
 	{
 		CLEM_CORE_CRITICAL("set ms per update non positive is not allowed");
-		abort();
+		assert(false);
 	}
 	msPerUpdate = ms;
 }
@@ -134,28 +135,28 @@ void Application::setMsPerRender(long ms)
 	if(ms <= 0)
 	{
 		CLEM_CORE_CRITICAL("set ms per render non positive is not allowed");
-		abort();
+		assert(false);
 	}
 	msPerRender = ms;
 }
 
 void Application::update(long dt)
 {
-	NScene* scene;
+	auto& scene = scenes.back();
 
 	static long lag = 0;
 	lag += dt;
 	while(lag >= msPerUpdate)
 	{
 		PROFILE_FUNC();
-
+		scene->update(dt / 1000.0f);
 		lag -= msPerUpdate;
 	}
 }
 
 void Application::render(long dt)
 {
-	NScene* scene;
+	auto& scene = scenes.back();
 
 	static long fpsLag = 0, frames = 0;
 	fpsLag += dt;
@@ -171,7 +172,7 @@ void Application::render(long dt)
 	while(lag >= msPerRender)
 	{
 		PROFILE_FUNC();
-
+		scene->render(dt / 1000.0f);
 		lag -= msPerRender;
 		frames++;
 	}
@@ -180,6 +181,31 @@ void Application::render(long dt)
 long Application::getFramesPerSecond() const
 {
 	return framesPerSecond;
+}
+
+void Application::pushScene(shared_ptr<NScene>& s)
+{
+	scenes.push_back(s);
+}
+
+void Application::popScene()
+{
+	if(scenes.empty())
+	{
+		CLEM_CORE_CRITICAL("pop a scene when the scenes is empty is not allowed");
+		assert(false);
+	}
+	scenes.pop_back();
+}
+
+void Application::replaceScene(std::shared_ptr<NScene>& s)
+{
+	if(scenes.empty())
+	{
+		CLEM_CORE_CRITICAL("replace a scene when the scenes is empty is not allowed");
+		assert(false);
+	}
+	scenes.back() = s;
 }
 
 void Application::onSignal(int signal)

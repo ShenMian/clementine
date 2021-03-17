@@ -79,6 +79,11 @@ public:
 	Pong()
 			: Application("Pong")
 	{
+		scene = make_shared<NScene>();
+		pushScene(scene);
+
+		auto entity = scene->createEntity();
+		entity.addComponent<NSprite>();
 	}
 
 	~Pong()
@@ -86,7 +91,7 @@ public:
 	}
 
 private:
-	NScene scene;
+	shared_ptr<NScene> scene;
 };
 
 Application* CreateApplication()

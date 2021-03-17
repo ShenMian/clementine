@@ -3,6 +3,7 @@
 
 #include "Scene.h"
 #include "Entity.h"
+#include "Sprite.h"
 
 NEntity NScene::createEntity()
 {
@@ -20,5 +21,5 @@ void NScene::update(long dt)
 
 void NScene::render(long dt)
 {
-	// auto view = registry.view<>();
+	auto view = registry.view<NSprite>();
 }

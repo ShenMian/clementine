@@ -1,13 +1,17 @@
 
 #include "Component.h"
+#include "clem/Math/Size.h"
+#include "clem/tile.h"
 
-class Tile;
 class Rect;
 class Point;
 
 class NSprite : public NComponent
 {
 public:
+	NSprite() = default;
+	NSprite(const NSprite&) = default;
+
 	/**
 	 * @brief 绘制点.
 	 * 
@@ -73,9 +77,6 @@ public:
 	 * @brief 获取可绘制区域的大小
 	 */
 	Size getSize() const;
-
-	void onAdd() override;
-	void onRemove() override;
 
 private:
 	Size              size;

@@ -7,6 +7,7 @@
 #include "clem/Math/Size.h"
 #include <string>
 #include <vector>
+#include <memory>
 
 class NScene;
 
@@ -78,7 +79,7 @@ public:
 	/**
 	 * @brief 压入场景.
 	 */
-	void pushScene(NScene&);
+	void pushScene(std::shared_ptr<NScene>& scene);
 
 	/**
 	 * @brief 弹出场景.
@@ -88,7 +89,7 @@ public:
 	/**
 	 * @brief 替换场景.
 	 */
-	void replaceScene(NScene&);
+	void replaceScene(std::shared_ptr<NScene>& scene);
 
 private:
 	void initialize();
@@ -103,7 +104,7 @@ private:
 	long                framesPerSecond = 0;
 	Size                winSize;
 	const std::string   name;
-	std::vector<NScene> scenes;
+	std::vector<std::shared_ptr<NScene>> scenes;
 
 	static void         onSignal(int signal);
 	static Application* instance;
