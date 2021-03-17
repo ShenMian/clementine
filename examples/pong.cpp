@@ -15,7 +15,7 @@ public:
 	Pong()
 			: Application("Pong")
 	{
-		scene = make_shared<Scene>();
+		auto scene = make_shared<Scene>();
 		pushScene(scene);
 
 		auto ball = scene->createEntity();
@@ -26,19 +26,12 @@ public:
 
 		ball.addComponent<Sprite>(sprite);
 	}
-
-private:
-	shared_ptr<Scene> scene;
 };
 
 Application* CreateApplication()
 {
 	return new Pong();
 }
-
-
-
-
 
 /*
 int func()

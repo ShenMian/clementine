@@ -19,7 +19,7 @@ Features 🎄
 --------
 - Multi-platform: Linux, macOS, Windows.
 - Lightweight.
-- Has a built-in CPU profiler.
+- Has a built-in CPU sampling profiler.
 - Using entity-component-system(ECS).
 
 Compiling ⛓
