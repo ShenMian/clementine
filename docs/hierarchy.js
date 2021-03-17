@@ -17,6 +17,7 @@ var hierarchy =
     ] ],
     [ "Cursor", "class_cursor.html", null ],
     [ "Director", "class_director.html", null ],
+    [ "Entity", "class_entity.html", null ],
     [ "Event", "class_event.html", null ],
     [ "Factor", "class_factor.html", null ],
     [ "FrameBuffer", "class_frame_buffer.html", null ],
@@ -27,7 +28,6 @@ var hierarchy =
     [ "NComponent", "class_n_component.html", [
       [ "NSprite", "class_n_sprite.html", null ]
     ] ],
-    [ "NEntity", "class_n_entity.html", null ],
     [ "NScene", "class_n_scene.html", null ],
     [ "Point", "class_point.html", null ],
     [ "ProfileRecord", "struct_profile_record.html", null ],

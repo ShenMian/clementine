@@ -11,7 +11,7 @@ var searchData=
   ['setposition_89',['setPosition',['../class_factor.html#a6fcd2d223e650919f4c218ca8a191da5',1,'Factor']]],
   ['setradius_90',['setRadius',['../class_circle_collider.html#a705dc1d6ce04f3d1faec1405810b520f',1,'CircleCollider']]],
   ['setscene_91',['setScene',['../class_camera.html#ac35b13397b0add2c502bef10a46f0e17',1,'Camera']]],
-  ['setsize_92',['setSize',['../class_camera.html#a41f5d6ed7aeffb62ab35268ca4a46773',1,'Camera::setSize()'],['../class_frame_buffer.html#ab1f2e6e815e01d0bbaf157c3b0a70c8c',1,'FrameBuffer::setSize()'],['../class_sprite.html#a25b334cef6d8ccee586182dc10f0b506',1,'Sprite::setSize()'],['../class_box_collider.html#a264b7d64e37f69c11c5ccf06ce371e14',1,'BoxCollider::setSize()'],['../class_n_sprite.html#aebefc1ea56c93c4250c1bed7c263bdff',1,'NSprite::setSize()']]],
+  ['setsize_92',['setSize',['../class_camera.html#a41f5d6ed7aeffb62ab35268ca4a46773',1,'Camera::setSize()'],['../class_frame_buffer.html#ab1f2e6e815e01d0bbaf157c3b0a70c8c',1,'FrameBuffer::setSize()'],['../class_sprite.html#a25b334cef6d8ccee586182dc10f0b506',1,'Sprite::setSize()'],['../class_box_collider.html#a264b7d64e37f69c11c5ccf06ce371e14',1,'BoxCollider::setSize()'],['../class_n_sprite.html#a68f68c344bd768c616aeebaea1af5e03',1,'NSprite::setSize()']]],
   ['setvisible_93',['setVisible',['../class_cursor.html#a99e1ea96e8ab6a46a7efef1e7ddd6bb1',1,'Cursor']]],
   ['size_94',['Size',['../class_size.html',1,'']]],
   ['sprite_95',['Sprite',['../class_sprite.html',1,'']]],

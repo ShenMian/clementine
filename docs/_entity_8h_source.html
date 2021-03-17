@@ -98,23 +98,23 @@ $(document).ready(function(){initNavTree('_entity_8h_source.html',''); initResiz
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span><a class="code" href="class_n_scene.html">NScene</a>;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_n_entity.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_n_entity.html">NEntity</a></div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_entity.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_entity.html">Entity</a></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_n_entity.html">NEntity</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_n_entity.html">NEntity</a>(entt::entity <span class="keywordtype">id</span>, <a class="code" href="class_n_scene.html">NScene</a>* scene);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_entity.html">Entity</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_entity.html">Entity</a>(entt::entity <span class="keywordtype">id</span>, <a class="code" href="class_n_scene.html">NScene</a>* scene);</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_n_entity.html#a78243a5377bbaaa28fa46c4c51ea13d7">addComponent</a>(Args&amp;&amp;... args);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_entity.html#a7ad074fbb0255cfa2c3bfccba0a0ae28">addComponent</a>(Args&amp;&amp;... args);</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_n_entity.html#a637fb795411d4c794c55ddaaf023e81e">removeComponent</a>();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_entity.html#a590ddbda675cf9b188977d553e396a0f">removeComponent</a>();</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    T&amp; <a class="code" href="class_n_entity.html#af881675c8c7acbbd5042c2bdaaa5219f">getComponent</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    T&amp; <a class="code" href="class_entity.html#af378c2ea70fa68a8433f19500261393d">getComponent</a>();</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_n_entity.html#a34d522d79996e2c0b4d43610cb30f7bf">hasComponent</a>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_entity.html#ad42785721cb226a1bea8025aeb1d9e8d">hasComponent</a>();</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    entt::entity getId() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="class_n_scene.html">NScene</a>*      getScene() <span class="keyword">const</span>;</div>
@@ -125,7 +125,7 @@ $(document).ready(function(){initNavTree('_entity_8h_source.html',''); initResiz
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="class_n_entity.html#a78243a5377bbaaa28fa46c4c51ea13d7">   65</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_n_entity.html#a78243a5377bbaaa28fa46c4c51ea13d7">NEntity::addComponent</a>(Args&amp;&amp;... args)</div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="class_entity.html#a7ad074fbb0255cfa2c3bfccba0a0ae28">   65</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_entity.html#a7ad074fbb0255cfa2c3bfccba0a0ae28">Entity::addComponent</a>(Args&amp;&amp;... args)</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span>(hasComponent&lt;T&gt;())</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    {</div>
@@ -136,7 +136,7 @@ $(document).ready(function(){initNavTree('_entity_8h_source.html',''); initResiz
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="class_n_entity.html#a637fb795411d4c794c55ddaaf023e81e">   76</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_n_entity.html#a637fb795411d4c794c55ddaaf023e81e">NEntity::removeComponent</a>()</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="class_entity.html#a590ddbda675cf9b188977d553e396a0f">   76</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_entity.html#a590ddbda675cf9b188977d553e396a0f">Entity::removeComponent</a>()</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">if</span>(!hasComponent&lt;T&gt;())</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    {</div>
@@ -147,7 +147,7 @@ $(document).ready(function(){initNavTree('_entity_8h_source.html',''); initResiz
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="class_n_entity.html#af881675c8c7acbbd5042c2bdaaa5219f">   87</a></span>&#160;T&amp; <a class="code" href="class_n_entity.html#af881675c8c7acbbd5042c2bdaaa5219f">NEntity::getComponent</a>()</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="class_entity.html#af378c2ea70fa68a8433f19500261393d">   87</a></span>&#160;T&amp; <a class="code" href="class_entity.html#af378c2ea70fa68a8433f19500261393d">Entity::getComponent</a>()</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;{</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">if</span>(!hasComponent&lt;T&gt;())</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    {</div>
@@ -158,17 +158,17 @@ $(document).ready(function(){initNavTree('_entity_8h_source.html',''); initResiz
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="class_n_entity.html#a34d522d79996e2c0b4d43610cb30f7bf">   98</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_n_entity.html#a34d522d79996e2c0b4d43610cb30f7bf">NEntity::hasComponent</a>()</div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="class_entity.html#ad42785721cb226a1bea8025aeb1d9e8d">   98</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_entity.html#ad42785721cb226a1bea8025aeb1d9e8d">Entity::hasComponent</a>()</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;{</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">return</span> scene-&gt;registry.has&lt;T&gt;(id);</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_CORE_ENTITY_H_</span></div>
-<div class="ttc" id="aclass_n_entity_html"><div class="ttname"><a href="class_n_entity.html">NEntity</a></div><div class="ttdef"><b>Definition:</b> Entity.h:22</div></div>
-<div class="ttc" id="aclass_n_entity_html_a34d522d79996e2c0b4d43610cb30f7bf"><div class="ttname"><a href="class_n_entity.html#a34d522d79996e2c0b4d43610cb30f7bf">NEntity::hasComponent</a></div><div class="ttdeci">bool hasComponent()</div><div class="ttdoc">是否存在指定组件.</div><div class="ttdef"><b>Definition:</b> Entity.h:98</div></div>
-<div class="ttc" id="aclass_n_entity_html_a637fb795411d4c794c55ddaaf023e81e"><div class="ttname"><a href="class_n_entity.html#a637fb795411d4c794c55ddaaf023e81e">NEntity::removeComponent</a></div><div class="ttdeci">void removeComponent()</div><div class="ttdoc">移除指定组件.</div><div class="ttdef"><b>Definition:</b> Entity.h:76</div></div>
-<div class="ttc" id="aclass_n_entity_html_a78243a5377bbaaa28fa46c4c51ea13d7"><div class="ttname"><a href="class_n_entity.html#a78243a5377bbaaa28fa46c4c51ea13d7">NEntity::addComponent</a></div><div class="ttdeci">void addComponent(Args &amp;&amp;... args)</div><div class="ttdoc">添加指定组件.</div><div class="ttdef"><b>Definition:</b> Entity.h:65</div></div>
-<div class="ttc" id="aclass_n_entity_html_af881675c8c7acbbd5042c2bdaaa5219f"><div class="ttname"><a href="class_n_entity.html#af881675c8c7acbbd5042c2bdaaa5219f">NEntity::getComponent</a></div><div class="ttdeci">T &amp; getComponent()</div><div class="ttdoc">获取指定组件.</div><div class="ttdef"><b>Definition:</b> Entity.h:87</div></div>
+<div class="ttc" id="aclass_entity_html"><div class="ttname"><a href="class_entity.html">Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.h:22</div></div>
+<div class="ttc" id="aclass_entity_html_a590ddbda675cf9b188977d553e396a0f"><div class="ttname"><a href="class_entity.html#a590ddbda675cf9b188977d553e396a0f">Entity::removeComponent</a></div><div class="ttdeci">void removeComponent()</div><div class="ttdoc">移除指定组件.</div><div class="ttdef"><b>Definition:</b> Entity.h:76</div></div>
+<div class="ttc" id="aclass_entity_html_a7ad074fbb0255cfa2c3bfccba0a0ae28"><div class="ttname"><a href="class_entity.html#a7ad074fbb0255cfa2c3bfccba0a0ae28">Entity::addComponent</a></div><div class="ttdeci">void addComponent(Args &amp;&amp;... args)</div><div class="ttdoc">添加指定组件.</div><div class="ttdef"><b>Definition:</b> Entity.h:65</div></div>
+<div class="ttc" id="aclass_entity_html_ad42785721cb226a1bea8025aeb1d9e8d"><div class="ttname"><a href="class_entity.html#ad42785721cb226a1bea8025aeb1d9e8d">Entity::hasComponent</a></div><div class="ttdeci">bool hasComponent()</div><div class="ttdoc">是否存在指定组件.</div><div class="ttdef"><b>Definition:</b> Entity.h:98</div></div>
+<div class="ttc" id="aclass_entity_html_af378c2ea70fa68a8433f19500261393d"><div class="ttname"><a href="class_entity.html#af378c2ea70fa68a8433f19500261393d">Entity::getComponent</a></div><div class="ttdeci">T &amp; getComponent()</div><div class="ttdoc">获取指定组件.</div><div class="ttdef"><b>Definition:</b> Entity.h:87</div></div>
 <div class="ttc" id="aclass_n_scene_html"><div class="ttname"><a href="class_n_scene.html">NScene</a></div><div class="ttdef"><b>Definition:</b> Scene.h:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -17,10 +17,37 @@ using namespace std;
 #include <clem/input/keyboard.h>
 #include <clem/frame_buffer.h>
 
-class Ball : public Factor
+class Pong : public Application
 {
 public:
-	explicit Ball(Scene& s)
+	Pong()
+			: Application("Pong")
+	{
+		scene = make_shared<NScene>();
+		pushScene(scene);
+
+		auto ball = scene->createEntity();
+
+		NSprite sprite;
+		sprite.setSize({1, 1});
+		sprite.drawPoint({0, 0}, Tile('O'));
+
+		ball.addComponent<NSprite>(sprite);
+	}
+
+private:
+	shared_ptr<NScene> scene;
+};
+
+Application* CreateApplication()
+{
+	return new Pong();
+}
+
+class _Ball : public Factor
+{
+public:
+	explicit _Ball(Scene& s)
 			: Factor(s)
 	{
 		sprite.setSize({1, 1});
@@ -50,10 +77,10 @@ private:
 	BoxCollider collider;
 };
 
-class Bar : public Factor
+class _Bar : public Factor
 {
 public:
-	Bar(Scene& s)
+	_Bar(Scene& s)
 			: Factor(s)
 	{
 		sprite.setSize({1, 5});
@@ -72,33 +99,6 @@ private:
 	Rigidbody   body;
 	BoxCollider collider;
 };
-
-class Pong : public Application
-{
-public:
-	Pong()
-			: Application("Pong")
-	{
-		scene = make_shared<NScene>();
-		pushScene(scene);
-
-		auto  entity = scene->createEntity();
-
-		NSprite sprite;
-		sprite.setSize({1, 1});
-		sprite.drawPoint({0, 0}, Tile('O'));
-
-		entity.addComponent<NSprite>(sprite);
-	}
-
-private:
-	shared_ptr<NScene> scene;
-};
-
-Application* CreateApplication()
-{
-	return new Pong();
-}
 
 /*
 int func()
