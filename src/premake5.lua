@@ -7,6 +7,6 @@ project "Clementine"
   targetdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/bin")
   objdir ("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/obj")
 
-  files {"**.h", "**.cpp"}
+  files {"%{thirdparty.entt}", "**.h", "**.cpp"}
 
   includedirs {".", "Clem"}

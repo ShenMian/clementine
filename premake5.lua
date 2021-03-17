@@ -16,6 +16,9 @@ workspace "Clementine"
 		runtime "Release"
 		optimize "on"
 
+thirdparty = {}
+thirdparty["entt"] = "%{wks.location}/thirdparty/entt/include"
+
 outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
 
 include "src"
