@@ -3,7 +3,7 @@
 // 矩形
 
 #include "rect.h"
-#include "size.h"
+#include "clem/Math/Size.h"
 #include "clem/Math/Point.h"
 
 Rect::Rect()

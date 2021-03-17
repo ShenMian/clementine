@@ -36,4 +36,8 @@
 	#include <windows.h>
 #endif
 
+#if !defined(OS_UNIX) && !defined(OS_WIN)
+	#error This platform is not supported.
+#endif
+
 #endif // CLEM_PLATFORM_H_

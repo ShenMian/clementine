@@ -8,6 +8,6 @@
 #include "Math/Vec2.h"
 #include "Math/Point.h"
 #include "type/rect.h"
-#include "type/size.h"
+#include "Math/Size.h"
 
 #endif // CLEM_TYPE_H_

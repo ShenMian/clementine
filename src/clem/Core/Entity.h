@@ -11,7 +11,12 @@
 class NScene;
 
 /**
- * ʵ��. ���������.
+ * @addtogroup Core
+ * @{
+ */
+
+/**
+ * 实体. 组件的容器.
  */
 class NEntity
 {
@@ -19,15 +24,27 @@ public:
 	NEntity() = default;
 	NEntity(entt::entity id, NScene* scene);
 
+	/**
+	 * @brief 添加指定组件.
+	 */
 	template <typename T, typename... Args>
 	void addComponent(Args&&... args);
 
+	/**
+	 * @brief 移除指定组件.
+	 */
 	template <typename T>
 	void removeComponent();
 
+	/**
+	 * @brief 获取指定组件.
+	 */
 	template <typename T>
 	T& getComponent();
 
+	/**
+	 * @brief 是否存在指定组件.
+	 */
 	template <typename T>
 	bool hasComponent();
 
@@ -38,6 +55,11 @@ private:
 	entt::entity id    = entt::null;
 	NScene*      scene = nullptr;
 };
+
+/**
+ * end of Core group
+ * @}
+ */
 
 template <typename T, typename... Args>
 void NEntity::addComponent(Args&&... args)

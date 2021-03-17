@@ -13,3 +13,12 @@ void NScene::destoryEntity(NEntity e)
 {
 	registry.destroy(e.getId());
 }
+
+void NScene::update(long dt)
+{
+}
+
+void NScene::render(long dt)
+{
+	// auto view = registry.view<>();
+}

@@ -59,7 +59,7 @@ CLEM_TERMINAL_H_	terminal.h	/^#define CLEM_TERMINAL_H_$/;"	d
 CLEM_TEXTURE_H_	texture.h	/^#define CLEM_TEXTURE_H_$/;"	d
 CLEM_TYPE_POINT_H_	type/point.h	/^#define CLEM_TYPE_POINT_H_$/;"	d
 CLEM_TYPE_RECT_HPP_	type/rect.h	/^#define CLEM_TYPE_RECT_HPP_$/;"	d
-CLEM_TYPE_SIZE_H_	type/size.h	/^#define CLEM_TYPE_SIZE_H_$/;"	d
+CLEM_TYPE_SIZE_H_	Math/Size.h	/^#define CLEM_TYPE_SIZE_H_$/;"	d
 CLEM_TYPE_TILE_H_	tile.h	/^#define CLEM_TYPE_TILE_H_$/;"	d
 CLEM_TYPE_TYPE_H_	type.h	/^#define CLEM_TYPE_TYPE_H_$/;"	d
 CLEM_TYPE_VECTOR_H_	type/vec2.h	/^#define CLEM_TYPE_VECTOR_H_$/;"	d
@@ -135,7 +135,7 @@ Scene	scene.cpp	/^Scene::Scene()$/;"	f	class:Scene
 Scene	scene.h	/^class Scene$/;"	c
 Size	type/size.cpp	/^Size::Size()$/;"	f	class:Size
 Size	type/size.cpp	/^Size::Size(int x, int y)$/;"	f	class:Size
-Size	type/size.h	/^class Size$/;"	c
+Size	Math/Size.h	/^class Size$/;"	c
 SubType	input/gamepad_event.h	/^	enum class SubType$/;"	g	class:GamepadEvent
 SubType	input/xinput.h	/^    BYTE SubType;$/;"	m	struct:_XINPUT_CAPABILITIES	typeref:typename:BYTE
 Terminal	terminal.h	/^class Terminal$/;"	c
@@ -434,7 +434,7 @@ ushort	cursor.h	/^typedef unsigned short ushort;$/;"	t	typeref:typename:unsigned
 ushort	input.h	/^typedef unsigned short ushort;$/;"	t	typeref:typename:unsigned short
 ushort	texture.h	/^typedef unsigned short ushort;$/;"	t	typeref:typename:unsigned short
 ushort	type/rect.h	/^typedef unsigned short ushort;$/;"	t	typeref:typename:unsigned short
-ushort	type/size.h	/^typedef unsigned short ushort;$/;"	t	typeref:typename:unsigned short
+ushort	Math/Size.h	/^typedef unsigned short ushort;$/;"	t	typeref:typename:unsigned short
 value	input/gamepad_event.h	/^	float    value;$/;"	m	class:GamepadEvent	typeref:typename:float
 velocity	physics/physics_body.h	/^	Vec2 velocity;$/;"	m	class:PhysicsBody	typeref:typename:Vec2
 wButtons	input/xinput.h	/^    WORD wButtons;$/;"	m	struct:_XINPUT_GAMEPAD	typeref:typename:WORD
@@ -445,11 +445,11 @@ white	color.h	/^	white$/;"	e	enum:Fore
 width	type/rect.h	/^	float width;$/;"	m	class:Rect	typeref:typename:float
 x	type/point.h	/^	float x;$/;"	m	class:Point	typeref:typename:float
 x	type/rect.h	/^	float x;$/;"	m	class:Rect	typeref:typename:float
-x	type/size.h	/^	ushort x;$/;"	m	class:Size	typeref:typename:ushort
+x	Math/Size.h	/^	ushort x;$/;"	m	class:Size	typeref:typename:ushort
 x	type/vec2.h	/^	float x;$/;"	m	class:Vec2	typeref:typename:float
 y	type/point.h	/^	float y;$/;"	m	class:Point	typeref:typename:float
 y	type/rect.h	/^	float y;$/;"	m	class:Rect	typeref:typename:float
-y	type/size.h	/^	ushort y;$/;"	m	class:Size	typeref:typename:ushort
+y	Math/Size.h	/^	ushort y;$/;"	m	class:Size	typeref:typename:ushort
 y	type/vec2.h	/^	float y;$/;"	m	class:Vec2	typeref:typename:float
 yellow	color.h	/^	yellow,$/;"	e	enum:Back
 yellow	color.h	/^	yellow,$/;"	e	enum:Fore

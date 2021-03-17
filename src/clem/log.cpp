@@ -17,7 +17,7 @@ void Log::init()
 	}
 	catch(const spdlog_ex& e)
 	{
-		assert(false);
+		assert(!"Log init failed.");
 	}
 
 	coreLogger->set_pattern("[%T][%=8l] %n : %v.");

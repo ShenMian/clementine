@@ -9,7 +9,12 @@
 class NEntity;
 
 /**
- * ³¡¾°. ´´½¨²¢¹ÜÀíÊµÌå.
+ * @addtogroup Core
+ * @{
+ */
+
+/**
+ * åœºæ™¯. åˆ›å»ºå¹¶ç®¡ç†å®ä½“.
  */
 class NScene
 {
@@ -17,10 +22,18 @@ public:
 	NEntity createEntity();
 	void    destoryEntity(NEntity);
 
+	void update(long dt);
+	void render(long dt);
+
 private:
 	entt::registry registry;
 
 	friend class NEntity;
 };
+
+/**
+ * end of Core group
+ * @}
+ */
 
 #endif // !CLEM_CORE_SCENE_H_

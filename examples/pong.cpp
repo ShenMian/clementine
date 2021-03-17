@@ -79,17 +79,14 @@ public:
 	Pong()
 			: Application("Pong")
 	{
-		auto director = Director::getInstance();
-		director->pushScene(scene);
 	}
 
 	~Pong()
 	{
-		getchar();
 	}
 
 private:
-	Scene scene;
+	NScene scene;
 };
 
 Application* CreateApplication()

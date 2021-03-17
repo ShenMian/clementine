@@ -8,8 +8,9 @@
 
 // Core
 #include "clem/Core/Application.h"
-#include "clem/Core/Scene.h"
 #include "clem/Core/Entity.h"
+#include "clem/Core/Scene.h"
+#include "clem/Core/Sprite.h"
 
 // Core
 #include "clem/camera.h"

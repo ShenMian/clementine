@@ -1,17 +1,30 @@
+// Copyright 2021 SMS
+// License(Apache-2.0)
 
 #include "Application.h"
-#include "clem/log.h"
+#include "Scene.h"
 #include "clem/Profiler.h"
+#include "clem/director.h"
+#include "clem/frame_buffer.h"
+#include "clem/log.h"
 #include "clem/platform.h"
-#include "clem.h"
+#include "clem/terminal.h"
+#include <csignal>
 
 using std::string;
+using std::this_thread::sleep_for;
+using std::chrono::milliseconds;
 
 int main(int argc, char* argv[])
 {
+	Log::init();
+	PROFILE_SESSION_BEGIN();
+
 	auto app = CreateApplication();
-	Director::getInstance()->run();
+	app->run();
 	delete app;
+
+	PROFILE_SESSION_END();
 	return 0;
 }
 
@@ -32,32 +45,193 @@ Application::Application(const string& name)
 		abort();
 	}
 	instance = this;
-	Log::init();
-	PROFILE_SESSION_BEGIN();
 	PROFILE_FUNC();
+
+	std::signal(SIGINT, onSignal);
 
 	// width / height = 80 / 25 => width * 25 = height * 80
 	const short width  = 80;
 	const short height = width * 25 / 80;
 	frameBuffer.setSize({width, height});
 
-#ifdef OS_WIN
-	// ø™∆Ù VT100 ƒ£ Ω
-	const auto hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	DWORD      mode;
-	if(!GetConsoleMode(hStdOut, &mode))
-		assert(false);
-	if(!SetConsoleMode(hStdOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING))
-		assert(false);
-#endif
+	winSize = {width, height};
+
+	initialize();
 }
 
 Application::~Application()
 {
-	PROFILE_SESSION_END();
+}
+
+void Application::run()
+{
+	CLEM_CORE_INFO("main loop started");
+
+	running       = true;
+	long previous = getCurrentMillSecond();
+
+	while(running)
+	{
+		long current = getCurrentMillSecond();
+		long dt      = current - previous;
+		previous     = current;
+
+		update(dt);
+		render(dt);
+
+		if(paused)
+		{
+			while(paused)
+				sleep_for(milliseconds(500));
+			previous = getCurrentMillSecond();
+		}
+	}
+
+	CLEM_CORE_INFO("main loop stoped");
+}
+
+void Application::stop()
+{
+	running = false;
+}
+
+void Application::pause()
+{
+	if(paused)
+		CLEM_CORE_WARN("pause when the main loop is already paused");
+	paused = true;
+}
+
+void Application::resume()
+{
+	if(!paused)
+		CLEM_CORE_WARN("resume when the main loop is not paused");
+	paused = false;
 }
 
 const std::string& Application::getName() const
 {
 	return name;
 }
+
+const Size& Application::getWinSize() const
+{
+	return winSize;
+}
+
+void Application::setMsPerUpdate(long ms)
+{
+	if(ms <= 0)
+	{
+		CLEM_CORE_CRITICAL("set ms per update non positive is not allowed");
+		abort();
+	}
+	msPerUpdate = ms;
+}
+
+void Application::setMsPerRender(long ms)
+{
+	if(ms <= 0)
+	{
+		CLEM_CORE_CRITICAL("set ms per render non positive is not allowed");
+		abort();
+	}
+	msPerRender = ms;
+}
+
+void Application::update(long dt)
+{
+	NScene* scene;
+
+	static long lag = 0;
+	lag += dt;
+	while(lag >= msPerUpdate)
+	{
+		PROFILE_FUNC();
+
+		lag -= msPerUpdate;
+	}
+}
+
+void Application::render(long dt)
+{
+	NScene* scene;
+
+	static long fpsLag = 0, frames = 0;
+	fpsLag += dt;
+	if(fpsLag >= 1000)
+	{
+		framesPerSecond = frames;
+		frames = fpsLag = 0;
+		Terminal::setTitle(name + " | Render: " + std::to_string(getFramesPerSecond()) + "FPS");
+	}
+
+	static long lag = 0;
+	lag += dt;
+	while(lag >= msPerRender)
+	{
+		PROFILE_FUNC();
+
+		lag -= msPerRender;
+		frames++;
+	}
+}
+
+long Application::getFramesPerSecond() const
+{
+	return framesPerSecond;
+}
+
+void Application::onSignal(int signal)
+{
+	switch(signal)
+	{
+	case SIGINT:
+		CLEM_CORE_WARN("signal: external interrupt, usually initiated by the user");
+		instance->stop();
+		break;
+
+	default:
+		assert(false);
+	}
+}
+
+#ifdef OS_UNIX
+
+void Application::initialize()
+{
+}
+
+long Application::getCurrentMillSecond() const
+{
+	struct timeval t;
+	gettimeofday(&t, NULL);
+	return t.tv_sec * 1000 + t.tv_usec * 0.001;
+}
+
+#endif
+
+#ifdef OS_WIN
+
+void Application::initialize()
+{
+	// ÂºÄÂêØ VT100 Ê®°Âºè
+	const auto hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	DWORD      mode;
+	if(!GetConsoleMode(hStdOut, &mode))
+		assert(false);
+	if(!SetConsoleMode(hStdOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING))
+		assert(false);
+}
+
+long Application::getCurrentMillSecond() const
+{
+	LARGE_INTEGER freq;
+	BOOL          ret = QueryPerformanceFrequency(&freq);
+	assert(ret != 0);
+	LARGE_INTEGER time;
+	QueryPerformanceCounter(&time);
+	return time.QuadPart * 1000 / freq.QuadPart;
+}
+
+#endif
