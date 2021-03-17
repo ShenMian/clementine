@@ -1,10 +1,9 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
-// 图像
 
-#include "sprite.h"
-#include "frame_buffer.h"
-#include <cassert>
+#include "Sprite.h"
+#include "clem/Math/Point.h"
+#include "clem/type/rect.h"
 
 void Sprite::drawPoint(int x, int y, const Tile& t)
 {
@@ -82,27 +81,13 @@ void Sprite::clear()
 	fillRect(Rect({0, 0}, size), Tile(' '));
 }
 
-void Sprite::setSize(Size s)
+void Sprite::setSize(const Size& s)
 {
 	size = s;
 	buffer.resize(s.area());
 }
 
-Size Sprite::getSize() const
+const Size& Sprite::getSize() const
 {
 	return size;
-}
-
-void Sprite::onAdd()
-{
-	auto scene = owner->getScene();
-	assert(scene != nullptr);
-	scene->addSprite(*this);
-}
-
-void Sprite::onRemove()
-{
-	auto scene = owner->getScene();
-	assert(scene != nullptr);
-	scene->removeSprite(*this);
 }

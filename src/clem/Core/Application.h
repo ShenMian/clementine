@@ -9,7 +9,7 @@
 #include <vector>
 #include <memory>
 
-class NScene;
+class Scene;
 
 /**
  * @addtogroup Core
@@ -79,7 +79,7 @@ public:
 	/**
 	 * @brief 压入场景.
 	 */
-	void pushScene(std::shared_ptr<NScene>& scene);
+	void pushScene(std::shared_ptr<Scene>& scene);
 
 	/**
 	 * @brief 弹出场景.
@@ -89,7 +89,7 @@ public:
 	/**
 	 * @brief 替换场景.
 	 */
-	void replaceScene(std::shared_ptr<NScene>& scene);
+	void replaceScene(std::shared_ptr<Scene>& scene);
 
 private:
 	void initialize();
@@ -104,7 +104,7 @@ private:
 	long                framesPerSecond = 0;
 	Size                winSize;
 	const std::string   name;
-	std::vector<std::shared_ptr<NScene>> scenes;
+	std::vector<std::shared_ptr<Scene>> scenes;
 
 	static void         onSignal(int signal);
 	static Application* instance;

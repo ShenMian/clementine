@@ -26,6 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Clementine
+   &#160;<span id="projectnumber">0.2</span>
    </div>
    <div id="projectbrief">A framework for building 2D console games.</div>
   </td>
@@ -96,13 +97,13 @@ $(document).ready(function(){initNavTree('_entity_8h_source.html',''); initResiz
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;clem/log.h&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;entt.hpp&quot;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span><a class="code" href="class_n_scene.html">NScene</a>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span><a class="code" href="class_scene.html">Scene</a>;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_entity.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_entity.html">Entity</a></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_entity.html">Entity</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_entity.html">Entity</a>(entt::entity <span class="keywordtype">id</span>, <a class="code" href="class_n_scene.html">NScene</a>* scene);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_entity.html">Entity</a>(entt::entity <span class="keywordtype">id</span>, <a class="code" href="class_scene.html">Scene</a>* scene);</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_entity.html#a7ad074fbb0255cfa2c3bfccba0a0ae28">addComponent</a>(Args&amp;&amp;... args);</div>
@@ -117,11 +118,11 @@ $(document).ready(function(){initNavTree('_entity_8h_source.html',''); initResiz
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_entity.html#ad42785721cb226a1bea8025aeb1d9e8d">hasComponent</a>();</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    entt::entity getId() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="class_n_scene.html">NScene</a>*      getScene() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="class_scene.html">Scene</a>*      getScene() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    entt::entity <span class="keywordtype">id</span>    = entt::null;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="class_n_scene.html">NScene</a>*      scene = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="class_scene.html">Scene</a>*      scene = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
@@ -169,7 +170,7 @@ $(document).ready(function(){initNavTree('_entity_8h_source.html',''); initResiz
 <div class="ttc" id="aclass_entity_html_a7ad074fbb0255cfa2c3bfccba0a0ae28"><div class="ttname"><a href="class_entity.html#a7ad074fbb0255cfa2c3bfccba0a0ae28">Entity::addComponent</a></div><div class="ttdeci">void addComponent(Args &amp;&amp;... args)</div><div class="ttdoc">添加指定组件.</div><div class="ttdef"><b>Definition:</b> Entity.h:65</div></div>
 <div class="ttc" id="aclass_entity_html_ad42785721cb226a1bea8025aeb1d9e8d"><div class="ttname"><a href="class_entity.html#ad42785721cb226a1bea8025aeb1d9e8d">Entity::hasComponent</a></div><div class="ttdeci">bool hasComponent()</div><div class="ttdoc">是否存在指定组件.</div><div class="ttdef"><b>Definition:</b> Entity.h:98</div></div>
 <div class="ttc" id="aclass_entity_html_af378c2ea70fa68a8433f19500261393d"><div class="ttname"><a href="class_entity.html#af378c2ea70fa68a8433f19500261393d">Entity::getComponent</a></div><div class="ttdeci">T &amp; getComponent()</div><div class="ttdoc">获取指定组件.</div><div class="ttdef"><b>Definition:</b> Entity.h:87</div></div>
-<div class="ttc" id="aclass_n_scene_html"><div class="ttname"><a href="class_n_scene.html">NScene</a></div><div class="ttdef"><b>Definition:</b> Scene.h:20</div></div>
+<div class="ttc" id="aclass_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdef"><b>Definition:</b> Scene.h:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

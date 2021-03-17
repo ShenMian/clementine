@@ -6,27 +6,21 @@
 
 #define CLEM_API
 
+#include "clem/Sprite.h"
+
 // Core
 #include "clem/Core/Application.h"
 #include "clem/Core/Entity.h"
 #include "clem/Core/Scene.h"
-#include "clem/Core/Sprite.h"
 
-// Core
-#include "clem/camera.h"
-#include "clem/director.h"
-#include "clem/factor.h"
-#include "clem/scene.h"
+// Physics
+// #include "clem/Physics/collider.h"
+#include "clem/Physics/rigidbody.h"
 
 // Math
 #include "clem/Math/Point.h"
+#include "clem/Math/Size.h"
 #include "clem/Math/Vec2.h"
-
-// Physics
-#include "clem/physics/box_collider.h"
-#include "clem/physics/circle_collider.h"
-#include "clem/physics/collider.h"
-#include "clem/physics/rigidbody.h"
 
 // Input
 #include "clem/input/controller.h"
@@ -39,8 +33,8 @@
 #include "clem/frame_buffer.h"
 #include "clem/sprite.h"
 
-#include "clem/log.h"
 #include "clem/Profiler.h"
+#include "clem/log.h"
 #include "clem/random.h"
 #include "clem/terminal.h"
 

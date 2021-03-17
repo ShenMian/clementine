@@ -1,10 +1,8 @@
 var class_component =
 [
-    [ "Component", "class_component.html#a8775db6d1a2c1afc2e77cd3c8f39da6f", null ],
-    [ "getOwner", "class_component.html#a49a722f368bfed2aee7667f8f9fc46d6", null ],
+    [ "getScene", "class_component.html#a417ba9c71cdac4bfda2c67a0bc2c4b42", null ],
     [ "onAdd", "class_component.html#aa00407644782cacbbbb142383c661c4c", null ],
     [ "onRemove", "class_component.html#a2b6d832c5909c5a0082b57ba4a210072", null ],
-    [ "setOwner", "class_component.html#a97cd7aab2c6e835371ef64e00c9618f1", null ],
-    [ "update", "class_component.html#a0cf2f57eacbbe4c215255aaeb86070c6", null ],
-    [ "owner", "class_component.html#a0de2d5a11f41b0768591e710e88b938a", null ]
+    [ "setScene", "class_component.html#ad5b881dcd6c3a3edf86e1355abf30ed5", null ],
+    [ "scene", "class_component.html#a681344c0ff97f7dd2162b59799ed4c0a", null ]
 ];

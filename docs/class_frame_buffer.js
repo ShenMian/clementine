@@ -1,6 +1,6 @@
 var class_frame_buffer =
 [
-    [ "FrameBuffer", "class_frame_buffer.html#a6f3763f4551f221b86ca033e2b315c42", null ],
+    [ "FrameBuffer", "class_frame_buffer.html#ad251e190e6674126b7390c5093699ed8", null ],
     [ "~FrameBuffer", "class_frame_buffer.html#aef8be9884e8cc0fc3f3692e6c6968fa1", null ],
     [ "clear", "class_frame_buffer.html#a3bbaeedfac8012df327f9649ee6304ef", null ],
     [ "drawCycle", "class_frame_buffer.html#afb9eb2ec0005f74de559913d8b7e1b13", null ],

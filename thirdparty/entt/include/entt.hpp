@@ -1446,7 +1446,7 @@ inline constexpr auto is_empty_v = is_empty<Type>::value;
  */
 template<typename To, typename From>
 struct constness_as {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::remove_const_t<To>;
 };
 
@@ -1454,13 +1454,13 @@ struct constness_as {
 /*! @copydoc constness_as */
 template<typename To, typename From>
 struct constness_as<To, const From> {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::add_const_t<To>;
 };
 
 
 /**
- * @brief Alias template to facilitate the transcription of the constness.
+ * @brief Alias template to facilitate the traScription of the constness.
  * @tparam To The type to which to transcribe the constness.
  * @tparam From The type from which to transcribe the constness.
  */
@@ -3137,7 +3137,7 @@ inline constexpr auto is_empty_v = is_empty<Type>::value;
  */
 template<typename To, typename From>
 struct constness_as {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::remove_const_t<To>;
 };
 
@@ -3145,13 +3145,13 @@ struct constness_as {
 /*! @copydoc constness_as */
 template<typename To, typename From>
 struct constness_as<To, const From> {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::add_const_t<To>;
 };
 
 
 /**
- * @brief Alias template to facilitate the transcription of the constness.
+ * @brief Alias template to facilitate the traScription of the constness.
  * @tparam To The type to which to transcribe the constness.
  * @tparam From The type from which to transcribe the constness.
  */
@@ -4182,7 +4182,7 @@ inline constexpr auto is_empty_v = is_empty<Type>::value;
  */
 template<typename To, typename From>
 struct constness_as {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::remove_const_t<To>;
 };
 
@@ -4190,13 +4190,13 @@ struct constness_as {
 /*! @copydoc constness_as */
 template<typename To, typename From>
 struct constness_as<To, const From> {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::add_const_t<To>;
 };
 
 
 /**
- * @brief Alias template to facilitate the transcription of the constness.
+ * @brief Alias template to facilitate the traScription of the constness.
  * @tparam To The type to which to transcribe the constness.
  * @tparam From The type from which to transcribe the constness.
  */
@@ -6169,7 +6169,7 @@ inline constexpr auto is_empty_v = is_empty<Type>::value;
  */
 template<typename To, typename From>
 struct constness_as {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::remove_const_t<To>;
 };
 
@@ -6177,13 +6177,13 @@ struct constness_as {
 /*! @copydoc constness_as */
 template<typename To, typename From>
 struct constness_as<To, const From> {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::add_const_t<To>;
 };
 
 
 /**
- * @brief Alias template to facilitate the transcription of the constness.
+ * @brief Alias template to facilitate the traScription of the constness.
  * @tparam To The type to which to transcribe the constness.
  * @tparam From The type from which to transcribe the constness.
  */
@@ -11812,7 +11812,7 @@ inline constexpr auto is_empty_v = is_empty<Type>::value;
  */
 template<typename To, typename From>
 struct constness_as {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::remove_const_t<To>;
 };
 
@@ -11820,13 +11820,13 @@ struct constness_as {
 /*! @copydoc constness_as */
 template<typename To, typename From>
 struct constness_as<To, const From> {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::add_const_t<To>;
 };
 
 
 /**
- * @brief Alias template to facilitate the transcription of the constness.
+ * @brief Alias template to facilitate the traScription of the constness.
  * @tparam To The type to which to transcribe the constness.
  * @tparam From The type from which to transcribe the constness.
  */
@@ -13019,7 +13019,7 @@ inline constexpr auto is_empty_v = is_empty<Type>::value;
  */
 template<typename To, typename From>
 struct constness_as {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::remove_const_t<To>;
 };
 
@@ -13027,13 +13027,13 @@ struct constness_as {
 /*! @copydoc constness_as */
 template<typename To, typename From>
 struct constness_as<To, const From> {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::add_const_t<To>;
 };
 
 
 /**
- * @brief Alias template to facilitate the transcription of the constness.
+ * @brief Alias template to facilitate the traScription of the constness.
  * @tparam To The type to which to transcribe the constness.
  * @tparam From The type from which to transcribe the constness.
  */
@@ -24694,7 +24694,7 @@ inline constexpr auto is_empty_v = is_empty<Type>::value;
  */
 template<typename To, typename From>
 struct constness_as {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::remove_const_t<To>;
 };
 
@@ -24702,13 +24702,13 @@ struct constness_as {
 /*! @copydoc constness_as */
 template<typename To, typename From>
 struct constness_as<To, const From> {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::add_const_t<To>;
 };
 
 
 /**
- * @brief Alias template to facilitate the transcription of the constness.
+ * @brief Alias template to facilitate the traScription of the constness.
  * @tparam To The type to which to transcribe the constness.
  * @tparam From The type from which to transcribe the constness.
  */
@@ -27092,7 +27092,7 @@ inline constexpr auto is_empty_v = is_empty<Type>::value;
  */
 template<typename To, typename From>
 struct constness_as {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::remove_const_t<To>;
 };
 
@@ -27100,13 +27100,13 @@ struct constness_as {
 /*! @copydoc constness_as */
 template<typename To, typename From>
 struct constness_as<To, const From> {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::add_const_t<To>;
 };
 
 
 /**
- * @brief Alias template to facilitate the transcription of the constness.
+ * @brief Alias template to facilitate the traScription of the constness.
  * @tparam To The type to which to transcribe the constness.
  * @tparam From The type from which to transcribe the constness.
  */
@@ -35124,7 +35124,7 @@ inline constexpr auto is_empty_v = is_empty<Type>::value;
  */
 template<typename To, typename From>
 struct constness_as {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::remove_const_t<To>;
 };
 
@@ -35132,13 +35132,13 @@ struct constness_as {
 /*! @copydoc constness_as */
 template<typename To, typename From>
 struct constness_as<To, const From> {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::add_const_t<To>;
 };
 
 
 /**
- * @brief Alias template to facilitate the transcription of the constness.
+ * @brief Alias template to facilitate the traScription of the constness.
  * @tparam To The type to which to transcribe the constness.
  * @tparam From The type from which to transcribe the constness.
  */
@@ -36331,7 +36331,7 @@ inline constexpr auto is_empty_v = is_empty<Type>::value;
  */
 template<typename To, typename From>
 struct constness_as {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::remove_const_t<To>;
 };
 
@@ -36339,13 +36339,13 @@ struct constness_as {
 /*! @copydoc constness_as */
 template<typename To, typename From>
 struct constness_as<To, const From> {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::add_const_t<To>;
 };
 
 
 /**
- * @brief Alias template to facilitate the transcription of the constness.
+ * @brief Alias template to facilitate the traScription of the constness.
  * @tparam To The type to which to transcribe the constness.
  * @tparam From The type from which to transcribe the constness.
  */
@@ -39154,7 +39154,7 @@ inline constexpr auto is_empty_v = is_empty<Type>::value;
  */
 template<typename To, typename From>
 struct constness_as {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::remove_const_t<To>;
 };
 
@@ -39162,13 +39162,13 @@ struct constness_as {
 /*! @copydoc constness_as */
 template<typename To, typename From>
 struct constness_as<To, const From> {
-    /*! @brief The type resulting from the transcription of the constness */
+    /*! @brief The type resulting from the traScription of the constness */
     using type = std::add_const_t<To>;
 };
 
 
 /**
- * @brief Alias template to facilitate the transcription of the constness.
+ * @brief Alias template to facilitate the traScription of the constness.
  * @tparam To The type to which to transcribe the constness.
  * @tparam From The type from which to transcribe the constness.
  */

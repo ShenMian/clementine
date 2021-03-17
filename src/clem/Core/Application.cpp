@@ -4,7 +4,6 @@
 #include "Application.h"
 #include "Scene.h"
 #include "clem/Profiler.h"
-#include "clem/director.h"
 #include "clem/frame_buffer.h"
 #include "clem/log.h"
 #include "clem/platform.h"
@@ -50,14 +49,14 @@ Application::Application(const string& name)
 
 	std::signal(SIGINT, onSignal);
 
+	initialize();
+
 	// width / height = 80 / 25 => width * 25 = height * 80
 	const short width  = 80;
 	const short height = width * 25 / 80;
 	frameBuffer.setSize({width, height});
 
 	winSize = {width, height};
-
-	initialize();
 }
 
 Application::~Application()
@@ -183,7 +182,7 @@ long Application::getFramesPerSecond() const
 	return framesPerSecond;
 }
 
-void Application::pushScene(shared_ptr<NScene>& s)
+void Application::pushScene(shared_ptr<Scene>& s)
 {
 	scenes.push_back(s);
 }
@@ -198,7 +197,7 @@ void Application::popScene()
 	scenes.pop_back();
 }
 
-void Application::replaceScene(std::shared_ptr<NScene>& s)
+void Application::replaceScene(std::shared_ptr<Scene>& s)
 {
 	if(scenes.empty())
 	{

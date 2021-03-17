@@ -26,6 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Clementine
+   &#160;<span id="projectnumber">0.2</span>
    </div>
    <div id="projectbrief">A framework for building 2D console games.</div>
   </td>
@@ -84,242 +85,39 @@ $(document).ready(function(){initNavTree('class_scene.html',''); initResizable()
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#friends">友元</a> &#124;
 <a href="class_scene-members.html">所有成员列表</a>  </div>
   <div class="headertitle">
-<div class="title">Scene类 参考</div>  </div>
+<div class="title">Scene类 参考<div class="ingroups"><a class="el" href="group___core.html">Core</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>场景, 管理游戏对象  
- <a href="class_scene.html#details">更多...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:ad10176d75a9cc0da56626f682d083507"><td class="memItemLeft" align="right" valign="top"><a id="ad10176d75a9cc0da56626f682d083507"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#ad10176d75a9cc0da56626f682d083507">Scene</a> ()</td></tr>
-<tr class="memdesc:ad10176d75a9cc0da56626f682d083507"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造 <a class="el" href="class_scene.html" title="场景, 管理游戏对象">Scene</a> 对象 <br /></td></tr>
-<tr class="separator:ad10176d75a9cc0da56626f682d083507"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b8cec2e32546713915f8c6303c951f1"><td class="memItemLeft" align="right" valign="top"><a id="a3b8cec2e32546713915f8c6303c951f1"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a3b8cec2e32546713915f8c6303c951f1">~Scene</a> ()</td></tr>
-<tr class="memdesc:a3b8cec2e32546713915f8c6303c951f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构 <a class="el" href="class_scene.html" title="场景, 管理游戏对象">Scene</a> 对象 <br /></td></tr>
-<tr class="separator:a3b8cec2e32546713915f8c6303c951f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bd876fa0a8118d169b7b31c9df7601b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a4bd876fa0a8118d169b7b31c9df7601b">update</a> (float dt)</td></tr>
-<tr class="memdesc:a4bd876fa0a8118d169b7b31c9df7601b"><td class="mdescLeft">&#160;</td><td class="mdescRight">更新游戏对象和物理引擎  <a href="class_scene.html#a4bd876fa0a8118d169b7b31c9df7601b">更多...</a><br /></td></tr>
-<tr class="separator:a4bd876fa0a8118d169b7b31c9df7601b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ddf2d16f371ee9533b3faf1dd5ddfb1"><td class="memItemLeft" align="right" valign="top"><a id="a4ddf2d16f371ee9533b3faf1dd5ddfb1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a4ddf2d16f371ee9533b3faf1dd5ddfb1">render</a> ()</td></tr>
-<tr class="memdesc:a4ddf2d16f371ee9533b3faf1dd5ddfb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">渲染全部摄像机的画面 <br /></td></tr>
-<tr class="separator:a4ddf2d16f371ee9533b3faf1dd5ddfb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59dae552adaab20d4aab310caa1e3e7d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a59dae552adaab20d4aab310caa1e3e7d">addFactor</a> (<a class="el" href="class_factor.html">Factor</a> &amp;)</td></tr>
-<tr class="memdesc:a59dae552adaab20d4aab310caa1e3e7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加游戏对象  <a href="class_scene.html#a59dae552adaab20d4aab310caa1e3e7d">更多...</a><br /></td></tr>
-<tr class="separator:a59dae552adaab20d4aab310caa1e3e7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90b5128964a2dbbc1dc4af6cbb2d245b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a90b5128964a2dbbc1dc4af6cbb2d245b">removeFactor</a> (<a class="el" href="class_factor.html">Factor</a> &amp;)</td></tr>
-<tr class="memdesc:a90b5128964a2dbbc1dc4af6cbb2d245b"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除游戏对象  <a href="class_scene.html#a90b5128964a2dbbc1dc4af6cbb2d245b">更多...</a><br /></td></tr>
-<tr class="separator:a90b5128964a2dbbc1dc4af6cbb2d245b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae83fd7b017cb8140a8cbe588e65fc32d"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="class_factor.html">Factor</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#ae83fd7b017cb8140a8cbe588e65fc32d">getFactors</a> () const</td></tr>
-<tr class="memdesc:ae83fd7b017cb8140a8cbe588e65fc32d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取全部游戏对象  <a href="class_scene.html#ae83fd7b017cb8140a8cbe588e65fc32d">更多...</a><br /></td></tr>
-<tr class="separator:ae83fd7b017cb8140a8cbe588e65fc32d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13be7230e86fb8c62d7b601be87f952d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a13be7230e86fb8c62d7b601be87f952d">addCamera</a> (<a class="el" href="class_camera.html">Camera</a> &amp;cam)</td></tr>
-<tr class="memdesc:a13be7230e86fb8c62d7b601be87f952d"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加摄像机  <a href="class_scene.html#a13be7230e86fb8c62d7b601be87f952d">更多...</a><br /></td></tr>
-<tr class="separator:a13be7230e86fb8c62d7b601be87f952d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1d83c221ffc390313ac7677e14c721a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#ab1d83c221ffc390313ac7677e14c721a">removeCamera</a> (<a class="el" href="class_camera.html">Camera</a> &amp;cam)</td></tr>
-<tr class="memdesc:ab1d83c221ffc390313ac7677e14c721a"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除摄像机  <a href="class_scene.html#ab1d83c221ffc390313ac7677e14c721a">更多...</a><br /></td></tr>
-<tr class="separator:ab1d83c221ffc390313ac7677e14c721a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0c0e248aea303c7bb59318de10606b5"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="class_camera.html">Camera</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#af0c0e248aea303c7bb59318de10606b5">getCameras</a> () const</td></tr>
-<tr class="memdesc:af0c0e248aea303c7bb59318de10606b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取全部摄像机  <a href="class_scene.html#af0c0e248aea303c7bb59318de10606b5">更多...</a><br /></td></tr>
-<tr class="separator:af0c0e248aea303c7bb59318de10606b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78d03eb9fd12f52233f44ffc9aaf8f55"><td class="memItemLeft" align="right" valign="top"><a id="a78d03eb9fd12f52233f44ffc9aaf8f55"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addSprite</b> (<a class="el" href="class_sprite.html">Sprite</a> &amp;)</td></tr>
-<tr class="separator:a78d03eb9fd12f52233f44ffc9aaf8f55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae27ea2fb9878ea0df8da788f914a4fdf"><td class="memItemLeft" align="right" valign="top"><a id="ae27ea2fb9878ea0df8da788f914a4fdf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>removeSprite</b> (<a class="el" href="class_sprite.html">Sprite</a> &amp;)</td></tr>
-<tr class="separator:ae27ea2fb9878ea0df8da788f914a4fdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1e2ea548b0051b343a294be6ffcc3b9"><td class="memItemLeft" align="right" valign="top"><a id="ab1e2ea548b0051b343a294be6ffcc3b9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addRigidbody</b> (<a class="el" href="class_rigidbody.html">Rigidbody</a> &amp;)</td></tr>
-<tr class="separator:ab1e2ea548b0051b343a294be6ffcc3b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4759c02f6cfb7eea7474fa42a44d8d78"><td class="memItemLeft" align="right" valign="top"><a id="a4759c02f6cfb7eea7474fa42a44d8d78"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>removeRigidbody</b> (<a class="el" href="class_rigidbody.html">Rigidbody</a> &amp;)</td></tr>
-<tr class="separator:a4759c02f6cfb7eea7474fa42a44d8d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a817e38149ed312f00941b7fbb28a4fcb"><td class="memItemLeft" align="right" valign="top"><a id="a817e38149ed312f00941b7fbb28a4fcb"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Scene</b> (const <a class="el" href="class_scene.html">Scene</a> &amp;)=delete</td></tr>
-<tr class="separator:a817e38149ed312f00941b7fbb28a4fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76962615132f2a87389fdfaad5191313"><td class="memItemLeft" align="right" valign="top"><a id="a76962615132f2a87389fdfaad5191313"></a>
+<a class="el" href="class_entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createEntity</b> ()</td></tr>
+<tr class="separator:a76962615132f2a87389fdfaad5191313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e75837feb23e9373acce65dff59217f"><td class="memItemLeft" align="right" valign="top"><a id="a1e75837feb23e9373acce65dff59217f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>destoryEntity</b> (<a class="el" href="class_entity.html">Entity</a>)</td></tr>
+<tr class="separator:a1e75837feb23e9373acce65dff59217f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7919c1166e57572eccb167347fe359a4"><td class="memItemLeft" align="right" valign="top"><a id="a7919c1166e57572eccb167347fe359a4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (long dt)</td></tr>
+<tr class="separator:a7919c1166e57572eccb167347fe359a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8801f66ffa1c58bdb0acc719cd34c5ff"><td class="memItemLeft" align="right" valign="top"><a id="a8801f66ffa1c58bdb0acc719cd34c5ff"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>render</b> (long dt)</td></tr>
+<tr class="separator:a8801f66ffa1c58bdb0acc719cd34c5ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+友元</h2></td></tr>
+<tr class="memitem:a614439ccac0344926adc4c0165d64060"><td class="memItemLeft" align="right" valign="top"><a id="a614439ccac0344926adc4c0165d64060"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>Entity</b></td></tr>
+<tr class="separator:a614439ccac0344926adc4c0165d64060"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
-<div class="textblock"><p>场景, 管理游戏对象 </p>
-</div><h2 class="groupheader">成员函数说明</h2>
-<a id="a13be7230e86fb8c62d7b601be87f952d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13be7230e86fb8c62d7b601be87f952d">&#9670;&nbsp;</a></span>addCamera()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Scene::addCamera </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_camera.html">Camera</a> &amp;&#160;</td>
-          <td class="paramname"><em>cam</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>添加摄像机 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cam</td><td>摄像机 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a59dae552adaab20d4aab310caa1e3e7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59dae552adaab20d4aab310caa1e3e7d">&#9670;&nbsp;</a></span>addFactor()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Scene::addFactor </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_factor.html">Factor</a> &amp;&#160;</td>
-          <td class="paramname"><em>f</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>添加游戏对象 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">f</td><td>游戏对象 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="af0c0e248aea303c7bb59318de10606b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0c0e248aea303c7bb59318de10606b5">&#9670;&nbsp;</a></span>getCameras()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const vector&lt; <a class="el" href="class_camera.html">Camera</a> * &gt; &amp; Scene::getCameras </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>获取全部摄像机 </p>
-<dl class="section return"><dt>返回</dt><dd>const vector&lt;Camera*&gt;&amp; </dd></dl>
-
-</div>
-</div>
-<a id="ae83fd7b017cb8140a8cbe588e65fc32d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae83fd7b017cb8140a8cbe588e65fc32d">&#9670;&nbsp;</a></span>getFactors()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::vector&lt; <a class="el" href="class_factor.html">Factor</a> * &gt; &amp; Scene::getFactors </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>获取全部游戏对象 </p>
-<dl class="section return"><dt>返回</dt><dd>const std::vector&lt;Factor*&gt;&amp; </dd></dl>
-
-</div>
-</div>
-<a id="ab1d83c221ffc390313ac7677e14c721a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab1d83c221ffc390313ac7677e14c721a">&#9670;&nbsp;</a></span>removeCamera()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Scene::removeCamera </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_camera.html">Camera</a> &amp;&#160;</td>
-          <td class="paramname"><em>cam</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>移除摄像机 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cam</td><td>摄像机 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a90b5128964a2dbbc1dc4af6cbb2d245b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a90b5128964a2dbbc1dc4af6cbb2d245b">&#9670;&nbsp;</a></span>removeFactor()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Scene::removeFactor </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_factor.html">Factor</a> &amp;&#160;</td>
-          <td class="paramname"><em>f</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>移除游戏对象 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">f</td><td>游戏对象 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a4bd876fa0a8118d169b7b31c9df7601b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4bd876fa0a8118d169b7b31c9df7601b">&#9670;&nbsp;</a></span>update()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Scene::update </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>dt</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>更新游戏对象和物理引擎 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">dt</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<hr/>该类的文档由以下文件生成:<ul>
-<li>src/clem/<a class="el" href="scene_8h_source.html">scene.h</a></li>
-<li>src/clem/scene.cpp</li>
+<div class="textblock"><p>场景. 创建并管理实体. </p>
+</div><hr/>该类的文档由以下文件生成:<ul>
+<li>src/clem/core/<a class="el" href="_scene_8h_source.html">Scene.h</a></li>
+<li>src/clem/core/Scene.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

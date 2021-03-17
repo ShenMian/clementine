@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['factor_26',['Factor',['../class_factor.html',1,'Factor'],['../class_factor.html#ac26c0b02faf21d3aaceea0deb07938ba',1,'Factor::Factor()'],['../class_factor.html#a9441521e3cd48c5e8d6ac6d90714d76c',1,'Factor::Factor(Scene &amp;)']]],
-  ['fillrect_27',['fillRect',['../class_frame_buffer.html#aae84bad665c018a9e290c1b2fe8a6438',1,'FrameBuffer::fillRect()'],['../class_sprite.html#ae94a879be830518a92d921581fa188e6',1,'Sprite::fillRect()'],['../class_n_sprite.html#a94116268bb44ad1a826fd91e2a746375',1,'NSprite::fillRect()']]],
-  ['framebuffer_28',['FrameBuffer',['../class_frame_buffer.html',1,'FrameBuffer'],['../class_frame_buffer.html#a6f3763f4551f221b86ca033e2b315c42',1,'FrameBuffer::FrameBuffer()']]]
+  ['getangle_19',['getAngle',['../class_vec2.html#aaca24d4a0550be8892c4d84c7b37e027',1,'Vec2']]],
+  ['getcomponent_20',['getComponent',['../class_entity.html#af378c2ea70fa68a8433f19500261393d',1,'Entity']]],
+  ['getframespersecond_21',['getFramesPerSecond',['../class_application.html#a2fdac02b67972272332f51f620550df9',1,'Application']]],
+  ['getmidpoint_22',['getMidpoint',['../class_point.html#ac57e6b10206aca3ed518f9bc3b240b25',1,'Point']]],
+  ['getname_23',['getName',['../class_application.html#a1f501ff9925eeef209d3519327063c66',1,'Application']]],
+  ['getsize_24',['getSize',['../class_frame_buffer.html#a33d5d424b89551cbb58435f87b391b21',1,'FrameBuffer::getSize()'],['../class_sprite.html#aa788ce3d15c51fd9eb776561e35ce952',1,'Sprite::getSize()']]],
+  ['getwinsize_25',['getWinSize',['../class_application.html#a92d81c5b230c84a9a69bfb5ce9873642',1,'Application']]]
 ];

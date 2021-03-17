@@ -1,9 +1,12 @@
 var searchData=
 [
-  ['pause_64',['pause',['../class_director.html#ad0e2e9b810e39c939e25ead3918faf00',1,'Director::pause()'],['../class_application.html#ac1f45b87ce5324acc250a9e857d233f4',1,'Application::pause()']]],
-  ['physics_65',['Physics',['../group__physics.html',1,'']]],
-  ['point_66',['Point',['../class_point.html',1,'Point'],['../class_point.html#a257415ad611a16bb73628efcdb87d0fd',1,'Point::Point()=default'],['../class_point.html#a30bc8409287de4f43e160664be834636',1,'Point::Point(float x, float y)']]],
-  ['popscene_67',['popScene',['../class_director.html#a92916c5c47d0f0a202fe1a5023841e8b',1,'Director::popScene()'],['../class_application.html#a47b5bec61b3d93cbb4998b42d0d2ea47',1,'Application::popScene()']]],
-  ['profilerecord_68',['ProfileRecord',['../struct_profile_record.html',1,'']]],
-  ['pushscene_69',['pushScene',['../class_director.html#aa4827f2c29421764dd38913e70fe9e5b',1,'Director::pushScene()'],['../class_application.html#acc4b427a433bc2257882f4fc5213bafe',1,'Application::pushScene()']]]
+  ['scene_52',['Scene',['../class_scene.html',1,'']]],
+  ['setmsperrender_53',['setMsPerRender',['../class_application.html#a1f30366a53d052fca2a17538032f176f',1,'Application']]],
+  ['setmsperupdate_54',['setMsPerUpdate',['../class_application.html#a9cc1b4bbc2ee9b71e84da42d2ff04f6b',1,'Application']]],
+  ['setsize_55',['setSize',['../class_frame_buffer.html#ab1f2e6e815e01d0bbaf157c3b0a70c8c',1,'FrameBuffer::setSize()'],['../class_sprite.html#a9fac3c7b9fe3e454ec04d3e4f5502103',1,'Sprite::setSize()']]],
+  ['setvisible_56',['setVisible',['../class_cursor.html#a99e1ea96e8ab6a46a7efef1e7ddd6bb1',1,'Cursor']]],
+  ['size_57',['Size',['../class_size.html',1,'']]],
+  ['sprite_58',['Sprite',['../class_sprite.html',1,'']]],
+  ['stop_59',['stop',['../class_application.html#a2e5dee1fbe413783d3500fe8da567ad4',1,'Application']]],
+  ['swapbuffers_60',['swapBuffers',['../class_frame_buffer.html#abee2f66e863efed92bc480275f0b52e0',1,'FrameBuffer']]]
 ];

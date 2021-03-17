@@ -23,7 +23,7 @@ public:
 	/**
 	 * @brief 构造函数.
 	 */
-	FrameBuffer();
+	FrameBuffer() = default;
 
 	/**
 	 * @brief 析构函数.
@@ -97,8 +97,8 @@ public:
 	Size getSize() const;
 
 private:
-	buffer_t* current;
-	buffer_t* next;
+	buffer_t* current = nullptr;
+	buffer_t* next    = nullptr;
 	Size      size;
 };
 

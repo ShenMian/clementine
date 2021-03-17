@@ -1,29 +1,23 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
-// 组件
 
 #ifndef CLEM_COMPONENT_H_
 #define CLEM_COMPONENT_H_
 
-#include "factor.h"
+class Scene;
 
-/// 组件
 class Component
 {
 public:
-	Component();
-
-	virtual void update(float dt);
-
 	virtual void onAdd();
+
 	virtual void onRemove();
 
-	void    setOwner(Factor* owner);
-	Factor* getOwner() const;
+	void    setScene(Scene*);
+	Scene* getScene() const;
 
 protected:
-	Factor* owner;
+	Scene* scene;
 };
 
 #endif // !CLEM_COMPONENT_H_
-

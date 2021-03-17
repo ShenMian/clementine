@@ -8,7 +8,7 @@
 #include "clem/log.h"
 #include "entt.hpp"
 
-class NScene;
+class Scene;
 
 /**
  * @addtogroup Core
@@ -22,7 +22,7 @@ class Entity
 {
 public:
 	Entity() = default;
-	Entity(entt::entity id, NScene* scene);
+	Entity(entt::entity id, Scene* scene);
 
 	/**
 	 * @brief 添加指定组件.
@@ -49,11 +49,11 @@ public:
 	bool hasComponent();
 
 	entt::entity getId() const;
-	NScene*      getScene() const;
+	Scene*      getScene() const;
 
 private:
 	entt::entity id    = entt::null;
-	NScene*      scene = nullptr;
+	Scene*      scene = nullptr;
 };
 
 /**

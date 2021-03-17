@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['factor_117',['Factor',['../class_factor.html',1,'']]],
-  ['framebuffer_118',['FrameBuffer',['../class_frame_buffer.html',1,'']]]
+  ['keyboard_77',['Keyboard',['../class_keyboard.html',1,'']]]
 ];

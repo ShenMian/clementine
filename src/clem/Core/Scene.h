@@ -16,11 +16,11 @@ class Entity;
 /**
  * 场景. 创建并管理实体.
  */
-class NScene
+class Scene
 {
 public:
 	Entity createEntity();
-	void    destoryEntity(Entity);
+	void   destoryEntity(Entity);
 
 	void update(long dt);
 	void render(long dt);

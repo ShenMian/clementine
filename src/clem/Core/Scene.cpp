@@ -3,29 +3,29 @@
 
 #include "Scene.h"
 #include "Entity.h"
-#include "Sprite.h"
+#include "clem/Sprite.h"
 
-Entity NScene::createEntity()
+Entity Scene::createEntity()
 {
 	return Entity(registry.create(), this);
 }
 
-void NScene::destoryEntity(Entity e)
+void Scene::destoryEntity(Entity e)
 {
 	registry.destroy(e.getId());
 }
 
-void NScene::update(long dt)
+void Scene::update(long dt)
 {
 }
 
-void NScene::render(long dt)
+void Scene::render(long dt)
 {
-	auto view = registry.view<NSprite>();
+	auto view = registry.view<Sprite>();
 	for(auto i : view)
 	{
 		Entity e(i, this);
-		auto& s = e.getComponent<NSprite>();
+		auto& s = e.getComponent<Sprite>();
 		printf("%hd, %hd\n", s.getSize().x, s.getSize().y);
 	}
 }

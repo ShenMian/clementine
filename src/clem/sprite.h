@@ -1,23 +1,22 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
-// 图像
 
 #ifndef CLEM_SPRITE_H_
 #define CLEM_SPRITE_H_
 
-#include "clem/component.h"
-#include "tile.h"
-#include <string>
-#include <vector>
+#include "Component.h"
+#include "clem/Math/Size.h"
+#include "clem/tile.h"
 
-class FrameBuffer;
+class Rect;
+class Point;
 
-/// 图像, 由瓦片组成的图像
 class Sprite : public Component
 {
-	friend class Camera;
-
 public:
+	Sprite() = default;
+	Sprite(const Sprite&) = default;
+
 	/**
 	 * @brief 绘制点.
 	 * 
@@ -26,7 +25,7 @@ public:
 	 * @param t 瓦片.
 	 */
 	void drawPoint(int x, int y, const Tile& t);
-	
+
 	/**
 	 * @brief 绘制点.
 	 * 
@@ -43,7 +42,7 @@ public:
 	 * @param t 瓦片.
 	 */
 	void drawLine(Point a, Point b, const Tile& t);
-	
+
 	/**
 	 * @brief 绘制矩形.
 	 * 
@@ -68,7 +67,7 @@ public:
 	 * @param t 瓦片.
 	 */
 	void drawCycle(Point p, short radius, const Tile& t);
-	
+
 	/**
 	 * @brief 清除全部绘制内容.
 	 */
@@ -77,15 +76,12 @@ public:
 	/**
 	 * @brief 设置可绘制区域的大小
 	 */
-	void setSize(Size s);
+	void setSize(const Size& s);
 
 	/**
 	 * @brief 获取可绘制区域的大小
 	 */
-	Size getSize() const;
-
-	void onAdd() override;
-	void onRemove() override;
+	const Size& getSize() const;
 
 private:
 	Size              size;

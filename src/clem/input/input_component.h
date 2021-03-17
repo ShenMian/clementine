@@ -5,7 +5,7 @@
 #ifndef CLEM_INPUT_COMPONENT_H_
 #define CLEM_INPUT_COMPONENT_H_
 
-#include "clem/component.h"
+#include "clem/Component.h"
 
 /// 输入组件
 class InputComponent : public Component

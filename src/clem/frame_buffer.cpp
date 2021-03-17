@@ -2,20 +2,14 @@
 // License(Apache-2.0)
 // 帧缓冲区
 
+#include "Core/Application.h"
 #include "frame_buffer.h"
 #include "Profiler.h"
-#include "director.h"
 #include "platform.h"
 #include "tile.h"
 #include <algorithm>
 
 FrameBuffer frameBuffer;
-
-FrameBuffer::FrameBuffer()
-		: current(nullptr), next(nullptr)
-{
-	setSize(Director::getInstance()->getWinSize());
-}
 
 FrameBuffer::~FrameBuffer()
 {
@@ -160,8 +154,6 @@ void FrameBuffer::render()
 #endif
 
 #ifdef OS_WIN
-
-#include "director.h"
 
 void FrameBuffer::drawPoint(Point p, const Tile& t)
 {
