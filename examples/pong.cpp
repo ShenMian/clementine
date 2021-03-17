@@ -82,12 +82,13 @@ public:
 		scene = make_shared<NScene>();
 		pushScene(scene);
 
-		auto entity = scene->createEntity();
-		entity.addComponent<NSprite>();
-	}
+		auto  entity = scene->createEntity();
 
-	~Pong()
-	{
+		NSprite sprite;
+		sprite.setSize({1, 1});
+		sprite.drawPoint({0, 0}, Tile('O'));
+
+		entity.addComponent<NSprite>(sprite);
 	}
 
 private:

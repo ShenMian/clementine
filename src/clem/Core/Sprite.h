@@ -1,3 +1,5 @@
+// Copyright 2021 SMS
+// License(Apache-2.0)
 
 #include "Component.h"
 #include "clem/Math/Size.h"
@@ -71,12 +73,12 @@ public:
 	/**
 	 * @brief 设置可绘制区域的大小
 	 */
-	void setSize(Size s);
+	void setSize(const Size& s);
 
 	/**
 	 * @brief 获取可绘制区域的大小
 	 */
-	Size getSize() const;
+	const Size& getSize() const;
 
 private:
 	Size              size;

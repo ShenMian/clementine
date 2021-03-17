@@ -18,11 +18,11 @@ class NScene;
 /**
  * 实体. 组件的容器.
  */
-class NEntity
+class Entity
 {
 public:
-	NEntity() = default;
-	NEntity(entt::entity id, NScene* scene);
+	Entity() = default;
+	Entity(entt::entity id, NScene* scene);
 
 	/**
 	 * @brief 添加指定组件.
@@ -62,7 +62,7 @@ private:
  */
 
 template <typename T, typename... Args>
-void NEntity::addComponent(Args&&... args)
+void Entity::addComponent(Args&&... args)
 {
 	if(hasComponent<T>())
 	{
@@ -73,7 +73,7 @@ void NEntity::addComponent(Args&&... args)
 }
 
 template <typename T>
-void NEntity::removeComponent()
+void Entity::removeComponent()
 {
 	if(!hasComponent<T>())
 	{
@@ -84,7 +84,7 @@ void NEntity::removeComponent()
 }
 
 template <typename T>
-T& NEntity::getComponent()
+T& Entity::getComponent()
 {
 	if(!hasComponent<T>())
 	{
@@ -95,7 +95,7 @@ T& NEntity::getComponent()
 }
 
 template <typename T>
-bool NEntity::hasComponent()
+bool Entity::hasComponent()
 {
 	return scene->registry.has<T>(id);
 }

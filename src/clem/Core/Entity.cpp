@@ -5,17 +5,17 @@
 #include "Scene.h"
 #include "clem/log.h"
 
-NEntity::NEntity(entt::entity id, NScene* scene)
+Entity::Entity(entt::entity id, NScene* scene)
 		: id(id), scene(scene)
 {
 }
 
-entt::entity NEntity::getId() const
+entt::entity Entity::getId() const
 {
 	return id;
 }
 
-NScene* NEntity::getScene() const
+NScene* Entity::getScene() const
 {
 	return scene;
 }

@@ -6,7 +6,7 @@
 
 #include "entt.hpp"
 
-class NEntity;
+class Entity;
 
 /**
  * @addtogroup Core
@@ -19,8 +19,8 @@ class NEntity;
 class NScene
 {
 public:
-	NEntity createEntity();
-	void    destoryEntity(NEntity);
+	Entity createEntity();
+	void    destoryEntity(Entity);
 
 	void update(long dt);
 	void render(long dt);
@@ -28,7 +28,7 @@ public:
 private:
 	entt::registry registry;
 
-	friend class NEntity;
+	friend class Entity;
 };
 
 /**

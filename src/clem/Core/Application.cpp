@@ -164,7 +164,7 @@ void Application::render(long dt)
 	{
 		framesPerSecond = frames;
 		frames = fpsLag = 0;
-		Terminal::setTitle(name + " | Render: " + std::to_string(getFramesPerSecond()) + "FPS");
+		Terminal::setTitle(name + " | " + std::to_string(getFramesPerSecond()) + "FPS");
 	}
 
 	static long lag = 0;
@@ -226,6 +226,9 @@ void Application::onSignal(int signal)
 
 void Application::initialize()
 {
+	winsize size;
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &size);
+	this->winSize = {size.ws_col, size.ws_row + 1};
 }
 
 long Application::getCurrentMillSecond() const
@@ -242,12 +245,18 @@ long Application::getCurrentMillSecond() const
 void Application::initialize()
 {
 	// 开启 VT100 模式
-	const auto hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	const auto hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	DWORD      mode;
-	if(!GetConsoleMode(hStdOut, &mode))
+	if(!GetConsoleMode(hOut, &mode))
 		assert(false);
-	if(!SetConsoleMode(hStdOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING))
+	if(!SetConsoleMode(hOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING))
 		assert(false);
+
+	CONSOLE_SCREEN_BUFFER_INFO screenInfo;
+	auto                       ret = GetConsoleScreenBufferInfo(hOut, &screenInfo);
+	if(!ret)
+		assert(false);
+	this->winSize = {screenInfo.srWindow.Right + 1, screenInfo.srWindow.Bottom + 1};
 }
 
 long Application::getCurrentMillSecond() const
