@@ -4,7 +4,7 @@
 #ifndef CLEM_CORE_APPLICATION_H_
 #define CLEM_CORE_APPLICATION_H_
 
-#include "clem/Math/Size.h"
+#include "Clem/Math.h"
 #include <string>
 #include <vector>
 #include <memory>

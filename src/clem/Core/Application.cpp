@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "Application.h"
-#include "Scene.h"
+#include "Clem/Scene.h"
 #include "clem/Profiler.h"
 #include "clem/frame_buffer.h"
 #include "clem/log.h"

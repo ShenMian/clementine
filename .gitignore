@@ -3,8 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# Visual Studio Code config files
-.vscode/
+# Visual Studio
+*.sln
+*.vcxproj
+*.filters
 
 # CMake build files
 [Bb]uild/
@@ -34,6 +36,9 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
+# Visual Studio Code
+.vscode/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
