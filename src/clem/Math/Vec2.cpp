@@ -6,11 +6,6 @@
 #include <cmath>
 #include <cfloat>
 
-Vec2::Vec2()
-		: x(0), y(0)
-{
-}
-
 Vec2::Vec2(float x, float y)
 		: x(x), y(y)
 {
@@ -64,7 +59,8 @@ float Vec2::getAngle() const
 
 bool Vec2::operator==(const Vec2& v) const
 {
-	return x == v.x && y == v.y;
+	return (std::abs(x - v.x) < FLT_EPSILON) &&
+				 (std::abs(y - v.y) < FLT_EPSILON);
 }
 
 bool Vec2::operator!=(const Vec2& v) const

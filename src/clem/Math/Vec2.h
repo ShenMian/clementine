@@ -20,12 +20,13 @@ class Point;
 class Vec2
 {
 public:
-	float x, y;
+	float x = 0;
+	float y = 0;
 
 	/**
 	 * @brief 构造函数.
 	 */
-	Vec2();
+	Vec2() = default;
 
 	/**
 	 * @brief 构造函数.

@@ -3,13 +3,9 @@
 
 #include "Point.h"
 #include "Vec2.h"
-#include <cmath>
 #include <algorithm>
-
-Point::Point()
-		: x(0), y(0)
-{
-}
+#include <cassert>
+#include <cmath>
 
 Point::Point(float x, float y)
 		: x(x), y(y)
@@ -30,6 +26,8 @@ float Point::distanceSquared(const Point& o) const
 
 void Point::clamp(Point min, Point max)
 {
+	assert(min.x <= max.x && min.y <= max.y);
+
 	x = std::max(x, min.x);
 	x = std::min(x, max.x);
 	y = std::max(y, min.y);
