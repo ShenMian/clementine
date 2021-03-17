@@ -1,6 +1,6 @@
 var class_vec2 =
 [
-    [ "Vec2", "class_vec2.html#a76080feed7005893ecc634f903cfbae0", null ],
+    [ "Vec2", "class_vec2.html#ab44c734ac1b44d99cd27e6e5e9068f4f", null ],
     [ "Vec2", "class_vec2.html#a6256fecebf5a43b14d5d5341c58cfdc4", null ],
     [ "getAngle", "class_vec2.html#aaca24d4a0550be8892c4d84c7b37e027", null ],
     [ "length", "class_vec2.html#af9ebf7c8888fd5df9514e6d519b99fb2", null ],

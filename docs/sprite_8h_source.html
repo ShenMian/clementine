@@ -119,15 +119,15 @@ $(document).ready(function(){initNavTree('sprite_8h_source.html',''); initResiza
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a36b20b1988778637e82ea71b03f24c36">clear</a>();</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a25b334cef6d8ccee586182dc10f0b506">setSize</a>(Size s);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a25b334cef6d8ccee586182dc10f0b506">setSize</a>(<a class="code" href="class_size.html">Size</a> s);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    Size <a class="code" href="class_sprite.html#a376e564f826c34afae8c9b62295a2714">getSize</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <a class="code" href="class_size.html">Size</a> <a class="code" href="class_sprite.html#a376e564f826c34afae8c9b62295a2714">getSize</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a855e2f6077d3d75fd0964d55b2a474f9">onAdd</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a7a0ba13245fa13a5656481fa6929838f">onRemove</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    Size              size;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="class_size.html">Size</a>              size;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    std::vector&lt;Tile&gt; buffer;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;};</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
@@ -136,6 +136,7 @@ $(document).ready(function(){initNavTree('sprite_8h_source.html',''); initResiza
 <div class="ttc" id="aclass_component_html"><div class="ttname"><a href="class_component.html">Component</a></div><div class="ttdoc">组件</div><div class="ttdef"><b>Definition:</b> component.h:12</div></div>
 <div class="ttc" id="aclass_frame_buffer_html"><div class="ttname"><a href="class_frame_buffer.html">FrameBuffer</a></div><div class="ttdoc">帧缓冲区</div><div class="ttdef"><b>Definition:</b> frame_buffer.h:15</div></div>
 <div class="ttc" id="aclass_point_html"><div class="ttname"><a href="class_point.html">Point</a></div><div class="ttdef"><b>Definition:</b> Point.h:18</div></div>
+<div class="ttc" id="aclass_size_html"><div class="ttname"><a href="class_size.html">Size</a></div><div class="ttdef"><b>Definition:</b> Size.h:16</div></div>
 <div class="ttc" id="aclass_sprite_html"><div class="ttname"><a href="class_sprite.html">Sprite</a></div><div class="ttdoc">图像, 由瓦片组成的图像</div><div class="ttdef"><b>Definition:</b> sprite.h:17</div></div>
 <div class="ttc" id="aclass_sprite_html_a13e2e7e37058e34f124fae858b7e85b9"><div class="ttname"><a href="class_sprite.html#a13e2e7e37058e34f124fae858b7e85b9">Sprite::drawPoint</a></div><div class="ttdeci">void drawPoint(int x, int y, const Tile &amp;t)</div><div class="ttdoc">绘制点.</div><div class="ttdef"><b>Definition:</b> sprite.cpp:9</div></div>
 <div class="ttc" id="aclass_sprite_html_a25b334cef6d8ccee586182dc10f0b506"><div class="ttname"><a href="class_sprite.html#a25b334cef6d8ccee586182dc10f0b506">Sprite::setSize</a></div><div class="ttdeci">void setSize(Size s)</div><div class="ttdoc">设置可绘制区域的大小</div><div class="ttdef"><b>Definition:</b> sprite.cpp:85</div></div>

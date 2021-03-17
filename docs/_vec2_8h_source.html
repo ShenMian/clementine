@@ -100,47 +100,48 @@ $(document).ready(function(){initNavTree('_vec2_8h_source.html',''); initResizab
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_vec2.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_vec2.html">Vec2</a></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">float</span> x, y;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_vec2.html#a76080feed7005893ecc634f903cfbae0">Vec2</a>();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="class_vec2.html#a76080feed7005893ecc634f903cfbae0">Vec2</a>(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_vec2.html#af9ebf7c8888fd5df9514e6d519b99fb2">length</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code" href="class_vec2.html#a5dbc5e767907b2e217060479c52777bb">lengthSquared</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>&amp; <a class="code" href="class_vec2.html#aadca70afd11794c024aad558bf7e032a">normalize</a>();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>&amp; <a class="code" href="class_vec2.html#a8582d3537a97d5919c7a194128bec495">rotate</a>(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp; point, <span class="keywordtype">float</span> angle);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_vec2.html#aaca24d4a0550be8892c4d84c7b37e027">getAngle</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">bool</span>  operator==(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp; v) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">bool</span>  operator!=(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp; v) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>  operator*(<span class="keywordtype">float</span> n) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>  operator/(<span class="keywordtype">float</span> n) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>  operator+(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp; v) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>  operator-(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp; v) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>  operator-() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>&amp; operator+=(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp; v);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>&amp; operator-=(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp; v);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>&amp; operator*=(<span class="keywordtype">float</span> n);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>&amp; operator/=(<span class="keywordtype">float</span> n);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a> zero;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_MATH_VEC2_H_</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">float</span> x = 0;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">float</span> y = 0;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_vec2.html#ab44c734ac1b44d99cd27e6e5e9068f4f">   29</a></span>&#160;    <a class="code" href="class_vec2.html#ab44c734ac1b44d99cd27e6e5e9068f4f">Vec2</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="class_vec2.html#ab44c734ac1b44d99cd27e6e5e9068f4f">Vec2</a>(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_vec2.html#af9ebf7c8888fd5df9514e6d519b99fb2">length</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code" href="class_vec2.html#a5dbc5e767907b2e217060479c52777bb">lengthSquared</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>&amp; <a class="code" href="class_vec2.html#aadca70afd11794c024aad558bf7e032a">normalize</a>();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>&amp; <a class="code" href="class_vec2.html#a8582d3537a97d5919c7a194128bec495">rotate</a>(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp; point, <span class="keywordtype">float</span> angle);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_vec2.html#aaca24d4a0550be8892c4d84c7b37e027">getAngle</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">bool</span>  operator==(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp; v) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">bool</span>  operator!=(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp; v) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>  operator*(<span class="keywordtype">float</span> n) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>  operator/(<span class="keywordtype">float</span> n) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>  operator+(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp; v) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>  operator-(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp; v) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>  operator-() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>&amp; operator+=(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp; v);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>&amp; operator-=(<span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a>&amp; v);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>&amp; operator*=(<span class="keywordtype">float</span> n);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="class_vec2.html">Vec2</a>&amp; operator/=(<span class="keywordtype">float</span> n);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_vec2.html">Vec2</a> zero;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_MATH_VEC2_H_</span></div>
 <div class="ttc" id="aclass_point_html"><div class="ttname"><a href="class_point.html">Point</a></div><div class="ttdef"><b>Definition:</b> Point.h:18</div></div>
 <div class="ttc" id="aclass_vec2_html"><div class="ttname"><a href="class_vec2.html">Vec2</a></div><div class="ttdef"><b>Definition:</b> Vec2.h:21</div></div>
-<div class="ttc" id="aclass_vec2_html_a5dbc5e767907b2e217060479c52777bb"><div class="ttname"><a href="class_vec2.html#a5dbc5e767907b2e217060479c52777bb">Vec2::lengthSquared</a></div><div class="ttdeci">float lengthSquared() const</div><div class="ttdoc">获取长度平方.</div><div class="ttdef"><b>Definition:</b> Vec2.cpp:24</div></div>
-<div class="ttc" id="aclass_vec2_html_a76080feed7005893ecc634f903cfbae0"><div class="ttname"><a href="class_vec2.html#a76080feed7005893ecc634f903cfbae0">Vec2::Vec2</a></div><div class="ttdeci">Vec2()</div><div class="ttdoc">构造函数.</div><div class="ttdef"><b>Definition:</b> Vec2.cpp:9</div></div>
-<div class="ttc" id="aclass_vec2_html_a8582d3537a97d5919c7a194128bec495"><div class="ttname"><a href="class_vec2.html#a8582d3537a97d5919c7a194128bec495">Vec2::rotate</a></div><div class="ttdeci">Vec2 &amp; rotate(const Vec2 &amp;point, float angle)</div><div class="ttdoc">旋转向量绕定点一定角度(弧度制).</div><div class="ttdef"><b>Definition:</b> Vec2.cpp:37</div></div>
-<div class="ttc" id="aclass_vec2_html_aaca24d4a0550be8892c4d84c7b37e027"><div class="ttname"><a href="class_vec2.html#aaca24d4a0550be8892c4d84c7b37e027">Vec2::getAngle</a></div><div class="ttdeci">float getAngle() const</div><div class="ttdoc">获取角度.</div><div class="ttdef"><b>Definition:</b> Vec2.cpp:60</div></div>
-<div class="ttc" id="aclass_vec2_html_aadca70afd11794c024aad558bf7e032a"><div class="ttname"><a href="class_vec2.html#aadca70afd11794c024aad558bf7e032a">Vec2::normalize</a></div><div class="ttdeci">Vec2 &amp; normalize()</div><div class="ttdoc">标准化成单位向量.</div><div class="ttdef"><b>Definition:</b> Vec2.cpp:29</div></div>
-<div class="ttc" id="aclass_vec2_html_af9ebf7c8888fd5df9514e6d519b99fb2"><div class="ttname"><a href="class_vec2.html#af9ebf7c8888fd5df9514e6d519b99fb2">Vec2::length</a></div><div class="ttdeci">float length() const</div><div class="ttdoc">获取长度.</div><div class="ttdef"><b>Definition:</b> Vec2.cpp:19</div></div>
+<div class="ttc" id="aclass_vec2_html_a5dbc5e767907b2e217060479c52777bb"><div class="ttname"><a href="class_vec2.html#a5dbc5e767907b2e217060479c52777bb">Vec2::lengthSquared</a></div><div class="ttdeci">float lengthSquared() const</div><div class="ttdoc">获取长度平方.</div><div class="ttdef"><b>Definition:</b> Vec2.cpp:19</div></div>
+<div class="ttc" id="aclass_vec2_html_a8582d3537a97d5919c7a194128bec495"><div class="ttname"><a href="class_vec2.html#a8582d3537a97d5919c7a194128bec495">Vec2::rotate</a></div><div class="ttdeci">Vec2 &amp; rotate(const Vec2 &amp;point, float angle)</div><div class="ttdoc">旋转向量绕定点一定角度(弧度制).</div><div class="ttdef"><b>Definition:</b> Vec2.cpp:32</div></div>
+<div class="ttc" id="aclass_vec2_html_aaca24d4a0550be8892c4d84c7b37e027"><div class="ttname"><a href="class_vec2.html#aaca24d4a0550be8892c4d84c7b37e027">Vec2::getAngle</a></div><div class="ttdeci">float getAngle() const</div><div class="ttdoc">获取角度.</div><div class="ttdef"><b>Definition:</b> Vec2.cpp:55</div></div>
+<div class="ttc" id="aclass_vec2_html_aadca70afd11794c024aad558bf7e032a"><div class="ttname"><a href="class_vec2.html#aadca70afd11794c024aad558bf7e032a">Vec2::normalize</a></div><div class="ttdeci">Vec2 &amp; normalize()</div><div class="ttdoc">标准化成单位向量.</div><div class="ttdef"><b>Definition:</b> Vec2.cpp:24</div></div>
+<div class="ttc" id="aclass_vec2_html_ab44c734ac1b44d99cd27e6e5e9068f4f"><div class="ttname"><a href="class_vec2.html#ab44c734ac1b44d99cd27e6e5e9068f4f">Vec2::Vec2</a></div><div class="ttdeci">Vec2()=default</div><div class="ttdoc">构造函数.</div></div>
+<div class="ttc" id="aclass_vec2_html_af9ebf7c8888fd5df9514e6d519b99fb2"><div class="ttname"><a href="class_vec2.html#af9ebf7c8888fd5df9514e6d519b99fb2">Vec2::length</a></div><div class="ttdeci">float length() const</div><div class="ttdoc">获取长度.</div><div class="ttdef"><b>Definition:</b> Vec2.cpp:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

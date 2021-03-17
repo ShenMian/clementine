@@ -8,7 +8,7 @@ var group___math =
     [ "截图 ✨", "md__r_e_a_d_m_e_cn.html#autotoc_md4", null ],
     [ "联系 💬", "md__r_e_a_d_m_e_cn.html#autotoc_md5", null ],
     [ "Point", "class_point.html", [
-      [ "Point", "class_point.html#ad92f2337b839a94ce97dcdb439b4325a", null ],
+      [ "Point", "class_point.html#a257415ad611a16bb73628efcdb87d0fd", null ],
       [ "Point", "class_point.html#a30bc8409287de4f43e160664be834636", null ],
       [ "clamp", "class_point.html#a57ec0649498755f2ad938a965c209d71", null ],
       [ "distance", "class_point.html#a0d86d1c1e7a6202483fd83ddd065e14f", null ],
@@ -23,8 +23,15 @@ var group___math =
       [ "x", "class_point.html#a05dfe2dfbde813ad234b514f30e662f1", null ],
       [ "y", "class_point.html#a6101960c8d2d4e8ea1d32c9234bbeb8d", null ]
     ] ],
+    [ "Size", "class_size.html", [
+      [ "Size", "class_size.html#ac5973e6a2751a9f1665172d32bc5f2a7", null ],
+      [ "Size", "class_size.html#af143f6e9d7c70bd7412fdc316b4fb216", null ],
+      [ "area", "class_size.html#a6856c61fcde78e0506bde6e8a8cc8a78", null ],
+      [ "x", "class_size.html#a9b97c1ac6659869f4898aab146db5b4d", null ],
+      [ "y", "class_size.html#a78f998cc9363c6715ed914a0995dee5e", null ]
+    ] ],
     [ "Vec2", "class_vec2.html", [
-      [ "Vec2", "class_vec2.html#a76080feed7005893ecc634f903cfbae0", null ],
+      [ "Vec2", "class_vec2.html#ab44c734ac1b44d99cd27e6e5e9068f4f", null ],
       [ "Vec2", "class_vec2.html#a6256fecebf5a43b14d5d5341c58cfdc4", null ],
       [ "getAngle", "class_vec2.html#aaca24d4a0550be8892c4d84c7b37e027", null ],
       [ "length", "class_vec2.html#af9ebf7c8888fd5df9514e6d519b99fb2", null ],

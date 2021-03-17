@@ -99,17 +99,17 @@ $(document).ready(function(){initNavTree('box__collider_8h_source.html',''); ini
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_box_collider.html">BoxCollider</a>();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_box_collider.html">BoxCollider</a>(Size size);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_box_collider.html">BoxCollider</a>(<a class="code" href="class_size.html">Size</a> size);</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_box_collider.html#aa69edc18f3df3df06be9b9b3f233fca9">collides</a>(<span class="keyword">const</span> <a class="code" href="class_collider.html">Collider</a>&amp; other) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_box_collider.html#a264b7d64e37f69c11c5ccf06ce371e14">setSize</a>(Size);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    Size <a class="code" href="class_box_collider.html#a99d5c37746f1544ba67986ce1bdeddda">getSize</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_box_collider.html#a264b7d64e37f69c11c5ccf06ce371e14">setSize</a>(<a class="code" href="class_size.html">Size</a>);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_size.html">Size</a> <a class="code" href="class_box_collider.html#a99d5c37746f1544ba67986ce1bdeddda">getSize</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    Rect getRect() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  Size size;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="class_size.html">Size</a> size;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_BOX_COLLIDER_H_</span></div>
@@ -118,6 +118,7 @@ $(document).ready(function(){initNavTree('box__collider_8h_source.html',''); ini
 <div class="ttc" id="aclass_box_collider_html_a99d5c37746f1544ba67986ce1bdeddda"><div class="ttname"><a href="class_box_collider.html#a99d5c37746f1544ba67986ce1bdeddda">BoxCollider::getSize</a></div><div class="ttdeci">Size getSize() const</div><div class="ttdoc">获取大小</div><div class="ttdef"><b>Definition:</b> box_collider.cpp:46</div></div>
 <div class="ttc" id="aclass_box_collider_html_aa69edc18f3df3df06be9b9b3f233fca9"><div class="ttname"><a href="class_box_collider.html#aa69edc18f3df3df06be9b9b3f233fca9">BoxCollider::collides</a></div><div class="ttdeci">bool collides(const Collider &amp;other) const override</div><div class="ttdoc">检测是否与其他碰撞体发生碰撞.</div><div class="ttdef"><b>Definition:</b> box_collider.cpp:19</div></div>
 <div class="ttc" id="aclass_collider_html"><div class="ttname"><a href="class_collider.html">Collider</a></div><div class="ttdoc">碰撞体</div><div class="ttdef"><b>Definition:</b> collider.h:20</div></div>
+<div class="ttc" id="aclass_size_html"><div class="ttname"><a href="class_size.html">Size</a></div><div class="ttdef"><b>Definition:</b> Size.h:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -1,6 +1,6 @@
 var class_point =
 [
-    [ "Point", "class_point.html#ad92f2337b839a94ce97dcdb439b4325a", null ],
+    [ "Point", "class_point.html#a257415ad611a16bb73628efcdb87d0fd", null ],
     [ "Point", "class_point.html#a30bc8409287de4f43e160664be834636", null ],
     [ "clamp", "class_point.html#a57ec0649498755f2ad938a965c209d71", null ],
     [ "distance", "class_point.html#a0d86d1c1e7a6202483fd83ddd065e14f", null ],
