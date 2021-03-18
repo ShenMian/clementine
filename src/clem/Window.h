@@ -10,7 +10,14 @@
 class Window
 {
 public:
+	/**
+	 * @brief 获取终端窗口大小.
+	 */
   static Size getSize();
+
+	/**
+	 * @brief 设置终端窗口标题.
+	 */
   static void setTitle(std::string& title);
 };
 

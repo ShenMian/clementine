@@ -57,11 +57,6 @@ public:
 	const std::string& getName() const;
 
 	/**
-	 * @brief 获取终端窗口大小.
-	 */
-	const Size& getWinSize() const;
-
-	/**
 	 * @brief 设置更新时间周期.
 	 */
 	void setMsPerUpdate(long ms);
