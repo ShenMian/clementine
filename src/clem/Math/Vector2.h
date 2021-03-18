@@ -104,14 +104,14 @@ public:
 	 * @param max 最大值.
 	 */
 	void clamp(const Vector2& min, const Vector2& max);
-	
+
 	/**
 	 * @brief 获取面积.
 	 */
 	float area() const;
 
-	bool  operator==(const Vector2& v) const;
-	bool  operator!=(const Vector2& v) const;
+	bool operator==(const Vector2& v) const;
+	bool operator!=(const Vector2& v) const;
 
 	Vector2  operator*(float n) const;
 	Vector2  operator/(float n) const;

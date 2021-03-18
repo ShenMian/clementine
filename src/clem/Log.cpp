@@ -3,7 +3,6 @@
 
 #include "Log.h"
 #include "spdlog/sinks/rotating_file_sink.h"
-#include <chrono>
 
 using namespace spdlog;
 
@@ -17,7 +16,8 @@ void Log::init()
 	}
 	catch(const spdlog_ex& e)
 	{
-		assert(!"Log init failed.");
+		printf("Logger init failed: %s", e.what());
+		assert(false);
 	}
 
 	coreLogger->set_pattern("[%D %T][thread %t][%L] %n : %v.");

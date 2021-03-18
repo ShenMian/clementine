@@ -8,10 +8,10 @@
 #include "Clem/Window.h"
 #include <csignal>
 
-using std::string;
 using std::shared_ptr;
-using std::this_thread::sleep_for;
+using std::string;
 using std::chrono::milliseconds;
+using std::this_thread::sleep_for;
 
 int main(int argc, char* argv[])
 {

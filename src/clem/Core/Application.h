@@ -5,9 +5,9 @@
 #define CLEM_CORE_APPLICATION_H_
 
 #include "Clem/Math.h"
+#include <memory>
 #include <string>
 #include <vector>
-#include <memory>
 
 class Scene;
 
@@ -97,12 +97,12 @@ private:
 	void render(long dt);
 	long getCurrentMillSecond() const;
 
-	bool                running         = false;
-	bool                paused          = false;
-	long                msPerUpdate     = 16;
-	long                msPerRender     = 16;
-	long                framesPerSecond = 0;
-	const std::string   name;
+	bool                                running         = false;
+	bool                                paused          = false;
+	long                                msPerUpdate     = 16;
+	long                                msPerRender     = 16;
+	long                                framesPerSecond = 0;
+	const std::string                   name;
 	std::vector<std::shared_ptr<Scene>> scenes;
 
 	static void         onSignal(int signal);

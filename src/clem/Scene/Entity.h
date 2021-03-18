@@ -49,11 +49,11 @@ public:
 	bool hasComponent();
 
 	entt::entity getId() const;
-	Scene*      getScene() const;
+	Scene*       getScene() const;
 
 private:
 	entt::entity id    = entt::null;
-	Scene*      scene = nullptr;
+	Scene*       scene = nullptr;
 };
 
 /**
