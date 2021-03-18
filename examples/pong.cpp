@@ -14,8 +14,6 @@ public:
 	Pong()
 			: Application("Pong")
 	{
-		puts(__FUNCTION__);
-
 		auto scene = make_shared<Scene>();
 		pushScene(scene);
 
@@ -30,7 +28,6 @@ public:
 
 	~Pong()
 	{
-		puts(__FUNCTION__);
 	}
 };
 

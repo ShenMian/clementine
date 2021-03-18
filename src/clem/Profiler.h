@@ -27,7 +27,7 @@ class Instrumentor
 public:
 	static Instrumentor& getInstance();
 
-	void begin(const char* filepath = "profile.json");
+	void begin(const char* filepath);
 	void end();
 
 	void writeRecord(const ProfileRecord& record);

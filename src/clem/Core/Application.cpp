@@ -6,7 +6,6 @@
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
 #include "Clem/Scene.h"
-#include "Clem/Window.h"
 #include <csignal>
 
 using std::shared_ptr;
@@ -134,7 +133,6 @@ void Application::update(long dt)
 	lag += dt;
 	while(lag >= msPerUpdate)
 	{
-		PROFILE_FUNC();
 		scene->update(msPerUpdate / 1000.0f);
 		lag -= msPerUpdate;
 	}
@@ -150,14 +148,12 @@ void Application::render(long dt)
 	{
 		framesPerSecond = frames;
 		frames = fpsLag = 0;
-		Window::setTitle(name + " | " + std::to_string(getFramesPerSecond()) + "FPS");
 	}
 
 	static long lag = 0;
 	lag += dt;
 	while(lag >= msPerRender)
 	{
-		PROFILE_FUNC();
 		scene->render(dt / 1000.0f);
 		lag -= msPerRender;
 		frames++;
