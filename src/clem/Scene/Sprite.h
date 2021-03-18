@@ -8,4 +8,11 @@ class Sprite
 {
 };
 
+class Tile
+{
+public:
+	wchar_t ch;
+	short   attr;
+};
+
 #endif // !CLEM_SCENE_SPRITE_H_
