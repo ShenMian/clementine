@@ -2,25 +2,127 @@
 // License(Apache-2.0)
 
 #include "Framebuffer.h"
-#include "Clem/Platform.h"
+#include "Clem/Profiler.h"
+
+void Framebuffer::drawSprite(const Point& p, const Sprite& s)
+{
+}
+
+void Framebuffer::drawPoint(float x, float y, const Tile& t)
+{
+	drawPoint({x, y}, t);
+}
+
+void Framebuffer::drawLine(Point a, Point b, const Tile& t)
+{
+	auto xDis   = b.x - a.x + 1;
+	auto yDis   = b.y - a.y + 1;
+	auto maxDis = std::max(abs(xDis), abs(yDis));
+
+	float xDelta = xDis / maxDis;
+	float yDelta = yDis / maxDis;
+
+	float x = a.x, y = a.y;
+	for(int i = 0; i < maxDis; i++)
+	{
+		drawPoint(x, y, t);
+		x += xDelta, y += yDelta;
+	}
+}
+
+/*
+void Framebuffer::drawRect(Rect r, const Tile& t)
+{
+	for(int x = r.left(); x <= r.right(); x++)
+	{
+		drawPoint(x, r.top(), t);
+		drawPoint(x, r.bottom(), t);
+	}
+	for(int y = r.top(); y <= r.bottom(); y++)
+	{
+		drawPoint(r.left(), y, t);
+		drawPoint(r.right(), y, t);
+	}
+}
+
+void Framebuffer::fillRect(Rect r, const Tile& t)
+{
+	for(int y = 0; y < r.height; y++)
+		for(int x = 0; x < r.width; x++)
+			drawPoint(r.x + x, r.y + y, t);
+}
+*/
+
+void Framebuffer::drawCycle(Point c, short r, const Tile& t)
+{
+	for(int x = 0; x <= r; x++)
+	{
+		int y = (int)std::sqrt(r * r - x * x);
+		drawPoint(c.x + x, c.y + y, t);
+		drawPoint(c.x - x, c.y + y, t);
+		drawPoint(c.x - x, c.y - y, t);
+		drawPoint(c.x + x, c.y - y, t);
+	}
+	for(int y = 0; y <= r; y++)
+	{
+		int x = (int)std::sqrt(r * r - y * y);
+		drawPoint(c.x + x, c.y + y, t);
+		drawPoint(c.x - x, c.y + y, t);
+		drawPoint(c.x - x, c.y - y, t);
+		drawPoint(c.x + x, c.y - y, t);
+	}
+}
+
+/*
+void Framebuffer::clear()
+{
+	fillRect(Rect({0, 0}, size), Tile());
+}
+*/
+
+void Framebuffer::setSize(const Size& s)
+{
+	size = s;
+	buffer.resize((size_t)s.area());
+}
+
+const Size& Framebuffer::getSize() const
+{
+	return size;
+}
 
 #ifdef OS_UNIX
 
-typedef Tile buffer_t;
-
-void Framebuffer::drawSprite(const Point& positon, const Sprite&)
+void Framebuffer::drawPoint(const Point& p, const Tile& t)
 {
+	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
+		return;
+	buffer[(size_t)p.x + (size_t)p.y * (size_t)size.x] = t;
+}
+
+void Framebuffer::render()
+{
+	PROFILE_FUNC();
 }
 
 #endif
 
 #ifdef OS_WIN
 
-typedef CHAR_INFO buffer_t;
-
-void Framebuffer::drawSprite(const Point& p, const Sprite& s)
+void Framebuffer::drawPoint(const Point& p, const Tile& t)
 {
-	
+	auto& buf            = buffer[(size_t)p.x + (size_t)p.y * (size_t)size.x];
+	buf.Char.UnicodeChar = t.ch;
+	buf.Attributes       = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY;
+}
+
+void Framebuffer::render()
+{
+	PROFILE_FUNC();
+
+	const auto hOut        = GetStdHandle(STD_OUTPUT_HANDLE);
+	SMALL_RECT writeRegion = {0, 0, (SHORT)size.x, (SHORT)size.y};
+	WriteConsoleOutput(hOut, (CHAR_INFO*)buffer.data(), {(short)size.x, (short)size.y}, {0, 0}, &writeRegion);
 }
 
 #endif

@@ -86,7 +86,7 @@ void Sprite::clear()
 void Sprite::setSize(const Size& s)
 {
 	size = s;
-	buffer.resize((int)s.area());
+	buffer.resize((size_t)s.area());
 }
 
 const Size& Sprite::getSize() const
