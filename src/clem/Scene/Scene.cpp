@@ -3,7 +3,7 @@
 
 #include "Scene.h"
 #include "Entity.h"
-#include "clem/Sprite.h"
+#include "Clem/Sprite.h"
 
 Entity Scene::createEntity()
 {
@@ -26,6 +26,5 @@ void Scene::render(long dt)
 	{
 		Entity e(i, this);
 		auto& s = e.getComponent<Sprite>();
-		printf("%hd, %hd\n", s.getSize().x, s.getSize().y);
 	}
 }
