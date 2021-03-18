@@ -145,14 +145,14 @@ void Application::updateScene(long dt)
 }
 
 void Application::renderScene(long dt)
-{	
+{
 	auto& scene = scenes.back();
 
 	static long fpsLag = 0, frames = 0;
 	fpsLag += dt;
 	if(fpsLag >= 1000)
 	{
-		framesPerSecond = frames;
+		frameRate = frames;
 		frames = fpsLag = 0;
 	}
 
@@ -166,9 +166,9 @@ void Application::renderScene(long dt)
 	}
 }
 
-long Application::getFramesPerSecond() const
+long Application::getFrameRate() const
 {
-	return framesPerSecond;
+	return frameRate;
 }
 
 void Application::pushScene(shared_ptr<Scene>& s)

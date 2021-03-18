@@ -67,9 +67,9 @@ public:
 	void setMsPerRender(long ms);
 
 	/**
-	 * @brief 获取每秒帧数(FPS).
+	 * @brief 获取帧速率(FPS).
 	 */
-	long getFramesPerSecond() const;
+	long getFrameRate() const;
 
 	/**
 	 * @brief 压入场景.
@@ -92,11 +92,11 @@ private:
 	void renderScene(long dt);
 	long getCurrentMillSecond() const;
 
-	bool                                running         = false;
-	bool                                paused          = false;
-	long                                msPerUpdate     = 16;
-	long                                msPerRender     = 16;
-	long                                framesPerSecond = 0;
+	bool                                running     = false;
+	bool                                paused      = false;
+	long                                msPerUpdate = 16;
+	long                                msPerRender = 16;
+	long                                frameRate   = 0;
 	const std::string                   name;
 	std::vector<std::shared_ptr<Scene>> scenes;
 
