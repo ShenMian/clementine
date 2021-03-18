@@ -148,14 +148,6 @@ void Application::renderScene(long dt)
 {
 	auto& scene = scenes.back();
 
-	static long fpsLag = 0, frames = 0;
-	fpsLag += dt;
-	if(fpsLag >= 1000)
-	{
-		frameRate = frames;
-		frames = fpsLag = 0;
-	}
-
 	static long lag = 0;
 	lag += dt;
 	while(lag >= msPerRender)
@@ -163,6 +155,17 @@ void Application::renderScene(long dt)
 		scene->render(dt / 1000.0f);
 		lag -= msPerRender;
 		frames++;
+	}
+}
+
+void Application::updateFrameRate(long dt)
+{
+	static long fpsLag = 0;
+	fpsLag += dt;
+	if(fpsLag >= 1000)
+	{
+		frameRate = frames;
+		frames = fpsLag = 0;
 	}
 }
 
