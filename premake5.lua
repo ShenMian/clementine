@@ -23,3 +23,4 @@ thirdparty["spdlog"] = "%{wks.location}/thirdparty/spdlog/include"
 outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
 
 include "src"
+include "examples"

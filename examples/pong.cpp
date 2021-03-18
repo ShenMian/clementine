@@ -2,10 +2,9 @@
 // License(Apache-2.0)
 
 #include "Clem.h"
+#include <cassert>
 #include <iostream>
-#include <time.h>
 #include <stdio.h>
-#include <assert.h>
 
 using namespace std;
 
@@ -32,34 +31,3 @@ Application* CreateApplication()
 {
 	return new Pong();
 }
-
-/*
-int func()
-{
-	Cursor::setVisible(false);
-	auto  director = Director::getInstance();
-	Scene scene;
-
-	Size winSize(width, height);
-	frameBuffer.setSize(winSize);
-
-	Bar bar(scene);
-	bar.setPosition({1, winSize.y / 2.0f - 2});
-
-	Ball ball(scene);
-	ball.setPosition({winSize.x / 2.0f, winSize.y / 2.0f});
-	ball.setVelocity({-30, 0});
-
-	Ball testA(scene);
-	testA.setPosition({117, 14});
-	Ball testB(scene);
-	testB.setPosition({2, 14});
-
-	director->setMsPerRender(1000 / 60);
-	director->pushScene(scene);
-	director->run();
-	while(true)
-		;
-	return 0;
-}
-*/

@@ -1,12 +1,13 @@
-project "Clementine"
-  kind "StaticLib"
+project "Examples"
+  kind "ConsoleApp"
   language "C++"
   cppdialect "C++17"
-  staticruntime "on"
-
+  
   targetdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/bin")
   objdir ("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/obj")
 
   files {"**.h", "**.cpp"}
 
-  includedirs {".", "%{thirdparty.entt}", "%{thirdparty.spdlog}"}
+  includedirs {"%{wks.location}/src", "%{thirdparty.entt}", "%{thirdparty.spdlog}"}
+
+  links {"Clementine"}
