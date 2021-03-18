@@ -9,4 +9,4 @@ project "Clementine"
 
   files {"**.h", "**.cpp"}
 
-  includedirs {".", "Clem", "%{thirdparty.entt}"}
+  includedirs {".", "Clem", "%{thirdparty.entt}", "%{thirdparty.spdlog}"}

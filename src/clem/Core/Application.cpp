@@ -48,10 +48,6 @@ Application::Application(const string& name)
 	std::signal(SIGINT, onSignal);
 
 	initialize();
-
-	// width / height = 80 / 25 => width * 25 = height * 80
-	const short width  = 80;
-	const short height = width * 25 / 80;
 }
 
 Application::~Application()
@@ -215,9 +211,6 @@ void Application::onSignal(int signal)
 
 void Application::initialize()
 {
-	winsize size;
-	ioctl(STDIN_FILENO, TIOCGWINSZ, &size);
-	this->winSize = {size.ws_col, size.ws_row + 1};
 }
 
 long Application::getCurrentMillSecond() const
@@ -240,12 +233,6 @@ void Application::initialize()
 		assert(false);
 	if(!SetConsoleMode(hOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING))
 		assert(false);
-
-	CONSOLE_SCREEN_BUFFER_INFO screenInfo;
-	auto                       ret = GetConsoleScreenBufferInfo(hOut, &screenInfo);
-	if(!ret)
-		assert(false);
-	this->winSize = {screenInfo.srWindow.Right + 1, screenInfo.srWindow.Bottom + 1};
 }
 
 long Application::getCurrentMillSecond() const

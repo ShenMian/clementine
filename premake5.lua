@@ -18,6 +18,7 @@ workspace "Clementine"
 
 thirdparty = {}
 thirdparty["entt"] = "%{wks.location}/thirdparty/entt/include"
+thirdparty["spdlog"] = "%{wks.location}/thirdparty/spdlog/include"
 
 outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
 
