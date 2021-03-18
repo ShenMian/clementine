@@ -2,6 +2,7 @@ project "Examples"
   kind "ConsoleApp"
   language "C++"
   cppdialect "C++17"
+  staticruntime "on"
   
   targetdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/bin")
   objdir ("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/obj")

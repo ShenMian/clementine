@@ -13,7 +13,7 @@ void Sprite::drawPoint(Point p, const Tile& t)
 {
 	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
 		return;
-	buffer[(int)p.x + (int)p.y * (int)size.x] = t;
+	buffer[(size_t)p.x + (size_t)p.y * (size_t)size.x] = t;
 }
 
 void Sprite::drawLine(Point a, Point b, const Tile& t)

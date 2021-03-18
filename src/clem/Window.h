@@ -18,7 +18,7 @@ public:
 	/**
 	 * @brief 设置终端窗口标题.
 	 */
-  static void setTitle(std::string& title);
+  static void setTitle(const std::string& title);
 };
 
 #endif // !CLEM_WINDOW_H_

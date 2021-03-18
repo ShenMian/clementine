@@ -4,14 +4,16 @@
 #include "Window.h"
 #include "Platform.h"
 #include <cassert>
+#include <cstdio>
 
 using std::string;
 
-void Window::setTitle(string& title)
-{
-}
-
 #ifdef OS_UNIX
+
+void Window::setTitle(const string& title)
+{
+	std::printf("\033]0;%s\007", title.c_str());
+}
 
 Size Window::getSize()
 {
@@ -28,6 +30,11 @@ Size Window::getSize()
 #endif
 
 #ifdef OS_WIN
+
+void Window::setTitle(const string& title)
+{
+	SetConsoleTitleA(title.c_str());
+}
 
 Size Window::getSize()
 {

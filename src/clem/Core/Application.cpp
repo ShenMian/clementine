@@ -3,6 +3,7 @@
 
 #include "Application.h"
 #include "Clem/Log.h"
+#include "Clem/Platform.h"
 #include "Clem/Profiler.h"
 #include "Clem/Scene.h"
 #include "Clem/Window.h"
