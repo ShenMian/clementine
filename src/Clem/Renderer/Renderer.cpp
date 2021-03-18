@@ -6,8 +6,8 @@
 
 Renderer::Renderer()
 {
-	current = &buffer[0];
-	next    = &buffer[1];
+	front = &buffer[0];
+	back  = &buffer[1];
 }
 
 Renderer& Renderer::getInstance()
@@ -20,21 +20,21 @@ void Renderer::render()
 {
 	PROFILE_FUNC();
 
-	current->render();
+	front->render();
 }
 
 void Renderer::swapBuffers()
 {
 	PROFILE_FUNC();
 
-	auto t  = current;
-	current = next;
-	next    = t;
+	auto t = front;
+	front  = back;
+	back   = t;
 }
 
 Framebuffer& Renderer::getBuffer() const
 {
-	return *next;
+	return *back;
 }
 
 void Renderer::setSize(const Size& s)

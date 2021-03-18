@@ -11,6 +11,9 @@
 class Rect;
 class Tile;
 
+/**
+ * @brief Tile的集合.
+ */
 class Sprite : public Component
 {
 public:

@@ -4,8 +4,8 @@
 #ifndef CLEM_RENDERER_RENDERER_H_
 #define CLEM_RENDERER_RENDERER_H_
 
-#include "Framebuffer.h"
 #include "Clem/Math/Vec2.h"
+#include "Framebuffer.h"
 
 class Renderer
 {
@@ -37,9 +37,9 @@ public:
 private:
 	Renderer();
 
-	Framebuffer* current;
-	Framebuffer* next;
-	Framebuffer buffer[2];
+	Framebuffer* front;
+	Framebuffer* back;
+	Framebuffer  buffer[2];
 };
 
 #endif // !CLEM_RENDERER_RENDERER_H_
