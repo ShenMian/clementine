@@ -102,7 +102,6 @@ private:
 	long                msPerUpdate     = 16;
 	long                msPerRender     = 16;
 	long                framesPerSecond = 0;
-	Size                winSize;
 	const std::string   name;
 	std::vector<std::shared_ptr<Scene>> scenes;
 

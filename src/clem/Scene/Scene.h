@@ -22,8 +22,8 @@ public:
 	Entity createEntity();
 	void   destoryEntity(Entity);
 
-	void update(long dt);
-	void render(long dt);
+	void update(float dt);
+	void render(float dt);
 
 private:
 	entt::registry registry;

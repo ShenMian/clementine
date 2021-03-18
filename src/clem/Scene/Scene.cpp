@@ -3,7 +3,7 @@
 
 #include "Scene.h"
 #include "Entity.h"
-#include "Clem/Sprite.h"
+#include "Sprite.h"
 
 Entity Scene::createEntity()
 {
@@ -15,11 +15,11 @@ void Scene::destoryEntity(Entity e)
 	registry.destroy(e.getId());
 }
 
-void Scene::update(long dt)
+void Scene::update(float dt)
 {
 }
 
-void Scene::render(long dt)
+void Scene::render(float dt)
 {
 	auto view = registry.view<Sprite>();
 	for(auto i : view)

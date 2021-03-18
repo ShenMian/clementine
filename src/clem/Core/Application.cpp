@@ -2,8 +2,10 @@
 // License(Apache-2.0)
 
 #include "Application.h"
+#include "Clem/Log.h"
+#include "Clem/Profiler.h"
 #include "Clem/Scene.h"
-#include "clem/Profiler.h"
+#include "Clem/Window.h"
 #include <csignal>
 
 using std::string;
@@ -14,7 +16,7 @@ using std::chrono::milliseconds;
 int main(int argc, char* argv[])
 {
 	Log::init();
-	PROFILE_SESSION_BEGIN();
+	PROFILE_SESSION_BEGIN("profile.json");
 
 	auto app = CreateApplication();
 	app->run();
@@ -50,9 +52,6 @@ Application::Application(const string& name)
 	// width / height = 80 / 25 => width * 25 = height * 80
 	const short width  = 80;
 	const short height = width * 25 / 80;
-	frameBuffer.setSize({width, height});
-
-	winSize = {width, height};
 }
 
 Application::~Application()
@@ -110,11 +109,6 @@ const std::string& Application::getName() const
 	return name;
 }
 
-const Size& Application::getWinSize() const
-{
-	return winSize;
-}
-
 void Application::setMsPerUpdate(long ms)
 {
 	if(ms <= 0)
@@ -144,7 +138,7 @@ void Application::update(long dt)
 	while(lag >= msPerUpdate)
 	{
 		PROFILE_FUNC();
-		scene->update(dt / 1000.0f);
+		scene->update(msPerUpdate / 1000.0f);
 		lag -= msPerUpdate;
 	}
 }
@@ -159,7 +153,7 @@ void Application::render(long dt)
 	{
 		framesPerSecond = frames;
 		frames = fpsLag = 0;
-		Terminal::setTitle(name + " | " + std::to_string(getFramesPerSecond()) + "FPS");
+		Window::setTitle(name + " | " + std::to_string(getFramesPerSecond()) + "FPS");
 	}
 
 	static long lag = 0;

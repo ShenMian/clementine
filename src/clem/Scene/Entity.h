@@ -4,6 +4,7 @@
 #ifndef CLEM_SCENE_ENTITY_H_
 #define CLEM_SCENE_ENTITY_H_
 
+#include "Clem/Log.h"
 #include "Scene.h"
 #include "entt.hpp"
 
