@@ -24,7 +24,7 @@ public:
 	 * @param y y坐标.
 	 * @param t 瓦片.
 	 */
-	void drawPoint(float x, float y, const Tile& t);
+	void drawPoint(int x, int y, const Tile& t);
 
 	/**
 	 * @brief 绘制点.
@@ -72,6 +72,10 @@ public:
 	 * @brief 清除全部绘制内容.
 	 */
 	void clear();
+
+	const Tile& getTile(int x, int y) const;
+
+	const Tile& getTile(const Point&) const;
 
 	/**
 	 * @brief 设置可绘制区域的大小

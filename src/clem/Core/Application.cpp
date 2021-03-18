@@ -5,7 +5,9 @@
 #include "Clem/Log.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
+#include "Clem/Renderer/Renderer.h"
 #include "Clem/Scene.h"
+#include "Clem/Window.h"
 #include <csignal>
 
 using std::shared_ptr;
@@ -47,6 +49,8 @@ Application::Application(const string& name)
 
 	std::signal(SIGINT, onSignal);
 
+	Renderer::getInstance().setSize(Window::getSize());
+
 	initialize();
 }
 
@@ -67,8 +71,10 @@ void Application::run()
 		long dt      = current - previous;
 		previous     = current;
 
-		update(dt);
-		render(dt);
+		PROFILE_FUNC();
+
+		updateScene(dt);
+		renderScene(dt);
 
 		if(paused)
 		{
@@ -125,7 +131,7 @@ void Application::setMsPerRender(long ms)
 	msPerRender = ms;
 }
 
-void Application::update(long dt)
+void Application::updateScene(long dt)
 {
 	auto& scene = scenes.back();
 
@@ -138,8 +144,8 @@ void Application::update(long dt)
 	}
 }
 
-void Application::render(long dt)
-{
+void Application::renderScene(long dt)
+{	
 	auto& scene = scenes.back();
 
 	static long fpsLag = 0, frames = 0;
@@ -172,7 +178,7 @@ void Application::pushScene(shared_ptr<Scene>& s)
 
 void Application::popScene()
 {
-	if(scenes.empty())
+	if(scenes.size() < 2)
 	{
 		CLEM_CORE_CRITICAL("pop a scene when the scenes is empty is not allowed");
 		assert(false);
@@ -239,7 +245,7 @@ long Application::getCurrentMillSecond() const
 	assert(ret != 0);
 	LARGE_INTEGER time;
 	QueryPerformanceCounter(&time);
-	return (long)time.QuadPart * 1000 / freq.QuadPart;
+	return (long)(time.QuadPart * 1000 / freq.QuadPart);
 }
 
 #endif

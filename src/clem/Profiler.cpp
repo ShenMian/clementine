@@ -14,17 +14,17 @@ Instrumentor& Instrumentor::getInstance()
 	return instance;
 }
 
-void Instrumentor::begin(const char* filepath)
+void Instrumentor::begin(const char* filename)
 {
 	assert(!session);
 
 	session = true;
-	file.open(filepath);
+	file.open(filename);
 	if(!file.is_open())
 	{
 		return;
 	}
-	CLEM_CORE_WARN("Profile session begin: {}", filepath);
+	CLEM_CORE_WARN("Profile session begin: {}", filename);
 	writeHead();
 }
 

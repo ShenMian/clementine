@@ -10,14 +10,19 @@
 class Renderer
 {
 public:
-	Renderer();
+	static Renderer& getInstance();
 
 	void render();
 
 	/**
 	 * @brief 交换缓冲区.
 	 */
-	void swapBuffer();
+	void swapBuffers();
+
+	/**
+	 * @brief 获取缓冲区.
+	 */
+	Framebuffer& getBuffer() const;
 
 	/**
 	 * @brief 设置缓冲区大小.
@@ -30,6 +35,8 @@ public:
 	const Size& getSize();
 
 private:
+	Renderer();
+
 	Framebuffer* current;
 	Framebuffer* next;
 	Framebuffer buffer[2];

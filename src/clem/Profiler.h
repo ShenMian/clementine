@@ -27,7 +27,7 @@ class Instrumentor
 public:
 	static Instrumentor& getInstance();
 
-	void begin(const char* filepath);
+	void begin(const char* filename);
 	void end();
 
 	void writeRecord(const ProfileRecord& record);
@@ -59,7 +59,7 @@ private:
 	std::chrono::time_point<std::chrono::steady_clock> begin;
 };
 
-#if 1
+#if 0
 	#define PROFILE_SESSION_BEGIN(filepath) Instrumentor::getInstance().begin(filepath)
 	#define PROFILE_SESSION_END() Instrumentor::getInstance().end()
 	#define PROFILE_SCOPE_BEGIN(name) InstrumentationCounter counter_##name(#name)

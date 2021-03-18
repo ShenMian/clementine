@@ -14,7 +14,7 @@ class Entity;
  */
 
 /**
- * 场景. 创建并管理实体.
+ * @brief 场景. 创建并管理实体.
  */
 class Scene
 {

@@ -4,9 +4,9 @@
 #include "Sprite.h"
 #include <cmath>
 
-void Sprite::drawPoint(float x, float y, const Tile& t)
+void Sprite::drawPoint(int x, int y, const Tile& t)
 {
-	drawPoint({x, y}, t);
+	drawPoint({(float)x, (float)y}, t);
 }
 
 void Sprite::drawPoint(Point p, const Tile& t)
@@ -82,6 +82,18 @@ void Sprite::clear()
 	fillRect(Rect({0, 0}, size), Tile());
 }
 */
+
+const Tile& Sprite::getTile(int x, int y) const
+{
+	return getTile(Point(x, y));
+}
+
+const Tile& Sprite::getTile(const Point& p) const
+{
+	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
+		return Tile();
+	return buffer[(size_t)p.x + (size_t)p.y * (size_t)size.x];
+}
 
 void Sprite::setSize(const Size& s)
 {

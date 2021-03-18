@@ -33,7 +33,7 @@ public:
 	 * @param y    y×ø±ê.
 	 * @param tile ÍßÆ¬.
 	 */
-	void drawPoint(float x, float y, const Tile& tile);
+	void drawPoint(int x, int y, const Tile& tile);
 
 	/**
 	 * @brief »æÖÆµã.

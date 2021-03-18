@@ -16,7 +16,7 @@ class Scene;
  */
 
 /**
- * 实体. 组件的容器.
+ * @brief 实体. 组件的容器.
  */
 class Entity
 {
@@ -80,7 +80,7 @@ void Entity::removeComponent()
 		CLEM_CORE_ERROR("remove a nonexistent component");
 		return;
 	}
-	scene->registry.get<T>(id);
+	scene->registry.getTile<T>(id);
 }
 
 template <typename T>

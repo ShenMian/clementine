@@ -6,11 +6,15 @@
 
 void Framebuffer::drawSprite(const Point& p, const Sprite& s)
 {
+	auto& siz = s.getSize();
+	for(int y = 0; y < siz.y; y++)
+		for(int x = 0; x < siz.x; x++)
+			drawPoint(p.x + x, p.y + y, s.getTile(x, y));
 }
 
-void Framebuffer::drawPoint(float x, float y, const Tile& t)
+void Framebuffer::drawPoint(int x, int y, const Tile& t)
 {
-	drawPoint({x, y}, t);
+	drawPoint({(float)x, (float)y}, t);
 }
 
 void Framebuffer::drawLine(Point a, Point b, const Tile& t)
@@ -111,6 +115,8 @@ void Framebuffer::render()
 
 void Framebuffer::drawPoint(const Point& p, const Tile& t)
 {
+	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
+		return;
 	auto& buf            = buffer[(size_t)p.x + (size_t)p.y * (size_t)size.x];
 	buf.Char.UnicodeChar = t.ch;
 	buf.Attributes       = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY;

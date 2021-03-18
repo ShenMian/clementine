@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Renderer.h"
+#include "Clem/Profiler.h"
 
 Renderer::Renderer()
 {
@@ -9,16 +10,31 @@ Renderer::Renderer()
 	next    = &buffer[1];
 }
 
+Renderer& Renderer::getInstance()
+{
+	static Renderer instance;
+	return instance;
+}
+
 void Renderer::render()
 {
+	PROFILE_FUNC();
+
 	current->render();
 }
 
-void Renderer::swapBuffer()
+void Renderer::swapBuffers()
 {
+	PROFILE_FUNC();
+
 	auto t  = current;
 	current = next;
 	next    = t;
+}
+
+Framebuffer& Renderer::getBuffer() const
+{
+	return *next;
 }
 
 void Renderer::setSize(const Size& s)

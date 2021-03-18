@@ -88,8 +88,8 @@ public:
 
 private:
 	void initialize();
-	void update(long dt);
-	void render(long dt);
+	void updateScene(long dt);
+	void renderScene(long dt);
 	long getCurrentMillSecond() const;
 
 	bool                                running         = false;
