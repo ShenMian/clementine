@@ -29,7 +29,7 @@ jobs:
       shell: bash
       run: cmake --build . --config $BUILD_TYPE
 
-    - name: Upload Library
+    - name: Upload
       uses: actions/upload-artifact@master
       with:
         name: Clementine

@@ -239,7 +239,7 @@ long Application::getCurrentMillSecond() const
 	assert(ret != 0);
 	LARGE_INTEGER time;
 	QueryPerformanceCounter(&time);
-	return time.QuadPart * 1000 / freq.QuadPart;
+	return (long)time.QuadPart * 1000 / freq.QuadPart;
 }
 
 #endif
