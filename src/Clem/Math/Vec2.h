@@ -12,7 +12,7 @@
 /**
  * 二维向量.
  */
-class Vector2
+class Vec2
 {
 public:
 	union
@@ -30,7 +30,7 @@ public:
 	/**
 	 * @brief 构造函数.
 	 */
-	Vector2() = default;
+	Vec2() = default;
 
 	/**
 	 * @brief 构造函数.
@@ -38,7 +38,7 @@ public:
 	 * @param x x坐标.
 	 * @param y y坐标.
 	 */
-	Vector2(float x, float y);
+	Vec2(float x, float y);
 
 	/**
 	 * @brief 获取长度.
@@ -57,7 +57,7 @@ public:
 	/**
 	 * @brief 标准化成单位向量.
 	 */
-	Vector2& normalize();
+	Vec2& normalize();
 
 	/**
 	 * @brief 旋转向量绕定点一定角度(弧度制).
@@ -65,7 +65,7 @@ public:
    * @param point 围绕旋转的点.
    * @param angle 要旋转的角度(弧度制).
 	 */
-	Vector2& rotate(const Vector2& point, float angle);
+	Vec2& rotate(const Vec2& point, float angle);
 
 	/**
 	 * @brief 获取角度.
@@ -79,7 +79,7 @@ public:
 	 * 
 	 * @see	distanceSquared
 	 */
-	float distance(const Vector2& point) const;
+	float distance(const Vec2& point) const;
 
 	/**
 	 * @brief 获取到另一个点的距离的平方.
@@ -88,14 +88,14 @@ public:
 	 * 
 	 * @see distance
 	 */
-	float distanceSquared(const Vector2& point) const;
+	float distanceSquared(const Vec2& point) const;
 
 	/**
 	 * @brief 获取两点之间的中点.
 	 * 
 	 * @param point 另一个点.
 	 */
-	Vector2 getMidpoint(const Vector2& point) const;
+	Vec2 getMidpoint(const Vec2& point) const;
 
 	/**
 	 * @brief 裁剪到指定的范围内.
@@ -103,31 +103,31 @@ public:
 	 * @param min 最小值.
 	 * @param max 最大值.
 	 */
-	void clamp(const Vector2& min, const Vector2& max);
+	void clamp(const Vec2& min, const Vec2& max);
 
 	/**
 	 * @brief 获取面积.
 	 */
 	float area() const;
 
-	bool operator==(const Vector2& v) const;
-	bool operator!=(const Vector2& v) const;
+	bool operator==(const Vec2& v) const;
+	bool operator!=(const Vec2& v) const;
 
-	Vector2  operator*(float n) const;
-	Vector2  operator/(float n) const;
-	Vector2  operator+(const Vector2& v) const;
-	Vector2  operator-(const Vector2& v) const;
-	Vector2  operator-() const;
-	Vector2& operator+=(const Vector2& v);
-	Vector2& operator-=(const Vector2& v);
-	Vector2& operator*=(float n);
-	Vector2& operator/=(float n);
+	Vec2  operator*(float n) const;
+	Vec2  operator/(float n) const;
+	Vec2  operator+(const Vec2& v) const;
+	Vec2  operator-(const Vec2& v) const;
+	Vec2  operator-() const;
+	Vec2& operator+=(const Vec2& v);
+	Vec2& operator-=(const Vec2& v);
+	Vec2& operator*=(float n);
+	Vec2& operator/=(float n);
 
-	static const Vector2 zero;
+	static const Vec2 zero;
 };
 
-typedef Vector2 Point;
-typedef Vector2 Size;
+typedef Vec2 Point;
+typedef Vec2 Size;
 
 /**
  * end of Math group

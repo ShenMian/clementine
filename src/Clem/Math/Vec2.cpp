@@ -1,28 +1,28 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "Vector2.h"
+#include "Vec2.h"
 #include <algorithm>
 #include <cassert>
 #include <cfloat>
 #include <cmath>
 
-Vector2::Vector2(float x, float y)
+Vec2::Vec2(float x, float y)
 		: x(x), y(y)
 {
 }
 
-float Vector2::length() const
+float Vec2::length() const
 {
 	return std::sqrt(lengthSquared());
 }
 
-float Vector2::lengthSquared() const
+float Vec2::lengthSquared() const
 {
 	return x * x + y * y;
 }
 
-Vector2& Vector2::normalize()
+Vec2& Vec2::normalize()
 {
 	const auto len = length();
 	if(len < FLT_EPSILON)
@@ -30,12 +30,12 @@ Vector2& Vector2::normalize()
 	return *this *= 1.0f / len;
 }
 
-Vector2& Vector2::rotate(const Vector2& point, float angle)
+Vec2& Vec2::rotate(const Vec2& point, float angle)
 {
 	const float sinAngle = std::sin(angle);
 	const float cosAngle = std::cos(angle);
 
-	if(point == Vector2(0, 0))
+	if(point == Vec2(0, 0))
 	{
 		float tempX = x * cosAngle - y * sinAngle;
 		y           = y * cosAngle + x * sinAngle;
@@ -53,29 +53,29 @@ Vector2& Vector2::rotate(const Vector2& point, float angle)
 	return *this;
 }
 
-float Vector2::getAngle() const
+float Vec2::getAngle() const
 {
 	return std::atan2(y, x);
 }
 
-float Vector2::distance(const Vector2& p) const
+float Vec2::distance(const Vec2& p) const
 {
 	return std::sqrt(distanceSquared(p));
 }
 
-float Vector2::distanceSquared(const Vector2& p) const
+float Vec2::distanceSquared(const Vec2& p) const
 {
 	auto xDis = std::abs(x - p.x);
 	auto yDis = std::abs(y - p.y);
 	return xDis * xDis + yDis * yDis;
 }
 
-Point Vector2::getMidpoint(const Vector2& p) const
+Point Vec2::getMidpoint(const Vec2& p) const
 {
 	return (*this + p) / 2.0f;
 }
 
-void Vector2::clamp(const Vector2& min, const Vector2& max)
+void Vec2::clamp(const Vec2& min, const Vec2& max)
 {
 	assert(min.x <= max.x && min.y <= max.y);
 
@@ -85,69 +85,69 @@ void Vector2::clamp(const Vector2& min, const Vector2& max)
 	y = std::min(y, max.y);
 }
 
-float Vector2::area() const
+float Vec2::area() const
 {
 	return width * height;
 }
 
-bool Vector2::operator==(const Vector2& v) const
+bool Vec2::operator==(const Vec2& v) const
 {
 	return (std::abs(x - v.x) < FLT_EPSILON) &&
 				 (std::abs(y - v.y) < FLT_EPSILON);
 }
 
-bool Vector2::operator!=(const Vector2& v) const
+bool Vec2::operator!=(const Vec2& v) const
 {
 	return !(*this == v);
 }
 
-Vector2 Vector2::operator*(float n) const
+Vec2 Vec2::operator*(float n) const
 {
-	return Vector2(x * n, y * n);
+	return Vec2(x * n, y * n);
 }
 
-Vector2 Vector2::operator/(float n) const
+Vec2 Vec2::operator/(float n) const
 {
-	return Vector2(x / n, y / n);
+	return Vec2(x / n, y / n);
 }
 
-Vector2 Vector2::operator+(const Vector2& v) const
+Vec2 Vec2::operator+(const Vec2& v) const
 {
-	return Vector2(x + v.x, y + v.y);
+	return Vec2(x + v.x, y + v.y);
 }
 
-Vector2 Vector2::operator-(const Vector2& v) const
+Vec2 Vec2::operator-(const Vec2& v) const
 {
-	return Vector2(x - v.x, y - v.y);
+	return Vec2(x - v.x, y - v.y);
 }
 
-Vector2 Vector2::operator-() const
+Vec2 Vec2::operator-() const
 {
-	return Vector2(-x, -y);
+	return Vec2(-x, -y);
 }
 
-Vector2& Vector2::operator+=(const Vector2& v)
+Vec2& Vec2::operator+=(const Vec2& v)
 {
 	x += v.x;
 	y += v.y;
 	return *this;
 }
 
-Vector2& Vector2::operator-=(const Vector2& v)
+Vec2& Vec2::operator-=(const Vec2& v)
 {
 	x -= v.x;
 	y -= v.y;
 	return *this;
 }
 
-Vector2& Vector2::operator*=(float n)
+Vec2& Vec2::operator*=(float n)
 {
 	return *this = *this * n;
 }
 
-Vector2& Vector2::operator/=(float n)
+Vec2& Vec2::operator/=(float n)
 {
 	return *this = *this / n;
 }
 
-const Vector2 Vector2::zero(0, 0);
+const Vec2 Vec2::zero(0, 0);
