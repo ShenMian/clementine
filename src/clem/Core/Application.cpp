@@ -4,10 +4,6 @@
 #include "Application.h"
 #include "Clem/Scene.h"
 #include "clem/Profiler.h"
-#include "clem/frame_buffer.h"
-#include "clem/log.h"
-#include "clem/platform.h"
-#include "clem/terminal.h"
 #include <csignal>
 
 using std::string;
