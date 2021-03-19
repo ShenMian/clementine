@@ -17,6 +17,8 @@ public:
 
 	/**
 	 * @brief 设置终端窗口标题.
+	 * 
+	 * @warning 此函数性能不稳定, 不应该频繁调用
 	 */
   static void setTitle(const std::string& title);
 };

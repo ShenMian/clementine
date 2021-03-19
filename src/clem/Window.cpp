@@ -3,6 +3,7 @@
 
 #include "Window.h"
 #include "Platform.h"
+#include "Profiler.h"
 #include <cassert>
 #include <cstdio>
 
@@ -12,11 +13,15 @@ using std::string;
 
 void Window::setTitle(const string& title)
 {
+	PROFILE_FUNC();
+
 	std::printf("\033]0;%s\007", title.c_str());
 }
 
 Size Window::getSize()
 {
+	PROFILE_FUNC();
+
 	winsize size;
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &size);
 	// return(size.ws_col, size.ws_row + 1);
@@ -33,11 +38,15 @@ Size Window::getSize()
 
 void Window::setTitle(const string& title)
 {
+	PROFILE_FUNC();
+
 	SetConsoleTitleA(title.c_str());
 }
 
 Size Window::getSize()
 {
+	PROFILE_FUNC();
+
 	const auto                 hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFO screenInfo;
 	auto                       ret = GetConsoleScreenBufferInfo(hOut, &screenInfo);

@@ -42,7 +42,4 @@ void Scene::render(float dt)
 
 	renderer.swapBuffers();
 	renderer.render();
-
-	auto& app = Application::getInstance();
-	Window::setTitle(app.getName() + " | " + std::to_string(app.getFramesPerSecond()) + "FPS");
 }

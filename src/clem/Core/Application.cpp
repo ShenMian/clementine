@@ -40,10 +40,7 @@ Application::Application(const string& name)
 		: name(name)
 {
 	if(instance != nullptr)
-	{
 		CLEM_CORE_CRITICAL("create the second application is not allowed");
-		assert(false);
-	}
 	instance = this;
 	PROFILE_FUNC();
 
@@ -71,10 +68,10 @@ void Application::run()
 		long dt      = current - previous;
 		previous     = current;
 
-		PROFILE_FUNC();
-
 		updateScene(dt);
 		renderScene(dt);
+
+		updateFrameRate(dt);
 
 		if(paused)
 		{
@@ -85,50 +82,6 @@ void Application::run()
 	}
 
 	CLEM_CORE_INFO("main loop stoped");
-}
-
-void Application::stop()
-{
-	running = false;
-}
-
-void Application::pause()
-{
-	if(paused)
-		CLEM_CORE_WARN("pause when the main loop is already paused");
-	paused = true;
-}
-
-void Application::resume()
-{
-	if(!paused)
-		CLEM_CORE_WARN("resume when the main loop is not paused");
-	paused = false;
-}
-
-const std::string& Application::getName() const
-{
-	return name;
-}
-
-void Application::setMsPerUpdate(long ms)
-{
-	if(ms <= 0)
-	{
-		CLEM_CORE_CRITICAL("set ms per update non positive is not allowed");
-		assert(false);
-	}
-	msPerUpdate = ms;
-}
-
-void Application::setMsPerRender(long ms)
-{
-	if(ms <= 0)
-	{
-		CLEM_CORE_CRITICAL("set ms per render non positive is not allowed");
-		assert(false);
-	}
-	msPerRender = ms;
 }
 
 void Application::updateScene(long dt)
@@ -166,7 +119,46 @@ void Application::updateFrameRate(long dt)
 	{
 		frameRate = frames;
 		frames = fpsLag = 0;
+		Window::setTitle(name + " | " + std::to_string(frameRate) +"FPS");
 	}
+}
+
+void Application::stop()
+{
+	running = false;
+}
+
+void Application::pause()
+{
+	if(paused)
+		CLEM_CORE_WARN("pause when the main loop is already paused");
+	paused = true;
+}
+
+void Application::resume()
+{
+	if(!paused)
+		CLEM_CORE_WARN("resume when the main loop is not paused");
+	paused = false;
+}
+
+const std::string& Application::getName() const
+{
+	return name;
+}
+
+void Application::setMsPerUpdate(long ms)
+{
+	if(ms <= 0)
+		CLEM_CORE_CRITICAL("set ms per update non positive is not allowed");
+	msPerUpdate = ms;
+}
+
+void Application::setMsPerRender(long ms)
+{
+	if(ms <= 0)
+		CLEM_CORE_CRITICAL("set ms per render non positive is not allowed");
+	msPerRender = ms;
 }
 
 long Application::getFrameRate() const
@@ -182,20 +174,14 @@ void Application::pushScene(shared_ptr<Scene>& s)
 void Application::popScene()
 {
 	if(scenes.size() < 2)
-	{
 		CLEM_CORE_CRITICAL("pop a scene when the scenes is empty is not allowed");
-		assert(false);
-	}
 	scenes.pop_back();
 }
 
 void Application::replaceScene(std::shared_ptr<Scene>& s)
 {
 	if(scenes.empty())
-	{
 		CLEM_CORE_CRITICAL("replace a scene when the scenes is empty is not allowed");
-		assert(false);
-	}
 	scenes.back() = s;
 }
 
@@ -244,7 +230,7 @@ void Application::initialize()
 long Application::getCurrentMillSecond() const
 {
 	LARGE_INTEGER freq;
-	BOOL          ret = QueryPerformanceFrequency(&freq);
+	BOOL          ret = QueryPerformanceFrequency(&freq); // TODO(SMS): 只需执行一次
 	assert(ret != 0);
 	LARGE_INTEGER time;
 	QueryPerformanceCounter(&time);

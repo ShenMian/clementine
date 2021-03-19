@@ -93,13 +93,15 @@ private:
 	void updateFrameRate(long dt);
 	long getCurrentMillSecond() const;
 
-	const std::string                   name;
-	bool                                running     = false;
-	bool                                paused      = false;
-	long                                msPerUpdate = 16;
-	long                                msPerRender = 16;
-	long                                frameRate   = 0;
-	long                                frames      = 0;
+	const std::string name;
+
+	bool running     = false;
+	bool paused      = false;
+	long msPerUpdate = 16;
+	long msPerRender = 16;
+	long frameRate   = 0;
+	long frames      = 0;
+
 	std::vector<std::shared_ptr<Scene>> scenes;
 
 	static void         onSignal(int signal);

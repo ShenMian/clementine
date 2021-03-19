@@ -28,7 +28,7 @@ public:
 	 * @brief 添加指定组件.
 	 */
 	template <typename T, typename... Args>
-	void addComponent(Args&&... args);
+	T& addComponent(Args&&... args);
 
 	/**
 	 * @brief 移除指定组件.
@@ -62,35 +62,26 @@ private:
  */
 
 template <typename T, typename... Args>
-void Entity::addComponent(Args&&... args)
+T& Entity::addComponent(Args&&... args)
 {
 	if(hasComponent<T>())
-	{
-		CLEM_CORE_ERROR("add a an existing component");
-		return;
-	}
-	scene->registry.emplace<T>(id, std::forward<Args>(args)...);
+		CLEM_CORE_CRITICAL("add a an existing component");
+	return scene->registry.emplace<T>(id, std::forward<Args>(args)...);
 }
 
 template <typename T>
 void Entity::removeComponent()
 {
 	if(!hasComponent<T>())
-	{
-		CLEM_CORE_ERROR("remove a nonexistent component");
-		return;
-	}
-	scene->registry.getTile<T>(id);
+		CLEM_CORE_CRITICAL("remove a nonexistent component");
+	scene->registry.destroy<T>(id);
 }
 
 template <typename T>
 T& Entity::getComponent()
 {
 	if(!hasComponent<T>())
-	{
 		CLEM_CORE_CRITICAL("get a nonexistent component");
-		abort();
-	}
 	return scene->registry.get<T>(id);
 }
 

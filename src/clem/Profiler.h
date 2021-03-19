@@ -59,7 +59,7 @@ private:
 	std::chrono::time_point<std::chrono::steady_clock> begin;
 };
 
-#if 0
+#if 1
 	#define PROFILE_SESSION_BEGIN(filepath) Instrumentor::getInstance().begin(filepath)
 	#define PROFILE_SESSION_END() Instrumentor::getInstance().end()
 	#define PROFILE_SCOPE_BEGIN(name) InstrumentationCounter counter_##name(#name)
