@@ -5,10 +5,6 @@
 #include <cassert>
 #include <iostream>
 #include <stdio.h>
-
-#define WIDE_ORIENTED 1
-#define CP_UTF8 65001
-#include <fcntl.h>
 #include <io.h>
 
 using namespace std;
@@ -33,6 +29,7 @@ public:
 		sprite.drawPoint({0, 0}, Tile('O'));         // 在 0,0 处绘制一个 Tile
 
 		auto& body = ball.addComponent<Rigidbody>(); // 为 ball 创建一个 Rigidbody 组件
+		body.velocity = Vec2(0.1, 0.1);
 	}
 
 private:

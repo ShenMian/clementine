@@ -26,7 +26,7 @@ public:
 	Entity getEntityById(entity_id id);
 	Entity getEntityByTag(const std::string& tag);
 
-	void destoryEntity(entity_id id);
+	void removeEntity(entity_id id);
 
 	void update(float dt);
 	void render(float dt);

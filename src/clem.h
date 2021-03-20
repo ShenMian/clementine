@@ -23,6 +23,7 @@
 // Component
 #include "Clem/Component/Component.h"
 #include "Clem/Component/Transform.h"
+#include "Clem/Component/Tag.h"
 
 #include "Clem/Log.h"
 #include "Clem/Platform.h"
