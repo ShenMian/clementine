@@ -8,7 +8,7 @@ project "Clementine"
   staticruntime "on"
 
   targetdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/bin")
-  objdir ("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/obj")
+  objdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/obj")
 
   files {"**.cpp", "**.h", "premake5.lua"}
 
@@ -17,3 +17,5 @@ project "Clementine"
     "%{thirdparty.entt}/include",
     "%{thirdparty.spdlog}/include",
     "%{thirdparty.yaml_cpp}/include"}
+
+  links "yaml-cpp"
