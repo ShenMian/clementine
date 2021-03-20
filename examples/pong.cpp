@@ -2,10 +2,11 @@
 // License(Apache-2.0)
 
 #include "Clem.h"
+#include "yaml-cpp/yaml.h"
+#include "Clem/Serialization/MathSerializer.h"
 #include <cassert>
 #include <iostream>
 #include <stdio.h>
-#include <io.h>
 
 using namespace std;
 
@@ -15,6 +16,10 @@ public:
 	Pong()
 			: Application("Pong")
 	{
+		YAML::Node config = YAML::LoadFile("config.yaml");
+
+		getchar();
+
 		scene = make_shared<Scene>();  // 创建场景 scene, 用于管理实体
 		pushScene(scene);              // 将 scene 压入堆栈
 		createBall();

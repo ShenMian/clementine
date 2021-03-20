@@ -1,3 +1,6 @@
+-- Copyright 2021 SMS
+-- License(Apache-2.0)
+
 project "Clementine"
   kind "StaticLib"
   language "C++"
@@ -9,10 +12,8 @@ project "Clementine"
 
   files {"**.h", "**.cpp"}
 
-  includedirs
-  {
+  includedirs {
     ".",
     "%{thirdparty.entt}",
     "%{thirdparty.spdlog}",
-    "%{thirdparty.yaml_cpp}"
-  }
+    "%{thirdparty.yaml_cpp}"}
