@@ -10,10 +10,10 @@ project "Clementine"
   targetdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/bin")
   objdir ("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/obj")
 
-  files {"**.h", "**.cpp"}
+  files {"**.cpp", "**.h", "premake5.lua"}
 
   includedirs {
     ".",
-    "%{thirdparty.entt}",
-    "%{thirdparty.spdlog}",
-    "%{thirdparty.yaml_cpp}"}
+    "%{thirdparty.entt}/include",
+    "%{thirdparty.spdlog}/include",
+    "%{thirdparty.yaml_cpp}/include"}

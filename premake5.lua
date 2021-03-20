@@ -9,27 +9,30 @@ workspace "Clementine"
   configurations {"Debug", "Release"}
 
   solution_items {
-		".clang-format",
-		"CMakeLists.txt",
-		"premake5.lua"
-	}
+    ".clang-format",
+    "CMakeLists.txt",
+    "premake5.lua"}
 
-	filter "configurations:Debug"
-		defines {"DEBUG"}
-		runtime "Debug"
-		symbols "on"
+  filter "configurations:Debug"
+    defines {"DEBUG"}
+    runtime "Debug"
+    symbols "on"
 
-	filter "configurations:Release"
-		defines {"NDEBUG"}
-		runtime "Release"
-		optimize "on"
+  filter "configurations:Release"
+    defines {"NDEBUG"}
+    runtime "Release"
+    optimize "on"
 
 thirdparty = {}
-thirdparty["entt"] = "%{wks.location}/thirdparty/entt/include"
-thirdparty["spdlog"] = "%{wks.location}/thirdparty/spdlog/include"
-thirdparty["yaml_cpp"] = "%{wks.location}/thirdparty/yaml-cpp/include"
+thirdparty["entt"] = "%{wks.location}/thirdparty/entt"
+thirdparty["spdlog"] = "%{wks.location}/thirdparty/spdlog"
+thirdparty["yaml_cpp"] = "%{wks.location}/thirdparty/yaml-cpp"
 
 outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
+
+group "Thirdparty"
+	include "thirdparty/yaml-cpp"
+group ""
 
 include "src"
 include "examples"
