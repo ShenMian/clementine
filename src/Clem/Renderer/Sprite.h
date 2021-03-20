@@ -4,7 +4,7 @@
 #ifndef CLEM_RENDERER_SPRITE_H_
 #define CLEM_RENDERER_SPRITE_H_
 
-#include "Clem/Component.h"
+#include "Clem/Component/Component.h"
 #include "Clem/Math/Vec2.h"
 #include <filesystem>
 #include <vector>

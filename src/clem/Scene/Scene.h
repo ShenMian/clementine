@@ -21,8 +21,12 @@ class Scene
 {
 public:
 	Entity createEntity();
-	Entity getEntity(entity_id id);
-	void   destoryEntity(Entity);
+	Entity createEntity(const std::string& tag);
+
+	Entity getEntityById(entity_id id);
+	Entity getEntityByTag(const std::string& tag);
+
+	void destoryEntity(entity_id id);
 
 	void update(float dt);
 	void render(float dt);

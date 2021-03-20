@@ -20,7 +20,10 @@
 // Math
 #include "Clem/Math/Vec2.h"
 
-#include "Clem/Component.h"
+// Component
+#include "Clem/Component/Component.h"
+#include "Clem/Component/Transform.h"
+
 #include "Clem/Log.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"

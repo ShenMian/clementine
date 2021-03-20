@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Scene.h"
+#include "Clem/Component/Tag.h"
 #include "Clem/Core/Application.h"
 #include "Clem/Profiler.h"
 #include "Clem/Renderer/Renderer.h"
@@ -12,17 +13,39 @@
 
 Entity Scene::createEntity()
 {
-	return getEntity(registry.create());
+	return getEntityById(registry.create());
 }
 
-Entity Scene::getEntity(entity_id id)
+Entity Scene::createEntity(const std::string& tag)
 {
-	return {id, this};
+	auto& e = getEntityById(registry.create());
+	e.addComponent<Tag>(tag);
+	return e;
 }
 
-void Scene::destoryEntity(Entity e)
+Entity Scene::getEntityById(entity_id id)
 {
-	registry.destroy(e.getId());
+	if(registry.valid(id))
+		return {id, this};
+	else
+		return Entity();
+}
+
+Entity Scene::getEntityByTag(const std::string& tag)
+{
+	auto view = registry.view<Tag>();
+	for(auto i : view)
+	{
+		auto& e = getEntityById(i);
+		if(e.getComponent<Tag>().tag == tag)
+			return e;
+	}
+	return Entity();
+}
+
+void Scene::destoryEntity(entity_id id)
+{
+	registry.destroy(id);
 }
 
 void Scene::update(float dt)
@@ -32,7 +55,7 @@ void Scene::update(float dt)
 	auto view = registry.view<Rigidbody>();
 	for(auto i : view)
 	{
-		auto& entity = getEntity(i);
+		auto& entity = getEntityById(i);
 		auto& body   = entity.getComponent<Rigidbody>();
 		body.velocity += body.acceleration * dt;
 	}
@@ -49,7 +72,7 @@ void Scene::render(float dt)
 	auto view = registry.view<Sprite>();
 	for(auto i : view)
 	{
-		auto& entity = getEntity(i);
+		auto& entity = getEntityById(i);
 		auto& sprite = entity.getComponent<Sprite>();
 		buf.drawSprite({0, 0}, sprite);
 	}
