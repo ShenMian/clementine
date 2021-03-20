@@ -32,8 +32,9 @@ void Scene::update(float dt)
 	auto view = registry.view<Rigidbody>();
 	for(auto i : view)
 	{
-		auto& e = getEntity(i);
-
+		auto& entity = getEntity(i);
+		auto& body   = entity.getComponent<Rigidbody>();
+		body.velocity += body.acceleration * dt;
 	}
 }
 
@@ -48,9 +49,9 @@ void Scene::render(float dt)
 	auto view = registry.view<Sprite>();
 	for(auto i : view)
 	{
-		auto& e = getEntity(i);
-		auto& s = e.getComponent<Sprite>();
-		buf.drawSprite({0, 0}, s);
+		auto& entity = getEntity(i);
+		auto& sprite = entity.getComponent<Sprite>();
+		buf.drawSprite({0, 0}, sprite);
 	}
 
 	renderer.swapBuffers();

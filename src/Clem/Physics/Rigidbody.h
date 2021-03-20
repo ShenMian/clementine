@@ -10,8 +10,6 @@
 class Rigidbody : public Component
 {
 public:
-
-private:
 	Vec2 velocity;
 	Vec2 acceleration;
 };

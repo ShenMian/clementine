@@ -5,6 +5,7 @@
 #define CLEM_SCENE_ENTITY_H_
 
 #include "Clem/Log.h"
+#include "Clem/Math/Vec2.h"
 #include "Scene.h"
 #include "entt.hpp"
 
@@ -50,12 +51,15 @@ public:
 	template <typename T>
 	bool hasComponent();
 
-	entity_id    getId() const;
-	Scene* getScene() const;
+	entity_id getId() const;
+	Scene*    getScene() const;
+
+	operator bool() const;
+	operator entity_id() const;
 
 private:
-	entity_id    id    = entt::null;
-	Scene* scene = nullptr;
+	entity_id id    = entt::null;
+	Scene*    scene = nullptr;
 };
 
 /**

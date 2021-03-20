@@ -19,3 +19,13 @@ Scene* Entity::getScene() const
 {
 	return scene;
 }
+
+Entity::operator bool() const
+{
+	return id != entt::null;
+}
+
+Entity::operator entity_id() const
+{
+	return id;
+}
