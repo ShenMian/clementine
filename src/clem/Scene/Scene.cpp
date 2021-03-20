@@ -28,20 +28,28 @@ void Scene::destoryEntity(Entity e)
 void Scene::update(float dt)
 {
 	PROFILE_FUNC();
+
+	auto view = registry.view<Rigidbody>();
+	for(auto i : view)
+	{
+		auto& e = getEntity(i);
+
+	}
 }
 
 void Scene::render(float dt)
 {
 	PROFILE_FUNC();
 
-	auto& renderer = Renderer::getInstance();
-	auto& buf      = renderer.getBuffer();
+	static auto& renderer = Renderer::getInstance();
+	auto&        buf      = renderer.getBuffer();
 	buf.clear();
 
 	auto view = registry.view<Sprite>();
 	for(auto i : view)
 	{
-		auto& s = getEntity(i).getComponent<Sprite>();
+		auto& e = getEntity(i);
+		auto& s = e.getComponent<Sprite>();
 		buf.drawSprite({0, 0}, s);
 	}
 

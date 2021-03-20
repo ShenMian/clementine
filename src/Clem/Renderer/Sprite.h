@@ -4,8 +4,9 @@
 #ifndef CLEM_RENDERER_SPRITE_H_
 #define CLEM_RENDERER_SPRITE_H_
 
-#include "Clem/Math/Vec2.h"
 #include "Clem/Component.h"
+#include "Clem/Math/Vec2.h"
+#include <filesystem>
 #include <vector>
 
 class Rect;
@@ -72,6 +73,14 @@ public:
 	void drawCycle(Point p, short radius, const Tile& t);
 
 	/**
+	 * @brief 绘制字符串.
+	 * 
+	 * @param pos 绘制起点的位置
+	 * @param str 要绘制的字符串
+	 */
+	void drawString(const Point& pos, std::wstring str);
+
+	/**
 	 * @brief 清除全部绘制内容.
 	 */
 	void clear();
@@ -89,6 +98,9 @@ public:
 	 * @brief 获取可绘制区域的大小
 	 */
 	const Size& getSize() const;
+
+	// void load(const std::filesystem::path& path);
+	// void store(const std::filesystem::path& path) const;
 
 private:
 	Size              size;

@@ -1,10 +1,15 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Clem.h"
 #include <cassert>
 #include <iostream>
 #include <stdio.h>
+
+#define WIDE_ORIENTED 1
+#define CP_UTF8 65001
+#include <fcntl.h>
+#include <io.h>
 
 using namespace std;
 
@@ -14,20 +19,20 @@ public:
 	Pong()
 			: Application("Pong")
 	{
-		scene = make_shared<Scene>();  // ´´½¨³¡¾° scene, ÓÃÓÚ¹ÜÀíÊµÌå
-		pushScene(scene);              // ½« scene Ñ¹Èë¶ÑÕ»
+		scene = make_shared<Scene>();  // åˆ›å»ºåœºæ™¯ scene, ç”¨äºç®¡ç†å®ä½“
+		pushScene(scene);              // å°† scene å‹å…¥å †æ ˆ
 		createBall();
 	}
 
 	void createBall()
 	{
-		auto ball = scene->createEntity();           // Ïò scene ÉêÇë´´½¨Ò»¸öÊµÌå ball
+		auto ball = scene->createEntity();           // å‘ scene ç”³è¯·åˆ›å»ºä¸€ä¸ªå®ä½“ ball
 
-		auto& sprite = ball.addComponent<Sprite>();  // Îª ball ´´½¨Ò»¸ö Sprite ×é¼ş
-		sprite.setSize({1, 1});                      // ÉèÖÃ Sprite µÄ´óĞ¡, ¼´¿É»æÖÆÇøÓòµÄ´óĞ¡
-		sprite.drawPoint({0, 0}, Tile('O'));         // ÔÚ 0,0 ´¦»æÖÆÒ»¸ö Tile
+		auto& sprite = ball.addComponent<Sprite>();  // ä¸º ball åˆ›å»ºä¸€ä¸ª Sprite ç»„ä»¶
+		sprite.setSize({1, 1});                      // è®¾ç½® Sprite çš„å¤§å°, å³å¯ç»˜åˆ¶åŒºåŸŸçš„å¤§å°
+		sprite.drawPoint({0, 0}, Tile('O'));         // åœ¨ 0,0 å¤„ç»˜åˆ¶ä¸€ä¸ª Tile
 
-		auto& body = ball.addComponent<Rigidbody>(); // Îª ball ´´½¨Ò»¸ö Rigidbody ×é¼ş
+		auto& body = ball.addComponent<Rigidbody>(); // ä¸º ball åˆ›å»ºä¸€ä¸ª Rigidbody ç»„ä»¶
 	}
 
 private:

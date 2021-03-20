@@ -28,7 +28,7 @@ private:
 	do                                         \
 	{                                          \
 		Log::getLogger()->critical(__VA_ARGS__); \
-		assert(!##__VA_ARGS__);                  \
+		assert(false);                           \
 	} while(0)
 
 #endif // !CLEM_LOG_H_

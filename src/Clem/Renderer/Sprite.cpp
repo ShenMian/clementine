@@ -4,6 +4,9 @@
 #include "Sprite.h"
 #include "Clem/Math/Rect.h"
 #include <cmath>
+#include <fstream>
+
+using namespace std::filesystem;
 
 void Sprite::drawPoint(int x, int y, const Tile& t)
 {
@@ -75,6 +78,12 @@ void Sprite::drawCycle(Point c, short r, const Tile& t)
 	}
 }
 
+void Sprite::drawString(const Point& pos, std::wstring str)
+{
+	for(int i = 0; i < str.size(); i++)
+		drawPoint(pos.x + i, pos.y, str[i]);
+}
+
 void Sprite::clear()
 {
 	fillRect(Rect({0, 0}, size), Tile::blank);
@@ -102,6 +111,30 @@ const Size& Sprite::getSize() const
 {
 	return size;
 }
+
+/*
+void Sprite::load(const path& path)
+{
+	if(!exists(path))
+		CLEM_CORE_CRITICAL("file doesn't exists" + path.string());
+	std::wifstream file(absolute(path), std::ios::binary);
+	file.read((wchar_t*)&size, sizeof(size));
+	auto buf = new wchar_t[size.height];
+	for(int i = 0; i < size.height; i++)
+	{
+		file.read((char*)buf, size.height * sizeof(wchar_t));
+		drawString({0, (float)i}, buf);
+	}
+}
+
+void Sprite::store(const path& path) const
+{
+	if(!exists(path))
+		CLEM_CORE_CRITICAL("file doesn't exists" + path.string());
+	std::wofstream file(absolute(path), std::ios::binary);
+	file.write((wchar_t*)&size, sizeof(size));
+}
+*/
 
 const Tile Tile::blank;
 
