@@ -9,4 +9,10 @@ project "Clementine"
 
   files {"**.h", "**.cpp"}
 
-  includedirs {".", "%{thirdparty.entt}", "%{thirdparty.spdlog}"}
+  includedirs
+  {
+    ".",
+    "%{thirdparty.entt}",
+    "%{thirdparty.spdlog}",
+    "%{thirdparty.yaml_cpp}"
+  }
