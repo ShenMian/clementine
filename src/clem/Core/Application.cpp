@@ -6,12 +6,12 @@
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
 #include "Clem/Renderer/Renderer.h"
-#include "Clem/Scene.h"
+#include "Clem/Scene/Scene.h"
 #include "Clem/Window.h"
 #include <csignal>
 
-using std::shared_ptr;
 using std::string;
+using std::shared_ptr;
 using std::chrono::milliseconds;
 using std::this_thread::sleep_for;
 
@@ -142,11 +142,6 @@ void Application::resume()
 	paused = false;
 }
 
-const std::string& Application::getName() const
-{
-	return name;
-}
-
 void Application::setMsPerUpdate(long ms)
 {
 	if(ms <= 0)
@@ -164,6 +159,11 @@ void Application::setMsPerRender(long ms)
 long Application::getFrameRate() const
 {
 	return frameRate;
+}
+
+const string& Application::getName() const
+{
+	return name;
 }
 
 void Application::pushScene(shared_ptr<Scene>& s)

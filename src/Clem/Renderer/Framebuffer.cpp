@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Framebuffer.h"
+#include "Clem/Math/Rect.h"
 #include "Clem/Profiler.h"
 
 void Framebuffer::drawSprite(const Point& p, const Sprite& s)
@@ -34,7 +35,6 @@ void Framebuffer::drawLine(Point a, Point b, const Tile& t)
 	}
 }
 
-/*
 void Framebuffer::drawRect(Rect r, const Tile& t)
 {
 	for(int x = r.left(); x <= r.right(); x++)
@@ -51,11 +51,10 @@ void Framebuffer::drawRect(Rect r, const Tile& t)
 
 void Framebuffer::fillRect(Rect r, const Tile& t)
 {
-	for(int y = 0; y < r.height; y++)
-		for(int x = 0; x < r.width; x++)
-			drawPoint(r.x + x, r.y + y, t);
+	for(int y = 0; y < r.size.y; y++)
+		for(int x = 0; x < r.size.x; x++)
+			drawPoint(r.origin.x + x, r.origin.y + y, t);
 }
-*/
 
 void Framebuffer::drawCycle(Point c, short r, const Tile& t)
 {
@@ -77,12 +76,10 @@ void Framebuffer::drawCycle(Point c, short r, const Tile& t)
 	}
 }
 
-/*
 void Framebuffer::clear()
 {
-	fillRect(Rect({0, 0}, size), Tile());
+	fillRect(Rect({0, 0}, size), Tile::blank);
 }
-*/
 
 void Framebuffer::setSize(const Size& s)
 {

@@ -15,6 +15,8 @@ class Scene;
  * @{
  */
 
+typedef entt::entity entity_id;
+
 /**
  * @brief 实体. 组件的容器.
  */
@@ -22,7 +24,7 @@ class Entity
 {
 public:
 	Entity() = default;
-	Entity(entt::entity id, Scene* scene);
+	Entity(entity_id id, Scene* scene);
 
 	/**
 	 * @brief 添加指定组件.
@@ -48,12 +50,12 @@ public:
 	template <typename T>
 	bool hasComponent();
 
-	entt::entity getId() const;
-	Scene*       getScene() const;
+	entity_id    getId() const;
+	Scene* getScene() const;
 
 private:
-	entt::entity id    = entt::null;
-	Scene*       scene = nullptr;
+	entity_id    id    = entt::null;
+	Scene* scene = nullptr;
 };
 
 /**

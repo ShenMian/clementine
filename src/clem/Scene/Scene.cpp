@@ -5,13 +5,19 @@
 #include "Clem/Core/Application.h"
 #include "Clem/Profiler.h"
 #include "Clem/Renderer/Renderer.h"
-#include "Clem/Window.h"
 #include "Entity.h"
-#include "Sprite.h"
+
+#include "Clem/Physics/Rigidbody.h"
+#include "Clem/Renderer/Sprite.h"
 
 Entity Scene::createEntity()
 {
-	return Entity(registry.create(), this);
+	return getEntity(registry.create());
+}
+
+Entity Scene::getEntity(entity_id id)
+{
+	return {id, this};
 }
 
 void Scene::destoryEntity(Entity e)
@@ -30,13 +36,12 @@ void Scene::render(float dt)
 
 	auto& renderer = Renderer::getInstance();
 	auto& buf      = renderer.getBuffer();
-	// buf.clear();
+	buf.clear();
 
 	auto view = registry.view<Sprite>();
 	for(auto i : view)
 	{
-		Entity e(i, this);
-		auto&  s = e.getComponent<Sprite>();
+		auto& s = getEntity(i).getComponent<Sprite>();
 		buf.drawSprite({0, 0}, s);
 	}
 

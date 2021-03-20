@@ -4,7 +4,7 @@
 #ifndef CLEM_WINDOW_H_
 #define CLEM_WINDOW_H_
 
-#include "Clem/Math.h"
+#include "Clem/Math/Vec2.h"
 #include <string>
 
 class Window

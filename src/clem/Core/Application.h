@@ -4,7 +4,7 @@
 #ifndef CLEM_CORE_APPLICATION_H_
 #define CLEM_CORE_APPLICATION_H_
 
-#include "Clem/Math.h"
+#include "Clem/Math/Vec2.h"
 #include <memory>
 #include <string>
 #include <vector>
@@ -52,11 +52,6 @@ public:
 	void resume();
 
 	/**
-	 * @brief 获取应用名称.
-	 */
-	const std::string& getName() const;
-
-	/**
 	 * @brief 设置更新时间周期.
 	 */
 	void setMsPerUpdate(long ms);
@@ -70,6 +65,11 @@ public:
 	 * @brief 获取帧速率(FPS).
 	 */
 	long getFrameRate() const;
+
+	/**
+	 * @brief 获取应用名称.
+	 */
+	const std::string& getName() const;
 
 	/**
 	 * @brief 压入场景.
@@ -88,12 +88,11 @@ public:
 
 private:
 	void initialize();
+
 	void updateScene(long dt);
 	void renderScene(long dt);
 	void updateFrameRate(long dt);
 	long getCurrentMillSecond() const;
-
-	const std::string name;
 
 	bool running     = false;
 	bool paused      = false;
@@ -103,6 +102,8 @@ private:
 	long frames      = 0;
 
 	std::vector<std::shared_ptr<Scene>> scenes;
+
+	const std::string name;
 
 	static void         onSignal(int signal);
 	static Application* instance;

@@ -1,11 +1,11 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_SCENE_SPRITE_H_
-#define CLEM_SCENE_SPRITE_H_
+#ifndef CLEM_RENDERER_SPRITE_H_
+#define CLEM_RENDERER_SPRITE_H_
 
 #include "Clem/Math/Vec2.h"
-#include "Component.h"
+#include "Clem/Component.h"
 #include <vector>
 
 class Rect;
@@ -103,6 +103,8 @@ public:
 
 	wchar_t ch   = ' ';
 	short   attr = 0;
+
+	static const Tile blank;
 };
 
-#endif // !CLEM_SCENE_SPRITE_H_
+#endif // !CLEM_RENDERER_SPRITE_H_

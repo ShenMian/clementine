@@ -2,7 +2,7 @@ include "./thirdparty/premake/solution_items.lua"
 
 workspace "Clementine"
   architecture "x86_64"
-  startproject "Clementine"
+  startproject "Examples"
   configurations {"Debug", "Release"}
   solution_items {".clang-format"}
 

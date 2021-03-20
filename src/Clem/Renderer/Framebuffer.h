@@ -5,8 +5,8 @@
 #define CLEM_RENDERER_H_
 
 #include "Clem/Math/Vec2.h"
-#include "Clem/Scene/Sprite.h"
 #include "Clem/Platform.h"
+#include "Sprite.h"
 #include <vector>
 
 class Rect;

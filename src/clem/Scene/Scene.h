@@ -6,6 +6,7 @@
 
 #include "entt.hpp"
 
+typedef entt::entity entity_id;
 class Entity;
 
 /**
@@ -20,6 +21,7 @@ class Scene
 {
 public:
 	Entity createEntity();
+	Entity getEntity(entity_id id);
 	void   destoryEntity(Entity);
 
 	void update(float dt);
