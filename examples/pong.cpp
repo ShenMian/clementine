@@ -14,13 +14,13 @@ public:
 	Pong()
 			: Application("Pong")
 	{
-		/*auto& dispatcher = EventDispatcher::getInstance();
+		auto& dispatcher = EventDispatcher::getInstance();
 		dispatcher.addListener(Event::Type::mouse, [](Event* e) {
 			auto event = dynamic_cast<MouseEvent*>(e);
 			auto& pos   = event->getPosition();
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {(short)pos.x, (short)pos.y});
 			printf("*");
-		});*/
+		});
 
 		scene = make_shared<Scene>();  // 创建场景 scene, 用于管理实体
 		pushScene(scene);              // 将 scene 压入堆栈

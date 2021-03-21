@@ -65,13 +65,17 @@ void Application::run()
 	quit          = false;
 	long previous = getCurrentMillSecond();
 
+	inputThread = std::thread([this]() {
+		while(!quit)
+			updateInput();
+	});
+
 	while(!quit)
 	{
 		long current = getCurrentMillSecond();
 		long dt      = current - previous;
 		previous     = current;
 
-		updateInput();
 		updateScene(dt);
 		renderScene(dt);
 
@@ -85,6 +89,7 @@ void Application::run()
 		}
 	}
 
+	inputThread.join();
 	CLEM_CORE_INFO("main loop stoped");
 }
 
@@ -94,11 +99,11 @@ void Application::run()
 void Application::updateInput()
 {
 	static auto&        dispatcher = EventDispatcher::getInstance();
-	static HANDLE       hInput     = GetStdHandle(STD_INPUT_HANDLE);
+	static HANDLE       hOut       = GetStdHandle(STD_INPUT_HANDLE);
 	static INPUT_RECORD rec;
-	static DWORD               res = 0;
+	static DWORD        res;
 	// TODO: 此处堵塞
-	ReadConsoleInput(hInput, &rec, 1, &res);
+	ReadConsoleInputW(hOut, &rec, 1, &res);
 	if(rec.EventType == MOUSE_EVENT && rec.Event.MouseEvent.dwEventFlags == MOUSE_MOVED)
 	{
 		dispatcher.dispatch(MouseEvent(MouseEvent::Type::move,

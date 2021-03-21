@@ -7,6 +7,7 @@
 #include "Clem/Math/Vec2.h"
 #include <memory>
 #include <string>
+#include <thread>
 #include <vector>
 
 class Scene;
@@ -103,6 +104,8 @@ private:
 
 	long frameRate   = 0;
 	long frames      = 0;
+
+	std::thread inputThread;
 
 	std::vector<std::shared_ptr<Scene>> scenes;
 
