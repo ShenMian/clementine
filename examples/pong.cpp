@@ -14,12 +14,20 @@ public:
 	Pong()
 			: Application("Pong")
 	{
+		/*auto& dispatcher = EventDispatcher::getInstance();
+		dispatcher.addListener(Event::Type::mouse, [](Event* e) {
+			auto event = dynamic_cast<MouseEvent*>(e);
+			auto& pos   = event->getPosition();
+			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {(short)pos.x, (short)pos.y});
+			printf("*");
+		});*/
+
 		scene = make_shared<Scene>();  // 创建场景 scene, 用于管理实体
 		pushScene(scene);              // 将 scene 压入堆栈
 
 		// 1. 创建乒乓球 Sprite
 		Sprite ballSprite({1 ,1});
-		ballSprite.drawPoint({0, 0}, Tile('O', 0x000E));
+		ballSprite.drawPoint({0, 0}, Tile('O', Color::yellow));
 
 		// 1. 创建乒乓球
 		auto ball = scene->createEntity("ball");            // 向 scene 申请创建一个实体 ball
@@ -29,7 +37,7 @@ public:
 
 		// 3. 创建乒乓球球拍 Sprite
 		Sprite batSprite({1, 5});
-		batSprite.fillRect(Rect({0, 0}, {1, 5}), Tile('#', 0x0001));
+		batSprite.fillRect(Rect({0, 0}, {1, 5}), Tile('#', Color::blue));
 
 		// 4. 创建两个乒乓球拍
 		auto bat1 = scene->createEntity("bat1");

@@ -27,6 +27,12 @@
 #include "Clem/Component/Tag.h"
 #include "Clem/Component/Script.h"
 
+// Event
+#include "Clem/Event/Event.h"
+#include "Clem/Event/EventDispatcher.h"
+#include "Clem/Event/KeyEvent.h"
+#include "Clem/Event/MouseEvent.h"
+
 // UI
 #include "Clem/UI/Text.h"
 

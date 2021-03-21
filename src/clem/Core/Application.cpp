@@ -71,6 +71,7 @@ void Application::run()
 		long dt      = current - previous;
 		previous     = current;
 
+		updateInput();
 		updateScene(dt);
 		renderScene(dt);
 
@@ -85,6 +86,24 @@ void Application::run()
 	}
 
 	CLEM_CORE_INFO("main loop stoped");
+}
+
+#include "Clem/Event/EventDispatcher.h"
+#include "Clem/Event/MouseEvent.h"
+
+void Application::updateInput()
+{
+	static auto&        dispatcher = EventDispatcher::getInstance();
+	static HANDLE       hInput     = GetStdHandle(STD_INPUT_HANDLE);
+	static INPUT_RECORD rec;
+	static DWORD               res = 0;
+	// TODO: 此处堵塞
+	ReadConsoleInput(hInput, &rec, 1, &res);
+	if(rec.EventType == MOUSE_EVENT && rec.Event.MouseEvent.dwEventFlags == MOUSE_MOVED)
+	{
+		dispatcher.dispatch(MouseEvent(MouseEvent::Type::move,
+																		{(float)rec.Event.MouseEvent.dwMousePosition.X, (float)rec.Event.MouseEvent.dwMousePosition.Y}));
+	}
 }
 
 void Application::updateScene(long dt)

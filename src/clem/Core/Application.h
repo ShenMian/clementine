@@ -89,6 +89,7 @@ public:
 private:
 	void initialize();
 
+	void updateInput();
 	void updateScene(long dt);
 	void renderScene(long dt);
 	void updateFrameRate(long dt);

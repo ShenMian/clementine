@@ -11,15 +11,15 @@ class Color
 public:
 	enum
 	{
-		black = 0x00,
-		red   = 0x04,
-		green = 0x02,
-		yellow,
-		blue = 0x01,
-		purple,
-		cyan,
-		aqua = cyan,
-		white
+		black  = 0x00,
+		red    = 0x04,
+		green  = 0x02,
+		yellow = 0x06,
+		blue   = 0x01,
+		purple = 0x05,
+		cyan   = 0x0B,
+		aqua   = cyan,
+		white  = 0x07
 	};
 
 	int8_t fore = 0xF;
