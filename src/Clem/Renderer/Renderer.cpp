@@ -16,7 +16,7 @@ Renderer& Renderer::getInstance()
 	return instance;
 }
 
-void Renderer::render()
+void Renderer::output()
 {
 	PROFILE_FUNC();
 

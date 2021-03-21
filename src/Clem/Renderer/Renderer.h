@@ -12,7 +12,7 @@ class Renderer
 public:
 	static Renderer& getInstance();
 
-	void render();
+	void output();
 
 	/**
 	 * @brief ½»»»»º³åÇø.

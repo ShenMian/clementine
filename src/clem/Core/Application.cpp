@@ -1,9 +1,6 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#define SDL_MAIN_HANDLED
-#include "SDL.h"
-
 #include "Application.h"
 #include "Clem/Log.h"
 #include "Clem/Platform.h"

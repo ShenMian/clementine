@@ -7,7 +7,7 @@ project "Clementine"
   cppdialect "C++17"
   staticruntime "on"
 
-  targetdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/bin")
+  targetdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/lib")
   objdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/obj")
 
   files {"**.cpp", "**.h", "premake5.lua"}
@@ -19,6 +19,4 @@ project "Clementine"
     "%{thirdparty.yaml_cpp}/include",
     "%{thirdparty.sdl}/include"}
 
-  links {
-    "yaml-cpp",
-    "sdl"}
+  links {"yaml-cpp"}

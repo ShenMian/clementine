@@ -25,10 +25,10 @@ workspace "Clementine"
     optimize "on"
 
 thirdparty = {}
+thirdparty["sdl"] = "%{wks.location}/thirdparty/sdl"
 thirdparty["entt"] = "%{wks.location}/thirdparty/entt"
 thirdparty["spdlog"] = "%{wks.location}/thirdparty/spdlog"
 thirdparty["yaml_cpp"] = "%{wks.location}/thirdparty/yaml-cpp"
-thirdparty["sdl"] = "%{wks.location}/thirdparty/sdl"
 
 outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
 

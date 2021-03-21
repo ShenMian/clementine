@@ -91,5 +91,5 @@ void Scene::render(float dt)
 		buf.drawString(transform.position, text.text);
 
 	renderer.swapBuffers();
-	renderer.render();
+	renderer.output();
 }
