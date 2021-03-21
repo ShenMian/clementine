@@ -23,19 +23,19 @@ Documentation
 👉 **[Github Wiki]** (Chinese)  
 👉 **[API Reference]** (Chinese)  
 
-Features 🎄
+Features
 --------
 - Multi-platform: Linux, macOS, Windows.
 - Lightweight.
 - Has a built-in CPU sampling profiler.
 - Using entity-component-system(ECS).
 
-Screenshots ✨
+Screenshots
 -----------
 <img src="docs/picture/profiler.png" width="80%" height="80%">
 <img src="docs/picture/clem_0.png" width="80%" height="80%">
 
-Compiling ⛓
+Compiling
 ---------
 [Set up Git] and [fork our repository].
 If you'd prefer not to use Git, use the 'Download ZIP' button on the right to get the source as a zip file.
@@ -55,7 +55,7 @@ Enter folder 'scripts' and run 'build.sh'/'build.bat'. This will download submod
 - `BUILD_EXAMPLES` Build the examples
 - `BUILD_TESTS`    Build the unit tests
 
-Contact 💬
+Contact
 -------
 - **[Github Discussions]**
 - **[Telegram]**

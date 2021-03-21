@@ -24,19 +24,19 @@
 👉 **[Github Wiki]** (中文)  
 👉 **[API参考]** (中文)  
 
-特点 🎄
+特点
 ----
 - 多平台: Linux, macOS, Windows.
 - 轻量.
 - 拥有内置CPU抽样性能分析器.
 - 使用实体-组件系统(ECS).
 
-截图 ✨
+截图
 ----
 <img src="docs/picture/profiler.png" width="80%" height="80%">
 <img src="docs/picture/picture_0.png" width="80%" height="80%">
 
-编译 ⛓
+编译
 ----
 [设置Git]并[fork我们的仓库]. 如果您更倾向于不使用Git, 点击右上角的'Download ZIP'来下载zip格式的源代码.
 
@@ -55,7 +55,7 @@
 - `BUILD_EXAMPLES` 构建示例
 - `BUILD_TESTS`    构建单元测试
 
-联系 💬
+联系
 ----
 - **[Github Discussions]**
 - **[Telegram]**
