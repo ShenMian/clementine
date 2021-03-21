@@ -14,9 +14,9 @@ project "Clementine"
 
   includedirs {
     ".",
+    "%{thirdparty.sdl}/include",
     "%{thirdparty.entt}/include",
     "%{thirdparty.spdlog}/include",
-    "%{thirdparty.yaml_cpp}/include",
-    "%{thirdparty.sdl}/include"}
+    "%{thirdparty.yaml_cpp}/include"}
 
-  links {"yaml-cpp"}
+  links {"yaml-cpp", "sdl"}

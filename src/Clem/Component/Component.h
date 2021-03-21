@@ -4,8 +4,6 @@
 #ifndef CLEM_SCENE_COMPONENT_H_
 #define CLEM_SCENE_COMPONENT_H_
 
-#include "Clem/Scene/Entity.h"
-
 class Component
 {
 };

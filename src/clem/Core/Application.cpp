@@ -1,6 +1,9 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
+#define SDL_MAIN_HANDLED
+#include "SDL.h"
+
 #include "Application.h"
 #include "Clem/Log.h"
 #include "Clem/Platform.h"
@@ -19,6 +22,8 @@ int main(int argc, char* argv[])
 {
 	Log::init();
 	PROFILE_SESSION_BEGIN("profile.json");
+
+	SDL_Init(SDL_INIT_EVENTS);
 
 	auto app = CreateApplication();
 	app->run();

@@ -12,6 +12,8 @@ workspace "Clementine"
   solution_items {
     ".clang-format",
     "CMakeLists.txt",
+    "README.md",
+    "README-cn.md",
     "premake5.lua"}
 
   filter "configurations:Debug"
