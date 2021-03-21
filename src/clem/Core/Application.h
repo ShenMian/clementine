@@ -94,10 +94,12 @@ private:
 	void updateFrameRate(long dt);
 	long getCurrentMillSecond() const;
 
-	bool running     = false;
+	bool quit        = false;
 	bool paused      = false;
+
 	long msPerUpdate = 16;
 	long msPerRender = 16;
+
 	long frameRate   = 0;
 	long frames      = 0;
 

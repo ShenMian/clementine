@@ -62,10 +62,10 @@ void Application::run()
 {
 	CLEM_CORE_INFO("main loop started");
 
-	running       = true;
+	quit          = false;
 	long previous = getCurrentMillSecond();
 
-	while(running)
+	while(!quit)
 	{
 		long current = getCurrentMillSecond();
 		long dt      = current - previous;
@@ -128,7 +128,7 @@ void Application::updateFrameRate(long dt)
 
 void Application::stop()
 {
-	running = false;
+	quit = true;
 }
 
 void Application::pause()

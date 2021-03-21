@@ -13,8 +13,15 @@
 
 这是一个用于制作2D命令行游戏的框架.   
 
+- [文档](#文档)
+- [特点](#特点)
+- [截图](#截图)
+- [编译](#编译)
+- [联系](#联系)
+
 文档
 ----
+👉 **[Github Wiki]** (中文)  
 👉 **[API参考]** (中文)  
 
 特点 🎄
@@ -24,19 +31,29 @@
 - 拥有内置CPU抽样性能分析器.
 - 使用实体-组件系统(ECS).
 
-编译 ⛓
-----
-1. [设置Git]并[fork我们的仓库]. 如果您更倾向于不使用Git, 点击右上角的'Download ZIP'来下载zip格式的源代码.
-2. 在文件管理器中打开源代码文件夹并执行'build.bat'. 这将下载子模块并使用CMake构建项目.
-
-### CMake 选项 (默认 ON)
-- `BUILD_EXAMPLES` 构建示例
-- `BUILD_TESTS`    构建单元测试
-
 截图 ✨
 ----
 <img src="docs/picture/profiler.png" width="80%" height="80%">
 <img src="docs/picture/picture_0.png" width="80%" height="80%">
+
+编译 ⛓
+----
+[设置Git]并[fork我们的仓库]. 如果您更倾向于不使用Git, 点击右上角的'Download ZIP'来下载zip格式的源代码.
+
+### Premake
+进入文件夹 'scripts' 并执行 'generate_[action]_project.sh'/'generate_[action]_project.bat'. 这将生成对应特定软件的项目文件.
+
+#### Action 选项
+- `vs2019` Visual Studio 2019
+- `xcode4` Xcode4
+- `gmake2` GNU Make 2
+
+### CMake
+进入文件夹 'scripts' 并执行 'build.sh'/'build.bat'. 这将下载子模块并使用 CMake 构建项目.
+
+### CMake 选项 (默认 ON)
+- `BUILD_EXAMPLES` 构建示例
+- `BUILD_TESTS`    构建单元测试
 
 联系 💬
 ----
@@ -47,5 +64,6 @@
 [API参考]:            https://shenmian.github.io/Clementine
 [设置Git]:            https://help.github.com/articles/set-up-git
 [fork我们的仓库]:      https://help.github.com/articles/fork-a-repo
+[Github Wiki]:         https://github.com/ShenMian/Clementine/wiki
 [Github Discussions]: https://github.com/ShenMian/Clementine/discussions
 [Telegram]:           https://t.me/shenmian
