@@ -143,7 +143,7 @@ void Sprite::store(const path& path) const
 
 const Tile Tile::blank;
 
-Tile::Tile(wchar_t ch, short attr)
-		: ch(ch), attr(attr)
+Tile::Tile(wchar_t ch, Color color)
+		: ch(ch), color(color)
 {
 }

@@ -24,7 +24,7 @@ YAML::Emitter& operator<<(YAML::Emitter& o, const Transform& t)
 YAML::Emitter& operator<<(YAML::Emitter& o, const Tile& t)
 {
 	o << YAML::Flow;
-	o << YAML::BeginSeq << t.ch << t.attr << YAML::EndSeq;
+	o << YAML::BeginSeq << t.ch << t.color.fore << t.color.back << YAML::EndSeq;
 	return o;
 }
 

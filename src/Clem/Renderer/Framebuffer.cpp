@@ -79,7 +79,7 @@ void Framebuffer::drawCycle(Point c, short r, const Tile& t)
 void Framebuffer::drawString(const Point& pos, std::wstring str)
 {
 	for(int i = 0; i < str.size(); i++)
-		drawPoint(pos.x + i, pos.y, str[i]);
+		drawPoint(pos.x + i, pos.y, Tile(str[i]));
 }
 
 void Framebuffer::clear(const Tile& t)
@@ -122,7 +122,7 @@ void Framebuffer::drawPoint(const Point& p, const Tile& t)
 		return;
 	auto& buf            = buffer[(size_t)p.x + (size_t)p.y * (size_t)size.x];
 	buf.Char.UnicodeChar = t.ch;
-	buf.Attributes       = t.attr;
+	buf.Attributes       = t.color.fore | t.color.back | FOREGROUND_INTENSITY;
 }
 
 void Framebuffer::output()

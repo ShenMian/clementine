@@ -108,13 +108,16 @@ private:
 	std::vector<Tile> buffer;
 };
 
+#include "Color.h"
+
 class Tile
 {
 public:
-	Tile(wchar_t ch = ' ', short attr = 0x000F);
+	Tile() = default;
+	Tile(wchar_t ch, Color color = Color());
 
-	wchar_t ch;
-	short   attr;
+	wchar_t ch = L' ';
+	Color   color;
 
 	static const Tile blank;
 };
