@@ -84,7 +84,7 @@ public:
 	/**
 	 * @brief 替换场景.
 	 */
-	void replaceScene(std::shared_ptr<Scene>& scene);
+	void replaceScene(const std::shared_ptr<Scene>& scene);
 
 private:
 	void initialize();

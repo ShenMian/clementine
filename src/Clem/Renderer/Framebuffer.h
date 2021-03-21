@@ -22,7 +22,7 @@ typedef CHAR_INFO buffer_t;
 class Framebuffer
 {
 public:
-	void render();
+	void output();
 
 	void drawSprite(const Point& positon, const Sprite& sprite);
 
@@ -78,9 +78,17 @@ public:
 	void drawCycle(Point p, short radius, const Tile& tile);
 
 	/**
+	 * @brief 绘制字符串.
+	 * 
+	 * @param pos 绘制起点的位置
+	 * @param str 要绘制的字符串
+	 */
+	void drawString(const Point& pos, std::wstring str);
+
+	/**
 	 * @brief 清除全部绘制内容.
 	 */
-	void clear();
+	void clear(const Tile& = Tile::blank);
 
 	void        setSize(const Size&);
 	const Size& getSize() const;

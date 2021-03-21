@@ -76,9 +76,8 @@ void Instrumentor::writeFooter()
 }
 
 InstrumentationCounter::InstrumentationCounter(const char* name)
-		: name(name), stopped(false)
+		: name(name), stopped(false), begin(std::chrono::steady_clock::now())
 {
-	begin = std::chrono::steady_clock::now();
 }
 
 InstrumentationCounter::~InstrumentationCounter()

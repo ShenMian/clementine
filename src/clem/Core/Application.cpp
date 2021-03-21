@@ -1,6 +1,9 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
+#define SDL_MAIN_HANDLED
+#include "SDL.h"
+
 #include "Application.h"
 #include "Clem/Log.h"
 #include "Clem/Platform.h"
@@ -178,7 +181,7 @@ void Application::popScene()
 	scenes.pop_back();
 }
 
-void Application::replaceScene(std::shared_ptr<Scene>& s)
+void Application::replaceScene(const shared_ptr<Scene>& s)
 {
 	if(scenes.empty())
 		CLEM_CORE_CRITICAL("replace a scene when the scenes is empty is not allowed");

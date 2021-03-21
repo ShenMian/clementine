@@ -8,6 +8,11 @@
 
 using namespace std::filesystem;
 
+Sprite::Sprite(const Size& size)
+{
+	setSize(size);
+}
+
 void Sprite::drawPoint(int x, int y, const Tile& t)
 {
 	drawPoint({(float)x, (float)y}, t);

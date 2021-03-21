@@ -7,10 +7,12 @@
 #include "Clem/Renderer/Renderer.h"
 #include "Entity.h"
 
+#include "Clem/Component/Script.h"
 #include "Clem/Component/Tag.h"
 #include "Clem/Component/Transform.h"
 #include "Clem/Physics/Rigidbody.h"
 #include "Clem/Renderer/Sprite.h"
+#include "Clem/UI/Text.h"
 
 Entity Scene::createEntity()
 {
@@ -56,13 +58,19 @@ void Scene::update(float dt)
 {
 	PROFILE_FUNC();
 
-	auto view = registry.view<Transform, Rigidbody>();
-	for(auto [entity, transform, body] : view.each())
+	auto scriptView = registry.view<Transform, Script>();
+	for(auto [entity, transform, script] : scriptView.each())
+		script.onUpdate(dt);
+
+	auto bodyView = registry.view<Transform, Rigidbody>();
+	for(auto [entity, transform, body] : bodyView.each())
 	{
 		transform.position += body.velocity;
-		body.velocity      += body.acceleration * dt;
+		body.velocity += body.acceleration * dt;
 	}
 }
+
+#include "Clem/Math/Rect.h"
 
 void Scene::render(float dt)
 {
@@ -70,13 +78,17 @@ void Scene::render(float dt)
 
 	static auto& renderer = Renderer::getInstance();
 	auto&        buf      = renderer.getBuffer();
-	buf.clear();
+	buf.clear(Tile('.'));
 
-	auto view = registry.view<Transform, Sprite>();
-	for(auto [entity, transform, sprite] : view.each())
-	{
+	// Render sprites
+	auto spriteView = registry.view<Transform, Sprite>();
+	for(auto [entity, transform, sprite] : spriteView.each())
 		buf.drawSprite(transform.position, sprite);
-	}
+
+	// Render UI
+	auto textView = registry.view<Transform, Text>();
+	for(auto [entity, transform, text] : textView.each())
+		buf.drawString(transform.position, text.text);
 
 	renderer.swapBuffers();
 	renderer.render();

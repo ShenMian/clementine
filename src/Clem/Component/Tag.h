@@ -4,7 +4,7 @@
 #ifndef CLEM_COMPONENT_TAG_H_
 #define CLEM_COMPONENT_TAG_H_
 
-#include "Clem/Component/Component.h"
+#include "Component.h"
 #include "Clem/Math/Vec2.h"
 
 #include <string>

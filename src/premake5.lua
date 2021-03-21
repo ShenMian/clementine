@@ -16,6 +16,9 @@ project "Clementine"
     ".",
     "%{thirdparty.entt}/include",
     "%{thirdparty.spdlog}/include",
-    "%{thirdparty.yaml_cpp}/include"}
+    "%{thirdparty.yaml_cpp}/include",
+    "%{thirdparty.sdl}/include"}
 
-  links "yaml-cpp"
+  links {
+    "yaml-cpp",
+    "sdl"}

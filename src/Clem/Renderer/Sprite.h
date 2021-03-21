@@ -20,6 +20,7 @@ class Sprite : public Component
 public:
 	Sprite()              = default;
 	Sprite(const Sprite&) = default;
+	explicit Sprite(const Size& size);
 
 	/**
 	 * @brief 绘制点.
@@ -110,11 +111,10 @@ private:
 class Tile
 {
 public:
-	Tile() = default;
-	Tile(wchar_t ch, short attr = 0);
+	Tile(wchar_t ch = ' ', short attr = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
-	wchar_t ch   = ' ';
-	short   attr = 0;
+	wchar_t ch;
+	short   attr;
 
 	static const Tile blank;
 };

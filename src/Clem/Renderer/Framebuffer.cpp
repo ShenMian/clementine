@@ -7,7 +7,7 @@
 
 void Framebuffer::drawSprite(const Point& p, const Sprite& s)
 {
-	auto& siz = s.getSize();
+	const auto& siz = s.getSize();
 	for(int y = 0; y < siz.y; y++)
 		for(int x = 0; x < siz.x; x++)
 			drawPoint(p.x + x, p.y + y, s.getTile(x, y));
@@ -76,9 +76,15 @@ void Framebuffer::drawCycle(Point c, short r, const Tile& t)
 	}
 }
 
-void Framebuffer::clear()
+void Framebuffer::drawString(const Point& pos, std::wstring str)
 {
-	fillRect(Rect({0, 0}, size), Tile::blank);
+	for(int i = 0; i < str.size(); i++)
+		drawPoint(pos.x + i, pos.y, str[i]);
+}
+
+void Framebuffer::clear(const Tile& t)
+{
+	fillRect(Rect({0, 0}, size), t);
 }
 
 void Framebuffer::setSize(const Size& s)
@@ -96,7 +102,7 @@ const Size& Framebuffer::getSize() const
 
 void Framebuffer::drawPoint(const Point& p, const Tile& t)
 {
-	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
+	if(0 <= p.x && p.x < size.x && 0 < p.y && p.y < size.y)
 		return;
 	buffer[(size_t)p.x + (size_t)p.y * (size_t)size.x] = t;
 }
@@ -116,16 +122,16 @@ void Framebuffer::drawPoint(const Point& p, const Tile& t)
 		return;
 	auto& buf            = buffer[(size_t)p.x + (size_t)p.y * (size_t)size.x];
 	buf.Char.UnicodeChar = t.ch;
-	buf.Attributes       = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY;
+	buf.Attributes       = t.attr;
 }
 
-void Framebuffer::render()
+void Framebuffer::output()
 {
 	PROFILE_FUNC();
 
 	const auto hOut        = GetStdHandle(STD_OUTPUT_HANDLE);
 	SMALL_RECT writeRegion = {0, 0, (SHORT)size.x, (SHORT)size.y};
-	WriteConsoleOutput(hOut, (CHAR_INFO*)buffer.data(), {(short)size.x, (short)size.y}, {0, 0}, &writeRegion);
+	WriteConsoleOutput(hOut, (CHAR_INFO*)buffer.data(), {(SHORT)size.x, (SHORT)size.y}, {0, 0}, &writeRegion);
 }
 
 #endif

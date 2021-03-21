@@ -20,7 +20,7 @@ void Renderer::render()
 {
 	PROFILE_FUNC();
 
-	front->render();
+	front->output();
 }
 
 void Renderer::swapBuffers()

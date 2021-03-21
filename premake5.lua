@@ -28,10 +28,12 @@ thirdparty = {}
 thirdparty["entt"] = "%{wks.location}/thirdparty/entt"
 thirdparty["spdlog"] = "%{wks.location}/thirdparty/spdlog"
 thirdparty["yaml_cpp"] = "%{wks.location}/thirdparty/yaml-cpp"
+thirdparty["sdl"] = "%{wks.location}/thirdparty/sdl"
 
 outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
 
 group "Thirdparty"
+  include "thirdparty/sdl"
   include "thirdparty/yaml-cpp"
 group ""
 

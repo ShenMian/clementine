@@ -48,7 +48,7 @@ private:
 class InstrumentationCounter
 {
 public:
-	InstrumentationCounter(const char* name);
+	explicit InstrumentationCounter(const char* name);
 	~InstrumentationCounter();
 
 	void stop();
