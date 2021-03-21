@@ -111,7 +111,7 @@ private:
 class Tile
 {
 public:
-	Tile(wchar_t ch = ' ', short attr = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+	Tile(wchar_t ch = ' ', short attr = 0x000F);
 
 	wchar_t ch;
 	short   attr;

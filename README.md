@@ -7,6 +7,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c09e10a19377466b99cc74d4f43ac214)](https://app.codacy.com/gh/ShenMian/Clementine?utm_source=github.com&utm_medium=referral&utm_content=ShenMian/Clementine&utm_campaign=Badge_Grade_Settings)
 [![LGTM](https://img.shields.io/lgtm/grade/cpp/g/ShenMian/Clementine.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ShenMian/Clementine/context:cpp)
 [![CI](https://github.com/ShenMian/Clementine/actions/workflows/ci.yml/badge.svg)](https://github.com/ShenMian/Clementine/actions/workflows/ci.yml)
+
 </div>
 
 This is a framework for building 2D console games.  
