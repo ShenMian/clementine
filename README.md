@@ -2,6 +2,7 @@
 
 <div align="center">
 
+![Banner](docs/pictures/banner.png)
 [![License](https://img.shields.io/github/license/ShenMian/Clementine)](https://github.com/ShenMian/Clementine/blob/master/LICENSE)
 [![CodeFactor](https://www.codefactor.io/repository/github/shenmian/clementine/badge)](https://www.codefactor.io/repository/github/shenmian/clementine)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c09e10a19377466b99cc74d4f43ac214)](https://app.codacy.com/gh/ShenMian/Clementine?utm_source=github.com&utm_medium=referral&utm_content=ShenMian/Clementine&utm_campaign=Badge_Grade_Settings)
@@ -12,16 +13,11 @@
 
 This is a framework for building 2D console games.  
 
-- [Documentation](#documentation)
 - [Features](#features)
+- [Documentation](#documentation)
 - [Screenshots](#screenshots)
 - [Compiling](#compiling)
 - [Contact](#contact)
-
-Documentation
--------------
-👉 **[Github Wiki]** (Chinese)  
-👉 **[API Reference]** (Chinese)  
 
 Features
 --------
@@ -30,10 +26,16 @@ Features
 - Has a built-in CPU sampling profiler.
 - Using entity-component-system(ECS).
 
+Documentation
+-------------
+👉 **[Github Wiki]** (Chinese)  
+👉 **[API Reference]** (Chinese)  
+
 Screenshots
 -----------
-<img src="docs/picture/profiler.png" width="80%" height="80%">
-<img src="docs/picture/clem_0.png" width="80%" height="80%">
+![](docs/pictures/profiler.png)
+![](docs/pictures/clem_0.png)
+![](docs/pictures/clem_1.png)
 
 Compiling
 ---------

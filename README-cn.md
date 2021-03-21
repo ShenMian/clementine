@@ -3,6 +3,7 @@
 <div align="center">
 <img src="docs/picture/banner.png">
 
+![Banner](docs/pictures/banner.png)
 [![License](https://img.shields.io/github/license/ShenMian/Clementine)](https://github.com/ShenMian/Clementine/blob/master/LICENSE)
 [![CodeFactor](https://www.codefactor.io/repository/github/shenmian/clementine/badge)](https://www.codefactor.io/repository/github/shenmian/clementine)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c09e10a19377466b99cc74d4f43ac214)](https://app.codacy.com/gh/ShenMian/Clementine?utm_source=github.com&utm_medium=referral&utm_content=ShenMian/Clementine&utm_campaign=Badge_Grade_Settings)
@@ -13,16 +14,11 @@
 
 这是一个用于制作2D命令行游戏的框架.   
 
-- [文档](#文档)
 - [特点](#特点)
+- [文档](#文档)
 - [截图](#截图)
 - [编译](#编译)
 - [联系](#联系)
-
-文档
-----
-👉 **[Github Wiki]** (中文)  
-👉 **[API参考]** (中文)  
 
 特点
 ----
@@ -31,10 +27,16 @@
 - 拥有内置CPU抽样性能分析器.
 - 使用实体-组件系统(ECS).
 
+文档
+----
+👉 **[Github Wiki]** (中文)  
+👉 **[API参考]** (中文)  
+
 截图
 ----
-<img src="docs/picture/profiler.png" width="80%" height="80%">
-<img src="docs/picture/picture_0.png" width="80%" height="80%">
+![](docs/pictures/profiler.png)
+![](docs/pictures/clem_0.png)
+![](docs/pictures/clem_1.png)
 
 编译
 ----
