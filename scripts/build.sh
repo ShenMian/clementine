@@ -4,6 +4,7 @@
 
 # 切换到主目录
 cd "$( cd "$( dirname "$0"  )" && pwd  )"
+cd ..
 
 # 创建build目录
 if [ ! -d "./build" ]; then
