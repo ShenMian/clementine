@@ -4,7 +4,7 @@
 #ifndef CLEM_PHYSICS_CIRCLE_COLLIDER_H_
 #define CLEM_PHYSICS_CIRCLE_COLLIDER_H_
 
-#include "collider.h"
+#include "Collider.h"
 
 /**
  * @addtogroup Physics

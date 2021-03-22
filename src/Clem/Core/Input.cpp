@@ -7,13 +7,23 @@
 #include "Clem/Event/KeyEvent.h"
 #include "Clem/Platform.h"
 
+#ifdef OS_UNIX
+
+void Input::update()
+{
+}
+
+#endif
+
+#ifdef OS_WIN
+
 void Input::update()
 {
 	static auto&        dispatcher = EventDispatcher::getInstance();
 	static HANDLE       hOut       = GetStdHandle(STD_INPUT_HANDLE);
 	static INPUT_RECORD rec;
 	static DWORD        res;
-	ReadConsoleInput(hOut, &rec, 1, &res); // ¶ÂÈû
+	ReadConsoleInput(hOut, &rec, 1, &res); // ï¿½ï¿½ï¿½ï¿½
 	switch(rec.EventType)
 	{
 	case KEY_EVENT:
@@ -56,3 +66,5 @@ void Input::update()
 		break;
 	}
 }
+
+#endif

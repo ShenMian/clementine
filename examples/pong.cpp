@@ -5,6 +5,7 @@
 #include <cassert>
 #include <iostream>
 #include <stdio.h>
+#include <cfloat>
 
 using namespace std;
 
@@ -57,7 +58,7 @@ public:
 
 		// 6. Bat2 由AI控制, 不推测路径
 		bat2.addComponent<Script>().onUpdate = [&](float dt) {
-			auto& bat        = scene->getEntityByTag("bat2");
+			auto  bat        = scene->getEntityByTag("bat2");
 			auto  ballPos    = scene->getEntityByTag("ball").getComponent<Transform>().position;
 			auto& batBody    = bat.getComponent<Rigidbody>();
 			auto  batPos     = bat.getComponent<Transform>().position;
@@ -67,7 +68,7 @@ public:
 		};
 
 		ball.addComponent<Script>().onUpdate = [&](float dt) {
-			auto& ball   = scene->getEntityByTag("ball");
+			auto  ball   = scene->getEntityByTag("ball");
 			auto& pos    = ball.getComponent<Transform>().position;
 			auto& vel    = ball.getComponent<Rigidbody>().velocity;
 			auto& sprite = ball.getComponent<Sprite>();

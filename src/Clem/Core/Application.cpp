@@ -223,6 +223,8 @@ void Application::onSignal(int signal)
 
 #ifdef OS_UNIX
 
+#include <sys/time.h>
+
 void Application::initialize()
 {
 }

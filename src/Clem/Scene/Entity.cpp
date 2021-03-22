@@ -3,7 +3,7 @@
 
 #include "Entity.h"
 #include "Scene.h"
-#include "clem/log.h"
+#include "Clem/Log.h"
 
 Entity::Entity(entity_id id, Scene* scene)
 		: id(id), scene(scene)

@@ -11,6 +11,10 @@ using std::string;
 
 #ifdef OS_UNIX
 
+#include <unistd.h>
+#include <termios.h>
+#include <sys/ioctl.h>
+
 void Window::setTitle(const string& title)
 {
 	PROFILE_FUNC();

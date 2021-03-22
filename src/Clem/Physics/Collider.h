@@ -4,7 +4,7 @@
 #ifndef CLEM_COLLIDER_H_
 #define CLEM_COLLIDER_H_
 
-#include "clem/Math/Vec2.h"
+#include "Clem/Math/Vec2.h"
 
 class Rigidbody;
 class BoxCollider;

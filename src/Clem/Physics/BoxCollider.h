@@ -4,7 +4,7 @@
 #ifndef CLEM_BOX_COLLIDER_H_
 #define CLEM_BOX_COLLIDER_H_
 
-#include "collider.h"
+#include "Collider.h"
 #include "Clem/Math/Vec2.h"
 #include "Clem/Math/Rect.h"
 

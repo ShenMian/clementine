@@ -10,21 +10,21 @@
 #include "Clem/Component/Script.h"
 #include "Clem/Component/Tag.h"
 #include "Clem/Component/Transform.h"
-#include "Clem/Physics/collider.h"
+#include "Clem/Physics/Collider.h"
 #include "Clem/Physics/Rigidbody.h"
 #include "Clem/Renderer/Sprite.h"
 #include "Clem/UI/Text.h"
 
 Entity Scene::createEntity()
 {
-	auto& e = getEntityById(registry.create());
+	auto e = getEntityById(registry.create());
 	e.addComponent<Transform>();
 	return e;
 }
 
 Entity Scene::createEntity(const std::string& tag)
 {
-	auto& e = createEntity();
+	auto e = createEntity();
 	e.addComponent<Tag>(tag);
 	return e;
 }
@@ -42,7 +42,7 @@ Entity Scene::getEntityByTag(const std::string& tag)
 	auto view = registry.view<Tag>();
 	for(auto i : view)
 	{
-		auto& e = getEntityById(i);
+		auto e = getEntityById(i);
 		if(e.getComponent<Tag>().tag == tag)
 			return e;
 	}

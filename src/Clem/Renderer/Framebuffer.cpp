@@ -4,6 +4,7 @@
 #include "Framebuffer.h"
 #include "Clem/Math/Rect.h"
 #include "Clem/Profiler.h"
+#include <cmath>
 
 void Framebuffer::drawSprite(const Point& p, const Sprite& s)
 {
@@ -107,7 +108,7 @@ void Framebuffer::drawPoint(const Point& p, const Tile& t)
 	buffer[(size_t)p.x + (size_t)p.y * (size_t)size.x] = t;
 }
 
-void Framebuffer::render()
+void Framebuffer::output()
 {
 	PROFILE_FUNC();
 }
