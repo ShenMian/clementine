@@ -1,24 +1,6 @@
-<<<<<<< HEAD
-[submodule "googletest"]
-	path = tests/googletest
-	url = https://github.com/google/googletest.git
-[submodule "thirdparty/asio"]
-	path = thirdparty/asio
-	url = https://github.com/chriskohlhoff/asio.git
-[submodule "thirdparty/spdlog"]
-	path = thirdparty/spdlog
-	url = https://github.com/gabime/spdlog.git
-[submodule "thirdparty/SDL"]
-	path = thirdparty/SDL
-	url = https://github.com/libsdl-org/SDL.git
-[submodule "thirdparty/yaml-cpp"]
-	path = thirdparty/yaml-cpp
-	url = https://github.com/jbeder/yaml-cpp
-=======
 [submodule "thirdparty/yaml-cpp"]
 	path = thirdparty/yaml-cpp
 	url = https://github.com/jbeder/yaml-cpp.git
 [submodule "thirdparty/sdl"]
 	path = thirdparty/sdl
 	url = https://github.com/libsdl-org/sdl.git
->>>>>>> develop
