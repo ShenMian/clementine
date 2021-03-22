@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Framebuffer.h"
+#include "Cursor.h"
 #include "Clem/Math/Rect.h"
 #include "Clem/Profiler.h"
 #include <cmath>
@@ -111,6 +112,16 @@ void Framebuffer::drawPoint(const Point& p, const Tile& t)
 void Framebuffer::output()
 {
 	PROFILE_FUNC();
+
+    for(int y = 0; y < size.y; y++)
+    {
+        Cursor::move(0, y);
+        for(int x = 0; x < size.x; x++)
+        {
+            auto& buf = buffer[x + y * size.x];
+            printf("%C", buf.ch);
+        }
+    }
 }
 
 #endif
