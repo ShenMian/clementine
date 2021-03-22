@@ -14,6 +14,8 @@ public:
 	short keyCode;
 	bool  state;
 	short repeatCount;
+
+	KeyEvent(short keyCode, bool state, short repeatCount = 0);
 };
 
 #endif // !CLEM_EVENT_KEY_EVENT_H_

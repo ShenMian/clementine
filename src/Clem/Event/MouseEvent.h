@@ -16,26 +16,27 @@ public:
 	{
 		move,
 		click,
+		double_click,
 		wheeled
 	};
 
-	enum class State
+	enum class Key
 	{
 		left_buttom,
 		right_buttom,
 		none
 	};
 
-	MouseEvent(Type type, const Point& pos, State state = State::none);
+	MouseEvent(Type type, const Point& pos, Key state = Key::none);
 
-	const Point& getPosition() const;
-	State        getState() const;
 	Type         getType() const;
+	const Point& getPosition() const;
+	Key          getKey() const;
 
 private:
 	Type  type;
 	Point position;
-	State state;
+	Key   key;
 };
 
 #endif // !CLEM_EVENT_MOUSE_EVENT_H_

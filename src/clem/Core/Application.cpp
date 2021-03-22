@@ -11,6 +11,7 @@
 #include "Clem/Renderer/Renderer.h"
 #include "Clem/Scene/Scene.h"
 #include "Clem/Window.h"
+#include "Input.h"
 #include <csignal>
 
 using std::string;
@@ -60,18 +61,14 @@ Application::~Application()
 
 void Application::run()
 {
+	if(quit == false)
+		CLEM_CORE_CRITICAL("call Application::run() when the application is already running");
 	CLEM_CORE_INFO("main loop started");
 
 	quit          = false;
 	long previous = getCurrentMillSecond();
 
-	thread.input = std::thread([this]() {
-		while(!quit)
-		{
-			updateInput();
-			sleep_for(milliseconds(16));
-		}
-	});
+	thread.input = std::thread(&Application::updateInput, this);
 
 	while(!quit)
 	{
@@ -97,21 +94,13 @@ void Application::run()
 	CLEM_CORE_INFO("main loop stoped");
 }
 
-#include "Clem/Event/EventDispatcher.h"
-#include "Clem/Event/MouseEvent.h"
 
 void Application::updateInput()
 {
-	static auto&        dispatcher = EventDispatcher::getInstance();
-	static HANDLE       hOut       = GetStdHandle(STD_INPUT_HANDLE);
-	static INPUT_RECORD rec;
-	static DWORD        res;
-	// TODO: 此处堵塞
-	ReadConsoleInputW(hOut, &rec, 1, &res);
-	if(rec.EventType == MOUSE_EVENT && rec.Event.MouseEvent.dwEventFlags == MOUSE_MOVED)
+	while(!quit)
 	{
-		dispatcher.dispatch(MouseEvent(MouseEvent::Type::move,
-																		{(float)rec.Event.MouseEvent.dwMousePosition.X, (float)rec.Event.MouseEvent.dwMousePosition.Y}));
+		Input::update();
+		sleep_for(milliseconds(16));
 	}
 }
 
@@ -156,6 +145,8 @@ void Application::updateFrameRate(long dt)
 
 void Application::stop()
 {
+	if(quit)
+		CLEM_CORE_CRITICAL("call Application::stop() when the application has stopped");
 	quit = true;
 }
 

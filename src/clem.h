@@ -3,6 +3,7 @@
 
 // Core
 #include "Clem/Core/Application.h"
+#include "Clem/Core/Input.h"
 
 // Scene
 #include "Clem/Scene/Scene.h"

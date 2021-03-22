@@ -3,8 +3,8 @@
 
 #include "MouseEvent.h"
 
-MouseEvent::MouseEvent(Type t, const Point& p, State s)
-		: type(t), position(p), state(s)
+MouseEvent::MouseEvent(Type t, const Point& p, Key s)
+		: type(t), position(p), key(s)
 {
 }
 
@@ -13,9 +13,9 @@ const Point& MouseEvent::getPosition() const
 	return position;
 }
 
-MouseEvent::State MouseEvent::getState() const
+MouseEvent::Key MouseEvent::getKey() const
 {
-	return state;
+	return key;
 }
 
 MouseEvent::Type MouseEvent::getType() const

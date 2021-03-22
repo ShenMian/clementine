@@ -96,7 +96,7 @@ private:
 	void updateFrameRate(long dt);
 	long getCurrentMillSecond() const;
 
-	bool quit        = false;
+	bool quit        = true;
 	bool paused      = false;
 
 	long msPerUpdate = 16;
