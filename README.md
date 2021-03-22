@@ -28,8 +28,8 @@ Features
 
 Documentation
 -------------
-👉 **[Github Wiki]** (Chinese)  
-👉 **[API Reference]** (Chinese)  
+- **[Github Wiki]** (Chinese)  
+- **[API Reference]** (Chinese)  
 
 Screenshots
 -----------

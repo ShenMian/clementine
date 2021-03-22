@@ -65,9 +65,12 @@ void Application::run()
 	quit          = false;
 	long previous = getCurrentMillSecond();
 
-	inputThread = std::thread([this]() {
+	thread.input = std::thread([this]() {
 		while(!quit)
+		{
 			updateInput();
+			sleep_for(milliseconds(16));
+		}
 	});
 
 	while(!quit)
@@ -89,7 +92,8 @@ void Application::run()
 		}
 	}
 
-	inputThread.join();
+	assert(thread.input.joinable());
+	thread.input.join();
 	CLEM_CORE_INFO("main loop stoped");
 }
 

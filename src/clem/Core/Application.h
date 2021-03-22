@@ -105,7 +105,10 @@ private:
 	long frameRate   = 0;
 	long frames      = 0;
 
-	std::thread inputThread;
+	struct
+	{
+		std::thread input;
+	} thread;
 
 	std::vector<std::shared_ptr<Scene>> scenes;
 
