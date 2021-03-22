@@ -33,10 +33,15 @@ void Input::update()
 			break;
 
 		case DOUBLE_CLICK:
-			printf("mouse:double_click");
+			dispatcher.dispatch(MouseEvent(MouseEvent::Type::double_click,
+																		 {(float)rec.Event.MouseEvent.dwMousePosition.X,
+																			(float)rec.Event.MouseEvent.dwMousePosition.Y}));
 			break;
 
 		case MOUSE_WHEELED:
+			dispatcher.dispatch(MouseEvent(MouseEvent::Type::wheeled,
+																		 {(float)rec.Event.MouseEvent.dwMousePosition.X,
+																			(float)rec.Event.MouseEvent.dwMousePosition.Y}));
 			printf("mouse:wheeled");
 			break;
 		}
