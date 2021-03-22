@@ -17,6 +17,9 @@
 
 // Physics
 #include "Clem/Physics/Rigidbody.h"
+#include "Clem/Physics/Collider.h"
+#include "Clem/Physics/BoxCollider.h"
+#include "Clem/Physics/CircleCollider.h"
 
 // Math
 #include "Clem/Math/Vec2.h"

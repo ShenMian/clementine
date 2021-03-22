@@ -10,6 +10,7 @@
 #include "Clem/Component/Script.h"
 #include "Clem/Component/Tag.h"
 #include "Clem/Component/Transform.h"
+#include "Clem/Physics/collider.h"
 #include "Clem/Physics/Rigidbody.h"
 #include "Clem/Renderer/Sprite.h"
 #include "Clem/UI/Text.h"
@@ -68,6 +69,27 @@ void Scene::update(float dt)
 		transform.position += body.velocity;
 		body.velocity += body.acceleration * dt;
 	}
+
+	//const size_t size = 10;
+	//for(int i = 0; i < size - 1; i++)
+	//	for(int j = i + 1; j < size; j++)
+	//		handle(colliders[i], colliders[j]);
+
+	//std::vector<int> v;
+	//for(auto i = v.begin(); i < v.end() - 1; i++)
+	//	;
+
+	//auto view = registry.view<Rigidbody, Collider>();
+	//for(auto i = view.begin(); i != view.end() - 1; ++i)
+	//	for(auto j = i + 1; j != view.end(); ++j)
+	//		handle(*i, *j);
+
+	//for(auto [entity, body, collider] : colliderView.each())
+	//{
+	//}
+
+	// getPosition().distance(o->getPosition()) <= getRadius() + o->getRadius();
+	// return getRect().contains(o->getRect());
 }
 
 #include "Clem/Math/Rect.h"

@@ -78,7 +78,10 @@ enum KeyCode
 	W,
 	X,
 	Y,
-	Z
+	Z,
+
+	up = 0x026,
+	down = 0x028
 };
 
 #endif // !CLEM_CORE_INPUT_H_
