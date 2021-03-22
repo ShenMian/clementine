@@ -1,21 +1,15 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "clem.h"
+#include "Clem.h"
+#include <cassert>
 #include <iostream>
-#include <time.h>
 #include <stdio.h>
-#include <assert.h>
-#include <chrono>
-#include <thread>
-
-using std::chrono::seconds;
-using std::this_thread::sleep_for;
+#include <cfloat>
 
 using namespace std;
 
-#include <clem/input/keyboard.h>
-#include <clem/frame_buffer.h>
+constexpr float ball_speed = 0.6;
 
 class Pong : public Application
 {
@@ -23,118 +17,84 @@ public:
 	Pong()
 			: Application("Pong")
 	{
-		scene = make_shared<NScene>();
-		pushScene(scene);
+		scene = make_shared<Scene>(); // 创建场景 scene, 用于管理实体
+		pushScene(scene);             // 将 scene 压入堆栈
 
-		auto ball = scene->createEntity();
+		// 1. 创建乒乓球 Sprite
+		Sprite ballSprite({1, 1});
+		ballSprite.drawPoint({0, 0}, Tile('O', Color::yellow));
 
-		NSprite sprite;
-		sprite.setSize({1, 1});
-		sprite.drawPoint({0, 0}, Tile('O'));
+		// 1. 创建乒乓球
+		auto ball = scene->createEntity("ball");                      // 向 scene 申请创建一个实体 ball
+		ball.addComponent<Sprite>(ballSprite);                        // 为 ball 创建一个大小为 1,1 的 Sprite组件. 并在 0,0 处绘制一个 Tile
+		ball.addComponent<Rigidbody>().velocity = {ball_speed, 0.02f}; // 为 ball 创建一个 Rigidbody 组件, 并设置初速度
+		ball.getComponent<Transform>().position = {39, 12};           // 设置 ball 的位置, Transform 组件默认存在
 
-		ball.addComponent<NSprite>(sprite);
+		// 3. 创建乒乓球球拍 Sprite
+		Sprite batSprite({1, 5});
+		batSprite.fillRect(Rect({0, 0}, {1, 5}), Tile('#', Color::blue));
 
-		puts(__FUNCTION__);
-		puts("Press Ctrl+C to exit.");
-	}
+		// 4. 创建两个乒乓球拍
+		auto bat1 = scene->createEntity("bat1");
+		auto bat2 = scene->createEntity("bat2");
+		bat1.addComponent<Sprite>(batSprite); // 添加一个复制 batSprite 的 Sprite 组件
+		bat2.addComponent<Sprite>(batSprite);
+		bat1.addComponent<Rigidbody>();
+		bat2.addComponent<Rigidbody>();
+		bat1.getComponent<Transform>().position = {1, 10};
+		bat2.getComponent<Transform>().position = {78, 10};
 
-	~Pong()
-	{
-		puts(__FUNCTION__);
+		// 5. Bat1 由玩家控制
+		EventDispatcher::getInstance().addListener(Event::Type::key, [&](Event* e) {
+			auto  event = dynamic_cast<KeyEvent*>(e);
+			auto& body  = scene->getEntityByTag("bat1").getComponent<Rigidbody>();
+			if(event->state == false)
+				body.velocity = {0, 0};
+			else if(event->keyCode == KeyCode::W)
+				body.velocity = {0, -0.2f};
+			else if(event->keyCode == KeyCode::S)
+				body.velocity = {0, 0.2f};
+		});
+
+		// 6. Bat2 由AI控制, 不推测路径
+		bat2.addComponent<Script>().onUpdate = [&](float dt) {
+			auto  bat        = scene->getEntityByTag("bat2");
+			auto  ballPos    = scene->getEntityByTag("ball").getComponent<Transform>().position;
+			auto& batBody    = bat.getComponent<Rigidbody>();
+			auto  batPos     = bat.getComponent<Transform>().position;
+			auto& batSize    = bat.getComponent<Sprite>().getSize();
+			auto  batCenter  = batPos.y + (int)batSize.y / 2;
+			batBody.velocity = Vec2(0, ballPos.y - batCenter).normalize() * 0.25f;
+		};
+
+		ball.addComponent<Script>().onUpdate = [&](float dt) {
+			auto  ball   = scene->getEntityByTag("ball");
+			auto& pos    = ball.getComponent<Transform>().position;
+			auto& vel    = ball.getComponent<Rigidbody>().velocity;
+			auto& sprite = ball.getComponent<Sprite>();
+			if(pos.x < 0 || pos.x >= 80)
+			{
+				vel.x = -vel.x;
+				vel.y += (float)random.getInt32(-6, 6) / 100;
+			}
+			else if(pos.y < 0 || pos.y >= 25)
+			{
+				vel.y = -vel.y;
+				vel.x += (float)random.getInt32(-6, 6) / 100;
+			}
+			vel = vel.normalize() * ball_speed;
+			assert(vel.length() - ball_speed < FLT_EPSILON);
+		};
 	}
 
 private:
-	shared_ptr<NScene> scene;
+	std::shared_ptr<Scene> scene;
+	Random                 random;
 };
+
+#include "chess.cpp"
 
 Application* CreateApplication()
 {
-	return new Pong();
+	return new Pong;
 }
-
-class _Ball : public Factor
-{
-public:
-	explicit _Ball(Scene& s)
-			: Factor(s)
-	{
-		sprite.setSize({1, 1});
-		sprite.drawPoint({0, 0}, Tile('O'));
-
-		collider.setSize({1, 1});
-
-		body.addCollider(collider);
-
-		addComponent(sprite);
-		addComponent(body);
-	}
-
-	void onCollision(Collider&, Collider&) override
-	{
-		body.velocity = -body.velocity;
-	}
-
-	void setVelocity(const Vec2& v)
-	{
-		body.velocity = v;
-	}
-
-private:
-	Sprite      sprite;
-	Rigidbody   body;
-	BoxCollider collider;
-};
-
-class _Bar : public Factor
-{
-public:
-	_Bar(Scene& s)
-			: Factor(s)
-	{
-		sprite.setSize({1, 5});
-		sprite.drawLine({0, 0}, {0, 4}, Tile('#'));
-
-		collider.setSize({1, 5});
-
-		body.addCollider(collider);
-
-		addComponent(sprite);
-		addComponent(body);
-	}
-
-private:
-	Sprite      sprite;
-	Rigidbody   body;
-	BoxCollider collider;
-};
-
-/*
-int func()
-{
-	Cursor::setVisible(false);
-	auto  director = Director::getInstance();
-	Scene scene;
-
-	Size winSize(width, height);
-	frameBuffer.setSize(winSize);
-
-	Bar bar(scene);
-	bar.setPosition({1, winSize.y / 2.0f - 2});
-
-	Ball ball(scene);
-	ball.setPosition({winSize.x / 2.0f, winSize.y / 2.0f});
-	ball.setVelocity({-30, 0});
-
-	Ball testA(scene);
-	testA.setPosition({117, 14});
-	Ball testB(scene);
-	testB.setPosition({2, 14});
-
-	director->setMsPerRender(1000 / 60);
-	director->pushScene(scene);
-	director->run();
-	while(true)
-		;
-	return 0;
-}
-*/

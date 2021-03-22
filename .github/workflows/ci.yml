@@ -16,10 +16,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Download Submodules
-      shell: bash
-      run: git submodule update --init --recursive
-
     - name: Create Build Environment
       run: cmake -E make_directory ${{runner.workspace}}/build
 
@@ -33,19 +29,8 @@ jobs:
       shell: bash
       run: cmake --build . --config $BUILD_TYPE
 
-    - name: Test
-      working-directory: ${{runner.workspace}}/build
-      shell: bash
-      run: ctest -C $BUILD_TYPE
-
-    - name: Upload Library
+    - name: Upload
       uses: actions/upload-artifact@master
       with:
         name: Clementine
-        path: ${{runner.workspace}}/build/lib/libclementine.a
-
-    - name: Upload Examples
-      uses: actions/upload-artifact@master
-      with:
-        name: Examples
-        path: ${{runner.workspace}}/build/examples
+        path: ${{runner.workspace}}/build

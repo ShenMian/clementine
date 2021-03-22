@@ -14,13 +14,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(LIBRARY_OUTPUT_PATH ../lib/)
 
 include_directories("src")
-
-include_directories("thirdparty/SDL/include")
 include_directories("thirdparty/entt/include")
 include_directories("thirdparty/spdlog/include")
-include_directories("thirdparty/asio/asio/include")
+include_directories("thirdparty/yaml-cpp/include")
 
-add_subdirectory("src/clem")
+add_subdirectory("thirdparty/yaml-cpp")
+add_subdirectory("src")
 
 # 例子
 if(BUILD_EXAMPLES)
