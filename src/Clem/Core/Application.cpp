@@ -13,6 +13,7 @@
 #include "Clem/Window.h"
 #include "Input.h"
 #include <csignal>
+#include <clocale>
 
 using std::string;
 using std::shared_ptr;
@@ -48,6 +49,7 @@ Application::Application(const string& name)
 	instance = this;
 	PROFILE_FUNC();
 
+	std::setlocale(LC_ALL, "");
 	std::signal(SIGINT, onSignal);
 
 	Renderer::getInstance().setSize(Window::getSize());

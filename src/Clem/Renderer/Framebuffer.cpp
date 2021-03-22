@@ -113,15 +113,15 @@ void Framebuffer::output()
 {
 	PROFILE_FUNC();
 
-    for(int y = 0; y < size.y; y++)
-    {
-        Cursor::move(0, y);
-        for(int x = 0; x < size.x; x++)
-        {
-            auto& buf = buffer[x + y * size.x];
-            printf("%C", buf.ch);
-        }
-    }
+  for(int y = 0; y < size.y; y++)
+  {
+      Cursor::move(0, y);
+      for(int x = 0; x < size.x; x++)
+      {
+          auto& buf = buffer[x + y * size.x];
+          printf("%C", buf.ch);
+      }
+  }
 }
 
 #endif
