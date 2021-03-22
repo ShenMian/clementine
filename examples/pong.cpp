@@ -8,6 +8,8 @@
 
 using namespace std;
 
+constexpr float ball_speed = 0.6;
+
 class Pong : public Application
 {
 public:
@@ -16,8 +18,6 @@ public:
 	{
 		scene = make_shared<Scene>(); // 创建场景 scene, 用于管理实体
 		pushScene(scene);             // 将 scene 压入堆栈
-
-		constexpr auto ball_speed = 0.6f;
 
 		// 1. 创建乒乓球 Sprite
 		Sprite ballSprite({1, 1});
@@ -50,9 +50,9 @@ public:
 			if(event->state == false)
 				body.velocity = {0, 0};
 			else if(event->keyCode == KeyCode::W)
-				body.velocity = {0, -0.3f};
+				body.velocity = {0, -0.2f};
 			else if(event->keyCode == KeyCode::S)
-				body.velocity = {0, 0.3f};
+				body.velocity = {0, 0.2f};
 		});
 
 		// 6. Bat2 由AI控制, 不推测路径
@@ -63,7 +63,7 @@ public:
 			auto  batPos     = bat.getComponent<Transform>().position;
 			auto& batSize    = bat.getComponent<Sprite>().getSize();
 			auto  batCenter  = batPos.y + (int)batSize.y / 2;
-			batBody.velocity = Vec2(0, ballPos.y - batCenter).normalize() * 0.3f;
+			batBody.velocity = Vec2(0, ballPos.y - batCenter).normalize() * 0.25f;
 		};
 
 		ball.addComponent<Script>().onUpdate = [&](float dt) {
@@ -74,15 +74,15 @@ public:
 			if(pos.x < 0 || pos.x >= 80)
 			{
 				vel.x = -vel.x;
-				vel.y += (float)random.getInt32(-5, 5) / 100;
-				vel = vel.normalize() * 0.6f;
+				vel.y += (float)random.getInt32(-6, 6) / 100;
 			}
 			else if(pos.y < 0 || pos.y >= 25)
 			{
 				vel.y = -vel.y;
-				vel.x += (float)random.getInt32(-5, 5) / 100;
-				vel = vel.normalize() * 0.6f;
+				vel.x += (float)random.getInt32(-6, 6) / 100;
 			}
+			vel = vel.normalize() * ball_speed;
+			assert(vel.length() - ball_speed < FLT_EPSILON);
 		};
 	}
 
