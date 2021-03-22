@@ -8,15 +8,16 @@
 #include "Clem/Log.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
+#include "Clem/Renderer/Cursor.h"
 #include "Clem/Renderer/Renderer.h"
 #include "Clem/Scene/Scene.h"
 #include "Clem/Window.h"
 #include "Input.h"
-#include <csignal>
 #include <clocale>
+#include <csignal>
 
-using std::string;
 using std::shared_ptr;
+using std::string;
 using std::chrono::milliseconds;
 using std::this_thread::sleep_for;
 
@@ -55,6 +56,8 @@ Application::Application(const string& name)
 	Renderer::getInstance().setSize(Window::getSize());
 
 	initialize();
+
+	Cursor::setVisible(false);
 }
 
 Application::~Application()
@@ -141,7 +144,7 @@ void Application::updateFrameRate(long dt)
 	{
 		frameRate = frames;
 		frames = fpsLag = 0;
-		Window::setTitle(name + " | " + std::to_string(frameRate) +"FPS");
+		Window::setTitle(name + " | " + std::to_string(frameRate) + "FPS");
 	}
 }
 
