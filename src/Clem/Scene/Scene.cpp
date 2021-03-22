@@ -13,7 +13,7 @@
 #include "Clem/Physics/Collider.h"
 #include "Clem/Physics/Rigidbody.h"
 #include "Clem/Renderer/Sprite.h"
-#include "Clem/UI/Text.h"
+#include "Clem/Ui/Text.h"
 
 Entity Scene::createEntity()
 {

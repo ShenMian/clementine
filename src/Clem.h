@@ -38,7 +38,7 @@
 #include "Clem/Event/MouseEvent.h"
 
 // UI
-#include "Clem/UI/Text.h"
+#include "Clem/Ui/Text.h"
 
 #include "Clem/Log.h"
 #include "Clem/Platform.h"
