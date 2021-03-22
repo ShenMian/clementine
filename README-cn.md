@@ -1,7 +1,6 @@
 **zh** | [en]
 
 <div align="center">
-<img src="docs/picture/banner.png">
 
 ![Banner](docs/pictures/banner.png)
 [![License](https://img.shields.io/github/license/ShenMian/Clementine)](https://github.com/ShenMian/Clementine/blob/master/LICENSE)
