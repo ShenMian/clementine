@@ -102,6 +102,8 @@ const Size& Framebuffer::getSize() const
 
 #ifdef OS_UNIX
 
+#include "Color.h"
+
 void Framebuffer::drawPoint(const Point& p, const Tile& t)
 {
 	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
@@ -120,37 +122,37 @@ void Framebuffer::output()
 		{
 			auto& buf = buffer[x + y * size.x];
 
-			switch(fore)
+			switch(buf.color.fore)
 			{
-			case Fore::black:
+			case Color::black:
 				printf("\x1b[30m");
 				break;
 
-			case Fore::red:
+			case Color::red:
 				printf("\x1b[31m");
 				break;
 
-			case Fore::green:
+			case Color::green:
 				printf("\x1b[32m");
 				break;
 
-			case Fore::yellow:
+			case Color::yellow:
 				printf("\x1b[33m");
 				break;
 
-			case Fore::blue:
+			case Color::blue:
 				printf("\x1b[34m");
 				break;
 
-			case Fore::purple:
+			case Color::purple:
 				printf("\x1b[35m");
 				break;
 
-			case Fore::cyan:
+			case Color::cyan:
 				printf("\x1b[36m");
 				break;
 
-			case Fore::white:
+			case Color::white:
 				printf("\x1b[37m");
 				break;
 
@@ -158,37 +160,37 @@ void Framebuffer::output()
 				assert(false); // 无效前景颜色属性
 			}
 
-			switch(back)
+			switch(buf.color.back)
 			{
-			case Back::black:
+			case Color::black:
 				printf("\x1b[40m");
 				break;
 
-			case Back::red:
+			case Color::red:
 				printf("\x1b[41m");
 				break;
 
-			case Back::green:
+			case Color::green:
 				printf("\x1b[42m");
 				break;
 
-			case Back::yellow:
+			case Color::yellow:
 				printf("\x1b[43m");
 				break;
 
-			case Back::blue:
+			case Color::blue:
 				printf("\x1b[44m");
 				break;
 
-			case Back::purple:
+			case Color::purple:
 				printf("\x1b[45m");
 				break;
 
-			case Back::cyan:
+			case Color::cyan:
 				printf("\x1b[46m");
 				break;
 
-			case Back::white:
+			case Color::white:
 				printf("\x1b[47m");
 				break;
 
