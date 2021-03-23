@@ -100,7 +100,7 @@ void Scene::render(float dt)
 
 	static auto& renderer = Renderer::getInstance();
 	auto&        buf      = renderer.getBuffer();
-	buf.clear(Tile('.'));
+	buf.clear();
 
 	// Render sprites
 	auto spriteView = registry.view<Transform, Sprite>();

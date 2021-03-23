@@ -10,9 +10,12 @@
 using namespace std;
 
 constexpr float ball_speed           = 0.8f;  // 球的移动速度, 始终恒定
-constexpr float player_speed         = 0.2f;  // 玩家乒乓球拍的移动速度
-constexpr float ai_speed             = 0.25f; // AI 乒乓球拍的移动速度
+constexpr float player_speed         = 0.15f;  // 玩家乒乓球拍的移动速度
+constexpr float ai_speed             = 0.1f; // AI 乒乓球拍的移动速度
 constexpr float random_rebound_angle = 5.0f;  // 碰撞时随机调整角度系数
+
+int player_score = 0;
+int ai_score     = 0;
 
 class Pong : public Application
 {
@@ -30,7 +33,7 @@ public:
 		// 1. 创建乒乓球
 		auto ball = scene->createEntity("ball");                       // 向 scene 申请创建一个实体 ball
 		ball.addComponent<Sprite>(ballSprite);                         // 为 ball 创建一个复制 ballSprite 的 Sprite 组件
-		ball.addComponent<Rigidbody>().velocity = {ball_speed, 0.02f}; // 为 ball 创建一个 Rigidbody 组件, 并设置初速度
+		ball.addComponent<Rigidbody>().velocity = {ball_speed, 0.05f}; // 为 ball 创建一个 Rigidbody 组件, 并设置初速度
 		ball.getComponent<Transform>().position = {39, 12};            // 设置 ball 的位置, Transform 组件默认存在
 
 		// 3. 创建乒乓球球拍 Sprite
@@ -44,11 +47,11 @@ public:
 		bat2.addComponent<Sprite>(batSprite);
 		bat1.addComponent<Rigidbody>();
 		bat2.addComponent<Rigidbody>();
-		bat1.getComponent<Transform>().position = {1, 10};
-		bat2.getComponent<Transform>().position = {78, 10};
+		bat1.getComponent<Transform>().position = {2, 10};
+		bat2.getComponent<Transform>().position = {77, 10};
 
 		// 5. Bat1 由玩家控制
-		// 为 bat1 创建一个事件监听器
+		// 为 bat1 创建一个事件监听器, 监听按键事件
 		EventDispatcher::getInstance().addListener(Event::Type::key, [&](Event* e) {
 			auto  event = dynamic_cast<KeyEvent*>(e);
 			auto& body  = scene->getEntityByTag("bat1").getComponent<Rigidbody>(); // 通过 Tag 组件获取 bat1 实体的 Rigidbody 组件
@@ -63,11 +66,11 @@ public:
 		// 6. Bat2 由AI控制, 不推测路径
 		// 为 bat2 创建一个脚本
 		bat2.addComponent<Script>().onUpdate = [&](float dt) {
-			auto  bat        = scene->getEntityByTag("bat2");
-			auto  ballPos    = scene->getEntityByTag("ball").getComponent<Transform>().position;
-			auto& batBody    = bat.getComponent<Rigidbody>();
-			auto  batPos     = bat.getComponent<Transform>().position;
-			auto& batSize    = bat.getComponent<Sprite>().getSize();
+			auto  bat     = scene->getEntityByTag("bat2");
+			auto  ballPos = scene->getEntityByTag("ball").getComponent<Transform>().position;
+			auto& batBody = bat.getComponent<Rigidbody>();
+			auto  batPos  = bat.getComponent<Transform>().position;
+			auto& batSize = bat.getComponent<Sprite>().getSize();
 
 			// 获取 bat2 的 Sprite 的几何中心
 			auto batCenter = batPos + batSize / 2;
@@ -82,17 +85,34 @@ public:
 			auto& pos    = ball.getComponent<Transform>().position;
 			auto& vel    = ball.getComponent<Rigidbody>().velocity;
 			auto& sprite = ball.getComponent<Sprite>();
-			if(pos.x < 0 || pos.x >= 80)
+			if(pos.x < 1 || pos.x >= 79)
 			{
+				if(pos.x < 1)
+					ai_score++;
+				else
+					player_score++;
+
 				vel.x = -vel.x;
 				vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 			}
-			else if(pos.y < 0 || pos.y >= 25)
+			else if(pos.y < 1 || pos.y >= 24)
 			{
 				vel.y = -vel.y;
 				vel.x += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 			}
+			else
+				return;
 			vel = vel.normalize() * ball_speed;
+		};
+
+		// 7. 创建场景中的其他元素
+		auto  board       = scene->createEntity("board");
+		auto& boardSprite = board.addComponent<Sprite>(Size(80, 25));
+		boardSprite.drawRect(Rect({0, 0}, {79, 24}), Tile('#'));
+		boardSprite.fillRect(Rect({39, 1}, {2, 23}), Tile('.', Color::green));
+		board.addComponent<Script>().onUpdate = [&](float dt) {
+			boardSprite.drawString({34, 2}, to_wstring(player_score));
+			boardSprite.drawString({44, 2}, to_wstring(ai_score));
 		};
 	}
 
