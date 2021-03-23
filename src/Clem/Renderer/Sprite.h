@@ -20,6 +20,7 @@ class Sprite : public Component
 public:
 	Sprite()              = default;
 	Sprite(const Sprite&) = default;
+	Sprite& operator=(const Sprite&) = default;
 	explicit Sprite(const Size& size);
 
 	/**

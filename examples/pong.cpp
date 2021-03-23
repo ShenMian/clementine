@@ -21,9 +21,8 @@ class Pong : public Application
 {
 public:
 	Pong()
-			: Application("Pong")
+			: Application("Pong"), scene(make_shared<Scene>())
 	{
-		scene = make_shared<Scene>(); // 创建场景 scene, 用于管理实体
 		pushScene(scene);             // 将 scene 压入堆栈
 
 		// 1. 创建乒乓球 Sprite

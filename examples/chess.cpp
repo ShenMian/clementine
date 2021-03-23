@@ -9,9 +9,8 @@ class Chess : public Application
 {
 public:
 	Chess()
-			: Application("Chess")
+			: Application("Chess"), scene(make_shared<Scene>())
 	{
-		scene = make_shared<Scene>();
 		pushScene(scene);
 
 		auto  canvas = scene->createEntity("canvas");

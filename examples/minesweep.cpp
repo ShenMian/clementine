@@ -23,9 +23,8 @@ class Minesweep : public Application
 {
 public:
 	Minesweep()
-			: Application("Minesweep")
+			: Application("Minesweep"), scene(make_shared<Scene>())
 	{
-		scene = make_shared<Scene>();
 		pushScene(scene);
 
 		memset(map, '0', sizeof(map));

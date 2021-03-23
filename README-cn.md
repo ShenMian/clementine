@@ -29,7 +29,7 @@
 文档
 ----
 - **[Github Wiki]** (中文)  
-- **[API参考]** (中文)  
+- **[API 参考]** (中文)  
 
 截图
 ----
@@ -63,9 +63,9 @@
 - **[Telegram]**
 
 [en]:                 README.md
-[API参考]:            https://shenmian.github.io/Clementine
-[设置Git]:            https://help.github.com/articles/set-up-git
+[api 参考]:            https://shenmian.github.io/Clementine
+[设置git]:            https://help.github.com/articles/set-up-git
 [fork我们的仓库]:      https://help.github.com/articles/fork-a-repo
-[Github Wiki]:         https://github.com/ShenMian/Clementine/wiki
-[Github Discussions]: https://github.com/ShenMian/Clementine/discussions
-[Telegram]:           https://t.me/shenmian
+[github wiki]:         https://github.com/ShenMian/Clementine/wiki
+[github discussions]: https://github.com/ShenMian/Clementine/discussions
+[telegram]:           https://t.me/shenmian
