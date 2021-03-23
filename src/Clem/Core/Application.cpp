@@ -247,13 +247,16 @@ long Application::getCurrentMillSecond() const
 
 void Application::initialize()
 {
+	/*
 	// 开启 VT100 模式
 	const auto hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	DWORD      mode;
 	if(!GetConsoleMode(hOut, &mode))
 		assert(false);
+	// TODO(SMS): Win10 一下會失敗
 	if(!SetConsoleMode(hOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING))
 		assert(false);
+	*/
 }
 
 long Application::getCurrentMillSecond() const
