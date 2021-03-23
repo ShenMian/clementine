@@ -9,7 +9,10 @@
 
 using namespace std;
 
-constexpr auto ball_speed = 0.6f;
+constexpr float ball_speed           = 0.8f;  // 球的移动速度, 始终恒定
+constexpr float player_speed         = 0.2f;  // 玩家乒乓球拍的移动速度
+constexpr float ai_speed             = 0.25f; // AI 乒乓球拍的移动速度
+constexpr float random_rebound_angle = 5.0f;  // 碰撞时随机调整角度系数
 
 class Pong : public Application
 {
@@ -25,10 +28,10 @@ public:
 		ballSprite.drawPoint({0, 0}, Tile('O', Color::yellow));
 
 		// 1. 创建乒乓球
-		auto ball = scene->createEntity("ball");                      // 向 scene 申请创建一个实体 ball
-		ball.addComponent<Sprite>(ballSprite);                        // 为 ball 创建一个大小为 1,1 的 Sprite组件. 并在 0,0 处绘制一个 Tile
+		auto ball = scene->createEntity("ball");                       // 向 scene 申请创建一个实体 ball
+		ball.addComponent<Sprite>(ballSprite);                         // 为 ball 创建一个复制 ballSprite 的 Sprite 组件
 		ball.addComponent<Rigidbody>().velocity = {ball_speed, 0.02f}; // 为 ball 创建一个 Rigidbody 组件, 并设置初速度
-		ball.getComponent<Transform>().position = {39, 12};           // 设置 ball 的位置, Transform 组件默认存在
+		ball.getComponent<Transform>().position = {39, 12};            // 设置 ball 的位置, Transform 组件默认存在
 
 		// 3. 创建乒乓球球拍 Sprite
 		Sprite batSprite({1, 5});
@@ -37,7 +40,7 @@ public:
 		// 4. 创建两个乒乓球拍
 		auto bat1 = scene->createEntity("bat1");
 		auto bat2 = scene->createEntity("bat2");
-		bat1.addComponent<Sprite>(batSprite); // 添加一个复制 batSprite 的 Sprite 组件
+		bat1.addComponent<Sprite>(batSprite);
 		bat2.addComponent<Sprite>(batSprite);
 		bat1.addComponent<Rigidbody>();
 		bat2.addComponent<Rigidbody>();
@@ -45,28 +48,35 @@ public:
 		bat2.getComponent<Transform>().position = {78, 10};
 
 		// 5. Bat1 由玩家控制
+		// 为 bat1 创建一个事件监听器
 		EventDispatcher::getInstance().addListener(Event::Type::key, [&](Event* e) {
 			auto  event = dynamic_cast<KeyEvent*>(e);
-			auto& body  = scene->getEntityByTag("bat1").getComponent<Rigidbody>();
+			auto& body  = scene->getEntityByTag("bat1").getComponent<Rigidbody>(); // 通过 Tag 组件获取 bat1 实体的 Rigidbody 组件
 			if(event->state == false)
 				body.velocity = {0, 0};
 			else if(event->keyCode == KeyCode::W)
-				body.velocity = {0, -0.2f};
+				body.velocity = {0, -player_speed};
 			else if(event->keyCode == KeyCode::S)
-				body.velocity = {0, 0.2f};
+				body.velocity = {0, player_speed};
 		});
 
 		// 6. Bat2 由AI控制, 不推测路径
+		// 为 bat2 创建一个脚本
 		bat2.addComponent<Script>().onUpdate = [&](float dt) {
 			auto  bat        = scene->getEntityByTag("bat2");
 			auto  ballPos    = scene->getEntityByTag("ball").getComponent<Transform>().position;
 			auto& batBody    = bat.getComponent<Rigidbody>();
 			auto  batPos     = bat.getComponent<Transform>().position;
 			auto& batSize    = bat.getComponent<Sprite>().getSize();
-			auto  batCenter  = batPos.y + (int)batSize.y / 2;
-			batBody.velocity = Vec2(0, ballPos.y - batCenter).normalize() * 0.25f;
+
+			// 获取 bat2 的 Sprite 的几何中心
+			auto batCenter = batPos + batSize / 2;
+
+			// 以 ai_speed 速度向 ball 所在的 y 坐标移动
+			batBody.velocity = Vec2(0, ballPos.y - batCenter.y).normalize() * ai_speed;
 		};
 
+		// TODO: 碰撞时被回调, 调整随机角度
 		ball.addComponent<Script>().onUpdate = [&](float dt) {
 			auto  ball   = scene->getEntityByTag("ball");
 			auto& pos    = ball.getComponent<Transform>().position;
@@ -75,15 +85,14 @@ public:
 			if(pos.x < 0 || pos.x >= 80)
 			{
 				vel.x = -vel.x;
-				vel.y += (float)random.getInt32(-6, 6) / 100;
+				vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 			}
 			else if(pos.y < 0 || pos.y >= 25)
 			{
 				vel.y = -vel.y;
-				vel.x += (float)random.getInt32(-6, 6) / 100;
+				vel.x += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 			}
 			vel = vel.normalize() * ball_speed;
-			assert(vel.length() - ball_speed < FLT_EPSILON);
 		};
 	}
 
