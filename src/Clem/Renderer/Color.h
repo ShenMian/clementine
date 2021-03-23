@@ -26,8 +26,8 @@ public:
 	int8_t back = 0x0;
 
 	Color() = default;
-	Color(short color); // TODO: short => uint_16
-	Color(short fore, short back);
+	Color(uint16_t color); // TODO: short => uint_16
+	Color(uint8_t fore, uint8_t back);
 };
 
 #endif // !CLEM_RENDERER_COLOR_H_

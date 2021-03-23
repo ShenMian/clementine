@@ -6,11 +6,11 @@
 
 #include "Clem/Component/Component.h"
 #include "Clem/Math/Vec2.h"
+#include "Tile.h"
 #include <filesystem>
 #include <vector>
 
 class Rect;
-class Tile;
 
 /**
  * @brief Tile的集合.
@@ -106,20 +106,6 @@ public:
 private:
 	Size              size;
 	std::vector<Tile> buffer;
-};
-
-#include "Color.h"
-
-class Tile
-{
-public:
-	Tile() = default;
-	Tile(wchar_t ch, Color color = Color());
-
-	wchar_t ch = L' ';
-	Color   color;
-
-	static const Tile blank;
 };
 
 #endif // !CLEM_RENDERER_SPRITE_H_

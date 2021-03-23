@@ -86,7 +86,7 @@ void Sprite::drawCycle(Point c, short r, const Tile& t)
 void Sprite::drawString(const Point& pos, std::wstring str)
 {
 	for(int i = 0; i < str.size(); i++)
-		drawPoint(pos.x + i, pos.y, str[i]);
+		drawPoint(pos.x + i, pos.y, Tile(str[i]));
 }
 
 void Sprite::clear()
@@ -140,10 +140,3 @@ void Sprite::store(const path& path) const
 	file.write((wchar_t*)&size, sizeof(size));
 }
 */
-
-const Tile Tile::blank;
-
-Tile::Tile(wchar_t ch, Color color)
-		: ch(ch), color(color)
-{
-}

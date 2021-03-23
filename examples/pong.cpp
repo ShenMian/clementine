@@ -9,7 +9,7 @@
 
 using namespace std;
 
-constexpr float ball_speed = 0.6;
+constexpr auto ball_speed = 0.6f;
 
 class Pong : public Application
 {

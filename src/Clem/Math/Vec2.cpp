@@ -7,8 +7,8 @@
 #include <cfloat>
 #include <cmath>
 
-Vec2::Vec2(float x, float y)
-		: x(x), y(y)
+Vec2::Vec2(float x_, float y_)
+		: x(x_), y(y_)
 {
 }
 
