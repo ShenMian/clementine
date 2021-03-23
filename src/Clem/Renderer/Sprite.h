@@ -76,10 +76,11 @@ public:
 	/**
 	 * @brief 绘制字符串.
 	 * 
-	 * @param pos 绘制起点的位置
-	 * @param str 要绘制的字符串
+	 * @param pos   绘制起点的位置
+	 * @param str   要绘制的字符串
+	 * @param color 顔色
 	 */
-	void drawString(const Point& pos, std::wstring str);
+	void drawString(const Point& pos, std::wstring str, Color color = Color());
 
 	/**
 	 * @brief 清除全部绘制内容.

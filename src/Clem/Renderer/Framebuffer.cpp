@@ -213,7 +213,7 @@ void Framebuffer::drawPoint(const Point& p, const Tile& t)
 		return;
 	auto& buf            = buffer[(size_t)p.x + (size_t)p.y * (size_t)size.x];
 	buf.Char.UnicodeChar = t.ch;
-	buf.Attributes       = t.color.fore | t.color.back | FOREGROUND_INTENSITY;
+	buf.Attributes       = t.color.fore | t.color.back << 4 | FOREGROUND_INTENSITY;
 }
 
 void Framebuffer::output()

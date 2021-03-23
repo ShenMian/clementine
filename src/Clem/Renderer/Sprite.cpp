@@ -83,10 +83,10 @@ void Sprite::drawCycle(Point c, short r, const Tile& t)
 	}
 }
 
-void Sprite::drawString(const Point& pos, std::wstring str)
+void Sprite::drawString(const Point& pos, std::wstring str, Color c)
 {
 	for(int i = 0; i < str.size(); i++)
-		drawPoint(pos.x + i, pos.y, Tile(str[i]));
+		drawPoint(pos.x + i, pos.y, Tile(str[i], c));
 }
 
 void Sprite::clear()

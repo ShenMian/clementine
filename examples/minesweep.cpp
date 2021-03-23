@@ -5,10 +5,19 @@
 
 using namespace std;
 
+// Easy
 constexpr int board_size_x = 9;
 constexpr int board_size_y = 9;
-const Size    board_size   = {board_size_x, board_size_y};
 const int     mine_num     = 10;
+
+// Middle
+/*
+constexpr int board_size_x = 16;
+constexpr int board_size_y = 16;
+const int     mine_num     = 40;
+*/
+
+const Size board_size = {board_size_x, board_size_y};
 
 class Minesweep : public Application
 {
@@ -34,10 +43,8 @@ public:
 						map[(int)p.x + x][(int)p.y + y]++;
 		} while(--i);
 
-		const Size spriteSize = {board_size.x * 2 + 1, board_size.y + 2};
-
 		auto board = scene->createEntity("board");
-		sprite     = &board.addComponent<Sprite>(spriteSize);
+		sprite     = &board.addComponent<Sprite>(Size(board_size.x * 2 + 1, board_size.y + 2));
 		sprite->drawRect(Rect({0, 0}, {board_size.x * 2, board_size.y + 1}), Tile('#'));
 
 		EventDispatcher::getInstance().addListener(Event::Type::mouse, [&](Event* e) {
@@ -52,12 +59,26 @@ public:
 					flag(p.x, p.y);
 			}
 		});
+
+		surplus = board_size.area() - mine_num;
 	}
 
-	~Minesweep()
+	void lost()
 	{
-		puts("GAME OVER");
+		for(int x = 0; x < board_size.x; x++)
+			for(int y = 0; y < board_size.x; y++)
+				if(map[x][y] == '*')
+					sprite->drawPoint(1 + x * 2, 1 + y, Tile('*', Color::red));
 		getchar();
+		stop();
+	}
+
+	void win()
+	{
+		wstring str = L"-=[ You won ]=-";
+		sprite->drawString({(board_size.x * 2 + 1 - str.size()) / 2, board_size.y / 2}, str, Color::yellow);
+		getchar();
+		stop();
 	}
 
 	void open(int x, int y)
@@ -66,7 +87,7 @@ public:
 			return;
 
 		if(map[x][y] == '*')
-			stop();
+			lost();
 
 		if(map[x][y] == '0')
 		{
@@ -79,6 +100,10 @@ public:
 		sprite->drawPoint(1 + x * 2, 1 + y, Tile(map[x][y], map[x][y] % Color::max));
 
 		map[x][y] = '.';
+
+		surplus--;
+		if(surplus == 0)
+			win();
 	}
 
 	void flag(int x, int y)
@@ -105,8 +130,10 @@ public:
 	}
 
 private:
-	Sprite*           sprite;
+	int               surplus;
 	char              map[board_size_x][board_size_y];
+	Sprite*           sprite;
+	vector<Point>     mines;
 	vector<Point>     flags;
 	Random            random;
 	shared_ptr<Scene> scene;
