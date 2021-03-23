@@ -4,7 +4,9 @@
 #include "Framebuffer.h"
 #include "Clem/Math/Rect.h"
 #include "Clem/Profiler.h"
+#include "Color.h"
 #include "Cursor.h"
+#include <cassert>
 #include <cmath>
 
 void Framebuffer::drawSprite(const Point& p, const Sprite& s)
@@ -102,8 +104,6 @@ const Size& Framebuffer::getSize() const
 
 #ifdef OS_UNIX
 
-#include "Color.h"
-
 void Framebuffer::drawPoint(const Point& p, const Tile& t)
 {
 	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
@@ -157,7 +157,7 @@ void Framebuffer::output()
 				break;
 
 			default:
-				assert(false); // ÎÞÐ§Ç°¾°ÑÕÉ«ÊôÐÔ
+				assert(false); // ï¿½ï¿½Ð§Ç°ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½
 			}
 
 			switch(buf.color.back)
@@ -195,7 +195,7 @@ void Framebuffer::output()
 				break;
 
 			default:
-				assert(false); // ÎÞÐ§±³¾°ÑÕÉ«ÊôÐÔ
+				assert(false); // ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½
 			}
 
 			printf("%C", buf.ch);

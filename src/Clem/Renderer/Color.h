@@ -22,11 +22,11 @@ public:
 		white  = 0x07
 	};
 
-	int8_t fore = 0xF;
-	int8_t back = 0x0;
+	int8_t fore = white;
+	int8_t back = black;
 
 	Color() = default;
-	Color(uint16_t color); // TODO: short => uint_16
+	Color(uint16_t color);
 	Color(uint8_t fore, uint8_t back);
 };
 
