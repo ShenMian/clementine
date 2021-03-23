@@ -33,3 +33,8 @@ float Random::getFloat()
 	uniform_real_distribution<float> dist;
 	return dist(generator);
 }
+
+Point Random::getPoint(const Point& min, const Point& max)
+{
+	return Point(getInt32(min.x, max.x), getInt32(min.y, max.y));
+}

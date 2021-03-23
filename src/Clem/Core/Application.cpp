@@ -56,8 +56,6 @@ Application::Application(const string& name)
 	Renderer::getInstance().setSize(Window::getSize());
 
 	initialize();
-
-	Cursor::setVisible(false);
 }
 
 Application::~Application()

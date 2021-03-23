@@ -117,13 +117,13 @@ public:
 	}
 
 private:
-	std::shared_ptr<Scene> scene;
 	Random                 random;
+	shared_ptr<Scene> scene;
 };
 
-#include "chess.cpp"
-
+/*
 Application* CreateApplication()
 {
 	return new Pong;
 }
+*/

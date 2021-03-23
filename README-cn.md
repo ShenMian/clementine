@@ -33,8 +33,9 @@
 
 截图
 ----
-![](docs/pictures/clem_0.png)
-![](docs/pictures/clem_1.png)
+![](docs/pictures/v0_0_0.png)
+![](docs/pictures/pong.png)
+![](docs/pictures/minesweep.png)
 ![](docs/pictures/profiler.png)
 
 编译

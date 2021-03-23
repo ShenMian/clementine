@@ -19,7 +19,8 @@ public:
 		purple = 0x05,
 		cyan   = 0x0B,
 		aqua   = cyan,
-		white  = 0x07
+		white  = 0x07,
+		max
 	};
 
 	int8_t fore = white;

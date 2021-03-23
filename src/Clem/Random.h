@@ -5,6 +5,7 @@
 #ifndef CLEM_RANDOM_H_
 #define CLEM_RANDOM_H_
 
+#include "Clem/Math/Vec2.h"
 #include <random>
 #include <stdint.h>
 
@@ -21,6 +22,8 @@ public:
 	uint32_t getUint32(uint32_t min = 0, uint32_t max = UINT32_MAX);
 	int32_t  getInt32(int32_t min = INT32_MIN, int32_t max = INT32_MAX);
 	float    getFloat();
+
+	Point getPoint(const Point& min, const Point& max);
 
 private:
 	std::mt19937 generator;

@@ -56,9 +56,15 @@ void Input::update()
 			break;
 		}
 		if(rec.Event.MouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
-			printf("mouse:left_buttom");
+			dispatcher.dispatch(MouseEvent(MouseEvent::Type::click,
+																		 {(float)rec.Event.MouseEvent.dwMousePosition.X,
+																			(float)rec.Event.MouseEvent.dwMousePosition.Y},
+																		 MouseEvent::Key::left_buttom));
 		if(rec.Event.MouseEvent.dwButtonState & RIGHTMOST_BUTTON_PRESSED)
-			printf("mouse:right_buttom");
+			dispatcher.dispatch(MouseEvent(MouseEvent::Type::click,
+																		 {(float)rec.Event.MouseEvent.dwMousePosition.X,
+																			(float)rec.Event.MouseEvent.dwMousePosition.Y},
+																		 MouseEvent::Key::right_buttom));
 		break;
 
 	case WINDOW_BUFFER_SIZE_EVENT:
