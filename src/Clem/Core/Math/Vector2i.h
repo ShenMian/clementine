@@ -3,10 +3,6 @@
 
 #pragma once
 
-#include <cmath>
-
-struct Vector2f;
-
 /**
  * @addtogroup Math
  * @{
@@ -32,9 +28,24 @@ struct Vector2i
 	 * @param y y坐标.
 	 */
 	Vector2i(int x, int y);
+
+	/**
+	 * @brief 获取面积.
+	 */
+	int area() const;
+
+	bool      operator==(const Vector2i& v) const;
+	bool      operator!=(const Vector2i& v) const;
+	Vector2i  operator*(float n) const;
+	Vector2i  operator/(float n) const;
+	Vector2i  operator+(const Vector2i& v) const;
+	Vector2i  operator-(const Vector2i& v) const;
+	Vector2i  operator-() const;
+	Vector2i& operator+=(const Vector2i& v);
+	Vector2i& operator-=(const Vector2i& v);
+	Vector2i& operator*=(float n);
+	Vector2i& operator/=(float n);
 };
 
-Vector2i::Vector2i(int x, int y)
-		: x(x), y(y)
-{
-}
+using Point2i = Vector2i;
+using Size2i  = Vector2i;

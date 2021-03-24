@@ -5,13 +5,13 @@
 #define CLEM_COMPONENT_TRANSFORM_H_
 
 #include "Clem/Component/Component.h"
-#include "Clem/Core/Math/Vec2.h"
+#include "Clem/Core/Math/Vector2f.h"
 
 class Transform : public Component
 {
 public:
-	Vec2<float> position;
-	Vec2<float> rotation;
+	Vector2f position;
+	Vector2f rotation;
 };
 
 #endif // !CLEM_COMPONENT_TRANSFORM_H_

@@ -6,18 +6,18 @@
 #include "Rigidbody.h"
 #include <cassert>
 
-Point<float> Collider::getPosition() const
+Point2 Collider::getPosition() const
 {
 	// assert(owner);
-	return Point<float>(); // owner->getOwner()->getPosition() + offset;
+	return Point2(); // owner->getOwner()->getPosition() + offset;
 }
 
-void Collider::setOffset(Point<float> o)
+void Collider::setOffset(Point2 o)
 {
 	offset = o;
 }
 
-Point<float> Collider::getOffset() const
+Point2 Collider::getOffset() const
 {
 	return offset;
 }

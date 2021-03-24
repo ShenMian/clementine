@@ -5,7 +5,7 @@
 #include "BoxCollider.h"
 #include <cassert>
 
-BoxCollider::BoxCollider(Size size)
+BoxCollider::BoxCollider(Size2 size)
 		: size(size)
 {
 }
@@ -15,7 +15,7 @@ BoxCollider::BoxCollider(Size size)
  * 
  * @param s 大小
  */
-void BoxCollider::setSize(Size s)
+void BoxCollider::setSize(Size2 s)
 {
 	size = s;
 }
@@ -23,15 +23,15 @@ void BoxCollider::setSize(Size s)
 /**
  * @brief 获取大小
  * 
- * @return Size 大小
+ * @return Size2 大小
  */
-Size BoxCollider::getSize() const
+Size2 BoxCollider::getSize() const
 {
 	return size;
 }
 
-Rect BoxCollider::getRect() const
+Rect2 BoxCollider::getRect() const
 {
 	auto p = getPosition();
-	return Rect({p.x - size.x / 2, p.y - size.y / 2}, size);
+	return Rect2({p.x - size.x / 2, p.y - size.y / 2}, size);
 }

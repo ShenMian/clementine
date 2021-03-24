@@ -37,7 +37,7 @@ public:
 
 		// 3. 创建乒乓球球拍 Sprite
 		Sprite batSprite({1, 5});
-		batSprite.fillRect(Rect({0, 0}, {1, 5}), Tile('#', Color::blue));
+		batSprite.fillRect(Rect2i({0, 0}, {1, 5}), Tile('#', Color::blue));
 
 		// 4. 创建两个乒乓球拍
 		auto bat1 = scene->createEntity("bat1");
@@ -75,7 +75,7 @@ public:
 			auto batCenter = batPos + batSize / 2;
 
 			// 以 ai_speed 速度向 ball 所在的 y 坐标移动
-			batBody.velocity = Vec2<float>(0, ballPos.y - batCenter.y).normalize() * ai_speed;
+			batBody.velocity = Vector2f(0, ballPos.y - batCenter.y).normalize() * ai_speed;
 		};
 
 		// TODO: 碰撞时被回调, 调整随机角度
@@ -106,9 +106,9 @@ public:
 
 		// 7. 创建场景中的其他元素
 		auto  board       = scene->createEntity("board");
-		auto& boardSprite = board.addComponent<Sprite>(Size(80, 25));
-		boardSprite.drawRect(Rect({0, 0}, {79, 24}), Tile('#'));
-		boardSprite.fillRect(Rect({39, 1}, {2, 23}), Tile('.', Color::green));
+		auto& boardSprite = board.addComponent<Sprite>(Size2(80, 25));
+		boardSprite.drawRect(Rect2i({0, 0}, {79, 24}), Tile('#'));
+		boardSprite.fillRect(Rect2i({39, 1}, {2, 23}), Tile('.', Color::green));
 		board.addComponent<Script>().onUpdate = [&](float dt) {
 			boardSprite.drawString({34, 2}, to_wstring(player_score));
 			boardSprite.drawString({44, 2}, to_wstring(ai_score));

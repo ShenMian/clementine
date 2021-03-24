@@ -4,14 +4,14 @@
 #ifndef CLEM_RENDERER_CAMERA_H_
 #define CLEM_RENDERER_CAMERA_H_
 
-#include "Clem/Core/Math/Rect.h"
+#include "Clem/Core/Math/Rect2f.h"
 
 class Camera
 {
 public:
 
 private:
-	Rect  viewport;
+	Rect2 viewport;
 	short depth;
 };
 

@@ -2,30 +2,30 @@
 // License(Apache-2.0)
 
 #include "Sprite.h"
-#include "Clem/Core/Math/Rect.h"
+#include "Clem/Core/Math/Rect2i.h"
 #include <cmath>
 #include <fstream>
 
 using namespace std::filesystem;
 
-Sprite::Sprite(const Size& size)
+Sprite::Sprite(const Size2& size)
 {
 	setSize(size);
 }
 
 void Sprite::drawPoint(int x, int y, const Tile& t)
 {
-	drawPoint({(float)x, (float)y}, t);
+	drawPoint({x, y}, t);
 }
 
-void Sprite::drawPoint(Point<float> p, const Tile& t)
+void Sprite::drawPoint(Point2i p, const Tile& t)
 {
 	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
 		return;
-	buffer[(size_t)p.x + (size_t)p.y * (size_t)size.x] = t;
+	buffer[p.x + p.y * size.x] = t;
 }
 
-void Sprite::drawLine(Point<float> a, Point<float> b, const Tile& t)
+void Sprite::drawLine(Point2 a, Point2 b, const Tile& t)
 {
 	auto xDis   = b.x - a.x + 1;
 	auto yDis   = b.y - a.y + 1;
@@ -42,7 +42,7 @@ void Sprite::drawLine(Point<float> a, Point<float> b, const Tile& t)
 	}
 }
 
-void Sprite::drawRect(Rect r, const Tile& t)
+void Sprite::drawRect(Rect2i r, const Tile& t)
 {
 	for(int x = r.left(); x <= r.right(); x++)
 	{
@@ -56,14 +56,14 @@ void Sprite::drawRect(Rect r, const Tile& t)
 	}
 }
 
-void Sprite::fillRect(Rect r, const Tile& t)
+void Sprite::fillRect(Rect2i r, const Tile& t)
 {
 	for(int y = 0; y < r.size.y; y++)
 		for(int x = 0; x < r.size.x; x++)
 			drawPoint(r.origin.x + x, r.origin.y + y, t);
 }
 
-void Sprite::drawCycle(Point<float> c, short r, const Tile& t)
+void Sprite::drawCycle(Point2 c, short r, const Tile& t)
 {
 	for(int x = 0; x <= r; x++)
 	{
@@ -83,36 +83,36 @@ void Sprite::drawCycle(Point<float> c, short r, const Tile& t)
 	}
 }
 
-void Sprite::drawString(const Point<float>& pos, std::wstring str, Color c)
+void Sprite::drawString(const Point2i& pos, std::wstring str, Color c)
 {
 	for(int i = 0; i < str.size(); i++)
 		drawPoint(pos.x + i, pos.y, Tile(str[i], c));
 }
 
-void Sprite::clear()
+void Sprite::clear(const Tile& t)
 {
-	fillRect(Rect({0, 0}, size), Tile::blank);
+	fillRect(Rect2i({0, 0}, size), t);
 }
 
 const Tile& Sprite::getTile(int x, int y) const
 {
-	return getTile(Point<float>(x, y));
+	return getTile(Point2(x, y));
 }
 
-const Tile& Sprite::getTile(const Point<float>& p) const
+const Tile& Sprite::getTile(const Point2i& p) const
 {
 	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
 		return Tile::blank;
 	return buffer[(size_t)p.x + (size_t)p.y * (size_t)size.x];
 }
 
-void Sprite::setSize(const Size& s)
+void Sprite::setSize(const Size2i& s)
 {
 	size = s;
-	buffer.resize((size_t)s.area());
+	buffer.resize(s.area());
 }
 
-const Size& Sprite::getSize() const
+const Size2i& Sprite::getSize() const
 {
 	return size;
 }

@@ -4,7 +4,7 @@
 #ifndef CLEM_RENDERER_RENDERER_H_
 #define CLEM_RENDERER_RENDERER_H_
 
-#include "Clem/Core/Math/Vec2.h"
+#include "Clem/Core/Math/Vector2f.h"
 #include "Framebuffer.h"
 
 class Renderer
@@ -27,12 +27,12 @@ public:
 	/**
 	 * @brief 设置缓冲区大小.
 	 */
-	void setSize(const Size&);
+	void setSize(const Size2&);
 
 	/**
 	 * @brief 获取缓冲区大小.
 	 */
-	const Size& getSize();
+	const Size2& getSize();
 
 private:
 	Renderer();

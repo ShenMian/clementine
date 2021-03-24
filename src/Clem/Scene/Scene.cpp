@@ -92,7 +92,7 @@ void Scene::update(float dt)
 	// return getRect().contains(o->getRect());
 }
 
-#include "Clem/Core/Math/Rect.h"
+#include "Clem/Core/Math/Rect2f.h"
 
 void Scene::render(float dt)
 {

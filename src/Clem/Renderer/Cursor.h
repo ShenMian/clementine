@@ -4,7 +4,7 @@
 #ifndef CLEM_RENDERER_CURSOR_H_
 #define CLEM_RENDERER_CURSOR_H_
 
-#include "Clem/Core/Math/Vec2.h"
+#include "Clem/Core/Math/Vector2f.h"
 
 /**
  * @brief 光标.
@@ -17,7 +17,7 @@ public:
    * 
    * @param p 坐标
    */
-  static void move(const Point<float>& p);
+  static void move(const Point2& p);
   
   /**
    * @brief 移动光标到指定坐标

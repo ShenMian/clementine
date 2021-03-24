@@ -37,13 +37,13 @@ Framebuffer& Renderer::getBuffer() const
 	return *back;
 }
 
-void Renderer::setSize(const Size& s)
+void Renderer::setSize(const Size2& s)
 {
 	buffer[0].setSize(s);
 	buffer[1].setSize(s);
 }
 
-const Size& Renderer::getSize()
+const Size2& Renderer::getSize()
 {
 	return buffer[0].getSize();
 }

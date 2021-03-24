@@ -5,8 +5,8 @@
 #define CLEM_RENDERER_SPRITE_H_
 
 #include "Clem/Component/Component.h"
-#include "Clem/Core/Math/Rect.h"
-#include "Clem/Core/Math/Vec2.h"
+#include "Clem/Core/Math/Rect2i.h"
+#include "Clem/Core/Math/Vector2f.h"
 #include "Tile.h"
 #include <filesystem>
 #include <vector>
@@ -20,7 +20,7 @@ public:
 	Sprite()              = default;
 	Sprite(const Sprite&) = default;
 	Sprite& operator=(const Sprite&) = default;
-	explicit Sprite(const Size& size);
+	explicit Sprite(const Size2& size);
 
 	/**
 	 * @brief 绘制点.
@@ -37,7 +37,7 @@ public:
 	 * @param p 点的坐标.
 	 * @param t 瓦片.
 	 */
-	void drawPoint(Point<float> p, const Tile& t);
+	void drawPoint(Point2i p, const Tile& t);
 
 	/**
 	 * @brief 绘制连接两点的直线.
@@ -46,7 +46,7 @@ public:
 	 * @param b b点坐标.
 	 * @param t 瓦片.
 	 */
-	void drawLine(Point<float> a, Point<float> b, const Tile& t);
+	void drawLine(Point2 a, Point2 b, const Tile& t);
 
 	/**
 	 * @brief 绘制矩形.
@@ -54,7 +54,7 @@ public:
 	 * @param r 矩形.
 	 * @param t 瓦片.
 	 */
-	void drawRect(Rect r, const Tile& t);
+	void drawRect(Rect2i r, const Tile& t);
 
 	/**
 	 * @brief 绘制实心矩形.
@@ -62,7 +62,7 @@ public:
 	 * @param r 矩形.
 	 * @param t 瓦片.
 	 */
-	void fillRect(Rect r, const Tile& t);
+	void fillRect(Rect2i r, const Tile& t);
 
 	/**
 	 * @brief 绘制圆形.
@@ -71,7 +71,7 @@ public:
 	 * @param radius 半径.
 	 * @param t 瓦片.
 	 */
-	void drawCycle(Point<float> p, short radius, const Tile& t);
+	void drawCycle(Point2 p, short radius, const Tile& t);
 
 	/**
 	 * @brief 绘制字符串.
@@ -80,32 +80,32 @@ public:
 	 * @param str   要绘制的字符串
 	 * @param color 顔色
 	 */
-	void drawString(const Point<float>& pos, std::wstring str, Color color = Color());
+	void drawString(const Point2i& pos, std::wstring str, Color color = Color());
 
 	/**
 	 * @brief 清除全部绘制内容.
 	 */
-	void clear();
+	void clear(const Tile& = Tile::blank);
 
 	const Tile& getTile(int x, int y) const;
 
-	const Tile& getTile(const Point<float>&) const;
+	const Tile& getTile(const Point2i&) const;
 
 	/**
 	 * @brief 设置可绘制区域的大小
 	 */
-	void setSize(const Size& s);
+	void setSize(const Size2i& s);
 
 	/**
 	 * @brief 获取可绘制区域的大小
 	 */
-	const Size& getSize() const;
+	const Size2i& getSize() const;
 
 	// void load(const std::filesystem::path& path);
 	// void store(const std::filesystem::path& path) const;
 
 private:
-	Size              size;
+	Size2i            size;
 	std::vector<Tile> buffer;
 };
 

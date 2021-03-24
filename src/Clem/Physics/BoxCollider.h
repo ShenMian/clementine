@@ -5,8 +5,8 @@
 #define CLEM_BOX_COLLIDER_H_
 
 #include "Collider.h"
-#include "Clem/Core/Math/Vec2.h"
-#include "Clem/Core/Math/Rect.h"
+#include "Clem/Core/Math/Vector2f.h"
+#include "Clem/Core/Math/Rect2f.h"
 
 /**
  * @addtogroup Physics
@@ -20,15 +20,15 @@ class BoxCollider : public Collider
 {
 public:
 	BoxCollider() = default;
-	explicit BoxCollider(Size size);
+	explicit BoxCollider(Size2 size);
 
-	void setSize(Size);
-	Size getSize() const;
+	void setSize(Size2);
+	Size2 getSize() const;
 
-	Rect getRect() const;
+	Rect2 getRect() const;
 
 private:
-  Size size;
+  Size2 size;
 };
 
 /**

@@ -4,8 +4,8 @@
 #ifndef CLEM_RENDERER_H_
 #define CLEM_RENDERER_H_
 
-#include "Clem/Core/Math/Rect.h"
-#include "Clem/Core/Math/Vec2.h"
+#include "Clem/Core/Math/Rect2f.h"
+#include "Clem/Core/Math/Vector2f.h"
 #include "Clem/Platform.h"
 #include "Sprite.h"
 #include <vector>
@@ -23,7 +23,7 @@ class Framebuffer
 public:
 	void output();
 
-	void drawSprite(const Point<float>& positon, const Sprite& sprite);
+	void drawSprite(const Point2i& positon, const Sprite& sprite);
 
 	/**
 	 * @brief 绘制点.
@@ -40,7 +40,7 @@ public:
 	 * @param p    点的坐标.
 	 * @param tile 瓦片.
 	 */
-	void drawPoint(const Point<float>& p, const Tile& tile);
+	void drawPoint(const Point2i& p, const Tile& tile);
 
 	/**
 	 * @brief 绘制连接两点的直线.
@@ -49,7 +49,7 @@ public:
 	 * @param b    b点坐标.
 	 * @param tile 瓦片.
 	 */
-	void drawLine(Point<float> a, Point<float> b, const Tile& tile);
+	void drawLine(Point2i a, Point2i b, const Tile& tile);
 
 	/**
 	 * @brief 绘制矩形.
@@ -57,7 +57,7 @@ public:
 	 * @param r    矩形.
 	 * @param tile 瓦片.
 	 */
-	void drawRect(Rect r, const Tile& tile);
+	void drawRect(Rect2i r, const Tile& tile);
 
 	/**
 	 * @brief 绘制实心矩形.
@@ -65,7 +65,7 @@ public:
 	 * @param r    矩形.
 	 * @param tile 瓦片.
 	 */
-	void fillRect(Rect r, const Tile& tile);
+	void fillRect(Rect2i r, const Tile& tile);
 
 	/**
 	 * @brief 绘制圆形.
@@ -74,7 +74,7 @@ public:
 	 * @param radius 半径.
 	 * @param tile   瓦片.
 	 */
-	void drawCycle(Point<float> p, short radius, const Tile& tile);
+	void drawCycle(Point2i p, short radius, const Tile& tile);
 
 	/**
 	 * @brief 绘制字符串.
@@ -82,18 +82,18 @@ public:
 	 * @param pos 绘制起点的位置
 	 * @param str 要绘制的字符串
 	 */
-	void drawString(const Point<float>& pos, std::wstring str);
+	void drawString(const Point2i& pos, std::wstring str);
 
 	/**
 	 * @brief 清除全部绘制内容.
 	 */
 	void clear(const Tile& = Tile::blank);
 
-	void        setSize(const Size&);
-	const Size& getSize() const;
+	void        setSize(const Size2&);
+	const Size2& getSize() const;
 
 private:
-	Size                  size;
+	Size2                  size;
 	std::vector<buffer_t> buffer;
 };
 

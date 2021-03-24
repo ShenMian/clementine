@@ -33,9 +33,9 @@
 
 截图
 ----
-![](docs/pictures/v0_0_0.png)
 ![](docs/pictures/pong.png)
-![](docs/pictures/minesweep.png)
+![](docs/pictures/minesweeper.png)
+![](docs/pictures/v0_0_0.png)
 ![](docs/pictures/profiler.png)
 
 编译

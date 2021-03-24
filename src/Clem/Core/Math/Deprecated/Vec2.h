@@ -66,7 +66,7 @@ public:
    * @param point 围绕旋转的点.
    * @param angle 要旋转的角度(弧度制).
 	 */
-	Vec2<T>& rotate(const Vec2<float>& point, float angle);
+	Vec2<T>& rotate(const Vector2f& point, float angle);
 
 	/**
 	 * @brief 获取角度.
@@ -124,15 +124,15 @@ public:
 	Vec2<T>& operator*=(float n);
 	Vec2<T>& operator/=(float n);
 
-	operator Vec2<int>() const;
-	operator Vec2<float>() const;
+	operator Vector2i() const;
+	operator Vector2f() const;
 
 	static const Vec2<T> zero;
 };
 
-#define Point Vec2
-//using Point = Vec2;
-using Size = Vec2<float>;
+#define Point2 Vec2
+//using Point2 = Vec2;
+using Size2 = Vector2f;
 
 #include "Vec2.inl"
 

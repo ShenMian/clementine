@@ -2,14 +2,13 @@
 // License(Apache-2.0)
 
 #include "Framebuffer.h"
-#include "Clem/Core/Math/Rect.h"
 #include "Clem/Profiler.h"
 #include "Color.h"
 #include "Cursor.h"
 #include <cassert>
 #include <cmath>
 
-void Framebuffer::drawSprite(const Point<float>& p, const Sprite& s)
+void Framebuffer::drawSprite(const Point2i& p, const Sprite& s)
 {
 	const auto& siz = s.getSize();
 	for(int y = 0; y < siz.y; y++)
@@ -19,10 +18,10 @@ void Framebuffer::drawSprite(const Point<float>& p, const Sprite& s)
 
 void Framebuffer::drawPoint(int x, int y, const Tile& t)
 {
-	drawPoint({(float)x, (float)y}, t);
+	drawPoint({x, y}, t);
 }
 
-void Framebuffer::drawLine(Point<float> a, Point<float> b, const Tile& t)
+void Framebuffer::drawLine(Point2i a, Point2i b, const Tile& t)
 {
 	auto xDis   = b.x - a.x + 1;
 	auto yDis   = b.y - a.y + 1;
@@ -39,7 +38,7 @@ void Framebuffer::drawLine(Point<float> a, Point<float> b, const Tile& t)
 	}
 }
 
-void Framebuffer::drawRect(Rect r, const Tile& t)
+void Framebuffer::drawRect(Rect2i r, const Tile& t)
 {
 	for(int x = r.left(); x <= r.right(); x++)
 	{
@@ -53,14 +52,14 @@ void Framebuffer::drawRect(Rect r, const Tile& t)
 	}
 }
 
-void Framebuffer::fillRect(Rect r, const Tile& t)
+void Framebuffer::fillRect(Rect2i r, const Tile& t)
 {
 	for(int y = 0; y < r.size.y; y++)
 		for(int x = 0; x < r.size.x; x++)
 			drawPoint(r.origin.x + x, r.origin.y + y, t);
 }
 
-void Framebuffer::drawCycle(Point<float> c, short r, const Tile& t)
+void Framebuffer::drawCycle(Point2i c, short r, const Tile& t)
 {
 	for(int x = 0; x <= r; x++)
 	{
@@ -80,7 +79,7 @@ void Framebuffer::drawCycle(Point<float> c, short r, const Tile& t)
 	}
 }
 
-void Framebuffer::drawString(const Point<float>& pos, std::wstring str)
+void Framebuffer::drawString(const Point2i& pos, std::wstring str)
 {
 	for(int i = 0; i < str.size(); i++)
 		drawPoint(pos.x + i, pos.y, Tile(str[i]));
@@ -88,23 +87,23 @@ void Framebuffer::drawString(const Point<float>& pos, std::wstring str)
 
 void Framebuffer::clear(const Tile& t)
 {
-	fillRect(Rect({0, 0}, size), t);
+	fillRect(Rect2i({0, 0}, size), t);
 }
 
-void Framebuffer::setSize(const Size& s)
+void Framebuffer::setSize(const Size2& s)
 {
 	size = s;
 	buffer.resize((size_t)s.area());
 }
 
-const Size& Framebuffer::getSize() const
+const Size2& Framebuffer::getSize() const
 {
 	return size;
 }
 
 #ifdef OS_UNIX
 
-void Framebuffer::drawPoint(const Point<float>& p, const Tile& t)
+void Framebuffer::drawPoint(const Point2i& p, const Tile& t)
 {
 	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
 		return;
@@ -207,7 +206,7 @@ void Framebuffer::output()
 
 #ifdef OS_WIN
 
-void Framebuffer::drawPoint(const Point<float>& p, const Tile& t)
+void Framebuffer::drawPoint(const Point2i& p, const Tile& t)
 {
 	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
 		return;

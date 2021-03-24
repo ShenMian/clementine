@@ -4,7 +4,7 @@
 #ifndef CLEM_WINDOW_H_
 #define CLEM_WINDOW_H_
 
-#include "Clem/Core/Math/Vec2.h"
+#include "Clem/Core/Math/Vector2f.h"
 #include <string>
 
 class Window
@@ -13,7 +13,7 @@ public:
 	/**
 	 * @brief 获取终端窗口大小.
 	 */
-  static Size getSize();
+  static Size2 getSize();
 
 	/**
 	 * @brief 设置终端窗口标题.
