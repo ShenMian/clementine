@@ -120,9 +120,8 @@ private:
 	shared_ptr<Scene> scene;
 };
 
-/*
 Application* CreateApplication()
 {
 	return new Pong;
 }
-*/
+
