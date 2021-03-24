@@ -10,7 +10,7 @@ project "Clementine"
   targetdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/lib")
   objdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/obj")
 
-  files {"**.cpp", "**.h", "premake5.lua"}
+  files {"**.cpp", "**.h", "**.inl", "premake5.lua"}
 
   includedirs {
     ".",

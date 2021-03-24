@@ -3,6 +3,8 @@
 
 #include "Clem.h"
 
+#include <iostream>
+
 using namespace std;
 
 // Easy
@@ -17,7 +19,7 @@ constexpr int board_size_y = 16;
 const int     mine_num     = 40;
 */
 
-const Size board_size = {board_size_x, board_size_y};
+const Vec2<float> board_size = {board_size_x, board_size_y};
 
 class Minesweep : public Application
 {
@@ -32,7 +34,7 @@ public:
 		int i = mine_num;
 		do
 		{
-			auto p = random.getPoint({0, 0}, {board_size.x - 1, board_size.y - 1});
+			Vec2<int> p = random.getPoint({0, 0}, {board_size.x - 1, board_size.y - 1});
 			if(map[(int)p.x][(int)p.y] == '*')
 				continue;
 			map[(int)p.x][(int)p.y] = '*';
@@ -50,7 +52,7 @@ public:
 			auto event = dynamic_cast<MouseEvent*>(e);
 			if(event->getType() == MouseEvent::Type::click)
 			{
-				auto p = event->getPosition();
+				Vec2<int> p = event->getPosition();
 				p      = {((p.x + 1) / 2) - 1, p.y - 1};
 				if(event->getKey() == MouseEvent::Key::left_buttom)
 					open(p.x, p.y);
@@ -68,7 +70,7 @@ public:
 			for(int y = 0; y < board_size.x; y++)
 				if(map[x][y] == '*')
 					sprite->drawPoint(1 + x * 2, 1 + y, Tile('*', Color::red));
-		getchar();
+		(void)getchar();
 		stop();
 	}
 
@@ -76,7 +78,7 @@ public:
 	{
 		wstring str = L"-=[ You won ]=-";
 		sprite->drawString({(board_size.x * 2 + 1 - str.size()) / 2, board_size.y / 2}, str, Color::yellow);
-		getchar();
+		(void)getchar();
 		stop();
 	}
 
@@ -110,11 +112,11 @@ public:
 		if(!inBoard(x, y) || map[x][y] == '.')
 			return;
 
-		auto flag = find(flags.begin(), flags.end(), Point(x, y));
+		auto flag = find(flags.begin(), flags.end(), Point<int>(x, y));
 		if(flag == flags.end())
 		{
 			sprite->drawPoint(1 + x * 2, 1 + y, Tile('?', Color::yellow));
-			flags.push_back(Point(x, y));
+			flags.push_back(Point<int>(x, y));
 		}
 		else
 		{
@@ -129,13 +131,12 @@ public:
 	}
 
 private:
-	int               surplus;
-	char              map[board_size_x][board_size_y];
-	Sprite*           sprite;
-	vector<Point>     mines;
-	vector<Point>     flags;
-	Random            random;
-	shared_ptr<Scene> scene;
+	int                surplus;
+	char               map[board_size_x][board_size_y];
+	Sprite*            sprite;
+	vector<Point<int>> flags;
+	Random             random;
+	shared_ptr<Scene>  scene;
 };
 
 Application* CreateApplication()

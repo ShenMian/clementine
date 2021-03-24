@@ -5,7 +5,7 @@
 #define CLEM_COMPONENT_TAG_H_
 
 #include "Component.h"
-#include "Clem/Math/Vec2.h"
+#include "Clem/Core/Math/Vec2.h"
 
 #include <string>
 

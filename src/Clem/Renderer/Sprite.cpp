@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "Sprite.h"
-#include "Clem/Math/Rect.h"
+#include "Clem/Core/Math/Rect.h"
 #include <cmath>
 #include <fstream>
 
@@ -18,14 +18,14 @@ void Sprite::drawPoint(int x, int y, const Tile& t)
 	drawPoint({(float)x, (float)y}, t);
 }
 
-void Sprite::drawPoint(Point p, const Tile& t)
+void Sprite::drawPoint(Point<float> p, const Tile& t)
 {
 	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
 		return;
 	buffer[(size_t)p.x + (size_t)p.y * (size_t)size.x] = t;
 }
 
-void Sprite::drawLine(Point a, Point b, const Tile& t)
+void Sprite::drawLine(Point<float> a, Point<float> b, const Tile& t)
 {
 	auto xDis   = b.x - a.x + 1;
 	auto yDis   = b.y - a.y + 1;
@@ -63,7 +63,7 @@ void Sprite::fillRect(Rect r, const Tile& t)
 			drawPoint(r.origin.x + x, r.origin.y + y, t);
 }
 
-void Sprite::drawCycle(Point c, short r, const Tile& t)
+void Sprite::drawCycle(Point<float> c, short r, const Tile& t)
 {
 	for(int x = 0; x <= r; x++)
 	{
@@ -83,7 +83,7 @@ void Sprite::drawCycle(Point c, short r, const Tile& t)
 	}
 }
 
-void Sprite::drawString(const Point& pos, std::wstring str, Color c)
+void Sprite::drawString(const Point<float>& pos, std::wstring str, Color c)
 {
 	for(int i = 0; i < str.size(); i++)
 		drawPoint(pos.x + i, pos.y, Tile(str[i], c));
@@ -96,10 +96,10 @@ void Sprite::clear()
 
 const Tile& Sprite::getTile(int x, int y) const
 {
-	return getTile(Point(x, y));
+	return getTile(Point<float>(x, y));
 }
 
-const Tile& Sprite::getTile(const Point& p) const
+const Tile& Sprite::getTile(const Point<float>& p) const
 {
 	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
 		return Tile::blank;

@@ -5,7 +5,7 @@
 #define CLEM_SCENE_ENTITY_H_
 
 #include "Clem/Log.h"
-#include "Clem/Math/Vec2.h"
+#include "Clem/Core/Math/Vec2.h"
 #include "Scene.h"
 #include "entt.hpp"
 

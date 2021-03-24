@@ -17,11 +17,11 @@
 class Rect
 {
 public:
-	Point origin;
-	Size  size;
+	Vec2<float> origin;
+	Size        size;
 
 	Rect() = default;
-	Rect(Point origin, Size size);
+	Rect(const Point<float>& origin, Size size);
 	Rect(float x, float y, float width, float height);
 
 	float top() const;
@@ -29,12 +29,12 @@ public:
 	float left() const;
 	float right() const;
 
-	Point tl() const;
-	Point tr() const;
-	Point bl() const;
-	Point br() const;
+	Point<float> tl() const;
+	Point<float> tr() const;
+	Point<float> bl() const;
+	Point<float> br() const;
 
-	bool containsPoint(const Point& point) const;
+	bool containsPoint(const Point<float>& point) const;
 	bool intersectsRect(const Rect& rect) const;
 };
 

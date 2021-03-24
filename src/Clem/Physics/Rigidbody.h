@@ -5,13 +5,13 @@
 #define CLEM_COMPONENT_RIGIDBODY_H_
 
 #include "Clem/Component/Component.h"
-#include "Clem/Math/Vec2.h"
+#include "Clem/Core/Math/Vec2.h"
 
 class Rigidbody : public Component
 {
 public:
-	Vec2 velocity;
-	Vec2 acceleration;
+	Vec2<float> velocity;
+	Vec2<float> acceleration;
 };
 
 #endif // !CLEM_COMPONENT_RIGIDBODY_H_

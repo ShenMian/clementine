@@ -4,7 +4,7 @@
 #ifndef CLEM_CORE_APPLICATION_H_
 #define CLEM_CORE_APPLICATION_H_
 
-#include "Clem/Math/Vec2.h"
+#include "Clem/Core/Math/Vec2.h"
 #include <memory>
 #include <string>
 #include <thread>

@@ -5,12 +5,11 @@
 #define CLEM_RENDERER_SPRITE_H_
 
 #include "Clem/Component/Component.h"
-#include "Clem/Math/Vec2.h"
+#include "Clem/Core/Math/Rect.h"
+#include "Clem/Core/Math/Vec2.h"
 #include "Tile.h"
 #include <filesystem>
 #include <vector>
-
-class Rect;
 
 /**
  * @brief Tile的集合.
@@ -38,7 +37,7 @@ public:
 	 * @param p 点的坐标.
 	 * @param t 瓦片.
 	 */
-	void drawPoint(Point p, const Tile& t);
+	void drawPoint(Point<float> p, const Tile& t);
 
 	/**
 	 * @brief 绘制连接两点的直线.
@@ -47,7 +46,7 @@ public:
 	 * @param b b点坐标.
 	 * @param t 瓦片.
 	 */
-	void drawLine(Point a, Point b, const Tile& t);
+	void drawLine(Point<float> a, Point<float> b, const Tile& t);
 
 	/**
 	 * @brief 绘制矩形.
@@ -72,7 +71,7 @@ public:
 	 * @param radius 半径.
 	 * @param t 瓦片.
 	 */
-	void drawCycle(Point p, short radius, const Tile& t);
+	void drawCycle(Point<float> p, short radius, const Tile& t);
 
 	/**
 	 * @brief 绘制字符串.
@@ -81,7 +80,7 @@ public:
 	 * @param str   要绘制的字符串
 	 * @param color 顔色
 	 */
-	void drawString(const Point& pos, std::wstring str, Color color = Color());
+	void drawString(const Point<float>& pos, std::wstring str, Color color = Color());
 
 	/**
 	 * @brief 清除全部绘制内容.
@@ -90,7 +89,7 @@ public:
 
 	const Tile& getTile(int x, int y) const;
 
-	const Tile& getTile(const Point&) const;
+	const Tile& getTile(const Point<float>&) const;
 
 	/**
 	 * @brief 设置可绘制区域的大小

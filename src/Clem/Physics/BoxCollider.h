@@ -5,8 +5,8 @@
 #define CLEM_BOX_COLLIDER_H_
 
 #include "Collider.h"
-#include "Clem/Math/Vec2.h"
-#include "Clem/Math/Rect.h"
+#include "Clem/Core/Math/Vec2.h"
+#include "Clem/Core/Math/Rect.h"
 
 /**
  * @addtogroup Physics

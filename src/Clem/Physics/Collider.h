@@ -4,7 +4,7 @@
 #ifndef CLEM_COLLIDER_H_
 #define CLEM_COLLIDER_H_
 
-#include "Clem/Math/Vec2.h"
+#include "Clem/Core/Math/Vec2.h"
 
 class Rigidbody;
 class BoxCollider;
@@ -26,23 +26,23 @@ public:
 	/**
 	 * @brief 获取坐标.
 	 */
-	Point getPosition() const;
+	Point<float> getPosition() const;
 
 	/**
 	 * @brief 设置偏移量.
 	 */
-	void  setOffset(Point offset);
+	void  setOffset(Point<float> offset);
 
 	/**
 	 * @brief 获取偏移量.
 	 */
-	Point getOffset() const;
+	Point<float> getOffset() const;
 
 	void       setOwner(Rigidbody* owner);
 	Rigidbody* getOwner() const;
 
 protected:
-	Point offset;
+	Point<float> offset;
 
 private:
 	Rigidbody* owner = nullptr;

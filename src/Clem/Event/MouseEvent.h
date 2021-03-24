@@ -5,7 +5,7 @@
 #define CLEM_EVENT_MOUSE_EVENT_H_
 
 #include "Event.h"
-#include "Clem/Math/Vec2.h"
+#include "Clem/Core/Math/Vec2.h"
 
 class MouseEvent : public Event
 {
@@ -27,15 +27,15 @@ public:
 		none
 	};
 
-	MouseEvent(Type type, const Point& pos, Key state = Key::none);
+	MouseEvent(Type type, const Point<float>& pos, Key state = Key::none);
 
 	Type         getType() const;
-	const Point& getPosition() const;
+	const Point<float>& getPosition() const;
 	Key          getKey() const;
 
 private:
 	Type  type;
-	Point position;
+	Point<float> position;
 	Key   key;
 };
 

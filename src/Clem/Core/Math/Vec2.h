@@ -1,8 +1,8 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_MATH_VECTOR2_H_
-#define CLEM_MATH_VECTOR2_H_
+#ifndef CLEM_MATH_VEC2_H_
+#define CLEM_MATH_VEC2_H_
 
 /**
  * @addtogroup Math
@@ -12,19 +12,20 @@
 /**
  * @brief 二维向量.
  */
+template <class T = float>
 class Vec2
 {
 public:
 	union
 	{
-		float x = 0;
-		float width;
+		T x = 0;
+		T width;
 	};
 
 	union
 	{
-		float y = 0;
-		float height;
+		T y = 0;
+		T height;
 	};
 
 	/**
@@ -38,7 +39,7 @@ public:
 	 * @param x x坐标.
 	 * @param y y坐标.
 	 */
-	Vec2(float x, float y);
+	Vec2(T x, T y);
 
 	/**
 	 * @brief 获取长度.
@@ -57,7 +58,7 @@ public:
 	/**
 	 * @brief 标准化成单位向量.
 	 */
-	Vec2& normalize();
+	Vec2<T>& normalize();
 
 	/**
 	 * @brief 旋转向量绕定点一定角度(弧度制).
@@ -65,7 +66,7 @@ public:
    * @param point 围绕旋转的点.
    * @param angle 要旋转的角度(弧度制).
 	 */
-	Vec2& rotate(const Vec2& point, float angle);
+	Vec2<T>& rotate(const Vec2<float>& point, float angle);
 
 	/**
 	 * @brief 获取角度.
@@ -79,7 +80,7 @@ public:
 	 * 
 	 * @see	distanceSquared
 	 */
-	float distance(const Vec2& point) const;
+	float distance(const Vec2<T>& point) const;
 
 	/**
 	 * @brief 获取到另一个点的距离的平方.
@@ -88,14 +89,14 @@ public:
 	 * 
 	 * @see distance
 	 */
-	float distanceSquared(const Vec2& point) const;
+	float distanceSquared(const Vec2<T>& point) const;
 
 	/**
 	 * @brief 获取两点之间的中点.
 	 * 
 	 * @param point 另一个点.
 	 */
-	Vec2 getMidpoint(const Vec2& point) const;
+	Vec2<T> getMidpoint(const Vec2<T>& point) const;
 
 	/**
 	 * @brief 裁剪到指定的范围内.
@@ -103,35 +104,41 @@ public:
 	 * @param min 最小值.
 	 * @param max 最大值.
 	 */
-	void clamp(const Vec2& min, const Vec2& max);
+	void clamp(const Vec2<T>& min, const Vec2<T>& max);
 
 	/**
 	 * @brief 获取面积.
 	 */
 	float area() const;
 
-	bool operator==(const Vec2& v) const;
-	bool operator!=(const Vec2& v) const;
+	bool operator==(const Vec2<T>& v) const;
+	bool operator!=(const Vec2<T>& v) const;
 
-	Vec2  operator*(float n) const;
-	Vec2  operator/(float n) const;
-	Vec2  operator+(const Vec2& v) const;
-	Vec2  operator-(const Vec2& v) const;
-	Vec2  operator-() const;
-	Vec2& operator+=(const Vec2& v);
-	Vec2& operator-=(const Vec2& v);
-	Vec2& operator*=(float n);
-	Vec2& operator/=(float n);
+	Vec2<T>  operator*(float n) const;
+	Vec2<T>  operator/(float n) const;
+	Vec2<T>  operator+(const Vec2<T>& v) const;
+	Vec2<T>  operator-(const Vec2<T>& v) const;
+	Vec2<T>  operator-() const;
+	Vec2<T>& operator+=(const Vec2<T>& v);
+	Vec2<T>& operator-=(const Vec2<T>& v);
+	Vec2<T>& operator*=(float n);
+	Vec2<T>& operator/=(float n);
 
-	static const Vec2 zero;
+	operator Vec2<int>() const;
+	operator Vec2<float>() const;
+
+	static const Vec2<T> zero;
 };
 
-typedef Vec2 Point;
-typedef Vec2 Size;
+#define Point Vec2
+//using Point = Vec2;
+using Size = Vec2<float>;
+
+#include "Vec2.inl"
 
 /**
  * end of Math group
  * @}
  */
 
-#endif // !CLEM_MATH_VECTOR2_H_
+#endif // !CLEM_MATH_VEC2_H_

@@ -34,7 +34,7 @@ float Random::getFloat()
 	return dist(generator);
 }
 
-Point Random::getPoint(const Point& min, const Point& max)
+Point<float> Random::getPoint(const Point<float>& min, const Point<float>& max)
 {
-	return Point(getInt32(min.x, max.x), getInt32(min.y, max.y));
+	return Point<float>(getInt32(min.x, max.x), getInt32(min.y, max.y));
 }

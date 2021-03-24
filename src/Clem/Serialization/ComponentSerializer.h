@@ -1,6 +1,8 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
+/*
+
 #ifndef CLEM_SERIALIZATION_COMPONENT_SERIALIZER_H_
 #define CLEM_SERIALIZATION_COMPONENT_SERIALIZER_H_
 
@@ -19,3 +21,5 @@ YAML::Emitter& operator<<(YAML::Emitter& out, const Sprite& sprite);
 YAML::Emitter& operator<<(YAML::Emitter& out, const Rigidbody& rigidbody);
 
 #endif // !CLEM_SERIALIZATION_COMPONENT_SERIALIZER_H_
+
+*/

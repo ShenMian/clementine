@@ -1,6 +1,8 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
+/*
+
 #include "ComponentSerializer.h"
 #include "MathSerializer.h"
 #include "Clem/Component/Tag.h"
@@ -41,4 +43,4 @@ YAML::Emitter& operator<<(YAML::Emitter& o, const Rigidbody& b)
 	return o;
 }
 
-
+*/

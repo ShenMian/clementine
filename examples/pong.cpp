@@ -75,7 +75,7 @@ public:
 			auto batCenter = batPos + batSize / 2;
 
 			// 以 ai_speed 速度向 ball 所在的 y 坐标移动
-			batBody.velocity = Vec2(0, ballPos.y - batCenter.y).normalize() * ai_speed;
+			batBody.velocity = Vec2<float>(0, ballPos.y - batCenter.y).normalize() * ai_speed;
 		};
 
 		// TODO: 碰撞时被回调, 调整随机角度

@@ -3,7 +3,7 @@
 
 #include "Rect.h"
 
-Rect::Rect(Point origin, Size size)
+Rect::Rect(const Point<float>& origin, Size size)
 		: origin(origin), size(size)
 {
 }
@@ -33,27 +33,27 @@ float Rect::right() const
 	return origin.x + size.x;
 }
 
-Point Rect::tl() const
+Point<float> Rect::tl() const
 {
-	return Point(left(), top());
+	return Point<float>(left(), top());
 }
 
-Point Rect::tr() const
+Point<float> Rect::tr() const
 {
-	return Point(right(), top());
+	return Point<float>(right(), top());
 }
 
-Point Rect::bl() const
+Point<float> Rect::bl() const
 {
-	return Point(left(), bottom());
+	return Point<float>(left(), bottom());
 }
 
-Point Rect::br() const
+Point<float> Rect::br() const
 {
-	return Point(right(), bottom());
+	return Point<float>(right(), bottom());
 }
 
-bool Rect::containsPoint(const Point& p) const
+bool Rect::containsPoint(const Point<float>& p) const
 {
 	return top() <= p.y && p.y <= bottom() && left() <= p.x && p.x <= right();
 }
