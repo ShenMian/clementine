@@ -30,7 +30,7 @@ public:
 		ballSprite.drawPoint({0, 0}, Tile('O', Color::yellow));
 
 		// 1. 创建乒乓球
-		auto ball = scene->createEntity("ball");                       // 向 scene 申请创建一个实体 ball
+		auto ball = scene->createEntityWithTag("ball");                       // 向 scene 申请创建一个实体 ball
 		ball.addComponent<Sprite>(ballSprite);                         // 为 ball 创建一个复制 ballSprite 的 Sprite 组件
 		ball.addComponent<Rigidbody>().velocity = {ball_speed, 0.05f}; // 为 ball 创建一个 Rigidbody 组件, 并设置初速度
 		ball.getComponent<Transform>().position = {39, 12};            // 设置 ball 的位置, Transform 组件默认存在
@@ -40,8 +40,8 @@ public:
 		batSprite.fillRect(Rect2i({0, 0}, {1, 5}), Tile('#', Color::blue));
 
 		// 4. 创建两个乒乓球拍
-		auto bat1 = scene->createEntity("bat1");
-		auto bat2 = scene->createEntity("bat2");
+		auto bat1 = scene->createEntityWithTag("bat1");
+		auto bat2 = scene->createEntityWithTag("bat2");
 		bat1.addComponent<Sprite>(batSprite);
 		bat2.addComponent<Sprite>(batSprite);
 		bat1.addComponent<Rigidbody>();
@@ -105,7 +105,7 @@ public:
 		};
 
 		// 7. 创建场景中的其他元素
-		auto  board       = scene->createEntity("board");
+		auto  board       = scene->createEntityWithTag("board");
 		auto& boardSprite = board.addComponent<Sprite>(Size2(80, 25));
 		boardSprite.drawRect(Rect2i({0, 0}, {79, 24}), Tile('#'));
 		boardSprite.fillRect(Rect2i({39, 1}, {2, 23}), Tile('.', Color::green));
@@ -120,8 +120,10 @@ private:
 	shared_ptr<Scene> scene;
 };
 
+/*
 Application* CreateApplication()
 {
 	return new Pong;
 }
+*/
 

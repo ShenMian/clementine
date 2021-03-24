@@ -13,7 +13,7 @@ public:
 	{
 		pushScene(scene);
 
-		auto  canvas = scene->createEntity("canvas");
+		auto  canvas = scene->createEntityWithTag("canvas");
 		auto& text   = canvas.addComponent<Text>();
 		text.text    = L"Hello World!";
 	}

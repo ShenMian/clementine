@@ -23,7 +23,7 @@ void Input::update()
 	static HANDLE       hOut       = GetStdHandle(STD_INPUT_HANDLE);
 	static INPUT_RECORD rec;
 	static DWORD        res;
-	ReadConsoleInput(hOut, &rec, 1, &res); // ����
+	ReadConsoleInput(hOut, &rec, 1, &res); // 堵塞
 	switch(rec.EventType)
 	{
 	case KEY_EVENT:
@@ -52,7 +52,6 @@ void Input::update()
 			dispatcher.dispatch(MouseEvent(MouseEvent::Type::wheeled,
 																		 {(float)rec.Event.MouseEvent.dwMousePosition.X,
 																			(float)rec.Event.MouseEvent.dwMousePosition.Y}));
-			printf("mouse:wheeled");
 			break;
 		}
 		if(rec.Event.MouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
@@ -68,7 +67,6 @@ void Input::update()
 		break;
 
 	case WINDOW_BUFFER_SIZE_EVENT:
-		printf("window:resize");
 		break;
 	}
 }

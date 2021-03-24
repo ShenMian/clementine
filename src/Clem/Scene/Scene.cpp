@@ -22,7 +22,7 @@ Entity Scene::createEntity()
 	return e;
 }
 
-Entity Scene::createEntity(const std::string& tag)
+Entity Scene::createEntityWithTag(const std::string& tag)
 {
 	auto e = createEntity();
 	e.addComponent<Tag>(tag);

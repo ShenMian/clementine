@@ -21,7 +21,7 @@ class Scene
 {
 public:
 	Entity createEntity();
-	Entity createEntity(const std::string& tag);
+	Entity createEntityWithTag(const std::string& tag);
 
 	Entity getEntityById(entity_id id);
 	Entity getEntityByTag(const std::string& tag);

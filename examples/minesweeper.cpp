@@ -4,22 +4,12 @@
 #include "Clem.h"
 
 #include <iostream>
+#include <limits.h>
 
 using namespace std;
 
-// Easy
-/*
-constexpr int board_size_x = 9;
-constexpr int board_size_y = 9;
-const int     mine_num     = 10;
-*/
-
-// Middle
-constexpr int board_size_x = 16;
-constexpr int board_size_y = 16;
-const int     mine_num     = 40;
-
-const Size2i board_size = {board_size_x, board_size_y};
+Size2i board_size;
+int    mine_num = 99;
 
 class Minesweeper : public Application
 {
@@ -29,7 +19,45 @@ public:
 	{
 		pushScene(scene);
 
-		auto board = scene->createEntity("board");
+		puts("/--[Level]--\\\n"
+				 "| 1. Easy   |\n"
+				 "| 2. Middle |\n"
+				 "| 3. Hard   |\n"
+				 "\\-----------/");
+		char choice = getchar();
+		(void)getchar();
+		switch(choice)
+		{
+		case '1':
+			board_size.x = 9;
+			board_size.y = 9;
+			mine_num     = 10;
+			break;
+
+		case '2':
+			board_size.x = 16;
+			board_size.y = 16;
+			mine_num     = 40;
+			break;
+
+		case '3':
+			board_size.x = 30;
+			board_size.y = 16;
+			mine_num     = 99;
+			break;
+
+		default:
+			puts("Unknown level");
+			(void)getchar();
+			exit(0);
+			break;
+		}
+
+		// map.resize(board_size.x);
+		// for(int i = 0; i < board_size.x; i++)
+		// 	map[i].resize(board_size.y);
+
+		auto board = scene->createEntityWithTag("board");
 		sprite     = &board.addComponent<Sprite>(Size2(board_size.x * 2 + 1, board_size.y + 2));
 
 		EventDispatcher::getInstance().addListener(Event::Type::mouse, [&](Event* e) {
@@ -40,10 +68,20 @@ public:
 				p         = {((p.x + 1) / 2) - 1, p.y - 1};
 				if(event->getKey() == MouseEvent::Key::left_buttom)
 					open(p.x, p.y);
-				else
+				else if(event->getKey() == MouseEvent::Key::right_buttom)
 					flag(p.x, p.y);
 			}
 		});
+
+		// BUG
+		/*auto ui    = scene->createEntityWithTag("info");
+		ui.addComponent<Sprite>(Size2(15, board_size.y + 2));
+		ui.getComponent<Transform>().position = Point2f(board_size.x * 2 + 2, 0);
+
+		ui.addComponent<Script>().onUpdate = [&](float) {
+			auto& s = scene->getEntityByTag("info").getComponent<Sprite>();
+			s.drawString({0, 0}, L"Mines: " + to_wstring(mine_num - flags.size()));
+		};*/
 
 		start();
 	}
@@ -85,18 +123,14 @@ public:
 	void lost()
 	{
 		for(int x = 0; x < board_size.x; x++)
-			for(int y = 0; y < board_size.x; y++)
+			for(int y = 0; y < board_size.y; y++)
 				if(map[x][y] == '*')
 					sprite->drawPoint(1 + x * 2, 1 + y, Tile('*', Color::red));
 
-		for(int i = 5; i > 0; i--)
-		{
-			wstring str = L"[ Restart in " + to_wstring(i) + L" secs ]";
-			sprite->drawString({(board_size.x * 2 + 1 - (int)str.size()) / 2, 0}, str, Color::red);
-			this_thread::sleep_for(chrono::seconds(1));
-		}
-
-		start();
+		wstring str = L"[ Press enter to exit ]";
+		sprite->drawString({(board_size.x * 2 + 1 - (int)str.size()) / 2, 0}, str, Color::red);
+		(void)getchar();
+		stop();
 	}
 
 	void open(int x, int y)
@@ -146,8 +180,8 @@ public:
 	}
 
 private:
+	char              map[30][16];
 	int               surplus;
-	char              map[board_size_x][board_size_y];
 	Sprite*           sprite;
 	vector<Point2i>   flags;
 	Random            random;
