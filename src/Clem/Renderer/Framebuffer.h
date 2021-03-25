@@ -4,8 +4,8 @@
 #ifndef CLEM_RENDERER_H_
 #define CLEM_RENDERER_H_
 
-#include "Clem/Core/Math/Rect2f.h"
-#include "Clem/Core/Math/Vector2f.h"
+#include "Clem/Core/Math/Rect2.h"
+#include "Clem/Core/Math/Vector2.h"
 #include "Clem/Platform.h"
 #include "Sprite.h"
 #include <vector>

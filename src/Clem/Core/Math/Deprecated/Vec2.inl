@@ -1,7 +1,7 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "Vector2f.h"
+#include "Vec2.h"
 #include <algorithm>
 #include <cassert>
 #include <cfloat>
@@ -35,12 +35,12 @@ Vec2<T>& Vec2<T>::normalize()
 }
 
 template <class T>
-Vec2<T>& Vec2<T>::rotate(const Vector2f& point, float angle)
+Vec2<T>& Vec2<T>::rotate(const Vector2& point, float angle)
 {
 	const float sinAngle = std::sin(angle);
 	const float cosAngle = std::cos(angle);
 
-	if(point == Vector2f(0, 0))
+	if(point == Vector2(0, 0))
 	{
 		float tempX = x * cosAngle - y * sinAngle;
 		y           = y * cosAngle + x * sinAngle;
@@ -117,31 +117,31 @@ bool Vec2<T>::operator!=(const Vec2<T>& v) const
 template <class T>
 Vec2<T> Vec2<T>::operator*(float n) const
 {
-	return Vector2f(x * n, y * n);
+	return Vector2(x * n, y * n);
 }
 
 template <class T>
 Vec2<T> Vec2<T>::operator/(float n) const
 {
-	return Vector2f(x / n, y / n);
+	return Vector2(x / n, y / n);
 }
 
 template <class T>
 Vec2<T> Vec2<T>::operator+(const Vec2<T>& v) const
 {
-	return Vector2f(x + v.x, y + v.y);
+	return Vector2(x + v.x, y + v.y);
 }
 
 template <class T>
 Vec2<T> Vec2<T>::operator-(const Vec2<T>& v) const
 {
-	return Vector2f(x - v.x, y - v.y);
+	return Vector2(x - v.x, y - v.y);
 }
 
 template <class T>
 Vec2<T> Vec2<T>::operator-() const
 {
-	return Vector2f(-x, -y);
+	return Vector2(-x, -y);
 }
 
 template <class T>
@@ -179,9 +179,9 @@ Vec2<T>::operator Vector2i() const
 }
 
 template <class T>
-Vec2<T>::operator Vector2f() const
+Vec2<T>::operator Vector2() const
 {
-	return Vector2f(static_cast<float>(x), static_cast<float>(y));
+	return Vector2(static_cast<float>(x), static_cast<float>(y));
 }
 
 template <class T>

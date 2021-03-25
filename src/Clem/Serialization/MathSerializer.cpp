@@ -4,10 +4,10 @@
 /*
 
 #include "MathSerializer.h"
-#include "Clem/Core/Math/Vector2f.h"
-#include "Clem/Core/Math/Rect2f.h"
+#include "Clem/Core/Math/Vector2.h"
+#include "Clem/Core/Math/Rect2.h"
 
-YAML::Emitter& operator<<(YAML::Emitter& o, const Vector2f& v)
+YAML::Emitter& operator<<(YAML::Emitter& o, const Vector2& v)
 {
 	o << YAML::Flow;
 	o << YAML::BeginSeq << v.x << v.y << YAML::EndSeq;

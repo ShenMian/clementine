@@ -3,6 +3,7 @@
 
 #include "Scene.h"
 #include "Clem/Core/Application.h"
+#include "Clem/Log.h"
 #include "Clem/Profiler.h"
 #include "Clem/Renderer/Renderer.h"
 #include "Entity.h"
@@ -15,6 +16,8 @@
 #include "Clem/Renderer/Sprite.h"
 #include "Clem/Ui/Text.h"
 
+using std::string;
+
 Entity Scene::createEntity()
 {
 	auto e = getEntityById(registry.create());
@@ -22,34 +25,32 @@ Entity Scene::createEntity()
 	return e;
 }
 
-Entity Scene::createEntityWithTag(const std::string& tag)
+Entity Scene::createEntity(const string& tag)
 {
 	auto e = createEntity();
 	e.addComponent<Tag>(tag);
 	return e;
 }
 
-Entity Scene::getEntityById(entity_id id)
+Entity Scene::getEntityById(id_t id)
 {
 	if(registry.valid(id))
 		return Entity(id, this);
-	else
-		return Entity();
-}
-
-Entity Scene::getEntityByTag(const std::string& tag)
-{
-	auto view = registry.view<Tag>();
-	for(auto i : view)
-	{
-		auto e = getEntityById(i);
-		if(e.getComponent<Tag>().tag == tag)
-			return e;
-	}
+	CLEM_CORE_ERROR("get entity with invalid a id");
 	return Entity();
 }
 
-void Scene::removeEntity(entity_id id)
+Entity Scene::getEntityByTag(const string& tag_)
+{
+	auto view = registry.view<Tag>();
+	for(auto [id, tag] : view.each())
+		if(tag.tag == tag_)
+			return getEntityById(id);
+	CLEM_CORE_ERROR("get entity with invalid a tag");
+	return Entity();
+}
+
+void Scene::removeEntity(id_t id)
 {
 	registry.destroy(id);
 	// registry.remove(id);
@@ -60,13 +61,14 @@ void Scene::update(float dt)
 	PROFILE_FUNC();
 
 	auto scriptView = registry.view<Transform, Script>();
-	for(auto [entity, transform, script] : scriptView.each())
+	for(auto [e, t, script] : scriptView.each())
 		script.onUpdate(dt);
 
 	auto bodyView = registry.view<Transform, Rigidbody>();
-	for(auto [entity, transform, body] : bodyView.each())
+	for(auto [e, t, body] : bodyView.each())
 	{
-		transform.position += body.velocity;
+		auto pos = t.getLocalPosition();
+		t.setLocalPosition(pos += body.velocity);
 		body.velocity += body.acceleration * dt;
 	}
 
@@ -92,7 +94,7 @@ void Scene::update(float dt)
 	// return getRect().contains(o->getRect());
 }
 
-#include "Clem/Core/Math/Rect2f.h"
+#include "Clem/Core/Math/Rect2.h"
 
 void Scene::render(float dt)
 {
@@ -104,13 +106,13 @@ void Scene::render(float dt)
 
 	// Render sprites
 	auto spriteView = registry.view<Transform, Sprite>();
-	for(auto [entity, transform, sprite] : spriteView.each())
-		buf.drawSprite(transform.position, sprite);
+	for(auto [e, t, sprite] : spriteView.each())
+		buf.drawSprite(t.getPosition(), sprite);
 
 	// Render UI
 	auto textView = registry.view<Transform, Text>();
-	for(auto [entity, transform, text] : textView.each())
-		buf.drawString(transform.position, text.text);
+	for(auto [e, t, text] : textView.each())
+		buf.drawString(t.getPosition(), text.text);
 
 	renderer.swapBuffers();
 	renderer.output();

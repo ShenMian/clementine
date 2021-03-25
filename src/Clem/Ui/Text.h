@@ -5,7 +5,7 @@
 #define CLEM_UI_TEXT_H_
 
 #include <string>
-#include "Clem/Core/Math/Vector2f.h"
+#include "Clem/Core/Math/Vector2.h"
 
 /**
  * @addtogroup UI

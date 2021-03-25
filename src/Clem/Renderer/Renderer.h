@@ -4,7 +4,7 @@
 #ifndef CLEM_RENDERER_RENDERER_H_
 #define CLEM_RENDERER_RENDERER_H_
 
-#include "Clem/Core/Math/Vector2f.h"
+#include "Clem/Core/Math/Vector2.h"
 #include "Framebuffer.h"
 
 class Renderer

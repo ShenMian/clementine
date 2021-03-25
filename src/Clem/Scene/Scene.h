@@ -6,7 +6,7 @@
 
 #include "entt.hpp"
 
-typedef entt::entity entity_id;
+typedef entt::entity id_t;
 class Entity;
 
 /**
@@ -21,12 +21,12 @@ class Scene
 {
 public:
 	Entity createEntity();
-	Entity createEntityWithTag(const std::string& tag);
+	Entity createEntity(const std::string& tag);
 
-	Entity getEntityById(entity_id id);
+	Entity getEntityById(id_t id);
 	Entity getEntityByTag(const std::string& tag);
 
-	void removeEntity(entity_id id);
+	void removeEntity(id_t id);
 
 	void update(float dt);
 	void render(float dt);

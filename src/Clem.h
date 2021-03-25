@@ -22,8 +22,8 @@
 #include "Clem/Physics/CircleCollider.h"
 
 // Math
-#include "Clem/Core/Math/Vector2f.h"
-#include "Clem/Core/Math/Rect2f.h"
+#include "Clem/Core/Math/Vector2.h"
+#include "Clem/Core/Math/Rect2.h"
 
 // Component
 #include "Clem/Component/Component.h"

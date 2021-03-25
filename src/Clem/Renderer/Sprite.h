@@ -6,7 +6,7 @@
 
 #include "Clem/Component/Component.h"
 #include "Clem/Core/Math/Rect2i.h"
-#include "Clem/Core/Math/Vector2f.h"
+#include "Clem/Core/Math/Vector2.h"
 #include "Tile.h"
 #include <filesystem>
 #include <vector>
@@ -20,7 +20,7 @@ public:
 	Sprite()              = default;
 	Sprite(const Sprite&) = default;
 	Sprite& operator=(const Sprite&) = default;
-	explicit Sprite(const Size2& size);
+	explicit Sprite(const Size2i& size);
 
 	/**
 	 * @brief 绘制点.

@@ -8,7 +8,7 @@
 
 using namespace std::filesystem;
 
-Sprite::Sprite(const Size2& size)
+Sprite::Sprite(const Size2i& size)
 {
 	setSize(size);
 }

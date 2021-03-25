@@ -5,7 +5,7 @@
 #define CLEM_COMPONENT_TAG_H_
 
 #include "Component.h"
-#include "Clem/Core/Math/Vector2f.h"
+#include "Clem/Core/Math/Vector2.h"
 
 #include <string>
 

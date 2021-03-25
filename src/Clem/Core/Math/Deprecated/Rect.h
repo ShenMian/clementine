@@ -4,7 +4,7 @@
 #ifndef CLEM_MATH_RECT_H_
 #define CLEM_MATH_RECT_H_
 
-#include "../Vector2f.h"
+#include "../Vector2.h"
 
 /**
  * @addtogroup Math
@@ -17,7 +17,7 @@
 class Rect
 {
 public:
-	Vector2f origin;
+	Vector2 origin;
 	Size2        size;
 
 	Rect() = default;

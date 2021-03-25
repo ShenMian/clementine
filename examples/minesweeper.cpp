@@ -57,8 +57,8 @@ public:
 		// for(int i = 0; i < board_size.x; i++)
 		// 	map[i].resize(board_size.y);
 
-		auto board = scene->createEntityWithTag("board");
-		sprite     = &board.addComponent<Sprite>(Size2(board_size.x * 2 + 1, board_size.y + 2));
+		auto board = scene->createEntity("board");
+		sprite     = &board.addComponent<Sprite>(Size2i(board_size.x * 2 + 1, board_size.y + 2));
 
 		EventDispatcher::getInstance().addListener(Event::Type::mouse, [&](Event* e) {
 			auto event = dynamic_cast<MouseEvent*>(e);
@@ -76,7 +76,7 @@ public:
 		// BUG
 		/*auto ui    = scene->createEntityWithTag("info");
 		ui.addComponent<Sprite>(Size2(15, board_size.y + 2));
-		ui.getComponent<Transform>().position = Point2f(board_size.x * 2 + 2, 0);
+		ui.getComponent<Transform>().position = Point2(board_size.x * 2 + 2, 0);
 
 		ui.addComponent<Script>().onUpdate = [&](float) {
 			auto& s = scene->getEntityByTag("info").getComponent<Sprite>();
@@ -188,7 +188,9 @@ private:
 	shared_ptr<Scene> scene;
 };
 
+#if 0
 Application* CreateApplication()
 {
 	return new Minesweeper;
 }
+#endif

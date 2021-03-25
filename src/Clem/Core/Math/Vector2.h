@@ -16,7 +16,7 @@
 /**
  * @brief 二维向量, 单精度.
  */
-struct Vector2f
+struct Vector2
 {
 	float x = 0.0f;
 	float y = 0.0f;
@@ -24,7 +24,7 @@ struct Vector2f
 	/**
 	 * @brief 默认构造函数.
 	 */
-	Vector2f() = default;
+	Vector2() = default;
 
 	/**
 	 * @brief 构造函数.
@@ -32,7 +32,7 @@ struct Vector2f
 	 * @param x x坐标.
 	 * @param y y坐标.
 	 */
-	Vector2f(float x, float y);
+	Vector2(float x, float y);
 
 	/**
 	 * @brief 获取长度.
@@ -55,7 +55,7 @@ struct Vector2f
 	 * 
 	 * @see	distanceSquared
 	 */
-	float distance(const Vector2f& point) const;
+	float distance(const Vector2& point) const;
 
 	/**
 	 * @brief 获取到另一个点的距离的平方.
@@ -64,12 +64,12 @@ struct Vector2f
 	 * 
 	 * @see distance
 	 */
-	float distanceSquared(const Vector2f& point) const;
+	float distanceSquared(const Vector2& point) const;
 
 	/**
 	 * @brief 标准化成单位向量.
 	 */
-	Vector2f& normalize();
+	Vector2& normalize();
 
 	/**
 	 * @brief 获取面积.
@@ -85,30 +85,27 @@ struct Vector2f
 
 	operator Vector2i() const;
 
-	bool      operator==(const Vector2f& v) const;
-	bool      operator!=(const Vector2f& v) const;
-	Vector2f  operator*(float n) const;
-	Vector2f  operator/(float n) const;
-	Vector2f  operator+(const Vector2f& v) const;
-	Vector2f  operator-(const Vector2f& v) const;
-	Vector2f  operator-() const;
-	Vector2f& operator+=(const Vector2f& v);
-	Vector2f& operator-=(const Vector2f& v);
-	Vector2f& operator*=(float n);
-	Vector2f& operator/=(float n);
+	bool      operator==(const Vector2& v) const;
+	bool      operator!=(const Vector2& v) const;
+	Vector2  operator*(float n) const;
+	Vector2  operator/(float n) const;
+	Vector2  operator+(const Vector2& v) const;
+	Vector2  operator-(const Vector2& v) const;
+	Vector2  operator-() const;
+	Vector2& operator+=(const Vector2& v);
+	Vector2& operator-=(const Vector2& v);
+	Vector2& operator*=(float n);
+	Vector2& operator/=(float n);
 
-	Vector2f operator+(const Vector2i& v) const;
-	Vector2f operator-(const Vector2i& v) const;
+	Vector2 operator+(const Vector2i& v) const;
+	Vector2 operator-(const Vector2i& v) const;
 
-	static const Vector2f Zero; // (0, 0)
-	static const Vector2f Unit; // (1, 1)
+	static const Vector2 Zero; // (0, 0)
+	static const Vector2 Unit; // (1, 1)
 };
 
-using Vector2 = Vector2f;
-using Point2  = Vector2f;
-using Size2   = Vector2f;
-using Point2f = Vector2f;
-using Size2f  = Vector2f;
+using Point2  = Vector2;
+using Size2   = Vector2;
 
 /**
  * end of Math group

@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Vector2f.h"
+#include "Vector2.h"
 
 /**
  * @addtogroup Math
@@ -13,16 +13,16 @@
 /**
  * @brief 二维矩形, 单精度.
  */
-class Rect2f
+class Rect2
 {
 public:
-	Vector2f origin;
-	Size2f   size;
+	Vector2 origin;
+	Size2   size;
 
 	/**
 	 * @brief 默认构造函数.
 	 */
-	Rect2f() = default;
+	Rect2() = default;
 
 	/**
 	 * @brief 构造函数.
@@ -30,7 +30,7 @@ public:
 	 * @param origin 坐标.
 	 * @param size   大小.
 	 */
-	Rect2f(const Point2f& origin, Size2f size);
+	Rect2(const Point2& origin, Size2 size);
 
 	/**
 	 * @brief 构造函数.
@@ -40,23 +40,23 @@ public:
 	 * @param width  宽.
 	 * @param height 高.
 	 */
-	Rect2f(float x, float y, float width, float height);
+	Rect2(float x, float y, float width, float height);
 
 	float top() const;
 	float bottom() const;
 	float left() const;
 	float right() const;
 
-	Point2f tl() const;
-	Point2f tr() const;
-	Point2f bl() const;
-	Point2f br() const;
+	Point2 tl() const;
+	Point2 tr() const;
+	Point2 bl() const;
+	Point2 br() const;
 
-	bool containsPoint(const Point2f& point) const;
-	bool intersectsRect(const Rect2f& rect) const;
+	bool containsPoint(const Point2& point) const;
+	bool intersectsRect(const Rect2& rect) const;
 };
 
-using Rect2 = Rect2f;
+using Rect2 = Rect2;
 
 /**
  * end of Math group

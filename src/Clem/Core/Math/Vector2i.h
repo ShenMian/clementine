@@ -49,3 +49,8 @@ struct Vector2i
 
 using Point2i = Vector2i;
 using Size2i  = Vector2i;
+
+/**
+ * end of Math group
+ * @}
+ */

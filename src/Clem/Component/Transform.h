@@ -5,13 +5,21 @@
 #define CLEM_COMPONENT_TRANSFORM_H_
 
 #include "Clem/Component/Component.h"
-#include "Clem/Core/Math/Vector2f.h"
+#include "Clem/Core/Math/Vector2.h"
 
 class Transform : public Component
 {
 public:
-	Vector2f position;
-	Vector2f rotation;
+	const Point2& getPosition();
+
+	const Point2& getLocalPosition();
+	void          setLocalPosition(const Point2&);
+
+private:
+	Vector2    localPosition;
+	Vector2    position;
+	Transform* parent = nullptr;
+	bool       dirty  = true;
 };
 
 #endif // !CLEM_COMPONENT_TRANSFORM_H_

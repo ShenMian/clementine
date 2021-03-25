@@ -4,7 +4,7 @@
 #ifndef CLEM_RENDERER_CAMERA_H_
 #define CLEM_RENDERER_CAMERA_H_
 
-#include "Clem/Core/Math/Rect2f.h"
+#include "Clem/Core/Math/Rect2.h"
 
 class Camera
 {

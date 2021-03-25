@@ -5,7 +5,7 @@
 #ifndef CLEM_RANDOM_H_
 #define CLEM_RANDOM_H_
 
-#include "Clem/Core/Math/Vector2f.h"
+#include "Clem/Core/Math/Vector2.h"
 #include <random>
 #include <stdint.h>
 

@@ -4,8 +4,8 @@
 #ifndef CLEM_SCENE_ENTITY_H_
 #define CLEM_SCENE_ENTITY_H_
 
+#include "Clem/Core/Math/Vector2.h"
 #include "Clem/Log.h"
-#include "Clem/Core/Math/Vector2f.h"
 #include "Scene.h"
 #include "entt.hpp"
 
@@ -16,16 +16,16 @@ class Scene;
  * @{
  */
 
-typedef entt::entity entity_id;
-
 /**
  * @brief 实体. 组件的容器.
  */
 class Entity
 {
 public:
+	typedef entt::entity id_t;
+
 	Entity() = default;
-	Entity(entity_id id, Scene* scene);
+	Entity(id_t id, Scene* scene);
 
 	/**
 	 * @brief 添加指定组件.
@@ -51,15 +51,15 @@ public:
 	template <typename T>
 	bool hasComponent();
 
-	entity_id getId() const;
-	Scene*    getScene() const;
+	id_t   getId() const;
+	Scene* getScene() const;
 
 	operator bool() const;
-	operator entity_id() const;
+	operator id_t() const;
 
 private:
-	entity_id id    = entt::null;
-	Scene*    scene = nullptr;
+	id_t   id    = entt::null;
+	Scene* scene = nullptr;
 };
 
 /**

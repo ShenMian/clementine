@@ -9,7 +9,7 @@
 class Color
 {
 public:
-	enum
+	enum : uint8_t
 	{
 		black  = 0x00,
 		red    = 0x04,
@@ -23,8 +23,8 @@ public:
 		max
 	};
 
-	int8_t fore = white;
-	int8_t back = black;
+	uint8_t fore = white;
+	uint8_t back = black;
 
 	Color() = default;
 	Color(uint16_t color);

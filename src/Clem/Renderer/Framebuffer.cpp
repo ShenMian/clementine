@@ -27,13 +27,13 @@ void Framebuffer::drawLine(Point2i a, Point2i b, const Tile& t)
 	auto yDis   = b.y - a.y + 1;
 	auto maxDis = std::max(abs(xDis), abs(yDis));
 
-	float xDelta = xDis / maxDis;
-	float yDelta = yDis / maxDis;
+	float xDelta = (float)xDis / maxDis;
+	float yDelta = (float)yDis / maxDis;
 
-	float x = a.x, y = a.y;
+	float x = (float)a.x, y = (float)a.y;
 	for(int i = 0; i < maxDis; i++)
 	{
-		drawPoint(x, y, t);
+		drawPoint((int)x, (int)y, t);
 		x += xDelta, y += yDelta;
 	}
 }
