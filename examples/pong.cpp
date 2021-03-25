@@ -29,11 +29,11 @@ public:
 		Sprite ballSprite({1, 1});
 		ballSprite.drawPoint({0, 0}, Tile('O', Color::yellow));
 
-		// 1. 创建乒乓球
-		auto ball = scene->createEntity("ball");                       // 向 scene 申请创建一个实体 ball
-		ball.addComponent<Sprite>(ballSprite);                         // 为 ball 创建一个复制 ballSprite 的 Sprite 组件
-		ball.addComponent<Rigidbody>().velocity = {ball_speed, 0.05f}; // 为 ball 创建一个 Rigidbody 组件, 并设置初速度
-		ball.getComponent<Transform>().setLocalPosition({39, 12});     // 设置 ball 的位置, Transform 组件默认存在
+		// 2. 创建乒乓球
+		auto ball = scene->createEntity("ball");                      // 向 scene 申请创建一个实体 ball
+		ball.addComponent<Sprite>(ballSprite);                        // 为 ball 创建一个复制 ballSprite 的 Sprite 组件
+		ball.addComponent<Rigidbody>().velocity = {ball_speed, 0.0f}; // 为 ball 创建一个 Rigidbody 组件, 并设置初速度
+		resetBall();
 
 		// 3. 创建乒乓球球拍 Sprite
 		Sprite batSprite({1, 5});
@@ -90,9 +90,7 @@ public:
 					ai_score++;
 				else
 					player_score++;
-
-				vel.x = -vel.x;
-				vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
+				resetBall();
 			}
 			else if(pos.y < 1 || pos.y >= 24)
 			{
@@ -115,12 +113,18 @@ public:
 		};
 	}
 
+	// 重置 ball 的位置, 回到中心
+	void resetBall()
+	{
+		scene->getEntityByTag("ball").getComponent<Transform>().setLocalPosition({39, 12});
+	}
+
 private:
 	Random            random;
 	shared_ptr<Scene> scene;
 };
 
-#if 0
+#if 1
 Application* CreateApplication()
 {
 	return new Pong;

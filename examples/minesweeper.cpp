@@ -188,7 +188,7 @@ private:
 	shared_ptr<Scene> scene;
 };
 
-#if 1
+#if 0
 Application* CreateApplication()
 {
 	return new Minesweeper;
