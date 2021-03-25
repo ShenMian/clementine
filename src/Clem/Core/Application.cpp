@@ -245,16 +245,21 @@ long Application::getCurrentMillSecond() const
 
 void Application::initialize()
 {
-	/*
-	// 开启 VT100 模式
+	DWORD mode;
+
 	const auto hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	DWORD      mode;
 	if(!GetConsoleMode(hOut, &mode))
 		assert(false);
-	// TODO(SMS): Win10 一下會失敗
-	if(!SetConsoleMode(hOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING))
+	// mode &= ENABLE_VIRTUAL_TERMINAL_PROCESSING; // 启用 VT100 模式 // TODO(SMS): Win10 以下會失敗
+	if(!SetConsoleMode(hOut, mode))
 		assert(false);
-	*/
+
+	const auto hIn = GetStdHandle(STD_INPUT_HANDLE);
+	if(!GetConsoleMode(hIn, &mode))
+		assert(false);
+	mode &= ~ENABLE_QUICK_EDIT_MODE; // 禁用 快速编辑模式
+	if(!SetConsoleMode(hIn, mode))
+		assert(false);
 }
 
 long Application::getCurrentMillSecond() const

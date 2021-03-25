@@ -66,7 +66,7 @@ public:
 	}
 };
 
-#if 1
+#if 0
 Application* CreateApplication()
 {
 	return new Chess;
