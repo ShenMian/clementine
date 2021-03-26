@@ -25,7 +25,7 @@ public:
 	typedef entt::entity id_t;
 
 	Entity() = default;
-	Entity(id_t id, Scene* scene);
+	Entity(Entity::id_t id, Scene* scene);
 
 	/**
 	 * @brief 添加指定组件.
@@ -55,11 +55,11 @@ public:
 	Scene* getScene() const;
 
 	operator bool() const;
-	operator id_t() const;
+	operator Entity::id_t() const;
 
 private:
-	id_t   id    = entt::null;
-	Scene* scene = nullptr;
+	Entity::id_t id    = entt::null;
+	Scene*       scene = nullptr;
 };
 
 /**
