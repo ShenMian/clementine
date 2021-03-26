@@ -24,7 +24,7 @@ void Window::setTitle(const string& title)
 	std::printf("\033]0;%s\007", title.c_str());
 }
 
-Size2 Window::getSize()
+Size2i Window::getSize()
 {
 	PROFILE_FUNC();
 
