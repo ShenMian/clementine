@@ -6,30 +6,30 @@
 #include "Clem/Core/Input.h"
 
 // Scene
-#include "Clem/Scene/Scene.h"
 #include "Clem/Scene/Entity.h"
+#include "Clem/Scene/Scene.h"
 
 // Renderer
-#include "Clem/Renderer/Renderer.h"
-#include "Clem/Renderer/Framebuffer.h"
 #include "Clem/Renderer/Camera.h"
+#include "Clem/Renderer/Framebuffer.h"
+#include "Clem/Renderer/Renderer.h"
 #include "Clem/Renderer/Sprite.h"
 
 // Physics
-#include "Clem/Physics/Rigidbody.h"
-#include "Clem/Physics/Collider.h"
 #include "Clem/Physics/BoxCollider.h"
 #include "Clem/Physics/CircleCollider.h"
+#include "Clem/Physics/Collider.h"
+#include "Clem/Physics/Rigidbody.h"
 
 // Math
-#include "Clem/Core/Math/Vector2.h"
 #include "Clem/Core/Math/Rect2.h"
+#include "Clem/Core/Math/Vector2.h"
 
 // Component
 #include "Clem/Component/Component.h"
-#include "Clem/Component/Transform.h"
-#include "Clem/Component/Tag.h"
 #include "Clem/Component/Script.h"
+#include "Clem/Component/Tag.h"
+#include "Clem/Component/Transform.h"
 
 // Event
 #include "Clem/Event/Event.h"

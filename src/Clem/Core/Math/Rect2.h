@@ -11,7 +11,7 @@
  */
 
 /**
- * @brief ¶þÎ¬¾ØÐÎ, µ¥¾«¶È.
+ * @brief ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
  */
 class Rect2
 {
@@ -20,25 +20,25 @@ public:
 	Size2   size;
 
 	/**
-	 * @brief Ä¬ÈÏ¹¹Ôìº¯Êý.
+	 * @brief Ä¬ï¿½Ï¹ï¿½ï¿½ìº¯ï¿½ï¿½.
 	 */
 	Rect2() = default;
 
 	/**
-	 * @brief ¹¹Ôìº¯Êý.
+	 * @brief ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½.
 	 * 
-	 * @param origin ×ø±ê.
-	 * @param size   ´óÐ¡.
+	 * @param origin ï¿½ï¿½ï¿½ï¿½.
+	 * @param size   ï¿½ï¿½Ð¡.
 	 */
 	Rect2(const Point2& origin, Size2 size);
 
 	/**
-	 * @brief ¹¹Ôìº¯Êý.
+	 * @brief ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½.
 	 * 
-	 * @param x      x×ø±ê.
-	 * @param y      y×ø±ê.
-	 * @param width  ¿í.
-	 * @param height ¸ß.
+	 * @param x      xï¿½ï¿½ï¿½ï¿½.
+	 * @param y      yï¿½ï¿½ï¿½ï¿½.
+	 * @param width  ï¿½ï¿½.
+	 * @param height ï¿½ï¿½.
 	 */
 	Rect2(float x, float y, float width, float height);
 

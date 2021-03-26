@@ -4,8 +4,8 @@
 #ifndef CLEM_UI_TEXT_H_
 #define CLEM_UI_TEXT_H_
 
-#include <string>
 #include "Clem/Core/Math/Vector2.h"
+#include <string>
 
 /**
  * @addtogroup UI
@@ -16,7 +16,7 @@ class Text
 {
 public:
 	std::wstring text;
-	Size2         size;
+	Size2        size;
 };
 
 /**

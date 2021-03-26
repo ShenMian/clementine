@@ -13,14 +13,14 @@ public:
 	/**
 	 * @brief 获取终端窗口大小.
 	 */
-  static Size2 getSize();
+	static Size2 getSize();
 
 	/**
 	 * @brief 设置终端窗口标题.
 	 * 
 	 * @warning Windows下此函数性能不稳定, 不应该频繁调用
 	 */
-  static void setTitle(const std::string& title);
+	static void setTitle(const std::string& title);
 };
 
 #endif // !CLEM_WINDOW_H_

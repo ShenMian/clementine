@@ -7,7 +7,7 @@
 #include <cfloat>
 #include <cmath>
 
-template<class T>
+template <class T>
 Vec2<T>::Vec2(T x_, T y_)
 		: x(x_), y(y_)
 {

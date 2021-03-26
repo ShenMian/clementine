@@ -15,22 +15,22 @@ public:
 	void output();
 
 	/**
-	 * @brief ½»»»»º³åÇø.
+	 * @brief ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	 */
 	void swapBuffers();
 
 	/**
-	 * @brief »ñÈ¡»º³åÇø.
+	 * @brief ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	 */
 	Framebuffer& getBuffer() const;
 
 	/**
-	 * @brief ÉèÖÃ»º³åÇø´óÐ¡.
+	 * @brief ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡.
 	 */
 	void setSize(const Size2&);
 
 	/**
-	 * @brief »ñÈ¡»º³åÇø´óÐ¡.
+	 * @brief ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡.
 	 */
 	const Size2& getSize();
 

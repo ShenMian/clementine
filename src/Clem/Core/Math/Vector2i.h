@@ -9,7 +9,7 @@
  */
 
 /**
- * @brief ¶þÎ¬ÏòÁ¿, ÕûÐÍ.
+ * @brief ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½.
  */
 struct Vector2i
 {
@@ -17,20 +17,20 @@ struct Vector2i
 	int y = 0;
 
 	/**
-	 * @brief Ä¬ÈÏ¹¹Ôìº¯Êý.
+	 * @brief Ä¬ï¿½Ï¹ï¿½ï¿½ìº¯ï¿½ï¿½.
 	 */
 	Vector2i() = default;
 
 	/**
-	 * @brief ¹¹Ôìº¯Êý.
+	 * @brief ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½.
 	 * 
-	 * @param x x×ø±ê.
-	 * @param y y×ø±ê.
+	 * @param x xï¿½ï¿½ï¿½ï¿½.
+	 * @param y yï¿½ï¿½ï¿½ï¿½.
 	 */
 	Vector2i(int x, int y);
 
 	/**
-	 * @brief »ñÈ¡Ãæ»ý.
+	 * @brief ï¿½ï¿½È¡ï¿½ï¿½ï¿½.
 	 */
 	int area() const;
 

@@ -13,9 +13,9 @@ using std::string;
 
 #ifdef OS_UNIX
 
-#include <unistd.h>
-#include <termios.h>
-#include <sys/ioctl.h>
+#	include <sys/ioctl.h>
+#	include <termios.h>
+#	include <unistd.h>
 
 void Window::setTitle(const string& title)
 {

@@ -96,14 +96,14 @@ private:
 	void updateFrameRate(long dt);
 	long getCurrentMillSecond() const;
 
-	bool quit        = true;
-	bool paused      = false;
+	bool quit   = true;
+	bool paused = false;
 
 	long msPerUpdate = 16;
 	long msPerRender = 16;
 
-	long frameRate   = 0;
-	long frames      = 0;
+	long frameRate = 0;
+	long frames    = 0;
 
 	struct
 	{

@@ -26,74 +26,74 @@ public:
 	void drawSprite(const Point2i& positon, const Sprite& sprite);
 
 	/**
-	 * @brief »æÖÆµã.
+	 * @brief ï¿½ï¿½ï¿½Æµï¿½.
 	 * 
-	 * @param x    x×ø±ê.
-	 * @param y    y×ø±ê.
-	 * @param tile ÍßÆ¬.
+	 * @param x    xï¿½ï¿½ï¿½ï¿½.
+	 * @param y    yï¿½ï¿½ï¿½ï¿½.
+	 * @param tile ï¿½ï¿½Æ¬.
 	 */
 	void drawPoint(int x, int y, const Tile& tile);
 
 	/**
-	 * @brief »æÖÆµã.
+	 * @brief ï¿½ï¿½ï¿½Æµï¿½.
 	 * 
-	 * @param p    µãµÄ×ø±ê.
-	 * @param tile ÍßÆ¬.
+	 * @param p    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+	 * @param tile ï¿½ï¿½Æ¬.
 	 */
 	void drawPoint(const Point2i& p, const Tile& tile);
 
 	/**
-	 * @brief »æÖÆÁ¬½ÓÁ½µãµÄÖ±Ïß.
+	 * @brief ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½.
 	 * 
-	 * @param a    aµã×ø±ê.
-	 * @param b    bµã×ø±ê.
-	 * @param tile ÍßÆ¬.
+	 * @param a    aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+	 * @param b    bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+	 * @param tile ï¿½ï¿½Æ¬.
 	 */
 	void drawLine(Point2i a, Point2i b, const Tile& tile);
 
 	/**
-	 * @brief »æÖÆ¾ØÐÎ.
+	 * @brief ï¿½ï¿½ï¿½Æ¾ï¿½ï¿½ï¿½.
 	 * 
-	 * @param r    ¾ØÐÎ.
-	 * @param tile ÍßÆ¬.
+	 * @param r    ï¿½ï¿½ï¿½ï¿½.
+	 * @param tile ï¿½ï¿½Æ¬.
 	 */
 	void drawRect(Rect2i r, const Tile& tile);
 
 	/**
-	 * @brief »æÖÆÊµÐÄ¾ØÐÎ.
+	 * @brief ï¿½ï¿½ï¿½ï¿½Êµï¿½Ä¾ï¿½ï¿½ï¿½.
 	 * 
-	 * @param r    ¾ØÐÎ.
-	 * @param tile ÍßÆ¬.
+	 * @param r    ï¿½ï¿½ï¿½ï¿½.
+	 * @param tile ï¿½ï¿½Æ¬.
 	 */
 	void fillRect(Rect2i r, const Tile& tile);
 
 	/**
-	 * @brief »æÖÆÔ²ÐÎ.
+	 * @brief ï¿½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½.
 	 * 
-	 * @param p      Ô­µã×ø±ê.
-	 * @param radius °ë¾¶.
-	 * @param tile   ÍßÆ¬.
+	 * @param p      Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+	 * @param radius ï¿½ë¾¶.
+	 * @param tile   ï¿½ï¿½Æ¬.
 	 */
 	void drawCycle(Point2i p, short radius, const Tile& tile);
 
 	/**
-	 * @brief »æÖÆ×Ö·û´®.
+	 * @brief ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½.
 	 * 
-	 * @param pos »æÖÆÆðµãµÄÎ»ÖÃ
-	 * @param str Òª»æÖÆµÄ×Ö·û´®
+	 * @param pos ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+	 * @param str Òªï¿½ï¿½ï¿½Æµï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 	 */
 	void drawString(const Point2i& pos, std::wstring str);
 
 	/**
-	 * @brief Çå³ýÈ«²¿»æÖÆÄÚÈÝ.
+	 * @brief ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	 */
 	void clear(const Tile& = Tile::blank);
 
-	void        setSize(const Size2&);
+	void         setSize(const Size2&);
 	const Size2& getSize() const;
 
 private:
-	Size2                  size;
+	Size2                 size;
 	std::vector<buffer_t> buffer;
 };
 

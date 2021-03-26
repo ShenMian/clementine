@@ -3,19 +3,31 @@
 
 Language: Cpp
 
-AccessModifierOffset: -2
-AlignConsecutiveAssignments: true
-AlignConsecutiveDeclarations: true
-AlignTrailingComments: true
+AccessModifierOffset:                -2
+
+AlignConsecutiveAssignments:         true
+AlignConsecutiveDeclarations:        true
+AlignConsecutiveBitFields:           true
+AlignConsecutiveMacros:              true
+AlignEscapedNewlines:                true
+AlignOperands:                       true
+AlignTrailingComments:               true
+
 AllowShortIfStatementsOnASingleLine: false
-AllowShortFunctionsOnASingleLine: None
+AllowShortFunctionsOnASingleLine:    None
 AllowShortIfStatementsOnASingleLine: Never
-BreakBeforeBraces: Allman
-SpaceBeforeParens: Never
+BreakBeforeBraces:                   Allman
+SpaceBeforeParens:                   Never
 
 MaxEmptyLinesToKeep: 2
-ColumnLimit: 0
-PointerAlignment: Left
+ColumnLimit:         0
+PointerAlignment:    Left
+
+ReflowComments:        false
+SortIncludes:          true
+SortUsingDeclarations: true
+
+IndentPPDirectives: AfterHash
 
 TabWidth: 2
-UseTab: ForContinuationAndIndentation
+UseTab:   ForContinuationAndIndentation

@@ -3,8 +3,8 @@
 
 #include "Vector2.h"
 
-#include <cmath>
 #include <cfloat>
+#include <cmath>
 
 Vector2i::Vector2i(int x, int y)
 		: x(x), y(y)

@@ -5,17 +5,17 @@
 #define CLEM_EVENT_EVENT_DISPATCHER_H_
 
 #include "Event.h"
-#include <map>
 #include <functional>
+#include <map>
 
 class EventDispatcher
 {
 public:
 	typedef std::function<void(Event*)> listener_t;
-	
+
 	static EventDispatcher& getInstance();
 
-	template<class T>
+	template <class T>
 	void dispatch(T& event);
 
 	void addListener(Event::Type type, const listener_t& listener);

@@ -12,14 +12,14 @@
 class Cursor
 {
 public:
-  /**
+	/**
    * @brief 移动光标到指定坐标
    * 
    * @param p 坐标
    */
-  static void move(const Point2& p);
-  
-  /**
+	static void move(const Point2& p);
+
+	/**
    * @brief 移动光标到指定坐标
    * 
    * @param x x坐标
@@ -27,7 +27,7 @@ public:
    */
 	static void move(short x, short y);
 
-  /**
+	/**
    * @brief 设置光标可见性
    * 
    * @param v 可见性

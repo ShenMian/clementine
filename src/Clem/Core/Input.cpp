@@ -3,8 +3,8 @@
 
 #include "Input.h"
 #include "Clem/Event/EventDispatcher.h"
-#include "Clem/Event/MouseEvent.h"
 #include "Clem/Event/KeyEvent.h"
+#include "Clem/Event/MouseEvent.h"
 #include "Clem/Platform.h"
 
 #ifdef OS_UNIX

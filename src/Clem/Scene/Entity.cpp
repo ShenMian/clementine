@@ -2,8 +2,8 @@
 // License(Apache-2.0)
 
 #include "Entity.h"
-#include "Scene.h"
 #include "Clem/Log.h"
+#include "Scene.h"
 
 Entity::Entity(id_t id, Scene* scene)
 		: id(id), scene(scene)

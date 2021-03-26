@@ -16,6 +16,10 @@ public:
 	virtual ~Event() = default;
 };
 
-#define EVENT_CLASS_TYPE(type) static Event::Type getEventType() { return Event::Type::type; }
+#define EVENT_CLASS_TYPE(type)      \
+	static Event::Type getEventType() \
+	{                                 \
+		return Event::Type::type;       \
+	}
 
 #endif // !CLEM_EVENT_EVENT_H_

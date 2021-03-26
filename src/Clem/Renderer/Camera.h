@@ -9,11 +9,9 @@
 class Camera
 {
 public:
-
 private:
 	Rect2 viewport;
 	short depth;
 };
 
 #endif // !CLEM_RENDERER_CAMERA_H_
-

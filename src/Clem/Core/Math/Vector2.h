@@ -14,7 +14,7 @@
  */
 
 /**
- * @brief ¶þÎ¬ÏòÁ¿, µ¥¾«¶È.
+ * @brief ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
  */
 struct Vector2
 {
@@ -22,71 +22,71 @@ struct Vector2
 	float y = 0.0f;
 
 	/**
-	 * @brief Ä¬ÈÏ¹¹Ôìº¯Êý.
+	 * @brief Ä¬ï¿½Ï¹ï¿½ï¿½ìº¯ï¿½ï¿½.
 	 */
 	Vector2() = default;
 
 	/**
-	 * @brief ¹¹Ôìº¯Êý.
+	 * @brief ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½.
 	 * 
-	 * @param x x×ø±ê.
-	 * @param y y×ø±ê.
+	 * @param x xï¿½ï¿½ï¿½ï¿½.
+	 * @param y yï¿½ï¿½ï¿½ï¿½.
 	 */
 	Vector2(float x, float y);
 
 	/**
-	 * @brief »ñÈ¡³¤¶È.
+	 * @brief ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½.
 	 * 
 	 * @see sizeSquared
 	 */
 	float size() const;
 
 	/**
-	 * @brief »ñÈ¡³¤¶ÈÆ½·½.
+	 * @brief ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½.
 	 * 
 	 * @see size
 	 */
 	float sizeSquared() const;
 
 	/**
-	 * @brief »ñÈ¡µ½ÁíÒ»¸öµãµÄ¾àÀë.
+	 * @brief ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½.
 	 * 
-	 * @param point ÁíÒ»¸öµã.
+	 * @param point ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½.
 	 * 
 	 * @see	distanceSquared
 	 */
 	float distance(const Vector2& point) const;
 
 	/**
-	 * @brief »ñÈ¡µ½ÁíÒ»¸öµãµÄ¾àÀëµÄÆ½·½.
+	 * @brief ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½.
 	 * 
-	 * @param point ÁíÒ»¸öµã.
+	 * @param point ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½.
 	 * 
 	 * @see distance
 	 */
 	float distanceSquared(const Vector2& point) const;
 
 	/**
-	 * @brief ±ê×¼»¯³Éµ¥Î»ÏòÁ¿.
+	 * @brief ï¿½ï¿½×¼ï¿½ï¿½ï¿½Éµï¿½Î»ï¿½ï¿½ï¿½ï¿½.
 	 */
 	Vector2& normalize();
 
 	/**
-	 * @brief »ñÈ¡Ãæ»ý.
+	 * @brief ï¿½ï¿½È¡ï¿½ï¿½ï¿½.
 	 */
 	float area() const;
 
 	/**
-	 * @brief »ñÈ¡ÕûÐÍ¶þÎ¬ÏòÁ¿.
+	 * @brief ï¿½ï¿½È¡ï¿½ï¿½ï¿½Í¶ï¿½Î¬ï¿½ï¿½ï¿½ï¿½.
 	 * 
-	 * @return µ±Ç°ÏòÁ¿È¥³ýÐ¡ÊýºóµÄÕûÐÍ¶þÎ¬ÏòÁ¿.
+	 * @return ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¶ï¿½Î¬ï¿½ï¿½ï¿½ï¿½.
 	 */
 	Vector2i asInt() const;
 
 	operator Vector2i() const;
 
-	bool      operator==(const Vector2& v) const;
-	bool      operator!=(const Vector2& v) const;
+	bool     operator==(const Vector2& v) const;
+	bool     operator!=(const Vector2& v) const;
 	Vector2  operator*(float n) const;
 	Vector2  operator/(float n) const;
 	Vector2  operator+(const Vector2& v) const;
@@ -104,8 +104,8 @@ struct Vector2
 	static const Vector2 Unit; // (1, 1)
 };
 
-using Point2  = Vector2;
-using Size2   = Vector2;
+using Point2 = Vector2;
+using Size2  = Vector2;
 
 /**
  * end of Math group

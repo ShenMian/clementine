@@ -31,7 +31,7 @@ public:
 	/**
 	 * @brief 设置偏移量.
 	 */
-	void  setOffset(Point2 offset);
+	void setOffset(Point2 offset);
 
 	/**
 	 * @brief 获取偏移量.

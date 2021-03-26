@@ -12,13 +12,13 @@
  */
 
 /**
- * @brief ¶þÎ¬¾ØÐÎ.
+ * @brief ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½.
  */
 class Rect
 {
 public:
 	Vector2 origin;
-	Size2        size;
+	Size2   size;
 
 	Rect() = default;
 	Rect(const Point2& origin, Size2 size);
