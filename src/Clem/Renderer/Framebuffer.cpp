@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Framebuffer.h"
@@ -90,13 +90,13 @@ void Framebuffer::clear(const Tile& t)
 	fillRect(Rect2i({0, 0}, size), t);
 }
 
-void Framebuffer::setSize(const Size2& s)
+void Framebuffer::setSize(const Size2i& s)
 {
 	size = s;
 	buffer.resize((size_t)s.area());
 }
 
-const Size2& Framebuffer::getSize() const
+const Size2i& Framebuffer::getSize() const
 {
 	return size;
 }

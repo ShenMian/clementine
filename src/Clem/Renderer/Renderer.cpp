@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Renderer.h"
@@ -37,13 +37,13 @@ Framebuffer& Renderer::getBuffer() const
 	return *back;
 }
 
-void Renderer::setSize(const Size2& s)
+void Renderer::setSize(const Size2i& s)
 {
 	buffer[0].setSize(s);
 	buffer[1].setSize(s);
 }
 
-const Size2& Renderer::getSize()
+const Size2i& Renderer::getSize()
 {
 	return buffer[0].getSize();
 }

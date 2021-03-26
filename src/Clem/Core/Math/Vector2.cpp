@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Vector2.h"
@@ -42,6 +42,11 @@ Vector2& Vector2::normalize()
 	if(len < FLT_EPSILON)
 		return *this;
 	return *this *= 1.0f / len;
+}
+
+float Vector2::getAngle() const
+{
+	return std::atan2(y, x);
 }
 
 float Vector2::area() const

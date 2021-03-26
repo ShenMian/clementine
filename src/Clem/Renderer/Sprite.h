@@ -46,7 +46,7 @@ public:
 	 * @param b b点坐标.
 	 * @param t 瓦片.
 	 */
-	void drawLine(Point2 a, Point2 b, const Tile& t);
+	void drawLine(Point2i a, Point2i b, const Tile& t);
 
 	/**
 	 * @brief 绘制矩形.
@@ -71,7 +71,7 @@ public:
 	 * @param radius 半径.
 	 * @param t 瓦片.
 	 */
-	void drawCycle(Point2 p, short radius, const Tile& t);
+	void drawCycle(Point2i p, short radius, const Tile& t);
 
 	/**
 	 * @brief 绘制字符串.

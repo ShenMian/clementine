@@ -44,16 +44,17 @@ void Window::setTitle(const string& title)
 	SetConsoleTitleA(title.c_str());
 }
 
-Size2 Window::getSize()
+Size2i Window::getSize()
 {
 	PROFILE_FUNC();
 
-	const auto                 hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	const auto hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
 	CONSOLE_SCREEN_BUFFER_INFO screenInfo;
 	auto                       ret = GetConsoleScreenBufferInfo(hOut, &screenInfo);
 	if(!ret)
 		assert(false);
-	return Size2(screenInfo.srWindow.Right + 1, screenInfo.srWindow.Bottom + 1);
+	return Size2i(screenInfo.srWindow.Right + 1, screenInfo.srWindow.Bottom + 1);
 }
 
 #endif

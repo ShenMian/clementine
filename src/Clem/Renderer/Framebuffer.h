@@ -1,11 +1,11 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #ifndef CLEM_RENDERER_H_
 #define CLEM_RENDERER_H_
 
 #include "Clem/Core/Math/Rect2.h"
-#include "Clem/Core/Math/Vector2.h"
+#include "Clem/Core/Math/Vector2i.h"
 #include "Clem/Platform.h"
 #include "Sprite.h"
 #include <vector>
@@ -89,11 +89,11 @@ public:
 	 */
 	void clear(const Tile& = Tile::blank);
 
-	void         setSize(const Size2&);
-	const Size2& getSize() const;
+	void          setSize(const Size2i&);
+	const Size2i& getSize() const;
 
 private:
-	Size2                 size;
+	Size2i                size;
 	std::vector<buffer_t> buffer;
 };
 

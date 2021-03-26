@@ -13,7 +13,7 @@ public:
 	/**
 	 * @brief 获取终端窗口大小.
 	 */
-	static Size2 getSize();
+	static Size2i getSize();
 
 	/**
 	 * @brief 设置终端窗口标题.

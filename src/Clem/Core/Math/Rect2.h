@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -11,7 +11,7 @@
  */
 
 /**
- * @brief ��ά����, ������.
+ * @brief 二维矩形, 单精度.
  */
 class Rect2
 {
@@ -20,25 +20,25 @@ public:
 	Size2   size;
 
 	/**
-	 * @brief Ĭ�Ϲ��캯��.
+	 * @brief 默认构造函数.
 	 */
 	Rect2() = default;
 
 	/**
-	 * @brief ���캯��.
+	 * @brief 构造函数.
 	 * 
-	 * @param origin ����.
-	 * @param size   ��С.
+	 * @param origin 矩形坐标, 左上角.
+	 * @param size   矩形大小.
 	 */
 	Rect2(const Point2& origin, Size2 size);
 
 	/**
-	 * @brief ���캯��.
+	 * @brief 构造函数.
 	 * 
-	 * @param x      x����.
-	 * @param y      y����.
-	 * @param width  ��.
-	 * @param height ��.
+	 * @param x      x坐标.
+	 * @param y      y坐标.
+	 * @param width  宽度.
+	 * @param height 高度.
 	 */
 	Rect2(float x, float y, float width, float height);
 

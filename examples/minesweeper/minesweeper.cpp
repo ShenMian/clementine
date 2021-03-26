@@ -8,9 +8,6 @@
 
 using namespace std;
 
-Size2i board_size;
-int    mine_num = 99;
-
 class Minesweeper : public Application
 {
 public:
@@ -180,6 +177,8 @@ public:
 	}
 
 private:
+	Size2i            board_size;
+	int               mine_num = 99;
 	char              map[30][16];
 	int               surplus;
 	Sprite*           sprite;

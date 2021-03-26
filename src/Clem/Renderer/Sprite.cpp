@@ -25,19 +25,19 @@ void Sprite::drawPoint(Point2i p, const Tile& t)
 	buffer[p.x + p.y * size.x] = t;
 }
 
-void Sprite::drawLine(Point2 a, Point2 b, const Tile& t)
+void Sprite::drawLine(Point2i a, Point2i b, const Tile& t)
 {
 	auto xDis   = b.x - a.x + 1;
 	auto yDis   = b.y - a.y + 1;
 	auto maxDis = std::max(abs(xDis), abs(yDis));
 
-	float xDelta = xDis / maxDis;
-	float yDelta = yDis / maxDis;
+	float xDelta = (float)xDis / maxDis;
+	float yDelta = (float)yDis / maxDis;
 
-	float x = a.x, y = a.y;
+	float x = (float)a.x, y = (float)a.y;
 	for(int i = 0; i < maxDis; i++)
 	{
-		drawPoint(x, y, t);
+		drawPoint((int)x, (int)y, t);
 		x += xDelta, y += yDelta;
 	}
 }
@@ -63,7 +63,7 @@ void Sprite::fillRect(Rect2i r, const Tile& t)
 			drawPoint(r.origin.x + x, r.origin.y + y, t);
 }
 
-void Sprite::drawCycle(Point2 c, short r, const Tile& t)
+void Sprite::drawCycle(Point2i c, short r, const Tile& t)
 {
 	for(int x = 0; x <= r; x++)
 	{
@@ -96,7 +96,7 @@ void Sprite::clear(const Tile& t)
 
 const Tile& Sprite::getTile(int x, int y) const
 {
-	return getTile(Point2(x, y));
+	return getTile({x, y});
 }
 
 const Tile& Sprite::getTile(const Point2i& p) const

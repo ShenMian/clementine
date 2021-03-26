@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -9,7 +9,7 @@
  */
 
 /**
- * @brief ��ά����, ����.
+ * @brief 二维向量, 整型.
  */
 struct Vector2i
 {
@@ -17,20 +17,20 @@ struct Vector2i
 	int y = 0;
 
 	/**
-	 * @brief Ĭ�Ϲ��캯��.
+	 * @brief 构造函数.
 	 */
 	Vector2i() = default;
 
 	/**
-	 * @brief ���캯��.
+	 * @brief 构造函数.
 	 * 
-	 * @param x x����.
-	 * @param y y����.
+	 * @param x x坐标.
+	 * @param y y坐标.
 	 */
 	Vector2i(int x, int y);
 
 	/**
-	 * @brief ��ȡ���.
+	 * @brief 获取面积.
 	 */
 	int area() const;
 

@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -14,7 +14,7 @@
  */
 
 /**
- * @brief ��ά����, ������.
+ * @brief 二维向量, 单精度.
  */
 struct Vector2
 {
@@ -22,64 +22,71 @@ struct Vector2
 	float y = 0.0f;
 
 	/**
-	 * @brief Ĭ�Ϲ��캯��.
+	 * @brief 默认构造函数.
 	 */
 	Vector2() = default;
 
 	/**
-	 * @brief ���캯��.
+	 * @brief 构造函数.
 	 * 
-	 * @param x x����.
-	 * @param y y����.
-	 */
+	 * @param x x坐标.
+	 * @param y y坐标.
+	 */ 
 	Vector2(float x, float y);
 
 	/**
-	 * @brief ��ȡ����.
+	 * @brief 获取长度.
 	 * 
 	 * @see sizeSquared
 	 */
 	float size() const;
 
 	/**
-	 * @brief ��ȡ����ƽ��.
+	 * @brief 获取长度平方.
 	 * 
 	 * @see size
 	 */
 	float sizeSquared() const;
 
 	/**
-	 * @brief ��ȡ����һ����ľ���.
+	 * @brief 获取到另一个点的距离.
 	 * 
-	 * @param point ��һ����.
+	 * @param point 另一个点.
 	 * 
 	 * @see	distanceSquared
 	 */
 	float distance(const Vector2& point) const;
 
 	/**
-	 * @brief ��ȡ����һ����ľ����ƽ��.
+	 * @brief 获取到另一个点的距离的平方.
 	 * 
-	 * @param point ��һ����.
+	 * @param point 另一个点.
 	 * 
 	 * @see distance
 	 */
 	float distanceSquared(const Vector2& point) const;
 
 	/**
-	 * @brief ��׼���ɵ�λ����.
+	 * @brief 标准化成单位向量.
 	 */
 	Vector2& normalize();
 
 	/**
-	 * @brief ��ȡ���.
+	 * @brief 获取角度.
+	 * 
+	 * @return 弧度制.
+	 */
+	float getAngle() const;
+
+	/**
+	 * @brief 获取面积.
 	 */
 	float area() const;
 
 	/**
-	 * @brief ��ȡ���Ͷ�ά����.
+	 * @brief 获取整型二维向量.
 	 * 
-	 * @return ��ǰ����ȥ��С��������Ͷ�ά����.
+	 * @return 去除小数后的整型二维向量.
 	 */
 	Vector2i asInt() const;
 
