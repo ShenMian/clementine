@@ -22,10 +22,10 @@ class Scene;
 class Entity
 {
 public:
-	typedef entt::entity id_t;
+	typedef entt::entity id_type;
 
 	Entity() = default;
-	Entity(Entity::id_t id, Scene* scene);
+	Entity(id_type id, Scene* scene);
 
 	/**
 	 * @brief 添加指定组件.
@@ -51,14 +51,14 @@ public:
 	template <typename T>
 	bool hasComponent();
 
-	id_t   getId() const;
+	id_type getId() const;
 	Scene* getScene() const;
 
 	operator bool() const;
-	operator Entity::id_t() const;
+	operator id_type() const;
 
 private:
-	Entity::id_t id    = entt::null;
+	id_type id    = entt::null;
 	Scene*       scene = nullptr;
 };
 

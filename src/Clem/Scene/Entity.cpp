@@ -5,12 +5,12 @@
 #include "Clem/Log.h"
 #include "Scene.h"
 
-Entity::Entity(Entity::id_t id, Scene* scene)
+Entity::Entity(id_type id, Scene* scene)
 		: id(id), scene(scene)
 {
 }
 
-Entity::id_t Entity::getId() const
+Entity::id_type Entity::getId() const
 {
 	return id;
 }
@@ -25,7 +25,7 @@ Entity::operator bool() const
 	return id != entt::null;
 }
 
-Entity::operator Entity::id_t() const
+Entity::operator id_type() const
 {
 	return id;
 }
