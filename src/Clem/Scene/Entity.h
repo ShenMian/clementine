@@ -6,9 +6,8 @@
 
 #include "Clem/Core/Math/Vector2.h"
 #include "Clem/Log.h"
+#include "Scene.h"
 #include "entt.hpp"
-
-class Scene;
 
 /**
  * @addtogroup Scene

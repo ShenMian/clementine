@@ -4,7 +4,10 @@
 #ifndef CLEM_SCENE_SCENE_H_
 #define CLEM_SCENE_SCENE_H_
 
-#include "Entity.h"
+#include <string>
+#include "entt.hpp"
+
+class Entity;
 
 /**
  * @addtogroup Scene
@@ -20,10 +23,9 @@ public:
 	Entity createEntity();
 	Entity createEntity(const std::string& tag);
 
-	Entity getEntityById(Entity::id_t id);
 	Entity getEntityByTag(const std::string& tag);
 
-	void removeEntity(Entity::id_t id);
+	void removeEntity(Entity entity);
 
 	void update(float dt);
 	void render(float dt);

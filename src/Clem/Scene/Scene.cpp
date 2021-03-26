@@ -2,11 +2,11 @@
 // License(Apache-2.0)
 
 #include "Scene.h"
+#include "Entity.h"
 #include "Clem/Core/Application.h"
 #include "Clem/Log.h"
 #include "Clem/Profiler.h"
 #include "Clem/Renderer/Renderer.h"
-#include "Entity.h"
 
 #include "Clem/Component/Script.h"
 #include "Clem/Component/Tag.h"
@@ -20,7 +20,7 @@ using std::string;
 
 Entity Scene::createEntity()
 {
-	auto e = getEntityById(registry.create());
+	auto e = Entity(registry.create(), this);
 	e.addComponent<Transform>();
 	return e;
 }
@@ -32,27 +32,19 @@ Entity Scene::createEntity(const string& tag)
 	return e;
 }
 
-Entity Scene::getEntityById(Entity::id_t id)
-{
-	if(registry.valid(id))
-		return Entity(id, this);
-	CLEM_CORE_ERROR("get entity with invalid a id");
-	return Entity();
-}
-
 Entity Scene::getEntityByTag(const string& tag_)
 {
 	auto view = registry.view<Tag>();
 	for(auto [id, tag] : view.each())
 		if(tag.tag == tag_)
-			return getEntityById(id);
+			return Entity(id, this);
 	CLEM_CORE_ERROR("get entity with invalid a tag");
 	return Entity();
 }
 
-void Scene::removeEntity(Entity::id_t id)
+void Scene::removeEntity(Entity e)
 {
-	registry.destroy(id);
+	registry.destroy(e.getId());
 	// registry.remove(id);
 }
 
