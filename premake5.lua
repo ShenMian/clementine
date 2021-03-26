@@ -34,10 +34,14 @@ thirdparty["yaml_cpp"] = "%{wks.location}/thirdparty/yaml-cpp"
 
 outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
 
+include "src"
+
+group "Examples"
+  include "examples/pong"
+  include "examples/minesweeper"
+group ""
+
 group "Thirdparty"
   include "thirdparty/sdl"
   include "thirdparty/yaml-cpp"
 group ""
-
-include "src"
-include "examples"

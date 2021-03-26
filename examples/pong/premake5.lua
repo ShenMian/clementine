@@ -1,7 +1,7 @@
 -- Copyright 2021 SMS
 -- License(Apache-2.0)
 
-project "Examples"
+project "Pong"
   kind "ConsoleApp"
   language "C++"
   cppdialect "C++17"
@@ -18,4 +18,4 @@ project "Examples"
     "%{thirdparty.spdlog}/include",
     "%{thirdparty.yaml_cpp}/include"}
 
-    links {"Clementine"}
+  links {"Clementine"}
