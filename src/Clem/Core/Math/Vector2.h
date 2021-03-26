@@ -28,40 +28,40 @@ struct Vector2
 
 	/**
 	 * @brief 构造函数.
-	 * 
+	 *
 	 * @param x x坐标.
 	 * @param y y坐标.
-	 */ 
+	 */
 	Vector2(float x, float y);
 
 	/**
 	 * @brief 获取长度.
-	 * 
+	 *
 	 * @see sizeSquared
 	 */
 	float size() const;
 
 	/**
 	 * @brief 获取长度平方.
-	 * 
+	 *
 	 * @see size
 	 */
 	float sizeSquared() const;
 
 	/**
 	 * @brief 获取到另一个点的距离.
-	 * 
+	 *
 	 * @param point 另一个点.
-	 * 
+	 *
 	 * @see	distanceSquared
 	 */
 	float distance(const Vector2& point) const;
 
 	/**
 	 * @brief 获取到另一个点的距离的平方.
-	 * 
+	 *
 	 * @param point 另一个点.
-	 * 
+	 *
 	 * @see distance
 	 */
 	float distanceSquared(const Vector2& point) const;
@@ -73,7 +73,7 @@ struct Vector2
 
 	/**
 	 * @brief 获取角度.
-	 * 
+	 *
 	 * @return 弧度制.
 	 */
 	float getAngle() const;
@@ -85,7 +85,7 @@ struct Vector2
 
 	/**
 	 * @brief 获取整型二维向量.
-	 * 
+	 *
 	 * @return 去除小数后的整型二维向量.
 	 */
 	Vector2i asInt() const;

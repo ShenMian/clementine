@@ -1,8 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_PHYSICS_CIRCLE_COLLIDER_H_
-#define CLEM_PHYSICS_CIRCLE_COLLIDER_H_
+#pragma once
 
 #include "Collider.h"
 
@@ -31,5 +30,3 @@ private:
  * end of Physics group
  * @}
  */
-
-#endif // !CLEM_PHYSICS_CIRCLE_COLLIDER_H_

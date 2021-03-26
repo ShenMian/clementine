@@ -26,7 +26,7 @@ public:
 
 	/**
 	 * @brief 构造函数.
-	 * 
+	 *
 	 * @param origin 矩形坐标, 左上角.
 	 * @param size   矩形大小.
 	 */
@@ -34,7 +34,7 @@ public:
 
 	/**
 	 * @brief 构造函数.
-	 * 
+	 *
 	 * @param x      x坐标.
 	 * @param y      y坐标.
 	 * @param width  宽度.

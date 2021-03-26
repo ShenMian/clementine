@@ -4,11 +4,12 @@
 #ifndef CLEM_LOG_H_
 #define CLEM_LOG_H_
 
+#include <cassert>
+#include <memory>
+
 #pragma warning(push, 0)
 #include "spdlog/spdlog.h"
 #pragma warning(pop)
-
-#include <cassert>
 
 class Log
 {

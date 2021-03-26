@@ -23,7 +23,7 @@ struct Vector2i
 
 	/**
 	 * @brief 构造函数.
-	 * 
+	 *
 	 * @param x x坐标.
 	 * @param y y坐标.
 	 */

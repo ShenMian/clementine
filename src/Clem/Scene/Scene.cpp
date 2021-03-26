@@ -2,11 +2,11 @@
 // License(Apache-2.0)
 
 #include "Scene.h"
-#include "Entity.h"
 #include "Clem/Core/Application.h"
 #include "Clem/Log.h"
 #include "Clem/Profiler.h"
 #include "Clem/Renderer/Renderer.h"
+#include "Entity.h"
 
 #include "Clem/Component/Script.h"
 #include "Clem/Component/Tag.h"
@@ -61,7 +61,7 @@ void Scene::update(float dt)
 	{
 		auto pos = t.getLocalPosition();
 		t.setLocalPosition(pos += body.velocity);
-		body.velocity += body.acceleration * dt;
+		// body.velocity += body.acceleration * dt;
 	}
 
 	//const size_t size = 10;

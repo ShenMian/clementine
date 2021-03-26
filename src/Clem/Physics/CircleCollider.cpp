@@ -12,7 +12,7 @@ CircleCollider::CircleCollider(float r)
 
 /**
  * @brief 设置半径
- * 
+ *
  * @param r 半径
  */
 void CircleCollider::setRadius(float r)
@@ -22,7 +22,7 @@ void CircleCollider::setRadius(float r)
 
 /**
  * @brief 获取半径
- * 
+ *
  * @return float 半径
  */
 float CircleCollider::getRadius() const

@@ -27,7 +27,7 @@ public:
 
 	/**
 	 * @brief ���Ƶ�.
-	 * 
+	 *
 	 * @param x    x����.
 	 * @param y    y����.
 	 * @param tile ��Ƭ.
@@ -36,7 +36,7 @@ public:
 
 	/**
 	 * @brief ���Ƶ�.
-	 * 
+	 *
 	 * @param p    �������.
 	 * @param tile ��Ƭ.
 	 */
@@ -44,7 +44,7 @@ public:
 
 	/**
 	 * @brief �������������ֱ��.
-	 * 
+	 *
 	 * @param a    a������.
 	 * @param b    b������.
 	 * @param tile ��Ƭ.
@@ -53,7 +53,7 @@ public:
 
 	/**
 	 * @brief ���ƾ���.
-	 * 
+	 *
 	 * @param r    ����.
 	 * @param tile ��Ƭ.
 	 */
@@ -61,7 +61,7 @@ public:
 
 	/**
 	 * @brief ����ʵ�ľ���.
-	 * 
+	 *
 	 * @param r    ����.
 	 * @param tile ��Ƭ.
 	 */
@@ -69,7 +69,7 @@ public:
 
 	/**
 	 * @brief ����Բ��.
-	 * 
+	 *
 	 * @param p      ԭ������.
 	 * @param radius �뾶.
 	 * @param tile   ��Ƭ.
@@ -78,7 +78,7 @@ public:
 
 	/**
 	 * @brief �����ַ���.
-	 * 
+	 *
 	 * @param pos ��������λ��
 	 * @param str Ҫ���Ƶ��ַ���
 	 */

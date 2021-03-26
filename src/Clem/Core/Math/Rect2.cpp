@@ -53,13 +53,20 @@ Point2 Rect2::br() const
 	return Point2(right(), bottom());
 }
 
-bool Rect2::containsPoint(const Point2& p) const
+bool Rect2::intersectsPoint(const Point2& p) const
 {
 	return top() <= p.y && p.y <= bottom() && left() <= p.x && p.x <= right();
 }
 
 bool Rect2::intersectsRect(const Rect2& r) const
 {
-	return containsPoint(r.tl()) || containsPoint(r.tr()) ||
-				 containsPoint(r.bl()) || containsPoint(r.br());
+	return std::abs(origin.x - r.origin.x) <= (size.x + r.size.x) / 2 &&
+				 std::abs(origin.y - r.origin.y) <= (size.y + r.size.y) / 2;
+	// return intersectsPoint(r.tl()) || intersectsPoint(r.tr()) ||
+	//			  intersectsPoint(r.bl()) || intersectsPoint(r.br());
+}
+
+bool Rect2::isValid() const
+{
+	return origin.area() >= 0 && size.area() >= 0;
 }

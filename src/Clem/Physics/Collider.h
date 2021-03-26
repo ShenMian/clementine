@@ -1,8 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_COLLIDER_H_
-#define CLEM_COLLIDER_H_
+#pragma once
 
 #include "Clem/Core/Math/Vector2.h"
 
@@ -52,5 +51,3 @@ private:
  * end of Physics group
  * @}
  */
-
-#endif // !CLEM_COLLIDER_H_

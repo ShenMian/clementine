@@ -5,6 +5,10 @@
 #include "Clem/Core/Application.h"
 #include "Clem/Core/Input.h"
 
+// Math
+#include "Clem/Core/Math/Rect2.h"
+#include "Clem/Core/Math/Vector2.h"
+
 // Scene
 #include "Clem/Scene/Entity.h"
 #include "Clem/Scene/Scene.h"
@@ -20,10 +24,6 @@
 #include "Clem/Physics/CircleCollider.h"
 #include "Clem/Physics/Collider.h"
 #include "Clem/Physics/Rigidbody.h"
-
-// Math
-#include "Clem/Core/Math/Rect2.h"
-#include "Clem/Core/Math/Vector2.h"
 
 // Component
 #include "Clem/Component/Component.h"

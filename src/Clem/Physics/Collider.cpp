@@ -24,7 +24,7 @@ Point2 Collider::getOffset() const
 
 /**
  * @brief 设置拥有者
- * 
+ *
  * @param o 拥有者
  */
 void Collider::setOwner(Rigidbody* o)
@@ -34,7 +34,7 @@ void Collider::setOwner(Rigidbody* o)
 
 /**
  * @brief 获取拥有者
- * 
+ *
  * @return Rigidbody* 拥有者
  */
 Rigidbody* Collider::getOwner() const

@@ -19,12 +19,11 @@ class Sprite : public Component
 public:
 	Sprite()              = default;
 	Sprite(const Sprite&) = default;
-	Sprite& operator=(const Sprite&) = default;
 	explicit Sprite(const Size2i& size);
 
 	/**
 	 * @brief 绘制点.
-	 * 
+	 *
 	 * @param x x坐标.
 	 * @param y y坐标.
 	 * @param t 瓦片.
@@ -33,7 +32,7 @@ public:
 
 	/**
 	 * @brief 绘制点.
-	 * 
+	 *
 	 * @param p 点的坐标.
 	 * @param t 瓦片.
 	 */
@@ -41,7 +40,7 @@ public:
 
 	/**
 	 * @brief 绘制连接两点的直线.
-	 * 
+	 *
 	 * @param a a点坐标.
 	 * @param b b点坐标.
 	 * @param t 瓦片.
@@ -50,7 +49,7 @@ public:
 
 	/**
 	 * @brief 绘制矩形.
-	 * 
+	 *
 	 * @param r 矩形.
 	 * @param t 瓦片.
 	 */
@@ -58,7 +57,7 @@ public:
 
 	/**
 	 * @brief 绘制实心矩形.
-	 * 
+	 *
 	 * @param r 矩形.
 	 * @param t 瓦片.
 	 */
@@ -66,7 +65,7 @@ public:
 
 	/**
 	 * @brief 绘制圆形.
-	 * 
+	 *
 	 * @param p 原点坐标.
 	 * @param radius 半径.
 	 * @param t 瓦片.
@@ -75,7 +74,7 @@ public:
 
 	/**
 	 * @brief 绘制字符串.
-	 * 
+	 *
 	 * @param pos   绘制起点的位置
 	 * @param str   要绘制的字符串
 	 * @param color 顔色
@@ -103,6 +102,8 @@ public:
 
 	// void load(const std::filesystem::path& path);
 	// void store(const std::filesystem::path& path) const;
+
+	Sprite& operator=(const Sprite&) = default;
 
 private:
 	Size2i            size;

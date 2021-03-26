@@ -1,4 +1,3 @@
-
 #include "KeyEvent.h"
 
 KeyEvent::KeyEvent(short keyCode, bool state, short repeatCount)

@@ -35,7 +35,7 @@ public:
 
 	/**
 	 * @brief 构造函数.
-	 * 
+	 *
 	 * @param x x坐标.
 	 * @param y y坐标.
 	 */
@@ -43,14 +43,14 @@ public:
 
 	/**
 	 * @brief 获取长度.
-	 * 
+	 *
 	 * @see lengthSquared
 	 */
 	float length() const;
 
 	/**
 	 * @brief 获取长度平方.
-	 * 
+	 *
 	 * @see length
 	 */
 	inline float lengthSquared() const;
@@ -62,7 +62,7 @@ public:
 
 	/**
 	 * @brief 旋转向量绕定点一定角度(弧度制).
-	 * 
+	 *
    * @param point 围绕旋转的点.
    * @param angle 要旋转的角度(弧度制).
 	 */
@@ -75,32 +75,32 @@ public:
 
 	/**
 	 * @brief 获取到另一个点的距离.
-	 * 
+	 *
 	 * @param point 另一个点.
-	 * 
+	 *
 	 * @see	distanceSquared
 	 */
 	float distance(const Vec2<T>& point) const;
 
 	/**
 	 * @brief 获取到另一个点的距离的平方.
-	 * 
+	 *
 	 * @param point 另一个点.
-	 * 
+	 *
 	 * @see distance
 	 */
 	float distanceSquared(const Vec2<T>& point) const;
 
 	/**
 	 * @brief 获取两点之间的中点.
-	 * 
+	 *
 	 * @param point 另一个点.
 	 */
 	Vec2<T> getMidpoint(const Vec2<T>& point) const;
 
 	/**
 	 * @brief 裁剪到指定的范围内.
-	 * 
+	 *
 	 * @param min 最小值.
 	 * @param max 最大值.
 	 */

@@ -97,7 +97,6 @@ void Application::run()
 	CLEM_CORE_INFO("main loop stoped");
 }
 
-
 void Application::updateInput()
 {
 	while(!quit)
