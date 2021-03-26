@@ -6,7 +6,6 @@
 
 #include "Clem/Core/Math/Vector2.h"
 #include "Clem/Log.h"
-#include "Scene.h"
 #include "entt.hpp"
 
 class Scene;
@@ -22,10 +21,10 @@ class Scene;
 class Entity
 {
 public:
-	typedef entt::entity id_type;
+	typedef entt::entity id_t;
 
 	Entity() = default;
-	Entity(id_type id, Scene* scene);
+	Entity(id_t id, Scene* scene);
 
 	/**
 	 * @brief 添加指定组件.
@@ -51,15 +50,15 @@ public:
 	template <typename T>
 	bool hasComponent();
 
-	id_type getId() const;
+	id_t   getId() const;
 	Scene* getScene() const;
 
 	operator bool() const;
-	operator id_type() const;
+	operator id_t() const;
 
 private:
-	id_type id    = entt::null;
-	Scene*       scene = nullptr;
+	id_t   id    = entt::null;
+	Scene* scene = nullptr;
 };
 
 /**

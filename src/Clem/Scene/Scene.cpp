@@ -32,7 +32,7 @@ Entity Scene::createEntity(const string& tag)
 	return e;
 }
 
-Entity Scene::getEntityById(id_t id)
+Entity Scene::getEntityById(Entity::id_t id)
 {
 	if(registry.valid(id))
 		return Entity(id, this);
@@ -50,7 +50,7 @@ Entity Scene::getEntityByTag(const string& tag_)
 	return Entity();
 }
 
-void Scene::removeEntity(id_t id)
+void Scene::removeEntity(Entity::id_t id)
 {
 	registry.destroy(id);
 	// registry.remove(id);
