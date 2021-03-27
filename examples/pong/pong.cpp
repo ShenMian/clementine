@@ -12,13 +12,12 @@ class Pong : public Application
 {
 public:
 	Pong()
-			: Application("Pong"), scene(make_shared<Scene>())
+			: Application("Pong")
 	{
 		pushScene(scene); // 将 scene 压入堆栈
 
-		auto& audio = Audio::get();
-		auto id = audio.loadSound("spell1_0.wav");
-		audio.play(id);
+		pop   = audio.loadSound("pop.wav");
+		score = audio.loadSound("score.wav");
 
 		// 1. 创建乒乓球 Sprite
 		Sprite ballSprite({1, 1});
@@ -76,21 +75,42 @@ public:
 		// TODO: 碰撞时被回调, 调整随机角度
 		ball.addComponent<Script>().onUpdate = [&](float dt) {
 			auto  ball   = scene->getEntityByTag("ball");
-			auto& pos    = ball.getComponent<Transform>().getLocalPosition();
+			auto& ts     = ball.getComponent<Transform>();
 			auto& vel    = ball.getComponent<Rigidbody>().velocity;
 			auto& sprite = ball.getComponent<Sprite>();
-			if(pos.x < 1 || pos.x >= 79)
+			auto& pos    = ts.getLocalPosition();
+			if(pos.x < 1)
 			{
-				if(pos.x < 1)
-					ai_score++;
-				else
-					player_score++;
-				resetBall();
+				ts.setLocalPosition({1, pos.y});
+				vel.x = -vel.x;
+				vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
+				ai_score++;
+				// resetBall();
+				audio.play(score, volume);
 			}
-			else if(pos.y < 1 || pos.y >= 24)
+			else if(pos.x >= 79)
 			{
+				ts.setLocalPosition({78, pos.y});
+				vel.x = -vel.x;
+				vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
+				player_score++;
+				// resetBall();
+				// audio.play(score, volume);
+				audio.play(pop, volume);
+			}
+			else if(pos.y < 1)
+			{
+				ts.setLocalPosition({pos.x, 1});
 				vel.y = -vel.y;
 				vel.x += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
+				audio.play(pop, volume);
+			}
+			else if(pos.y >= 24)
+			{
+				ts.setLocalPosition({pos.x, 23});
+				vel.y = -vel.y;
+				vel.x += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
+				audio.play(pop, volume);
 			}
 			else
 				return;
@@ -122,9 +142,12 @@ private:
 	const float player_speed         = 0.15f; // 玩家乒乓球拍的移动速度
 	const float ai_speed             = 0.1f;  // AI 乒乓球拍的移动速度
 	const int   random_rebound_angle = 5;     // 碰撞时随机调整角度系数
+	const float volume               = 0.1f;  // 声音效果音量
 
 	Random            random;
-	shared_ptr<Scene> scene;
+	shared_ptr<Scene> scene = make_shared<Scene>();
+	Audio&            audio = Audio::get();
+	Audio::id_t       pop, score;
 };
 
 #if 1

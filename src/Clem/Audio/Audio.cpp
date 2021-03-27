@@ -20,19 +20,24 @@ Audio& Audio::get()
 
 bool Audio::play(id_t id, float volume, float speed)
 {
-	alSourcei(source, AL_BUFFER, (ALint)id);
+	static id_t currentId = 0;
+	if(currentId != id)
+	{
+		alSourcei(source, AL_BUFFER, (ALint)id);
+		currentId = id;
+	}
 
 	alSourcef(source, AL_GAIN, volume);
 	alSourcef(source, AL_PITCH, speed);
 
 	alSource3f(source, AL_POSITION, 0, 0, 0);
-	alSource3f(source, AL_VELOCITY, 0, 0, 0);
 	
-	assert(alGetError() == AL_NO_ERROR);
-
 	alSourcePlay(source);
 
-	// alGetSourcei(source, AL_SOURCE_STATE, &state);
+	/*auto err = alGetError();
+	if(err != AL_NO_ERROR)
+		CLEM_CORE_ERROR("OpenAL error: {}", alGetString(err));*/
+
 	// alGetSourcef(source, AL_SEC_OFFSET, &offset);
 
 	return true;
@@ -70,7 +75,7 @@ Audio::id_t Audio::loadSound(const path& path)
 
 	std::ifstream file(path, std::ios::binary);
 	if(!file.is_open())
-		CLEM_CORE_CRITICAL("the file could not be opened '{}'", path.string());
+		CLEM_CORE_CRITICAL("the file could not be opened: '{}'", path.string());
 
 	RiffHeader riffHeader;
 	file.read((char*)&riffHeader, sizeof(riffHeader));
@@ -83,32 +88,51 @@ Audio::id_t Audio::loadSound(const path& path)
 			riffHeader.format[1] != 'A' ||
 			riffHeader.format[2] != 'V' ||
 			riffHeader.format[3] != 'E'))
-		assert(!"Invalid RIFF or WAVE Header");
+		CLEM_CORE_CRITICAL("invalid RIFF or WAVE Header: '{}'", path.string());
 
 	WaveFormat waveFormat;
+	WaveData   waveData;
+
 	file.read((char*)&waveFormat, sizeof(waveFormat));
 
-	if(waveFormat.id[0] != 'f' ||
+	if(waveFormat.size > 16)
+		file.seekg(2, std::ios::cur);
+
+	while(true)
+	{
+		char id[5] = {'\0'};
+
+		file.read(id, 4);
+
+		if(strcmp(id, "data") == 0)
+		{
+			file.seekg(-4, std::ios::cur);
+			break;
+		}
+		else if(strcmp(id, "LIST") == 0)
+			file.seekg(0x1E, std::ios::cur); // 格式转换信息
+	}
+
+	file.read((char*)&waveData, sizeof(waveData));
+	
+	/*if(waveFormat.id[0] != 'f' ||
 		 waveFormat.id[1] != 'm' ||
 		 waveFormat.id[2] != 't' ||
 		 waveFormat.id[3] != ' ')
-		assert(!"Invalid Wave Format");
+		CLEM_CORE_CRITICAL("invalid WAVE format: '{}'", path.string());
 
 	if(waveFormat.size > 16)
-		file.seekg(sizeof(short), std::ios::cur);
+		file.seekg(sizeof(short), std::ios::cur);*/
 
-	WaveData waveData;
-	file.read((char*)&waveData, sizeof(waveData));
-
-	if(waveData.id[0] != 'd' ||
+	/*if(waveData.id[0] != 'd' ||
 		 waveData.id[1] != 'a' ||
 		 waveData.id[2] != 't' ||
 		 waveData.id[3] != 'a')
-		assert(!"Invalid data header");
+		CLEM_CORE_CRITICAL("invalid WAVE.DATA header: '{}'", path.string());*/
 
-	ALenum  format;
-	ALsizei size;
-	ALsizei frequency;
+	ALenum  format    = 0;
+	ALsizei size      = waveData.size;
+	ALsizei frequency = waveFormat.sampleRate;
 
 	if(waveFormat.numChannels == 1)
 	{
@@ -124,9 +148,8 @@ Audio::id_t Audio::loadSound(const path& path)
 		else if(waveFormat.bitsPerSample == 16)
 			format = AL_FORMAT_STEREO16;
 	}
-
-	size      = waveData.size;
-	frequency = waveFormat.sampleRate;
+	if(format == 0)
+		CLEM_CORE_CRITICAL("invalid WAVE format: '{}'", path.string());
 
 	auto data = new unsigned char[size];
 	file.read((char*)data, size);
@@ -173,6 +196,7 @@ Audio::~Audio()
 	alDeleteSources(1, &source);
 
 	alDeleteBuffers(sounds.size(), sounds.data());
+	sounds.clear();
 
 	alcMakeContextCurrent(nullptr);
 	alcDestroyContext(context);
