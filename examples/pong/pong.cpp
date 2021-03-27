@@ -16,6 +16,10 @@ public:
 	{
 		pushScene(scene); // 将 scene 压入堆栈
 
+		auto& audio = Audio::get();
+		auto id = audio.loadSound("spell1_0.wav");
+		audio.play(id);
+
 		// 1. 创建乒乓球 Sprite
 		Sprite ballSprite({1, 1});
 		ballSprite.drawPoint({0, 0}, Tile('O', Color::yellow));

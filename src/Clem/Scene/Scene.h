@@ -4,7 +4,7 @@
 #ifndef CLEM_SCENE_SCENE_H_
 #define CLEM_SCENE_SCENE_H_
 
-#include "entt.hpp"
+#include "entt/entt.hpp"
 #include <string>
 
 class Entity;

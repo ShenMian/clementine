@@ -7,7 +7,7 @@
 #include "Clem/Core/Math/Math.h"
 #include "Clem/Log.h"
 #include "Scene.h"
-#include "entt.hpp"
+#include "entt/entt.hpp"
 
 /**
  * @addtogroup Scene

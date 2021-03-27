@@ -16,9 +16,6 @@ class Log
 public:
 	static void                            init();
 	static std::shared_ptr<spdlog::logger> getLogger();
-
-private:
-	static std::shared_ptr<spdlog::logger> coreLogger;
 };
 
 #define CLEM_CORE_TRACE(...) Log::getLogger()->trace(__VA_ARGS__)

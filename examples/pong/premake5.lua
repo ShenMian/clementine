@@ -16,6 +16,7 @@ project "Pong"
     "%{wks.location}/src",
     "%{thirdparty.entt}/include",
     "%{thirdparty.spdlog}/include",
+    "%{thirdparty.openal}/include",
     "%{thirdparty.yaml_cpp}/include"}
 
   links {"Clementine"}

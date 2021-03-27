@@ -6,7 +6,7 @@
 
 using namespace spdlog;
 
-std::shared_ptr<logger> Log::coreLogger;
+static std::shared_ptr<logger> coreLogger;
 
 void Log::init()
 {

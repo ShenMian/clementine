@@ -35,6 +35,9 @@
 // UI
 #include "Clem/Ui/Text.h"
 
+// Audio
+#include "Clem/Audio/Audio.h"
+
 #include "Clem/Log.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
