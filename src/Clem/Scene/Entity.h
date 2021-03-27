@@ -28,25 +28,25 @@ public:
 	/**
 	 * @brief 添加指定组件.
 	 */
-	template <typename T, typename... Args>
-	T& addComponent(Args&&... args);
+	template <typename Com, typename... Args>
+	Com& addComponent(Args&&... args);
 
 	/**
 	 * @brief 移除指定组件.
 	 */
-	template <typename T>
+	template <typename Com>
 	void removeComponent();
 
 	/**
 	 * @brief 获取指定组件.
 	 */
-	template <typename T>
-	T& getComponent();
+	template <typename Com>
+	Com& getComponent();
 
 	/**
 	 * @brief 是否存在指定组件.
 	 */
-	template <typename T>
+	template <typename Com>
 	bool hasComponent();
 
 	id_t   getId() const;
@@ -65,34 +65,34 @@ private:
  * @}
  */
 
-template <typename T, typename... Args>
-T& Entity::addComponent(Args&&... args)
+template <typename Com, typename... Args>
+Com& Entity::addComponent(Args&&... args)
 {
-	if(hasComponent<T>())
-		CLEM_CORE_CRITICAL("add a an existing component '{}'", typeid(T).name());
-	return scene->registry.emplace<T>(id, std::forward<Args>(args)...);
+	if(hasComponent<Com>())
+		CLEM_CORE_CRITICAL("add a an existing component '{}' to entity '{}'", typeid(Com).name(), getComponent<Tag>().tag);
+	return scene->registry.emplace<Com>(id, std::forward<Args>(args)...);
 }
 
-template <typename T>
+template <typename Com>
 void Entity::removeComponent()
 {
-	if(!hasComponent<T>())
-		CLEM_CORE_CRITICAL("remove a nonexistent component '{}'", typeid(T).name());
-	scene->registry.destroy<T>(id);
+	if(!hasComponent<Com>())
+		CLEM_CORE_CRITICAL("remove a nonexistent component '{}' from entity '{}'", typeid(Com).name(), getComponent<Tag>().tag);
+	scene->registry.destroy<Com>(id);
 }
 
-template <typename T>
-T& Entity::getComponent()
+template <typename Com>
+Com& Entity::getComponent()
 {
-	if(!hasComponent<T>())
-		CLEM_CORE_CRITICAL("get a nonexistent component '{}'", typeid(T).name());
-	return scene->registry.get<T>(id);
+	if(!hasComponent<Com>())
+		CLEM_CORE_CRITICAL("get a nonexistent component '{}' from entity '{}'", typeid(Com).name(), getComponent<Tag>().tag);
+	return scene->registry.get<Com>(id);
 }
 
-template <typename T>
+template <typename Com>
 bool Entity::hasComponent()
 {
-	return scene->registry.has<T>(id);
+	return scene->registry.has<Com>(id);
 }
 
 #endif // !CLEM_SCENE_ENTITY_H_

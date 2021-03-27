@@ -10,21 +10,11 @@ BoxCollider::BoxCollider(Size2 size)
 {
 }
 
-/**
- * @brief 设置大小
- *
- * @param s 大小
- */
 void BoxCollider::setSize(Size2 s)
 {
 	size = s;
 }
 
-/**
- * @brief 获取大小
- *
- * @return Size2 大小
- */
 Size2 BoxCollider::getSize() const
 {
 	return size;

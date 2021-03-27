@@ -21,7 +21,18 @@ public:
 	BoxCollider() = default;
 	explicit BoxCollider(Size2 size);
 
-	void  setSize(Size2);
+	/**
+	* @brief 设置大小
+	*
+	* @param s 大小
+	*/
+	void setSize(Size2);
+
+	/**
+  * @brief 获取大小
+  *
+  * @return Size2 大小
+  */
 	Size2 getSize() const;
 
 	Rect2 getRect() const;

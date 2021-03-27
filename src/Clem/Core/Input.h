@@ -1,8 +1,7 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_CORE_INPUT_H_
-#define CLEM_CORE_INPUT_H_
+#pragma once
 
 class Input
 {
@@ -98,5 +97,3 @@ enum KeyCode
 	F23       = 0x86,
 	F24       = 0x87
 };
-
-#endif // !CLEM_CORE_INPUT_H_

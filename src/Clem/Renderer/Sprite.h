@@ -12,7 +12,7 @@
 #include <vector>
 
 /**
- * @brief Tile的集合.
+ * @brief 精灵.
  */
 class Sprite : public Component
 {

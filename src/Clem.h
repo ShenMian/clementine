@@ -2,12 +2,7 @@
 // License(Apache-2.0)
 
 // Core
-#include "Clem/Core/Application.h"
-#include "Clem/Core/Input.h"
-
-// Math
-#include "Clem/Core/Math/Rect2.h"
-#include "Clem/Core/Math/Vector2.h"
+#include "Clem/Core/Core.h"
 
 // Scene
 #include "Clem/Scene/Entity.h"

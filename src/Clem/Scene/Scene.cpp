@@ -97,12 +97,12 @@ void Scene::render(float dt)
 	buf.clear();
 
 	// Render sprites
-	auto spriteView = registry.view<Transform, Sprite>();
+	auto spriteView = registry.view<Transform, const Sprite>();
 	for(auto [e, t, sprite] : spriteView.each())
 		buf.drawSprite(t.getPosition(), sprite);
 
 	// Render UI
-	auto textView = registry.view<Transform, Text>();
+	auto textView = registry.view<Transform, const Text>();
 	for(auto [e, t, text] : textView.each())
 		buf.drawString(t.getPosition(), text.text);
 

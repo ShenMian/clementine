@@ -27,12 +27,12 @@ bool Vector2i::operator!=(const Vector2i& v) const
 	return !(*this == v);
 }
 
-Vector2i Vector2i::operator*(float n) const
+Vector2i Vector2i::operator*(int n) const
 {
 	return Vector2i(x * n, y * n);
 }
 
-Vector2i Vector2i::operator/(float n) const
+Vector2i Vector2i::operator/(int n) const
 {
 	return Vector2i(x / n, y / n);
 }
@@ -66,12 +66,12 @@ Vector2i& Vector2i::operator-=(const Vector2i& v)
 	return *this;
 }
 
-Vector2i& Vector2i::operator*=(float n)
+Vector2i& Vector2i::operator*=(int n)
 {
 	return *this = *this * n;
 }
 
-Vector2i& Vector2i::operator/=(float n)
+Vector2i& Vector2i::operator/=(int n)
 {
 	return *this = *this / n;
 }

@@ -4,7 +4,7 @@
 #include "Cursor.h"
 #include <stdio.h>
 
-void Cursor::move(const Point2& p)
+void Cursor::move(const Point2i& p)
 {
 	move(p.x, p.y);
 }

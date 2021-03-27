@@ -49,6 +49,11 @@ float Vector2::getAngle() const
 	return std::atan2(y, x);
 }
 
+Vector2 Vector2::getMidPoint(const Vector2& o) const
+{
+	return Vector2((x + o.x) / 2.0f, (y + o.y) / 2.0f);
+}
+
 float Vector2::area() const
 {
 	return x * y;

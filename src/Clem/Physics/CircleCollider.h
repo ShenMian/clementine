@@ -19,7 +19,18 @@ public:
 	CircleCollider() = default;
 	explicit CircleCollider(float radius);
 
-	void  setRadius(float);
+	/**
+	 * @brief 设置半径
+	 *
+	 * @param r 半径
+	 */
+	void  setRadius(float r);
+
+	/**
+	 * @brief 获取半径
+	 *
+	 * @return float 半径
+	 */
 	float getRadius() const;
 
 private:

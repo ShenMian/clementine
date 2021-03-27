@@ -74,9 +74,14 @@ struct Vector2
 	/**
 	 * @brief 获取角度.
 	 *
-	 * @return 弧度制.
+	 * @return 角度, 弧度制.
 	 */
 	float getAngle() const;
+
+	/**
+	 * @brief 获取与另一个点之间的中点.
+	 */
+	Vector2 getMidPoint(const Vector2& other) const;
 
 	/**
 	 * @brief 获取面积.
