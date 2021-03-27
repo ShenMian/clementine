@@ -9,15 +9,11 @@
 [![LGTM](https://img.shields.io/lgtm/grade/cpp/g/ShenMian/Clementine.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ShenMian/Clementine/context:cpp)
 [![CI](https://github.com/ShenMian/Clementine/actions/workflows/ci.yml/badge.svg)](https://github.com/ShenMian/Clementine/actions/workflows/ci.yml)
 
+**[Features](#features) | [Documentation](#documentation) | [Screenshots](#screenshots) | [Compiling](#compiling) | [Contact](#contact)**
+
 </div>
 
 This is a framework for building 2D console games.  
-
-- [Features](#features)
-- [Documentation](#documentation)
-- [Screenshots](#screenshots)
-- [Compiling](#compiling)
-- [Contact](#contact)
 
 Features
 --------

@@ -9,15 +9,11 @@
 [![LGTM](https://img.shields.io/lgtm/grade/cpp/g/ShenMian/Clementine.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ShenMian/Clementine/context:cpp)
 [![CI](https://github.com/ShenMian/Clementine/actions/workflows/ci.yml/badge.svg)](https://github.com/ShenMian/Clementine/actions/workflows/ci.yml)
 
+**[特点](#特点) | [文档](#文档) | [截图](#截图) | [编译](#编译) | [联系](#联系)**
+
 </div>
 
-这是一个用于制作2D命令行游戏的框架.   
-
-- [特点](#特点)
-- [文档](#文档)
-- [截图](#截图)
-- [编译](#编译)
-- [联系](#联系)
+这是一个用于制作2D命令行游戏的框架.  
 
 特点
 ----
