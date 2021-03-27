@@ -4,7 +4,7 @@
 #ifndef CLEM_MATH_RECT_H_
 #define CLEM_MATH_RECT_H_
 
-#include "../Vector2.h"
+#include "../Math.h"
 
 /**
  * @addtogroup Math

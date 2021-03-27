@@ -5,7 +5,7 @@
 #define CLEM_COMPONENT_TRANSFORM_H_
 
 #include "Clem/Component/Component.h"
-#include "Clem/Core/Math/Vector2.h"
+#include "Clem/Core/Math/Math.h"
 
 class Transform : public Component
 {

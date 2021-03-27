@@ -4,7 +4,7 @@
 #ifndef CLEM_EVENT_MOUSE_EVENT_H_
 #define CLEM_EVENT_MOUSE_EVENT_H_
 
-#include "Clem/Core/Math/Vector2.h"
+#include "Clem/Core/Math/Math.h"
 #include "Event.h"
 
 class MouseEvent : public Event

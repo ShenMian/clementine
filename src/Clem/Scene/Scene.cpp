@@ -92,7 +92,7 @@ void Scene::render(float dt)
 {
 	PROFILE_FUNC();
 
-	static auto& renderer = Renderer::getInstance();
+	static auto& renderer = Renderer::get();
 	auto&        buf      = renderer.getBuffer();
 	buf.clear();
 

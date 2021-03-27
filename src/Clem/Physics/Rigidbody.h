@@ -4,7 +4,7 @@
 #pragma once
 
 #include "Clem/Component/Component.h"
-#include "Clem/Core/Math/Vector2.h"
+#include "Clem/Core/Math/Math.h"
 
 /**
  * @addtogroup Physics

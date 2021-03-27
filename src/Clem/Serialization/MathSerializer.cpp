@@ -4,8 +4,7 @@
 /*
 
 #include "MathSerializer.h"
-#include "Clem/Core/Math/Rect2.h"
-#include "Clem/Core/Math/Vector2.h"
+#include "Clem/Core/Math/Math.h"
 
 YAML::Emitter& operator<<(YAML::Emitter& o, const Vector2& v)
 {

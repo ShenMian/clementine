@@ -28,6 +28,7 @@ workspace "Clementine"
 
 thirdparty = {}
 thirdparty["sdl"] = "%{wks.location}/thirdparty/sdl"
+thirdparty["openal"] = "%{wks.location}/thirdparty/openal"
 thirdparty["entt"] = "%{wks.location}/thirdparty/entt"
 thirdparty["spdlog"] = "%{wks.location}/thirdparty/spdlog"
 thirdparty["yaml_cpp"] = "%{wks.location}/thirdparty/yaml-cpp"

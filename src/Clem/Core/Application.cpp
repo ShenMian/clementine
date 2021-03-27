@@ -21,6 +21,8 @@ using std::string;
 using std::chrono::milliseconds;
 using std::this_thread::sleep_for;
 
+#include "AL/alc.h"
+
 int main(int argc, char* argv[])
 {
 	Log::init();
@@ -36,7 +38,7 @@ int main(int argc, char* argv[])
 
 Application* Application::instance = nullptr;
 
-Application& Application::getInstance()
+Application& Application::get()
 {
 	assert(instance);
 	return *instance;
@@ -53,7 +55,7 @@ Application::Application(const string& name)
 	std::setlocale(LC_ALL, "");
 	std::signal(SIGINT, onSignal);
 
-	Renderer::getInstance().setSize(Window::getSize());
+	Renderer::get().setSize(Window::getSize());
 
 	initialize();
 }

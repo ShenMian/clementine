@@ -5,6 +5,4 @@
 #include "Input.h"
 
 // Math
-#include "Math/Vector2.h"
-#include "Math/Vector2i.h"
-#include "Math/Rect2.h"
+#include "Math/Math.h"

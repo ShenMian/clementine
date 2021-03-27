@@ -15,8 +15,9 @@ project "Clementine"
   includedirs {
     ".",
     "%{thirdparty.sdl}/include",
+    "%{thirdparty.openal}/include",
     "%{thirdparty.entt}/include",
     "%{thirdparty.spdlog}/include",
     "%{thirdparty.yaml_cpp}/include"}
 
-  links {"yaml-cpp", "sdl"}
+  links {"yaml-cpp", "sdl", "%{thirdparty.openal}/lib/OpenAL32"}

@@ -4,7 +4,7 @@
 #ifndef CLEM_UI_TEXT_H_
 #define CLEM_UI_TEXT_H_
 
-#include "Clem/Core/Math/Vector2.h"
+#include "Clem/Core/Math/Math.h"
 #include <string>
 
 /**

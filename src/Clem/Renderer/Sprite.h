@@ -5,8 +5,7 @@
 #define CLEM_RENDERER_SPRITE_H_
 
 #include "Clem/Component/Component.h"
-#include "Clem/Core/Math/Rect2i.h"
-#include "Clem/Core/Math/Vector2.h"
+#include "Clem/Core/Math/Math.h"
 #include "Tile.h"
 #include <filesystem>
 #include <vector>

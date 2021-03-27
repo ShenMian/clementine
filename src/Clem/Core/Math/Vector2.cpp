@@ -6,8 +6,12 @@
 #include <cfloat>
 #include <cmath>
 
-const Vector2 Vector2::Zero(0, 0);
-const Vector2 Vector2::Unit(1, 1);
+const Vector2 Vector2::zero(0, 0);
+const Vector2 Vector2::unit(1, 1);
+const Vector2 Vector2::right(1, 0);
+const Vector2 Vector2::left(0, 1);
+const Vector2 Vector2::up(0, 1);
+const Vector2 Vector2::down(0, -1);
 
 Vector2::Vector2(float x, float y)
 		: x(x), y(y)
@@ -44,14 +48,19 @@ Vector2& Vector2::normalize()
 	return *this *= 1.0f / len;
 }
 
+float Vector2::dot(const Vector2& v) const
+{
+	return x * v.x + y * v.y;
+}
+
 float Vector2::getAngle() const
 {
 	return std::atan2(y, x);
 }
 
-Vector2 Vector2::getMidPoint(const Vector2& o) const
+Vector2 Vector2::getMidPoint(const Vector2& p) const
 {
-	return Vector2((x + o.x) / 2.0f, (y + o.y) / 2.0f);
+	return Vector2((x + p.x) / 2.0f, (y + p.y) / 2.0f);
 }
 
 float Vector2::area() const

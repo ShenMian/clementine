@@ -3,7 +3,6 @@
 
 #include "Clem.h"
 #include <cassert>
-#include <cfloat>
 #include <iostream>
 #include <stdio.h>
 
@@ -22,9 +21,9 @@ public:
 		ballSprite.drawPoint({0, 0}, Tile('O', Color::yellow));
 
 		// 2. 创建乒乓球
-		auto ball = scene->createEntity("ball");                      // 向 scene 申请创建一个实体 ball
-		ball.addComponent<Sprite>(ballSprite);                        // 为 ball 创建一个复制 ballSprite 的 Sprite 组件
-		ball.addComponent<Rigidbody>().velocity = {ball_speed, 0.0f}; // 为 ball 创建一个 Rigidbody 组件, 并设置初速度
+		auto ball = scene->createEntity("ball");                               // 向 scene 申请创建一个实体 ball
+		ball.addComponent<Sprite>(ballSprite);                                 // 为 ball 创建一个复制 ballSprite 的 Sprite 组件
+		ball.addComponent<Rigidbody>().velocity = Vector2::right * ball_speed; // 为 ball 创建一个 Rigidbody 组件, 并设置初速度
 		resetBall();
 
 		// 3. 创建乒乓球球拍 Sprite
@@ -47,7 +46,7 @@ public:
 			auto  event = dynamic_cast<KeyEvent*>(e);
 			auto& body  = scene->getEntityByTag("bat1").getComponent<Rigidbody>(); // 通过 Tag 组件获取 bat1 实体的 Rigidbody 组件
 			if(event->state == false)
-				body.velocity = {0, 0};
+				body.velocity = Vector2::zero;
 			else if(event->keyCode == KeyCode::W)
 				body.velocity = {0, -player_speed};
 			else if(event->keyCode == KeyCode::S)

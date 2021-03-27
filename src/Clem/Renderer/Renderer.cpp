@@ -10,7 +10,7 @@ Renderer::Renderer()
 	back  = &buffer[1];
 }
 
-Renderer& Renderer::getInstance()
+Renderer& Renderer::get()
 {
 	static Renderer instance;
 	return instance;

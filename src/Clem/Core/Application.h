@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Core/Math/Vector2.h"
+#include "Clem/Core/Math/Math.h"
 #include <memory>
 #include <string>
 #include <thread>
@@ -19,7 +19,7 @@ class Scene;
 class Application
 {
 public:
-	static Application& getInstance();
+	static Application& get();
 
 	/**
 	 * @brief 构造函数.

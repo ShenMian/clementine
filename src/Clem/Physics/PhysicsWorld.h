@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Core/Math/Vector2.h"
+#include "Clem/Core/Math/Math.h"
 #include <vector>
 
 /**

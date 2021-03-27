@@ -10,7 +10,7 @@
 class Renderer
 {
 public:
-	static Renderer& getInstance();
+	static Renderer& get();
 
 	void output();
 
