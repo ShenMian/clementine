@@ -16,8 +16,13 @@ public:
 	{
 		pushScene(scene); // 将 scene 压入堆栈
 
-		pop   = audio.loadSound("pop.wav");
-		score = audio.loadSound("score.wav");
+		popSound   = audio.loadSound("pop.wav");
+		scoreSound = audio.loadSound("score.wav");
+
+		upSource.setPosition({0, 5});
+		downSource.setPosition({0, -5});
+		leftSource.setPosition({-5, 0});
+		rightSource.setPosition({5, 0});
 
 		// 1. 创建乒乓球 Sprite
 		Sprite ballSprite({1, 1});
@@ -26,7 +31,7 @@ public:
 		// 2. 创建乒乓球
 		auto ball = scene->createEntity("ball");                               // 向 scene 申请创建一个实体 ball
 		ball.addComponent<Sprite>(ballSprite);                                 // 为 ball 创建一个复制 ballSprite 的 Sprite 组件
-		ball.addComponent<Rigidbody>().velocity = Vector2::right * ball_speed; // 为 ball 创建一个 Rigidbody 组件, 并设置初速度
+		ball.addComponent<Rigidbody>();                                        // 为 ball 创建一个 Rigidbody 组件
 		resetBall();
 
 		// 3. 创建乒乓球球拍 Sprite
@@ -72,45 +77,70 @@ public:
 			batBody.velocity = Vector2(0, ballPos.y - batCenter.y).normalize() * ai_speed;
 		};
 
-		// TODO: 碰撞时被回调, 调整随机角度
+		// TODO: 碰撞检测. 碰撞时被回调, 调整随机角度
 		ball.addComponent<Script>().onUpdate = [&](float dt) {
 			auto  ball   = scene->getEntityByTag("ball");
 			auto& ts     = ball.getComponent<Transform>();
 			auto& vel    = ball.getComponent<Rigidbody>().velocity;
 			auto& sprite = ball.getComponent<Sprite>();
-			auto& pos    = ts.getLocalPosition();
-			if(pos.x < 1)
+			auto& ballPos    = ts.getPosition();
+			Entity bats[2];
+			bats[0] = scene->getEntityByTag("bat1");
+			bats[1] = scene->getEntityByTag("bat2");
+
+			for(int i = 0; i < 2; i++)
 			{
-				ts.setLocalPosition({1, pos.y});
+				auto& pos  = bats[i].getComponent<Transform>().getPosition();
+				auto& size = bats[i].getComponent<Sprite>().getSize();
+				Rect2 rect(pos, Size2(size.x, size.y));
+				if(rect.intersectsPoint(ballPos))
+				{
+					if(ballPos.x < 39)
+					{
+						leftSource.play(popSound);
+						ts.setLocalPosition({pos.x + 1, ballPos.y});
+					}
+					else
+					{
+						rightSource.play(popSound);
+						ts.setLocalPosition({pos.x - 1, ballPos.y});
+					}
+					vel.x = -vel.x;
+					vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
+				}
+			}
+
+			if(ballPos.x < 1)
+			{
+				ts.setLocalPosition({1, ballPos.y});
 				vel.x = -vel.x;
 				vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
+				resetBall();
+				leftSource.play(scoreSound);
 				ai_score++;
-				// resetBall();
-				audio.play(score, volume);
 			}
-			else if(pos.x >= 79)
+			else if(ballPos.x >= 79)
 			{
-				ts.setLocalPosition({78, pos.y});
+				ts.setLocalPosition({78, ballPos.y});
 				vel.x = -vel.x;
 				vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
+				resetBall();
+				rightSource.play(scoreSound);
 				player_score++;
-				// resetBall();
-				// audio.play(score, volume);
-				audio.play(pop, volume);
 			}
-			else if(pos.y < 1)
+			else if(ballPos.y < 1)
 			{
-				ts.setLocalPosition({pos.x, 1});
+				ts.setLocalPosition({ballPos.x, 1});
 				vel.y = -vel.y;
 				vel.x += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
-				audio.play(pop, volume);
+				upSource.play(popSound);
 			}
-			else if(pos.y >= 24)
+			else if(ballPos.y >= 24)
 			{
-				ts.setLocalPosition({pos.x, 23});
+				ts.setLocalPosition({ballPos.x, 23});
 				vel.y = -vel.y;
 				vel.x += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
-				audio.play(pop, volume);
+				downSource.play(popSound);
 			}
 			else
 				return;
@@ -132,6 +162,7 @@ public:
 	void resetBall()
 	{
 		scene->getEntityByTag("ball").getComponent<Transform>().setLocalPosition({39, 12});
+		scene->getEntityByTag("ball").getComponent<Rigidbody>().velocity = Vector2::right * ball_speed;
 	}
 
 private:
@@ -147,7 +178,8 @@ private:
 	Random            random;
 	shared_ptr<Scene> scene = make_shared<Scene>();
 	Audio&            audio = Audio::get();
-	Audio::id_t       pop, score;
+	Audio::id_t       popSound, scoreSound;
+	Source            upSource, downSource, leftSource, rightSource;
 };
 
 #if 1

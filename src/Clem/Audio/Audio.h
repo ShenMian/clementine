@@ -36,7 +36,6 @@ private:
 	Audio();
 	~Audio();
 
-	id_t              source = 0;
 	std::vector<id_t> sounds;
 
 	ALCdevice*  device;

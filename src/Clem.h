@@ -37,6 +37,7 @@
 
 // Audio
 #include "Clem/Audio/Audio.h"
+#include "Clem/Audio/Source.h"
 
 #include "Clem/Log.h"
 #include "Clem/Platform.h"

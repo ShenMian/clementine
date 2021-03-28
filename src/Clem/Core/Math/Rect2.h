@@ -30,7 +30,7 @@ public:
 	 * @param origin 矩形坐标, 左上角.
 	 * @param size   矩形大小.
 	 */
-	Rect2(const Point2& origin, Size2 size);
+	Rect2(const Point2& origin, const Size2& size);
 
 	/**
 	 * @brief 构造函数.

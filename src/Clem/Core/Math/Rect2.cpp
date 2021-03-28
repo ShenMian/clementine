@@ -3,7 +3,7 @@
 
 #include "Rect2.h"
 
-Rect2::Rect2(const Point2& o, Size2 s)
+Rect2::Rect2(const Point2& o, const Size2& s)
 		: origin(o), size(s)
 {
 }

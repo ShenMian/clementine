@@ -18,36 +18,11 @@ Audio& Audio::get()
 	return instance;
 }
 
-bool Audio::play(id_t id, float volume, float speed)
-{
-	static id_t currentId = 0;
-	if(currentId != id)
-	{
-		alSourcei(source, AL_BUFFER, (ALint)id);
-		currentId = id;
-	}
-
-	alSourcef(source, AL_GAIN, volume);
-	alSourcef(source, AL_PITCH, speed);
-
-	alSource3f(source, AL_POSITION, 0, 0, 0);
-	
-	alSourcePlay(source);
-
-	/*auto err = alGetError();
-	if(err != AL_NO_ERROR)
-		CLEM_CORE_ERROR("OpenAL error: {}", alGetString(err));*/
-
-	// alGetSourcef(source, AL_SEC_OFFSET, &offset);
-
-	return true;
-}
-
 struct RiffHeader
 {
 	char    id[4]; // 资源交换文件标志
 	int32_t size;
-	char    format[4]; // WAV文件标志（WAVE）
+	char    format[4]; // WAV文件标志
 };
 
 struct WaveFormat
@@ -98,6 +73,23 @@ Audio::id_t Audio::loadSound(const path& path)
 	if(waveFormat.size > 16)
 		file.seekg(2, std::ios::cur);
 
+	char headId[5] = {'\0'};
+
+	file.read(headId, 4);
+
+	if(strcmp(headId, "LIST") == 0)
+	{
+		file.seekg(0x1E, std::ios::cur); // 跳过 格式转换信息
+		file.read(headId, 4);
+	}
+
+	if(strcmp(headId, "data") == 0)
+	{
+		file.seekg(-4, std::ios::cur);
+		file.read((char*)&waveData, sizeof(waveData));
+	}
+
+	/*
 	while(true)
 	{
 		char id[5] = {'\0'};
@@ -113,7 +105,7 @@ Audio::id_t Audio::loadSound(const path& path)
 			file.seekg(0x1E, std::ios::cur); // 格式转换信息
 	}
 
-	file.read((char*)&waveData, sizeof(waveData));
+	file.read((char*)&waveData, sizeof(waveData));*/
 	
 	/*if(waveFormat.id[0] != 'f' ||
 		 waveFormat.id[1] != 'm' ||
@@ -187,14 +179,10 @@ Audio::Audio()
 	assert(device);
 	context = alcCreateContext(device, nullptr);
 	alcMakeContextCurrent(context);
-
-	alGenSources(1, &source);
 }
 
 Audio::~Audio()
 {
-	alDeleteSources(1, &source);
-
 	alDeleteBuffers(sounds.size(), sounds.data());
 	sounds.clear();
 

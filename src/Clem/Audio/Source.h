@@ -10,13 +10,20 @@
 class Source
 {
 public:
-	void play(Audio::id_t id);
-	void stop();
+	Source();
+	~Source();
 
-	void setVolume(float);
-	void setPitch(float);
+	void play(Audio::id_t soundId);
+	void stop();
+	void pause();
+
+	void setVolume(float volume);
+	void setPitch(float pitch);
 	void setLoop(bool);
 
 	void setPosition(const Point2& p);
 	void setVelocity(const Vector2& v);
+
+private:
+	Audio::id_t sourceId;
 };
