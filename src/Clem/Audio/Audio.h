@@ -32,12 +32,13 @@ public:
 	 */
 	bool unloadSound(id_t id);
 
+	static void init();
+	static void deinit();
+
 private:
-	Audio();
-	~Audio();
+	Audio() = default;
 
-	std::vector<id_t> sounds;
-
-	ALCdevice*  device;
-	ALCcontext* context;
+	static std::vector<id_t> sounds;
+	static ALCdevice*        device;
+	static ALCcontext*       context;
 };

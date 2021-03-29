@@ -6,6 +6,8 @@
 #include "Clem/Event/KeyEvent.h"
 #include "Clem/Event/MouseEvent.h"
 #include "Clem/Platform.h"
+#include "Keyboard.h"
+#include "Mouse.h"
 
 #ifdef OS_UNIX
 
@@ -27,6 +29,7 @@ void Input::update()
 	switch(rec.EventType)
 	{
 	case KEY_EVENT:
+		Keyboard::setKeyState((Keyboard::Key)rec.Event.KeyEvent.wVirtualKeyCode, rec.Event.KeyEvent.bKeyDown);
 		dispatcher.dispatch(
 				KeyEvent(rec.Event.KeyEvent.wVirtualKeyCode,
 								 rec.Event.KeyEvent.bKeyDown,
@@ -37,6 +40,8 @@ void Input::update()
 		switch(rec.Event.MouseEvent.dwEventFlags)
 		{
 		case MOUSE_MOVED:
+			Mouse::setPosition({rec.Event.MouseEvent.dwMousePosition.X,
+													rec.Event.MouseEvent.dwMousePosition.Y});
 			dispatcher.dispatch(MouseEvent(MouseEvent::Type::move,
 																		 {(float)rec.Event.MouseEvent.dwMousePosition.X,
 																			(float)rec.Event.MouseEvent.dwMousePosition.Y}));
@@ -69,6 +74,9 @@ void Input::update()
 	case WINDOW_BUFFER_SIZE_EVENT:
 		break;
 	}
+
+	Mouse::setKeyState(Mouse::Key::left, rec.Event.MouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED);
+	Mouse::setKeyState(Mouse::Key::right, rec.Event.MouseEvent.dwButtonState & RIGHTMOST_BUTTON_PRESSED);
 }
 
 #endif

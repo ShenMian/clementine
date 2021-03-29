@@ -14,6 +14,10 @@ public:
 	Pong()
 			: Application("Pong")
 	{
+	}
+
+	void init() override
+	{
 		pushScene(scene); // 将 scene 压入堆栈
 
 		popSound   = audio.loadSound("assets/pop.wav");

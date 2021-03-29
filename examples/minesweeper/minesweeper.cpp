@@ -14,12 +14,16 @@ public:
 	Minesweeper()
 			: Application("Minesweeper")
 	{
+	}
+
+	void init() override
+	{
 		pushScene(scene);
 
 		opening = audio.loadSound("assets/opening.wav");
 		explode = audio.loadSound("assets/explode.wav");
 		source.setVolume(0.3);
-		
+
 		// TODO: UI
 		puts("/--[Level]--\\\n"
 				 "| 1. Easy   |\n"

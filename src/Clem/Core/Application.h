@@ -86,8 +86,11 @@ public:
 	 */
 	void replaceScene(const std::shared_ptr<Scene>& scene);
 
+	virtual void init();
+	virtual void deinit();
+
 private:
-	void initialize();
+	void initPlatform();
 
 	void updateInput();
 	void updateScene(long dt);

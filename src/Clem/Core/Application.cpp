@@ -30,7 +30,9 @@ int main(int argc, char* argv[])
 	PROFILE_SESSION_BEGIN("profile.json");
 
 	auto app = CreateApplication();
+	app->init();
 	app->run();
+	app->deinit();
 	delete app;
 
 	PROFILE_SESSION_END();
@@ -56,14 +58,15 @@ Application::Application(const string& name)
 	std::setlocale(LC_ALL, "");
 	std::signal(SIGINT, onSignal);
 
-	Output::get().setSize(Window::getSize());
-	Audio::get();
+	initPlatform();
 
-	initialize();
+	Output::get().setSize(Window::getSize()); // 初始化 Output
+	Audio::init();                            // 初始化 Audio
 }
 
 Application::~Application()
 {
+	Audio::deinit();
 }
 
 void Application::run()
@@ -213,6 +216,14 @@ void Application::replaceScene(const shared_ptr<Scene>& s)
 	scenes.back() = s;
 }
 
+void Application::init()
+{
+}
+
+void Application::deinit()
+{
+}
+
 void Application::onSignal(int signal)
 {
 	switch(signal)
@@ -229,11 +240,11 @@ void Application::onSignal(int signal)
 
 #ifdef OS_UNIX
 
-#	include <sys/time.h>
-
-void Application::initialize()
+void Application::initPlatform()
 {
 }
+
+#	include <sys/time.h>
 
 long Application::getCurrentMillSecond() const
 {
@@ -246,7 +257,7 @@ long Application::getCurrentMillSecond() const
 
 #ifdef OS_WIN
 
-void Application::initialize()
+void Application::initPlatform()
 {
 	DWORD mode;
 

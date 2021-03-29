@@ -3,14 +3,17 @@
 
 #include "Audio.h"
 #include "Clem/Log.h"
+#include "Clem/Profiler.h"
 #include <algorithm>
 #include <cassert>
 #include <fstream>
 #include <stdint.h>
 
-#include <thread>
-
 using namespace std::filesystem;
+
+std::vector<Audio::id_t> Audio::sounds;
+ALCdevice*               Audio::device;
+ALCcontext*              Audio::context;
 
 Audio& Audio::get()
 {
@@ -173,16 +176,20 @@ bool Audio::unloadSound(id_t id)
 		return false;
 }
 
-Audio::Audio()
+void Audio::init()
 {
+	PROFILE_FUNC();
+
 	device = alcOpenDevice(nullptr); // 获取默认设备
 	assert(device);
 	context = alcCreateContext(device, nullptr);
 	alcMakeContextCurrent(context);
 }
 
-Audio::~Audio()
+void Audio::deinit()
 {
+	PROFILE_FUNC();
+
 	alDeleteBuffers((ALsizei)sounds.size(), sounds.data());
 	sounds.clear();
 
