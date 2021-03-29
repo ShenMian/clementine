@@ -49,8 +49,7 @@ public:
 		bat2.addComponent<Sprite>(batSprite);
 		bat1.addComponent<Rigidbody>();
 		bat2.addComponent<Rigidbody>();
-		bat1.getComponent<Transform>().setLocalPosition({2, 10});
-		bat2.getComponent<Transform>().setLocalPosition({77, 10});
+		resetBats();
 
 		// 5. Bat1 由玩家控制
 		// 为 bat1 创建一个事件监听器, 监听按键事件
@@ -120,6 +119,7 @@ public:
 				vel.x = -vel.x;
 				vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 				resetBall();
+				resetBats();
 				leftSource.play(scoreSound);
 				ai_score++;
 			}
@@ -129,6 +129,7 @@ public:
 				vel.x = -vel.x;
 				vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 				resetBall();
+				resetBats();
 				rightSource.play(scoreSound);
 				player_score++;
 			}
@@ -162,11 +163,18 @@ public:
 		};
 	}
 
-	// 重置 ball 的位置, 回到中心
+	// 重置 ball 的位置
 	void resetBall()
 	{
 		scene->getEntityByTag("ball").getComponent<Transform>().setLocalPosition({39, 12});
 		scene->getEntityByTag("ball").getComponent<Rigidbody>().velocity = Vector2::right * ball_speed;
+	}
+
+	// 重置 bat 的位置
+	void resetBats()
+	{
+		scene->getEntityByTag("bat1").getComponent<Transform>().setLocalPosition({2, 10});
+		scene->getEntityByTag("bat2").getComponent<Transform>().setLocalPosition({77, 10});
 	}
 
 private:

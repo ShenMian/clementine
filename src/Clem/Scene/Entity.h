@@ -69,7 +69,7 @@ template <typename Com, typename... Args>
 Com& Entity::addComponent(Args&&... args)
 {
 	if(hasComponent<Com>())
-		CLEM_CORE_CRITICAL("add a an existing component '{}' to entity '{}'", typeid(Com).name(), getComponent<Tag>().tag);
+		CLEM_CORE_FATAL("add a an existing component '{}' to entity '{}'", typeid(Com).name(), getComponent<Tag>().tag);
 	return scene->registry.emplace<Com>(id, std::forward<Args>(args)...);
 }
 
@@ -77,7 +77,7 @@ template <typename Com>
 void Entity::removeComponent()
 {
 	if(!hasComponent<Com>())
-		CLEM_CORE_CRITICAL("remove a nonexistent component '{}' from entity '{}'", typeid(Com).name(), getComponent<Tag>().tag);
+		CLEM_CORE_FATAL("remove a nonexistent component '{}' from entity '{}'", typeid(Com).name(), getComponent<Tag>().tag);
 	scene->registry.destroy<Com>(id);
 }
 
@@ -85,7 +85,7 @@ template <typename Com>
 Com& Entity::getComponent()
 {
 	if(!hasComponent<Com>())
-		CLEM_CORE_CRITICAL("get a nonexistent component '{}' from entity '{}'", typeid(Com).name(), getComponent<Tag>().tag);
+		CLEM_CORE_FATAL("get a nonexistent component '{}' from entity '{}'", typeid(Com).name(), getComponent<Tag>().tag);
 	return scene->registry.get<Com>(id);
 }
 

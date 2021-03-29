@@ -49,11 +49,11 @@ struct WaveData
 Audio::id_t Audio::loadSound(const path& path)
 {
 	if(!exists(path))
-		CLEM_CORE_CRITICAL("file does not exist: '{}'", path.string());
+		CLEM_CORE_FATAL("file does not exist: '{}'", path.string());
 
 	std::ifstream file(path, std::ios::binary);
 	if(!file.is_open())
-		CLEM_CORE_CRITICAL("the file could not be opened: '{}'", path.string());
+		CLEM_CORE_FATAL("the file could not be opened: '{}'", path.string());
 
 	RiffHeader riffHeader;
 	file.read((char*)&riffHeader, sizeof(riffHeader));
@@ -66,7 +66,7 @@ Audio::id_t Audio::loadSound(const path& path)
 			riffHeader.format[1] != 'A' ||
 			riffHeader.format[2] != 'V' ||
 			riffHeader.format[3] != 'E'))
-		CLEM_CORE_CRITICAL("invalid RIFF or WAVE Header: '{}'", path.string());
+		CLEM_CORE_FATAL("invalid RIFF or WAVE Header: '{}'", path.string());
 
 	WaveFormat waveFormat;
 	WaveData   waveData;
@@ -144,7 +144,7 @@ Audio::id_t Audio::loadSound(const path& path)
 			format = AL_FORMAT_STEREO16;
 	}
 	if(format == 0)
-		CLEM_CORE_CRITICAL("invalid WAVE format: '{}'", path.string());
+		CLEM_CORE_FATAL("invalid WAVE format: '{}'", path.string());
 
 	auto data = new unsigned char[size];
 	file.read((char*)data, size);

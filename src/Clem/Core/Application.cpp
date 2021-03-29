@@ -51,7 +51,7 @@ Application::Application(const string& name)
 		: name(name)
 {
 	if(instance != nullptr)
-		CLEM_CORE_CRITICAL("create the second application is not allowed");
+		CLEM_CORE_FATAL("create the second application is not allowed");
 	instance = this;
 	PROFILE_FUNC();
 
@@ -72,7 +72,7 @@ Application::~Application()
 void Application::run()
 {
 	if(quit == false)
-		CLEM_CORE_CRITICAL("call Application::run() when the application is already running");
+		CLEM_CORE_FATAL("call Application::run() when the application is already running");
 	CLEM_CORE_INFO("main loop started");
 
 	quit          = false;
@@ -155,7 +155,7 @@ void Application::updateFrameRate(long dt)
 void Application::stop()
 {
 	if(quit)
-		CLEM_CORE_CRITICAL("call Application::stop() when the application has stopped");
+		CLEM_CORE_FATAL("call Application::stop() when the application has stopped");
 	quit = true;
 }
 
@@ -176,14 +176,14 @@ void Application::resume()
 void Application::setMsPerUpdate(long ms)
 {
 	if(ms <= 0)
-		CLEM_CORE_CRITICAL("set ms per update non positive is not allowed");
+		CLEM_CORE_FATAL("set ms per update non positive is not allowed");
 	msPerUpdate = ms;
 }
 
 void Application::setMsPerRender(long ms)
 {
 	if(ms <= 0)
-		CLEM_CORE_CRITICAL("set ms per render non positive is not allowed");
+		CLEM_CORE_FATAL("set ms per render non positive is not allowed");
 	msPerRender = ms;
 }
 
@@ -205,14 +205,14 @@ void Application::pushScene(shared_ptr<Scene>& s)
 void Application::popScene()
 {
 	if(scenes.size() < 2)
-		CLEM_CORE_CRITICAL("pop a scene when the scenes is empty is not allowed");
+		CLEM_CORE_FATAL("pop a scene when the scenes is empty is not allowed");
 	scenes.pop_back();
 }
 
 void Application::replaceScene(const shared_ptr<Scene>& s)
 {
 	if(scenes.empty())
-		CLEM_CORE_CRITICAL("replace a scene when the scenes is empty is not allowed");
+		CLEM_CORE_FATAL("replace a scene when the scenes is empty is not allowed");
 	scenes.back() = s;
 }
 

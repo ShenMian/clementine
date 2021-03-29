@@ -22,7 +22,7 @@ public:
 #define CLEM_CORE_INFO(...)  Log::getLogger()->info(__VA_ARGS__)
 #define CLEM_CORE_WARN(...)  Log::getLogger()->warn(__VA_ARGS__)
 #define CLEM_CORE_ERROR(...) Log::getLogger()->error(__VA_ARGS__)
-#define CLEM_CORE_CRITICAL(...)              \
+#define CLEM_CORE_FATAL(...)                 \
 	do                                         \
 	{                                          \
 		Log::getLogger()->critical(__VA_ARGS__); \

@@ -19,8 +19,13 @@ Features
 --------
 - Multi-platform: Linux, macOS, Windows.
 - Lightweight.
-- Has a built-in CPU sampling profiler.
-- Using entity-component-system(ECS).
+- Has a in-game profiling tool (CPU sampling profiler).
+- Using entity-component-system (ECS).
+- Subsystems
+  - Audio
+  - Physics
+  - Logging
+  - Input: Keyboard, Mouse, Gamepad
 
 Documentation
 -------------
