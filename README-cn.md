@@ -24,15 +24,15 @@
 
 文档
 ----
-- **[Github Wiki]** (中文)  
-- **[API 参考]** (中文)  
+- **[Github Wiki]**
+- **[API 参考]** (中文)
 
 截图
 ----
-![](docs/pictures/pong.png)
-![](docs/pictures/minesweeper.png)
+![Pong](docs/pictures/pong.png)
+![Minesweeper](docs/pictures/minesweeper.png)
 ![](docs/pictures/v0_0_0.png)
-![](docs/pictures/profiler.png)
+![Profiler](docs/pictures/profiler.png)
 
 编译
 ----
@@ -59,9 +59,9 @@
 - **[Telegram]**
 
 [en]:                 README.md
-[api 参考]:            https://shenmian.github.io/Clementine
+[github wiki]:        https://github.com/ShenMian/Clementine/wiki
+[api 参考]:           https://shenmian.github.io/Clementine
 [设置git]:            https://help.github.com/articles/set-up-git
 [fork我们的仓库]:      https://help.github.com/articles/fork-a-repo
-[github wiki]:         https://github.com/ShenMian/Clementine/wiki
 [github discussions]: https://github.com/ShenMian/Clementine/discussions
 [telegram]:           https://t.me/shenmian

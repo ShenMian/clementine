@@ -24,15 +24,15 @@ Features
 
 Documentation
 -------------
-- **[Github Wiki]** (Chinese)  
-- **[API Reference]** (Chinese)  
+- **[Github Wiki]**
+- **[API Reference]** (Chinese)
 
 Screenshots
 -----------
-![](docs/pictures/pong.png)
-![](docs/pictures/minesweeper.png)
+![Pong](docs/pictures/pong.png)
+![Minesweeper](docs/pictures/minesweeper.png)
 ![](docs/pictures/v0_0_0.png)
-![](docs/pictures/profiler.png)
+![Profiler](docs/pictures/profiler.png)
 
 Compiling
 ---------
@@ -60,9 +60,9 @@ Contact
 - **[Telegram]**
 
 [cn]:                  README-cn.md
+[github wiki]:         https://github.com/ShenMian/Clementine/wiki
 [api reference]:       https://shenmian.github.io/Clementine
 [set up git]:          https://help.github.com/articles/set-up-git
 [fork our repository]: https://help.github.com/articles/fork-a-repo
-[github wiki]:         https://github.com/ShenMian/Clementine/wiki
 [github discussions]:  https://github.com/ShenMian/Clementine/discussions
 [telegram]:            https://t.me/shenmian
