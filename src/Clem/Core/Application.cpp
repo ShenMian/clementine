@@ -22,19 +22,16 @@ using std::string;
 using std::chrono::milliseconds;
 using std::this_thread::sleep_for;
 
-#include "AL/alc.h"
-
 int main(int argc, char* argv[])
 {
-	Log::init();
 	PROFILE_SESSION_BEGIN("profile.json");
-
 	auto app = CreateApplication();
+
 	app->init();
 	app->run();
 	app->deinit();
-	delete app;
 
+	delete app;
 	PROFILE_SESSION_END();
 	return 0;
 }
@@ -61,12 +58,15 @@ Application::Application(const string& name)
 	initPlatform();
 
 	Output::get().setSize(Window::getSize()); // 初始化 Output
-	Audio::init();                            // 初始化 Audio
+
+	Log::init();
+	Audio::init();
 }
 
 Application::~Application()
 {
 	Audio::deinit();
+	Log::deinit();
 }
 
 void Application::run()

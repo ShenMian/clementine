@@ -24,14 +24,14 @@ void Instrumentor::begin(const char* filename)
 	{
 		return;
 	}
-	CLEM_CORE_WARN("Profile session begin: {}", filename);
+	// CLEM_CORE_WARN("Profile session begin: {}", filename);
 	writeHead();
 }
 
 void Instrumentor::end()
 {
 	assert(session);
-	CLEM_CORE_WARN("Profile session end");
+	// CLEM_CORE_WARN("Profile session end");
 
 	writeFooter();
 	file.close();

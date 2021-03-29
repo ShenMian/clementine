@@ -11,11 +11,34 @@
 #include "spdlog/spdlog.h"
 #pragma warning(pop)
 
+constexpr int log_active_level = 1;
+
+constexpr int log_level_trace = 0;
+constexpr int log_level_debug = 1;
+constexpr int log_level_info  = 2;
+constexpr int log_level_warn  = 3;
+constexpr int log_level_error = 4;
+constexpr int log_level_fatal = 5;
+
 class Log
 {
 public:
-	static void                            init();
+	enum class Level;
+
 	static std::shared_ptr<spdlog::logger> getLogger();
+
+	static void init();
+	static void deinit();
+};
+
+enum class Log::Level
+{
+	trace,
+	debug,
+	info,
+	warn,
+	error,
+	fatal
 };
 
 #define CLEM_CORE_TRACE(...) Log::getLogger()->trace(__VA_ARGS__)

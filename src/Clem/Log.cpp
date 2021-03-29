@@ -24,6 +24,11 @@ void Log::init()
 	flush_every(std::chrono::seconds(1));
 }
 
+void Log::deinit()
+{
+	coreLogger->flush();
+}
+
 std::shared_ptr<logger> Log::getLogger()
 {
 	assert(coreLogger != nullptr);
