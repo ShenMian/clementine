@@ -29,9 +29,9 @@ public:
 		ballSprite.drawPoint({0, 0}, Tile('O', Color::yellow));
 
 		// 2. 创建乒乓球
-		auto ball = scene->createEntity("ball");                               // 向 scene 申请创建一个实体 ball
-		ball.addComponent<Sprite>(ballSprite);                                 // 为 ball 创建一个复制 ballSprite 的 Sprite 组件
-		ball.addComponent<Rigidbody>();                                        // 为 ball 创建一个 Rigidbody 组件
+		auto ball = scene->createEntity("ball"); // 向 scene 申请创建一个实体 ball
+		ball.addComponent<Sprite>(ballSprite);   // 为 ball 创建一个复制 ballSprite 的 Sprite 组件
+		ball.addComponent<Rigidbody>();          // 为 ball 创建一个 Rigidbody 组件
 		resetBall();
 
 		// 3. 创建乒乓球球拍 Sprite
@@ -79,11 +79,11 @@ public:
 
 		// TODO: 碰撞检测. 碰撞时被回调, 调整随机角度
 		ball.addComponent<Script>().onUpdate = [&](float dt) {
-			auto  ball   = scene->getEntityByTag("ball");
-			auto& ts     = ball.getComponent<Transform>();
-			auto& vel    = ball.getComponent<Rigidbody>().velocity;
-			auto& sprite = ball.getComponent<Sprite>();
-			auto& ballPos    = ts.getPosition();
+			auto   ball    = scene->getEntityByTag("ball");
+			auto&  ts      = ball.getComponent<Transform>();
+			auto&  vel     = ball.getComponent<Rigidbody>().velocity;
+			auto&  sprite  = ball.getComponent<Sprite>();
+			auto&  ballPos = ts.getPosition();
 			Entity bats[2];
 			bats[0] = scene->getEntityByTag("bat1");
 			bats[1] = scene->getEntityByTag("bat2");
@@ -175,11 +175,13 @@ private:
 	const int   random_rebound_angle = 5;     // 碰撞时随机调整角度系数
 	const float volume               = 0.1f;  // 声音效果音量
 
-	Random            random;
+	Audio&      audio = Audio::get();
+	Audio::id_t popSound, scoreSound;
+	Source      upSource, downSource, leftSource, rightSource;
+
+	Random random;
+
 	shared_ptr<Scene> scene = make_shared<Scene>();
-	Audio&            audio = Audio::get();
-	Audio::id_t       popSound, scoreSound;
-	Source            upSource, downSource, leftSource, rightSource;
 };
 
 #if 1

@@ -19,6 +19,8 @@ void Source::play(Audio::id_t soundId)
 {
 	stop();
 	alSourcei(sourceId, AL_BUFFER, (ALint)soundId);
+	assert(alGetError() == AL_NO_ERROR);
+
 	alSourcePlay(sourceId);
 }
 

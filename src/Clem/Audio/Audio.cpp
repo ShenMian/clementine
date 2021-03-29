@@ -20,20 +20,20 @@ Audio& Audio::get()
 
 struct RiffHeader
 {
-	char    id[4]; // 资源交换文件标志
-	int32_t size;
+	char    id[4];     // 资源交换文件标志, "RIFF"
+	int32_t size;      // 文件总大小
 	char    format[4]; // WAV文件标志
 };
 
 struct WaveFormat
 {
-	char    id[4]; // 波形格式标志
+	char    id[4]; // 波形格式标志, "WAVE"
 	int32_t size;
-	int16_t audioFormat;   // 音频格式
+	int16_t audioFormat;   // 音频格式, 线性 PCM 编码
 	int16_t numChannels;   // 声道数
-	int32_t sampleRate;    // 采样率
-	int32_t byteRate;      // 每秒数据字节数
-	int16_t blockAlign;    // 数据块对齐
+	int32_t sampleRate;    // 采样率, Hz
+	int32_t byteRate;      // 波形数据传输率, Bps
+	int16_t blockAlign;    // 块对齐
 	int16_t bitsPerSample; // 采样位数
 };
 
@@ -79,18 +79,18 @@ Audio::id_t Audio::loadSound(const path& path)
 
 	if(strcmp(headId, "LIST") == 0)
 	{
-		file.seekg(0x1E, std::ios::cur); // 跳过 格式转换信息
+		int32_t size;
+		file.read((char*)&size, sizeof(size));
+		file.seekg(size, std::ios::cur); // 跳过 格式转换信息
 		file.read(headId, 4);
 	}
 
-	if(strcmp(headId, "data") == 0)
-	{
-		file.seekg(-4, std::ios::cur);
-		file.read((char*)&waveData, sizeof(waveData));
-	}
+	assert(strcmp(headId, "data") == 0);
 
-	/*
-	while(true)
+	file.seekg(-4, std::ios::cur);
+	file.read((char*)&waveData, sizeof(waveData));
+
+	/*while(true)
 	{
 		char id[5] = {'\0'};
 
@@ -122,7 +122,7 @@ Audio::id_t Audio::loadSound(const path& path)
 		 waveData.id[3] != 'a')
 		CLEM_CORE_CRITICAL("invalid WAVE.DATA header: '{}'", path.string());*/
 
-	ALenum  format    = 0;
+ 	ALenum  format    = 0;
 	ALsizei size      = waveData.size;
 	ALsizei frequency = waveFormat.sampleRate;
 
@@ -183,7 +183,7 @@ Audio::Audio()
 
 Audio::~Audio()
 {
-	alDeleteBuffers(sounds.size(), sounds.data());
+	alDeleteBuffers((ALsizei)sounds.size(), sounds.data());
 	sounds.clear();
 
 	alcMakeContextCurrent(nullptr);

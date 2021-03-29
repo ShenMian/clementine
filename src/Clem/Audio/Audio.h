@@ -7,14 +7,14 @@
 #include <vector>
 #include <filesystem>
 
+// Warning: 务必在所以音频操作开始前初始化, 否则 OpenAL 不会报错
+
 class Audio
 {
 public:
 	typedef ALuint id_t;
 
 	static Audio& get();
-
-	bool play(id_t id, float volume = 1.0f, float speed = 1.0f);
 
 	/**
 	 * @brief 加载声音.

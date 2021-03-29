@@ -12,10 +12,14 @@ class Minesweeper : public Application
 {
 public:
 	Minesweeper()
-			: Application("Minesweeper"), scene(make_shared<Scene>())
+			: Application("Minesweeper")
 	{
 		pushScene(scene);
 
+		opening = audio.loadSound("opening.wav");
+		explode = audio.loadSound("explode.wav");
+		source.setVolume(0.3);
+		
 		// TODO: UI
 		puts("/--[Level]--\\\n"
 				 "| 1. Easy   |\n"
@@ -50,10 +54,6 @@ public:
 			exit(0);
 			break;
 		}
-
-		// map.resize(board_size.x);
-		// for(int i = 0; i < board_size.x; i++)
-		// 	map[i].resize(board_size.y);
 
 		auto board = scene->createEntity("board");
 		sprite     = &board.addComponent<Sprite>(Size2i(board_size.x * 2 + 1, board_size.y + 2));
@@ -108,6 +108,8 @@ public:
 		sprite->drawRect(Rect2i({0, 0}, {board_size.x * 2, board_size.y + 1}), Tile('#'));
 
 		surplus = board_size.area() - mine_num;
+
+		source.play(opening);
 	}
 
 	void win()
@@ -120,6 +122,8 @@ public:
 
 	void lost()
 	{
+		source.play(explode);
+
 		for(int x = 0; x < board_size.x; x++)
 			for(int y = 0; y < board_size.y; y++)
 				if(map[x][y] == '*')
@@ -184,8 +188,14 @@ private:
 	int               surplus;
 	Sprite*           sprite;
 	vector<Point2i>   flags;
-	Random            random;
-	shared_ptr<Scene> scene;
+
+	Source      source;
+	Audio::id_t opening, explode;
+	Audio&      audio = Audio::get();
+
+	Random random;
+
+	shared_ptr<Scene> scene = make_shared<Scene>();
 };
 
 Application* CreateApplication()

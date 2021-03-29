@@ -5,6 +5,7 @@
 // #include "SDL.h"
 
 #include "Application.h"
+#include "Clem/Audio/Audio.h"
 #include "Clem/Log.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
@@ -56,6 +57,7 @@ Application::Application(const string& name)
 	std::signal(SIGINT, onSignal);
 
 	Renderer::get().setSize(Window::getSize());
+	Audio::get();
 
 	initialize();
 }
