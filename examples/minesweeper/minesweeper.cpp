@@ -16,8 +16,8 @@ public:
 	{
 		pushScene(scene);
 
-		opening = audio.loadSound("opening.wav");
-		explode = audio.loadSound("explode.wav");
+		opening = audio.loadSound("assets/opening.wav");
+		explode = audio.loadSound("assets/explode.wav");
 		source.setVolume(0.3);
 		
 		// TODO: UI

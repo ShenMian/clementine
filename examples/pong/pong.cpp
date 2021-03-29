@@ -16,8 +16,8 @@ public:
 	{
 		pushScene(scene); // 将 scene 压入堆栈
 
-		popSound   = audio.loadSound("pop.wav");
-		scoreSound = audio.loadSound("score.wav");
+		popSound   = audio.loadSound("assets/pop.wav");
+		scoreSound = audio.loadSound("assets/score.wav");
 
 		upSource.setPosition({0, 5});
 		downSource.setPosition({0, -5});
