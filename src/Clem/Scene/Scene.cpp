@@ -5,7 +5,7 @@
 #include "Clem/Core/Application.h"
 #include "Clem/Log.h"
 #include "Clem/Profiler.h"
-#include "Clem/Renderer/Renderer.h"
+#include "Clem/Renderer/Output.h"
 #include "Entity.h"
 
 #include "Clem/Component/Script.h"
@@ -92,7 +92,7 @@ void Scene::render(float dt)
 {
 	PROFILE_FUNC();
 
-	static auto& renderer = Renderer::get();
+	static auto& renderer = Output::get();
 	auto&        buf      = renderer.getBuffer();
 	buf.clear();
 
@@ -107,5 +107,5 @@ void Scene::render(float dt)
 		buf.drawString(t.getPosition(), text.text);
 
 	renderer.swapBuffers();
-	renderer.output();
+	renderer.update();
 }

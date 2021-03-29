@@ -1,29 +1,29 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "Renderer.h"
+#include "Output.h"
 #include "Clem/Profiler.h"
 
-Renderer::Renderer()
+Output::Output()
 {
 	front = &buffer[0];
 	back  = &buffer[1];
 }
 
-Renderer& Renderer::get()
+Output& Output::get()
 {
-	static Renderer instance;
+	static Output instance;
 	return instance;
 }
 
-void Renderer::output()
+void Output::update()
 {
 	PROFILE_FUNC();
 
 	front->output();
 }
 
-void Renderer::swapBuffers()
+void Output::swapBuffers()
 {
 	PROFILE_FUNC();
 
@@ -32,18 +32,18 @@ void Renderer::swapBuffers()
 	back   = t;
 }
 
-Framebuffer& Renderer::getBuffer() const
+Framebuffer& Output::getBuffer() const
 {
 	return *back;
 }
 
-void Renderer::setSize(const Size2i& s)
+void Output::setSize(const Size2i& s)
 {
 	buffer[0].setSize(s);
 	buffer[1].setSize(s);
 }
 
-const Size2i& Renderer::getSize()
+const Size2i& Output::getSize()
 {
 	return buffer[0].getSize();
 }

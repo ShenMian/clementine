@@ -10,7 +10,7 @@
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
 #include "Clem/Renderer/Cursor.h"
-#include "Clem/Renderer/Renderer.h"
+#include "Clem/Renderer/Output.h"
 #include "Clem/Scene/Scene.h"
 #include "Clem/Window.h"
 #include "Input.h"
@@ -56,7 +56,7 @@ Application::Application(const string& name)
 	std::setlocale(LC_ALL, "");
 	std::signal(SIGINT, onSignal);
 
-	Renderer::get().setSize(Window::getSize());
+	Output::get().setSize(Window::getSize());
 	Audio::get();
 
 	initialize();

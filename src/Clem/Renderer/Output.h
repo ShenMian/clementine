@@ -7,12 +7,12 @@
 #include "Clem/Core/Math/Vector2i.h"
 #include "Framebuffer.h"
 
-class Renderer
+class Output
 {
 public:
-	static Renderer& get();
+	static Output& get();
 
-	void output();
+	void update();
 
 	/**
 	 * @brief 交换缓冲区.
@@ -35,7 +35,7 @@ public:
 	const Size2i& getSize();
 
 private:
-	Renderer();
+	Output();
 
 	Framebuffer* front;
 	Framebuffer* back;

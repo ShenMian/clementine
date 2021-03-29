@@ -11,7 +11,7 @@
 // Renderer
 #include "Clem/Renderer/Camera.h"
 #include "Clem/Renderer/Framebuffer.h"
-#include "Clem/Renderer/Renderer.h"
+#include "Clem/Renderer/Output.h"
 #include "Clem/Renderer/Sprite.h"
 
 // Physics
