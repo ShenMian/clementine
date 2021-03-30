@@ -40,6 +40,7 @@ include "src"
 group "Examples"
   include "examples/pong"
   include "examples/minesweeper"
+  include "examples/unnamed"
 group ""
 
 group "Thirdparty"

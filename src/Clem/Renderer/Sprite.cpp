@@ -85,8 +85,25 @@ void Sprite::drawCycle(const Point2i& c, short r, const Tile& t)
 
 void Sprite::drawString(const Point2i& pos, std::wstring_view str, Color c)
 {
-	for(int i = 0; i < str.size(); i++)
-		drawPoint(pos.x + i, pos.y, Tile(str[i], c));
+	const auto& size = getSize();
+	int         x = 0, y = 0;
+	for(auto ch : str)
+	{
+		if(ch == '\n' || y == size.y)
+		{
+			x = 0;
+			y++;
+		}
+		else if(ch == '\r')
+			x = 0;
+		else
+		{
+			drawPoint({pos.x + x, pos.y + y}, Tile(ch, c));
+			x++;
+		}
+	}
+	//for(int i = 0; i < str.size(); i++)
+	//	drawPoint(pos.x + i, pos.y, Tile(str[i], c));
 }
 
 void Sprite::clear(const Tile& t)

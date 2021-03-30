@@ -10,7 +10,7 @@ project "Clementine"
   targetdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/lib")
   objdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/obj")
 
-  files {"**.cpp", "**.h", "**.inl", "premake5.lua"}
+  files {"**.cpp", "**.h", "**.inl", "premake5.lua", "CMakeLists.txt"}
 
   includedirs {
     ".",
@@ -23,4 +23,4 @@ project "Clementine"
   links {
     "sdl",
     "yaml-cpp",
-    "%{thirdparty.openal}/lib/openal32",}
+    "%{thirdparty.openal}/lib/openal32"}
