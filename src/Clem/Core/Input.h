@@ -7,6 +7,9 @@ class Input
 {
 public:
 	static void update();
+
+	static void init();
+	static void deinit();
 };
 
 enum KeyCode

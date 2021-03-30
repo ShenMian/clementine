@@ -1,8 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_PROFILER_H_
-#define CLEM_PROFILER_H_
+#pragma once
 
 #include <chrono>
 #include <fstream>
@@ -74,5 +73,3 @@ private:
 #	define PROFILE_SCOPE
 #	define PROFILE_FUNC()
 #endif
-
-#endif // !CLEM_PROFILER_H_

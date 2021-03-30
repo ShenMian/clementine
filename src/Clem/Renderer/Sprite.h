@@ -78,7 +78,7 @@ public:
 	 * @param str   要绘制的字符串
 	 * @param color 顔色
 	 */
-	void drawString(const Point2i& pos, std::wstring str, Color color = Color());
+	void drawString(const Point2i& pos, std::wstring_view str, Color color = Color());
 
 	/**
 	 * @brief 清除全部绘制内容.

@@ -61,10 +61,12 @@ Application::Application(const string& name)
 
 	Log::init();
 	Audio::init();
+	Input::init();
 }
 
 Application::~Application()
 {
+	Input::deinit();
 	Audio::deinit();
 	Log::deinit();
 }

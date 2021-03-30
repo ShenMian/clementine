@@ -1,8 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_PLATFORM_H_
-#define CLEM_PLATFORM_H_
+#pragma once
 
 #if defined(WIN32) || defined(_WIN32) || defined(_WIN32_) || defined(__WIN32__) || defined(__MINGW32__) || defined(WIN64) || defined(_WIN64) || defined(_WIN64_)
 #	define OS_WIN
@@ -38,5 +37,3 @@
 #if !defined(OS_UNIX) && !defined(OS_WIN)
 #	error This platform is not supported.
 #endif
-
-#endif // CLEM_PLATFORM_H_

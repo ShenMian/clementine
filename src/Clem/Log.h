@@ -1,8 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_LOG_H_
-#define CLEM_LOG_H_
+#pragma once
 
 #include <cassert>
 #include <memory>
@@ -51,5 +50,3 @@ enum class Log::Level
 		Log::getLogger()->critical(__VA_ARGS__); \
 		assert(false);                           \
 	} while(0)
-
-#endif // !CLEM_LOG_H_

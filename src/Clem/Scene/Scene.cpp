@@ -99,11 +99,6 @@ void Scene::render(float dt)
 
 	renderSprites();
 
-	// Render UI
-	auto textView = registry.view<Transform, const Text>();
-	for(auto [e, t, text] : textView.each())
-		buf.drawString(t.getPosition(), text.text);
-
 	renderer.swapBuffers();
 	renderer.update();
 }

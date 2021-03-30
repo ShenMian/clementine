@@ -1,8 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_WINDOW_H_
-#define CLEM_WINDOW_H_
+#pragma once
 
 #include "Clem/Core/Math/Math.h"
 #include <string>
@@ -18,9 +17,7 @@ public:
 	/**
 	 * @brief 设置终端窗口标题.
 	 *
-	 * @warning Windows下此函数性能不稳定, 不应该频繁调用
+	 * @warn Windows下此函数性能不稳定, 不应该频繁调用
 	 */
 	static void setTitle(const std::string& title);
 };
-
-#endif // !CLEM_WINDOW_H_

@@ -2,8 +2,7 @@
 // License(Apache-2.0)
 // 随机数生成器
 
-#ifndef CLEM_RANDOM_H_
-#define CLEM_RANDOM_H_
+#pragma once
 
 #include "Clem/Core/Math/Math.h"
 #include <random>
@@ -28,5 +27,3 @@ public:
 private:
 	std::mt19937 generator;
 };
-
-#endif // !CLEM_RANDOM_H_

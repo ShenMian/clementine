@@ -1,27 +1,27 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_UI_TEXT_H_
-#define CLEM_UI_TEXT_H_
+#pragma once
 
-#include "Clem/Core/Math/Math.h"
+#include "UiComponent.h"
 #include <string>
 
 /**
- * @addtogroup UI
+ * @addtogroup Ui
  * @{
  */
 
-class Text
+class Text : public UiComponent
 {
 public:
+	void setText(std::wstring_view t, Color c = Color());
+
+private:
 	std::wstring text;
-	Size2        size;
+	Color        color;
 };
 
 /**
- * end of UI group
+ * end of Ui group
  * @}
  */
-
-#endif // !CLEM_UI_TEXT_H_

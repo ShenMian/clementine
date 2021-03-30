@@ -15,6 +15,29 @@
 void Input::update()
 {
 	PROFILE_FUNC();
+
+	getchar();
+}
+
+#include <unistd.h>
+#include <termios.h>
+
+void Input::init()
+{
+	termios opts;
+	tcgetattr(0, &opts);          // grab old terminal i/o settings
+	opts.c_lflag &= ~ICANON;      // disable buffered i/o
+	opts.c_lflag &= ~ECHO;        // set echo mode
+	tcsetattr(0, TCSANOW, &opts); // use these new terminal i/o settings now
+}
+
+void Input::deinit()
+{
+	termios opts;
+	tcgetattr(0, &opts);
+	opts.c_lflag &= ICANON;
+	opts.c_lflag &= ECHO;
+	tcsetattr(0, TCSANOW, &opts);
 }
 
 #endif
@@ -92,6 +115,14 @@ void Input::update()
 
 	Mouse::setKeyState(Mouse::Key::left, rec.Event.MouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED);
 	Mouse::setKeyState(Mouse::Key::right, rec.Event.MouseEvent.dwButtonState & RIGHTMOST_BUTTON_PRESSED);
+}
+
+void Input::init()
+{
+}
+
+void Input::deinit()
+{
 }
 
 #endif

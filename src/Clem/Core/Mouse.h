@@ -8,6 +8,8 @@
 
 /**
  * @brief 鼠标.
+ * 
+ * @warn 仅支持 Windows 系统
  */
 class Mouse
 {
