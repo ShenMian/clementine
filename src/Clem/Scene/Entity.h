@@ -4,6 +4,7 @@
 #ifndef CLEM_SCENE_ENTITY_H_
 #define CLEM_SCENE_ENTITY_H_
 
+#include "Clem/Component/Tag.h"
 #include "Clem/Core/Math/Math.h"
 #include "Clem/Log.h"
 #include "Scene.h"
