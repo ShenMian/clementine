@@ -63,7 +63,7 @@ private:
 #	define PROFILE_SESSION_BEGIN(filepath) Instrumentor::getInstance().begin(filepath)
 #	define PROFILE_SESSION_END()           Instrumentor::getInstance().end()
 #	define PROFILE_SCOPE_BEGIN(name)       InstrumentationCounter counter_##name(#  name)
-#	define PROFILE_SCOPE_END(name)         counter_##name.~InstrumentationCounter()
+#	define PROFILE_SCOPE_END(name)         counter_##name.stop()
 #	define PROFILE_SCOPE                   PROFILE_SCOPE_BEGIN
 #	define PROFILE_FUNC()                  InstrumentationCounter counter_##name(__FUNCTION__) /* __FUNCSIG__ */
 #else

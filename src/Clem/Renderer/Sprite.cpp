@@ -18,14 +18,14 @@ void Sprite::drawPoint(int x, int y, const Tile& t)
 	drawPoint({x, y}, t);
 }
 
-void Sprite::drawPoint(Point2i p, const Tile& t)
+void Sprite::drawPoint(const Point2i& p, const Tile& t)
 {
 	if(p.x < 0 || p.x >= size.x || p.y < 0 || p.y >= size.y)
 		return;
 	buffer[p.x + p.y * size.x] = t;
 }
 
-void Sprite::drawLine(Point2i a, Point2i b, const Tile& t)
+void Sprite::drawLine(const Point2i& a, const Point2i& b, const Tile& t)
 {
 	auto xDis   = b.x - a.x + 1;
 	auto yDis   = b.y - a.y + 1;
@@ -42,7 +42,7 @@ void Sprite::drawLine(Point2i a, Point2i b, const Tile& t)
 	}
 }
 
-void Sprite::drawRect(Rect2i r, const Tile& t)
+void Sprite::drawRect(const Rect2i& r, const Tile& t)
 {
 	for(int x = r.left(); x <= r.right(); x++)
 	{
@@ -56,14 +56,14 @@ void Sprite::drawRect(Rect2i r, const Tile& t)
 	}
 }
 
-void Sprite::fillRect(Rect2i r, const Tile& t)
+void Sprite::fillRect(const Rect2i& r, const Tile& t)
 {
 	for(int y = 0; y < r.size.y; y++)
 		for(int x = 0; x < r.size.x; x++)
 			drawPoint(r.origin.x + x, r.origin.y + y, t);
 }
 
-void Sprite::drawCycle(Point2i c, short r, const Tile& t)
+void Sprite::drawCycle(const Point2i& c, short r, const Tile& t)
 {
 	for(int x = 0; x <= r; x++)
 	{

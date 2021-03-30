@@ -35,7 +35,7 @@ public:
 	 * @param p 点的坐标.
 	 * @param t 瓦片.
 	 */
-	void drawPoint(Point2i p, const Tile& t);
+	void drawPoint(const Point2i& p, const Tile& t);
 
 	/**
 	 * @brief 绘制连接两点的直线.
@@ -44,7 +44,7 @@ public:
 	 * @param b b点坐标.
 	 * @param t 瓦片.
 	 */
-	void drawLine(Point2i a, Point2i b, const Tile& t);
+	void drawLine(const Point2i& a, const Point2i& b, const Tile& t);
 
 	/**
 	 * @brief 绘制矩形.
@@ -52,7 +52,7 @@ public:
 	 * @param r 矩形.
 	 * @param t 瓦片.
 	 */
-	void drawRect(Rect2i r, const Tile& t);
+	void drawRect(const Rect2i& r, const Tile& t);
 
 	/**
 	 * @brief 绘制实心矩形.
@@ -60,7 +60,7 @@ public:
 	 * @param r 矩形.
 	 * @param t 瓦片.
 	 */
-	void fillRect(Rect2i r, const Tile& t);
+	void fillRect(const Rect2i& r, const Tile& t);
 
 	/**
 	 * @brief 绘制圆形.
@@ -69,7 +69,7 @@ public:
 	 * @param radius 半径.
 	 * @param t 瓦片.
 	 */
-	void drawCycle(Point2i p, short radius, const Tile& t);
+	void drawCycle(const Point2i& p, short radius, const Tile& t);
 
 	/**
 	 * @brief 绘制字符串.

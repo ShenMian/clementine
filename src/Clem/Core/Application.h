@@ -92,7 +92,7 @@ public:
 private:
 	void initPlatform();
 
-	void updateInput();
+	void updateInput(long dt);
 	void updateScene(long dt);
 	void renderScene(long dt);
 	void updateFrameRate(long dt);
@@ -101,6 +101,7 @@ private:
 	bool quit   = true;
 	bool paused = false;
 
+	long msPerInput  = 16;
 	long msPerUpdate = 16;
 	long msPerRender = 16;
 

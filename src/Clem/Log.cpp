@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Log.h"
+#include "Clem/Profiler.h"
 #include "spdlog/sinks/rotating_file_sink.h"
 
 using namespace spdlog;
@@ -10,6 +11,8 @@ static std::shared_ptr<logger> coreLogger;
 
 void Log::init()
 {
+	PROFILE_FUNC();
+
 	try
 	{
 		coreLogger = rotating_logger_mt("engine", "logs/clem.log", 1024 * 1024 * 5, 3);
@@ -26,6 +29,8 @@ void Log::init()
 
 void Log::deinit()
 {
+	PROFILE_FUNC();
+
 	coreLogger->flush();
 }
 

@@ -48,6 +48,8 @@ struct WaveData
 
 Audio::id_t Audio::loadSound(const path& path)
 {
+	PROFILE_FUNC();
+
 	if(!exists(path))
 		CLEM_CORE_FATAL("file does not exist: '{}'", path.string());
 

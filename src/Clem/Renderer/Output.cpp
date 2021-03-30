@@ -18,15 +18,11 @@ Output& Output::get()
 
 void Output::update()
 {
-	PROFILE_FUNC();
-
 	front->output();
 }
 
 void Output::swapBuffers()
 {
-	PROFILE_FUNC();
-
 	auto t = front;
 	front  = back;
 	back   = t;

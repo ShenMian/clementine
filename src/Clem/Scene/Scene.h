@@ -31,6 +31,8 @@ public:
 	void render(float dt);
 
 private:
+	void renderSprites();
+
 	entt::registry registry;
 
 	friend class Entity;

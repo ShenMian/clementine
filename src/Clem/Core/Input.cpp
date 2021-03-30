@@ -6,6 +6,7 @@
 #include "Clem/Event/KeyEvent.h"
 #include "Clem/Event/MouseEvent.h"
 #include "Clem/Platform.h"
+#include "Clem/Profiler.h"
 #include "Keyboard.h"
 #include "Mouse.h"
 
@@ -13,6 +14,7 @@
 
 void Input::update()
 {
+	PROFILE_FUNC();
 }
 
 #endif
@@ -21,6 +23,8 @@ void Input::update()
 
 void Input::update()
 {
+	PROFILE_FUNC();
+
 	static auto&        dispatcher = EventDispatcher::getInstance();
 	static HANDLE       hIn        = GetStdHandle(STD_INPUT_HANDLE);
 	static INPUT_RECORD rec;
@@ -30,8 +34,8 @@ void Input::update()
 	GetNumberOfConsoleInputEvents(hIn, &numOfEvents);
 	if(numOfEvents < 1)
 		return;
-	
-	ReadConsoleInput(hIn, &rec, 1, &res); // 堵塞
+
+	ReadConsoleInput(hIn, &rec, 1, &res);
 	// PeekConsoleInput(hIn, &rec, 1, &res);
 
 	KEY_EVENT_RECORD keyEvent;

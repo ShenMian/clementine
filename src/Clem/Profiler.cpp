@@ -5,6 +5,7 @@
 #include "Log.h"
 #include <cassert>
 #include <iomanip>
+#include "Profile\Profiler.h"
 
 using namespace std::chrono;
 
@@ -74,6 +75,7 @@ void Instrumentor::writeFooter()
 {
 	file << "]}";
 }
+
 
 InstrumentationCounter::InstrumentationCounter(const char* name)
 		: name(name), stopped(false), begin(std::chrono::steady_clock::now())

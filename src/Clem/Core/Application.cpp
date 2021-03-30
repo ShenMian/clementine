@@ -84,7 +84,7 @@ void Application::run()
 		long dt      = current - previous;
 		previous     = current;
 
-		updateInput();
+		updateInput(dt);
 		updateScene(dt);
 		renderScene(dt);
 
@@ -101,16 +101,23 @@ void Application::run()
 	CLEM_CORE_INFO("main loop stoped");
 }
 
-void Application::updateInput()
+void Application::updateInput(long dt)
 {
-	Input::update();
+	static long lag = 0;
+
+	lag += dt;
+	if(lag >= msPerInput)
+	{
+		Input::update();
+		lag = 0;
+	}
 }
 
 void Application::updateScene(long dt)
 {
+	static long lag   = 0;
 	auto& scene = scenes.back();
 
-	static long lag = 0;
 	lag += dt;
 	while(lag >= msPerUpdate)
 	{
@@ -121,9 +128,9 @@ void Application::updateScene(long dt)
 
 void Application::renderScene(long dt)
 {
+	static long lag   = 0;
 	auto& scene = scenes.back();
 
-	static long lag = 0;
 	lag += dt;
 	while(lag >= msPerRender)
 	{
@@ -136,6 +143,7 @@ void Application::renderScene(long dt)
 void Application::updateFrameRate(long dt)
 {
 	static long fpsLag = 0;
+
 	fpsLag += dt;
 	if(fpsLag >= 1000)
 	{

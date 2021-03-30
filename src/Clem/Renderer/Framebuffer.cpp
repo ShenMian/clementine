@@ -21,7 +21,7 @@ void Framebuffer::drawPoint(int x, int y, const Tile& t)
 	drawPoint({x, y}, t);
 }
 
-void Framebuffer::drawLine(Point2i a, Point2i b, const Tile& t)
+void Framebuffer::drawLine(const Point2i& a, const Point2i& b, const Tile& t)
 {
 	auto xDis   = b.x - a.x + 1;
 	auto yDis   = b.y - a.y + 1;
@@ -38,7 +38,7 @@ void Framebuffer::drawLine(Point2i a, Point2i b, const Tile& t)
 	}
 }
 
-void Framebuffer::drawRect(Rect2i r, const Tile& t)
+void Framebuffer::drawRect(const Rect2i& r, const Tile& t)
 {
 	for(int x = r.left(); x <= r.right(); x++)
 	{
@@ -52,14 +52,14 @@ void Framebuffer::drawRect(Rect2i r, const Tile& t)
 	}
 }
 
-void Framebuffer::fillRect(Rect2i r, const Tile& t)
+void Framebuffer::fillRect(const Rect2i& r, const Tile& t)
 {
 	for(int y = 0; y < r.size.y; y++)
 		for(int x = 0; x < r.size.x; x++)
 			drawPoint(r.origin.x + x, r.origin.y + y, t);
 }
 
-void Framebuffer::drawCycle(Point2i c, short r, const Tile& t)
+void Framebuffer::drawCycle(const Point2i& c, short r, const Tile& t)
 {
 	for(int x = 0; x <= r; x++)
 	{
@@ -79,10 +79,10 @@ void Framebuffer::drawCycle(Point2i c, short r, const Tile& t)
 	}
 }
 
-void Framebuffer::drawString(const Point2i& pos, std::wstring str)
+void Framebuffer::drawString(const Point2i& pos, std::wstring str, Color c)
 {
 	for(int i = 0; i < str.size(); i++)
-		drawPoint(pos.x + i, pos.y, Tile(str[i]));
+		drawPoint(pos.x + i, pos.y, Tile(str[i], c));
 }
 
 void Framebuffer::clear(const Tile& t)
