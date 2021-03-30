@@ -5,7 +5,6 @@
 #include "Log.h"
 #include <cassert>
 #include <iomanip>
-#include "Profile\Profiler.h"
 
 using namespace std::chrono;
 
