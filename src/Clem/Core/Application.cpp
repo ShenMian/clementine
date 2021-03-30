@@ -78,14 +78,13 @@ void Application::run()
 	quit          = false;
 	long previous = getCurrentMillSecond();
 
-	thread.input = std::thread(&Application::updateInput, this);
-
 	while(!quit)
 	{
 		long current = getCurrentMillSecond();
 		long dt      = current - previous;
 		previous     = current;
 
+		updateInput();
 		updateScene(dt);
 		renderScene(dt);
 
@@ -99,18 +98,12 @@ void Application::run()
 		}
 	}
 
-	assert(thread.input.joinable());
-	thread.input.join();
 	CLEM_CORE_INFO("main loop stoped");
 }
 
 void Application::updateInput()
 {
-	while(!quit)
-	{
-		Input::update();
-		sleep_for(milliseconds(16));
-	}
+	Input::update();
 }
 
 void Application::updateScene(long dt)

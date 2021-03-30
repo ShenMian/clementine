@@ -22,18 +22,29 @@ void Input::update()
 void Input::update()
 {
 	static auto&        dispatcher = EventDispatcher::getInstance();
-	static HANDLE       hOut       = GetStdHandle(STD_INPUT_HANDLE);
+	static HANDLE       hIn        = GetStdHandle(STD_INPUT_HANDLE);
 	static INPUT_RECORD rec;
 	static DWORD        res;
-	ReadConsoleInput(hOut, &rec, 1, &res); // 堵塞
+
+	DWORD numOfEvents;
+	GetNumberOfConsoleInputEvents(hIn, &numOfEvents);
+	if(numOfEvents < 1)
+		return;
+	
+	ReadConsoleInput(hIn, &rec, 1, &res); // 堵塞
+	// PeekConsoleInput(hIn, &rec, 1, &res);
+
+	KEY_EVENT_RECORD keyEvent;
+
 	switch(rec.EventType)
 	{
 	case KEY_EVENT:
-		Keyboard::setKeyState((Keyboard::Key)rec.Event.KeyEvent.wVirtualKeyCode, rec.Event.KeyEvent.bKeyDown);
+		keyEvent = rec.Event.KeyEvent;
+		Keyboard::setKeyState((Keyboard::Key)keyEvent.wVirtualKeyCode, keyEvent.bKeyDown);
 		dispatcher.dispatch(
-				KeyEvent(rec.Event.KeyEvent.wVirtualKeyCode,
-								 rec.Event.KeyEvent.bKeyDown,
-								 rec.Event.KeyEvent.wRepeatCount));
+				KeyEvent(keyEvent.wVirtualKeyCode,
+								 keyEvent.bKeyDown,
+								 keyEvent.wRepeatCount));
 		break;
 
 	case MOUSE_EVENT:

@@ -1,7 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "Clem.h"
+#include <Clem.h>
 #include <cassert>
 #include <iostream>
 #include <stdio.h>
@@ -95,7 +95,7 @@ public:
 			{
 				auto& pos  = bats[i].getComponent<Transform>().getPosition();
 				auto& size = bats[i].getComponent<Sprite>().getSize();
-				Rect2 rect(pos, Size2(size.x, size.y));
+				Rect2 rect(pos, Size2((float)size.x, (float)size.y));
 				if(rect.intersectsPoint(ballPos))
 				{
 					if(ballPos.x < 39)
