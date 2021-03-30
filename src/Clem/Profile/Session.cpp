@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Session.h"
+#include "Counter.h"
 
 // TODO: 利用移动语义提高性能
 void Session::addCpuSample(const CpuSample& s)

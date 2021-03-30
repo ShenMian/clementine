@@ -3,10 +3,9 @@
 
 #pragma once
 
+#include "Counter.h"
 #include <string>
 #include <vector>
-
-struct CpuSample;
 
 class Session
 {
@@ -15,6 +14,6 @@ public:
 	void clear();
 
 private:
-	std::string                  name;
-	std::vector<const CpuSample> samples;
+	std::string            name;
+	std::vector<CpuSample> samples;
 };
