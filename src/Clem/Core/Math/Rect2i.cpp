@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Rect2i.h"
+#include <cassert>
 
 Rect2i::Rect2i(const Point2i& o, Size2i s)
 		: origin(o), size(s)
@@ -20,7 +21,7 @@ int Rect2i::top() const
 
 int Rect2i::bottom() const
 {
-	return origin.y + size.y;
+	return origin.y + size.y - 1;
 }
 
 int Rect2i::left() const
@@ -30,7 +31,7 @@ int Rect2i::left() const
 
 int Rect2i::right() const
 {
-	return origin.x + size.x;
+	return origin.x + size.x - 1;
 }
 
 Point2i Rect2i::tl() const

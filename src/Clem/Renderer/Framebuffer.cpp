@@ -40,15 +40,15 @@ void Framebuffer::drawLine(const Point2i& a, const Point2i& b, const Tile& t)
 
 void Framebuffer::drawRect(const Rect2i& r, const Tile& t)
 {
-	for(int x = r.left(); x <= r.right(); x++)
+	for(int x = 0; x < r.size.x; x++)
 	{
-		drawPoint(x, r.top(), t);
-		drawPoint(x, r.bottom(), t);
+		drawPoint(r.origin.x + x, r.top(), t);
+		drawPoint(r.origin.x + x, r.bottom(), t);
 	}
-	for(int y = r.top(); y <= r.bottom(); y++)
+	for(int y = 0; y < r.size.y; y++)
 	{
-		drawPoint(r.left(), y, t);
-		drawPoint(r.right(), y, t);
+		drawPoint(r.left(), r.origin.y + y, t);
+		drawPoint(r.right(), r.origin.y + y, t);
 	}
 }
 
