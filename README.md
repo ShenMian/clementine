@@ -36,7 +36,7 @@ Screenshots
 -----------
 ![Pong](docs/pictures/pong.png)
 ![Minesweeper](docs/pictures/minesweeper.png)
-![](docs/pictures/v0_0_0.png)
+![Sort](docs/pictures/sort.gif)
 ![Profiler](docs/pictures/profiler.png)
 
 Compiling
