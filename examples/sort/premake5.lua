@@ -1,7 +1,7 @@
 -- Copyright 2021 SMS
 -- License(Apache-2.0)
 
-project "Unnamed"
+project "Sort"
   kind "ConsoleApp"
   language "C++"
   cppdialect "C++17"

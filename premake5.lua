@@ -5,7 +5,7 @@ include "thirdparty/premake/solution_items.lua"
 
 workspace "Clementine"
   architecture "x86_64"
-  startproject "Examples"
+  startproject "Sort"
   configurations {"Debug", "Release"}
   flags "MultiProcessorCompile"
 
@@ -40,7 +40,7 @@ include "src"
 group "Examples"
   include "examples/pong"
   include "examples/minesweeper"
-  include "examples/unnamed"
+  include "examples/sort"
 group ""
 
 group "Thirdparty"

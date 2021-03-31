@@ -8,6 +8,8 @@
 
 using namespace std;
 
+// TODO: 由于 Rect 重写, 此部分急需修复
+
 class Pong : public Application
 {
 public:
