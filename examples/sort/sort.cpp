@@ -10,6 +10,11 @@ using namespace std;
 class Sort : public Application
 {
 public:
+	Sort()
+			: Application("Sort")
+	{
+	}
+
 	void init() override
 	{
 		pushScene(scene);
