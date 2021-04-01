@@ -2,10 +2,13 @@
 // License(Apache-2.0)
 
 #include <Clem.h>
+#include <future>
 #include <iostream>
 #include <limits.h>
 
 using namespace std;
+
+// TODO: 输入不再由单独的线程控制, 所以输入触发的部分操作无法正常显示. (如失败和胜利画面)
 
 class Minesweeper : public Application
 {
@@ -108,7 +111,7 @@ public:
 		flags.clear();
 
 		sprite->clear();
-		sprite->drawRect(Rect2i({0, 0}, {board_size.x * 2, board_size.y + 1}), Tile('#'));
+		sprite->drawRect(Rect2i({0, 0}, {board_size.x * 2 + 1, board_size.y + 2}), Tile('#'));
 
 		surplus = board_size.area() - mine_num;
 
@@ -119,8 +122,11 @@ public:
 	{
 		wstring str = L"-=[ You won ]=-";
 		sprite->drawString({(board_size.x * 2 + 1 - (int)str.size()) / 2, board_size.y / 2}, str, Color::yellow);
-		(void)getchar();
-		stop();
+
+		static auto h = async([&]() {
+			(void)getchar();
+			stop();
+		});
 	}
 
 	void lost()
@@ -130,12 +136,15 @@ public:
 		for(int x = 0; x < board_size.x; x++)
 			for(int y = 0; y < board_size.y; y++)
 				if(map[x][y] == '*')
-					sprite->drawPoint(1 + x * 2, 1 + y, Tile('*', Color::red));
+					sprite->drawPoint(x * 2 + 1, y + 1, Tile('*', Color::red));
 
-		wstring str = L"[ Press enter to exit ]";
+		wstring str = L"Press enter to exit";
 		sprite->drawString({(board_size.x * 2 + 1 - (int)str.size()) / 2, 0}, str, Color::red);
-		(void)getchar();
-		stop();
+		
+		static auto h = async([&]() {
+			(void)getchar();
+			stop();
+		});
 	}
 
 	void open(int x, int y)

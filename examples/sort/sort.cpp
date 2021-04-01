@@ -20,7 +20,7 @@ public:
 		pushScene(scene);
 
 		auto figure = scene->createEntity("figure");
-		figure.getComponent<Transform>().setLocalPosition({6, 3});
+		figure.getComponent<Transform>().setLocalPosition({1, 1});
 		sprite = &figure.addComponent<Sprite>(size);
 
 		// 生成随机数
@@ -43,7 +43,7 @@ public:
 					swap(data[i], data[j]);
 					showSwap(i, j);
 				}
-			this_thread::sleep_for(chrono::milliseconds(32));
+			this_thread::sleep_for(chrono::milliseconds(20));
 		}
 		showDone();
 	}
@@ -68,12 +68,12 @@ public:
 				sprite->fillRect(Rect2i({1 * i, size.y - data[i]}, {1, data[i]}), Tile(' ', green));
 			else
 				sprite->fillRect(Rect2i({1 * i, size.y - data[i]}, {1, data[i]}), Tile(' ', red));
-			this_thread::sleep_for(chrono::milliseconds(16));
+			this_thread::sleep_for(chrono::milliseconds(8));
 		}
 	}
 
 private:
-	Size2i            size = {60, 10};
+	Size2i size = {118, 28};
 	vector<int>       data;
 	Sprite*           sprite;
 	Random            random;

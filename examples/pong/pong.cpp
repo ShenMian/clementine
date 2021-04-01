@@ -8,8 +8,6 @@
 
 using namespace std;
 
-// TODO: 由于 Rect 重写, 此部分急需修复
-
 class Pong : public Application
 {
 public:
@@ -157,7 +155,7 @@ public:
 		// 7. 创建场景中的其他元素
 		auto  board       = scene->createEntity("board");
 		auto& boardSprite = board.addComponent<Sprite>(Size2(80, 25));
-		boardSprite.drawRect(Rect2i({0, 0}, {79, 24}), Tile('#'));
+		boardSprite.drawRect(Rect2i({0, 0}, {80, 25}), Tile('#'));
 		boardSprite.fillRect(Rect2i({39, 1}, {2, 23}), Tile('.', Color::green));
 		board.addComponent<Script>().onUpdate = [&](float dt) {
 			boardSprite.drawString({34, 2}, to_wstring(player_score));
