@@ -27,7 +27,7 @@ public:
 	void addForce(const Vector2& force);
 
 private:
-	float   mass = 0.0f;
+	float   mass = 1.0f;
 	Vector2 acceleration;
 };
 

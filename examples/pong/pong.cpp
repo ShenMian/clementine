@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include <Clem.h>
+#include <future>
 #include <cassert>
 #include <iostream>
 #include <stdio.h>
@@ -167,7 +168,13 @@ public:
 	void resetBall()
 	{
 		scene->getEntityByTag("ball").getComponent<Transform>().setLocalPosition({39, 12});
-		scene->getEntityByTag("ball").getComponent<Rigidbody>().velocity = Vector2::right * ball_speed;
+		scene->getEntityByTag("ball").getComponent<Rigidbody>().velocity = Vector2::zero;
+		
+		static future<void> h;
+		h = async([&]() {
+			this_thread::sleep_for(chrono::seconds(3));
+			scene->getEntityByTag("ball").getComponent<Rigidbody>().velocity = Vector2::right * ball_speed;
+		});
 	}
 
 	// 重置 bat 的位置

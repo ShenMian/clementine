@@ -4,7 +4,6 @@
 #include "Audio.h"
 #include "Clem/Log.h"
 #include "Clem/Profiler.h"
-#include <algorithm>
 #include <cassert>
 #include <fstream>
 #include <stdint.h>
@@ -21,17 +20,64 @@ Audio& Audio::get()
 	return instance;
 }
 
+Audio::id_t Audio::loadSound(const path& path)
+{
+	PROFILE_FUNC();
+
+	if(!exists(path))
+		CLEM_CORE_FATAL("file does not exist: '{}'", path.string());
+
+	auto fileName = path.filename().string();
+	auto fileFormat = fileName.substr(fileName.find_last_of('.'));
+
+	ALenum         format;
+	ALsizei        size;
+	ALsizei        frequency;
+	unsigned char* data;
+
+	if(fileFormat == ".wav")
+		loadWav(path, format, data, size, frequency);
+	else
+		CLEM_CORE_FATAL("unsupported file format: '{}'", fileFormat);
+
+	id_t id;
+	alGenBuffers(1, &id);
+	alBufferData(id, format, (void*)data, size, frequency);
+	assert(alGetError() == AL_NO_ERROR);
+
+	delete[] data;
+
+	sounds.push_back(id);
+
+	return id;
+}
+
+bool Audio::unloadSound(id_t id)
+{
+	PROFILE_FUNC();
+
+	auto it = std::find(sounds.begin(), sounds.end(), id);
+	if(it == sounds.end())
+	{
+		alDeleteBuffers(1, &id);
+		sounds.erase(it);
+		return true;
+	}
+	else
+		return false;
+}
+
 struct RiffHeader
 {
 	char    id[4];     // 资源交换文件标志, "RIFF"
 	int32_t size;      // 文件总大小
-	char    format[4]; // WAV文件标志
+	char    format[4]; // WAV 文件标志
 };
 
 struct WaveFormat
 {
-	char    id[4]; // 波形格式标志, "WAVE"
-	int32_t size;
+	char    id[4];         // 波形格式标志, "WAVE"
+	int32_t size;          // 大小
 	int16_t audioFormat;   // 音频格式, 线性 PCM 编码
 	int16_t numChannels;   // 声道数
 	int32_t sampleRate;    // 采样率, Hz
@@ -46,13 +92,8 @@ struct WaveData
 	int32_t size;
 };
 
-Audio::id_t Audio::loadSound(const path& path)
+void Audio::loadWav(const path& path, ALenum& format, unsigned char*& data, ALsizei& size, ALsizei& frequency)
 {
-	PROFILE_FUNC();
-
-	if(!exists(path))
-		CLEM_CORE_FATAL("file does not exist: '{}'", path.string());
-
 	std::ifstream file(path, std::ios::binary);
 	if(!file.is_open())
 		CLEM_CORE_FATAL("the file could not be opened: '{}'", path.string());
@@ -95,41 +136,9 @@ Audio::id_t Audio::loadSound(const path& path)
 	file.seekg(-4, std::ios::cur);
 	file.read((char*)&waveData, sizeof(waveData));
 
-	/*while(true)
-	{
-		char id[5] = {'\0'};
-
-		file.read(id, 4);
-
-		if(strcmp(id, "data") == 0)
-		{
-			file.seekg(-4, std::ios::cur);
-			break;
-		}
-		else if(strcmp(id, "LIST") == 0)
-			file.seekg(0x1E, std::ios::cur); // 格式转换信息
-	}
-
-	file.read((char*)&waveData, sizeof(waveData));*/
-	
-	/*if(waveFormat.id[0] != 'f' ||
-		 waveFormat.id[1] != 'm' ||
-		 waveFormat.id[2] != 't' ||
-		 waveFormat.id[3] != ' ')
-		CLEM_CORE_CRITICAL("invalid WAVE format: '{}'", path.string());
-
-	if(waveFormat.size > 16)
-		file.seekg(sizeof(short), std::ios::cur);*/
-
-	/*if(waveData.id[0] != 'd' ||
-		 waveData.id[1] != 'a' ||
-		 waveData.id[2] != 't' ||
-		 waveData.id[3] != 'a')
-		CLEM_CORE_CRITICAL("invalid WAVE.DATA header: '{}'", path.string());*/
-
- 	ALenum  format    = 0;
-	ALsizei size      = waveData.size;
-	ALsizei frequency = waveFormat.sampleRate;
+	format    = 0;
+	size      = waveData.size;
+	frequency = waveFormat.sampleRate;
 
 	if(waveFormat.numChannels == 1)
 	{
@@ -148,34 +157,10 @@ Audio::id_t Audio::loadSound(const path& path)
 	if(format == 0)
 		CLEM_CORE_FATAL("invalid WAVE format: '{}'", path.string());
 
-	auto data = new unsigned char[size];
+	data = new unsigned char[size];
+
 	file.read((char*)data, size);
-
-	id_t id;
-
-	alGenBuffers(1, &id);
-	alBufferData(id, format, (void*)data, size, frequency);
-	assert(alGetError() == AL_NO_ERROR);
-
-	delete[] data;
 	file.close();
-
-	sounds.push_back(id);
-
-	return id;
-}
-
-bool Audio::unloadSound(id_t id)
-{
-	auto it = std::find(sounds.begin(), sounds.end(), id);
-	if(it == sounds.end())
-	{
-		alDeleteBuffers(1, &id);
-		sounds.erase(it);
-		return true;
-	}
-	else
-		return false;
 }
 
 void Audio::init()

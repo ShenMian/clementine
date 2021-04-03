@@ -5,5 +5,5 @@
 
 void Rigidbody::addForce(const Vector2& f)
 {
-	acceleration += f;
+	acceleration += f / mass;
 }

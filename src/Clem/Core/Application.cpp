@@ -66,6 +66,8 @@ Application::Application(const string& name)
 
 Application::~Application()
 {
+	PROFILE_FUNC();
+
 	Input::deinit();
 	Audio::deinit();
 	Log::deinit();
