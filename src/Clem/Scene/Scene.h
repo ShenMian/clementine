@@ -20,8 +20,7 @@ class Entity;
 class Scene
 {
 public:
-	Entity createEntity();
-	Entity createEntity(const std::string& tag);
+	Entity createEntity(const std::string& tag = "");
 
 	Entity getEntityByTag(const std::string& tag);
 

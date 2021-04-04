@@ -12,6 +12,9 @@ project "Clementine"
 
   files {"**.cpp", "**.h", "**.inl", "premake5.lua", "CMakeLists.txt"}
 
+  filter "system:windows"
+    links "xinput"
+
   includedirs {
     ".",
     "%{thirdparty.sdl}/include",

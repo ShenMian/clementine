@@ -18,16 +18,10 @@
 
 using std::string;
 
-Entity Scene::createEntity()
+Entity Scene::createEntity(const string& tag)
 {
 	auto e = Entity(registry.create(), this);
 	e.addComponent<Transform>();
-	return e;
-}
-
-Entity Scene::createEntity(const string& tag)
-{
-	auto e = createEntity();
 	e.addComponent<Tag>(tag);
 	return e;
 }

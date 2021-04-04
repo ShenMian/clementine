@@ -41,6 +41,7 @@ group "Examples"
   include "examples/pong"
   include "examples/minesweeper"
   include "examples/sort"
+  include "examples/gamepad"
 group ""
 
 group "Thirdparty"

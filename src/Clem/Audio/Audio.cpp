@@ -99,7 +99,7 @@ void Audio::loadWav(const path& path, ALenum& format, unsigned char*& data, ALsi
 		CLEM_CORE_FATAL("the file could not be opened: '{}'", path.string());
 
 	RiffHeader riffHeader;
-	file.read((char*)&riffHeader, sizeof(riffHeader));
+	file.read((char*)&riffHeader, sizeof(RiffHeader));
 
 	if((riffHeader.id[0] != 'R' ||
 			riffHeader.id[1] != 'I' ||
@@ -114,7 +114,7 @@ void Audio::loadWav(const path& path, ALenum& format, unsigned char*& data, ALsi
 	WaveFormat waveFormat;
 	WaveData   waveData;
 
-	file.read((char*)&waveFormat, sizeof(waveFormat));
+	file.read((char*)&waveFormat, sizeof(WaveFormat));
 
 	if(waveFormat.size > 16)
 		file.seekg(2, std::ios::cur);
@@ -134,7 +134,7 @@ void Audio::loadWav(const path& path, ALenum& format, unsigned char*& data, ALsi
 	assert(strcmp(headId, "data") == 0);
 
 	file.seekg(-4, std::ios::cur);
-	file.read((char*)&waveData, sizeof(waveData));
+	file.read((char*)&waveData, sizeof(WaveData));
 
 	format    = 0;
 	size      = waveData.size;

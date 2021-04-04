@@ -8,7 +8,7 @@
 
 using namespace std;
 
-// TODO: 输入不再由单独的线程控制, 所以输入触发的部分操作无法正常显示. (如失败和胜利画面)
+// TODO: UI: 剩余雷数, 计时
 
 class Minesweeper : public Application
 {
@@ -24,7 +24,7 @@ public:
 
 		opening = audio.loadSound("assets/opening.wav");
 		explode = audio.loadSound("assets/explode.wav");
-		source.setVolume(0.3);
+		source.setVolume(0.3f);
 
 		// TODO: UI
 		puts("/--[Level]--\\\n"

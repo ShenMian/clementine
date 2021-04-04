@@ -6,3 +6,9 @@
 
 // Math
 #include "Math/Math.h"
+
+// Input
+#include "Input.h"
+#include "Keyboard.h"
+#include "Mouse.h"
+#include "Gamepad.h"

@@ -9,6 +9,8 @@
 
 using namespace std;
 
+// TODO: 碰撞检测: 乒乓球反弹, 防止球拍出界
+
 class Pong : public Application
 {
 public:

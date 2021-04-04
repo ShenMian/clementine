@@ -20,7 +20,12 @@ Vector2::Vector2(float x, float y)
 
 float Vector2::size() const
 {
-	return std::sqrt(sizeSquared());
+	return std::sqrt(x * x + y * y);
+}
+
+float Vector2::magnitude() const
+{
+	return std::sqrt(x * x + y * y);
 }
 
 float Vector2::sizeSquared() const

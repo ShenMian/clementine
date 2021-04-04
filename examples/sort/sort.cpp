@@ -7,6 +7,8 @@
 
 using namespace std;
 
+// TODO: 双缓冲
+
 class Sort : public Application
 {
 public:
@@ -19,9 +21,9 @@ public:
 	{
 		pushScene(scene);
 
-		auto figure = scene->createEntity("figure");
-		figure.getComponent<Transform>().setLocalPosition({1, 1});
-		sprite = &figure.addComponent<Sprite>(size);
+		auto entity = scene->createEntity();
+		entity.getComponent<Transform>().setLocalPosition({1, 1});
+		sprite = &entity.addComponent<Sprite>(size);
 
 		// 生成随机数
 		for(int i = 0; i < size.x; i++)
@@ -73,9 +75,9 @@ public:
 	}
 
 private:
-	Size2i size = {118, 28};
+	Size2i            size = {118, 28};
 	vector<int>       data;
-	Sprite*           sprite;
+	Sprite*           sprite = nullptr;
 	Random            random;
 	Color             white = Color(Color::white, Color::white);
 	Color             green = Color(Color::green, Color::green);
