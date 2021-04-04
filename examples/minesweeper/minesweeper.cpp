@@ -8,7 +8,8 @@
 
 using namespace std;
 
-// TODO: UI: 剩余雷数, 计时
+// TODO: UI: 剩余雷数, 计时, 开始菜单(难度选择)
+//       先揭开第一个方格再生成地雷, 防止第一次就触碰到地雷
 
 class Minesweeper : public Application
 {
@@ -77,10 +78,10 @@ public:
 			}
 		});
 
-		// BUG
-		/*auto ui    = scene->createEntityWithTag("info");
-		ui.addComponent<Sprite>(Size2(15, board_size.y + 2));
-		ui.getComponent<Transform>().position = Point2(board_size.x * 2 + 2, 0);
+		/*auto ui = scene->createEntity("info");
+		ui.addComponent<Sprite>(Size2i(15, board_size.y + 2));
+		// BUG: 其他实体的组件会被释放
+		ui.getComponent<Transform>().setLocalPosition(Point2((float)board_size.x * 2 + 2, 0));
 
 		ui.addComponent<Script>().onUpdate = [&](float) {
 			auto& s = scene->getEntityByTag("info").getComponent<Sprite>();

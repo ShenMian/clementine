@@ -10,14 +10,14 @@ class Window
 {
 public:
 	/**
-	 * @brief 获取终端窗口大小.
-	 */
-	static Size2i getSize();
-
-	/**
 	 * @brief 设置终端窗口标题.
 	 *
 	 * @warn Windows下此函数性能不稳定, 不应该频繁调用
 	 */
 	static void setTitle(const std::string& title);
+
+	/**
+	 * @brief 获取终端窗口大小.
+	 */
+	static Size2i getSize();
 };

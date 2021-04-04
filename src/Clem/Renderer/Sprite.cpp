@@ -3,6 +3,7 @@
 
 #include "Sprite.h"
 #include "Clem/Core/Math/Rect2i.h"
+#include "Clem/Log.h"
 #include <cmath>
 #include <fstream>
 
@@ -15,6 +16,11 @@ Sprite::Sprite(const Size2i& size)
 
 void Sprite::drawPoint(int x, int y, const Tile& t)
 {
+	if(size.area() == 0)
+	{
+		CLEM_CORE_WARN("try to draw something when the sprite size is zero");
+		assert(false); // TODO: debug 用
+	}
 	drawPoint({x, y}, t);
 }
 

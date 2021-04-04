@@ -6,14 +6,11 @@
 
 using namespace std;
 
-namespace example
-{
-
 class GamepadInput : public Application
 {
 public:
 	GamepadInput()
-			: Application("Input")
+			: Application("Gamepad")
 	{
 	}
 
@@ -126,9 +123,7 @@ private:
 	shared_ptr<Scene> scene = make_shared<Scene>();
 };
 
-} // namespace example
-
 Application* CreateApplication()
 {
-	return new example::GamepadInput;
+	return new GamepadInput;
 }

@@ -17,16 +17,27 @@ public:
 
 	void update();
 
+	/**
+	 * @brief 获取摇杆状态.
+	 */
 	const Vector2& get(Thumb t) const;
-	bool           get(Button b) const;
-	uint8_t        get(Trigger t) const;
 
 	/**
-	* @brief 设置震动反馈.
-	* 
-	* @param left  左马达转速.
-	* @param right 右马达转速.
-	*/
+	 * @brief 获取按键状态.
+	 */
+	bool get(Button b) const;
+
+	/**
+	 * @brief 获取线性按键状态.
+	 */
+	uint8_t get(Trigger t) const;
+
+	/**
+	 * @brief 设置震动反馈.
+	 * 
+	 * @param left  左马达转速.
+	 * @param right 右马达转速.
+	 */
 	void setVibration(uint16_t left, uint16_t right);
 
 	bool isConnected() const;

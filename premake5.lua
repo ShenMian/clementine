@@ -42,6 +42,7 @@ group "Examples"
   include "examples/minesweeper"
   include "examples/sort"
   include "examples/gamepad"
+  include "examples/2048"
 group ""
 
 group "Thirdparty"

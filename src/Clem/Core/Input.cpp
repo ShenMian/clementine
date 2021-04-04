@@ -16,7 +16,10 @@ void Input::update()
 {
 	PROFILE_FUNC();
 
-	getchar();
+	char ch = -1;
+	ch = getchar();
+	if(ch == -1)
+		return;
 }
 
 #include <unistd.h>
