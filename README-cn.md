@@ -37,6 +37,7 @@
 ![Pong](docs/pictures/pong.png)
 ![Minesweeper](docs/pictures/minesweeper.png)
 ![Sort](docs/pictures/sort.gif)
+![Gamepad](docs/pictures/gamepad.gif)
 ![Profiler](docs/pictures/profiler.png)
 
 编译
