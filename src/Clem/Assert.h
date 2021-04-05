@@ -32,4 +32,6 @@ public:
 
 	static void isNull(void* expr, const char*, unsigned int);
 	static void isNull(void* expr, const std::string_view& msg, const char*, unsigned int);
+
+	Assert() = delete;
 };

@@ -3,7 +3,6 @@
 
 #include "Audio.h"
 #include "Clem.h"
-#include <cassert>
 #include <fstream>
 #include <stdint.h>
 
@@ -22,11 +21,10 @@ Audio& Audio::get()
 Audio::id_t Audio::loadSound(const path& path)
 {
 	PROFILE_FUNC();
+	
+	Assert::isTrue(exists(path), fmt::format("file does not exist: '{}'", path.string()), CALL_INFO);
 
-	if(!exists(path))
-		CLEM_CORE_FATAL("file does not exist: '{}'", path.string());
-
-	auto fileName = path.filename().string();
+	auto fileName   = path.filename().string();
 	auto fileFormat = fileName.substr(fileName.find_last_of('.'));
 
 	ALenum         format;
@@ -94,8 +92,7 @@ struct WaveData
 void Audio::loadWav(const path& path, ALenum& format, unsigned char*& data, ALsizei& size, ALsizei& frequency)
 {
 	std::ifstream file(path, std::ios::binary);
-	if(!file.is_open())
-		CLEM_CORE_FATAL("the file could not be opened: '{}'", path.string());
+	Assert::isTrue(file.is_open(), fmt::format("the file could not be opened: '{}'", path.string()), CALL_INFO);
 
 	RiffHeader riffHeader;
 	file.read((char*)&riffHeader, sizeof(RiffHeader));
@@ -123,7 +120,7 @@ void Audio::loadWav(const path& path, ALenum& format, unsigned char*& data, ALsi
 		file.read(headId, 4);
 	}
 
-	assert(strcmp(headId, "data") == 0);
+	Assert::isTrue(strcmp(headId, "data") == 0, CALL_INFO);
 
 	file.seekg(-4, std::ios::cur);
 	file.read((char*)&waveData, sizeof(WaveData));
@@ -146,8 +143,7 @@ void Audio::loadWav(const path& path, ALenum& format, unsigned char*& data, ALsi
 		else if(waveFormat.bitsPerSample == 16)
 			format = AL_FORMAT_STEREO16;
 	}
-	if(format == 0)
-		CLEM_CORE_FATAL("invalid WAVE format: '{}'", path.string());
+	Assert::isTrue(format, fmt::format("invalid WAVE format: '{}'", path.string()), CALL_INFO);
 
 	data = new unsigned char[size];
 
@@ -160,7 +156,7 @@ void Audio::init()
 	PROFILE_FUNC();
 
 	device = alcOpenDevice(nullptr); // 获取默认设备
-	assert(device);
+	Assert::isNotNull(device, "can't open audio device", CALL_INFO);
 	context = alcCreateContext(device, nullptr);
 	alcMakeContextCurrent(context);
 }

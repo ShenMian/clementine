@@ -10,11 +10,11 @@
 class Script : public Component
 {
 public:
-	std::function<void(float)> onUpdate;
+	Script() = default;
 	
 	virtual void update(float dt);
 
-	Script() = default;
+	std::function<void(float)> onUpdate = std::bind(&Script::update, this, std::placeholders::_1);
 };
 
 #endif // !CLEM_COMPONENT_SCRIPT_H_

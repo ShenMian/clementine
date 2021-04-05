@@ -46,6 +46,5 @@ group "Examples"
 group ""
 
 group "Thirdparty"
-  include "thirdparty/sdl"
   include "thirdparty/yaml-cpp"
 group ""

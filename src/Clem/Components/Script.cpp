@@ -5,6 +5,4 @@
 
 void Script::update(float dt)
 {
-	// if(onUpdate)
-	onUpdate(dt);
 }

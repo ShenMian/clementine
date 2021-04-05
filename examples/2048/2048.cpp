@@ -26,6 +26,7 @@ public:
 		pushScene(scene);
 
 		auto& board = scene->createEntity("board");
+		board.getComponent<Transform>().setLocalPosition({3, 1});
 		sprite = &board.addComponent<Sprite>(Size2i(4 * 2, 4));
 
 		start();
@@ -48,18 +49,7 @@ public:
 	{
 		for(int y = 0; y < 4; y++)
 		{
-			int x = y + 1;
-			do
-			{
-				if(map[x][y] && map[x - 1][y] == 0)
-				{
-					map[x - 1][y] = map[x][y];
-					map[x][y]     = 0;
-					x--;
-					continue;
-				}
-				x++;
-			} while(x < 4);
+			;
 		}
 	}
 
