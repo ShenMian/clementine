@@ -2,8 +2,7 @@
 // License(Apache-2.0)
 
 #include "Window.h"
-#include "Platform.h"
-#include "Profiler.h"
+#include "Clem.h"
 #include <cassert>
 #include <cstdio>
 

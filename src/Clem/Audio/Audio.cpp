@@ -2,8 +2,7 @@
 // License(Apache-2.0)
 
 #include "Audio.h"
-#include "Clem/Log.h"
-#include "Clem/Profiler.h"
+#include "Clem.h"
 #include <cassert>
 #include <fstream>
 #include <stdint.h>
@@ -43,7 +42,7 @@ Audio::id_t Audio::loadSound(const path& path)
 	id_t id;
 	alGenBuffers(1, &id);
 	alBufferData(id, format, (void*)data, size, frequency);
-	assert(alGetError() == AL_NO_ERROR);
+	Assert::isTrue(alGetError() == AL_NO_ERROR, CALL_INFO);
 
 	delete[] data;
 

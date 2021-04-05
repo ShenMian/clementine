@@ -5,16 +5,7 @@
 // #include "SDL.h"
 
 #include "Application.h"
-#include "Clem/Assert.h"
-#include "Clem/Audio/Audio.h"
-#include "Clem/Log.h"
-#include "Clem/Platform.h"
-#include "Clem/Profiler.h"
-#include "Clem/Renderer/Cursor.h"
-#include "Clem/Renderer/Output.h"
-#include "Clem/Scene/Scene.h"
-#include "Clem/Window.h"
-#include "Input.h"
+#include "Clem.h"
 #include <clocale>
 #include <csignal>
 
