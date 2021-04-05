@@ -56,6 +56,9 @@ public:
 	operator bool() const;
 	operator id_t() const;
 
+	bool operator==(const Entity&) const;
+	bool operator!=(const Entity&) const;
+
 private:
 	id_t   id    = entt::null;
 	Scene* scene = nullptr;
@@ -70,7 +73,7 @@ template <typename Com, typename... Args>
 Com& Entity::addComponent(Args&&... args)
 {
 	if(hasComponent<Com>())
-		CLEM_CORE_FATAL("add a an existing component '{}' to entity '{}'", typeid(Com).name(), getComponent<Tag>().tag);
+		CLEM_CORE_FATAL("add a an existing component '{}' to entity '{}'", typeid(Com).name(), getComponent<Tag>().string);
 	return scene->registry.emplace<Com>(id, std::forward<Args>(args)...);
 }
 
@@ -78,7 +81,7 @@ template <typename Com>
 void Entity::removeComponent()
 {
 	if(!hasComponent<Com>())
-		CLEM_CORE_FATAL("remove a nonexistent component '{}' from entity '{}'", typeid(Com).name(), getComponent<Tag>().tag);
+		CLEM_CORE_FATAL("remove a nonexistent component '{}' from entity '{}'", typeid(Com).name(), getComponent<Tag>().string);
 	scene->registry.destroy<Com>(id);
 }
 
@@ -86,7 +89,7 @@ template <typename Com>
 Com& Entity::getComponent()
 {
 	if(!hasComponent<Com>())
-		CLEM_CORE_FATAL("get a nonexistent component '{}' from entity '{}'", typeid(Com).name(), getComponent<Tag>().tag);
+		CLEM_CORE_FATAL("get a nonexistent component '{}' from entity '{}'", typeid(Com).name(), getComponent<Tag>().string);
 	return scene->registry.get<Com>(id);
 }
 

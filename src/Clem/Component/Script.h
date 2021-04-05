@@ -10,7 +10,9 @@
 class Script : public Component
 {
 public:
-	std::function<void(float)> onUpdate;
+	std::function<void(float)> onUpdateFunction;
+	
+	virtual void onUpdate(float dt);
 
 	Script() = default;
 };

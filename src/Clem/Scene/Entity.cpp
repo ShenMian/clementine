@@ -29,3 +29,13 @@ Entity::operator id_t() const
 {
 	return id;
 }
+
+bool Entity::operator==(const Entity& e) const
+{
+	return id == e.getId();
+}
+
+bool Entity::operator!=(const Entity& e) const
+{
+	return !(*this == e);
+}

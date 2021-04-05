@@ -39,8 +39,20 @@ public:
 	void moveLeft()
 	{
 		for(int y = 0; y < 4; y++)
-			for(int x = 1; x < 4; x++)
-				;
+		{
+			int x = y + 1;
+			do
+			{
+				if(map[x][y] && map[x - 1][y] == 0)
+				{
+					map[x - 1][y] = map[x][y];
+					map[x][y]     = 0;
+					x--;
+					continue;
+				}
+				x++;
+			} while(x < 4);
+		}
 	}
 
 	void generate(int a, int b)
@@ -60,10 +72,8 @@ public:
 	{
 		for(int x = 0; x < 4; x++)
 			for(int y = 0; y < 4; y++)
-				if(map[x][y])
-					sprite->drawPoint({x * 2, y}, Tile('0' + map[x][y], map[x][y]  % Color::max));
-				else
-					sprite->drawPoint({x * 2, y}, Tile('.', map[x][y] % Color::max));
+				sprite->drawPoint({x * 2, y},
+													Tile(map[x][y] ? '0' + map[x][y] : '.', map[x][y] % Color::max));
 	}
 
 private:

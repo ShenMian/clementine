@@ -57,7 +57,7 @@ public:
 		// 为 bat1 创建一个事件监听器, 监听按键事件
 		EventDispatcher::getInstance().addListener(Event::Type::key, [&](Event* e) {
 			auto  event = dynamic_cast<KeyEvent*>(e);
-			auto& body  = scene->getEntityByTag("bat1").getComponent<Rigidbody>(); // 通过 Tag 组件获取 bat1 实体的 Rigidbody 组件
+			auto& body  = scene->getEntity("bat1").getComponent<Rigidbody>(); // 通过 Tag 组件获取 bat1 实体的 Rigidbody 组件
 			if(event->state == false)
 				body.velocity = Vector2::zero;
 			else if(event->keyCode == KeyCode::W)
@@ -68,9 +68,9 @@ public:
 
 		// Bat2 由AI控制, 不推测路径
 		// 为 bat2 创建一个脚本
-		bat2.addComponent<Script>().onUpdate = [&](float dt) {
-			auto  bat     = scene->getEntityByTag("bat2");
-			auto  ballPos = scene->getEntityByTag("ball").getComponent<Transform>().getLocalPosition();
+		bat2.addComponent<Script>().onUpdateFunction = [&](float) {
+			auto  bat     = scene->getEntity("bat2");
+			auto  ballPos = scene->getEntity("ball").getComponent<Transform>().getLocalPosition();
 			auto& batBody = bat.getComponent<Rigidbody>();
 			auto  batPos  = bat.getComponent<Transform>().getLocalPosition();
 			auto& batSize = bat.getComponent<Sprite>().getSize();
@@ -83,15 +83,15 @@ public:
 		};
 
 		// TODO: 碰撞检测. 碰撞时被回调, 调整随机角度
-		ball.addComponent<Script>().onUpdate = [&](float dt) {
-			auto   ball    = scene->getEntityByTag("ball");
+		ball.addComponent<Script>().onUpdateFunction = [&](float) {
+			auto   ball    = scene->getEntity("ball");
 			auto&  ts      = ball.getComponent<Transform>();
 			auto&  vel     = ball.getComponent<Rigidbody>().velocity;
 			auto&  sprite  = ball.getComponent<Sprite>();
 			auto&  ballPos = ts.getPosition();
 			Entity bats[2];
-			bats[0] = scene->getEntityByTag("bat1");
-			bats[1] = scene->getEntityByTag("bat2");
+			bats[0] = scene->getEntity("bat1");
+			bats[1] = scene->getEntity("bat2");
 
 			for(int i = 0; i < 2; i++)
 			{
@@ -159,7 +159,7 @@ public:
 		auto& boardSprite = board.addComponent<Sprite>(Size2(80, 25));
 		boardSprite.drawRect(Rect2i({0, 0}, {80, 25}), Tile('#'));
 		boardSprite.fillRect(Rect2i({39, 1}, {2, 23}), Tile('.', Color::green));
-		board.addComponent<Script>().onUpdate = [&](float dt) {
+		board.addComponent<Script>().onUpdateFunction = [&](float dt) {
 			boardSprite.drawString({34, 2}, to_wstring(player_score));
 			boardSprite.drawString({44, 2}, to_wstring(ai_score));
 		};
@@ -171,21 +171,21 @@ public:
 	// 重置 ball 的位置
 	void resetBall()
 	{
-		scene->getEntityByTag("ball").getComponent<Transform>().setLocalPosition({39, 12});
-		scene->getEntityByTag("ball").getComponent<Rigidbody>().velocity = Vector2::zero;
+		scene->getEntity("ball").getComponent<Transform>().setLocalPosition({39, 12});
+		scene->getEntity("ball").getComponent<Rigidbody>().velocity = Vector2::zero;
 		
 		static future<void> h;
 		h = async([&]() {
-			this_thread::sleep_for(chrono::seconds(3));
-			scene->getEntityByTag("ball").getComponent<Rigidbody>().velocity = Vector2::right * ball_speed;
+			this_thread::sleep_for(chrono::seconds(2));
+			scene->getEntity("ball").getComponent<Rigidbody>().velocity = Vector2::right * ball_speed;
 		});
 	}
 
 	// 重置 bat 的位置
 	void resetBats()
 	{
-		scene->getEntityByTag("bat1").getComponent<Transform>().setLocalPosition({2, 10});
-		scene->getEntityByTag("bat2").getComponent<Transform>().setLocalPosition({77, 10});
+		scene->getEntity("bat1").getComponent<Transform>().setLocalPosition({2, 10});
+		scene->getEntity("bat2").getComponent<Transform>().setLocalPosition({77, 10});
 	}
 
 private:

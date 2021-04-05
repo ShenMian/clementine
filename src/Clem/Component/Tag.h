@@ -12,11 +12,11 @@
 class Tag : public Component
 {
 public:
-	std::string tag;
+	std::string string;
 
 	Tag() = default;
 	Tag(const std::string& tag)
-			: tag(tag)
+			: string(tag)
 	{
 	}
 };

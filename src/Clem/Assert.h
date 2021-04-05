@@ -11,14 +11,6 @@
 #	define breakpoint() __buildin_trap()
 #endif
 
-/*
-#define assert(expr, msg) \
-	if(!(expr))             \
-	{                       \
-		breakpoint();         \
-	}
-*/
-
 #define CALL_INFO __FILE__, __LINE__
 
 /**
