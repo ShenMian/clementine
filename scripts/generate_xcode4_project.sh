@@ -6,4 +6,4 @@
 cd "$( cd "$( dirname "$0"  )" && pwd  )"
 cd ..
 
-./thirdparty/premake/bin/premake5.exe xcode4
+./thirdparty/premake/bin/premake5 xcode4
