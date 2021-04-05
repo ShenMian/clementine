@@ -4,7 +4,7 @@
 #ifndef CLEM_RENDERER_SPRITE_H_
 #define CLEM_RENDERER_SPRITE_H_
 
-#include "Clem/Component/Component.h"
+#include "Clem/Components/Component.h"
 #include "Clem/Core/Math/Math.h"
 #include "Tile.h"
 #include <filesystem>

@@ -2,7 +2,14 @@
 // License(Apache-2.0)
 
 #include "Scene.h"
-#include "Clem.h"
+#include "Clem/Components/Components.h"
+#include "Clem/Log.h"
+#include "Clem/Profiler.h"
+#include "Entity.h"
+
+#include "Clem/Physics/Rigidbody.h"
+#include "Clem/Renderer/Sprite.h"
+#include "Clem/Renderer/Output.h"
 
 using std::string;
 using std::string_view;

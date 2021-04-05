@@ -4,6 +4,9 @@
 // Core
 #include "Clem/Core/Core.h"
 
+// Components
+#include "Clem/Components/Components.h"
+
 // Scene
 #include "Clem/Scene/Entity.h"
 #include "Clem/Scene/Scene.h"
@@ -20,13 +23,7 @@
 #include "Clem/Physics/Collider.h"
 #include "Clem/Physics/Rigidbody.h"
 
-// Component
-#include "Clem/Component/Component.h"
-#include "Clem/Component/Script.h"
-#include "Clem/Component/Tag.h"
-#include "Clem/Component/Transform.h"
-
-// Event
+// Events
 #include "Clem/Events/Event.h"
 #include "Clem/Events/EventDispatcher.h"
 #include "Clem/Events/KeyEvent.h"

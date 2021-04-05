@@ -4,7 +4,7 @@
 #ifndef CLEM_SCENE_ENTITY_H_
 #define CLEM_SCENE_ENTITY_H_
 
-#include "Clem/Component/Tag.h"
+#include "Clem/Components/Tag.h"
 #include "Clem/Core/Math/Math.h"
 #include "Clem/Log.h"
 #include "Scene.h"
@@ -82,7 +82,7 @@ void Entity::removeComponent()
 {
 	if(!hasComponent<Com>())
 		CLEM_CORE_FATAL("remove a nonexistent component '{}' from entity '{}'", typeid(Com).name(), getComponent<Tag>().string);
-	scene->registry.destroy<Com>(id);
+	scene->registry.remove<Com>(id);
 }
 
 template <typename Com>

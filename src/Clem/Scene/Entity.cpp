@@ -30,12 +30,12 @@ Entity::operator id_t() const
 	return id;
 }
 
-bool Entity::operator==(const Entity& e) const
+bool Entity::operator==(const Entity& o) const
 {
-	return id == e.getId();
+	return id == o.getId();
 }
 
-bool Entity::operator!=(const Entity& e) const
+bool Entity::operator!=(const Entity& o) const
 {
-	return !(*this == e);
+	return !(*this == o);
 }

@@ -5,6 +5,14 @@
 
 using namespace std;
 
+class MyScript : public Script
+{
+	void onUpdate(float) override
+	{
+		Assert::isTrue(false, CALL_INFO);
+	}
+};
+
 class Game2048 : public Application
 {
 public:

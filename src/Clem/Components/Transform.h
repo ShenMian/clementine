@@ -4,7 +4,7 @@
 #ifndef CLEM_COMPONENT_TRANSFORM_H_
 #define CLEM_COMPONENT_TRANSFORM_H_
 
-#include "Clem/Component/Component.h"
+#include "Clem/Components/Component.h"
 #include "Clem/Core/Math/Math.h"
 
 class Transform : public Component

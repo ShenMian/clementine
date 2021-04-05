@@ -4,8 +4,8 @@
 /*
 
 #include "ComponentSerializer.h"
-#include "Clem/Component/Tag.h"
-#include "Clem/Component/Transform.h"
+#include "Clem/Components/Tag.h"
+#include "Clem/Components/Transform.h"
 #include "Clem/Physics/Rigidbody.h"
 #include "Clem/Renderer/Sprite.h"
 #include "MathSerializer.h"
