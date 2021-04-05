@@ -3,7 +3,8 @@
 
 #include "Script.h"
 
-void Script::onUpdate(float dt)
+void Script::update(float dt)
 {
-	onUpdateFunction(dt);
+	// if(onUpdate)
+	onUpdate(dt);
 }

@@ -4,7 +4,7 @@
 #pragma once
 
 #include "Clem/Core/Math/Math.h"
-#include "Clem/Renderer/Sprite.h"
+#include "Clem/Rendering/Sprite.h"
 
 // TODO: Entity, Sprite µÄ½áºÏ
 class UIComponent : protected Sprite

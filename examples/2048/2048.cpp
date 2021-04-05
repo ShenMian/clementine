@@ -7,7 +7,7 @@ using namespace std;
 
 class MyScript : public Script
 {
-	void onUpdate(float) override
+	void update(float) override
 	{
 		Assert::isTrue(false, CALL_INFO);
 	}

@@ -5,11 +5,10 @@
 #include "Clem/Components/Components.h"
 #include "Clem/Log.h"
 #include "Clem/Profiler.h"
+#include "Clem/Rendering/Rendering.h"
 #include "Entity.h"
 
 #include "Clem/Physics/Rigidbody.h"
-#include "Clem/Renderer/Sprite.h"
-#include "Clem/Renderer/Output.h"
 
 using std::string;
 using std::string_view;
@@ -62,7 +61,7 @@ void Scene::updateScripts(float dt)
 {
 	auto view = registry.view<Transform, Script>();
 	for(auto [e, t, script] : view.each())
-		script.onUpdate(dt);
+		script.update(dt);
 }
 
 void Scene::updateRigidbodies(float dt)

@@ -68,7 +68,7 @@ public:
 
 		// Bat2 由AI控制, 不推测路径
 		// 为 bat2 创建一个脚本
-		bat2.addComponent<Script>().onUpdateFunction = [&](float) {
+		bat2.addComponent<Script>().onUpdate = [&](float) {
 			auto  bat     = scene->getEntity("bat2");
 			auto  ballPos = scene->getEntity("ball").getComponent<Transform>().getLocalPosition();
 			auto& batBody = bat.getComponent<Rigidbody>();
@@ -83,7 +83,7 @@ public:
 		};
 
 		// TODO: 碰撞检测. 碰撞时被回调, 调整随机角度
-		ball.addComponent<Script>().onUpdateFunction = [&](float) {
+		ball.addComponent<Script>().onUpdate = [&](float) {
 			auto   ball    = scene->getEntity("ball");
 			auto&  ts      = ball.getComponent<Transform>();
 			auto&  vel     = ball.getComponent<Rigidbody>().velocity;
@@ -159,7 +159,7 @@ public:
 		auto& boardSprite = board.addComponent<Sprite>(Size2(80, 25));
 		boardSprite.drawRect(Rect2i({0, 0}, {80, 25}), Tile('#'));
 		boardSprite.fillRect(Rect2i({39, 1}, {2, 23}), Tile('.', Color::green));
-		board.addComponent<Script>().onUpdateFunction = [&](float dt) {
+		board.addComponent<Script>().onUpdate = [&](float dt) {
 			boardSprite.drawString({34, 2}, to_wstring(player_score));
 			boardSprite.drawString({44, 2}, to_wstring(ai_score));
 		};

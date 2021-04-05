@@ -7,7 +7,7 @@
 #include "Clem/Components/Tag.h"
 #include "Clem/Components/Transform.h"
 #include "Clem/Physics/Rigidbody.h"
-#include "Clem/Renderer/Sprite.h"
+#include "Clem/Rendering/Sprite.h"
 #include "MathSerializer.h"
 
 YAML::Emitter& operator<<(YAML::Emitter& o, const Tag& t)

@@ -1,21 +1,13 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-// Core
 #include "Clem/Core/Core.h"
-
-// Components
+#include "Clem/Rendering/Rendering.h"
 #include "Clem/Components/Components.h"
 
 // Scene
 #include "Clem/Scene/Entity.h"
 #include "Clem/Scene/Scene.h"
-
-// Renderer
-#include "Clem/Renderer/Camera.h"
-#include "Clem/Renderer/Framebuffer.h"
-#include "Clem/Renderer/Output.h"
-#include "Clem/Renderer/Sprite.h"
 
 // Physics
 #include "Clem/Physics/BoxCollider.h"
@@ -34,7 +26,6 @@
 #include "Clem/Audio/Source.h"
 
 #include "Clem/Assert.h"
-
 #include "Clem/Log.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
