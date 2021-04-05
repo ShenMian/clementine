@@ -110,6 +110,88 @@ void Framebuffer::drawPoint(const Point2i& p, const Tile& t)
 	buffer[(size_t)p.x + (size_t)p.y * (size_t)size.x] = t;
 }
 
+void setForeColor(uint8_t fore)
+{
+	switch(fore)
+	{
+	case Color::black:
+		printf("\x1b[30m");
+		break;
+
+	case Color::red:
+		printf("\x1b[31m");
+		break;
+
+	case Color::green:
+		printf("\x1b[32m");
+		break;
+
+	case Color::yellow:
+		printf("\x1b[33m");
+		break;
+
+	case Color::blue:
+		printf("\x1b[34m");
+		break;
+
+	case Color::purple:
+		printf("\x1b[35m");
+		break;
+
+	case Color::cyan:
+		printf("\x1b[36m");
+		break;
+
+	case Color::white:
+		printf("\x1b[37m");
+		break;
+
+	default:
+		assert(false);
+	}
+}
+
+void setBackColor(uint8_t back)
+{
+	switch(back)
+	{
+	case Color::black:
+		printf("\x1b[40m");
+		break;
+
+	case Color::red:
+		printf("\x1b[41m");
+		break;
+
+	case Color::green:
+		printf("\x1b[42m");
+		break;
+
+	case Color::yellow:
+		printf("\x1b[43m");
+		break;
+
+	case Color::blue:
+		printf("\x1b[44m");
+		break;
+
+	case Color::purple:
+		printf("\x1b[45m");
+		break;
+
+	case Color::cyan:
+		printf("\x1b[46m");
+		break;
+
+	case Color::white:
+		printf("\x1b[47m");
+		break;
+
+	default:
+		assert(false);
+	}
+}
+
 void Framebuffer::output()
 {
 	PROFILE_FUNC();
@@ -120,83 +202,8 @@ void Framebuffer::output()
 		for(int x = 0; x < size.x; x++)
 		{
 			auto& buf = buffer[x + y * size.x];
-
-			switch(buf.color.fore)
-			{
-			case Color::black:
-				printf("\x1b[30m");
-				break;
-
-			case Color::red:
-				printf("\x1b[31m");
-				break;
-
-			case Color::green:
-				printf("\x1b[32m");
-				break;
-
-			case Color::yellow:
-				printf("\x1b[33m");
-				break;
-
-			case Color::blue:
-				printf("\x1b[34m");
-				break;
-
-			case Color::purple:
-				printf("\x1b[35m");
-				break;
-
-			case Color::cyan:
-				printf("\x1b[36m");
-				break;
-
-			case Color::white:
-				printf("\x1b[37m");
-				break;
-
-			default:
-				assert(false);
-			}
-
-			switch(buf.color.back)
-			{
-			case Color::black:
-				printf("\x1b[40m");
-				break;
-
-			case Color::red:
-				printf("\x1b[41m");
-				break;
-
-			case Color::green:
-				printf("\x1b[42m");
-				break;
-
-			case Color::yellow:
-				printf("\x1b[43m");
-				break;
-
-			case Color::blue:
-				printf("\x1b[44m");
-				break;
-
-			case Color::purple:
-				printf("\x1b[45m");
-				break;
-
-			case Color::cyan:
-				printf("\x1b[46m");
-				break;
-
-			case Color::white:
-				printf("\x1b[47m");
-				break;
-
-			default:
-				assert(false);
-			}
-
+			setForeColor(buf.color.fore);
+			setBackColor(buf.color.back);
 			printf("%C", buf.ch);
 		}
 	}
