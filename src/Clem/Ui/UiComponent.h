@@ -7,7 +7,7 @@
 #include "Clem/Renderer/Sprite.h"
 
 // TODO: Entity, Sprite µÄ½áºÏ
-class UiComponent : protected Sprite
+class UIComponent : protected Sprite
 {
 public:
 	void          setPosition(const Point2& p);

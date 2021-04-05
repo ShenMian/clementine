@@ -37,14 +37,21 @@ public:
 	 */
 	Point2 getOffset() const;
 
-	void       setOwner(Rigidbody* owner);
-	Rigidbody* getOwner() const;
+	/**
+	 * @brief 设置附加到的刚体.
+	 */
+	void setRigidbody(Rigidbody* rb);
+
+	/**
+	 * @brief 获取附加到的刚体.
+	 */
+	Rigidbody* getRigidbody() const;
 
 protected:
 	Point2 offset;
 
 private:
-	Rigidbody* owner = nullptr;
+	Rigidbody* rigidbody = nullptr;
 };
 
 /**

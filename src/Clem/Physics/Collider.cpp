@@ -8,8 +8,7 @@
 
 Point2 Collider::getPosition() const
 {
-	// assert(owner);
-	return Point2(); // owner->getOwner()->getPosition() + offset;
+	return Point2(); // rigidbody->getOwner()->getPosition() + offset;
 }
 
 void Collider::setOffset(Point2 o)
@@ -22,22 +21,12 @@ Point2 Collider::getOffset() const
 	return offset;
 }
 
-/**
- * @brief 设置拥有者
- *
- * @param o 拥有者
- */
-void Collider::setOwner(Rigidbody* o)
+void Collider::setRigidbody(Rigidbody* rb)
 {
-	owner = o;
+	rigidbody = rb;
 }
 
-/**
- * @brief 获取拥有者
- *
- * @return Rigidbody* 拥有者
- */
-Rigidbody* Collider::getOwner() const
+Rigidbody* Collider::getRigidbody() const
 {
-	return owner;
+	return rigidbody;
 }

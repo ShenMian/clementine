@@ -1,9 +1,8 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "UiComponent.h"
+#include "UIComponent.h"
 
-void UiComponent::setPosition(const Point2& p)
+void UIComponent::setPosition(const Point2& p)
 {
-	
 }

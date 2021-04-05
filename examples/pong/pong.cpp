@@ -3,9 +3,8 @@
 
 #include <Clem.h>
 #include <future>
-#include <cassert>
 #include <iostream>
-#include <stdio.h>
+#include <string>
 
 using namespace std;
 
@@ -21,30 +20,32 @@ public:
 
 	void init() override
 	{
-		pushScene(scene); // 将 scene 压入堆栈
+		pushScene(scene);
 
+		// 加载音频文件
 		popSound   = audio.loadSound("assets/pop.wav");
 		scoreSound = audio.loadSound("assets/score.wav");
 
+		// 设置音源方位
 		upSource.setPosition({0, 5});
 		downSource.setPosition({0, -5});
 		leftSource.setPosition({-5, 0});
 		rightSource.setPosition({5, 0});
 
-		// 1. 创建乒乓球 Sprite
+		// 创建乒乓球 Sprite
 		Sprite ballSprite({1, 1});
 		ballSprite.drawPoint({0, 0}, Tile('O', Color::yellow));
 
-		// 2. 创建乒乓球
+		// 创建乒乓球
 		auto ball = scene->createEntity("ball"); // 向 scene 申请创建一个实体 ball
 		ball.addComponent<Sprite>(ballSprite);   // 为 ball 创建一个复制 ballSprite 的 Sprite 组件
 		ball.addComponent<Rigidbody>();          // 为 ball 创建一个 Rigidbody 组件
 
-		// 3. 创建乒乓球球拍 Sprite
+		// 创建乒乓球球拍 Sprite
 		Sprite batSprite({1, 5});
 		batSprite.fillRect(Rect2i({0, 0}, {1, 5}), Tile('#', Color::blue));
 
-		// 4. 创建两个乒乓球拍
+		// 创建两个乒乓球拍
 		auto bat1 = scene->createEntity("bat1");
 		auto bat2 = scene->createEntity("bat2");
 		bat1.addComponent<Sprite>(batSprite);
@@ -52,7 +53,7 @@ public:
 		bat1.addComponent<Rigidbody>();
 		bat2.addComponent<Rigidbody>();
 
-		// 5. Bat1 由玩家控制
+		// Bat1 由玩家控制
 		// 为 bat1 创建一个事件监听器, 监听按键事件
 		EventDispatcher::getInstance().addListener(Event::Type::key, [&](Event* e) {
 			auto  event = dynamic_cast<KeyEvent*>(e);
@@ -65,7 +66,7 @@ public:
 				body.velocity = {0, player_speed};
 		});
 
-		// 6. Bat2 由AI控制, 不推测路径
+		// Bat2 由AI控制, 不推测路径
 		// 为 bat2 创建一个脚本
 		bat2.addComponent<Script>().onUpdate = [&](float dt) {
 			auto  bat     = scene->getEntityByTag("bat2");
@@ -153,7 +154,7 @@ public:
 			vel = vel.normalize() * ball_speed;
 		};
 
-		// 7. 创建场景中的其他元素
+		// 创建场景中的其他元素
 		auto  board       = scene->createEntity("board");
 		auto& boardSprite = board.addComponent<Sprite>(Size2(80, 25));
 		boardSprite.drawRect(Rect2i({0, 0}, {80, 25}), Tile('#'));

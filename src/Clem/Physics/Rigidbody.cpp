@@ -2,8 +2,15 @@
 // License(Apache-2.0)
 
 #include "Rigidbody.h"
+#include <cassert>
 
 void Rigidbody::addForce(const Vector2& f)
 {
 	acceleration += f / mass;
+}
+
+void Rigidbody::setMass(float m)
+{
+	assert(m > 0);
+	mass = m;
 }

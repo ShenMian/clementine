@@ -32,12 +32,11 @@
 #include "Clem/Events/KeyEvent.h"
 #include "Clem/Events/MouseEvent.h"
 
-// UI
-#include "Clem/Ui/Text.h"
-
 // Audio
 #include "Clem/Audio/Audio.h"
 #include "Clem/Audio/Source.h"
+
+#include "Clem/Assert.h"
 
 #include "Clem/Log.h"
 #include "Clem/Platform.h"

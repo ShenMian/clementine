@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "UiComponent.h"
+#include "UIComponent.h"
 #include <string>
 
 /**
@@ -11,7 +11,7 @@
  * @{
  */
 
-class Text : public UiComponent
+class Text : public UIComponent
 {
 public:
 	void setText(std::wstring_view t, Color c = Color());

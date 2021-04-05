@@ -26,6 +26,13 @@ public:
 	 */
 	void addForce(const Vector2& force);
 
+	/**
+	 * @brief 设置质量.
+	 * 
+	 * @param m 质量, kg;
+	 */
+	void setMass(float m);
+
 private:
 	float   mass = 1.0f;
 	Vector2 acceleration;

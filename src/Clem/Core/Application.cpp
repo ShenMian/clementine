@@ -5,6 +5,7 @@
 // #include "SDL.h"
 
 #include "Application.h"
+#include "Clem/Assert.h"
 #include "Clem/Audio/Audio.h"
 #include "Clem/Log.h"
 #include "Clem/Platform.h"
@@ -40,7 +41,7 @@ Application* Application::instance = nullptr;
 
 Application& Application::get()
 {
-	assert(instance);
+	Assert::isNotNull(instance, "get the instance before creating the instance", CALL_INFO);
 	return *instance;
 }
 
@@ -120,7 +121,7 @@ void Application::updateInput(long dt)
 void Application::updateScene(long dt)
 {
 	static long lag   = 0;
-	auto& scene = scenes.back();
+	auto&       scene = scenes.back();
 
 	lag += dt;
 	while(lag >= msPerUpdate)
@@ -133,7 +134,7 @@ void Application::updateScene(long dt)
 void Application::renderScene(long dt)
 {
 	static long lag   = 0;
-	auto& scene = scenes.back();
+	auto&       scene = scenes.back();
 
 	lag += dt;
 	while(lag >= msPerRender)
