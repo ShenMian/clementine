@@ -100,14 +100,7 @@ void Audio::loadWav(const path& path, ALenum& format, unsigned char*& data, ALsi
 	RiffHeader riffHeader;
 	file.read((char*)&riffHeader, sizeof(RiffHeader));
 
-	if((riffHeader.id[0] != 'R' ||
-			riffHeader.id[1] != 'I' ||
-			riffHeader.id[2] != 'F' ||
-			riffHeader.id[3] != 'F') ||
-		 (riffHeader.format[0] != 'W' ||
-			riffHeader.format[1] != 'A' ||
-			riffHeader.format[2] != 'V' ||
-			riffHeader.format[3] != 'E'))
+	if(memcmp(riffHeader.id, "RIFF", 4) != 0 || memcmp(riffHeader.format, "WAVE", 4) != 0)
 		CLEM_CORE_FATAL("invalid RIFF or WAVE Header: '{}'", path.string());
 
 	WaveFormat waveFormat;
