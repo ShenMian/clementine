@@ -9,7 +9,7 @@
 
 using namespace std;
 
-// TODO: 碰撞检测: 乒乓球反弹, 防止球拍出界
+// TODO: 碰撞检测: 乒乓球反弹, 约束球拍
 
 class Pong : public Application
 {
@@ -39,7 +39,6 @@ public:
 		auto ball = scene->createEntity("ball"); // 向 scene 申请创建一个实体 ball
 		ball.addComponent<Sprite>(ballSprite);   // 为 ball 创建一个复制 ballSprite 的 Sprite 组件
 		ball.addComponent<Rigidbody>();          // 为 ball 创建一个 Rigidbody 组件
-		resetBall();
 
 		// 3. 创建乒乓球球拍 Sprite
 		Sprite batSprite({1, 5});
@@ -52,7 +51,6 @@ public:
 		bat2.addComponent<Sprite>(batSprite);
 		bat1.addComponent<Rigidbody>();
 		bat2.addComponent<Rigidbody>();
-		resetBats();
 
 		// 5. Bat1 由玩家控制
 		// 为 bat1 创建一个事件监听器, 监听按键事件
@@ -164,6 +162,9 @@ public:
 			boardSprite.drawString({34, 2}, to_wstring(player_score));
 			boardSprite.drawString({44, 2}, to_wstring(ai_score));
 		};
+
+		resetBall();
+		resetBats();
 	}
 
 	// 重置 ball 的位置

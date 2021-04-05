@@ -27,10 +27,10 @@
 #include "Clem/Component/Transform.h"
 
 // Event
-#include "Clem/Event/Event.h"
-#include "Clem/Event/EventDispatcher.h"
-#include "Clem/Event/KeyEvent.h"
-#include "Clem/Event/MouseEvent.h"
+#include "Clem/Events/Event.h"
+#include "Clem/Events/EventDispatcher.h"
+#include "Clem/Events/KeyEvent.h"
+#include "Clem/Events/MouseEvent.h"
 
 // UI
 #include "Clem/Ui/Text.h"

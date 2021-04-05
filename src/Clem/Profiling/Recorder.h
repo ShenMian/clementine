@@ -17,7 +17,7 @@ struct CpuSample
 	std::thread::id                           threadId;
 };
 
-class Counter
+class Recorder
 {
 	using time_point = std::chrono::time_point<std::chrono::steady_clock>;
 
@@ -27,14 +27,14 @@ public:
 	 *
 	 * @note 被调用时开始计时.
 	 */
-	Counter(std::string_view name, Session& s);
+	Recorder(std::string_view name, Session& s);
 
 	/**
 	 * @brief 析构函数.
 	 *
 	 * @note 被调用时停止计时, 并将样本数据写入所属的 Session.
 	 */
-	virtual ~Counter();
+	virtual ~Recorder();
 
 	/**
 	 * @brief 停止计时.

@@ -2,9 +2,9 @@
 // License(Apache-2.0)
 
 #include "Input.h"
-#include "Clem/Event/EventDispatcher.h"
-#include "Clem/Event/KeyEvent.h"
-#include "Clem/Event/MouseEvent.h"
+#include "Clem/Events/EventDispatcher.h"
+#include "Clem/Events/KeyEvent.h"
+#include "Clem/Events/MouseEvent.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
 #include "Keyboard.h"

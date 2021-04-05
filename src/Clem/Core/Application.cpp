@@ -160,7 +160,7 @@ void Application::updateFrameRate(long dt)
 void Application::stop()
 {
 	if(quit)
-		CLEM_CORE_FATAL("call Application::stop() when the application has stopped");
+		CLEM_CORE_WARN("call Application::stop() when the application has stopped");
 	quit = true;
 }
 

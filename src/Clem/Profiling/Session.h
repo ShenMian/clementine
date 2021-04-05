@@ -3,10 +3,13 @@
 
 #pragma once
 
-#include "Counter.h"
+#include "Recorder.h"
 #include <string>
 #include <vector>
 
+/**
+ * @brief 对样本进行分组.
+ */
 class Session
 {
 public:

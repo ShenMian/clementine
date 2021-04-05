@@ -86,22 +86,21 @@ void Scene::render(float dt)
 {
 	PROFILE_FUNC();
 
-	static auto& renderer = Output::get();
-
-	auto& buf = renderer.getBuffer();
-	buf.clear();
+	static auto& output = Output::get();
+	output.getBuffer().clear();
 
 	renderSprites();
 
-	renderer.swapBuffers();
-	renderer.update();
+	output.swapBuffers();
+	output.update();
 }
 
 void Scene::renderSprites()
 {
 	PROFILE_FUNC();
 
-	auto spriteView = registry.view<Transform, const Sprite>();
-	for(auto [e, t, sprite] : spriteView.each())
-		Output::get().getBuffer().drawSprite(t.getPosition(), sprite);
+	auto& buf  = Output::get().getBuffer();
+	auto  view = registry.view<Transform, const Sprite>();
+	for(auto [e, t, sprite] : view.each())
+		buf.drawSprite(t.getPosition(), sprite);
 }

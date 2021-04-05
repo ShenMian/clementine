@@ -1,25 +1,25 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "Counter.h"
+#include "Recorder.h"
 #include "Session.h"
 
 using namespace std::chrono;
 
-Counter::Counter(std::string_view n, Session& s)
+Recorder::Recorder(std::string_view n, Session& s)
 		: stopped(false), begin(steady_clock::now()), session(s)
 {
 	sample.name     = n;
 	sample.threadId = std::this_thread::get_id();
 }
 
-Counter::~Counter()
+Recorder::~Recorder()
 {
 	if(!stopped)
 		stop();
 }
 
-void Counter::stop()
+void Recorder::stop()
 {
 	stopped        = true;
 	auto end       = steady_clock::now();

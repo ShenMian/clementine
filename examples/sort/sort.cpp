@@ -3,8 +3,6 @@
 
 #include <Clem.h>
 
-#include <iostream>
-
 using namespace std;
 
 // TODO: 双缓冲

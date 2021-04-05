@@ -38,10 +38,10 @@ public:
 	void drawPoint(const Point2i& p, const Tile& t);
 
 	/**
-	 * @brief 绘制连接两点的直线.
+	 * @brief 绘制连接两点的线段.
 	 *
-	 * @param a a点坐标.
-	 * @param b b点坐标.
+	 * @param a 线段端点坐标.
+	 * @param b 线段另一端点坐标.
 	 * @param t 瓦片.
 	 */
 	void drawLine(const Point2i& a, const Point2i& b, const Tile& t);

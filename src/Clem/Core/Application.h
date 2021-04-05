@@ -6,7 +6,6 @@
 #include "Clem/Core/Math/Math.h"
 #include <memory>
 #include <string>
-#include <thread>
 #include <vector>
 
 class Scene;
@@ -107,11 +106,6 @@ private:
 
 	long frameRate = 0;
 	long frames    = 0;
-
-	struct
-	{
-		std::thread input;
-	} thread;
 
 	std::vector<std::shared_ptr<Scene>> scenes;
 
