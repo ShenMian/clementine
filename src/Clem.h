@@ -1,6 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
+#include "Clem/Audio/Audio.h"
 #include "Clem/Core/Core.h"
 #include "Clem/Rendering/Rendering.h"
 #include "Clem/Components/Components.h"
@@ -20,11 +21,6 @@
 #include "Clem/Events/EventDispatcher.h"
 #include "Clem/Events/KeyEvent.h"
 #include "Clem/Events/MouseEvent.h"
-
-// Audio
-#include "Clem/Audio/Audio.h"
-#include "Clem/Audio/Source.h"
-#include "Clem/Audio/Sound.h"
 
 #include "Clem/Assert.h"
 #include "Clem/Log.h"

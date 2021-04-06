@@ -12,11 +12,17 @@
 class Listener
 {
 public:
-	typedef ALuint id_t;
+	/**
+	 * @brief 设置声源位置.
+	 * 
+	 * @param p 坐标.
+	 */
+	static void setPosition(const Point2& p);
 
-	void setPosition(const Point2& p);
-	void setVelocity(const Vector2& v);
-	
-private:
-	id_t id;
+	/**
+	 * @brief 设置声源速度.
+	 * 
+	 * @param v 速度.
+	 */
+	static void setVelocity(const Vector2& v);
 };

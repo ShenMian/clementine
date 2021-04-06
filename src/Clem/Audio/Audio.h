@@ -7,6 +7,10 @@
 #include <vector>
 #include <filesystem>
 
+#include "Listener.h"
+#include "Sound.h"
+#include "Source.h"
+
 class Audio
 {
 public:
