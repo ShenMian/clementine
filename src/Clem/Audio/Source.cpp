@@ -36,17 +36,29 @@ void Source::pause()
 	alSourcePause(id);
 }
 
-void Source::setVolume(float volume)
+void Source::rewind()
 {
-	assert(0 <= volume && volume <= 1);
-	alSourcef(id, AL_GAIN, volume);
+	alSourceRewind(id);
+}
+
+void Source::setVolume(float v)
+{
+	assert(0 <= v && v <= 1);
+	alSourcef(id, AL_GAIN, v);
 	assert(alGetError() == AL_NO_ERROR);
 }
 
-void Source::setPitch(float pitch)
+float Source::getVolume()
 {
-	assert(0.5f <= pitch && pitch <= 2.0f);
-	alSourcef(id, AL_PITCH, pitch);
+	ALfloat v;
+	alGetSourcef(id, AL_GAIN, &v);
+	return v;
+}
+
+void Source::setPitch(float p)
+{
+	assert(0.5f <= p && p <= 2.0f);
+	alSourcef(id, AL_PITCH, p);
 	assert(alGetError() == AL_NO_ERROR);
 }
 
@@ -62,9 +74,23 @@ void Source::setPosition(const Point2& p)
 	assert(alGetError() == AL_NO_ERROR);
 }
 
+Point2 Source::getPosition()
+{
+	ALfloat x, y, z;
+	alGetSource3f(id, AL_POSITION, &x, &y, &z);
+	return Point2(x, y);
+}
+
 void Source::setVelocity(const Vector2& v)
 {
 	alSource3f(id, AL_VELOCITY, v.x, v.y, 0);
 	assert(alGetError() == AL_NO_ERROR);
+}
+
+Vector2 Source::getVelocity()
+{
+	ALfloat x, y, z;
+	alGetSource3f(id, AL_VELOCITY, &x, &y, &z);
+	return Point2(x, y);
 }
 } // namespace clem

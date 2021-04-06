@@ -9,8 +9,8 @@
 using namespace clem;
 using namespace std::filesystem;
 
-ALCdevice*  Audio::device;
-ALCcontext* Audio::context;
+ALCdevice*  Audio::device  = nullptr;
+ALCcontext* Audio::context = nullptr;
 
 Audio& Audio::get()
 {
@@ -22,7 +22,8 @@ void Audio::init()
 {
 	PROFILE_FUNC();
 
-	device = alcOpenDevice(nullptr); // 获取默认设备
+	Assert::isNull(device, "aleardy opened a audio device", CALL_INFO);
+	device = alcOpenDevice(nullptr); // 获取首选设备
 	Assert::isNotNull(device, "can't open audio device", CALL_INFO);
 	context = alcCreateContext(device, nullptr);
 	alcMakeContextCurrent(context);
@@ -35,4 +36,6 @@ void Audio::deinit()
 	alcMakeContextCurrent(nullptr);
 	alcDestroyContext(context);
 	alcCloseDevice(device);
+	context = nullptr;
+	device  = nullptr;
 }

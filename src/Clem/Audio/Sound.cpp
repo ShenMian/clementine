@@ -38,15 +38,15 @@ void Sound::loadFromFile(const path& path)
 
 	ALenum         format;
 	ALsizei        size;
-	ALsizei        frequency;
+	ALsizei        freq;
 	unsigned char* data;
 
 	if(fileFormat == ".wav")
-		loadWavFile(path, format, data, size, frequency);
+		loadWavFile(path, format, data, size, freq);
 	else
 		CLEM_CORE_FATAL("unsupported file format: '{}'", fileFormat);
 
-	alBufferData(id, format, (void*)data, size, frequency);
+	alBufferData(id, format, (void*)data, size, freq);
 	Assert::isTrue(alGetError() == AL_NO_ERROR, CALL_INFO);
 
 	delete[] data;

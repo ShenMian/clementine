@@ -39,11 +39,21 @@ public:
 	void pause();
 
 	/**
+	 * @brief 重绕.
+	 */
+	void rewind();
+
+	/**
 	 * @brief 设置音量.
 	 *
 	 * @param volume 音量. 范围: 0.0 - 1.0.
 	 */
 	void setVolume(float volume);
+
+	/**
+	 * @brief 获取音量.
+	 */
+	float getVolume();
 
 	/**
 	 * @brief 设置速率(倍速).
@@ -65,11 +75,25 @@ public:
 	void setPosition(const Point2& p);
 
 	/**
+	 * @brief 获取声源位置.
+	 *
+	 * @return 声源坐标.
+	 */
+	Point2 getPosition();
+
+	/**
 	 * @brief 设置声源速度.
 	 *
 	 * @param v 速度.
 	 */
 	void setVelocity(const Vector2& v);
+
+	/**
+	 * @brief 获取声源速度.
+	 *
+	 * @return 声源速度.
+	 */
+	Vector2 getVelocity();
 
 private:
 	id_t id;

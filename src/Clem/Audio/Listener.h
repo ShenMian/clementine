@@ -15,17 +15,43 @@ class Listener
 {
 public:
 	/**
-	 * @brief 设置声源位置.
+	 * @brief 设置音量.
 	 *
-	 * @param p 坐标.
+	 * @param volume 音量. 范围: 0.0 - 1.0.
+	 */
+	static void setVolume(float volume);
+
+	/**
+	 * @brief 获取音量.
+	 */
+	static float getVolume();
+
+	/**
+	 * @brief 设置听者位置.
+	 *
+	 * @param p 听者坐标.
 	 */
 	static void setPosition(const Point2& p);
 
 	/**
-	 * @brief 设置声源速度.
+	 * @brief 获取听者位置.
 	 *
-	 * @param v 速度.
+	 * @return 听者坐标.
+	 */
+	static Point2 getPosition();
+
+	/**
+	 * @brief 设置听者速度.
+	 *
+	 * @param v 听者速度.
 	 */
 	static void setVelocity(const Vector2& v);
+
+	/**
+	 * @brief 获取听者速度.
+	 *
+	 * @return 听者速度.
+	 */
+	static Vector2 getVelocity();
 };
 } // namespace clem

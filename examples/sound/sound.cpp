@@ -19,6 +19,8 @@ public:
 	{
 		pushScene(scene);
 
+		auto i = Listener::getPosition();
+
 		scene->createEntity("source").addComponent<Sprite>(Size2i(1, 1)).drawPoint({0, 0}, '*');
 
 		auto& listener = scene->createEntity("listener");
