@@ -4,6 +4,8 @@
 #include "Mouse.h"
 #include <cassert>
 
+namespace clem
+{
 std::unordered_map<Mouse::Key, bool> Mouse::states;
 Point2i                              Mouse::position;
 
@@ -27,3 +29,4 @@ void Mouse::setPosition(Point2i p)
 {
 	position = p;
 }
+} // namespace clem

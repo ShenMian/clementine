@@ -14,7 +14,7 @@ class Script : public Component
 {
 public:
 	Script() = default;
-	
+
 	virtual void update(float dt);
 
 	std::function<void(float)> onUpdate = std::bind(&Script::update, this, std::placeholders::_1);

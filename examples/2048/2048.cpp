@@ -4,6 +4,7 @@
 #include <Clem.h>
 
 using namespace std;
+using namespace clem;
 
 class MyScript : public Script
 {
@@ -81,7 +82,7 @@ private:
 	shared_ptr<Scene> scene = make_shared<Scene>();
 };
 
-Application* CreateApplication()
+Application* clem::CreateApplication()
 {
 	return new Game2048;
 }

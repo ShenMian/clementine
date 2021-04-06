@@ -5,6 +5,8 @@
 #include "Clem/Log.h"
 #include "Scene.h"
 
+namespace clem
+{
 Entity::Entity(id_t id, Scene* scene)
 		: id(id), scene(scene)
 {
@@ -39,3 +41,4 @@ bool Entity::operator!=(const Entity& o) const
 {
 	return !(*this == o);
 }
+} // namespace clem

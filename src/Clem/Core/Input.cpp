@@ -10,6 +10,8 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 
+namespace clem
+{
 #ifdef OS_UNIX
 
 void Input::update()
@@ -17,13 +19,13 @@ void Input::update()
 	PROFILE_FUNC();
 
 	char ch = -1;
-	ch = getchar();
+	ch      = getchar();
 	if(ch == -1)
 		return;
 }
 
-#include <unistd.h>
-#include <termios.h>
+#	include <termios.h>
+#	include <unistd.h>
 
 void Input::init()
 {
@@ -129,3 +131,4 @@ void Input::deinit()
 }
 
 #endif
+} // namespace clem

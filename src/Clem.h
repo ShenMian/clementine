@@ -2,9 +2,9 @@
 // License(Apache-2.0)
 
 #include "Clem/Audio/Audio.h"
+#include "Clem/Components/Components.h"
 #include "Clem/Core/Core.h"
 #include "Clem/Rendering/Rendering.h"
-#include "Clem/Components/Components.h"
 
 // Scene
 #include "Clem/Scene/Entity.h"

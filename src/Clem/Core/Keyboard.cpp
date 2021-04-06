@@ -4,6 +4,8 @@
 #include "Keyboard.h"
 #include <cassert>
 
+namespace clem
+{
 std::unordered_map<Keyboard::Key, bool> Keyboard::states;
 
 bool Keyboard::getKeyState(Key k)
@@ -16,3 +18,4 @@ void Keyboard::setKeyState(Key k, bool s)
 {
 	states[k] = s;
 }
+} // namespace clem

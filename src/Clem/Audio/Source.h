@@ -6,6 +6,8 @@
 #include "AL/alext.h"
 #include "Clem/Core/Math/Math.h"
 
+namespace clem
+{
 class Sound;
 
 /**
@@ -21,7 +23,7 @@ public:
 
 	/**
 	 * @brief 播放声音.
-	 * 
+	 *
 	 * @param s 要播放的声音.
 	 */
 	void play(Sound& s);
@@ -38,14 +40,14 @@ public:
 
 	/**
 	 * @brief 设置音量.
-	 * 
+	 *
 	 * @param volume 音量. 范围: 0.0 - 1.0.
 	 */
 	void setVolume(float volume);
 
 	/**
 	 * @brief 设置速率(倍速).
-	 * 
+	 *
 	 * @param pitch 速率. 范围: 0.5 - 2.0
 	 */
 	void setPitch(float pitch);
@@ -57,14 +59,14 @@ public:
 
 	/**
 	 * @brief 设置声源位置.
-	 * 
+	 *
 	 * @param p 坐标.
 	 */
 	void setPosition(const Point2& p);
 
 	/**
 	 * @brief 设置声源速度.
-	 * 
+	 *
 	 * @param v 速度.
 	 */
 	void setVelocity(const Vector2& v);
@@ -72,3 +74,4 @@ public:
 private:
 	id_t id;
 };
+} // namespace clem

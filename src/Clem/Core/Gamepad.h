@@ -6,6 +6,8 @@
 #include "Clem/Core/Math/Math.h"
 #include <cstdint>
 
+namespace clem
+{
 /**
  * @brief 游戏手柄.
  */
@@ -37,7 +39,7 @@ public:
 
 	/**
 	 * @brief 设置震动反馈.
-	 * 
+	 *
 	 * @param left  左马达转速.
 	 * @param right 右马达转速.
 	 */
@@ -75,7 +77,7 @@ enum class Gamepad::Button : uint16_t
 	DPAD_Down,
 	DPAD_Left,
 	DPAD_Right,
-	
+
 	Shoulder_Left,
 	Shoulder_Right
 };
@@ -85,3 +87,4 @@ enum class Gamepad::Trigger
 	left,
 	right
 };
+} // namespace clem

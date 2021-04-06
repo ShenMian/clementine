@@ -5,6 +5,8 @@
 #include "Sound.h"
 #include <cassert>
 
+namespace clem
+{
 Source::Source()
 {
 	alGenSources(1, &id);
@@ -65,3 +67,4 @@ void Source::setVelocity(const Vector2& v)
 	alSource3f(id, AL_VELOCITY, v.x, v.y, 0);
 	assert(alGetError() == AL_NO_ERROR);
 }
+} // namespace clem

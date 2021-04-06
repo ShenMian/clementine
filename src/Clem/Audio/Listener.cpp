@@ -3,6 +3,8 @@
 
 #include "Listener.h"
 
+namespace clem
+{
 void Listener::setPosition(const Point2& p)
 {
 	alListener3f(AL_POSITION, p.x, p.y, 0);
@@ -12,3 +14,4 @@ void Listener::setVelocity(const Vector2& v)
 {
 	alListener3f(AL_VELOCITY, v.x, v.y, 0);
 }
+} // namespace clem

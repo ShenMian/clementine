@@ -24,7 +24,7 @@ public:
 	 *
 	 * @param r 半径
 	 */
-	void  setRadius(float r);
+	void setRadius(float r);
 
 	/**
 	 * @brief 获取半径

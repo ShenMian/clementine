@@ -19,7 +19,7 @@ using std::this_thread::sleep_for;
 int main(int argc, char* argv[])
 {
 	PROFILE_SESSION_BEGIN("profile.json");
-	auto app = CreateApplication();
+	auto app = clem::CreateApplication();
 	Assert::isNotNull(app, "CreateApplication() returns nullptr", CALL_INFO);
 
 	app->init();
@@ -31,6 +31,8 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
+namespace clem
+{
 Application* Application::instance = nullptr;
 
 Application& Application::get()
@@ -272,10 +274,11 @@ long Application::getCurrentMillSecond() const
 	LARGE_INTEGER freq;
 	BOOL          ret = QueryPerformanceFrequency(&freq); // TODO: 只需执行一次
 	Assert::isTrue(ret != 0, "the installed hardware doesn't supports a high-resolution performance counter", CALL_INFO);
-	
+
 	LARGE_INTEGER time;
 	QueryPerformanceCounter(&time);
 	return (long)(time.QuadPart * 1000 / freq.QuadPart);
 }
 
 #endif
+} // namespace clem

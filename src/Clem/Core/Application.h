@@ -8,6 +8,8 @@
 #include <string>
 #include <vector>
 
+namespace clem
+{
 class Scene;
 
 /**
@@ -125,3 +127,4 @@ Application* CreateApplication();
  * end of Core group
  * @}
  */
+} // namespace clem

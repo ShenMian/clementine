@@ -7,6 +7,8 @@
 using std::string;
 using std::string_view;
 
+namespace clem
+{
 void Assert::isTrue(bool expr, const char* file, unsigned int line)
 {
 	if(expr)
@@ -63,3 +65,4 @@ void Assert::isNull(void* expr, const std::string_view& msg, const char* file, u
 {
 	isTrue(expr == nullptr, msg, file, line);
 }
+} // namespace clem

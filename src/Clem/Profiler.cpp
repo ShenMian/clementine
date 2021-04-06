@@ -75,7 +75,6 @@ void Instrumentor::writeFooter()
 	file << "]}";
 }
 
-
 InstrumentationCounter::InstrumentationCounter(const char* name)
 		: name(name), stopped(false), begin(std::chrono::steady_clock::now())
 {

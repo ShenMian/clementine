@@ -6,6 +6,8 @@
 #include <cassert>
 #include <cmath>
 
+namespace clem
+{
 Gamepad::Gamepad(short id)
 		: deviceId(id)
 {
@@ -46,7 +48,7 @@ bool Gamepad::isConnected() const
 
 #ifdef OS_WIN
 
-#include <Xinput.h>
+#	include <Xinput.h>
 
 constexpr auto leftThumbDeadzone  = XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
 constexpr auto rightThumbDeadzone = XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE;
@@ -165,3 +167,4 @@ void Gamepad::setVibration(uint16_t left, uint16_t right)
 }
 
 #endif
+} // namespace clem

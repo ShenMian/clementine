@@ -7,6 +7,7 @@
 #include <string>
 
 using namespace std;
+using namespace clem;
 
 // TODO: 碰撞检测: 乒乓球反弹, 约束球拍
 
@@ -207,9 +208,7 @@ private:
 	shared_ptr<Scene> scene = make_shared<Scene>();
 };
 
-#if 1
-Application* CreateApplication()
+Application* clem::CreateApplication()
 {
 	return new Pong;
 }
-#endif

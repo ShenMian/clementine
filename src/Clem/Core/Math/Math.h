@@ -3,7 +3,7 @@
 
 #pragma once
 
-constexpr auto pi = 3.14159265358979323846f;
+constexpr auto  pi         = 3.14159265358979323846f;
 constexpr float deg_to_rad = pi / 180;
 constexpr float rad_to_deg = 180 / pi;
 

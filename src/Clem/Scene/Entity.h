@@ -1,8 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_SCENE_ENTITY_H_
-#define CLEM_SCENE_ENTITY_H_
+#pragma once
 
 #include "Clem/Components/Tag.h"
 #include "Clem/Core/Math/Math.h"
@@ -10,6 +9,8 @@
 #include "Scene.h"
 #include "entt/entt.hpp"
 
+namespace clem
+{
 /**
  * @addtogroup Scene
  * @{
@@ -98,5 +99,4 @@ bool Entity::hasComponent()
 {
 	return scene->registry.has<Com>(id);
 }
-
-#endif // !CLEM_SCENE_ENTITY_H_
+} // namespace clem

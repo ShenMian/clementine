@@ -41,7 +41,6 @@ struct Vector2
 	 */
 	float size() const;
 
-
 	/**
 	 * @brief 获取长度.
 	 *
@@ -81,7 +80,7 @@ struct Vector2
 
 	/**
 	 * @brief 计算向量点积.
-	 * 
+	 *
 	 * @param v 另一个向量.
 	 * @return 和另一个向量的点积.
 	 */

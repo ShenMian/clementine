@@ -6,6 +6,8 @@
 #include "AL/alext.h"
 #include <filesystem>
 
+namespace clem
+{
 /**
  * @brief 声音.
  * 提前将音频文件载入到内存中, 作为声音效果. 适用于较小的音频文件.
@@ -32,7 +34,7 @@ public:
 
 	/**
 	 * @brief 加载声音.
-	 * 
+	 *
 	 * @param path 声音文件路径.
 	 */
 	void loadFromFile(const std::filesystem::path&);
@@ -42,7 +44,7 @@ public:
 private:
 	/**
 	 * 从 WAV 文件载入声音.
-	 * 
+	 *
 	 * @param path      文件路径
 	 * @param format    格式
 	 * @param data      声音数据缓冲区
@@ -51,5 +53,6 @@ private:
 	 */
 	void loadWavFile(const std::filesystem::path& path, ALenum& format, unsigned char*& data, ALsizei& size, ALsizei& frequency);
 
-	 id_t id;
+	id_t id;
 };
+} // namespace clem

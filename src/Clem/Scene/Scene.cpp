@@ -13,6 +13,8 @@
 using std::string;
 using std::string_view;
 
+namespace clem
+{
 Entity Scene::createEntity(const string& tag)
 {
 	auto e = Entity(registry.create(), this);
@@ -84,6 +86,7 @@ void Scene::renderSprites()
 	for(auto [e, t, sprite] : view.each())
 		buf.drawSprite(t.getPosition(), sprite);
 }
+} // namespace clem
 
 /*
 	const size_t size = 10;

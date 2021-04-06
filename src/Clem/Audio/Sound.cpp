@@ -2,13 +2,15 @@
 // License(Apache-2.0)
 
 #include "Sound.h"
-#include "Clem/Log.h"
 #include "Clem/Assert.h"
+#include "Clem/Log.h"
 #include "Clem/Profiler.h"
 
-using std::filesystem::path;
 using std::filesystem::exists;
+using std::filesystem::path;
 
+namespace clem
+{
 Sound::Sound()
 {
 	alGenBuffers(1, &id);
@@ -141,3 +143,4 @@ void Sound::loadWavFile(const std::filesystem::path& path, ALenum& format, unsig
 	file.read((char*)data, size);
 	file.close();
 }
+} // namespace clem

@@ -4,8 +4,8 @@
 #pragma once
 
 #include "AL/alext.h"
-#include <vector>
 #include <filesystem>
+#include <vector>
 
 #include "Listener.h"
 #include "Sound.h"

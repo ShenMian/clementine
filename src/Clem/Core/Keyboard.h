@@ -5,6 +5,8 @@
 
 #include <unordered_map>
 
+namespace clem
+{
 /**
  * @brief 键盘.
  */
@@ -15,7 +17,7 @@ public:
 
 	/**
 	 * @brief 获取按键状态.
-	 * 
+	 *
 	 * @param k 按键.
 	 * @return 按键按下时返回 true.
 	 */
@@ -23,7 +25,7 @@ public:
 
 	/**
 	 * @brief 设置按键状态.
-	 * 
+	 *
 	 * @param k 按键.
 	 * @param s 状态, 按下为 true.
 	 */
@@ -80,3 +82,4 @@ enum class Keyboard::Key : uint8_t
 	Insert,
 	Delete,
 };
+} // namespace clem

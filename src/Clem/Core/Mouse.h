@@ -6,9 +6,11 @@
 #include "Clem/Core/Math/Math.h"
 #include <unordered_map>
 
+namespace clem
+{
 /**
  * @brief 鼠标.
- * 
+ *
  * @warn 仅支持 Windows 系统
  */
 class Mouse
@@ -18,7 +20,7 @@ public:
 
 	/**
 	 * @brief 获取按键状态.
-	 * 
+	 *
 	 * @param k 按键.
 	 * @return 按键按下时返回 true.
 	 */
@@ -26,7 +28,7 @@ public:
 
 	/**
 	 * @brief 设置按键状态.
-	 * 
+	 *
 	 * @param k 按键.
 	 * @param s 状态, 按下为 true.
 	 */
@@ -46,3 +48,4 @@ enum class Mouse::Key : uint8_t
 	left,
 	right
 };
+} // namespace clem

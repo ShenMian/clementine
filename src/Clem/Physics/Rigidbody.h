@@ -28,7 +28,7 @@ public:
 
 	/**
 	 * @brief 设置质量.
-	 * 
+	 *
 	 * @param m 质量, kg;
 	 */
 	void setMass(float m);
