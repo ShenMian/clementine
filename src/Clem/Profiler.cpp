@@ -8,7 +8,7 @@
 
 using namespace std::chrono;
 
-Instrumentor& Instrumentor::getInstance()
+Instrumentor& Instrumentor::get()
 {
 	static Instrumentor instance;
 	return instance;
@@ -92,5 +92,5 @@ void InstrumentationCounter::stop()
 	auto end     = steady_clock::now();
 	auto start   = begin.time_since_epoch();
 	auto elapsed = time_point_cast<microseconds>(end).time_since_epoch() - time_point_cast<microseconds>(begin).time_since_epoch();
-	Instrumentor::getInstance().writeRecord({name, start, elapsed, std::this_thread::get_id()});
+	Instrumentor::get().writeRecord({name, start, elapsed, std::this_thread::get_id()});
 }

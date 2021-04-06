@@ -3,7 +3,7 @@
 
 #include "EventDispatcher.h"
 
-EventDispatcher& EventDispatcher::getInstance()
+EventDispatcher& EventDispatcher::get()
 {
 	static EventDispatcher instance;
 	return instance;

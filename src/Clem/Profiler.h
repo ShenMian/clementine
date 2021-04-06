@@ -24,7 +24,7 @@ struct ProfileRecord
 class Instrumentor
 {
 public:
-	static Instrumentor& getInstance();
+	static Instrumentor& get();
 
 	void begin(const char* filename);
 	void end();
@@ -59,8 +59,8 @@ private:
 };
 
 #if 1
-#	define PROFILE_SESSION_BEGIN(filepath) Instrumentor::getInstance().begin(filepath)
-#	define PROFILE_SESSION_END()           Instrumentor::getInstance().end()
+#	define PROFILE_SESSION_BEGIN(filepath) Instrumentor::get().begin(filepath)
+#	define PROFILE_SESSION_END()           Instrumentor::get().end()
 #	define PROFILE_SCOPE_BEGIN(name)       InstrumentationCounter counter_##name(#  name)
 #	define PROFILE_SCOPE_END(name)         counter_##name.stop()
 #	define PROFILE_SCOPE                   PROFILE_SCOPE_BEGIN

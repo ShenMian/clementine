@@ -129,10 +129,11 @@ struct Vector2
 
 	static const Vector2 zero;  // (0, 0)
 	static const Vector2 unit;  // (1, 1)
-	static const Vector2 right; // (1, 0)
-	static const Vector2 left;  // (-1, 0)
+
 	static const Vector2 up;    // (0, 1)
 	static const Vector2 down;  // (0, -1)
+	static const Vector2 right; // (1, 0)
+	static const Vector2 left;  // (-1, 0)
 };
 
 using Point2 = Vector2;

@@ -56,7 +56,7 @@ public:
 
 		// Bat1 由玩家控制
 		// 为 bat1 创建一个事件监听器, 监听按键事件
-		EventDispatcher::getInstance().addListener(Event::Type::key, [&](Event* e) {
+		EventDispatcher::get().addListener(Event::Type::key, [&](Event* e) {
 			auto  event = dynamic_cast<KeyEvent*>(e);
 			auto& body  = scene->getEntity("bat1").getComponent<Rigidbody>(); // 通过 Tag 组件获取 bat1 实体的 Rigidbody 组件
 			if(event->state == false)

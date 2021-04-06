@@ -65,7 +65,7 @@ public:
 		auto board = scene->createEntity("board");
 		sprite     = &board.addComponent<Sprite>(Size2i(board_size.x * 2 + 1, board_size.y + 2));
 
-		EventDispatcher::getInstance().addListener(Event::Type::mouse, [&](Event* e) {
+		EventDispatcher::get().addListener(Event::Type::mouse, [&](Event* e) {
 			auto event = dynamic_cast<MouseEvent*>(e);
 			if(event->getType() == MouseEvent::Type::click)
 			{

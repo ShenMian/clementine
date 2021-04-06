@@ -13,7 +13,7 @@ class EventDispatcher
 public:
 	typedef std::function<void(Event*)> listener_t;
 
-	static EventDispatcher& getInstance();
+	static EventDispatcher& get();
 
 	template <class T>
 	void dispatch(T& event);

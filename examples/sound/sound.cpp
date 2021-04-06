@@ -19,38 +19,35 @@ public:
 	{
 		pushScene(scene);
 
-		auto& source = scene->createEntity("source");
-		source.addComponent<Sprite>(Size2i(1, 1)).drawPoint({0, 0}, '*');
+		scene->createEntity("source").addComponent<Sprite>(Size2i(1, 1)).drawPoint({0, 0}, '*');
 
 		auto& listener = scene->createEntity("listener");
 		listener.addComponent<Sprite>(Size2i(1, 1)).drawPoint({0, 0}, '@');
 		listener.getComponent<Transform>().setLocalPosition(Point2(size.x / 2, size.y / 2));
 
 		sound.loadFromFile("../pong/assets/pop.wav");
-		src.setLoop(true);
-		src.play(sound);
+		source.setLoop(true);
+		source.play(sound);
 
 		scene->createEntity().addComponent<Script>().onUpdate = [&](float dt) {
+			if(Mouse::getKeyState(Mouse::Key::left))
 			{
-				auto& ts = scene->getEntity("source").getComponent<Transform>();
-				if(Mouse::getKeyState(Mouse::Key::left))
-				{
-					auto& pos = Mouse::getPosition();
-					ts.setLocalPosition(pos);
-					src.setPosition(ts.getPosition());
-				}
+				auto& ts  = scene->getEntity("source").getComponent<Transform>();
+				auto& pos = Mouse::getPosition();
+				ts.setLocalPosition(pos);
+				source.setPosition(ts.getPosition());
 			}
 
 			{
 				auto& ts = scene->getEntity("listener").getComponent<Transform>();
 				if(Keyboard::getKeyState(Keyboard::Key::W))
-					ts.setLocalPosition(ts.getLocalPosition() + Vector2::down * 4 * dt);
+					ts.setLocalPosition(ts.getLocalPosition() + Vector2::down * 5 * dt);
 				if(Keyboard::getKeyState(Keyboard::Key::S))
-					ts.setLocalPosition(ts.getLocalPosition() + Vector2::up * 4 * dt);
+					ts.setLocalPosition(ts.getLocalPosition() + Vector2::up * 5 * dt);
 				if(Keyboard::getKeyState(Keyboard::Key::A))
-					ts.setLocalPosition(ts.getLocalPosition() + Vector2::left * 4 * dt);
+					ts.setLocalPosition(ts.getLocalPosition() + Vector2::left * 5 * dt);
 				if(Keyboard::getKeyState(Keyboard::Key::D))
-					ts.setLocalPosition(ts.getLocalPosition() + Vector2::right * 4 * dt);
+					ts.setLocalPosition(ts.getLocalPosition() + Vector2::right * 5 * dt);
 				Listener::setPosition(ts.getPosition());
 			}
 		};
@@ -59,7 +56,7 @@ public:
 private:
 	Size2i            size = Window::getSize();
 	clem::Sound       sound;
-	Source            src;
+	Source            source;
 	Random            random;
 	shared_ptr<Scene> scene = make_shared<Scene>();
 };

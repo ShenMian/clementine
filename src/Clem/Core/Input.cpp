@@ -22,10 +22,12 @@ void Input::update()
 	ch      = getchar();
 	if(ch == -1)
 		return;
+	auto vk = ch;
+	Keyboard::setKeyState((Keyboard::Key)vk, true);
 }
 
-#	include <termios.h>
-#	include <unistd.h>
+#include <termios.h>
+#include <unistd.h>
 
 void Input::init()
 {
@@ -49,11 +51,59 @@ void Input::deinit()
 
 #ifdef OS_WIN
 
+void handleKeyEvent(KEY_EVENT_RECORD* e)
+{
+	Keyboard::setKeyState((Keyboard::Key)e->wVirtualKeyCode, e->bKeyDown);
+	EventDispatcher::get().dispatch(
+			KeyEvent(e->wVirtualKeyCode,
+							 e->bKeyDown,
+							 e->wRepeatCount));
+}
+
+void handleMouseEvent(MOUSE_EVENT_RECORD* e)
+{
+	auto& dispatcher = EventDispatcher::get();
+	switch(e->dwEventFlags)
+	{
+	case MOUSE_MOVED:
+		Mouse::setPosition({(float)e->dwMousePosition.X,
+												(float)e->dwMousePosition.Y});
+		dispatcher.dispatch(MouseEvent(MouseEvent::Type::move,
+																	 {(float)e->dwMousePosition.X,
+																		(float)e->dwMousePosition.Y}));
+		break;
+
+	case DOUBLE_CLICK:
+		dispatcher.dispatch(MouseEvent(MouseEvent::Type::double_click,
+																	 {(float)e->dwMousePosition.X,
+																		(float)e->dwMousePosition.Y}));
+		break;
+
+	case MOUSE_WHEELED:
+		dispatcher.dispatch(MouseEvent(MouseEvent::Type::wheeled,
+																	 {(float)e->dwMousePosition.X,
+																		(float)e->dwMousePosition.Y}));
+		break;
+	}
+	if(e->dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
+		dispatcher.dispatch(MouseEvent(MouseEvent::Type::click,
+																	 {(float)e->dwMousePosition.X,
+																		(float)e->dwMousePosition.Y},
+																	 MouseEvent::Key::left_buttom));
+	if(e->dwButtonState & RIGHTMOST_BUTTON_PRESSED)
+		dispatcher.dispatch(MouseEvent(MouseEvent::Type::click,
+																	 {(float)e->dwMousePosition.X,
+																		(float)e->dwMousePosition.Y},
+																	 MouseEvent::Key::right_buttom));
+	Mouse::setKeyState(Mouse::Key::left, e->dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED);
+	Mouse::setKeyState(Mouse::Key::right, e->dwButtonState & RIGHTMOST_BUTTON_PRESSED);
+}
+
 void Input::update()
 {
 	PROFILE_FUNC();
 
-	static auto&        dispatcher = EventDispatcher::getInstance();
+	static auto&        dispatcher = EventDispatcher::get();
 	static HANDLE       hIn        = GetStdHandle(STD_INPUT_HANDLE);
 	static INPUT_RECORD rec;
 	static DWORD        res;
@@ -64,64 +114,19 @@ void Input::update()
 		return;
 
 	ReadConsoleInput(hIn, &rec, 1, &res);
-	// PeekConsoleInput(hIn, &rec, 1, &res);
-
-	KEY_EVENT_RECORD keyEvent;
 
 	switch(rec.EventType)
 	{
 	case KEY_EVENT:
-		keyEvent = rec.Event.KeyEvent;
-		Keyboard::setKeyState((Keyboard::Key)keyEvent.wVirtualKeyCode, keyEvent.bKeyDown);
-		dispatcher.dispatch(
-				KeyEvent(keyEvent.wVirtualKeyCode,
-								 keyEvent.bKeyDown,
-								 keyEvent.wRepeatCount));
+		handleKeyEvent(&rec.Event.KeyEvent);
 		break;
 
 	case MOUSE_EVENT:
-		switch(rec.Event.MouseEvent.dwEventFlags)
-		{
-		case MOUSE_MOVED:
-			Mouse::setPosition({(float)rec.Event.MouseEvent.dwMousePosition.X,
-													(float)rec.Event.MouseEvent.dwMousePosition.Y});
-			dispatcher.dispatch(MouseEvent(MouseEvent::Type::move,
-																		 {(float)rec.Event.MouseEvent.dwMousePosition.X,
-																			(float)rec.Event.MouseEvent.dwMousePosition.Y}));
-			break;
-
-		case DOUBLE_CLICK:
-			dispatcher.dispatch(MouseEvent(MouseEvent::Type::double_click,
-																		 {(float)rec.Event.MouseEvent.dwMousePosition.X,
-																			(float)rec.Event.MouseEvent.dwMousePosition.Y}));
-			break;
-
-		case MOUSE_WHEELED:
-			dispatcher.dispatch(MouseEvent(MouseEvent::Type::wheeled,
-																		 {(float)rec.Event.MouseEvent.dwMousePosition.X,
-																			(float)rec.Event.MouseEvent.dwMousePosition.Y}));
-			break;
-		}
-		if(rec.Event.MouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
-			dispatcher.dispatch(MouseEvent(MouseEvent::Type::click,
-																		 {(float)rec.Event.MouseEvent.dwMousePosition.X,
-																			(float)rec.Event.MouseEvent.dwMousePosition.Y},
-																		 MouseEvent::Key::left_buttom));
-		if(rec.Event.MouseEvent.dwButtonState & RIGHTMOST_BUTTON_PRESSED)
-			dispatcher.dispatch(MouseEvent(MouseEvent::Type::click,
-																		 {(float)rec.Event.MouseEvent.dwMousePosition.X,
-																			(float)rec.Event.MouseEvent.dwMousePosition.Y},
-																		 MouseEvent::Key::right_buttom));
+		handleMouseEvent(&rec.Event.MouseEvent);
 		break;
 
 	case WINDOW_BUFFER_SIZE_EVENT:
 		break;
-	}
-
-	if(rec.EventType == MOUSE_EVENT)
-	{
-		Mouse::setKeyState(Mouse::Key::left, rec.Event.MouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED);
-		Mouse::setKeyState(Mouse::Key::right, rec.Event.MouseEvent.dwButtonState & RIGHTMOST_BUTTON_PRESSED);
 	}
 }
 
