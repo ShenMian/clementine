@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #ifndef CLEM_RENDERER_COLOR_H_
@@ -6,6 +6,9 @@
 
 #include <stdint.h>
 
+/**
+ * @brief 字体属性.
+ */
 class Color
 {
 public:

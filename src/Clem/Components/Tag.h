@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #ifndef CLEM_COMPONENT_TAG_H_
@@ -9,6 +9,9 @@
 
 #include <string>
 
+/**
+ * @brief 标签组件.
+ */
 class Tag : public Component
 {
 public:

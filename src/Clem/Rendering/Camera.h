@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #ifndef CLEM_RENDERER_CAMERA_H_
@@ -6,6 +6,9 @@
 
 #include "Clem/Core/Math/Rect2.h"
 
+/**
+ * @brief 摄像机.
+ */
 class Camera
 {
 public:

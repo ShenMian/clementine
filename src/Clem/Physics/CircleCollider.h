@@ -11,7 +11,7 @@
  */
 
 /**
- * 圆形碰撞体.
+ * @brief 圆形碰撞体.
  */
 class CircleCollider : public Collider
 {

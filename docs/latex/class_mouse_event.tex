@@ -1,0 +1,48 @@
+\hypertarget{class_mouse_event}{}\doxysection{Mouse\+Event类 参考}
+\label{class_mouse_event}\index{MouseEvent@{MouseEvent}}
+类 Mouse\+Event 继承关系图\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_mouse_event}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_mouse_event_af25a43f88c618c0d757d1f537ae5d17b}\label{class_mouse_event_af25a43f88c618c0d757d1f537ae5d17b}} 
+enum class {\bfseries Type} \{ {\bfseries move}
+, {\bfseries click}
+, {\bfseries double\+\_\+click}
+, {\bfseries wheeled}
+ \}
+\item 
+\mbox{\Hypertarget{class_mouse_event_afc8cf5b69bbfbc75c6d89ba3516ee5c5}\label{class_mouse_event_afc8cf5b69bbfbc75c6d89ba3516ee5c5}} 
+enum class {\bfseries Key} \{ {\bfseries left\+\_\+buttom}
+, {\bfseries right\+\_\+buttom}
+, {\bfseries none}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_mouse_event_af5441a93b23a0b38c22f66dd07bd2e12}\label{class_mouse_event_af5441a93b23a0b38c22f66dd07bd2e12}} 
+{\bfseries EVENT\+\_\+\+CLASS\+\_\+\+TYPE} (mouse)
+\item 
+\mbox{\Hypertarget{class_mouse_event_a0b089e2f973fafd5bd5caa2ad86e4037}\label{class_mouse_event_a0b089e2f973fafd5bd5caa2ad86e4037}} 
+{\bfseries Mouse\+Event} (Type type, const \mbox{\hyperlink{struct_vector2}{Point2}} \&pos, Key state=Key\+::none)
+\item 
+\mbox{\Hypertarget{class_mouse_event_a4ef3f7a8a017fdd9a245c085d1a63c5e}\label{class_mouse_event_a4ef3f7a8a017fdd9a245c085d1a63c5e}} 
+Type {\bfseries get\+Type} () const
+\item 
+\mbox{\Hypertarget{class_mouse_event_a741728b0fa33e9698662e9f8403e2a74}\label{class_mouse_event_a741728b0fa33e9698662e9f8403e2a74}} 
+const \mbox{\hyperlink{struct_vector2}{Point2}} \& {\bfseries get\+Position} () const
+\item 
+\mbox{\Hypertarget{class_mouse_event_ad98387fc8f322f1f71c2b0b8686355a9}\label{class_mouse_event_ad98387fc8f322f1f71c2b0b8686355a9}} 
+Key {\bfseries get\+Key} () const
+\end{DoxyCompactItemize}
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Clem/\+Events/Mouse\+Event.\+h\item 
+src/\+Clem/\+Events/Mouse\+Event.\+cpp\end{DoxyCompactItemize}

@@ -9,7 +9,7 @@
 #include <stdint.h>
 
 /**
- * 随机数生成器.
+ * @brief 随机数生成器.
  */
 class Random
 {

@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #ifndef CLEM_COMPONENT_TRANSFORM_H_
@@ -6,7 +6,9 @@
 
 #include "Clem/Components/Component.h"
 #include "Clem/Core/Math/Math.h"
-
+/**
+ * @brief 变换组件.
+ */
 class Transform : public Component
 {
 public:

@@ -6,6 +6,9 @@
 #include "Clem/Core/Math/Math.h"
 #include <string>
 
+/**
+ * @brief 窗口.
+ */
 class Window
 {
 public:

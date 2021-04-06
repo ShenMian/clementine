@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -7,9 +7,9 @@
 #include <unordered_map>
 
 /**
- * @brief Êó±ê.
+ * @brief é¼ æ ‡.
  * 
- * @warn ½öÖ§³Ö Windows ÏµÍ³
+ * @warn ä»…æ”¯æŒ Windows ç³»ç»Ÿ
  */
 class Mouse
 {
@@ -17,18 +17,18 @@ public:
 	enum class Key : uint8_t;
 
 	/**
-	 * @brief »ñÈ¡°´¼ü×´Ì¬.
+	 * @brief è·å–æŒ‰é”®çŠ¶æ€.
 	 * 
-	 * @param k °´¼ü.
-	 * @return °´¼ü°´ÏÂÊ±·µ»Ø true.
+	 * @param k æŒ‰é”®.
+	 * @return æŒ‰é”®æŒ‰ä¸‹æ—¶è¿”å› true.
 	 */
 	static bool getKeyState(Key k);
 
 	/**
-	 * @brief ÉèÖÃ°´¼ü×´Ì¬.
+	 * @brief è®¾ç½®æŒ‰é”®çŠ¶æ€.
 	 * 
-	 * @param k °´¼ü.
-	 * @param s ×´Ì¬, °´ÏÂÎª true.
+	 * @param k æŒ‰é”®.
+	 * @param s çŠ¶æ€, æŒ‰ä¸‹ä¸º true.
 	 */
 	static void setKeyState(Key k, bool s);
 

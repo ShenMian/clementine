@@ -36,27 +36,32 @@ void Source::pause()
 
 void Source::setVolume(float volume)
 {
-	assert(volume >= 0);
+	assert(0 <= volume && volume <= 1);
 	alSourcef(id, AL_GAIN, volume);
+	assert(alGetError() == AL_NO_ERROR);
 }
 
 void Source::setPitch(float pitch)
 {
 	assert(0.5f <= pitch && pitch <= 2.0f);
 	alSourcef(id, AL_PITCH, pitch);
+	assert(alGetError() == AL_NO_ERROR);
 }
 
 void Source::setLoop(bool v)
 {
 	alSourcei(id, AL_LOOPING, v ? AL_TRUE : AL_FALSE);
+	assert(alGetError() == AL_NO_ERROR);
 }
 
 void Source::setPosition(const Point2& p)
 {
 	alSource3f(id, AL_POSITION, p.x, p.y, 0);
+	assert(alGetError() == AL_NO_ERROR);
 }
 
 void Source::setVelocity(const Vector2& v)
 {
 	alSource3f(id, AL_VELOCITY, v.x, v.y, 0);
+	assert(alGetError() == AL_NO_ERROR);
 }

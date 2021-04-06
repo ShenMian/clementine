@@ -1,14 +1,16 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
 
-#include "Audio.h"
-#include "Clem/Core/Math/Math.h"
 #include "AL/alext.h"
+#include "Clem/Core/Math/Math.h"
 
 class Sound;
 
+/**
+ * @brief 声源.
+ */
 class Source
 {
 public:

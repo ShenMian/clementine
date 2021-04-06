@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #ifndef CLEM_RENDERER_TILE_H_
@@ -6,6 +6,9 @@
 
 #include "Color.h"
 
+/**
+ * @brief 瓦片.
+ */
 class Tile
 {
 public:

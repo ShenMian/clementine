@@ -40,7 +40,7 @@ void Sound::loadFromFile(const path& path)
 	unsigned char* data;
 
 	if(fileFormat == ".wav")
-		loadWav(path, format, data, size, frequency);
+		loadWavFile(path, format, data, size, frequency);
 	else
 		CLEM_CORE_FATAL("unsupported file format: '{}'", fileFormat);
 
@@ -80,7 +80,7 @@ struct WaveData
 	int32_t size;
 };
 
-void Sound::loadWav(const std::filesystem::path& path, ALenum& format, unsigned char*& data, ALsizei& size, ALsizei& frequency)
+void Sound::loadWavFile(const std::filesystem::path& path, ALenum& format, unsigned char*& data, ALsizei& size, ALsizei& frequency)
 {
 	std::ifstream file(path, std::ios::binary);
 	Assert::isTrue(file.is_open(), fmt::format("the file could not be opened: '{}'", path.string()), CALL_INFO);

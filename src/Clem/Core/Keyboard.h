@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -6,7 +6,7 @@
 #include <unordered_map>
 
 /**
- * @brief ¼üÅÌ.
+ * @brief é”®ç›˜.
  */
 class Keyboard
 {
@@ -14,18 +14,18 @@ public:
 	enum class Key : uint8_t;
 
 	/**
-	 * @brief »ñÈ¡°´¼ü×´Ì¬.
+	 * @brief è·å–æŒ‰é”®çŠ¶æ€.
 	 * 
-	 * @param k °´¼ü.
-	 * @return °´¼ü°´ÏÂÊ±·µ»Ø true.
+	 * @param k æŒ‰é”®.
+	 * @return æŒ‰é”®æŒ‰ä¸‹æ—¶è¿”å› true.
 	 */
 	static bool getKeyState(Key k);
 
 	/**
-	 * @brief ÉèÖÃ°´¼ü×´Ì¬.
+	 * @brief è®¾ç½®æŒ‰é”®çŠ¶æ€.
 	 * 
-	 * @param k °´¼ü.
-	 * @param s ×´Ì¬, °´ÏÂÎª true.
+	 * @param k æŒ‰é”®.
+	 * @param s çŠ¶æ€, æŒ‰ä¸‹ä¸º true.
 	 */
 	static void setKeyState(Key k, bool s);
 
@@ -35,7 +35,7 @@ private:
 
 enum class Keyboard::Key : uint8_t
 {
-	A = 0x41, // FIXME, ÕâÑùĞ´ÎŞ·¨³õÊ¼»¯×´Ì¬
+	A = 0x41, // FIXME, è¿™æ ·å†™æ— æ³•åˆå§‹åŒ–çŠ¶æ€
 	B,
 	C,
 	D,

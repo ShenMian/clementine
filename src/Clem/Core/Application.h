@@ -15,6 +15,10 @@ class Scene;
  * @{
  */
 
+/**
+ * @brief 应用程序.
+ * 用户通过继承该类来创建自己的应用程序.
+ */
 class Application
 {
 public:

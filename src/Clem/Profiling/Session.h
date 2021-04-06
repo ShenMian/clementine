@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -8,7 +8,7 @@
 #include <vector>
 
 /**
- * @brief ¶ÔÑù±¾½øĞĞ·Ö×é.
+ * @brief ä¼šè¯. å¯¹æ ·æœ¬è¿›è¡Œåˆ†ç»„.
  */
 class Session
 {

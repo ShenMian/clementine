@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -6,30 +6,34 @@
 #include "AL/alext.h"
 #include <filesystem>
 
+/**
+ * @brief å£°éŸ³.
+ * æå‰å°†éŸ³é¢‘æ–‡ä»¶è½½å…¥åˆ°å†…å­˜ä¸­, ä½œä¸ºå£°éŸ³æ•ˆæœ. é€‚ç”¨äºè¾ƒå°çš„éŸ³é¢‘æ–‡ä»¶.
+ */
 class Sound
 {
 public:
 	typedef ALuint id_t;
 
 	/**
-	 * @brief Ä¬ÈÏ¹¹Ôìº¯Êı.
+	 * @brief é»˜è®¤æ„é€ å‡½æ•°.
 	 */
 	Sound();
 
 	/**
-	 * @brief ¹¹Ôìº¯Êı, ´ÓÎÄ¼şµ¼ÈëÉùÒô.
+	 * @brief æ„é€ å‡½æ•°, ä»æ–‡ä»¶å¯¼å…¥å£°éŸ³.
 	 */
 	Sound(const std::filesystem::path&);
 
 	/**
-	 * @brief Îö¹¹º¯Êı, Ğ¶ÔØÉùÒô.
+	 * @brief ææ„å‡½æ•°, å¸è½½å£°éŸ³.
 	 */
 	~Sound();
 
 	/**
-	 * @brief ¼ÓÔØÉùÒô.
+	 * @brief åŠ è½½å£°éŸ³.
 	 * 
-	 * @param path ÉùÒôÎÄ¼şÂ·¾¶.
+	 * @param path å£°éŸ³æ–‡ä»¶è·¯å¾„.
 	 */
 	void loadFromFile(const std::filesystem::path&);
 
@@ -37,15 +41,15 @@ public:
 
 private:
 	/**
-	 * ´Ó WAV ÎÄ¼şÔØÈëÉùÒô.
+	 * ä» WAV æ–‡ä»¶è½½å…¥å£°éŸ³.
 	 * 
-	 * @param path      ÎÄ¼şÂ·¾¶
-	 * @param format    ¸ñÊ½
-	 * @param data      ÉùÒôÊı¾İ»º³åÇø
-	 * @param size      ÉùÒôÊı¾İ»º³åÇø´óĞ¡
-	 * @param frequency ÉùÒôÆµÂÊ
+	 * @param path      æ–‡ä»¶è·¯å¾„
+	 * @param format    æ ¼å¼
+	 * @param data      å£°éŸ³æ•°æ®ç¼“å†²åŒº
+	 * @param size      å£°éŸ³æ•°æ®ç¼“å†²åŒºå¤§å°
+	 * @param frequency å£°éŸ³é¢‘ç‡
 	 */
-	void loadWav(const std::filesystem::path& path, ALenum& format, unsigned char*& data, ALsizei& size, ALsizei& frequency);
+	void loadWavFile(const std::filesystem::path& path, ALenum& format, unsigned char*& data, ALsizei& size, ALsizei& frequency);
 
 	 id_t id;
 };

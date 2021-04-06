@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -6,6 +6,9 @@
 #include "Clem/Core/Math/Math.h"
 #include <cstdint>
 
+/**
+ * @brief æ¸¸æˆæ‰‹æŸ„.
+ */
 class Gamepad
 {
 public:
@@ -18,25 +21,25 @@ public:
 	void update();
 
 	/**
-	 * @brief »ñÈ¡Ò¡¸Ë×´Ì¬.
+	 * @brief è·å–æ‘‡æ†çŠ¶æ€.
 	 */
 	const Vector2& get(Thumb t) const;
 
 	/**
-	 * @brief »ñÈ¡°´¼ü×´Ì¬.
+	 * @brief è·å–æŒ‰é”®çŠ¶æ€.
 	 */
 	bool get(Button b) const;
 
 	/**
-	 * @brief »ñÈ¡ÏßĞÔ°´¼ü×´Ì¬.
+	 * @brief è·å–çº¿æ€§æŒ‰é”®çŠ¶æ€.
 	 */
 	uint8_t get(Trigger t) const;
 
 	/**
-	 * @brief ÉèÖÃÕğ¶¯·´À¡.
+	 * @brief è®¾ç½®éœ‡åŠ¨åé¦ˆ.
 	 * 
-	 * @param left  ×óÂí´ï×ªËÙ.
-	 * @param right ÓÒÂí´ï×ªËÙ.
+	 * @param left  å·¦é©¬è¾¾è½¬é€Ÿ.
+	 * @param right å³é©¬è¾¾è½¬é€Ÿ.
 	 */
 	void setVibration(uint16_t left, uint16_t right);
 

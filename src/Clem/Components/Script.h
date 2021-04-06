@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #ifndef CLEM_COMPONENT_SCRIPT_H_
@@ -7,6 +7,9 @@
 #include "Component.h"
 #include <functional>
 
+/**
+ * @brief 脚本组件.
+ */
 class Script : public Component
 {
 public:

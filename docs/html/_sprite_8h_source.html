@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Clementine: src/Clem/Rendering/Sprite.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Clementine
+   &#160;<span id="projectnumber">0.0.2</span>
+   </div>
+   <div id="projectbrief">A framework for building 2D console games.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_sprite_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Sprite.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2021 SMS</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// License(Apache-2.0)</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef CLEM_RENDERER_SPRITE_H_</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define CLEM_RENDERER_SPRITE_H_</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Clem/Components/Component.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Clem/Core/Math/Math.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;Tile.h&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;filesystem&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_sprite.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_sprite.html">Sprite</a> : <span class="keyword">public</span> <a class="code" href="class_component.html">Component</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_sprite.html">Sprite</a>()              = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_sprite.html">Sprite</a>(<span class="keyword">const</span> <a class="code" href="class_sprite.html">Sprite</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_sprite.html">Sprite</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Size2i</a>&amp; size);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a13e2e7e37058e34f124fae858b7e85b9">drawPoint</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a13e2e7e37058e34f124fae858b7e85b9">drawPoint</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; p, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a6d8b0d106d74ba539f87a4a11b016121">drawLine</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; a, <span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; b, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a8816463ab2c6f230288dc385e3a79372">drawRect</a>(<span class="keyword">const</span> <a class="code" href="class_rect2i.html">Rect2i</a>&amp; r, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a9abe7d64965d87f983deaff2a06193c9">fillRect</a>(<span class="keyword">const</span> <a class="code" href="class_rect2i.html">Rect2i</a>&amp; r, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a6fb005cf357a360e25e3d44430b65d64">drawCycle</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; p, <span class="keywordtype">short</span> radius, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#a0565655caa0559dd21f68bf6b69e0677">drawString</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; pos, std::wstring_view str, <a class="code" href="class_color.html">Color</a> color = <a class="code" href="class_color.html">Color</a>());</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#aa002befde779b135e9b6e336d4e1894d">clear</a>(<span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; = Tile::blank);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; getTile(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; getTile(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp;) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sprite.html#ac85a02552cc59bb739cdea2adc47f790">setSize</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Size2i</a>&amp; s);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Size2i</a>&amp; <a class="code" href="class_sprite.html#a53ba3c47bc3d878e527bcafc9f60de9a">getSize</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="comment">// void load(const std::filesystem::path&amp; path);</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="comment">// void store(const std::filesystem::path&amp; path) const;</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="class_sprite.html">Sprite</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="class_sprite.html">Sprite</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <a class="code" href="struct_vector2i.html">Size2i</a>            size;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    std::vector&lt;Tile&gt; buffer;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;};</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_RENDERER_SPRITE_H_</span></div>
+<div class="ttc" id="aclass_color_html"><div class="ttname"><a href="class_color.html">Color</a></div><div class="ttdoc">字体属性.</div><div class="ttdef"><b>Definition:</b> Color.h:13</div></div>
+<div class="ttc" id="aclass_component_html"><div class="ttname"><a href="class_component.html">Component</a></div><div class="ttdef"><b>Definition:</b> Component.h:8</div></div>
+<div class="ttc" id="aclass_rect2i_html"><div class="ttname"><a href="class_rect2i.html">Rect2i</a></div><div class="ttdoc">二维矩形, 整型.</div><div class="ttdef"><b>Definition:</b> Rect2i.h:17</div></div>
+<div class="ttc" id="aclass_sprite_html"><div class="ttname"><a href="class_sprite.html">Sprite</a></div><div class="ttdoc">精灵.</div><div class="ttdef"><b>Definition:</b> Sprite.h:17</div></div>
+<div class="ttc" id="aclass_sprite_html_a0565655caa0559dd21f68bf6b69e0677"><div class="ttname"><a href="class_sprite.html#a0565655caa0559dd21f68bf6b69e0677">Sprite::drawString</a></div><div class="ttdeci">void drawString(const Point2i &amp;pos, std::wstring_view str, Color color=Color())</div><div class="ttdoc">绘制字符串.</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:92</div></div>
+<div class="ttc" id="aclass_sprite_html_a13e2e7e37058e34f124fae858b7e85b9"><div class="ttname"><a href="class_sprite.html#a13e2e7e37058e34f124fae858b7e85b9">Sprite::drawPoint</a></div><div class="ttdeci">void drawPoint(int x, int y, const Tile &amp;t)</div><div class="ttdoc">绘制点.</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:17</div></div>
+<div class="ttc" id="aclass_sprite_html_a53ba3c47bc3d878e527bcafc9f60de9a"><div class="ttname"><a href="class_sprite.html#a53ba3c47bc3d878e527bcafc9f60de9a">Sprite::getSize</a></div><div class="ttdeci">const Size2i &amp; getSize() const</div><div class="ttdoc">获取可绘制区域的大小</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:138</div></div>
+<div class="ttc" id="aclass_sprite_html_a6d8b0d106d74ba539f87a4a11b016121"><div class="ttname"><a href="class_sprite.html#a6d8b0d106d74ba539f87a4a11b016121">Sprite::drawLine</a></div><div class="ttdeci">void drawLine(const Point2i &amp;a, const Point2i &amp;b, const Tile &amp;t)</div><div class="ttdoc">绘制连接两点的线段.</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:34</div></div>
+<div class="ttc" id="aclass_sprite_html_a6fb005cf357a360e25e3d44430b65d64"><div class="ttname"><a href="class_sprite.html#a6fb005cf357a360e25e3d44430b65d64">Sprite::drawCycle</a></div><div class="ttdeci">void drawCycle(const Point2i &amp;p, short radius, const Tile &amp;t)</div><div class="ttdoc">绘制圆形.</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:72</div></div>
+<div class="ttc" id="aclass_sprite_html_a8816463ab2c6f230288dc385e3a79372"><div class="ttname"><a href="class_sprite.html#a8816463ab2c6f230288dc385e3a79372">Sprite::drawRect</a></div><div class="ttdeci">void drawRect(const Rect2i &amp;r, const Tile &amp;t)</div><div class="ttdoc">绘制矩形.</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:51</div></div>
+<div class="ttc" id="aclass_sprite_html_a9abe7d64965d87f983deaff2a06193c9"><div class="ttname"><a href="class_sprite.html#a9abe7d64965d87f983deaff2a06193c9">Sprite::fillRect</a></div><div class="ttdeci">void fillRect(const Rect2i &amp;r, const Tile &amp;t)</div><div class="ttdoc">绘制实心矩形.</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:65</div></div>
+<div class="ttc" id="aclass_sprite_html_aa002befde779b135e9b6e336d4e1894d"><div class="ttname"><a href="class_sprite.html#aa002befde779b135e9b6e336d4e1894d">Sprite::clear</a></div><div class="ttdeci">void clear(const Tile &amp;=Tile::blank)</div><div class="ttdoc">清除全部绘制内容.</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:115</div></div>
+<div class="ttc" id="aclass_sprite_html_ac85a02552cc59bb739cdea2adc47f790"><div class="ttname"><a href="class_sprite.html#ac85a02552cc59bb739cdea2adc47f790">Sprite::setSize</a></div><div class="ttdeci">void setSize(const Size2i &amp;s)</div><div class="ttdoc">设置可绘制区域的大小</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:132</div></div>
+<div class="ttc" id="aclass_tile_html"><div class="ttname"><a href="class_tile.html">Tile</a></div><div class="ttdoc">瓦片.</div><div class="ttdef"><b>Definition:</b> Tile.h:13</div></div>
+<div class="ttc" id="astruct_vector2i_html"><div class="ttname"><a href="struct_vector2i.html">Vector2i</a></div><div class="ttdoc">二维向量, 整型.</div><div class="ttdef"><b>Definition:</b> Vector2i.h:15</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_6159ebb534700731bf4b22c629f4e6b1.html">Clem</a></li><li class="navelem"><a class="el" href="dir_65e9873783252aacc207e003d806e7ae.html">Rendering</a></li><li class="navelem"><b>Sprite.h</b></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
+</body>
+</html>

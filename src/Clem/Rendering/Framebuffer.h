@@ -18,6 +18,9 @@ typedef Tile buffer_t;
 typedef CHAR_INFO buffer_t;
 #endif
 
+/**
+ * @brief 帧缓冲区.
+ */
 class Framebuffer
 {
 public:

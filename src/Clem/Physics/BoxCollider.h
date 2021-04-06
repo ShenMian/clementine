@@ -12,7 +12,7 @@
  */
 
 /**
- * AABB 盒形碰撞体.
+ * @brief AABB 盒形碰撞体.
  */
 class BoxCollider : public Collider
 {

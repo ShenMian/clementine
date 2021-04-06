@@ -19,6 +19,9 @@ constexpr int log_level_warn  = 3;
 constexpr int log_level_error = 4;
 constexpr int log_level_fatal = 5;
 
+/**
+ * @brief 日志.
+ */
 class Log
 {
 public:

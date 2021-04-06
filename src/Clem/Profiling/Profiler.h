@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -8,8 +8,8 @@
 class Session;
 
 /**
- * @brief ÐÔÄÜ·ÖÎöÆ÷.
- * Ö§³ÖÒÔ²»Í¬µÄ¸ñÊ½µ¼³öÑù±¾Êý¾Ý. °üÀ¨¿ÉÓÃä¯ÀÀÆ÷ Tracking ·ÖÎöµÄ JSON ¸ñÊ½.
+ * @brief æ€§èƒ½åˆ†æžå™¨.
+ * æ”¯æŒä»¥ä¸åŒçš„æ ¼å¼å¯¼å‡ºæ ·æœ¬æ•°æ®. åŒ…æ‹¬å¯ç”¨æµè§ˆå™¨ Tracking åˆ†æžçš„ JSON æ ¼å¼.
  */
 class Profiler
 {

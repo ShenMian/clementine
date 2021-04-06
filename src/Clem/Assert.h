@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+Ôªø// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -14,9 +14,9 @@
 #define CALL_INFO __FILE__, __LINE__
 
 /**
- * ∂œ—‘.
+ * @brief Êñ≠Ë®Ä.
  * 
- *  π”√∑Ω∑®: Assert.method(expr, CALL_INFO);
+ * @code Assert.method(expr, CALL_INFO);
  */
 class Assert
 {
