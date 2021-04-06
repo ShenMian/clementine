@@ -23,14 +23,14 @@ public:
 		pushScene(scene);
 
 		// 加载音频文件
-		popSound   = audio.loadSound("assets/pop.wav");
-		scoreSound = audio.loadSound("assets/score.wav");
+		pop.loadFromFile("assets/pop.wav");
+		score.loadFromFile("assets/score.wav");
 
 		// 设置音源方位
-		upSource.setPosition({0, 5});
-		downSource.setPosition({0, -5});
-		leftSource.setPosition({-5, 0});
-		rightSource.setPosition({5, 0});
+		up.setPosition({0, 5});
+		down.setPosition({0, -5});
+		left.setPosition({-5, 0});
+		right.setPosition({5, 0});
 
 		// 创建乒乓球 Sprite
 		Sprite ballSprite({1, 1});
@@ -102,12 +102,12 @@ public:
 				{
 					if(ballPos.x < 39)
 					{
-						leftSource.play(popSound);
+						left.play(pop);
 						ts.setLocalPosition({pos.x + 1, ballPos.y});
 					}
 					else
 					{
-						rightSource.play(popSound);
+						right.play(pop);
 						ts.setLocalPosition({pos.x - 1, ballPos.y});
 					}
 					vel.x = -vel.x;
@@ -122,7 +122,7 @@ public:
 				vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 				resetBall();
 				resetBats();
-				leftSource.play(scoreSound);
+				left.play(score);
 				ai_score++;
 			}
 			else if(ballPos.x >= 79)
@@ -132,7 +132,7 @@ public:
 				vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 				resetBall();
 				resetBats();
-				rightSource.play(scoreSound);
+				right.play(score);
 				player_score++;
 			}
 			else if(ballPos.y < 1)
@@ -140,14 +140,14 @@ public:
 				ts.setLocalPosition({ballPos.x, 1});
 				vel.y = -vel.y;
 				vel.x += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
-				upSource.play(popSound);
+				up.play(pop);
 			}
 			else if(ballPos.y >= 24)
 			{
 				ts.setLocalPosition({ballPos.x, 23});
 				vel.y = -vel.y;
 				vel.x += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
-				downSource.play(popSound);
+				down.play(pop);
 			}
 			else
 				return;
@@ -198,9 +198,9 @@ private:
 	const int   random_rebound_angle = 5;     // 碰撞时随机调整角度系数
 	const float volume               = 0.1f;  // 声音效果音量
 
-	Audio&      audio = Audio::get();
-	Audio::id_t popSound, scoreSound;
-	Source      upSource, downSource, leftSource, rightSource;
+	Sound  pop, score;
+	Source up, down, left, right;
+	Audio& audio = Audio::get();
 
 	Random random;
 

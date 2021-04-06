@@ -16,7 +16,7 @@ void Assert::isTrue(bool expr, const char* file, unsigned int line)
 				 "- file: %s\n"
 				 "- line: %u\n",
 				 file, line);
-	breakpoint();
+	// breakpoint();
 	CLEM_CORE_ERROR("Assertion failed: file: {} line: {}", file, line);
 }
 
@@ -30,7 +30,7 @@ void Assert::isTrue(bool expr, const string_view& msg, const char* file, unsigne
 				 "- file:    %s\n"
 				 "- line:    %u\n",
 				 string(msg).c_str(), file, line);
-	breakpoint();
+	// breakpoint();
 	CLEM_CORE_FATAL("Assertion failed: message: {} file: {} line: {}", msg, file, line);
 }
 

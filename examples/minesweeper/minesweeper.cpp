@@ -23,9 +23,8 @@ public:
 	{
 		pushScene(scene);
 
-		opening = audio.loadSound("assets/opening.wav");
-		explode = audio.loadSound("assets/explode.wav");
-		source.setVolume(0.3f);
+		opening.loadFromFile("assets/opening.wav");
+		explode.loadFromFile("assets/explode.wav");
 
 		// TODO: UI
 		puts("/--[Level]--\\\n"
@@ -202,9 +201,9 @@ private:
 	Sprite*           sprite;
 	vector<Point2i>   flags;
 
-	Source      source;
-	Audio::id_t opening, explode;
-	Audio&      audio = Audio::get();
+	Sound  opening, explode;
+	Source source;
+	Audio& audio = Audio::get();
 
 	Random random;
 

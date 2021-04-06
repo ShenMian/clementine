@@ -2,61 +2,61 @@
 // License(Apache-2.0)
 
 #include "Source.h"
+#include "Sound.h"
 #include <cassert>
 
 Source::Source()
 {
-	alGenSources(1, &sourceId);
+	alGenSources(1, &id);
 }
 
 Source::~Source()
 {
 	stop();
-	alDeleteSources(1, &sourceId);
+	alDeleteSources(1, &id);
 }
 
-void Source::play(Audio::id_t soundId)
+void Source::play(Sound& s)
 {
 	stop();
-	alSourcei(sourceId, AL_BUFFER, (ALint)soundId);
+	alSourcei(id, AL_BUFFER, s);
 	assert(alGetError() == AL_NO_ERROR);
-
-	alSourcePlay(sourceId);
+	alSourcePlay(id);
 }
 
 void Source::stop()
 {
-	alSourceStop(sourceId);
+	alSourceStop(id);
 }
 
 void Source::pause()
 {
-	alSourcePause(sourceId);
+	alSourcePause(id);
 }
 
 void Source::setVolume(float volume)
 {
 	assert(volume >= 0);
-	alSourcef(sourceId, AL_GAIN, volume);
+	alSourcef(id, AL_GAIN, volume);
 }
 
 void Source::setPitch(float pitch)
 {
 	assert(0.5f <= pitch && pitch <= 2.0f);
-	alSourcef(sourceId, AL_PITCH, pitch);
+	alSourcef(id, AL_PITCH, pitch);
 }
 
 void Source::setLoop(bool v)
 {
-	alSourcei(sourceId, AL_LOOPING, v ? AL_TRUE : AL_FALSE);
+	alSourcei(id, AL_LOOPING, v ? AL_TRUE : AL_FALSE);
 }
 
 void Source::setPosition(const Point2& p)
 {
-	alSource3f(sourceId, AL_POSITION, p.x, p.y, 0);
+	alSource3f(id, AL_POSITION, p.x, p.y, 0);
 }
 
 void Source::setVelocity(const Vector2& v)
 {
-	alSource3f(sourceId, AL_VELOCITY, v.x, v.y, 0);
+	alSource3f(id, AL_VELOCITY, v.x, v.y, 0);
 }

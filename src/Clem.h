@@ -24,6 +24,7 @@
 // Audio
 #include "Clem/Audio/Audio.h"
 #include "Clem/Audio/Source.h"
+#include "Clem/Audio/Sound.h"
 
 #include "Clem/Assert.h"
 #include "Clem/Log.h"

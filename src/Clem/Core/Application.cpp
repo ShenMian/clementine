@@ -1,6 +1,8 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
+// 在 CreateApplication 之前初始化
+
 // #define SDL_MAIN_HANDLED
 // #include "SDL.h"
 

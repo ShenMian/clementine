@@ -7,13 +7,17 @@
 #include "Clem/Core/Math/Math.h"
 #include "AL/alext.h"
 
+class Sound;
+
 class Source
 {
 public:
+	typedef ALuint id_t;
+
 	Source();
 	~Source();
 
-	void play(Audio::id_t soundId);
+	void play(Sound&);
 	void stop();
 	void pause();
 
@@ -25,5 +29,5 @@ public:
 	void setVelocity(const Vector2& v);
 
 private:
-	Audio::id_t sourceId;
+	id_t id;
 };
