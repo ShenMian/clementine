@@ -6,6 +6,9 @@
 #include "Clem/Core/Math/Math.h"
 #include "Collider.h"
 
+namespace clem
+{
+
 /**
  * @addtogroup Physics
  * @{
@@ -44,3 +47,5 @@ private:
  * end of Physics group
  * @}
  */
+
+} // namespace clem

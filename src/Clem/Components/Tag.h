@@ -1,13 +1,15 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_COMPONENT_TAG_H_
-#define CLEM_COMPONENT_TAG_H_
+#pragma once
 
 #include "Clem/Core/Math/Math.h"
 #include "Component.h"
 
 #include <string>
+
+namespace clem
+{
 
 /**
  * @brief 标签组件.
@@ -24,4 +26,4 @@ public:
 	}
 };
 
-#endif // !CLEM_COMPONENT_TAG_H_
+} // namespace clem

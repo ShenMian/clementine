@@ -201,7 +201,6 @@ private:
 
 	Sound  pop, score;
 	Source up, down, left, right;
-	Audio& audio = Audio::get();
 
 	Random random;
 

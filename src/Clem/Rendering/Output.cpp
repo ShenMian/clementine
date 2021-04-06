@@ -4,6 +4,9 @@
 #include "Output.h"
 #include "Clem/Profiler.h"
 
+namespace clem
+{
+
 Output::Output()
 {
 	front = &buffer[0];
@@ -43,3 +46,5 @@ const Size2i& Output::getSize()
 {
 	return buffer[0].getSize();
 }
+
+} // namespace clem

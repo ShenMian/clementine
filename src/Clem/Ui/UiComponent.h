@@ -6,6 +6,9 @@
 #include "Clem/Core/Math/Math.h"
 #include "Clem/Rendering/Sprite.h"
 
+namespace clem
+{
+
 // TODO: Entity, Sprite µÄ½áºÏ
 class UIComponent : protected Sprite
 {
@@ -16,3 +19,5 @@ public:
 	void  setSize(const Size2 s);
 	Size2 getSize() const;
 };
+
+} // namespace clem

@@ -3,6 +3,11 @@
 
 #include "Script.h"
 
+namespace clem
+{
+
 void Script::update(float dt)
 {
 }
+
+} // namespace clem

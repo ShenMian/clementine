@@ -82,7 +82,7 @@ struct WaveData
 	int32_t size;
 };
 
-void Sound::loadWavFile(const std::filesystem::path& path, ALenum& format, unsigned char*& data, ALsizei& size, ALsizei& frequency)
+void Sound::loadWavFile(const path& path, ALenum& format, unsigned char*& data, ALsizei& size, ALsizei& freq)
 {
 	std::ifstream file(path, std::ios::binary);
 	Assert::isTrue(file.is_open(), fmt::format("the file could not be opened: '{}'", path.string()), CALL_INFO);
@@ -101,26 +101,27 @@ void Sound::loadWavFile(const std::filesystem::path& path, ALenum& format, unsig
 	if(waveFormat.size > 16)
 		file.seekg(2, std::ios::cur);
 
-	char headId[5] = {'\0'};
+	char id[4];
+	file.read(id, 4);
 
-	file.read(headId, 4);
-
-	if(strcmp(headId, "LIST") == 0)
+	// 如果 WAV 文件是由其他格式转换而来, 会包含 ID 为 LIST 的格式转换信息.
+	// 跳过这部分内容, 来直接获取音频样本数据.
+	if(memcmp(id, "LIST", 4) == 0)
 	{
 		int32_t size;
 		file.read((char*)&size, sizeof(size));
-		file.seekg(size, std::ios::cur); // 跳过 格式转换信息
-		file.read(headId, 4);
+		file.seekg(size, std::ios::cur);
+		file.read(id, 4);
 	}
 
-	Assert::isTrue(strcmp(headId, "data") == 0, CALL_INFO);
+	Assert::isTrue(memcmp(id, "data", 4) == 0, CALL_INFO);
 
 	file.seekg(-4, std::ios::cur);
 	file.read((char*)&waveData, sizeof(WaveData));
 
 	format    = 0;
 	size      = waveData.size;
-	frequency = waveFormat.sampleRate;
+	freq = waveFormat.sampleRate;
 
 	if(waveFormat.numChannels == 1)
 	{

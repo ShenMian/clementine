@@ -45,13 +45,13 @@ private:
 	/**
 	 * 从 WAV 文件载入声音.
 	 *
-	 * @param path      文件路径
-	 * @param format    格式
-	 * @param data      声音数据缓冲区
-	 * @param size      声音数据缓冲区大小
-	 * @param frequency 声音频率
+	 * @param path   文件路径
+	 * @param format 格式
+	 * @param data   声音数据缓冲区
+	 * @param size   声音数据缓冲区大小
+	 * @param freq   声音频率
 	 */
-	void loadWavFile(const std::filesystem::path& path, ALenum& format, unsigned char*& data, ALsizei& size, ALsizei& frequency);
+	static void loadWavFile(const std::filesystem::path& path, ALenum& format, unsigned char*& data, ALsizei& size, ALsizei& freq);
 
 	id_t id;
 };

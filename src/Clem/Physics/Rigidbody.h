@@ -6,6 +6,8 @@
 #include "Clem/Components/Component.h"
 #include "Clem/Core/Math/Math.h"
 
+namespace clem
+{
 /**
  * @addtogroup Physics
  * @{
@@ -42,3 +44,4 @@ private:
  * end of Physics group
  * @}
  */
+} // namespace clem

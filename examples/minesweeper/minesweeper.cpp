@@ -204,7 +204,6 @@ private:
 
 	Sound  opening, explode;
 	Source source;
-	Audio& audio = Audio::get();
 
 	Random random;
 

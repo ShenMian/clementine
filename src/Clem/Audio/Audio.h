@@ -14,16 +14,12 @@
 class Audio
 {
 public:
-	typedef ALuint id_t;
-
-	static Audio& get();
-
 	static void init();
 	static void deinit();
 
-private:
-	Audio() = default;
+	Audio() = delete;
 
+private:
 	static ALCdevice*  device;
 	static ALCcontext* context;
 };

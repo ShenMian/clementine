@@ -12,12 +12,6 @@ using namespace std::filesystem;
 ALCdevice*  Audio::device  = nullptr;
 ALCcontext* Audio::context = nullptr;
 
-Audio& Audio::get()
-{
-	static Audio instance;
-	return instance;
-}
-
 void Audio::init()
 {
 	PROFILE_FUNC();
@@ -25,6 +19,14 @@ void Audio::init()
 	Assert::isNull(device, "aleardy opened a audio device", CALL_INFO);
 	device = alcOpenDevice(nullptr); // 获取首选设备
 	Assert::isNotNull(device, "can't open audio device", CALL_INFO);
+
+	const ALCchar* name = nullptr;
+	if(alcIsExtensionPresent(device, "ALC_ENUMERATE_ALL_EXT"))
+		name = alcGetString(device, ALC_ALL_DEVICES_SPECIFIER);
+	if(!name || alcGetError(device) != AL_NO_ERROR)
+		name = alcGetString(device, ALC_DEVICE_SPECIFIER);
+	CLEM_CORE_INFO("opened audio device: '{}'", name);
+
 	context = alcCreateContext(device, nullptr);
 	alcMakeContextCurrent(context);
 }

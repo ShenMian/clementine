@@ -3,6 +3,9 @@
 
 #include "Text.h"
 
+namespace clem
+{
+
 void Text::setText(std::wstring_view t, Color color)
 {
 	// const auto& pos  = getPisition();
@@ -24,3 +27,5 @@ void Text::setText(std::wstring_view t, Color color)
 		}
 	}
 }
+
+} // namespace clem

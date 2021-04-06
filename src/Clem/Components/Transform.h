@@ -1,11 +1,14 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_COMPONENT_TRANSFORM_H_
-#define CLEM_COMPONENT_TRANSFORM_H_
+#pragma once
 
-#include "Clem/Components/Component.h"
 #include "Clem/Core/Math/Math.h"
+#include "Component.h"
+
+namespace clem
+{
+
 /**
  * @brief 变换组件.
  */
@@ -24,4 +27,4 @@ private:
 	bool       dirty  = true;
 };
 
-#endif // !CLEM_COMPONENT_TRANSFORM_H_
+} // namespace clem

@@ -6,6 +6,8 @@
 #include "Rigidbody.h"
 #include <cassert>
 
+namespace clem
+{
 Point2 Collider::getPosition() const
 {
 	return Point2(); // rigidbody->getOwner()->getPosition() + offset;
@@ -30,3 +32,4 @@ Rigidbody* Collider::getRigidbody() const
 {
 	return rigidbody;
 }
+} // namespace clem

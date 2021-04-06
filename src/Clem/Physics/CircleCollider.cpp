@@ -5,6 +5,9 @@
 #include "CircleCollider.h"
 #include <cassert>
 
+namespace clem
+{
+
 CircleCollider::CircleCollider(float r)
 		: radius(r)
 {
@@ -19,3 +22,5 @@ float CircleCollider::getRadius() const
 {
 	return radius;
 }
+
+} // namespace clem

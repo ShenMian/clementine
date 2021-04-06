@@ -1,14 +1,16 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_RENDERER_SPRITE_H_
-#define CLEM_RENDERER_SPRITE_H_
+#pragma once
 
 #include "Clem/Components/Component.h"
 #include "Clem/Core/Math/Math.h"
 #include "Tile.h"
 #include <filesystem>
 #include <vector>
+
+namespace clem
+{
 
 /**
  * @brief 精灵.
@@ -109,4 +111,4 @@ private:
 	std::vector<Tile> buffer;
 };
 
-#endif // !CLEM_RENDERER_SPRITE_H_
+} // namespace clem

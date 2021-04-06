@@ -93,4 +93,9 @@ Vector2 Source::getVelocity()
 	alGetSource3f(id, AL_VELOCITY, &x, &y, &z);
 	return Point2(x, y);
 }
+
+Source::operator id_t() const
+{
+	return id;
+}
 } // namespace clem

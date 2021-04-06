@@ -6,8 +6,11 @@
 #include "UIComponent.h"
 #include <string>
 
+namespace clem
+{
+
 /**
- * @addtogroup Ui
+ * @addtogroup UI
  * @{
  */
 
@@ -25,3 +28,5 @@ private:
  * end of Ui group
  * @}
  */
+
+} // namespace clem

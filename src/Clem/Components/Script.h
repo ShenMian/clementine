@@ -1,11 +1,13 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_COMPONENT_SCRIPT_H_
-#define CLEM_COMPONENT_SCRIPT_H_
+#pragma once
 
 #include "Component.h"
 #include <functional>
+
+namespace clem
+{
 
 /**
  * @brief 脚本组件.
@@ -20,4 +22,4 @@ public:
 	std::function<void(float)> onUpdate;
 };
 
-#endif // !CLEM_COMPONENT_SCRIPT_H_
+} // namespace clem

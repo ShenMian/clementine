@@ -95,6 +95,8 @@ public:
 	 */
 	Vector2 getVelocity();
 
+	operator id_t() const;
+
 private:
 	id_t id;
 };

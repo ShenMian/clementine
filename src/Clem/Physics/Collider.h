@@ -5,6 +5,9 @@
 
 #include "Clem/Core/Math/Math.h"
 
+namespace clem
+{
+
 class Rigidbody;
 class BoxCollider;
 class CircleCollider;
@@ -58,3 +61,5 @@ private:
  * end of Physics group
  * @}
  */
+
+} // namespace clem

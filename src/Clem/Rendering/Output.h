@@ -1,11 +1,13 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_RENDERER_RENDERER_H_
-#define CLEM_RENDERER_RENDERER_H_
+#pragma once
 
 #include "Clem/Core/Math/Vector2i.h"
 #include "Framebuffer.h"
+
+namespace clem
+{
 
 class Output
 {
@@ -42,4 +44,4 @@ private:
 	Framebuffer  buffer[2];
 };
 
-#endif // !CLEM_RENDERER_RENDERER_H_
+} // namespace clem

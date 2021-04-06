@@ -3,6 +3,9 @@
 
 #include "Transform.h"
 
+namespace clem
+{
+
 const Point2& Transform::getPosition()
 {
 	return position;
@@ -21,3 +24,5 @@ void Transform::setLocalPosition(const Point2& p)
 	// TODO
 	position = localPosition;
 }
+
+} // namespace clem

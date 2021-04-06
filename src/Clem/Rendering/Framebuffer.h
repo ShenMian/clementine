@@ -1,14 +1,16 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_RENDERER_H_
-#define CLEM_RENDERER_H_
+#pragma once
 
 #include "Clem/Core/Math/Rect2.h"
 #include "Clem/Core/Math/Vector2i.h"
 #include "Clem/Platform.h"
 #include "Sprite.h"
 #include <vector>
+
+namespace clem
+{
 
 #ifdef OS_UNIX
 typedef Tile buffer_t;
@@ -101,4 +103,4 @@ private:
 	std::vector<buffer_t> buffer;
 };
 
-#endif // !CLEM_RENDERER_H_
+} // namespace clem
