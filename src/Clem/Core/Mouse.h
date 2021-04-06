@@ -34,13 +34,12 @@ public:
 	 */
 	static void setKeyState(Key k, bool s);
 
-	static Point2i getPosition();
-
-	static void setPosition(Point2i p);
+	static Point2 getPosition();
+	static void   setPosition(Point2 p);
 
 private:
 	static std::unordered_map<Key, bool> states;
-	static Point2i                       position;
+	static Point2                        position;
 };
 
 enum class Mouse::Key : uint8_t

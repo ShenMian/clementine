@@ -17,7 +17,7 @@ public:
 
 	virtual void update(float dt);
 
-	std::function<void(float)> onUpdate = std::bind(&Script::update, this, std::placeholders::_1);
+	std::function<void(float)> onUpdate;
 };
 
 #endif // !CLEM_COMPONENT_SCRIPT_H_

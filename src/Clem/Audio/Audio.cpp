@@ -6,6 +6,7 @@
 #include <fstream>
 #include <stdint.h>
 
+using namespace clem;
 using namespace std::filesystem;
 
 ALCdevice*  Audio::device;

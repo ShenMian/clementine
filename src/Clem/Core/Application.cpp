@@ -11,6 +11,7 @@
 #include <clocale>
 #include <csignal>
 
+using namespace clem;
 using std::shared_ptr;
 using std::string;
 using std::chrono::milliseconds;

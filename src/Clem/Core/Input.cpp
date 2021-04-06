@@ -83,8 +83,8 @@ void Input::update()
 		switch(rec.Event.MouseEvent.dwEventFlags)
 		{
 		case MOUSE_MOVED:
-			Mouse::setPosition({rec.Event.MouseEvent.dwMousePosition.X,
-													rec.Event.MouseEvent.dwMousePosition.Y});
+			Mouse::setPosition({(float)rec.Event.MouseEvent.dwMousePosition.X,
+													(float)rec.Event.MouseEvent.dwMousePosition.Y});
 			dispatcher.dispatch(MouseEvent(MouseEvent::Type::move,
 																		 {(float)rec.Event.MouseEvent.dwMousePosition.X,
 																			(float)rec.Event.MouseEvent.dwMousePosition.Y}));
@@ -118,8 +118,11 @@ void Input::update()
 		break;
 	}
 
-	Mouse::setKeyState(Mouse::Key::left, rec.Event.MouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED);
-	Mouse::setKeyState(Mouse::Key::right, rec.Event.MouseEvent.dwButtonState & RIGHTMOST_BUTTON_PRESSED);
+	if(rec.EventType == MOUSE_EVENT)
+	{
+		Mouse::setKeyState(Mouse::Key::left, rec.Event.MouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED);
+		Mouse::setKeyState(Mouse::Key::right, rec.Event.MouseEvent.dwButtonState & RIGHTMOST_BUTTON_PRESSED);
+	}
 }
 
 void Input::init()

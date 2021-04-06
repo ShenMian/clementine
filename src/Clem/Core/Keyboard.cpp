@@ -10,8 +10,10 @@ std::unordered_map<Keyboard::Key, bool> Keyboard::states;
 
 bool Keyboard::getKeyState(Key k)
 {
-	assert(states.find(k) != states.end());
-	return states[k];
+	if(states.find(k) != states.end())
+		return states[k];
+	else 
+		return false;
 }
 
 void Keyboard::setKeyState(Key k, bool s)

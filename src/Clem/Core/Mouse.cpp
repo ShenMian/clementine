@@ -7,12 +7,14 @@
 namespace clem
 {
 std::unordered_map<Mouse::Key, bool> Mouse::states;
-Point2i                              Mouse::position;
+Point2                               Mouse::position;
 
 bool Mouse::getKeyState(Key k)
 {
-	assert(states.find(k) != states.end());
-	return states[k];
+	if(states.find(k) != states.end())
+		return states[k];
+	else
+		return false;
 }
 
 void Mouse::setKeyState(Key k, bool s)
@@ -20,12 +22,12 @@ void Mouse::setKeyState(Key k, bool s)
 	states[k] = s;
 }
 
-Point2i Mouse::getPosition()
+Point2 Mouse::getPosition()
 {
 	return position;
 }
 
-void Mouse::setPosition(Point2i p)
+void Mouse::setPosition(Point2 p)
 {
 	position = p;
 }

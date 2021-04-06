@@ -43,6 +43,7 @@ group "Examples"
   include "examples/sort"
   include "examples/gamepad"
   include "examples/2048"
+  include "examples/sound"
 group ""
 
 group "Thirdparty"

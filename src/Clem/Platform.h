@@ -37,3 +37,17 @@
 #if !defined(OS_UNIX) && !defined(OS_WIN)
 #	error This platform is not supported.
 #endif
+
+#ifdef __GNUC__
+#	define GCC_VERSION_AT_LEAST(x, y) (__GNUC__ > (x) || __GNUC__ == (x) && __GNUC_MINOR__ >= (y))
+#else
+#	define GCC_VERSION_AT_LEAST(x, y) 0
+#endif
+
+#if GCC_VERSION_AT_LEAST(3, 1)
+#	define DEPRECATED __attribute__((deprecated))
+#elif defined(_MSC_VER)
+#	define DEPRECATED __declspec(deprecated)
+#else
+#	define DEPRECATED
+#endif

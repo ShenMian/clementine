@@ -10,14 +10,16 @@
 #include "spdlog/spdlog.h"
 #pragma warning(pop)
 
-constexpr int log_active_level = 1;
-
 constexpr int log_level_trace = 0;
 constexpr int log_level_debug = 1;
 constexpr int log_level_info  = 2;
 constexpr int log_level_warn  = 3;
 constexpr int log_level_error = 4;
 constexpr int log_level_fatal = 5;
+
+constexpr int log_active_level = 1;
+
+static_assert(log_level_trace <= log_active_level && log_active_level <= log_level_fatal);
 
 /**
  * @brief 日志.

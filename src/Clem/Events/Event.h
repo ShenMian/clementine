@@ -1,9 +1,11 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_EVENT_EVENT_H_
-#define CLEM_EVENT_EVENT_H_
+#pragma once
 
+/**
+ * @brief 事件.
+ */
 class Event
 {
 public:
@@ -21,5 +23,3 @@ public:
 	{                                 \
 		return Event::Type::type;       \
 	}
-
-#endif // !CLEM_EVENT_EVENT_H_
