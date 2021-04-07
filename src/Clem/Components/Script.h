@@ -8,7 +8,6 @@
 
 namespace clem
 {
-
 /**
  * @brief 脚本组件.
  */
@@ -21,5 +20,4 @@ public:
 
 	std::function<void(float)> onUpdate;
 };
-
 } // namespace clem

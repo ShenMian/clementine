@@ -11,7 +11,6 @@ using namespace std::filesystem;
 
 namespace clem
 {
-
 Sprite::Sprite(const Size2i& size)
 {
 	setSize(size);
@@ -142,7 +141,6 @@ const Size2i& Sprite::getSize() const
 {
 	return size;
 }
-
 } // namespace clem
 
 /*

@@ -8,7 +8,6 @@
 
 namespace clem
 {
-
 /**
  * @brief 变换组件.
  */
@@ -26,5 +25,4 @@ private:
 	Transform* parent = nullptr;
 	bool       dirty  = true;
 };
-
 } // namespace clem

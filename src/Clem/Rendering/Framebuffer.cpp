@@ -10,7 +10,6 @@
 
 namespace clem
 {
-
 void Framebuffer::drawSprite(const Point2i& p, const Sprite& s)
 {
 	const auto& siz = s.getSize();
@@ -236,5 +235,4 @@ void Framebuffer::output()
 }
 
 #endif
-
 } // namespace clem

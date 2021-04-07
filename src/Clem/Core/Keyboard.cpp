@@ -12,7 +12,7 @@ bool Keyboard::getKeyState(Key k)
 {
 	if(states.find(k) != states.end())
 		return states[k];
-	else 
+	else
 		return false;
 }
 

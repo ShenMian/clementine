@@ -8,7 +8,6 @@
 
 namespace clem
 {
-
 class Output
 {
 public:
@@ -43,5 +42,4 @@ private:
 	Framebuffer* back;
 	Framebuffer  buffer[2];
 };
-
 } // namespace clem

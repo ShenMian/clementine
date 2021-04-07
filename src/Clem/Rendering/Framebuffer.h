@@ -11,7 +11,6 @@
 
 namespace clem
 {
-
 #ifdef OS_UNIX
 typedef Tile buffer_t;
 #endif
@@ -102,5 +101,4 @@ private:
 	Size2i                size;
 	std::vector<buffer_t> buffer;
 };
-
 } // namespace clem

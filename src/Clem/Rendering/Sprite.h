@@ -11,7 +11,6 @@
 
 namespace clem
 {
-
 /**
  * @brief 精灵.
  */
@@ -110,5 +109,4 @@ private:
 	Size2i            size;
 	std::vector<Tile> buffer;
 };
-
 } // namespace clem

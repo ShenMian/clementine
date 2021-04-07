@@ -5,9 +5,7 @@
 
 namespace clem
 {
-
 void UIComponent::setPosition(const Point2& p)
 {
 }
-
 } // namespace clem

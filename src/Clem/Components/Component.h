@@ -5,9 +5,7 @@
 
 namespace clem
 {
-
 class Component
 {
 };
-
 } // namespace clem

@@ -119,9 +119,9 @@ void Sound::loadWavFile(const path& path, ALenum& format, unsigned char*& data, 
 	file.seekg(-4, std::ios::cur);
 	file.read((char*)&waveData, sizeof(WaveData));
 
-	format    = 0;
-	size      = waveData.size;
-	freq = waveFormat.sampleRate;
+	format = 0;
+	size   = waveData.size;
+	freq   = waveFormat.sampleRate;
 
 	if(waveFormat.numChannels == 1)
 	{

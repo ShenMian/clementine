@@ -26,8 +26,8 @@ void Input::update()
 	Keyboard::setKeyState((Keyboard::Key)vk, true);
 }
 
-#include <termios.h>
-#include <unistd.h>
+#	include <termios.h>
+#	include <unistd.h>
 
 void Input::init()
 {

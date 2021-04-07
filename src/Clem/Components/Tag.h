@@ -10,7 +10,6 @@
 
 namespace clem
 {
-
 /**
  * @brief 标签组件.
  */
@@ -25,5 +24,4 @@ public:
 	{
 	}
 };
-
 } // namespace clem

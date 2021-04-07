@@ -8,7 +8,6 @@
 
 namespace clem
 {
-
 /**
  * @addtogroup UI
  * @{
@@ -28,5 +27,4 @@ private:
  * end of Ui group
  * @}
  */
-
 } // namespace clem

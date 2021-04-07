@@ -8,7 +8,6 @@
 
 namespace clem
 {
-
 /**
  * @addtogroup Physics
  * @{
@@ -47,5 +46,4 @@ private:
  * end of Physics group
  * @}
  */
-
 } // namespace clem
