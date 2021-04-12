@@ -89,9 +89,9 @@ struct Vector2
 	/**
 	 * @brief 获取角度.
 	 *
-	 * @return 角度, 弧度制.
+	 * @return 角度, 弧度制. 范围: [2π, -2π)
 	 */
-	float getAngle() const;
+	float angle() const;
 
 	/**
 	 * @brief 获取与另一个点之间的中点.

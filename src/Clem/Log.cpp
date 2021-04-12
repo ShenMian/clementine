@@ -4,10 +4,15 @@
 #include "Log.h"
 #include "Clem/Profiler.h"
 #include "spdlog/sinks/rotating_file_sink.h"
+#include "spdlog/sinks/basic_file_sink.h"
 
 using namespace spdlog;
+using namespace std;
 
-static std::shared_ptr<logger> coreLogger;
+static shared_ptr<logger> engineLogger;
+
+static std::vector<logger> loggers;
+static auto                sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>("logs/core.log", true);
 
 void Log::init()
 {
@@ -15,7 +20,18 @@ void Log::init()
 
 	try
 	{
-		coreLogger = rotating_logger_mt("engine", "logs/clem.log", 1024 * 1024 * 5, 3);
+		loggers.emplace_back("core", sink);
+		loggers.back().set_pattern("[%D %T][thread %t][%L] %v.");
+	}
+	catch(const spdlog_ex& e)
+	{
+		printf("Logger init failed: %s", e.what());
+		abort();
+	}
+
+	try
+	{
+		engineLogger = rotating_logger_mt("engine", "logs/clem.log", 1024 * 1024 * 5, 3);
 	}
 	catch(const spdlog_ex& e)
 	{
@@ -23,19 +39,22 @@ void Log::init()
 		assert(false);
 	}
 
-	coreLogger->set_pattern("[%D %T][thread %t][%L] %n : %v.");
+	engineLogger->set_pattern("[%D %T][thread %t][%L] %n : %v.");
 	flush_every(std::chrono::seconds(1));
+
+	CLEM_LOG_INFO("core", "log init");
 }
 
 void Log::deinit()
 {
 	PROFILE_FUNC();
+	CLEM_LOG_INFO("core", "log deinit");
 
-	coreLogger->flush();
+	engineLogger->flush();
 }
 
-std::shared_ptr<logger> Log::getLogger()
+shared_ptr<logger> Log::getLogger()
 {
-	assert(coreLogger != nullptr);
-	return coreLogger;
+	assert(engineLogger != nullptr);
+	return engineLogger;
 }

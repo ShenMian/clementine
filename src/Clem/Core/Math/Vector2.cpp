@@ -59,7 +59,7 @@ float Vector2::dot(const Vector2& v) const
 	return x * v.x + y * v.y;
 }
 
-float Vector2::getAngle() const
+float Vector2::angle() const
 {
 	return std::atan2(y, x);
 }

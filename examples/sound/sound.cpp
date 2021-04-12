@@ -19,19 +19,13 @@ public:
 	{
 		pushScene(scene);
 
-		auto i = Listener::getPosition();
-
-		scene->createEntity("source").addComponent<Sprite>(Size2i(1, 1)).drawPoint({0, 0}, '*');
-
-		auto& listener = scene->createEntity("listener");
-		listener.addComponent<Sprite>(Size2i(1, 1)).drawPoint({0, 0}, '@');
-		listener.getComponent<Transform>().setLocalPosition(Point2(size.x / 2, size.y / 2));
-
 		sound.loadFromFile("../pong/assets/pop.wav");
 		source.setLoop(true);
 		source.play(sound);
 
-		scene->createEntity().addComponent<Script>().onUpdate = [&](float dt) {
+		auto& s = scene->createEntity("source");
+		s.addComponent<Sprite>(Size2i(1, 1)).drawPoint({0, 0}, '*');
+		s.addComponent<Script>([&](float) {
 			if(Mouse::getKeyState(Mouse::Key::left))
 			{
 				auto& ts  = scene->getEntity("source").getComponent<Transform>();
@@ -39,8 +33,12 @@ public:
 				ts.setLocalPosition(pos);
 				source.setPosition(ts.getPosition());
 			}
+		});
 
-			{
+		auto& l = scene->createEntity("listener");
+		l.addComponent<Sprite>(Size2i(1, 1)).drawPoint({0, 0}, '@');
+		l.getComponent<Transform>().setLocalPosition(Point2(size.x / 2, size.y / 2));
+		l.addComponent<Script>().onUpdate = [&](float dt) {
 				auto& ts = scene->getEntity("listener").getComponent<Transform>();
 				if(Keyboard::getKeyState(Keyboard::Key::W))
 					ts.setLocalPosition(ts.getLocalPosition() + Vector2::down * 5 * dt);
@@ -51,15 +49,14 @@ public:
 				if(Keyboard::getKeyState(Keyboard::Key::D))
 					ts.setLocalPosition(ts.getLocalPosition() + Vector2::right * 5 * dt);
 				Listener::setPosition(ts.getPosition());
-			}
 		};
 	}
 
 private:
-	Size2i            size = Window::getSize();
 	clem::Sound       sound;
 	Source            source;
 	Random            random;
+	Size2i            size  = Window::getSize();
 	shared_ptr<Scene> scene = make_shared<Scene>();
 };
 

@@ -5,6 +5,7 @@
 
 #include <cassert>
 #include <memory>
+#include <vector>
 
 #pragma warning(push, 0)
 #include "spdlog/spdlog.h"
@@ -45,6 +46,8 @@ enum class Log::Level
 	fatal
 };
 
+#define CLEM_LOG_INFO(name, ...) Log::getLogger()->info(name##" : "##__VA_ARGS__)
+
 #define CLEM_CORE_TRACE(...) Log::getLogger()->trace(__VA_ARGS__)
 #define CLEM_CORE_INFO(...)  Log::getLogger()->info(__VA_ARGS__)
 #define CLEM_CORE_WARN(...)  Log::getLogger()->warn(__VA_ARGS__)
@@ -54,4 +57,4 @@ enum class Log::Level
 	{                                          \
 		Log::getLogger()->critical(__VA_ARGS__); \
 		assert(false);                           \
-	} while(0)
+	} while(false)

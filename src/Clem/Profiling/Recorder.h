@@ -9,6 +9,9 @@
 
 class Session;
 
+/**
+ * CPU 样本.
+ */
 struct CpuSample
 {
 	std::string_view                          name;
@@ -17,6 +20,9 @@ struct CpuSample
 	std::thread::id                           threadId;
 };
 
+/**
+ * @brief 样本收集器.
+ */
 class Recorder
 {
 	using time_point = std::chrono::time_point<std::chrono::steady_clock>;

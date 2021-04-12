@@ -15,6 +15,7 @@ ALCcontext* Audio::context = nullptr;
 void Audio::init()
 {
 	PROFILE_FUNC();
+	CLEM_CORE_INFO("audio init");
 
 	Assert::isNull(device, "aleardy opened a audio device", CALL_INFO);
 	device = alcOpenDevice(nullptr); // 获取首选设备
@@ -34,6 +35,7 @@ void Audio::init()
 void Audio::deinit()
 {
 	PROFILE_FUNC();
+	CLEM_CORE_INFO("audio deinit");
 
 	alcMakeContextCurrent(nullptr);
 	alcDestroyContext(context);

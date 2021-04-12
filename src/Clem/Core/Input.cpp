@@ -7,6 +7,7 @@
 #include "Clem/Events/MouseEvent.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
+#include "Clem/Log.h"
 #include "Keyboard.h"
 #include "Mouse.h"
 
@@ -31,6 +32,9 @@ void Input::update()
 
 void Input::init()
 {
+	PROFILE_FUNC();
+	CLEM_CORE_INFO("input init");
+
 	termios opts;
 	tcgetattr(0, &opts);          // grab old terminal i/o settings
 	opts.c_lflag &= ~ICANON;      // disable buffered i/o
@@ -40,6 +44,9 @@ void Input::init()
 
 void Input::deinit()
 {
+	PROFILE_FUNC();
+	CLEM_CORE_INFO("input deinit");
+
 	termios opts;
 	tcgetattr(0, &opts);
 	opts.c_lflag &= ICANON;
@@ -132,10 +139,14 @@ void Input::update()
 
 void Input::init()
 {
+	PROFILE_FUNC();
+	CLEM_CORE_INFO("input init");
 }
 
 void Input::deinit()
 {
+	PROFILE_FUNC();
+	CLEM_CORE_INFO("input deinit");
 }
 
 #endif

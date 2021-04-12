@@ -77,7 +77,7 @@ public:
 
 				// Ò¡¸Ë
 				auto& LT      = gamepad.get(clem::Gamepad::Thumb::left);
-				auto  LTAngle = LT.getAngle() * rad_to_deg;
+				auto  LTAngle = LT.angle() * rad_to_deg;
 				sprite->drawString({13, 6},
 													 LTAngle == 0 && LT.size() ? L"--" : L"  ", Color::red);
 				sprite->drawPoint({13, 5},
@@ -96,7 +96,7 @@ public:
 													90 < LTAngle && LTAngle < 180 ? Tile('\\', Color::red) : ' ');
 
 				auto& RT      = gamepad.get(clem::Gamepad::Thumb::right);
-				auto  RTAngle = RT.getAngle() * rad_to_deg;
+				auto  RTAngle = RT.angle() * rad_to_deg;
 				sprite->drawString({13 + 23, 6 + 4},
 													 RTAngle == 0 && RT.size() ? L"--" : L"  ", Color::red);
 				sprite->drawPoint({13 + 23, 5 + 4},
