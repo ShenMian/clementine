@@ -18,6 +18,7 @@ project "Clementine"
   includedirs {
     ".",
     "%{thirdparty.sdl}/include",
+    "%{thirdparty.asio}/include",
     "%{thirdparty.entt}/include",
     "%{thirdparty.spdlog}/include",
     "%{thirdparty.openal}/include",

@@ -1,8 +1,6 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-// 在 CreateApplication 之前初始化
-
 // #define SDL_MAIN_HANDLED
 // #include "SDL.h"
 
@@ -12,10 +10,12 @@
 #include <csignal>
 
 using namespace clem;
+using namespace std::chrono_literals;
 using std::shared_ptr;
 using std::string;
-using std::chrono::milliseconds;
 using std::this_thread::sleep_for;
+
+#include "asio.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -59,12 +59,14 @@ Application::Application(const string& name)
 	Log::init();
 	Audio::init();
 	Input::init();
+	Network::init();
 }
 
 Application::~Application()
 {
 	PROFILE_FUNC();
 
+	Network::deinit();
 	Input::deinit();
 	Audio::deinit();
 	Log::deinit();
@@ -93,7 +95,7 @@ void Application::run()
 		if(paused)
 		{
 			while(paused)
-				sleep_for(milliseconds(500));
+				sleep_for(500ms);
 			previous = getCurrentMillSecond();
 		}
 	}

@@ -8,7 +8,7 @@ using std::uniform_real_distribution;
 
 Random::Random()
 {
-	generator.seed(std::random_device()());
+	seed(std::random_device()());
 }
 
 void Random::seed(uint32_t seed)

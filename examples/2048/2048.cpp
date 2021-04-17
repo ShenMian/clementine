@@ -6,18 +6,10 @@
 using namespace std;
 using namespace clem;
 
-class MyScript : public Script
-{
-	void update(float) override
-	{
-		Assert::isTrue(false, CALL_INFO);
-	}
-};
-
-class Game2048 : public Application
+class App : public Application
 {
 public:
-	Game2048()
+	App()
 			: Application("2048")
 	{
 	}
@@ -27,8 +19,24 @@ public:
 		pushScene(scene);
 
 		auto& board = scene->createEntity("board");
-		board.getComponent<Transform>().setLocalPosition({3, 1});
-		sprite = &board.addComponent<Sprite>(Size2i(4 * 2, 4));
+		board.getComponent<Transform>().setLocalPosition({0, 0});
+		sprite = &board.addComponent<Sprite>(Size2i(4 * 5, 4 * 2));
+
+		board.addComponent<Script>().onUpdate = [&](float dt) {
+			static float lag = 0;
+			lag += dt;
+			if(lag < 0.1)
+				return;
+			lag = 0;
+
+			if(Keyboard::getKeyState(Keyboard::Key::A))
+			{
+				if(moveLeft())
+					generate({2});
+			}
+
+			show();
+		};
 
 		start();
 	}
@@ -36,34 +44,61 @@ public:
 	void start()
 	{
 		memset(map, 0, sizeof(map));
-		
+
 		// 生成初始的两个数字
-		generate(2, 2);
-		generate(2, 2);
-
-		moveLeft();
-
-		show();
+		generate({2});
+		generate({2});
 	}
 
-	void moveLeft()
+	bool moveLeft()
 	{
+		bool moved = false;
 		for(int y = 0; y < 4; y++)
-		{
-			;
-		}
+			for(int x = 0; x < 4 - 1; x++)
+				if(map[x][y] == 0)
+				{
+					for(int i = x + 1; i < 4; i++)
+						if(map[i][y] != 0)
+						{
+							map[x][y] = map[i][y];
+							map[i][y] = 0;
+							moved     = true;
+							break;
+						}
+				}
+				else
+				{
+					for(int i = x + 1; i < 4; i++)
+						if(map[i][y] == map[x][y])
+						{
+							map[x][y] *= 2;
+							map[i][y] = 0;
+							moved     = true;
+							break;
+						}
+				}
+		return moved;
 	}
 
-	void generate(int a, int b)
+	bool isFull()
+	{
+		for(int x = 0; x < 4; x++)
+			for(int y = 0; y < 4; y++)
+				if(map[x][y] == 0)
+					return false;
+		return true;
+	}
+
+	// 在随机位置上生成一个传入参数中的随机一个数
+	void generate(const vector<int>& nums)
 	{
 		while(true)
 		{
-			auto p = random.getPoint2i({0, 0}, {3, 3});
-			if(map[p.x][p.y] == 0)
-			{
-				map[p.x][p.y] = random.getUint32(0, 1) ? a : b;
-				break;
-			}
+			auto pos = random.getPoint2i({0, 0}, {3, 3});
+			if(map[pos.x][pos.y] != 0)
+				continue;
+			map[pos.x][pos.y] = nums[random.getUint32(0, (uint32_t)nums.size() - 1)];
+			break;
 		}
 	}
 
@@ -71,12 +106,11 @@ public:
 	{
 		for(int x = 0; x < 4; x++)
 			for(int y = 0; y < 4; y++)
-				sprite->drawPoint({x * 2, y},
-													Tile(map[x][y] ? '0' + map[x][y] : '.', map[x][y] % Color::max));
+				sprite->drawString({x * 5, y * 2}, to_wstring(map[x][y]), map[x][y] % Color::max);
 	}
 
 private:
-	char              map[4][4];
+	int               map[4][4];
 	Sprite*           sprite;
 	Random            random;
 	shared_ptr<Scene> scene = make_shared<Scene>();
@@ -84,5 +118,5 @@ private:
 
 Application* clem::CreateApplication()
 {
-	return new Game2048;
+	return new App;
 }

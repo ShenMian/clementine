@@ -22,6 +22,9 @@
 #include "Clem/Events/KeyEvent.h"
 #include "Clem/Events/MouseEvent.h"
 
+// Networking
+#include "Clem/Networking/Network.h"
+
 #include "Clem/Assert.h"
 #include "Clem/Log.h"
 #include "Clem/Platform.h"

@@ -7,10 +7,10 @@
 using namespace std;
 using namespace clem;
 
-class Gamepad : public Application
+class App : public Application
 {
 public:
-	Gamepad()
+	App()
 			: Application("Gamepad")
 	{
 	}
@@ -40,43 +40,43 @@ public:
   `....'                                            `....')");
 
 		static future<void> h = async([&]() {
-			clem::Gamepad gamepad;
+			Gamepad gamepad;
 			while(true)
 			{
 				gamepad.update();
 
 				// 按钮
 				sprite->drawPoint({46, 7},
-													Tile('A', gamepad.get(clem::Gamepad::Button::A) ? Color::red : Color::white));
+													Tile('A', gamepad.get(Gamepad::Button::A) ? Color::red : Color::white));
 				sprite->drawPoint({49, 6},
-													Tile('B', gamepad.get(clem::Gamepad::Button::B) ? Color::red : Color::white));
+													Tile('B', gamepad.get(Gamepad::Button::B) ? Color::red : Color::white));
 				sprite->drawPoint({43, 6},
-													Tile('X', gamepad.get(clem::Gamepad::Button::X) ? Color::red : Color::white));
+													Tile('X', gamepad.get(Gamepad::Button::X) ? Color::red : Color::white));
 				sprite->drawPoint({46, 5},
-													Tile('Y', gamepad.get(clem::Gamepad::Button::Y) ? Color::red : Color::white));
+													Tile('Y', gamepad.get(Gamepad::Button::Y) ? Color::red : Color::white));
 				sprite->drawPoint({34, 4},
-													Tile('S', gamepad.get(clem::Gamepad::Button::Start) ? Color::red : Color::white));
+													Tile('S', gamepad.get(Gamepad::Button::Start) ? Color::red : Color::white));
 				sprite->drawPoint({23, 4},
-													Tile('B', gamepad.get(clem::Gamepad::Button::Back) ? Color::red : Color::white));
+													Tile('B', gamepad.get(Gamepad::Button::Back) ? Color::red : Color::white));
 
 				sprite->drawPoint({23, 9},
-													gamepad.get(clem::Gamepad::Button::DPAD_Up) ? Tile('#', Color::red) : ' ');
+													gamepad.get(Gamepad::Button::DPAD_Up) ? Tile('#', Color::red) : ' ');
 				sprite->drawPoint({23, 11},
-													gamepad.get(clem::Gamepad::Button::DPAD_Down) ? Tile('#', Color::red) : '_');
+													gamepad.get(Gamepad::Button::DPAD_Down) ? Tile('#', Color::red) : '_');
 				sprite->drawPoint({21, 10},
-													gamepad.get(clem::Gamepad::Button::DPAD_Left) ? Tile('#', Color::red) : '_');
+													gamepad.get(Gamepad::Button::DPAD_Left) ? Tile('#', Color::red) : '_');
 				sprite->drawPoint({25, 10},
-													gamepad.get(clem::Gamepad::Button::DPAD_Right) ? Tile('#', Color::red) : '_');
+													gamepad.get(Gamepad::Button::DPAD_Right) ? Tile('#', Color::red) : '_');
 			
-				sprite->drawString({12, 0}, L"..", gamepad.get(clem::Gamepad::Button::Shoulder_Left) ? Color::red : Color::white);
-				sprite->drawString({43, 0}, L"..", gamepad.get(clem::Gamepad::Button::Shoulder_Right) ? Color::red : Color::white);
+				sprite->drawString({12, 0}, L"..", gamepad.get(Gamepad::Button::Shoulder_Left) ? Color::red : Color::white);
+				sprite->drawString({43, 0}, L"..", gamepad.get(Gamepad::Button::Shoulder_Right) ? Color::red : Color::white);
 
 				// 线性按钮
-				sprite->drawString({15, 0}, to_wstring(gamepad.get(clem::Gamepad::Trigger::left)) + L"   \r", gamepad.get(clem::Gamepad::Trigger::left) ? Color::red : Color::white);
-				sprite->drawString({46, 0}, to_wstring(gamepad.get(clem::Gamepad::Trigger::right)) + L"   \r", gamepad.get(clem::Gamepad::Trigger::right) ? Color::red : Color::white);
+				sprite->drawString({15, 0}, to_wstring(gamepad.get(Gamepad::Trigger::left)) + L"   \r", gamepad.get(Gamepad::Trigger::left) ? Color::red : Color::white);
+				sprite->drawString({46, 0}, to_wstring(gamepad.get(Gamepad::Trigger::right)) + L"   \r", gamepad.get(Gamepad::Trigger::right) ? Color::red : Color::white);
 
 				// 摇杆
-				auto& LT      = gamepad.get(clem::Gamepad::Thumb::left);
+				auto& LT      = gamepad.get(Gamepad::Thumb::left);
 				auto  LTAngle = LT.angle() * rad_to_deg;
 				sprite->drawString({13, 6},
 													 LTAngle == 0 && LT.size() ? L"--" : L"  ", Color::red);
@@ -95,7 +95,7 @@ public:
 				sprite->drawPoint({10, 5},
 													90 < LTAngle && LTAngle < 180 ? Tile('\\', Color::red) : ' ');
 
-				auto& RT      = gamepad.get(clem::Gamepad::Thumb::right);
+				auto& RT      = gamepad.get(Gamepad::Thumb::right);
 				auto  RTAngle = RT.angle() * rad_to_deg;
 				sprite->drawString({13 + 23, 6 + 4},
 													 RTAngle == 0 && RT.size() ? L"--" : L"  ", Color::red);
@@ -114,7 +114,7 @@ public:
 				sprite->drawPoint({10 + 23, 5 + 4},
 													90 < RTAngle && RTAngle < 180 ? Tile('\\', Color::red) : ' ');
 
-				gamepad.setVibration(gamepad.get(clem::Gamepad::Trigger::left) * 120, gamepad.get(clem::Gamepad::Trigger::right) * 120);
+				gamepad.setVibration(gamepad.get(Gamepad::Trigger::left) * 120, gamepad.get(Gamepad::Trigger::right) * 120);
 			}
 		});
 	}
@@ -126,5 +126,5 @@ private:
 
 Application* clem::CreateApplication()
 {
-	return new ::Gamepad;
+	return new App;
 }

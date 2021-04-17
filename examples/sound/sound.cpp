@@ -7,10 +7,10 @@
 using namespace std;
 using namespace clem;
 
-class Sound : public Application
+class App : public Application
 {
 public:
-	Sound()
+	App()
 			: Application("Sound")
 	{
 	}
@@ -25,7 +25,7 @@ public:
 
 		auto& s = scene->createEntity("source");
 		s.addComponent<Sprite>(Size2i(1, 1)).drawPoint({0, 0}, '*');
-		s.addComponent<Script>([&](float) {
+		s.addComponent<Script>().onUpdate = [&](float) {
 			if(Mouse::getKeyState(Mouse::Key::left))
 			{
 				auto& ts  = scene->getEntity("source").getComponent<Transform>();
@@ -33,7 +33,7 @@ public:
 				ts.setLocalPosition(pos);
 				source.setPosition(ts.getPosition());
 			}
-		});
+		};
 
 		auto& l = scene->createEntity("listener");
 		l.addComponent<Sprite>(Size2i(1, 1)).drawPoint({0, 0}, '@');
@@ -53,7 +53,7 @@ public:
 	}
 
 private:
-	clem::Sound       sound;
+	Sound             sound;
 	Source            source;
 	Random            random;
 	Size2i            size  = Window::getSize();
@@ -62,5 +62,5 @@ private:
 
 Application* clem::CreateApplication()
 {
-	return new ::Sound;
+	return new App;
 }

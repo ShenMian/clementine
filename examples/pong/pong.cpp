@@ -11,10 +11,10 @@ using namespace clem;
 
 // TODO: 碰撞检测: 乒乓球反弹, 约束球拍
 
-class Pong : public Application
+class App : public Application
 {
 public:
-	Pong()
+	App()
 			: Application("Pong")
 	{
 	}
@@ -209,5 +209,5 @@ private:
 
 Application* clem::CreateApplication()
 {
-	return new Pong;
+	return new App;
 }

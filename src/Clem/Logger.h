@@ -1,17 +1,23 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
 
 #include "spdlog/spdlog.h"
+#include <string>
 #include <memory>
 
+namespace clem
+{
+
 /**
- * ÈÕÖ¾¼ÇÂ¼Æ÷.
+ * æ—¥å¿—è®°å½•å™¨.
  */
 class Logger
 {
 public:
+	Logger(const std::string_view& name);
+
 	template <typename T>
 	void info(const T& msg);
 
@@ -28,9 +34,9 @@ private:
 	std::shared_ptr<spdlog::logger> spdlogger;
 };
 
-template<typename T>
+template <typename T>
 void Logger::info(const T& msg)
-{	
+{
 	spdlogger->info(msg);
 }
 
@@ -51,3 +57,5 @@ void Logger::fatal(const T& msg)
 {
 	spdlogger->critical(msg);
 }
+
+} // namespace clem
