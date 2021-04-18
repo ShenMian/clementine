@@ -69,6 +69,12 @@ void Connection::readHeader()
 	async_read(socket, asio::buffer(&((Message<T>*)buffer)->header, sizeof(Message<T>::header)),
 						 [this](std::error_code ec, size_t size) {
 							 assert(!ec);
+							 if(((Message<T>*)buffer)->header.size == 0)
+							 {
+								 if(onMessage)
+									 onMessage();
+								 return;
+							 }
 							 readBody<T>();
 						 });
 }
@@ -76,7 +82,7 @@ void Connection::readHeader()
 template <typename T>
 void Connection::readBody()
 {
-	async_read(socket, asio::buffer(&((Message<T>*)buffer)->header, ((Message<T>*)buffer)->header.size),
+	async_read(socket, asio::buffer(&((Message<T>*)buffer)->body.data(), ((Message<T>*)buffer)->header.size),
 						 [this](std::error_code ec, size_t size) {
 							 assert(!ec);
 							 readHeader<T>();

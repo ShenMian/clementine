@@ -136,21 +136,29 @@ void Application::renderScene(long dt)
 	{
 		scene->render(dt / 1000.0f);
 		lag -= msPerRender;
-		frames++;
 	}
 }
 
 void Application::updateFrameRate(long dt)
 {
-	static long fpsLag = 0;
-
+	// 计算帧速率
+	static long fpsLag = 0, frames = 0;
 	fpsLag += dt;
+	frames++;
 	if(fpsLag >= 1000)
 	{
 		frameRate = frames;
 		frames = fpsLag = 0;
 		Window::setTitle(name + " | " + std::to_string(frameRate) + "FPS");
 	}
+
+	// 限制主循环速度, 减少 CPU 占用
+	static long       acc    = 0;
+	static const auto target = std::min(msPerInput, std::min(msPerUpdate, msPerRender));
+	acc += dt < target ? 1 : (acc > 0 ? -1 : 0);
+	if(dt > target && acc == 0)
+		return;
+	sleep_for(std::chrono::milliseconds(target - dt + acc));
 }
 
 void Application::stop()

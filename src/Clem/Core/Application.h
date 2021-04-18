@@ -111,7 +111,6 @@ private:
 	long msPerRender = 16;
 
 	long frameRate = 0;
-	long frames    = 0;
 
 	std::vector<std::shared_ptr<Scene>> scenes;
 
