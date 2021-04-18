@@ -153,12 +153,13 @@ void Application::updateFrameRate(long dt)
 	}
 
 	// 限制主循环速度, 减少 CPU 占用
-	static long       acc    = 0;
-	static const auto target = std::min(msPerInput, std::min(msPerUpdate, msPerRender));
-	acc += dt < target ? 1 : (acc > 0 ? -1 : 0);
-	if(dt > target && acc == 0)
+	static const auto target   = std::min(msPerInput, std::min(msPerUpdate, msPerRender));
+	static long       integral = 0;
+	auto              error    = target - dt;
+	integral += error > 0 ? 1 : (integral > 0 ? -1 : 0);
+	if(error < 0 && integral == 0)
 		return;
-	sleep_for(std::chrono::milliseconds(target - dt + acc));
+	sleep_for(std::chrono::milliseconds(error + integral));
 }
 
 void Application::stop()

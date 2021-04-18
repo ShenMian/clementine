@@ -48,4 +48,24 @@ public:
 
 		return msg;
 	}
+
+	template <typename Data>
+	friend Message<T>& operator<<(Message<T>& msg, const std::vector<Data>& data)
+	{
+		for(const auto& i : data)
+			msg << i;
+		msg << data.size();
+		return msg;
+	}
+
+	template <typename Data>
+	friend Message<T>& operator>>(Message<T>& msg, std::vector<Data>& data)
+	{
+		size_t size;
+		msg >> size;
+		data.resize(size);
+		for(auto& i : data)
+			msg >> i;
+		return msg;
+	}
 };
