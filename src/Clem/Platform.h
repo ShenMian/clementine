@@ -31,6 +31,9 @@
 #ifdef OS_WIN
 #	define WIN32_LEAN_AND_MEAN
 #	define NOMINMAX
+
+#	define _WIN32_WINDOWS 0x0A00 // Windows 10
+#	define _WINSOCK_DEPRECATED_NO_WARNINGS
 #	include <windows.h>
 #endif
 

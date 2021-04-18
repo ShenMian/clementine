@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Server.h"
+#include "Connection.h"
 
 using namespace asio;
 
@@ -38,19 +39,49 @@ bool Server::start(std::uint16_t port)
 
 void Server::stop()
 {
-	for(auto& con : connections)
-		con->disconnect();
+	for(auto& conn : connections)
+		conn->disconnect();
 	context.stop();
 	if(thread.joinable())
 		thread.join();
 }
 
+void Server::write(std::shared_ptr<Connection> conn)
+{
+	assert(conn);
+
+	if(!conn->isConnected())
+	{
+		if(onDisconnect)
+			onDisconnect(conn);
+		connections.erase(std::find(connections.begin(), connections.end(), conn));
+	}
+}
+
+void Server::read(std::shared_ptr<Connection> conn)
+{
+	assert(conn);
+
+	if(!conn->isConnected())
+	{
+		if(onDisconnect)
+			onDisconnect(conn);
+		connections.erase(std::find(connections.begin(), connections.end(), conn));
+	}
+}
+
 void Server::acceptAsync()
 {
 	acceptor.async_accept([this](std::error_code ec, ip::tcp::socket sock) {
-		assert(!ec);
+		if(ec)
+		{
+			acceptAsync();
+		}
 
-		connections.push_back(std::make_shared<Connection>(context, std::move(sock)));
+		auto ptr = std::make_shared<Connection>(context, std::move(sock));
+		if(!onConnect || onConnect(ptr))
+			connections.push_back(ptr);
+
 		acceptAsync();
 	});
 }

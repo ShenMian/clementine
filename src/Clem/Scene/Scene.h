@@ -5,6 +5,8 @@
 
 #include "entt/entt.hpp"
 #include <string>
+#include <unordered_map>
+#include <cstdint>
 
 namespace clem
 {

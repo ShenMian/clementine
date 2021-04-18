@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Clem/Platform.h"
 #include "Connection.h"
 #include "asio.hpp"
 #include <cstdint>
@@ -19,8 +20,14 @@ public:
 
 	bool isConnected() const;
 
+	template <typename T>
+	void write(const Message<T>& msg)
+	{
+		connection.write(msg);
+	}
+
 private:
 	asio::io_context context;
-	std::thread      thread;
 	Connection       connection;
+	std::thread      thread;
 };

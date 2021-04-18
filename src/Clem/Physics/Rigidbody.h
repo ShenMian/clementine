@@ -5,6 +5,7 @@
 
 #include "Clem/Components/Component.h"
 #include "Clem/Core/Math/Math.h"
+#include "Clem/Scene/Entity.h"
 
 namespace clem
 {
@@ -35,9 +36,13 @@ public:
 	 */
 	void setMass(float m);
 
+	void          setEntity(const Entity&);
+	const Entity& getEntity() const;
+
 private:
 	float   mass = 1.0f;
 	Vector2 acceleration;
+	Entity  entity;
 };
 
 /**

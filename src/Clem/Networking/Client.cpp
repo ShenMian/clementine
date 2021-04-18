@@ -15,15 +15,11 @@ Client::~Client()
 	disconnect();
 }
 
-bool Client::connect(const std::string_view& host, uint16_t port)
+bool Client::connect(const std::string_view& host, std::uint16_t port)
 {
 	try
 	{
-		ip::tcp::resolver        resolver(context);
-		ip::tcp::resolver::query query(std::string(host), std::to_string(port));
-		auto                     it = resolver.resolve(query);
-
-		connection.connect(it->endpoint());
+		connection.connect(host, port);
 
 		thread = std::thread([this]() { context.run(); });
 	}

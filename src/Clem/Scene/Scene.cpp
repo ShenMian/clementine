@@ -23,11 +23,11 @@ Entity Scene::createEntity(const string& tag)
 	return e;
 }
 
-Entity Scene::getEntity(const string_view& tag_)
+Entity Scene::getEntity(const string_view& tag)
 {
 	auto view = registry.view<Tag>();
-	for(auto [e, tag] : view.each())
-		if(tag.string == tag_)
+	for(auto [e, t] : view.each())
+		if(t.string == tag)
 			return Entity(e, this);
 	CLEM_CORE_ERROR("get entity with invalid a tag");
 	return Entity();

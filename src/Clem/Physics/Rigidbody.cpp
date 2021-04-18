@@ -16,4 +16,14 @@ void Rigidbody::setMass(float m)
 	assert(m > 0);
 	mass = m;
 }
+
+void Rigidbody::setEntity(const Entity& e)
+{
+	entity = e;
+}
+
+const Entity& Rigidbody::getEntity() const
+{
+	return entity;
+}
 } // namespace clem
