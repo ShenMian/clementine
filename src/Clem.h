@@ -5,6 +5,7 @@
 #include "Clem/Components/Components.h"
 #include "Clem/Core/Core.h"
 #include "Clem/Rendering/Rendering.h"
+#include "Clem/Networking/Networking.h"
 
 // Scene
 #include "Clem/Scene/Entity.h"
@@ -21,9 +22,6 @@
 #include "Clem/Events/EventDispatcher.h"
 #include "Clem/Events/KeyEvent.h"
 #include "Clem/Events/MouseEvent.h"
-
-// Networking
-#include "Clem/Networking/Network.h"
 
 #include "Clem/Assert.h"
 #include "Clem/Log.h"

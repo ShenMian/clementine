@@ -14,6 +14,7 @@ project "2048"
 
   includedirs {
     "%{wks.location}/src",
+    "%{thirdparty.asio}/include",
     "%{thirdparty.entt}/include",
     "%{thirdparty.spdlog}/include",
     "%{thirdparty.openal}/include",

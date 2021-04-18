@@ -59,14 +59,12 @@ Application::Application(const string& name)
 	Log::init();
 	Audio::init();
 	Input::init();
-	Network::init();
 }
 
 Application::~Application()
 {
 	PROFILE_FUNC();
 
-	Network::deinit();
 	Input::deinit();
 	Audio::deinit();
 	Log::deinit();

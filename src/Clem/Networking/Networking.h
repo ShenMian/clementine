@@ -3,14 +3,11 @@
 
 #pragma once
 
-class Network
-{
-public:
-	static void init();
-	static void deinit();
-};
+#include "Client.h"
+#include "Server.h"
 
-#include <stdint.h>
+#include <cstdint>
+#include <vector>
 
 enum class PacketType
 {
@@ -25,14 +22,13 @@ enum class ReplicationType
 	velocity
 };
 
-/*
-
 template <typename T>
 class Message
 {
 public:
 	class Header;
 
+	Header               header;
 	std::vector<uint8_t> body;
 
 	template <typename Data>
@@ -45,5 +41,7 @@ public:
 template <typename T>
 class Message<T>::Header
 {
-	uint8_t size;
-};*/
+public:
+	T            id;
+	std::uint8_t size;
+};
