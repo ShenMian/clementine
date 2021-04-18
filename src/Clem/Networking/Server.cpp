@@ -46,30 +46,6 @@ void Server::stop()
 		thread.join();
 }
 
-void Server::write(std::shared_ptr<Connection> conn)
-{
-	assert(conn);
-
-	if(!conn->isConnected())
-	{
-		if(onDisconnect)
-			onDisconnect(conn);
-		connections.erase(std::find(connections.begin(), connections.end(), conn));
-	}
-}
-
-void Server::read(std::shared_ptr<Connection> conn)
-{
-	assert(conn);
-
-	if(!conn->isConnected())
-	{
-		if(onDisconnect)
-			onDisconnect(conn);
-		connections.erase(std::find(connections.begin(), connections.end(), conn));
-	}
-}
-
 void Server::acceptAsync()
 {
 	acceptor.async_accept([this](std::error_code ec, ip::tcp::socket sock) {
@@ -78,9 +54,12 @@ void Server::acceptAsync()
 			acceptAsync();
 		}
 
-		auto ptr = std::make_shared<Connection>(context, std::move(sock));
-		if(!onConnect || onConnect(ptr))
-			connections.push_back(ptr);
+		auto conn = std::make_shared<Connection>(context, std::move(sock));
+		if(!onConnect || onConnect(conn))
+		{
+			conn->onMessage = [this, conn]() { onMessage(conn); };
+			connections.push_back(conn);
+		}
 
 		acceptAsync();
 	});

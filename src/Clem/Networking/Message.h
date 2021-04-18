@@ -15,9 +15,9 @@ public:
 		T            id;
 		std::uint8_t size = 0;
 	} header;
-
 	std::vector<uint8_t> body;
 
+	Message() = default;
 	Message(T id)
 	{
 		header.id = id;

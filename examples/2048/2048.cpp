@@ -6,14 +6,6 @@
 using namespace std;
 using namespace clem;
 
-Client client;
-Server server;
-
-enum class Type
-{
-	Ping
-};
-
 class App : public Application
 {
 public:
@@ -25,12 +17,6 @@ public:
 	void init() override
 	{
 		pushScene(scene);
-
-		server.start(25565);
-		client.connect("127.0.0.1", 25565);
-
-		Message msg(Type::Ping);
-		client.write(msg);
 
 		auto& board = scene->createEntity("board");
 		board.getComponent<Transform>().setLocalPosition({0, 0});

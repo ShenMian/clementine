@@ -8,7 +8,6 @@ using namespace asio;
 Connection::Connection(io_context& c, ip::tcp::socket s)
 		: context(c), socket(std::move(s))
 {
-	onConnect = [](std::error_code, ip::tcp::endpoint) {};
 }
 
 Connection::~Connection()
@@ -23,7 +22,11 @@ bool Connection::connect(const std::string_view& host, std::uint16_t port)
 		ip::tcp::resolver resolver(context);
 		auto              endpoints = resolver.resolve(std::string(host), std::to_string(port));
 
-		async_connect(socket, endpoints, Connection::onConnect);
+		async_connect(socket, endpoints, [this](std::error_code ec, asio::ip::tcp::endpoint) {
+			assert(!ec);
+			if(onConnect)
+				onConnect();
+		});
 	}
 	catch(std::exception&)
 	{
@@ -34,7 +37,7 @@ bool Connection::connect(const std::string_view& host, std::uint16_t port)
 
 void Connection::disconnect()
 {
-	socket.close();
+	post(context, [this]() { socket.close(); });
 }
 
 bool Connection::isConnected() const
