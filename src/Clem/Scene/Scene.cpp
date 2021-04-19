@@ -61,6 +61,8 @@ void Scene::render(float dt)
 
 void Scene::updateScripts(float dt)
 {
+	PROFILE_FUNC();
+
 	auto view = registry.view<Transform, Script>();
 	for(auto [e, t, script] : view.each())
 		script.onUpdate(dt);
@@ -68,6 +70,8 @@ void Scene::updateScripts(float dt)
 
 void Scene::updateRigidbodies(float dt)
 {
+	PROFILE_FUNC();
+
 	auto view = registry.view<Transform, Rigidbody>();
 	for(auto [e, t, body] : view.each())
 	{
@@ -81,10 +85,22 @@ void Scene::renderSprites()
 {
 	PROFILE_FUNC();
 
+	// TODO: 应该当在 sprites 之一的 depth 发生变化时调用
+	sortSprites();
+
 	auto& buf  = Output::get().getBuffer();
 	auto  view = registry.view<Transform, const Sprite>();
 	for(auto [e, t, sprite] : view.each())
 		buf.drawSprite(t.getPosition(), sprite);
+}
+
+void Scene::sortSprites()
+{
+	registry.sort<Sprite>([this](const entt::entity lhs, const entt::entity rhs) {
+		const auto& clhs = registry.get<Sprite>(lhs);
+		const auto& crhs = registry.get<Sprite>(rhs);
+		return clhs.getDepth() > crhs.getDepth();
+	});
 }
 } // namespace clem
 

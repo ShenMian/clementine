@@ -16,7 +16,7 @@ namespace clem
 class Logger
 {
 public:
-	Logger(const std::string_view& name);
+	Logger(const std::string& name);
 
 	template <typename T>
 	void info(const T& msg);

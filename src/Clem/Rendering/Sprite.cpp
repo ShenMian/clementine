@@ -141,6 +141,17 @@ const Size2i& Sprite::getSize() const
 {
 	return size;
 }
+
+void Sprite::setDepth(size_t d)
+{
+	depth = d;
+}
+
+size_t Sprite::getDepth() const
+{
+	return depth;
+}
+
 } // namespace clem
 
 /*

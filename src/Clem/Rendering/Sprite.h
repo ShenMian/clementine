@@ -100,12 +100,17 @@ public:
 	 */
 	const Size2i& getSize() const;
 
+	void setDepth(size_t);
+
+	size_t getDepth() const;
+
 	// void load(const std::filesystem::path& path);
 	// void store(const std::filesystem::path& path) const;
 
 	Sprite& operator=(const Sprite&) = default;
 
 private:
+	size_t            depth = 0;
 	Size2i            size;
 	std::vector<Tile> buffer;
 };

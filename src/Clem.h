@@ -25,6 +25,7 @@
 
 #include "Clem/Assert.h"
 #include "Clem/Log.h"
+#include "Clem/Logger.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
 #include "Clem/Random.h"
