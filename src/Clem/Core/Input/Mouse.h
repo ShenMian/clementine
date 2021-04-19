@@ -18,6 +18,8 @@ class Mouse
 public:
 	enum class Key : uint8_t;
 
+	static void update();
+
 	/**
 	 * @brief 获取按键状态.
 	 *

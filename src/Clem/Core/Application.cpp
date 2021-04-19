@@ -58,14 +58,14 @@ Application::Application(const string& name)
 
 	Log::init();
 	Audio::init();
-	Input::init();
+	Keyboard::init();
 }
 
 Application::~Application()
 {
 	PROFILE_FUNC();
 
-	Input::deinit();
+	Keyboard::deinit();
 	Audio::deinit();
 	Log::deinit();
 }
@@ -103,18 +103,24 @@ void Application::run()
 
 void Application::updateInput(long dt)
 {
+	PROFILE_FUNC();
+
 	static long lag = 0;
 
 	lag += dt;
 	if(lag >= msPerInput)
 	{
-		Input::update();
+		Keyboard::update();
+		Mouse::update();
+		inputRecords.clear();
 		lag = 0;
 	}
 }
 
 void Application::updateScene(long dt)
 {
+	PROFILE_FUNC();
+
 	static long lag   = 0;
 	auto&       scene = scenes.back();
 
@@ -128,6 +134,8 @@ void Application::updateScene(long dt)
 
 void Application::renderScene(long dt)
 {
+	PROFILE_FUNC();
+
 	static long lag   = 0;
 	auto&       scene = scenes.back();
 
@@ -141,6 +149,8 @@ void Application::renderScene(long dt)
 
 void Application::updateFrameRate(long dt)
 {
+	PROFILE_FUNC();
+
 	// 计算帧速率
 	static long fpsLag = 0, frames = 0;
 	fpsLag += dt;

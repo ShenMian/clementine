@@ -3,16 +3,31 @@
 
 #pragma once
 
+#include "Clem/Platform.h"
+#include "Gamepad.h"
+#include "Keyboard.h"
+#include "Mouse.h"
+#include <vector>
+
+/*
+void Input::update()
+{
+	PROFILE_FUNC();
+
+	char ch = -1;
+	ch      = getchar();
+	if(ch == -1)
+		return;
+	auto vk = ch;
+	Keyboard::setKeyState((Keyboard::Key)vk, true);
+}
+*/
+
 namespace clem
 {
-class Input
-{
-public:
-	static void update();
-
-	static void init();
-	static void deinit();
-};
+#ifdef OS_WIN
+inline std::vector<INPUT_RECORD> inputRecords;
+#endif
 
 enum KeyCode
 {

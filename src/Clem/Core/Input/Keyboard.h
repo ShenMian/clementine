@@ -15,6 +15,8 @@ class Keyboard
 public:
 	enum class Key : uint8_t;
 
+	static void update();
+
 	/**
 	 * @brief 获取按键状态.
 	 *
@@ -30,6 +32,9 @@ public:
 	 * @param s 状态, 按下为 true.
 	 */
 	static void setKeyState(Key k, bool s);
+
+	static void init();
+	static void deinit();
 
 private:
 	static std::unordered_map<Key, bool> states;
