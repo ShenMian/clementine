@@ -7,7 +7,7 @@
 #include "Math/Math.h"
 
 // Input
-#include "Gamepad.h"
-#include "Input.h"
-#include "Keyboard.h"
-#include "Mouse.h"
+#include "Input/Gamepad.h"
+#include "Input/Input.h"
+#include "Input/Keyboard.h"
+#include "Input/Mouse.h"
