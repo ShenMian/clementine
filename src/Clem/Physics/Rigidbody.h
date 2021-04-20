@@ -23,11 +23,18 @@ public:
 	Vector2 velocity;
 
 	/**
-	 * @brief 向刚体施加一个力.
+	 * @brief 向刚体施加一个持续的力.
 	 *
-	 * @param force 施加的力.
+	 * @param force 施加的持续的力.
 	 */
 	void addForce(const Vector2& force);
+
+	/**
+	 * @brief 设置加速度.
+	 *
+	 * @param force 加速度.
+	 */
+	void setAcceleration(const Vector2& acc);
 
 	/**
 	 * @brief 设置质量.
@@ -36,7 +43,16 @@ public:
 	 */
 	void setMass(float m);
 
-	void          setEntity(const Entity&);
+	/**
+	 * @brief 设置所属的实体.
+	 *
+	 * @param e 所属的实体;
+	 */
+	void setEntity(const Entity& e);
+
+	/**
+	 * @brief 获取所属的实体.
+	 */
 	const Entity& getEntity() const;
 
 private:

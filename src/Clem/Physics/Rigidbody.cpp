@@ -11,9 +11,14 @@ void Rigidbody::addForce(const Vector2& f)
 	acceleration += f / mass;
 }
 
+void Rigidbody::setAcceleration(const Vector2& acc)
+{
+	acceleration = acc;
+}
+
 void Rigidbody::setMass(float m)
 {
-	assert(m > 0);
+	assert(m >= 0);
 	mass = m;
 }
 
