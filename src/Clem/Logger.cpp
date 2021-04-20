@@ -10,18 +10,32 @@ using std::string;
 namespace clem
 {
 
+std::unordered_map<std::string, Logger> Logger::loggers;
+
 Logger::Logger(const string& name)
 {
 	try
 	{
-		spdlogger = spdlog::basic_logger_mt(name, "logs/" + name + ".txt");
-		spdlogger->set_pattern("[%D %T][thread %t][%L] %v.");
+		logger = spdlog::basic_logger_mt(name, "logs/" + name + ".log");
+		logger->set_pattern("[%D %T][thread %t][%L] %v.");
 	}
 	catch(const spdlog::spdlog_ex& e)
 	{
 		printf("Logger init failed: %s", e.what());
 		abort();
 	}
+}
+
+void Logger::create(const string& name)
+{
+	loggers.emplace(name, name);
+}
+
+Logger& Logger::get(const string& name)
+{
+	auto res = loggers.find(name);
+	Assert::isTrue(res != loggers.end(), "logger named '" + name + "' doesn't exist", CALL_INFO);
+	return res->second;
 }
 
 } // namespace clem

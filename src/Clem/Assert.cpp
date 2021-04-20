@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "Assert.h"
-#include "Log.h"
+#include "Logger.h"
 
 using std::string;
 using std::string_view;
@@ -19,7 +19,7 @@ void Assert::isTrue(bool expr, const char* file, unsigned int line)
 				 "- line: %u\n",
 				 file, line);
 	// breakpoint();
-	CLEM_CORE_FATAL("Assertion failed: file: {} line: {}", file, line);
+	CLEM_LOG_FATAL("assert", "Assertion failed: file: {}, line: {}", file, line);
 }
 
 void Assert::isTrue(bool expr, const string_view& msg, const char* file, unsigned int line)
@@ -33,7 +33,7 @@ void Assert::isTrue(bool expr, const string_view& msg, const char* file, unsigne
 				 "- line:    %u\n",
 				 string(msg).c_str(), file, line);
 	// breakpoint();
-	CLEM_CORE_FATAL("Assertion failed: message: {} file: {} line: {}", msg, file, line);
+	CLEM_LOG_FATAL("assert", "Assertion failed: message: '{}', file: {}, line: {}", msg, file, line);
 }
 
 void Assert::isFalse(bool expr, const char* file, unsigned int line)

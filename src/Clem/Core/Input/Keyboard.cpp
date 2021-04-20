@@ -4,7 +4,7 @@
 #include "Keyboard.h"
 #include "Clem/Events/EventDispatcher.h"
 #include "Clem/Events/KeyEvent.h"
-#include "Clem/Log.h"
+#include "Clem/Logger.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
 #include "Input.h"
@@ -101,13 +101,13 @@ void Keyboard::update()
 void Keyboard::init()
 {
 	PROFILE_FUNC();
-	CLEM_CORE_INFO("keyboard init");
+	CLEM_LOG_INFO("core", "keyboard init");
 }
 
 void Keyboard::deinit()
 {
 	PROFILE_FUNC();
-	CLEM_CORE_INFO("keyboard deinit");
+	CLEM_LOG_INFO("core", "keyboard deinit");
 }
 
 #endif

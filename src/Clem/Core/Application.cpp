@@ -56,7 +56,10 @@ Application::Application(const string& name)
 
 	Output::get().setSize(Window::getSize()); // 初始化 Output
 
-	Log::init();
+	Logger::create("core");
+	Logger::create("audio");
+	Logger::create("assert");
+
 	Audio::init();
 	Keyboard::init();
 }
@@ -67,13 +70,12 @@ Application::~Application()
 
 	Keyboard::deinit();
 	Audio::deinit();
-	Log::deinit();
 }
 
 void Application::run()
 {
 	Assert::isTrue(quit, "call Application::run() when the application is already running", CALL_INFO);
-	CLEM_CORE_INFO("main loop started");
+	CLEM_LOG_INFO("core", "main loop started");
 
 	quit          = false;
 	long previous = getCurrentMillSecond();
@@ -98,7 +100,7 @@ void Application::run()
 		}
 	}
 
-	CLEM_CORE_INFO("main loop stoped");
+	CLEM_LOG_INFO("core", "main loop stoped");
 }
 
 void Application::updateInput(long dt)
@@ -140,10 +142,10 @@ void Application::renderScene(long dt)
 	auto&       scene = scenes.back();
 
 	lag += dt;
-	while(lag >= msPerRender)
+	if(lag >= msPerRender)
 	{
 		scene->render(dt / 1000.0f);
-		lag -= msPerRender;
+		lag = 0;
 	}
 }
 
@@ -152,13 +154,13 @@ void Application::updateFrameRate(long dt)
 	PROFILE_FUNC();
 
 	// 计算帧速率
-	static long fpsLag = 0, frames = 0;
-	fpsLag += dt;
+	static long lag = 0, frames = 0;
+	lag += dt;
 	frames++;
-	if(fpsLag >= 1000)
+	if(lag >= 1000)
 	{
 		frameRate = frames;
-		frames = fpsLag = 0;
+		frames = lag = 0;
 		Window::setTitle(name + " | " + std::to_string(frameRate) + "FPS");
 	}
 
@@ -242,7 +244,7 @@ void Application::onSignal(int signal)
 	switch(signal)
 	{
 	case SIGINT:
-		CLEM_CORE_WARN("signal: external interrupt, usually initiated by the user");
+		CLEM_LOG_WARN("core", "signal: external interrupt, usually initiated by the user");
 		instance->stop();
 		break;
 

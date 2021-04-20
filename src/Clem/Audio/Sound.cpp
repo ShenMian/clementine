@@ -3,7 +3,7 @@
 
 #include "Sound.h"
 #include "Clem/Assert.h"
-#include "Clem/Log.h"
+#include "Clem/Logger.h"
 #include "Clem/Profiler.h"
 
 using std::filesystem::exists;
@@ -44,7 +44,7 @@ void Sound::loadFromFile(const path& path)
 	if(fileFormat == ".wav")
 		loadWavFile(path, format, data, size, freq);
 	else
-		CLEM_CORE_FATAL("unsupported file format: '{}'", fileFormat);
+		CLEM_LOG_FATAL("audio", "unsupported file format: '{}'", fileFormat);
 
 	alBufferData(id, format, (void*)data, size, freq);
 	Assert::isTrue(alGetError() == AL_NO_ERROR, CALL_INFO);
@@ -91,7 +91,7 @@ void Sound::loadWavFile(const path& path, ALenum& format, unsigned char*& data, 
 	file.read((char*)&riffHeader, sizeof(RiffHeader));
 
 	if(memcmp(riffHeader.id, "RIFF", 4) != 0 || memcmp(riffHeader.format, "WAVE", 4) != 0)
-		CLEM_CORE_FATAL("invalid RIFF or WAVE Header: '{}'", path.string());
+		CLEM_LOG_FATAL("audio", "invalid RIFF or WAVE Header: '{}'", path.string());
 
 	WaveFormat waveFormat;
 	WaveData   waveData;

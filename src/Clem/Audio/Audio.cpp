@@ -2,7 +2,8 @@
 // License(Apache-2.0)
 
 #include "Audio.h"
-#include "Clem.h"
+#include "Clem/Logger.h"
+#include "Clem/Profiler.h"
 #include <fstream>
 #include <stdint.h>
 
@@ -15,7 +16,7 @@ ALCcontext* Audio::context = nullptr;
 void Audio::init()
 {
 	PROFILE_FUNC();
-	CLEM_CORE_INFO("audio init");
+	CLEM_LOG_INFO("audio", "audio init");
 
 	Assert::isNull(device, "aleardy opened a audio device", CALL_INFO);
 	device = alcOpenDevice(nullptr); // 获取首选设备
@@ -26,7 +27,7 @@ void Audio::init()
 		name = alcGetString(device, ALC_ALL_DEVICES_SPECIFIER);
 	if(!name || alcGetError(device) != AL_NO_ERROR)
 		name = alcGetString(device, ALC_DEVICE_SPECIFIER);
-	CLEM_CORE_INFO("opened audio device: '{}'", name);
+	CLEM_LOG_INFO("audio", "opened audio device: '{}'", name);
 
 	context = alcCreateContext(device, nullptr);
 	alcMakeContextCurrent(context);
@@ -35,7 +36,7 @@ void Audio::init()
 void Audio::deinit()
 {
 	PROFILE_FUNC();
-	CLEM_CORE_INFO("audio deinit");
+	CLEM_LOG_INFO("audio", "audio deinit");
 
 	alcMakeContextCurrent(nullptr);
 	alcDestroyContext(context);

@@ -3,12 +3,24 @@
 
 #pragma once
 
+#include "Clem/Assert.h"
 #include "spdlog/spdlog.h"
-#include <string>
 #include <memory>
+#include <string>
 
 namespace clem
 {
+
+constexpr int log_level_trace = 0;
+constexpr int log_level_debug = 1;
+constexpr int log_level_info  = 2;
+constexpr int log_level_warn  = 3;
+constexpr int log_level_error = 4;
+constexpr int log_level_fatal = 5;
+
+constexpr int log_active_level = 1;
+
+static_assert(log_level_trace <= log_active_level && log_active_level <= log_level_fatal);
 
 /**
  * 日志记录器.
@@ -18,44 +30,55 @@ class Logger
 public:
 	Logger(const std::string& name);
 
-	template <typename T>
-	void info(const T& msg);
+	template <typename FormatString, typename... Args>
+	void info(const FormatString& fmt, Args&&... args);
 
-	template <typename T>
-	void warn(const T& msg);
+	template <typename FormatString, typename... Args>
+	void warn(const FormatString& fmt, Args&&... args);
 
-	template <typename T>
-	void error(const T& msg);
+	template <typename FormatString, typename... Args>
+	void error(const FormatString& fmt, Args&&... args);
 
-	template <typename T>
-	void fatal(const T& msg);
+	template <typename FormatString, typename... Args>
+	void fatal(const FormatString& fmt, Args&&... args);
+
+	static void    create(const std::string& name);
+	static Logger& get(const std::string& name);
 
 private:
-	std::shared_ptr<spdlog::logger> spdlogger;
+	std::shared_ptr<spdlog::logger> logger;
+	
+	static std::unordered_map<std::string, Logger> loggers;
 };
 
-template <typename T>
-void Logger::info(const T& msg)
+template <typename FormatString, typename... Args>
+void Logger::info(const FormatString& fmt, Args&&... args)
 {
-	spdlogger->info(msg);
+	logger->info(fmt, std::forward<Args>(args)...);
 }
 
-template <typename T>
-void Logger::warn(const T& msg)
+template <typename FormatString, typename... Args>
+void Logger::warn(const FormatString& fmt, Args&&... args)
 {
-	spdlogger->warn(msg);
+	logger->warn(fmt, std::forward<Args>(args)...);
 }
 
-template <typename T>
-void Logger::error(const T& msg)
+template <typename FormatString, typename... Args>
+void Logger::error(const FormatString& fmt, Args&&... args)
 {
-	spdlogger->error(msg);
+	logger->error(fmt, std::forward<Args>(args)...);
 }
 
-template <typename T>
-void Logger::fatal(const T& msg)
+template <typename FormatString, typename... Args>
+void Logger::fatal(const FormatString& fmt, Args&&... args)
 {
-	spdlogger->critical(msg);
+	logger->critical(fmt, std::forward<Args>(args)...);
+	abort();
 }
+
+#define CLEM_LOG_INFO(name, ...)  Logger::get(name).info(__VA_ARGS__)
+#define CLEM_LOG_WARN(name, ...)  Logger::get(name).warn(__VA_ARGS__)
+#define CLEM_LOG_ERROR(name, ...) Logger::get(name).error(__VA_ARGS__)
+#define CLEM_LOG_FATAL(name, ...) Logger::get(name).fatal(__VA_ARGS__)
 
 } // namespace clem

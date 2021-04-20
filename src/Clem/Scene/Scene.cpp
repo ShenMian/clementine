@@ -3,7 +3,7 @@
 
 #include "Scene.h"
 #include "Clem/Components/Components.h"
-#include "Clem/Log.h"
+#include "Clem/Logger.h"
 #include "Clem/Profiler.h"
 #include "Clem/Rendering/Rendering.h"
 #include "Entity.h"
@@ -29,7 +29,7 @@ Entity Scene::getEntity(const string_view& tag)
 	for(auto [e, t] : view.each())
 		if(t.string == tag)
 			return Entity(e, this);
-	CLEM_CORE_ERROR("get entity with invalid a tag");
+	CLEM_LOG_WARN("core", "get entity with invalid a tag");
 	return Entity();
 }
 
@@ -96,10 +96,8 @@ void Scene::renderSprites()
 
 void Scene::sortSprites()
 {
-	registry.sort<Sprite>([this](const entt::entity lhs, const entt::entity rhs) {
-		const auto& clhs = registry.get<Sprite>(lhs);
-		const auto& crhs = registry.get<Sprite>(rhs);
-		return clhs.getDepth() > crhs.getDepth();
+	registry.sort<Sprite>([](const Sprite& lhs, const Sprite& rhs) {
+		return lhs.getDepth() > rhs.getDepth();
 	});
 }
 } // namespace clem

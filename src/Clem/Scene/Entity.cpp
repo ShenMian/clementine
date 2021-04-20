@@ -2,7 +2,6 @@
 // License(Apache-2.0)
 
 #include "Entity.h"
-#include "Clem/Log.h"
 #include "Scene.h"
 
 namespace clem

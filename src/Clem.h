@@ -24,7 +24,6 @@
 #include "Clem/Events/MouseEvent.h"
 
 #include "Clem/Assert.h"
-#include "Clem/Log.h"
 #include "Clem/Logger.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"

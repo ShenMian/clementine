@@ -25,28 +25,34 @@ public:
 	{
 		pushScene(scene);
 
-		auto& board = scene->createEntity("board").addComponent<Sprite>(Size2i(15 * 2, 15));
-		board.setDepth(1);
-
-		memset(map, 0, sizeof(map));
+		scene->createEntity("board").addComponent<Sprite>(Size2i(15 * 2, 15)).setDepth(1);
 
 		auto cursor = scene->createEntity("cursor");
-		cursor.addComponent<Sprite>(Size2i(3, 3));
+		cursor.addComponent<Sprite>(Size2i(1, 1));
 		cursor.addComponent<Script>().onUpdate = [&](float dt) {
-			static auto  cursor    = scene->getEntity("cursor");
-			static auto& sprite    = cursor.getComponent<Sprite>();
-			static auto& transform = cursor.getComponent<Transform>();
-			static float lag = 0;
+			auto  cursor = scene->getEntity("cursor");
+			auto& sprite = cursor.getComponent<Sprite>();
+			auto& tf     = cursor.getComponent<Transform>();
+
+			static float lag    = 0;
 			lag += dt;
-			if(lag >= 1)
-			{
-				sprite.drawPoint(transform.getPosition(), '+');
+			sprite.drawPoint(0, 0, '+');
+			if(lag >= 2)
 				lag = 0;
-			}
 
 			if(Keyboard::getKeyState(Keyboard::Key::W))
-				;
+				tf.setLocalPosition(tf.getLocalPosition() + Vector2::up);
+			else if(Keyboard::getKeyState(Keyboard::Key::S))
+				tf.setLocalPosition(tf.getLocalPosition() + Vector2::down);
+			else if(Keyboard::getKeyState(Keyboard::Key::A))
+				tf.setLocalPosition(tf.getLocalPosition() + Vector2::left);
+			else if(Keyboard::getKeyState(Keyboard::Key::D))
+				tf.setLocalPosition(tf.getLocalPosition() + Vector2::right);
+
+			show();
 		};
+
+		memset(map, 0, sizeof(map));
 
 		show();
 	}
