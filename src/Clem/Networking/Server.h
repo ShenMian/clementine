@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -17,7 +17,18 @@ public:
 	Server();
 	virtual ~Server();
 
+	/**
+	 * @brief 启动网络服务器并开始监听指定端口.
+	 * 
+	 * @param port   要监听的端口.
+	 * @return true  启动成功.
+	 * @return false 启动失败.
+	 */
 	bool start(std::uint16_t port);
+
+	/**
+	 * @brief 停止网络服务器.
+	 */
 	void stop();
 
 	template <typename T>

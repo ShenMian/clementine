@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -14,9 +14,27 @@ public:
 	Connection(asio::io_context&, asio::ip::tcp::socket);
 	virtual ~Connection();
 
+	/**
+	 * @brief 与指定主机建立连接.
+	 * 
+	 * @param host   主机, IP 或 Domain.
+	 * @param port   端口号.
+	 * @return true  连接成功
+	 * @return false 连接失败
+	 */
 	bool connect(const std::string_view& host, std::uint16_t port);
+
+	/**
+	 * @brief 断开已建立的连接.
+	 */
 	void disconnect();
 
+	/**
+	 * @brief 判断是否已建立连接.
+	 * 
+	 * @return true  连接已建立.
+	 * @return false 连接未建立.
+	 */
 	bool isConnected() const;
 
 	template <typename T>
