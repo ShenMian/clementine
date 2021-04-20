@@ -1,20 +1,20 @@
 var group___core =
 [
-    [ "Application", "class_application.html", [
-      [ "Application", "class_application.html#a83773206579486c1c1612fff97541029", null ],
-      [ "~Application", "class_application.html#a748bca84fefb9c12661cfaa2f623748d", null ],
-      [ "deinit", "class_application.html#a1cedfa9acba028c49e6fa1eb50bc7bd7", null ],
-      [ "getFrameRate", "class_application.html#acb1533897025e288014feb37c4079a16", null ],
-      [ "getName", "class_application.html#af6f53e8619062f82ccd6522acb63e3e9", null ],
-      [ "init", "class_application.html#aebb6d1a7983d8d23368b5b34461111ee", null ],
-      [ "pause", "class_application.html#ac1f45b87ce5324acc250a9e857d233f4", null ],
-      [ "popScene", "class_application.html#a47b5bec61b3d93cbb4998b42d0d2ea47", null ],
-      [ "pushScene", "class_application.html#abc456b1bd47b8e69d70eecb28338b455", null ],
-      [ "replaceScene", "class_application.html#a4ce258b57aef6e31920ecda37e47d9b7", null ],
-      [ "resume", "class_application.html#a255be3f6636c0ea4c719e22c467ef052", null ],
-      [ "run", "class_application.html#a68965449404743bf1add056784d6cf81", null ],
-      [ "setMsPerRender", "class_application.html#a1f30366a53d052fca2a17538032f176f", null ],
-      [ "setMsPerUpdate", "class_application.html#a9cc1b4bbc2ee9b71e84da42d2ff04f6b", null ],
-      [ "stop", "class_application.html#a2e5dee1fbe413783d3500fe8da567ad4", null ]
+    [ "Application", "classclem_1_1_application.html", [
+      [ "Application", "classclem_1_1_application.html#a27889b2dd8138eb1777046862b329949", null ],
+      [ "~Application", "classclem_1_1_application.html#aa2ea891d9fa8051a83b7033d18576766", null ],
+      [ "deinit", "classclem_1_1_application.html#a2e3a9ba9e88077166891bf4ab638a106", null ],
+      [ "getFrameRate", "classclem_1_1_application.html#aa7a4b46f1b73926b54a92265972edbd8", null ],
+      [ "getName", "classclem_1_1_application.html#aeb4b0268eacf471fd264eea572df7510", null ],
+      [ "init", "classclem_1_1_application.html#a8bd69e1024de530a039125cf82bab4b3", null ],
+      [ "pause", "classclem_1_1_application.html#a701d5bd0328d08eb0ddea65f9c7ec250", null ],
+      [ "popScene", "classclem_1_1_application.html#aede36acbdc1718fd7e96df7a8809ed4f", null ],
+      [ "pushScene", "classclem_1_1_application.html#a0514480b591420bed86c2923985d05f2", null ],
+      [ "replaceScene", "classclem_1_1_application.html#aced81125a24e9675b71c7ed8d4a4ec11", null ],
+      [ "resume", "classclem_1_1_application.html#a5918fa82a8bbb59327ab337c6ade12ef", null ],
+      [ "run", "classclem_1_1_application.html#a0940de245f438582ef0299792a7ca1e5", null ],
+      [ "setMsPerRender", "classclem_1_1_application.html#a9fd3d7fcf185a53e14cef17719066341", null ],
+      [ "setMsPerUpdate", "classclem_1_1_application.html#a031ea31d1244e5d362787c0d3a98e9c6", null ],
+      [ "stop", "classclem_1_1_application.html#a3f49f03fffc0f6a1509b1d08cc4129ff", null ]
     ] ]
 ];

@@ -1,0 +1,178 @@
+\hypertarget{classclem_1_1_framebuffer}{}\doxysection{clem\+::Framebuffer类 参考}
+\label{classclem_1_1_framebuffer}\index{clem::Framebuffer@{clem::Framebuffer}}
+
+
+帧缓冲区.  
+
+
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classclem_1_1_framebuffer_a03f6c3d20ecffd01fadab899f45fb509}\label{classclem_1_1_framebuffer_a03f6c3d20ecffd01fadab899f45fb509}} 
+void {\bfseries output} ()
+\item 
+\mbox{\Hypertarget{classclem_1_1_framebuffer_a98efff6d1413780e0b2486860c76215d}\label{classclem_1_1_framebuffer_a98efff6d1413780e0b2486860c76215d}} 
+void {\bfseries draw\+Sprite} (const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&positon, const \mbox{\hyperlink{classclem_1_1_sprite}{Sprite}} \&sprite)
+\item 
+void \mbox{\hyperlink{classclem_1_1_framebuffer_a37eda3d14e59c6c2aa8802aae131cd30}{draw\+Point}} (int x, int y, const \mbox{\hyperlink{class_tile}{Tile}} \&t)
+\begin{DoxyCompactList}\small\item\em 绘制点. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classclem_1_1_framebuffer_ac0a190ad3310424c211a31a76d6e3809}{draw\+Point}} (const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&p, const \mbox{\hyperlink{class_tile}{Tile}} \&t)
+\begin{DoxyCompactList}\small\item\em 绘制点. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classclem_1_1_framebuffer_a85e66d00bfff450ec868978c0979922d}{draw\+Line}} (const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&a, const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&b, const \mbox{\hyperlink{class_tile}{Tile}} \&t)
+\begin{DoxyCompactList}\small\item\em 绘制连接两点的线段. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classclem_1_1_framebuffer_ac1019c7046ece5edb4f6104b5a12f6aa}{draw\+Rect}} (const \mbox{\hyperlink{class_rect2i}{Rect2i}} \&r, const \mbox{\hyperlink{class_tile}{Tile}} \&t)
+\begin{DoxyCompactList}\small\item\em 绘制矩形. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classclem_1_1_framebuffer_ab1f2bb51ec6cc45a7fbd49501127ef4a}{fill\+Rect}} (const \mbox{\hyperlink{class_rect2i}{Rect2i}} \&r, const \mbox{\hyperlink{class_tile}{Tile}} \&t)
+\begin{DoxyCompactList}\small\item\em 绘制实心矩形. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classclem_1_1_framebuffer_ac697cdb1d0ceaa4cf0e8cf469f1ff549}{draw\+Cycle}} (const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&p, short radius, const \mbox{\hyperlink{class_tile}{Tile}} \&t)
+\begin{DoxyCompactList}\small\item\em 绘制圆形. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classclem_1_1_framebuffer_ae8fcb4f03b3c5816927711435fdf9190}{draw\+String}} (const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&pos, std\+::wstring str, \mbox{\hyperlink{class_color}{Color}} color=\mbox{\hyperlink{class_color}{Color}}())
+\begin{DoxyCompactList}\small\item\em 绘制字符串. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classclem_1_1_framebuffer_a57af5de52cbdf24456e57216773dd1db}\label{classclem_1_1_framebuffer_a57af5de52cbdf24456e57216773dd1db}} 
+void \mbox{\hyperlink{classclem_1_1_framebuffer_a57af5de52cbdf24456e57216773dd1db}{clear}} (const \mbox{\hyperlink{class_tile}{Tile}} \&=Tile\+::blank)
+\begin{DoxyCompactList}\small\item\em 清除全部绘制内容. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classclem_1_1_framebuffer_acfb9c068ee3369982cb092c319b6356d}\label{classclem_1_1_framebuffer_acfb9c068ee3369982cb092c319b6356d}} 
+void {\bfseries set\+Size} (const \mbox{\hyperlink{struct_vector2i}{Size2i}} \&)
+\item 
+\mbox{\Hypertarget{classclem_1_1_framebuffer_a8c95029edbe87bd11311da36169c194f}\label{classclem_1_1_framebuffer_a8c95029edbe87bd11311da36169c194f}} 
+const \mbox{\hyperlink{struct_vector2i}{Size2i}} \& {\bfseries get\+Size} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+帧缓冲区. 
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classclem_1_1_framebuffer_ac697cdb1d0ceaa4cf0e8cf469f1ff549}\label{classclem_1_1_framebuffer_ac697cdb1d0ceaa4cf0e8cf469f1ff549}} 
+\index{clem::Framebuffer@{clem::Framebuffer}!drawCycle@{drawCycle}}
+\index{drawCycle@{drawCycle}!clem::Framebuffer@{clem::Framebuffer}}
+\doxysubsubsection{\texorpdfstring{drawCycle()}{drawCycle()}}
+{\footnotesize\ttfamily void clem\+::\+Framebuffer\+::draw\+Cycle (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&}]{p,  }\item[{short}]{radius,  }\item[{const \mbox{\hyperlink{class_tile}{Tile}} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+绘制圆形. 
+
+
+\begin{DoxyParams}{参数}
+{\em p} & 原点坐标. \\
+\hline
+{\em radius} & 半径. \\
+\hline
+{\em t} & 瓦片. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classclem_1_1_framebuffer_a85e66d00bfff450ec868978c0979922d}\label{classclem_1_1_framebuffer_a85e66d00bfff450ec868978c0979922d}} 
+\index{clem::Framebuffer@{clem::Framebuffer}!drawLine@{drawLine}}
+\index{drawLine@{drawLine}!clem::Framebuffer@{clem::Framebuffer}}
+\doxysubsubsection{\texorpdfstring{drawLine()}{drawLine()}}
+{\footnotesize\ttfamily void clem\+::\+Framebuffer\+::draw\+Line (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&}]{a,  }\item[{const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&}]{b,  }\item[{const \mbox{\hyperlink{class_tile}{Tile}} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+绘制连接两点的线段. 
+
+
+\begin{DoxyParams}{参数}
+{\em a} & 线段端点坐标. \\
+\hline
+{\em b} & 线段另一端点坐标. \\
+\hline
+{\em t} & 瓦片. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classclem_1_1_framebuffer_ac0a190ad3310424c211a31a76d6e3809}\label{classclem_1_1_framebuffer_ac0a190ad3310424c211a31a76d6e3809}} 
+\index{clem::Framebuffer@{clem::Framebuffer}!drawPoint@{drawPoint}}
+\index{drawPoint@{drawPoint}!clem::Framebuffer@{clem::Framebuffer}}
+\doxysubsubsection{\texorpdfstring{drawPoint()}{drawPoint()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void clem\+::\+Framebuffer\+::draw\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&}]{p,  }\item[{const \mbox{\hyperlink{class_tile}{Tile}} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+绘制点. 
+
+
+\begin{DoxyParams}{参数}
+{\em p} & 点的坐标. \\
+\hline
+{\em t} & 瓦片. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classclem_1_1_framebuffer_a37eda3d14e59c6c2aa8802aae131cd30}\label{classclem_1_1_framebuffer_a37eda3d14e59c6c2aa8802aae131cd30}} 
+\index{clem::Framebuffer@{clem::Framebuffer}!drawPoint@{drawPoint}}
+\index{drawPoint@{drawPoint}!clem::Framebuffer@{clem::Framebuffer}}
+\doxysubsubsection{\texorpdfstring{drawPoint()}{drawPoint()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void clem\+::\+Framebuffer\+::draw\+Point (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{const \mbox{\hyperlink{class_tile}{Tile}} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+绘制点. 
+
+
+\begin{DoxyParams}{参数}
+{\em x} & x坐标. \\
+\hline
+{\em y} & y坐标. \\
+\hline
+{\em t} & 瓦片. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classclem_1_1_framebuffer_ac1019c7046ece5edb4f6104b5a12f6aa}\label{classclem_1_1_framebuffer_ac1019c7046ece5edb4f6104b5a12f6aa}} 
+\index{clem::Framebuffer@{clem::Framebuffer}!drawRect@{drawRect}}
+\index{drawRect@{drawRect}!clem::Framebuffer@{clem::Framebuffer}}
+\doxysubsubsection{\texorpdfstring{drawRect()}{drawRect()}}
+{\footnotesize\ttfamily void clem\+::\+Framebuffer\+::draw\+Rect (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_rect2i}{Rect2i}} \&}]{r,  }\item[{const \mbox{\hyperlink{class_tile}{Tile}} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+绘制矩形. 
+
+
+\begin{DoxyParams}{参数}
+{\em r} & 矩形. \\
+\hline
+{\em t} & 瓦片. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classclem_1_1_framebuffer_ae8fcb4f03b3c5816927711435fdf9190}\label{classclem_1_1_framebuffer_ae8fcb4f03b3c5816927711435fdf9190}} 
+\index{clem::Framebuffer@{clem::Framebuffer}!drawString@{drawString}}
+\index{drawString@{drawString}!clem::Framebuffer@{clem::Framebuffer}}
+\doxysubsubsection{\texorpdfstring{drawString()}{drawString()}}
+{\footnotesize\ttfamily void clem\+::\+Framebuffer\+::draw\+String (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&}]{pos,  }\item[{std\+::wstring}]{str,  }\item[{\mbox{\hyperlink{class_color}{Color}}}]{color = {\ttfamily \mbox{\hyperlink{class_color}{Color}}()} }\end{DoxyParamCaption})}
+
+
+
+绘制字符串. 
+
+
+\begin{DoxyParams}{参数}
+{\em pos} & 绘制起点的位置 \\
+\hline
+{\em str} & 要绘制的字符串 \\
+\hline
+{\em color} & 顔色 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classclem_1_1_framebuffer_ab1f2bb51ec6cc45a7fbd49501127ef4a}\label{classclem_1_1_framebuffer_ab1f2bb51ec6cc45a7fbd49501127ef4a}} 
+\index{clem::Framebuffer@{clem::Framebuffer}!fillRect@{fillRect}}
+\index{fillRect@{fillRect}!clem::Framebuffer@{clem::Framebuffer}}
+\doxysubsubsection{\texorpdfstring{fillRect()}{fillRect()}}
+{\footnotesize\ttfamily void clem\+::\+Framebuffer\+::fill\+Rect (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_rect2i}{Rect2i}} \&}]{r,  }\item[{const \mbox{\hyperlink{class_tile}{Tile}} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+绘制实心矩形. 
+
+
+\begin{DoxyParams}{参数}
+{\em r} & 矩形. \\
+\hline
+{\em t} & 瓦片. \\
+\hline
+\end{DoxyParams}
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Clem/\+Rendering/Framebuffer.\+h\item 
+src/\+Clem/\+Rendering/Framebuffer.\+cpp\end{DoxyCompactItemize}

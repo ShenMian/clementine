@@ -1,0 +1,84 @@
+\hypertarget{class_connection}{}\doxysection{Connection类 参考}
+\label{class_connection}\index{Connection@{Connection}}
+
+
+网络连接, TCP 协议.  
+
+
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_connection_af325d1db74a38d204ba1299a6a541903}\label{class_connection_af325d1db74a38d204ba1299a6a541903}} 
+{\bfseries Connection} (asio\+::io\+\_\+context \&, asio\+::ip\+::tcp\+::socket)
+\item 
+bool \mbox{\hyperlink{class_connection_a213f8884b390b83bd23420899c1046b1}{connect}} (const std\+::string\+\_\+view \&host, std\+::uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em 与指定主机建立连接. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_connection_ae7ab346dba186ca12bba17eb6f0fbaab}\label{class_connection_ae7ab346dba186ca12bba17eb6f0fbaab}} 
+void \mbox{\hyperlink{class_connection_ae7ab346dba186ca12bba17eb6f0fbaab}{disconnect}} ()
+\begin{DoxyCompactList}\small\item\em 断开已建立的连接. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_connection_aca8da70e25d2e4ecbc32fba34e24c2b3}{is\+Connected}} () const
+\begin{DoxyCompactList}\small\item\em 判断是否已建立连接. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries write} (const \mbox{\hyperlink{class_message}{Message}}$<$ T $>$ \&msg)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries read} ()
+\item 
+{\footnotesize template$<$typename T $>$ }\\const \mbox{\hyperlink{class_message}{Message}}$<$ T $>$ \& {\bfseries get\+Message} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_connection_ad5a26886cccde12d6feb388b2790f72d}\label{class_connection_ad5a26886cccde12d6feb388b2790f72d}} 
+std\+::function$<$ void()$>$ {\bfseries on\+Connect} = nullptr
+\item 
+\mbox{\Hypertarget{class_connection_ae2ff387be0bd8f078155f507210e38ed}\label{class_connection_ae2ff387be0bd8f078155f507210e38ed}} 
+std\+::function$<$ void()$>$ {\bfseries on\+Message} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+网络连接, TCP 协议. 
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{class_connection_a213f8884b390b83bd23420899c1046b1}\label{class_connection_a213f8884b390b83bd23420899c1046b1}} 
+\index{Connection@{Connection}!connect@{connect}}
+\index{connect@{connect}!Connection@{Connection}}
+\doxysubsubsection{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily bool Connection\+::connect (\begin{DoxyParamCaption}\item[{const std\+::string\+\_\+view \&}]{host,  }\item[{std\+::uint16\+\_\+t}]{port }\end{DoxyParamCaption})}
+
+
+
+与指定主机建立连接. 
+
+
+\begin{DoxyParams}{参数}
+{\em host} & 主机, IP 或 Domain. \\
+\hline
+{\em port} & 端口号. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+true 连接成功. 
+
+false 连接失败. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_connection_aca8da70e25d2e4ecbc32fba34e24c2b3}\label{class_connection_aca8da70e25d2e4ecbc32fba34e24c2b3}} 
+\index{Connection@{Connection}!isConnected@{isConnected}}
+\index{isConnected@{isConnected}!Connection@{Connection}}
+\doxysubsubsection{\texorpdfstring{isConnected()}{isConnected()}}
+{\footnotesize\ttfamily bool Connection\+::is\+Connected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+判断是否已建立连接. 
+
+\begin{DoxyReturn}{返回}
+true 连接已建立. 
+
+false 连接未建立. 
+\end{DoxyReturn}
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Clem/\+Networking/Connection.\+h\item 
+src/\+Clem/\+Networking/Connection.\+cpp\end{DoxyCompactItemize}

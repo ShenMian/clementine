@@ -98,37 +98,37 @@ $(document).ready(function(){initNavTree('_recorder_8h_source.html',''); initRes
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span><a class="code" href="class_session.html">Session</a>;</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="struct_cpu_sample.html">   12</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_cpu_sample.html">CpuSample</a></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    std::string_view                          name;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    std::chrono::duration&lt;double, std::micro&gt; start;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    std::chrono::microseconds                 elapsed;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    std::thread::id                           threadId;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;};</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_recorder.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_recorder.html">Recorder</a></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">using</span> time_point = std::chrono::time_point&lt;std::chrono::steady_clock&gt;;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_recorder.html#a68c85014dc853b9deef2269c43fc974c">Recorder</a>(std::string_view name, <a class="code" href="class_session.html">Session</a>&amp; s);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_recorder.html#a6b3c569577fcdc298d8d4a6a2b96e9a9">~Recorder</a>();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_recorder.html#a4ea54ad6c2efb9eaee08f5cd4a82b03c">stop</a>();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">bool</span>       stopped;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    time_point begin;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="struct_cpu_sample.html">CpuSample</a>  sample;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="class_session.html">Session</a>&amp;   session;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
-<div class="ttc" id="aclass_recorder_html"><div class="ttname"><a href="class_recorder.html">Recorder</a></div><div class="ttdef"><b>Definition:</b> Recorder.h:21</div></div>
-<div class="ttc" id="aclass_recorder_html_a4ea54ad6c2efb9eaee08f5cd4a82b03c"><div class="ttname"><a href="class_recorder.html#a4ea54ad6c2efb9eaee08f5cd4a82b03c">Recorder::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">ֹͣ��ʱ.</div><div class="ttdef"><b>Definition:</b> Recorder.cpp:22</div></div>
-<div class="ttc" id="aclass_recorder_html_a68c85014dc853b9deef2269c43fc974c"><div class="ttname"><a href="class_recorder.html#a68c85014dc853b9deef2269c43fc974c">Recorder::Recorder</a></div><div class="ttdeci">Recorder(std::string_view name, Session &amp;s)</div><div class="ttdoc">���캯��.</div><div class="ttdef"><b>Definition:</b> Recorder.cpp:9</div></div>
-<div class="ttc" id="aclass_recorder_html_a6b3c569577fcdc298d8d4a6a2b96e9a9"><div class="ttname"><a href="class_recorder.html#a6b3c569577fcdc298d8d4a6a2b96e9a9">Recorder::~Recorder</a></div><div class="ttdeci">virtual ~Recorder()</div><div class="ttdoc">��������.</div><div class="ttdef"><b>Definition:</b> Recorder.cpp:16</div></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="struct_cpu_sample.html">   15</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_cpu_sample.html">CpuSample</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    std::string_view                          name;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    std::chrono::duration&lt;double, std::micro&gt; start;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    std::chrono::microseconds                 elapsed;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    std::thread::id                           threadId;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_recorder.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_recorder.html">Recorder</a></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">using</span> time_point = std::chrono::time_point&lt;std::chrono::steady_clock&gt;;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="class_recorder.html#a68c85014dc853b9deef2269c43fc974c">Recorder</a>(std::string_view name, <a class="code" href="class_session.html">Session</a>&amp; s);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_recorder.html#a6b3c569577fcdc298d8d4a6a2b96e9a9">~Recorder</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_recorder.html#a4ea54ad6c2efb9eaee08f5cd4a82b03c">stop</a>();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">bool</span>       stopped;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    time_point begin;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="struct_cpu_sample.html">CpuSample</a>  sample;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="class_session.html">Session</a>&amp;   session;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
+<div class="ttc" id="aclass_recorder_html"><div class="ttname"><a href="class_recorder.html">Recorder</a></div><div class="ttdoc">样本收集器.</div><div class="ttdef"><b>Definition:</b> Recorder.h:27</div></div>
+<div class="ttc" id="aclass_recorder_html_a4ea54ad6c2efb9eaee08f5cd4a82b03c"><div class="ttname"><a href="class_recorder.html#a4ea54ad6c2efb9eaee08f5cd4a82b03c">Recorder::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">停止计时.</div><div class="ttdef"><b>Definition:</b> Recorder.cpp:22</div></div>
+<div class="ttc" id="aclass_recorder_html_a68c85014dc853b9deef2269c43fc974c"><div class="ttname"><a href="class_recorder.html#a68c85014dc853b9deef2269c43fc974c">Recorder::Recorder</a></div><div class="ttdeci">Recorder(std::string_view name, Session &amp;s)</div><div class="ttdoc">构造函数.</div><div class="ttdef"><b>Definition:</b> Recorder.cpp:9</div></div>
+<div class="ttc" id="aclass_recorder_html_a6b3c569577fcdc298d8d4a6a2b96e9a9"><div class="ttname"><a href="class_recorder.html#a6b3c569577fcdc298d8d4a6a2b96e9a9">Recorder::~Recorder</a></div><div class="ttdeci">virtual ~Recorder()</div><div class="ttdoc">析构函数.</div><div class="ttdef"><b>Definition:</b> Recorder.cpp:16</div></div>
 <div class="ttc" id="aclass_session_html"><div class="ttname"><a href="class_session.html">Session</a></div><div class="ttdoc">会话. 对样本进行分组.</div><div class="ttdef"><b>Definition:</b> Session.h:14</div></div>
-<div class="ttc" id="astruct_cpu_sample_html"><div class="ttname"><a href="struct_cpu_sample.html">CpuSample</a></div><div class="ttdef"><b>Definition:</b> Recorder.h:13</div></div>
+<div class="ttc" id="astruct_cpu_sample_html"><div class="ttname"><a href="struct_cpu_sample.html">CpuSample</a></div><div class="ttdoc">CPU 样本.</div><div class="ttdef"><b>Definition:</b> Recorder.h:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -1,0 +1,58 @@
+\hypertarget{classclem_1_1_entity}{}\doxysection{clem\+::Entity类 参考}
+\label{classclem_1_1_entity}\index{clem::Entity@{clem::Entity}}
+
+
+实体. 组件的容器.  
+
+
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classclem_1_1_entity_ac292ac5a69b2afa8978a703f0700aeb1}\label{classclem_1_1_entity_ac292ac5a69b2afa8978a703f0700aeb1}} 
+typedef entt\+::entity {\bfseries id\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classclem_1_1_entity_ae0966a9e7534a1c3da36b30fc25ad7ff}\label{classclem_1_1_entity_ae0966a9e7534a1c3da36b30fc25ad7ff}} 
+{\bfseries Entity} (id\+\_\+t id, \mbox{\hyperlink{classclem_1_1_scene}{Scene}} $\ast$scene)
+\item 
+\mbox{\Hypertarget{classclem_1_1_entity_ae8947e7fb27c8fde55824399558c69f3}\label{classclem_1_1_entity_ae8947e7fb27c8fde55824399558c69f3}} 
+{\footnotesize template$<$typename Com , typename... Args$>$ }\\Com \& \mbox{\hyperlink{classclem_1_1_entity_ae8947e7fb27c8fde55824399558c69f3}{add\+Component}} (Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em 添加指定组件. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classclem_1_1_entity_af763355898fef9e800ef6e515e3b7361}\label{classclem_1_1_entity_af763355898fef9e800ef6e515e3b7361}} 
+{\footnotesize template$<$typename Com $>$ }\\void \mbox{\hyperlink{classclem_1_1_entity_af763355898fef9e800ef6e515e3b7361}{remove\+Component}} ()
+\begin{DoxyCompactList}\small\item\em 移除指定组件. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classclem_1_1_entity_a2d7a39a13e862071a53f966b6def85c3}\label{classclem_1_1_entity_a2d7a39a13e862071a53f966b6def85c3}} 
+{\footnotesize template$<$typename Com $>$ }\\Com \& \mbox{\hyperlink{classclem_1_1_entity_a2d7a39a13e862071a53f966b6def85c3}{get\+Component}} ()
+\begin{DoxyCompactList}\small\item\em 获取指定组件. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classclem_1_1_entity_a0e3b994270e2a3814d4bc9d2425c8967}\label{classclem_1_1_entity_a0e3b994270e2a3814d4bc9d2425c8967}} 
+{\footnotesize template$<$typename Com $>$ }\\bool \mbox{\hyperlink{classclem_1_1_entity_a0e3b994270e2a3814d4bc9d2425c8967}{has\+Component}} ()
+\begin{DoxyCompactList}\small\item\em 是否存在指定组件. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classclem_1_1_entity_a3704081c8439585b7a0557bfbfa999a2}\label{classclem_1_1_entity_a3704081c8439585b7a0557bfbfa999a2}} 
+id\+\_\+t {\bfseries get\+Id} () const
+\item 
+\mbox{\Hypertarget{classclem_1_1_entity_ae94fb551dd5fc66a144e3409e58dc2e0}\label{classclem_1_1_entity_ae94fb551dd5fc66a144e3409e58dc2e0}} 
+\mbox{\hyperlink{classclem_1_1_scene}{Scene}} $\ast$ {\bfseries get\+Scene} () const
+\item 
+\mbox{\Hypertarget{classclem_1_1_entity_a33fa3849fa7cf782906e90aea8546823}\label{classclem_1_1_entity_a33fa3849fa7cf782906e90aea8546823}} 
+{\bfseries operator bool} () const
+\item 
+\mbox{\Hypertarget{classclem_1_1_entity_a28a709019ecd6755635d4ae01ba52d4a}\label{classclem_1_1_entity_a28a709019ecd6755635d4ae01ba52d4a}} 
+{\bfseries operator id\+\_\+t} () const
+\item 
+\mbox{\Hypertarget{classclem_1_1_entity_a1b31f88b925aa82cfe4ded367d58e302}\label{classclem_1_1_entity_a1b31f88b925aa82cfe4ded367d58e302}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{classclem_1_1_entity}{Entity}} \&) const
+\item 
+\mbox{\Hypertarget{classclem_1_1_entity_a8b5f65805854c705944b821b9a2698cb}\label{classclem_1_1_entity_a8b5f65805854c705944b821b9a2698cb}} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{classclem_1_1_entity}{Entity}} \&) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+实体. 组件的容器. 
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Clem/\+Scene/Entity.\+h\item 
+src/\+Clem/\+Scene/Entity.\+cpp\end{DoxyCompactItemize}

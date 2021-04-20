@@ -5,6 +5,9 @@
 
 namespace clem
 {
+/**
+ * @brief 组件.
+ */
 class Component
 {
 };

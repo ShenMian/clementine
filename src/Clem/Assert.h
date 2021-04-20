@@ -18,7 +18,7 @@ namespace clem
 /**
  * @brief 断言.
  *
- * @code Assert.method(expr, CALL_INFO);
+ * Assert.method(expr, [msg,] CALL_INFO);
  */
 class Assert
 {

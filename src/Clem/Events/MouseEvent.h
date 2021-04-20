@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #ifndef CLEM_EVENT_MOUSE_EVENT_H_
@@ -7,6 +7,9 @@
 #include "Clem/Core/Math/Math.h"
 #include "Event.h"
 
+/**
+ * @brief 鼠标事件.
+ */
 class MouseEvent : public Event
 {
 public:

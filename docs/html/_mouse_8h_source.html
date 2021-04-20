@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Clementine: src/Clem/Core/Mouse.h 源文件</title>
+<title>Clementine: src/Clem/Core/Input/Mouse.h 源文件</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,39 +95,43 @@ $(document).ready(function(){initNavTree('_mouse_8h_source.html',''); initResiza
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Clem/Core/Math/Math.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_mouse.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_mouse.html">Mouse</a></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">enum class</span> Key : uint8_t;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    static bool <a class="code" href="class_mouse.html#ad38331ef02b44d53920b6cb6188e92dd">getKeyState</a>(Key k);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    static void <a class="code" href="class_mouse.html#a71843fa6aaf5a33b5fbc27e663fa9c1a">setKeyState</a>(Key k, bool s);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    static <a class="code" href="struct_vector2i.html">Point2i</a> getPosition();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    static void setPosition(Point2i p);</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>clem</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classclem_1_1_mouse.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_mouse.html">Mouse</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">enum class</span> Key : uint8_t;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    static void update();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    static bool <a class="code" href="classclem_1_1_mouse.html#aa6d410543af3337d03a36f924ea57abd">getKeyState</a>(Key k);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    static void <a class="code" href="classclem_1_1_mouse.html#a1ea86ef0d10f94453d6607407f6e8413">setKeyState</a>(Key k, bool s);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    static std::unordered_map&lt;Key, bool&gt; states;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    static <a class="code" href="struct_vector2i.html">Point2i</a>                       position;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;enum class Mouse::Key : uint8_t</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    left,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    right</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
-<div class="ttc" id="aclass_mouse_html"><div class="ttname"><a href="class_mouse.html">Mouse</a></div><div class="ttdoc">鼠标.</div><div class="ttdef"><b>Definition:</b> Mouse.h:15</div></div>
-<div class="ttc" id="aclass_mouse_html_a71843fa6aaf5a33b5fbc27e663fa9c1a"><div class="ttname"><a href="class_mouse.html#a71843fa6aaf5a33b5fbc27e663fa9c1a">Mouse::setKeyState</a></div><div class="ttdeci">static void setKeyState(Key k, bool s)</div><div class="ttdoc">设置按键状态.</div><div class="ttdef"><b>Definition:</b> Mouse.cpp:16</div></div>
-<div class="ttc" id="aclass_mouse_html_ad38331ef02b44d53920b6cb6188e92dd"><div class="ttname"><a href="class_mouse.html#ad38331ef02b44d53920b6cb6188e92dd">Mouse::getKeyState</a></div><div class="ttdeci">enum static Key uint8_t bool getKeyState(Key k)</div><div class="ttdoc">获取按键状态.</div><div class="ttdef"><b>Definition:</b> Mouse.cpp:10</div></div>
-<div class="ttc" id="astruct_vector2i_html"><div class="ttname"><a href="struct_vector2i.html">Vector2i</a></div><div class="ttdoc">二维向量, 整型.</div><div class="ttdef"><b>Definition:</b> Vector2i.h:15</div></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    static <a class="code" href="struct_vector2.html">Point2</a> getPosition();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    static void   setPosition(Point2 p);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    static std::unordered_map&lt;Key, bool&gt; states;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    static <a class="code" href="struct_vector2.html">Point2</a>                        position;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;enum class Mouse::Key : uint8_t</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    left,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    right</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;} <span class="comment">// namespace clem</span></div>
+<div class="ttc" id="aclassclem_1_1_mouse_html"><div class="ttname"><a href="classclem_1_1_mouse.html">clem::Mouse</a></div><div class="ttdoc">鼠标.</div><div class="ttdef"><b>Definition:</b> Mouse.h:17</div></div>
+<div class="ttc" id="aclassclem_1_1_mouse_html_a1ea86ef0d10f94453d6607407f6e8413"><div class="ttname"><a href="classclem_1_1_mouse.html#a1ea86ef0d10f94453d6607407f6e8413">clem::Mouse::setKeyState</a></div><div class="ttdeci">static void setKeyState(Key k, bool s)</div><div class="ttdoc">设置按键状态.</div><div class="ttdef"><b>Definition:</b> Mouse.cpp:25</div></div>
+<div class="ttc" id="aclassclem_1_1_mouse_html_aa6d410543af3337d03a36f924ea57abd"><div class="ttname"><a href="classclem_1_1_mouse.html#aa6d410543af3337d03a36f924ea57abd">clem::Mouse::getKeyState</a></div><div class="ttdeci">static bool getKeyState(Key k)</div><div class="ttdoc">获取按键状态.</div><div class="ttdef"><b>Definition:</b> Mouse.cpp:17</div></div>
+<div class="ttc" id="astruct_vector2_html"><div class="ttname"><a href="struct_vector2.html">Vector2</a></div><div class="ttdoc">二维向量, 单精度.</div><div class="ttdef"><b>Definition:</b> Vector2.h:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_6159ebb534700731bf4b22c629f4e6b1.html">Clem</a></li><li class="navelem"><a class="el" href="dir_244a22a3a2aed95b5e09e75663ad57df.html">Core</a></li><li class="navelem"><b>Mouse.h</b></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_6159ebb534700731bf4b22c629f4e6b1.html">Clem</a></li><li class="navelem"><a class="el" href="dir_244a22a3a2aed95b5e09e75663ad57df.html">Core</a></li><li class="navelem"><a class="el" href="dir_67b009c0a6dd912dad225263b757e6d8.html">Input</a></li><li class="navelem"><b>Mouse.h</b></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

@@ -11,6 +11,14 @@
 #include <memory>
 #include <vector>
 
+/**
+ * @addtogroup Networking
+ * @{
+ */
+
+/**
+ * @brief 网络服务器, TCP 协议.
+ */
 class Server
 {
 public:
@@ -81,3 +89,8 @@ void Server::read(std::shared_ptr<Connection> conn)
 
 	conn->read<T>();
 }
+
+/**
+ * end of Networking group
+ * @}
+ */

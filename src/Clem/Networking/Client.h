@@ -9,6 +9,14 @@
 #include <cstdint>
 #include <string>
 
+/**
+ * @addtogroup Networking
+ * @{
+ */
+
+/**
+ * @brief 网络客户端, TCP 协议.
+ */
 class Client
 {
 public:
@@ -31,3 +39,8 @@ private:
 	Connection       connection;
 	std::thread      thread;
 };
+
+/**
+ * end of Networking group
+ * @}
+ */

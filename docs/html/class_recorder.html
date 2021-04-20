@@ -90,20 +90,25 @@ $(document).ready(function(){initNavTree('class_recorder.html',''); initResizabl
 <div class="title">Recorder类 参考</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>样本收集器.  
+ <a href="class_recorder.html#details">更多...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
 <tr class="memitem:a68c85014dc853b9deef2269c43fc974c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_recorder.html#a68c85014dc853b9deef2269c43fc974c">Recorder</a> (std::string_view name, <a class="el" href="class_session.html">Session</a> &amp;s)</td></tr>
-<tr class="memdesc:a68c85014dc853b9deef2269c43fc974c"><td class="mdescLeft">&#160;</td><td class="mdescRight">���캯��.  <a href="class_recorder.html#a68c85014dc853b9deef2269c43fc974c">更多...</a><br /></td></tr>
+<tr class="memdesc:a68c85014dc853b9deef2269c43fc974c"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数.  <a href="class_recorder.html#a68c85014dc853b9deef2269c43fc974c">更多...</a><br /></td></tr>
 <tr class="separator:a68c85014dc853b9deef2269c43fc974c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b3c569577fcdc298d8d4a6a2b96e9a9"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_recorder.html#a6b3c569577fcdc298d8d4a6a2b96e9a9">~Recorder</a> ()</td></tr>
-<tr class="memdesc:a6b3c569577fcdc298d8d4a6a2b96e9a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">��������.  <a href="class_recorder.html#a6b3c569577fcdc298d8d4a6a2b96e9a9">更多...</a><br /></td></tr>
+<tr class="memdesc:a6b3c569577fcdc298d8d4a6a2b96e9a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数.  <a href="class_recorder.html#a6b3c569577fcdc298d8d4a6a2b96e9a9">更多...</a><br /></td></tr>
 <tr class="separator:a6b3c569577fcdc298d8d4a6a2b96e9a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ea54ad6c2efb9eaee08f5cd4a82b03c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_recorder.html#a4ea54ad6c2efb9eaee08f5cd4a82b03c">stop</a> ()</td></tr>
-<tr class="memdesc:a4ea54ad6c2efb9eaee08f5cd4a82b03c"><td class="mdescLeft">&#160;</td><td class="mdescRight">ֹͣ��ʱ.  <a href="class_recorder.html#a4ea54ad6c2efb9eaee08f5cd4a82b03c">更多...</a><br /></td></tr>
+<tr class="memdesc:a4ea54ad6c2efb9eaee08f5cd4a82b03c"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止计时.  <a href="class_recorder.html#a4ea54ad6c2efb9eaee08f5cd4a82b03c">更多...</a><br /></td></tr>
 <tr class="separator:a4ea54ad6c2efb9eaee08f5cd4a82b03c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">构造及析构函数说明</h2>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>样本收集器. </p>
+</div><h2 class="groupheader">构造及析构函数说明</h2>
 <a id="a68c85014dc853b9deef2269c43fc974c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a68c85014dc853b9deef2269c43fc974c">&#9670;&nbsp;</a></span>Recorder()</h2>
 
@@ -130,8 +135,8 @@ Public 成员函数</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>���캯��. </p>
-<dl class="section note"><dt>注解</dt><dd>������ʱ��ʼ��ʱ. </dd></dl>
+<p>构造函数. </p>
+<dl class="section note"><dt>注解</dt><dd>被调用时开始计时. </dd></dl>
 
 </div>
 </div>
@@ -158,8 +163,8 @@ Public 成员函数</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>��������. </p>
-<dl class="section note"><dt>注解</dt><dd>������ʱֹͣ��ʱ, ������������д�������� <a class="el" href="class_session.html" title="会话. 对样本进行分组.">Session</a>. </dd></dl>
+<p>析构函数. </p>
+<dl class="section note"><dt>注解</dt><dd>被调用时停止计时, 并将样本数据写入所属的 <a class="el" href="class_session.html" title="会话. 对样本进行分组.">Session</a>. </dd></dl>
 
 </div>
 </div>
@@ -179,8 +184,8 @@ Public 成员函数</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>ֹͣ��ʱ. </p>
-<p>@node ��ʱ��Ҫ�����������Զ�����ǰֹͣ��ʱ. </p>
+<p>停止计时. </p>
+<p>@node 有时需要在析构函数自动调用前停止计时. </p>
 
 </div>
 </div>

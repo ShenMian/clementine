@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -10,7 +10,7 @@
 class Session;
 
 /**
- * CPU Ñù±¾.
+ * @brief CPU æ ·æœ¬.
  */
 struct CpuSample
 {
@@ -21,7 +21,7 @@ struct CpuSample
 };
 
 /**
- * @brief Ñù±¾ÊÕ¼¯Æ÷.
+ * @brief æ ·æœ¬æ”¶é›†å™¨.
  */
 class Recorder
 {
@@ -29,23 +29,23 @@ class Recorder
 
 public:
 	/**
-	 * @brief ¹¹Ôìº¯Êı.
+	 * @brief æ„é€ å‡½æ•°.
 	 *
-	 * @note ±»µ÷ÓÃÊ±¿ªÊ¼¼ÆÊ±.
+	 * @note è¢«è°ƒç”¨æ—¶å¼€å§‹è®¡æ—¶.
 	 */
 	Recorder(std::string_view name, Session& s);
 
 	/**
-	 * @brief Îö¹¹º¯Êı.
+	 * @brief ææ„å‡½æ•°.
 	 *
-	 * @note ±»µ÷ÓÃÊ±Í£Ö¹¼ÆÊ±, ²¢½«Ñù±¾Êı¾İĞ´ÈëËùÊôµÄ Session.
+	 * @note è¢«è°ƒç”¨æ—¶åœæ­¢è®¡æ—¶, å¹¶å°†æ ·æœ¬æ•°æ®å†™å…¥æ‰€å±çš„ Session.
 	 */
 	virtual ~Recorder();
 
 	/**
-	 * @brief Í£Ö¹¼ÆÊ±.
+	 * @brief åœæ­¢è®¡æ—¶.
 	 *
-	 * @node ÓĞÊ±ĞèÒªÔÚÎö¹¹º¯Êı×Ô¶¯µ÷ÓÃÇ°Í£Ö¹¼ÆÊ±.
+	 * @node æœ‰æ—¶éœ€è¦åœ¨ææ„å‡½æ•°è‡ªåŠ¨è°ƒç”¨å‰åœæ­¢è®¡æ—¶.
 	 */
 	void stop();
 

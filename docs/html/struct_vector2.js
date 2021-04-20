@@ -2,12 +2,12 @@ var struct_vector2 =
 [
     [ "Vector2", "struct_vector2.html#af1de25cf0004820d5e6db855c91bc4ad", null ],
     [ "Vector2", "struct_vector2.html#a061ab58a0e216c759d64e3746d712b12", null ],
+    [ "angle", "struct_vector2.html#afa33de2ad0f917e8f4d751b8855f4da7", null ],
     [ "area", "struct_vector2.html#add74d7e1b1fd038b1f32fe238df349ca", null ],
     [ "asInt", "struct_vector2.html#a68b299e5dc20f37ab18ba70c53e006af", null ],
     [ "distance", "struct_vector2.html#ae754545486968d5055c75ecadb858aa3", null ],
     [ "distanceSquared", "struct_vector2.html#a584530f1f825ce1b4d76bd84ab0caf87", null ],
     [ "dot", "struct_vector2.html#aaf4f05ee6cb634974bf528e09f813c8f", null ],
-    [ "getAngle", "struct_vector2.html#a71c142a245cf773581ee7c2b0e0cf884", null ],
     [ "getMidPoint", "struct_vector2.html#a83d0899f858d2b401b417d044f6f8aaa", null ],
     [ "magnitude", "struct_vector2.html#ab84b0c3d31e2893df551d259789e80a9", null ],
     [ "normalize", "struct_vector2.html#a32e698ed9337b1d258fe96b5b942015a", null ],

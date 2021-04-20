@@ -90,42 +90,42 @@ $(document).ready(function(){initNavTree('_output_8h_source.html',''); initResiz
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2021 SMS</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// License(Apache-2.0)</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef CLEM_RENDERER_RENDERER_H_</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define CLEM_RENDERER_RENDERER_H_</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Clem/Core/Math/Vector2i.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Framebuffer.h&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_output.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_output.html">Output</a></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_output.html">Output</a>&amp; get();</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">void</span> update();</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_output.html#a2b6d32775ef65644b78755c74b6c14e7">swapBuffers</a>();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_framebuffer.html">Framebuffer</a>&amp; <a class="code" href="class_output.html#ad32d8413a5a61a24bda92dbf46405e75">getBuffer</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_output.html#a6c282174d32687ad40c582f31c275974">setSize</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Size2i</a>&amp;);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Size2i</a>&amp; <a class="code" href="class_output.html#abd010d51cc3139ebaeeb95f475dff229">getSize</a>();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_output.html">Output</a>();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_framebuffer.html">Framebuffer</a>* front;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="class_framebuffer.html">Framebuffer</a>* back;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_framebuffer.html">Framebuffer</a>  buffer[2];</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_RENDERER_RENDERER_H_</span></div>
-<div class="ttc" id="aclass_framebuffer_html"><div class="ttname"><a href="class_framebuffer.html">Framebuffer</a></div><div class="ttdoc">帧缓冲区.</div><div class="ttdef"><b>Definition:</b> Framebuffer.h:25</div></div>
-<div class="ttc" id="aclass_output_html"><div class="ttname"><a href="class_output.html">Output</a></div><div class="ttdef"><b>Definition:</b> Output.h:11</div></div>
-<div class="ttc" id="aclass_output_html_a2b6d32775ef65644b78755c74b6c14e7"><div class="ttname"><a href="class_output.html#a2b6d32775ef65644b78755c74b6c14e7">Output::swapBuffers</a></div><div class="ttdeci">void swapBuffers()</div><div class="ttdoc">交换缓冲区.</div><div class="ttdef"><b>Definition:</b> Output.cpp:24</div></div>
-<div class="ttc" id="aclass_output_html_a6c282174d32687ad40c582f31c275974"><div class="ttname"><a href="class_output.html#a6c282174d32687ad40c582f31c275974">Output::setSize</a></div><div class="ttdeci">void setSize(const Size2i &amp;)</div><div class="ttdoc">设置缓冲区大小.</div><div class="ttdef"><b>Definition:</b> Output.cpp:36</div></div>
-<div class="ttc" id="aclass_output_html_abd010d51cc3139ebaeeb95f475dff229"><div class="ttname"><a href="class_output.html#abd010d51cc3139ebaeeb95f475dff229">Output::getSize</a></div><div class="ttdeci">const Size2i &amp; getSize()</div><div class="ttdoc">获取缓冲区大小.</div><div class="ttdef"><b>Definition:</b> Output.cpp:42</div></div>
-<div class="ttc" id="aclass_output_html_ad32d8413a5a61a24bda92dbf46405e75"><div class="ttname"><a href="class_output.html#ad32d8413a5a61a24bda92dbf46405e75">Output::getBuffer</a></div><div class="ttdeci">Framebuffer &amp; getBuffer() const</div><div class="ttdoc">获取下一个缓冲区.</div><div class="ttdef"><b>Definition:</b> Output.cpp:31</div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Clem/Core/Math/Vector2i.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Framebuffer.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>clem</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classclem_1_1_output.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_output.html">Output</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">static</span> <a class="code" href="classclem_1_1_output.html">Output</a>&amp; get();</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> update();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_output.html#a42d5f3c8d032042866f47d6e643a76a2">swapBuffers</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classclem_1_1_framebuffer.html">Framebuffer</a>&amp; <a class="code" href="classclem_1_1_output.html#a3fa807049504ada11f6d75b66122cad4">getBuffer</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_output.html#a9fe457dad947b42d121e4564fcdbc082">setSize</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Size2i</a>&amp;);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Size2i</a>&amp; <a class="code" href="classclem_1_1_output.html#a29896803f075d71aae9c53c4b4825cc6">getSize</a>();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classclem_1_1_output.html">Output</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="classclem_1_1_framebuffer.html">Framebuffer</a>* front;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classclem_1_1_framebuffer.html">Framebuffer</a>* back;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classclem_1_1_framebuffer.html">Framebuffer</a>  buffer[2];</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;} <span class="comment">// namespace clem</span></div>
+<div class="ttc" id="aclassclem_1_1_framebuffer_html"><div class="ttname"><a href="classclem_1_1_framebuffer.html">clem::Framebuffer</a></div><div class="ttdoc">帧缓冲区.</div><div class="ttdef"><b>Definition:</b> Framebuffer.h:26</div></div>
+<div class="ttc" id="aclassclem_1_1_output_html"><div class="ttname"><a href="classclem_1_1_output.html">clem::Output</a></div><div class="ttdef"><b>Definition:</b> Output.h:12</div></div>
+<div class="ttc" id="aclassclem_1_1_output_html_a29896803f075d71aae9c53c4b4825cc6"><div class="ttname"><a href="classclem_1_1_output.html#a29896803f075d71aae9c53c4b4825cc6">clem::Output::getSize</a></div><div class="ttdeci">const Size2i &amp; getSize()</div><div class="ttdoc">获取缓冲区大小.</div><div class="ttdef"><b>Definition:</b> Output.cpp:44</div></div>
+<div class="ttc" id="aclassclem_1_1_output_html_a3fa807049504ada11f6d75b66122cad4"><div class="ttname"><a href="classclem_1_1_output.html#a3fa807049504ada11f6d75b66122cad4">clem::Output::getBuffer</a></div><div class="ttdeci">Framebuffer &amp; getBuffer() const</div><div class="ttdoc">获取下一个缓冲区.</div><div class="ttdef"><b>Definition:</b> Output.cpp:33</div></div>
+<div class="ttc" id="aclassclem_1_1_output_html_a42d5f3c8d032042866f47d6e643a76a2"><div class="ttname"><a href="classclem_1_1_output.html#a42d5f3c8d032042866f47d6e643a76a2">clem::Output::swapBuffers</a></div><div class="ttdeci">void swapBuffers()</div><div class="ttdoc">交换缓冲区.</div><div class="ttdef"><b>Definition:</b> Output.cpp:26</div></div>
+<div class="ttc" id="aclassclem_1_1_output_html_a9fe457dad947b42d121e4564fcdbc082"><div class="ttname"><a href="classclem_1_1_output.html#a9fe457dad947b42d121e4564fcdbc082">clem::Output::setSize</a></div><div class="ttdeci">void setSize(const Size2i &amp;)</div><div class="ttdoc">设置缓冲区大小.</div><div class="ttdef"><b>Definition:</b> Output.cpp:38</div></div>
 <div class="ttc" id="astruct_vector2i_html"><div class="ttname"><a href="struct_vector2i.html">Vector2i</a></div><div class="ttdoc">二维向量, 整型.</div><div class="ttdef"><b>Definition:</b> Vector2i.h:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -28,7 +28,7 @@ float \mbox{\hyperlink{struct_vector2_a584530f1f825ce1b4d76bd84ab0caf87}{distanc
 \begin{DoxyCompactList}\small\item\em 标准化成单位向量. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{struct_vector2_aaf4f05ee6cb634974bf528e09f813c8f}{dot}} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&v) const
 \begin{DoxyCompactList}\small\item\em 计算向量点积. \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{struct_vector2_a71c142a245cf773581ee7c2b0e0cf884}{get\+Angle}} () const
+float \mbox{\hyperlink{struct_vector2_afa33de2ad0f917e8f4d751b8855f4da7}{angle}} () const
 \begin{DoxyCompactList}\small\item\em 获取角度. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_vector2_a83d0899f858d2b401b417d044f6f8aaa}\label{struct_vector2_a83d0899f858d2b401b417d044f6f8aaa}} 
 \mbox{\hyperlink{struct_vector2}{Vector2}} \mbox{\hyperlink{struct_vector2_a83d0899f858d2b401b417d044f6f8aaa}{get\+Mid\+Point}} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&p) const
@@ -98,17 +98,17 @@ static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries zero}
 \mbox{\Hypertarget{struct_vector2_a3d5a013903c44b1afd903274eff780fd}\label{struct_vector2_a3d5a013903c44b1afd903274eff780fd}} 
 static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries unit}
 \item 
-\mbox{\Hypertarget{struct_vector2_aa9712253176cedb918592990df5ea611}\label{struct_vector2_aa9712253176cedb918592990df5ea611}} 
-static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries right}
-\item 
-\mbox{\Hypertarget{struct_vector2_aaad26bbee0364de1e6a8676215886a2f}\label{struct_vector2_aaad26bbee0364de1e6a8676215886a2f}} 
-static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries left}
-\item 
 \mbox{\Hypertarget{struct_vector2_a0de964f9acb5cc8669d0b3b9f5b9d4eb}\label{struct_vector2_a0de964f9acb5cc8669d0b3b9f5b9d4eb}} 
 static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries up}
 \item 
 \mbox{\Hypertarget{struct_vector2_a64cb9ddeb42abbcfa527c3e2660ffef9}\label{struct_vector2_a64cb9ddeb42abbcfa527c3e2660ffef9}} 
 static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries down}
+\item 
+\mbox{\Hypertarget{struct_vector2_aa9712253176cedb918592990df5ea611}\label{struct_vector2_aa9712253176cedb918592990df5ea611}} 
+static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries right}
+\item 
+\mbox{\Hypertarget{struct_vector2_aaad26bbee0364de1e6a8676215886a2f}\label{struct_vector2_aaad26bbee0364de1e6a8676215886a2f}} 
+static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries left}
 \end{DoxyCompactItemize}
 
 
@@ -136,6 +136,19 @@ static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries down}
 
 
 \doxysubsection{成员函数说明}
+\mbox{\Hypertarget{struct_vector2_afa33de2ad0f917e8f4d751b8855f4da7}\label{struct_vector2_afa33de2ad0f917e8f4d751b8855f4da7}} 
+\index{Vector2@{Vector2}!angle@{angle}}
+\index{angle@{angle}!Vector2@{Vector2}}
+\doxysubsubsection{\texorpdfstring{angle()}{angle()}}
+{\footnotesize\ttfamily float Vector2\+::angle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取角度. 
+
+\begin{DoxyReturn}{返回}
+角度, 弧度制. 范围\+: \mbox{[}2π, -\/2π) 
+\end{DoxyReturn}
 \mbox{\Hypertarget{struct_vector2_a68b299e5dc20f37ab18ba70c53e006af}\label{struct_vector2_a68b299e5dc20f37ab18ba70c53e006af}} 
 \index{Vector2@{Vector2}!asInt@{asInt}}
 \index{asInt@{asInt}!Vector2@{Vector2}}
@@ -202,19 +215,6 @@ static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries down}
 \end{DoxyParams}
 \begin{DoxyReturn}{返回}
 和另一个向量的点积. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{struct_vector2_a71c142a245cf773581ee7c2b0e0cf884}\label{struct_vector2_a71c142a245cf773581ee7c2b0e0cf884}} 
-\index{Vector2@{Vector2}!getAngle@{getAngle}}
-\index{getAngle@{getAngle}!Vector2@{Vector2}}
-\doxysubsubsection{\texorpdfstring{getAngle()}{getAngle()}}
-{\footnotesize\ttfamily float Vector2\+::get\+Angle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
-
-
-
-获取角度. 
-
-\begin{DoxyReturn}{返回}
-角度, 弧度制. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{struct_vector2_ab84b0c3d31e2893df551d259789e80a9}\label{struct_vector2_ab84b0c3d31e2893df551d259789e80a9}} 
 \index{Vector2@{Vector2}!magnitude@{magnitude}}

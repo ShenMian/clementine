@@ -1,26 +1,26 @@
 var group___scene =
 [
-    [ "Entity", "class_entity.html", [
-      [ "id_t", "class_entity.html#a5e135afe7c73cc2d884f31fdb55ae369", null ],
-      [ "Entity", "class_entity.html#aa28e3afd0766aae4d570ee9ee3c4ae3b", null ],
-      [ "Entity", "class_entity.html#a9b21526e485eb8b25b6171bc10f2b86e", null ],
-      [ "addComponent", "class_entity.html#a6c587536036aba9386ab288da78b1eb7", null ],
-      [ "getComponent", "class_entity.html#af5ed3abfec53434fe3fe604d3792e6fa", null ],
-      [ "getId", "class_entity.html#a80b05b1a96ae4fa256456c59068d157b", null ],
-      [ "getScene", "class_entity.html#a85a7ccf9c44cb612ec4ad2fd41169bc9", null ],
-      [ "hasComponent", "class_entity.html#ad42785721cb226a1bea8025aeb1d9e8d", null ],
-      [ "operator bool", "class_entity.html#a392c04ea669a2c92079b972828f9c352", null ],
-      [ "operator id_t", "class_entity.html#a0095108bde028d4848a78a2b142401a3", null ],
-      [ "operator!=", "class_entity.html#af8e8d2b70b96d5bb0104b9b30365cd04", null ],
-      [ "operator==", "class_entity.html#a0e06efc8cbb213cad26a352b84a10ba2", null ],
-      [ "removeComponent", "class_entity.html#a590ddbda675cf9b188977d553e396a0f", null ]
+    [ "Entity", "classclem_1_1_entity.html", [
+      [ "id_t", "classclem_1_1_entity.html#ac292ac5a69b2afa8978a703f0700aeb1", null ],
+      [ "Entity", "classclem_1_1_entity.html#a40d42762c8b56f339246aac8719a1034", null ],
+      [ "Entity", "classclem_1_1_entity.html#ae0966a9e7534a1c3da36b30fc25ad7ff", null ],
+      [ "addComponent", "classclem_1_1_entity.html#ae8947e7fb27c8fde55824399558c69f3", null ],
+      [ "getComponent", "classclem_1_1_entity.html#a2d7a39a13e862071a53f966b6def85c3", null ],
+      [ "getId", "classclem_1_1_entity.html#a3704081c8439585b7a0557bfbfa999a2", null ],
+      [ "getScene", "classclem_1_1_entity.html#ae94fb551dd5fc66a144e3409e58dc2e0", null ],
+      [ "hasComponent", "classclem_1_1_entity.html#a0e3b994270e2a3814d4bc9d2425c8967", null ],
+      [ "operator bool", "classclem_1_1_entity.html#a33fa3849fa7cf782906e90aea8546823", null ],
+      [ "operator id_t", "classclem_1_1_entity.html#a28a709019ecd6755635d4ae01ba52d4a", null ],
+      [ "operator!=", "classclem_1_1_entity.html#a8b5f65805854c705944b821b9a2698cb", null ],
+      [ "operator==", "classclem_1_1_entity.html#a1b31f88b925aa82cfe4ded367d58e302", null ],
+      [ "removeComponent", "classclem_1_1_entity.html#af763355898fef9e800ef6e515e3b7361", null ]
     ] ],
-    [ "Scene", "class_scene.html", [
-      [ "createEntity", "class_scene.html#a452acda004c2131ca6f4433f51717e48", null ],
-      [ "destroyEntity", "class_scene.html#a344a3b28262068191a4d116f5c2012aa", null ],
-      [ "getEntity", "class_scene.html#a232a8e2c6e04033581d6ad5fc14d013a", null ],
-      [ "render", "class_scene.html#ac6c1b33a96262e42897d5c7810cee5ee", null ],
-      [ "update", "class_scene.html#a4bd876fa0a8118d169b7b31c9df7601b", null ],
-      [ "Entity", "class_scene.html#a614439ccac0344926adc4c0165d64060", null ]
+    [ "Scene", "classclem_1_1_scene.html", [
+      [ "createEntity", "classclem_1_1_scene.html#af73b32a107bb6338d17a680d5289a5f7", null ],
+      [ "destroyEntity", "classclem_1_1_scene.html#a1f578c1c436c506a33f0c08b9d7f7ebd", null ],
+      [ "getEntity", "classclem_1_1_scene.html#ab214995ef831a24666c658d4444bd716", null ],
+      [ "render", "classclem_1_1_scene.html#abeb1da7c7c6c077f1aa749f0c6ade7cd", null ],
+      [ "update", "classclem_1_1_scene.html#a1ed29757c875f731f760fded44795807", null ],
+      [ "Entity", "classclem_1_1_scene.html#a614439ccac0344926adc4c0165d64060", null ]
     ] ]
 ];

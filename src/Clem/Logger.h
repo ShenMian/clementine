@@ -23,7 +23,7 @@ constexpr int log_active_level = 1;
 static_assert(log_level_trace <= log_active_level && log_active_level <= log_level_fatal);
 
 /**
- * 日志记录器.
+ * @brief 日志记录器.
  */
 class Logger
 {

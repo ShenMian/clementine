@@ -90,42 +90,46 @@ $(document).ready(function(){initNavTree('_scene_8h_source.html',''); initResiza
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2021 SMS</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// License(Apache-2.0)</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef CLEM_SCENE_SCENE_H_</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define CLEM_SCENE_SCENE_H_</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;entt/entt.hpp&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span><a class="code" href="class_entity.html">Entity</a>;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_scene.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_scene.html">Scene</a></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_entity.html">Entity</a> <a class="code" href="class_scene.html#a452acda004c2131ca6f4433f51717e48">createEntity</a>(<span class="keyword">const</span> std::string&amp; tag = <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="class_entity.html">Entity</a> <a class="code" href="class_scene.html#a232a8e2c6e04033581d6ad5fc14d013a">getEntity</a>(<span class="keyword">const</span> std::string_view&amp; tag);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scene.html#a344a3b28262068191a4d116f5c2012aa">destroyEntity</a>(<span class="keyword">const</span> std::string_view&amp; tag);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> update(<span class="keywordtype">float</span> dt);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> render(<span class="keywordtype">float</span> dt);</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;entt/entt.hpp&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>clem</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">class </span>Entity;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classclem_1_1_scene.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_scene.html">Scene</a></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="classclem_1_1_entity.html">Entity</a> <a class="code" href="classclem_1_1_scene.html#af73b32a107bb6338d17a680d5289a5f7">createEntity</a>(<span class="keyword">const</span> std::string&amp; tag = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="classclem_1_1_entity.html">Entity</a> <a class="code" href="classclem_1_1_scene.html#ab214995ef831a24666c658d4444bd716">getEntity</a>(<span class="keyword">const</span> std::string_view&amp; tag);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_scene.html#a1f578c1c436c506a33f0c08b9d7f7ebd">destroyEntity</a>(<span class="keyword">const</span> std::string_view&amp; tag);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> updateScripts(<span class="keywordtype">float</span> dt);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> updateRigidbodies(<span class="keywordtype">float</span> dt);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> renderSprites();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    entt::registry registry;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_entity.html">Entity</a>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !CLEM_SCENE_SCENE_H_</span></div>
-<div class="ttc" id="aclass_entity_html"><div class="ttname"><a href="class_entity.html">Entity</a></div><div class="ttdoc">实体. 组件的容器.</div><div class="ttdef"><b>Definition:</b> Entity.h:22</div></div>
-<div class="ttc" id="aclass_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdoc">场景. 创建并管理实体.</div><div class="ttdef"><b>Definition:</b> Scene.h:21</div></div>
-<div class="ttc" id="aclass_scene_html_a232a8e2c6e04033581d6ad5fc14d013a"><div class="ttname"><a href="class_scene.html#a232a8e2c6e04033581d6ad5fc14d013a">Scene::getEntity</a></div><div class="ttdeci">Entity getEntity(const std::string_view &amp;tag)</div><div class="ttdoc">通过标签获取实体.</div><div class="ttdef"><b>Definition:</b> Scene.cpp:24</div></div>
-<div class="ttc" id="aclass_scene_html_a344a3b28262068191a4d116f5c2012aa"><div class="ttname"><a href="class_scene.html#a344a3b28262068191a4d116f5c2012aa">Scene::destroyEntity</a></div><div class="ttdeci">void destroyEntity(const std::string_view &amp;tag)</div><div class="ttdoc">通过标签销毁实体.</div><div class="ttdef"><b>Definition:</b> Scene.cpp:34</div></div>
-<div class="ttc" id="aclass_scene_html_a452acda004c2131ca6f4433f51717e48"><div class="ttname"><a href="class_scene.html#a452acda004c2131ca6f4433f51717e48">Scene::createEntity</a></div><div class="ttdeci">Entity createEntity(const std::string &amp;tag=&quot;&quot;)</div><div class="ttdoc">创建新的实体.</div><div class="ttdef"><b>Definition:</b> Scene.cpp:16</div></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> update(<span class="keywordtype">float</span> dt);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> render(<span class="keywordtype">float</span> dt);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> updateScripts(<span class="keywordtype">float</span> dt);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> updateRigidbodies(<span class="keywordtype">float</span> dt);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> renderSprites();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> sortSprites();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    entt::registry registry;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classclem_1_1_entity.html">Entity</a>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;} <span class="comment">// namespace clem</span></div>
+<div class="ttc" id="aclassclem_1_1_entity_html"><div class="ttname"><a href="classclem_1_1_entity.html">clem::Entity</a></div><div class="ttdoc">实体. 组件的容器.</div><div class="ttdef"><b>Definition:</b> Entity.h:23</div></div>
+<div class="ttc" id="aclassclem_1_1_scene_html"><div class="ttname"><a href="classclem_1_1_scene.html">clem::Scene</a></div><div class="ttdoc">场景. 创建并管理实体.</div><div class="ttdef"><b>Definition:</b> Scene.h:24</div></div>
+<div class="ttc" id="aclassclem_1_1_scene_html_a1f578c1c436c506a33f0c08b9d7f7ebd"><div class="ttname"><a href="classclem_1_1_scene.html#a1f578c1c436c506a33f0c08b9d7f7ebd">clem::Scene::destroyEntity</a></div><div class="ttdeci">void destroyEntity(const std::string_view &amp;tag)</div><div class="ttdoc">通过标签销毁实体.</div><div class="ttdef"><b>Definition:</b> Scene.cpp:36</div></div>
+<div class="ttc" id="aclassclem_1_1_scene_html_ab214995ef831a24666c658d4444bd716"><div class="ttname"><a href="classclem_1_1_scene.html#ab214995ef831a24666c658d4444bd716">clem::Scene::getEntity</a></div><div class="ttdeci">Entity getEntity(const std::string_view &amp;tag)</div><div class="ttdoc">通过标签获取实体.</div><div class="ttdef"><b>Definition:</b> Scene.cpp:26</div></div>
+<div class="ttc" id="aclassclem_1_1_scene_html_af73b32a107bb6338d17a680d5289a5f7"><div class="ttname"><a href="classclem_1_1_scene.html#af73b32a107bb6338d17a680d5289a5f7">clem::Scene::createEntity</a></div><div class="ttdeci">Entity createEntity(const std::string &amp;tag=&quot;&quot;)</div><div class="ttdoc">创建新的实体.</div><div class="ttdef"><b>Definition:</b> Scene.cpp:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

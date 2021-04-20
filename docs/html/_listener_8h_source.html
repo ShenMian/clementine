@@ -95,18 +95,31 @@ $(document).ready(function(){initNavTree('_listener_8h_source.html',''); initRes
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;AL/alext.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Clem/Core/Math/Math.h&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_listener.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_listener.html">Listener</a></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">typedef</span> ALuint id_t;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span> setPosition(<span class="keyword">const</span> <a class="code" href="struct_vector2.html">Point2</a>&amp; p);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> setVelocity(<span class="keyword">const</span> <a class="code" href="struct_vector2.html">Vector2</a>&amp; v);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    id_t id;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
-<div class="ttc" id="aclass_listener_html"><div class="ttname"><a href="class_listener.html">Listener</a></div><div class="ttdoc">听者.</div><div class="ttdef"><b>Definition:</b> Listener.h:13</div></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>clem</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classclem_1_1_listener.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_listener.html">Listener</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_listener.html#a80d46e99a10cb7397ae9bb8d30f56bba">setVolume</a>(<span class="keywordtype">float</span> volume);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">float</span> <a class="code" href="classclem_1_1_listener.html#a30450f26bd28e50c560ab8f75684af0d">getVolume</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_listener.html#a07a5f3471a53882262d352739be84d88">setPosition</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2.html">Point2</a>&amp; p);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">static</span> <a class="code" href="struct_vector2.html">Point2</a> <a class="code" href="classclem_1_1_listener.html#aa009c6475f3175998e51823cea199e7f">getPosition</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_listener.html#a78cfd869c756f7893c6b029a33d14b26">setVelocity</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2.html">Vector2</a>&amp; v);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">static</span> <a class="code" href="struct_vector2.html">Vector2</a> <a class="code" href="classclem_1_1_listener.html#a22d61a2d9c17f348368144668b00e17f">getVelocity</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;} <span class="comment">// namespace clem</span></div>
+<div class="ttc" id="aclassclem_1_1_listener_html"><div class="ttname"><a href="classclem_1_1_listener.html">clem::Listener</a></div><div class="ttdoc">听者.</div><div class="ttdef"><b>Definition:</b> Listener.h:15</div></div>
+<div class="ttc" id="aclassclem_1_1_listener_html_a07a5f3471a53882262d352739be84d88"><div class="ttname"><a href="classclem_1_1_listener.html#a07a5f3471a53882262d352739be84d88">clem::Listener::setPosition</a></div><div class="ttdeci">static void setPosition(const Point2 &amp;p)</div><div class="ttdoc">设置听者位置.</div><div class="ttdef"><b>Definition:</b> Listener.cpp:23</div></div>
+<div class="ttc" id="aclassclem_1_1_listener_html_a22d61a2d9c17f348368144668b00e17f"><div class="ttname"><a href="classclem_1_1_listener.html#a22d61a2d9c17f348368144668b00e17f">clem::Listener::getVelocity</a></div><div class="ttdeci">static Vector2 getVelocity()</div><div class="ttdoc">获取听者速度.</div><div class="ttdef"><b>Definition:</b> Listener.cpp:42</div></div>
+<div class="ttc" id="aclassclem_1_1_listener_html_a30450f26bd28e50c560ab8f75684af0d"><div class="ttname"><a href="classclem_1_1_listener.html#a30450f26bd28e50c560ab8f75684af0d">clem::Listener::getVolume</a></div><div class="ttdeci">static float getVolume()</div><div class="ttdoc">获取音量.</div><div class="ttdef"><b>Definition:</b> Listener.cpp:16</div></div>
+<div class="ttc" id="aclassclem_1_1_listener_html_a78cfd869c756f7893c6b029a33d14b26"><div class="ttname"><a href="classclem_1_1_listener.html#a78cfd869c756f7893c6b029a33d14b26">clem::Listener::setVelocity</a></div><div class="ttdeci">static void setVelocity(const Vector2 &amp;v)</div><div class="ttdoc">设置听者速度.</div><div class="ttdef"><b>Definition:</b> Listener.cpp:36</div></div>
+<div class="ttc" id="aclassclem_1_1_listener_html_a80d46e99a10cb7397ae9bb8d30f56bba"><div class="ttname"><a href="classclem_1_1_listener.html#a80d46e99a10cb7397ae9bb8d30f56bba">clem::Listener::setVolume</a></div><div class="ttdeci">static void setVolume(float volume)</div><div class="ttdoc">设置音量.</div><div class="ttdef"><b>Definition:</b> Listener.cpp:9</div></div>
+<div class="ttc" id="aclassclem_1_1_listener_html_aa009c6475f3175998e51823cea199e7f"><div class="ttname"><a href="classclem_1_1_listener.html#aa009c6475f3175998e51823cea199e7f">clem::Listener::getPosition</a></div><div class="ttdeci">static Point2 getPosition()</div><div class="ttdoc">获取听者位置.</div><div class="ttdef"><b>Definition:</b> Listener.cpp:29</div></div>
 <div class="ttc" id="astruct_vector2_html"><div class="ttname"><a href="struct_vector2.html">Vector2</a></div><div class="ttdoc">二维向量, 单精度.</div><div class="ttdef"><b>Definition:</b> Vector2.h:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

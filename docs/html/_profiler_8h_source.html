@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('_profiler_8h_source.html',''); initRes
 <div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_instrumentor.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_instrumentor.html">Instrumentor</a></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_instrumentor.html">Instrumentor</a>&amp; getInstance();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_instrumentor.html">Instrumentor</a>&amp; get();</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> begin(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename);</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> end();</div>
@@ -142,8 +142,8 @@ $(document).ready(function(){initNavTree('_profiler_8h_source.html',''); initRes
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#if 1</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#   define PROFILE_SESSION_BEGIN(filepath) Instrumentor::getInstance().begin(filepath)</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#   define PROFILE_SESSION_END()           Instrumentor::getInstance().end()</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#   define PROFILE_SESSION_BEGIN(filepath) Instrumentor::get().begin(filepath)</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#   define PROFILE_SESSION_END()           Instrumentor::get().end()</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#   define PROFILE_SCOPE_BEGIN(name)       InstrumentationCounter counter_##name(#  name)</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#   define PROFILE_SCOPE_END(name)         counter_##name.stop()</span></div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#   define PROFILE_SCOPE                   PROFILE_SCOPE_BEGIN</span></div>

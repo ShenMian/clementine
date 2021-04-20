@@ -6,6 +6,16 @@
 #include <cstdint>
 #include <vector>
 
+/**
+ * @addtogroup Networking
+ * @{
+ */
+
+/**
+ * @brief 网络消息.
+ * 
+ * @tparam T 消息 ID 类型, 强类型枚举体.
+ */
 template <typename T>
 class Message
 {
@@ -69,3 +79,8 @@ public:
 		return msg;
 	}
 };
+
+/**
+ * end of Networking group
+ * @}
+ */
