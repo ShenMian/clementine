@@ -2,7 +2,6 @@
 // License(Apache-2.0)
 
 #include "Profiler.h"
-#include "Log.h"
 #include <cassert>
 #include <iomanip>
 

@@ -23,22 +23,22 @@ message("\n")
 # 设置 lib 输出目录
 set(LIBRARY_OUTPUT_PATH ../lib/)
 
-include_directories("src")
-include_directories("thirdparty/entt/include")
-include_directories("thirdparty/spdlog/include")
-include_directories("thirdparty/openal/include")
-include_directories("thirdparty/yaml-cpp/include")
+include_directories("Source")
+include_directories("Thirdparty/entt/include")
+include_directories("Thirdparty/spdlog/include")
+include_directories("Thirdparty/openal/include")
+include_directories("Thirdparty/yaml-cpp/include")
 
-add_subdirectory("thirdparty/yaml-cpp")
-add_subdirectory("src")
+add_subdirectory("Thirdparty/yaml-cpp")
+add_subdirectory("Source")
 
 # 例子
 if(BUILD_EXAMPLES)
-	add_subdirectory("examples")
+	add_subdirectory("Examples")
 endif()
 
 # 单元测试
 if(BUILD_TESTS)
   enable_testing()
-	add_subdirectory("tests")
+	add_subdirectory("Tests")
 endif()

@@ -34,11 +34,11 @@ Documentation
 
 Screenshots
 -----------
-![Pong](docs/pictures/pong.png)
-![Minesweeper](docs/pictures/minesweeper.png)
-![Sort](docs/pictures/sort.gif)
-![Gamepad](docs/pictures/gamepad.gif)
-![Profiler](docs/pictures/profiler.png)
+![Pong](Docs/pictures/pong.png)
+![Minesweeper](Docs/pictures/minesweeper.png)
+![Sort](Docs/pictures/sort.gif)
+![Gamepad](Docs/pictures/gamepad.gif)
+![Profiler](Docs/pictures/profiler.png)
 
 Compiling
 ---------
@@ -46,7 +46,7 @@ Compiling
 If you'd prefer not to use Git, use the 'Download ZIP' button on the right to get the source as a zip file.
 
 ### Premake
-Enter folder 'scripts' and run 'generate_[action]_project.sh'/'generate_[action]_project.bat'. This will generate the project files corresponding to specific software.
+Enter folder 'Scripts' and run 'generate_[action]_project.sh'/'generate_[action]_project.bat'. This will generate the project files corresponding to specific software.
 
 #### Action options
 - `vs2019` Visual Studio 2019
@@ -54,7 +54,7 @@ Enter folder 'scripts' and run 'generate_[action]_project.sh'/'generate_[action]
 - `gmake2` GNU Make 2
 
 ### CMake
-Enter folder 'scripts' and run 'build.sh'/'build.bat'. This will download submodules and use CMake to build project.
+Enter folder 'Scripts' and run 'build.sh'/'build.bat'. This will download submodules and use CMake to build project.
 
 #### CMake Options (default ON)
 - `BUILD_EXAMPLES` Build the examples

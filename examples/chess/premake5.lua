@@ -13,7 +13,7 @@ project "Chess"
   files {"**.h", "**.cpp", "premake5.lua"}
 
   includedirs {
-    "%{wks.location}/src",
+    "%{wks.location}/Source",
     "%{thirdparty.asio}/include",
     "%{thirdparty.entt}/include",
     "%{thirdparty.spdlog}/include",

@@ -34,18 +34,18 @@
 
 截图
 ----
-![Pong](docs/pictures/pong.png)
-![Minesweeper](docs/pictures/minesweeper.png)
-![Sort](docs/pictures/sort.gif)
-![Gamepad](docs/pictures/gamepad.gif)
-![Profiler](docs/pictures/profiler.png)
+![Pong](Docs/pictures/pong.png)
+![Minesweeper](Docs/pictures/minesweeper.png)
+![Sort](Docs/pictures/sort.gif)
+![Gamepad](Docs/pictures/gamepad.gif)
+![Profiler](Docs/pictures/profiler.png)
 
 编译
 ----
 [设置Git]并[fork我们的仓库]. 如果您更倾向于不使用Git, 点击右上角的'Download ZIP'来下载zip格式的源代码.
 
 ### Premake
-进入文件夹 'scripts' 并执行 'generate_[action]_project.sh'/'generate_[action]_project.bat'. 这将生成对应特定软件的项目文件.
+进入文件夹 'Scripts' 并执行 'generate_[action]_project.sh'/'generate_[action]_project.bat'. 这将生成对应特定软件的项目文件.
 
 #### Action 选项
 - `vs2019` Visual Studio 2019
@@ -53,7 +53,7 @@
 - `gmake2` GNU Make 2
 
 ### CMake
-进入文件夹 'scripts' 并执行 'build.sh'/'build.bat'. 这将下载子模块并使用 CMake 构建项目.
+进入文件夹 'Scripts' 并执行 'build.sh'/'build.bat'. 这将下载子模块并使用 CMake 构建项目.
 
 ### CMake 选项 (默认 ON)
 - `BUILD_EXAMPLES` 构建示例
