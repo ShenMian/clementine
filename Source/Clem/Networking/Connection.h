@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Clem/Logger.h"
 #include "Clem/Platform.h"
 #include "Message.h"
 #include "asio.hpp"
@@ -26,15 +27,15 @@ public:
 	virtual ~Connection();
 
 	/**
-	 * @brief 与指定主机建立连接.
+	 * @brief 与指定主机的端口建立连接.
 	 * 
-	 * @param host   主机, IP 或 Domain.
-	 * @param port   端口号.
+	 * @param host 主机, IP 或 Domain.
+	 * @param port 端口号.
 	 */
 	bool connect(const std::string_view& host, std::uint16_t port);
 
 	/**
-	 * @brief 断开已建立的连接.
+	 * @brief 断开连接.
 	 */
 	void disconnect();
 
@@ -55,8 +56,9 @@ public:
 	template <typename T>
 	const Message<T>& getMessage();
 
-	std::function<void()> onConnect = nullptr;
-	std::function<void()> onMessage = nullptr;
+	std::function<void()> onConnect;
+	std::function<void()> onDisconnect;
+	std::function<void()> onMessage;
 
 private:
 	asio::io_context&     context;
@@ -76,7 +78,8 @@ void Connection::write(const Message<T>& msg)
 {
 	asio::async_write(socket, asio::buffer(&msg.header, sizeof(msg.header)),
 										[this](std::error_code ec, size_t size) {
-											assert(!ec);
+											if(ec)
+												CLEM_LOG_ERROR("networking", ec.message());
 										});
 }
 
@@ -95,13 +98,19 @@ void Connection::readHeader()
 {
 	async_read(socket, asio::buffer(&((Message<T>*)buffer)->header, sizeof(Message<T>::header)),
 						 [this](std::error_code ec, size_t size) {
-							 assert(!ec);
+							 if(ec)
+							 {
+								 CLEM_LOG_ERROR("networking", ec.message());
+								 return;
+							 }
+
 							 if(((Message<T>*)buffer)->header.size == 0)
 							 {
 								 if(onMessage)
 									 onMessage();
 								 return;
 							 }
+
 							 readBody<T>();
 						 });
 }
@@ -111,7 +120,12 @@ void Connection::readBody()
 {
 	async_read(socket, asio::buffer(&((Message<T>*)buffer)->body.data(), ((Message<T>*)buffer)->header.size),
 						 [this](std::error_code ec, size_t size) {
-							 assert(!ec);
+							 if(ec)
+							 {
+								 CLEM_LOG_ERROR("networking", ec.message());
+								 return;
+							 }
+
 							 readHeader<T>();
 							 if(onMessage)
 								 onMessage();

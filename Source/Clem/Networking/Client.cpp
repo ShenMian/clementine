@@ -21,7 +21,9 @@ Client::~Client()
 bool Client::connect(const std::string_view& host, std::uint16_t port)
 {
 	connection.connect(host, port);
-	connection.onMessage = [this]() { onMessage(); };
+	connection.onConnect    = [this]() { if(onConnect) onConnect(); };
+	connection.onDisconnect = [this]() { if(onDisconnect) onDisconnect(); };
+	connection.onMessage    = [this]() { if(onMessage) onMessage(); };
 
 	thread = std::thread([this]() { context.run(); });
 
@@ -30,8 +32,6 @@ bool Client::connect(const std::string_view& host, std::uint16_t port)
 
 void Client::disconnect()
 {
-	if(onDisconnect)
-		onDisconnect();
 	connection.disconnect();
 	context.stop();
 	if(thread.joinable())

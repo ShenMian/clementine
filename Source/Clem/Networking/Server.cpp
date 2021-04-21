@@ -60,7 +60,8 @@ void Server::acceptAsync()
 		auto conn = std::make_shared<Connection>(context, std::move(sock));
 		if(!onConnect || onConnect(conn))
 		{
-			conn->onMessage = [this, conn]() { onMessage(conn); };
+			conn->onDisconnect = [this, conn]() { if(onDisconnect) onDisconnect(conn); };
+			conn->onMessage    = [this, conn]() { if(onMessage) onMessage(conn); };
 			connections.push_back(conn);
 		}
 

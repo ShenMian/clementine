@@ -37,6 +37,7 @@ public:
 	template <typename T>
 	void read();
 
+	std::function<void()> onConnect;
 	std::function<void()> onDisconnect;
 	std::function<void()> onMessage;
 

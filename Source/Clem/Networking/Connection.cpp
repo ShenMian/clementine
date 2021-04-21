@@ -2,7 +2,6 @@
 // License(Apache-2.0)
 
 #include "Connection.h"
-#include "Clem/Logger.h"
 
 using namespace asio;
 
@@ -42,6 +41,8 @@ bool Connection::connect(const std::string_view& host, std::uint16_t port)
 
 void Connection::disconnect()
 {
+	if(onDisconnect)
+		onDisconnect();
 	post(context, [this]() { socket.close(); });
 }
 
