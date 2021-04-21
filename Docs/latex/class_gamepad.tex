@@ -1,0 +1,90 @@
+\hypertarget{class_gamepad}{}\doxysection{Gamepad类 参考}
+\label{class_gamepad}\index{Gamepad@{Gamepad}}
+
+
+游戏手柄.  
+
+
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_gamepad_a3e2204214f53c8d800b8ef7d4d0fab7c}\label{class_gamepad_a3e2204214f53c8d800b8ef7d4d0fab7c}} 
+enum class {\bfseries Thumb} \{ {\bfseries left}
+, {\bfseries right}
+ \}
+\item 
+\mbox{\Hypertarget{class_gamepad_a70c9a9ffcad17dd3c0b4a3838b33c804}\label{class_gamepad_a70c9a9ffcad17dd3c0b4a3838b33c804}} 
+enum class {\bfseries Button} \+: uint16\+\_\+t \{ \newline
+{\bfseries A}
+, {\bfseries B}
+, {\bfseries X}
+, {\bfseries Y}
+, \newline
+{\bfseries Start}
+, {\bfseries Back}
+, {\bfseries DPAD\+\_\+\+Up}
+, {\bfseries DPAD\+\_\+\+Down}
+, \newline
+{\bfseries DPAD\+\_\+\+Left}
+, {\bfseries DPAD\+\_\+\+Right}
+, {\bfseries Shoulder\+\_\+\+Left}
+, {\bfseries Shoulder\+\_\+\+Right}
+ \}
+\item 
+\mbox{\Hypertarget{class_gamepad_a814093b43f211a291b19ccf662096738}\label{class_gamepad_a814093b43f211a291b19ccf662096738}} 
+enum class {\bfseries Trigger} \{ {\bfseries left}
+, {\bfseries right}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_gamepad_a9a3034a4c4b95bf952589d626e4c512a}\label{class_gamepad_a9a3034a4c4b95bf952589d626e4c512a}} 
+{\bfseries Gamepad} (short device\+Id=0)
+\item 
+\mbox{\Hypertarget{class_gamepad_ae37f83a954aabbf634e9d6f37697ae58}\label{class_gamepad_ae37f83a954aabbf634e9d6f37697ae58}} 
+void {\bfseries update} ()
+\item 
+\mbox{\Hypertarget{class_gamepad_a65f0fdb3086a3ba7ab9e5ed54fecd71e}\label{class_gamepad_a65f0fdb3086a3ba7ab9e5ed54fecd71e}} 
+const \mbox{\hyperlink{struct_vector2}{Vector2}} \& \mbox{\hyperlink{class_gamepad_a65f0fdb3086a3ba7ab9e5ed54fecd71e}{get}} (Thumb t) const
+\begin{DoxyCompactList}\small\item\em 获取摇杆状态. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_gamepad_aef3cff7b9c5fc0bd56bb4aeaa6c45e62}\label{class_gamepad_aef3cff7b9c5fc0bd56bb4aeaa6c45e62}} 
+bool \mbox{\hyperlink{class_gamepad_aef3cff7b9c5fc0bd56bb4aeaa6c45e62}{get}} (Button b) const
+\begin{DoxyCompactList}\small\item\em 获取按键状态. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_gamepad_a4332c19fbfc7198f3ef9700fbe507651}\label{class_gamepad_a4332c19fbfc7198f3ef9700fbe507651}} 
+uint8\+\_\+t \mbox{\hyperlink{class_gamepad_a4332c19fbfc7198f3ef9700fbe507651}{get}} (Trigger t) const
+\begin{DoxyCompactList}\small\item\em 获取线性按键状态. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_gamepad_ad9091abfbb2cb8737389698200b487db}{set\+Vibration}} (uint16\+\_\+t left, uint16\+\_\+t right)
+\begin{DoxyCompactList}\small\item\em 设置震动反馈. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_gamepad_a33d4dbd503a8d645885bd19cbc390a91}\label{class_gamepad_a33d4dbd503a8d645885bd19cbc390a91}} 
+bool {\bfseries is\+Connected} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+游戏手柄. 
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{class_gamepad_ad9091abfbb2cb8737389698200b487db}\label{class_gamepad_ad9091abfbb2cb8737389698200b487db}} 
+\index{Gamepad@{Gamepad}!setVibration@{setVibration}}
+\index{setVibration@{setVibration}!Gamepad@{Gamepad}}
+\doxysubsubsection{\texorpdfstring{setVibration()}{setVibration()}}
+{\footnotesize\ttfamily void Gamepad\+::set\+Vibration (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{left,  }\item[{uint16\+\_\+t}]{right }\end{DoxyParamCaption})}
+
+
+
+设置震动反馈. 
+
+
+\begin{DoxyParams}{参数}
+{\em left} & 左马达转速. \\
+\hline
+{\em right} & 右马达转速. \\
+\hline
+\end{DoxyParams}
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Clem/\+Core/Gamepad.\+h\item 
+src/\+Clem/\+Core/Gamepad.\+cpp\end{DoxyCompactItemize}

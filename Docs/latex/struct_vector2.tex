@@ -1,0 +1,263 @@
+\hypertarget{struct_vector2}{}\doxysection{Vector2结构体 参考}
+\label{struct_vector2}\index{Vector2@{Vector2}}
+
+
+二维向量, 单精度.  
+
+
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_vector2_af1de25cf0004820d5e6db855c91bc4ad}\label{struct_vector2_af1de25cf0004820d5e6db855c91bc4ad}} 
+\mbox{\hyperlink{struct_vector2_af1de25cf0004820d5e6db855c91bc4ad}{Vector2}} ()=default
+\begin{DoxyCompactList}\small\item\em 默认构造函数. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_vector2_a061ab58a0e216c759d64e3746d712b12}{Vector2}} (float x, float y)
+\begin{DoxyCompactList}\small\item\em 构造函数. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{struct_vector2_ad6312eb18238dc3f0376841c2d6d117b}{size}} () const
+\begin{DoxyCompactList}\small\item\em 获取长度. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{struct_vector2_ab84b0c3d31e2893df551d259789e80a9}{magnitude}} () const
+\begin{DoxyCompactList}\small\item\em 获取长度. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{struct_vector2_a00514b919a4a46031e5eef0346564227}{size\+Squared}} () const
+\begin{DoxyCompactList}\small\item\em 获取长度平方. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{struct_vector2_ae754545486968d5055c75ecadb858aa3}{distance}} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&p) const
+\begin{DoxyCompactList}\small\item\em 获取到另一个点的距离. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{struct_vector2_a584530f1f825ce1b4d76bd84ab0caf87}{distance\+Squared}} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&p) const
+\begin{DoxyCompactList}\small\item\em 获取到另一个点的距离的平方. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_vector2_a32e698ed9337b1d258fe96b5b942015a}\label{struct_vector2_a32e698ed9337b1d258fe96b5b942015a}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} \& \mbox{\hyperlink{struct_vector2_a32e698ed9337b1d258fe96b5b942015a}{normalize}} ()
+\begin{DoxyCompactList}\small\item\em 标准化成单位向量. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{struct_vector2_aaf4f05ee6cb634974bf528e09f813c8f}{dot}} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&v) const
+\begin{DoxyCompactList}\small\item\em 计算向量点积. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{struct_vector2_afa33de2ad0f917e8f4d751b8855f4da7}{angle}} () const
+\begin{DoxyCompactList}\small\item\em 获取角度. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_vector2_a83d0899f858d2b401b417d044f6f8aaa}\label{struct_vector2_a83d0899f858d2b401b417d044f6f8aaa}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} \mbox{\hyperlink{struct_vector2_a83d0899f858d2b401b417d044f6f8aaa}{get\+Mid\+Point}} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&p) const
+\begin{DoxyCompactList}\small\item\em 获取与另一个点之间的中点. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_vector2_add74d7e1b1fd038b1f32fe238df349ca}\label{struct_vector2_add74d7e1b1fd038b1f32fe238df349ca}} 
+float \mbox{\hyperlink{struct_vector2_add74d7e1b1fd038b1f32fe238df349ca}{area}} () const
+\begin{DoxyCompactList}\small\item\em 获取面积. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_vector2i}{Vector2i}} \mbox{\hyperlink{struct_vector2_a68b299e5dc20f37ab18ba70c53e006af}{as\+Int}} () const
+\begin{DoxyCompactList}\small\item\em 获取整型二维向量. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_vector2_a1d2814f5d611ca11a3838e5a451b5c3d}\label{struct_vector2_a1d2814f5d611ca11a3838e5a451b5c3d}} 
+{\bfseries operator Vector2i} () const
+\item 
+\mbox{\Hypertarget{struct_vector2_a77b638de6b16a80d4c4be0c21fe2b481}\label{struct_vector2_a77b638de6b16a80d4c4be0c21fe2b481}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&v) const
+\item 
+\mbox{\Hypertarget{struct_vector2_a805e8fa742bba45aea6af187069f2c96}\label{struct_vector2_a805e8fa742bba45aea6af187069f2c96}} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&v) const
+\item 
+\mbox{\Hypertarget{struct_vector2_ab344dd39299d68565d43c10a1a48a82d}\label{struct_vector2_ab344dd39299d68565d43c10a1a48a82d}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries operator$\ast$} (float n) const
+\item 
+\mbox{\Hypertarget{struct_vector2_ae6fe0b84bd871a298d1d45ad7bdb4456}\label{struct_vector2_ae6fe0b84bd871a298d1d45ad7bdb4456}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries operator/} (float n) const
+\item 
+\mbox{\Hypertarget{struct_vector2_a18759ffa878ab208dbe092ae07e70b6f}\label{struct_vector2_a18759ffa878ab208dbe092ae07e70b6f}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries operator+} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&v) const
+\item 
+\mbox{\Hypertarget{struct_vector2_a37653598d7dd2e823c7af55bc50b92bb}\label{struct_vector2_a37653598d7dd2e823c7af55bc50b92bb}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries operator-\/} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&v) const
+\item 
+\mbox{\Hypertarget{struct_vector2_a66c2a54ca378d0d665bbb1115b2576f7}\label{struct_vector2_a66c2a54ca378d0d665bbb1115b2576f7}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries operator-\/} () const
+\item 
+\mbox{\Hypertarget{struct_vector2_a2315357e857ba16eeff4455e911d588c}\label{struct_vector2_a2315357e857ba16eeff4455e911d588c}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} \& {\bfseries operator+=} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&v)
+\item 
+\mbox{\Hypertarget{struct_vector2_acef1586ad34e658b975c21978a183931}\label{struct_vector2_acef1586ad34e658b975c21978a183931}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} \& {\bfseries operator-\/=} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&v)
+\item 
+\mbox{\Hypertarget{struct_vector2_a2be4cb943eb669ba047d5938ef7e6e7e}\label{struct_vector2_a2be4cb943eb669ba047d5938ef7e6e7e}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} \& {\bfseries operator$\ast$=} (float n)
+\item 
+\mbox{\Hypertarget{struct_vector2_a9e9e6e8c499d5a9f23eb474540679b29}\label{struct_vector2_a9e9e6e8c499d5a9f23eb474540679b29}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} \& {\bfseries operator/=} (float n)
+\item 
+\mbox{\Hypertarget{struct_vector2_a00854e433e5d7c7e3e95c07ae8e70894}\label{struct_vector2_a00854e433e5d7c7e3e95c07ae8e70894}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries operator+} (const \mbox{\hyperlink{struct_vector2i}{Vector2i}} \&v) const
+\item 
+\mbox{\Hypertarget{struct_vector2_a9f53e92d88902a54625f4a8dfc08108b}\label{struct_vector2_a9f53e92d88902a54625f4a8dfc08108b}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries operator-\/} (const \mbox{\hyperlink{struct_vector2i}{Vector2i}} \&v) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_vector2_a046bb8d17a876acc49415128dc0502f2}\label{struct_vector2_a046bb8d17a876acc49415128dc0502f2}} 
+float {\bfseries x} = 0.\+0f
+\item 
+\mbox{\Hypertarget{struct_vector2_a0e07bad05f01ed811b909a2eef97f9e2}\label{struct_vector2_a0e07bad05f01ed811b909a2eef97f9e2}} 
+float {\bfseries y} = 0.\+0f
+\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_vector2_a28849e17f54c1c995f035544b5fd0a5f}\label{struct_vector2_a28849e17f54c1c995f035544b5fd0a5f}} 
+static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries zero}
+\item 
+\mbox{\Hypertarget{struct_vector2_a3d5a013903c44b1afd903274eff780fd}\label{struct_vector2_a3d5a013903c44b1afd903274eff780fd}} 
+static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries unit}
+\item 
+\mbox{\Hypertarget{struct_vector2_a0de964f9acb5cc8669d0b3b9f5b9d4eb}\label{struct_vector2_a0de964f9acb5cc8669d0b3b9f5b9d4eb}} 
+static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries up}
+\item 
+\mbox{\Hypertarget{struct_vector2_a64cb9ddeb42abbcfa527c3e2660ffef9}\label{struct_vector2_a64cb9ddeb42abbcfa527c3e2660ffef9}} 
+static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries down}
+\item 
+\mbox{\Hypertarget{struct_vector2_aa9712253176cedb918592990df5ea611}\label{struct_vector2_aa9712253176cedb918592990df5ea611}} 
+static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries right}
+\item 
+\mbox{\Hypertarget{struct_vector2_aaad26bbee0364de1e6a8676215886a2f}\label{struct_vector2_aaad26bbee0364de1e6a8676215886a2f}} 
+static const \mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries left}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+二维向量, 单精度. 
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{struct_vector2_a061ab58a0e216c759d64e3746d712b12}\label{struct_vector2_a061ab58a0e216c759d64e3746d712b12}} 
+\index{Vector2@{Vector2}!Vector2@{Vector2}}
+\index{Vector2@{Vector2}!Vector2@{Vector2}}
+\doxysubsubsection{\texorpdfstring{Vector2()}{Vector2()}}
+{\footnotesize\ttfamily Vector2\+::\+Vector2 (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})}
+
+
+
+构造函数. 
+
+
+\begin{DoxyParams}{参数}
+{\em x} & x坐标. \\
+\hline
+{\em y} & y坐标. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{struct_vector2_afa33de2ad0f917e8f4d751b8855f4da7}\label{struct_vector2_afa33de2ad0f917e8f4d751b8855f4da7}} 
+\index{Vector2@{Vector2}!angle@{angle}}
+\index{angle@{angle}!Vector2@{Vector2}}
+\doxysubsubsection{\texorpdfstring{angle()}{angle()}}
+{\footnotesize\ttfamily float Vector2\+::angle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取角度. 
+
+\begin{DoxyReturn}{返回}
+角度, 弧度制. 范围\+: \mbox{[}2π, -\/2π) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_vector2_a68b299e5dc20f37ab18ba70c53e006af}\label{struct_vector2_a68b299e5dc20f37ab18ba70c53e006af}} 
+\index{Vector2@{Vector2}!asInt@{asInt}}
+\index{asInt@{asInt}!Vector2@{Vector2}}
+\doxysubsubsection{\texorpdfstring{asInt()}{asInt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_vector2i}{Vector2i}} Vector2\+::as\+Int (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取整型二维向量. 
+
+\begin{DoxyReturn}{返回}
+去除小数后的整型二维向量. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_vector2_ae754545486968d5055c75ecadb858aa3}\label{struct_vector2_ae754545486968d5055c75ecadb858aa3}} 
+\index{Vector2@{Vector2}!distance@{distance}}
+\index{distance@{distance}!Vector2@{Vector2}}
+\doxysubsubsection{\texorpdfstring{distance()}{distance()}}
+{\footnotesize\ttfamily float Vector2\+::distance (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_vector2}{Vector2}} \&}]{p }\end{DoxyParamCaption}) const}
+
+
+
+获取到另一个点的距离. 
+
+
+\begin{DoxyParams}{参数}
+{\em p} & 另一个点.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{struct_vector2_a584530f1f825ce1b4d76bd84ab0caf87}{distance\+Squared}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{struct_vector2_a584530f1f825ce1b4d76bd84ab0caf87}\label{struct_vector2_a584530f1f825ce1b4d76bd84ab0caf87}} 
+\index{Vector2@{Vector2}!distanceSquared@{distanceSquared}}
+\index{distanceSquared@{distanceSquared}!Vector2@{Vector2}}
+\doxysubsubsection{\texorpdfstring{distanceSquared()}{distanceSquared()}}
+{\footnotesize\ttfamily float Vector2\+::distance\+Squared (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_vector2}{Vector2}} \&}]{p }\end{DoxyParamCaption}) const}
+
+
+
+获取到另一个点的距离的平方. 
+
+
+\begin{DoxyParams}{参数}
+{\em p} & 另一个点.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{struct_vector2_ae754545486968d5055c75ecadb858aa3}{distance}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{struct_vector2_aaf4f05ee6cb634974bf528e09f813c8f}\label{struct_vector2_aaf4f05ee6cb634974bf528e09f813c8f}} 
+\index{Vector2@{Vector2}!dot@{dot}}
+\index{dot@{dot}!Vector2@{Vector2}}
+\doxysubsubsection{\texorpdfstring{dot()}{dot()}}
+{\footnotesize\ttfamily float Vector2\+::dot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_vector2}{Vector2}} \&}]{v }\end{DoxyParamCaption}) const}
+
+
+
+计算向量点积. 
+
+
+\begin{DoxyParams}{参数}
+{\em v} & 另一个向量. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+和另一个向量的点积. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_vector2_ab84b0c3d31e2893df551d259789e80a9}\label{struct_vector2_ab84b0c3d31e2893df551d259789e80a9}} 
+\index{Vector2@{Vector2}!magnitude@{magnitude}}
+\index{magnitude@{magnitude}!Vector2@{Vector2}}
+\doxysubsubsection{\texorpdfstring{magnitude()}{magnitude()}}
+{\footnotesize\ttfamily float Vector2\+::magnitude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取长度. 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{struct_vector2_ad6312eb18238dc3f0376841c2d6d117b}{size}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{struct_vector2_ad6312eb18238dc3f0376841c2d6d117b}\label{struct_vector2_ad6312eb18238dc3f0376841c2d6d117b}} 
+\index{Vector2@{Vector2}!size@{size}}
+\index{size@{size}!Vector2@{Vector2}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily float Vector2\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取长度. 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{struct_vector2_a00514b919a4a46031e5eef0346564227}{size\+Squared}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{struct_vector2_a00514b919a4a46031e5eef0346564227}\label{struct_vector2_a00514b919a4a46031e5eef0346564227}} 
+\index{Vector2@{Vector2}!sizeSquared@{sizeSquared}}
+\index{sizeSquared@{sizeSquared}!Vector2@{Vector2}}
+\doxysubsubsection{\texorpdfstring{sizeSquared()}{sizeSquared()}}
+{\footnotesize\ttfamily float Vector2\+::size\+Squared (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取长度平方. 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{struct_vector2_ad6312eb18238dc3f0376841c2d6d117b}{size}} 
+\end{DoxySeeAlso}
+
+
+该结构体的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Clem/\+Core/\+Math/Vector2.\+h\item 
+src/\+Clem/\+Core/\+Math/Vector2.\+cpp\end{DoxyCompactItemize}

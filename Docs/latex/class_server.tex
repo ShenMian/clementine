@@ -1,0 +1,63 @@
+\hypertarget{class_server}{}\doxysection{Server类 参考}
+\label{class_server}\index{Server@{Server}}
+
+
+网络服务器, TCP 协议.  
+
+
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_server_a094743390756fae3cd0bcb92387f6b70}{start}} (std\+::uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em 启动网络服务器并开始监听指定端口. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_server_a07c45a7e101a3926d8f9685c3c5d14e4}\label{class_server_a07c45a7e101a3926d8f9685c3c5d14e4}} 
+void \mbox{\hyperlink{class_server_a07c45a7e101a3926d8f9685c3c5d14e4}{stop}} ()
+\begin{DoxyCompactList}\small\item\em 停止网络服务器. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries write} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_connection}{Connection}} $>$ conn, const \mbox{\hyperlink{class_message}{Message}}$<$ T $>$ \&msg)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries read} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_connection}{Connection}} $>$ conn)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_server_ac8e2d40bdc39aed55df43010d2486dea}\label{class_server_ac8e2d40bdc39aed55df43010d2486dea}} 
+std\+::function$<$ bool(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_connection}{Connection}} $>$)$>$ {\bfseries on\+Connect} = nullptr
+\item 
+\mbox{\Hypertarget{class_server_a5f54a10f7d191a8077684ac1439f9436}\label{class_server_a5f54a10f7d191a8077684ac1439f9436}} 
+std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_connection}{Connection}} $>$)$>$ {\bfseries on\+Disconnect} = nullptr
+\item 
+\mbox{\Hypertarget{class_server_a7d4178712703ac8017e10b9ef9577736}\label{class_server_a7d4178712703ac8017e10b9ef9577736}} 
+std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_connection}{Connection}} $>$)$>$ {\bfseries on\+Message} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+网络服务器, TCP 协议. 
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{class_server_a094743390756fae3cd0bcb92387f6b70}\label{class_server_a094743390756fae3cd0bcb92387f6b70}} 
+\index{Server@{Server}!start@{start}}
+\index{start@{start}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily bool Server\+::start (\begin{DoxyParamCaption}\item[{std\+::uint16\+\_\+t}]{port }\end{DoxyParamCaption})}
+
+
+
+启动网络服务器并开始监听指定端口. 
+
+
+\begin{DoxyParams}{参数}
+{\em port} & 要监听的端口. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+true 启动成功. 
+
+false 启动失败. 
+\end{DoxyReturn}
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Clem/\+Networking/Server.\+h\item 
+src/\+Clem/\+Networking/Server.\+cpp\end{DoxyCompactItemize}

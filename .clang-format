@@ -1,0 +1,33 @@
+# Copyright 2019 SMS
+# License(Apache-2.0)
+
+Language: Cpp
+
+AccessModifierOffset:                -2
+
+AlignConsecutiveAssignments:         true
+AlignConsecutiveDeclarations:        true
+AlignConsecutiveBitFields:           true
+AlignConsecutiveMacros:              true
+AlignEscapedNewlines:                true
+AlignOperands:                       true
+AlignTrailingComments:               true
+
+AllowShortIfStatementsOnASingleLine: false
+AllowShortFunctionsOnASingleLine:    None
+AllowShortIfStatementsOnASingleLine: Never
+BreakBeforeBraces:                   Allman
+SpaceBeforeParens:                   Never
+
+MaxEmptyLinesToKeep: 2
+ColumnLimit:         0
+PointerAlignment:    Left
+
+ReflowComments:        false
+SortIncludes:          true
+SortUsingDeclarations: true
+
+IndentPPDirectives: AfterHash
+
+TabWidth: 2
+UseTab:   ForContinuationAndIndentation

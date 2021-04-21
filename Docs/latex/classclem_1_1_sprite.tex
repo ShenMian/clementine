@@ -1,0 +1,199 @@
+\hypertarget{classclem_1_1_sprite}{}\doxysection{clem\+::Sprite类 参考}
+\label{classclem_1_1_sprite}\index{clem::Sprite@{clem::Sprite}}
+
+
+精灵.  
+
+
+类 clem\+::Sprite 继承关系图\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classclem_1_1_sprite}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classclem_1_1_sprite_aaf1c1ba281d27dd9a9bc2ced2f4061ed}\label{classclem_1_1_sprite_aaf1c1ba281d27dd9a9bc2ced2f4061ed}} 
+{\bfseries Sprite} (const \mbox{\hyperlink{classclem_1_1_sprite}{Sprite}} \&)=default
+\item 
+\mbox{\Hypertarget{classclem_1_1_sprite_a6740939883afc84b45632026c8aa1455}\label{classclem_1_1_sprite_a6740939883afc84b45632026c8aa1455}} 
+{\bfseries Sprite} (const \mbox{\hyperlink{struct_vector2i}{Size2i}} \&size)
+\item 
+void \mbox{\hyperlink{classclem_1_1_sprite_a200f9adf6c963ba80681b6eab21a47ce}{draw\+Point}} (int x, int y, const \mbox{\hyperlink{class_tile}{Tile}} \&t)
+\begin{DoxyCompactList}\small\item\em 绘制点. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classclem_1_1_sprite_ae7b2ed2a7c269024ed36d4d89ef6f266}{draw\+Point}} (const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&p, const \mbox{\hyperlink{class_tile}{Tile}} \&t)
+\begin{DoxyCompactList}\small\item\em 绘制点. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classclem_1_1_sprite_ab4d40e1579cd40b9d99fd8baf8105389}{draw\+Line}} (const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&a, const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&b, const \mbox{\hyperlink{class_tile}{Tile}} \&t)
+\begin{DoxyCompactList}\small\item\em 绘制连接两点的线段. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classclem_1_1_sprite_a0d637653e8ee6dd1c7d78b388d661759}{draw\+Rect}} (const \mbox{\hyperlink{class_rect2i}{Rect2i}} \&r, const \mbox{\hyperlink{class_tile}{Tile}} \&t)
+\begin{DoxyCompactList}\small\item\em 绘制矩形. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classclem_1_1_sprite_a5a2fe01dadbb931a0d5119d405e8e465}{fill\+Rect}} (const \mbox{\hyperlink{class_rect2i}{Rect2i}} \&r, const \mbox{\hyperlink{class_tile}{Tile}} \&t)
+\begin{DoxyCompactList}\small\item\em 绘制实心矩形. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classclem_1_1_sprite_af747fa1c37bc9b4c1ec96c8aed87d6a0}{draw\+Cycle}} (const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&p, short radius, const \mbox{\hyperlink{class_tile}{Tile}} \&t)
+\begin{DoxyCompactList}\small\item\em 绘制圆形. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classclem_1_1_sprite_a048c33603a646d95416d99c2798bf347}{draw\+String}} (const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&pos, std\+::wstring\+\_\+view str, \mbox{\hyperlink{class_color}{Color}} color=\mbox{\hyperlink{class_color}{Color}}())
+\begin{DoxyCompactList}\small\item\em 绘制字符串. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classclem_1_1_sprite_ab31e3f73406032e3f1adfda8c938f6f6}\label{classclem_1_1_sprite_ab31e3f73406032e3f1adfda8c938f6f6}} 
+void \mbox{\hyperlink{classclem_1_1_sprite_ab31e3f73406032e3f1adfda8c938f6f6}{clear}} (const \mbox{\hyperlink{class_tile}{Tile}} \&=Tile\+::blank)
+\begin{DoxyCompactList}\small\item\em 清除全部绘制内容. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classclem_1_1_sprite_ad9fec15c68e0e2bc6406c5282c4e6376}\label{classclem_1_1_sprite_ad9fec15c68e0e2bc6406c5282c4e6376}} 
+const \mbox{\hyperlink{class_tile}{Tile}} \& {\bfseries get\+Tile} (int x, int y) const
+\item 
+\mbox{\Hypertarget{classclem_1_1_sprite_a465cad5b65c22086a2e0f7de129fe6e1}\label{classclem_1_1_sprite_a465cad5b65c22086a2e0f7de129fe6e1}} 
+const \mbox{\hyperlink{class_tile}{Tile}} \& {\bfseries get\+Tile} (const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&) const
+\item 
+\mbox{\Hypertarget{classclem_1_1_sprite_a3977986edadd95b63c3a3e37bcdfb943}\label{classclem_1_1_sprite_a3977986edadd95b63c3a3e37bcdfb943}} 
+void \mbox{\hyperlink{classclem_1_1_sprite_a3977986edadd95b63c3a3e37bcdfb943}{set\+Size}} (const \mbox{\hyperlink{struct_vector2i}{Size2i}} \&s)
+\begin{DoxyCompactList}\small\item\em 设置可绘制区域的大小 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classclem_1_1_sprite_a2f741c83f21d8b2c3ccf31f7e53189c2}\label{classclem_1_1_sprite_a2f741c83f21d8b2c3ccf31f7e53189c2}} 
+const \mbox{\hyperlink{struct_vector2i}{Size2i}} \& \mbox{\hyperlink{classclem_1_1_sprite_a2f741c83f21d8b2c3ccf31f7e53189c2}{get\+Size}} () const
+\begin{DoxyCompactList}\small\item\em 获取可绘制区域的大小 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classclem_1_1_sprite_aa48ba0e8a9844ea8ff153299b5e4969c}\label{classclem_1_1_sprite_aa48ba0e8a9844ea8ff153299b5e4969c}} 
+void {\bfseries set\+Depth} (size\+\_\+t)
+\item 
+\mbox{\Hypertarget{classclem_1_1_sprite_ad341a2b5ed7a08680dcdd7c1e89e0191}\label{classclem_1_1_sprite_ad341a2b5ed7a08680dcdd7c1e89e0191}} 
+size\+\_\+t {\bfseries get\+Depth} () const
+\item 
+\mbox{\Hypertarget{classclem_1_1_sprite_a52ef9515b33db2b9172f3b973f2e3979}\label{classclem_1_1_sprite_a52ef9515b33db2b9172f3b973f2e3979}} 
+\mbox{\hyperlink{classclem_1_1_sprite}{Sprite}} \& {\bfseries operator=} (const \mbox{\hyperlink{classclem_1_1_sprite}{Sprite}} \&)=default
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+精灵. 
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classclem_1_1_sprite_af747fa1c37bc9b4c1ec96c8aed87d6a0}\label{classclem_1_1_sprite_af747fa1c37bc9b4c1ec96c8aed87d6a0}} 
+\index{clem::Sprite@{clem::Sprite}!drawCycle@{drawCycle}}
+\index{drawCycle@{drawCycle}!clem::Sprite@{clem::Sprite}}
+\doxysubsubsection{\texorpdfstring{drawCycle()}{drawCycle()}}
+{\footnotesize\ttfamily void clem\+::\+Sprite\+::draw\+Cycle (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&}]{p,  }\item[{short}]{radius,  }\item[{const \mbox{\hyperlink{class_tile}{Tile}} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+绘制圆形. 
+
+
+\begin{DoxyParams}{参数}
+{\em p} & 原点坐标. \\
+\hline
+{\em radius} & 半径. \\
+\hline
+{\em t} & 瓦片. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classclem_1_1_sprite_ab4d40e1579cd40b9d99fd8baf8105389}\label{classclem_1_1_sprite_ab4d40e1579cd40b9d99fd8baf8105389}} 
+\index{clem::Sprite@{clem::Sprite}!drawLine@{drawLine}}
+\index{drawLine@{drawLine}!clem::Sprite@{clem::Sprite}}
+\doxysubsubsection{\texorpdfstring{drawLine()}{drawLine()}}
+{\footnotesize\ttfamily void clem\+::\+Sprite\+::draw\+Line (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&}]{a,  }\item[{const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&}]{b,  }\item[{const \mbox{\hyperlink{class_tile}{Tile}} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+绘制连接两点的线段. 
+
+
+\begin{DoxyParams}{参数}
+{\em a} & 线段端点坐标. \\
+\hline
+{\em b} & 线段另一端点坐标. \\
+\hline
+{\em t} & 瓦片. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classclem_1_1_sprite_ae7b2ed2a7c269024ed36d4d89ef6f266}\label{classclem_1_1_sprite_ae7b2ed2a7c269024ed36d4d89ef6f266}} 
+\index{clem::Sprite@{clem::Sprite}!drawPoint@{drawPoint}}
+\index{drawPoint@{drawPoint}!clem::Sprite@{clem::Sprite}}
+\doxysubsubsection{\texorpdfstring{drawPoint()}{drawPoint()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void clem\+::\+Sprite\+::draw\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&}]{p,  }\item[{const \mbox{\hyperlink{class_tile}{Tile}} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+绘制点. 
+
+
+\begin{DoxyParams}{参数}
+{\em p} & 点的坐标. \\
+\hline
+{\em t} & 瓦片. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classclem_1_1_sprite_a200f9adf6c963ba80681b6eab21a47ce}\label{classclem_1_1_sprite_a200f9adf6c963ba80681b6eab21a47ce}} 
+\index{clem::Sprite@{clem::Sprite}!drawPoint@{drawPoint}}
+\index{drawPoint@{drawPoint}!clem::Sprite@{clem::Sprite}}
+\doxysubsubsection{\texorpdfstring{drawPoint()}{drawPoint()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void clem\+::\+Sprite\+::draw\+Point (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{const \mbox{\hyperlink{class_tile}{Tile}} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+绘制点. 
+
+
+\begin{DoxyParams}{参数}
+{\em x} & x坐标. \\
+\hline
+{\em y} & y坐标. \\
+\hline
+{\em t} & 瓦片. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classclem_1_1_sprite_a0d637653e8ee6dd1c7d78b388d661759}\label{classclem_1_1_sprite_a0d637653e8ee6dd1c7d78b388d661759}} 
+\index{clem::Sprite@{clem::Sprite}!drawRect@{drawRect}}
+\index{drawRect@{drawRect}!clem::Sprite@{clem::Sprite}}
+\doxysubsubsection{\texorpdfstring{drawRect()}{drawRect()}}
+{\footnotesize\ttfamily void clem\+::\+Sprite\+::draw\+Rect (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_rect2i}{Rect2i}} \&}]{r,  }\item[{const \mbox{\hyperlink{class_tile}{Tile}} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+绘制矩形. 
+
+
+\begin{DoxyParams}{参数}
+{\em r} & 矩形. \\
+\hline
+{\em t} & 瓦片. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classclem_1_1_sprite_a048c33603a646d95416d99c2798bf347}\label{classclem_1_1_sprite_a048c33603a646d95416d99c2798bf347}} 
+\index{clem::Sprite@{clem::Sprite}!drawString@{drawString}}
+\index{drawString@{drawString}!clem::Sprite@{clem::Sprite}}
+\doxysubsubsection{\texorpdfstring{drawString()}{drawString()}}
+{\footnotesize\ttfamily void clem\+::\+Sprite\+::draw\+String (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_vector2i}{Point2i}} \&}]{pos,  }\item[{std\+::wstring\+\_\+view}]{str,  }\item[{\mbox{\hyperlink{class_color}{Color}}}]{color = {\ttfamily \mbox{\hyperlink{class_color}{Color}}()} }\end{DoxyParamCaption})}
+
+
+
+绘制字符串. 
+
+
+\begin{DoxyParams}{参数}
+{\em pos} & 绘制起点的位置 \\
+\hline
+{\em str} & 要绘制的字符串 \\
+\hline
+{\em color} & 顔色 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classclem_1_1_sprite_a5a2fe01dadbb931a0d5119d405e8e465}\label{classclem_1_1_sprite_a5a2fe01dadbb931a0d5119d405e8e465}} 
+\index{clem::Sprite@{clem::Sprite}!fillRect@{fillRect}}
+\index{fillRect@{fillRect}!clem::Sprite@{clem::Sprite}}
+\doxysubsubsection{\texorpdfstring{fillRect()}{fillRect()}}
+{\footnotesize\ttfamily void clem\+::\+Sprite\+::fill\+Rect (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_rect2i}{Rect2i}} \&}]{r,  }\item[{const \mbox{\hyperlink{class_tile}{Tile}} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+绘制实心矩形. 
+
+
+\begin{DoxyParams}{参数}
+{\em r} & 矩形. \\
+\hline
+{\em t} & 瓦片. \\
+\hline
+\end{DoxyParams}
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Clem/\+Rendering/Sprite.\+h\item 
+src/\+Clem/\+Rendering/Sprite.\+cpp\end{DoxyCompactItemize}
