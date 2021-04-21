@@ -34,7 +34,7 @@ void Logger::create(const string& name)
 Logger& Logger::get(const string& name)
 {
 	auto res = loggers.find(name);
-	Assert::isTrue(res != loggers.end(), "logger named '" + name + "' doesn't exist", CALL_INFO);
+	ASSERT_TRUE(res != loggers.end(), "logger named '" + name + "' doesn't exist");
 	return res->second;
 }
 

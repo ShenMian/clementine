@@ -44,7 +44,7 @@ public:
 
 		// 创建乒乓球球拍 Sprite
 		Sprite batSprite({1, 5});
-		batSprite.fillRect(Rect2i({0, 0}, {1, 5}), Tile('#', Color::blue));
+		batSprite.fillRect(Rect2i({0, 0}, {1, 5}), Tile(L'█', Color::blue));
 
 		// 创建两个乒乓球拍
 		auto bat1 = scene->createEntity("bat1");

@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 {
 	PROFILE_SESSION_BEGIN("profile.json");
 	auto app = clem::CreateApplication();
-	Assert::isNotNull(app, "CreateApplication() returns nullptr", CALL_INFO);
+	ASSERT_NOT_NULL(app, "CreateApplication() returns nullptr");
 
 	app->init();
 	app->run();
@@ -38,14 +38,14 @@ Application* Application::instance = nullptr;
 
 Application& Application::get()
 {
-	Assert::isNotNull(instance, "get the instance before creating the instance", CALL_INFO);
+	ASSERT_NOT_NULL(instance, "get the instance before creating the instance");
 	return *instance;
 }
 
 Application::Application(const string& name)
 		: name(name)
 {
-	Assert::isNull(instance, "try to create the application twice", CALL_INFO);
+	ASSERT_NULL(instance, "try to create the application twice");
 	instance = this;
 	PROFILE_FUNC();
 
@@ -74,7 +74,7 @@ Application::~Application()
 
 void Application::run()
 {
-	Assert::isTrue(quit, "call Application::run() when the application is already running", CALL_INFO);
+	ASSERT_TRUE(quit, "call Application::run() when the application is already running");
 	CLEM_LOG_INFO("core", "main loop started");
 
 	quit          = false;
@@ -114,7 +114,7 @@ void Application::updateInput(long dt)
 	{
 		Keyboard::update();
 		Mouse::update();
-		inputRecords.clear();
+		// TODO: 清除 inputRecords 中不关注的事件
 		lag = 0;
 	}
 }
@@ -176,31 +176,31 @@ void Application::updateFrameRate(long dt)
 
 void Application::stop()
 {
-	Assert::isFalse(quit, "call Application::stop() when the application has stopped", CALL_INFO);
+	ASSERT_FALSE(quit, "call Application::stop() when the application has stopped");
 	quit = true;
 }
 
 void Application::pause()
 {
-	Assert::isFalse(paused, "pause when the main loop is already paused", CALL_INFO);
+	ASSERT_FALSE(paused, "pause when the main loop is already paused");
 	paused = true;
 }
 
 void Application::resume()
 {
-	Assert::isTrue(paused, "resume when the main loop is not paused", CALL_INFO);
+	ASSERT_TRUE(paused, "resume when the main loop is not paused");
 	paused = false;
 }
 
 void Application::setMsPerUpdate(long ms)
 {
-	Assert::isTrue(ms <= 0, "set ms per update non positive is not allowed", CALL_INFO);
+	ASSERT_TRUE(ms <= 0, "set ms per update non positive is not allowed");
 	msPerUpdate = ms;
 }
 
 void Application::setMsPerRender(long ms)
 {
-	Assert::isTrue(ms <= 0, "set ms per render non positive is not allowed", CALL_INFO);
+	ASSERT_TRUE(ms <= 0, "set ms per render non positive is not allowed");
 	msPerRender = ms;
 }
 
@@ -221,13 +221,13 @@ void Application::pushScene(shared_ptr<Scene>& s)
 
 void Application::popScene()
 {
-	Assert::isTrue(scenes.size() < 2, "pop a scene when the scenes is empty is not allowed", CALL_INFO);
+	ASSERT_TRUE(scenes.size() < 2, "pop a scene when the scenes is empty is not allowed");
 	scenes.pop_back();
 }
 
 void Application::replaceScene(const shared_ptr<Scene>& s)
 {
-	Assert::isTrue(scenes.empty(), "replace a scene when the scenes is empty is not allowed", CALL_INFO);
+	ASSERT_TRUE(scenes.empty(), "replace a scene when the scenes is empty is not allowed");
 	scenes.back() = s;
 }
 
@@ -295,7 +295,7 @@ long Application::getCurrentMillSecond() const
 {
 	LARGE_INTEGER freq;
 	BOOL          ret = QueryPerformanceFrequency(&freq); // TODO: 只需执行一次
-	Assert::isTrue(ret != 0, "the installed hardware doesn't supports a high-resolution performance counter", CALL_INFO);
+	ASSERT_TRUE(ret != 0, "the installed hardware doesn't supports a high-resolution performance counter");
 
 	LARGE_INTEGER time;
 	QueryPerformanceCounter(&time);

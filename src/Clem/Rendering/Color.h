@@ -1,8 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_RENDERER_COLOR_H_
-#define CLEM_RENDERER_COLOR_H_
+#pragma once
 
 #include <stdint.h>
 
@@ -33,5 +32,3 @@ public:
 	Color(uint16_t color);
 	Color(uint8_t fore, uint8_t back);
 };
-
-#endif // !CLEM_RENDERER_COLOR_H_

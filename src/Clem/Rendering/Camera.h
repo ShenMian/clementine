@@ -1,8 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_RENDERER_CAMERA_H_
-#define CLEM_RENDERER_CAMERA_H_
+#pragma once
 
 #include "Clem/Core/Math/Rect2.h"
 
@@ -16,5 +15,3 @@ private:
 	Rect2 viewport;
 	short depth;
 };
-
-#endif // !CLEM_RENDERER_CAMERA_H_

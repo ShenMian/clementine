@@ -31,7 +31,7 @@ void Sound::loadFromFile(const path& path)
 {
 	PROFILE_FUNC();
 
-	Assert::isTrue(exists(path), fmt::format("file does not exist: '{}'", path.string()), CALL_INFO);
+	ASSERT_TRUE(exists(path), fmt::format("file does not exist: '{}'", path.string()));
 
 	auto fileName   = path.filename().string();
 	auto fileFormat = fileName.substr(fileName.find_last_of('.'));
@@ -47,7 +47,7 @@ void Sound::loadFromFile(const path& path)
 		CLEM_LOG_FATAL("audio", "unsupported file format: '{}'", fileFormat);
 
 	alBufferData(id, format, (void*)data, size, freq);
-	Assert::isTrue(alGetError() == AL_NO_ERROR, CALL_INFO);
+	ASSERT_TRUE(alGetError() == AL_NO_ERROR, "unable to create sound buffer");
 
 	delete[] data;
 }
@@ -85,7 +85,7 @@ struct WaveData
 void Sound::loadWavFile(const path& path, ALenum& format, unsigned char*& data, ALsizei& size, ALsizei& freq)
 {
 	std::ifstream file(path, std::ios::binary);
-	Assert::isTrue(file.is_open(), fmt::format("the file could not be opened: '{}'", path.string()), CALL_INFO);
+	ASSERT_TRUE(file.is_open(), fmt::format("the file could not be opened: '{}'", path.string()));
 
 	RiffHeader riffHeader;
 	file.read((char*)&riffHeader, sizeof(RiffHeader));
@@ -114,7 +114,7 @@ void Sound::loadWavFile(const path& path, ALenum& format, unsigned char*& data, 
 		file.read(id, 4);
 	}
 
-	Assert::isTrue(memcmp(id, "data", 4) == 0, CALL_INFO);
+	ASSERT_TRUE(memcmp(id, "data", 4) == 0, "can't find ID 'data'");
 
 	file.seekg(-4, std::ios::cur);
 	file.read((char*)&waveData, sizeof(WaveData));
@@ -137,7 +137,7 @@ void Sound::loadWavFile(const path& path, ALenum& format, unsigned char*& data, 
 		else if(waveFormat.bitsPerSample == 16)
 			format = AL_FORMAT_STEREO16;
 	}
-	Assert::isTrue(format, fmt::format("invalid WAVE format: '{}'", path.string()), CALL_INFO);
+	ASSERT_TRUE(format, fmt::format("invalid WAVE format: '{}'", path.string()));
 
 	data = new unsigned char[size];
 
