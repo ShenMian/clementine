@@ -36,9 +36,9 @@ public:
 	// 排序算法
 	void sort()
 	{
-		for(int i = 0; i < data.size() - 1; i++)
+		for(size_t i = 0; i < data.size() - 1; i++)
 		{
-			for(int j = i + 1; j < data.size(); j++)
+			for(size_t j = i + 1; j < data.size(); j++)
 				if(data[i] > data[j])
 				{
 					swap(data[i], data[j]);
@@ -53,8 +53,8 @@ public:
 	void showSwap(int a, int b)
 	{
 		sprite->clear();
-		for(int i = 0; i < data.size(); i++)
-			sprite->fillRect(Rect2i({1 * i, size.y - data[i]}, {1, data[i]}),
+		for(size_t i = 0; i < data.size(); i++)
+			sprite->fillRect(Rect2i({1 * (int)i, size.y - data[i]}, {1, data[i]}),
 											 Tile(' ', i == a || i == b ? blue : white));
 	}
 
@@ -63,12 +63,12 @@ public:
 	{
 		showSwap(-1, -1);
 		sprite->fillRect(Rect2i({0, size.y - data[0]}, {1, data[1]}), Tile(' ', green));
-		for(int i = 1; i < data.size(); i++)
+		for(size_t i = 1; i < data.size(); i++)
 		{
 			if(data[i - 1] <= data[i])
-				sprite->fillRect(Rect2i({1 * i, size.y - data[i]}, {1, data[i]}), Tile(' ', green));
+				sprite->fillRect(Rect2i({1 * (int)i, size.y - data[i]}, {1, data[i]}), Tile(' ', green));
 			else
-				sprite->fillRect(Rect2i({1 * i, size.y - data[i]}, {1, data[i]}), Tile(' ', red));
+				sprite->fillRect(Rect2i({1 * (int)i, size.y - data[i]}, {1, data[i]}), Tile(' ', red));
 			this_thread::sleep_for(chrono::milliseconds(8));
 		}
 	}

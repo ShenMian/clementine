@@ -24,6 +24,7 @@ message("\n")
 set(LIBRARY_OUTPUT_PATH ../lib/)
 
 include_directories("Source")
+include_directories("Thirdparty/asio/include")
 include_directories("Thirdparty/entt/include")
 include_directories("Thirdparty/spdlog/include")
 include_directories("Thirdparty/openal/include")
