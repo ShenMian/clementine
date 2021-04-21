@@ -40,7 +40,7 @@ include "Source"
 
 group "Examples"
   include "Examples/2048"
-  include "Examples/chess"
+  include "Examples/gobang"
   include "Examples/gamepad"
   include "Examples/minesweeper"
   include "Examples/pong"
