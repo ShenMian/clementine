@@ -9,6 +9,9 @@
 #include <cstdint>
 #include <string>
 
+namespace clem
+{
+
 /**
  * @addtogroup Networking
  * @{
@@ -29,10 +32,13 @@ public:
 	bool isConnected() const;
 
 	template <typename T>
-	void write(const Message<T>& msg)
-	{
-		connection.write(msg);
-	}
+	void write(const Message<T>& msg);
+
+	template <typename T>
+	void read();
+
+	std::function<void()> onDisconnect;
+	std::function<void()> onMessage;
 
 private:
 	asio::io_context context;
@@ -40,7 +46,35 @@ private:
 	std::thread      thread;
 };
 
+template <typename T>
+void Client::write(const Message<T>& msg)
+{
+	if(!connection.isConnected())
+	{
+		if(onDisconnect)
+			onDisconnect();
+		return;
+	}
+
+	connection.write(msg);
+}
+
+template <typename T>
+void Client::read()
+{
+	if(!connection.isConnected())
+	{
+		if(onDisconnect)
+			onDisconnect();
+		return;
+	}
+
+	connection.read<T>();
+}
+
 /**
  * end of Networking group
  * @}
  */
+
+} // namespace clem

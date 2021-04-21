@@ -11,6 +11,9 @@
 #include <memory>
 #include <vector>
 
+namespace clem
+{
+
 /**
  * @addtogroup Networking
  * @{
@@ -45,9 +48,9 @@ public:
 	template <typename T>
 	void read(std::shared_ptr<Connection> conn);
 
-	std::function<bool(std::shared_ptr<Connection>)> onConnect    = nullptr;
-	std::function<void(std::shared_ptr<Connection>)> onDisconnect = nullptr;
-	std::function<void(std::shared_ptr<Connection>)> onMessage    = nullptr;
+	std::function<bool(std::shared_ptr<Connection>)> onConnect;
+	std::function<void(std::shared_ptr<Connection>)> onDisconnect;
+	std::function<void(std::shared_ptr<Connection>)> onMessage;
 
 private:
 	void acceptAsync();
@@ -70,6 +73,7 @@ void Server::write(std::shared_ptr<Connection> conn, const Message<T>& msg)
 		if(onDisconnect)
 			onDisconnect(conn);
 		connections.erase(std::find(connections.begin(), connections.end(), conn));
+		return;
 	}
 
 	conn->write<T>(msg);
@@ -85,6 +89,7 @@ void Server::read(std::shared_ptr<Connection> conn)
 		if(onDisconnect)
 			onDisconnect(conn);
 		connections.erase(std::find(connections.begin(), connections.end(), conn));
+		return;
 	}
 
 	conn->read<T>();
@@ -94,3 +99,5 @@ void Server::read(std::shared_ptr<Connection> conn)
  * end of Networking group
  * @}
  */
+
+} // namespace clem

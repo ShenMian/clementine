@@ -56,7 +56,3 @@ group "Examples"
   include "Examples/sort"
   include "Examples/sound"
 group ""
-
-group "Thirdparty"
-  include "Thirdparty/yaml_cpp"
-group ""

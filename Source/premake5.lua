@@ -25,5 +25,4 @@ project "Clementine"
     "%{thirdparty.yaml_cpp}/include"}
 
   links {
-    "yaml-cpp",
     "%{thirdparty.openal}/lib/openal32"}

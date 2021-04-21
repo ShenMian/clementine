@@ -2,9 +2,13 @@
 // License(Apache-2.0)
 
 #include "Server.h"
+#include "Clem/Logger.h"
 #include "Connection.h"
 
 using namespace asio;
+
+namespace clem
+{
 
 Server::Server()
 		: socket(context), acceptor(context)
@@ -29,8 +33,9 @@ bool Server::start(std::uint16_t port)
 
 		thread = std::thread([this]() { context.run(); });
 	}
-	catch(std::exception&)
+	catch(std::exception& e)
 	{
+		CLEM_LOG_ERROR("networking", e.what());
 		return false;
 	}
 
@@ -50,9 +55,7 @@ void Server::acceptAsync()
 {
 	acceptor.async_accept([this](std::error_code ec, ip::tcp::socket sock) {
 		if(ec)
-		{
-			acceptAsync();
-		}
+			abort();
 
 		auto conn = std::make_shared<Connection>(context, std::move(sock));
 		if(!onConnect || onConnect(conn))
@@ -64,3 +67,5 @@ void Server::acceptAsync()
 		acceptAsync();
 	});
 }
+
+} // namespace clem

@@ -59,6 +59,7 @@ Application::Application(const string& name)
 	Logger::create("core");
 	Logger::create("audio");
 	Logger::create("assert");
+	Logger::create("networking");
 
 	Audio::init();
 	Keyboard::init();

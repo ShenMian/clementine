@@ -5,6 +5,9 @@
 
 using namespace asio;
 
+namespace clem
+{
+
 Client::Client()
 		: connection(context, ip::tcp::socket(context))
 {
@@ -17,21 +20,18 @@ Client::~Client()
 
 bool Client::connect(const std::string_view& host, std::uint16_t port)
 {
-	try
-	{
-		connection.connect(host, port);
+	connection.connect(host, port);
+	connection.onMessage = [this]() { onMessage(); };
 
-		thread = std::thread([this]() { context.run(); });
-	}
-	catch(std::exception&)
-	{
-		return false;
-	}
+	thread = std::thread([this]() { context.run(); });
+
 	return true;
 }
 
 void Client::disconnect()
 {
+	if(onDisconnect)
+		onDisconnect();
 	connection.disconnect();
 	context.stop();
 	if(thread.joinable())
@@ -42,3 +42,5 @@ bool Client::isConnected() const
 {
 	return connection.isConnected();
 }
+
+} // namespace clem

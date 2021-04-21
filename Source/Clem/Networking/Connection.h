@@ -8,6 +8,9 @@
 #include "asio.hpp"
 #include <functional>
 
+namespace clem
+{
+
 /**
  * @addtogroup Networking
  * @{
@@ -27,8 +30,6 @@ public:
 	 * 
 	 * @param host   主机, IP 或 Domain.
 	 * @param port   端口号.
-	 * @return true  连接成功.
-	 * @return false 连接失败.
 	 */
 	bool connect(const std::string_view& host, std::uint16_t port);
 
@@ -127,3 +128,5 @@ const Message<T>& Connection::getMessage()
  * end of Networking group
  * @}
  */
+
+} // namespace clem

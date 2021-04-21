@@ -6,6 +6,9 @@
 #include <cstdint>
 #include <vector>
 
+namespace clem
+{
+
 /**
  * @addtogroup Networking
  * @{
@@ -40,8 +43,8 @@ public:
 
 		const auto offset = msg.body.size();
 		msg.body.resize(msg.body.size() + sizeof(Data));
-		msg.header.size = msg.body.size();
 		std::memcpy(msg.body.data() + offset, &data, sizeof(Data));
+		msg.header.size = msg.body.size();
 
 		return msg;
 	}
@@ -84,3 +87,5 @@ public:
  * end of Networking group
  * @}
  */
+
+} // namespace clem
