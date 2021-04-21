@@ -1,6 +1,15 @@
 -- Copyright 2021 SMS
 -- License(Apache-2.0)
 
+print("\n")
+print("   _____ _                           _   _            ")
+print("  / ____| |                         | | (_)           ")
+print(" | |    | | ___ _ __ ___   ___ _ __ | |_ _ _ __   ___ ")
+print(" | |    | |/ _ \\ '_ ` _ \\ / _ \\ '_ \\| __| | '_ \\ / _ \\")
+print(" | |____| |  __/ | | | | |  __/ | | | |_| | | | |  __/")
+print("  \\_____|_|\\___|_| |_| |_|\\___|_| |_|\\__|_|_| |_|\\___|")
+print("\n")
+
 include "thirdparty/premake/solution_items.lua"
 
 workspace "Clementine"
@@ -32,7 +41,7 @@ thirdparty["asio"] = "%{wks.location}/Thirdparty/asio"
 thirdparty["entt"] = "%{wks.location}/Thirdparty/entt"
 thirdparty["spdlog"] = "%{wks.location}/Thirdparty/spdlog"
 thirdparty["openal"] = "%{wks.location}/Thirdparty/openal"
-thirdparty["yaml_cpp"] = "%{wks.location}/Thirdparty/yaml-cpp"
+thirdparty["yaml_cpp"] = "%{wks.location}/Thirdparty/yaml_cpp"
 
 outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
 
@@ -49,5 +58,5 @@ group "Examples"
 group ""
 
 group "Thirdparty"
-  include "Thirdparty/yaml-cpp"
+  include "Thirdparty/yaml_cpp"
 group ""

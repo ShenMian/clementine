@@ -28,9 +28,9 @@ include_directories("Thirdparty/asio/include")
 include_directories("Thirdparty/entt/include")
 include_directories("Thirdparty/spdlog/include")
 include_directories("Thirdparty/openal/include")
-include_directories("Thirdparty/yaml-cpp/include")
+include_directories("Thirdparty/yaml_cpp/include")
 
-add_subdirectory("Thirdparty/yaml-cpp")
+add_subdirectory("Thirdparty/yaml_cpp")
 add_subdirectory("Source")
 
 # 例子
