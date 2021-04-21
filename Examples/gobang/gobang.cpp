@@ -6,11 +6,18 @@
 using namespace std;
 using namespace clem;
 
-enum Chess
+Server server;
+
+enum Chess : std::int8_t
 {
 	none,
 	black,
 	white
+};
+
+enum class Cmd
+{
+	place
 };
 
 class App : public Application
@@ -25,36 +32,45 @@ public:
 	{
 		pushScene(scene);
 
-		scene->createEntity("board").addComponent<Sprite>(Size2i(15 * 2, 15)).setDepth(1);
+		server.start(25565);
+		server.onConnect = [this](shared_ptr<Connection> conn) {
+			conn->read<Cmd>();
+			return true;
+		};
+		server.onMessage = [this](shared_ptr<Connection> conn) {
+			auto& msg = conn->getMessage<Cmd>();
+			
+			int   x, y;
+			Chess c;
 
-		auto cursor = scene->createEntity("cursor");
-		cursor.addComponent<Sprite>(Size2i(1, 1));
-		cursor.addComponent<Script>().onUpdate = [&](float dt) {
-			auto  cursor = scene->getEntity("cursor");
-			auto& sprite = cursor.getComponent<Sprite>();
-			auto& tf     = cursor.getComponent<Transform>();
+			msg >> c >> y >> x;
 
-			static float lag    = 0;
-			lag += dt;
-			sprite.drawPoint(0, 0, '+');
-			if(lag >= 2)
-				lag = 0;
-
-			if(Keyboard::getKeyState(Keyboard::Key::W))
-				tf.setLocalPosition(tf.getLocalPosition() + Vector2::up);
-			else if(Keyboard::getKeyState(Keyboard::Key::S))
-				tf.setLocalPosition(tf.getLocalPosition() + Vector2::down);
-			else if(Keyboard::getKeyState(Keyboard::Key::A))
-				tf.setLocalPosition(tf.getLocalPosition() + Vector2::left);
-			else if(Keyboard::getKeyState(Keyboard::Key::D))
-				tf.setLocalPosition(tf.getLocalPosition() + Vector2::right);
+			this->map[x][y] = c;
 
 			show();
 		};
 
+		scene->createEntity("board").addComponent<Sprite>(Size2i(15 * 2, 15));
+
+		client.connect("127.0.0.1", 25565);
+
 		memset(map, 0, sizeof(map));
 
+		place(15 / 2, 15 / 2, Chess::black);
 		show();
+	}
+
+	void place(int x, int y, Chess c)
+	{
+		ASSERT_TRUE(0 <= x && x <= 15 && 0 <= y && y <= 15, "out of range");
+		if(map[x][y] != Chess::none)
+			return;
+
+		// map[x][y] = c;
+
+		Message msg(Cmd::place);
+		msg << x << y << c;
+		client.write(msg);
 	}
 
 	void show()
@@ -68,7 +84,7 @@ public:
 
 private:
 	int               map[15][15];
-	Random            random;
+	Client            client;
 	shared_ptr<Scene> scene = make_shared<Scene>();
 };
 

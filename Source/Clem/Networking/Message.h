@@ -40,11 +40,12 @@ public:
 	friend Message<T>& operator<<(Message<T>& msg, const Data& data)
 	{
 		static_assert(std::is_standard_layout<Data>::value, "Data type is not suppoted");
+		ASSERT_TRUE(msg.header.size < (size_t)-1 - sizeof(Data), "Message is full");
 
 		const auto offset = msg.body.size();
 		msg.body.resize(msg.body.size() + sizeof(Data));
 		std::memcpy(msg.body.data() + offset, &data, sizeof(Data));
-		msg.header.size = msg.body.size();
+		msg.header.size = (std::uint8_t)msg.body.size();
 
 		return msg;
 	}
@@ -57,7 +58,7 @@ public:
 		const auto offset = msg.body.size() - sizeof(Data);
 		std::memcpy(&data, msg.body.data() + offset, sizeof(Data));
 		msg.body.resize(msg.body.size() - sizeof(Data));
-		msg.header.size = msg.body.size();
+		msg.header.size = (std::uint8_t)msg.body.size();
 
 		return msg;
 	}
@@ -65,6 +66,8 @@ public:
 	template <typename Data>
 	friend Message<T>& operator<<(Message<T>& msg, const std::vector<Data>& data)
 	{
+		ASSERT_TRUE(msg.header.size < (size_t)-1 - data.size() * sizeof(Data), "Message is full");
+
 		for(const auto& i : data)
 			msg << i;
 		msg << data.size();

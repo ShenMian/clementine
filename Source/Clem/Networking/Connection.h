@@ -54,7 +54,7 @@ public:
 	void read();
 
 	template <typename T>
-	const Message<T>& getMessage();
+	Message<T>& getMessage();
 
 	std::function<void()> onConnect;
 	std::function<void()> onDisconnect;
@@ -77,6 +77,11 @@ template <typename T>
 void Connection::write(const Message<T>& msg)
 {
 	asio::async_write(socket, asio::buffer(&msg.header, sizeof(msg.header)),
+										[this](std::error_code ec, size_t size) {
+											if(ec)
+												CLEM_LOG_ERROR("networking", ec.message());
+										});
+	asio::async_write(socket, asio::buffer(msg.body.data(), msg.header.size),
 										[this](std::error_code ec, size_t size) {
 											if(ec)
 												CLEM_LOG_ERROR("networking", ec.message());
@@ -111,6 +116,7 @@ void Connection::readHeader()
 								 return;
 							 }
 
+							 ((Message<T>*)buffer)->body.resize(((Message<T>*)buffer)->header.size);
 							 readBody<T>();
 						 });
 }
@@ -118,7 +124,7 @@ void Connection::readHeader()
 template <typename T>
 void Connection::readBody()
 {
-	async_read(socket, asio::buffer(&((Message<T>*)buffer)->body.data(), ((Message<T>*)buffer)->header.size),
+	async_read(socket, asio::buffer(((Message<T>*)buffer)->body.data(), ((Message<T>*)buffer)->header.size),
 						 [this](std::error_code ec, size_t size) {
 							 if(ec)
 							 {
@@ -126,14 +132,15 @@ void Connection::readBody()
 								 return;
 							 }
 
-							 readHeader<T>();
 							 if(onMessage)
 								 onMessage();
+
+							 readHeader<T>();
 						 });
 }
 
 template <typename T>
-const Message<T>& Connection::getMessage()
+Message<T>& Connection::getMessage()
 {
 	return *(Message<T>*)buffer;
 }
