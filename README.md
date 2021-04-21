@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Banner](docs/pictures/banner.png)
+![Banner](Docs/pictures/banner.png)
 [![License](https://img.shields.io/github/license/ShenMian/Clementine)](https://github.com/ShenMian/Clementine/blob/master/LICENSE)
 [![CodeFactor](https://www.codefactor.io/repository/github/shenmian/clementine/badge)](https://www.codefactor.io/repository/github/shenmian/clementine)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c09e10a19377466b99cc74d4f43ac214)](https://app.codacy.com/gh/ShenMian/Clementine?utm_source=github.com&utm_medium=referral&utm_content=ShenMian/Clementine&utm_campaign=Badge_Grade_Settings)
@@ -19,13 +19,15 @@ Features
 --------
 - Multi-platform: Linux, macOS, Windows.
 - Lightweight.
+- Easy to use.
 - Has a in-game profiling tool (CPU sampling profiler).
-- Using entity-component-system (ECS).
 - Subsystems
-  - Audio
-  - Physics
-  - Logging
-  - Input: Keyboard, Mouse, Gamepad
+  - entity-component-system (ECS).
+  - Audio.
+  - Physics.
+  - Logging.
+  - Input: Keyboard, Mouse, Gamepad.
+  - Networking.
 
 Documentation
 -------------
