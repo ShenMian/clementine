@@ -15,7 +15,7 @@ enum Chess : std::int8_t
 	white
 };
 
-enum class Cmd
+enum class NetCommand
 {
 	place
 };
@@ -34,29 +34,43 @@ public:
 
 		server.start(25565);
 		server.onConnect = [this](shared_ptr<Connection> conn) {
-			conn->read<Cmd>();
+			conn->read<NetCommand>();
 			return true;
 		};
 		server.onMessage = [this](shared_ptr<Connection> conn) {
-			auto& msg = conn->getMessage<Cmd>();
+			auto& msg = conn->getMessage<NetCommand>();
 			
 			int   x, y;
 			Chess c;
 
-			msg >> c >> y >> x;
+			switch(msg.header.id)
+			{
+			case NetCommand::place:
+				msg >> c >> y >> x;
+				this->map[x][y] = c;
+				show();
+				break;
 
-			this->map[x][y] = c;
-
-			show();
+			default:
+				abort();
+			}
 		};
 
 		scene->createEntity("board").addComponent<Sprite>(Size2i(15 * 2, 15));
+
+		EventDispatcher::get().addListener(Event::Type::mouse, [&](Event* e) {
+			auto event = dynamic_cast<MouseEvent*>(e);
+			if(event->getType() == MouseEvent::Type::click)
+			{
+				Point2i p = event->getPosition();
+				place(p.x / 2, p.y, Chess::black);
+			}
+		});
 
 		client.connect("127.0.0.1", 25565);
 
 		memset(map, 0, sizeof(map));
 
-		place(15 / 2, 15 / 2, Chess::black);
 		show();
 	}
 
@@ -68,9 +82,10 @@ public:
 
 		// map[x][y] = c;
 
-		Message msg(Cmd::place);
+		Message msg(NetCommand::place);
 		msg << x << y << c;
 		client.write(msg);
+		show();
 	}
 
 	void show()

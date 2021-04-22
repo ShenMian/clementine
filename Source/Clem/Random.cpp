@@ -8,10 +8,10 @@ using std::uniform_real_distribution;
 
 Random::Random()
 {
-	seed(std::random_device()());
+	setSeed(std::random_device()());
 }
 
-void Random::seed(uint32_t seed)
+void Random::setSeed(uint32_t seed)
 {
 	generator.seed(seed);
 }

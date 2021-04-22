@@ -51,6 +51,11 @@ void Server::stop()
 		thread.join();
 }
 
+std::vector<std::shared_ptr<Connection>>& Server::getConnections()
+{
+	return connections;
+}
+
 void Server::acceptAsync()
 {
 	acceptor.async_accept([this](std::error_code ec, ip::tcp::socket sock) {

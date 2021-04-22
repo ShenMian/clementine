@@ -16,11 +16,32 @@ class Random
 public:
 	Random();
 
-	void seed(uint32_t);
+	/**
+	 * @brief 设置种子.
+	 */
+	void setSeed(uint32_t);
 
+	/**
+	 * @brief 生成指定范围内的32位随机无符号整数.
+	 * 
+	 * @param min 范围下限, 包含, 默认值: 32位无符号整数最大值.
+	 * @param max 范围上限, 包含, 默认值: 0.
+	 */
 	uint32_t getUint32(uint32_t min = 0, uint32_t max = UINT32_MAX);
+
+	/**
+	 * @brief 生成指定范围内的32位随机有符号整数.
+	 * 
+	 * @param min 范围下限, 包含, 默认值: 32位无符号整数最大值.
+	 * @param max 范围上限, 包含, 默认值: 32位无符号整数最小值.
+	 * @return int32_t 
+	 */
 	int32_t  getInt32(int32_t min = INT32_MIN, int32_t max = INT32_MAX);
-	float    getFloat();
+
+	/**
+	 * @brief 生成 0-1 之间的随机单精度浮点数.
+	 */
+	float getFloat();
 
 	Point2i getPoint2i(const Point2i& min, const Point2i& max);
 

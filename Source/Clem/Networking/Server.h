@@ -42,6 +42,8 @@ public:
 	 */
 	void stop();
 
+	std::vector<std::shared_ptr<Connection>>& getConnections();
+
 	template <typename T>
 	void write(std::shared_ptr<Connection> conn, const Message<T>& msg);
 
