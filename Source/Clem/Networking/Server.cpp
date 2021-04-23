@@ -51,7 +51,7 @@ void Server::stop()
 		thread.join();
 }
 
-std::vector<std::shared_ptr<Connection>>& Server::getConnections()
+const std::vector<std::shared_ptr<Connection>>& Server::getConnections() const
 {
 	return connections;
 }

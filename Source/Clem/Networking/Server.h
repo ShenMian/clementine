@@ -43,13 +43,16 @@ public:
 	 */
 	void stop();
 
-	std::vector<std::shared_ptr<Connection>>& getConnections();
-
 	template <typename T>
 	void write(std::shared_ptr<Connection> conn, const Message<T>& msg);
 
 	template <typename T>
+	void write(const Message<T>& msg);
+
+	template <typename T>
 	void read(std::shared_ptr<Connection> conn);
+
+	const std::vector<std::shared_ptr<Connection>>& getConnections() const;
 
 	std::function<bool(std::shared_ptr<Connection>)> onConnect;
 	std::function<void(std::shared_ptr<Connection>)> onDisconnect;
@@ -80,6 +83,13 @@ void Server::write(std::shared_ptr<Connection> conn, const Message<T>& msg)
 	}
 
 	conn->write<T>(msg);
+}
+
+template <typename T>
+void Server::Server::write(const Message<T>& msg)
+{
+	for(auto& conn : connections)
+		write<T>(conn, msg);
 }
 
 template <typename T>

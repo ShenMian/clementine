@@ -5,6 +5,7 @@
 
 #include <cstdint>
 #include <vector>
+#include "Clem/Assert.h"
 
 namespace clem
 {
