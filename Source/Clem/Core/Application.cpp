@@ -95,10 +95,9 @@ void Application::run()
 
 		updateFrameRate(dt);
 
-		if(paused)
+		while(paused)
 		{
-			while(paused)
-				sleep_for(500ms);
+			sleep_for(500ms);
 			previous = getCurrentMillSecond();
 		}
 	}
