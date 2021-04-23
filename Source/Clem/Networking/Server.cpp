@@ -29,7 +29,7 @@ bool Server::start(std::uint16_t port)
 		acceptor.bind(endpoint);
 		acceptor.listen();
 
-		acceptAsync();
+		accept();
 
 		thread = std::thread([this]() { context.run(); });
 	}
@@ -56,7 +56,7 @@ std::vector<std::shared_ptr<Connection>>& Server::getConnections()
 	return connections;
 }
 
-void Server::acceptAsync()
+void Server::accept()
 {
 	acceptor.async_accept([this](std::error_code ec, ip::tcp::socket sock) {
 		if(ec)
@@ -70,7 +70,7 @@ void Server::acceptAsync()
 			connections.push_back(conn);
 		}
 
-		acceptAsync();
+		accept();
 	});
 }
 

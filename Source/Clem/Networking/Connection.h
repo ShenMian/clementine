@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Clem/Assert.h"
 #include "Clem/Logger.h"
 #include "Clem/Platform.h"
 #include "Message.h"
@@ -29,7 +30,7 @@ public:
 	/**
 	 * @brief 与指定主机的端口建立连接.
 	 * 
-	 * @param host 主机, IP 或 Domain.
+	 * @param host 主机, IP 或域名.
 	 * @param port 端口号.
 	 */
 	bool connect(const std::string_view& host, std::uint16_t port);
@@ -47,9 +48,15 @@ public:
 	 */
 	bool isConnected() const;
 
+	/**
+	 * @brief 发送消息.
+	 */
 	template <typename T>
 	void write(const Message<T>& msg);
 
+	/**
+	 * @brief 持续接收任何消息并转换为特定类型.
+	 */
 	template <typename T>
 	void read();
 
@@ -76,6 +83,8 @@ private:
 template <typename T>
 void Connection::write(const Message<T>& msg)
 {
+	ASSERT_TRUE(msg.header.size == msg.body.size(), "");
+
 	asio::async_write(socket, asio::buffer(&msg.header, sizeof(msg.header)),
 										[this](std::error_code ec, size_t size) {
 											if(ec)

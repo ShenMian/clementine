@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Clem/Assert.h"
 #include "Clem/Platform.h"
 #include "Connection.h"
 #include "asio.hpp"
@@ -55,7 +56,7 @@ public:
 	std::function<void(std::shared_ptr<Connection>)> onMessage;
 
 private:
-	void acceptAsync();
+	void accept();
 
 	asio::io_context        context;
 	asio::ip::tcp::socket   socket;
@@ -68,7 +69,7 @@ private:
 template <typename T>
 void Server::write(std::shared_ptr<Connection> conn, const Message<T>& msg)
 {
-	assert(conn);
+	ASSERT_NOT_NULL(conn, "connection doesn't exist");
 
 	if(!conn->isConnected())
 	{
@@ -84,7 +85,7 @@ void Server::write(std::shared_ptr<Connection> conn, const Message<T>& msg)
 template <typename T>
 void Server::read(std::shared_ptr<Connection> conn)
 {
-	assert(conn);
+	ASSERT_NOT_NULL(conn, "connection doesn't exist");
 
 	if(!conn->isConnected())
 	{

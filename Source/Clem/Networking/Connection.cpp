@@ -25,7 +25,7 @@ bool Connection::connect(const std::string_view& host, std::uint16_t port)
 		ip::tcp::resolver resolver(context);
 		auto              endpoints = resolver.resolve(std::string(host), std::to_string(port));
 
-		async_connect(socket, endpoints, [this](std::error_code ec, asio::ip::tcp::endpoint) {
+		async_connect(socket, endpoints, [this](std::error_code ec, ip::tcp::endpoint) {
 			assert(!ec);
 			if(onConnect)
 				onConnect();
@@ -41,6 +41,9 @@ bool Connection::connect(const std::string_view& host, std::uint16_t port)
 
 void Connection::disconnect()
 {
+	if(!socket.is_open())
+		return;
+
 	if(onDisconnect)
 		onDisconnect();
 	post(context, [this]() { socket.close(); });
