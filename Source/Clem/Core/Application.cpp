@@ -20,6 +20,7 @@ using std::this_thread::sleep_for;
 int main(int argc, char* argv[])
 {
 	PROFILE_SESSION_BEGIN("profile.json");
+
 	auto app = clem::CreateApplication();
 	ASSERT_NOT_NULL(app, "CreateApplication() returns nullptr");
 
@@ -28,6 +29,7 @@ int main(int argc, char* argv[])
 	app->deinit();
 
 	delete app;
+
 	PROFILE_SESSION_END();
 	return 0;
 }

@@ -101,22 +101,24 @@ void Connection::read()
 template <typename T>
 void Connection::readHeader()
 {
-	async_read(socket, asio::buffer(&((Message<T>*)buffer)->header, sizeof(Message<T>::header)),
-						 [this](std::error_code ec, size_t size) {
+	Message<T>& msg = *static_cast<Message<T>*>(buffer);
+	async_read(socket, asio::buffer(&msg.header, sizeof(Message<T>::header)),
+						 [&, this](std::error_code ec, size_t size) {
 							 if(ec)
 							 {
 								 CLEM_LOG_ERROR("networking", ec.message());
 								 return;
 							 }
 
-							 if(((Message<T>*)buffer)->header.size == 0)
+							 if(msg.header.size == 0)
 							 {
 								 if(onMessage)
 									 onMessage();
+								 readHeader<T>();
 								 return;
 							 }
 
-							 ((Message<T>*)buffer)->body.resize(((Message<T>*)buffer)->header.size);
+							 msg.body.resize(msg.header.size);
 							 readBody<T>();
 						 });
 }
@@ -124,7 +126,8 @@ void Connection::readHeader()
 template <typename T>
 void Connection::readBody()
 {
-	async_read(socket, asio::buffer(((Message<T>*)buffer)->body.data(), ((Message<T>*)buffer)->header.size),
+	Message<T>& msg = *static_cast<Message<T>*>(buffer);
+	async_read(socket, asio::buffer(msg.body.data(), msg.header.size),
 						 [this](std::error_code ec, size_t size) {
 							 if(ec)
 							 {
