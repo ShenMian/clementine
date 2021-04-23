@@ -37,6 +37,11 @@ public:
 	void setAcceleration(const Vector2& acc);
 
 	/**
+	 * @brief 获取加速度.
+	 */
+	const Vector2& getAcceleration() const;
+
+	/**
 	 * @brief 设置质量.
 	 *
 	 * @param m 质量, kg;
@@ -56,8 +61,8 @@ public:
 	const Entity& getEntity() const;
 
 private:
-	float   mass = 1.0f;
 	Vector2 acceleration;
+	float   mass = 1.0f;
 	Entity  entity;
 };
 

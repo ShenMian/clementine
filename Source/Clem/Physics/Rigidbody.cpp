@@ -16,6 +16,11 @@ void Rigidbody::setAcceleration(const Vector2& acc)
 	acceleration = acc;
 }
 
+const Vector2& Rigidbody::getAcceleration() const
+{
+	return acceleration;
+}
+
 void Rigidbody::setMass(float m)
 {
 	assert(m >= 0);

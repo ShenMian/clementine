@@ -3,10 +3,11 @@
 
 #pragma once
 
+#include "Clem/Physics/PhysicsWorld.h"
 #include "entt/entt.hpp"
+#include <cstdint>
 #include <string>
 #include <unordered_map>
-#include <cstdint>
 
 namespace clem
 {
@@ -23,6 +24,8 @@ class Entity;
 class Scene
 {
 public:
+	Scene();
+
 	/**
 	 * @brief 创建新的实体.
 	 *
@@ -53,9 +56,12 @@ private:
 	void renderSprites();
 	void sortSprites();
 
+	PhysicsWorld physicsWorld;
+
 	entt::registry registry;
 
 	friend class Entity;
+	friend class PhysicsWorld;
 };
 
 /**

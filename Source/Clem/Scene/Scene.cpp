@@ -15,6 +15,11 @@ using std::string_view;
 
 namespace clem
 {
+Scene::Scene()
+		: physicsWorld(*this)
+{
+}
+
 Entity Scene::createEntity(const string& tag)
 {
 	auto e = Entity(registry.create(), this);
@@ -43,7 +48,7 @@ void Scene::update(float dt)
 	PROFILE_FUNC();
 
 	updateScripts(dt);
-	updateRigidbodies(dt);
+	physicsWorld.update(dt);
 }
 
 void Scene::render(float dt)
@@ -68,19 +73,6 @@ void Scene::updateScripts(float dt)
 		script.onUpdate(dt);
 }
 
-void Scene::updateRigidbodies(float dt)
-{
-	PROFILE_FUNC();
-
-	auto view = registry.view<Transform, Rigidbody>();
-	for(auto [e, t, body] : view.each())
-	{
-		auto pos = t.getLocalPosition();
-		t.setLocalPosition(pos += body.velocity);
-		// body.velocity += body.acceleration * dt;
-	}
-}
-
 void Scene::renderSprites()
 {
 	PROFILE_FUNC();
@@ -96,6 +88,7 @@ void Scene::renderSprites()
 
 void Scene::sortSprites()
 {
+	// FIXME: 无效
 	registry.sort<Sprite>([](const Sprite& lhs, const Sprite& rhs) {
 		return lhs.getDepth() > rhs.getDepth();
 	});
