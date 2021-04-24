@@ -26,9 +26,16 @@ bool Connection::connect(const std::string_view& host, uint16_t port)
 		auto              endpoints = resolver.resolve(std::string(host), std::to_string(port));
 
 		async_connect(socket, endpoints, [this](std::error_code ec, ip::tcp::endpoint) {
-			assert(!ec);
-			if(onConnect)
-				onConnect();
+			if(ec)
+			{
+				CLEM_LOG_ERROR("networking", ec.message());
+				if(onError)
+					onError(ec);
+				return;
+			}
+
+			if(onConnected)
+				onConnected();
 		});
 	}
 	catch(std::exception& e)

@@ -21,7 +21,7 @@ namespace clem
  */
 
 /**
- * @brief 网络服务器, TCP 协议.
+ * @brief 异步网络服务器, TCP 协议.
  */
 class Server
 {
@@ -30,33 +30,44 @@ public:
 	virtual ~Server();
 
 	/**
-	 * @brief 启动网络服务器并开始监听指定端口.
+	 * @brief 启动服务器并开始监听指定端口.
 	 * 
-	 * @param port   要监听的端口.
+	 * @param port 要监听的端口.
+	 * 
 	 * @return true  启动成功.
 	 * @return false 启动失败.
 	 */
 	bool start(uint16_t port);
 
 	/**
-	 * @brief 停止网络服务器.
+	 * @brief 停止服务器.
 	 */
 	void stop();
 
+	/**
+	 * @brief 向指定客户端发送消息.
+	 */
 	template <typename T>
 	void write(std::shared_ptr<Connection> conn, const Message<T>& msg);
 
+	/**
+	 * @brief 向全部客户端发送消息.
+	 */
 	template <typename T>
 	void write(const Message<T>& msg);
 
+	/**
+	 * @brief 持续接收任何消息并转换为特定类型.
+	 */
 	template <typename T>
 	void read(std::shared_ptr<Connection> conn);
 
 	const std::vector<std::shared_ptr<Connection>>& getConnections() const;
 
-	std::function<bool(std::shared_ptr<Connection>)> onConnect;
-	std::function<void(std::shared_ptr<Connection>)> onDisconnect;
-	std::function<void(std::shared_ptr<Connection>)> onMessage;
+	std::function<bool(std::shared_ptr<Connection>)>                  onAccept;
+	std::function<void(std::shared_ptr<Connection>)>                  onDisconnect;
+	std::function<void(std::shared_ptr<Connection>)>                  onReceived;
+	std::function<void(std::shared_ptr<Connection>, std::error_code)> onError;
 
 private:
 	void accept();

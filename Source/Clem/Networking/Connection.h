@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include "Clem/Assert.h"
 #include "Clem/Logger.h"
 #include "Clem/Platform.h"
 #include "Message.h"
@@ -29,6 +28,7 @@ public:
 
 	/**
 	 * @brief 与指定主机的端口建立连接.
+	 * 异步, 完成后回调 onConnect.
 	 * 
 	 * @param host 主机, IP 或域名.
 	 * @param port 端口号.
@@ -63,9 +63,10 @@ public:
 	template <typename T>
 	Message<T>& getMessage();
 
-	std::function<void()> onConnect;
-	std::function<void()> onDisconnect;
-	std::function<void()> onMessage;
+	std::function<void()>                onConnected;
+	std::function<void()>                onDisconnect;
+	std::function<void()>                onReceived;
+	std::function<void(std::error_code)> onError;
 
 private:
 	asio::io_context&     context;
@@ -88,12 +89,22 @@ void Connection::write(const Message<T>& msg)
 	asio::async_write(socket, asio::buffer(&msg.header, sizeof(msg.header)),
 										[this](std::error_code ec, size_t size) {
 											if(ec)
+											{
+												if(onError)
+													onError(ec);
 												CLEM_LOG_ERROR("networking", ec.message());
+												return;
+											}
 										});
 	asio::async_write(socket, asio::buffer(msg.body.data(), msg.header.size),
 										[this](std::error_code ec, size_t size) {
 											if(ec)
+											{
+												if(onError)
+													onError(ec);
 												CLEM_LOG_ERROR("networking", ec.message());
+												return;
+											}
 										});
 }
 
@@ -115,14 +126,16 @@ void Connection::readHeader()
 						 [&, this](std::error_code ec, size_t size) {
 							 if(ec)
 							 {
+								 if(onError)
+									 onError(ec);
 								 CLEM_LOG_ERROR("networking", ec.message());
 								 return;
 							 }
 
 							 if(msg.header.size == 0)
 							 {
-								 if(onMessage)
-									 onMessage();
+								 if(onReceived)
+									 onReceived();
 								 readHeader<T>();
 								 return;
 							 }
@@ -140,12 +153,14 @@ void Connection::readBody()
 						 [this](std::error_code ec, size_t size) {
 							 if(ec)
 							 {
+								 if(onError)
+									 onError(ec);
 								 CLEM_LOG_ERROR("networking", ec.message());
 								 return;
 							 }
 
-							 if(onMessage)
-								 onMessage();
+							 if(onReceived)
+								 onReceived();
 
 							 readHeader<T>();
 						 });

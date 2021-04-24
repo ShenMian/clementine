@@ -63,10 +63,11 @@ void Server::accept()
 			abort();
 
 		auto conn = std::make_shared<Connection>(context, std::move(sock));
-		if(onConnect && onConnect(conn))
+		if(onAccept && onAccept(conn))
 		{
 			conn->onDisconnect = [this, conn]() { if(onDisconnect) onDisconnect(conn); };
-			conn->onMessage    = [this, conn]() { if(onMessage) onMessage(conn); };
+			conn->onReceived   = [this, conn]() { if(onReceived) onReceived(conn); };
+			conn->onError      = [this, conn](auto ec) { if(onError) onError(conn, ec); };
 			connections.push_back(conn);
 		}
 

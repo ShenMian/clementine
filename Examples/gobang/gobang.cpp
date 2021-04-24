@@ -32,12 +32,12 @@ public:
 	{
 		pushScene(scene);
 
-		server.start(25565);
-		server.onConnect = [this](shared_ptr<Connection> conn) {
+		//server.start(25565);
+		server.onAccept = [this](shared_ptr<Connection> conn) {
 			conn->read<NetCommand>();
 			return true;
 		};
-		server.onMessage = [this](shared_ptr<Connection> conn) {
+		server.onReceived = [this](shared_ptr<Connection> conn) {
 			auto& msg = conn->getMessage<NetCommand>();
 			
 			int   x, y;
@@ -55,6 +55,14 @@ public:
 				abort();
 			}
 		};
+		server.onError = [this](shared_ptr<Connection> conn, error_code ec) {
+			printf("%s", ec.message().c_str());
+		};
+
+		client.connect("127.0.0.1", 25565);
+		client.onError = [](error_code ec) {
+			printf("%s", ec.message().c_str());
+		};
 
 		scene->createEntity("board").addComponent<Sprite>(Size2i(15 * 2, 15));
 
@@ -66,8 +74,6 @@ public:
 				place(p.x / 2, p.y, Chess::black);
 			}
 		});
-
-		client.connect("127.0.0.1", 25565);
 
 		memset(map, 0, sizeof(map));
 

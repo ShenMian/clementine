@@ -32,6 +32,11 @@ public:
 
 	static void isNull(void* expr, const char*, unsigned int);
 	static void isNull(void* expr, const std::string_view& msg, const char*, unsigned int);
+
+	/*
+	template <typename T>
+	static void isNull(const std::shared_ptr<T>& expr, ...);
+	*/
 };
 
 } // namespace clem
