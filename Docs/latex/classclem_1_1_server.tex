@@ -2,43 +2,43 @@
 \label{classclem_1_1_server}\index{clem::Server@{clem::Server}}
 
 
-网络服务器, TCP 协议.  
+异步网络服务器, TCP 协议.  
 
 
 \doxysubsection*{Public 成员函数}
 \begin{DoxyCompactItemize}
 \item 
 bool \mbox{\hyperlink{classclem_1_1_server_ad3455b601eb575df5f6009bd48440333}{start}} (uint16\+\_\+t port)
-\begin{DoxyCompactList}\small\item\em 启动网络服务器并开始监听指定端口. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em 启动服务器并开始监听指定端口. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classclem_1_1_server_af80415bd7600f7db3af077089865e665}\label{classclem_1_1_server_af80415bd7600f7db3af077089865e665}} 
 void \mbox{\hyperlink{classclem_1_1_server_af80415bd7600f7db3af077089865e665}{stop}} ()
-\begin{DoxyCompactList}\small\item\em 停止网络服务器. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T $>$ }\\void {\bfseries write} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classclem_1_1_connection}{Connection}} $>$ conn, const \mbox{\hyperlink{classclem_1_1_message}{Message}}$<$ T $>$ \&msg)
-\item 
+\begin{DoxyCompactList}\small\item\em 停止服务器. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group___networking_gab4d889754bbf550980e9c7fa39819613}{write}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classclem_1_1_connection}{Connection}} $>$ conn, const \mbox{\hyperlink{classclem_1_1_message}{Message}}$<$ T $>$ \&msg)
+\begin{DoxyCompactList}\small\item\em 向指定客户端发送消息. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classclem_1_1_server_a21cfd483fd97c09bbcd0c5f72a00eca7}\label{classclem_1_1_server_a21cfd483fd97c09bbcd0c5f72a00eca7}} 
-{\footnotesize template$<$typename T $>$ }\\void {\bfseries write} (const \mbox{\hyperlink{classclem_1_1_message}{Message}}$<$ T $>$ \&msg)
-\item 
-{\footnotesize template$<$typename T $>$ }\\void {\bfseries read} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classclem_1_1_connection}{Connection}} $>$ conn)
-\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classclem_1_1_server_a21cfd483fd97c09bbcd0c5f72a00eca7}{write}} (const \mbox{\hyperlink{classclem_1_1_message}{Message}}$<$ T $>$ \&msg)
+\begin{DoxyCompactList}\small\item\em 向全部客户端发送消息. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group___networking_gaeeed9a80b6c00017d73698bc26de1c69}{read}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classclem_1_1_connection}{Connection}} $>$ conn)
+\begin{DoxyCompactList}\small\item\em 持续接收任何消息并转换为特定类型. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classclem_1_1_server_af97bfcbf360129a91e10c560eb373e0f}\label{classclem_1_1_server_af97bfcbf360129a91e10c560eb373e0f}} 
 const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classclem_1_1_connection}{Connection}} $>$ $>$ \& {\bfseries get\+Connections} () const
 \end{DoxyCompactItemize}
 \doxysubsection*{Public 属性}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classclem_1_1_server_aa9b777df3a8d128f9570828b1af7e399}\label{classclem_1_1_server_aa9b777df3a8d128f9570828b1af7e399}} 
-std\+::function$<$ bool(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classclem_1_1_connection}{Connection}} $>$)$>$ {\bfseries on\+Connect}
+\mbox{\Hypertarget{classclem_1_1_server_a876ec1aa6e4d7d659d8dc67c0853d84a}\label{classclem_1_1_server_a876ec1aa6e4d7d659d8dc67c0853d84a}} 
+std\+::function$<$ bool(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classclem_1_1_connection}{Connection}} $>$)$>$ {\bfseries on\+Accept}
 \item 
 \mbox{\Hypertarget{classclem_1_1_server_a621af4504ea034d42bed1f43f8c39a1c}\label{classclem_1_1_server_a621af4504ea034d42bed1f43f8c39a1c}} 
 std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classclem_1_1_connection}{Connection}} $>$)$>$ {\bfseries on\+Disconnect}
 \item 
-\mbox{\Hypertarget{classclem_1_1_server_a2504f3ea2d2a261283c050b2aef9c813}\label{classclem_1_1_server_a2504f3ea2d2a261283c050b2aef9c813}} 
-std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classclem_1_1_connection}{Connection}} $>$)$>$ {\bfseries on\+Message}
+\mbox{\Hypertarget{classclem_1_1_server_abb25decf664e1b2869b4f45a9d672a87}\label{classclem_1_1_server_abb25decf664e1b2869b4f45a9d672a87}} 
+std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classclem_1_1_connection}{Connection}} $>$)$>$ {\bfseries on\+Received}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{详细描述}
-网络服务器, TCP 协议. 
+异步网络服务器, TCP 协议. 
 
 \doxysubsection{成员函数说明}
 \mbox{\Hypertarget{classclem_1_1_server_ad3455b601eb575df5f6009bd48440333}\label{classclem_1_1_server_ad3455b601eb575df5f6009bd48440333}} 
@@ -49,11 +49,11 @@ std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classclem_1_1
 
 
 
-启动网络服务器并开始监听指定端口. 
+启动服务器并开始监听指定端口. 
 
 
 \begin{DoxyParams}{参数}
-{\em port} & 要监听的端口. \\
+{\em port} & 要监听的端口.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{返回}

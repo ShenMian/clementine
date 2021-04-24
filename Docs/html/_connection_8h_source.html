@@ -92,22 +92,21 @@ $(document).ready(function(){initNavTree('_connection_8h_source.html',''); initR
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Clem/Assert.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Clem/Logger.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Clem/Platform.h&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;Message.h&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;asio.hpp&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>clem</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classclem_1_1_connection.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_connection.html">Connection</a></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="classclem_1_1_connection.html">Connection</a>(asio::io_context&amp;, asio::ip::tcp::socket);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classclem_1_1_connection.html">Connection</a>();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Clem/Logger.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Clem/Platform.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Message.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;asio.hpp&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>clem</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classclem_1_1_connection.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_connection.html">Connection</a></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classclem_1_1_connection.html">Connection</a>(asio::io_context&amp;, asio::ip::tcp::socket);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classclem_1_1_connection.html">Connection</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classclem_1_1_connection.html#a4233a7599b5099a88f36b4103b4e86ae">connect</a>(<span class="keyword">const</span> std::string_view&amp; host, uint16_t port);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_connection.html#a9afd964eedf2a621c4708a1e7dec6b5b">disconnect</a>();</div>
@@ -123,9 +122,9 @@ $(document).ready(function(){initNavTree('_connection_8h_source.html',''); initR
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="classclem_1_1_message.html">Message&lt;T&gt;</a>&amp; getMessage();</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    std::function&lt;void()&gt; onConnect;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    std::function&lt;void()&gt; onConnected;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    std::function&lt;void()&gt; onDisconnect;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    std::function&lt;void()&gt; onMessage;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    std::function&lt;void()&gt; onReceived;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    asio::io_context&amp;     context;</div>
@@ -181,8 +180,8 @@ $(document).ready(function(){initNavTree('_connection_8h_source.html',''); initR
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                             <span class="keywordflow">if</span>(msg.header.size == 0)</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                             {</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                                 if(onMessage)</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                                     onMessage();</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                                 if(onReceived)</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                                     onReceived();</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                                 readHeader&lt;T&gt;();</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                                 return;</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                             }</div>
@@ -204,8 +203,8 @@ $(document).ready(function(){initNavTree('_connection_8h_source.html',''); initR
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                                 return;</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                             }</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                             <span class="keywordflow">if</span>(onMessage)</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                                 onMessage();</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                             <span class="keywordflow">if</span>(onReceived)</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                                 onReceived();</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                             readHeader&lt;T&gt;();</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                         });</div>
@@ -218,10 +217,10 @@ $(document).ready(function(){initNavTree('_connection_8h_source.html',''); initR
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;}</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;} <span class="comment">// namespace clem</span></div>
-<div class="ttc" id="aclassclem_1_1_connection_html"><div class="ttname"><a href="classclem_1_1_connection.html">clem::Connection</a></div><div class="ttdoc">网络连接, TCP 协议.</div><div class="ttdef"><b>Definition:</b> Connection.h:25</div></div>
-<div class="ttc" id="aclassclem_1_1_connection_html_a4233a7599b5099a88f36b4103b4e86ae"><div class="ttname"><a href="classclem_1_1_connection.html#a4233a7599b5099a88f36b4103b4e86ae">clem::Connection::connect</a></div><div class="ttdeci">bool connect(const std::string_view &amp;host, uint16_t port)</div><div class="ttdoc">与指定主机的端口建立连接.</div><div class="ttdef"><b>Definition:</b> Connection.cpp:21</div></div>
-<div class="ttc" id="aclassclem_1_1_connection_html_a88e28e5451ee7ee32561134039f1a320"><div class="ttname"><a href="classclem_1_1_connection.html#a88e28e5451ee7ee32561134039f1a320">clem::Connection::isConnected</a></div><div class="ttdeci">bool isConnected() const</div><div class="ttdoc">判断是否已建立连接.</div><div class="ttdef"><b>Definition:</b> Connection.cpp:52</div></div>
-<div class="ttc" id="aclassclem_1_1_connection_html_a9afd964eedf2a621c4708a1e7dec6b5b"><div class="ttname"><a href="classclem_1_1_connection.html#a9afd964eedf2a621c4708a1e7dec6b5b">clem::Connection::disconnect</a></div><div class="ttdeci">void disconnect()</div><div class="ttdoc">断开连接.</div><div class="ttdef"><b>Definition:</b> Connection.cpp:42</div></div>
+<div class="ttc" id="aclassclem_1_1_connection_html"><div class="ttname"><a href="classclem_1_1_connection.html">clem::Connection</a></div><div class="ttdoc">网络连接, TCP 协议.</div><div class="ttdef"><b>Definition:</b> Connection.h:24</div></div>
+<div class="ttc" id="aclassclem_1_1_connection_html_a4233a7599b5099a88f36b4103b4e86ae"><div class="ttname"><a href="classclem_1_1_connection.html#a4233a7599b5099a88f36b4103b4e86ae">clem::Connection::connect</a></div><div class="ttdeci">bool connect(const std::string_view &amp;host, uint16_t port)</div><div class="ttdoc">与指定主机的端口建立连接. 异步, 完成后回调 onConnect.</div><div class="ttdef"><b>Definition:</b> Connection.cpp:21</div></div>
+<div class="ttc" id="aclassclem_1_1_connection_html_a88e28e5451ee7ee32561134039f1a320"><div class="ttname"><a href="classclem_1_1_connection.html#a88e28e5451ee7ee32561134039f1a320">clem::Connection::isConnected</a></div><div class="ttdeci">bool isConnected() const</div><div class="ttdoc">判断是否已建立连接.</div><div class="ttdef"><b>Definition:</b> Connection.cpp:57</div></div>
+<div class="ttc" id="aclassclem_1_1_connection_html_a9afd964eedf2a621c4708a1e7dec6b5b"><div class="ttname"><a href="classclem_1_1_connection.html#a9afd964eedf2a621c4708a1e7dec6b5b">clem::Connection::disconnect</a></div><div class="ttdeci">void disconnect()</div><div class="ttdoc">断开连接.</div><div class="ttdef"><b>Definition:</b> Connection.cpp:47</div></div>
 <div class="ttc" id="aclassclem_1_1_message_html"><div class="ttname"><a href="classclem_1_1_message.html">clem::Message</a></div><div class="ttdoc">网络消息.</div><div class="ttdef"><b>Definition:</b> Message.h:25</div></div>
 <div class="ttc" id="agroup___networking_html_ga13b5f1a3d5dabbc04d273b9e021f89b2"><div class="ttname"><a href="group___networking.html#ga13b5f1a3d5dabbc04d273b9e021f89b2">clem::Connection::write</a></div><div class="ttdeci">void write(const Message&lt; T &gt; &amp;msg)</div><div class="ttdoc">发送消息.</div><div class="ttdef"><b>Definition:</b> Connection.h:84</div></div>
 <div class="ttc" id="agroup___networking_html_ga8982f0d21d47d7b837ef83b7490b4bfc"><div class="ttname"><a href="group___networking.html#ga8982f0d21d47d7b837ef83b7490b4bfc">clem::Connection::read</a></div><div class="ttdeci">void read()</div><div class="ttdoc">持续接收任何消息并转换为特定类型.</div><div class="ttdef"><b>Definition:</b> Connection.h:101</div></div>

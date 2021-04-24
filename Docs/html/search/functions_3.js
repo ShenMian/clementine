@@ -1,7 +1,7 @@
 var searchData=
 [
   ['destroyentity_228',['destroyEntity',['../classclem_1_1_scene.html#a1f578c1c436c506a33f0c08b9d7f7ebd',1,'clem::Scene']]],
-  ['disconnect_229',['disconnect',['../classclem_1_1_connection.html#a9afd964eedf2a621c4708a1e7dec6b5b',1,'clem::Connection']]],
+  ['disconnect_229',['disconnect',['../classclem_1_1_client.html#aa98bb673df803685206983b0926be12e',1,'clem::Client::disconnect()'],['../classclem_1_1_connection.html#a9afd964eedf2a621c4708a1e7dec6b5b',1,'clem::Connection::disconnect()']]],
   ['distance_230',['distance',['../class_vec2.html#a08aadbc189bf8c44a6213ddf163722a6',1,'Vec2::distance()'],['../struct_vector2.html#ae754545486968d5055c75ecadb858aa3',1,'Vector2::distance()']]],
   ['distancesquared_231',['distanceSquared',['../class_vec2.html#ae9efea2acb9ad7ec05b0a83626699446',1,'Vec2::distanceSquared()'],['../struct_vector2.html#a584530f1f825ce1b4d76bd84ab0caf87',1,'Vector2::distanceSquared(const Vector2 &amp;p) const']]],
   ['dot_232',['dot',['../struct_vector2.html#aaf4f05ee6cb634974bf528e09f813c8f',1,'Vector2']]],

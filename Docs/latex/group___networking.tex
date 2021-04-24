@@ -4,22 +4,22 @@
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classclem_1_1_client}{clem\+::\+Client}}
-\begin{DoxyCompactList}\small\item\em 网络客户端, TCP 协议. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em 异步网络客户端, TCP 协议. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classclem_1_1_connection}{clem\+::\+Connection}}
 \begin{DoxyCompactList}\small\item\em 网络连接, TCP 协议. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classclem_1_1_message}{clem\+::\+Message$<$ T $>$}}
 \begin{DoxyCompactList}\small\item\em 网络消息. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classclem_1_1_server}{clem\+::\+Server}}
-\begin{DoxyCompactList}\small\item\em 网络服务器, TCP 协议. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em 异步网络服务器, TCP 协议. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{函数}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{group___networking_ga4a0a888f34c71e199dfea753e3236743}\label{group___networking_ga4a0a888f34c71e199dfea753e3236743}} 
-{\footnotesize template$<$typename T $>$ }\\void {\bfseries clem\+::\+Client\+::write} (const \mbox{\hyperlink{classclem_1_1_message}{Message}}$<$ T $>$ \&msg)
-\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group___networking_ga4a0a888f34c71e199dfea753e3236743}{clem\+::\+Client\+::write}} (const \mbox{\hyperlink{classclem_1_1_message}{Message}}$<$ T $>$ \&msg)
+\begin{DoxyCompactList}\small\item\em 发送消息. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___networking_gaf24d929e70a8ca088834ca30a4deccbe}\label{group___networking_gaf24d929e70a8ca088834ca30a4deccbe}} 
-{\footnotesize template$<$typename T $>$ }\\void {\bfseries clem\+::\+Client\+::read} ()
-\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group___networking_gaf24d929e70a8ca088834ca30a4deccbe}{clem\+::\+Client\+::read}} ()
+\begin{DoxyCompactList}\small\item\em 持续接收任何消息并转换为特定类型. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___networking_ga13b5f1a3d5dabbc04d273b9e021f89b2}\label{group___networking_ga13b5f1a3d5dabbc04d273b9e021f89b2}} 
 {\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group___networking_ga13b5f1a3d5dabbc04d273b9e021f89b2}{clem\+::\+Connection\+::write}} (const \mbox{\hyperlink{classclem_1_1_message}{Message}}$<$ T $>$ \&msg)
 \begin{DoxyCompactList}\small\item\em 发送消息. \end{DoxyCompactList}\item 
@@ -30,11 +30,11 @@ class \mbox{\hyperlink{classclem_1_1_server}{clem\+::\+Server}}
 {\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classclem_1_1_message}{Message}}$<$ T $>$ \& {\bfseries clem\+::\+Connection\+::get\+Message} ()
 \item 
 \mbox{\Hypertarget{group___networking_gab4d889754bbf550980e9c7fa39819613}\label{group___networking_gab4d889754bbf550980e9c7fa39819613}} 
-{\footnotesize template$<$typename T $>$ }\\void {\bfseries clem\+::\+Server\+::write} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classclem_1_1_connection}{Connection}} $>$ conn, const \mbox{\hyperlink{classclem_1_1_message}{Message}}$<$ T $>$ \&msg)
-\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group___networking_gab4d889754bbf550980e9c7fa39819613}{clem\+::\+Server\+::write}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classclem_1_1_connection}{Connection}} $>$ conn, const \mbox{\hyperlink{classclem_1_1_message}{Message}}$<$ T $>$ \&msg)
+\begin{DoxyCompactList}\small\item\em 向指定客户端发送消息. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___networking_gaeeed9a80b6c00017d73698bc26de1c69}\label{group___networking_gaeeed9a80b6c00017d73698bc26de1c69}} 
-{\footnotesize template$<$typename T $>$ }\\void {\bfseries clem\+::\+Server\+::read} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classclem_1_1_connection}{Connection}} $>$ conn)
-\end{DoxyCompactItemize}
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group___networking_gaeeed9a80b6c00017d73698bc26de1c69}{clem\+::\+Server\+::read}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classclem_1_1_connection}{Connection}} $>$ conn)
+\begin{DoxyCompactList}\small\item\em 持续接收任何消息并转换为特定类型. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{详细描述}

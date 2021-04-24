@@ -42,7 +42,7 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "classclem_1_1_gamepad.html#a65bb62e8614937672490fdaaa5dcb075",
-"struct_vector2i.html#ae1f159d24643f25674b38495a926144b"
+"struct_vector2i.html#ab4e168dce592fb15f6526b140ec4742c"
 ];
 
 var SYNCONMSG = '点击 关闭 面板同步';

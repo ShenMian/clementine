@@ -92,29 +92,32 @@ $(document).ready(function(){initNavTree('classclem_1_1_server.html',''); initRe
 </div><!--header-->
 <div class="contents">
 
-<p>网络服务器, TCP 协议.  
+<p>异步网络服务器, TCP 协议.  
  <a href="classclem_1_1_server.html#details">更多...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
 <tr class="memitem:ad3455b601eb575df5f6009bd48440333"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclem_1_1_server.html#ad3455b601eb575df5f6009bd48440333">start</a> (uint16_t port)</td></tr>
-<tr class="memdesc:ad3455b601eb575df5f6009bd48440333"><td class="mdescLeft">&#160;</td><td class="mdescRight">启动网络服务器并开始监听指定端口.  <a href="classclem_1_1_server.html#ad3455b601eb575df5f6009bd48440333">更多...</a><br /></td></tr>
+<tr class="memdesc:ad3455b601eb575df5f6009bd48440333"><td class="mdescLeft">&#160;</td><td class="mdescRight">启动服务器并开始监听指定端口.  <a href="classclem_1_1_server.html#ad3455b601eb575df5f6009bd48440333">更多...</a><br /></td></tr>
 <tr class="separator:ad3455b601eb575df5f6009bd48440333"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af80415bd7600f7db3af077089865e665"><td class="memItemLeft" align="right" valign="top"><a id="af80415bd7600f7db3af077089865e665"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclem_1_1_server.html#af80415bd7600f7db3af077089865e665">stop</a> ()</td></tr>
-<tr class="memdesc:af80415bd7600f7db3af077089865e665"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止网络服务器. <br /></td></tr>
+<tr class="memdesc:af80415bd7600f7db3af077089865e665"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止服务器. <br /></td></tr>
 <tr class="separator:af80415bd7600f7db3af077089865e665"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab4d889754bbf550980e9c7fa39819613"><td class="memTemplParams" colspan="2">
 template&lt;typename T &gt; </td></tr>
-<tr class="memitem:gab4d889754bbf550980e9c7fa39819613"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>write</b> (std::shared_ptr&lt; <a class="el" href="classclem_1_1_connection.html">Connection</a> &gt; conn, const <a class="el" href="classclem_1_1_message.html">Message</a>&lt; T &gt; &amp;msg)</td></tr>
+<tr class="memitem:gab4d889754bbf550980e9c7fa39819613"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___networking.html#gab4d889754bbf550980e9c7fa39819613">write</a> (std::shared_ptr&lt; <a class="el" href="classclem_1_1_connection.html">Connection</a> &gt; conn, const <a class="el" href="classclem_1_1_message.html">Message</a>&lt; T &gt; &amp;msg)</td></tr>
+<tr class="memdesc:gab4d889754bbf550980e9c7fa39819613"><td class="mdescLeft">&#160;</td><td class="mdescRight">向指定客户端发送消息. <br /></td></tr>
 <tr class="separator:gab4d889754bbf550980e9c7fa39819613"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21cfd483fd97c09bbcd0c5f72a00eca7"><td class="memTemplParams" colspan="2"><a id="a21cfd483fd97c09bbcd0c5f72a00eca7"></a>
 template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a21cfd483fd97c09bbcd0c5f72a00eca7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>write</b> (const <a class="el" href="classclem_1_1_message.html">Message</a>&lt; T &gt; &amp;msg)</td></tr>
+<tr class="memitem:a21cfd483fd97c09bbcd0c5f72a00eca7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classclem_1_1_server.html#a21cfd483fd97c09bbcd0c5f72a00eca7">write</a> (const <a class="el" href="classclem_1_1_message.html">Message</a>&lt; T &gt; &amp;msg)</td></tr>
+<tr class="memdesc:a21cfd483fd97c09bbcd0c5f72a00eca7"><td class="mdescLeft">&#160;</td><td class="mdescRight">向全部客户端发送消息. <br /></td></tr>
 <tr class="separator:a21cfd483fd97c09bbcd0c5f72a00eca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaeeed9a80b6c00017d73698bc26de1c69"><td class="memTemplParams" colspan="2">
 template&lt;typename T &gt; </td></tr>
-<tr class="memitem:gaeeed9a80b6c00017d73698bc26de1c69"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>read</b> (std::shared_ptr&lt; <a class="el" href="classclem_1_1_connection.html">Connection</a> &gt; conn)</td></tr>
+<tr class="memitem:gaeeed9a80b6c00017d73698bc26de1c69"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___networking.html#gaeeed9a80b6c00017d73698bc26de1c69">read</a> (std::shared_ptr&lt; <a class="el" href="classclem_1_1_connection.html">Connection</a> &gt; conn)</td></tr>
+<tr class="memdesc:gaeeed9a80b6c00017d73698bc26de1c69"><td class="mdescLeft">&#160;</td><td class="mdescRight">持续接收任何消息并转换为特定类型. <br /></td></tr>
 <tr class="separator:gaeeed9a80b6c00017d73698bc26de1c69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af97bfcbf360129a91e10c560eb373e0f"><td class="memItemLeft" align="right" valign="top"><a id="af97bfcbf360129a91e10c560eb373e0f"></a>
 const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classclem_1_1_connection.html">Connection</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getConnections</b> () const</td></tr>
@@ -122,18 +125,18 @@ const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classclem_1_1_conn
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public 属性</h2></td></tr>
-<tr class="memitem:aa9b777df3a8d128f9570828b1af7e399"><td class="memItemLeft" align="right" valign="top"><a id="aa9b777df3a8d128f9570828b1af7e399"></a>
-std::function&lt; bool(std::shared_ptr&lt; <a class="el" href="classclem_1_1_connection.html">Connection</a> &gt;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>onConnect</b></td></tr>
-<tr class="separator:aa9b777df3a8d128f9570828b1af7e399"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a876ec1aa6e4d7d659d8dc67c0853d84a"><td class="memItemLeft" align="right" valign="top"><a id="a876ec1aa6e4d7d659d8dc67c0853d84a"></a>
+std::function&lt; bool(std::shared_ptr&lt; <a class="el" href="classclem_1_1_connection.html">Connection</a> &gt;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>onAccept</b></td></tr>
+<tr class="separator:a876ec1aa6e4d7d659d8dc67c0853d84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a621af4504ea034d42bed1f43f8c39a1c"><td class="memItemLeft" align="right" valign="top"><a id="a621af4504ea034d42bed1f43f8c39a1c"></a>
 std::function&lt; void(std::shared_ptr&lt; <a class="el" href="classclem_1_1_connection.html">Connection</a> &gt;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>onDisconnect</b></td></tr>
 <tr class="separator:a621af4504ea034d42bed1f43f8c39a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2504f3ea2d2a261283c050b2aef9c813"><td class="memItemLeft" align="right" valign="top"><a id="a2504f3ea2d2a261283c050b2aef9c813"></a>
-std::function&lt; void(std::shared_ptr&lt; <a class="el" href="classclem_1_1_connection.html">Connection</a> &gt;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>onMessage</b></td></tr>
-<tr class="separator:a2504f3ea2d2a261283c050b2aef9c813"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb25decf664e1b2869b4f45a9d672a87"><td class="memItemLeft" align="right" valign="top"><a id="abb25decf664e1b2869b4f45a9d672a87"></a>
+std::function&lt; void(std::shared_ptr&lt; <a class="el" href="classclem_1_1_connection.html">Connection</a> &gt;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>onReceived</b></td></tr>
+<tr class="separator:abb25decf664e1b2869b4f45a9d672a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
-<div class="textblock"><p>网络服务器, TCP 协议. </p>
+<div class="textblock"><p>异步网络服务器, TCP 协议. </p>
 </div><h2 class="groupheader">成员函数说明</h2>
 <a id="ad3455b601eb575df5f6009bd48440333"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad3455b601eb575df5f6009bd48440333">&#9670;&nbsp;</a></span>start()</h2>
@@ -151,10 +154,10 @@ std::function&lt; void(std::shared_ptr&lt; <a class="el" href="classclem_1_1_con
       </table>
 </div><div class="memdoc">
 
-<p>启动网络服务器并开始监听指定端口. </p>
+<p>启动服务器并开始监听指定端口. </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">port</td><td>要监听的端口. </td></tr>
+    <tr><td class="paramname">port</td><td>要监听的端口.</td></tr>
   </table>
   </dd>
 </dl>

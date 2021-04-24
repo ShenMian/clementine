@@ -1,7 +1,7 @@
 var searchData=
 [
   ['random_94',['Random',['../class_random.html',1,'']]],
-  ['read_95',['read',['../group___networking.html#ga8982f0d21d47d7b837ef83b7490b4bfc',1,'clem::Connection']]],
+  ['read_95',['read',['../group___networking.html#gaf24d929e70a8ca088834ca30a4deccbe',1,'clem::Client::read()'],['../group___networking.html#ga8982f0d21d47d7b837ef83b7490b4bfc',1,'clem::Connection::read()'],['../group___networking.html#gaeeed9a80b6c00017d73698bc26de1c69',1,'clem::Server::read()']]],
   ['recorder_96',['Recorder',['../class_recorder.html',1,'Recorder'],['../class_recorder.html#a68c85014dc853b9deef2269c43fc974c',1,'Recorder::Recorder()']]],
   ['rect_97',['Rect',['../class_rect.html',1,'']]],
   ['rect2_98',['Rect2',['../class_rect2.html',1,'Rect2'],['../class_rect2.html#af57a2f1b2e8320c5600467b78f0f3666',1,'Rect2::Rect2()=default'],['../class_rect2.html#a71b9efe9cf2968c7e59c046dce998c70',1,'Rect2::Rect2(const Point2 &amp;origin, const Size2 &amp;size)'],['../class_rect2.html#a43db73e3064ae1a60fe786d639ae0f52',1,'Rect2::Rect2(float x, float y, float width, float height)']]],

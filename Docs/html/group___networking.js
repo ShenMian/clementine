@@ -8,9 +8,9 @@ var group___networking =
       [ "isConnected", "classclem_1_1_client.html#aae54c38ae878f11b33ece16d36720d41", null ],
       [ "read", "group___networking.html#gaf24d929e70a8ca088834ca30a4deccbe", null ],
       [ "write", "group___networking.html#ga4a0a888f34c71e199dfea753e3236743", null ],
-      [ "onConnect", "classclem_1_1_client.html#aca73293cd900f4147bd924c45184d1e5", null ],
+      [ "onConnected", "classclem_1_1_client.html#a0751fbc1a4825d56ca72cf407e77f7a8", null ],
       [ "onDisconnect", "classclem_1_1_client.html#ab48c2aaea0f5dc3c842bd4ebf34366ed", null ],
-      [ "onMessage", "classclem_1_1_client.html#ab6f521535940119ffab8884b26e5da97", null ]
+      [ "onReceived", "classclem_1_1_client.html#a47c41c5525abf97197eaf54121726271", null ]
     ] ],
     [ "Connection", "classclem_1_1_connection.html", [
       [ "Connection", "classclem_1_1_connection.html#a4b52deec28fb622d30ca370273dca3bb", null ],
@@ -21,9 +21,9 @@ var group___networking =
       [ "isConnected", "classclem_1_1_connection.html#a88e28e5451ee7ee32561134039f1a320", null ],
       [ "read", "group___networking.html#ga8982f0d21d47d7b837ef83b7490b4bfc", null ],
       [ "write", "group___networking.html#ga13b5f1a3d5dabbc04d273b9e021f89b2", null ],
-      [ "onConnect", "classclem_1_1_connection.html#ac368b09b801c93660cd2f83bb2f43da0", null ],
+      [ "onConnected", "classclem_1_1_connection.html#a4a86850646665e8950a83514df28c479", null ],
       [ "onDisconnect", "classclem_1_1_connection.html#a82e99fbf33de91dbc183fc68deb72965", null ],
-      [ "onMessage", "classclem_1_1_connection.html#a3b145c30911db4fe17b34777ac85ac0a", null ]
+      [ "onReceived", "classclem_1_1_connection.html#a3d6e227591a54800e6217042ffac83d0", null ]
     ] ],
     [ "Message", "classclem_1_1_message.html", [
       [ "Message", "classclem_1_1_message.html#a04c179ebfe4746be4c030df4bfc5ad75", null ],
@@ -46,10 +46,14 @@ var group___networking =
       [ "stop", "classclem_1_1_server.html#af80415bd7600f7db3af077089865e665", null ],
       [ "write", "classclem_1_1_server.html#a21cfd483fd97c09bbcd0c5f72a00eca7", null ],
       [ "write", "group___networking.html#gab4d889754bbf550980e9c7fa39819613", null ],
-      [ "onConnect", "classclem_1_1_server.html#aa9b777df3a8d128f9570828b1af7e399", null ],
+      [ "onAccept", "classclem_1_1_server.html#a876ec1aa6e4d7d659d8dc67c0853d84a", null ],
       [ "onDisconnect", "classclem_1_1_server.html#a621af4504ea034d42bed1f43f8c39a1c", null ],
-      [ "onMessage", "classclem_1_1_server.html#a2504f3ea2d2a261283c050b2aef9c813", null ]
+      [ "onReceived", "classclem_1_1_server.html#abb25decf664e1b2869b4f45a9d672a87", null ]
     ] ],
+    [ "read", "group___networking.html#gaf24d929e70a8ca088834ca30a4deccbe", null ],
     [ "read", "group___networking.html#ga8982f0d21d47d7b837ef83b7490b4bfc", null ],
-    [ "write", "group___networking.html#ga13b5f1a3d5dabbc04d273b9e021f89b2", null ]
+    [ "read", "group___networking.html#gaeeed9a80b6c00017d73698bc26de1c69", null ],
+    [ "write", "group___networking.html#ga4a0a888f34c71e199dfea753e3236743", null ],
+    [ "write", "group___networking.html#ga13b5f1a3d5dabbc04d273b9e021f89b2", null ],
+    [ "write", "group___networking.html#gab4d889754bbf550980e9c7fa39819613", null ]
 ];

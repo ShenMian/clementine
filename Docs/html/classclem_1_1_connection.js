@@ -8,7 +8,7 @@ var classclem_1_1_connection =
     [ "isConnected", "classclem_1_1_connection.html#a88e28e5451ee7ee32561134039f1a320", null ],
     [ "read", "group___networking.html#ga8982f0d21d47d7b837ef83b7490b4bfc", null ],
     [ "write", "group___networking.html#ga13b5f1a3d5dabbc04d273b9e021f89b2", null ],
-    [ "onConnect", "classclem_1_1_connection.html#ac368b09b801c93660cd2f83bb2f43da0", null ],
+    [ "onConnected", "classclem_1_1_connection.html#a4a86850646665e8950a83514df28c479", null ],
     [ "onDisconnect", "classclem_1_1_connection.html#a82e99fbf33de91dbc183fc68deb72965", null ],
-    [ "onMessage", "classclem_1_1_connection.html#a3b145c30911db4fe17b34777ac85ac0a", null ]
+    [ "onReceived", "classclem_1_1_connection.html#a3d6e227591a54800e6217042ffac83d0", null ]
 ];
