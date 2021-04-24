@@ -1,5 +1,17 @@
 var NAVTREEINDEX2 =
 {
+"struct_vector2i.html#ae1f159d24643f25674b38495a926144b":[0,1,5,10],
+"struct_vector2i.html#af14b082bf07c40e0d0f1203a786dca68":[0,1,5,5],
+"structclem_1_1_riff_header.html":[1,0,0,2],
+"structclem_1_1_riff_header.html#a1a5d4543b0cc31027ac0b57a8a23f610":[1,0,0,2,2],
+"structclem_1_1_riff_header.html#a496f243f51619fd981319fa2f30c752f":[1,0,0,2,0],
+"structclem_1_1_riff_header.html#a5b1d65849ae00adf4f615d38fe2a7a1e":[1,0,0,2,1],
+"structclem_1_1_wave_data.html":[1,0,0,4],
+"structclem_1_1_wave_data.html#a8a64d5175726865e47c032c58993060c":[1,0,0,4,1],
+"structclem_1_1_wave_data.html#ae719b0100617562510eb06bdd715c696":[1,0,0,4,0],
+"structclem_1_1_wave_format.html":[1,0,0,3],
+"structclem_1_1_wave_format.html#a09bf819df53386d10e22ef7d86fed00c":[1,0,0,3,5],
+"structclem_1_1_wave_format.html#a10cde080dbaa184d224a23aed8bc50d7":[1,0,0,3,4],
 "structclem_1_1_wave_format.html#a5927a7be81556751cd999c20eb98a00e":[1,0,0,3,2],
 "structclem_1_1_wave_format.html#a68b2e2d852546fed5d1a50354c122532":[1,0,0,3,0],
 "structclem_1_1_wave_format.html#a74166f060f1cca9d5ab695a8765f2bac":[1,0,0,3,6],

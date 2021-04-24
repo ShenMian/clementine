@@ -41,8 +41,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"classclem_1_1_framebuffer.html#ae8fcb4f03b3c5816927711435fdf9190",
-"structclem_1_1_wave_format.html#a5927a7be81556751cd999c20eb98a00e"
+"classclem_1_1_gamepad.html#a65bb62e8614937672490fdaaa5dcb075",
+"struct_vector2i.html#ae1f159d24643f25674b38495a926144b"
 ];
 
 var SYNCONMSG = '点击 关闭 面板同步';

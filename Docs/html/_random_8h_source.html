@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Clementine: src/Clem/Random.h 源文件</title>
+<title>Clementine: Source/Clem/Random.h 源文件</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -102,25 +102,31 @@ $(document).ready(function(){initNavTree('_random_8h_source.html',''); initResiz
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="class_random.html">Random</a>();</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> seed(uint32_t);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    uint32_t getUint32(uint32_t min = 0, uint32_t max = UINT32_MAX);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    int32_t  getInt32(int32_t min = INT32_MIN, int32_t max = INT32_MAX);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">float</span>    getFloat();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="struct_vector2i.html">Point2i</a> getPoint2i(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; min, <span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; max);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    std::mt19937 generator;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_random.html#a0cee184d5ec09774c7881fb73eb2fb1d">setSeed</a>(uint32_t);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    uint32_t <a class="code" href="class_random.html#a0178393e9c32f712a963a6c9b202a36c">getUint32</a>(uint32_t min = 0, uint32_t max = UINT32_MAX);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    int32_t  <a class="code" href="class_random.html#a664e49a3019266be01a7f03bf0cdae91">getInt32</a>(int32_t min = INT32_MIN, int32_t max = INT32_MAX);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_random.html#a2498fad76196a0ede1cc9ad2c1b843b7">getFloat</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="struct_vector2i.html">Point2i</a> getPoint2i(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; min, <span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; max);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    std::mt19937 generator;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
 <div class="ttc" id="aclass_random_html"><div class="ttname"><a href="class_random.html">Random</a></div><div class="ttdoc">随机数生成器.</div><div class="ttdef"><b>Definition:</b> Random.h:15</div></div>
+<div class="ttc" id="aclass_random_html_a0178393e9c32f712a963a6c9b202a36c"><div class="ttname"><a href="class_random.html#a0178393e9c32f712a963a6c9b202a36c">Random::getUint32</a></div><div class="ttdeci">uint32_t getUint32(uint32_t min=0, uint32_t max=UINT32_MAX)</div><div class="ttdoc">生成指定范围内的32位随机无符号整数.</div><div class="ttdef"><b>Definition:</b> Random.cpp:19</div></div>
+<div class="ttc" id="aclass_random_html_a0cee184d5ec09774c7881fb73eb2fb1d"><div class="ttname"><a href="class_random.html#a0cee184d5ec09774c7881fb73eb2fb1d">Random::setSeed</a></div><div class="ttdeci">void setSeed(uint32_t)</div><div class="ttdoc">设置种子.</div><div class="ttdef"><b>Definition:</b> Random.cpp:14</div></div>
+<div class="ttc" id="aclass_random_html_a2498fad76196a0ede1cc9ad2c1b843b7"><div class="ttname"><a href="class_random.html#a2498fad76196a0ede1cc9ad2c1b843b7">Random::getFloat</a></div><div class="ttdeci">float getFloat()</div><div class="ttdoc">生成 0-1 之间的随机单精度浮点数.</div><div class="ttdef"><b>Definition:</b> Random.cpp:31</div></div>
+<div class="ttc" id="aclass_random_html_a664e49a3019266be01a7f03bf0cdae91"><div class="ttname"><a href="class_random.html#a664e49a3019266be01a7f03bf0cdae91">Random::getInt32</a></div><div class="ttdeci">int32_t getInt32(int32_t min=INT32_MIN, int32_t max=INT32_MAX)</div><div class="ttdoc">生成指定范围内的32位随机有符号整数.</div><div class="ttdef"><b>Definition:</b> Random.cpp:25</div></div>
 <div class="ttc" id="astruct_vector2i_html"><div class="ttname"><a href="struct_vector2i.html">Vector2i</a></div><div class="ttdoc">二维向量, 整型.</div><div class="ttdef"><b>Definition:</b> Vector2i.h:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_6159ebb534700731bf4b22c629f4e6b1.html">Clem</a></li><li class="navelem"><b>Random.h</b></li>
+    <li class="navelem"><a class="el" href="dir_74389ed8173ad57b461b9d623a1f3867.html">Source</a></li><li class="navelem"><a class="el" href="dir_7021f754b8ddfcf6c3876e5dcdd251f8.html">Clem</a></li><li class="navelem"><b>Random.h</b></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

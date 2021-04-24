@@ -22,11 +22,13 @@ var group___physics =
       [ "setRigidbody", "classclem_1_1_collider.html#aa6b5b0b01bdbad350eaa1b59f500dcb6", null ],
       [ "offset", "classclem_1_1_collider.html#a428d4e89eb2516fb42c0d9050fb2d519", null ]
     ] ],
-    [ "PhysicsWorld", "class_physics_world.html", [
-      [ "update", "class_physics_world.html#a284ecdfa1480f11c684f3112289501f3", null ]
+    [ "PhysicsWorld", "classclem_1_1_physics_world.html", [
+      [ "PhysicsWorld", "classclem_1_1_physics_world.html#aef46cae656ec077e23224f7f94ffeb21", null ],
+      [ "update", "classclem_1_1_physics_world.html#a12df28cd58df0b1cd0ec2ca282095856", null ]
     ] ],
     [ "Rigidbody", "classclem_1_1_rigidbody.html", [
       [ "addForce", "classclem_1_1_rigidbody.html#accee589b869a6db35cad3b4226354b64", null ],
+      [ "getAcceleration", "classclem_1_1_rigidbody.html#a2edcd39c2b8dd62f054f35d0e8ada005", null ],
       [ "getEntity", "classclem_1_1_rigidbody.html#a83839838063293d2b2f718bcb002096f", null ],
       [ "setAcceleration", "classclem_1_1_rigidbody.html#a1a19ee0e4d06b7f16f2d77c9608cd8e3", null ],
       [ "setEntity", "classclem_1_1_rigidbody.html#a70e1124f6400a84447202800f63c598e", null ],

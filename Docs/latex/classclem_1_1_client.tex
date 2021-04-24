@@ -1,0 +1,44 @@
+\hypertarget{classclem_1_1_client}{}\doxysection{clem\+::Client类 参考}
+\label{classclem_1_1_client}\index{clem::Client@{clem::Client}}
+
+
+网络客户端, TCP 协议.  
+
+
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classclem_1_1_client_aa571f79a7041cc955d49729b2c761927}\label{classclem_1_1_client_aa571f79a7041cc955d49729b2c761927}} 
+bool {\bfseries connect} (const std\+::string\+\_\+view \&host, uint16\+\_\+t port)
+\item 
+\mbox{\Hypertarget{classclem_1_1_client_aa98bb673df803685206983b0926be12e}\label{classclem_1_1_client_aa98bb673df803685206983b0926be12e}} 
+void {\bfseries disconnect} ()
+\item 
+\mbox{\Hypertarget{classclem_1_1_client_aae54c38ae878f11b33ece16d36720d41}\label{classclem_1_1_client_aae54c38ae878f11b33ece16d36720d41}} 
+bool {\bfseries is\+Connected} () const
+\item 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries write} (const \mbox{\hyperlink{classclem_1_1_message}{Message}}$<$ T $>$ \&msg)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries read} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classclem_1_1_client_aca73293cd900f4147bd924c45184d1e5}\label{classclem_1_1_client_aca73293cd900f4147bd924c45184d1e5}} 
+std\+::function$<$ void()$>$ {\bfseries on\+Connect}
+\item 
+\mbox{\Hypertarget{classclem_1_1_client_ab48c2aaea0f5dc3c842bd4ebf34366ed}\label{classclem_1_1_client_ab48c2aaea0f5dc3c842bd4ebf34366ed}} 
+std\+::function$<$ void()$>$ {\bfseries on\+Disconnect}
+\item 
+\mbox{\Hypertarget{classclem_1_1_client_ab6f521535940119ffab8884b26e5da97}\label{classclem_1_1_client_ab6f521535940119ffab8884b26e5da97}} 
+std\+::function$<$ void()$>$ {\bfseries on\+Message}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+网络客户端, TCP 协议. 
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Clem/\+Networking/Client.\+h\item 
+Source/\+Clem/\+Networking/Client.\+cpp\end{DoxyCompactItemize}
