@@ -36,7 +36,7 @@ public:
 	 * @return true  启动成功.
 	 * @return false 启动失败.
 	 */
-	bool start(std::uint16_t port);
+	bool start(uint16_t port);
 
 	/**
 	 * @brief 停止网络服务器.

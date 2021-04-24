@@ -8,7 +8,7 @@ using namespace clem;
 
 Server server;
 
-enum Chess : std::int8_t
+enum Chess : uint8_t
 {
 	none,
 	black,

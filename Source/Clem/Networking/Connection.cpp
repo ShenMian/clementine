@@ -18,7 +18,7 @@ Connection::~Connection()
 	disconnect();
 }
 
-bool Connection::connect(const std::string_view& host, std::uint16_t port)
+bool Connection::connect(const std::string_view& host, uint16_t port)
 {
 	try
 	{

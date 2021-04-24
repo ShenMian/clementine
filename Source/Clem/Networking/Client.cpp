@@ -18,7 +18,7 @@ Client::~Client()
 	disconnect();
 }
 
-bool Client::connect(const std::string_view& host, std::uint16_t port)
+bool Client::connect(const std::string_view& host, uint16_t port)
 {
 	connection.connect(host, port);
 	connection.onConnect    = [this]() { if(onConnect) onConnect(); };

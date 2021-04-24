@@ -27,9 +27,9 @@ public:
 	struct
 	{
 		T            id;
-		std::uint8_t size = 0;
+		uint8_t size = 0;
 	} header;
-	std::vector<std::uint8_t> body;
+	std::vector<uint8_t> body;
 
 	Message() = default;
 	Message(T id)
@@ -46,7 +46,7 @@ public:
 		const auto offset = msg.body.size();
 		msg.body.resize(msg.body.size() + sizeof(Data));
 		std::memcpy(msg.body.data() + offset, &data, sizeof(Data));
-		msg.header.size = (std::uint8_t)msg.body.size();
+		msg.header.size = (uint8_t)msg.body.size();
 
 		return msg;
 	}
@@ -59,7 +59,7 @@ public:
 		const auto offset = msg.body.size() - sizeof(Data);
 		std::memcpy(&data, msg.body.data() + offset, sizeof(Data));
 		msg.body.resize(msg.body.size() - sizeof(Data));
-		msg.header.size = (std::uint8_t)msg.body.size();
+		msg.header.size = (uint8_t)msg.body.size();
 
 		return msg;
 	}

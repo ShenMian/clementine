@@ -26,7 +26,7 @@ public:
 	Client();
 	virtual ~Client();
 
-	bool connect(const std::string_view& host, std::uint16_t port);
+	bool connect(const std::string_view& host, uint16_t port);
 	void disconnect();
 
 	bool isConnected() const;

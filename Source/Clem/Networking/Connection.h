@@ -33,7 +33,7 @@ public:
 	 * @param host 主机, IP 或域名.
 	 * @param port 端口号.
 	 */
-	bool connect(const std::string_view& host, std::uint16_t port);
+	bool connect(const std::string_view& host, uint16_t port);
 
 	/**
 	 * @brief 断开连接.

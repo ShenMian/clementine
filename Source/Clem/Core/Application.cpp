@@ -13,7 +13,6 @@ using namespace clem;
 using namespace std::chrono_literals;
 using std::shared_ptr;
 using std::string;
-using std::this_thread::sleep_for;
 
 #include "asio.hpp"
 
@@ -81,13 +80,13 @@ void Application::run()
 	CLEM_LOG_INFO("core", "main loop started");
 
 	quit          = false;
-	long previous = getCurrentMillSecond();
+	auto previous = getCurrentMillSecond();
 
 	while(!quit)
 	{
-		long current = getCurrentMillSecond();
-		long dt      = current - previous;
-		previous     = current;
+		auto     current = getCurrentMillSecond();
+		uint16_t dt      = static_cast<uint16_t>(current - previous);
+		previous         = current;
 
 		updateInput(dt);
 		updateScene(dt);
@@ -97,7 +96,7 @@ void Application::run()
 
 		while(paused)
 		{
-			sleep_for(500ms);
+			std::this_thread::sleep_for(500ms);
 			previous = getCurrentMillSecond();
 		}
 	}
@@ -105,7 +104,7 @@ void Application::run()
 	CLEM_LOG_INFO("core", "main loop stoped");
 }
 
-void Application::updateInput(long dt)
+void Application::updateInput(uint16_t dt)
 {
 	PROFILE_FUNC();
 
@@ -121,12 +120,12 @@ void Application::updateInput(long dt)
 	}
 }
 
-void Application::updateScene(long dt)
+void Application::updateScene(uint16_t dt)
 {
 	PROFILE_FUNC();
 
-	static long lag   = 0;
-	auto&       scene = scenes.back();
+	auto&           scene = scenes.back();
+	static uint16_t lag   = 0;
 
 	lag += dt;
 	while(lag >= msPerUpdate)
@@ -136,12 +135,12 @@ void Application::updateScene(long dt)
 	}
 }
 
-void Application::renderScene(long dt)
+void Application::renderScene(uint16_t dt)
 {
 	PROFILE_FUNC();
 
-	static long lag   = 0;
-	auto&       scene = scenes.back();
+	auto&           scene = scenes.back();
+	static uint16_t lag   = 0;
 
 	lag += dt;
 	if(lag >= msPerRender)
@@ -151,12 +150,12 @@ void Application::renderScene(long dt)
 	}
 }
 
-void Application::updateFrameRate(long dt)
+void Application::updateFrameRate(uint16_t dt)
 {
 	PROFILE_FUNC();
 
 	// 计算帧速率
-	static long lag = 0, frames = 0;
+	static uint16_t lag = 0, frames = 0;
 	lag += dt;
 	frames++;
 	if(lag >= 1000)
@@ -167,13 +166,13 @@ void Application::updateFrameRate(long dt)
 	}
 
 	// 限制主循环速度, 减少 CPU 占用
-	static const auto target   = std::min(msPerInput, std::min(msPerUpdate, msPerRender));
-	static long       integral = 0;
+	static const auto target   = std::min({msPerInput, msPerUpdate, msPerRender});
+	static uint16_t   integral = 0;
 	auto              error    = target - dt;
 	integral += error > 0 ? 1 : (integral > 0 ? -1 : 0);
 	if(error < 0 && integral == 0)
 		return;
-	sleep_for(std::chrono::milliseconds(error + integral));
+	std::this_thread::sleep_for(std::chrono::milliseconds(error + integral));
 }
 
 void Application::stop()
@@ -194,19 +193,19 @@ void Application::resume()
 	paused = false;
 }
 
-void Application::setMsPerUpdate(long ms)
+void Application::setMsPerUpdate(uint16_t ms)
 {
-	ASSERT_TRUE(ms <= 0, "set ms per update non positive is not allowed");
+	ASSERT_TRUE(ms >= 0, "set ms per update non positive is not allowed");
 	msPerUpdate = ms;
 }
 
-void Application::setMsPerRender(long ms)
+void Application::setMsPerRender(uint16_t ms)
 {
-	ASSERT_TRUE(ms <= 0, "set ms per render non positive is not allowed");
+	ASSERT_TRUE(ms >= 0, "set ms per render non positive is not allowed");
 	msPerRender = ms;
 }
 
-long Application::getFrameRate() const
+uint16_t Application::getFrameRate() const
 {
 	return frameRate;
 }

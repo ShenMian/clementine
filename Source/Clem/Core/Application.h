@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Clem/Core/Math/Math.h"
+#include <cstdint>
 #include <memory>
 #include <string>
 #include <vector>
@@ -59,17 +60,17 @@ public:
 	/**
 	 * @brief 设置更新时间周期.
 	 */
-	void setMsPerUpdate(long ms);
+	void setMsPerUpdate(uint16_t ms);
 
 	/**
 	 * @brief 设置渲染时间周期.
 	 */
-	void setMsPerRender(long ms);
+	void setMsPerRender(uint16_t ms);
 
 	/**
 	 * @brief 获取帧速率(FPS).
 	 */
-	long getFrameRate() const;
+	uint16_t getFrameRate() const;
 
 	/**
 	 * @brief 获取应用名称.
@@ -97,24 +98,21 @@ public:
 private:
 	void initPlatform();
 
-	void updateInput(long dt);
-	void updateScene(long dt);
-	void renderScene(long dt);
-	void updateFrameRate(long dt);
+	void updateInput(uint16_t dt);
+	void updateScene(uint16_t dt);
+	void renderScene(uint16_t dt);
+	void updateFrameRate(uint16_t dt);
 	long getCurrentMillSecond() const;
 
-	bool quit   = true;
-	bool paused = false;
+	bool     quit        = true;
+	bool     paused      = false;
+	uint16_t msPerInput  = 16;
+	uint16_t msPerUpdate = 16;
+	uint16_t msPerRender = 16;
+	uint16_t frameRate   = 0;
 
-	long msPerInput  = 16;
-	long msPerUpdate = 16;
-	long msPerRender = 16;
-
-	long frameRate = 0;
-
+	const std::string                   name;
 	std::vector<std::shared_ptr<Scene>> scenes;
-
-	const std::string name;
 
 	static void         onSignal(int signal);
 	static Application* instance;

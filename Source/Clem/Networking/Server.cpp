@@ -20,7 +20,7 @@ Server::~Server()
 	stop();
 }
 
-bool Server::start(std::uint16_t port)
+bool Server::start(uint16_t port)
 {
 	try
 	{
