@@ -19,11 +19,16 @@ public:
 
 	Point2 getWorldPosition();
 
-	bool       dirty  = true;
-	Transform* parent = nullptr;
+	void setDirty(bool);
+	bool isDirty() const;
+
+	void       setParent(Transform*);
+	Transform* getParent() const;
 
 private:
 	Vector2    position;
 	Vector2    worldPosition;
+	bool       dirty  = true;
+	Transform* parent = nullptr;
 };
 } // namespace clem

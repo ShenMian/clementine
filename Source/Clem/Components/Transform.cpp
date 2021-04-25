@@ -29,4 +29,24 @@ Point2 Transform::getWorldPosition()
 	else
 		return position;
 }
+void Transform::setDirty(bool d)
+{
+	dirty = d;
+}
+
+bool Transform::isDirty() const
+{
+	return dirty;
+}
+
+void Transform::setParent(Transform* p)
+{
+	ASSERT_TRUE(p != this, "parent can't be itself");
+	parent = p;
+}
+
+Transform* Transform::getParent() const
+{
+	return parent;
+}
 } // namespace clem
