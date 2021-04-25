@@ -66,7 +66,7 @@ public:
 
 	std::function<bool(std::shared_ptr<Connection>)>                  onAccept;
 	std::function<void(std::shared_ptr<Connection>)>                  onDisconnect;
-	std::function<void(std::shared_ptr<Connection>)>                  onReceived;
+	std::function<void(std::shared_ptr<Connection>)>                  onMessage;
 	std::function<void(std::shared_ptr<Connection>, std::error_code)> onError;
 
 private:

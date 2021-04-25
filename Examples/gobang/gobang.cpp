@@ -36,9 +36,9 @@ public:
 			conn->read<NetCommand>();
 			return true;
 		};
-		server.onReceived = [this](shared_ptr<Connection> conn) {
+		server.onMessage = [this](shared_ptr<Connection> conn) {
 			auto& msg = conn->getMessage<NetCommand>();
-			
+
 			int   x, y;
 			Chess c;
 

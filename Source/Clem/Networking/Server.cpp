@@ -66,7 +66,7 @@ void Server::accept()
 		if(onAccept && onAccept(conn))
 		{
 			conn->onDisconnect = [this, conn]() { if(onDisconnect) onDisconnect(conn); };
-			conn->onReceived   = [this, conn]() { if(onReceived) onReceived(conn); };
+			conn->onMessage    = [this, conn]() { if(onMessage) onMessage(conn); };
 			conn->onError      = [this, conn](auto ec) { if(onError) onError(conn, ec); };
 			connections.push_back(conn);
 		}

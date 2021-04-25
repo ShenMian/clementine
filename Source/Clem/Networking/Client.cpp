@@ -23,7 +23,7 @@ bool Client::connect(const std::string_view& host, uint16_t port)
 	connection.connect(host, port);
 	connection.onConnected  = [this]() { if(onConnected) onConnected(); };
 	connection.onDisconnect = [this]() { if(onDisconnect) onDisconnect(); };
-	connection.onReceived   = [this]() { if(onReceived) onReceived(); };
+	connection.onMessage    = [this]() { if(onMessage) onMessage(); };
 	connection.onError      = [this](auto ec) { if(onError) onError(ec); };
 
 	thread = std::thread([this]() { context.run(); });

@@ -65,7 +65,7 @@ public:
 
 	std::function<void()>                onConnected;
 	std::function<void()>                onDisconnect;
-	std::function<void()>                onReceived;
+	std::function<void()>                onMessage;
 	std::function<void(std::error_code)> onError;
 
 private:
@@ -134,8 +134,8 @@ void Connection::readHeader()
 
 							 if(msg.header.size == 0)
 							 {
-								 if(onReceived)
-									 onReceived();
+								 if(onMessage)
+									 onMessage();
 								 readHeader<T>();
 								 return;
 							 }
@@ -159,8 +159,8 @@ void Connection::readBody()
 								 return;
 							 }
 
-							 if(onReceived)
-								 onReceived();
+							 if(onMessage)
+								 onMessage();
 
 							 readHeader<T>();
 						 });
