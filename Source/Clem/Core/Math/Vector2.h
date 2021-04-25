@@ -138,6 +138,7 @@ struct Vector2
 
 using Point2 = Vector2;
 using Size2  = Vector2;
+using Vec2   = Vector2;
 
 /**
  * end of Math group

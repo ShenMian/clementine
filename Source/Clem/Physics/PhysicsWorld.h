@@ -24,6 +24,8 @@ public:
 
 	void update(float dt);
 
+	void setGravity(const Vector2&);
+
 private:
 	Scene&  scene;
 	Vector2 gravity;

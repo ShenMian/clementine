@@ -8,23 +8,28 @@ namespace clem
 {
 void Rigidbody::addForce(const Vector2& f)
 {
-	acceleration += f / mass;
+	force += f;
 }
 
-void Rigidbody::setAcceleration(const Vector2& acc)
+const Vector2& Rigidbody::getForce() const
 {
-	acceleration = acc;
+	return force;
 }
 
 const Vector2& Rigidbody::getAcceleration() const
 {
-	return acceleration;
+	return force / mass;
 }
 
 void Rigidbody::setMass(float m)
 {
 	assert(m >= 0);
 	mass = m;
+}
+
+float Rigidbody::getMass() const
+{
+	return mass;
 }
 
 void Rigidbody::setEntity(const Entity& e)

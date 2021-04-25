@@ -21,7 +21,7 @@ public:
 		pushScene(scene);
 
 		auto entity = scene->createEntity();
-		entity.getComponent<Transform>().setLocalPosition({1, 1});
+		entity.getComponent<Transform>().setPosition({1, 1});
 		sprite = &entity.addComponent<Sprite>(size);
 
 		// 生成随机数

@@ -83,7 +83,7 @@ void Scene::renderSprites()
 	auto& buf  = Output::get().getBuffer();
 	auto  view = registry.view<Transform, const Sprite>();
 	for(auto [e, t, sprite] : view.each())
-		buf.drawSprite(t.getPosition(), sprite);
+		buf.drawSprite(t.getWorldPosition(), sprite);
 }
 
 void Scene::sortSprites()

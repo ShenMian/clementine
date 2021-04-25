@@ -22,10 +22,14 @@ void PhysicsWorld::update(float dt)
 	auto view = scene.registry.view<Transform, Rigidbody>();
 	for(auto [e, t, body] : view.each())
 	{
-		auto pos = t.getLocalPosition();
-		body.velocity += body.getAcceleration() * dt;
-		t.setLocalPosition(pos += body.velocity);
+		body.velocity += (body.getAcceleration() + gravity) * dt; // v += (a + g) * dt;
+		t.setPosition(t.getPosition() + body.velocity);           // p += v * dt;
 	}
+}
+
+void PhysicsWorld::setGravity(const Vector2& g)
+{
+	gravity = g;
 }
 
 } // namespace clem

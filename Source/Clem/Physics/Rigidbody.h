@@ -30,11 +30,16 @@ public:
 	void addForce(const Vector2& force);
 
 	/**
+	 * @brief 获取刚体收到的持续的力.
+	 */
+	const Vector2& getForce() const;
+
+	/**
 	 * @brief 设置加速度.
 	 *
 	 * @param force 加速度.
 	 */
-	void setAcceleration(const Vector2& acc);
+	// void setAcceleration(const Vector2& acc);
 
 	/**
 	 * @brief 获取加速度.
@@ -49,6 +54,11 @@ public:
 	void setMass(float m);
 
 	/**
+	 * @brief 获取质量.
+	 */
+	float getMass() const;
+
+	/**
 	 * @brief 设置所属的实体.
 	 *
 	 * @param e 所属的实体;
@@ -61,7 +71,7 @@ public:
 	const Entity& getEntity() const;
 
 private:
-	Vector2 acceleration;
+	Vector2 force;
 	float   mass = 1.0f;
 	Entity  entity;
 };

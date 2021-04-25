@@ -2,25 +2,31 @@
 // License(Apache-2.0)
 
 #include "Transform.h"
+#include "Clem/Assert.h"
 
 namespace clem
 {
-const Point2& Transform::getPosition()
+void Transform::setPosition(const Point2& p)
+{
+	dirty    = true;
+	position = p;
+}
+
+Point2 Transform::getPosition() const
 {
 	return position;
 }
 
-const Point2& Transform::getLocalPosition()
+Point2 Transform::getWorldPosition()
 {
-	return localPosition;
-}
-
-void Transform::setLocalPosition(const Point2& p)
-{
-	dirty         = true;
-	localPosition = p;
-
-	// TODO
-	position = localPosition;
+	ASSERT_TRUE(parent != this, "");
+	if(parent && dirty)
+	{
+		worldPosition = parent->getWorldPosition() + position;
+		dirty         = false;
+		return worldPosition;
+	}
+	else
+		return position;
 }
 } // namespace clem

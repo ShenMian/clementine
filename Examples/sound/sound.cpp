@@ -30,25 +30,25 @@ public:
 			{
 				auto& ts  = scene->getEntity("source").getComponent<Transform>();
 				auto& pos = Mouse::getPosition();
-				ts.setLocalPosition(pos);
-				source.setPosition(ts.getPosition());
+				ts.setPosition(pos);
+				source.setPosition(ts.getWorldPosition());
 			}
 		};
 
 		auto& l = scene->createEntity("listener");
 		l.addComponent<Sprite>(Size2i(1, 1)).drawPoint({0, 0}, '@');
-		l.getComponent<Transform>().setLocalPosition(Point2(size.x / 2, size.y / 2));
+		l.getComponent<Transform>().setPosition(Point2(size.x / 2, size.y / 2));
 		l.addComponent<Script>().onUpdate = [&](float dt) {
 				auto& ts = scene->getEntity("listener").getComponent<Transform>();
 				if(Keyboard::getKeyState(Keyboard::Key::W))
-					ts.setLocalPosition(ts.getLocalPosition() + Vector2::down * 5 * dt);
+					ts.setPosition(ts.getPosition() + Vector2::down * 5 * dt);
 				if(Keyboard::getKeyState(Keyboard::Key::S))
-					ts.setLocalPosition(ts.getLocalPosition() + Vector2::up * 5 * dt);
+					ts.setPosition(ts.getPosition() + Vector2::up * 5 * dt);
 				if(Keyboard::getKeyState(Keyboard::Key::A))
-					ts.setLocalPosition(ts.getLocalPosition() + Vector2::left * 5 * dt);
+					ts.setPosition(ts.getPosition() + Vector2::left * 5 * dt);
 				if(Keyboard::getKeyState(Keyboard::Key::D))
-					ts.setLocalPosition(ts.getLocalPosition() + Vector2::right * 5 * dt);
-				Listener::setPosition(ts.getPosition());
+					ts.setPosition(ts.getPosition() + Vector2::right * 5 * dt);
+				Listener::setPosition(ts.getWorldPosition());
 		};
 	}
 

@@ -14,15 +14,16 @@ namespace clem
 class Transform : public Component
 {
 public:
-	const Point2& getPosition();
+	void   setPosition(const Point2&);
+	Point2 getPosition() const;
 
-	const Point2& getLocalPosition();
-	void          setLocalPosition(const Point2&);
+	Point2 getWorldPosition();
+
+	bool       dirty  = true;
+	Transform* parent = nullptr;
 
 private:
-	Vector2    localPosition;
 	Vector2    position;
-	Transform* parent = nullptr;
-	bool       dirty  = true;
+	Vector2    worldPosition;
 };
 } // namespace clem

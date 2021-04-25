@@ -19,7 +19,7 @@ public:
 		pushScene(scene);
 
 		auto& board = scene->createEntity("board");
-		board.getComponent<Transform>().setLocalPosition({0, 0});
+		board.getComponent<Transform>().setPosition({0, 0});
 		sprite = &board.addComponent<Sprite>(Size2i(4 * 5, 4 * 2));
 
 		board.addComponent<Script>().onUpdate = [&](float dt) {

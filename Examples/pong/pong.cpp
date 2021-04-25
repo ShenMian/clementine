@@ -71,9 +71,9 @@ public:
 		// 为 bat2 创建一个脚本
 		bat2.addComponent<Script>().onUpdate = [&](float) {
 			auto  bat     = scene->getEntity("bat2");
-			auto  ballPos = scene->getEntity("ball").getComponent<Transform>().getLocalPosition();
+			auto  ballPos = scene->getEntity("ball").getComponent<Transform>().getPosition();
 			auto& batBody = bat.getComponent<Rigidbody>();
-			auto  batPos  = bat.getComponent<Transform>().getLocalPosition();
+			auto  batPos  = bat.getComponent<Transform>().getPosition();
 			auto& batSize = bat.getComponent<Sprite>().getSize();
 
 			// 获取 bat2 的 Sprite 的几何中心
@@ -89,14 +89,14 @@ public:
 			auto&  ts      = ball.getComponent<Transform>();
 			auto&  vel     = ball.getComponent<Rigidbody>().velocity;
 			auto&  sprite  = ball.getComponent<Sprite>();
-			auto&  ballPos = ts.getPosition();
+			auto&  ballPos = ts.getWorldPosition();
 			Entity bats[2];
 			bats[0] = scene->getEntity("bat1");
 			bats[1] = scene->getEntity("bat2");
 
 			for(int i = 0; i < 2; i++)
 			{
-				auto& pos  = bats[i].getComponent<Transform>().getPosition();
+				auto& pos  = bats[i].getComponent<Transform>().getWorldPosition();
 				auto& size = bats[i].getComponent<Sprite>().getSize();
 				Rect2 rect(pos, Size2((float)size.x, (float)size.y));
 				if(rect.intersectsPoint(ballPos))
@@ -104,12 +104,12 @@ public:
 					if(ballPos.x < 39)
 					{
 						left.play(pop);
-						ts.setLocalPosition({pos.x + 1, ballPos.y});
+						ts.setPosition({pos.x + 1, ballPos.y});
 					}
 					else
 					{
 						right.play(pop);
-						ts.setLocalPosition({pos.x - 1, ballPos.y});
+						ts.setPosition({pos.x - 1, ballPos.y});
 					}
 					vel.x = -vel.x;
 					vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
@@ -118,7 +118,7 @@ public:
 
 			if(ballPos.x < 1)
 			{
-				ts.setLocalPosition({1, ballPos.y});
+				ts.setPosition({1, ballPos.y});
 				vel.x = -vel.x;
 				vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 				resetBall();
@@ -128,7 +128,7 @@ public:
 			}
 			else if(ballPos.x >= 79)
 			{
-				ts.setLocalPosition({78, ballPos.y});
+				ts.setPosition({78, ballPos.y});
 				vel.x = -vel.x;
 				vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 				resetBall();
@@ -138,14 +138,14 @@ public:
 			}
 			else if(ballPos.y < 1)
 			{
-				ts.setLocalPosition({ballPos.x, 1});
+				ts.setPosition({ballPos.x, 1});
 				vel.y = -vel.y;
 				vel.x += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 				up.play(pop);
 			}
 			else if(ballPos.y >= 24)
 			{
-				ts.setLocalPosition({ballPos.x, 23});
+				ts.setPosition({ballPos.x, 23});
 				vel.y = -vel.y;
 				vel.x += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 				down.play(pop);
@@ -172,7 +172,7 @@ public:
 	// 重置 ball 的位置
 	void resetBall()
 	{
-		scene->getEntity("ball").getComponent<Transform>().setLocalPosition({39, 12});
+		scene->getEntity("ball").getComponent<Transform>().setPosition({39, 12});
 		scene->getEntity("ball").getComponent<Rigidbody>().velocity = Vector2::zero;
 		
 		static future<void> h;
@@ -185,8 +185,8 @@ public:
 	// 重置 bat 的位置
 	void resetBats()
 	{
-		scene->getEntity("bat1").getComponent<Transform>().setLocalPosition({2, 10});
-		scene->getEntity("bat2").getComponent<Transform>().setLocalPosition({77, 10});
+		scene->getEntity("bat1").getComponent<Transform>().setPosition({2, 10});
+		scene->getEntity("bat2").getComponent<Transform>().setPosition({77, 10});
 	}
 
 private:
