@@ -19,15 +19,15 @@ Point2 Transform::getPosition() const
 
 Point2 Transform::getWorldPosition()
 {
-	ASSERT_TRUE(parent != this, "");
-	if(parent && dirty)
+	if(dirty)
 	{
-		worldPosition = parent->getWorldPosition() + position;
-		dirty         = false;
-		return worldPosition;
+		if(parent)
+			worldPosition = parent->getWorldPosition() + position;
+		else
+			worldPosition = position;
+		dirty = false;
 	}
-	else
-		return position;
+	return worldPosition;
 }
 void Transform::setDirty(bool d)
 {
@@ -42,6 +42,7 @@ bool Transform::isDirty() const
 void Transform::setParent(Transform* p)
 {
 	ASSERT_TRUE(p != this, "parent can't be itself");
+	dirty  = true;
 	parent = p;
 }
 

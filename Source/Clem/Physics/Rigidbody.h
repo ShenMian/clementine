@@ -20,6 +20,13 @@ namespace clem
 class Rigidbody : public Component
 {
 public:
+	enum class Type
+	{
+		Dynamic,
+		Kinematic,
+		Static
+	};
+
 	Vector2 velocity;
 
 	/**
@@ -44,7 +51,7 @@ public:
 	/**
 	 * @brief 获取加速度.
 	 */
-	const Vector2& getAcceleration() const;
+	Vector2 getAcceleration() const;
 
 	/**
 	 * @brief 设置质量.
@@ -57,6 +64,16 @@ public:
 	 * @brief 获取质量.
 	 */
 	float getMass() const;
+
+	/**
+	 * @brief 设置类型.
+	 */
+	void setType(Type);
+
+	/**
+	 * @brief 获取类型.
+	 */
+	Type getType() const;
 
 	/**
 	 * @brief 设置所属的实体.
@@ -73,6 +90,7 @@ public:
 private:
 	Vector2 force;
 	float   mass = 1.0f;
+	Type    type = Type::Dynamic;
 	Entity  entity;
 };
 

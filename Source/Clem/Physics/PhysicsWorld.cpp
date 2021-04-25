@@ -22,8 +22,20 @@ void PhysicsWorld::update(float dt)
 	auto view = scene.registry.view<Transform, Rigidbody>();
 	for(auto [e, t, body] : view.each())
 	{
-		body.velocity += (body.getAcceleration() + gravity) * dt; // v += (a + g) * dt;
-		t.setPosition(t.getPosition() + body.velocity);           // p += v * dt;
+		switch(body.getType())
+		{
+		case Rigidbody::Type::Dynamic:
+			body.velocity += (body.getAcceleration() + gravity) * dt; // v += (a + g) * dt;
+			break;
+
+		case Rigidbody::Type::Kinematic:
+			body.velocity += body.getAcceleration() * dt; // v += a * dt;
+			break;
+
+		case Rigidbody::Type::Static:
+			continue;
+		}
+		t.setPosition(t.getPosition() + body.velocity); // p += v * dt;
 	}
 }
 

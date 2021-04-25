@@ -10,5 +10,9 @@ namespace clem
  */
 class Component
 {
+public:
+
+private:
+	//Entity entity;
 };
 } // namespace clem

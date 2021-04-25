@@ -16,7 +16,7 @@ const Vector2& Rigidbody::getForce() const
 	return force;
 }
 
-const Vector2& Rigidbody::getAcceleration() const
+Vector2 Rigidbody::getAcceleration() const
 {
 	return force / mass;
 }
@@ -30,6 +30,16 @@ void Rigidbody::setMass(float m)
 float Rigidbody::getMass() const
 {
 	return mass;
+}
+
+void Rigidbody::setType(Type t)
+{
+	type = t;
+}
+
+Rigidbody::Type Rigidbody::getType() const
+{
+	return type;
 }
 
 void Rigidbody::setEntity(const Entity& e)
