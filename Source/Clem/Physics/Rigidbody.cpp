@@ -16,6 +16,11 @@ const Vector2& Rigidbody::getForce() const
 	return force;
 }
 
+void Rigidbody::setAcceleration(const Vector2& acc)
+{
+	force = acc * mass;
+}
+
 Vector2 Rigidbody::getAcceleration() const
 {
 	return force / mass;

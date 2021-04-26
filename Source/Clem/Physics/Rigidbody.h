@@ -44,9 +44,9 @@ public:
 	/**
 	 * @brief 设置加速度.
 	 *
-	 * @param force 加速度.
+	 * @param acc 加速度.
 	 */
-	// void setAcceleration(const Vector2& acc);
+	void setAcceleration(const Vector2& acc);
 
 	/**
 	 * @brief 获取加速度.
