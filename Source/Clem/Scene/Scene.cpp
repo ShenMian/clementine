@@ -8,8 +8,6 @@
 #include "Clem/Rendering/Rendering.h"
 #include "Entity.h"
 
-#include "Clem/Physics/Rigidbody.h"
-
 using std::string;
 using std::string_view;
 
@@ -22,7 +20,7 @@ Scene::Scene()
 
 Entity Scene::createEntity(const string& tag)
 {
-	auto e = Entity(registry.create(), this);
+	Entity e(registry.create(), this);
 	e.addComponent<Transform>();
 	e.addComponent<Tag>(tag);
 	return e;

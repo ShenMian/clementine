@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Rigidbody.h"
+#include "Clem/Components/Transform.h"
 #include <cassert>
 
 namespace clem
@@ -47,13 +48,23 @@ Rigidbody::Type Rigidbody::getType() const
 	return type;
 }
 
+Point2 Rigidbody::getPosition()
+{
+	return entity.getComponent<Transform>().getPosition();
+}
+
+void Rigidbody::setPosition(const Point2& p)
+{
+	entity.getComponent<Transform>().setPosition(p);
+}
+
+Entity& Rigidbody::getEntity()
+{
+	return entity;
+}
+
 void Rigidbody::setEntity(const Entity& e)
 {
 	entity = e;
-}
-
-const Entity& Rigidbody::getEntity() const
-{
-	return entity;
 }
 } // namespace clem

@@ -24,11 +24,15 @@ public:
 
 	void update(float dt);
 
+	void addBody(Rigidbody&);
+	bool removeBody(Rigidbody&);
+
 	void setGravity(const Vector2&);
 
 private:
-	Scene&  scene;
-	Vector2 gravity;
+	std::vector<Rigidbody*> bodies;
+	Scene&                  scene;
+	Vector2                 gravity;
 };
 
 /**
