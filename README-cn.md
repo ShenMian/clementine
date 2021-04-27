@@ -11,7 +11,7 @@
 [![CI](https://github.com/ShenMian/Clementine/actions/workflows/ci.yml/badge.svg)](https://github.com/ShenMian/Clementine/actions/workflows/ci.yml)
 -->
 
-**[特点](#特点) | [文档](#文档) | [截图](#截图) | [编译](#编译) | [联系](#联系)**
+**[特点](#特点) | [文档](#文档) | [编译](#编译) | [联系](#联系)** | [截图](#截图)
 
 </div>
 
