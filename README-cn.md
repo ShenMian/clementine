@@ -40,14 +40,6 @@
 - **[Github Wiki]**
 - **[API 参考]** (中文)
 
-截图
-----
-![Pong](Docs/pictures/pong.png)
-![Minesweeper](Docs/pictures/minesweeper.png)
-![Sort](Docs/pictures/sort.gif)
-![Gamepad](Docs/pictures/gamepad.gif)
-![Profiler](Docs/pictures/profiler.png)
-
 编译
 ----
 [设置Git]并[fork我们的仓库]. 如果您更倾向于不使用Git, 点击右上角的'Download ZIP'来下载zip格式的源代码.
@@ -71,6 +63,14 @@
 ----
 - **[Github Discussions]**
 - **[Telegram]**
+
+截图
+----
+![Pong](Docs/pictures/pong.png)
+![Minesweeper](Docs/pictures/minesweeper.png)
+![Sort](Docs/pictures/sort.gif)
+![Gamepad](Docs/pictures/gamepad.gif)
+![Profiler](Docs/pictures/profiler.png)
 
 [en]:                 README.md
 [github wiki]:        https://github.com/ShenMian/Clementine/wiki

@@ -40,14 +40,6 @@ Documentation
 - **[Github Wiki]**
 - **[API Reference]** (Chinese)
 
-Screenshots
------------
-![Pong](Docs/pictures/pong.png)
-![Minesweeper](Docs/pictures/minesweeper.png)
-![Sort](Docs/pictures/sort.gif)
-![Gamepad](Docs/pictures/gamepad.gif)
-![Profiler](Docs/pictures/profiler.png)
-
 Compiling
 ---------
 [Set up Git] and [fork our repository].
@@ -72,6 +64,14 @@ Contact
 -------
 - **[Github Discussions]**
 - **[Telegram]**
+
+Screenshots
+-----------
+![Pong](Docs/pictures/pong.png)
+![Minesweeper](Docs/pictures/minesweeper.png)
+![Sort](Docs/pictures/sort.gif)
+![Gamepad](Docs/pictures/gamepad.gif)
+![Profiler](Docs/pictures/profiler.png)
 
 [cn]:                  README-cn.md
 [github wiki]:         https://github.com/ShenMian/Clementine/wiki
