@@ -31,6 +31,10 @@ Features
   - Input: Keyboard, Mouse, Gamepad.
   - Networking.
 
+Goals
+-----
+Make the framework as simple as possible and reduce the mental burden of users.
+
 Documentation
 -------------
 - **[Github Wiki]**
