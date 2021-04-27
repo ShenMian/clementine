@@ -11,7 +11,7 @@
 [![CI](https://github.com/ShenMian/Clementine/actions/workflows/ci.yml/badge.svg)](https://github.com/ShenMian/Clementine/actions/workflows/ci.yml)
 -->
 
-**[Features](#features) | [Documentation](#documentation) | [Compiling](#compiling) | [Contact](#contact)** | [Screenshots](#screenshots)
+**[Features](#features) | [Documentation](#documentation) | [Compiling](#compiling) | [Contact](#contact) | [Screenshots](#screenshots)**
 
 </div>
 
