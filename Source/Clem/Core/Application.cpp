@@ -8,13 +8,14 @@
 #include "Clem.h"
 #include <clocale>
 #include <csignal>
+#include <map>
 
 using namespace clem;
 using namespace std::chrono_literals;
+using std::map;
 using std::shared_ptr;
 using std::string;
-
-#include "asio.hpp"
+using std::string_view;
 
 int main(int argc, char* argv[])
 {
@@ -238,6 +239,20 @@ void Application::init()
 
 void Application::deinit()
 {
+}
+
+void Application::parseArgs(int argc, char* argv[])
+{
+	map<string, string> args;
+
+	for(int i = 1; i < argc; i++)
+	{
+		string_view str = argv[i];
+		auto        it  = str.find('=');
+		auto        opt = str.substr(0, it);
+		auto        val = str.substr(it + 1);
+		args.emplace(opt, val);
+	}
 }
 
 void Application::onSignal(int signal)
