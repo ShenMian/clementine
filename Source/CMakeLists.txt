@@ -4,7 +4,8 @@
 find_package(Threads REQUIRED)
 
 file(GLOB_RECURSE sources "Clem/*.cpp")
-link_directories("../thirdparty/openal/lib")
+
+link_directories("${PROJECT_SOURCE_DIR}/Thirdparty/openal/lib")
 
 add_library(clementine STATIC ${sources})
 target_link_libraries(clementine PUBLIC Threads::Threads)
