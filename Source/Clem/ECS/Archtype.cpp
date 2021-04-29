@@ -6,7 +6,7 @@
 namespace clem
 {
 
-Archtype::Archtype(std::vector<std::type_info>& types)
+Archtype::Archtype(const std::vector<std::type_info>& types)
 {
 	for(auto& t : types)
 		indexs.insert(std::type_index(t));

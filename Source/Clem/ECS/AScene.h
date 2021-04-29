@@ -4,6 +4,8 @@
 #pragma once
 
 #include <cstdint>
+#include <memory_resource>
+#include <unordered_map>
 #include <vector>
 
 namespace clem
@@ -20,6 +22,8 @@ public:
 	
 private:
 	std::vector<Archtype> archtypes;
+	std::unordered_map<Archtype, Chunk*> chunks;
+	std::pmr::polymorphic_allocator<Chunk> allocator;
 };
 
 } // namespace clem
