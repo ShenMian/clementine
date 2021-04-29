@@ -110,8 +110,6 @@ void Sprite::drawString(const Point2i& pos, std::wstring_view str, Color c)
 			x++;
 		}
 	}
-	//for(int i = 0; i < str.size(); i++)
-	//	drawPoint(pos.x + i, pos.y, Tile(str[i], c));
 }
 
 void Sprite::clear(const Tile& t)

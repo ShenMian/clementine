@@ -26,8 +26,8 @@ public:
 	Transform* getParent() const;
 
 private:
-	Vector2    position;
-	Vector2    worldPosition;
+	Vector2    local;
+	Vector2    world;
 	bool       dirty  = true;
 	Transform* parent = nullptr;
 };

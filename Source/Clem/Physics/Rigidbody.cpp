@@ -50,21 +50,11 @@ Rigidbody::Type Rigidbody::getType() const
 
 Point2 Rigidbody::getPosition()
 {
-	return entity.getComponent<Transform>().getPosition();
+	return getEntity().getComponent<Transform>().getPosition();
 }
 
 void Rigidbody::setPosition(const Point2& p)
 {
-	entity.getComponent<Transform>().setPosition(p);
-}
-
-Entity& Rigidbody::getEntity()
-{
-	return entity;
-}
-
-void Rigidbody::setEntity(const Entity& e)
-{
-	entity = e;
+	getEntity().getComponent<Transform>().setPosition(p);
 }
 } // namespace clem

@@ -8,26 +8,27 @@ namespace clem
 {
 void Transform::setPosition(const Point2& p)
 {
-	dirty    = true;
-	position = p;
+	dirty = true;
+	local = p;
 }
 
 Point2 Transform::getPosition() const
 {
-	return position;
+	return local;
 }
 
 Point2 Transform::getWorldPosition()
 {
+	// FIXME
 	if(dirty)
 	{
 		if(parent)
-			worldPosition = parent->getWorldPosition() + position;
+			world = parent->getWorldPosition() + local;
 		else
-			worldPosition = position;
+			world = local;
 		dirty = false;
 	}
-	return worldPosition;
+	return world;
 }
 void Transform::setDirty(bool d)
 {

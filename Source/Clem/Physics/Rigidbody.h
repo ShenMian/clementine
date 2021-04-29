@@ -75,41 +75,21 @@ public:
 	 */
 	Type getType() const;
 
+	/**
+	 * @brief 设置位置.
+	 */
 	void setPosition(const Point2&);
 
+	/**
+	 * @brief 获取位置.
+	 */
 	Point2 getPosition();
-
-	/**
-	 * @brief 设置所属的实体.
-	 *
-	 * @param e 所属的实体;
-	 */
-	void setEntity(const Entity& e);
-
-	/**
-	 * @brief 获取所属的实体.
-	 */
-	Entity& getEntity();
 
 private:
 	Vector2 force;
 	float   mass = 1.0f;
 	Type    type = Type::Dynamic;
-	Entity  entity;
 };
-
-template <>
-inline void Scene::onComponentAdded(Entity e, Rigidbody& b)
-{
-	b.setEntity(e);
-	physicsWorld.addBody(b);
-}
-
-template <>
-inline void Scene::onComponentRemoved(Entity e, Rigidbody& b)
-{
-	physicsWorld.removeBody(b);
-}
 
 /**
  * end of Physics group

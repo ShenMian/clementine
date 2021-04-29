@@ -88,7 +88,6 @@ void Entity::removeComponent()
 {
 	if(!hasComponent<Com>())
 		CLEM_LOG_FATAL("core", "remove a nonexistent component '{}' from entity '{}'", typeid(Com).name() /*, getComponent<Tag>().string*/);
-	scene->onComponentRemoved(getComponent<Com>());
 	scene->registry.remove<Com>(id);
 }
 

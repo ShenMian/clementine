@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include "Clem/Scene/Entity.h"
+
 namespace clem
 {
 /**
@@ -11,8 +13,19 @@ namespace clem
 class Component
 {
 public:
+	/**
+	 * @brief 设置所属的实体.
+	 *
+	 * @param entity 所属的实体;
+	 */
+	void setEntity(const Entity& entity);
+
+	/**
+	 * @brief 获取所属的实体.
+	 */
+	Entity& getEntity();
 
 private:
-	//Entity entity;
+	Entity entity;
 };
 } // namespace clem
