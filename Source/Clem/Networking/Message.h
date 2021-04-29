@@ -6,6 +6,7 @@
 #include "Clem/Assert.h"
 #include <cstddef>
 #include <cstdint>
+#include <cstring>
 #include <vector>
 
 namespace clem

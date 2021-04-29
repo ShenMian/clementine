@@ -83,7 +83,7 @@ private:
 template <typename T>
 void Server::write(std::shared_ptr<Connection> conn, const Message<T>& msg)
 {
-	ASSERT_NOT_NULL(conn, "connection doesn't exist");
+	ASSERT_NOT_NULL(conn.get(), "connection doesn't exist");
 
 	if(!conn->isConnected())
 	{
@@ -106,7 +106,7 @@ void Server::Server::write(const Message<T>& msg)
 template <typename T>
 void Server::read(std::shared_ptr<Connection> conn)
 {
-	ASSERT_NOT_NULL(conn, "connection doesn't exist");
+	ASSERT_NOT_NULL(conn.get(), "connection doesn't exist");
 
 	if(!conn->isConnected())
 	{
