@@ -41,7 +41,7 @@ void Keyboard::update()
 void Keyboard::init()
 {
 	PROFILE_FUNC();
-	CLEM_CORE_INFO("keyboard init");
+	CLEM_LOG_INFO("keyboard init");
 
 	termios opts;
 	tcgetattr(0, &opts);          // grab old terminal i/o settings
@@ -53,7 +53,7 @@ void Keyboard::init()
 void Keyboard::deinit()
 {
 	PROFILE_FUNC();
-	CLEM_CORE_INFO("keyboard deinit");
+	CLEM_LOG_INFO("keyboard deinit");
 
 	termios opts;
 	tcgetattr(0, &opts);
