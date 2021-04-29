@@ -5,7 +5,7 @@
 #include "Clem/Logger.h"
 #include "Clem/Profiler.h"
 #include <fstream>
-#include <stdint.h>
+#include <cstdint>
 
 using namespace clem;
 using namespace std::filesystem;
