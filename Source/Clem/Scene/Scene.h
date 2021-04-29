@@ -52,7 +52,6 @@ public:
 
 private:
 	void updateScripts(float dt);
-	void updateRigidbodies(float dt);
 	void renderSprites();
 	void sortSprites();
 

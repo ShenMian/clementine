@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Entity.h"
+#include "Clem/Components/Tag.h"
 #include "Scene.h"
 
 namespace clem
@@ -39,5 +40,10 @@ bool Entity::operator==(const Entity& o) const
 bool Entity::operator!=(const Entity& o) const
 {
 	return !(*this == o);
+}
+
+void Entity::onAddComponent(Component* com)
+{
+	com->setEntity(*this);
 }
 } // namespace clem
