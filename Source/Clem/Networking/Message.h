@@ -3,9 +3,10 @@
 
 #pragma once
 
+#include "Clem/Assert.h"
+#include <cstddef>
 #include <cstdint>
 #include <vector>
-#include "Clem/Assert.h"
 
 namespace clem
 {
@@ -26,10 +27,10 @@ class Message
 public:
 	struct
 	{
-		T            id;
+		T       id;
 		uint8_t size = 0;
 	} header;
-	std::vector<uint8_t> body;
+	std::vector<std::byte> body;
 
 	Message() = default;
 	Message(T id)
