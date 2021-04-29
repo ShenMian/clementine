@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Clementine: Source/Clem/Physics/Collider.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Clementine
+   &#160;<span id="projectnumber">0.0.2</span>
+   </div>
+   <div id="projectbrief">A framework for building 2D console games.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_collider_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Collider.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2021 SMS</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// License(Apache-2.0)</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Clem/Core/Math/Math.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>clem</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span>Rigidbody;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span>BoxCollider;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">class </span>CircleCollider;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classclem_1_1_collider.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_collider.html">Collider</a></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classclem_1_1_collider.html">Collider</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="struct_vector2.html">Point2</a> <a class="code" href="classclem_1_1_collider.html#a4cb15ac90ab1dcd2d97ef4bf24cb7e08">getPosition</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_collider.html#a3225d0b2ddcb71e7ffd62b280e8e64ad">setOffset</a>(<a class="code" href="struct_vector2.html">Point2</a> offset);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="struct_vector2.html">Point2</a> <a class="code" href="classclem_1_1_collider.html#a8efc08eabd2c7a76ce682dbf53cc94a9">getOffset</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_collider.html#aa6b5b0b01bdbad350eaa1b59f500dcb6">setRigidbody</a>(<a class="code" href="classclem_1_1_rigidbody.html">Rigidbody</a>* rb);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="classclem_1_1_rigidbody.html">Rigidbody</a>* <a class="code" href="classclem_1_1_collider.html#a288a72955dbe06d654e99b347eeabf05">getRigidbody</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="struct_vector2.html">Point2</a> offset;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="classclem_1_1_rigidbody.html">Rigidbody</a>* rigidbody = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;} <span class="comment">// namespace clem</span></div>
+<div class="ttc" id="aclassclem_1_1_collider_html"><div class="ttname"><a href="classclem_1_1_collider.html">clem::Collider</a></div><div class="ttdoc">碰撞体.</div><div class="ttdef"><b>Definition:</b> Collider.h:23</div></div>
+<div class="ttc" id="aclassclem_1_1_collider_html_a288a72955dbe06d654e99b347eeabf05"><div class="ttname"><a href="classclem_1_1_collider.html#a288a72955dbe06d654e99b347eeabf05">clem::Collider::getRigidbody</a></div><div class="ttdeci">Rigidbody * getRigidbody() const</div><div class="ttdoc">获取附加到的刚体.</div><div class="ttdef"><b>Definition:</b> Collider.cpp:31</div></div>
+<div class="ttc" id="aclassclem_1_1_collider_html_a3225d0b2ddcb71e7ffd62b280e8e64ad"><div class="ttname"><a href="classclem_1_1_collider.html#a3225d0b2ddcb71e7ffd62b280e8e64ad">clem::Collider::setOffset</a></div><div class="ttdeci">void setOffset(Point2 offset)</div><div class="ttdoc">设置偏移量.</div><div class="ttdef"><b>Definition:</b> Collider.cpp:16</div></div>
+<div class="ttc" id="aclassclem_1_1_collider_html_a4cb15ac90ab1dcd2d97ef4bf24cb7e08"><div class="ttname"><a href="classclem_1_1_collider.html#a4cb15ac90ab1dcd2d97ef4bf24cb7e08">clem::Collider::getPosition</a></div><div class="ttdeci">Point2 getPosition() const</div><div class="ttdoc">获取坐标.</div><div class="ttdef"><b>Definition:</b> Collider.cpp:11</div></div>
+<div class="ttc" id="aclassclem_1_1_collider_html_a8efc08eabd2c7a76ce682dbf53cc94a9"><div class="ttname"><a href="classclem_1_1_collider.html#a8efc08eabd2c7a76ce682dbf53cc94a9">clem::Collider::getOffset</a></div><div class="ttdeci">Point2 getOffset() const</div><div class="ttdoc">获取偏移量.</div><div class="ttdef"><b>Definition:</b> Collider.cpp:21</div></div>
+<div class="ttc" id="aclassclem_1_1_collider_html_aa6b5b0b01bdbad350eaa1b59f500dcb6"><div class="ttname"><a href="classclem_1_1_collider.html#aa6b5b0b01bdbad350eaa1b59f500dcb6">clem::Collider::setRigidbody</a></div><div class="ttdeci">void setRigidbody(Rigidbody *rb)</div><div class="ttdoc">设置附加到的刚体.</div><div class="ttdef"><b>Definition:</b> Collider.cpp:26</div></div>
+<div class="ttc" id="aclassclem_1_1_rigidbody_html"><div class="ttname"><a href="classclem_1_1_rigidbody.html">clem::Rigidbody</a></div><div class="ttdoc">刚体.</div><div class="ttdef"><b>Definition:</b> Rigidbody.h:21</div></div>
+<div class="ttc" id="astruct_vector2_html"><div class="ttname"><a href="struct_vector2.html">Vector2</a></div><div class="ttdoc">二维向量, 单精度.</div><div class="ttdef"><b>Definition:</b> Vector2.h:20</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_74389ed8173ad57b461b9d623a1f3867.html">Source</a></li><li class="navelem"><a class="el" href="dir_7021f754b8ddfcf6c3876e5dcdd251f8.html">Clem</a></li><li class="navelem"><a class="el" href="dir_61200dbf6e8ed5d1b653e715604e2ccc.html">Physics</a></li><li class="navelem"><b>Collider.h</b></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Clementine: clem::Client类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Clementine
+   &#160;<span id="projectnumber">0.0.2</span>
+   </div>
+   <div id="projectbrief">A framework for building 2D console games.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classclem_1_1_client.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pub-attribs">Public 属性</a> &#124;
+<a href="classclem_1_1_client-members.html">所有成员列表</a>  </div>
+  <div class="headertitle">
+<div class="title">clem::Client类 参考<div class="ingroups"><a class="el" href="group___networking.html">Networking</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>异步网络客户端, TCP 协议.  
+ <a href="classclem_1_1_client.html#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:aa571f79a7041cc955d49729b2c761927"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclem_1_1_client.html#aa571f79a7041cc955d49729b2c761927">connect</a> (const std::string_view &amp;host, uint16_t port)</td></tr>
+<tr class="memdesc:aa571f79a7041cc955d49729b2c761927"><td class="mdescLeft">&#160;</td><td class="mdescRight">启动客户端并与指定主机(服务器)的端口建立连接.  <a href="classclem_1_1_client.html#aa571f79a7041cc955d49729b2c761927">更多...</a><br /></td></tr>
+<tr class="separator:aa571f79a7041cc955d49729b2c761927"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa98bb673df803685206983b0926be12e"><td class="memItemLeft" align="right" valign="top"><a id="aa98bb673df803685206983b0926be12e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclem_1_1_client.html#aa98bb673df803685206983b0926be12e">disconnect</a> ()</td></tr>
+<tr class="memdesc:aa98bb673df803685206983b0926be12e"><td class="mdescLeft">&#160;</td><td class="mdescRight">断开连接. <br /></td></tr>
+<tr class="separator:aa98bb673df803685206983b0926be12e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae54c38ae878f11b33ece16d36720d41"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclem_1_1_client.html#aae54c38ae878f11b33ece16d36720d41">isConnected</a> () const</td></tr>
+<tr class="memdesc:aae54c38ae878f11b33ece16d36720d41"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断是否已建立连接.  <a href="classclem_1_1_client.html#aae54c38ae878f11b33ece16d36720d41">更多...</a><br /></td></tr>
+<tr class="separator:aae54c38ae878f11b33ece16d36720d41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4a0a888f34c71e199dfea753e3236743"><td class="memTemplParams" colspan="2">
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga4a0a888f34c71e199dfea753e3236743"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___networking.html#ga4a0a888f34c71e199dfea753e3236743">write</a> (const <a class="el" href="classclem_1_1_message.html">Message</a>&lt; T &gt; &amp;msg)</td></tr>
+<tr class="memdesc:ga4a0a888f34c71e199dfea753e3236743"><td class="mdescLeft">&#160;</td><td class="mdescRight">发送消息. <br /></td></tr>
+<tr class="separator:ga4a0a888f34c71e199dfea753e3236743"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf24d929e70a8ca088834ca30a4deccbe"><td class="memTemplParams" colspan="2">
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gaf24d929e70a8ca088834ca30a4deccbe"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___networking.html#gaf24d929e70a8ca088834ca30a4deccbe">read</a> ()</td></tr>
+<tr class="memdesc:gaf24d929e70a8ca088834ca30a4deccbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">持续接收任何消息并转换为特定类型. <br /></td></tr>
+<tr class="separator:gaf24d929e70a8ca088834ca30a4deccbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public 属性</h2></td></tr>
+<tr class="memitem:a0751fbc1a4825d56ca72cf407e77f7a8"><td class="memItemLeft" align="right" valign="top"><a id="a0751fbc1a4825d56ca72cf407e77f7a8"></a>
+std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>onConnected</b></td></tr>
+<tr class="separator:a0751fbc1a4825d56ca72cf407e77f7a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab48c2aaea0f5dc3c842bd4ebf34366ed"><td class="memItemLeft" align="right" valign="top"><a id="ab48c2aaea0f5dc3c842bd4ebf34366ed"></a>
+std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>onDisconnect</b></td></tr>
+<tr class="separator:ab48c2aaea0f5dc3c842bd4ebf34366ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47c41c5525abf97197eaf54121726271"><td class="memItemLeft" align="right" valign="top"><a id="a47c41c5525abf97197eaf54121726271"></a>
+std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>onReceived</b></td></tr>
+<tr class="separator:a47c41c5525abf97197eaf54121726271"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>异步网络客户端, TCP 协议. </p>
+</div><h2 class="groupheader">成员函数说明</h2>
+<a id="aa571f79a7041cc955d49729b2c761927"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa571f79a7041cc955d49729b2c761927">&#9670;&nbsp;</a></span>connect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool clem::Client::connect </td>
+          <td>(</td>
+          <td class="paramtype">const std::string_view &amp;&#160;</td>
+          <td class="paramname"><em>host</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>port</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>启动客户端并与指定主机(服务器)的端口建立连接. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">host</td><td>主机, IP 或域名. </td></tr>
+    <tr><td class="paramname">port</td><td>端口号.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true 启动成功. </dd>
+<dd>
+false 启动失败. </dd></dl>
+
+</div>
+</div>
+<a id="aae54c38ae878f11b33ece16d36720d41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae54c38ae878f11b33ece16d36720d41">&#9670;&nbsp;</a></span>isConnected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool clem::Client::isConnected </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>判断是否已建立连接. </p>
+<dl class="section return"><dt>返回</dt><dd>true 连接已建立. </dd>
+<dd>
+false 连接未建立. </dd></dl>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>Source/Clem/Networking/<a class="el" href="_client_8h_source.html">Client.h</a></li>
+<li>Source/Clem/Networking/Client.cpp</li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>clem</b></li><li class="navelem"><a class="el" href="classclem_1_1_client.html">Client</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
+</body>
+</html>
