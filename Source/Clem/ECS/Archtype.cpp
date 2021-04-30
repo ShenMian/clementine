@@ -6,10 +6,14 @@
 namespace clem
 {
 
-Archtype::Archtype(const std::vector<std::type_info>& types)
+Archtype::Archtype(const std::set<std::type_index>& types)
+		: indexs(types)
 {
-	for(auto& t : types)
-		indexs.insert(std::type_index(t));
+}
+
+bool Archtype::operator==(const Archtype& rhs) const
+{
+	return indexs == rhs.indexs;
 }
 
 } // namespace clem

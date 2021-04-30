@@ -42,6 +42,7 @@ thirdparty["entt"] = "%{wks.location}/Thirdparty/entt"
 thirdparty["spdlog"] = "%{wks.location}/Thirdparty/spdlog"
 thirdparty["openal"] = "%{wks.location}/Thirdparty/openal"
 thirdparty["yaml_cpp"] = "%{wks.location}/Thirdparty/yaml_cpp"
+thirdparty["googletest"] = "%{wks.location}/Thirdparty/googletest"
 
 outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
 

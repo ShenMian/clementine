@@ -21,8 +21,8 @@ public:
 	void    destoryEntity(AEntity);
 	
 private:
-	std::vector<Archtype> archtypes;
-	std::unordered_map<Archtype, Chunk*> chunks;
+	std::vector<Archtype>                  archtypes;
+	std::unordered_map<Archtype, Chunk*>   chunks;
 	std::pmr::polymorphic_allocator<Chunk> allocator;
 };
 

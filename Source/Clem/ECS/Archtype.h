@@ -15,7 +15,9 @@ class Chunk;
 class Archtype
 {
 public:
-	Archtype(const std::vector<std::type_info>&);
+	Archtype(const std::set<std::type_index>&);
+
+	bool operator==(const Archtype& rhs) const;
 
 private:
 	std::set<std::type_index> indexs;

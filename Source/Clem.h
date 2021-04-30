@@ -9,6 +9,9 @@
 #include "Clem/Physics/Physics.h"
 #include "Clem/Rendering/Rendering.h"
 
+// ECS
+#include "Clem/ECS/Archtype.h"
+
 // Scene
 #include "Clem/Scene/Entity.h"
 #include "Clem/Scene/Scene.h"
