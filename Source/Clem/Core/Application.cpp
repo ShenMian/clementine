@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 	PROFILE_SESSION_BEGIN("profile.json");
 
 	auto app = clem::CreateApplication();
-	ASSERT_NOT_NULL(app, "CreateApplication() returns nullptr");
+	CLEM_ASSERT_NOT_NULL(app, "CreateApplication() returns nullptr");
 
 	app->init();
 	app->run();
@@ -40,14 +40,14 @@ Application* Application::instance = nullptr;
 
 Application& Application::get()
 {
-	ASSERT_NOT_NULL(instance, "get the instance before creating the instance");
+	CLEM_ASSERT_NOT_NULL(instance, "get the instance before creating the instance");
 	return *instance;
 }
 
 Application::Application(const string& name)
 		: name(name)
 {
-	ASSERT_NULL(instance, "try to create the application twice");
+	CLEM_ASSERT_NULL(instance, "try to create the application twice");
 	instance = this;
 	PROFILE_FUNC();
 
@@ -77,7 +77,7 @@ Application::~Application()
 
 void Application::run()
 {
-	ASSERT_TRUE(quit, "call Application::run() when the application is already running");
+	CLEM_ASSERT_TRUE(quit, "call Application::run() when the application is already running");
 	CLEM_LOG_INFO("core", "main loop started");
 
 	quit          = false;
@@ -178,31 +178,31 @@ void Application::updateFrameRate(uint16_t dt)
 
 void Application::stop()
 {
-	ASSERT_FALSE(quit, "call Application::stop() when the application has stopped");
+	CLEM_ASSERT_FALSE(quit, "call Application::stop() when the application has stopped");
 	quit = true;
 }
 
 void Application::pause()
 {
-	ASSERT_FALSE(paused, "pause when the main loop is already paused");
+	CLEM_ASSERT_FALSE(paused, "pause when the main loop is already paused");
 	paused = true;
 }
 
 void Application::resume()
 {
-	ASSERT_TRUE(paused, "resume when the main loop is not paused");
+	CLEM_ASSERT_TRUE(paused, "resume when the main loop is not paused");
 	paused = false;
 }
 
 void Application::setMsPerUpdate(uint16_t ms)
 {
-	ASSERT_TRUE(ms >= 0, "set ms per update non positive is not allowed");
+	CLEM_ASSERT_TRUE(ms >= 0, "set ms per update non positive is not allowed");
 	msPerUpdate = ms;
 }
 
 void Application::setMsPerRender(uint16_t ms)
 {
-	ASSERT_TRUE(ms >= 0, "set ms per render non positive is not allowed");
+	CLEM_ASSERT_TRUE(ms >= 0, "set ms per render non positive is not allowed");
 	msPerRender = ms;
 }
 
@@ -223,13 +223,13 @@ void Application::pushScene(shared_ptr<Scene>& s)
 
 void Application::popScene()
 {
-	ASSERT_TRUE(scenes.size() < 2, "pop a scene when the scenes is empty is not allowed");
+	CLEM_ASSERT_TRUE(scenes.size() < 2, "pop a scene when the scenes is empty is not allowed");
 	scenes.pop_back();
 }
 
 void Application::replaceScene(const shared_ptr<Scene>& s)
 {
-	ASSERT_TRUE(scenes.empty(), "replace a scene when the scenes is empty is not allowed");
+	CLEM_ASSERT_TRUE(scenes.empty(), "replace a scene when the scenes is empty is not allowed");
 	scenes.back() = s;
 }
 
@@ -311,7 +311,7 @@ long Application::getCurrentMillSecond() const
 {
 	LARGE_INTEGER freq;
 	BOOL          ret = QueryPerformanceFrequency(&freq); // TODO: 只需执行一次
-	ASSERT_TRUE(ret != 0, "the installed hardware doesn't supports a high-resolution performance counter");
+	CLEM_ASSERT_TRUE(ret != 0, "the installed hardware doesn't supports a high-resolution performance counter");
 
 	LARGE_INTEGER time;
 	QueryPerformanceCounter(&time);

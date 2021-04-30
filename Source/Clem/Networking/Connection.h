@@ -84,7 +84,7 @@ private:
 template <typename T>
 void Connection::write(const Message<T>& msg)
 {
-	ASSERT_TRUE(msg.header.size == msg.body.size(), "");
+	CLEM_ASSERT_TRUE(msg.header.size == msg.body.size(), "");
 
 	asio::async_write(socket, asio::buffer(&msg.header, sizeof(msg.header)),
 										[this](std::error_code ec, size_t size) {

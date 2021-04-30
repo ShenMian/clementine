@@ -43,7 +43,7 @@ public:
 	friend Message<T>& operator<<(Message<T>& msg, const Data& data)
 	{
 		static_assert(std::is_standard_layout<Data>::value, "Data type is not suppoted");
-		ASSERT_TRUE(msg.header.size < (size_t)-1 - sizeof(Data), "Message is full");
+		CLEM_ASSERT_TRUE(msg.header.size < (size_t)-1 - sizeof(Data), "Message is full");
 
 		const auto offset = msg.body.size();
 		msg.body.resize(msg.body.size() + sizeof(Data));
@@ -69,7 +69,7 @@ public:
 	template <typename Data>
 	friend Message<T>& operator<<(Message<T>& msg, const std::vector<Data>& data)
 	{
-		ASSERT_TRUE(msg.header.size < (size_t)-1 - data.size() * sizeof(Data), "Message is full");
+		CLEM_ASSERT_TRUE(msg.header.size < (size_t)-1 - data.size() * sizeof(Data), "Message is full");
 
 		for(const auto& i : data)
 			msg << i;

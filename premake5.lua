@@ -42,12 +42,12 @@ thirdparty["entt"] = "%{wks.location}/Thirdparty/entt"
 thirdparty["spdlog"] = "%{wks.location}/Thirdparty/spdlog"
 thirdparty["openal"] = "%{wks.location}/Thirdparty/openal"
 thirdparty["yaml_cpp"] = "%{wks.location}/Thirdparty/yaml_cpp"
-thirdparty["googletest"] = "%{wks.location}/Thirdparty/googletest"
+thirdparty["googletest"] = "%{wks.location}/Thirdparty/googletest/googletest"
 
 outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
 
 include "Source"
-
+include "Test"
 group "Examples"
   include "Examples/2048"
   include "Examples/gobang"

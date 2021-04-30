@@ -82,7 +82,7 @@ public:
 
 	void place(int x, int y, Chess c)
 	{
-		ASSERT_TRUE(0 <= x && x <= 15 && 0 <= y && y <= 15, "out of range");
+		CLEM_ASSERT_TRUE(0 <= x && x <= 15 && 0 <= y && y <= 15, "out of range");
 		if(map[x][y] != Chess::none)
 			return;
 

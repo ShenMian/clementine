@@ -18,10 +18,10 @@ void Audio::init()
 	PROFILE_FUNC();
 	CLEM_LOG_INFO("audio", "audio init");
 
-	ASSERT_NULL(device, "aleardy opened a audio device");
+	CLEM_ASSERT_NULL(device, "aleardy opened a audio device");
 
 	device = alcOpenDevice(nullptr); // 获取首选设备
-	ASSERT_NOT_NULL(device, "can't open audio device");
+	CLEM_ASSERT_NOT_NULL(device, "can't open audio device");
 
 	const ALCchar* name = nullptr;
 	if(alcIsExtensionPresent(device, "ALC_ENUMERATE_ALL_EXT"))
