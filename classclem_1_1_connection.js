@@ -10,5 +10,6 @@ var classclem_1_1_connection =
     [ "write", "group___networking.html#ga13b5f1a3d5dabbc04d273b9e021f89b2", null ],
     [ "onConnected", "classclem_1_1_connection.html#a4a86850646665e8950a83514df28c479", null ],
     [ "onDisconnect", "classclem_1_1_connection.html#a82e99fbf33de91dbc183fc68deb72965", null ],
-    [ "onReceived", "classclem_1_1_connection.html#a3d6e227591a54800e6217042ffac83d0", null ]
+    [ "onError", "classclem_1_1_connection.html#abc88220e19f04e3697489abdc1bcee00", null ],
+    [ "onMessage", "classclem_1_1_connection.html#a3b145c30911db4fe17b34777ac85ac0a", null ]
 ];

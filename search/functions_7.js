@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['intersectspoint_261',['intersectsPoint',['../class_rect2.html#a2eca7910a70328c18992e9d70acd0d7c',1,'Rect2']]],
-  ['intersectsrect_262',['intersectsRect',['../class_rect2.html#a93e5a5004886832b5741e9bf3a428e07',1,'Rect2']]],
-  ['isconnected_263',['isConnected',['../classclem_1_1_client.html#aae54c38ae878f11b33ece16d36720d41',1,'clem::Client::isConnected()'],['../classclem_1_1_connection.html#a88e28e5451ee7ee32561134039f1a320',1,'clem::Connection::isConnected()']]]
+  ['hascomponent_263',['hasComponent',['../classclem_1_1_entity.html#a0e3b994270e2a3814d4bc9d2425c8967',1,'clem::Entity']]]
 ];

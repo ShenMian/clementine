@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fillrect_238',['fillRect',['../classclem_1_1_framebuffer.html#ab1f2bb51ec6cc45a7fbd49501127ef4a',1,'clem::Framebuffer::fillRect()'],['../classclem_1_1_sprite.html#a5a2fe01dadbb931a0d5119d405e8e465',1,'clem::Sprite::fillRect()']]]
+  ['error_238',['error',['../classclem_1_1_logger.html#af89b7d8c9f6395cc52a2c04a143b23b9',1,'clem::Logger']]]
 ];

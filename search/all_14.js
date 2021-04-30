@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['wavedata_152',['WaveData',['../structclem_1_1_wave_data.html',1,'clem']]],
-  ['waveformat_153',['WaveFormat',['../structclem_1_1_wave_format.html',1,'clem']]],
-  ['window_154',['Window',['../class_window.html',1,'']]],
-  ['write_155',['write',['../group___networking.html#ga4a0a888f34c71e199dfea753e3236743',1,'clem::Client::write()'],['../group___networking.html#ga13b5f1a3d5dabbc04d273b9e021f89b2',1,'clem::Connection::write()'],['../group___networking.html#gab4d889754bbf550980e9c7fa39819613',1,'clem::Server::write(std::shared_ptr&lt; Connection &gt; conn, const Message&lt; T &gt; &amp;msg)'],['../classclem_1_1_server.html#a21cfd483fd97c09bbcd0c5f72a00eca7',1,'clem::Server::write(const Message&lt; T &gt; &amp;msg)']]]
+  ['_7eapplication_157',['~Application',['../classclem_1_1_application.html#aa2ea891d9fa8051a83b7033d18576766',1,'clem::Application']]],
+  ['_7erecorder_158',['~Recorder',['../class_recorder.html#a6b3c569577fcdc298d8d4a6a2b96e9a9',1,'Recorder']]],
+  ['_7esound_159',['~Sound',['../classclem_1_1_sound.html#ae46d3bde26957b4ee89a3f969014a6ef',1,'clem::Sound']]]
 ];

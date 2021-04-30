@@ -1,9 +1,13 @@
 var hierarchy =
 [
+    [ "clem::AEntity", "classclem_1_1_a_entity.html", null ],
     [ "clem::Application", "classclem_1_1_application.html", null ],
+    [ "clem::Archtype", "classclem_1_1_archtype.html", null ],
+    [ "clem::AScene", "classclem_1_1_a_scene.html", null ],
     [ "clem::Assert", "classclem_1_1_assert.html", null ],
     [ "Audio", "class_audio.html", null ],
     [ "Camera", "class_camera.html", null ],
+    [ "Chunk", "struct_chunk.html", null ],
     [ "clem::Client", "classclem_1_1_client.html", null ],
     [ "clem::Collider", "classclem_1_1_collider.html", [
       [ "clem::BoxCollider", "classclem_1_1_box_collider.html", null ],
@@ -13,11 +17,7 @@ var hierarchy =
     [ "clem::Component", "classclem_1_1_component.html", [
       [ "clem::Rigidbody", "classclem_1_1_rigidbody.html", null ],
       [ "clem::Script", "classclem_1_1_script.html", null ],
-      [ "clem::Sprite", "classclem_1_1_sprite.html", [
-        [ "clem::UIComponent", "classclem_1_1_u_i_component.html", [
-          [ "clem::Text", "classclem_1_1_text.html", null ]
-        ] ]
-      ] ],
+      [ "clem::Sprite", "classclem_1_1_sprite.html", null ],
       [ "clem::Tag", "classclem_1_1_tag.html", null ],
       [ "clem::Transform", "classclem_1_1_transform.html", null ]
     ] ],
@@ -45,7 +45,6 @@ var hierarchy =
     [ "ProfileRecord", "struct_profile_record.html", null ],
     [ "Random", "class_random.html", null ],
     [ "Recorder", "class_recorder.html", null ],
-    [ "Rect", "class_rect.html", null ],
     [ "Rect2", "class_rect2.html", null ],
     [ "Rect2i", "class_rect2i.html", null ],
     [ "clem::RiffHeader", "structclem_1_1_riff_header.html", null ],
@@ -55,7 +54,6 @@ var hierarchy =
     [ "clem::Sound", "classclem_1_1_sound.html", null ],
     [ "clem::Source", "classclem_1_1_source.html", null ],
     [ "Tile", "class_tile.html", null ],
-    [ "Vec2< T >", "class_vec2.html", null ],
     [ "Vector2", "struct_vector2.html", null ],
     [ "Vector2i", "struct_vector2i.html", null ],
     [ "clem::WaveData", "structclem_1_1_wave_data.html", null ],

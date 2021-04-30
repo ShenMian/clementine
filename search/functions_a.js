@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['normalize_270',['normalize',['../class_vec2.html#a85cf28b708c007c2448e8a42d4b7e335',1,'Vec2::normalize()'],['../struct_vector2.html#a32e698ed9337b1d258fe96b5b942015a',1,'Vector2::normalize()']]]
+  ['magnitude_270',['magnitude',['../struct_vector2.html#ab84b0c3d31e2893df551d259789e80a9',1,'Vector2']]],
+  ['move_271',['move',['../class_cursor.html#ae86abef1331337aa55d57a72e8e5110d',1,'Cursor::move(const Point2i &amp;p)'],['../class_cursor.html#adba7aea466336c66082b19455fef5df6',1,'Cursor::move(short x, short y)']]]
 ];

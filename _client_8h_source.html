@@ -119,54 +119,55 @@ $(document).ready(function(){initNavTree('_client_8h_source.html',''); initResiz
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="group___networking.html#gaf24d929e70a8ca088834ca30a4deccbe">read</a>();</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    std::function&lt;void()&gt; onConnected;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    std::function&lt;void()&gt; onDisconnect;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    std::function&lt;void()&gt; onReceived;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    asio::io_context context;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="classclem_1_1_connection.html">Connection</a>       connection;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    std::thread      thread;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;};</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="group___networking.html#ga4a0a888f34c71e199dfea753e3236743">   76</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___networking.html#ga4a0a888f34c71e199dfea753e3236743">Client::write</a>(<span class="keyword">const</span> <a class="code" href="classclem_1_1_message.html">Message&lt;T&gt;</a>&amp; msg)</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">if</span>(!connection.<a class="code" href="classclem_1_1_connection.html#a88e28e5451ee7ee32561134039f1a320">isConnected</a>())</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">if</span>(onDisconnect)</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            onDisconnect();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    connection.<a class="code" href="group___networking.html#ga13b5f1a3d5dabbc04d273b9e021f89b2">write</a>(msg);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="group___networking.html#gaf24d929e70a8ca088834ca30a4deccbe">   89</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___networking.html#gaf24d929e70a8ca088834ca30a4deccbe">Client::read</a>()</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;{</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">if</span>(!connection.<a class="code" href="classclem_1_1_connection.html#a88e28e5451ee7ee32561134039f1a320">isConnected</a>())</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">if</span>(onDisconnect)</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            onDisconnect();</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    connection.<a class="code" href="group___networking.html#ga8982f0d21d47d7b837ef83b7490b4bfc">read</a>&lt;T&gt;();</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;} <span class="comment">// namespace clem</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    std::function&lt;void()&gt;                onConnected;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    std::function&lt;void()&gt;                onDisconnect;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    std::function&lt;void()&gt;                onMessage;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    std::function&lt;void(std::error_code)&gt; onError;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    asio::io_context context;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="classclem_1_1_connection.html">Connection</a>       connection;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    std::thread      thread;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="group___networking.html#ga4a0a888f34c71e199dfea753e3236743">   77</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___networking.html#ga4a0a888f34c71e199dfea753e3236743">Client::write</a>(<span class="keyword">const</span> <a class="code" href="classclem_1_1_message.html">Message&lt;T&gt;</a>&amp; msg)</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">if</span>(!connection.<a class="code" href="classclem_1_1_connection.html#a88e28e5451ee7ee32561134039f1a320">isConnected</a>())</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">if</span>(onDisconnect)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            onDisconnect();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    connection.<a class="code" href="group___networking.html#ga13b5f1a3d5dabbc04d273b9e021f89b2">write</a>(msg);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="group___networking.html#gaf24d929e70a8ca088834ca30a4deccbe">   90</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___networking.html#gaf24d929e70a8ca088834ca30a4deccbe">Client::read</a>()</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;{</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">if</span>(!connection.<a class="code" href="classclem_1_1_connection.html#a88e28e5451ee7ee32561134039f1a320">isConnected</a>())</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordflow">if</span>(onDisconnect)</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            onDisconnect();</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    connection.<a class="code" href="group___networking.html#ga8982f0d21d47d7b837ef83b7490b4bfc">read</a>&lt;T&gt;();</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;} <span class="comment">// namespace clem</span></div>
 <div class="ttc" id="aclassclem_1_1_client_html"><div class="ttname"><a href="classclem_1_1_client.html">clem::Client</a></div><div class="ttdoc">异步网络客户端, TCP 协议.</div><div class="ttdef"><b>Definition:</b> Client.h:24</div></div>
 <div class="ttc" id="aclassclem_1_1_client_html_aa571f79a7041cc955d49729b2c761927"><div class="ttname"><a href="classclem_1_1_client.html#aa571f79a7041cc955d49729b2c761927">clem::Client::connect</a></div><div class="ttdeci">bool connect(const std::string_view &amp;host, uint16_t port)</div><div class="ttdoc">启动客户端并与指定主机(服务器)的端口建立连接.</div><div class="ttdef"><b>Definition:</b> Client.cpp:21</div></div>
-<div class="ttc" id="aclassclem_1_1_client_html_aa98bb673df803685206983b0926be12e"><div class="ttname"><a href="classclem_1_1_client.html#aa98bb673df803685206983b0926be12e">clem::Client::disconnect</a></div><div class="ttdeci">void disconnect()</div><div class="ttdoc">断开连接.</div><div class="ttdef"><b>Definition:</b> Client.cpp:33</div></div>
-<div class="ttc" id="aclassclem_1_1_client_html_aae54c38ae878f11b33ece16d36720d41"><div class="ttname"><a href="classclem_1_1_client.html#aae54c38ae878f11b33ece16d36720d41">clem::Client::isConnected</a></div><div class="ttdeci">bool isConnected() const</div><div class="ttdoc">判断是否已建立连接.</div><div class="ttdef"><b>Definition:</b> Client.cpp:41</div></div>
+<div class="ttc" id="aclassclem_1_1_client_html_aa98bb673df803685206983b0926be12e"><div class="ttname"><a href="classclem_1_1_client.html#aa98bb673df803685206983b0926be12e">clem::Client::disconnect</a></div><div class="ttdeci">void disconnect()</div><div class="ttdoc">断开连接.</div><div class="ttdef"><b>Definition:</b> Client.cpp:34</div></div>
+<div class="ttc" id="aclassclem_1_1_client_html_aae54c38ae878f11b33ece16d36720d41"><div class="ttname"><a href="classclem_1_1_client.html#aae54c38ae878f11b33ece16d36720d41">clem::Client::isConnected</a></div><div class="ttdeci">bool isConnected() const</div><div class="ttdoc">判断是否已建立连接.</div><div class="ttdef"><b>Definition:</b> Client.cpp:42</div></div>
 <div class="ttc" id="aclassclem_1_1_connection_html"><div class="ttname"><a href="classclem_1_1_connection.html">clem::Connection</a></div><div class="ttdoc">网络连接, TCP 协议.</div><div class="ttdef"><b>Definition:</b> Connection.h:24</div></div>
-<div class="ttc" id="aclassclem_1_1_connection_html_a88e28e5451ee7ee32561134039f1a320"><div class="ttname"><a href="classclem_1_1_connection.html#a88e28e5451ee7ee32561134039f1a320">clem::Connection::isConnected</a></div><div class="ttdeci">bool isConnected() const</div><div class="ttdoc">判断是否已建立连接.</div><div class="ttdef"><b>Definition:</b> Connection.cpp:57</div></div>
-<div class="ttc" id="aclassclem_1_1_message_html"><div class="ttname"><a href="classclem_1_1_message.html">clem::Message</a></div><div class="ttdoc">网络消息.</div><div class="ttdef"><b>Definition:</b> Message.h:25</div></div>
-<div class="ttc" id="agroup___networking_html_ga13b5f1a3d5dabbc04d273b9e021f89b2"><div class="ttname"><a href="group___networking.html#ga13b5f1a3d5dabbc04d273b9e021f89b2">clem::Connection::write</a></div><div class="ttdeci">void write(const Message&lt; T &gt; &amp;msg)</div><div class="ttdoc">发送消息.</div><div class="ttdef"><b>Definition:</b> Connection.h:84</div></div>
-<div class="ttc" id="agroup___networking_html_ga4a0a888f34c71e199dfea753e3236743"><div class="ttname"><a href="group___networking.html#ga4a0a888f34c71e199dfea753e3236743">clem::Client::write</a></div><div class="ttdeci">void write(const Message&lt; T &gt; &amp;msg)</div><div class="ttdoc">发送消息.</div><div class="ttdef"><b>Definition:</b> Client.h:76</div></div>
-<div class="ttc" id="agroup___networking_html_ga8982f0d21d47d7b837ef83b7490b4bfc"><div class="ttname"><a href="group___networking.html#ga8982f0d21d47d7b837ef83b7490b4bfc">clem::Connection::read</a></div><div class="ttdeci">void read()</div><div class="ttdoc">持续接收任何消息并转换为特定类型.</div><div class="ttdef"><b>Definition:</b> Connection.h:101</div></div>
-<div class="ttc" id="agroup___networking_html_gaf24d929e70a8ca088834ca30a4deccbe"><div class="ttname"><a href="group___networking.html#gaf24d929e70a8ca088834ca30a4deccbe">clem::Client::read</a></div><div class="ttdeci">void read()</div><div class="ttdoc">持续接收任何消息并转换为特定类型.</div><div class="ttdef"><b>Definition:</b> Client.h:89</div></div>
+<div class="ttc" id="aclassclem_1_1_connection_html_a88e28e5451ee7ee32561134039f1a320"><div class="ttname"><a href="classclem_1_1_connection.html#a88e28e5451ee7ee32561134039f1a320">clem::Connection::isConnected</a></div><div class="ttdeci">bool isConnected() const</div><div class="ttdoc">判断是否已建立连接.</div><div class="ttdef"><b>Definition:</b> Connection.cpp:59</div></div>
+<div class="ttc" id="aclassclem_1_1_message_html"><div class="ttname"><a href="classclem_1_1_message.html">clem::Message</a></div><div class="ttdoc">网络消息.</div><div class="ttdef"><b>Definition:</b> Message.h:27</div></div>
+<div class="ttc" id="agroup___networking_html_ga13b5f1a3d5dabbc04d273b9e021f89b2"><div class="ttname"><a href="group___networking.html#ga13b5f1a3d5dabbc04d273b9e021f89b2">clem::Connection::write</a></div><div class="ttdeci">void write(const Message&lt; T &gt; &amp;msg)</div><div class="ttdoc">发送消息.</div><div class="ttdef"><b>Definition:</b> Connection.h:85</div></div>
+<div class="ttc" id="agroup___networking_html_ga4a0a888f34c71e199dfea753e3236743"><div class="ttname"><a href="group___networking.html#ga4a0a888f34c71e199dfea753e3236743">clem::Client::write</a></div><div class="ttdeci">void write(const Message&lt; T &gt; &amp;msg)</div><div class="ttdoc">发送消息.</div><div class="ttdef"><b>Definition:</b> Client.h:77</div></div>
+<div class="ttc" id="agroup___networking_html_ga8982f0d21d47d7b837ef83b7490b4bfc"><div class="ttname"><a href="group___networking.html#ga8982f0d21d47d7b837ef83b7490b4bfc">clem::Connection::read</a></div><div class="ttdeci">void read()</div><div class="ttdoc">持续接收任何消息并转换为特定类型.</div><div class="ttdef"><b>Definition:</b> Connection.h:112</div></div>
+<div class="ttc" id="agroup___networking_html_gaf24d929e70a8ca088834ca30a4deccbe"><div class="ttname"><a href="group___networking.html#gaf24d929e70a8ca088834ca30a4deccbe">clem::Client::read</a></div><div class="ttdeci">void read()</div><div class="ttdoc">持续接收任何消息并转换为特定类型.</div><div class="ttdef"><b>Definition:</b> Client.h:90</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

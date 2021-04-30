@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['uicomponent_208',['UIComponent',['../classclem_1_1_u_i_component.html',1,'clem']]]
+  ['vector2_211',['Vector2',['../struct_vector2.html',1,'']]],
+  ['vector2i_212',['Vector2i',['../struct_vector2i.html',1,'']]]
 ];

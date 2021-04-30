@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['vec2_149',['Vec2',['../class_vec2.html',1,'Vec2&lt; T &gt;'],['../class_vec2.html#a40b1f3da82b038c13f5085383d4c747b',1,'Vec2::Vec2()=default'],['../class_vec2.html#a43581c2c510e3731cbe9f49a328d73b9',1,'Vec2::Vec2(T x, T y)']]],
-  ['vector2_150',['Vector2',['../struct_vector2.html',1,'Vector2'],['../struct_vector2.html#af1de25cf0004820d5e6db855c91bc4ad',1,'Vector2::Vector2()=default'],['../struct_vector2.html#a061ab58a0e216c759d64e3746d712b12',1,'Vector2::Vector2(float x, float y)']]],
-  ['vector2i_151',['Vector2i',['../struct_vector2i.html',1,'Vector2i'],['../struct_vector2i.html#a8d5bbd531be1217f6e1f328b72271a4b',1,'Vector2i::Vector2i()=default'],['../struct_vector2i.html#ab3a716594a6cb13343cebf1843d04d5b',1,'Vector2i::Vector2i(int x, int y)']]]
+  ['warn_152',['warn',['../classclem_1_1_logger.html#a153538b64ec2f950c22b18aaf284bdac',1,'clem::Logger']]],
+  ['wavedata_153',['WaveData',['../structclem_1_1_wave_data.html',1,'clem']]],
+  ['waveformat_154',['WaveFormat',['../structclem_1_1_wave_format.html',1,'clem']]],
+  ['window_155',['Window',['../class_window.html',1,'']]],
+  ['write_156',['write',['../group___networking.html#ga4a0a888f34c71e199dfea753e3236743',1,'clem::Client::write()'],['../group___networking.html#ga13b5f1a3d5dabbc04d273b9e021f89b2',1,'clem::Connection::write()'],['../group___networking.html#gab4d889754bbf550980e9c7fa39819613',1,'clem::Server::write(std::shared_ptr&lt; Connection &gt; conn, const Message&lt; T &gt; &amp;msg)'],['../classclem_1_1_server.html#a21cfd483fd97c09bbcd0c5f72a00eca7',1,'clem::Server::write(const Message&lt; T &gt; &amp;msg)']]]
 ];

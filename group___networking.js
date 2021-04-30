@@ -10,7 +10,8 @@ var group___networking =
       [ "write", "group___networking.html#ga4a0a888f34c71e199dfea753e3236743", null ],
       [ "onConnected", "classclem_1_1_client.html#a0751fbc1a4825d56ca72cf407e77f7a8", null ],
       [ "onDisconnect", "classclem_1_1_client.html#ab48c2aaea0f5dc3c842bd4ebf34366ed", null ],
-      [ "onReceived", "classclem_1_1_client.html#a47c41c5525abf97197eaf54121726271", null ]
+      [ "onError", "classclem_1_1_client.html#a3a518286cab0e65bb0a1e19cab6e9ad1", null ],
+      [ "onMessage", "classclem_1_1_client.html#ab6f521535940119ffab8884b26e5da97", null ]
     ] ],
     [ "Connection", "classclem_1_1_connection.html", [
       [ "Connection", "classclem_1_1_connection.html#a4b52deec28fb622d30ca370273dca3bb", null ],
@@ -23,7 +24,8 @@ var group___networking =
       [ "write", "group___networking.html#ga13b5f1a3d5dabbc04d273b9e021f89b2", null ],
       [ "onConnected", "classclem_1_1_connection.html#a4a86850646665e8950a83514df28c479", null ],
       [ "onDisconnect", "classclem_1_1_connection.html#a82e99fbf33de91dbc183fc68deb72965", null ],
-      [ "onReceived", "classclem_1_1_connection.html#a3d6e227591a54800e6217042ffac83d0", null ]
+      [ "onError", "classclem_1_1_connection.html#abc88220e19f04e3697489abdc1bcee00", null ],
+      [ "onMessage", "classclem_1_1_connection.html#a3b145c30911db4fe17b34777ac85ac0a", null ]
     ] ],
     [ "Message", "classclem_1_1_message.html", [
       [ "Message", "classclem_1_1_message.html#a04c179ebfe4746be4c030df4bfc5ad75", null ],
@@ -32,8 +34,8 @@ var group___networking =
       [ "operator<<", "classclem_1_1_message.html#a24c79f6d179a74a1acc358b93c2ed5a6", null ],
       [ "operator>>", "classclem_1_1_message.html#ad6c33064de5d1656809e478f188cc048", null ],
       [ "operator>>", "classclem_1_1_message.html#a8b26e2a589a6785e835240124346c351", null ],
-      [ "body", "classclem_1_1_message.html#a41871ed134844a4c5444545fd32aecb6", null ],
-      [ "header", "classclem_1_1_message.html#a004720db987e0509f17a443ef08f3c15", null ],
+      [ "body", "classclem_1_1_message.html#ac287c229ca861afa2c4b19bd67b2eb40", null ],
+      [ "header", "classclem_1_1_message.html#a3028daa30d8349dc6ee47386979d8892", null ],
       [ "id", "classclem_1_1_message.html#aabd4900da726ebd1b6bebb744f0aecbc", null ],
       [ "size", "classclem_1_1_message.html#a0f9e76b87ee6dc3b103154d98fbafcda", null ]
     ] ],
@@ -48,7 +50,8 @@ var group___networking =
       [ "write", "group___networking.html#gab4d889754bbf550980e9c7fa39819613", null ],
       [ "onAccept", "classclem_1_1_server.html#a876ec1aa6e4d7d659d8dc67c0853d84a", null ],
       [ "onDisconnect", "classclem_1_1_server.html#a621af4504ea034d42bed1f43f8c39a1c", null ],
-      [ "onReceived", "classclem_1_1_server.html#abb25decf664e1b2869b4f45a9d672a87", null ]
+      [ "onError", "classclem_1_1_server.html#aad46e9c8fd29eace95c4786fa45f6405", null ],
+      [ "onMessage", "classclem_1_1_server.html#a2504f3ea2d2a261283c050b2aef9c813", null ]
     ] ],
     [ "read", "group___networking.html#gaf24d929e70a8ca088834ca30a4deccbe", null ],
     [ "read", "group___networking.html#ga8982f0d21d47d7b837ef83b7490b4bfc", null ],

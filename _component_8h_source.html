@@ -92,13 +92,25 @@ $(document).ready(function(){initNavTree('_component_8h_source.html',''); initRe
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>clem</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classclem_1_1_component.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_component.html">Component</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;};</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;} <span class="comment">// namespace clem</span></div>
-<div class="ttc" id="aclassclem_1_1_component_html"><div class="ttname"><a href="classclem_1_1_component.html">clem::Component</a></div><div class="ttdoc">组件.</div><div class="ttdef"><b>Definition:</b> Component.h:12</div></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Clem/Scene/Entity.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>clem</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classclem_1_1_component.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_component.html">Component</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_component.html#a37a0d70471497be8fabb3fb4a1a985e8">setEntity</a>(<span class="keyword">const</span> <a class="code" href="classclem_1_1_entity.html">Entity</a>&amp; entity);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classclem_1_1_entity.html">Entity</a>&amp; <a class="code" href="classclem_1_1_component.html#a7e3da7bfc8167ca5e53dca86ae2b8fe2">getEntity</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="classclem_1_1_entity.html">Entity</a> entity;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;} <span class="comment">// namespace clem</span></div>
+<div class="ttc" id="aclassclem_1_1_component_html"><div class="ttname"><a href="classclem_1_1_component.html">clem::Component</a></div><div class="ttdoc">组件.</div><div class="ttdef"><b>Definition:</b> Component.h:14</div></div>
+<div class="ttc" id="aclassclem_1_1_component_html_a37a0d70471497be8fabb3fb4a1a985e8"><div class="ttname"><a href="classclem_1_1_component.html#a37a0d70471497be8fabb3fb4a1a985e8">clem::Component::setEntity</a></div><div class="ttdeci">void setEntity(const Entity &amp;entity)</div><div class="ttdoc">设置所属的实体.</div><div class="ttdef"><b>Definition:</b> Component.cpp:13</div></div>
+<div class="ttc" id="aclassclem_1_1_component_html_a7e3da7bfc8167ca5e53dca86ae2b8fe2"><div class="ttname"><a href="classclem_1_1_component.html#a7e3da7bfc8167ca5e53dca86ae2b8fe2">clem::Component::getEntity</a></div><div class="ttdeci">Entity &amp; getEntity()</div><div class="ttdoc">获取所属的实体.</div><div class="ttdef"><b>Definition:</b> Component.cpp:8</div></div>
+<div class="ttc" id="aclassclem_1_1_entity_html"><div class="ttname"><a href="classclem_1_1_entity.html">clem::Entity</a></div><div class="ttdoc">实体. 组件的容器.</div><div class="ttdef"><b>Definition:</b> Entity.h:24</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['magnitude_268',['magnitude',['../struct_vector2.html#ab84b0c3d31e2893df551d259789e80a9',1,'Vector2']]],
-  ['move_269',['move',['../class_cursor.html#ae86abef1331337aa55d57a72e8e5110d',1,'Cursor::move(const Point2i &amp;p)'],['../class_cursor.html#adba7aea466336c66082b19455fef5df6',1,'Cursor::move(short x, short y)']]]
+  ['left_268',['left',['../class_rect2.html#aeaba64aca9d51bf530e11c97198e274c',1,'Rect2']]],
+  ['loadfromfile_269',['loadFromFile',['../classclem_1_1_sound.html#a56f5857689eb8a5a31935c17c5498f7c',1,'clem::Sound']]]
 ];

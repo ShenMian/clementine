@@ -9,5 +9,6 @@ var classclem_1_1_client =
     [ "write", "group___networking.html#ga4a0a888f34c71e199dfea753e3236743", null ],
     [ "onConnected", "classclem_1_1_client.html#a0751fbc1a4825d56ca72cf407e77f7a8", null ],
     [ "onDisconnect", "classclem_1_1_client.html#ab48c2aaea0f5dc3c842bd4ebf34366ed", null ],
-    [ "onReceived", "classclem_1_1_client.html#a47c41c5525abf97197eaf54121726271", null ]
+    [ "onError", "classclem_1_1_client.html#a3a518286cab0e65bb0a1e19cab6e9ad1", null ],
+    [ "onMessage", "classclem_1_1_client.html#ab6f521535940119ffab8884b26e5da97", null ]
 ];
