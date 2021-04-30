@@ -108,9 +108,9 @@ void Sound::loadWavFile(const path& path, ALenum& format, unsigned char*& data, 
 	// 跳过这部分内容, 来直接获取音频样本数据.
 	if(memcmp(id, "LIST", 4) == 0)
 	{
-		int32_t size;
-		file.read((char*)&size, sizeof(size));
-		file.seekg(size, std::ios::cur);
+		int32_t list_size;
+		file.read((char*)&list_size, sizeof(list_size));
+		file.seekg(list_size, std::ios::cur);
 		file.read(id, 4);
 	}
 
