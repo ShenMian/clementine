@@ -42,7 +42,7 @@ private:
 
 enum class Keyboard::Key : uint8_t
 {
-	A = 0x41, // FIXME, 这样写无法初始化状态
+	A = 0x41,
 	B,
 	C,
 	D,

@@ -9,20 +9,6 @@
 #include "Mouse.h"
 #include <vector>
 
-/*
-void Input::update()
-{
-	PROFILE_FUNC();
-
-	char ch = -1;
-	ch      = getchar();
-	if(ch == -1)
-		return;
-	auto vk = ch;
-	Keyboard::setKeyState((Keyboard::Key)vk, true);
-}
-*/
-
 namespace clem
 {
 #ifdef OS_WIN

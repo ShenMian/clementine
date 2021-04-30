@@ -36,6 +36,14 @@ void Keyboard::setKeyState(Key k, bool s)
 
 void Keyboard::update()
 {
+	PROFILE_FUNC();
+
+	char ch = -1;
+	ch      = getchar();
+	if(ch == -1)
+		return;
+	auto vk = ch; // ASCII -> VK
+	Keyboard::setKeyState((Keyboard::Key)vk, true);
 }
 
 void Keyboard::init()
