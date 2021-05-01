@@ -14,13 +14,21 @@ class Chunk;
 
 class Archtype
 {
+	using type_set = std::set<std::type_index>;
+
 public:
-	Archtype(const std::set<std::type_index>&);
+	Archtype(const type_set&);
+
+	bool all(const Archtype&) const;
+	bool any(const Archtype&) const;
+	bool none(const Archtype&) const;
 
 	bool operator==(const Archtype& rhs) const;
+	bool operator<=(const Archtype& rhs) const;
+	bool operator>=(const Archtype& rhs) const;
 
 private:
-	std::set<std::type_index> indexs;
+	type_set types;
 };
 
 } // namespace clem
