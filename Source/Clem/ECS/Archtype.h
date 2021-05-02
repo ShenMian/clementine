@@ -24,8 +24,7 @@ public:
 	bool none(const Archtype&) const;
 
 	bool operator==(const Archtype& rhs) const;
-	bool operator<=(const Archtype& rhs) const;
-	bool operator>=(const Archtype& rhs) const;
+	bool operator<(const Archtype& rhs) const;
 
 private:
 	type_set types;

@@ -23,10 +23,19 @@ public:
 	template <typename Com>
 	bool hasComponent() const;
 
+	template <typename T, typename V, typename... Types>
+	bool hasComponent() const;
+
 	bool isValid() const;
 
 private:
 	size_t id;
 };
+
+template <typename T, typename V, typename... Types>
+bool AEntity::hasComponent() const
+{
+	return hasComponent<T>() && hasComponent<V, Types...>();
+}
 
 } // namespace clem

@@ -38,14 +38,9 @@ bool Archtype::operator==(const Archtype& rhs) const
 	return types == rhs.types;
 }
 
-bool Archtype::operator<=(const Archtype& rhs) const
+bool Archtype::operator<(const Archtype& rhs) const
 {
-	return types <= rhs.types;
-}
-
-bool Archtype::operator>=(const Archtype& rhs) const
-{
-	return types >= rhs.types;
+	return types < rhs.types;
 }
 
 } // namespace clem

@@ -11,8 +11,6 @@ constexpr auto chunkSize      = 16 * 1024;
 
 struct alignas(chunkAlignment) Chunk
 {
-	static constexpr size_t size = chunkSize;
-
-private:
-	std::array<std::byte, size> buffer;
+public:
+	std::array<std::byte, chunkSize> buffer;
 };
