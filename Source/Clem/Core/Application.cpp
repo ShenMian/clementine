@@ -17,6 +17,8 @@ using std::shared_ptr;
 using std::string;
 using std::string_view;
 
+#include <iostream>
+
 int main(int argc, char* argv[])
 {
 	PROFILE_SESSION_BEGIN("profile.json");
@@ -52,11 +54,12 @@ Application::Application(const string& name)
 	PROFILE_FUNC();
 
 	std::setlocale(LC_ALL, "");
-	std::signal(SIGINT, onSignal);
+
+	std::signal(SIGINT, Application::onSignal);
 
 	initPlatform();
 
-	Output::get().setSize(Window::getSize()); // 初始化 Output
+	Output::get().setSize(Window::getSize());
 
 	Logger::create("core");
 	Logger::create("audio");
@@ -194,6 +197,23 @@ void Application::resume()
 	paused = false;
 }
 
+void Application::pushScene(shared_ptr<Scene>& s)
+{
+	scenes.push_back(s);
+}
+
+void Application::popScene()
+{
+	CLEM_ASSERT_TRUE(scenes.size() < 2, "pop a scene when the scenes is empty is not allowed");
+	scenes.pop_back();
+}
+
+void Application::replaceScene(const shared_ptr<Scene>& s)
+{
+	CLEM_ASSERT_TRUE(scenes.empty(), "replace a scene when the scenes is empty is not allowed");
+	scenes.back() = s;
+}
+
 void Application::setMsPerUpdate(uint16_t ms)
 {
 	CLEM_ASSERT_TRUE(ms >= 0, "set ms per update non positive is not allowed");
@@ -214,23 +234,6 @@ uint16_t Application::getFrameRate() const
 const string& Application::getName() const
 {
 	return name;
-}
-
-void Application::pushScene(shared_ptr<Scene>& s)
-{
-	scenes.push_back(s);
-}
-
-void Application::popScene()
-{
-	CLEM_ASSERT_TRUE(scenes.size() < 2, "pop a scene when the scenes is empty is not allowed");
-	scenes.pop_back();
-}
-
-void Application::replaceScene(const shared_ptr<Scene>& s)
-{
-	CLEM_ASSERT_TRUE(scenes.empty(), "replace a scene when the scenes is empty is not allowed");
-	scenes.back() = s;
 }
 
 void Application::init()

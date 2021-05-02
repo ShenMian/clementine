@@ -25,6 +25,9 @@ class Scene;
 class Application
 {
 public:
+	/**
+	 * @brief 获取单例实例.
+	 */
 	static Application& get();
 
 	/**
@@ -58,6 +61,21 @@ public:
 	void resume();
 
 	/**
+	 * @brief 压入场景.
+	 */
+	void pushScene(std::shared_ptr<Scene>& scene);
+
+	/**
+	 * @brief 弹出场景.
+	 */
+	void popScene();
+
+	/**
+	 * @brief 替换场景.
+	 */
+	void replaceScene(const std::shared_ptr<Scene>& scene);
+
+	/**
 	 * @brief 设置更新时间周期.
 	 */
 	void setMsPerUpdate(uint16_t ms);
@@ -77,21 +95,6 @@ public:
 	 */
 	const std::string& getName() const;
 
-	/**
-	 * @brief 压入场景.
-	 */
-	void pushScene(std::shared_ptr<Scene>& scene);
-
-	/**
-	 * @brief 弹出场景.
-	 */
-	void popScene();
-
-	/**
-	 * @brief 替换场景.
-	 */
-	void replaceScene(const std::shared_ptr<Scene>& scene);
-
 	virtual void init();
 	virtual void deinit();
 
@@ -104,6 +107,7 @@ private:
 	void updateScene(uint16_t dt);
 	void renderScene(uint16_t dt);
 	void updateFrameRate(uint16_t dt);
+
 	long getCurrentMillSecond() const;
 
 	bool     quit        = true;
