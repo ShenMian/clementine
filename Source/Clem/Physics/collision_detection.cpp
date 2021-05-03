@@ -69,6 +69,8 @@ bool collision(BoxCollider box, Line2 l)
 
 	// TODO: 判断是否与上边相交
 	// TODO: 判断是否与下边相交
+	
+	return false;
 }
 
 bool collision(CircleCollider c, Line2 l)
