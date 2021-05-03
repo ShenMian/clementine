@@ -47,3 +47,5 @@ public:
 #define CLEM_ASSERT_FALSE(expr, msg)    clem::Assert::isFalse(expr, msg, CALL_INFO);
 #define CLEM_ASSERT_NULL(expr, msg)     clem::Assert::isNull(expr, msg, CALL_INFO);
 #define CLEM_ASSERT_NOT_NULL(expr, msg) clem::Assert::isNotNull(expr, msg, CALL_INFO);
+#define CLEM_ASSERT_EQ(val1, val2)      clem::Assert::isTrue((val1) == (val2), msg, CALL_INFO);
+#define CLEM_ASSERT_NE(val1, val2)      clem::Assert::isTrue((val1) != (val2), msg, CALL_INFO);
