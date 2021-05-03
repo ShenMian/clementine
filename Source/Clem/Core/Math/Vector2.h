@@ -58,20 +58,20 @@ struct Vector2
 	/**
 	 * @brief 获取到另一个点的距离.
 	 *
-	 * @param p 另一个点.
+	 * @param point 另一个点.
 	 *
 	 * @see	distanceSquared
 	 */
-	float distance(const Vector2& p) const;
+	float distance(const Vector2& point) const;
 
 	/**
 	 * @brief 获取到另一个点的距离的平方.
 	 *
-	 * @param p 另一个点.
+	 * @param point 另一个点.
 	 *
 	 * @see distance
 	 */
-	float distanceSquared(const Vector2& p) const;
+	float distanceSquared(const Vector2& point) const;
 
 	/**
 	 * @brief 标准化成单位向量.
