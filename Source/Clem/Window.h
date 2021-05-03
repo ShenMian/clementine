@@ -20,7 +20,7 @@ public:
 	static void setTitle(const std::string& title);
 
 	/**
-	 * @brief 获取终端窗口大小.
+	 * @brief 获取终端可见缓冲区大小.
 	 */
-	static Size2i getSize();
+	static Size2i getVisibleSize();
 };

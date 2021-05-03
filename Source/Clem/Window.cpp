@@ -24,7 +24,7 @@ void Window::setTitle(const string& title)
 	std::printf("\033]0;%s\007", title.c_str());
 }
 
-Size2i Window::getSize()
+Size2i Window::getVisibleSize()
 {
 	PROFILE_FUNC();
 
@@ -44,7 +44,7 @@ void Window::setTitle(const string& title)
 	SetConsoleTitleA(title.c_str());
 }
 
-Size2i Window::getSize()
+Size2i Window::getVisibleSize()
 {
 	PROFILE_FUNC();
 

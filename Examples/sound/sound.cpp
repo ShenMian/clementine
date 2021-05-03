@@ -56,7 +56,7 @@ private:
 	Sound             sound;
 	Source            source;
 	Random            random;
-	Size2i            size  = Window::getSize();
+	Size2i            size  = Window::getVisibleSize();
 	shared_ptr<Scene> scene = make_shared<Scene>();
 };
 

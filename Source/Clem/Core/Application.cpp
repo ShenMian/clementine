@@ -59,7 +59,7 @@ Application::Application(const string& name)
 
 	initPlatform();
 
-	Output::get().setSize(Window::getSize());
+	Output::get().setSize(Window::getVisibleSize());
 
 	Logger::create("core");
 	Logger::create("audio");
