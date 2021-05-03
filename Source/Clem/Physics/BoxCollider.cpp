@@ -24,7 +24,8 @@ Size2 BoxCollider::getSize() const
 
 Rect2 BoxCollider::getRect() const
 {
-	auto p = getPosition();
-	return Rect2({p.x - size.x / 2, p.y - size.y / 2}, size);
+	return Rect2(getPosition(), size);
+	// auto p = getPosition();
+	// return Rect2({p.x - size.x / 2, p.y - size.y / 2}, size);
 }
 } // namespace clem

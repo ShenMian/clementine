@@ -10,7 +10,7 @@ namespace clem
 {
 Point2 Collider::getPosition() const
 {
-	return Point2(); // rigidbody->getOwner()->getPosition() + offset;
+	return rigidbody->getPosition() + offset;
 }
 
 void Collider::setOffset(Point2 o)

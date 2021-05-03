@@ -25,9 +25,9 @@ public:
 	/**
 	* @brief 设置大小
 	*
-	* @param s 大小
+	* @param size 大小
 	*/
-	void setSize(Size2);
+	void setSize(Size2 size);
 
 	/**
   * @brief 获取大小

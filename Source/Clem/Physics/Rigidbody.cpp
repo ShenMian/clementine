@@ -50,7 +50,8 @@ Rigidbody::Type Rigidbody::getType() const
 
 Point2 Rigidbody::getPosition()
 {
-	return getEntity().getComponent<Transform>().getPosition();
+	// TODO
+	return Point2::zero;
 }
 
 void Rigidbody::setPosition(const Point2& p)
