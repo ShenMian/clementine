@@ -10,8 +10,8 @@ namespace clem
 
 struct EntityInfo
 {
-	Archtype                                   archtype;
-	std::unordered_map<std::type_index, void*> components;
+	Archtype                         archtype;
+	std::map<std::type_index, void*> components;
 };
 
 void AScene::view(const Archtype& archtype)

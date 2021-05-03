@@ -25,7 +25,7 @@ public:
 	void view(const Archtype&);
 	
 private:
-	std::unordered_map<AEntity, EntityInfo> entities;
+	std::map<AEntity, EntityInfo> entities;
 	std::vector<Archtype>                   archtypes;
 	std::map<Archtype, Chunk*>              chunks; // unordered_map
 	std::pmr::polymorphic_allocator<Chunk>  allocator;
