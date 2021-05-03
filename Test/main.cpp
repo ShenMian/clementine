@@ -4,8 +4,6 @@
 #include "gtest/gtest.h"
 #include "Clem.h"
 
-using namespace clem;
-
 int main(int argc, char* argv[])
 {
 	testing::InitGoogleTest(&argc, argv);
