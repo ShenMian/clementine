@@ -3,13 +3,11 @@
 
 #pragma once
 
-#include "AL/alext.h"
-#include <filesystem>
-#include <vector>
-
 #include "Listener.h"
 #include "Sound.h"
 #include "Source.h"
+
+#include "AL/alext.h"
 
 namespace clem
 {
