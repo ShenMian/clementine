@@ -22,7 +22,8 @@ project "Clementine"
     "%{thirdparty.entt}/include",
     "%{thirdparty.spdlog}/include",
     "%{thirdparty.openal}/include",
-    "%{thirdparty.yaml_cpp}/include"}
+    "%{thirdparty.yaml_cpp}/include",
+    "%{thirdparty.nlohmann_json}/include"}
 
   links {
     "%{thirdparty.openal}/lib/openal32"}

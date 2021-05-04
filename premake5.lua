@@ -43,6 +43,7 @@ thirdparty["spdlog"] = "%{wks.location}/Thirdparty/spdlog"
 thirdparty["openal"] = "%{wks.location}/Thirdparty/openal"
 thirdparty["yaml_cpp"] = "%{wks.location}/Thirdparty/yaml_cpp"
 thirdparty["googletest"] = "%{wks.location}/Thirdparty/googletest/googletest"
+thirdparty["nlohmann_json"] = "%{wks.location}/Thirdparty/nlohmann_json"
 
 outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
 
