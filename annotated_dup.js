@@ -2,6 +2,7 @@ var annotated_dup =
 [
     [ "clem", null, [
       [ "Assert", "classclem_1_1_assert.html", null ],
+      [ "Audio", "classclem_1_1_audio.html", "classclem_1_1_audio" ],
       [ "Listener", "classclem_1_1_listener.html", null ],
       [ "RiffHeader", "structclem_1_1_riff_header.html", "structclem_1_1_riff_header" ],
       [ "WaveFormat", "structclem_1_1_wave_format.html", "structclem_1_1_wave_format" ],
@@ -18,6 +19,8 @@ var annotated_dup =
       [ "Mouse", "classclem_1_1_mouse.html", "classclem_1_1_mouse" ],
       [ "AEntity", "classclem_1_1_a_entity.html", "classclem_1_1_a_entity" ],
       [ "Archtype", "classclem_1_1_archtype.html", "classclem_1_1_archtype" ],
+      [ "EntityInfo", "structclem_1_1_entity_info.html", "structclem_1_1_entity_info" ],
+      [ "Iterator", "classclem_1_1_iterator.html", null ],
       [ "AScene", "classclem_1_1_a_scene.html", "classclem_1_1_a_scene" ],
       [ "Logger", "classclem_1_1_logger.html", "classclem_1_1_logger" ],
       [ "Client", "classclem_1_1_client.html", "classclem_1_1_client" ],
@@ -35,9 +38,8 @@ var annotated_dup =
       [ "Entity", "classclem_1_1_entity.html", "classclem_1_1_entity" ],
       [ "Scene", "classclem_1_1_scene.html", "classclem_1_1_scene" ]
     ] ],
-    [ "Audio", "class_audio.html", "class_audio" ],
     [ "Camera", "class_camera.html", null ],
-    [ "Chunk", "struct_chunk.html", null ],
+    [ "Chunk", "struct_chunk.html", "struct_chunk" ],
     [ "Color", "class_color.html", "class_color" ],
     [ "CpuSample", "struct_cpu_sample.html", "struct_cpu_sample" ],
     [ "Cursor", "class_cursor.html", null ],
@@ -46,6 +48,7 @@ var annotated_dup =
     [ "InstrumentationCounter", "class_instrumentation_counter.html", "class_instrumentation_counter" ],
     [ "Instrumentor", "class_instrumentor.html", "class_instrumentor" ],
     [ "KeyEvent", "class_key_event.html", "class_key_event" ],
+    [ "Line2", "struct_line2.html", "struct_line2" ],
     [ "MouseEvent", "class_mouse_event.html", "class_mouse_event" ],
     [ "Profiler", "class_profiler.html", "class_profiler" ],
     [ "ProfileRecord", "struct_profile_record.html", "struct_profile_record" ],

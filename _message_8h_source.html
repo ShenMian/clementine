@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('_message_8h_source.html',''); initResi
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">friend</span> <a class="code" href="classclem_1_1_message.html">Message&lt;T&gt;</a>&amp; operator&lt;&lt;(<a class="code" href="classclem_1_1_message.html">Message&lt;T&gt;</a>&amp; msg, <span class="keyword">const</span> Data&amp; data)</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        static_assert(std::is_standard_layout&lt;Data&gt;::value, <span class="stringliteral">&quot;Data type is not suppoted&quot;</span>);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        ASSERT_TRUE(msg.header.size &lt; (<span class="keywordtype">size_t</span>)-1 - <span class="keyword">sizeof</span>(Data), <span class="stringliteral">&quot;Message is full&quot;</span>);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        CLEM_ASSERT_TRUE(msg.header.size &lt; (<span class="keywordtype">size_t</span>)-1 - <span class="keyword">sizeof</span>(Data), <span class="stringliteral">&quot;Message is full&quot;</span>);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> offset = msg.body.size();</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        msg.body.resize(msg.body.size() + <span class="keyword">sizeof</span>(Data));</div>
@@ -148,7 +148,7 @@ $(document).ready(function(){initNavTree('_message_8h_source.html',''); initResi
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Data&gt;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">friend</span> <a class="code" href="classclem_1_1_message.html">Message&lt;T&gt;</a>&amp; operator&lt;&lt;(<a class="code" href="classclem_1_1_message.html">Message&lt;T&gt;</a>&amp; msg, <span class="keyword">const</span> std::vector&lt;Data&gt;&amp; data)</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        ASSERT_TRUE(msg.header.size &lt; (<span class="keywordtype">size_t</span>)-1 - data.size() * <span class="keyword">sizeof</span>(Data), <span class="stringliteral">&quot;Message is full&quot;</span>);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        CLEM_ASSERT_TRUE(msg.header.size &lt; (<span class="keywordtype">size_t</span>)-1 - data.size() * <span class="keyword">sizeof</span>(Data), <span class="stringliteral">&quot;Message is full&quot;</span>);</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; i : data)</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            msg &lt;&lt; i;</div>

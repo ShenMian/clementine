@@ -144,7 +144,7 @@ $(document).ready(function(){initNavTree('_server_8h_source.html',''); initResiz
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="group___networking.html#gab4d889754bbf550980e9c7fa39819613">   84</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___networking.html#gab4d889754bbf550980e9c7fa39819613">Server::write</a>(std::shared_ptr&lt;Connection&gt; conn, <span class="keyword">const</span> <a class="code" href="classclem_1_1_message.html">Message&lt;T&gt;</a>&amp; msg)</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;{</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    ASSERT_NOT_NULL(conn.get(), <span class="stringliteral">&quot;connection doesn&#39;t exist&quot;</span>);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    CLEM_ASSERT_NOT_NULL(conn.get(), <span class="stringliteral">&quot;connection doesn&#39;t exist&quot;</span>);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">if</span>(!conn-&gt;isConnected())</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    {</div>
@@ -167,7 +167,7 @@ $(document).ready(function(){initNavTree('_server_8h_source.html',''); initResiz
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="group___networking.html#gaeeed9a80b6c00017d73698bc26de1c69">  107</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___networking.html#gaeeed9a80b6c00017d73698bc26de1c69">Server::read</a>(std::shared_ptr&lt;Connection&gt; conn)</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;{</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    ASSERT_NOT_NULL(conn.get(), <span class="stringliteral">&quot;connection doesn&#39;t exist&quot;</span>);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    CLEM_ASSERT_NOT_NULL(conn.get(), <span class="stringliteral">&quot;connection doesn&#39;t exist&quot;</span>);</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">if</span>(!conn-&gt;isConnected())</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    {</div>

@@ -2,8 +2,8 @@ var searchData=
 [
   ['destroyentity_29',['destroyEntity',['../classclem_1_1_scene.html#a1f578c1c436c506a33f0c08b9d7f7ebd',1,'clem::Scene']]],
   ['disconnect_30',['disconnect',['../classclem_1_1_client.html#aa98bb673df803685206983b0926be12e',1,'clem::Client::disconnect()'],['../classclem_1_1_connection.html#a9afd964eedf2a621c4708a1e7dec6b5b',1,'clem::Connection::disconnect()']]],
-  ['distance_31',['distance',['../struct_vector2.html#ae754545486968d5055c75ecadb858aa3',1,'Vector2']]],
-  ['distancesquared_32',['distanceSquared',['../struct_vector2.html#a584530f1f825ce1b4d76bd84ab0caf87',1,'Vector2']]],
+  ['distance_31',['distance',['../struct_vector2.html#a583ed95ebff13e5a9547d4b7d2a89ba0',1,'Vector2']]],
+  ['distancesquared_32',['distanceSquared',['../struct_vector2.html#a797ca3f84a425f5f1bc2e454ac401ed6',1,'Vector2']]],
   ['dot_33',['dot',['../struct_vector2.html#aaf4f05ee6cb634974bf528e09f813c8f',1,'Vector2']]],
   ['drawcycle_34',['drawCycle',['../classclem_1_1_framebuffer.html#ac697cdb1d0ceaa4cf0e8cf469f1ff549',1,'clem::Framebuffer::drawCycle()'],['../classclem_1_1_sprite.html#af747fa1c37bc9b4c1ec96c8aed87d6a0',1,'clem::Sprite::drawCycle()']]],
   ['drawline_35',['drawLine',['../classclem_1_1_framebuffer.html#a85e66d00bfff450ec868978c0979922d',1,'clem::Framebuffer::drawLine()'],['../classclem_1_1_sprite.html#ab4d40e1579cd40b9d99fd8baf8105389',1,'clem::Sprite::drawLine()']]],

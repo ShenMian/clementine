@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['math_324',['Math',['../group___math.html',1,'']]]
+  ['core_332',['Core',['../group___core.html',1,'']]]
 ];

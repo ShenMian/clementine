@@ -5,7 +5,7 @@ var hierarchy =
     [ "clem::Archtype", "classclem_1_1_archtype.html", null ],
     [ "clem::AScene", "classclem_1_1_a_scene.html", null ],
     [ "clem::Assert", "classclem_1_1_assert.html", null ],
-    [ "Audio", "class_audio.html", null ],
+    [ "clem::Audio", "classclem_1_1_audio.html", null ],
     [ "Camera", "class_camera.html", null ],
     [ "Chunk", "struct_chunk.html", null ],
     [ "clem::Client", "classclem_1_1_client.html", null ],
@@ -25,6 +25,7 @@ var hierarchy =
     [ "CpuSample", "struct_cpu_sample.html", null ],
     [ "Cursor", "class_cursor.html", null ],
     [ "clem::Entity", "classclem_1_1_entity.html", null ],
+    [ "clem::EntityInfo", "structclem_1_1_entity_info.html", null ],
     [ "Event", "class_event.html", [
       [ "KeyEvent", "class_key_event.html", null ],
       [ "MouseEvent", "class_mouse_event.html", null ]
@@ -34,7 +35,9 @@ var hierarchy =
     [ "clem::Gamepad", "classclem_1_1_gamepad.html", null ],
     [ "InstrumentationCounter", "class_instrumentation_counter.html", null ],
     [ "Instrumentor", "class_instrumentor.html", null ],
+    [ "clem::Iterator", "classclem_1_1_iterator.html", null ],
     [ "clem::Keyboard", "classclem_1_1_keyboard.html", null ],
+    [ "Line2", "struct_line2.html", null ],
     [ "clem::Listener", "classclem_1_1_listener.html", null ],
     [ "clem::Logger", "classclem_1_1_logger.html", null ],
     [ "clem::Message< T >", "classclem_1_1_message.html", null ],

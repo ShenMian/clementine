@@ -143,7 +143,7 @@ $(document).ready(function(){initNavTree('_connection_8h_source.html',''); initR
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="group___networking.html#ga13b5f1a3d5dabbc04d273b9e021f89b2">   85</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___networking.html#ga13b5f1a3d5dabbc04d273b9e021f89b2">Connection::write</a>(<span class="keyword">const</span> <a class="code" href="classclem_1_1_message.html">Message&lt;T&gt;</a>&amp; msg)</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;{</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    ASSERT_TRUE(msg.header.size == msg.body.size(), <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    CLEM_ASSERT_TRUE(msg.header.size == msg.body.size(), <span class="stringliteral">&quot;&quot;</span>);</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    asio::async_write(socket, asio::buffer(&amp;msg.header, <span class="keyword">sizeof</span>(msg.header)),</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                                        [<span class="keyword">this</span>](std::error_code ec, <span class="keywordtype">size_t</span> size) {</div>

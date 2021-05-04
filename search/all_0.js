@@ -10,5 +10,5 @@ var searchData=
   ['ascene_7',['AScene',['../classclem_1_1_a_scene.html',1,'clem']]],
   ['asint_8',['asInt',['../struct_vector2.html#a68b299e5dc20f37ab18ba70c53e006af',1,'Vector2']]],
   ['assert_9',['Assert',['../classclem_1_1_assert.html',1,'clem']]],
-  ['audio_10',['Audio',['../class_audio.html',1,'']]]
+  ['audio_10',['Audio',['../group___audio.html',1,'(全局命名空间)'],['../classclem_1_1_audio.html',1,'clem::Audio']]]
 ];

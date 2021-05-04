@@ -127,10 +127,12 @@ $(document).ready(function(){initNavTree('_assert_8h_source.html',''); initResiz
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#define CALL_INFO __FILE__, __LINE__</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#define ASSERT_TRUE(expr, msg)     clem::Assert::isTrue(expr, msg, CALL_INFO);</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#define ASSERT_FALSE(expr, msg)    clem::Assert::isFalse(expr, msg, CALL_INFO);</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#define ASSERT_NULL(expr, msg)     clem::Assert::isNull(expr, msg, CALL_INFO);</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#define ASSERT_NOT_NULL(expr, msg) clem::Assert::isNotNull(expr, msg, CALL_INFO);</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#define CLEM_ASSERT_TRUE(expr, msg)     clem::Assert::isTrue(expr, msg, CALL_INFO);</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#define CLEM_ASSERT_FALSE(expr, msg)    clem::Assert::isFalse(expr, msg, CALL_INFO);</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#define CLEM_ASSERT_NULL(expr, msg)     clem::Assert::isNull(expr, msg, CALL_INFO);</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#define CLEM_ASSERT_NOT_NULL(expr, msg) clem::Assert::isNotNull(expr, msg, CALL_INFO);</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#define CLEM_ASSERT_EQ(val1, val2)      clem::Assert::isTrue((val1) == (val2), msg, CALL_INFO);</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#define CLEM_ASSERT_NE(val1, val2)      clem::Assert::isTrue((val1) != (val2), msg, CALL_INFO);</span></div>
 <div class="ttc" id="aclassclem_1_1_assert_html"><div class="ttname"><a href="classclem_1_1_assert.html">clem::Assert</a></div><div class="ttdoc">断言.</div><div class="ttdef"><b>Definition:</b> Assert.h:22</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
