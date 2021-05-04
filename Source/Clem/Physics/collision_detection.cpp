@@ -80,8 +80,9 @@ bool collision(CircleCollider c, Line2 l)
 	const auto startToEnd    = l.end - l.start;
 	const auto angle         = std::abs(startToCenter.angle() - startToEnd.angle());
 	return sin(angle) * startToCenter.size() <= c.getRadius();
+}
 
-	/*const auto center        = c.getPosition();
+/*const auto center        = c.getPosition();
 	const auto startToCenter = center - l.start;
 	const auto startToEnd    = l.end - l.start;
 
@@ -93,4 +94,8 @@ bool collision(CircleCollider c, Line2 l)
 	const auto closestPoint = l.start + startToEnd * t;
 
 	collision(c, closestPoint);*/
+
+bool collision(BoxCollider b, CircleCollider c)
+{
+	return false;
 }
