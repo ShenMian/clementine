@@ -10,6 +10,9 @@
 using namespace clem;
 using namespace std::filesystem;
 
+namespace clem
+{
+
 ALCdevice*  Audio::device  = nullptr;
 ALCcontext* Audio::context = nullptr;
 
@@ -45,3 +48,5 @@ void Audio::deinit()
 	context = nullptr;
 	device  = nullptr;
 }
+
+} // namespace clem

@@ -8,6 +8,12 @@
 
 namespace clem
 {
+
+/**
+ * @addtogroup Audio
+ * @{
+ */
+
 /**
  * @brief 声音.
  * 提前将音频文件载入到内存中, 作为声音效果. 适用于较小的音频文件.
@@ -55,4 +61,10 @@ private:
 
 	id_t id;
 };
+
+/**
+ * end of Audio group
+ * @}
+ */
+
 } // namespace clem

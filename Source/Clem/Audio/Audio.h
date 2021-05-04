@@ -11,6 +11,14 @@
 #include "Sound.h"
 #include "Source.h"
 
+namespace clem
+{
+
+/**
+ * @addtogroup Audio
+ * @{
+ */
+
 class Audio
 {
 public:
@@ -23,3 +31,10 @@ private:
 	static ALCdevice*  device;
 	static ALCcontext* context;
 };
+
+/**
+ * end of Audio group
+ * @}
+ */
+
+} // namespace clem

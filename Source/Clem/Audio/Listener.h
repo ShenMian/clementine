@@ -8,6 +8,12 @@
 
 namespace clem
 {
+
+/**
+ * @addtogroup Audio
+ * @{
+ */
+
 /**
  * @brief 听者.
  */
@@ -54,4 +60,9 @@ public:
 	 */
 	static Vector2 getVelocity();
 };
+
+/**
+ * end of Audio group
+ * @}
+ */
 } // namespace clem

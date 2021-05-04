@@ -11,6 +11,11 @@ namespace clem
 class Sound;
 
 /**
+ * @addtogroup Audio
+ * @{
+ */
+
+/**
  * @brief 声源.
  */
 class Source
@@ -100,4 +105,10 @@ public:
 private:
 	id_t id;
 };
+
+/**
+ * end of Audio group
+ * @}
+ */
+
 } // namespace clem
