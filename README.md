@@ -17,17 +17,9 @@ This is a framework for building 2D console games.
 
 Features
 --------
-- Multi-platform: Linux, macOS, Windows.
-- Lightweight.
 - Easy to use.
-- Has a in-game profiling tool (CPU sampling profiler).
-- Subsystems
-  - entity-component-system (ECS).
-  - Audio.
-  - Physics.
-  - Logging.
-  - Input: Keyboard, Mouse, Gamepad.
-  - Networking.
+- Lightweight.
+- Multi-platform: Windows, Linux, macOS.
 
 Goals
 -----
