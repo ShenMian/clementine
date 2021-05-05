@@ -8,7 +8,6 @@
 
 namespace clem
 {
-
 class Scene;
 class Rigidbody;
 
@@ -39,5 +38,4 @@ private:
  * end of Physics group
  * @}
  */
-
 } // namespace clem

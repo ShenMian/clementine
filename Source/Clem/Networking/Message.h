@@ -11,7 +11,6 @@
 
 namespace clem
 {
-
 /**
  * @addtogroup Networking
  * @{
@@ -19,7 +18,7 @@ namespace clem
 
 /**
  * @brief 网络消息.
- * 
+ *
  * @tparam T 消息 ID 类型, 强类型枚举体.
  */
 template <typename T>
@@ -93,5 +92,4 @@ public:
  * end of Networking group
  * @}
  */
-
 } // namespace clem

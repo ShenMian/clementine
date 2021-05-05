@@ -11,7 +11,6 @@
 
 namespace clem
 {
-
 /**
  * @addtogroup Networking
  * @{
@@ -29,7 +28,7 @@ public:
 	/**
 	 * @brief 与指定主机的端口建立连接.
 	 * 异步, 完成后回调 onConnect.
-	 * 
+	 *
 	 * @param host 主机, IP 或域名.
 	 * @param port 端口号.
 	 */
@@ -42,7 +41,7 @@ public:
 
 	/**
 	 * @brief 判断是否已建立连接.
-	 * 
+	 *
 	 * @return true  连接已建立.
 	 * @return false 连接未建立.
 	 */
@@ -176,5 +175,4 @@ Message<T>& Connection::getMessage()
  * end of Networking group
  * @}
  */
-
 } // namespace clem

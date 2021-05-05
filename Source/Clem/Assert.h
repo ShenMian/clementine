@@ -38,7 +38,6 @@ public:
 	static void isNull(const std::shared_ptr<T>& expr, ...);
 	*/
 };
-
 } // namespace clem
 
 #define CALL_INFO __FILE__, __LINE__

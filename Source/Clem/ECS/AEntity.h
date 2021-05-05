@@ -7,7 +7,6 @@
 
 namespace clem
 {
-
 class AEntity
 {
 public:
@@ -37,5 +36,4 @@ bool AEntity::hasComponent() const
 {
 	return hasComponent<T>() && hasComponent<V, Types...>();
 }
-
 } // namespace clem

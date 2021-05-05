@@ -29,5 +29,4 @@ public:
 private:
 	type_set types;
 };
-
 } // namespace clem

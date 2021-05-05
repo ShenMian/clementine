@@ -1,4 +1,3 @@
-
 #include "Clem.h"
 
 using namespace clem;
@@ -17,7 +16,7 @@ bool collision(Line2 l, Point2 p)
 	const auto dx = l.end.x - l.start.x;
 	const auto dy = l.end.y - l.start.y;
 	assert(dx != 0 && dy != 0);
-	const auto k  = dy / dx;
+	const auto k = dy / dx;
 	const auto b = l.start.y; // b = l.end.y - k * l.end.x
 
 	return p.y == k * p.x + b;
@@ -69,7 +68,7 @@ bool collision(BoxCollider box, Line2 l)
 
 	// TODO: 判断是否与上边相交
 	// TODO: 判断是否与下边相交
-	
+
 	return false;
 }
 

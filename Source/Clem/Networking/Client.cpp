@@ -7,7 +7,6 @@ using namespace asio;
 
 namespace clem
 {
-
 Client::Client()
 		: connection(context, ip::tcp::socket(context))
 {
@@ -43,5 +42,4 @@ bool Client::isConnected() const
 {
 	return connection.isConnected();
 }
-
 } // namespace clem

@@ -7,7 +7,6 @@ using namespace asio;
 
 namespace clem
 {
-
 Connection::Connection(io_context& c, ip::tcp::socket s)
 		: context(c), socket(std::move(s))
 {
@@ -60,5 +59,4 @@ bool Connection::isConnected() const
 {
 	return socket.is_open();
 }
-
 } // namespace clem

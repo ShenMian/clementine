@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Message.h"
-#include "Connection.h"
 #include "Client.h"
+#include "Connection.h"
+#include "Message.h"
 #include "Server.h"

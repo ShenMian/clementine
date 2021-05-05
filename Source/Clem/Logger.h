@@ -10,7 +10,6 @@
 
 namespace clem
 {
-
 #define LOG_LEVEL_INFO  0
 #define LOG_LEVEL_WARN  1
 #define LOG_LEVEL_ERROR 2
@@ -32,7 +31,7 @@ public:
 
 	/**
 	 * @brief 一般消息.
-	 * 
+	 *
 	 * @param fmt  格式字符串.
 	 * @param args 参数.
 	 */
@@ -41,7 +40,7 @@ public:
 
 	/**
 	 * @brief 警告消息.
-	 * 
+	 *
 	 * @param fmt  格式字符串.
 	 * @param args 参数.
 	 */
@@ -50,7 +49,7 @@ public:
 
 	/**
 	 * @brief 错误消息.
-	 * 
+	 *
 	 * @param fmt  格式字符串.
 	 * @param args 参数.
 	 */
@@ -59,7 +58,7 @@ public:
 
 	/**
 	 * @brief 致命错误消息. 调用后会终止程序.
-	 * 
+	 *
 	 * @param fmt  格式字符串.
 	 * @param args 参数.
 	 */
@@ -71,7 +70,7 @@ public:
 
 private:
 	std::shared_ptr<spdlog::logger> logger;
-	
+
 	static std::unordered_map<std::string, Logger> loggers;
 };
 
@@ -107,7 +106,6 @@ void Logger::fatal(const FmtStr& fmt, Args&&... args)
 #endif
 	abort();
 }
-
 } // namespace clem
 
 #define CLEM_LOG_INFO(name, ...)  clem::Logger::get(name).info(__VA_ARGS__)

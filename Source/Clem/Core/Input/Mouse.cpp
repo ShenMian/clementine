@@ -110,5 +110,4 @@ void Mouse::update()
 }
 
 #endif
-
 } // namespace clem

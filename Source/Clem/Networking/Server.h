@@ -14,7 +14,6 @@
 
 namespace clem
 {
-
 /**
  * @addtogroup Networking
  * @{
@@ -31,9 +30,9 @@ public:
 
 	/**
 	 * @brief 启动服务器并开始监听指定端口.
-	 * 
+	 *
 	 * @param port 要监听的端口.
-	 * 
+	 *
 	 * @return true  启动成功.
 	 * @return false 启动失败.
 	 */
@@ -123,5 +122,4 @@ void Server::read(std::shared_ptr<Connection> conn)
  * end of Networking group
  * @}
  */
-
 } // namespace clem

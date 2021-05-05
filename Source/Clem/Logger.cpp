@@ -2,14 +2,13 @@
 // License(Apache-2.0)
 
 #include "Logger.h"
-#include "spdlog/sinks/rotating_file_sink.h"
 #include "spdlog/sinks/basic_file_sink.h"
+#include "spdlog/sinks/rotating_file_sink.h"
 
 using std::string;
 
 namespace clem
 {
-
 std::unordered_map<std::string, Logger> Logger::loggers;
 
 Logger::Logger(const string& name)
@@ -37,5 +36,4 @@ Logger& Logger::get(const string& name)
 	CLEM_ASSERT_TRUE(res != loggers.end(), "logger named '" + name + "' doesn't exist");
 	return res->second;
 }
-
 } // namespace clem

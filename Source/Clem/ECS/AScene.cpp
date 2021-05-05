@@ -7,7 +7,6 @@
 
 namespace clem
 {
-
 struct EntityInfo
 {
 	Archtype                         archtype;
@@ -17,7 +16,6 @@ struct EntityInfo
 void AScene::view(const Archtype& archtype)
 {
 	auto it = std::find(archtypes.begin(), archtypes.end(), archtype);
-	
 }
 
 class Iterator
@@ -25,5 +23,4 @@ class Iterator
 	Iterator& operator++();
 	Iterator& operator++(int);
 };
-
 } // namespace clem

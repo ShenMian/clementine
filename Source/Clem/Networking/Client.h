@@ -11,7 +11,6 @@
 
 namespace clem
 {
-
 /**
  * @addtogroup Networking
  * @{
@@ -28,10 +27,10 @@ public:
 
 	/**
 	 * @brief 启动客户端并与指定主机(服务器)的端口建立连接.
-	 * 
+	 *
 	 * @param host 主机, IP 或域名.
 	 * @param port 端口号.
-	 * 
+	 *
 	 * @return true  启动成功.
 	 * @return false 启动失败.
 	 */
@@ -44,7 +43,7 @@ public:
 
 	/**
 	 * @brief 判断是否已建立连接.
-	 * 
+	 *
 	 * @return true  连接已建立.
 	 * @return false 连接未建立.
 	 */
@@ -103,5 +102,4 @@ void Client::read()
  * end of Networking group
  * @}
  */
-
 } // namespace clem

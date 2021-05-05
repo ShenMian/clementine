@@ -149,7 +149,6 @@ size_t Sprite::getDepth() const
 {
 	return depth;
 }
-
 } // namespace clem
 
 /*

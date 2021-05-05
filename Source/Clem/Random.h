@@ -23,7 +23,7 @@ public:
 
 	/**
 	 * @brief 生成指定范围内的32位随机无符号整数.
-	 * 
+	 *
 	 * @param min 范围下限, 包含, 默认值: 32位无符号整数最大值.
 	 * @param max 范围上限, 包含, 默认值: 0.
 	 */
@@ -31,12 +31,12 @@ public:
 
 	/**
 	 * @brief 生成指定范围内的32位随机有符号整数.
-	 * 
+	 *
 	 * @param min 范围下限, 包含, 默认值: 32位无符号整数最大值.
 	 * @param max 范围上限, 包含, 默认值: 32位无符号整数最小值.
-	 * @return int32_t 
+	 * @return int32_t
 	 */
-	int32_t  getInt32(int32_t min = INT32_MIN, int32_t max = INT32_MAX);
+	int32_t getInt32(int32_t min = INT32_MIN, int32_t max = INT32_MAX);
 
 	/**
 	 * @brief 生成 0-1 之间的随机单精度浮点数.

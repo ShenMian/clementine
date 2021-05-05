@@ -8,7 +8,6 @@
 
 namespace clem
 {
-
 PhysicsWorld::PhysicsWorld(Scene& s)
 		: scene(s)
 {
@@ -75,5 +74,4 @@ void PhysicsWorld::setGravity(const Vector2& g)
 {
 	gravity = g;
 }
-
 } // namespace clem

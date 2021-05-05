@@ -110,5 +110,4 @@ private:
  * end of Audio group
  * @}
  */
-
 } // namespace clem

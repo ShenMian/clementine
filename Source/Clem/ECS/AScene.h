@@ -4,9 +4,9 @@
 #pragma once
 
 #include <cstdint>
+#include <map>
 #include <memory_resource>
 #include <unordered_map>
-#include <map>
 #include <vector>
 
 namespace clem
@@ -23,12 +23,11 @@ public:
 	void    destoryEntity(AEntity);
 
 	void view(const Archtype&);
-	
-private:
-	std::map<AEntity, EntityInfo> entities;
-	std::vector<Archtype>                   archtypes;
-	std::map<Archtype, Chunk*>              chunks; // unordered_map
-	std::pmr::polymorphic_allocator<Chunk>  allocator;
-};
 
+private:
+	std::map<AEntity, EntityInfo>          entities;
+	std::vector<Archtype>                  archtypes;
+	std::map<Archtype, Chunk*>             chunks; // unordered_map
+	std::pmr::polymorphic_allocator<Chunk> allocator;
+};
 } // namespace clem

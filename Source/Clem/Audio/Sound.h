@@ -8,7 +8,6 @@
 
 namespace clem
 {
-
 /**
  * @addtogroup Audio
  * @{
@@ -66,5 +65,4 @@ private:
  * end of Audio group
  * @}
  */
-
 } // namespace clem

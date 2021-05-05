@@ -95,7 +95,7 @@ template <typename Com>
 Com& Entity::getComponent()
 {
 	if(!hasComponent<Com>())
-		CLEM_LOG_FATAL("core", "get a nonexistent component '{}' from entity '{}'", typeid(Com).name()/*, getComponent<Tag>().string*/);
+		CLEM_LOG_FATAL("core", "get a nonexistent component '{}' from entity '{}'", typeid(Com).name() /*, getComponent<Tag>().string*/);
 	return scene->registry.get<Com>(id);
 }
 
