@@ -4,6 +4,7 @@
 #include "Sprite.h"
 #include "Clem/Core/Math/Rect2i.h"
 #include "Clem/Logger.h"
+#include <algorithm>
 #include <cmath>
 #include <fstream>
 
@@ -33,9 +34,22 @@ void Sprite::drawPoint(const Point2i& p, const Tile& t)
 	buffer[p.x + p.y * size.x] = t;
 }
 
-void Sprite::drawLine(const Point2i& a, const Point2i& b, const Tile& t)
+void Sprite::drawLine(const Point2i& start, const Point2i& end, const Tile& t)
 {
-	auto xDis   = b.x - a.x + 1;
+	const float dx  = end.x - start.x;
+	const float dy  = end.y - start.y;
+	const float max = std::max(dx, dy);
+	const float kx  = max / dx;
+	const float ky  = max / dy;
+
+	float x = start.x, y = start.y;
+	for(int i = 0; i <= max; i++)
+	{
+		drawPoint((int)(x + 0.5f), (int)(y + 0.5f), t);
+		x += kx, y += ky;
+	}
+	
+	/*auto xDis   = b.x - a.x + 1;
 	auto yDis   = b.y - a.y + 1;
 	auto maxDis = std::max(abs(xDis), abs(yDis));
 
@@ -47,7 +61,7 @@ void Sprite::drawLine(const Point2i& a, const Point2i& b, const Tile& t)
 	{
 		drawPoint((int)x, (int)y, t);
 		x += xDelta, y += yDelta;
-	}
+	}*/
 }
 
 void Sprite::drawRect(const Rect2i& r, const Tile& t)

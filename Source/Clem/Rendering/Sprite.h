@@ -45,7 +45,7 @@ public:
 	 * @param b 线段另一端点坐标.
 	 * @param t 瓦片.
 	 */
-	void drawLine(const Point2i& a, const Point2i& b, const Tile& t);
+	void drawLine(const Point2i& start, const Point2i& end, const Tile& t);
 
 	/**
 	 * @brief 绘制矩形.
