@@ -9,17 +9,21 @@
 #include <stdint.h>
 
 /**
- * @brief 随机数生成器.
+ * @brief 伪随机数生成器.
+ * 生成均匀分布的随机数.
  */
 class Random
 {
 public:
+	/**
+	 * @brief 默认构造函数. 使用随机生成的种子.
+	 */
 	Random();
 
 	/**
 	 * @brief 设置种子.
 	 */
-	void setSeed(uint32_t);
+	void setSeed(uint32_t seed);
 
 	/**
 	 * @brief 生成指定范围内的32位随机无符号整数.
@@ -39,10 +43,16 @@ public:
 	int32_t getInt32(int32_t min = INT32_MIN, int32_t max = INT32_MAX);
 
 	/**
-	 * @brief 生成 0-1 之间的随机单精度浮点数.
+	 * @brief 生成指定范围内的随机单精度浮点数.
+	 *
+	 * @param min 范围下限, 包含, 默认值: 0.
+	 * @param max 范围上限, 包含, 默认值: 1.
 	 */
-	float getFloat();
+	float getFloat(float min = 0.0f, float max = 1.0f);
 
+	/**
+	 * @brief 生成指定范围内的随机二维点.
+	 */
 	Point2i getPoint2i(const Point2i& min, const Point2i& max);
 
 private:

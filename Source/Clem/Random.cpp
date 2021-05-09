@@ -18,19 +18,19 @@ void Random::setSeed(uint32_t seed)
 
 uint32_t Random::getUint32(uint32_t min, uint32_t max)
 {
-	uniform_int_distribution<uint32_t> dist(min, max);
+	uniform_int_distribution dist(min, max);
 	return dist(generator);
 }
 
 int32_t Random::getInt32(int32_t min, int32_t max)
 {
-	uniform_int_distribution<int32_t> dist(min, max);
+	uniform_int_distribution dist(min, max);
 	return dist(generator);
 }
 
-float Random::getFloat()
+float Random::getFloat(float min, float max)
 {
-	uniform_real_distribution<float> dist;
+	uniform_real_distribution dist(min, max);
 	return dist(generator);
 }
 
