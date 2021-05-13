@@ -53,6 +53,11 @@ public:
 	/**
 	 * @brief 生成指定范围内的随机二维点.
 	 */
+	Point2 getPoint2(const Point2& min, const Point2& max);
+
+	/**
+	 * @brief 生成指定范围内的随机二维点.
+	 */
 	Point2i getPoint2i(const Point2i& min, const Point2i& max);
 
 private:
