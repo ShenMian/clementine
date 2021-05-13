@@ -55,15 +55,30 @@ Point2 Rect2::br() const
 
 bool Rect2::intersectsPoint(const Point2& p) const
 {
-	return top() <= p.y && p.y <= bottom() && left() <= p.x && p.x <= right();
+	return intersectsX(p.x) && intersectsY(p.y);
 }
 
 bool Rect2::intersectsRect(const Rect2& r) const
 {
-	return std::abs(origin.x - r.origin.x) <= (size.x + r.size.x) / 2 &&
-				 std::abs(origin.y - r.origin.y) <= (size.y + r.size.y) / 2;
+	// FIMME
+	return (intersectsX(r.left()) || intersectsX(r.right()) || r.intersectsX(left()) || r.intersectsX(right())) &&
+				 (intersectsY(r.bottom()) || intersectsY(r.top()) || r.intersectsY(bottom()) || r.intersectsY(top()));
+
+	// return std::abs(origin.x - r.origin.x) <= (size.x + r.size.x) / 2 &&
+	//        std::abs(origin.y - r.origin.y) <= (size.y + r.size.y) / 2;
+
 	// return intersectsPoint(r.tl()) || intersectsPoint(r.tr()) ||
 	//			  intersectsPoint(r.bl()) || intersectsPoint(r.br());
+}
+
+bool Rect2::intersectsX(float x) const
+{
+	return left() <= x && x <= right();
+}
+
+bool Rect2::intersectsY(float y) const
+{
+	return bottom() <= y && y <= top();
 }
 
 bool Rect2::isValid() const
