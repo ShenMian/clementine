@@ -99,8 +99,6 @@ public:
 	virtual void deinit();
 
 private:
-	void parseArgs(int argc, char* argv[]);
-
 	void initPlatform();
 
 	void updateInput(uint16_t dt);

@@ -23,6 +23,20 @@ int main(int argc, char* argv[])
 {
 	PROFILE_SESSION_BEGIN("profile.json");
 
+	auto parseArgs = [](int argc, char* argv[]) {
+		map<string, string> args;
+
+		for(int i = 1; i < argc; i++)
+		{
+			string_view str = argv[i];
+			auto        it  = str.find('=');
+			auto        opt = str.substr(0, it);
+			auto        val = str.substr(it + 1);
+			args.emplace(opt, val);
+		}
+	};
+	parseArgs(argc, argv);
+
 	auto app = clem::CreateApplication();
 	CLEM_ASSERT_NOT_NULL(app, "CreateApplication() returns nullptr");
 
@@ -240,20 +254,6 @@ void Application::init()
 
 void Application::deinit()
 {
-}
-
-void Application::parseArgs(int argc, char* argv[])
-{
-	map<string, string> args;
-
-	for(int i = 1; i < argc; i++)
-	{
-		string_view str = argv[i];
-		auto        it  = str.find('=');
-		auto        opt = str.substr(0, it);
-		auto        val = str.substr(it + 1);
-		args.emplace(opt, val);
-	}
 }
 
 void Application::onSignal(int signal)
