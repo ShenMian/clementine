@@ -216,13 +216,11 @@ void Application::replaceScene(const shared_ptr<Scene>& s)
 
 void Application::setMsPerUpdate(uint16_t ms)
 {
-	CLEM_ASSERT_TRUE(ms >= 0, "set ms per update non positive is not allowed");
 	msPerUpdate = ms;
 }
 
 void Application::setMsPerRender(uint16_t ms)
 {
-	CLEM_ASSERT_TRUE(ms >= 0, "set ms per render non positive is not allowed");
 	msPerRender = ms;
 }
 
