@@ -98,9 +98,9 @@ public:
 	 */
 	bool intersectsRect(const Rect2& rect) const;
 
-	bool Rect2::intersectsX(float x) const;
+	bool intersectsX(float x) const;
 
-	bool Rect2::intersectsY(float y) const;
+	bool intersectsY(float y) const;
 
 	bool isValid() const;
 };
