@@ -25,13 +25,13 @@ void Framebuffer::drawPoint(int x, int y, const Tile& t)
 
 void Framebuffer::drawLine(const Point2i& start, const Point2i& end, const Tile& t)
 {
-	const float dx  = end.x - start.x;
-	const float dy  = end.y - start.y;
+	const float dx  = (float)end.x - start.x;
+	const float dy  = (float)end.y - start.y;
 	const float max = std::max(dx, dy);
 	const float kx  = max / dx;
 	const float ky  = max / dy;
 
-	float x = start.x, y = start.y;
+	float x = (float)start.x, y = (float)start.y;
 	for(int i = 0; i <= max; i++)
 	{
 		drawPoint((int)(x + 0.5f), (int)(y + 0.5f), t);
