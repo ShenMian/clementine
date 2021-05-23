@@ -7,9 +7,13 @@
 
 namespace clem
 {
+class AScene;
+
 class AEntity
 {
 public:
+	AEntity(size_t id, AScene& scene);
+
 	template <typename Com, typename... Args>
 	Com& addComponent(Args&&... args);
 
@@ -27,13 +31,23 @@ public:
 
 	bool isValid() const;
 
+	bool operator==(const AEntity& rhs) const;
+	bool operator<(const AEntity& rhs) const;
+
 private:
-	size_t id;
+	size_t  id;
+	AScene& scene;
 };
 
-template <typename T, typename V, typename... Types>
+template <typename Com>
 bool AEntity::hasComponent() const
 {
-	return hasComponent<T>() && hasComponent<V, Types...>();
+	return false;
+}
+
+template <typename Com, typename T, typename... Types>
+bool AEntity::hasComponent() const
+{
+	return hasComponent<Com>() && hasComponent<T, Types...>();
 }
 } // namespace clem

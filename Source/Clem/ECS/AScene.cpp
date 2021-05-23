@@ -2,16 +2,24 @@
 // License(Apache-2.0)
 
 #include "AScene.h"
+#include "AEntity.h"
 #include "Archtype.h"
 #include <algorithm>
 
 namespace clem
 {
-struct EntityInfo
+AEntity AScene::createEntity()
 {
-	Archtype                         archtype;
-	std::map<std::type_index, void*> components;
-};
+	// AEntity entity(entities.size(), *this);
+	// entities.emplace(entity);
+	// return entity;
+	return AEntity(0, *this);
+}
+
+void AScene::destoryEntity(AEntity entity)
+{
+	// entities.erase(entities.find(entity));
+}
 
 void AScene::view(const Archtype& archtype)
 {

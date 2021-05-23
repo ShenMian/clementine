@@ -1,9 +1,12 @@
+ï»¿// Copyright 2021 SMS
+// License(Apache-2.0)
+
 #include "Clem.h"
 
 using namespace clem;
 
 /**
- * @brief ¶þÎ¬Ïß¶Î.
+ * @brief äºŒç»´çº¿æ®µ.
  */
 struct Line2
 {
@@ -56,18 +59,18 @@ bool collision(BoxCollider box, Line2 l)
 	const auto k = dy / dx;
 	const auto b = l.start.y;
 
-	// ÅÐ¶ÏÊÇ·ñÓë×ó±ßÏà½»
+	// ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à½»
 	auto y = k * rect.left() + b;
 	if(rect.bottom() <= y && y <= rect.top())
 		return true;
 
-	// ÅÐ¶ÏÊÇ·ñÓëÓÒ±ßÏà½»
+	// ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ò±ï¿½ï¿½à½»
 	y = k * rect.right() + b;
 	if(rect.bottom() <= y && y <= rect.top())
 		return true;
 
-	// TODO: ÅÐ¶ÏÊÇ·ñÓëÉÏ±ßÏà½»
-	// TODO: ÅÐ¶ÏÊÇ·ñÓëÏÂ±ßÏà½»
+	// TODO: ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½à½»
+	// TODO: ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Â±ï¿½ï¿½à½»
 
 	return false;
 }

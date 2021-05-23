@@ -310,8 +310,8 @@ void Application::initPlatform()
 
 long Application::getCurrentMillSecond() const
 {
-	LARGE_INTEGER freq;
-	BOOL          ret = QueryPerformanceFrequency(&freq); // TODO: 只需执行一次
+	static LARGE_INTEGER freq;
+	static BOOL          ret = QueryPerformanceFrequency(&freq);
 	CLEM_ASSERT_TRUE(ret != 0, "the installed hardware doesn't supports a high-resolution performance counter");
 
 	LARGE_INTEGER time;

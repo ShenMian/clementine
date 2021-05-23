@@ -88,6 +88,8 @@ void Framebuffer::drawString(const Point2i& pos, std::wstring str, Color c)
 
 void Framebuffer::clear(const Tile& t)
 {
+	PROFILE_FUNC();
+
 	fillRect(Rect2i({0, 0}, size), t);
 }
 
