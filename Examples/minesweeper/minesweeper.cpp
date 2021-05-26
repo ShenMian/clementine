@@ -37,6 +37,7 @@ public:
 		(void)getchar();
 		switch(choice)
 		{
+		default:
 		case '1':
 			board_size.x = 9;
 			board_size.y = 9;
@@ -53,12 +54,6 @@ public:
 			board_size.x = 30;
 			board_size.y = 16;
 			mine_num     = 99;
-			break;
-
-		default:
-			puts("Unknown level");
-			(void)getchar();
-			exit(0);
 			break;
 		}
 
@@ -80,7 +75,7 @@ public:
 
 		/*auto ui = scene->createEntity("info");
 		ui.addComponent<Sprite>(Size2i(15, board_size.y + 2));
-		// BUG: 其他实体的组件会被释放
+		// FIXME: 其他实体的组件会被释放
 		ui.getComponent<Transform>().setLocalPosition(Point2((float)board_size.x * 2 + 2, 0));
 
 		ui.addComponent<Script>().onUpdate = [&](float) {
@@ -189,24 +184,22 @@ public:
 		}
 	}
 
-	bool inBoard(int x, int y)
+private:
+	bool inBoard(int x, int y) const
 	{
 		return x >= 0 && x < board_size.x && y >= 0 && y < board_size.y;
 	}
 
-private:
-	Size2i            board_size;
-	int               mine_num = 99;
-	char              map[30][16];
-	int               surplus;
+	Size2i            board_size;		// 雷区大小
+	int               mine_num;			// 地雷数量
+	char              map[30][16];	// 雷区
+	int               surplus;			// 剩余未揭开格数
+	vector<Point2i>   flags;        // 标记位置
+	Sound             opening;			// 开场音效(游戏开始)
+	Sound             explode;			// 引爆地雷音效(游戏失败)
+	Source            source;
+	Random            random;
 	Sprite*           sprite;
-	vector<Point2i>   flags;
-
-	Sound  opening, explode;
-	Source source;
-
-	Random random;
-
 	shared_ptr<Scene> scene = make_shared<Scene>();
 };
 

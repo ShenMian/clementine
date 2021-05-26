@@ -6,7 +6,7 @@
 using namespace std;
 using namespace clem;
 
-// TODO: 双缓冲
+// TODO: 应用双缓冲
 
 class Sort : public Application
 {
