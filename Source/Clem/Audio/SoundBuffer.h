@@ -4,6 +4,8 @@
 #pragma once
 
 #include <filesystem>
+#include <vector>
+#include <cstring>
 
 namespace clem
 {
@@ -35,10 +37,12 @@ public:
 
 private:
 	std::vector<uint8_t> samples;
+	int32_t              sampleRate;
+	int16_t              channelCount;
 	unsigned int         id; // OpenAL 缓冲区 ID
 
-	int                  frequency;
-	int                  format;
+	int frequency;
+	int format;
 
 	/**
 	 * 从 WAV 文件载入声音.

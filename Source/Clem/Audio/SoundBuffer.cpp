@@ -86,7 +86,7 @@ bool SoundBuffer::loadWavFile(const std::filesystem::path& path)
 	WaveData   waveData;
 
 	file.read((char*)&riffHeader, sizeof(RiffHeader));
-	if(memcmp(riffHeader.id, "RIFF", 4) != 0 || memcmp(riffHeader.format, "WAVE", 4) != 0)
+	if(std::memcmp(riffHeader.id, "RIFF", 4) != 0 || std::memcmp(riffHeader.format, "WAVE", 4) != 0)
 		return false;
 
 	file.read((char*)&waveFormat, sizeof(WaveFormat));
@@ -98,7 +98,7 @@ bool SoundBuffer::loadWavFile(const std::filesystem::path& path)
 
 	// 如果 WAV 文件是由其他格式转换而来, 会包含 ID 为 LIST 的格式转换信息.
 	// 跳过这部分内容, 直接获取音频样本数据.
-	if(memcmp(id, "LIST", 4) == 0)
+	if(std::memcmp(id, "LIST", 4) == 0)
 	{
 		int32_t list_size;
 		file.read((char*)&list_size, sizeof(list_size));
@@ -106,14 +106,15 @@ bool SoundBuffer::loadWavFile(const std::filesystem::path& path)
 		file.read(id, 4);
 	}
 
-	if(memcmp(id, "data", 4) != 0)
+	if(std::memcmp(id, "data", 4) != 0)
 		return false;
 
 	file.seekg(-4, std::ios::cur);
 	file.read((char*)&waveData, sizeof(WaveData));
 
-	format    = 0;
-	frequency = waveFormat.sampleRate;
+	format       = 0;
+	sampleRate   = waveFormat.sampleRate;
+	channelCount = waveFormat.numChannels;
 
 	if(waveFormat.numChannels == 1)
 	{
