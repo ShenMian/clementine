@@ -37,7 +37,7 @@ public:
 
 private:
 	// std::map<AEntity, EntityInfo>          entities;
-	std::vector<Archtype>                  archtypes;
+	std::vector<Archtype> archtypes;
 	// std::map<Archtype, Chunk*>             chunks; // unordered_map
 	std::pmr::polymorphic_allocator<Chunk> allocator;
 };
@@ -58,5 +58,4 @@ void AScene::destoryComponent()
 	// auto& info = entities.find(entity)->second;
 	// info.components.erase(info.components.find(typeid(Com)));
 }
-
 } // namespace clem

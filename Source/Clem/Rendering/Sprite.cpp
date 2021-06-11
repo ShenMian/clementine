@@ -48,7 +48,7 @@ void Sprite::drawLine(const Point2i& start, const Point2i& end, const Tile& t)
 		drawPoint((int)(x + 0.5f), (int)(y + 0.5f), t);
 		x += kx, y += ky;
 	}
-	
+
 	/*auto xDis   = b.x - a.x + 1;
 	auto yDis   = b.y - a.y + 1;
 	auto maxDis = std::max(abs(xDis), abs(yDis));

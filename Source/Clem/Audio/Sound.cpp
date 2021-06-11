@@ -9,7 +9,6 @@ namespace fs = std::filesystem;
 
 namespace clem
 {
-
 Sound::Sound()
 {
 	alGenBuffers(1, &bufferId);
@@ -142,8 +141,7 @@ void Sound::loadWavFile(const fs::path& path)
 	file.read((char*)samples.data(), waveData.size);
 
 	file.close();
-	
+
 	alBufferData(bufferId, format, (void*)samples.data(), (ALsizei)samples.size(), sampleRate);
 }
-
 } // namespace clem

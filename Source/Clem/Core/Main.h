@@ -3,14 +3,13 @@
 
 #pragma once
 
-#include <vector>
 #include <memory>
+#include <vector>
 
 int main(int argc, char* argv[]);
 
 namespace clem
 {
-
 /**
  * @addtogroup Core
  * @{
@@ -19,10 +18,10 @@ namespace clem
 class Main
 {
 public:
-  Main();
-  ~Main();
+	Main();
+	~Main();
 
-  int main(int argc, char* argv[]);
+	int main(int argc, char* argv[]);
 
 	/**
 	 * @brief Æô¶¯Ö÷Ñ­»·.
@@ -44,7 +43,7 @@ public:
 	 */
 	void resume();
 
-  uint16_t getFrameRate() const;
+	uint16_t getFrameRate() const;
 
 private:
 	bool     running     = true;
@@ -73,5 +72,4 @@ private:
  * end of Core group
  * @}
  */
-
 } // namespace clem

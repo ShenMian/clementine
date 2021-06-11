@@ -16,7 +16,6 @@ int main_(int argc, char* argv[])
 
 namespace clem
 {
-
 Main::Main()
 {
 	init();
@@ -37,7 +36,7 @@ int Main::main(int argc, char* argv[])
 	app.run();
 	app.deinit();
 
-  return 0;
+	return 0;
 }
 
 void Main::run()
@@ -86,13 +85,13 @@ void Main::parseArgs(int argc, char* argv[])
 
 	std::string_view str;
 	for(int i = 1; i < argc; i++)
-{
+	{
 		str      = argv[i];
 		auto it  = str.find('=');
 		auto opt = str.substr(0, it);
 		auto val = str.substr(it + 1);
 		args.emplace(opt, val);
-}
+	}
 
 	args.clear();
 }
@@ -169,5 +168,4 @@ long Main::getCurrentMillSecond() const
 }
 
 #endif
-
 } // namespace clem

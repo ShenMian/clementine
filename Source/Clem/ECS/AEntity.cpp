@@ -6,7 +6,6 @@
 
 namespace clem
 {
-
 AEntity::AEntity(size_t id, AScene& scene)
 		: id(id), scene(scene)
 {
@@ -21,5 +20,4 @@ bool AEntity::operator<(const AEntity& rhs) const
 {
 	return id < rhs.id;
 }
-
 } // namespace clem

@@ -3,9 +3,9 @@
 
 #pragma once
 
+#include <cstring>
 #include <filesystem>
 #include <vector>
-#include <cstring>
 
 namespace clem
 {
@@ -63,5 +63,4 @@ private:
 * end of Audio group
 * @}
 */
-
 } // namespace clem
