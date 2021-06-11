@@ -6,7 +6,6 @@
 #include "Listener.h"
 #include "Sound.h"
 #include "Source.h"
-
 #include "AL/alext.h"
 
 namespace clem

@@ -21,7 +21,7 @@ Source::~Source()
 void Source::play(Sound& s)
 {
 	stop();
-	alSourcei(id, AL_BUFFER, s);
+	alSourcei(id, AL_BUFFER, s.getBufferId());
 	assert(alGetError() == AL_NO_ERROR);
 	alSourcePlay(id);
 }

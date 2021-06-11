@@ -2,59 +2,57 @@
 // License(Apache-2.0)
 
 #include "Sound.h"
-#include "Clem/Assert.h"
-#include "Clem/Logger.h"
-#include "Clem/Profiler.h"
+#include "AL/alext.h"
+#include <fstream>
 
-using std::filesystem::exists;
-using std::filesystem::path;
+namespace fs = std::filesystem;
 
 namespace clem
 {
+
 Sound::Sound()
 {
-	alGenBuffers(1, &id);
+	alGenBuffers(1, &bufferId);
 }
 
-Sound::Sound(const path& path)
+Sound::Sound(const fs::path& path)
 {
-	alGenBuffers(1, &id);
+	alGenBuffers(1, &bufferId);
 	loadFromFile(path);
 }
 
 Sound::~Sound()
 {
-	alDeleteBuffers(1, &id);
+	alDeleteBuffers(1, &bufferId);
 }
 
-void Sound::loadFromFile(const path& path)
+void Sound::loadFromFile(const fs::path& path)
 {
-	PROFILE_FUNC();
+	if(!fs::exists(path))
+		throw std::exception("file doesn't exist");
 
-	CLEM_ASSERT_TRUE(exists(path), fmt::format("file does not exist: '{}'", path.string()));
+	auto name      = path.filename().string();
+	auto extension = name.substr(name.find_last_of('.') + 1);
 
-	auto fileName   = path.filename().string();
-	auto fileFormat = fileName.substr(fileName.find_last_of('.'));
-
-	ALenum         format;
-	ALsizei        size;
-	ALsizei        freq;
-	unsigned char* data;
-
-	if(fileFormat == ".wav")
-		loadWavFile(path, format, data, size, freq);
+	if(extension == "wav")
+		loadWavFile(path);
 	else
-		CLEM_LOG_FATAL("audio", "unsupported file format: '{}'", fileFormat);
-
-	alBufferData(id, format, (void*)data, size, freq);
-	CLEM_ASSERT_TRUE(alGetError() == AL_NO_ERROR, "unable to create sound buffer");
-
-	delete[] data;
+		throw std::exception("unsupported file extension");
 }
 
-Sound::operator id_t() const
+const uint8_t* Sound::getSamples() const
 {
-	return id;
+	return samples.data();
+}
+
+size_t Sound::getSampleCount() const
+{
+	return samples.size();
+}
+
+int32_t Sound::getBufferId() const
+{
+	return bufferId;
 }
 
 struct RiffHeader
@@ -82,22 +80,21 @@ struct WaveData
 	int32_t size;
 };
 
-void Sound::loadWavFile(const path& path, ALenum& format, unsigned char*& data, ALsizei& size, ALsizei& freq)
+void Sound::loadWavFile(const fs::path& path)
 {
 	std::ifstream file(path, std::ios::binary);
-	CLEM_ASSERT_TRUE(file.is_open(), fmt::format("the file could not be opened: '{}'", path.string()));
+	if(!file.is_open())
+		throw std::exception("can't open file");
 
 	RiffHeader riffHeader;
-	file.read((char*)&riffHeader, sizeof(RiffHeader));
-
-	if(memcmp(riffHeader.id, "RIFF", 4) != 0 || memcmp(riffHeader.format, "WAVE", 4) != 0)
-		CLEM_LOG_FATAL("audio", "invalid RIFF or WAVE Header: '{}'", path.string());
-
 	WaveFormat waveFormat;
 	WaveData   waveData;
 
-	file.read((char*)&waveFormat, sizeof(WaveFormat));
+	file.read((char*)&riffHeader, sizeof(RiffHeader));
+	if(std::memcmp(riffHeader.id, "RIFF", 4) != 0 || std::memcmp(riffHeader.format, "WAVE", 4) != 0)
+		throw std::exception("incorrect file content");
 
+	file.read((char*)&waveFormat, sizeof(WaveFormat));
 	if(waveFormat.size > 16)
 		file.seekg(2, std::ios::cur);
 
@@ -105,8 +102,8 @@ void Sound::loadWavFile(const path& path, ALenum& format, unsigned char*& data, 
 	file.read(id, 4);
 
 	// 如果 WAV 文件是由其他格式转换而来, 会包含 ID 为 LIST 的格式转换信息.
-	// 跳过这部分内容, 来直接获取音频样本数据.
-	if(memcmp(id, "LIST", 4) == 0)
+	// 跳过这部分内容, 直接获取音频样本数据.
+	if(std::memcmp(id, "LIST", 4) == 0)
 	{
 		int32_t list_size;
 		file.read((char*)&list_size, sizeof(list_size));
@@ -114,15 +111,16 @@ void Sound::loadWavFile(const path& path, ALenum& format, unsigned char*& data, 
 		file.read(id, 4);
 	}
 
-	CLEM_ASSERT_TRUE(memcmp(id, "data", 4) == 0, "can't find ID 'data'");
+	if(std::memcmp(id, "data", 4) != 0)
+		throw std::exception("incorrect file content");
 
 	file.seekg(-4, std::ios::cur);
 	file.read((char*)&waveData, sizeof(WaveData));
 
-	format = 0;
-	size   = waveData.size;
-	freq   = waveFormat.sampleRate;
+	sampleRate   = waveFormat.sampleRate;
+	channelCount = waveFormat.numChannels;
 
+	int format = 0;
 	if(waveFormat.numChannels == 1)
 	{
 		if(waveFormat.bitsPerSample == 8)
@@ -137,11 +135,15 @@ void Sound::loadWavFile(const path& path, ALenum& format, unsigned char*& data, 
 		else if(waveFormat.bitsPerSample == 16)
 			format = AL_FORMAT_STEREO16;
 	}
-	CLEM_ASSERT_TRUE(format, fmt::format("invalid WAVE format: '{}'", path.string()));
+	if(format == 0)
+		throw std::exception("unknown audio format");
 
-	data = new unsigned char[size];
+	samples.resize(waveData.size);
+	file.read((char*)samples.data(), waveData.size);
 
-	file.read((char*)data, size);
 	file.close();
+	
+	alBufferData(bufferId, format, (void*)samples.data(), (ALsizei)samples.size(), sampleRate);
 }
+
 } // namespace clem
