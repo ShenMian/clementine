@@ -28,7 +28,7 @@ Sound::~Sound()
 void Sound::loadFromFile(const fs::path& path)
 {
 	if(!fs::exists(path))
-		throw std::exception("file doesn't exist");
+		return; // file doesn't exist
 
 	auto name      = path.filename().string();
 	auto extension = name.substr(name.find_last_of('.') + 1);
@@ -36,7 +36,7 @@ void Sound::loadFromFile(const fs::path& path)
 	if(extension == "wav")
 		loadWavFile(path);
 	else
-		throw std::exception("unsupported file extension");
+		return; // unsupported file extension
 }
 
 const uint8_t* Sound::getSamples() const
@@ -83,7 +83,7 @@ void Sound::loadWavFile(const fs::path& path)
 {
 	std::ifstream file(path, std::ios::binary);
 	if(!file.is_open())
-		throw std::exception("can't open file");
+		return; // can't open file
 
 	RiffHeader riffHeader;
 	WaveFormat waveFormat;
@@ -91,7 +91,7 @@ void Sound::loadWavFile(const fs::path& path)
 
 	file.read((char*)&riffHeader, sizeof(RiffHeader));
 	if(std::memcmp(riffHeader.id, "RIFF", 4) != 0 || std::memcmp(riffHeader.format, "WAVE", 4) != 0)
-		throw std::exception("incorrect file content");
+		return; // incorrect file content
 
 	file.read((char*)&waveFormat, sizeof(WaveFormat));
 	if(waveFormat.size > 16)
@@ -111,7 +111,7 @@ void Sound::loadWavFile(const fs::path& path)
 	}
 
 	if(std::memcmp(id, "data", 4) != 0)
-		throw std::exception("incorrect file content");
+		return; // incorrect file content
 
 	file.seekg(-4, std::ios::cur);
 	file.read((char*)&waveData, sizeof(WaveData));
@@ -135,7 +135,7 @@ void Sound::loadWavFile(const fs::path& path)
 			format = AL_FORMAT_STEREO16;
 	}
 	if(format == 0)
-		throw std::exception("unknown audio format");
+		return; // unknown audio format
 
 	samples.resize(waveData.size);
 	file.read((char*)samples.data(), waveData.size);
