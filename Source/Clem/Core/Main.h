@@ -16,12 +16,20 @@ namespace clem
 class Main
 {
 public:
-	int main(int argc, char* argv[]);
+    Main(int argc, char* argv[]);
+    ~Main();
 
-	void init();
-	void deinit();
+    void run();
+    void stop();
+
+    uint16_t getFrameRate() const;
 
 private:
+    void init();
+    void deinit();
+
+private:
+  void mainLoop();
 	void parseArgs(int argc, char* argv[]);
 };
 
