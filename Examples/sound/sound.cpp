@@ -19,9 +19,9 @@ public:
 	{
 		pushScene(scene);
 
-		sound.loadFromFile("../pong/assets/pop.wav");
+		Sound.loadFromFile("../pong/assets/pop.wav");
 		source.setLoop(true);
-		source.play(sound);
+		source.play(Sound);
 
 		auto& s = scene->createEntity("source");
 		s.addComponent<Sprite>(Size2i(1, 1)).drawPoint({0, 0}, '*');
@@ -53,7 +53,7 @@ public:
 	}
 
 private:
-	Sound             sound;
+	Sound             Sound;
 	Source            source;
 	Random            random;
 	Size2i            size  = Window::getVisibleSize();

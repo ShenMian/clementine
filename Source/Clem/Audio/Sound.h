@@ -1,10 +1,11 @@
-ï»¿// Copyright 2021 SMS
+// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
 
-#include "AL/alext.h"
 #include <filesystem>
+#include <vector>
+#include <cstring>
 
 namespace clem
 {
@@ -13,56 +14,54 @@ namespace clem
  * @{
  */
 
-/**
- * @brief å£°éŸ³.
- * æå‰å°†éŸ³é¢‘æ–‡ä»¶è½½å…¥åˆ°å†…å­˜ä¸­, ä½œä¸ºå£°éŸ³æ•ˆæœ. é€‚ç”¨äºè¾ƒå°çš„éŸ³é¢‘æ–‡ä»¶.
- */
 class Sound
 {
 public:
-	typedef ALuint id_t;
-
 	/**
-	 * @brief é»˜è®¤æ„é€ å‡½æ•°.
+	 * @brief Ä¬ÈÏ¹¹Ôìº¯Êı.
 	 */
 	Sound();
 
 	/**
-	 * @brief æ„é€ å‡½æ•°, ä»æ–‡ä»¶å¯¼å…¥å£°éŸ³.
+	 * @brief ¹¹Ôìº¯Êı, ´ÓÎÄ¼şµ¼ÈëÉùÒô.
 	 */
-	Sound(const std::filesystem::path&);
+	Sound(const std::filesystem::path& path);
 
 	/**
-	 * @brief ææ„å‡½æ•°, å¸è½½å£°éŸ³.
+	 * @brief Ä¬ÈÏÎö¹¹º¯Êı.
 	 */
 	~Sound();
 
 	/**
-	 * @brief åŠ è½½å£°éŸ³.
+	 * @brief ´ÓÎÄ¼ş¼ÓÔØÉùÒô.
 	 *
-	 * @param path å£°éŸ³æ–‡ä»¶è·¯å¾„.
+	 * @param path ÉùÒôÎÄ¼şÂ·¾¶.
 	 */
-	void loadFromFile(const std::filesystem::path&);
+	void loadFromFile(const std::filesystem::path& path);
 
-	operator id_t() const;
+	const uint8_t* getSamples() const;
+
+	size_t getSampleCount() const;
+
+	int getBufferId() const;
 
 private:
-	/**
-	 * ä» WAV æ–‡ä»¶è½½å…¥å£°éŸ³.
-	 *
-	 * @param path   æ–‡ä»¶è·¯å¾„
-	 * @param format æ ¼å¼
-	 * @param data   å£°éŸ³æ•°æ®ç¼“å†²åŒº
-	 * @param size   å£°éŸ³æ•°æ®ç¼“å†²åŒºå¤§å°
-	 * @param freq   å£°éŸ³é¢‘ç‡
-	 */
-	static void loadWavFile(const std::filesystem::path& path, ALenum& format, unsigned char*& data, ALsizei& size, ALsizei& freq);
+	std::vector<uint8_t> samples;
+	int32_t              sampleRate   = 0;
+	int16_t              channelCount = 0;
+	unsigned int         bufferId;
 
-	id_t id;
+	/**
+	 * ´Ó WAV ÎÄ¼şÔØÈëÉùÒô.
+	 *
+	 * @param path ÎÄ¼şÂ·¾¶.
+	 */
+	void loadWavFile(const std::filesystem::path& path);
 };
 
 /**
- * end of Audio group
- * @}
- */
+* end of Audio group
+* @}
+*/
+
 } // namespace clem
