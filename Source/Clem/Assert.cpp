@@ -46,23 +46,23 @@ void Assert::isFalse(bool expr, const string_view& msg, const char* file, unsign
 	isTrue(!expr, msg, file, line);
 }
 
-void Assert::isNotNull(void* expr, const char* file, unsigned int line)
+void Assert::isNotNull(void* ptr, const char* file, unsigned int line)
 {
-	isTrue(expr != nullptr, file, line);
+	isTrue(ptr != nullptr, file, line);
 }
 
-void Assert::isNotNull(void* expr, const std::string_view& msg, const char* file, unsigned int line)
+void Assert::isNotNull(void* ptr, const std::string_view& msg, const char* file, unsigned int line)
 {
-	isTrue(expr != nullptr, msg, file, line);
+	isTrue(ptr != nullptr, msg, file, line);
 }
 
-void Assert::isNull(void* expr, const char* file, unsigned int line)
+void Assert::isNull(void* ptr, const char* file, unsigned int line)
 {
-	isTrue(expr == nullptr, file, line);
+	isTrue(ptr == nullptr, file, line);
 }
 
-void Assert::isNull(void* expr, const std::string_view& msg, const char* file, unsigned int line)
+void Assert::isNull(void* ptr, const std::string_view& msg, const char* file, unsigned int line)
 {
-	isTrue(expr == nullptr, msg, file, line);
+	isTrue(ptr == nullptr, msg, file, line);
 }
 } // namespace clem
