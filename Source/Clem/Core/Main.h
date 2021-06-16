@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include <memory>
 #include <vector>
 
 int main(int argc, char* argv[]);
@@ -15,12 +14,26 @@ namespace clem
  * @{
  */
 
+class Application;
+
+extern Application* CreateApplication();
+
 class Main
 {
 public:
+	/**
+	 * @brief 默认构造函数.
+	 */
 	Main();
+
+	/**
+	 * @brief 默认析构函数.
+	 */
 	~Main();
 
+	/**
+	 * @brief 主函数.
+	 */
 	int main(int argc, char* argv[]);
 
 	/**
@@ -43,6 +56,9 @@ public:
 	 */
 	void resume();
 
+	/**
+	 * @brief 获取帧速率, 单位: FPS.
+	 */
 	uint16_t getFrameRate() const;
 
 private:
@@ -52,6 +68,8 @@ private:
 	uint16_t msPerUpdate = 16;
 	uint16_t msPerRender = 16;
 	uint16_t frameRate   = 0;
+
+	Application* app = nullptr;
 
 	void init();
 	void deinit();

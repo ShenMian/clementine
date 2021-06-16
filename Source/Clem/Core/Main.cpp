@@ -2,6 +2,8 @@
 // License(Apache-2.0)
 
 #include "Main.h"
+#include "Application.h"
+#include "Clem/Assert.h"
 #include "Clem.h"
 #include <map>
 #include <string>
@@ -30,17 +32,24 @@ int Main::main(int argc, char* argv[])
 {
 	parseArgs(argc, argv);
 
-	auto& app = Application();
+	app = CreateApplication();
+	CLEM_ASSERT_NOT_NULL(app, "'CreateApplication() return nullptr'");
 
-	app.init();
-	app.run();
-	app.deinit();
+	app->init();
+
+	run();
+
+	app->deinit();
+	
+	delete app;
 
 	return 0;
 }
 
 void Main::run()
 {
+	CLEM_ASSERT_FALSE(running, "already running");
+	running = true;
 	mainLoop();
 }
 
@@ -54,20 +63,24 @@ void Main::pause()
 	paused = true;
 }
 
+void Main::resume()
+{
+	paused = false;
+}
+
 void Main::mainLoop()
 {
 	long previous = getCurrentMillSecond();
 
-	running = true;
 	while(running)
 	{
 		auto     current = getCurrentMillSecond();
 		uint16_t dt      = static_cast<uint16_t>(current - previous);
 		previous         = current;
 
-		updateInput(dt);
-		updateScene(dt);
-		renderScene(dt);
+		// updateInput(dt);
+		// updateScene(dt);
+		// renderScene(dt);
 
 		updateFrameRate(dt);
 
@@ -77,6 +90,31 @@ void Main::mainLoop()
 			previous = getCurrentMillSecond();
 		}
 	}
+}
+
+void Main::updateFrameRate(uint16_t dt)
+{
+	PROFILE_FUNC();
+
+	// 计算帧速率
+	static uint16_t lag = 0, frames = 0;
+	lag += dt;
+	frames++;
+	if(lag >= 1000)
+	{
+		frameRate = frames;
+		frames = lag = 0;
+		Window::setTitle(app->getName() + " | " + std::to_string(frameRate) + "FPS");
+	}
+
+	// 积分控制. 限制主循环速度, 减少 CPU 占用
+	static const auto target   = std::min({msPerInput, msPerUpdate, msPerRender});
+	static uint16_t   integral = 0;
+	auto              error    = target - dt;
+	integral += error > 0 ? 1 : (integral > 0 ? -1 : 0);
+	if(error < 0 && integral == 0)
+		return;
+	std::this_thread::sleep_for(std::chrono::milliseconds(error + integral));
 }
 
 void Main::parseArgs(int argc, char* argv[])
@@ -96,9 +134,9 @@ void Main::parseArgs(int argc, char* argv[])
 	args.clear();
 }
 
-void Main::resume()
+uint16_t Main::getFrameRate() const
 {
-	paused = false;
+	return frameRate;
 }
 
 void Main::init()
