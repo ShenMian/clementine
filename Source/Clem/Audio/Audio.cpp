@@ -4,11 +4,6 @@
 #include "Audio.h"
 #include "Clem/Logger.h"
 #include "Clem/Profiler.h"
-#include <cstdint>
-#include <fstream>
-
-using namespace clem;
-using namespace std::filesystem;
 
 namespace clem
 {

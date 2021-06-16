@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Sound.h"
+#include "Clem/Profiler.h"
 #include "AL/alext.h"
 #include <fstream>
 
@@ -27,6 +28,8 @@ Sound::~Sound()
 
 void Sound::loadFromFile(const fs::path& path)
 {
+	PROFILE_FUNC();
+
 	if(!fs::exists(path))
 		return; // file doesn't exist
 
