@@ -35,12 +35,20 @@ public:
 
 	static void isNull(void* ptr, const char*, unsigned int);
 	static void isNull(void* ptr, const std::string_view& msg, const char*, unsigned int);
+	template <typename T>
+	static void isNull(std::shared_ptr<T>& ptr, const char*, unsigned int);
 };
 
 template <typename T>
-inline void Assert::isNotNull(std::shared_ptr<T>& ptr, const char*, unsigned int)
+inline void Assert::isNotNull(std::shared_ptr<T>& ptr, const char* file, unsigned int line)
 {
-	isTrue(ptr != nullptr, file, line);
+	isTrue(ptr, file, line);
+}
+
+template <typename T>
+inline void Assert::isNull(std::shared_ptr<T>& ptr, const char* file, unsigned int line)
+{
+	isTrue(ptr == nullptr, file, line);
 }
 
 } // namespace clem
