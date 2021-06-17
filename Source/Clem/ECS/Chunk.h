@@ -3,11 +3,8 @@
 
 #pragma once
 
+#include "config.h"
 #include <array>
-#include <cstddef>
-
-constexpr auto chunkAlignment = 64;
-constexpr auto chunkSize      = 16 * 1024;
 
 struct alignas(chunkAlignment) Chunk
 {

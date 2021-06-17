@@ -4,5 +4,5 @@
 #pragma once
 
 #include "AEntity.h"
-#include "AScene.h"
 #include "Archtype.h"
+#include "Registry.h"

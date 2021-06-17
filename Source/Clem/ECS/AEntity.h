@@ -3,40 +3,61 @@
 
 #pragma once
 
-#include <cstddef>
+#include "config.h"
 
 namespace clem
 {
-class AScene;
+class Registry;
 
 class AEntity
 {
 public:
-	AEntity(size_t id, AScene& scene);
+	/**
+	 * @brief 构造函数.
+	 */
+	AEntity(EntityId id, size_t version, Registry& reg);
 
+	/**
+	 * @brief 添加组件.
+	 */
 	template <typename Com, typename... Args>
 	Com& addComponent(Args&&... args);
 
+	/**
+	 * @brief 移除组件.
+	 */
 	template <typename Com>
 	void removeComponent();
 
+	/**
+	 * @brief 获取组件.
+	 */
 	template <typename Com>
 	Com& getComponent() const;
 
+	/**
+	 * @brief 检查是否有指定组件.
+	 */
 	template <typename Com>
 	bool hasComponent() const;
 
+	/**
+	 * @brief 检查是否有指定的多个组件.
+	 */
 	template <typename T, typename V, typename... Types>
 	bool hasComponent() const;
 
 	bool isValid() const;
 
+	EntityId getId() const;
+
 	bool operator==(const AEntity& rhs) const;
 	bool operator<(const AEntity& rhs) const;
 
 private:
-	size_t  id;
-	AScene& scene;
+	EntityId  id;
+	size_t    version;
+	Registry& registry;
 };
 
 template <typename Com>
