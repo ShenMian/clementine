@@ -70,13 +70,13 @@ void Main::resume()
 
 void Main::mainLoop()
 {
-	long previous = getCurrentMillSecond();
+	auto previous = getCurrentMillSecond();
 
 	while(running)
 	{
-		auto     current = getCurrentMillSecond();
-		uint16_t dt      = static_cast<uint16_t>(current - previous);
-		previous         = current;
+		auto current = getCurrentMillSecond();
+		auto dt      = static_cast<uint16_t>(current - previous);
+		previous     = current;
 
 		// updateInput(dt);
 		// updateScene(dt);
