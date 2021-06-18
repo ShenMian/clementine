@@ -22,7 +22,7 @@ AEntity Registry::create()
 	return AEntity(id, entities[id].version, *this);
 }
 
-void Registry::destory(AEntity& e)
+void Registry::destory(const AEntity& e)
 {
 	const auto id = e.getId();
 	entities[id].version++;

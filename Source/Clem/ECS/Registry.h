@@ -25,7 +25,7 @@ public:
 	/**
 	 * @brief 销毁实体.
 	 */
-	void destory(AEntity&);
+	void destory(const AEntity&);
 
 	/**
 	 * @brief 获取实体数量.
