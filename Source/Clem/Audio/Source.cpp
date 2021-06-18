@@ -18,7 +18,7 @@ Source::~Source()
 	alDeleteSources(1, &id);
 }
 
-void Source::play(Sound& s)
+void Source::play(const Sound& s)
 {
 	stop();
 	alSourcei(id, AL_BUFFER, s.getBufferId());

@@ -31,7 +31,7 @@ public:
 	 *
 	 * @param s 要播放的声音.
 	 */
-	void play(Sound& s);
+	void play(const Sound& s);
 
 	/**
 	 * @brief 停止播放.
