@@ -51,6 +51,8 @@ public:
 
 	EntityId getId() const;
 
+	size_t getVersion() const;
+
 	bool operator==(const AEntity& rhs) const;
 	bool operator<(const AEntity& rhs) const;
 

@@ -4,6 +4,7 @@
 #include "Registry.h"
 #include "Archtype.h"
 #include "Chunk.h"
+#include <algorithm>
 
 namespace clem
 {
@@ -11,20 +12,22 @@ namespace clem
 struct EntityInfo
 {
 	Archtype* archtype = nullptr;
+	Chunk*    chunk    = nullptr;
 	size_t    version  = 0;
 };
 
 AEntity Registry::create()
 {
-	auto id = getNewId();
+	const auto id = getNewId();
 	return AEntity(id, entities[id].version, *this);
 }
 
-void Registry::destory(AEntity& entity)
+void Registry::destory(AEntity& e)
 {
-	auto id = entity.getId();
+	const auto id = e.getId();
 	entities[id].version++;
-	freeId.push_back(id);
+	if(id < entities.size())
+		freeId.push_back(id);
 }
 
 size_t Registry::getSize() const
@@ -35,9 +38,14 @@ size_t Registry::getSize() const
 		return 0;
 }
 
-const Archtype& Registry::getArchtype(const Archtype& archtype)
+bool Registry::isValid(const AEntity& e) const
 {
-	auto pair = archtypes.insert(archtype);
+	return e.getId() < entities.size() && e.getVersion() == entities[e.getId()].version;
+}
+
+const Archtype& Registry::getArchtype(const Archtype& at)
+{
+	auto pair = archtypes.insert(at);
 	return *(pair.first);
 }
 

@@ -33,17 +33,24 @@ public:
 	size_t getSize() const;
 
 	/**
+	 * @brief 判断实体是否有效.
+	 */
+	bool isValid(const AEntity&) const;
+
+	/**
 	 * @brief 获取 Archtype 的引用.
 	 * Archtypes 由该类管理, 以节省内存占用.
 	 */
 	const Archtype& getArchtype(const Archtype&);
 
 private:
-	std::vector<EntityInfo>                entities;
-	std::vector<EntityId>                  freeId;
-	std::set<Archtype>                     archtypes; // std::unordered_set
-	std::unordered_map<Archtype*, Chunk*>  chunks;
-	std::pmr::polymorphic_allocator<Chunk> allocator;
+	template <typename T>
+	using Allocator = std::pmr::polymorphic_allocator<T>;
+
+	std::vector<EntityInfo> entities;
+	std::vector<EntityId>   freeId;
+	std::set<Archtype>      archtypes; // std::unordered_set
+	Allocator<Chunk>        allocator;
 
 	EntityId getNewId();
 };
