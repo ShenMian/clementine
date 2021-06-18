@@ -9,24 +9,26 @@
 #include <string>
 
 using namespace std::chrono_literals;
+using clem::Main;
 
 int main_(int argc, char* argv[])
 {
-	clem::Main main;
-	return main.main(argc, argv);
+	Main::init();
+	auto ret = Main::main(argc, argv);
+	Main::deinit();
+	return ret;
 }
 
 namespace clem
 {
-Main::Main()
-{
-	init();
-}
 
-Main::~Main()
-{
-	deinit();
-}
+bool         Main::running     = true;
+bool         Main::paused      = false;
+uint16_t     Main::msPerInput  = 16;
+uint16_t     Main::msPerUpdate = 16;
+uint16_t     Main::msPerRender = 16;
+uint16_t     Main::frameRate   = 0;
+Application* Main::app         = nullptr;
 
 int Main::main(int argc, char* argv[])
 {
@@ -134,7 +136,7 @@ void Main::parseArgs(int argc, char* argv[])
 	args.clear();
 }
 
-uint16_t Main::getFrameRate() const
+uint16_t Main::getFrameRate()
 {
 	return frameRate;
 }
@@ -164,7 +166,7 @@ void Main::platformInit()
 
 #	include <sys/time.h>
 
-long Main::getCurrentMillSecond() const
+long Main::getCurrentMillSecond()
 {
 	struct timeval t;
 	gettimeofday(&t, NULL);
@@ -194,7 +196,7 @@ void Main::platformInit()
 		assert(false);
 }
 
-long Main::getCurrentMillSecond() const
+long Main::getCurrentMillSecond()
 {
 	static LARGE_INTEGER freq;
 	static BOOL          ret = QueryPerformanceFrequency(&freq);

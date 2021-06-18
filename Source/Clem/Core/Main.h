@@ -23,68 +23,58 @@ class Main
 {
 public:
 	/**
-	 * @brief 默认构造函数.
-	 */
-	Main();
-
-	/**
-	 * @brief 默认析构函数.
-	 */
-	~Main();
-
-	/**
 	 * @brief 主函数.
 	 */
-	int main(int argc, char* argv[]);
+	static int main(int argc, char* argv[]);
 
 	/**
 	 * @brief 启动主循环.
 	 */
-	void run();
+	static void run();
 
 	/**
 	 * @brief 终止主循环.
 	 */
-	void stop();
+	static void stop();
 
 	/**
 	 * @brief 暂停主循环.
 	 */
-	void pause();
+	static void pause();
 
 	/**
 	 * @brief 恢复主循环.
 	 */
-	void resume();
+	static void resume();
 
 	/**
 	 * @brief 获取帧速率, 单位: FPS.
 	 */
-	uint16_t getFrameRate() const;
+	static uint16_t getFrameRate();
+
+	static void init();
+	static void deinit();
 
 private:
-	bool     running     = true;
-	bool     paused      = false;
-	uint16_t msPerInput  = 16;
-	uint16_t msPerUpdate = 16;
-	uint16_t msPerRender = 16;
-	uint16_t frameRate   = 0;
+	static bool     running;
+	static bool     paused;
+	static uint16_t msPerInput;
+	static uint16_t msPerUpdate;
+	static uint16_t msPerRender;
+	static uint16_t frameRate;
 
-	Application* app = nullptr;
+	static Application* app;
 
-	void init();
-	void deinit();
+	static void mainLoop();
+	static void parseArgs(int argc, char* argv[]);
 
-	void mainLoop();
-	void parseArgs(int argc, char* argv[]);
+	static void updateInput(uint16_t dt);
+	static void updateScene(uint16_t dt);
+	static void renderScene(uint16_t dt);
+	static void updateFrameRate(uint16_t dt);
 
-	void updateInput(uint16_t dt);
-	void updateScene(uint16_t dt);
-	void renderScene(uint16_t dt);
-	void updateFrameRate(uint16_t dt);
-
-	void platformInit();
-	long getCurrentMillSecond() const;
+	static void platformInit();
+	static long getCurrentMillSecond();
 };
 
 /**
