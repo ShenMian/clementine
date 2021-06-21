@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Clementine
-   &#160;<span id="projectnumber">0.0.2</span>
+   &#160;<span id="projectnumber">0.0.1</span>
    </div>
    <div id="projectbrief">A framework for building 2D console games.</div>
   </td>
@@ -92,43 +92,72 @@ $(document).ready(function(){initNavTree('_a_entity_8h_source.html',''); initRes
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;config.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>clem</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classclem_1_1_a_entity.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_a_entity.html">AEntity</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Com, <span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    Com&amp; addComponent(Args&amp;&amp;... args);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Com&gt;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> removeComponent();</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span>Registry;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classclem_1_1_a_entity.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_a_entity.html">AEntity</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="classclem_1_1_a_entity.html#a1f48d719e743771815b7c83199786791">AEntity</a>(EntityId <span class="keywordtype">id</span>, <span class="keywordtype">size_t</span> version, <a class="code" href="classclem_1_1_registry.html">Registry</a>&amp; reg);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Com&gt;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    Com&amp; getComponent() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Com&gt;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">bool</span> hasComponent() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Com, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classclem_1_1_a_entity.html#a69e2a14aac842e66b90276edfc9586cf">   24</a></span>&#160;    Com&amp; <a class="code" href="classclem_1_1_a_entity.html#a69e2a14aac842e66b90276edfc9586cf">addComponent</a>(Args&amp;&amp;... args);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> V, <span class="keyword">typename</span>... Types&gt;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">bool</span> hasComponent() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">bool</span> isValid() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">size_t</span> id;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> V, <span class="keyword">typename</span>... Types&gt;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">bool</span> AEntity::hasComponent()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">return</span> hasComponent&lt;T&gt;() &amp;&amp; hasComponent&lt;V, Types...&gt;();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;} <span class="comment">// namespace clem</span></div>
-<div class="ttc" id="aclassclem_1_1_a_entity_html"><div class="ttname"><a href="classclem_1_1_a_entity.html">clem::AEntity</a></div><div class="ttdef"><b>Definition:</b> AEntity.h:12</div></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Com&gt;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classclem_1_1_a_entity.html#a908c061b04d2b01335ea6c6e50954c74">   30</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_a_entity.html#a908c061b04d2b01335ea6c6e50954c74">removeComponent</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Com&gt;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classclem_1_1_a_entity.html#a5e52e9b5f933862423aa9805bf662ab2">   36</a></span>&#160;    Com&amp; <a class="code" href="classclem_1_1_a_entity.html#a5e52e9b5f933862423aa9805bf662ab2">getComponent</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Com&gt;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classclem_1_1_a_entity.html#a209dba01d63d349d7e7d9b6bde3664f3">hasComponent</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Com, <span class="keyword">typename</span>... Coms&gt;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classclem_1_1_a_entity.html#a209dba01d63d349d7e7d9b6bde3664f3">hasComponent</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classclem_1_1_a_entity.html#a8c3506f56461e508a7c0d99cb57edbc0">isValid</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    EntityId <a class="code" href="classclem_1_1_a_entity.html#a4820ae0a3bd2debaadb0bd47b33744da">getId</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classclem_1_1_a_entity.html#a14fc23fe5357396cae7d3442a2bbe041">getVersion</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">bool</span> operator==(<span class="keyword">const</span> <a class="code" href="classclem_1_1_a_entity.html">AEntity</a>&amp; rhs) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">bool</span> operator&lt;(<span class="keyword">const</span> <a class="code" href="classclem_1_1_a_entity.html">AEntity</a>&amp; rhs) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    EntityId  id;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">size_t</span>    version;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="classclem_1_1_registry.html">Registry</a>&amp; registry;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Com&gt;</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classclem_1_1_a_entity.html#a209dba01d63d349d7e7d9b6bde3664f3">   75</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classclem_1_1_a_entity.html#a209dba01d63d349d7e7d9b6bde3664f3">AEntity::hasComponent</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Com, <span class="keyword">typename</span>... Coms&gt;</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classclem_1_1_a_entity.html#a58bc22da2b623672a9a9ad58b198644d">   81</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classclem_1_1_a_entity.html#a209dba01d63d349d7e7d9b6bde3664f3">AEntity::hasComponent</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">if</span> constexpr(<span class="keyword">sizeof</span>...(Coms) &gt; 0)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span> hasComponent&lt;Com&gt;() &amp;&amp; <a class="code" href="classclem_1_1_a_entity.html#a209dba01d63d349d7e7d9b6bde3664f3">hasComponent</a>&lt;Coms...&gt;();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">return</span> hasComponent&lt;Com&gt;();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;} <span class="comment">// namespace clem</span></div>
+<div class="ttc" id="aclassclem_1_1_a_entity_html"><div class="ttname"><a href="classclem_1_1_a_entity.html">clem::AEntity</a></div><div class="ttdef"><b>Definition:</b> AEntity.h:13</div></div>
+<div class="ttc" id="aclassclem_1_1_a_entity_html_a14fc23fe5357396cae7d3442a2bbe041"><div class="ttname"><a href="classclem_1_1_a_entity.html#a14fc23fe5357396cae7d3442a2bbe041">clem::AEntity::getVersion</a></div><div class="ttdeci">size_t getVersion() const</div><div class="ttdoc">获取 version.</div><div class="ttdef"><b>Definition:</b> AEntity.cpp:29</div></div>
+<div class="ttc" id="aclassclem_1_1_a_entity_html_a1f48d719e743771815b7c83199786791"><div class="ttname"><a href="classclem_1_1_a_entity.html#a1f48d719e743771815b7c83199786791">clem::AEntity::AEntity</a></div><div class="ttdeci">AEntity(EntityId id, size_t version, Registry &amp;reg)</div><div class="ttdoc">构造函数.</div><div class="ttdef"><b>Definition:</b> AEntity.cpp:14</div></div>
+<div class="ttc" id="aclassclem_1_1_a_entity_html_a209dba01d63d349d7e7d9b6bde3664f3"><div class="ttname"><a href="classclem_1_1_a_entity.html#a209dba01d63d349d7e7d9b6bde3664f3">clem::AEntity::hasComponent</a></div><div class="ttdeci">bool hasComponent() const</div><div class="ttdoc">检查是否有指定组件.</div><div class="ttdef"><b>Definition:</b> AEntity.h:75</div></div>
+<div class="ttc" id="aclassclem_1_1_a_entity_html_a4820ae0a3bd2debaadb0bd47b33744da"><div class="ttname"><a href="classclem_1_1_a_entity.html#a4820ae0a3bd2debaadb0bd47b33744da">clem::AEntity::getId</a></div><div class="ttdeci">EntityId getId() const</div><div class="ttdoc">获取 ID.</div><div class="ttdef"><b>Definition:</b> AEntity.cpp:24</div></div>
+<div class="ttc" id="aclassclem_1_1_a_entity_html_a5e52e9b5f933862423aa9805bf662ab2"><div class="ttname"><a href="classclem_1_1_a_entity.html#a5e52e9b5f933862423aa9805bf662ab2">clem::AEntity::getComponent</a></div><div class="ttdeci">Com &amp; getComponent() const</div><div class="ttdoc">获取组件.</div></div>
+<div class="ttc" id="aclassclem_1_1_a_entity_html_a69e2a14aac842e66b90276edfc9586cf"><div class="ttname"><a href="classclem_1_1_a_entity.html#a69e2a14aac842e66b90276edfc9586cf">clem::AEntity::addComponent</a></div><div class="ttdeci">Com &amp; addComponent(Args &amp;&amp;... args)</div><div class="ttdoc">添加组件.</div></div>
+<div class="ttc" id="aclassclem_1_1_a_entity_html_a8c3506f56461e508a7c0d99cb57edbc0"><div class="ttname"><a href="classclem_1_1_a_entity.html#a8c3506f56461e508a7c0d99cb57edbc0">clem::AEntity::isValid</a></div><div class="ttdeci">bool isValid() const</div><div class="ttdoc">检查是否有效.</div><div class="ttdef"><b>Definition:</b> AEntity.cpp:19</div></div>
+<div class="ttc" id="aclassclem_1_1_a_entity_html_a908c061b04d2b01335ea6c6e50954c74"><div class="ttname"><a href="classclem_1_1_a_entity.html#a908c061b04d2b01335ea6c6e50954c74">clem::AEntity::removeComponent</a></div><div class="ttdeci">void removeComponent()</div><div class="ttdoc">移除组件.</div></div>
+<div class="ttc" id="aclassclem_1_1_registry_html"><div class="ttname"><a href="classclem_1_1_registry.html">clem::Registry</a></div><div class="ttdef"><b>Definition:</b> Registry.h:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Clementine
-   &#160;<span id="projectnumber">0.0.2</span>
+   &#160;<span id="projectnumber">0.0.1</span>
    </div>
    <div id="projectbrief">A framework for building 2D console games.</div>
   </td>
@@ -87,10 +87,14 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 <h3><a id="index_a"></a>- a -</h3><ul>
 <li>addComponent()
-: <a class="el" href="classclem_1_1_entity.html#ae8947e7fb27c8fde55824399558c69f3">clem::Entity</a>
+: <a class="el" href="classclem_1_1_a_entity.html#a69e2a14aac842e66b90276edfc9586cf">clem::AEntity</a>
+, <a class="el" href="classclem_1_1_entity.html#ae8947e7fb27c8fde55824399558c69f3">clem::Entity</a>
 </li>
 <li>addForce()
 : <a class="el" href="classclem_1_1_rigidbody.html#accee589b869a6db35cad3b4226354b64">clem::Rigidbody</a>
+</li>
+<li>AEntity()
+: <a class="el" href="classclem_1_1_a_entity.html#a1f48d719e743771815b7c83199786791">clem::AEntity</a>
 </li>
 <li>angle()
 : <a class="el" href="struct_vector2.html#afa33de2ad0f917e8f4d751b8855f4da7">Vector2</a>
@@ -130,6 +134,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="classclem_1_1_client.html#aa571f79a7041cc955d49729b2c761927">clem::Client</a>
 , <a class="el" href="classclem_1_1_connection.html#a4233a7599b5099a88f36b4103b4e86ae">clem::Connection</a>
 </li>
+<li>create()
+: <a class="el" href="classclem_1_1_registry.html#a240f229b7d17276cdb42c36424ba4f4e">clem::Registry</a>
+</li>
 <li>createEntity()
 : <a class="el" href="classclem_1_1_scene.html#af73b32a107bb6338d17a680d5289a5f7">clem::Scene</a>
 </li>
@@ -137,6 +144,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 
 <h3><a id="index_d"></a>- d -</h3><ul>
+<li>destory()
+: <a class="el" href="classclem_1_1_registry.html#a992b6fc879552d790da196de57b30ae4">clem::Registry</a>
+</li>
 <li>destroyEntity()
 : <a class="el" href="classclem_1_1_scene.html#a1f578c1c436c506a33f0c08b9d7f7ebd">clem::Scene</a>
 </li>
@@ -158,8 +168,8 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 , <a class="el" href="classclem_1_1_sprite.html#af747fa1c37bc9b4c1ec96c8aed87d6a0">clem::Sprite</a>
 </li>
 <li>drawLine()
-: <a class="el" href="classclem_1_1_framebuffer.html#a85e66d00bfff450ec868978c0979922d">clem::Framebuffer</a>
-, <a class="el" href="classclem_1_1_sprite.html#ab4d40e1579cd40b9d99fd8baf8105389">clem::Sprite</a>
+: <a class="el" href="classclem_1_1_framebuffer.html#a3b6646fe1ac8634ad1cb79bb755d126e">clem::Framebuffer</a>
+, <a class="el" href="classclem_1_1_sprite.html#a8514162012b5593563870139baac9e65">clem::Sprite</a>
 </li>
 <li>drawPoint()
 : <a class="el" href="classclem_1_1_framebuffer.html#a37eda3d14e59c6c2aa8802aae131cd30">clem::Framebuffer</a>
@@ -202,24 +212,32 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>getAcceleration()
 : <a class="el" href="classclem_1_1_rigidbody.html#a334aaaf54110cd3a0e866ecb5a595f6f">clem::Rigidbody</a>
 </li>
+<li>getArchtype()
+: <a class="el" href="classclem_1_1_registry.html#af1d5b2f4718ce531cb58e046376eacde">clem::Registry</a>
+</li>
 <li>getBuffer()
 : <a class="el" href="classclem_1_1_output.html#a3fa807049504ada11f6d75b66122cad4">clem::Output</a>
 </li>
 <li>getComponent()
-: <a class="el" href="classclem_1_1_entity.html#a2d7a39a13e862071a53f966b6def85c3">clem::Entity</a>
+: <a class="el" href="classclem_1_1_a_entity.html#a5e52e9b5f933862423aa9805bf662ab2">clem::AEntity</a>
+, <a class="el" href="classclem_1_1_entity.html#a2d7a39a13e862071a53f966b6def85c3">clem::Entity</a>
 </li>
 <li>getEntity()
 : <a class="el" href="classclem_1_1_component.html#a7e3da7bfc8167ca5e53dca86ae2b8fe2">clem::Component</a>
 , <a class="el" href="classclem_1_1_scene.html#ab214995ef831a24666c658d4444bd716">clem::Scene</a>
 </li>
 <li>getFloat()
-: <a class="el" href="class_random.html#a2498fad76196a0ede1cc9ad2c1b843b7">Random</a>
+: <a class="el" href="class_random.html#a9556d7e5a909c609f6e4a06b678da17e">Random</a>
 </li>
 <li>getForce()
 : <a class="el" href="classclem_1_1_rigidbody.html#a9aceb3b22baa2d7a49b7115834186999">clem::Rigidbody</a>
 </li>
 <li>getFrameRate()
 : <a class="el" href="classclem_1_1_application.html#a00628b0647bc0d1c537b95fd6c37de2a">clem::Application</a>
+, <a class="el" href="classclem_1_1_main.html#ab942de7f8599125b2bf9374adba15a41">clem::Main</a>
+</li>
+<li>getId()
+: <a class="el" href="classclem_1_1_a_entity.html#a4820ae0a3bd2debaadb0bd47b33744da">clem::AEntity</a>
 </li>
 <li>getInt32()
 : <a class="el" href="class_random.html#a664e49a3019266be01a7f03bf0cdae91">Random</a>
@@ -240,6 +258,12 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>getOffset()
 : <a class="el" href="classclem_1_1_collider.html#a8efc08eabd2c7a76ce682dbf53cc94a9">clem::Collider</a>
 </li>
+<li>getPoint2()
+: <a class="el" href="class_random.html#a6bae2ea6435e44305b94b06adcec61b1">Random</a>
+</li>
+<li>getPoint2i()
+: <a class="el" href="class_random.html#a1c222611a3585609ea720525f9184a93">Random</a>
+</li>
 <li>getPosition()
 : <a class="el" href="classclem_1_1_collider.html#a4cb15ac90ab1dcd2d97ef4bf24cb7e08">clem::Collider</a>
 , <a class="el" href="classclem_1_1_listener.html#aa009c6475f3175998e51823cea199e7f">clem::Listener</a>
@@ -255,6 +279,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>getSize()
 : <a class="el" href="classclem_1_1_box_collider.html#a92c516cfd63aa6609a6940665c5fa870">clem::BoxCollider</a>
 , <a class="el" href="classclem_1_1_output.html#a29896803f075d71aae9c53c4b4825cc6">clem::Output</a>
+, <a class="el" href="classclem_1_1_registry.html#a2a6665da514a4005a959bd3400d02710">clem::Registry</a>
 , <a class="el" href="classclem_1_1_sprite.html#a2f741c83f21d8b2c3ccf31f7e53189c2">clem::Sprite</a>
 </li>
 <li>getType()
@@ -266,6 +291,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>getVelocity()
 : <a class="el" href="classclem_1_1_listener.html#a22d61a2d9c17f348368144668b00e17f">clem::Listener</a>
 , <a class="el" href="classclem_1_1_source.html#a5346abf77026fb874ecc3211785cfb94">clem::Source</a>
+</li>
+<li>getVersion()
+: <a class="el" href="classclem_1_1_a_entity.html#a14fc23fe5357396cae7d3442a2bbe041">clem::AEntity</a>
 </li>
 <li>getVisibleSize()
 : <a class="el" href="class_window.html#af42966d9c4b4c83e469d2a95f5b3644f">Window</a>
@@ -279,7 +307,8 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 <h3><a id="index_h"></a>- h -</h3><ul>
 <li>hasComponent()
-: <a class="el" href="classclem_1_1_entity.html#a0e3b994270e2a3814d4bc9d2425c8967">clem::Entity</a>
+: <a class="el" href="classclem_1_1_a_entity.html#a209dba01d63d349d7e7d9b6bde3664f3">clem::AEntity</a>
+, <a class="el" href="classclem_1_1_entity.html#a0e3b994270e2a3814d4bc9d2425c8967">clem::Entity</a>
 </li>
 </ul>
 
@@ -298,6 +327,10 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="classclem_1_1_client.html#aae54c38ae878f11b33ece16d36720d41">clem::Client</a>
 , <a class="el" href="classclem_1_1_connection.html#a88e28e5451ee7ee32561134039f1a320">clem::Connection</a>
 </li>
+<li>isValid()
+: <a class="el" href="classclem_1_1_a_entity.html#a8c3506f56461e508a7c0d99cb57edbc0">clem::AEntity</a>
+, <a class="el" href="classclem_1_1_registry.html#ad07ec5d4e6d6b2025f3856e7e5ee6135">clem::Registry</a>
+</li>
 </ul>
 
 
@@ -306,7 +339,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="class_rect2.html#aeaba64aca9d51bf530e11c97198e274c">Rect2</a>
 </li>
 <li>loadFromFile()
-: <a class="el" href="classclem_1_1_sound.html#a56f5857689eb8a5a31935c17c5498f7c">clem::Sound</a>
+: <a class="el" href="classclem_1_1_sound.html#abb1d8819fc4442926e79db5850f683c2">clem::Sound</a>
 </li>
 </ul>
 
@@ -314,6 +347,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <h3><a id="index_m"></a>- m -</h3><ul>
 <li>magnitude()
 : <a class="el" href="struct_vector2.html#ab84b0c3d31e2893df551d259789e80a9">Vector2</a>
+</li>
+<li>main()
+: <a class="el" href="classclem_1_1_main.html#af6bf178503fda25e5c94216d0ebb4478">clem::Main</a>
 </li>
 <li>move()
 : <a class="el" href="class_cursor.html#ae86abef1331337aa55d57a72e8e5110d">Cursor</a>
@@ -331,10 +367,11 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <h3><a id="index_p"></a>- p -</h3><ul>
 <li>pause()
 : <a class="el" href="classclem_1_1_application.html#a701d5bd0328d08eb0ddea65f9c7ec250">clem::Application</a>
+, <a class="el" href="classclem_1_1_main.html#a7992eab97e6eb8e45b4db139a5ff26e3">clem::Main</a>
 , <a class="el" href="classclem_1_1_source.html#ab09b5353b0a4794bd79388404d1abf33">clem::Source</a>
 </li>
 <li>play()
-: <a class="el" href="classclem_1_1_source.html#a0c58921e549d2c2edef7ac6a340da84f">clem::Source</a>
+: <a class="el" href="classclem_1_1_source.html#a442fee1e2cbc82e08a63221d4749958c">clem::Source</a>
 </li>
 <li>popScene()
 : <a class="el" href="classclem_1_1_application.html#aede36acbdc1718fd7e96df7a8809ed4f">clem::Application</a>
@@ -346,6 +383,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
+<li>Random()
+: <a class="el" href="class_random.html#acb76b49c3903a3c4fb67fd216341f08d">Random</a>
+</li>
 <li>read()
 : <a class="el" href="group___networking.html#gaf24d929e70a8ca088834ca30a4deccbe">clem::Client</a>
 , <a class="el" href="group___networking.html#ga8982f0d21d47d7b837ef83b7490b4bfc">clem::Connection</a>
@@ -361,13 +401,15 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="class_rect2i.html#a988319875d2154761965423d2432b429">Rect2i</a>
 </li>
 <li>removeComponent()
-: <a class="el" href="classclem_1_1_entity.html#af763355898fef9e800ef6e515e3b7361">clem::Entity</a>
+: <a class="el" href="classclem_1_1_a_entity.html#a908c061b04d2b01335ea6c6e50954c74">clem::AEntity</a>
+, <a class="el" href="classclem_1_1_entity.html#af763355898fef9e800ef6e515e3b7361">clem::Entity</a>
 </li>
 <li>replaceScene()
 : <a class="el" href="classclem_1_1_application.html#aced81125a24e9675b71c7ed8d4a4ec11">clem::Application</a>
 </li>
 <li>resume()
 : <a class="el" href="classclem_1_1_application.html#a5918fa82a8bbb59327ab337c6ade12ef">clem::Application</a>
+, <a class="el" href="classclem_1_1_main.html#a6e56d96e73ce20666127b722cb7d43b3">clem::Main</a>
 </li>
 <li>rewind()
 : <a class="el" href="classclem_1_1_source.html#a1628c1204bd6116485e4c2b0c17d87da">clem::Source</a>
@@ -377,6 +419,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 </li>
 <li>run()
 : <a class="el" href="classclem_1_1_application.html#a0940de245f438582ef0299792a7ca1e5">clem::Application</a>
+, <a class="el" href="classclem_1_1_main.html#a688b95ae4a97f3a961286e8d0a6c8ddc">clem::Main</a>
 </li>
 </ul>
 
@@ -422,7 +465,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="classclem_1_1_collider.html#aa6b5b0b01bdbad350eaa1b59f500dcb6">clem::Collider</a>
 </li>
 <li>setSeed()
-: <a class="el" href="class_random.html#a0cee184d5ec09774c7881fb73eb2fb1d">Random</a>
+: <a class="el" href="class_random.html#a3bd9e427daee4bec93bb0090d6c75829">Random</a>
 </li>
 <li>setSize()
 : <a class="el" href="classclem_1_1_box_collider.html#ab07eb782908beb624260bff829e9d4bd">clem::BoxCollider</a>
@@ -463,6 +506,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 </li>
 <li>stop()
 : <a class="el" href="classclem_1_1_application.html#a3f49f03fffc0f6a1509b1d08cc4129ff">clem::Application</a>
+, <a class="el" href="classclem_1_1_main.html#a9e059ba4547348e20b7c4dfe1c1edb84">clem::Main</a>
 , <a class="el" href="classclem_1_1_server.html#af80415bd7600f7db3af077089865e665">clem::Server</a>
 , <a class="el" href="classclem_1_1_source.html#a85b65342402209cc6bd0cf8bc4d90de3">clem::Source</a>
 , <a class="el" href="class_recorder.html#a4ea54ad6c2efb9eaee08f5cd4a82b03c">Recorder</a>

@@ -9,6 +9,8 @@ var group___math =
       [ "br", "class_rect2.html#afee4f0512094d4a132de66272ae38e6a", null ],
       [ "intersectsPoint", "class_rect2.html#a2eca7910a70328c18992e9d70acd0d7c", null ],
       [ "intersectsRect", "class_rect2.html#a93e5a5004886832b5741e9bf3a428e07", null ],
+      [ "intersectsX", "class_rect2.html#a671fcac353709fa93b4226b0e54f60ff", null ],
+      [ "intersectsY", "class_rect2.html#a935f8d44eb8e6028cf32a5ce692c28d9", null ],
       [ "isValid", "class_rect2.html#a9e725b3d97e716079e081ede11c63c27", null ],
       [ "left", "class_rect2.html#aeaba64aca9d51bf530e11c97198e274c", null ],
       [ "right", "class_rect2.html#a06966ddaaf76ea457e1a57cd172691fc", null ],

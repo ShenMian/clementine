@@ -8,7 +8,7 @@ var classclem_1_1_source =
     [ "getVolume", "classclem_1_1_source.html#a3c18912e1edbf2a0f78b8afb2c285853", null ],
     [ "operator id_t", "classclem_1_1_source.html#a8e0ab53569b7b18a2ca826eac5a2465c", null ],
     [ "pause", "classclem_1_1_source.html#ab09b5353b0a4794bd79388404d1abf33", null ],
-    [ "play", "classclem_1_1_source.html#a0c58921e549d2c2edef7ac6a340da84f", null ],
+    [ "play", "classclem_1_1_source.html#a442fee1e2cbc82e08a63221d4749958c", null ],
     [ "rewind", "classclem_1_1_source.html#a1628c1204bd6116485e4c2b0c17d87da", null ],
     [ "setLoop", "classclem_1_1_source.html#a87bf7c384b3ceb1ce6fb6a52ccada9c0", null ],
     [ "setPitch", "classclem_1_1_source.html#a46b0726c0169e2fed452bcff8977bcd7", null ],

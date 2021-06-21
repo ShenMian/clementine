@@ -41,8 +41,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"classclem_1_1_keyboard.html#a859a0b607ca50c3422cc6bfab67acc76a5206560a306a2e085a437fd258eb57ce",
-"structclem_1_1_riff_header.html"
+"classclem_1_1_keyboard.html#a859a0b607ca50c3422cc6bfab67acc76a4c614360da93c0a041b22e537de151eb",
+"struct_vector2i.html#ab4e168dce592fb15f6526b140ec4742c"
 ];
 
 var SYNCONMSG = '点击 关闭 面板同步';

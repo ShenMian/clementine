@@ -2,7 +2,7 @@ var classclem_1_1_framebuffer =
 [
     [ "clear", "classclem_1_1_framebuffer.html#a57af5de52cbdf24456e57216773dd1db", null ],
     [ "drawCycle", "classclem_1_1_framebuffer.html#ac697cdb1d0ceaa4cf0e8cf469f1ff549", null ],
-    [ "drawLine", "classclem_1_1_framebuffer.html#a85e66d00bfff450ec868978c0979922d", null ],
+    [ "drawLine", "classclem_1_1_framebuffer.html#a3b6646fe1ac8634ad1cb79bb755d126e", null ],
     [ "drawPoint", "classclem_1_1_framebuffer.html#ac0a190ad3310424c211a31a76d6e3809", null ],
     [ "drawPoint", "classclem_1_1_framebuffer.html#a37eda3d14e59c6c2aa8802aae131cd30", null ],
     [ "drawRect", "classclem_1_1_framebuffer.html#ac1019c7046ece5edb4f6104b5a12f6aa", null ],

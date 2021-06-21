@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Clementine
-   &#160;<span id="projectnumber">0.0.2</span>
+   &#160;<span id="projectnumber">0.0.1</span>
    </div>
    <div id="projectbrief">A framework for building 2D console games.</div>
   </td>
@@ -91,32 +91,77 @@ $(document).ready(function(){initNavTree('class_random.html',''); initResizable(
 </div><!--header-->
 <div class="contents">
 
-<p>随机数生成器.  
+<p>伪随机数生成器. 生成均匀分布的随机数.  
  <a href="class_random.html#details">更多...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:a0cee184d5ec09774c7881fb73eb2fb1d"><td class="memItemLeft" align="right" valign="top"><a id="a0cee184d5ec09774c7881fb73eb2fb1d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random.html#a0cee184d5ec09774c7881fb73eb2fb1d">setSeed</a> (uint32_t)</td></tr>
-<tr class="memdesc:a0cee184d5ec09774c7881fb73eb2fb1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置种子. <br /></td></tr>
-<tr class="separator:a0cee184d5ec09774c7881fb73eb2fb1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb76b49c3903a3c4fb67fd216341f08d"><td class="memItemLeft" align="right" valign="top"><a id="acb76b49c3903a3c4fb67fd216341f08d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random.html#acb76b49c3903a3c4fb67fd216341f08d">Random</a> ()</td></tr>
+<tr class="memdesc:acb76b49c3903a3c4fb67fd216341f08d"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数. 使用随机生成的种子. <br /></td></tr>
+<tr class="separator:acb76b49c3903a3c4fb67fd216341f08d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bd9e427daee4bec93bb0090d6c75829"><td class="memItemLeft" align="right" valign="top"><a id="a3bd9e427daee4bec93bb0090d6c75829"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random.html#a3bd9e427daee4bec93bb0090d6c75829">setSeed</a> (uint32_t seed)</td></tr>
+<tr class="memdesc:a3bd9e427daee4bec93bb0090d6c75829"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置种子. <br /></td></tr>
+<tr class="separator:a3bd9e427daee4bec93bb0090d6c75829"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0178393e9c32f712a963a6c9b202a36c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random.html#a0178393e9c32f712a963a6c9b202a36c">getUint32</a> (uint32_t min=0, uint32_t max=UINT32_MAX)</td></tr>
 <tr class="memdesc:a0178393e9c32f712a963a6c9b202a36c"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成指定范围内的32位随机无符号整数.  <a href="class_random.html#a0178393e9c32f712a963a6c9b202a36c">更多...</a><br /></td></tr>
 <tr class="separator:a0178393e9c32f712a963a6c9b202a36c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a664e49a3019266be01a7f03bf0cdae91"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random.html#a664e49a3019266be01a7f03bf0cdae91">getInt32</a> (int32_t min=INT32_MIN, int32_t max=INT32_MAX)</td></tr>
 <tr class="memdesc:a664e49a3019266be01a7f03bf0cdae91"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成指定范围内的32位随机有符号整数.  <a href="class_random.html#a664e49a3019266be01a7f03bf0cdae91">更多...</a><br /></td></tr>
 <tr class="separator:a664e49a3019266be01a7f03bf0cdae91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2498fad76196a0ede1cc9ad2c1b843b7"><td class="memItemLeft" align="right" valign="top"><a id="a2498fad76196a0ede1cc9ad2c1b843b7"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random.html#a2498fad76196a0ede1cc9ad2c1b843b7">getFloat</a> ()</td></tr>
-<tr class="memdesc:a2498fad76196a0ede1cc9ad2c1b843b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成 0-1 之间的随机单精度浮点数. <br /></td></tr>
-<tr class="separator:a2498fad76196a0ede1cc9ad2c1b843b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9556d7e5a909c609f6e4a06b678da17e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random.html#a9556d7e5a909c609f6e4a06b678da17e">getFloat</a> (float min=0.0f, float max=1.0f)</td></tr>
+<tr class="memdesc:a9556d7e5a909c609f6e4a06b678da17e"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成指定范围内的随机单精度浮点数.  <a href="class_random.html#a9556d7e5a909c609f6e4a06b678da17e">更多...</a><br /></td></tr>
+<tr class="separator:a9556d7e5a909c609f6e4a06b678da17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bae2ea6435e44305b94b06adcec61b1"><td class="memItemLeft" align="right" valign="top"><a id="a6bae2ea6435e44305b94b06adcec61b1"></a>
+<a class="el" href="struct_vector2.html">Point2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random.html#a6bae2ea6435e44305b94b06adcec61b1">getPoint2</a> (const <a class="el" href="struct_vector2.html">Point2</a> &amp;min, const <a class="el" href="struct_vector2.html">Point2</a> &amp;max)</td></tr>
+<tr class="memdesc:a6bae2ea6435e44305b94b06adcec61b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成指定范围内的随机二维点. <br /></td></tr>
+<tr class="separator:a6bae2ea6435e44305b94b06adcec61b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c222611a3585609ea720525f9184a93"><td class="memItemLeft" align="right" valign="top"><a id="a1c222611a3585609ea720525f9184a93"></a>
-<a class="el" href="struct_vector2i.html">Point2i</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getPoint2i</b> (const <a class="el" href="struct_vector2i.html">Point2i</a> &amp;min, const <a class="el" href="struct_vector2i.html">Point2i</a> &amp;max)</td></tr>
+<a class="el" href="struct_vector2i.html">Point2i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random.html#a1c222611a3585609ea720525f9184a93">getPoint2i</a> (const <a class="el" href="struct_vector2i.html">Point2i</a> &amp;min, const <a class="el" href="struct_vector2i.html">Point2i</a> &amp;max)</td></tr>
+<tr class="memdesc:a1c222611a3585609ea720525f9184a93"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成指定范围内的随机二维点. <br /></td></tr>
 <tr class="separator:a1c222611a3585609ea720525f9184a93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
-<div class="textblock"><p>随机数生成器. </p>
+<div class="textblock"><p>伪随机数生成器. 生成均匀分布的随机数. </p>
 </div><h2 class="groupheader">成员函数说明</h2>
+<a id="a9556d7e5a909c609f6e4a06b678da17e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9556d7e5a909c609f6e4a06b678da17e">&#9670;&nbsp;</a></span>getFloat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Random::getFloat </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>min</em> = <code>0.0f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>max</em> = <code>1.0f</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>生成指定范围内的随机单精度浮点数. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">min</td><td>范围下限, 包含, 默认值: 0. </td></tr>
+    <tr><td class="paramname">max</td><td>范围上限, 包含, 默认值: 1. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a664e49a3019266be01a7f03bf0cdae91"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a664e49a3019266be01a7f03bf0cdae91">&#9670;&nbsp;</a></span>getInt32()</h2>
 

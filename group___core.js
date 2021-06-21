@@ -16,5 +16,6 @@ var group___core =
       [ "setMsPerRender", "classclem_1_1_application.html#a6cd73223c5a1b5545de8d0ae2fbf2bd7", null ],
       [ "setMsPerUpdate", "classclem_1_1_application.html#a7857b1091cd4dacdd0a69cd1a1fc837b", null ],
       [ "stop", "classclem_1_1_application.html#a3f49f03fffc0f6a1509b1d08cc4129ff", null ]
-    ] ]
+    ] ],
+    [ "Main", "classclem_1_1_main.html", null ]
 ];

@@ -5,7 +5,7 @@ var classclem_1_1_sprite =
     [ "Sprite", "classclem_1_1_sprite.html#a6740939883afc84b45632026c8aa1455", null ],
     [ "clear", "classclem_1_1_sprite.html#ab31e3f73406032e3f1adfda8c938f6f6", null ],
     [ "drawCycle", "classclem_1_1_sprite.html#af747fa1c37bc9b4c1ec96c8aed87d6a0", null ],
-    [ "drawLine", "classclem_1_1_sprite.html#ab4d40e1579cd40b9d99fd8baf8105389", null ],
+    [ "drawLine", "classclem_1_1_sprite.html#a8514162012b5593563870139baac9e65", null ],
     [ "drawPoint", "classclem_1_1_sprite.html#ae7b2ed2a7c269024ed36d4d89ef6f266", null ],
     [ "drawPoint", "classclem_1_1_sprite.html#a200f9adf6c963ba80681b6eab21a47ce", null ],
     [ "drawRect", "classclem_1_1_sprite.html#a0d637653e8ee6dd1c7d78b388d661759", null ],
