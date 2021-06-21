@@ -9,7 +9,7 @@
 
 namespace clem
 {
-
+template <typename...>
 class Archtype;
 class Chunk;
 struct EntityInfo;
@@ -41,7 +41,7 @@ public:
 	 * @brief 获取 Archtype 的引用.
 	 * Archtypes 由该类管理, 以节省内存占用.
 	 */
-	const Archtype& getArchtype(const Archtype&);
+	const Archtype<>& getArchtype(const Archtype<>&);
 
 private:
 	template <typename T>
@@ -49,10 +49,9 @@ private:
 
 	std::vector<EntityInfo> entities;
 	std::vector<EntityId>   freeId;
-	std::set<Archtype>      archtypes; // std::unordered_set
+	std::set<Archtype<>>    archtypes; // std::unordered_set
 	Allocator<Chunk>        allocator;
 
 	EntityId getNewId();
 };
-
 } // namespace clem

@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include <string>
 #include <memory>
+#include <string>
 
 #if _MSC_VER
 #	define breakpoint() __debugbreak()
@@ -50,14 +50,13 @@ inline void Assert::isNull(std::shared_ptr<T>& ptr, const char* file, unsigned i
 {
 	isTrue(ptr == nullptr, file, line);
 }
-
 } // namespace clem
 
 #define CALL_INFO __FILE__, __LINE__
 
-#define CLEM_ASSERT_TRUE(expr, msg)     clem::Assert::isTrue(expr, msg, CALL_INFO);
-#define CLEM_ASSERT_FALSE(expr, msg)    clem::Assert::isFalse(expr, msg, CALL_INFO);
-#define CLEM_ASSERT_NULL(ptr, msg)      clem::Assert::isNull(ptr, msg, CALL_INFO);
-#define CLEM_ASSERT_NOT_NULL(ptr, msg)  clem::Assert::isNotNull(ptr, msg, CALL_INFO);
-#define CLEM_ASSERT_EQ(val1, val2)      clem::Assert::isTrue((val1) == (val2), msg, CALL_INFO);
-#define CLEM_ASSERT_NE(val1, val2)      clem::Assert::isTrue((val1) != (val2), msg, CALL_INFO);
+#define CLEM_ASSERT_TRUE(expr, msg)    clem::Assert::isTrue(expr, msg, CALL_INFO);
+#define CLEM_ASSERT_FALSE(expr, msg)   clem::Assert::isFalse(expr, msg, CALL_INFO);
+#define CLEM_ASSERT_NULL(ptr, msg)     clem::Assert::isNull(ptr, msg, CALL_INFO);
+#define CLEM_ASSERT_NOT_NULL(ptr, msg) clem::Assert::isNotNull(ptr, msg, CALL_INFO);
+#define CLEM_ASSERT_EQ(val1, val2)     clem::Assert::isTrue((val1) == (val2), msg, CALL_INFO);
+#define CLEM_ASSERT_NE(val1, val2)     clem::Assert::isTrue((val1) != (val2), msg, CALL_INFO);

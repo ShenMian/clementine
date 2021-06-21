@@ -3,8 +3,8 @@
 
 #include "Main.h"
 #include "Application.h"
-#include "Clem/Assert.h"
 #include "Clem.h"
+#include "Clem/Assert.h"
 #include <map>
 #include <string>
 
@@ -21,7 +21,6 @@ int main_(int argc, char* argv[])
 
 namespace clem
 {
-
 bool         Main::running     = true;
 bool         Main::paused      = false;
 uint16_t     Main::msPerInput  = 16;
@@ -42,7 +41,7 @@ int Main::main(int argc, char* argv[])
 	run();
 
 	app->deinit();
-	
+
 	delete app;
 
 	return 0;

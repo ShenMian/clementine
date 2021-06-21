@@ -12,6 +12,8 @@ using namespace clem;
 // TODO: UI: 剩余雷数, 计时, 开始菜单(难度选择)
 //       先揭开第一个方格再生成地雷, 防止第一次就触碰到地雷
 
+#include <tuple>
+
 class App : public Application
 {
 public:
@@ -26,6 +28,9 @@ public:
 
 		opening.loadFromFile("assets/opening.wav");
 		explode.loadFromFile("assets/explode.wav");
+
+		std::tuple<int> i;
+		Archtype at;
 
 		// TODO: UI
 		puts("/--[Level]--\\\n"

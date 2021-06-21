@@ -6,12 +6,8 @@
 
 namespace clem
 {
-Archtype::Archtype(const type_set& types)
-		: types(types)
-{
-}
-
-bool Archtype::all(const Archtype& ts) const
+template <typename T, typename... Types>
+bool Archtype<T, Types...>::all(const Archtype& ts) const
 {
 	for(auto& t : ts.types)
 		if(types.find(t) == types.end())
@@ -19,7 +15,8 @@ bool Archtype::all(const Archtype& ts) const
 	return true;
 }
 
-bool Archtype::any(const Archtype& ts) const
+template <typename T, typename... Types>
+bool Archtype<T, Types...>::any(const Archtype& ts) const
 {
 	for(auto& t : ts.types)
 		if(types.find(t) != types.end())
@@ -27,17 +24,20 @@ bool Archtype::any(const Archtype& ts) const
 	return false;
 }
 
-bool Archtype::none(const Archtype& ts) const
+template <typename T, typename... Types>
+bool Archtype<T, Types...>::none(const Archtype& ts) const
 {
 	return !any(ts);
 }
 
-bool Archtype::operator==(const Archtype& rhs) const
+template <typename T, typename... Types>
+bool Archtype<T, Types...>::operator==(const Archtype& rhs) const
 {
 	return types == rhs.types;
 }
 
-bool Archtype::operator<(const Archtype& rhs) const
+template <typename T, typename... Types>
+bool Archtype<T, Types...>::operator<(const Archtype& rhs) const
 {
 	return types < rhs.types;
 }

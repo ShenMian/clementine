@@ -6,18 +6,21 @@
 #include <set>
 #include <typeindex>
 #include <typeinfo>
-#include <vector>
 
 namespace clem
 {
 class Chunk;
 
+template <typename...>
 class Archtype
 {
-	using type_set = std::set<std::type_index>;
+};
 
+template <typename T, typename... Types>
+class Archtype<T, Types...> : private Archtype<Types...>
+{
 public:
-	Archtype(const type_set&);
+	Archtype();
 
 	bool all(const Archtype&) const;
 	bool any(const Archtype&) const;
@@ -27,6 +30,19 @@ public:
 	bool operator<(const Archtype& rhs) const;
 
 private:
-	type_set types;
+	std::type_index           type;
+	std::set<std::type_index> types;
 };
+
+template <>
+class Archtype<>
+{
+};
+
+template <typename T, typename... Types>
+inline Archtype<T, Types...>::Archtype()
+		: type(typeid(T))
+{
+	types += type + Archtype<Types...>::types;
+}
 } // namespace clem

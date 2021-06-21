@@ -2,8 +2,8 @@
 // License(Apache-2.0)
 
 #include "Sound.h"
-#include "Clem/Profiler.h"
 #include "AL/alext.h"
+#include "Clem/Profiler.h"
 #include <fstream>
 
 namespace fs = std::filesystem;

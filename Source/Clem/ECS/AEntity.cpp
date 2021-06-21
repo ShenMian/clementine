@@ -6,7 +6,6 @@
 
 namespace clem
 {
-
 struct EntityInfo
 {
 	Archtype& archtype;
@@ -15,6 +14,11 @@ struct EntityInfo
 AEntity::AEntity(EntityId id, size_t ver, Registry& reg)
 		: id(id), version(ver), registry(reg)
 {
+}
+
+bool AEntity::isValid() const
+{
+	return registry.isValid(*this);
 }
 
 EntityId AEntity::getId() const

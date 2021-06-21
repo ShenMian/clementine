@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include <cstdint>
 #include <cstddef>
+#include <cstdint>
 
 typedef uint32_t EntityId;
 

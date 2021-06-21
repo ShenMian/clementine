@@ -8,7 +8,6 @@
 
 namespace clem
 {
-
 struct EntityInfo
 {
 	Archtype* archtype = nullptr;
@@ -64,5 +63,4 @@ EntityId Registry::getNewId()
 	}
 	return id;
 }
-
 } // namespace clem
