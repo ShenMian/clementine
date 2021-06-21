@@ -72,13 +72,13 @@ private:
 };
 
 template <typename Com>
-bool AEntity::hasComponent() const
+inline bool AEntity::hasComponent() const
 {
 	return false;
 }
 
 template <typename Com, typename... Coms>
-bool AEntity::hasComponent() const
+inline bool AEntity::hasComponent() const
 {
 	if constexpr(sizeof...(Coms) > 0)
 		return hasComponent<Com>() && hasComponent<Coms...>();

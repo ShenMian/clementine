@@ -6,6 +6,18 @@
 
 namespace clem
 {
-/*
-*/
+Archtype::Archtype(std::set<std::type_index>&& types)
+		: types(std::move(types))
+{
+}
+
+bool Archtype::operator==(const Archtype& rhs) const
+{
+	return types == rhs.types;
+}
+
+bool Archtype::operator<(const Archtype& rhs) const
+{
+	return types < rhs.types;
+}
 } // namespace clem

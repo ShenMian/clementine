@@ -6,11 +6,6 @@
 
 namespace clem
 {
-struct EntityInfo
-{
-	Archtype<>& archtype;
-};
-
 AEntity::AEntity(EntityId id, size_t ver, Registry& reg)
 		: id(id), version(ver), registry(reg)
 {

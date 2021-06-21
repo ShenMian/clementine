@@ -11,10 +11,11 @@ namespace clem
 {
 class Chunk;
 
-template <typename... Types>
 class Archtype
 {
 public:
+	Archtype(std::set<std::type_index>&&);
+
 	template <typename T, typename... Args>
 	bool all() const;
 
@@ -24,15 +25,21 @@ public:
 	template <typename... Args>
 	bool none() const;
 
-	bool operator<(const Archtype<Types...>& rhs) const;
+	bool operator==(const Archtype& rhs) const;
+	bool operator<(const Archtype& rhs) const;
 
 private:
-	std::set<std::type_index> types = {std::type_index(typeid(Types))...};
+	std::set<std::type_index> types;
 };
 
 template <typename... Types>
+inline Archtype makeArchtype()
+{
+	return Archtype({std::type_index(typeid(Types))...});
+}
+
 template <typename T, typename... Args>
-bool Archtype<Types...>::all() const
+inline bool Archtype::all() const
 {
 	if constexpr(sizeof...(Args) > 0)
 		return types.find(typeid(T)) != types.end() && all<Args...>();
@@ -40,9 +47,8 @@ bool Archtype<Types...>::all() const
 		return types.find(typeid(T)) != types.end();
 }
 
-template <typename... Types>
 template <typename T, typename... Args>
-bool Archtype<Types...>::any() const
+inline bool Archtype::any() const
 {
 	if constexpr(sizeof...(Args) > 0)
 		return types.find(typeid(T)) != types.end() || any<Args...>();
@@ -50,22 +56,9 @@ bool Archtype<Types...>::any() const
 		return types.find(typeid(T)) != types.end();
 }
 
-template <typename... Types>
 template <typename... Args>
-bool Archtype<Types...>::none() const
+inline bool Archtype::none() const
 {
 	return !any<Args...>();
-}
-
-template <typename... Types1, typename... Types2>
-bool operator==(const Archtype<Types1...>& lhs, const Archtype<Types2...>& rhs) const
-{
-	return lhs.types == rhs.types;
-}
-
-template <typename... Types>
-bool Archtype<Types...>::operator<(const Archtype<Types...>& rhs) const
-{
-	return types < rhs.types;
 }
 } // namespace clem

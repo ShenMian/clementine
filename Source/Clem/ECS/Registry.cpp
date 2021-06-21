@@ -8,12 +8,6 @@
 
 namespace clem
 {
-struct EntityInfo
-{
-	Archtype<>* archtype = nullptr;
-	Chunk*      chunk    = nullptr;
-	size_t      version  = 0;
-};
 
 AEntity Registry::create()
 {
@@ -42,7 +36,7 @@ bool Registry::isValid(const AEntity& e) const
 	return e.getId() < entities.size() && e.getVersion() == entities[e.getId()].version;
 }
 
-const Archtype<>& Registry::getArchtype(const Archtype<>& at)
+const Archtype& Registry::getArchtype(const Archtype& at)
 {
 	auto pair = archtypes.insert(at);
 	return *(pair.first);
