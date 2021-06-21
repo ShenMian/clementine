@@ -8,7 +8,7 @@ namespace clem
 {
 struct EntityInfo
 {
-	Archtype& archtype;
+	Archtype<>& archtype;
 };
 
 AEntity::AEntity(EntityId id, size_t ver, Registry& reg)
