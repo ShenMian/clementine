@@ -24,8 +24,7 @@ public:
 	template <typename... Args>
 	bool none() const;
 
-	bool operator==(const Archtype<>& rhs) const;
-	bool operator<(const Archtype<>& rhs) const;
+	bool operator<(const Archtype<Types...>& rhs) const;
 
 private:
 	std::set<std::type_index> types = {std::type_index(typeid(Types))...};
@@ -58,14 +57,14 @@ bool Archtype<Types...>::none() const
 	return !any<Args...>();
 }
 
-template <typename... Types>
-bool Archtype<Types...>::operator==(const Archtype<>& rhs) const
+template <typename... Types1, typename... Types2>
+bool operator==(const Archtype<Types1...>& lhs, const Archtype<Types2...>& rhs) const
 {
-	return types == rhs.types;
+	return lhs.types == rhs.types;
 }
 
 template <typename... Types>
-bool Archtype<Types...>::operator<(const Archtype<>& rhs) const
+bool Archtype<Types...>::operator<(const Archtype<Types...>& rhs) const
 {
 	return types < rhs.types;
 }

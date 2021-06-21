@@ -44,13 +44,22 @@ public:
 	/**
 	 * @brief 检查是否有指定的多个组件.
 	 */
-	template <typename T, typename V, typename... Types>
+	template <typename Com, typename... Coms>
 	bool hasComponent() const;
 
+	/**
+	 * @brief 检查是否有效.
+	 */
 	bool isValid() const;
 
+	/**
+	 * @brief 获取 ID.
+	 */
 	EntityId getId() const;
 
+	/**
+	 * @brief 获取 version.
+	 */
 	size_t getVersion() const;
 
 	bool operator==(const AEntity& rhs) const;
@@ -68,9 +77,12 @@ bool AEntity::hasComponent() const
 	return false;
 }
 
-template <typename Com, typename T, typename... Types>
+template <typename Com, typename... Coms>
 bool AEntity::hasComponent() const
 {
-	return hasComponent<Com>() && hasComponent<T, Types...>();
+	if constexpr(sizeof...(Coms) > 0)
+		return hasComponent<Com>() && hasComponent<Coms...>();
+	else
+		return hasComponent<Com>();
 }
 } // namespace clem
