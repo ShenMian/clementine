@@ -3,8 +3,16 @@
 
 #include "Main.h"
 #include "Application.h"
-#include "Clem.h"
+
 #include "Clem/Assert.h"
+#include "Clem/Audio/Audio.h"
+#include "Clem/Core/Input/Keyboard.h"
+#include "Clem/Core/Input/Mouse.h"
+#include "Clem/Logger.h"
+#include "Clem/Profiler.h"
+#include "Clem/Rendering/Output.h"
+#include "Clem/Window.h"
+
 #include <map>
 #include <string>
 
