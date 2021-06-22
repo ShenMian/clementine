@@ -8,11 +8,6 @@
 
 namespace clem
 {
-Point2 Collider::getPosition() const
-{
-	return rigidbody->getPosition() + offset;
-}
-
 void Collider::setOffset(Point2 o)
 {
 	offset = o;

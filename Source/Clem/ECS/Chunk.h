@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "AEntity.h"
+#include "Entity.h"
 #include "config.h"
 #include <any>
 #include <array>
@@ -17,16 +17,16 @@ struct alignas(chunkAlignment) Chunk
 {
 public:
 	template <typename Com, typename... Args>
-	Com& addComponent(const AEntity&, Args&&... args);
+	Com& addComponent(const Entity&, Args&&... args);
 
 	template <typename Com>
-	void removeComponent(const AEntity&);
+	void removeComponent(const Entity&);
 
 	template <typename Com>
-	Com& getComponent(const AEntity&);
+	Com& getComponent(const Entity&);
 
 	template <typename Com>
-	bool hasComponent(const AEntity&);
+	bool hasComponent(const Entity&);
 
 	size_t getSize() const
 	{
@@ -47,11 +47,11 @@ private:
 	size_t                           size;
 	std::array<std::byte, chunkSize> buffer;
 
-	std::map<AEntity, std::unordered_map<std::type_index, std::any>> components;
+	std::map<Entity, std::unordered_map<std::type_index, std::any>> components;
 };
 
 template <typename Com, typename... Args>
-inline Com& Chunk::addComponent(const AEntity& e, Args&&... args)
+inline Com& Chunk::addComponent(const Entity& e, Args&&... args)
 {
 	components[e][typeid(Com)] = Com(args...);
 	size++;
@@ -59,20 +59,20 @@ inline Com& Chunk::addComponent(const AEntity& e, Args&&... args)
 }
 
 template <typename Com>
-inline void Chunk::removeComponent(const AEntity& e)
+inline void Chunk::removeComponent(const Entity& e)
 {
 	components[e][typeid(Com)].reset();
 	size--;
 }
 
 template <typename Com>
-[[nodiscard]] inline Com& Chunk::getComponent(const AEntity& e)
+[[nodiscard]] inline Com& Chunk::getComponent(const Entity& e)
 {
 	return std::any_cast<Com&>(components[e][typeid(Com)]);
 }
 
 template <typename Com>
-[[nodiscard]] inline bool Chunk::hasComponent(const AEntity& e)
+[[nodiscard]] inline bool Chunk::hasComponent(const Entity& e)
 {
 	return components[e][typeid(Com)].has_value();
 }

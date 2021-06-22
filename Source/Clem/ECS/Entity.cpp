@@ -1,27 +1,27 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "AEntity.h"
+#include "Entity.h"
 #include "Registry.h"
 
 namespace clem
 {
-AEntity::AEntity(EntityId id, size_t ver, Registry& reg)
+Entity::Entity(id_type id, version_type ver, Registry& reg)
 		: id(id), version(ver), registry(reg)
 {
 }
 
-bool AEntity::isValid() const
+bool Entity::isValid() const
 {
 	return registry.isValid(*this);
 }
 
-bool AEntity::operator==(const AEntity& rhs) const
+bool Entity::operator==(const Entity& rhs) const
 {
 	return id == rhs.id && &registry == &rhs.registry;
 }
 
-bool AEntity::operator<(const AEntity& rhs) const
+bool Entity::operator<(const Entity& rhs) const
 {
 	return id < rhs.id;
 }

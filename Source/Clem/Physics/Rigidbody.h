@@ -75,16 +75,6 @@ public:
 	 */
 	Type getType() const;
 
-	/**
-	 * @brief 设置位置.
-	 */
-	void setPosition(const Point2&);
-
-	/**
-	 * @brief 获取位置.
-	 */
-	Point2 getPosition();
-
 private:
 	Vector2 force;
 	float   mass = 1.0f;

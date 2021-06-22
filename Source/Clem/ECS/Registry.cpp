@@ -9,14 +9,14 @@
 
 namespace clem
 {
-AEntity Registry::create()
+Entity Registry::create()
 {
-	const auto id = getNewId();
+	const auto id      = getNewId();
 	entities[id].chunk = &chunk;
-	return AEntity(id, entities[id].version, *this);
+	return Entity(id, entities[id].version, *this);
 }
 
-void Registry::destory(const AEntity& e)
+void Registry::destory(const Entity& e)
 {
 	const auto id = e.id;
 	entities[id].version++;
@@ -34,7 +34,7 @@ size_t Registry::getSize() const
 		return 0;
 }
 
-bool Registry::isValid(const AEntity& e) const
+bool Registry::isValid(const Entity& e) const
 {
 	return e.id < entities.size() && e.version == entities[e.id].version;
 }
@@ -45,17 +45,17 @@ void Registry::update(float dt)
 		system->update(dt);
 }
 
-Chunk& Registry::getChunk(const AEntity& e) const
+Chunk& Registry::getChunk(const Entity& e) const
 {
 	return *entities[e.id].chunk;
 }
 
-EntityId Registry::getNewId()
+id_type Registry::getNewId()
 {
-	EntityId id;
+	id_type id;
 	if(freeId.empty())
 	{
-		id = static_cast<EntityId>(entities.size());
+		id = static_cast<id_type>(entities.size());
 		entities.emplace_back();
 	}
 	else

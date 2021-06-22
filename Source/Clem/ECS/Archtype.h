@@ -35,11 +35,17 @@ public:
 	bool operator==(const Archtype& rhs) const;
 	bool operator<(const Archtype& rhs) const;
 
-	size_t getHashCode() const;
+	size_t hashCode() const;
 
 private:
 	std::set<std::type_index> types;
 };
+
+template <typename... Ts>
+inline Archtype makeArchtype()
+{
+	return Archtype(std::move({std::type_index(typeid(Ts))...}));
+}
 } // namespace clem
 
 #include "Archtype.inl"

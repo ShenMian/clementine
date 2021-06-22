@@ -11,7 +11,7 @@
 
 namespace clem
 {
-class Entity;
+class OldEntity;
 
 /**
  * @addtogroup Scene
@@ -31,14 +31,14 @@ public:
 	 *
 	 * @param tag 新实体的标签.
 	 */
-	Entity createEntity(const std::string& tag = "");
+	OldEntity createEntity(const std::string& tag = "");
 
 	/**
 	 * @brief 通过标签获取实体.
 	 *
 	 * @param tag 要获取的实体的标签.
 	 */
-	Entity getEntity(const std::string_view& tag);
+	OldEntity getEntity(const std::string_view& tag);
 
 	/**
 	 * @brief 通过标签销毁实体.
@@ -59,7 +59,7 @@ private:
 
 	entt::registry registry;
 
-	friend class Entity;
+	friend class OldEntity;
 	friend class PhysicsWorld;
 };
 

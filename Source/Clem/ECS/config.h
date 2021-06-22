@@ -7,7 +7,10 @@
 #include <cstdint>
 #include <typeindex>
 
-typedef uint32_t EntityId;
+namespace clem
+{
+using id_type      = uint32_t;
+using version_type = uint16_t;
 
 constexpr auto chunkAlignment = 64;
 constexpr auto chunkSize      = 16 * 1024;
@@ -16,7 +19,7 @@ constexpr auto chunkSize      = 16 * 1024;
 
 #ifdef CLEM_HAVE_RTTI
 
-typedef std::type_index TypeIndex;
+using TypeIndex = std::type_index;
 
 #	define CLEM_DECLARE_TYPE
 #	define CLEM_DEFINE_TYPE(type)
@@ -29,11 +32,10 @@ TypeIndex Typeid()
 
 #else
 
-typedef uint32_t TypeIndex;
+using TypeIndex = uint32_t;
 
 namespace detal
 {
-
 class TypeRegistry
 {
 public:
@@ -59,7 +61,7 @@ TypeIndex Typeid()
 {
 	return T::__type_registry.index;
 }
-
 } // namespace detal
 
 #endif
+} // namespace clem

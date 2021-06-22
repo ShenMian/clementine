@@ -30,7 +30,7 @@ TEST(Point2, distance)
 	EXPECT_EQ(Point2(3, 4).distance(Point2(3 + 3, 4 + 4)), 5);
 }
 
-TEST(Point2, distance)
+TEST(Point2, distanceSquared)
 {
 	EXPECT_EQ(Point2(0, 0).distanceSquared(Point2(3, 4)), 5 * 5);
 }

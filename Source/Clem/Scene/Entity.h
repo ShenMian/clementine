@@ -20,13 +20,13 @@ class Component;
 /**
  * @brief 实体. 组件的容器.
  */
-class Entity
+class OldEntity
 {
 public:
 	typedef entt::entity id_t;
 
-	Entity() = default;
-	Entity(id_t id, Scene* scene);
+	OldEntity() = default;
+	OldEntity(id_t id, Scene* scene);
 
 	/**
 	 * @brief 添加指定组件.
@@ -58,8 +58,8 @@ public:
 	operator bool() const;
 	operator id_t() const;
 
-	bool operator==(const Entity&) const;
-	bool operator!=(const Entity&) const;
+	bool operator==(const OldEntity&) const;
+	bool operator!=(const OldEntity&) const;
 
 private:
 	void onAddComponent(Component*);
@@ -74,7 +74,7 @@ private:
  */
 
 template <typename Com, typename... Args>
-Com& Entity::addComponent(Args&&... args)
+Com& OldEntity::addComponent(Args&&... args)
 {
 	if(hasComponent<Com>())
 		CLEM_LOG_FATAL("core", "add a an existing component '{}' to entity '{}'", typeid(Com).name() /*, getComponent<Tag>().string*/);
@@ -84,7 +84,7 @@ Com& Entity::addComponent(Args&&... args)
 }
 
 template <typename Com>
-void Entity::removeComponent()
+void OldEntity::removeComponent()
 {
 	if(!hasComponent<Com>())
 		CLEM_LOG_FATAL("core", "remove a nonexistent component '{}' from entity '{}'", typeid(Com).name() /*, getComponent<Tag>().string*/);
@@ -92,7 +92,7 @@ void Entity::removeComponent()
 }
 
 template <typename Com>
-Com& Entity::getComponent()
+Com& OldEntity::getComponent()
 {
 	if(!hasComponent<Com>())
 		CLEM_LOG_FATAL("core", "get a nonexistent component '{}' from entity '{}'", typeid(Com).name() /*, getComponent<Tag>().string*/);
@@ -100,7 +100,7 @@ Com& Entity::getComponent()
 }
 
 template <typename Com>
-bool Entity::hasComponent()
+bool OldEntity::hasComponent()
 {
 	return scene->registry.has<Com>(id);
 }

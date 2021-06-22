@@ -47,15 +47,4 @@ Rigidbody::Type Rigidbody::getType() const
 {
 	return type;
 }
-
-Point2 Rigidbody::getPosition()
-{
-	// TODO
-	return Point2::zero;
-}
-
-void Rigidbody::setPosition(const Point2& p)
-{
-	getEntity().getComponent<Transform>().setPosition(p);
-}
 } // namespace clem

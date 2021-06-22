@@ -3,13 +3,6 @@
 
 namespace clem
 {
-
-template <typename... Ts>
-inline Archtype makeArchtype()
-{
-	return Archtype(std::move({std::type_index(typeid(Ts))...}));
-}
-
 template <typename T, typename... Ts>
 inline bool Archtype::all() const
 {
@@ -47,7 +40,6 @@ inline Archtype& Archtype::remove()
 	types.erase(typeid(T));
 	return *this;
 }
-
 } // namespace clem
 
 /*
@@ -56,7 +48,7 @@ struct std::hash<clem::Archtype>
 {
 	size_t operator()(const clem::Archtype& v) const noexcept
 	{
-		return v.getHashCode();
+		return v.hashCode();
 	}
 };
 

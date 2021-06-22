@@ -18,22 +18,22 @@ Scene::Scene()
 {
 }
 
-Entity Scene::createEntity(const string& tag)
+OldEntity Scene::createEntity(const string& tag)
 {
-	Entity e(registry.create(), this);
+	OldEntity e(registry.create(), this);
 	e.addComponent<Transform>();
 	e.addComponent<Tag>(tag);
 	return e;
 }
 
-Entity Scene::getEntity(const string_view& tag)
+OldEntity Scene::getEntity(const string_view& tag)
 {
 	auto view = registry.view<Tag>();
 	for(auto [e, t] : view.each())
 		if(t.string == tag)
-			return Entity(e, this);
+			return OldEntity(e, this);
 	CLEM_LOG_WARN("core", "get entity with invalid a tag");
-	return Entity();
+	return OldEntity();
 }
 
 void Scene::destroyEntity(const string_view& tag)

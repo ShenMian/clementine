@@ -3,11 +3,9 @@
 
 namespace clem
 {
-
 class System
 {
 public:
 	virtual void update(float dt) = 0;
 };
-
 } // namespace clem

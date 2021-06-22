@@ -17,6 +17,7 @@ void PhysicsWorld::update(float dt)
 {
 	PROFILE_FUNC();
 
+	/*
 	for(auto body : bodies)
 	{
 		switch(body->getType())
@@ -33,7 +34,7 @@ void PhysicsWorld::update(float dt)
 			continue;
 		}
 		body->setPosition(body->getPosition() + body->velocity); // p += v * dt;
-	}
+	}*/
 
 	/*
 	auto view = scene.registry.view<Rigidbody>();

@@ -10,13 +10,13 @@ namespace clem
 {
 class Registry;
 
-class AEntity
+class Entity
 {
 public:
 	/**
 	 * @brief 构造函数.
 	 */
-	AEntity(EntityId id, size_t version, Registry& reg);
+	Entity(id_type id, version_type version, Registry& reg);
 
 	/**
 	 * @brief 添加组件.
@@ -47,17 +47,16 @@ public:
 	 */
 	bool isValid() const;
 
-	const EntityId id;
+	const id_type id;
 
-	const size_t version;
+	const version_type version;
 
-	bool operator==(const AEntity& rhs) const;
-	bool operator<(const AEntity& rhs) const;
+	bool operator==(const Entity& rhs) const;
+	bool operator<(const Entity& rhs) const;
 
 private:
 	Registry& registry;
 };
-
 } // namespace clem
 
 #include "Entity.inl"

@@ -3,6 +3,6 @@
 
 #pragma once
 
-#include "AEntity.h"
 #include "Archtype.h"
+#include "Entity.h"
 #include "Registry.h"
