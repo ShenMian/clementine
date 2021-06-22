@@ -4,23 +4,26 @@
 #include "Registry.h"
 #include "Archtype.h"
 #include "Chunk.h"
+#include "System.h"
 #include <algorithm>
 
 namespace clem
 {
-
 AEntity Registry::create()
 {
 	const auto id = getNewId();
+	entities[id].chunk = &chunk;
 	return AEntity(id, entities[id].version, *this);
 }
 
 void Registry::destory(const AEntity& e)
 {
-	const auto id = e.getId();
+	const auto id = e.id;
 	entities[id].version++;
+	freeId.push_back(id);
 	if(id < entities.size())
 		freeId.push_back(id);
+	// freeId.erase(std::remove_if(freeId.begin(), freeId.end(), [this](auto id) { return id < entities.size(); }), freeId.end());
 }
 
 size_t Registry::getSize() const
@@ -33,13 +36,18 @@ size_t Registry::getSize() const
 
 bool Registry::isValid(const AEntity& e) const
 {
-	return e.getId() < entities.size() && e.getVersion() == entities[e.getId()].version;
+	return e.id < entities.size() && e.version == entities[e.id].version;
 }
 
-const Archtype& Registry::getArchtype(const Archtype& at)
+void Registry::update(float dt)
 {
-	auto pair = archtypes.insert(at);
-	return *(pair.first);
+	for(auto& system : systems)
+		system->update(dt);
+}
+
+Chunk& Registry::getChunk(const AEntity& e) const
+{
+	return *entities[e.id].chunk;
 }
 
 EntityId Registry::getNewId()

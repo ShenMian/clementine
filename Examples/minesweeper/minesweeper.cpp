@@ -12,8 +12,6 @@ using namespace clem;
 // TODO: UI: 剩余雷数, 计时, 开始菜单(难度选择)
 //       先揭开第一个方格再生成地雷, 防止第一次就触碰到地雷
 
-#include <tuple>
-
 class App : public Application
 {
 public:
@@ -25,6 +23,12 @@ public:
 	void init() override
 	{
 		pushScene(scene);
+
+		Registry reg;
+		auto e = reg.create();
+		e.add<int>();
+		e.add<Point2>();
+		e.has<Point2, int>();
 
 		opening.loadFromFile("assets/opening.wav");
 		explode.loadFromFile("assets/explode.wav");

@@ -4,6 +4,7 @@
 #pragma once
 
 #include "config.h"
+#include <cassert>
 
 namespace clem
 {
@@ -21,68 +22,70 @@ public:
 	 * @brief 添加组件.
 	 */
 	template <typename Com, typename... Args>
-	Com& addComponent(Args&&... args);
+	Com& add(Args&&... args);
 
 	/**
 	 * @brief 移除组件.
 	 */
 	template <typename Com>
-	void removeComponent();
+	void remove();
 
 	/**
 	 * @brief 获取组件.
 	 */
 	template <typename Com>
-	Com& getComponent() const;
-
-	/**
-	 * @brief 检查是否有指定组件.
-	 */
-	template <typename Com>
-	bool hasComponent() const;
+	Com& get() const;
 
 	/**
 	 * @brief 检查是否有指定的多个组件.
 	 */
 	template <typename Com, typename... Coms>
-	bool hasComponent() const;
+	bool has() const;
 
 	/**
 	 * @brief 检查是否有效.
 	 */
 	bool isValid() const;
 
-	/**
-	 * @brief 获取 ID.
-	 */
-	EntityId getId() const;
+	const EntityId id;
 
-	/**
-	 * @brief 获取 version.
-	 */
-	size_t getVersion() const;
+	const size_t version;
 
 	bool operator==(const AEntity& rhs) const;
 	bool operator<(const AEntity& rhs) const;
 
 private:
-	EntityId  id;
-	size_t    version;
 	Registry& registry;
 };
 
-template <typename Com>
-inline bool AEntity::hasComponent() const
+template <typename Com, typename... Args>
+inline Com& AEntity::add(Args&&... args)
 {
-	return false;
+	assert(!has<Com>() && "component already exist");
+	return registry.addComponent<Com>(*this, std::forward<Args>(args)...);
+}
+
+template <typename Com>
+inline void AEntity::remove()
+{
+	assert(has<Com>() && "component doesn't exist");
+	registry.removeComponent<Com>(*this);
+}
+
+template <typename Com>
+[[nodiscard]] inline Com& AEntity::get() const
+{
+	assert(has<Com>() && "component doesn't exist");
+	return registry.getComponent<Com>(*this);
 }
 
 template <typename Com, typename... Coms>
-inline bool AEntity::hasComponent() const
+[[nodiscard]] inline bool AEntity::has() const
 {
 	if constexpr(sizeof...(Coms) > 0)
-		return hasComponent<Com>() && hasComponent<Coms...>();
+		return registry.hasComponent<Com>(*this) && registry.hasComponent<Coms...>(*this);
 	else
-		return hasComponent<Com>();
+		return registry.hasComponent<Com>(*this);
 }
+
 } // namespace clem
