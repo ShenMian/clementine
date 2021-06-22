@@ -11,6 +11,11 @@ AEntity::AEntity(EntityId id, size_t ver, Registry& reg)
 {
 }
 
+bool AEntity::isValid() const
+{
+	return registry.isValid(*this);
+}
+
 bool AEntity::operator==(const AEntity& rhs) const
 {
 	return id == rhs.id && &registry == &rhs.registry;
