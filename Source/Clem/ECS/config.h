@@ -51,17 +51,22 @@ private:
 	static TypeIndex size;
 };
 
-#	define CLEM_DECLARE_TYPE \
-	public:                   \
-		detal::TypeRegistry __type_registry;
-#	define CLEM_DEFINE_TYPE(type) detal::TypeRegistry type::__type_registry;
+inline TypeIndex TypeRegistry::size = 0;
+
+#	define CLEM_DECLARE_TYPE                             \
+	public:                                               \
+		static ::clem::detal::TypeRegistry __type_registry; \
+                                                        \
+	private:
+
+#	define CLEM_DEFINE_TYPE(T) inline ::clem::detal::TypeRegistry T::__type_registry;
+} // namespace detal
 
 template <typename T>
 TypeIndex Typeid()
 {
 	return T::__type_registry.index;
 }
-} // namespace detal
 
 #endif
 } // namespace clem

@@ -3,9 +3,8 @@
 
 #pragma once
 
-#include "Clem/Core/Math/Math.h"
+#include "Clem/ECS/config.h"
 #include "Component.h"
-
 #include <string>
 
 namespace clem
@@ -15,13 +14,18 @@ namespace clem
  */
 class Tag : public Component
 {
+	CLEM_DECLARE_TYPE;
+
 public:
-	std::string string;
+	std::string str;
 
 	Tag() = default;
 	Tag(const std::string& tag)
-			: string(tag)
+			: str(tag)
 	{
 	}
 };
+
+CLEM_DEFINE_TYPE(Tag);
+
 } // namespace clem

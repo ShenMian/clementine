@@ -47,33 +47,33 @@ private:
 	size_t                           size;
 	std::array<std::byte, chunkSize> buffer;
 
-	std::map<Entity, std::unordered_map<std::type_index, std::any>> components;
+	std::map<Entity, std::unordered_map<TypeIndex, std::any>> components;
 };
 
 template <typename Com, typename... Args>
 inline Com& Chunk::addComponent(const Entity& e, Args&&... args)
 {
-	components[e][typeid(Com)] = Com(args...);
+	components[e][Typeid<Com>()] = Com(args...);
 	size++;
-	return std::any_cast<Com&>(components[e][typeid(Com)]);
+	return std::any_cast<Com&>(components[e][Typeid<Com>()]);
 }
 
 template <typename Com>
 inline void Chunk::removeComponent(const Entity& e)
 {
-	components[e][typeid(Com)].reset();
+	components[e][Typeid<Com>()].reset();
 	size--;
 }
 
 template <typename Com>
 [[nodiscard]] inline Com& Chunk::getComponent(const Entity& e)
 {
-	return std::any_cast<Com&>(components[e][typeid(Com)]);
+	return std::any_cast<Com&>(components[e][Typeid<Com>()]);
 }
 
 template <typename Com>
 [[nodiscard]] inline bool Chunk::hasComponent(const Entity& e)
 {
-	return components[e][typeid(Com)].has_value();
+	return components[e][Typeid<Com>()].has_value();
 }
 } // namespace clem

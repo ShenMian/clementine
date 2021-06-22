@@ -26,9 +26,8 @@ public:
 
 		Registry reg;
 		auto e = reg.create();
-		e.add<int>();
-		e.add<Point2>();
-		e.has<Point2, int>();
+		e.add<Tag>("tag");
+		e.get<Tag>();
 
 		opening.loadFromFile("assets/opening.wav");
 		explode.loadFromFile("assets/explode.wav");

@@ -3,8 +3,6 @@
 
 #pragma once
 
-#include "Clem/Scene/Entity.h"
-
 namespace clem
 {
 /**

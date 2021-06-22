@@ -30,7 +30,7 @@ OldEntity Scene::getEntity(const string_view& tag)
 {
 	auto view = registry.view<Tag>();
 	for(auto [e, t] : view.each())
-		if(t.string == tag)
+		if(t.str == tag)
 			return OldEntity(e, this);
 	CLEM_LOG_WARN("core", "get entity with invalid a tag");
 	return OldEntity();

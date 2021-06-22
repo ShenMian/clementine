@@ -6,6 +6,7 @@
 
 namespace clem
 {
+
 void Transform::setPosition(const Point2& p)
 {
 	dirty = true;

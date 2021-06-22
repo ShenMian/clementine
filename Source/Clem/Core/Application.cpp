@@ -12,6 +12,7 @@
 #include "Clem/Logger.h"
 #include "Clem/Profiler.h"
 #include "Clem/Rendering/Output.h"
+#include "Clem/Scene/Scene.h"
 #include "Clem/Window.h"
 #include <chrono>
 #include <clocale>
