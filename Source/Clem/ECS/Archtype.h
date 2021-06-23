@@ -8,6 +8,7 @@
 
 namespace clem
 {
+
 struct Chunk;
 
 class Archtype
@@ -46,6 +47,7 @@ inline Archtype makeArchtype()
 {
 	return Archtype(std::move({std::type_index(typeid(Ts))...}));
 }
+
 } // namespace clem
 
 #include "Archtype.inl"

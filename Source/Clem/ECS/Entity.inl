@@ -3,6 +3,7 @@
 
 namespace clem
 {
+
 template <typename Com, typename... Args>
 inline Com& Entity::add(Args&&... args)
 {
@@ -32,4 +33,5 @@ template <typename Com, typename... Coms>
 	else
 		return registry.hasComponent<Com>(*this);
 }
+
 } // namespace clem

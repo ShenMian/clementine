@@ -3,6 +3,7 @@
 
 namespace clem
 {
+
 template <typename T, typename... Ts>
 inline bool Archtype::all() const
 {
@@ -40,6 +41,7 @@ inline Archtype& Archtype::remove()
 	types.erase(typeid(T));
 	return *this;
 }
+
 } // namespace clem
 
 /*

@@ -13,6 +13,7 @@
 
 namespace clem
 {
+
 struct alignas(chunkAlignment) Chunk
 {
 public:
@@ -76,4 +77,5 @@ template <typename Com>
 {
 	return components[e][Typeid<Com>()].has_value();
 }
+
 } // namespace clem

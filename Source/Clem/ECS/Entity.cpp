@@ -6,6 +6,7 @@
 
 namespace clem
 {
+
 Entity::Entity(id_type id, version_type ver, Registry& reg)
 		: id(id), version(ver), registry(reg)
 {
@@ -25,4 +26,5 @@ bool Entity::operator<(const Entity& rhs) const
 {
 	return id < rhs.id;
 }
+
 } // namespace clem

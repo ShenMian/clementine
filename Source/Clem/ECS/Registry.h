@@ -12,6 +12,7 @@
 
 namespace clem
 {
+
 class System;
 
 struct EntityInfo
@@ -69,6 +70,26 @@ public:
 	bool isValid(const Entity&) const;
 
 	/**
+	 * @brief 添加系统.
+	 */
+	void addSystem(System&);
+
+	/**
+	 * @brief 移除系统.
+	 */
+	void removeSystem(System&);
+
+	/**
+	 * @brief 启用系统.
+	 */
+	void enableSystem(System&);
+
+	/**
+	 * @brief 禁用系统.
+	 */
+	void disableSystem(System&);
+
+	/**
 	 * @brief 更新系统.
 	 */
 	void update(float dt);
@@ -77,9 +98,12 @@ private:
 	template <typename T>
 	using Allocator = std::pmr::polymorphic_allocator<T>;
 
-	std::vector<EntityInfo>    entities;
-	std::vector<id_type>       freeId;
-	std::vector<System*>       systems;
+	std::vector<EntityInfo> entities;
+	std::vector<id_type>    freeIds;
+
+	std::vector<System*> systems;
+	std::vector<System*> disabledSystems;
+
 	std::map<Archtype, Chunk*> chunks; // std::unordered_map
 	Allocator<Chunk>           allocator;
 
@@ -88,6 +112,7 @@ private:
 	id_type getNewId();
 	Chunk&  getChunk(const Entity&) const;
 };
+
 } // namespace clem
 
 #include "Registry.inl"

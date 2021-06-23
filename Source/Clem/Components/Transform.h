@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Clem/Core/Math/Math.h"
+#include "Clem/ECS/config.h"
 #include "Component.h"
 
 namespace clem
@@ -13,6 +14,8 @@ namespace clem
  */
 class Transform : public Component
 {
+	CLEM_DECLARE_TYPE;
+
 public:
 	void   setPosition(const Point2&);
 	Point2 getPosition() const;
@@ -31,4 +34,7 @@ private:
 	bool       dirty  = true;
 	Transform* parent = nullptr;
 };
+
+CLEM_DEFINE_TYPE(Transform);
+
 } // namespace clem

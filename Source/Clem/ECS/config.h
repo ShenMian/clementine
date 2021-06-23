@@ -9,6 +9,7 @@
 
 namespace clem
 {
+
 using id_type      = uint32_t;
 using version_type = uint16_t;
 
@@ -69,4 +70,5 @@ TypeIndex Typeid()
 }
 
 #endif
+
 } // namespace clem

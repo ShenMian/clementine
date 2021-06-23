@@ -6,6 +6,7 @@
 
 namespace clem
 {
+
 Archtype::Archtype(std::set<std::type_index>&& types)
 		: types(std::move(types))
 {
@@ -28,4 +29,5 @@ size_t Archtype::hashCode() const
 		code ^= type.hash_code();
 	return code;
 }
+
 } // namespace clem

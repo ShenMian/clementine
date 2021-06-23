@@ -6,9 +6,11 @@
 #include "Chunk.h"
 #include "System.h"
 #include <algorithm>
+#include <cassert>
 
 namespace clem
 {
+
 Entity Registry::create()
 {
 	const auto id      = getNewId();
@@ -20,16 +22,16 @@ void Registry::destory(const Entity& e)
 {
 	const auto id = e.id;
 	entities[id].version++;
-	freeId.push_back(id);
+	freeIds.push_back(id);
 	if(id < entities.size())
-		freeId.push_back(id);
-	// freeId.erase(std::remove_if(freeId.begin(), freeId.end(), [this](auto id) { return id < entities.size(); }), freeId.end());
+		freeIds.push_back(id);
+	// freeIds.erase(std::remove_if(freeIds.begin(), freeIds.end(), [this](auto id) { return id < entities.size(); }), freeIds.end());
 }
 
 size_t Registry::getSize() const
 {
-	if(entities.size() > freeId.size())
-		return entities.size() - freeId.size();
+	if(entities.size() > freeIds.size())
+		return entities.size() - freeIds.size();
 	else
 		return 0;
 }
@@ -45,6 +47,34 @@ void Registry::update(float dt)
 		system->update(dt);
 }
 
+void Registry::addSystem(System& s)
+{
+	systems.push_back(&s);
+	s.init();
+}
+
+void Registry::removeSystem(System& s)
+{
+	s.deinit();
+	systems.erase(std::remove(systems.begin(), systems.end(), &s));
+}
+
+void Registry::enableSystem(System& system)
+{
+	const auto it = std::find(disabledSystems.begin(), disabledSystems.end(), &system);
+	assert(it != disabledSystems.end());
+	disabledSystems.erase(it);
+	systems.push_back(&system);
+}
+
+void Registry::disableSystem(System& system)
+{
+	const auto it = std::find(systems.begin(), systems.end(), &system);
+	assert(it != systems.end());
+	systems.erase(it);
+	disabledSystems.push_back(&system);
+}
+
 Chunk& Registry::getChunk(const Entity& e) const
 {
 	return *entities[e.id].chunk;
@@ -53,16 +83,17 @@ Chunk& Registry::getChunk(const Entity& e) const
 id_type Registry::getNewId()
 {
 	id_type id;
-	if(freeId.empty())
+	if(freeIds.empty())
 	{
 		id = static_cast<id_type>(entities.size());
 		entities.emplace_back();
 	}
 	else
 	{
-		id = freeId.back();
-		freeId.pop_back();
+		id = freeIds.back();
+		freeIds.pop_back();
 	}
 	return id;
 }
+
 } // namespace clem

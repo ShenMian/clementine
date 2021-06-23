@@ -8,6 +8,7 @@
 
 namespace clem
 {
+
 class Registry;
 
 class Entity
@@ -57,6 +58,7 @@ public:
 private:
 	Registry& registry;
 };
+
 } // namespace clem
 
 #include "Entity.inl"
