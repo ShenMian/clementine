@@ -18,6 +18,11 @@ public:
 	enum class Button : uint16_t;
 	enum class Trigger;
 
+	/**
+	 * @brief 构造函数.
+	 * 
+	 * @param deviceId 手柄设备 ID.
+	 */
 	Gamepad(short deviceId = 0);
 
 	void update();
@@ -45,6 +50,11 @@ public:
 	 */
 	void setVibration(uint16_t left, uint16_t right);
 
+	/**
+	 * @brief 获取手柄连接状态.
+	 * 
+	 * @warning 连接状态来源于最后一次更新.
+	 */
 	bool isConnected() const;
 
 private:
@@ -56,6 +66,8 @@ private:
 	uint16_t buttons      = 0;
 	uint8_t  leftTrigger  = 0;
 	uint8_t  rightTrigger = 0;
+
+	bool check(long);
 };
 
 enum class Gamepad::Thumb

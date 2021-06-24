@@ -60,16 +60,8 @@ void Gamepad::update()
 {
 	XINPUT_STATE state;
 	ZeroMemory(&state, sizeof(XINPUT_STATE));
-	auto ret = XInputGetState(deviceId, &state);
-
-	if(ret == ERROR_DEVICE_NOT_CONNECTED)
-	{
-		connected = false;
+	if(!check(XInputGetState(deviceId, &state)))
 		return;
-	}
-	else
-		connected = true;
-	assert(ret == ERROR_SUCCESS);
 
 	// °´¼ü
 	buttons = state.Gamepad.wButtons;
@@ -88,23 +80,17 @@ void Gamepad::update()
 	// Ò¡¸Ë
 	leftThumb.x = state.Gamepad.sThumbLX;
 	leftThumb.y = state.Gamepad.sThumbLY;
-	if(leftThumb.sizeSquared() > leftThumbDeadzone * leftThumbDeadzone)
-	{
-		if(leftThumb.sizeSquared() > leftThumbMax * leftThumbMax)
-			leftThumb = leftThumb.normalize() * leftThumbMax;
-	}
-	else
+	if(leftThumb.sizeSquared() < leftThumbDeadzone * leftThumbDeadzone)
 		leftThumb = Vector2::zero;
+	if(leftThumb.sizeSquared() > leftThumbMax * leftThumbMax)
+			leftThumb = leftThumb.normalize() * leftThumbMax;
 
 	rightThumb.x = state.Gamepad.sThumbRX;
 	rightThumb.y = state.Gamepad.sThumbRY;
 	if(rightThumb.sizeSquared() > rightThumbDeadzone * rightThumbDeadzone)
-	{
-		if(rightThumb.sizeSquared() > rightThumbMax * rightThumbMax)
-			rightThumb = rightThumb.normalize() * rightThumbMax;
-	}
-	else
 		rightThumb = Vector2::zero;
+	if(rightThumb.sizeSquared() > rightThumbMax * rightThumbMax)
+		rightThumb = rightThumb.normalize() * rightThumbMax;
 }
 
 bool Gamepad::get(Button b) const
@@ -147,23 +133,33 @@ bool Gamepad::get(Button b) const
 	case Button::Shoulder_Right:
 		return buttons & XINPUT_GAMEPAD_RIGHT_SHOULDER;
 	}
-	assert(false);
+	assert(false && "unknown button");
 	return false;
 }
 
 void Gamepad::setVibration(uint16_t left, uint16_t right)
 {
-	XINPUT_VIBRATION v   = {left, right};
-	auto             ret = XInputSetState(deviceId, &v);
+	XINPUT_VIBRATION v = {left, right};
+	check(XInputSetState(deviceId, &v));
+	return;
+}
 
-	if(ret == ERROR_DEVICE_NOT_CONNECTED)
+bool Gamepad::check(long v)
+{
+	switch(v)
 	{
+	case ERROR_SUCCESS:
+		break;
+
+	case ERROR_DEVICE_NOT_CONNECTED:
 		connected = false;
-		return;
+		return false;
+
+	default:
+		assert(false && "unknown error code");
 	}
-	else
-		connected = true;
-	assert(ret == ERROR_SUCCESS);
+	connected = true;
+	return false;
 }
 
 #endif
