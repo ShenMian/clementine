@@ -37,6 +37,7 @@ using TypeIndex = uint32_t;
 
 namespace detal
 {
+
 class TypeRegistry
 {
 public:
@@ -61,6 +62,7 @@ inline TypeIndex TypeRegistry::size = 0;
 	private:
 
 #	define CLEM_DEFINE_TYPE(T) inline ::clem::detal::TypeRegistry T::__type_registry;
+
 } // namespace detal
 
 template <typename T>
