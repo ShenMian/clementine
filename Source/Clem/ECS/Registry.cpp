@@ -22,18 +22,13 @@ void Registry::destory(const Entity& e)
 {
 	const auto id = e.id;
 	entities[id].version++;
-	freeIds.push_back(id);
 	if(id < entities.size())
 		freeIds.push_back(id);
-	// freeIds.erase(std::remove_if(freeIds.begin(), freeIds.end(), [this](auto id) { return id < entities.size(); }), freeIds.end());
 }
 
 size_t Registry::getSize() const
 {
-	if(entities.size() > freeIds.size())
-		return entities.size() - freeIds.size();
-	else
-		return 0;
+	return entities.size() - freeIds.size();
 }
 
 bool Registry::isValid(const Entity& e) const

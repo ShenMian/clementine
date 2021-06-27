@@ -18,8 +18,8 @@ class System;
 struct EntityInfo
 {
 	Archtype     archtype;
-	version_type version = 0;
 	Chunk*       chunk   = nullptr;
+	version_type version = 0;
 };
 
 class Registry
