@@ -12,6 +12,11 @@ Archtype::Archtype(std::set<std::type_index>&& types)
 {
 }
 
+void Archtype::clear()
+{
+	types.clear();
+}
+
 bool Archtype::operator==(const Archtype& rhs) const
 {
 	return types == rhs.types;

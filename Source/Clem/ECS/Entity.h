@@ -46,7 +46,7 @@ public:
 	/**
 	 * @brief 检查是否有效.
 	 */
-	bool isValid() const;
+	bool valid() const;
 
 	const id_type id;
 

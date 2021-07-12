@@ -17,9 +17,8 @@ public:
 		static auto& output = Output::get();
 		output.getBuffer().clear();
 
-		registry.each<Sprite>([](const Entity& e) {
-			auto& sprite = e.get<Sprite>();
-			auto& tf     = e.get<Transform>();
+		registry.each<Sprite>([](const Entity& e, Sprite& sprite) {
+			auto& tf = e.get<Transform>();
 			output.getBuffer().drawSprite(tf.getPosition(), sprite);
 		});
 
@@ -33,9 +32,8 @@ class PhysicsSystem : public System
 public:
 	void update(float dt, Registry& registry)
 	{
-		registry.each<Rigidbody>([&](const Entity& e) {
-			auto& body = e.get<Rigidbody>();
-			auto& tf   = e.get<Transform>();
+		registry.each<Rigidbody>([&](const Entity& e, Rigidbody& body) {
+			auto& tf = e.get<Transform>();
 			switch(body.getType())
 			{
 			case Rigidbody::Type::Dynamic:

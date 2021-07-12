@@ -23,7 +23,7 @@ void Registry::destroy(const Entity& e)
 	const auto id = e.id;
 	assert(entities[id].version < std::numeric_limits<version_type>::max());
 	entities[id].version++;
-	entities[id].chunk = nullptr;
+	entities[id].archtype.clear();
 	if(id < entities.size())
 		freeIds.push_back(id);
 }
@@ -33,10 +33,9 @@ size_t Registry::getSize() const
 	return entities.size() - freeIds.size();
 }
 
-// 对 EntityInfo::chunk 的判断用于快速判断 EntityInfo 的 id 是否位于 freeIds
-bool Registry::isValid(const Entity& e) const
+bool Registry::valid(const Entity& e) const
 {
-	return e.id < entities.size() && e.version == entities[e.id].version && entities[e.id].chunk != nullptr;
+	return e.id < entities.size() && e.version == entities[e.id].version;
 }
 
 void Registry::update(float dt)

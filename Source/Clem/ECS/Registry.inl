@@ -10,9 +10,17 @@ inline void Registry::each(std::function<void(const Entity&)> func)
 	for(id_type i = 0; i < entities.size(); i++)
 	{
 		Entity entity(i, entities[i].version, *this);
-		if(entity.isValid() && entity.has<Com>())
+		if(valid(entity) && allOf<Com>(entity))
 			func(entity);
 	}
+}
+
+template <typename Com>
+inline void Registry::each(std::function<void(const Entity&, Com&)> func)
+{
+	each<Com>([&](const Entity& entity) {
+		func(entity, getComponent<Com>(entity));
+	});
 }
 
 template <typename Com, typename... Args>
@@ -25,12 +33,15 @@ inline Com& Registry::addComponent(const Entity& e, Args&&... args)
 		allocator.deallocate(newChunk, 1);
 	}*/
 	// entities[id].archtype.add<Com>();
+
+	entities[e.id].archtype.add<Com>();
 	return getChunk(e).addComponent<Com>(e, std::forward<Args>(args)...);
 }
 
 template <typename Com>
 inline void Registry::removeComponent(const Entity& e)
 {
+	entities[e.id].archtype.remove<Com>();
 	getChunk(e).removeComponent<Com>(e);
 }
 
@@ -40,12 +51,22 @@ template <typename Com>
 	return getChunk(e).getComponent<Com>(e);
 }
 
-template <typename Com, typename... Coms>
+template <typename... Coms>
 [[nodiscard]] inline bool Registry::allOf(const Entity& e) const
 {
-	if constexpr(sizeof...(Coms) > 0)
-		return getChunk(e).hasComponent<Com>(e) && getChunk(e).hasComponent<Coms...>(e);
-	else
-		return getChunk(e).hasComponent<Com>(e);
+	return entities[e.id].archtype.all<Coms...>();
 }
+
+template <typename... Coms>
+[[nodiscard]] inline bool Registry::anyOf(const Entity& e) const
+{
+	return entities[e.id].archtype.any<Coms...>();
+}
+
+template <typename... Coms>
+[[nodiscard]] inline bool Registry::noneOf(const Entity& entity) const
+{
+	return entities[e.id].archtype.none<Coms...>();
+}
+
 } // namespace clem

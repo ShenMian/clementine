@@ -52,6 +52,14 @@ public:
 	void each(std::function<void(const Entity&)> func);
 
 	/**
+	 * @brief 遍历具有指定组件的实体.
+	 * 
+	 * @param func 遍历时将调用的函数, 参数为实体和组件.
+	 */
+	template <typename Com>
+	void each(std::function<void(const Entity&, Com&)> func);
+
+	/**
 	 * @brief 添加组件.
 	 */
 	template <typename Com, typename... Args>
@@ -70,25 +78,33 @@ public:
 	Com& getComponent(const Entity&);
 
 	/**
-	 * @brief 检查是否包含全部指定组件.
+	 * @brief 判断是否有指定的全部组件.
 	 * 
 	 * @param entity 要检测的实体.
 	 */
-	template <typename Com, typename... Coms>
+	template <typename... Coms>
 	bool allOf(const Entity& entity) const;
 
 	/**
-	 * @brief 检查是否存在指定组件.
+	 * @brief 判断是否有指定的任意组件.
 	 * 
 	 * @param entity 要检测的实体.
 	 */
-	template <typename Com, typename... Coms>
-	bool anyOf(const Entity&) const;
+	template <typename... Coms>
+	bool anyOf(const Entity& entity) const;
+
+	/**
+	 * @brief 判断是否没有指定的任何组件.
+	 * 
+	 * @param entity 要检测的实体.
+	 */
+	template <typename... Coms>
+	bool noneOf(const Entity& entity) const;
 
 	/**
 	 * @brief 判断实体是否有效.
 	 */
-	bool isValid(const Entity&) const;
+	bool valid(const Entity&) const;
 
 	/**
 	 * @brief 更新系统.

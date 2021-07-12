@@ -12,9 +12,9 @@ Entity::Entity(id_type id, version_type ver, Registry& reg)
 {
 }
 
-bool Entity::isValid() const
+[[nodiscard]] bool Entity::valid() const
 {
-	return registry.isValid(*this);
+	return registry.valid(*this);
 }
 
 bool Entity::operator==(const Entity& rhs) const
