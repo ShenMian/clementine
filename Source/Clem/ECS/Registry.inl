@@ -3,6 +3,18 @@
 
 namespace clem
 {
+
+template <typename Com>
+inline void Registry::each(std::function<void(const Entity&)> func)
+{
+	for(id_type i = 0; i < entities.size(); i++)
+	{
+		Entity entity(i, entities[i].version, *this);
+		if(entity.isValid() && entity.has<Com>())
+			func(entity);
+	}
+}
+
 template <typename Com, typename... Args>
 inline Com& Registry::addComponent(const Entity& e, Args&&... args)
 {
@@ -28,9 +40,12 @@ template <typename Com>
 	return getChunk(e).getComponent<Com>(e);
 }
 
-template <typename Com>
-[[nodiscard]] inline bool Registry::hasComponent(const Entity& e) const
+template <typename Com, typename... Coms>
+[[nodiscard]] inline bool Registry::allOf(const Entity& e) const
 {
-	return getChunk(e).hasComponent<Com>(e);
+	if constexpr(sizeof...(Coms) > 0)
+		return getChunk(e).hasComponent<Com>(e) && getChunk(e).hasComponent<Coms...>(e);
+	else
+		return getChunk(e).hasComponent<Com>(e);
 }
 } // namespace clem

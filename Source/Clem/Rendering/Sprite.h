@@ -5,17 +5,21 @@
 
 #include "Clem/Components/Component.h"
 #include "Clem/Core/Math/Math.h"
+#include "Clem/ECS/config.h"
 #include "Tile.h"
 #include <filesystem>
 #include <vector>
 
 namespace clem
 {
+
 /**
  * @brief 精灵.
  */
 class Sprite : public Component
 {
+	CLEM_DECLARE_TYPE;
+
 public:
 	Sprite()              = default;
 	Sprite(const Sprite&) = default;
@@ -114,4 +118,7 @@ private:
 	Size2i            size;
 	std::vector<Tile> buffer;
 };
+
+CLEM_DEFINE_TYPE(Sprite);
+
 } // namespace clem

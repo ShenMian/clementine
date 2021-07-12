@@ -5,10 +5,12 @@
 
 #include "Clem/Components/Component.h"
 #include "Clem/Core/Math/Math.h"
+#include "Clem/ECS/config.h"
 #include "Clem/Scene/Entity.h"
 
 namespace clem
 {
+
 /**
  * @addtogroup Physics
  * @{
@@ -19,6 +21,8 @@ namespace clem
  */
 class Rigidbody : public Component
 {
+	CLEM_DECLARE_TYPE;
+
 public:
 	enum class Type
 	{
@@ -78,11 +82,14 @@ public:
 private:
 	Vector2 force;
 	float   mass = 1.0f;
-	Type    type = Type::Dynamic;
+	Type    type = Type::Kinematic;
 };
+
+CLEM_DEFINE_TYPE(Rigidbody);
 
 /**
  * end of Physics group
  * @}
  */
+
 } // namespace clem

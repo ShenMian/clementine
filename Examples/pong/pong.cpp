@@ -96,8 +96,8 @@ public:
 
 			for(int i = 0; i < 2; i++)
 			{
-				auto& pos  = bats[i].getComponent<Transform>().getWorldPosition();
-				auto& size = bats[i].getComponent<Sprite>().getSize();
+				auto& pos  = bats[i].get<Transform>().getWorldPosition();
+				auto& size = bats[i].get<Sprite>().getSize();
 				Rect2 rect(pos, Size2((float)size.x, (float)size.y));
 				if(rect.intersectsPoint(ballPos))
 				{

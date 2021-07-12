@@ -8,6 +8,7 @@
 
 namespace clem
 {
+
 /**
  * @addtogroup Physics
  * @{
@@ -30,10 +31,10 @@ public:
 	void setSize(Size2 size);
 
 	/**
-  * @brief 获取大小
-  *
-  * @return Size2 大小
-  */
+    * @brief 获取大小
+    *
+    * @return Size2 大小
+    */
 	Size2 getSize() const;
 
 	Rect2 getRect() const;
@@ -46,4 +47,5 @@ private:
  * end of Physics group
  * @}
  */
+
 } // namespace clem

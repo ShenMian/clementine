@@ -68,9 +68,7 @@ private:
 	static void mainLoop();
 	static void parseArgs(int argc, char* argv[]);
 
-	static void updateInput(uint16_t dt);
-	static void updateScene(uint16_t dt);
-	static void renderScene(uint16_t dt);
+	static void update(uint16_t dt);
 	static void updateFrameRate(uint16_t dt);
 
 	static void platformInit();

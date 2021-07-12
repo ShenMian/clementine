@@ -4,10 +4,12 @@
 namespace clem
 {
 
+class Registry;
+
 class System
 {
 public:
-	virtual void update(float dt) = 0;
+	virtual void update(float dt, Registry& reg) = 0;
 
 	virtual void init();
 	virtual void deinit();

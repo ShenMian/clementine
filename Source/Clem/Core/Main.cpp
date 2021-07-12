@@ -8,28 +8,28 @@
 #include "Clem/Audio/Audio.h"
 #include "Clem/Core/Input/Keyboard.h"
 #include "Clem/Core/Input/Mouse.h"
+#include "Clem/ECS/Registry.h"
 #include "Clem/Logger.h"
 #include "Clem/Profiler.h"
 #include "Clem/Rendering/Output.h"
 #include "Clem/Window.h"
-
 #include <map>
 #include <string>
 
 using namespace std::chrono_literals;
 using clem::Main;
 
-int main_(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
 	Main::init();
-	auto ret = Main::main(argc, argv);
+	const auto ret = Main::main(argc, argv);
 	Main::deinit();
 	return ret;
 }
 
 namespace clem
 {
-bool         Main::running     = true;
+bool         Main::running     = false;
 bool         Main::paused      = false;
 uint16_t     Main::msPerInput  = 16;
 uint16_t     Main::msPerUpdate = 16;
@@ -42,12 +42,10 @@ int Main::main(int argc, char* argv[])
 	parseArgs(argc, argv);
 
 	app = CreateApplication();
-	CLEM_ASSERT_NOT_NULL(app, "'CreateApplication() return nullptr'");
+	CLEM_ASSERT_NOT_NULL(app, "CreateApplication() return nullptr");
 
 	app->init();
-
 	run();
-
 	app->deinit();
 
 	delete app;
@@ -88,8 +86,7 @@ void Main::mainLoop()
 		previous     = current;
 
 		// updateInput(dt);
-		// updateScene(dt);
-		// renderScene(dt);
+		update(dt);
 
 		updateFrameRate(dt);
 
@@ -99,6 +96,13 @@ void Main::mainLoop()
 			previous = getCurrentMillSecond();
 		}
 	}
+}
+
+void Main::update(uint16_t dt)
+{
+	static Registry registry = app->getRegistry();
+
+	registry.update(dt / 1000.0f);
 }
 
 void Main::updateFrameRate(uint16_t dt)
@@ -150,6 +154,8 @@ uint16_t Main::getFrameRate()
 
 void Main::init()
 {
+	PROFILE_SESSION_BEGIN("profile.json");
+
 	Logger::create("core");
 	Logger::create("audio");
 	Logger::create("assert");
@@ -163,6 +169,8 @@ void Main::deinit()
 {
 	Keyboard::deinit();
 	Audio::deinit();
+
+	PROFILE_SESSION_END();
 }
 
 #ifdef OS_UNIX

@@ -23,7 +23,7 @@ public:
 	 * @brief 添加组件.
 	 */
 	template <typename Com, typename... Args>
-	Com& add(Args&&... args);
+	Com& emplace(Args&&... args);
 
 	/**
 	 * @brief 移除组件.
@@ -40,7 +40,7 @@ public:
 	/**
 	 * @brief 检查是否有指定的多个组件.
 	 */
-	template <typename Com, typename... Coms>
+	template <typename... Coms>
 	bool has() const;
 
 	/**

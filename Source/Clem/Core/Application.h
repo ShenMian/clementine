@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Clem/Core/Math/Math.h"
+#include "Clem/ECS/Registry.h"
 #include <cstdint>
 #include <memory>
 #include <string>
@@ -11,6 +12,7 @@
 
 namespace clem
 {
+
 class Scene;
 
 /**
@@ -95,8 +97,13 @@ public:
 	 */
 	const std::string& getName() const;
 
+	Registry& getRegistry();
+
 	virtual void init();
 	virtual void deinit();
+
+protected:
+	Registry registry;
 
 private:
 	void initPlatform();

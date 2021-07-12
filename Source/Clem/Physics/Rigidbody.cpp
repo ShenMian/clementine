@@ -7,6 +7,7 @@
 
 namespace clem
 {
+
 void Rigidbody::addForce(const Vector2& f)
 {
 	force += f;
@@ -29,7 +30,7 @@ Vector2 Rigidbody::getAcceleration() const
 
 void Rigidbody::setMass(float m)
 {
-	assert(m >= 0);
+	assert(m > 0);
 	mass = m;
 }
 
@@ -47,4 +48,5 @@ Rigidbody::Type Rigidbody::getType() const
 {
 	return type;
 }
+
 } // namespace clem

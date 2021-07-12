@@ -13,8 +13,11 @@ namespace clem
 using id_type      = uint32_t;
 using version_type = uint16_t;
 
-constexpr auto chunkAlignment = 64;
-constexpr auto chunkSize      = 16 * 1024;
+static_assert(std::is_integral<id_type>::value, "id_type must be integral.");
+static_assert(std::is_integral<version_type>::value, "version_type must be integral.");
+
+constexpr size_t chunkAlignment = 64;
+constexpr size_t chunkSize      = 16 * 1024;
 
 // #define CLEM_HAVE_RTTI
 
@@ -57,9 +60,7 @@ inline TypeIndex TypeRegistry::size = 0;
 
 #	define CLEM_DECLARE_TYPE                             \
 	public:                                               \
-		static ::clem::detal::TypeRegistry __type_registry; \
-                                                        \
-	private:
+		static ::clem::detal::TypeRegistry __type_registry;
 
 #	define CLEM_DEFINE_TYPE(T) inline ::clem::detal::TypeRegistry T::__type_registry;
 

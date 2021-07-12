@@ -1,10 +1,13 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
+#pragma once
+
 #include "Archtype.h"
 #include "Chunk.h"
 #include "Entity.h"
 #include "config.h"
+#include <functional>
 #include <memory_resource>
 #include <set>
 #include <unordered_map>
@@ -33,12 +36,20 @@ public:
 	/**
 	 * @brief 销毁实体.
 	 */
-	void destory(const Entity&);
+	void destroy(const Entity&);
 
 	/**
 	 * @brief 获取实体数量.
 	 */
 	size_t getSize() const;
+
+	/**
+	 * @brief 遍历具有指定组件的实体.
+	 * 
+	 * @param func 遍历时将调用的函数, 参数为实体.
+	 */
+	template <typename Com>
+	void each(std::function<void(const Entity&)> func);
 
 	/**
 	 * @brief 添加组件.
@@ -59,15 +70,30 @@ public:
 	Com& getComponent(const Entity&);
 
 	/**
-	 * @brief 检查是否有指定组件.
+	 * @brief 检查是否包含全部指定组件.
+	 * 
+	 * @param entity 要检测的实体.
 	 */
-	template <typename Com>
-	bool hasComponent(const Entity&) const;
+	template <typename Com, typename... Coms>
+	bool allOf(const Entity& entity) const;
+
+	/**
+	 * @brief 检查是否存在指定组件.
+	 * 
+	 * @param entity 要检测的实体.
+	 */
+	template <typename Com, typename... Coms>
+	bool anyOf(const Entity&) const;
 
 	/**
 	 * @brief 判断实体是否有效.
 	 */
 	bool isValid(const Entity&) const;
+
+	/**
+	 * @brief 更新系统.
+	 */
+	void update(float dt);
 
 	/**
 	 * @brief 添加系统.
@@ -88,11 +114,6 @@ public:
 	 * @brief 禁用系统.
 	 */
 	void disableSystem(System&);
-
-	/**
-	 * @brief 更新系统.
-	 */
-	void update(float dt);
 
 private:
 	template <typename T>

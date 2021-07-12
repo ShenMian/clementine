@@ -5,7 +5,7 @@ namespace clem
 {
 
 template <typename Com, typename... Args>
-inline Com& Entity::add(Args&&... args)
+inline Com& Entity::emplace(Args&&... args)
 {
 	assert(!has<Com>() && "component already exist");
 	return registry.addComponent<Com>(*this, std::forward<Args>(args)...);
@@ -25,13 +25,10 @@ template <typename Com>
 	return registry.getComponent<Com>(*this);
 }
 
-template <typename Com, typename... Coms>
+template <typename... Coms>
 [[nodiscard]] inline bool Entity::has() const
 {
-	if constexpr(sizeof...(Coms) > 0)
-		return registry.hasComponent<Com>(*this) && registry.hasComponent<Coms...>(*this);
-	else
-		return registry.hasComponent<Com>(*this);
+	return registry.allOf<Coms...>(*this);
 }
 
 } // namespace clem

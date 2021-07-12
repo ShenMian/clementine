@@ -29,7 +29,7 @@ using std::string_view;
 
 #include <iostream>
 
-int main(int argc, char* argv[])
+int main_(int argc, char* argv[])
 {
 	PROFILE_SESSION_BEGIN("profile.json");
 
@@ -71,6 +71,7 @@ Application::Application(const string& name)
 
 	Output::get().setSize(Window::getVisibleSize());
 
+	/*
 	Logger::create("core");
 	Logger::create("audio");
 	Logger::create("assert");
@@ -78,14 +79,17 @@ Application::Application(const string& name)
 
 	Audio::init();
 	Keyboard::init();
+	*/
 }
 
 Application::~Application()
 {
 	PROFILE_FUNC();
 
+	/*
 	Keyboard::deinit();
 	Audio::deinit();
+	*/
 }
 
 void Application::run()
@@ -242,6 +246,11 @@ uint16_t Application::getFrameRate() const
 const string& Application::getName() const
 {
 	return name;
+}
+
+Registry& Application::getRegistry()
+{
+	return registry;
 }
 
 void Application::init()
