@@ -90,11 +90,12 @@ public:
 		explode.loadFromFile("assets/explode.wav");
 
 		// TODO: UI
-		puts("/--[Level]--\\\n"
-				 "| 1. Easy   |\n"
-				 "| 2. Middle |\n"
-				 "| 3. Hard   |\n"
-				 "\\-----------/");
+		puts(R"(
+/--[Level]--\
+| 1. Easy   |
+| 2. Middle |
+| 3. Hard   |
+\-----------/)");
 		char choice = getchar();
 		(void)getchar();
 		switch(choice)

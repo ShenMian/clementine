@@ -13,7 +13,7 @@ namespace clem
 
 Entity Registry::create()
 {
-	const auto id      = getNewId();
+	const auto id      = requestId();
 	entities[id].chunk = &chunk;
 	return Entity(id, entities[id].version, *this);
 }
@@ -24,8 +24,7 @@ void Registry::destroy(const Entity& e)
 	assert(entities[id].version < std::numeric_limits<version_type>::max());
 	entities[id].version++;
 	entities[id].archtype.clear();
-	if(id < entities.size())
-		freeIds.push_back(id);
+	recycleId(id);
 }
 
 size_t Registry::getSize() const
@@ -79,7 +78,7 @@ Chunk& Registry::getChunk(const Entity& e) const
 	return *entities[e.id].chunk;
 }
 
-id_type Registry::getNewId()
+id_type Registry::requestId()
 {
 	id_type id;
 	if(freeIds.empty())
@@ -93,6 +92,12 @@ id_type Registry::getNewId()
 		freeIds.pop_back();
 	}
 	return id;
+}
+
+void Registry::recycleId(id_type id)
+{
+	if(id < entities.size())
+		freeIds.push_back(id);
 }
 
 } // namespace clem

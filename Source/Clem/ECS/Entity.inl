@@ -4,31 +4,43 @@
 namespace clem
 {
 
-template <typename Com, typename... Args>
-inline Com& Entity::emplace(Args&&... args)
+template <typename T, typename... Args>
+inline T& Entity::emplace(Args&&... args)
 {
-	assert(!has<Com>() && "component already exist");
-	return registry.addComponent<Com>(*this, std::forward<Args>(args)...);
+	assert(!anyOf<T>() && "component already exist");
+	return registry.addComponent<T>(*this, std::forward<Args>(args)...);
 }
 
-template <typename Com>
+template <typename T>
 inline void Entity::remove()
 {
-	assert(has<Com>() && "component doesn't exist");
-	registry.removeComponent<Com>(*this);
+	assert(anyOf<T>() && "component doesn't exist");
+	registry.removeComponent<T>(*this);
 }
 
-template <typename Com>
-[[nodiscard]] inline Com& Entity::get() const
+template <typename T>
+[[nodiscard]] inline T& Entity::get() const
 {
-	assert(has<Com>() && "component doesn't exist");
-	return registry.getComponent<Com>(*this);
+	assert(anyOf<T>() && "component doesn't exist");
+	return registry.getComponent<T>(*this);
 }
 
-template <typename... Coms>
-[[nodiscard]] inline bool Entity::has() const
+template <typename... Ts>
+[[nodiscard]] inline bool Entity::allOf() const
 {
-	return registry.allOf<Coms...>(*this);
+	return registry.allOf<Ts...>(*this);
+}
+
+template <typename... Ts>
+[[nodiscard]] inline bool Entity::anyOf() const
+{
+	return registry.anyOf<Ts...>(*this);
+}
+
+template <typename... Ts>
+[[nodiscard]] inline bool Entity::noneOf() const
+{
+	return registry.noneOf<Ts...>(*this);
 }
 
 } // namespace clem

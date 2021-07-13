@@ -146,7 +146,9 @@ private:
 
 	Chunk chunk;
 
-	id_type getNewId();
+	id_type requestId();
+	void    recycleId(id_type);
+
 	Chunk&  getChunk(const Entity&) const;
 };
 
