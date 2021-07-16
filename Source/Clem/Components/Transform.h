@@ -4,7 +4,7 @@
 #pragma once
 
 #include "Clem/Core/Math/Math.h"
-#include "Clem/ECS/config.h"
+#include "Clem/ECS/ECS.h"
 #include "Component.h"
 
 namespace clem
@@ -12,7 +12,7 @@ namespace clem
 /**
  * @brief 变换组件.
  */
-class Transform : public Component
+class Transform
 {
 	CLEM_DECLARE_TYPE;
 

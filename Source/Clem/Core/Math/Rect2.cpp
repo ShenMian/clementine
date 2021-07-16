@@ -15,12 +15,12 @@ Rect2::Rect2(float x, float y, float w, float h)
 
 float Rect2::top() const
 {
-	return origin.y;
+	return origin.y + size.y;
 }
 
 float Rect2::bottom() const
 {
-	return origin.y + size.y;
+	return origin.y;
 }
 
 float Rect2::left() const

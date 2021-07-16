@@ -15,6 +15,11 @@ class Entity
 {
 public:
 	/**
+	 * @brief 默认构造函数.
+	 */
+	Entity() = default;
+
+	/**
 	 * @brief 构造函数.
 	 */
 	Entity(id_type id, version_type version, Registry& reg);
@@ -25,7 +30,7 @@ public:
 	 * @tparam T 组件.
 	 */
 	template <typename T, typename... Args>
-	T& emplace(Args&&... args);
+	T& add(Args&&... args);
 
 	/**
 	 * @brief 移除组件.
@@ -71,19 +76,22 @@ public:
 	bool noneOf() const;
 
 	/**
-	 * @brief 检查是否有效.
+	 * @brief 检查实体是否有效.
 	 */
 	bool valid() const;
 
-	const id_type id;
+	id_type id() const;
 
-	const version_type version;
+	version_type version() const;
 
 	bool operator==(const Entity& rhs) const;
 	bool operator<(const Entity& rhs) const;
+	Entity& operator=(const Entity& rhs);
 
 private:
-	Registry& registry;
+	id_type      id_      = 0;
+	version_type version_ = 0;
+	Registry*    registry = nullptr;
 };
 
 } // namespace clem

@@ -9,52 +9,6 @@
 using namespace std;
 using namespace clem;
 
-class RenderSystem : public System
-{
-public:
-	void update(float dt, Registry& registry)
-	{
-		static auto& output = Output::get();
-		output.getBuffer().clear();
-
-		registry.each<Sprite>([](const Entity& e, Sprite& sprite) {
-			auto& tf = e.get<Transform>();
-			output.getBuffer().drawSprite(tf.getPosition(), sprite);
-		});
-
-		output.swapBuffers();
-		output.update();
-	}
-};
-
-class PhysicsSystem : public System
-{
-public:
-	void update(float dt, Registry& registry)
-	{
-		registry.each<Rigidbody>([&](const Entity& e, Rigidbody& body) {
-			auto& tf = e.get<Transform>();
-			switch(body.getType())
-			{
-			case Rigidbody::Type::Dynamic:
-				body.velocity += (body.getAcceleration() + gravity) * dt; // v += (a + g) * dt;
-				break;
-
-			case Rigidbody::Type::Kinematic:
-				body.velocity += body.getAcceleration() * dt; // v += a * dt;
-				break;
-
-			case Rigidbody::Type::Static:
-				break;
-			}
-			tf.setPosition(tf.getPosition() + body.velocity); // p += v * dt;
-		});
-	}
-
-private:
-	const Vector2 gravity = {0.0f, 9.8f};
-};
-
 // TODO: UI: 剩余雷数, 计时, 开始菜单(难度选择)
 //       先揭开第一个方格再生成地雷, 防止第一次就触碰到地雷
 
@@ -69,22 +23,6 @@ public:
 	void init() override
 	{
 		pushScene(scene);
-
-		////////////////
-		Output::get().setSize(Window::getVisibleSize());
-
-		// 创建乒乓球 Sprite
-		Sprite ballSprite({1, 1});
-		ballSprite.drawPoint({0, 0}, Tile('O', Color::yellow));
-
-		registry.addSystem(PhysicsSystem());
-		registry.addSystem(RenderSystem());
-		auto& entity = registry.create();
-		entity.emplace<Sprite>(ballSprite);
-		entity.emplace<Rigidbody>();
-		entity.emplace<Transform>();
-		entity.get<Rigidbody>().velocity = {0.5, 0};
-		////////////////
 
 		opening.loadFromFile("assets/opening.wav");
 		explode.loadFromFile("assets/explode.wav");
@@ -120,8 +58,9 @@ public:
 			break;
 		}
 
-		auto board = scene->createEntity("board");
-		sprite     = &board.addComponent<Sprite>(Size2i(board_size.x * 2 + 1, board_size.y + 2));
+		auto board = Main::registry.create();
+		board.add<Transform>();
+		sprite = &board.add<Sprite>(Size2i(board_size.x * 2 + 1, board_size.y + 2));
 
 		EventDispatcher::get().addListener(Event::Type::mouse, [&](Event* e) {
 			auto event = dynamic_cast<MouseEvent*>(e);

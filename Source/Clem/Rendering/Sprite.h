@@ -5,7 +5,7 @@
 
 #include "Clem/Components/Component.h"
 #include "Clem/Core/Math/Math.h"
-#include "Clem/ECS/config.h"
+#include "Clem/ECS/ECS.h"
 #include "Tile.h"
 #include <filesystem>
 #include <vector>

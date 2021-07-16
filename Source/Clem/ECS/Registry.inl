@@ -34,14 +34,14 @@ inline Com& Registry::addComponent(const Entity& e, Args&&... args)
 	}*/
 	// entities[id].archtype.add<Com>();
 
-	entities[e.id].archtype.add<Com>();
+	entities[e.id()].archtype.add<Com>();
 	return getChunk(e).addComponent<Com>(e, std::forward<Args>(args)...);
 }
 
 template <typename Com>
 inline void Registry::removeComponent(const Entity& e)
 {
-	entities[e.id].archtype.remove<Com>();
+	entities[e.id()].archtype.remove<Com>();
 	getChunk(e).removeComponent<Com>(e);
 }
 
@@ -54,19 +54,19 @@ template <typename Com>
 template <typename... Coms>
 [[nodiscard]] inline bool Registry::allOf(const Entity& e) const
 {
-	return entities[e.id].archtype.all<Coms...>();
+	return entities[e.id()].archtype.all<Coms...>();
 }
 
 template <typename... Coms>
 [[nodiscard]] inline bool Registry::anyOf(const Entity& e) const
 {
-	return entities[e.id].archtype.any<Coms...>();
+	return entities[e.id()].archtype.any<Coms...>();
 }
 
 template <typename... Coms>
-[[nodiscard]] inline bool Registry::noneOf(const Entity& entity) const
+[[nodiscard]] inline bool Registry::noneOf(const Entity& e) const
 {
-	return entities[e.id].archtype.none<Coms...>();
+	return entities[e.id()].archtype.none<Coms...>();
 }
 
 } // namespace clem

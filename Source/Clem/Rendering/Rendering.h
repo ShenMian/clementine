@@ -7,5 +7,6 @@
 #include "Cursor.h"
 #include "Framebuffer.h"
 #include "Output.h"
+#include "RenderSystem.h"
 #include "Sprite.h"
 #include "Tile.h"

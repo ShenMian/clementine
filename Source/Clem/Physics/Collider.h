@@ -60,4 +60,5 @@ private:
  * end of Physics group
  * @}
  */
+
 } // namespace clem

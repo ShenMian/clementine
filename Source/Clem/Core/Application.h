@@ -97,13 +97,8 @@ public:
 	 */
 	const std::string& getName() const;
 
-	Registry& getRegistry();
-
 	virtual void init();
 	virtual void deinit();
-
-protected:
-	Registry registry;
 
 private:
 	void initPlatform();

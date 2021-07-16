@@ -10,8 +10,9 @@
 #include "Clem/Core/Input/Mouse.h"
 #include "Clem/ECS/Registry.h"
 #include "Clem/Logger.h"
+#include "Clem/Physics/Physics.h"
 #include "Clem/Profiler.h"
-#include "Clem/Rendering/Output.h"
+#include "Clem/Rendering/Rendering.h"
 #include "Clem/Window.h"
 #include <map>
 #include <string>
@@ -29,6 +30,8 @@ int main(int argc, char* argv[])
 
 namespace clem
 {
+
+Registry     Main::registry;
 bool         Main::running     = false;
 bool         Main::paused      = false;
 uint16_t     Main::msPerInput  = 16;
@@ -85,7 +88,7 @@ void Main::mainLoop()
 		auto dt      = static_cast<uint16_t>(current - previous);
 		previous     = current;
 
-		// updateInput(dt);
+		updateInput(dt);
 		update(dt);
 
 		updateFrameRate(dt);
@@ -98,11 +101,31 @@ void Main::mainLoop()
 	}
 }
 
+void Main::updateInput(uint16_t dt)
+{
+	PROFILE_FUNC();
+
+	static uint16_t lag = 0;
+	lag += dt;
+	if(lag >= msPerInput)
+	{
+		Keyboard::update();
+		Mouse::update();
+		lag = 0;
+	}
+}
+
 void Main::update(uint16_t dt)
 {
-	static Registry registry = app->getRegistry();
+	PROFILE_FUNC();
 
-	registry.update(dt / 1000.0f);
+	static uint16_t lag = 0;
+	lag += dt;
+	while(lag >= msPerUpdate)
+	{
+		registry.update(dt / 1000.0f);
+		lag -= msPerUpdate;
+	}
 }
 
 void Main::updateFrameRate(uint16_t dt)
@@ -156,11 +179,17 @@ void Main::init()
 {
 	PROFILE_SESSION_BEGIN("profile.json");
 
+	// 初始化 ECS, 添加默认系统
+	registry.addSystem(new PhysicsSystem());
+	registry.addSystem(new RenderSystem());
+
+	// 初始化日志系统
 	Logger::create("core");
 	Logger::create("audio");
 	Logger::create("assert");
 	Logger::create("networking");
 
+	// 初始化 I/O
 	Audio::init();
 	Keyboard::init();
 }
@@ -223,4 +252,5 @@ long Main::getCurrentMillSecond()
 }
 
 #endif
+
 } // namespace clem

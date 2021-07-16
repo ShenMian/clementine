@@ -8,23 +8,43 @@ namespace clem
 {
 
 Entity::Entity(id_type id, version_type ver, Registry& reg)
-		: id(id), version(ver), registry(reg)
+		: id_(id), version_(ver), registry(&reg)
 {
 }
 
 [[nodiscard]] bool Entity::valid() const
 {
-	return registry.valid(*this);
+	if(registry)
+		return registry->valid(*this);
+	return false;
+}
+
+id_type Entity::id() const
+{
+	return id_;
+}
+
+version_type Entity::version() const
+{
+	return version_;
 }
 
 bool Entity::operator==(const Entity& rhs) const
 {
-	return id == rhs.id && &registry == &rhs.registry;
+	return id_ == rhs.id_ && &registry == &rhs.registry;
 }
 
 bool Entity::operator<(const Entity& rhs) const
 {
-	return id < rhs.id;
+	return id_ < rhs.id_;
+}
+
+Entity& Entity::operator=(const Entity& rhs)
+{
+	id_      = rhs.id_;
+	version_ = rhs.version_;
+	registry = rhs.registry;
+	return *this;
 }
 
 } // namespace clem

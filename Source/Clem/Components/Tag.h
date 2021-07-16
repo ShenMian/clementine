@@ -3,8 +3,7 @@
 
 #pragma once
 
-#include "Clem/ECS/config.h"
-#include "Component.h"
+#include "Clem/ECS/ECS.h"
 #include <string>
 
 namespace clem
@@ -12,7 +11,7 @@ namespace clem
 /**
  * @brief 标签组件.
  */
-class Tag : public Component
+class Tag
 {
 	CLEM_DECLARE_TYPE;
 

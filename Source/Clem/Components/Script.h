@@ -3,16 +3,18 @@
 
 #pragma once
 
-#include "Component.h"
 #include <functional>
+#include "Clem/ECS/ECS.h"
 
 namespace clem
 {
 /**
  * @brief 脚本组件.
  */
-class Script : public Component
+class Script
 {
+	CLEM_DECLARE_TYPE;
+
 public:
 	Script() = default;
 
@@ -20,4 +22,7 @@ public:
 
 	std::function<void(float)> onUpdate;
 };
+
+CLEM_DEFINE_TYPE(Script);
+
 } // namespace clem

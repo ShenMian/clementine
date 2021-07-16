@@ -248,11 +248,6 @@ const string& Application::getName() const
 	return name;
 }
 
-Registry& Application::getRegistry()
-{
-	return registry;
-}
-
 void Application::init()
 {
 }

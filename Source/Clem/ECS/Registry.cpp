@@ -5,6 +5,7 @@
 #include "Archtype.h"
 #include "Chunk.h"
 #include "System.h"
+#include "Clem/Components/Tag.h"
 #include <algorithm>
 #include <cassert>
 
@@ -20,11 +21,21 @@ Entity Registry::create()
 
 void Registry::destroy(const Entity& e)
 {
-	const auto id = e.id;
+	const auto id = e.id();
 	assert(entities[id].version < std::numeric_limits<version_type>::max());
 	entities[id].version++;
 	entities[id].archtype.clear();
 	recycleId(id);
+}
+
+Entity Registry::get(const std::string& str)
+{
+	Entity entity(0, 0, *this);
+	each<Tag>([&](const Entity& e, Tag& tag) {
+		if(tag.str == str)
+			entity = e;
+	});
+	return entity;
 }
 
 size_t Registry::getSize() const
@@ -32,9 +43,16 @@ size_t Registry::getSize() const
 	return entities.size() - freeIds.size();
 }
 
+Entity Registry::create(const std::string& tag)
+{
+	auto& entity = create();
+	entity.add<Tag>(tag);
+	return entity;
+}
+
 bool Registry::valid(const Entity& e) const
 {
-	return e.id < entities.size() && e.version == entities[e.id].version;
+	return e.id() < entities.size() && e.version() == entities[e.id()].version;
 }
 
 void Registry::update(float dt)
@@ -43,39 +61,39 @@ void Registry::update(float dt)
 		system->update(dt, *this);
 }
 
-void Registry::addSystem(System& s)
+void Registry::addSystem(System* system)
 {
-	systems.push_back(&s);
-	s.init();
+	systems.push_back(system);
+	system->init();
 }
 
-void Registry::removeSystem(System& s)
+void Registry::removeSystem(System* system)
 {
-	s.deinit();
-	systems.erase(std::remove(systems.begin(), systems.end(), &s));
+	system->deinit();
+	systems.erase(std::remove(systems.begin(), systems.end(), system));
 }
 
-void Registry::enableSystem(System& system)
+void Registry::enableSystem(System* system)
 {
 	// assert(disabledSystems.contains(&system)); // C++20
-	const auto it = std::find(disabledSystems.begin(), disabledSystems.end(), &system);
+	const auto it = std::find(disabledSystems.begin(), disabledSystems.end(), system);
 	assert(it != disabledSystems.end());
 	disabledSystems.erase(it);
-	systems.push_back(&system);
+	systems.push_back(system);
 }
 
-void Registry::disableSystem(System& system)
+void Registry::disableSystem(System* system)
 {
 	// assert(systems.contains(&system)); // C++20
-	const auto it = std::find(systems.begin(), systems.end(), &system);
+	const auto it = std::find(systems.begin(), systems.end(), system);
 	assert(it != systems.end());
 	systems.erase(it);
-	disabledSystems.push_back(&system);
+	disabledSystems.push_back(system);
 }
 
 Chunk& Registry::getChunk(const Entity& e) const
 {
-	return *entities[e.id].chunk;
+	return *entities[e.id()].chunk;
 }
 
 id_type Registry::requestId()

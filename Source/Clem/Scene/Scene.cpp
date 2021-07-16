@@ -13,7 +13,7 @@ using std::string_view;
 
 namespace clem
 {
-Scene::Scene()
+[[deprecated]] Scene::Scene()
 		: physicsWorld(*this)
 {
 }
@@ -21,8 +21,8 @@ Scene::Scene()
 OldEntity Scene::createEntity(const string& tag)
 {
 	OldEntity e(registry.create(), this);
-	e.addComponent<Transform>();
-	e.addComponent<Tag>(tag);
+	// e.addComponent<Transform>();
+	// e.addComponent<Tag>(tag);
 	return e;
 }
 

@@ -16,6 +16,7 @@ namespace clem
  */
 
 class Application;
+class Registry;
 
 extern Application* CreateApplication();
 
@@ -52,6 +53,8 @@ public:
 	 */
 	static uint16_t getFrameRate();
 
+	static Registry registry;
+
 	static void init();
 	static void deinit();
 
@@ -68,6 +71,7 @@ private:
 	static void mainLoop();
 	static void parseArgs(int argc, char* argv[]);
 
+	static void updateInput(uint16_t dt);
 	static void update(uint16_t dt);
 	static void updateFrameRate(uint16_t dt);
 

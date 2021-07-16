@@ -20,9 +20,10 @@ public:
 	{
 		pushScene(scene);
 
-		auto entity = scene->createEntity();
-		entity.getComponent<Transform>().setPosition({1, 1});
-		sprite = &entity.addComponent<Sprite>(size);
+		auto entity = Main::registry.create();
+		entity.add<Transform>();
+		entity.get<Transform>().setPosition({1, 1});
+		sprite = &entity.add<Sprite>(size);
 
 		// 生成随机数
 		for(int i = 0; i < size.x; i++)

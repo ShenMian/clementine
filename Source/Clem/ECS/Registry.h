@@ -33,10 +33,14 @@ public:
 	 */
 	Entity create();
 
+	Entity create(const std::string&);
+
 	/**
 	 * @brief 销毁实体.
 	 */
 	void destroy(const Entity&);
+
+	Entity get(const std::string&);
 
 	/**
 	 * @brief 获取实体数量.
@@ -58,6 +62,32 @@ public:
 	 */
 	template <typename Com>
 	void each(std::function<void(const Entity&, Com&)> func);
+
+	/**
+	 * @brief 更新系统.
+	 */
+	void update(float dt);
+
+	/**
+	 * @brief 添加系统.
+	 */
+	void addSystem(System*);
+
+	/**
+	 * @brief 移除系统.
+	 */
+	void removeSystem(System*);
+
+	/**
+	 * @brief 启用系统.
+	 */
+	void enableSystem(System*);
+
+	/**
+	 * @brief 禁用系统.
+	 */
+	void disableSystem(System*);
+
 
 	/**
 	 * @brief 添加组件.
@@ -105,31 +135,6 @@ public:
 	 * @brief 判断实体是否有效.
 	 */
 	bool valid(const Entity&) const;
-
-	/**
-	 * @brief 更新系统.
-	 */
-	void update(float dt);
-
-	/**
-	 * @brief 添加系统.
-	 */
-	void addSystem(System&);
-
-	/**
-	 * @brief 移除系统.
-	 */
-	void removeSystem(System&);
-
-	/**
-	 * @brief 启用系统.
-	 */
-	void enableSystem(System&);
-
-	/**
-	 * @brief 禁用系统.
-	 */
-	void disableSystem(System&);
 
 private:
 	template <typename T>
