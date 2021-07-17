@@ -75,15 +75,13 @@ public:
 			}
 		});
 
-		/*auto ui = scene->createEntity("info");
-		ui.addComponent<Sprite>(Size2i(15, board_size.y + 2));
-		// FIXME: 其他实体的组件会被释放
-		ui.getComponent<Transform>().setLocalPosition(Point2((float)board_size.x * 2 + 2, 0));
-
-		ui.addComponent<Script>().onUpdate = [&](float) {
-			auto& s = scene->getEntityByTag("info").getComponent<Sprite>();
+		auto ui = Main::registry.create("info");
+		ui.add<Sprite>(Size2i(15, board_size.y + 2));
+		ui.add<Transform>().setPosition(Point2((float)board_size.x * 2 + 2, 0));
+		ui.add<Script>().onUpdate = [&](float) {
+			auto& s = Main::registry.get("info").get<Sprite>();
 			s.drawString({0, 0}, L"Mines: " + to_wstring(mine_num - flags.size()));
-		};*/
+		};
 
 		start();
 	}

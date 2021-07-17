@@ -9,17 +9,6 @@
 using namespace std;
 using namespace clem;
 
-class ScriptSystem : public System
-{
-public:
-	void update(float dt, Registry& reg)
-	{
-		reg.each<Script>([&](const Entity&, Script& script) {
-			script.onUpdate(dt);
-		});
-	}
-};
-
 // TODO: 碰撞检测: 乒乓球反弹, 约束球拍
 
 class App : public Application
@@ -45,7 +34,6 @@ public:
 		right.setPosition({5, 0});
 
 		auto& reg = Main::registry;
-		reg.addSystem(new ScriptSystem);
 
 		// 创建背景
 		auto board = reg.create("board");

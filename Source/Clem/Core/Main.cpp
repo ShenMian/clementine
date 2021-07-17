@@ -6,6 +6,7 @@
 
 #include "Clem/Assert.h"
 #include "Clem/Audio/Audio.h"
+#include "Clem/Components/ScriptSystem.h"
 #include "Clem/Core/Input/Keyboard.h"
 #include "Clem/Core/Input/Mouse.h"
 #include "Clem/ECS/Registry.h"
@@ -182,6 +183,7 @@ void Main::init()
 	// 初始化 ECS, 添加默认系统
 	registry.addSystem(new PhysicsSystem());
 	registry.addSystem(new RenderSystem());
+	registry.addSystem(new ScriptSystem());
 
 	// 初始化日志系统
 	Logger::create("core");
