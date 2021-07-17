@@ -94,6 +94,26 @@ Vector2 Source::getVelocity()
 	return Point2(x, y);
 }
 
+Source::Status Source::getStatus() const
+{
+	ALint status;
+	alGetSourcei(id, AL_SOURCE_STATE, &status);
+
+	switch(status)
+	{
+	case AL_INITIAL:
+	case AL_STOPPED:
+		return Status::Stopped;
+	case AL_PAUSED:
+		return Status::Paused;
+	case AL_PLAYING:
+		return Status::Playing;
+	}
+
+	assert(false && "unknown status");
+	return Status::Stopped;
+}
+
 Source::operator id_t() const
 {
 	return id;

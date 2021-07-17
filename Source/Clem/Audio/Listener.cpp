@@ -20,6 +20,11 @@ float Listener::getVolume()
 	return v;
 }
 
+void Listener::setPosition(float x, float y)
+{
+	setPosition(Point2(x, y));
+}
+
 void Listener::setPosition(const Point2& p)
 {
 	alListener3f(AL_POSITION, p.x, p.y, 0);

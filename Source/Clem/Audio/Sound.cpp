@@ -10,6 +10,7 @@ namespace fs = std::filesystem;
 
 namespace clem
 {
+
 Sound::Sound()
 {
 	alGenBuffers(1, &bufferId);
@@ -49,7 +50,22 @@ const uint8_t* Sound::getSamples() const
 
 size_t Sound::getSampleCount() const
 {
-	return samples.size();
+	return samples.size() * 8 / bitsPerSample;
+}
+
+unsigned int Sound::getSampleRate() const
+{
+	return sampleRate;
+}
+
+unsigned int Sound::getChannelCount() const
+{
+	return channelCount;
+}
+
+size_t Sound::getTime() const
+{
+	return getSampleCount() / (getChannelCount() * getSampleRate());
 }
 
 int32_t Sound::getBufferId() const
@@ -119,8 +135,9 @@ void Sound::loadWavFile(const fs::path& path)
 	file.seekg(-4, std::ios::cur);
 	file.read((char*)&waveData, sizeof(WaveData));
 
-	sampleRate   = waveFormat.sampleRate;
-	channelCount = waveFormat.numChannels;
+	sampleRate    = waveFormat.sampleRate;
+	channelCount  = waveFormat.numChannels;
+	bitsPerSample = waveFormat.bitsPerSample;
 
 	int format = 0;
 	if(waveFormat.numChannels == 1)
@@ -147,4 +164,5 @@ void Sound::loadWavFile(const fs::path& path)
 
 	alBufferData(bufferId, format, (void*)samples.data(), (ALsizei)samples.size(), sampleRate);
 }
+
 } // namespace clem

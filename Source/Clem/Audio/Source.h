@@ -23,6 +23,13 @@ class Source
 public:
 	typedef ALuint id_t;
 
+	enum class Status
+	{
+		Paused,
+		Playing,
+		Stopped
+	};
+
 	Source();
 	~Source();
 
@@ -51,7 +58,7 @@ public:
 	/**
 	 * @brief 设置音量.
 	 *
-	 * @param volume 音量. 范围: 0.0 - 1.0.
+	 * @param volume 音量. 范围: [0.0, 1.0].
 	 */
 	void setVolume(float volume);
 
@@ -63,7 +70,7 @@ public:
 	/**
 	 * @brief 设置速率(倍速).
 	 *
-	 * @param pitch 速率. 范围: 0.5 - 2.0
+	 * @param pitch 速率. 范围: [0.5, 2.0]
 	 */
 	void setPitch(float pitch);
 
@@ -99,6 +106,8 @@ public:
 	 * @return 声源速度.
 	 */
 	Vector2 getVelocity();
+
+	Status getStatus() const;
 
 	operator id_t() const;
 

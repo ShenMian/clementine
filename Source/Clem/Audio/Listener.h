@@ -22,7 +22,7 @@ public:
 	/**
 	 * @brief 设置音量.
 	 *
-	 * @param volume 音量. 范围: 0.0 - 1.0.
+	 * @param volume 音量. 范围: [0.0, 1.0].
 	 */
 	static void setVolume(float volume);
 
@@ -34,9 +34,17 @@ public:
 	/**
 	 * @brief 设置听者位置.
 	 *
-	 * @param p 听者坐标.
+	 * @param position 听者坐标.
 	 */
-	static void setPosition(const Point2& p);
+	static void setPosition(const Point2& position);
+
+	/**
+	 * @brief 设置听者位置.
+	 *
+	 * @param x 听者的 X 坐标.
+	 * @param y 听者的 Y 坐标.
+	 */
+	static void setPosition(float x, float y);
 
 	/**
 	 * @brief 获取听者位置.

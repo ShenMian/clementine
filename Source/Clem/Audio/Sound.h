@@ -40,15 +40,24 @@ public:
 	void loadFromFile(const std::filesystem::path& path);
 
 	const uint8_t* getSamples() const;
+	size_t         getSampleCount() const;
+	unsigned int   getSampleRate() const;
+	unsigned int   getChannelCount() const;
 
-	size_t getSampleCount() const;
+	/**
+	 * @brief 获取声音总时长.
+	 *
+	 * @return 声音总时长, 单位: 秒.
+	 */
+	size_t getTime() const;
 
 	int getBufferId() const;
 
 private:
 	std::vector<uint8_t> samples;
-	int32_t              sampleRate   = 0;
-	int16_t              channelCount = 0;
+	int32_t              sampleRate;
+	int16_t              channelCount;
+	int16_t              bitsPerSample;
 	unsigned int         bufferId;
 
 	/**
