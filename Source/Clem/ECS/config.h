@@ -58,8 +58,8 @@ private:
 
 inline TypeIndex TypeRegistry::size = 0;
 
-#	define CLEM_DECLARE_TYPE                             \
-	public:                                               \
+#	define CLEM_DECLARE_TYPE \
+	public:                   \
 		static ::clem::detal::TypeRegistry __type_registry;
 
 #	define CLEM_DEFINE_TYPE(T) inline ::clem::detal::TypeRegistry T::__type_registry;

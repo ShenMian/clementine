@@ -20,7 +20,7 @@ public:
 
 	/**
 	 * @brief 构造函数.
-	 * 
+	 *
 	 * @param deviceId 手柄设备 ID.
 	 */
 	Gamepad(short deviceId = 0);
@@ -52,7 +52,7 @@ public:
 
 	/**
 	 * @brief 获取手柄连接状态.
-	 * 
+	 *
 	 * @warning 连接状态来源于最后一次更新.
 	 */
 	bool isConnected() const;

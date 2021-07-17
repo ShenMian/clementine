@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include <functional>
 #include "Clem/ECS/ECS.h"
+#include <functional>
 
 namespace clem
 {

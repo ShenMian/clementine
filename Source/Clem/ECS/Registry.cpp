@@ -4,8 +4,8 @@
 #include "Registry.h"
 #include "Archtype.h"
 #include "Chunk.h"
-#include "System.h"
 #include "Clem/Components/Tag.h"
+#include "System.h"
 #include <algorithm>
 #include <cassert>
 

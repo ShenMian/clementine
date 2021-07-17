@@ -51,7 +51,7 @@ public:
 		ballSprite.drawPoint({0, 0}, Tile('O', Color::yellow));
 
 		// 创建乒乓球
-		auto  ball = reg.create("ball");
+		auto ball = reg.create("ball");
 		ball.add<Sprite>(ballSprite);
 		ball.add<Rigidbody>();
 		ball.add<Transform>();
@@ -180,7 +180,7 @@ public:
 	{
 		Main::registry.get("ball").get<Transform>().setPosition({39, 12});
 		Main::registry.get("ball").get<Rigidbody>().velocity = Vector2::zero;
-		
+
 		static future<void> h;
 		h = async([this]() {
 			this_thread::sleep_for(chrono::seconds(2));

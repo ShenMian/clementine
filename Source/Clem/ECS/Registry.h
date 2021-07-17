@@ -49,7 +49,7 @@ public:
 
 	/**
 	 * @brief 遍历具有指定组件的实体.
-	 * 
+	 *
 	 * @param func 遍历时将调用的函数, 参数为实体.
 	 */
 	template <typename Com>
@@ -57,7 +57,7 @@ public:
 
 	/**
 	 * @brief 遍历具有指定组件的实体.
-	 * 
+	 *
 	 * @param func 遍历时将调用的函数, 参数为实体和组件.
 	 */
 	template <typename Com>
@@ -88,7 +88,6 @@ public:
 	 */
 	void disableSystem(System*);
 
-
 	/**
 	 * @brief 添加组件.
 	 */
@@ -109,7 +108,7 @@ public:
 
 	/**
 	 * @brief 判断是否有指定的全部组件.
-	 * 
+	 *
 	 * @param entity 要检测的实体.
 	 */
 	template <typename... Coms>
@@ -117,7 +116,7 @@ public:
 
 	/**
 	 * @brief 判断是否有指定的任意组件.
-	 * 
+	 *
 	 * @param entity 要检测的实体.
 	 */
 	template <typename... Coms>
@@ -125,7 +124,7 @@ public:
 
 	/**
 	 * @brief 判断是否没有指定的任何组件.
-	 * 
+	 *
 	 * @param entity 要检测的实体.
 	 */
 	template <typename... Coms>
@@ -154,7 +153,7 @@ private:
 	id_type requestId();
 	void    recycleId(id_type);
 
-	Chunk&  getChunk(const Entity&) const;
+	Chunk& getChunk(const Entity&) const;
 };
 
 } // namespace clem

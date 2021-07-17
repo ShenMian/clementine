@@ -67,7 +67,7 @@ public:
 													gamepad.get(Gamepad::Button::DPAD_Left) ? Tile('#', Color::red) : '_');
 				sprite->drawPoint({25, 10},
 													gamepad.get(Gamepad::Button::DPAD_Right) ? Tile('#', Color::red) : '_');
-			
+
 				sprite->drawString({12, 0}, L"..", gamepad.get(Gamepad::Button::Shoulder_Left) ? Color::red : Color::white);
 				sprite->drawString({43, 0}, L"..", gamepad.get(Gamepad::Button::Shoulder_Right) ? Color::red : Color::white);
 
@@ -87,7 +87,7 @@ public:
 				sprite->drawPoint({13, 7},
 													-90 < LTAngle && LTAngle < 0 ? Tile('\\', Color::red) : ' ');
 				sprite->drawString({9, 6},
-													LTAngle == 180 && LT.size() ? L"--" : L"  ", Color::red);
+													 LTAngle == 180 && LT.size() ? L"--" : L"  ", Color::red);
 				sprite->drawPoint({10, 7},
 													-180 < LTAngle && LTAngle < -90 ? Tile('/', Color::red) : ' ');
 				sprite->drawPoint({12, 7},
@@ -121,7 +121,7 @@ public:
 
 private:
 	Sprite*           sprite = nullptr;
-	shared_ptr<Scene> scene = make_shared<Scene>();
+	shared_ptr<Scene> scene  = make_shared<Scene>();
 };
 
 Application* clem::CreateApplication()

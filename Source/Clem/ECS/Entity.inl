@@ -1,8 +1,8 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include <string>
 #include "Clem/Assert.h"
+#include <string>
 
 namespace clem
 {

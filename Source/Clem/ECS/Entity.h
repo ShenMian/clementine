@@ -26,7 +26,7 @@ public:
 
 	/**
 	 * @brief 添加组件.
-	 * 
+	 *
 	 * @tparam T 组件.
 	 */
 	template <typename T, typename... Args>
@@ -34,7 +34,7 @@ public:
 
 	/**
 	 * @brief 移除组件.
-	 * 
+	 *
 	 * @tparam T 组件.
 	 */
 	template <typename T>
@@ -42,7 +42,7 @@ public:
 
 	/**
 	 * @brief 获取组件.
-	 * 
+	 *
 	 * @tparam T 组件.
 	 */
 	template <typename T>
@@ -50,7 +50,7 @@ public:
 
 	/**
 	 * @brief 判断是否有指定的全部组件.
-	 * 
+	 *
 	 * @param entity 要检测的实体.
 	 * @tparam Ts 组件列表.
 	 */
@@ -59,7 +59,7 @@ public:
 
 	/**
 	 * @brief 判断是否有指定的任意组件.
-	 * 
+	 *
 	 * @param entity 要检测的实体.
 	 * @tparam Ts 组件列表.
 	 */
@@ -68,7 +68,7 @@ public:
 
 	/**
 	 * @brief 判断是否没有指定的任何组件.
-	 * 
+	 *
 	 * @param entity 要检测的实体.
 	 * @tparam Ts 组件列表.
 	 */
@@ -84,8 +84,8 @@ public:
 
 	version_type version() const;
 
-	bool operator==(const Entity& rhs) const;
-	bool operator<(const Entity& rhs) const;
+	bool    operator==(const Entity& rhs) const;
+	bool    operator<(const Entity& rhs) const;
 	Entity& operator=(const Entity& rhs);
 
 private:

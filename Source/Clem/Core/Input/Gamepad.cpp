@@ -83,7 +83,7 @@ void Gamepad::update()
 	if(leftThumb.sizeSquared() < leftThumbDeadzone * leftThumbDeadzone)
 		leftThumb = Vector2::zero;
 	if(leftThumb.sizeSquared() > leftThumbMax * leftThumbMax)
-			leftThumb = leftThumb.normalize() * leftThumbMax;
+		leftThumb = leftThumb.normalize() * leftThumbMax;
 
 	rightThumb.x = state.Gamepad.sThumbRX;
 	rightThumb.y = state.Gamepad.sThumbRY;
