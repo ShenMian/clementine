@@ -61,60 +61,73 @@ public:
 		batSprite.fillRect(Rect2i({0, 0}, {1, 5}), Tile(L'█', Color::blue));
 
 		// 创建两个乒乓球拍
-		auto bat1 = reg.create("bat1");
-		auto bat2 = reg.create("bat2");
-		bat1.add<Sprite>(batSprite);
-		bat2.add<Sprite>(batSprite);
-		bat1.add<Rigidbody>();
-		bat2.add<Rigidbody>();
-		bat1.add<Transform>();
-		bat2.add<Transform>();
+		for(int i = 0; i < 2; i++)
+		{
+			bats[i] = reg.create();
+			bats[i].add<Sprite>(batSprite);
+			bats[i].add<Rigidbody>();
+			bats[i].add<Transform>();
+		}
 
 		// Bat1 由玩家控制
-		// 为 bat1 创建一个事件监听器, 监听按键事件
+		// 为 bats[0] 创建一个事件监听器, 监听按键事件
 		EventDispatcher::get().addListener(Event::Type::key, [&](Event* e) {
 			auto  event = dynamic_cast<KeyEvent*>(e);
-			auto& body  = Main::registry.get("bat1").get<Rigidbody>(); // 通过 Tag 组件获取 bat1 实体的 Rigidbody 组件
+			auto& body  = bats[0].get<Rigidbody>(); // 通过 Tag 组件获取 bats[0] 实体的 Rigidbody 组件
+			auto& tf    = bats[0].get<Transform>();
+
 			if(event->state == false)
 				body.velocity = Vector2::zero;
 			else if(event->keyCode == KeyCode::W)
 				body.velocity = {0, -player_speed};
 			else if(event->keyCode == KeyCode::S)
 				body.velocity = {0, player_speed};
+
+			if(tf.getPosition().y + body.velocity.y < 1)
+			{
+				body.velocity = Vector2::zero;
+				tf.setPosition({tf.getPosition().x, 1});
+				return;
+			}
+			else if(tf.getPosition().y + body.velocity.y > 19)
+			{
+				body.velocity = Vector2::zero;
+				tf.setPosition({tf.getPosition().x, 19});
+				return;
+			}
 		});
 
 		// Bat2 由AI控制, 不推测路径
-		// 为 bat2 创建一个脚本
-		bat2.add<Script>().onUpdate = [&](float) {
-			auto  bat     = Main::registry.get("bat2");
+		// 为 bats[1] 创建一个脚本
+		bats[1].add<Script>().onUpdate = [&](float) {
 			auto  ballPos = Main::registry.get("ball").get<Transform>().getPosition();
-			auto& batBody = bat.get<Rigidbody>();
-			auto  batPos  = bat.get<Transform>().getPosition();
-			auto& batSize = bat.get<Sprite>().getSize();
+			auto& batBody = bats[1].get<Rigidbody>();
+			auto  batPos  = bats[1].get<Transform>().getPosition();
+			auto& batSize = bats[1].get<Sprite>().getSize();
 
-			// 获取 bat2 的 Sprite 的几何中心
+			// 获取 bats[1] 的 Sprite 的几何中心
 			auto batCenter = batPos + batSize / 2;
 
 			// 以 ai_speed 速度向 ball 所在的 y 坐标移动
 			batBody.velocity = Vector2(0, ballPos.y - batCenter.y).normalize() * ai_speed;
 		};
 
-		// TODO: 碰撞检测. 碰撞时被回调, 调整随机角度
+		// 碰撞检测
 		ball.add<Script>().onUpdate = [&](float) {
-			auto   ball    = Main::registry.get("ball");
-			auto&  ts      = ball.get<Transform>();
-			auto&  vel     = ball.get<Rigidbody>().velocity;
-			auto&  sprite  = ball.get<Sprite>();
-			auto&  ballPos = ts.getPosition();
-			Entity bats[2];
-			bats[0] = Main::registry.get("bat1");
-			bats[1] = Main::registry.get("bat2");
+			auto  ball    = Main::registry.get("ball");
+			auto& ts      = ball.get<Transform>();
+			auto& vel     = ball.get<Rigidbody>().velocity;
+			auto& sprite  = ball.get<Sprite>();
+			auto& ballPos = ts.getPosition();
 
+			// 球与球拍
 			for(int i = 0; i < 2; i++)
 			{
-				auto& pos  = bats[i].get<Transform>().getPosition();
+				auto& tf   = bats[i].get<Transform>();
+				auto& pos  = tf.getPosition();
 				auto& size = bats[i].get<Sprite>().getSize();
 				Rect2 rect(pos, Size2((float)size.x, (float)size.y));
+
 				if(rect.intersectsPoint(ballPos))
 				{
 					if(ballPos.x < 39)
@@ -132,11 +145,26 @@ public:
 				}
 			}
 
+			// 球拍与边界
+			auto& tf   = bats[1].get<Transform>();
+			auto& body = bats[1].get<Rigidbody>();
+			if(tf.getPosition().y + body.velocity.y < 1)
+			{
+				body.velocity = Vector2::zero;
+				tf.setPosition({tf.getPosition().x, 1});
+			}
+			else if(tf.getPosition().y + body.velocity.y > 19)
+			{
+				body.velocity = Vector2::zero;
+				tf.setPosition({tf.getPosition().x, 19});
+			}
+
+			// 球与边界
 			if(ballPos.x < 1)
 			{
-				ts.setPosition({1, ballPos.y});
-				vel.x = -vel.x;
-				vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
+				// ts.setPosition({1, ballPos.y});
+				// vel.x = -vel.x;
+				// vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 				resetBall();
 				resetBats();
 				left.play(score);
@@ -144,9 +172,9 @@ public:
 			}
 			else if(ballPos.x >= 79)
 			{
-				ts.setPosition({78, ballPos.y});
-				vel.x = -vel.x;
-				vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
+				// ts.setPosition({78, ballPos.y});
+				// vel.x = -vel.x;
+				// vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 				resetBall();
 				resetBats();
 				right.play(score);
@@ -191,8 +219,8 @@ public:
 	// 重置 bat 的位置
 	void resetBats()
 	{
-		Main::registry.get("bat1").get<Transform>().setPosition({2, 10});
-		Main::registry.get("bat2").get<Transform>().setPosition({77, 10});
+		bats[0].get<Transform>().setPosition({2, 10});
+		bats[1].get<Transform>().setPosition({77, 10});
 	}
 
 private:
@@ -204,6 +232,8 @@ private:
 	const float ai_speed             = 0.1f;  // AI 乒乓球拍的移动速度
 	const int   random_rebound_angle = 5;     // 碰撞时随机调整角度系数
 	const float volume               = 0.1f;  // 声音效果音量
+
+	Entity bats[2];
 
 	Sound  pop, score;
 	Source up, down, left, right;
