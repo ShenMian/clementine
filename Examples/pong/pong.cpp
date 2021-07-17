@@ -41,7 +41,7 @@ public:
 		auto& boardSprite = board.add<Sprite>(Size2(80, 25));
 		boardSprite.drawRect(Rect2i({0, 0}, {80, 25}), Tile('#'));
 		boardSprite.fillRect(Rect2i({39, 1}, {2, 23}), Tile('.', Color::green));
-		board.add<Script>().onUpdate = [&](float dt) {
+		board.add<Script>().onUpdate = [&](Time dt) {
 			boardSprite.drawString({34, 2}, to_wstring(player_score));
 			boardSprite.drawString({44, 2}, to_wstring(ai_score));
 		};
@@ -99,7 +99,7 @@ public:
 
 		// Bat2 由AI控制, 不推测路径
 		// 为 bats[1] 创建一个脚本
-		bats[1].add<Script>().onUpdate = [&](float) {
+		bats[1].add<Script>().onUpdate = [&](Time) {
 			auto  ballPos = Main::registry.get("ball").get<Transform>().getPosition();
 			auto& batBody = bats[1].get<Rigidbody>();
 			auto  batPos  = bats[1].get<Transform>().getPosition();
@@ -113,7 +113,7 @@ public:
 		};
 
 		// 碰撞检测
-		ball.add<Script>().onUpdate = [&](float) {
+		ball.add<Script>().onUpdate = [&](Time) {
 			auto  ball    = Main::registry.get("ball");
 			auto& ts      = ball.get<Transform>();
 			auto& vel     = ball.get<Rigidbody>().velocity;

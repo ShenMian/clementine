@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include "Clem/ECS/ECS.h"
 #include "Script.h"
 
 namespace clem
@@ -12,7 +11,7 @@ namespace clem
 class ScriptSystem : public System
 {
 public:
-	void update(float dt, Registry& reg)
+	void update(Time dt, Registry& reg)
 	{
 		reg.each<Script>([&](const Entity&, Script& script) {
 			script.onUpdate(dt);

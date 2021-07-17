@@ -3,15 +3,16 @@
 
 #pragma once
 
+#include "Clem/Core/Core.h"
+#include "Clem/ECS/ECS.h"
+
 namespace clem
 {
-
-class Registry;
 
 class System
 {
 public:
-	virtual void update(float dt, Registry& reg) = 0;
+	virtual void update(Time dt, Registry& reg) = 0;
 
 	virtual void init();
 	virtual void deinit();

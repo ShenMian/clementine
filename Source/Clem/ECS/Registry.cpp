@@ -58,7 +58,7 @@ bool Registry::valid(const Entity& e) const
 void Registry::update(float dt)
 {
 	for(auto& system : systems)
-		system->update(dt, *this);
+		system->update(seconds(dt), *this);
 }
 
 void Registry::addSystem(System* system)

@@ -2,7 +2,6 @@
 // License(Apache-2.0)
 
 #include "Clem/Components/Transform.h"
-#include "Clem/ECS/ECS.h"
 #include "Rigidbody.h"
 
 namespace clem
@@ -16,18 +15,18 @@ namespace clem
 class PhysicsSystem : public System
 {
 public:
-	void update(float dt, Registry& registry)
+	void update(Time dt, Registry& registry)
 	{
 		registry.each<Rigidbody>([&](const Entity& e, Rigidbody& body) {
 			auto& tf = e.get<Transform>();
 			switch(body.getType())
 			{
 			case Rigidbody::Type::Dynamic:
-				body.velocity += (body.getAcceleration() + gravity) * dt; // v += (a + g) * dt;
+				body.velocity += (body.getAcceleration() + gravity) * dt.seconds(); // v += (a + g) * dt;
 				break;
 
 			case Rigidbody::Type::Kinematic:
-				body.velocity += body.getAcceleration() * dt; // v += a * dt;
+				body.velocity += body.getAcceleration() * dt.seconds(); // v += a * dt;
 				break;
 
 			case Rigidbody::Type::Static:

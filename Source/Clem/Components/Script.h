@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Clem/Core/Core.h"
 #include "Clem/ECS/ECS.h"
 #include <functional>
 
@@ -20,7 +21,7 @@ public:
 
 	virtual void update(float dt);
 
-	std::function<void(float)> onUpdate;
+	std::function<void(Time)> onUpdate;
 };
 
 CLEM_DEFINE_TYPE(Script);

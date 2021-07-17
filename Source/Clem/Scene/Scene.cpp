@@ -68,7 +68,7 @@ void Scene::updateScripts(float dt)
 
 	auto view = registry.view<Transform, Script>();
 	for(auto [e, t, script] : view.each())
-		script.onUpdate(dt);
+		script.onUpdate(seconds(dt));
 }
 
 void Scene::renderSprites()
