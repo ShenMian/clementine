@@ -12,7 +12,6 @@
 #include "Clem/Logger.h"
 #include "Clem/Profiler.h"
 #include "Clem/Rendering/Output.h"
-#include "Clem/Scene/Scene.h"
 #include "Clem/Window.h"
 #include <chrono>
 #include <clocale>
@@ -142,13 +141,13 @@ void Application::updateScene(uint16_t dt)
 {
 	PROFILE_FUNC();
 
-	auto&           scene = scenes.back();
+	// auto&           scene = scenes.back();
 	static uint16_t lag   = 0;
 
 	lag += dt;
 	while(lag >= msPerUpdate)
 	{
-		scene->update(msPerUpdate / 1000.0f);
+		// scene->update(msPerUpdate / 1000.0f);
 		lag -= msPerUpdate;
 	}
 }
@@ -157,13 +156,13 @@ void Application::renderScene(uint16_t dt)
 {
 	PROFILE_FUNC();
 
-	auto&           scene = scenes.back();
+	// auto&           scene = scenes.back();
 	static uint16_t lag   = 0;
 
 	lag += dt;
 	if(lag >= msPerRender)
 	{
-		scene->render(dt / 1000.0f);
+		// scene->render(dt / 1000.0f);
 		lag = 0;
 	}
 }
@@ -211,6 +210,7 @@ void Application::resume()
 	paused = false;
 }
 
+/*
 void Application::pushScene(shared_ptr<Scene>& s)
 {
 	scenes.push_back(s);
@@ -227,6 +227,7 @@ void Application::replaceScene(const shared_ptr<Scene>& s)
 	CLEM_ASSERT_TRUE(scenes.empty(), "replace a scene when the scenes is empty is not allowed");
 	scenes.back() = s;
 }
+*/
 
 void Application::setMsPerUpdate(uint16_t ms)
 {

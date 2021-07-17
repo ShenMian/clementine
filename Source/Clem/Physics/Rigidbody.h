@@ -6,7 +6,6 @@
 #include "Clem/Components/Component.h"
 #include "Clem/Core/Math/Math.h"
 #include "Clem/ECS/ECS.h"
-#include "Clem/Scene/Entity.h"
 
 namespace clem
 {

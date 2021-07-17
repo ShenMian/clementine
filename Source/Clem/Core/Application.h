@@ -65,17 +65,17 @@ public:
 	/**
 	 * @brief 压入场景.
 	 */
-	void pushScene(std::shared_ptr<Scene>& scene);
+	// void pushScene(std::shared_ptr<Scene>& scene);
 
 	/**
 	 * @brief 弹出场景.
 	 */
-	void popScene();
+	// void popScene();
 
 	/**
 	 * @brief 替换场景.
 	 */
-	void replaceScene(const std::shared_ptr<Scene>& scene);
+	// void replaceScene(const std::shared_ptr<Scene>& scene);
 
 	/**
 	 * @brief 设置更新时间周期.
@@ -118,7 +118,7 @@ private:
 	uint16_t frameRate   = 0;
 
 	const std::string                   name;
-	std::vector<std::shared_ptr<Scene>> scenes;
+	// std::vector<std::shared_ptr<Scene>> scenes;
 
 	static void         onSignal(int signal);
 	static Application* instance;

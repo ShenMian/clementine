@@ -22,8 +22,6 @@ public:
 
 	void init() override
 	{
-		pushScene(scene);
-
 		opening.loadFromFile("assets/opening.wav");
 		explode.loadFromFile("assets/explode.wav");
 
@@ -200,7 +198,6 @@ private:
 	Source            source;
 	Random            random;
 	Sprite*           sprite;
-	shared_ptr<Scene> scene = make_shared<Scene>();
 };
 
 Application* clem::CreateApplication()

@@ -18,7 +18,3 @@
 #include "Clem/Profiler.h"
 #include "Clem/Random.h"
 #include "Clem/Window.h"
-
-// Scene
-#include "Clem/Scene/Entity.h"
-#include "Clem/Scene/Scene.h"

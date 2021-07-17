@@ -21,8 +21,6 @@ public:
 
 	void init() override
 	{
-		pushScene(scene);
-
 		// 加载音频文件
 		pop.loadFromFile("assets/pop.wav");
 		score.loadFromFile("assets/score.wav");
@@ -239,8 +237,6 @@ private:
 	Source up, down, left, right;
 
 	Random random;
-
-	shared_ptr<Scene> scene = make_shared<Scene>();
 };
 
 Application* clem::CreateApplication()
