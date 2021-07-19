@@ -225,7 +225,7 @@ private:
 	int player_score = 0;
 	int ai_score     = 0;
 
-	const float ball_speed           = 0.8f;  // 球的移动速度, 始终恒定
+	const float ball_speed           = 1.0f;  // 球的移动速度
 	const float player_speed         = 0.15f; // 玩家乒乓球拍的移动速度
 	const float ai_speed             = 0.1f;  // AI 乒乓球拍的移动速度
 	const int   random_rebound_angle = 5;     // 碰撞时随机调整角度系数
