@@ -12,11 +12,18 @@
 namespace clem
 {
 
-Entity Registry::create()
+[[nodiscard]] Entity Registry::create()
 {
 	const auto id      = requestId();
 	entities[id].chunk = &chunk;
 	return Entity(id, entities[id].version, *this);
+}
+
+[[nodiscard]] Entity Registry::create(const std::string& tag)
+{
+	auto& entity = create();
+	entity.add<Tag>(tag);
+	return entity;
 }
 
 void Registry::destroy(const Entity& e)
@@ -28,7 +35,7 @@ void Registry::destroy(const Entity& e)
 	recycleId(id);
 }
 
-Entity Registry::get(const std::string& str)
+[[nodiscard]] Entity Registry::get(const std::string& str)
 {
 	Entity entity(0, 0, *this);
 	each<Tag>([&](const Entity& e, Tag& tag) {
@@ -38,19 +45,12 @@ Entity Registry::get(const std::string& str)
 	return entity;
 }
 
-size_t Registry::getSize() const
+[[nodiscard]] size_t Registry::getSize() const
 {
 	return entities.size() - freeIds.size();
 }
 
-Entity Registry::create(const std::string& tag)
-{
-	auto& entity = create();
-	entity.add<Tag>(tag);
-	return entity;
-}
-
-bool Registry::valid(const Entity& e) const
+[[nodiscard]] bool Registry::valid(const Entity& e) const
 {
 	return e.id() < entities.size() && e.version() == entities[e.id()].version;
 }
@@ -91,12 +91,12 @@ void Registry::disableSystem(System* system)
 	disabledSystems.push_back(system);
 }
 
-Chunk& Registry::getChunk(const Entity& e) const
+[[nodiscard]] Chunk& Registry::getChunk(const Entity& e) const
 {
 	return *entities[e.id()].chunk;
 }
 
-id_type Registry::requestId()
+[[nodiscard]] id_type Registry::requestId()
 {
 	id_type id;
 	if(freeIds.empty())

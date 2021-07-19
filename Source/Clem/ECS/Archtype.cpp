@@ -27,7 +27,7 @@ bool Archtype::operator<(const Archtype& rhs) const
 	return types < rhs.types;
 }
 
-size_t Archtype::hashCode() const
+[[nodiscard]] size_t Archtype::hashCode() const
 {
 	size_t code = 0;
 	for(auto type : types)

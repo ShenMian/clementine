@@ -21,13 +21,19 @@ public:
 
 	/**
 	 * @brief 构造函数.
+	 * 
+	 * @param id 实体 id.
+	 * @param version 实体 version.
+	 * @param reg 实体所属的 Registry.
 	 */
 	Entity(id_type id, version_type version, Registry& reg);
 
 	/**
 	 * @brief 添加组件.
 	 *
+	 * @param args 组件构造函数的参数.
 	 * @tparam T 组件.
+	 * @return 组件的引用.
 	 */
 	template <typename T, typename... Args>
 	T& add(Args&&... args);
@@ -44,6 +50,7 @@ public:
 	 * @brief 获取组件.
 	 *
 	 * @tparam T 组件.
+	 * @return 组件的引用.
 	 */
 	template <typename T>
 	T& get() const;
@@ -80,8 +87,14 @@ public:
 	 */
 	bool valid() const;
 
+	/**
+	 * @brief 获取实体 id.
+	 */
 	id_type id() const;
 
+	/**
+	 * @brief 获取实体 version.
+	 */
 	version_type version() const;
 
 	bool    operator==(const Entity& rhs) const;

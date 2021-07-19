@@ -26,14 +26,6 @@ inline void Registry::each(std::function<void(const Entity&, Com&)> func)
 template <typename Com, typename... Args>
 inline Com& Registry::addComponent(const Entity& e, Args&&... args)
 {
-	/*auto& chunk = getChunk(e);
-	if(chunk.getSize() == chunk.getMaxSize())
-	{
-		auto newChunk = allocator.allocate(1);
-		allocator.deallocate(newChunk, 1);
-	}*/
-	// entities[id].archtype.add<Com>();
-
 	entities[e.id()].archtype.add<Com>();
 	return getChunk(e).addComponent<Com>(e, std::forward<Args>(args)...);
 }

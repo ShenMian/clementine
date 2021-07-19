@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Clem/Assert.h"
+#include "Registry.h"
 #include <string>
 
 namespace clem
