@@ -6,6 +6,9 @@
 #include "Clem/Core/Math/Math.h"
 #include <string>
 
+namespace clem
+{
+
 /**
  * @brief 窗口.
  */
@@ -24,3 +27,5 @@ public:
 	 */
 	virtual Size2i getVisibleSize() = 0;
 };
+
+} // namespace clem

@@ -7,6 +7,9 @@
 #include "Clem/Window/Window.h"
 #include <string>
 
+namespace clem
+{
+
 /**
  * @brief 终端窗口.
  */
@@ -27,3 +30,5 @@ public:
 	 */
 	Size2i getVisibleSize() override;
 };
+
+} // namespace clem
