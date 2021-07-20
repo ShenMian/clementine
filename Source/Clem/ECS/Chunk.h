@@ -14,7 +14,7 @@
 namespace clem
 {
 
-struct alignas(chunkAlignment) Chunk
+struct alignas(chunk_alignment) Chunk
 {
 public:
 	template <typename Com, typename... Args>
@@ -29,24 +29,15 @@ public:
 	template <typename Com>
 	bool hasComponent(const Entity&);
 
-	size_t getSize() const
-	{
-		return size;
-	}
+	size_t getSize() const;
 
-	size_t getSizeBytes() const
-	{
-		return buffer.size();
-	}
+	size_t getSizeBytes() const;
 
-	constexpr size_t getMaxSize() const
-	{
-		return 0;
-	}
+	bool empty() const;
 
 private:
-	size_t                           size;
-	std::array<std::byte, chunkSize> buffer;
+	size_t                            size;
+	std::array<std::byte, chunk_size> buffer;
 
 	std::map<Entity, std::unordered_map<TypeIndex, std::any>> components;
 };

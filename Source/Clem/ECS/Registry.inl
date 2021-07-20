@@ -26,21 +26,49 @@ inline void Registry::each(std::function<void(const Entity&, Com&)> func)
 template <typename Com, typename... Args>
 inline Com& Registry::addComponent(const Entity& e, Args&&... args)
 {
-	entities[e.id()].archtype.add<Com>();
-	return getChunk(e).addComponent<Com>(e, std::forward<Args>(args)...);
+	auto& archtype = entities[e.id()].archtype;
+	auto& chunk    = entities[e.id()].chunk;
+
+	archtype.add<Com>();
+	auto it = chunks.find(archtype);
+	if(it == chunks.end())
+	{
+		chunk = allocator.allocate(1);
+		chunks.emplace(archtype, chunk);
+	}
+	else
+		chunk = it->second;
+
+	return chunk->addComponent<Com>(e, std::forward<Args>(args)...);
 }
 
 template <typename Com>
 inline void Registry::removeComponent(const Entity& e)
 {
-	entities[e.id()].archtype.remove<Com>();
-	getChunk(e).removeComponent<Com>(e);
+	auto& archtype = entities[e.id()].archtype;
+	auto& chunk    = entities[e.id()].chunk;
+
+	chunk.removeComponent<Com>(e);
+
+	auto it = chunks.find(archtype);
+	if(it->second->empty())
+	{
+		allocator.deallocate(it->second, 1);
+		chunks.erase(it);
+	}
+
+	archtype.remove<Com>();
+	it = chunks.find(archtype);
+	if(it == chunks.end())
+		chunk = chunks.emplace(archtype, allocator.allocate(1)); // ÉêÇëÐÂµÄ Chunk
+	else
+		chunk = it->second;
 }
 
 template <typename Com>
 [[nodiscard]] inline Com& Registry::getComponent(const Entity& e)
 {
-	return getChunk(e).getComponent<Com>(e);
+	return entities[e.id()].chunk->getComponent<Com>(e);
 }
 
 template <typename... Coms>

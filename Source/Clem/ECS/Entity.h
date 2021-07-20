@@ -21,7 +21,7 @@ public:
 
 	/**
 	 * @brief 构造函数.
-	 * 
+	 *
 	 * @param id 实体 id.
 	 * @param version 实体 version.
 	 * @param reg 实体所属的 Registry.

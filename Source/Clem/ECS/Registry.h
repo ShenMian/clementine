@@ -6,8 +6,8 @@
 #include "Archtype.h"
 #include "Chunk.h"
 #include "Entity.h"
-#include "config.h"
 #include <functional>
+#include <map>
 #include <memory_resource>
 #include <set>
 #include <unordered_map>
@@ -33,14 +33,24 @@ public:
 	 */
 	Entity create();
 
-	Entity create(const std::string&);
+	/**
+	 * @brief 创建带有指定 Tag 组件的实体.
+	 * 
+	 * @param tag Tag 组件的字符串.
+	 */
+	Entity create(const std::string& tag);
 
 	/**
 	 * @brief 销毁实体.
 	 */
 	void destroy(const Entity&);
 
-	Entity get(const std::string&);
+	/**
+	 * @brief 获取带有指定 Tag 组件的实体.
+	 * 
+	 * @param tag Tag 组件的字符串.
+	 */
+	Entity get(const std::string& tag);
 
 	/**
 	 * @brief 获取实体数量.
@@ -142,13 +152,12 @@ private:
 	std::vector<EntityInfo> entities;
 	std::vector<id_type>    freeIds;
 
-	std::vector<System*> systems;
-	std::vector<System*> disabledSystems;
-
-	std::map<Archtype, Chunk*> chunks; // std::unordered_map
+	Chunk                      chunk;
+	std::map<Archtype, Chunk*> chunks;
 	Allocator<Chunk>           allocator;
 
-	Chunk chunk;
+	std::vector<System*> systems;
+	std::vector<System*> disabledSystems;
 
 	id_type requestId();
 	void    recycleId(id_type);
