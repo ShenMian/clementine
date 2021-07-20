@@ -17,4 +17,6 @@
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
 #include "Clem/Random.h"
-#include "Clem/Window.h"
+
+#include "Clem/Window/Window.h"
+#include "Clem/Window/Console/ConsoleWindow.h"

@@ -1,7 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "Window.h"
+#include "ConsoleWindow.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
 #include <cassert>
@@ -17,14 +17,18 @@ using std::string;
 #	include <termios.h>
 #	include <unistd.h>
 
-void Window::setTitle(const string& title)
+void ConsoleWindow::update()
+{
+}
+
+void ConsoleWindow::setTitle(const string& title)
 {
 	PROFILE_FUNC();
 
 	std::printf("\033]0;%s\007", title.c_str());
 }
 
-Size2i Window::getVisibleSize()
+Size2i ConsoleWindow::getVisibleSize()
 {
 	PROFILE_FUNC();
 
@@ -37,14 +41,18 @@ Size2i Window::getVisibleSize()
 
 #ifdef OS_WIN
 
-void Window::setTitle(const string& title)
+void ConsoleWindow::update()
+{
+}
+
+void ConsoleWindow::setTitle(const string& title)
 {
 	PROFILE_FUNC();
 
 	SetConsoleTitleA(title.c_str());
 }
 
-Size2i Window::getVisibleSize()
+Size2i ConsoleWindow::getVisibleSize()
 {
 	PROFILE_FUNC();
 
