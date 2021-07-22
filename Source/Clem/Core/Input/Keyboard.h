@@ -23,7 +23,7 @@ public:
 	 * @param k 按键.
 	 * @return 按键按下时返回 true.
 	 */
-	static bool getKeyState(Key k);
+	static bool getState(Key k);
 
 	/**
 	 * @brief 设置按键状态.
@@ -31,7 +31,7 @@ public:
 	 * @param k 按键.
 	 * @param s 状态, 按下为 true.
 	 */
-	static void setKeyState(Key k, bool s);
+	static void setState(Key k, bool s);
 
 	static void init();
 	static void deinit();

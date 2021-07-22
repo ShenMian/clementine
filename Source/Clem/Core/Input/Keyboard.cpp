@@ -19,7 +19,7 @@ namespace clem
 {
 std::unordered_map<Keyboard::Key, bool> Keyboard::states;
 
-bool Keyboard::getKeyState(Key k)
+bool Keyboard::getState(Key k)
 {
 	if(states.find(k) != states.end())
 		return states[k];
@@ -27,7 +27,7 @@ bool Keyboard::getKeyState(Key k)
 		return false;
 }
 
-void Keyboard::setKeyState(Key k, bool s)
+void Keyboard::setState(Key k, bool s)
 {
 	states[k] = s;
 }
@@ -94,7 +94,7 @@ void Keyboard::update()
 			continue;
 
 		const KEY_EVENT_RECORD* keyRecord = &record.Event.KeyEvent;
-		Keyboard::setKeyState((Keyboard::Key)keyRecord->wVirtualKeyCode, keyRecord->bKeyDown);
+		Keyboard::setState((Keyboard::Key)keyRecord->wVirtualKeyCode, keyRecord->bKeyDown);
 		EventDispatcher::get().dispatch(
 				KeyEvent(keyRecord->wVirtualKeyCode,
 								 keyRecord->bKeyDown,

@@ -63,6 +63,14 @@ public:
 	void resume();
 
 	/**
+	 * @brief 获取应用名称.
+	 */
+	const std::string& getName() const;
+
+	virtual void init();
+	virtual void deinit();
+
+	/**
 	 * @brief 压入场景.
 	 */
 	// void pushScene(std::shared_ptr<Scene>& scene);
@@ -77,50 +85,10 @@ public:
 	 */
 	// void replaceScene(const std::shared_ptr<Scene>& scene);
 
-	/**
-	 * @brief 设置更新时间周期.
-	 */
-	void setMsPerUpdate(uint16_t ms);
-
-	/**
-	 * @brief 设置渲染时间周期.
-	 */
-	void setMsPerRender(uint16_t ms);
-
-	/**
-	 * @brief 获取帧速率(FPS).
-	 */
-	uint16_t getFrameRate() const;
-
-	/**
-	 * @brief 获取应用名称.
-	 */
-	const std::string& getName() const;
-
-	virtual void init();
-	virtual void deinit();
-
 private:
-	void initPlatform();
-
-	void updateInput(uint16_t dt);
-	void updateScene(uint16_t dt);
-	void renderScene(uint16_t dt);
-	void updateFrameRate(uint16_t dt);
-
-	long getCurrentMillSecond() const;
-
-	bool     quit        = true;
-	bool     paused      = false;
-	uint16_t msPerInput  = 16;
-	uint16_t msPerUpdate = 16;
-	uint16_t msPerRender = 16;
-	uint16_t frameRate   = 0;
-
-	const std::string                   name;
+	const std::string name;
 	// std::vector<std::shared_ptr<Scene>> scenes;
 
-	static void         onSignal(int signal);
 	static Application* instance;
 };
 

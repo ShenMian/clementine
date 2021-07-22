@@ -29,7 +29,7 @@ public:
 				return;
 			lag = 0;
 
-			if(Keyboard::getKeyState(Keyboard::Key::A))
+			if(Keyboard::getState(Keyboard::Key::A))
 			{
 				if(moveLeft())
 					generate({2});
