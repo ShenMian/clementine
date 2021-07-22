@@ -5,6 +5,8 @@
 
 #include "Clem/Core/Math/Math.h"
 #include "Clem/Window/Window.h"
+#include "GLFW/glfw3.h"
+#include <functional>
 #include <string>
 
 namespace clem
@@ -16,6 +18,24 @@ namespace clem
 class WindowsWindow : public Window
 {
 public:
+	/**
+	 * @brief 构造函数.
+	 * 
+	 * @param title 窗口标题.
+	 * @param size 窗口大小.
+	 */
+	WindowsWindow(std::string title, Size2i size);
+
+	/**
+	 * @brief 默认析构函数.
+	 */
+	~WindowsWindow();
+
+	/**
+	 * @brief 更新.
+	 * 
+	 * 轮询事件, 响应窗口事件.
+	 */
 	void update() override;
 
 	/**
@@ -29,6 +49,15 @@ public:
 	 * @brief 获取终端可见缓冲区大小, 单位: 字符.
 	 */
 	Size2i getVisibleSize() override;
+
+	virtual void init() override;
+	virtual void deinit() override;
+
+	std::function<void(int, int)> onResize;
+	std::function<void()>         onClose;
+
+private:
+	GLFWwindow* handle;
 };
 
 } // namespace clem

@@ -14,7 +14,8 @@
 #include "Clem/Physics/Physics.h"
 #include "Clem/Profiler.h"
 #include "Clem/Rendering/Rendering.h"
-#include "Clem/Window.h"
+#include "Clem/Window/Console/ConsoleWindow.h"
+#include <csignal>
 #include <map>
 #include <string>
 
@@ -40,6 +41,7 @@ uint16_t     Main::msPerUpdate = 16;
 uint16_t     Main::msPerRender = 16;
 uint16_t     Main::frameRate   = 0;
 Application* Main::app         = nullptr;
+Window*      Main::window;
 
 int Main::main(int argc, char* argv[])
 {
@@ -125,6 +127,7 @@ void Main::update(uint16_t dt)
 	while(lag >= msPerUpdate)
 	{
 		registry.update(dt / 1000.0f);
+		window->update();
 		lag -= msPerUpdate;
 	}
 }
@@ -141,7 +144,7 @@ void Main::updateFrameRate(uint16_t dt)
 	{
 		frameRate = frames;
 		frames = lag = 0;
-		Window::setTitle(app->getName() + " | " + std::to_string(frameRate) + "FPS");
+		window->setTitle(app->getName() + " | " + std::to_string(frameRate) + "FPS");
 	}
 
 	// 积分控制. 限制主循环速度, 减少 CPU 占用
@@ -180,6 +183,13 @@ void Main::init()
 {
 	PROFILE_SESSION_BEGIN("profile.json");
 
+	// std::setlocale(LC_ALL, "");
+	std::signal(SIGINT, Main::onSignal);
+
+	// 初始化窗口
+	window = new ConsoleWindow("Clementine", {80, 25});
+	window->init();
+
 	// 初始化 ECS, 添加默认系统
 	registry.addSystem(new PhysicsSystem());
 	registry.addSystem(new RenderSystem());
@@ -200,15 +210,26 @@ void Main::deinit()
 {
 	Keyboard::deinit();
 	Audio::deinit();
+	window->deinit();
 
 	PROFILE_SESSION_END();
 }
 
-#ifdef OS_UNIX
-
-void Main::platformInit()
+void Main::onSignal(int signal)
 {
+	switch(signal)
+	{
+	case SIGINT:
+		CLEM_LOG_WARN("core", "signal: external interrupt, usually initiated by the user");
+		app->stop();
+		break;
+
+	default:
+		assert(false);
+	}
 }
+
+#ifdef OS_UNIX
 
 #	include <sys/time.h>
 
@@ -222,25 +243,6 @@ long Main::getCurrentMillSecond()
 #endif
 
 #ifdef OS_WIN
-
-void Main::platformInit()
-{
-	DWORD mode;
-
-	const auto hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	if(!GetConsoleMode(hOut, &mode))
-		assert(false);
-	// mode &= ENABLE_VIRTUAL_TERMINAL_PROCESSING; // 启用 VT100 模式 // TODO: Win10 以下會失敗
-	if(!SetConsoleMode(hOut, mode))
-		assert(false);
-
-	const auto hIn = GetStdHandle(STD_INPUT_HANDLE);
-	if(!GetConsoleMode(hIn, &mode))
-		assert(false);
-	mode &= ~ENABLE_QUICK_EDIT_MODE; // 禁用 快速编辑模式
-	if(!SetConsoleMode(hIn, mode))
-		assert(false);
-}
 
 long Main::getCurrentMillSecond()
 {

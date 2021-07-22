@@ -16,6 +16,19 @@ namespace clem
 class ConsoleWindow : public Window
 {
 public:
+	/**
+	 * @brief 构造函数.
+	 * 
+	 * @param title 窗口标题.
+	 * @param size 可绘制区域大小, 不一定等于窗口大小.
+	 */
+	ConsoleWindow(std::string title, Size2i size);
+
+	/**
+	 * @brief 更新.
+	 * 
+	 * 轮询事件, 响应窗口事件.
+	 */
 	void update() override;
 
 	/**
@@ -29,6 +42,12 @@ public:
 	 * @brief 获取终端可见缓冲区大小, 单位: 字符.
 	 */
 	Size2i getVisibleSize() override;
+
+	virtual void init() override;
+	virtual void deinit() override;
+
+private:
+	Size2i size;
 };
 
 } // namespace clem

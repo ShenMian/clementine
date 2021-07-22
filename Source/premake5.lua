@@ -20,6 +20,7 @@ project "Clementine"
     "%{thirdparty.sdl}/include",
     "%{thirdparty.asio}/include",
     "%{thirdparty.entt}/include",
+    "%{thirdparty.glfw}/include",
     "%{thirdparty.spdlog}/include",
     "%{thirdparty.openal}/include",
     "%{thirdparty.yaml_cpp}/include",

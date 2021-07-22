@@ -4,7 +4,6 @@
 #pragma once
 
 #include <cstdint>
-#include <vector>
 
 int main(int argc, char* argv[]);
 
@@ -16,6 +15,7 @@ namespace clem
  */
 
 class Application;
+class Window;
 class Registry;
 
 extern Application* CreateApplication();
@@ -67,6 +67,7 @@ private:
 	static uint16_t frameRate;
 
 	static Application* app;
+	static Window*      window;
 
 	static void mainLoop();
 	static void parseArgs(int argc, char* argv[]);
@@ -75,8 +76,9 @@ private:
 	static void update(uint16_t dt);
 	static void updateFrameRate(uint16_t dt);
 
-	static void platformInit();
 	static long getCurrentMillSecond();
+
+	static void onSignal(int signal);
 };
 
 /**

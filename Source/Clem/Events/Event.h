@@ -12,7 +12,21 @@ public:
 	enum class Type
 	{
 		key,
-		mouse
+		mouse,
+		window,
+
+
+		key_press,
+		key_release,
+		key_repeat,
+
+		mouse_move,
+		mouse_click,
+		mouse_double_click,
+		mouse_wheeled,
+		
+		window_resize,
+		window_close
 	};
 
 	virtual ~Event() = default;

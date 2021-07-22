@@ -1,8 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#ifndef CLEM_EVENT_MOUSE_EVENT_H_
-#define CLEM_EVENT_MOUSE_EVENT_H_
+#pragma once
 
 #include "Clem/Core/Math/Math.h"
 #include "Event.h"
@@ -41,5 +40,3 @@ private:
 	Point2 position;
 	Key    key;
 };
-
-#endif // !CLEM_EVENT_MOUSE_EVENT_H_
