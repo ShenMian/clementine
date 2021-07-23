@@ -15,6 +15,7 @@
 namespace clem
 {
 
+class Time;
 class Entity;
 class System;
 
@@ -76,7 +77,7 @@ public:
 	/**
 	 * @brief 更新系统.
 	 */
-	void update(float dt);
+	void update(Time dt);
 
 	/**
 	 * @brief 添加系统.

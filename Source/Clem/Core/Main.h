@@ -15,7 +15,7 @@ namespace clem
  */
 
 class Application;
-class Window;
+class WindowBase;
 class Registry;
 
 extern Application* CreateApplication();
@@ -53,6 +53,8 @@ public:
 	 */
 	static uint16_t getFrameRate();
 
+	static WindowBase* getMainWindow();
+
 	static Registry registry;
 
 	static void init();
@@ -67,13 +69,14 @@ private:
 	static uint16_t frameRate;
 
 	static Application* app;
-	static Window*      window;
+	static WindowBase*  window;
 
 	static void mainLoop();
 	static void parseArgs(int argc, char* argv[]);
 
 	static void updateInput(uint16_t dt);
 	static void update(uint16_t dt);
+	static void render(uint16_t dt);
 	static void updateFrameRate(uint16_t dt);
 
 	static long getCurrentMillSecond();

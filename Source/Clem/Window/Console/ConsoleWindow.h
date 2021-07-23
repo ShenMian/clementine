@@ -3,8 +3,7 @@
 
 #pragma once
 
-#include "Clem/Core/Math/Math.h"
-#include "Clem/Window/Window.h"
+#include "Clem/Window/WindowBase.h"
 
 namespace clem
 {
@@ -12,7 +11,7 @@ namespace clem
 /**
  * @brief 终端窗口.
  */
-class ConsoleWindow : public Window
+class ConsoleWindow : public WindowBase
 {
 public:
 	/**
@@ -28,7 +27,7 @@ public:
 	 *
 	 * 轮询事件, 响应窗口事件.
 	 */
-	void update() override;
+	void update(Time dt) override;
 
 	/**
 	 * @brief 设置终端窗口标题.
@@ -39,14 +38,14 @@ public:
 
 	/**
 	 * @brief 设置终端缓冲区大小, 单位: 字符.
-	 * 
+	 *
 	 * @warn 不影响终端窗口大小.
 	 */
 	void setSize(Size2i size) override;
 
 	/**
 	 * @brief 获取终端缓冲区大小, 单位: 字符.
-	 * 
+	 *
 	 * @warn 不代表终端窗口大小.
 	 */
 	Size2i getSize() override;

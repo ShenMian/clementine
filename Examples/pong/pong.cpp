@@ -9,6 +9,16 @@
 using namespace std;
 using namespace clem;
 
+class MyLayer : public Layer
+{
+public:
+	void update(Time dt) override
+	{
+		ImGui::Begin("Dev Menu");
+		ImGui::End();
+	}
+};
+
 // TODO: 碰撞检测: 乒乓球反弹, 约束球拍
 
 class App : public Application
@@ -21,6 +31,8 @@ public:
 
 	void init() override
 	{
+		Main::getMainWindow()->add(new MyLayer);
+
 		// 加载音频文件
 		pop.loadFromFile("assets/pop.wav");
 		score.loadFromFile("assets/score.wav");

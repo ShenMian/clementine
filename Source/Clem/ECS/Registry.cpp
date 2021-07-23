@@ -5,6 +5,7 @@
 #include "Archtype.h"
 #include "Chunk.h"
 #include "Clem/Components/Tag.h"
+#include "Clem/Core/Core.h"
 #include "System.h"
 #include <algorithm>
 #include <cassert>
@@ -55,10 +56,10 @@ void Registry::destroy(const Entity& e)
 	return e.id() < entities.size() && e.version() == entities[e.id()].version;
 }
 
-void Registry::update(float dt)
+void Registry::update(Time dt)
 {
 	for(auto& system : systems)
-		system->update(seconds(dt), *this);
+		system->update(dt, *this);
 }
 
 void Registry::addSystem(System* system)

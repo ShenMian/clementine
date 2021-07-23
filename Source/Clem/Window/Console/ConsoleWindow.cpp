@@ -19,7 +19,7 @@ ConsoleWindow::ConsoleWindow(std::string title, Size2i size)
 	Output::get().setSize(size);
 }
 
-void ConsoleWindow::update()
+void ConsoleWindow::update(Time dt)
 {
 	auto newSize = getSize();
 	if(newSize == size)

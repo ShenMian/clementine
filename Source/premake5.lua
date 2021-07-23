@@ -26,6 +26,8 @@ project "Clementine"
     "%{thirdparty.entt}/include",
     "%{thirdparty.glad}/include",
     "%{thirdparty.glfw}/include",
+    "%{thirdparty.imgui}/include",
+    "%{thirdparty.imgui}/include/imgui",
     "%{thirdparty.spdlog}/include",
     "%{thirdparty.openal}/include",
     "%{thirdparty.yaml_cpp}/include",
@@ -34,4 +36,5 @@ project "Clementine"
   links {
     "GLAD",
     "GLFW",
+    "ImGui",
     "%{thirdparty.openal}/lib/openal32"}

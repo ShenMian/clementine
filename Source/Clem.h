@@ -8,6 +8,7 @@
 #include "Clem/Core/Core.h"
 #include "Clem/ECS/ECS.h"
 #include "Clem/Events/Events.h"
+#include "Clem/GUI/GUI.h"
 #include "Clem/Networking/Networking.h"
 #include "Clem/Physics/Physics.h"
 #include "Clem/Rendering/Rendering.h"
@@ -18,5 +19,5 @@
 #include "Clem/Profiler.h"
 #include "Clem/Random.h"
 
-#include "Clem/Window/Window.h"
 #include "Clem/Window/Console/ConsoleWindow.h"
+#include "Clem/Window/Window.h"

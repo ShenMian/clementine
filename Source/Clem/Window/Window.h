@@ -3,23 +3,25 @@
 
 #pragma once
 
-#include "Clem/Core/Math/Math.h"
-#include <functional>
-#include <string>
+#include "Clem/Window/WindowBase.h"
+
+struct GLFWwindow;
 
 namespace clem
 {
-
 /**
  * @brief 窗口.
  */
-class Window
+class Window : public WindowBase
 {
 public:
 	/**
-	 * @brief 默认构造函数.
+	 * @brief 构造函数.
+	 *
+	 * @param title 窗口标题.
+	 * @param size 窗口大小.
 	 */
-	Window();
+	Window(std::string title, Size2i size);
 
 	/**
 	 * @brief 默认析构函数.
@@ -31,65 +33,60 @@ public:
 	 *
 	 * 轮询事件, 响应窗口事件.
 	 */
-	virtual void update() = 0;
+	void update(Time dt) override;
 
 	/**
-	 * @brief 设置窗口标题.
-	 * 
-	 * @param title 新窗口标题.
+	 * @brief 设置终端窗口标题.
+	 *
+	 * @warn 此函数性能不稳定, 可能造成超高延迟, 不应该频繁调用.
 	 */
-	virtual void setTitle(const std::string& title) = 0;
+	void setTitle(const std::string& title) override;
 
 	/**
 	 * @brief 设置窗口大小.
-	 * 
-	 * @param size 新窗口大小.
 	 */
-	virtual void setSize(Size2i size) = 0;
+	void setSize(Size2i size) override;
 
 	/**
 	 * @brief 获取窗口大小.
-	 * 
-	 * @return 当前窗口大小.
 	 */
-	virtual Size2i getSize() = 0;
+	Size2i getSize() override;
 
 	/**
 	 * @brief 设置窗口坐标.
-	 * 
+	 *
 	 * @param pos 新窗口坐标.
 	 */
-	virtual void setPosition(Size2i pos) = 0;
+	void setPosition(Size2i pos) override;
 
 	/**
 	 * @brief 获取窗口坐标.
-	 * 
+	 *
 	 * @return 当前窗口坐标.
 	 */
-	virtual Size2i getPosition() = 0;
+	Size2i getPosition() override;
 
 	/**
 	 * @brief 设置窗口可见性.
-	 * 
+	 *
 	 * @param visible true 为可见, false 为不可见.
 	 */
-	virtual void setVisible(bool visible) = 0;
+	void setVisible(bool visible) override;
 
 	/**
 	 * @brief 获取窗口可见性.
-	 * 
+	 *
 	 * @return true 为可见, false 为不可见.
 	 */
-	virtual bool isVisible() = 0;
+	bool isVisible() override;
 
 	static void init();
 	static void deinit();
 
-	std::function<void(Size2i)> onResize;
-	std::function<void()>       onClose;
-
 private:
-	static bool initialized;
+	void renderGui(Time dt);
+
+	GLFWwindow* handle;
 };
 
 } // namespace clem

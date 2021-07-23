@@ -15,7 +15,7 @@
 #include "Clem/Profiler.h"
 #include "Clem/Rendering/Rendering.h"
 #include "Clem/Window/Console/ConsoleWindow.h"
-#include "Clem/Window/Windows/WindowsWindow.h"
+#include "Clem/Window/Window.h"
 #include <csignal>
 #include <map>
 #include <string>
@@ -34,15 +34,17 @@ int main(int argc, char* argv[])
 namespace clem
 {
 
+static uint16_t frames = 0;
+
 Registry     Main::registry;
 bool         Main::running     = false;
 bool         Main::paused      = false;
-uint16_t     Main::msPerInput  = 16;
-uint16_t     Main::msPerUpdate = 16;
-uint16_t     Main::msPerRender = 16;
+uint16_t     Main::msPerInput  = 1000 / 144;
+uint16_t     Main::msPerUpdate = 1000 / 144;
+uint16_t     Main::msPerRender = 1000 / 144;
 uint16_t     Main::frameRate   = 0;
 Application* Main::app         = nullptr;
-Window*      Main::window;
+WindowBase*  Main::window;
 
 int Main::main(int argc, char* argv[])
 {
@@ -94,7 +96,7 @@ void Main::mainLoop()
 
 		updateInput(dt);
 		update(dt);
-
+		render(dt);
 		updateFrameRate(dt);
 
 		while(paused)
@@ -127,9 +129,22 @@ void Main::update(uint16_t dt)
 	lag += dt;
 	while(lag >= msPerUpdate)
 	{
-		registry.update(dt / 1000.0f);
-		window->update();
+		registry.update(milliseconds(dt));
 		lag -= msPerUpdate;
+	}
+}
+
+void Main::render(uint16_t dt)
+{
+	PROFILE_FUNC();
+
+	static uint16_t lag = 0;
+	lag += dt;
+	if(lag >= msPerRender)
+	{
+		window->update(milliseconds(dt));
+		frames++;
+		lag = 0;
 	}
 }
 
@@ -138,9 +153,8 @@ void Main::updateFrameRate(uint16_t dt)
 	PROFILE_FUNC();
 
 	// 计算帧速率
-	static uint16_t lag = 0, frames = 0;
+	static uint16_t lag = 0;
 	lag += dt;
-	frames++;
 	if(lag >= 1000)
 	{
 		frameRate = frames;
@@ -180,6 +194,11 @@ uint16_t Main::getFrameRate()
 	return frameRate;
 }
 
+WindowBase* Main::getMainWindow()
+{
+	return window;
+}
+
 void Main::init()
 {
 	PROFILE_SESSION_BEGIN("profile.json");
@@ -199,9 +218,9 @@ void Main::init()
 	registry.addSystem(new ScriptSystem());
 
 	// 初始化窗口
-	Window::init();
+	WindowBase::init();
 	// window = new ConsoleWindow("Clementine", {80, 25});
-	window          = new WindowsWindow("Clementine", {1920 / 2, 1080 / 2});
+	window          = new Window("Clementine", {1920 / 2, 1080 / 2});
 	window->onClose = []() { Main::running = false; };
 
 	// 初始化 I/O
