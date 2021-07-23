@@ -24,6 +24,7 @@ project "Clementine"
     "%{thirdparty.sdl}/include",
     "%{thirdparty.asio}/include",
     "%{thirdparty.entt}/include",
+    "%{thirdparty.glad}/include",
     "%{thirdparty.glfw}/include",
     "%{thirdparty.spdlog}/include",
     "%{thirdparty.openal}/include",
@@ -31,5 +32,6 @@ project "Clementine"
     "%{thirdparty.nlohmann_json}/include"}
 
   links {
-    "%{thirdparty.openal}/lib/openal32",
-    "GLFW"}
+    "GLAD",
+    "GLFW",
+    "%{thirdparty.openal}/lib/openal32"}
