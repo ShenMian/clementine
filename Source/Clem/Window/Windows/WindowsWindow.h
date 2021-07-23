@@ -6,8 +6,6 @@
 #include "Clem/Core/Math/Math.h"
 #include "Clem/Window/Window.h"
 #include "GLFW/glfw3.h"
-#include <functional>
-#include <string>
 
 namespace clem
 {
@@ -20,7 +18,7 @@ class WindowsWindow : public Window
 public:
 	/**
 	 * @brief 构造函数.
-	 * 
+	 *
 	 * @param title 窗口标题.
 	 * @param size 窗口大小.
 	 */
@@ -33,7 +31,7 @@ public:
 
 	/**
 	 * @brief 更新.
-	 * 
+	 *
 	 * 轮询事件, 响应窗口事件.
 	 */
 	void update() override;
@@ -50,11 +48,8 @@ public:
 	 */
 	Size2i getVisibleSize() override;
 
-	virtual void init() override;
-	virtual void deinit() override;
-
-	std::function<void(int, int)> onResize;
-	std::function<void()>         onClose;
+	static void init();
+	static void deinit();
 
 private:
 	GLFWwindow* handle;

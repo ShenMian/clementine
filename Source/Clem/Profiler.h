@@ -58,7 +58,7 @@ private:
 	std::chrono::time_point<std::chrono::steady_clock> begin;
 };
 
-#if 1
+#if USE_PROFILER
 #	define PROFILE_SESSION_BEGIN(filepath) Instrumentor::get().begin(filepath)
 #	define PROFILE_SESSION_END()           Instrumentor::get().end()
 #	define PROFILE_SCOPE_BEGIN(name)       InstrumentationCounter counter_##name(#  name)

@@ -22,11 +22,10 @@ ConsoleWindow::ConsoleWindow(std::string title, Size2i size)
 void ConsoleWindow::update()
 {
 	auto newSize = getVisibleSize();
-	if(newSize != size)
-	{
-		size = newSize;
-		// 分发 窗口大小改变 事件
-	}
+	if(newSize == size)
+		return;
+	size = newSize;
+	onResize(size);
 }
 
 // width / height = 80 / 25 => width * 25 = height * 80

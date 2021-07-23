@@ -19,14 +19,19 @@ WindowsWindow::WindowsWindow(std::string title, Size2i size)
 
 	glfwSetWindowUserPointer(handle, static_cast<void*>(this));
 
+	glfwSetErrorCallback([](int error, const char* desc) {
+	});
+
 	glfwSetWindowSizeCallback(handle, [](GLFWwindow* native, int width, int height) {
 		auto win = static_cast<WindowsWindow*>(glfwGetWindowUserPointer(native));
-		win->onResize(width, height);
+		if(win->onResize)
+			win->onResize({width, height});
 	});
 
 	glfwSetWindowCloseCallback(handle, [](GLFWwindow* native) {
 		auto win = static_cast<WindowsWindow*>(glfwGetWindowUserPointer(native));
-		win->onClose();
+		if(win->onClose)
+			win->onClose();
 	});
 
 	glfwSetKeyCallback(handle, [](GLFWwindow* native, int key, int scancode, int action, int mods) {

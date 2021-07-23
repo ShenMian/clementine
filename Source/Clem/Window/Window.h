@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Clem/Core/Math/Math.h"
+#include <functional>
 #include <string>
 
 namespace clem
@@ -17,7 +18,7 @@ class Window
 public:
 	/**
 	 * @brief 更新.
-	 * 
+	 *
 	 * 轮询事件, 响应窗口事件.
 	 */
 	virtual void update() = 0;
@@ -32,8 +33,11 @@ public:
 	 */
 	virtual Size2i getVisibleSize() = 0;
 
-	virtual void init() = 0;
-	virtual void deinit() = 0;
+	static void init();
+	static void deinit();
+
+	std::function<void(Size2i)> onResize;
+	std::function<void()>       onClose;
 };
 
 } // namespace clem

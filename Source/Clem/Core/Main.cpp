@@ -15,6 +15,7 @@
 #include "Clem/Profiler.h"
 #include "Clem/Rendering/Rendering.h"
 #include "Clem/Window/Console/ConsoleWindow.h"
+#include "Clem/Window/Windows/WindowsWindow.h"
 #include <csignal>
 #include <map>
 #include <string>
@@ -187,8 +188,16 @@ void Main::init()
 	std::signal(SIGINT, Main::onSignal);
 
 	// 初始化窗口
-	window = new ConsoleWindow("Clementine", {80, 25});
-	window->init();
+	Window::init();
+	// window = new ConsoleWindow("Clementine", {80, 25});
+	window = new WindowsWindow("Clementine", {1920 / 2, 1080 / 2});
+
+	window->onResize = [](Size2i size) {
+		auto t = size;
+	};
+	window->onClose = []() {
+		auto t = 0;
+	};
 
 	// 初始化 ECS, 添加默认系统
 	registry.addSystem(new PhysicsSystem());
@@ -221,7 +230,7 @@ void Main::onSignal(int signal)
 	{
 	case SIGINT:
 		CLEM_LOG_WARN("core", "signal: external interrupt, usually initiated by the user");
-		app->stop();
+		stop();
 		break;
 
 	default:

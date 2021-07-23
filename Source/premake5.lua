@@ -15,6 +15,10 @@ project "Clementine"
   filter "system:windows"
     links "xinput"
 
+  defines {
+    "USE_PROFILER",
+    "USE_ASSERT"}
+
   includedirs {
     ".",
     "%{thirdparty.sdl}/include",
@@ -27,4 +31,5 @@ project "Clementine"
     "%{thirdparty.nlohmann_json}/include"}
 
   links {
-    "%{thirdparty.openal}/lib/openal32"}
+    "%{thirdparty.openal}/lib/openal32",
+    "GLFW"}
