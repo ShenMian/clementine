@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['tl_341',['tl',['../class_rect2.html#ab931055758364d327d6509d77b5b29c6',1,'Rect2']]],
-  ['top_342',['top',['../class_rect2.html#a00439a5f5949dfcd890b6c8d7f32b7fc',1,'Rect2']]],
-  ['tr_343',['tr',['../class_rect2.html#a85a7a1641210c166f76c45209a661588',1,'Rect2']]]
+  ['update_381',['update',['../classclem_1_1_registry.html#aaaca1c477118f7c363b4114c0a7a77f6',1,'clem::Registry::update()'],['../classclem_1_1_console_window.html#a13c3d3bced296722df23c91ee1f1067b',1,'clem::ConsoleWindow::update()'],['../classclem_1_1_window.html#aa4292ad7cc76d5911b6f874189bb7765',1,'clem::Window::update()'],['../classclem_1_1_windows_window.html#ae0a7c50837184dafebb20815007edd33',1,'clem::WindowsWindow::update()']]]
 ];

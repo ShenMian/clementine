@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Clementine: Source/Clem/Window/Windows/WindowsWindow.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Clementine
+   &#160;<span id="projectnumber">0.0.1</span>
+   </div>
+   <div id="projectbrief">A framework for building 2D console games.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_windows_window_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">WindowsWindow.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2021 SMS</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// License(Apache-2.0)</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Clem/Core/Math/Math.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Clem/Window/Window.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;GLFW/glfw3.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>clem</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classclem_1_1_windows_window.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_windows_window.html">WindowsWindow</a> : <span class="keyword">public</span> <a class="code" href="classclem_1_1_window.html">Window</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classclem_1_1_windows_window.html#a9211222becbfd64c62409cf506b476fd">WindowsWindow</a>(std::string title, <a class="code" href="struct_vector2i.html">Size2i</a> size);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="classclem_1_1_windows_window.html#ac99b5321b3d52f40d073ae67fc64d353">~WindowsWindow</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_windows_window.html#ae0a7c50837184dafebb20815007edd33">update</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_windows_window.html#a24ea5c3eb5aee4377cdd1400d5ffe5c6">setTitle</a>(<span class="keyword">const</span> std::string&amp; title) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_windows_window.html#a74953c2b93ed64a1a28993af805846ce">setSize</a>(<a class="code" href="struct_vector2i.html">Size2i</a> size) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="struct_vector2i.html">Size2i</a> <a class="code" href="classclem_1_1_windows_window.html#a0c5b63b54877cbbb686fee617f488e39">getSize</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_windows_window.html#a31bd1811a5b1fb497f4db7e05d4ace61">setPosition</a>(<a class="code" href="struct_vector2i.html">Size2i</a> pos) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="struct_vector2i.html">Size2i</a> <a class="code" href="classclem_1_1_windows_window.html#ad495a9d03c5d6ab04676e9e010ad941d">getPosition</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_windows_window.html#a98cdf69d9097e5bdb3c4cddcb0f91bfe">setVisible</a>(<span class="keywordtype">bool</span> visible) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classclem_1_1_windows_window.html#ab9d22a98ff805a1451f48c71881e74f3">isVisible</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> init();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> deinit();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    GLFWwindow* handle;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;};</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;} <span class="comment">// namespace clem</span></div>
+<div class="ttc" id="aclassclem_1_1_window_html"><div class="ttname"><a href="classclem_1_1_window.html">clem::Window</a></div><div class="ttdoc">窗口.</div><div class="ttdef"><b>Definition:</b> Window.h:17</div></div>
+<div class="ttc" id="aclassclem_1_1_windows_window_html"><div class="ttname"><a href="classclem_1_1_windows_window.html">clem::WindowsWindow</a></div><div class="ttdoc">窗口.</div><div class="ttdef"><b>Definition:</b> WindowsWindow.h:17</div></div>
+<div class="ttc" id="aclassclem_1_1_windows_window_html_a0c5b63b54877cbbb686fee617f488e39"><div class="ttname"><a href="classclem_1_1_windows_window.html#a0c5b63b54877cbbb686fee617f488e39">clem::WindowsWindow::getSize</a></div><div class="ttdeci">Size2i getSize() override</div><div class="ttdoc">获取窗口大小.</div><div class="ttdef"><b>Definition:</b> WindowsWindow.cpp:81</div></div>
+<div class="ttc" id="aclassclem_1_1_windows_window_html_a24ea5c3eb5aee4377cdd1400d5ffe5c6"><div class="ttname"><a href="classclem_1_1_windows_window.html#a24ea5c3eb5aee4377cdd1400d5ffe5c6">clem::WindowsWindow::setTitle</a></div><div class="ttdeci">void setTitle(const std::string &amp;title) override</div><div class="ttdoc">设置终端窗口标题.</div><div class="ttdef"><b>Definition:</b> WindowsWindow.cpp:71</div></div>
+<div class="ttc" id="aclassclem_1_1_windows_window_html_a31bd1811a5b1fb497f4db7e05d4ace61"><div class="ttname"><a href="classclem_1_1_windows_window.html#a31bd1811a5b1fb497f4db7e05d4ace61">clem::WindowsWindow::setPosition</a></div><div class="ttdeci">void setPosition(Size2i pos) override</div><div class="ttdoc">设置窗口坐标.</div><div class="ttdef"><b>Definition:</b> WindowsWindow.cpp:88</div></div>
+<div class="ttc" id="aclassclem_1_1_windows_window_html_a74953c2b93ed64a1a28993af805846ce"><div class="ttname"><a href="classclem_1_1_windows_window.html#a74953c2b93ed64a1a28993af805846ce">clem::WindowsWindow::setSize</a></div><div class="ttdeci">void setSize(Size2i size) override</div><div class="ttdoc">设置窗口大小.</div><div class="ttdef"><b>Definition:</b> WindowsWindow.cpp:76</div></div>
+<div class="ttc" id="aclassclem_1_1_windows_window_html_a9211222becbfd64c62409cf506b476fd"><div class="ttname"><a href="classclem_1_1_windows_window.html#a9211222becbfd64c62409cf506b476fd">clem::WindowsWindow::WindowsWindow</a></div><div class="ttdeci">WindowsWindow(std::string title, Size2i size)</div><div class="ttdoc">构造函数.</div><div class="ttdef"><b>Definition:</b> WindowsWindow.cpp:15</div></div>
+<div class="ttc" id="aclassclem_1_1_windows_window_html_a98cdf69d9097e5bdb3c4cddcb0f91bfe"><div class="ttname"><a href="classclem_1_1_windows_window.html#a98cdf69d9097e5bdb3c4cddcb0f91bfe">clem::WindowsWindow::setVisible</a></div><div class="ttdeci">void setVisible(bool visible) override</div><div class="ttdoc">设置窗口可见性.</div><div class="ttdef"><b>Definition:</b> WindowsWindow.cpp:100</div></div>
+<div class="ttc" id="aclassclem_1_1_windows_window_html_ab9d22a98ff805a1451f48c71881e74f3"><div class="ttname"><a href="classclem_1_1_windows_window.html#ab9d22a98ff805a1451f48c71881e74f3">clem::WindowsWindow::isVisible</a></div><div class="ttdeci">bool isVisible() override</div><div class="ttdoc">获取窗口可见性.</div><div class="ttdef"><b>Definition:</b> WindowsWindow.cpp:108</div></div>
+<div class="ttc" id="aclassclem_1_1_windows_window_html_ac99b5321b3d52f40d073ae67fc64d353"><div class="ttname"><a href="classclem_1_1_windows_window.html#ac99b5321b3d52f40d073ae67fc64d353">clem::WindowsWindow::~WindowsWindow</a></div><div class="ttdeci">~WindowsWindow()</div><div class="ttdoc">默认析构函数.</div><div class="ttdef"><b>Definition:</b> WindowsWindow.cpp:59</div></div>
+<div class="ttc" id="aclassclem_1_1_windows_window_html_ad495a9d03c5d6ab04676e9e010ad941d"><div class="ttname"><a href="classclem_1_1_windows_window.html#ad495a9d03c5d6ab04676e9e010ad941d">clem::WindowsWindow::getPosition</a></div><div class="ttdeci">Size2i getPosition() override</div><div class="ttdoc">获取窗口坐标.</div><div class="ttdef"><b>Definition:</b> WindowsWindow.cpp:93</div></div>
+<div class="ttc" id="aclassclem_1_1_windows_window_html_ae0a7c50837184dafebb20815007edd33"><div class="ttname"><a href="classclem_1_1_windows_window.html#ae0a7c50837184dafebb20815007edd33">clem::WindowsWindow::update</a></div><div class="ttdeci">void update() override</div><div class="ttdoc">更新.</div><div class="ttdef"><b>Definition:</b> WindowsWindow.cpp:65</div></div>
+<div class="ttc" id="astruct_vector2i_html"><div class="ttname"><a href="struct_vector2i.html">Vector2i</a></div><div class="ttdoc">二维向量, 整型.</div><div class="ttdef"><b>Definition:</b> Vector2i.h:15</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_74389ed8173ad57b461b9d623a1f3867.html">Source</a></li><li class="navelem"><a class="el" href="dir_7021f754b8ddfcf6c3876e5dcdd251f8.html">Clem</a></li><li class="navelem"><a class="el" href="dir_cf39f2e22f2c5284b6c04efd7430240c.html">Window</a></li><li class="navelem"><a class="el" href="dir_0aa0cb3456faa8a1c2b8ab5eded3db5f.html">Windows</a></li><li class="navelem"><b>WindowsWindow.h</b></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
+</body>
+</html>

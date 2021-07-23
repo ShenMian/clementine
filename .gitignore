@@ -10,8 +10,7 @@
 
 # CMake build files
 [Bb]uild/
-lib/clementine.lib
-lib/libclementine.a
+[Tt]hirdparty/
 
 # User-specific files
 *.rsuser

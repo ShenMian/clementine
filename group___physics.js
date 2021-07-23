@@ -22,12 +22,8 @@ var group___physics =
       [ "setRigidbody", "classclem_1_1_collider.html#aa6b5b0b01bdbad350eaa1b59f500dcb6", null ],
       [ "offset", "classclem_1_1_collider.html#a428d4e89eb2516fb42c0d9050fb2d519", null ]
     ] ],
-    [ "PhysicsWorld", "classclem_1_1_physics_world.html", [
-      [ "PhysicsWorld", "classclem_1_1_physics_world.html#aef46cae656ec077e23224f7f94ffeb21", null ],
-      [ "addBody", "classclem_1_1_physics_world.html#a1df609fd39c6751e42ddf4cc67b91191", null ],
-      [ "removeBody", "classclem_1_1_physics_world.html#a2824144bcf2f420c954a11f4c28df630", null ],
-      [ "setGravity", "classclem_1_1_physics_world.html#a1cf8716f5f1f86ed17584a7417e0a538", null ],
-      [ "update", "classclem_1_1_physics_world.html#a12df28cd58df0b1cd0ec2ca282095856", null ]
+    [ "PhysicsSystem", "classclem_1_1_physics_system.html", [
+      [ "update", "classclem_1_1_physics_system.html#aeb03523ad23d59f54d4e86792de9cf34", null ]
     ] ],
     [ "Rigidbody", "classclem_1_1_rigidbody.html", [
       [ "Type", "classclem_1_1_rigidbody.html#a86c9cdb10f0395ad06fb0b90afc4fad2", [
@@ -39,12 +35,13 @@ var group___physics =
       [ "getAcceleration", "classclem_1_1_rigidbody.html#a334aaaf54110cd3a0e866ecb5a595f6f", null ],
       [ "getForce", "classclem_1_1_rigidbody.html#a9aceb3b22baa2d7a49b7115834186999", null ],
       [ "getMass", "classclem_1_1_rigidbody.html#ae6a49495358436515485191f4624049d", null ],
-      [ "getPosition", "classclem_1_1_rigidbody.html#a5a0e548d6416b920b93ffce1c7fb2065", null ],
       [ "getType", "classclem_1_1_rigidbody.html#a50f5d63408938fab1bbf26cd2b754a29", null ],
       [ "setAcceleration", "classclem_1_1_rigidbody.html#a1a19ee0e4d06b7f16f2d77c9608cd8e3", null ],
       [ "setMass", "classclem_1_1_rigidbody.html#a8a244d050427672d48d433fcc52639a0", null ],
-      [ "setPosition", "classclem_1_1_rigidbody.html#a4cb0e75cf887055a410450644be5c558", null ],
       [ "setType", "classclem_1_1_rigidbody.html#a8f28b390c84c22a2c72f04fbc7991840", null ],
       [ "velocity", "classclem_1_1_rigidbody.html#af5a172c8a5dd1d0773a7ced394ec1c24", null ]
+    ] ],
+    [ "RenderSystem", "classclem_1_1_render_system.html", [
+      [ "update", "classclem_1_1_render_system.html#aba43896b04e8b48c9d3c643a20f10813", null ]
     ] ]
 ];

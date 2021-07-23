@@ -1,6 +1,9 @@
 var annotated_dup =
 [
     [ "clem", null, [
+      [ "detal", null, [
+        [ "TypeRegistry", "classclem_1_1detal_1_1_type_registry.html", "classclem_1_1detal_1_1_type_registry" ]
+      ] ],
       [ "Assert", "classclem_1_1_assert.html", null ],
       [ "Audio", "classclem_1_1_audio.html", "classclem_1_1_audio" ],
       [ "Listener", "classclem_1_1_listener.html", null ],
@@ -9,8 +12,9 @@ var annotated_dup =
       [ "WaveData", "structclem_1_1_wave_data.html", "structclem_1_1_wave_data" ],
       [ "Sound", "classclem_1_1_sound.html", "classclem_1_1_sound" ],
       [ "Source", "classclem_1_1_source.html", "classclem_1_1_source" ],
-      [ "Component", "classclem_1_1_component.html", "classclem_1_1_component" ],
+      [ "Component", "classclem_1_1_component.html", null ],
       [ "Script", "classclem_1_1_script.html", "classclem_1_1_script" ],
+      [ "ScriptSystem", "classclem_1_1_script_system.html", "classclem_1_1_script_system" ],
       [ "Tag", "classclem_1_1_tag.html", "classclem_1_1_tag" ],
       [ "Transform", "classclem_1_1_transform.html", "classclem_1_1_transform" ],
       [ "Application", "classclem_1_1_application.html", "classclem_1_1_application" ],
@@ -18,10 +22,13 @@ var annotated_dup =
       [ "Keyboard", "classclem_1_1_keyboard.html", "classclem_1_1_keyboard" ],
       [ "Mouse", "classclem_1_1_mouse.html", "classclem_1_1_mouse" ],
       [ "Main", "classclem_1_1_main.html", null ],
-      [ "EntityInfo", "structclem_1_1_entity_info.html", "structclem_1_1_entity_info" ],
-      [ "AEntity", "classclem_1_1_a_entity.html", "classclem_1_1_a_entity" ],
+      [ "Time", "classclem_1_1_time.html", "classclem_1_1_time" ],
       [ "Archtype", "classclem_1_1_archtype.html", "classclem_1_1_archtype" ],
+      [ "Chunk", "structclem_1_1_chunk.html", "structclem_1_1_chunk" ],
+      [ "Entity", "classclem_1_1_entity.html", "classclem_1_1_entity" ],
+      [ "EntityInfo", "structclem_1_1_entity_info.html", "structclem_1_1_entity_info" ],
       [ "Registry", "classclem_1_1_registry.html", "classclem_1_1_registry" ],
+      [ "System", "classclem_1_1_system.html", "classclem_1_1_system" ],
       [ "Logger", "classclem_1_1_logger.html", "classclem_1_1_logger" ],
       [ "Client", "classclem_1_1_client.html", "classclem_1_1_client" ],
       [ "Connection", "classclem_1_1_connection.html", "classclem_1_1_connection" ],
@@ -30,16 +37,17 @@ var annotated_dup =
       [ "BoxCollider", "classclem_1_1_box_collider.html", "classclem_1_1_box_collider" ],
       [ "CircleCollider", "classclem_1_1_circle_collider.html", "classclem_1_1_circle_collider" ],
       [ "Collider", "classclem_1_1_collider.html", "classclem_1_1_collider" ],
-      [ "PhysicsWorld", "classclem_1_1_physics_world.html", "classclem_1_1_physics_world" ],
+      [ "PhysicsSystem", "classclem_1_1_physics_system.html", "classclem_1_1_physics_system" ],
       [ "Rigidbody", "classclem_1_1_rigidbody.html", "classclem_1_1_rigidbody" ],
       [ "Framebuffer", "classclem_1_1_framebuffer.html", "classclem_1_1_framebuffer" ],
       [ "Output", "classclem_1_1_output.html", "classclem_1_1_output" ],
+      [ "RenderSystem", "classclem_1_1_render_system.html", "classclem_1_1_render_system" ],
       [ "Sprite", "classclem_1_1_sprite.html", "classclem_1_1_sprite" ],
-      [ "Entity", "classclem_1_1_entity.html", "classclem_1_1_entity" ],
-      [ "Scene", "classclem_1_1_scene.html", "classclem_1_1_scene" ]
+      [ "ConsoleWindow", "classclem_1_1_console_window.html", "classclem_1_1_console_window" ],
+      [ "Window", "classclem_1_1_window.html", "classclem_1_1_window" ],
+      [ "WindowsWindow", "classclem_1_1_windows_window.html", "classclem_1_1_windows_window" ]
     ] ],
     [ "Camera", "class_camera.html", null ],
-    [ "Chunk", "struct_chunk.html", "struct_chunk" ],
     [ "Color", "class_color.html", "class_color" ],
     [ "CpuSample", "struct_cpu_sample.html", "struct_cpu_sample" ],
     [ "Cursor", "class_cursor.html", null ],
@@ -48,6 +56,9 @@ var annotated_dup =
     [ "InstrumentationCounter", "class_instrumentation_counter.html", "class_instrumentation_counter" ],
     [ "Instrumentor", "class_instrumentor.html", "class_instrumentor" ],
     [ "KeyEvent", "class_key_event.html", "class_key_event" ],
+    [ "KeyPressEvent", "class_key_press_event.html", "class_key_press_event" ],
+    [ "KeyReleaseEvent", "class_key_release_event.html", "class_key_release_event" ],
+    [ "KeyRepeatEvent", "class_key_repeat_event.html", "class_key_repeat_event" ],
     [ "Line2", "struct_line2.html", "struct_line2" ],
     [ "MouseEvent", "class_mouse_event.html", "class_mouse_event" ],
     [ "Profiler", "class_profiler.html", "class_profiler" ],
@@ -60,5 +71,5 @@ var annotated_dup =
     [ "Tile", "class_tile.html", "class_tile" ],
     [ "Vector2", "struct_vector2.html", "struct_vector2" ],
     [ "Vector2i", "struct_vector2i.html", "struct_vector2i" ],
-    [ "Window", "class_window.html", null ]
+    [ "WindowEvent", "class_window_event.html", "class_window_event" ]
 ];

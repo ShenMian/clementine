@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Clementine: Source/Clem/Window.h 源文件</title>
+<title>Clementine: Source/Clem/Window/Window.h 源文件</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,25 +93,64 @@ $(document).ready(function(){initNavTree('_window_8h_source.html',''); initResiz
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Clem/Core/Math/Math.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_window.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_window.html">Window</a></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_window.html#a6d03fd6c9fbfcaf4aba92e6b4d08123e">setTitle</a>(<span class="keyword">const</span> std::string&amp; title);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">static</span> <a class="code" href="struct_vector2i.html">Size2i</a> <a class="code" href="class_window.html#af42966d9c4b4c83e469d2a95f5b3644f">getVisibleSize</a>();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
-<div class="ttc" id="aclass_window_html"><div class="ttname"><a href="class_window.html">Window</a></div><div class="ttdoc">窗口.</div><div class="ttdef"><b>Definition:</b> Window.h:13</div></div>
-<div class="ttc" id="aclass_window_html_a6d03fd6c9fbfcaf4aba92e6b4d08123e"><div class="ttname"><a href="class_window.html#a6d03fd6c9fbfcaf4aba92e6b4d08123e">Window::setTitle</a></div><div class="ttdeci">static void setTitle(const std::string &amp;title)</div><div class="ttdoc">设置终端窗口标题.</div><div class="ttdef"><b>Definition:</b> Window.cpp:20</div></div>
-<div class="ttc" id="aclass_window_html_af42966d9c4b4c83e469d2a95f5b3644f"><div class="ttname"><a href="class_window.html#af42966d9c4b4c83e469d2a95f5b3644f">Window::getVisibleSize</a></div><div class="ttdeci">static Size2i getVisibleSize()</div><div class="ttdoc">获取终端可见缓冲区大小.</div><div class="ttdef"><b>Definition:</b> Window.cpp:27</div></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>clem</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classclem_1_1_window.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_window.html">Window</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="classclem_1_1_window.html#a27431dd8ef264331636a2721ff3004b0">Window</a>();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="classclem_1_1_window.html#a3edcdf8adc840d3fa61a5b6bd757861e">~Window</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classclem_1_1_window.html#aa4292ad7cc76d5911b6f874189bb7765">   34</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_window.html#aa4292ad7cc76d5911b6f874189bb7765">update</a>() = 0;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classclem_1_1_window.html#ad2a6bf035583a8013de99ec8e61d4280">   41</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_window.html#ad2a6bf035583a8013de99ec8e61d4280">setTitle</a>(<span class="keyword">const</span> std::string&amp; title) = 0;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classclem_1_1_window.html#a2d6435fa84ef436ce9e6f7bb0c8f9405">   48</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_window.html#a2d6435fa84ef436ce9e6f7bb0c8f9405">setSize</a>(<a class="code" href="struct_vector2i.html">Size2i</a> size) = 0;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classclem_1_1_window.html#a66d5430e572ea46c702875463534e794">   55</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="struct_vector2i.html">Size2i</a> <a class="code" href="classclem_1_1_window.html#a66d5430e572ea46c702875463534e794">getSize</a>() = 0;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classclem_1_1_window.html#a9589d06c951456b2de8c1e6f6c8c9d4a">   62</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_window.html#a9589d06c951456b2de8c1e6f6c8c9d4a">setPosition</a>(<a class="code" href="struct_vector2i.html">Size2i</a> pos) = 0;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classclem_1_1_window.html#aa458d67a8a0618193ae43de52e24785b">   69</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="struct_vector2i.html">Size2i</a> <a class="code" href="classclem_1_1_window.html#aa458d67a8a0618193ae43de52e24785b">getPosition</a>() = 0;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classclem_1_1_window.html#a794607094c4e8cff79027326ad18ebf5">   76</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_window.html#a794607094c4e8cff79027326ad18ebf5">setVisible</a>(<span class="keywordtype">bool</span> visible) = 0;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classclem_1_1_window.html#a289b88e0c957233b0084357da2d537c6">   83</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classclem_1_1_window.html#a289b88e0c957233b0084357da2d537c6">isVisible</a>() = 0;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> init();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> deinit();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    std::function&lt;void(<a class="code" href="struct_vector2i.html">Size2i</a>)&gt; onResize;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    std::function&lt;void()&gt;       onClose;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> initialized;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;};</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;} <span class="comment">// namespace clem</span></div>
+<div class="ttc" id="aclassclem_1_1_window_html"><div class="ttname"><a href="classclem_1_1_window.html">clem::Window</a></div><div class="ttdoc">窗口.</div><div class="ttdef"><b>Definition:</b> Window.h:17</div></div>
+<div class="ttc" id="aclassclem_1_1_window_html_a27431dd8ef264331636a2721ff3004b0"><div class="ttname"><a href="classclem_1_1_window.html#a27431dd8ef264331636a2721ff3004b0">clem::Window::Window</a></div><div class="ttdeci">Window()</div><div class="ttdoc">默认构造函数.</div><div class="ttdef"><b>Definition:</b> Window.cpp:15</div></div>
+<div class="ttc" id="aclassclem_1_1_window_html_a289b88e0c957233b0084357da2d537c6"><div class="ttname"><a href="classclem_1_1_window.html#a289b88e0c957233b0084357da2d537c6">clem::Window::isVisible</a></div><div class="ttdeci">virtual bool isVisible()=0</div><div class="ttdoc">获取窗口可见性.</div></div>
+<div class="ttc" id="aclassclem_1_1_window_html_a2d6435fa84ef436ce9e6f7bb0c8f9405"><div class="ttname"><a href="classclem_1_1_window.html#a2d6435fa84ef436ce9e6f7bb0c8f9405">clem::Window::setSize</a></div><div class="ttdeci">virtual void setSize(Size2i size)=0</div><div class="ttdoc">设置窗口大小.</div></div>
+<div class="ttc" id="aclassclem_1_1_window_html_a3edcdf8adc840d3fa61a5b6bd757861e"><div class="ttname"><a href="classclem_1_1_window.html#a3edcdf8adc840d3fa61a5b6bd757861e">clem::Window::~Window</a></div><div class="ttdeci">~Window()</div><div class="ttdoc">默认析构函数.</div><div class="ttdef"><b>Definition:</b> Window.cpp:20</div></div>
+<div class="ttc" id="aclassclem_1_1_window_html_a66d5430e572ea46c702875463534e794"><div class="ttname"><a href="classclem_1_1_window.html#a66d5430e572ea46c702875463534e794">clem::Window::getSize</a></div><div class="ttdeci">virtual Size2i getSize()=0</div><div class="ttdoc">获取窗口大小.</div></div>
+<div class="ttc" id="aclassclem_1_1_window_html_a794607094c4e8cff79027326ad18ebf5"><div class="ttname"><a href="classclem_1_1_window.html#a794607094c4e8cff79027326ad18ebf5">clem::Window::setVisible</a></div><div class="ttdeci">virtual void setVisible(bool visible)=0</div><div class="ttdoc">设置窗口可见性.</div></div>
+<div class="ttc" id="aclassclem_1_1_window_html_a9589d06c951456b2de8c1e6f6c8c9d4a"><div class="ttname"><a href="classclem_1_1_window.html#a9589d06c951456b2de8c1e6f6c8c9d4a">clem::Window::setPosition</a></div><div class="ttdeci">virtual void setPosition(Size2i pos)=0</div><div class="ttdoc">设置窗口坐标.</div></div>
+<div class="ttc" id="aclassclem_1_1_window_html_aa4292ad7cc76d5911b6f874189bb7765"><div class="ttname"><a href="classclem_1_1_window.html#aa4292ad7cc76d5911b6f874189bb7765">clem::Window::update</a></div><div class="ttdeci">virtual void update()=0</div><div class="ttdoc">更新.</div></div>
+<div class="ttc" id="aclassclem_1_1_window_html_aa458d67a8a0618193ae43de52e24785b"><div class="ttname"><a href="classclem_1_1_window.html#aa458d67a8a0618193ae43de52e24785b">clem::Window::getPosition</a></div><div class="ttdeci">virtual Size2i getPosition()=0</div><div class="ttdoc">获取窗口坐标.</div></div>
+<div class="ttc" id="aclassclem_1_1_window_html_ad2a6bf035583a8013de99ec8e61d4280"><div class="ttname"><a href="classclem_1_1_window.html#ad2a6bf035583a8013de99ec8e61d4280">clem::Window::setTitle</a></div><div class="ttdeci">virtual void setTitle(const std::string &amp;title)=0</div><div class="ttdoc">设置窗口标题.</div></div>
 <div class="ttc" id="astruct_vector2i_html"><div class="ttname"><a href="struct_vector2i.html">Vector2i</a></div><div class="ttdoc">二维向量, 整型.</div><div class="ttdef"><b>Definition:</b> Vector2i.h:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_74389ed8173ad57b461b9d623a1f3867.html">Source</a></li><li class="navelem"><a class="el" href="dir_7021f754b8ddfcf6c3876e5dcdd251f8.html">Clem</a></li><li class="navelem"><b>Window.h</b></li>
+    <li class="navelem"><a class="el" href="dir_74389ed8173ad57b461b9d623a1f3867.html">Source</a></li><li class="navelem"><a class="el" href="dir_7021f754b8ddfcf6c3876e5dcdd251f8.html">Clem</a></li><li class="navelem"><a class="el" href="dir_cf39f2e22f2c5284b6c04efd7430240c.html">Window</a></li><li class="navelem"><b>Window.h</b></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

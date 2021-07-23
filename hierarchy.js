@@ -1,12 +1,11 @@
 var hierarchy =
 [
-    [ "clem::AEntity", "classclem_1_1_a_entity.html", null ],
     [ "clem::Application", "classclem_1_1_application.html", null ],
-    [ "clem::Archtype< Types >", "classclem_1_1_archtype.html", null ],
+    [ "clem::Archtype", "classclem_1_1_archtype.html", null ],
     [ "clem::Assert", "classclem_1_1_assert.html", null ],
     [ "clem::Audio", "classclem_1_1_audio.html", null ],
     [ "Camera", "class_camera.html", null ],
-    [ "Chunk", "struct_chunk.html", null ],
+    [ "clem::Chunk", "structclem_1_1_chunk.html", null ],
     [ "clem::Client", "classclem_1_1_client.html", null ],
     [ "clem::Collider", "classclem_1_1_collider.html", [
       [ "clem::BoxCollider", "classclem_1_1_box_collider.html", null ],
@@ -15,10 +14,7 @@ var hierarchy =
     [ "Color", "class_color.html", null ],
     [ "clem::Component", "classclem_1_1_component.html", [
       [ "clem::Rigidbody", "classclem_1_1_rigidbody.html", null ],
-      [ "clem::Script", "classclem_1_1_script.html", null ],
-      [ "clem::Sprite", "classclem_1_1_sprite.html", null ],
-      [ "clem::Tag", "classclem_1_1_tag.html", null ],
-      [ "clem::Transform", "classclem_1_1_transform.html", null ]
+      [ "clem::Sprite", "classclem_1_1_sprite.html", null ]
     ] ],
     [ "clem::Connection", "classclem_1_1_connection.html", null ],
     [ "CpuSample", "struct_cpu_sample.html", null ],
@@ -27,7 +23,11 @@ var hierarchy =
     [ "clem::EntityInfo", "structclem_1_1_entity_info.html", null ],
     [ "Event", "class_event.html", [
       [ "KeyEvent", "class_key_event.html", null ],
-      [ "MouseEvent", "class_mouse_event.html", null ]
+      [ "KeyPressEvent", "class_key_press_event.html", null ],
+      [ "KeyReleaseEvent", "class_key_release_event.html", null ],
+      [ "KeyRepeatEvent", "class_key_repeat_event.html", null ],
+      [ "MouseEvent", "class_mouse_event.html", null ],
+      [ "WindowEvent", "class_window_event.html", null ]
     ] ],
     [ "EventDispatcher", "class_event_dispatcher.html", null ],
     [ "clem::Framebuffer", "classclem_1_1_framebuffer.html", null ],
@@ -42,7 +42,6 @@ var hierarchy =
     [ "clem::Message< T >", "classclem_1_1_message.html", null ],
     [ "clem::Mouse", "classclem_1_1_mouse.html", null ],
     [ "clem::Output", "classclem_1_1_output.html", null ],
-    [ "clem::PhysicsWorld", "classclem_1_1_physics_world.html", null ],
     [ "Profiler", "class_profiler.html", null ],
     [ "ProfileRecord", "struct_profile_record.html", null ],
     [ "Random", "class_random.html", null ],
@@ -51,15 +50,27 @@ var hierarchy =
     [ "Rect2i", "class_rect2i.html", null ],
     [ "clem::Registry", "classclem_1_1_registry.html", null ],
     [ "clem::RiffHeader", "structclem_1_1_riff_header.html", null ],
-    [ "clem::Scene", "classclem_1_1_scene.html", null ],
+    [ "clem::Script", "classclem_1_1_script.html", null ],
     [ "clem::Server", "classclem_1_1_server.html", null ],
     [ "Session", "class_session.html", null ],
     [ "clem::Sound", "classclem_1_1_sound.html", null ],
     [ "clem::Source", "classclem_1_1_source.html", null ],
+    [ "clem::System", "classclem_1_1_system.html", [
+      [ "clem::PhysicsSystem", "classclem_1_1_physics_system.html", null ],
+      [ "clem::RenderSystem", "classclem_1_1_render_system.html", null ],
+      [ "clem::ScriptSystem", "classclem_1_1_script_system.html", null ]
+    ] ],
+    [ "clem::Tag", "classclem_1_1_tag.html", null ],
     [ "Tile", "class_tile.html", null ],
+    [ "clem::Time", "classclem_1_1_time.html", null ],
+    [ "clem::Transform", "classclem_1_1_transform.html", null ],
+    [ "clem::detal::TypeRegistry", "classclem_1_1detal_1_1_type_registry.html", null ],
     [ "Vector2", "struct_vector2.html", null ],
     [ "Vector2i", "struct_vector2i.html", null ],
     [ "clem::WaveData", "structclem_1_1_wave_data.html", null ],
     [ "clem::WaveFormat", "structclem_1_1_wave_format.html", null ],
-    [ "Window", "class_window.html", null ]
+    [ "clem::Window", "classclem_1_1_window.html", [
+      [ "clem::ConsoleWindow", "classclem_1_1_console_window.html", null ],
+      [ "clem::WindowsWindow", "classclem_1_1_windows_window.html", null ]
+    ] ]
 ];

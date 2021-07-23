@@ -97,6 +97,11 @@ $(document).ready(function(){initNavTree('classclem_1_1_source.html',''); initRe
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public 类型</h2></td></tr>
+<tr class="memitem:a78807e1e6d15c67f3ddc76ccbbab05aa"><td class="memItemLeft" align="right" valign="top"><a id="a78807e1e6d15c67f3ddc76ccbbab05aa"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>Status</b> { <b>Paused</b>
+, <b>Playing</b>
+, <b>Stopped</b>
+ }</td></tr>
+<tr class="separator:a78807e1e6d15c67f3ddc76ccbbab05aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a834c3d9a180dd52bd1c7a10ee8cd6a34"><td class="memItemLeft" align="right" valign="top"><a id="a834c3d9a180dd52bd1c7a10ee8cd6a34"></a>
 typedef ALuint&#160;</td><td class="memItemRight" valign="bottom"><b>id_t</b></td></tr>
 <tr class="separator:a834c3d9a180dd52bd1c7a10ee8cd6a34"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,6 +149,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a5346abf77026fb874ecc3211785cfb94"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_vector2.html">Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclem_1_1_source.html#a5346abf77026fb874ecc3211785cfb94">getVelocity</a> ()</td></tr>
 <tr class="memdesc:a5346abf77026fb874ecc3211785cfb94"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取声源速度.  <a href="classclem_1_1_source.html#a5346abf77026fb874ecc3211785cfb94">更多...</a><br /></td></tr>
 <tr class="separator:a5346abf77026fb874ecc3211785cfb94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8920785e921b46fdd75bc152a505b346"><td class="memItemLeft" align="right" valign="top"><a id="a8920785e921b46fdd75bc152a505b346"></a>
+Status&#160;</td><td class="memItemRight" valign="bottom"><b>getStatus</b> () const</td></tr>
+<tr class="separator:a8920785e921b46fdd75bc152a505b346"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e0ab53569b7b18a2ca826eac5a2465c"><td class="memItemLeft" align="right" valign="top"><a id="a8e0ab53569b7b18a2ca826eac5a2465c"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>operator id_t</b> () const</td></tr>
 <tr class="separator:a8e0ab53569b7b18a2ca826eac5a2465c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -236,7 +244,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>设置速率(倍速). </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pitch</td><td>速率. 范围: 0.5 - 2.0 </td></tr>
+    <tr><td class="paramname">pitch</td><td>速率. 范围: [0.5, 2.0] </td></tr>
   </table>
   </dd>
 </dl>
@@ -314,7 +322,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>设置音量. </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">volume</td><td>音量. 范围: 0.0 - 1.0. </td></tr>
+    <tr><td class="paramname">volume</td><td>音量. 范围: [0.0, 1.0]. </td></tr>
   </table>
   </dd>
 </dl>

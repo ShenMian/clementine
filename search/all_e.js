@@ -1,11 +1,19 @@
 var searchData=
 [
-  ['pause_103',['pause',['../classclem_1_1_source.html#ab09b5353b0a4794bd79388404d1abf33',1,'clem::Source::pause()'],['../classclem_1_1_application.html#a701d5bd0328d08eb0ddea65f9c7ec250',1,'clem::Application::pause()'],['../classclem_1_1_main.html#a7992eab97e6eb8e45b4db139a5ff26e3',1,'clem::Main::pause()']]],
-  ['physics_104',['Physics',['../group___physics.html',1,'']]],
-  ['physicsworld_105',['PhysicsWorld',['../classclem_1_1_physics_world.html',1,'clem']]],
-  ['play_106',['play',['../classclem_1_1_source.html#a442fee1e2cbc82e08a63221d4749958c',1,'clem::Source']]],
-  ['popscene_107',['popScene',['../classclem_1_1_application.html#aede36acbdc1718fd7e96df7a8809ed4f',1,'clem::Application']]],
-  ['profiler_108',['Profiler',['../class_profiler.html',1,'']]],
-  ['profilerecord_109',['ProfileRecord',['../struct_profile_record.html',1,'']]],
-  ['pushscene_110',['pushScene',['../classclem_1_1_application.html#a0514480b591420bed86c2923985d05f2',1,'clem::Application']]]
+  ['random_120',['Random',['../class_random.html',1,'Random'],['../class_random.html#acb76b49c3903a3c4fb67fd216341f08d',1,'Random::Random()']]],
+  ['read_121',['read',['../group___networking.html#gaf24d929e70a8ca088834ca30a4deccbe',1,'clem::Client::read()'],['../group___networking.html#ga8982f0d21d47d7b837ef83b7490b4bfc',1,'clem::Connection::read()'],['../group___networking.html#gaeeed9a80b6c00017d73698bc26de1c69',1,'clem::Server::read()']]],
+  ['recorder_122',['Recorder',['../class_recorder.html',1,'Recorder'],['../class_recorder.html#a68c85014dc853b9deef2269c43fc974c',1,'Recorder::Recorder()']]],
+  ['rect2_123',['Rect2',['../class_rect2.html',1,'Rect2'],['../class_rect2.html#af57a2f1b2e8320c5600467b78f0f3666',1,'Rect2::Rect2()=default'],['../class_rect2.html#a71b9efe9cf2968c7e59c046dce998c70',1,'Rect2::Rect2(const Point2 &amp;origin, const Size2 &amp;size)'],['../class_rect2.html#a43db73e3064ae1a60fe786d639ae0f52',1,'Rect2::Rect2(float x, float y, float width, float height)']]],
+  ['rect2i_124',['Rect2i',['../class_rect2i.html',1,'Rect2i'],['../class_rect2i.html#a988319875d2154761965423d2432b429',1,'Rect2i::Rect2i()=default'],['../class_rect2i.html#a574db2206ae17b52e6f4aca683f455cd',1,'Rect2i::Rect2i(const Point2i &amp;origin, Size2i size)'],['../class_rect2i.html#abe71ee54607b99b3cf9a49ce460d9093',1,'Rect2i::Rect2i(int x, int y, int width, int height)']]],
+  ['registry_125',['Registry',['../classclem_1_1_registry.html',1,'clem']]],
+  ['remove_126',['remove',['../classclem_1_1_archtype.html#ae2379bade671c697fb44c356fece59e3',1,'clem::Archtype::remove()'],['../classclem_1_1_entity.html#ab00e1c4d5c4a568ec70d1e998184e3e7',1,'clem::Entity::remove()']]],
+  ['removecomponent_127',['removeComponent',['../classclem_1_1_registry.html#ac912725bedbfe701fec32ad824c3cf18',1,'clem::Registry']]],
+  ['removesystem_128',['removeSystem',['../classclem_1_1_registry.html#a2f49f47f43e67f8521fe315f5b568994',1,'clem::Registry']]],
+  ['rendersystem_129',['RenderSystem',['../classclem_1_1_render_system.html',1,'clem']]],
+  ['resume_130',['resume',['../classclem_1_1_application.html#a5918fa82a8bbb59327ab337c6ade12ef',1,'clem::Application::resume()'],['../classclem_1_1_main.html#a6e56d96e73ce20666127b722cb7d43b3',1,'clem::Main::resume()']]],
+  ['rewind_131',['rewind',['../classclem_1_1_source.html#a1628c1204bd6116485e4c2b0c17d87da',1,'clem::Source']]],
+  ['riffheader_132',['RiffHeader',['../structclem_1_1_riff_header.html',1,'clem']]],
+  ['right_133',['right',['../class_rect2.html#a06966ddaaf76ea457e1a57cd172691fc',1,'Rect2']]],
+  ['rigidbody_134',['Rigidbody',['../classclem_1_1_rigidbody.html',1,'clem']]],
+  ['run_135',['run',['../classclem_1_1_application.html#a0940de245f438582ef0299792a7ca1e5',1,'clem::Application::run()'],['../classclem_1_1_main.html#a688b95ae4a97f3a961286e8d0a6c8ddc',1,'clem::Main::run()']]]
 ];

@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['info_289',['info',['../classclem_1_1_logger.html#adec6d9b40da5287e9e2ef0f61cf4b8d2',1,'clem::Logger']]],
-  ['intersectspoint_290',['intersectsPoint',['../class_rect2.html#a2eca7910a70328c18992e9d70acd0d7c',1,'Rect2']]],
-  ['intersectsrect_291',['intersectsRect',['../class_rect2.html#a93e5a5004886832b5741e9bf3a428e07',1,'Rect2']]],
-  ['isconnected_292',['isConnected',['../classclem_1_1_client.html#aae54c38ae878f11b33ece16d36720d41',1,'clem::Client::isConnected()'],['../classclem_1_1_connection.html#a88e28e5451ee7ee32561134039f1a320',1,'clem::Connection::isConnected()']]],
-  ['isvalid_293',['isValid',['../classclem_1_1_a_entity.html#a8c3506f56461e508a7c0d99cb57edbc0',1,'clem::AEntity::isValid()'],['../classclem_1_1_registry.html#ad07ec5d4e6d6b2025f3856e7e5ee6135',1,'clem::Registry::isValid()']]]
+  ['left_329',['left',['../class_rect2.html#aeaba64aca9d51bf530e11c97198e274c',1,'Rect2']]],
+  ['loadfromfile_330',['loadFromFile',['../classclem_1_1_sound.html#abb1d8819fc4442926e79db5850f683c2',1,'clem::Sound']]]
 ];

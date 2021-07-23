@@ -92,27 +92,29 @@ $(document).ready(function(){initNavTree('_tag_8h_source.html',''); initResizabl
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Clem/Core/Math/Math.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Component.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Clem/ECS/ECS.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>clem</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classclem_1_1_tag.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_tag.html">Tag</a> : <span class="keyword">public</span> <a class="code" href="classclem_1_1_component.html">Component</a></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>clem</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classclem_1_1_tag.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_tag.html">Tag</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    CLEM_DECLARE_TYPE;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    std::string string;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    std::string str;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="classclem_1_1_tag.html">Tag</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="classclem_1_1_tag.html">Tag</a>(<span class="keyword">const</span> std::string&amp; tag)</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            : string(tag)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            : str(tag)</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    {</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    }</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;} <span class="comment">// namespace clem</span></div>
-<div class="ttc" id="aclassclem_1_1_component_html"><div class="ttname"><a href="classclem_1_1_component.html">clem::Component</a></div><div class="ttdoc">组件.</div><div class="ttdef"><b>Definition:</b> Component.h:14</div></div>
-<div class="ttc" id="aclassclem_1_1_tag_html"><div class="ttname"><a href="classclem_1_1_tag.html">clem::Tag</a></div><div class="ttdoc">标签组件.</div><div class="ttdef"><b>Definition:</b> Tag.h:17</div></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;CLEM_DEFINE_TYPE(<a class="code" href="classclem_1_1_tag.html">Tag</a>);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;} <span class="comment">// namespace clem</span></div>
+<div class="ttc" id="aclassclem_1_1_tag_html"><div class="ttname"><a href="classclem_1_1_tag.html">clem::Tag</a></div><div class="ttdoc">标签组件.</div><div class="ttdef"><b>Definition:</b> Tag.h:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

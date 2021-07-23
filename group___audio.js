@@ -9,15 +9,24 @@ var group___audio =
       [ "Sound", "classclem_1_1_sound.html#ae623923d8e296fa39c13f4da25140bb4", null ],
       [ "~Sound", "classclem_1_1_sound.html#ae46d3bde26957b4ee89a3f969014a6ef", null ],
       [ "getBufferId", "classclem_1_1_sound.html#a7535575e8e8f460fe2b7a90fcdae1207", null ],
+      [ "getChannelCount", "classclem_1_1_sound.html#a2fe7c1633d3879da0323337b43f063f8", null ],
       [ "getSampleCount", "classclem_1_1_sound.html#a286a4ff9aac340337c565e5b8a3eaf04", null ],
+      [ "getSampleRate", "classclem_1_1_sound.html#a7c1d77028a0c11c954603332cdffda0a", null ],
       [ "getSamples", "classclem_1_1_sound.html#a5d1391ff41c253e8f983938d1a861bca", null ],
+      [ "getTime", "classclem_1_1_sound.html#af2291bf0cc7f073eb03d8f6004f9ff4b", null ],
       [ "loadFromFile", "classclem_1_1_sound.html#abb1d8819fc4442926e79db5850f683c2", null ]
     ] ],
     [ "Source", "classclem_1_1_source.html", [
       [ "id_t", "classclem_1_1_source.html#a834c3d9a180dd52bd1c7a10ee8cd6a34", null ],
+      [ "Status", "classclem_1_1_source.html#a78807e1e6d15c67f3ddc76ccbbab05aa", [
+        [ "Paused", "classclem_1_1_source.html#a78807e1e6d15c67f3ddc76ccbbab05aaae99180abf47a8b3a856e0bcb2656990a", null ],
+        [ "Playing", "classclem_1_1_source.html#a78807e1e6d15c67f3ddc76ccbbab05aaac9dbb2b7c84159b632d71e512eba8428", null ],
+        [ "Stopped", "classclem_1_1_source.html#a78807e1e6d15c67f3ddc76ccbbab05aaac23e2b09ebe6bf4cb5e2a9abe85c0be2", null ]
+      ] ],
       [ "Source", "classclem_1_1_source.html#a3b13f8f9cc2e124a73edde4beffb6f59", null ],
       [ "~Source", "classclem_1_1_source.html#a5a65d7a04bf4f33a2db47ffdffe0b27a", null ],
       [ "getPosition", "classclem_1_1_source.html#a2fa80ce22fb001440a21554fda9ffe5e", null ],
+      [ "getStatus", "classclem_1_1_source.html#a8920785e921b46fdd75bc152a505b346", null ],
       [ "getVelocity", "classclem_1_1_source.html#a5346abf77026fb874ecc3211785cfb94", null ],
       [ "getVolume", "classclem_1_1_source.html#a3c18912e1edbf2a0f78b8afb2c285853", null ],
       [ "operator id_t", "classclem_1_1_source.html#a8e0ab53569b7b18a2ca826eac5a2465c", null ],

@@ -31,8 +31,8 @@ var NAVTREE =
       [ "类索引", "classes.html", null ],
       [ "类继承关系", "hierarchy.html", "hierarchy" ],
       [ "类成员", "functions.html", [
-        [ "全部", "functions.html", null ],
-        [ "函数", "functions_func.html", null ]
+        [ "全部", "functions.html", "functions_dup" ],
+        [ "函数", "functions_func.html", "functions_func" ]
       ] ]
     ] ]
   ] ]
@@ -41,8 +41,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"classclem_1_1_keyboard.html#a859a0b607ca50c3422cc6bfab67acc76a4c614360da93c0a041b22e537de151eb",
-"struct_vector2i.html#ab4e168dce592fb15f6526b140ec4742c"
+"classclem_1_1_gamepad.html#a44e1405aea0e3460f40d2b4b9f48b169",
+"functions_e.html"
 ];
 
 var SYNCONMSG = '点击 关闭 面板同步';

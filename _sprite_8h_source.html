@@ -94,63 +94,70 @@ $(document).ready(function(){initNavTree('_sprite_8h_source.html',''); initResiz
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Clem/Components/Component.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Clem/Core/Math/Math.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Tile.h&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;filesystem&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>clem</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classclem_1_1_sprite.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_sprite.html">Sprite</a> : <span class="keyword">public</span> <a class="code" href="classclem_1_1_component.html">Component</a></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="classclem_1_1_sprite.html">Sprite</a>()              = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="classclem_1_1_sprite.html">Sprite</a>(<span class="keyword">const</span> <a class="code" href="classclem_1_1_sprite.html">Sprite</a>&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classclem_1_1_sprite.html">Sprite</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Size2i</a>&amp; size);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#a200f9adf6c963ba80681b6eab21a47ce">drawPoint</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#a200f9adf6c963ba80681b6eab21a47ce">drawPoint</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; p, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#a8514162012b5593563870139baac9e65">drawLine</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; start, <span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; end, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#a0d637653e8ee6dd1c7d78b388d661759">drawRect</a>(<span class="keyword">const</span> <a class="code" href="class_rect2i.html">Rect2i</a>&amp; r, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#a5a2fe01dadbb931a0d5119d405e8e465">fillRect</a>(<span class="keyword">const</span> <a class="code" href="class_rect2i.html">Rect2i</a>&amp; r, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#af747fa1c37bc9b4c1ec96c8aed87d6a0">drawCycle</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; p, <span class="keywordtype">short</span> radius, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#a048c33603a646d95416d99c2798bf347">drawString</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; pos, std::wstring_view str, <a class="code" href="class_color.html">Color</a> color = <a class="code" href="class_color.html">Color</a>());</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#ab31e3f73406032e3f1adfda8c938f6f6">clear</a>(<span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; = Tile::blank);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; getTile(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; getTile(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp;) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Clem/ECS/ECS.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;Tile.h&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;filesystem&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>clem</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classclem_1_1_sprite.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_sprite.html">Sprite</a> : <span class="keyword">public</span> <a class="code" href="classclem_1_1_component.html">Component</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    CLEM_DECLARE_TYPE;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classclem_1_1_sprite.html">Sprite</a>()              = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classclem_1_1_sprite.html">Sprite</a>(<span class="keyword">const</span> <a class="code" href="classclem_1_1_sprite.html">Sprite</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classclem_1_1_sprite.html">Sprite</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Size2i</a>&amp; size);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#a200f9adf6c963ba80681b6eab21a47ce">drawPoint</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#a200f9adf6c963ba80681b6eab21a47ce">drawPoint</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; p, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#a8514162012b5593563870139baac9e65">drawLine</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; start, <span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; end, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#a0d637653e8ee6dd1c7d78b388d661759">drawRect</a>(<span class="keyword">const</span> <a class="code" href="class_rect2i.html">Rect2i</a>&amp; r, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#a5a2fe01dadbb931a0d5119d405e8e465">fillRect</a>(<span class="keyword">const</span> <a class="code" href="class_rect2i.html">Rect2i</a>&amp; r, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#af747fa1c37bc9b4c1ec96c8aed87d6a0">drawCycle</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; p, <span class="keywordtype">short</span> radius, <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; t);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#a048c33603a646d95416d99c2798bf347">drawString</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp; pos, std::wstring_view str, <a class="code" href="class_color.html">Color</a> color = <a class="code" href="class_color.html">Color</a>());</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#ab31e3f73406032e3f1adfda8c938f6f6">clear</a>(<span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; = Tile::blank);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#a3977986edadd95b63c3a3e37bcdfb943">setSize</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Size2i</a>&amp; s);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Size2i</a>&amp; <a class="code" href="classclem_1_1_sprite.html#a2f741c83f21d8b2c3ccf31f7e53189c2">getSize</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">void</span> setDepth(<span class="keywordtype">size_t</span>);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">size_t</span> getDepth() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; getTile(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_tile.html">Tile</a>&amp; getTile(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Point2i</a>&amp;) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_sprite.html#a3977986edadd95b63c3a3e37bcdfb943">setSize</a>(<span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Size2i</a>&amp; s);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keyword">const</span> <a class="code" href="struct_vector2i.html">Size2i</a>&amp; <a class="code" href="classclem_1_1_sprite.html#a2f741c83f21d8b2c3ccf31f7e53189c2">getSize</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="comment">// void load(const std::filesystem::path&amp; path);</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="comment">// void store(const std::filesystem::path&amp; path) const;</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <a class="code" href="classclem_1_1_sprite.html">Sprite</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classclem_1_1_sprite.html">Sprite</a>&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">size_t</span>            depth = 0;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <a class="code" href="struct_vector2i.html">Size2i</a>            size;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    std::vector&lt;Tile&gt; buffer;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;};</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;} <span class="comment">// namespace clem</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">void</span> setDepth(<span class="keywordtype">size_t</span>);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">size_t</span> getDepth() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="comment">// void load(const std::filesystem::path&amp; path);</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="comment">// void store(const std::filesystem::path&amp; path) const;</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <a class="code" href="classclem_1_1_sprite.html">Sprite</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classclem_1_1_sprite.html">Sprite</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">size_t</span>            depth = 0;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <a class="code" href="struct_vector2i.html">Size2i</a>            size;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    std::vector&lt;Tile&gt; buffer;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;};</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;CLEM_DEFINE_TYPE(<a class="code" href="classclem_1_1_sprite.html">Sprite</a>);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;} <span class="comment">// namespace clem</span></div>
 <div class="ttc" id="aclass_color_html"><div class="ttname"><a href="class_color.html">Color</a></div><div class="ttdoc">字体属性.</div><div class="ttdef"><b>Definition:</b> Color.h:12</div></div>
 <div class="ttc" id="aclass_rect2i_html"><div class="ttname"><a href="class_rect2i.html">Rect2i</a></div><div class="ttdoc">二维矩形, 整型.</div><div class="ttdef"><b>Definition:</b> Rect2i.h:17</div></div>
 <div class="ttc" id="aclass_tile_html"><div class="ttname"><a href="class_tile.html">Tile</a></div><div class="ttdoc">瓦片.</div><div class="ttdef"><b>Definition:</b> Tile.h:13</div></div>
-<div class="ttc" id="aclassclem_1_1_component_html"><div class="ttname"><a href="classclem_1_1_component.html">clem::Component</a></div><div class="ttdoc">组件.</div><div class="ttdef"><b>Definition:</b> Component.h:14</div></div>
-<div class="ttc" id="aclassclem_1_1_sprite_html"><div class="ttname"><a href="classclem_1_1_sprite.html">clem::Sprite</a></div><div class="ttdoc">精灵.</div><div class="ttdef"><b>Definition:</b> Sprite.h:18</div></div>
+<div class="ttc" id="aclassclem_1_1_component_html"><div class="ttname"><a href="classclem_1_1_component.html">clem::Component</a></div><div class="ttdoc">组件.</div><div class="ttdef"><b>Definition:</b> Component.h:12</div></div>
+<div class="ttc" id="aclassclem_1_1_sprite_html"><div class="ttname"><a href="classclem_1_1_sprite.html">clem::Sprite</a></div><div class="ttdoc">精灵.</div><div class="ttdef"><b>Definition:</b> Sprite.h:20</div></div>
 <div class="ttc" id="aclassclem_1_1_sprite_html_a048c33603a646d95416d99c2798bf347"><div class="ttname"><a href="classclem_1_1_sprite.html#a048c33603a646d95416d99c2798bf347">clem::Sprite::drawString</a></div><div class="ttdeci">void drawString(const Point2i &amp;pos, std::wstring_view str, Color color=Color())</div><div class="ttdoc">绘制字符串.</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:108</div></div>
 <div class="ttc" id="aclassclem_1_1_sprite_html_a0d637653e8ee6dd1c7d78b388d661759"><div class="ttname"><a href="classclem_1_1_sprite.html#a0d637653e8ee6dd1c7d78b388d661759">clem::Sprite::drawRect</a></div><div class="ttdeci">void drawRect(const Rect2i &amp;r, const Tile &amp;t)</div><div class="ttdoc">绘制矩形.</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:67</div></div>
 <div class="ttc" id="aclassclem_1_1_sprite_html_a200f9adf6c963ba80681b6eab21a47ce"><div class="ttname"><a href="classclem_1_1_sprite.html#a200f9adf6c963ba80681b6eab21a47ce">clem::Sprite::drawPoint</a></div><div class="ttdeci">void drawPoint(int x, int y, const Tile &amp;t)</div><div class="ttdoc">绘制点.</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:20</div></div>

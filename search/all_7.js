@@ -1,4 +1,11 @@
 var searchData=
 [
-  ['hascomponent_77',['hasComponent',['../classclem_1_1_a_entity.html#a209dba01d63d349d7e7d9b6bde3664f3',1,'clem::AEntity::hasComponent() const'],['../classclem_1_1_a_entity.html#a58bc22da2b623672a9a9ad58b198644d',1,'clem::AEntity::hasComponent() const'],['../classclem_1_1_entity.html#a0e3b994270e2a3814d4bc9d2425c8967',1,'clem::Entity::hasComponent()']]]
+  ['id_81',['id',['../classclem_1_1_entity.html#a9dd27db5d8deb9d37c733e0da9d771fd',1,'clem::Entity']]],
+  ['info_82',['info',['../classclem_1_1_logger.html#adec6d9b40da5287e9e2ef0f61cf4b8d2',1,'clem::Logger']]],
+  ['instrumentationcounter_83',['InstrumentationCounter',['../class_instrumentation_counter.html',1,'']]],
+  ['instrumentor_84',['Instrumentor',['../class_instrumentor.html',1,'']]],
+  ['intersectspoint_85',['intersectsPoint',['../class_rect2.html#a2eca7910a70328c18992e9d70acd0d7c',1,'Rect2']]],
+  ['intersectsrect_86',['intersectsRect',['../class_rect2.html#a93e5a5004886832b5741e9bf3a428e07',1,'Rect2']]],
+  ['isconnected_87',['isConnected',['../classclem_1_1_gamepad.html#a47176a9db935f36e8c82b6c04a88cea3',1,'clem::Gamepad::isConnected()'],['../classclem_1_1_client.html#aae54c38ae878f11b33ece16d36720d41',1,'clem::Client::isConnected()'],['../classclem_1_1_connection.html#a88e28e5451ee7ee32561134039f1a320',1,'clem::Connection::isConnected()']]],
+  ['isvisible_88',['isVisible',['../classclem_1_1_console_window.html#a15881ca6dd2de8886fe1f089286ecb6d',1,'clem::ConsoleWindow::isVisible()'],['../classclem_1_1_window.html#a289b88e0c957233b0084357da2d537c6',1,'clem::Window::isVisible()'],['../classclem_1_1_windows_window.html#ab9d22a98ff805a1451f48c71881e74f3',1,'clem::WindowsWindow::isVisible()']]]
 ];

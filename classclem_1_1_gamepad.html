@@ -126,8 +126,8 @@ Public 类型</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:a44e1405aea0e3460f40d2b4b9f48b169"><td class="memItemLeft" align="right" valign="top"><a id="a44e1405aea0e3460f40d2b4b9f48b169"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Gamepad</b> (short deviceId=0)</td></tr>
+<tr class="memitem:a44e1405aea0e3460f40d2b4b9f48b169"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclem_1_1_gamepad.html#a44e1405aea0e3460f40d2b4b9f48b169">Gamepad</a> (short deviceId=0)</td></tr>
+<tr class="memdesc:a44e1405aea0e3460f40d2b4b9f48b169"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数.  <a href="classclem_1_1_gamepad.html#a44e1405aea0e3460f40d2b4b9f48b169">更多...</a><br /></td></tr>
 <tr class="separator:a44e1405aea0e3460f40d2b4b9f48b169"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65bb62e8614937672490fdaaa5dcb075"><td class="memItemLeft" align="right" valign="top"><a id="a65bb62e8614937672490fdaaa5dcb075"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()</td></tr>
@@ -147,13 +147,60 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:a45404871f63f35910df0aa4c74831506"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclem_1_1_gamepad.html#a45404871f63f35910df0aa4c74831506">setVibration</a> (uint16_t left, uint16_t right)</td></tr>
 <tr class="memdesc:a45404871f63f35910df0aa4c74831506"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置震动反馈.  <a href="classclem_1_1_gamepad.html#a45404871f63f35910df0aa4c74831506">更多...</a><br /></td></tr>
 <tr class="separator:a45404871f63f35910df0aa4c74831506"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47176a9db935f36e8c82b6c04a88cea3"><td class="memItemLeft" align="right" valign="top"><a id="a47176a9db935f36e8c82b6c04a88cea3"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isConnected</b> () const</td></tr>
+<tr class="memitem:a47176a9db935f36e8c82b6c04a88cea3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclem_1_1_gamepad.html#a47176a9db935f36e8c82b6c04a88cea3">isConnected</a> () const</td></tr>
+<tr class="memdesc:a47176a9db935f36e8c82b6c04a88cea3"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取手柄连接状态.  <a href="classclem_1_1_gamepad.html#a47176a9db935f36e8c82b6c04a88cea3">更多...</a><br /></td></tr>
 <tr class="separator:a47176a9db935f36e8c82b6c04a88cea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
 <div class="textblock"><p>游戏手柄. </p>
-</div><h2 class="groupheader">成员函数说明</h2>
+</div><h2 class="groupheader">构造及析构函数说明</h2>
+<a id="a44e1405aea0e3460f40d2b4b9f48b169"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44e1405aea0e3460f40d2b4b9f48b169">&#9670;&nbsp;</a></span>Gamepad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">clem::Gamepad::Gamepad </td>
+          <td>(</td>
+          <td class="paramtype">short&#160;</td>
+          <td class="paramname"><em>deviceId</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构造函数. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">deviceId</td><td>手柄设备 ID. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="a47176a9db935f36e8c82b6c04a88cea3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47176a9db935f36e8c82b6c04a88cea3">&#9670;&nbsp;</a></span>isConnected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool clem::Gamepad::isConnected </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取手柄连接状态. </p>
+<dl class="section warning"><dt>警告</dt><dd>连接状态来源于最后一次更新. </dd></dl>
+
+</div>
+</div>
 <a id="a45404871f63f35910df0aa4c74831506"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a45404871f63f35910df0aa4c74831506">&#9670;&nbsp;</a></span>setVibration()</h2>
 
