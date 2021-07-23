@@ -11,7 +11,7 @@ namespace clem
 {
 
 /**
- * @brief 终端窗口.
+ * @brief 窗口.
  */
 class WindowsWindow : public Window
 {
@@ -44,9 +44,42 @@ public:
 	void setTitle(const std::string& title) override;
 
 	/**
-	 * @brief 获取终端可见缓冲区大小, 单位: 字符.
+	 * @brief 设置窗口大小.
 	 */
-	Size2i getVisibleSize() override;
+	void setSize(Size2i size) override;
+
+	/**
+	 * @brief 获取窗口大小.
+	 */
+	Size2i getSize() override;
+
+	/**
+	 * @brief 设置窗口坐标.
+	 * 
+	 * @param pos 新窗口坐标.
+	 */
+	void setPosition(Size2i pos) override;
+
+	/**
+	 * @brief 获取窗口坐标.
+	 * 
+	 * @return 当前窗口坐标.
+	 */
+	Size2i getPosition() override;
+
+	/**
+	 * @brief 设置窗口可见性.
+	 * 
+	 * @param visible true 为可见, false 为不可见.
+	 */
+	void setVisible(bool visible) override;
+
+	/**
+	 * @brief 获取窗口可见性.
+	 * 
+	 * @return true 为可见, false 为不可见.
+	 */
+	bool isVisible() override;
 
 	static void init();
 	static void deinit();

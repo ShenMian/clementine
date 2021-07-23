@@ -64,6 +64,7 @@ WindowsWindow::~WindowsWindow()
 
 void WindowsWindow::update()
 {
+	glfwSwapBuffers(handle);
 	glfwPollEvents();
 }
 
@@ -72,16 +73,47 @@ void WindowsWindow::setTitle(const string& title)
 	glfwSetWindowTitle(handle, title.c_str());
 }
 
-Size2i WindowsWindow::getVisibleSize()
+void WindowsWindow::setSize(Size2i size)
+{
+	glfwSetWindowSize(handle, size.x, size.y);
+}
+
+Size2i WindowsWindow::getSize()
 {
 	Size2i size;
 	glfwGetWindowSize(handle, &size.x, &size.y);
 	return size;
 }
 
+void WindowsWindow::setPosition(Size2i size)
+{
+	glfwSetWindowPos(handle, size.x, size.y);
+}
+
+Size2i WindowsWindow::getPosition()
+{
+	Size2i size;
+	glfwGetWindowPos(handle, &size.x, &size.y);
+	return size;
+}
+
+void WindowsWindow::setVisible(bool visible)
+{
+	if(visible)
+		glfwShowWindow(handle);
+	else
+		glfwHideWindow(handle);
+}
+
+bool WindowsWindow::isVisible()
+{
+	return glfwGetWindowAttrib(handle, GLFW_VISIBLE);
+}
+
 void WindowsWindow::init()
 {
-	glfwInit();
+	auto success = glfwInit();
+	assert(success);
 }
 
 void WindowsWindow::deinit()

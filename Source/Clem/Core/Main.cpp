@@ -187,28 +187,22 @@ void Main::init()
 	// std::setlocale(LC_ALL, "");
 	std::signal(SIGINT, Main::onSignal);
 
-	// 初始化窗口
-	Window::init();
-	// window = new ConsoleWindow("Clementine", {80, 25});
-	window = new WindowsWindow("Clementine", {1920 / 2, 1080 / 2});
-
-	window->onResize = [](Size2i size) {
-		auto t = size;
-	};
-	window->onClose = []() {
-		auto t = 0;
-	};
+	// 初始化日志系统
+	Logger::create("core");
+	Logger::create("audio");
+	Logger::create("assert");
+	Logger::create("networking");
 
 	// 初始化 ECS, 添加默认系统
 	registry.addSystem(new PhysicsSystem());
 	registry.addSystem(new RenderSystem());
 	registry.addSystem(new ScriptSystem());
 
-	// 初始化日志系统
-	Logger::create("core");
-	Logger::create("audio");
-	Logger::create("assert");
-	Logger::create("networking");
+	// 初始化窗口
+	Window::init();
+	// window = new ConsoleWindow("Clementine", {80, 25});
+	window          = new WindowsWindow("Clementine", {1920 / 2, 1080 / 2});
+	window->onClose = []() { Main::running = false; };
 
 	// 初始化 I/O
 	Audio::init();

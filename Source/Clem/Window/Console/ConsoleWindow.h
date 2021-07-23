@@ -38,9 +38,38 @@ public:
 	void setTitle(const std::string& title) override;
 
 	/**
-	 * @brief 获取终端可见缓冲区大小, 单位: 字符.
+	 * @brief 设置终端缓冲区大小, 单位: 字符.
+	 * 
+	 * @warn 不影响终端窗口大小.
 	 */
-	Size2i getVisibleSize() override;
+	void setSize(Size2i size) override;
+
+	/**
+	 * @brief 获取终端缓冲区大小, 单位: 字符.
+	 * 
+	 * @warn 不代表终端窗口大小.
+	 */
+	Size2i getSize() override;
+
+	/**
+	 * @brief 终端窗口不支持.
+	 */
+	void setPosition(Size2i pos) override;
+
+	/**
+	 * @brief 终端窗口不支持.
+	 */
+	Size2i getPosition() override;
+
+	/**
+	 * @brief 终端窗口不支持.
+	 */
+	void setVisible(bool visible) override;
+
+	/**
+	 * @brief 终端窗口不支持.
+	 */
+	bool isVisible() override;
 
 	static void init();
 	static void deinit();

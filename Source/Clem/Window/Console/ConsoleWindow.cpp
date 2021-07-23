@@ -13,7 +13,7 @@ namespace clem
 {
 
 ConsoleWindow::ConsoleWindow(std::string title, Size2i size)
-		: size(getVisibleSize())
+		: size(getSize())
 {
 	setTitle(title);
 	Output::get().setSize(size);
@@ -21,11 +21,34 @@ ConsoleWindow::ConsoleWindow(std::string title, Size2i size)
 
 void ConsoleWindow::update()
 {
-	auto newSize = getVisibleSize();
+	auto newSize = getSize();
 	if(newSize == size)
 		return;
 	size = newSize;
-	onResize(size);
+	setSize(size);
+	if(onResize)
+		onResize(size);
+}
+
+void ConsoleWindow::setPosition(Size2i size)
+{
+	assert(false);
+}
+
+Size2i ConsoleWindow::getPosition()
+{
+	assert(false);
+	return Size2i();
+}
+
+void ConsoleWindow::setVisible(bool visible)
+{
+	assert(false);
+}
+
+bool ConsoleWindow::isVisible()
+{
+	return true;
 }
 
 // width / height = 80 / 25 => width * 25 = height * 80
@@ -41,7 +64,7 @@ void ConsoleWindow::setTitle(const string& title)
 	std::printf("\033]0;%s\007", title.c_str());
 }
 
-Size2i ConsoleWindow::getVisibleSize()
+Size2i ConsoleWindow::getSize()
 {
 	winsize size;
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &size);
@@ -65,8 +88,16 @@ void ConsoleWindow::setTitle(const string& title)
 	SetConsoleTitleA(title.c_str());
 }
 
-Size2i ConsoleWindow::getVisibleSize()
+void ConsoleWindow::setSize(Size2i size)
 {
+	Output::get().setSize(size);
+}
+
+Size2i ConsoleWindow::getSize()
+{
+	return Output::get().getSize();
+
+	/*
 	const auto hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	CONSOLE_SCREEN_BUFFER_INFO screenInfo;
@@ -74,6 +105,7 @@ Size2i ConsoleWindow::getVisibleSize()
 	if(!ret)
 		assert(false);
 	return Size2i(screenInfo.srWindow.Right + 1, screenInfo.srWindow.Bottom + 1);
+	*/
 }
 
 void ConsoleWindow::init()
