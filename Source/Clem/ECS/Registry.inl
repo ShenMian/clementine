@@ -1,6 +1,8 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
+#include "Entity.h"
+
 namespace clem
 {
 
@@ -23,6 +25,7 @@ inline void Registry::each(std::function<void(const Entity&, Com&)> func)
 	});
 }
 
+// FIXME: 更改 Chunk 却没有把组件移动过去
 template <typename Com, typename... Args>
 inline Com& Registry::addComponent(const Entity& e, Args&&... args)
 {
@@ -30,14 +33,17 @@ inline Com& Registry::addComponent(const Entity& e, Args&&... args)
 	auto& chunk    = entities[e.id()].chunk;
 
 	archtype.add<Com>();
+	/*
 	auto it = chunks.find(archtype);
 	if(it == chunks.end())
 	{
-		chunk = allocator.allocate(1);
+		chunk = new Chunk;
+		// chunk = allocator.allocate(1);
 		chunks.emplace(archtype, chunk);
 	}
 	else
 		chunk = it->second;
+	*/
 
 	return chunk->addComponent<Com>(e, std::forward<Args>(args)...);
 }
@@ -50,19 +56,24 @@ inline void Registry::removeComponent(const Entity& e)
 
 	chunk.removeComponent<Com>(e);
 
+	/*
 	auto it = chunks.find(archtype);
 	if(it->second->empty())
 	{
-		allocator.deallocate(it->second, 1);
+		delete it->second;
+		// allocator.deallocate(it->second, 1);
 		chunks.erase(it);
 	}
+	*/
 
 	archtype.remove<Com>();
+	/*
 	it = chunks.find(archtype);
 	if(it == chunks.end())
 		chunk = chunks.emplace(archtype, allocator.allocate(1)); // 申请新的 Chunk
 	else
 		chunk = it->second;
+	*/
 }
 
 template <typename Com>

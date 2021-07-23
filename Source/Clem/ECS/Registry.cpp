@@ -91,11 +91,6 @@ void Registry::disableSystem(System* system)
 	disabledSystems.push_back(system);
 }
 
-[[nodiscard]] Chunk& Registry::getChunk(const Entity& e) const
-{
-	return *entities[e.id()].chunk;
-}
-
 [[nodiscard]] id_type Registry::requestId()
 {
 	id_type id;

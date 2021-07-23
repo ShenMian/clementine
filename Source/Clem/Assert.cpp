@@ -19,7 +19,7 @@ void Assert::isTrue(bool expr, const char* file, const char* func, unsigned int 
 				 "- func: %s\n"
 				 "- line: %u\n",
 				 file, func, line);
-	// breakpoint();
+	breakpoint();
 	CLEM_LOG_FATAL("assert", "Assertion failed: file: {}, line: {}", file, line);
 }
 
@@ -34,7 +34,7 @@ void Assert::isTrue(bool expr, const string_view& msg, const char* file, const c
 				 "- func:    %s\n"
 				 "- line:    %u\n",
 				 string(msg).c_str(), file, func, line);
-	// breakpoint();
+	breakpoint();
 	CLEM_LOG_FATAL("assert", "Assertion failed: message: '{}', file: {}, line: {}", msg, file, line);
 }
 

@@ -6,6 +6,8 @@
 #include <set>
 #include <typeindex>
 
+// TODO: Avoid RTTI
+
 namespace clem
 {
 

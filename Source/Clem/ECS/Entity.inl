@@ -2,11 +2,12 @@
 // License(Apache-2.0)
 
 #include "Clem/Assert.h"
-#include "Registry.h"
 #include <string>
 
 namespace clem
 {
+
+class Registry;
 
 template <typename T, typename... Args>
 inline T& Entity::add(Args&&... args)

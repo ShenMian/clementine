@@ -39,34 +39,35 @@ private:
 	size_t                            size;
 	std::array<std::byte, chunk_size> buffer;
 
-	std::map<Entity, std::unordered_map<TypeIndex, std::any>> components;
+	std::unordered_map<id_type, std::unordered_map<TypeIndex, std::any>> components;
 };
 
 template <typename Com, typename... Args>
 inline Com& Chunk::addComponent(const Entity& e, Args&&... args)
 {
-	components[e][Typeid<Com>()] = Com(args...);
+	components[e.id()][Typeid<Com>()] = Com(args...);
 	size++;
-	return std::any_cast<Com&>(components[e][Typeid<Com>()]);
+	return std::any_cast<Com&>(components[e.id()][Typeid<Com>()]);
 }
 
 template <typename Com>
 inline void Chunk::removeComponent(const Entity& e)
 {
-	components[e][Typeid<Com>()].reset();
+	components[e.id()][Typeid<Com>()].reset();
 	size--;
 }
 
 template <typename Com>
 [[nodiscard]] inline Com& Chunk::getComponent(const Entity& e)
 {
-	return std::any_cast<Com&>(components[e][Typeid<Com>()]);
+	assert(components[e.id()][Typeid<Com>()].has_value());
+	return std::any_cast<Com&>(components[e.id()][Typeid<Com>()]);
 }
 
 template <typename Com>
 [[nodiscard]] inline bool Chunk::hasComponent(const Entity& e)
 {
-	return components[e][Typeid<Com>()].has_value();
+	return components[e.id()][Typeid<Com>()].has_value();
 }
 
 } // namespace clem

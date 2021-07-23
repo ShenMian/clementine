@@ -4,8 +4,7 @@
 #pragma once
 
 #include "Archtype.h"
-#include "Chunk.h"
-#include "Entity.h"
+#include "Chunk.h" // FIXME: incude Entity -> include Registry
 #include <functional>
 #include <map>
 #include <memory_resource>
@@ -16,13 +15,14 @@
 namespace clem
 {
 
+class Entity;
 class System;
 
 struct EntityInfo
 {
 	Archtype     archtype;
-	Chunk*       chunk   = nullptr;
 	version_type version = 0;
+	Chunk*       chunk   = nullptr;
 };
 
 class Registry
@@ -35,7 +35,7 @@ public:
 
 	/**
 	 * @brief 创建带有指定 Tag 组件的实体.
-	 * 
+	 *
 	 * @param tag Tag 组件的字符串.
 	 */
 	Entity create(const std::string& tag);
@@ -47,7 +47,7 @@ public:
 
 	/**
 	 * @brief 获取带有指定 Tag 组件的实体.
-	 * 
+	 *
 	 * @param tag Tag 组件的字符串.
 	 */
 	Entity get(const std::string& tag);
@@ -161,8 +161,6 @@ private:
 
 	id_type requestId();
 	void    recycleId(id_type);
-
-	Chunk& getChunk(const Entity&) const;
 };
 
 } // namespace clem
