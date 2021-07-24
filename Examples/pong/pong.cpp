@@ -9,14 +9,57 @@
 using namespace std;
 using namespace clem;
 
-class MyLayer : public Layer
+class DevMenu : public Layer
 {
 public:
 	void update(Time dt) override
 	{
-		ImGui::Begin("Dev Menu");
-		ImGui::End();
+		if(flag)
+		{
+			ImGui::Begin("Dev Menu", &flag);
+
+			if(ImGui::BeginMenu("Rendering"))
+			{
+				ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
+				ImGui::EndMenu();
+			}
+
+			if(ImGui::BeginMenu("Entities"))
+			{
+				ImGui::Text("ID    Tag        Position");
+				Main::registry.all([](const auto& e) {
+					ImGui::Text("%-5d", e.id());
+					ImGui::SameLine();
+					if(e.anyOf<Tag>())
+						ImGui::Text("%-10s", e.get<Tag>().str.c_str());
+					else
+						ImGui::Text("(null)    ");
+					ImGui::SameLine();
+					if(e.anyOf<Transform>())
+						ImGui::Text("%-4.1f, %-4.1f", e.get<Transform>().getWorldPosition().x, e.get<Transform>().getWorldPosition().y);
+					else
+						ImGui::Text("(null)    ");
+				});
+				ImGui::EndMenu();
+			}
+
+			if(ImGui::BeginMenu("Profile"))
+			{
+				if(ImGui::MenuItem("Start", "Start profiling"))
+				{
+				}
+				if(ImGui::MenuItem("Stop", "Stop profiling"))
+				{
+				}
+				ImGui::EndMenu();
+			}
+			
+			ImGui::End();
+		}
 	}
+
+private:
+	bool flag = true;
 };
 
 // TODO: 碰撞检测: 乒乓球反弹, 约束球拍
@@ -31,7 +74,7 @@ public:
 
 	void init() override
 	{
-		Main::getMainWindow()->add(new MyLayer);
+		Main::getMainWindow()->add(new DevMenu);
 
 		// 加载音频文件
 		pop.loadFromFile("assets/pop.wav");

@@ -4,7 +4,7 @@
 #include "WindowBase.h"
 #include "Clem/GUI/GUI.h"
 #include "Clem/Platform.h"
-#include "Console/ConsoleWindow.h"
+#include "ConsoleWindow.h"
 #include "Window.h"
 #include <cassert>
 
@@ -44,7 +44,7 @@ void WindowBase::init()
 #if defined(USE_CONSOLE)
 	ConsoleWindow::init();
 #else
-	Window::init();
+	GlfwWindow::init();
 #endif
 
 	initialized = true;
@@ -57,7 +57,7 @@ void WindowBase::deinit()
 #if defined(USE_CONSOLE)
 	ConsoleWindow::deinit();
 #else
-	Window::deinit();
+	GlfwWindow::deinit();
 #endif
 
 	initialized = false;

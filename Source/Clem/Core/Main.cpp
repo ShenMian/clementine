@@ -7,14 +7,12 @@
 #include "Clem/Assert.h"
 #include "Clem/Audio/Audio.h"
 #include "Clem/Components/ScriptSystem.h"
-#include "Clem/Core/Input/Keyboard.h"
-#include "Clem/Core/Input/Mouse.h"
+#include "Clem/Core/Core.h"
 #include "Clem/ECS/Registry.h"
 #include "Clem/Logger.h"
 #include "Clem/Physics/Physics.h"
 #include "Clem/Profiler.h"
 #include "Clem/Rendering/Rendering.h"
-#include "Clem/Window/Console/ConsoleWindow.h"
 #include "Clem/Window/Window.h"
 #include <csignal>
 #include <map>
@@ -26,7 +24,7 @@ using clem::Main;
 int main(int argc, char* argv[])
 {
 	Main::init();
-	const auto ret = Main::main(argc, argv);
+	auto ret = Main::main(argc, argv);
 	Main::deinit();
 	return ret;
 }
@@ -137,7 +135,7 @@ void Main::update(uint16_t dt)
 void Main::render(uint16_t dt)
 {
 	PROFILE_FUNC();
-
+	
 	static uint16_t lag = 0;
 	lag += dt;
 	if(lag >= msPerRender)
@@ -220,7 +218,7 @@ void Main::init()
 	// 初始化窗口
 	WindowBase::init();
 	// window = new ConsoleWindow("Clementine", {80, 25});
-	window          = new Window("Clementine", {1920 / 2, 1080 / 2});
+	window          = new GlfwWindow("Clementine", {1920 / 2, 1080 / 2});
 	window->onClose = []() { Main::running = false; };
 
 	// 初始化 I/O

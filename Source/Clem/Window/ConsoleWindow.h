@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Window/WindowBase.h"
+#include "WindowBase.h"
 
 namespace clem
 {

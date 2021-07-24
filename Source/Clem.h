@@ -12,12 +12,10 @@
 #include "Clem/Networking/Networking.h"
 #include "Clem/Physics/Physics.h"
 #include "Clem/Rendering/Rendering.h"
+#include "Clem/Window/Window.h"
 
 #include "Clem/Assert.h"
 #include "Clem/Logger.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
 #include "Clem/Random.h"
-
-#include "Clem/Window/Console/ConsoleWindow.h"
-#include "Clem/Window/Window.h"

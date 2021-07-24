@@ -18,8 +18,6 @@ public:
 
 	void init() override
 	{
-		pushScene(scene);
-
 		auto entity = Main::registry.create();
 		entity.add<Transform>();
 		entity.get<Transform>().setPosition({1, 1});
@@ -83,7 +81,6 @@ private:
 	Color             green = Color(Color::green, Color::green);
 	Color             blue  = Color(Color::blue, Color::blue);
 	Color             red   = Color(Color::red, Color::red);
-	shared_ptr<Scene> scene = make_shared<Scene>();
 };
 
 Application* clem::CreateApplication()

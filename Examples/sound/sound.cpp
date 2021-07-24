@@ -56,7 +56,7 @@ private:
 	Sound             Sound;
 	Source            source;
 	Random            random;
-	Size2i            size  = Window::getSize();
+	Size2i            size  = GlfwWindow::getSize();
 	shared_ptr<Scene> scene = make_shared<Scene>();
 };
 

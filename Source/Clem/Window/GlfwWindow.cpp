@@ -1,26 +1,29 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "Window.h"
+#include "GlfwWindow.h"
 #include "Clem/Events/Events.h"
 #include "Clem/GUI/GUI.h"
 #include "Clem/Platform.h"
+#include "Clem/Profiler.h"
 #include <cassert>
 #include <cstdio>
 #include <glad/glad.h>
 #include <glfw/glfw3.h>
 
-#include <imgui/imgui.h>
 #include <imgui/backends/imgui_impl_glfw.h>
 #include <imgui/backends/imgui_impl_opengl3.h>
+#include <imgui/imgui.h>
 
 using std::string;
 
 namespace clem
 {
 
-Window::Window(std::string title, Size2i size)
+GlfwWindow::GlfwWindow(std::string title, Size2i size)
 {
+	PROFILE_FUNC();
+
 	handle = glfwCreateWindow(size.x, size.y, title.c_str(), nullptr, nullptr);
 	glfwMakeContextCurrent(handle);
 
@@ -35,13 +38,13 @@ Window::Window(std::string title, Size2i size)
 	});
 
 	glfwSetWindowSizeCallback(handle, [](GLFWwindow* native, int width, int height) {
-		auto win = static_cast<Window*>(glfwGetWindowUserPointer(native));
+		auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
 		if(win->onResize)
 			win->onResize({width, height});
 	});
 
 	glfwSetWindowCloseCallback(handle, [](GLFWwindow* native) {
-		auto win = static_cast<Window*>(glfwGetWindowUserPointer(native));
+		auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
 		if(win->onClose)
 			win->onClose();
 	});
@@ -71,49 +74,54 @@ Window::Window(std::string title, Size2i size)
 	ImGui_ImplOpenGL3_Init("#version 410");
 }
 
-Window::~Window()
+GlfwWindow::~GlfwWindow()
 {
 	glfwMakeContextCurrent(handle);
 	glfwDestroyWindow(handle);
 }
 
-void Window::update(Time dt)
+void GlfwWindow::update(Time dt)
 {
+	PROFILE_FUNC();
+
+	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+
 	renderGui(dt);
 	glfwSwapBuffers(handle);
 	glfwPollEvents();
 }
 
-void Window::setTitle(const string& title)
+void GlfwWindow::setTitle(const string& title)
 {
 	glfwSetWindowTitle(handle, title.c_str());
 }
 
-void Window::setSize(Size2i size)
+void GlfwWindow::setSize(Size2i size)
 {
 	glfwSetWindowSize(handle, size.x, size.y);
 }
 
-Size2i Window::getSize()
+Size2i GlfwWindow::getSize()
 {
 	Size2i size;
 	glfwGetWindowSize(handle, &size.x, &size.y);
 	return size;
 }
 
-void Window::setPosition(Size2i size)
+void GlfwWindow::setPosition(Size2i size)
 {
 	glfwSetWindowPos(handle, size.x, size.y);
 }
 
-Size2i Window::getPosition()
+Size2i GlfwWindow::getPosition()
 {
 	Size2i size;
 	glfwGetWindowPos(handle, &size.x, &size.y);
 	return size;
 }
 
-void Window::setVisible(bool visible)
+void GlfwWindow::setVisible(bool visible)
 {
 	if(visible)
 		glfwShowWindow(handle);
@@ -121,12 +129,12 @@ void Window::setVisible(bool visible)
 		glfwHideWindow(handle);
 }
 
-bool Window::isVisible()
+bool GlfwWindow::isVisible()
 {
 	return glfwGetWindowAttrib(handle, GLFW_VISIBLE);
 }
 
-void Window::init()
+void GlfwWindow::init()
 {
 	auto success = glfwInit();
 	assert(success);
@@ -134,15 +142,17 @@ void Window::init()
 	GUI::init();
 }
 
-void Window::deinit()
+void GlfwWindow::deinit()
 {
 	GUI::deinit();
 
 	glfwTerminate();
 }
 
-void Window::renderGui(Time dt)
+void GlfwWindow::renderGui(Time dt)
 {
+	PROFILE_FUNC();
+
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
@@ -151,8 +161,6 @@ void Window::renderGui(Time dt)
 		layer->update(dt);
 
 	ImGui::Render();
-	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
