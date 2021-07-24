@@ -59,6 +59,7 @@ private:
 	int16_t              channelCount;
 	int16_t              bitsPerSample;
 	unsigned int         bufferId;
+	bool                 initialized = false;
 
 	/**
 	 * 从 WAV 文件载入声音.

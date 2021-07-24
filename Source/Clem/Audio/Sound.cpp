@@ -4,6 +4,7 @@
 #include "Sound.h"
 #include "AL/alext.h"
 #include "Clem/Profiler.h"
+#include <cassert>
 #include <fstream>
 
 namespace fs = std::filesystem;
@@ -41,35 +42,43 @@ void Sound::loadFromFile(const fs::path& path)
 		loadWavFile(path);
 	else
 		return; // unsupported file extension
+
+	initialized = true;
 }
 
 const uint8_t* Sound::getSamples() const
 {
+	assert(initialized);
 	return samples.data();
 }
 
 size_t Sound::getSampleCount() const
 {
+	assert(initialized);
 	return samples.size() * 8 / bitsPerSample;
 }
 
 unsigned int Sound::getSampleRate() const
 {
+	assert(initialized);
 	return sampleRate;
 }
 
 unsigned int Sound::getChannelCount() const
 {
+	assert(initialized);
 	return channelCount;
 }
 
 size_t Sound::getTime() const
 {
+	assert(initialized);
 	return getSampleCount() / (getChannelCount() * getSampleRate());
 }
 
 int32_t Sound::getBufferId() const
 {
+	assert(initialized);
 	return bufferId;
 }
 
