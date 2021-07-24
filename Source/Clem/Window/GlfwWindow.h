@@ -25,7 +25,7 @@ public:
 	 * @param title 窗口标题.
 	 * @param size 窗口大小.
 	 */
-	GlfwWindow(std::string title, Size2i size);
+	GlfwWindow(const std::string& title, Size2i size);
 
 	/**
 	 * @brief 默认析构函数.

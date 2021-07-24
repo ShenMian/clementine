@@ -23,7 +23,7 @@ namespace clem
 
 static unsigned int vertexArray, vertexBuffer, indexBuffer;
 
-GlfwWindow::GlfwWindow(std::string title, Size2i size)
+GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 {
 	PROFILE_FUNC();
 

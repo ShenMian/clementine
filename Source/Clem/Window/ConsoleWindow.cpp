@@ -12,7 +12,7 @@ using std::string;
 namespace clem
 {
 
-ConsoleWindow::ConsoleWindow(std::string title, Size2i size)
+ConsoleWindow::ConsoleWindow(const std::string& title, Size2i size)
 		: size(getSize())
 {
 	setTitle(title);

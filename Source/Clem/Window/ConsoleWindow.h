@@ -20,7 +20,7 @@ public:
 	 * @param title 窗口标题.
 	 * @param size 可绘制区域大小, 不一定等于窗口大小.
 	 */
-	ConsoleWindow(std::string title, Size2i size);
+	ConsoleWindow(const std::string& title, Size2i size);
 
 	/**
 	 * @brief 更新.
