@@ -6,7 +6,7 @@
 #include "Clem/GUI/GUI.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
-#include "Clem/Rendering/Rendering.h"
+#include "Clem/Rendering/OpenGL/OpenGLShader.h"
 #include <cassert>
 #include <cstdio>
 #include <glad/glad.h>
@@ -96,7 +96,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 		}
 	)";
 
-	shader = std::make_unique<Shader>(vertexSrc, fregmentSrc);
+	shader = std::make_unique<OpenGLShader>(vertexSrc, fregmentSrc);
 
 	glGenVertexArrays(1, &vertexArray);
 	glBindVertexArray(vertexArray);
@@ -139,7 +139,7 @@ void GlfwWindow::update(Time dt)
 {
 	PROFILE_FUNC();
 
-	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	glClearColor(30.0f / 255, 144.0f / 255, 255.0f / 255, 1.0f); // 湖蓝色
 	glClear(GL_COLOR_BUFFER_BIT);
 	// shader->bind();
 

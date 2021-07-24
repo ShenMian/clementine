@@ -1,7 +1,7 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "Shader.h"
+#include "OpenGLShader.h"
 #include <cassert>
 #include <glad/glad.h>
 #include <vector>
@@ -9,7 +9,7 @@
 namespace clem
 {
 
-Shader::Shader(const std::string& vertexSrc, const std::string& fragmentSrc)
+OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
 {
 	// Create an empty vertex shader handle
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -105,12 +105,12 @@ Shader::Shader(const std::string& vertexSrc, const std::string& fragmentSrc)
 	glDetachShader(program, fragmentShader);
 }
 
-Shader::~Shader()
+OpenGLShader::~OpenGLShader()
 {
 	glDeleteProgram(program);
 }
 
-void Shader::bind()
+void OpenGLShader::bind()
 {
 	glUseProgram(program);
 }
