@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -30,119 +30,126 @@ class Registry
 {
 public:
 	/**
-	 * @brief ´´½¨ÊµÌå.
+	 * @brief åˆ›å»ºå®ä½“.
 	 */
 	Entity create();
 
 	/**
-	 * @brief ´´½¨´øÓĞÖ¸¶¨ Tag ×é¼şµÄÊµÌå.
+	 * @brief åˆ›å»ºå¸¦æœ‰æŒ‡å®š Tag ç»„ä»¶çš„å®ä½“.
 	 *
-	 * @param tag Tag ×é¼şµÄ×Ö·û´®.
+	 * @param tag Tag ç»„ä»¶çš„å­—ç¬¦ä¸².
 	 */
 	Entity create(const std::string& tag);
 
 	/**
-	 * @brief Ïú»ÙÊµÌå.
+	 * @brief é”€æ¯å®ä½“.
 	 */
 	void destroy(const Entity&);
 
 	/**
-	 * @brief »ñÈ¡´øÓĞÖ¸¶¨ Tag ×é¼şµÄÊµÌå.
+	 * @brief è·å–å¸¦æœ‰æŒ‡å®š Tag ç»„ä»¶çš„å®ä½“.
 	 *
-	 * @param tag Tag ×é¼şµÄ×Ö·û´®.
+	 * @param tag Tag ç»„ä»¶çš„å­—ç¬¦ä¸².
 	 */
 	Entity get(const std::string& tag);
 
 	/**
-	 * @brief »ñÈ¡ÊµÌåÊıÁ¿.
+	 * @brief è·å–å®ä½“æ•°é‡.
 	 */
 	size_t getSize() const;
 
 	/**
-	 * @brief ±éÀú¾ßÓĞÖ¸¶¨×é¼şµÄÊµÌå.
+	 * @brief éå†å…¨éƒ¨å®ä½“.
 	 *
-	 * @param func ±éÀúÊ±½«µ÷ÓÃµÄº¯Êı, ²ÎÊıÎªÊµÌå.
+	 * @param func éå†æ—¶å°†è°ƒç”¨çš„å‡½æ•°, å‚æ•°ä¸ºå®ä½“.
+	 */
+	void all(std::function<void(const Entity&)> func);
+
+	/**
+	 * @brief éå†å…·æœ‰æŒ‡å®šç»„ä»¶çš„å®ä½“.
+	 *
+	 * @param func éå†æ—¶å°†è°ƒç”¨çš„å‡½æ•°, å‚æ•°ä¸ºå®ä½“.
 	 */
 	template <typename Com>
 	void each(std::function<void(const Entity&)> func);
 
 	/**
-	 * @brief ±éÀú¾ßÓĞÖ¸¶¨×é¼şµÄÊµÌå.
+	 * @brief éå†å…·æœ‰æŒ‡å®šç»„ä»¶çš„å®ä½“.
 	 *
-	 * @param func ±éÀúÊ±½«µ÷ÓÃµÄº¯Êı, ²ÎÊıÎªÊµÌåºÍ×é¼ş.
+	 * @param func éå†æ—¶å°†è°ƒç”¨çš„å‡½æ•°, å‚æ•°ä¸ºå®ä½“å’Œç»„ä»¶.
 	 */
 	template <typename Com>
 	void each(std::function<void(const Entity&, Com&)> func);
 
 	/**
-	 * @brief ¸üĞÂÏµÍ³.
+	 * @brief æ›´æ–°ç³»ç»Ÿ.
 	 */
 	void update(Time dt);
 
 	/**
-	 * @brief Ìí¼ÓÏµÍ³.
+	 * @brief æ·»åŠ ç³»ç»Ÿ.
 	 */
 	void addSystem(System*);
 
 	/**
-	 * @brief ÒÆ³ıÏµÍ³.
+	 * @brief ç§»é™¤ç³»ç»Ÿ.
 	 */
 	void removeSystem(System*);
 
 	/**
-	 * @brief ÆôÓÃÏµÍ³.
+	 * @brief å¯ç”¨ç³»ç»Ÿ.
 	 */
 	void enableSystem(System*);
 
 	/**
-	 * @brief ½ûÓÃÏµÍ³.
+	 * @brief ç¦ç”¨ç³»ç»Ÿ.
 	 */
 	void disableSystem(System*);
 
 	/**
-	 * @brief Ìí¼Ó×é¼ş.
+	 * @brief æ·»åŠ ç»„ä»¶.
 	 */
 	template <typename Com, typename... Args>
 	Com& addComponent(const Entity&, Args&&...);
 
 	/**
-	 * @brief ÒÆ³ı×é¼ş.
+	 * @brief ç§»é™¤ç»„ä»¶.
 	 */
 	template <typename Com>
 	void removeComponent(const Entity&);
 
 	/**
-	 * @brief »ñÈ¡×é¼ş.
+	 * @brief è·å–ç»„ä»¶.
 	 */
 	template <typename Com>
 	Com& getComponent(const Entity&);
 
 	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñÓĞÖ¸¶¨µÄÈ«²¿×é¼ş.
+	 * @brief åˆ¤æ–­æ˜¯å¦æœ‰æŒ‡å®šçš„å…¨éƒ¨ç»„ä»¶.
 	 *
-	 * @param entity Òª¼ì²âµÄÊµÌå.
+	 * @param entity è¦æ£€æµ‹çš„å®ä½“.
 	 */
 	template <typename... Coms>
 	bool allOf(const Entity& entity) const;
 
 	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñÓĞÖ¸¶¨µÄÈÎÒâ×é¼ş.
+	 * @brief åˆ¤æ–­æ˜¯å¦æœ‰æŒ‡å®šçš„ä»»æ„ç»„ä»¶.
 	 *
-	 * @param entity Òª¼ì²âµÄÊµÌå.
+	 * @param entity è¦æ£€æµ‹çš„å®ä½“.
 	 */
 	template <typename... Coms>
 	bool anyOf(const Entity& entity) const;
 
 	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñÃ»ÓĞÖ¸¶¨µÄÈÎºÎ×é¼ş.
+	 * @brief åˆ¤æ–­æ˜¯å¦æ²¡æœ‰æŒ‡å®šçš„ä»»ä½•ç»„ä»¶.
 	 *
-	 * @param entity Òª¼ì²âµÄÊµÌå.
+	 * @param entity è¦æ£€æµ‹çš„å®ä½“.
 	 */
 	template <typename... Coms>
 	bool noneOf(const Entity& entity) const;
 
 	/**
-	 * @brief ÅĞ¶ÏÊµÌåÊÇ·ñÓĞĞ§.
+	 * @brief åˆ¤æ–­å®ä½“æ˜¯å¦æœ‰æ•ˆ.
 	 */
 	bool valid(const Entity&) const;
 

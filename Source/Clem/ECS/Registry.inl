@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Entity.h"
@@ -9,12 +9,10 @@ namespace clem
 template <typename Com>
 inline void Registry::each(std::function<void(const Entity&)> func)
 {
-	for(id_type i = 0; i < entities.size(); i++)
-	{
-		Entity entity(i, entities[i].version, *this);
-		if(valid(entity) && allOf<Com>(entity))
+	all([&](const Entity& entity) {
+		if(entity.valid() && entity.anyOf<Com>())
 			func(entity);
-	}
+	});
 }
 
 template <typename Com>
@@ -25,7 +23,7 @@ inline void Registry::each(std::function<void(const Entity&, Com&)> func)
 	});
 }
 
-// FIXME: ¸ü¸Ä Chunk È´Ã»ÓÐ°Ñ×é¼þÒÆ¶¯¹ýÈ¥
+// FIXME: ï¿½ï¿½ï¿½ï¿½ Chunk È´Ã»ï¿½Ð°ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½È¥
 template <typename Com, typename... Args>
 inline Com& Registry::addComponent(const Entity& e, Args&&... args)
 {
@@ -70,7 +68,7 @@ inline void Registry::removeComponent(const Entity& e)
 	/*
 	it = chunks.find(archtype);
 	if(it == chunks.end())
-		chunk = chunks.emplace(archtype, allocator.allocate(1)); // ÉêÇëÐÂµÄ Chunk
+		chunk = chunks.emplace(archtype, allocator.allocate(1)); // ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ Chunk
 	else
 		chunk = it->second;
 	*/

@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -15,85 +15,85 @@ class Entity
 {
 public:
 	/**
-	 * @brief Ä¬ÈÏ¹¹Ôìº¯Êı.
+	 * @brief é»˜è®¤æ„é€ å‡½æ•°.
 	 */
 	Entity() = default;
 
 	/**
-	 * @brief ¹¹Ôìº¯Êı.
+	 * @brief æ„é€ å‡½æ•°.
 	 *
-	 * @param id ÊµÌå id.
-	 * @param version ÊµÌå version.
-	 * @param reg ÊµÌåËùÊôµÄ Registry.
+	 * @param id å®ä½“ id.
+	 * @param version å®ä½“ version.
+	 * @param reg å®ä½“æ‰€å±çš„ Registry.
 	 */
 	Entity(id_type id, version_type version, Registry& reg);
 
 	/**
-	 * @brief Ìí¼Ó×é¼ş.
+	 * @brief æ·»åŠ ç»„ä»¶.
 	 *
-	 * @param args ×é¼ş¹¹Ôìº¯ÊıµÄ²ÎÊı.
-	 * @tparam T ×é¼ş.
-	 * @return ×é¼şµÄÒıÓÃ.
+	 * @param args ç»„ä»¶æ„é€ å‡½æ•°çš„å‚æ•°.
+	 * @tparam T ç»„ä»¶.
+	 * @return ç»„ä»¶çš„å¼•ç”¨.
 	 */
 	template <typename T, typename... Args>
 	T& add(Args&&... args);
 
 	/**
-	 * @brief ÒÆ³ı×é¼ş.
+	 * @brief ç§»é™¤ç»„ä»¶.
 	 *
-	 * @tparam T ×é¼ş.
+	 * @tparam T ç»„ä»¶.
 	 */
 	template <typename T>
 	void remove();
 
 	/**
-	 * @brief »ñÈ¡×é¼ş.
+	 * @brief è·å–ç»„ä»¶.
 	 *
-	 * @tparam T ×é¼ş.
-	 * @return ×é¼şµÄÒıÓÃ.
+	 * @tparam T ç»„ä»¶.
+	 * @return ç»„ä»¶çš„å¼•ç”¨.
 	 */
 	template <typename T>
 	T& get() const;
 
 	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñÓĞÖ¸¶¨µÄÈ«²¿×é¼ş.
+	 * @brief åˆ¤æ–­æ˜¯å¦æœ‰æŒ‡å®šçš„å…¨éƒ¨ç»„ä»¶.
 	 *
-	 * @param entity Òª¼ì²âµÄÊµÌå.
-	 * @tparam Ts ×é¼şÁĞ±í.
+	 * @param entity è¦æ£€æµ‹çš„å®ä½“.
+	 * @tparam Ts ç»„ä»¶åˆ—è¡¨.
 	 */
 	template <typename... Ts>
 	bool allOf() const;
 
 	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñÓĞÖ¸¶¨µÄÈÎÒâ×é¼ş.
+	 * @brief åˆ¤æ–­æ˜¯å¦æœ‰æŒ‡å®šçš„ä»»æ„ç»„ä»¶.
 	 *
-	 * @param entity Òª¼ì²âµÄÊµÌå.
-	 * @tparam Ts ×é¼şÁĞ±í.
+	 * @param entity è¦æ£€æµ‹çš„å®ä½“.
+	 * @tparam Ts ç»„ä»¶åˆ—è¡¨.
 	 */
 	template <typename... Ts>
 	bool anyOf() const;
 
 	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñÃ»ÓĞÖ¸¶¨µÄÈÎºÎ×é¼ş.
+	 * @brief åˆ¤æ–­æ˜¯å¦æ²¡æœ‰æŒ‡å®šçš„ä»»ä½•ç»„ä»¶.
 	 *
-	 * @param entity Òª¼ì²âµÄÊµÌå.
-	 * @tparam Ts ×é¼şÁĞ±í.
+	 * @param entity è¦æ£€æµ‹çš„å®ä½“.
+	 * @tparam Ts ç»„ä»¶åˆ—è¡¨.
 	 */
 	template <typename... Ts>
 	bool noneOf() const;
 
 	/**
-	 * @brief ¼ì²éÊµÌåÊÇ·ñÓĞĞ§.
+	 * @brief æ£€æŸ¥å®ä½“æ˜¯å¦æœ‰æ•ˆ.
 	 */
 	bool valid() const;
 
 	/**
-	 * @brief »ñÈ¡ÊµÌå id.
+	 * @brief è·å–å®ä½“ id.
 	 */
 	id_type id() const;
 
 	/**
-	 * @brief »ñÈ¡ÊµÌå version.
+	 * @brief è·å–å®ä½“ version.
 	 */
 	version_type version() const;
 

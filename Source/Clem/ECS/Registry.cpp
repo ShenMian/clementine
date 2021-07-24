@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Registry.h"
@@ -49,6 +49,12 @@ void Registry::destroy(const Entity& e)
 [[nodiscard]] size_t Registry::getSize() const
 {
 	return entities.size() - freeIds.size();
+}
+
+void Registry::all(std::function<void(const Entity&)> func)
+{
+	for(id_type i = 0; i < entities.size(); i++)
+		func(Entity(i, entities[i].version, *this));
 }
 
 [[nodiscard]] bool Registry::valid(const Entity& e) const
