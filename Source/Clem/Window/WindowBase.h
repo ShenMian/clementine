@@ -27,7 +27,7 @@ public:
 	/**
 	 * @brief 默认析构函数.
 	 */
-	~WindowBase();
+	virtual ~WindowBase();
 
 	/**
 	 * @brief 更新.

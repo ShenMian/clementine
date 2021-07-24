@@ -6,6 +6,7 @@
 #include "Clem/GUI/GUI.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
+#include "Clem/Rendering/Rendering.h"
 #include <cassert>
 #include <cstdio>
 #include <glad/glad.h>
@@ -19,6 +20,8 @@ using std::string;
 
 namespace clem
 {
+
+static unsigned int vertexArray, vertexBuffer, indexBuffer;
 
 GlfwWindow::GlfwWindow(std::string title, Size2i size)
 {
@@ -72,6 +75,58 @@ GlfwWindow::GlfwWindow(std::string title, Size2i size)
 
 	ImGui_ImplGlfw_InitForOpenGL(handle, true);
 	ImGui_ImplOpenGL3_Init("#version 410");
+
+	std::string vertexSrc = R"(
+		#version 410
+
+		layout(location = 0) in vec3 a_Position;
+
+		void main()
+		{
+			gl_Position = vec4(a_Position, 1.0);
+		}
+	)";
+	std::string fregmentSrc = R"(
+		#version 410
+
+		layout(location = 0) out vec4 color;
+
+		void main()
+		{
+		}
+	)";
+
+	shader = std::make_unique<Shader>(vertexSrc, fregmentSrc);
+
+	glGenVertexArrays(1, &vertexArray);
+	glBindVertexArray(vertexArray);
+
+	glGenBuffers(1, &vertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+
+	float vertices[3 * 3] = {
+			-0.5f,
+			-0.5f,
+			0.0f,
+
+			0.5f,
+			-0.5f,
+			0.0f,
+
+			0.0f,
+			0.5f,
+			0.0f,
+	};
+
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+
+	glGenBuffers(1, &indexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+
+	unsigned int indices[3] = {0, 1, 2};
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), &indices, GL_STATIC_DRAW);
 }
 
 GlfwWindow::~GlfwWindow()
@@ -86,6 +141,10 @@ void GlfwWindow::update(Time dt)
 
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
+	// shader->bind();
+
+	glBindVertexArray(vertexArray);
+	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
 	renderGui(dt);
 	glfwSwapBuffers(handle);

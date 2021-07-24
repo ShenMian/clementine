@@ -4,11 +4,15 @@
 #pragma once
 
 #include "WindowBase.h"
+#include <memory>
 
 struct GLFWwindow;
 
 namespace clem
 {
+
+class Shader;
+
 /**
  * @brief 窗口.
  */
@@ -86,7 +90,8 @@ public:
 private:
 	void renderGui(Time dt);
 
-	GLFWwindow* handle;
+	GLFWwindow*             handle;
+	std::unique_ptr<Shader> shader;
 };
 
 } // namespace clem
