@@ -4,7 +4,7 @@ var searchData=
   ['addcomponent_1',['addComponent',['../classclem_1_1_registry.html#aedaccc6244cbe0817f0a1167a9b6c1ef',1,'clem::Registry']]],
   ['addforce_2',['addForce',['../classclem_1_1_rigidbody.html#accee589b869a6db35cad3b4226354b64',1,'clem::Rigidbody']]],
   ['addsystem_3',['addSystem',['../classclem_1_1_registry.html#ad79b78322a0c820d86f1ea68681a2f37',1,'clem::Registry']]],
-  ['all_4',['all',['../classclem_1_1_archtype.html#aa0196452cf858096034ee16872068870',1,'clem::Archtype']]],
+  ['all_4',['all',['../classclem_1_1_archtype.html#aa0196452cf858096034ee16872068870',1,'clem::Archtype::all()'],['../classclem_1_1_registry.html#a2480530b7c36e1725fa0c8604b5109f9',1,'clem::Registry::all()']]],
   ['allof_5',['allOf',['../classclem_1_1_entity.html#afd2273f8d2ba3da40741bbe4fe992a6c',1,'clem::Entity::allOf()'],['../classclem_1_1_registry.html#a2decf54397b490e94a942ab41e832c83',1,'clem::Registry::allOf()']]],
   ['angle_6',['angle',['../struct_vector2.html#afa33de2ad0f917e8f4d751b8855f4da7',1,'Vector2']]],
   ['any_7',['any',['../classclem_1_1_archtype.html#a268958c313ffda57ef338f1556ce5ae9',1,'clem::Archtype']]],

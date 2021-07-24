@@ -29,6 +29,8 @@ var annotated_dup =
       [ "EntityInfo", "structclem_1_1_entity_info.html", "structclem_1_1_entity_info" ],
       [ "Registry", "classclem_1_1_registry.html", "classclem_1_1_registry" ],
       [ "System", "classclem_1_1_system.html", "classclem_1_1_system" ],
+      [ "GUI", "classclem_1_1_g_u_i.html", null ],
+      [ "Layer", "classclem_1_1_layer.html", "classclem_1_1_layer" ],
       [ "Logger", "classclem_1_1_logger.html", "classclem_1_1_logger" ],
       [ "Client", "classclem_1_1_client.html", "classclem_1_1_client" ],
       [ "Connection", "classclem_1_1_connection.html", "classclem_1_1_connection" ],
@@ -44,8 +46,8 @@ var annotated_dup =
       [ "RenderSystem", "classclem_1_1_render_system.html", "classclem_1_1_render_system" ],
       [ "Sprite", "classclem_1_1_sprite.html", "classclem_1_1_sprite" ],
       [ "ConsoleWindow", "classclem_1_1_console_window.html", "classclem_1_1_console_window" ],
-      [ "Window", "classclem_1_1_window.html", "classclem_1_1_window" ],
-      [ "WindowsWindow", "classclem_1_1_windows_window.html", "classclem_1_1_windows_window" ]
+      [ "GlfwWindow", "classclem_1_1_glfw_window.html", "classclem_1_1_glfw_window" ],
+      [ "WindowBase", "classclem_1_1_window_base.html", "classclem_1_1_window_base" ]
     ] ],
     [ "Camera", "class_camera.html", null ],
     [ "Color", "class_color.html", "class_color" ],

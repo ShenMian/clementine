@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['update_176',['update',['../classclem_1_1_registry.html#aaaca1c477118f7c363b4114c0a7a77f6',1,'clem::Registry::update()'],['../classclem_1_1_console_window.html#a13c3d3bced296722df23c91ee1f1067b',1,'clem::ConsoleWindow::update()'],['../classclem_1_1_window.html#aa4292ad7cc76d5911b6f874189bb7765',1,'clem::Window::update()'],['../classclem_1_1_windows_window.html#ae0a7c50837184dafebb20815007edd33',1,'clem::WindowsWindow::update()']]]
+  ['update_179',['update',['../classclem_1_1_registry.html#a0045bc0e13ccda075d156dcf53c48e72',1,'clem::Registry::update()'],['../classclem_1_1_console_window.html#a3c13308f539f16b597b743f23c02376d',1,'clem::ConsoleWindow::update()'],['../classclem_1_1_glfw_window.html#ae55571eb0d2cdc75d6b5600ba3f5d654',1,'clem::GlfwWindow::update()'],['../classclem_1_1_window_base.html#aac7f196940cfbabc6cfaffc0dffad736',1,'clem::WindowBase::update()']]]
 ];

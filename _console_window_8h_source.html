@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Clementine: Source/Clem/Window/Console/ConsoleWindow.h 源文件</title>
+<title>Clementine: Source/Clem/Window/ConsoleWindow.h 源文件</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -92,44 +92,43 @@ $(document).ready(function(){initNavTree('_console_window_8h_source.html',''); i
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Clem/Core/Math/Math.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Clem/Window/Window.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>clem</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classclem_1_1_console_window.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_console_window.html">ConsoleWindow</a> : <span class="keyword">public</span> <a class="code" href="classclem_1_1_window.html">Window</a></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classclem_1_1_console_window.html#a7f822c8c3b9d7b04908110244ed6af67">ConsoleWindow</a>(std::string title, <a class="code" href="struct_vector2i.html">Size2i</a> size);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_console_window.html#a13c3d3bced296722df23c91ee1f1067b">update</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_console_window.html#ad9c40a9c1571b7a812405d3594832ee2">setTitle</a>(<span class="keyword">const</span> std::string&amp; title) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classclem_1_1_console_window.html#a404639aa1a0da0b2f5803f2e6c512901">   45</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_console_window.html#a404639aa1a0da0b2f5803f2e6c512901">setSize</a>(<a class="code" href="struct_vector2i.html">Size2i</a> size) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="struct_vector2i.html">Size2i</a> <a class="code" href="classclem_1_1_console_window.html#acd782f5d416b822ca1b36135e196ac36">getSize</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_console_window.html#acb0a9b701885fb3bc9ba13a71adb25f1">setPosition</a>(<a class="code" href="struct_vector2i.html">Size2i</a> pos) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="struct_vector2i.html">Size2i</a> <a class="code" href="classclem_1_1_console_window.html#a546a1915f935aab8a01dce9e938d103d">getPosition</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_console_window.html#afac0136eb6a3969e251908340e188c86">setVisible</a>(<span class="keywordtype">bool</span> visible) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classclem_1_1_console_window.html#a15881ca6dd2de8886fe1f089286ecb6d">isVisible</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> init();</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> deinit();</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="struct_vector2i.html">Size2i</a> size;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;} <span class="comment">// namespace clem</span></div>
-<div class="ttc" id="aclassclem_1_1_console_window_html"><div class="ttname"><a href="classclem_1_1_console_window.html">clem::ConsoleWindow</a></div><div class="ttdoc">终端窗口.</div><div class="ttdef"><b>Definition:</b> ConsoleWindow.h:16</div></div>
-<div class="ttc" id="aclassclem_1_1_console_window_html_a13c3d3bced296722df23c91ee1f1067b"><div class="ttname"><a href="classclem_1_1_console_window.html#a13c3d3bced296722df23c91ee1f1067b">clem::ConsoleWindow::update</a></div><div class="ttdeci">void update() override</div><div class="ttdoc">更新.</div><div class="ttdef"><b>Definition:</b> ConsoleWindow.cpp:22</div></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;WindowBase.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>clem</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classclem_1_1_console_window.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_console_window.html">ConsoleWindow</a> : <span class="keyword">public</span> <a class="code" href="classclem_1_1_window_base.html">WindowBase</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classclem_1_1_console_window.html#a7f822c8c3b9d7b04908110244ed6af67">ConsoleWindow</a>(std::string title, <a class="code" href="struct_vector2i.html">Size2i</a> size);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_console_window.html#a3c13308f539f16b597b743f23c02376d">update</a>(<a class="code" href="classclem_1_1_time.html">Time</a> dt) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_console_window.html#ad9c40a9c1571b7a812405d3594832ee2">setTitle</a>(<span class="keyword">const</span> std::string&amp; title) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classclem_1_1_console_window.html#a404639aa1a0da0b2f5803f2e6c512901">   44</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_console_window.html#a404639aa1a0da0b2f5803f2e6c512901">setSize</a>(<a class="code" href="struct_vector2i.html">Size2i</a> size) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="struct_vector2i.html">Size2i</a> <a class="code" href="classclem_1_1_console_window.html#acd782f5d416b822ca1b36135e196ac36">getSize</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_console_window.html#acb0a9b701885fb3bc9ba13a71adb25f1">setPosition</a>(<a class="code" href="struct_vector2i.html">Size2i</a> pos) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="struct_vector2i.html">Size2i</a> <a class="code" href="classclem_1_1_console_window.html#a546a1915f935aab8a01dce9e938d103d">getPosition</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classclem_1_1_console_window.html#afac0136eb6a3969e251908340e188c86">setVisible</a>(<span class="keywordtype">bool</span> visible) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classclem_1_1_console_window.html#a15881ca6dd2de8886fe1f089286ecb6d">isVisible</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> init();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> deinit();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="struct_vector2i.html">Size2i</a> size;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;} <span class="comment">// namespace clem</span></div>
+<div class="ttc" id="aclassclem_1_1_console_window_html"><div class="ttname"><a href="classclem_1_1_console_window.html">clem::ConsoleWindow</a></div><div class="ttdoc">终端窗口.</div><div class="ttdef"><b>Definition:</b> ConsoleWindow.h:15</div></div>
 <div class="ttc" id="aclassclem_1_1_console_window_html_a15881ca6dd2de8886fe1f089286ecb6d"><div class="ttname"><a href="classclem_1_1_console_window.html#a15881ca6dd2de8886fe1f089286ecb6d">clem::ConsoleWindow::isVisible</a></div><div class="ttdeci">bool isVisible() override</div><div class="ttdoc">终端窗口不支持.</div><div class="ttdef"><b>Definition:</b> ConsoleWindow.cpp:49</div></div>
+<div class="ttc" id="aclassclem_1_1_console_window_html_a3c13308f539f16b597b743f23c02376d"><div class="ttname"><a href="classclem_1_1_console_window.html#a3c13308f539f16b597b743f23c02376d">clem::ConsoleWindow::update</a></div><div class="ttdeci">void update(Time dt) override</div><div class="ttdoc">更新.</div><div class="ttdef"><b>Definition:</b> ConsoleWindow.cpp:22</div></div>
 <div class="ttc" id="aclassclem_1_1_console_window_html_a404639aa1a0da0b2f5803f2e6c512901"><div class="ttname"><a href="classclem_1_1_console_window.html#a404639aa1a0da0b2f5803f2e6c512901">clem::ConsoleWindow::setSize</a></div><div class="ttdeci">void setSize(Size2i size) override</div><div class="ttdoc">设置终端缓冲区大小, 单位: 字符.</div></div>
 <div class="ttc" id="aclassclem_1_1_console_window_html_a546a1915f935aab8a01dce9e938d103d"><div class="ttname"><a href="classclem_1_1_console_window.html#a546a1915f935aab8a01dce9e938d103d">clem::ConsoleWindow::getPosition</a></div><div class="ttdeci">Size2i getPosition() override</div><div class="ttdoc">终端窗口不支持.</div><div class="ttdef"><b>Definition:</b> ConsoleWindow.cpp:38</div></div>
 <div class="ttc" id="aclassclem_1_1_console_window_html_a7f822c8c3b9d7b04908110244ed6af67"><div class="ttname"><a href="classclem_1_1_console_window.html#a7f822c8c3b9d7b04908110244ed6af67">clem::ConsoleWindow::ConsoleWindow</a></div><div class="ttdeci">ConsoleWindow(std::string title, Size2i size)</div><div class="ttdoc">构造函数.</div><div class="ttdef"><b>Definition:</b> ConsoleWindow.cpp:15</div></div>
@@ -137,14 +136,15 @@ $(document).ready(function(){initNavTree('_console_window_8h_source.html',''); i
 <div class="ttc" id="aclassclem_1_1_console_window_html_acd782f5d416b822ca1b36135e196ac36"><div class="ttname"><a href="classclem_1_1_console_window.html#acd782f5d416b822ca1b36135e196ac36">clem::ConsoleWindow::getSize</a></div><div class="ttdeci">Size2i getSize() override</div><div class="ttdoc">获取终端缓冲区大小, 单位: 字符.</div><div class="ttdef"><b>Definition:</b> ConsoleWindow.cpp:67</div></div>
 <div class="ttc" id="aclassclem_1_1_console_window_html_ad9c40a9c1571b7a812405d3594832ee2"><div class="ttname"><a href="classclem_1_1_console_window.html#ad9c40a9c1571b7a812405d3594832ee2">clem::ConsoleWindow::setTitle</a></div><div class="ttdeci">void setTitle(const std::string &amp;title) override</div><div class="ttdoc">设置终端窗口标题.</div><div class="ttdef"><b>Definition:</b> ConsoleWindow.cpp:62</div></div>
 <div class="ttc" id="aclassclem_1_1_console_window_html_afac0136eb6a3969e251908340e188c86"><div class="ttname"><a href="classclem_1_1_console_window.html#afac0136eb6a3969e251908340e188c86">clem::ConsoleWindow::setVisible</a></div><div class="ttdeci">void setVisible(bool visible) override</div><div class="ttdoc">终端窗口不支持.</div><div class="ttdef"><b>Definition:</b> ConsoleWindow.cpp:44</div></div>
-<div class="ttc" id="aclassclem_1_1_window_html"><div class="ttname"><a href="classclem_1_1_window.html">clem::Window</a></div><div class="ttdoc">窗口.</div><div class="ttdef"><b>Definition:</b> Window.h:17</div></div>
+<div class="ttc" id="aclassclem_1_1_time_html"><div class="ttname"><a href="classclem_1_1_time.html">clem::Time</a></div><div class="ttdef"><b>Definition:</b> Time.h:12</div></div>
+<div class="ttc" id="aclassclem_1_1_window_base_html"><div class="ttname"><a href="classclem_1_1_window_base.html">clem::WindowBase</a></div><div class="ttdoc">窗口.</div><div class="ttdef"><b>Definition:</b> WindowBase.h:20</div></div>
 <div class="ttc" id="astruct_vector2i_html"><div class="ttname"><a href="struct_vector2i.html">Vector2i</a></div><div class="ttdoc">二维向量, 整型.</div><div class="ttdef"><b>Definition:</b> Vector2i.h:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_74389ed8173ad57b461b9d623a1f3867.html">Source</a></li><li class="navelem"><a class="el" href="dir_7021f754b8ddfcf6c3876e5dcdd251f8.html">Clem</a></li><li class="navelem"><a class="el" href="dir_cf39f2e22f2c5284b6c04efd7430240c.html">Window</a></li><li class="navelem"><a class="el" href="dir_992110ea946869fac3881e1b5970e9c5.html">Console</a></li><li class="navelem"><b>ConsoleWindow.h</b></li>
+    <li class="navelem"><a class="el" href="dir_74389ed8173ad57b461b9d623a1f3867.html">Source</a></li><li class="navelem"><a class="el" href="dir_7021f754b8ddfcf6c3876e5dcdd251f8.html">Clem</a></li><li class="navelem"><a class="el" href="dir_cf39f2e22f2c5284b6c04efd7430240c.html">Window</a></li><li class="navelem"><b>ConsoleWindow.h</b></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

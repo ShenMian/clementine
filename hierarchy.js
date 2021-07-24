@@ -32,9 +32,11 @@ var hierarchy =
     [ "EventDispatcher", "class_event_dispatcher.html", null ],
     [ "clem::Framebuffer", "classclem_1_1_framebuffer.html", null ],
     [ "clem::Gamepad", "classclem_1_1_gamepad.html", null ],
+    [ "clem::GUI", "classclem_1_1_g_u_i.html", null ],
     [ "InstrumentationCounter", "class_instrumentation_counter.html", null ],
     [ "Instrumentor", "class_instrumentor.html", null ],
     [ "clem::Keyboard", "classclem_1_1_keyboard.html", null ],
+    [ "clem::Layer", "classclem_1_1_layer.html", null ],
     [ "Line2", "struct_line2.html", null ],
     [ "clem::Listener", "classclem_1_1_listener.html", null ],
     [ "clem::Logger", "classclem_1_1_logger.html", null ],
@@ -69,8 +71,8 @@ var hierarchy =
     [ "Vector2i", "struct_vector2i.html", null ],
     [ "clem::WaveData", "structclem_1_1_wave_data.html", null ],
     [ "clem::WaveFormat", "structclem_1_1_wave_format.html", null ],
-    [ "clem::Window", "classclem_1_1_window.html", [
+    [ "clem::WindowBase", "classclem_1_1_window_base.html", [
       [ "clem::ConsoleWindow", "classclem_1_1_console_window.html", null ],
-      [ "clem::WindowsWindow", "classclem_1_1_windows_window.html", null ]
+      [ "clem::GlfwWindow", "classclem_1_1_glfw_window.html", null ]
     ] ]
 ];
