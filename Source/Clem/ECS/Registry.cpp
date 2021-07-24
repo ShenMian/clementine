@@ -22,7 +22,7 @@ namespace clem
 
 [[nodiscard]] Entity Registry::create(const std::string& tag)
 {
-	auto& entity = create();
+	auto entity = create();
 	entity.add<Tag>(tag);
 	return entity;
 }
@@ -39,7 +39,7 @@ void Registry::destroy(const Entity& e)
 [[nodiscard]] Entity Registry::get(const std::string& str)
 {
 	Entity entity(0, 0, *this);
-	each<Tag>([&](const Entity& e, Tag& tag) {
+	each<Tag>([&](const Entity& e, const Tag& tag) {
 		if(tag.str == str)
 			entity = e;
 	});

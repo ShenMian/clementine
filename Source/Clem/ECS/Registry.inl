@@ -23,7 +23,7 @@ inline void Registry::each(std::function<void(const Entity&, Com&)> func)
 	});
 }
 
-// FIXME: ���� Chunk ȴû�а�����ƶ���ȥ
+// FIXME: 改变 Chunk 却没有转移 Components
 template <typename Com, typename... Args>
 inline Com& Registry::addComponent(const Entity& e, Args&&... args)
 {
