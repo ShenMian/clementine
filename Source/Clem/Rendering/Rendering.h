@@ -1,6 +1,8 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
+#include "Shader.h"
+
 #include "Camera.h"
 #include "CharMap.h"
 #include "Color.h"
