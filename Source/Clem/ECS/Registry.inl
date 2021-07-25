@@ -28,7 +28,7 @@ template <typename Com, typename... Args>
 inline Com& Registry::addComponent(const Entity& e, Args&&... args)
 {
 	auto& archtype = entities[e.id()].archtype;
-	auto& chunk    = entities[e.id()].chunk;
+	auto  chunk    = entities[e.id()].chunk;
 
 	archtype.add<Com>();
 	/*
@@ -50,9 +50,9 @@ template <typename Com>
 inline void Registry::removeComponent(const Entity& e)
 {
 	auto& archtype = entities[e.id()].archtype;
-	auto& chunk    = entities[e.id()].chunk;
+	auto  chunk    = entities[e.id()].chunk;
 
-	chunk.removeComponent<Com>(e.id());
+	chunk->removeComponent<Com>(e.id());
 
 	/*
 	auto it = chunks.find(archtype);
