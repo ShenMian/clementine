@@ -9,7 +9,7 @@
 #if _MSC_VER
 #	define breakpoint() __debugbreak()
 #else
-#	define breakpoint() __buildin_trap()
+#	define breakpoint() __builtin_trap()
 #endif
 
 namespace clem
