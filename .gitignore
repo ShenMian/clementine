@@ -11,6 +11,7 @@
 # CMake build files
 [Bb]uild/
 [Bb]in/
+Makefile
 lib/clementine.lib
 lib/libclementine.a
 

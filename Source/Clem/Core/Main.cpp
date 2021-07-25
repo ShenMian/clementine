@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Main.h"
@@ -14,6 +14,7 @@
 #include "Clem/Profiler.h"
 #include "Clem/Rendering/Rendering.h"
 #include "Clem/Window/Window.h"
+#include "Time.h"
 #include <csignal>
 #include <map>
 #include <string>
@@ -152,7 +153,7 @@ void Main::updateFrameRate(uint16_t dt)
 {
 	PROFILE_FUNC();
 
-	// ¼ÆËãÖ¡ËÙÂÊ
+	// è®¡ç®—å¸§é€Ÿç‡
 	static uint16_t lag = 0;
 	lag += dt;
 	if(lag >= 1000)
@@ -164,7 +165,7 @@ void Main::updateFrameRate(uint16_t dt)
 
 	frames++;
 
-	// »ı·Ö¿ØÖÆ. ÏŞÖÆÖ÷Ñ­»·ËÙ¶È, ¼õÉÙ CPU Õ¼ÓÃ
+	// ç§¯åˆ†æ§åˆ¶. é™åˆ¶ä¸»å¾ªç¯é€Ÿåº¦, å‡å°‘ CPU å ç”¨
 	const auto target = static_cast<uint16_t>(
 			1000 / std::max({inputRate, updateRate, renderRate}));
 	static int integral = 0;
@@ -245,24 +246,24 @@ void Main::init()
 	// std::setlocale(LC_ALL, "");
 	std::signal(SIGINT, Main::onSignal);
 
-	// ³õÊ¼»¯ÈÕÖ¾ÏµÍ³
+	// åˆå§‹åŒ–æ—¥å¿—ç³»ç»Ÿ
 	Logger::create("core");
 	Logger::create("audio");
 	Logger::create("assert");
 	Logger::create("networking");
 
-	// ³õÊ¼»¯ ECS, Ìí¼ÓÄ¬ÈÏÏµÍ³
+	// åˆå§‹åŒ– ECS, æ·»åŠ é»˜è®¤ç³»ç»Ÿ
 	registry.addSystem(new PhysicsSystem());
 	registry.addSystem(new RenderSystem());
 	registry.addSystem(new ScriptSystem());
 
-	// ³õÊ¼»¯´°¿Ú
+	// åˆå§‹åŒ–çª—å£
 	WindowBase::init();
 	// window = new ConsoleWindow("Clementine", {80, 25});
 	window          = new GlfwWindow("Clementine", {1920 / 2, 1080 / 2});
 	window->onClose = []() { Main::running = false; };
 
-	// ³õÊ¼»¯ I/O
+	// åˆå§‹åŒ– I/O
 	Audio::init();
 	Keyboard::init();
 }

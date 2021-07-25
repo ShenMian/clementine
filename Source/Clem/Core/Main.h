@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -24,32 +24,32 @@ class Main
 {
 public:
 	/**
-	 * @brief Ö÷º¯Êı.
+	 * @brief ä¸»å‡½æ•°.
 	 */
 	static int main(int argc, char* argv[]);
 
 	/**
-	 * @brief Æô¶¯Ö÷Ñ­»·.
+	 * @brief å¯åŠ¨ä¸»å¾ªç¯.
 	 */
 	static void run();
 
 	/**
-	 * @brief ÖÕÖ¹Ö÷Ñ­»·.
+	 * @brief ç»ˆæ­¢ä¸»å¾ªç¯.
 	 */
 	static void stop();
 
 	/**
-	 * @brief ÔİÍ£Ö÷Ñ­»·.
+	 * @brief æš‚åœä¸»å¾ªç¯.
 	 */
 	static void pause();
 
 	/**
-	 * @brief »Ö¸´Ö÷Ñ­»·.
+	 * @brief æ¢å¤ä¸»å¾ªç¯.
 	 */
 	static void resume();
 
 	/**
-	 * @brief »ñÈ¡Ö¡ËÙÂÊ, µ¥Î»: FPS.
+	 * @brief è·å–å¸§é€Ÿç‡, å•ä½: FPS.
 	 */
 	static uint16_t getFrameRate();
 
@@ -62,10 +62,10 @@ public:
 	static void     setRenderRate(uint16_t rate);
 	static uint16_t getRenderRate();
 
-	static Registry registry;
-
 	static void init();
 	static void deinit();
+
+	static Registry registry;
 
 private:
 	static bool     running;

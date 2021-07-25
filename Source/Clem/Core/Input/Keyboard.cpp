@@ -43,7 +43,7 @@ void Keyboard::update()
 	if(ch == -1)
 		return;
 	auto vk = ch; // ASCII -> VK
-	Keyboard::setKeyState((Keyboard::Key)vk, true);
+	Keyboard::setState((Keyboard::Key)vk, true);
 }
 
 void Keyboard::init()

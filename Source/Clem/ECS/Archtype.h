@@ -1,8 +1,9 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
 
+#include <cstddef>
 #include <set>
 #include <typeindex>
 
@@ -21,37 +22,37 @@ public:
 	Archtype(std::set<std::type_index>&&);
 
 	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñÓĞÖ¸¶¨µÄÈ«²¿ÀàĞÍ.
+	 * @brief åˆ¤æ–­æ˜¯å¦æœ‰æŒ‡å®šçš„å…¨éƒ¨ç±»å‹.
 	 */
 	template <typename T, typename... Ts>
 	bool all() const;
 
 	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñÓĞÖ¸¶¨µÄÈÎÒâÀàĞÍ.
+	 * @brief åˆ¤æ–­æ˜¯å¦æœ‰æŒ‡å®šçš„ä»»æ„ç±»å‹.
 	 */
 	template <typename T, typename... Ts>
 	bool any() const;
 
 	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñÃ»ÓĞÖ¸¶¨µÄÈÎºÎÀàĞÍ.
+	 * @brief åˆ¤æ–­æ˜¯å¦æ²¡æœ‰æŒ‡å®šçš„ä»»ä½•ç±»å‹.
 	 */
 	template <typename... Ts>
 	bool none() const;
 
 	/**
-	 * @brief Ìí¼ÓÀàĞÍ.
+	 * @brief æ·»åŠ ç±»å‹.
 	 */
 	template <typename T>
 	Archtype& add();
 
 	/**
-	 * @brief ÒÆ³ıÀàĞÍ.
+	 * @brief ç§»é™¤ç±»å‹.
 	 */
 	template <typename T>
 	Archtype& remove();
 
 	/**
-	 * @brief ÒÆ³ıÈ«²¿ÀàĞÍ.
+	 * @brief ç§»é™¤å…¨éƒ¨ç±»å‹.
 	 */
 	void clear();
 

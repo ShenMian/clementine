@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Clem/Core/Math/Math.h"
+#include <cstdint>
 #include <unordered_map>
 
 namespace clem

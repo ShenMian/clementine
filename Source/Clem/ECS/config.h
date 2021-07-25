@@ -6,6 +6,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <typeindex>
+#include <type_traits>
 
 namespace clem
 {

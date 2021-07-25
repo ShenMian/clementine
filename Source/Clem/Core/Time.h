@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -12,17 +12,17 @@ class Time
 {
 public:
 	/**
-	 * @brief »ñÈ¡ÒÔÃëÎªµ¥Î»µÄÊ±¼ä.
+	 * @brief è·å–ä»¥ç§’ä¸ºå•ä½çš„æ—¶é—´.
 	 */
 	float seconds() const;
 
 	/**
-	 * @brief »ñÈ¡ÒÔºÁÃëÎªµ¥Î»µÄÊ±¼ä.
+	 * @brief è·å–ä»¥æ¯«ç§’ä¸ºå•ä½çš„æ—¶é—´.
 	 */
 	uint32_t milliseconds() const;
 
 	/**
-	 * @brief »ñÈ¡ÒÔÎ¢ÃëÎªµ¥Î»µÄÊ±¼ä.
+	 * @brief è·å–ä»¥å¾®ç§’ä¸ºå•ä½çš„æ—¶é—´.
 	 */
 	uint64_t microseconds() const;
 
@@ -31,9 +31,13 @@ private:
 
 	uint64_t microseconds_;
 
-	friend Time seconds(float sec);
-	friend Time milliseconds(uint32_t ms);
-	friend Time microseconds(uint64_t us);
+	friend Time seconds(float);
+	friend Time milliseconds(uint32_t);
+	friend Time microseconds(uint64_t);
 };
+
+Time seconds(float sec);
+Time milliseconds(uint32_t ms);
+Time microseconds(uint64_t us);
 
 } // namespace clem

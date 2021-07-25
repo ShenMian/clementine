@@ -10,7 +10,7 @@ print(" | |____| |  __/ | | | | |  __/ | | | |_| | | | |  __/")
 print("  \\_____|_|\\___|_| |_| |_|\\___|_| |_|\\__|_|_| |_|\\___|")
 print("\n")
 
-include "thirdparty/premake/solution_items.lua"
+include "Thirdparty/premake/solution_items.lua"
 
 workspace "Clementine"
   architecture "x86_64"

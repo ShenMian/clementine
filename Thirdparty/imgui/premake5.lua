@@ -9,7 +9,7 @@ project "ImGui"
 
 	files {
     "include/**.h",
-    "src/**.cpp",
+    "include/**.cpp",
     "backends/**.h",
     "backends/imgui_impl_glfw.cpp",
     "backends/imgui_impl_opengl3.cpp",
