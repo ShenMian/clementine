@@ -23,7 +23,6 @@ public:
 
 			if(ImGui::BeginMenu("Rendering"))
 			{
-				// auto   fps = ImGui::GetIO().Framerate;
 				auto   fps = Main::getFrameRate();
 				ImVec4 color;
 				if(fps < 30)
@@ -32,7 +31,7 @@ public:
 					color = {1, 1, 0, 1};
 				else
 					color = {0, 1, 0, 1};
-				// ImGui::TextColored(color, "%3u", fps);
+				ImGui::TextColored(color, "%3u", fps);
 				ImGui::SameLine();
 				ImGui::Text("FPS, %2.1f ms/frame", 1000.0f / fps);
 
@@ -72,6 +71,7 @@ public:
 				ImGui::EndMenu();
 			}
 
+			/*
 			if(ImGui::BeginMenu("Profile"))
 			{
 				if(ImGui::MenuItem("Start", "Start profiling"))
@@ -82,6 +82,7 @@ public:
 				}
 				ImGui::EndMenu();
 			}
+			*/
 
 			ImGui::End();
 		}
