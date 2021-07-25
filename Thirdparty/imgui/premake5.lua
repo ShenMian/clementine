@@ -2,7 +2,7 @@ project "ImGui"
 	kind "StaticLib"
 	language "C++"
 	cppdialect "C++17"
-	staticruntime "On"
+	staticruntime "on"
 	
 	targetdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/lib")
 	objdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/obj")

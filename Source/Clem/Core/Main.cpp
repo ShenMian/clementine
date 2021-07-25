@@ -35,14 +35,13 @@ namespace clem
 static uint16_t frames = 0;
 
 Registry     Main::registry;
-bool         Main::running        = false;
-bool         Main::paused         = false;
-uint16_t     Main::inputRate      = 144;
-uint16_t     Main::updateRate     = 144;
-uint16_t     Main::renderRate     = 144;
-uint16_t     Main::frameRate      = 0;
-uint16_t     Main::frameRateLimit = 144;
-Application* Main::app            = nullptr;
+bool         Main::running    = false;
+bool         Main::paused     = false;
+uint16_t     Main::inputRate  = 144;
+uint16_t     Main::updateRate = 144;
+uint16_t     Main::renderRate = 144;
+uint16_t     Main::frameRate  = 0;
+Application* Main::app        = nullptr;
 WindowBase*  Main::window;
 
 int Main::main(int argc, char* argv[])
@@ -93,10 +92,13 @@ void Main::mainLoop()
 		auto dt      = static_cast<uint16_t>(current - previous);
 		previous     = current;
 
-		updateInput(dt);
-		update(dt);
-		render(dt);
-		updateFrameRate(dt);
+		if(dt)
+		{
+			updateInput(dt);
+			update(dt);
+			render(dt);
+			updateFrameRate(dt);
+		}
 
 		while(paused)
 		{
@@ -112,7 +114,7 @@ void Main::updateInput(uint16_t dt)
 
 	static uint16_t lag = 0;
 	lag += dt;
-	if(lag >= msPerInput)
+	if(lag >= 1000 / inputRate)
 	{
 		Keyboard::update();
 		Mouse::update();
@@ -126,10 +128,10 @@ void Main::update(uint16_t dt)
 
 	static uint16_t lag = 0;
 	lag += dt;
-	while(lag >= msPerUpdate)
+	while(lag >= 1000 / updateRate)
 	{
 		registry.update(milliseconds(dt));
-		lag -= msPerUpdate;
+		lag -= 1000 / updateRate;
 	}
 }
 
@@ -139,10 +141,9 @@ void Main::render(uint16_t dt)
 
 	static uint16_t lag = 0;
 	lag += dt;
-	if(lag >= msPerRender)
+	if(lag >= 1000 / renderRate)
 	{
 		window->update(milliseconds(dt));
-		frames++;
 		lag = 0;
 	}
 }
@@ -161,16 +162,20 @@ void Main::updateFrameRate(uint16_t dt)
 		window->setTitle(app->getName() + " | " + std::to_string(frameRate) + "FPS");
 	}
 
+	frames++;
+
 	// 积分控制. 限制主循环速度, 减少 CPU 占用
-	const auto      target   = static_cast<uint16_t>(std::max(
-      std::min({1000 / inputRate, 1000 / msPerUpdate, 1000 / msPerRender}),
-      1000 / frameRateLimit));
-	static uint16_t integral = 0;
-	auto            error    = target - dt;
-	integral += error > 0 ? 1 : (integral > 0 ? -1 : 0);
-	if(error < 0 && integral == 0)
-		return;
-	std::this_thread::sleep_for(std::chrono::milliseconds(error + integral));
+	const auto target = static_cast<uint16_t>(
+			1000 / std::max({inputRate, updateRate, renderRate}));
+	static int integral = 0;
+	auto       error    = target - dt;
+	if(error)
+	{
+		integral += error > 0 ? std::abs(error) : -std::abs(error);
+		if(error + integral <= 0)
+			return;
+		std::this_thread::sleep_for(std::chrono::milliseconds(error + integral));
+	}
 }
 
 void Main::parseArgs(int argc, char* argv[])
@@ -195,9 +200,42 @@ uint16_t Main::getFrameRate()
 	return frameRate;
 }
 
-WindowBase* Main::getMainWindow()
+WindowBase* Main::getWindow()
 {
 	return window;
+}
+
+void Main::setInputRate(uint16_t rate)
+{
+	assert(rate != 0);
+	inputRate = rate;
+}
+
+uint16_t Main::getInputRate()
+{
+	return inputRate;
+}
+
+void Main::setUpdateRate(uint16_t rate)
+{
+	assert(rate != 0);
+	updateRate = rate;
+}
+
+uint16_t Main::getUpdateRate()
+{
+	return updateRate;
+}
+
+void Main::setRenderRate(uint16_t rate)
+{
+	assert(rate != 0);
+	renderRate = rate;
+}
+
+uint16_t Main::getRenderRate()
+{
+	return renderRate;
 }
 
 void Main::init()

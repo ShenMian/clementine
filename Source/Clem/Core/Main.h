@@ -53,12 +53,19 @@ public:
 	 */
 	static uint16_t getFrameRate();
 
-	static WindowBase* getMainWindow();
+	static WindowBase* getWindow();
+
+	static void     setInputRate(uint16_t rate);
+	static uint16_t getInputRate();
+	static void     setUpdateRate(uint16_t rate);
+	static uint16_t getUpdateRate();
+	static void     setRenderRate(uint16_t rate);
+	static uint16_t getRenderRate();
 
 	static Registry registry;
 
 	static void init();
-	static void     deinit();
+	static void deinit();
 
 private:
 	static bool     running;
@@ -67,7 +74,6 @@ private:
 	static uint16_t updateRate;
 	static uint16_t renderRate;
 	static uint16_t frameRate;
-	static uint16_t frameRateLimit;
 
 	static Application* app;
 	static WindowBase*  window;
