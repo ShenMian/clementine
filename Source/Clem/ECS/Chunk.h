@@ -3,10 +3,10 @@
 
 #pragma once
 
-#include "Entity.h"
 #include "config.h"
 #include <any>
 #include <array>
+#include <cassert>
 #include <map>
 #include <typeindex>
 #include <unordered_map>
@@ -18,16 +18,16 @@ struct alignas(chunk_alignment) Chunk
 {
 public:
 	template <typename Com, typename... Args>
-	Com& addComponent(const Entity&, Args&&... args);
+	Com& addComponent(id_type id, Args&&... args);
 
 	template <typename Com>
-	void removeComponent(const Entity&);
+	void removeComponent(id_type id);
 
 	template <typename Com>
-	Com& getComponent(const Entity&);
+	Com& getComponent(id_type id);
 
 	template <typename Com>
-	bool hasComponent(const Entity&);
+	bool hasComponent(id_type id);
 
 	size_t getSize() const;
 
@@ -43,31 +43,31 @@ private:
 };
 
 template <typename Com, typename... Args>
-inline Com& Chunk::addComponent(const Entity& e, Args&&... args)
+inline Com& Chunk::addComponent(id_type id, Args&&... args)
 {
-	components[e.id()][Typeid<Com>()] = Com(args...);
+	components[id][Typeid<Com>()] = Com(args...);
 	size++;
-	return std::any_cast<Com&>(components[e.id()][Typeid<Com>()]);
+	return std::any_cast<Com&>(components[id][Typeid<Com>()]);
 }
 
 template <typename Com>
-inline void Chunk::removeComponent(const Entity& e)
+inline void Chunk::removeComponent(id_type id)
 {
-	components[e.id()][Typeid<Com>()].reset();
+	components[id][Typeid<Com>()].reset();
 	size--;
 }
 
 template <typename Com>
-[[nodiscard]] inline Com& Chunk::getComponent(const Entity& e)
+[[nodiscard]] inline Com& Chunk::getComponent(id_type id)
 {
-	assert(components[e.id()][Typeid<Com>()].has_value());
-	return std::any_cast<Com&>(components[e.id()][Typeid<Com>()]);
+	assert(components[id][Typeid<Com>()].has_value());
+	return std::any_cast<Com&>(components[id][Typeid<Com>()]);
 }
 
 template <typename Com>
-[[nodiscard]] inline bool Chunk::hasComponent(const Entity& e)
+[[nodiscard]] inline bool Chunk::hasComponent(id_type id)
 {
-	return components[e.id()][Typeid<Com>()].has_value();
+	return components[id][Typeid<Com>()].has_value();
 }
 
 } // namespace clem

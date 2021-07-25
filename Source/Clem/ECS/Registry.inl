@@ -43,7 +43,7 @@ inline Com& Registry::addComponent(const Entity& e, Args&&... args)
 		chunk = it->second;
 	*/
 
-	return chunk->addComponent<Com>(e, std::forward<Args>(args)...);
+	return chunk->addComponent<Com>(e.id(), std::forward<Args>(args)...);
 }
 
 template <typename Com>
@@ -52,7 +52,7 @@ inline void Registry::removeComponent(const Entity& e)
 	auto& archtype = entities[e.id()].archtype;
 	auto& chunk    = entities[e.id()].chunk;
 
-	chunk.removeComponent<Com>(e);
+	chunk.removeComponent<Com>(e.id());
 
 	/*
 	auto it = chunks.find(archtype);
@@ -77,7 +77,7 @@ inline void Registry::removeComponent(const Entity& e)
 template <typename Com>
 [[nodiscard]] inline Com& Registry::getComponent(const Entity& e)
 {
-	return entities[e.id()].chunk->getComponent<Com>(e);
+	return entities[e.id()].chunk->getComponent<Com>(e.id());
 }
 
 template <typename... Coms>

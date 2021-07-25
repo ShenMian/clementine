@@ -4,7 +4,7 @@
 #pragma once
 
 #include "Archtype.h"
-#include "Chunk.h" // FIXME: incude Entity -> include Registry
+#include "Chunk.h"
 #include <functional>
 #include <map>
 #include <memory_resource>
