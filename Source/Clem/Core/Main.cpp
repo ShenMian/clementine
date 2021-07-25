@@ -35,13 +35,14 @@ namespace clem
 static uint16_t frames = 0;
 
 Registry     Main::registry;
-bool         Main::running     = false;
-bool         Main::paused      = false;
-uint16_t     Main::msPerInput  = 1000 / 144;
-uint16_t     Main::msPerUpdate = 1000 / 144;
-uint16_t     Main::msPerRender = 1000 / 144;
-uint16_t     Main::frameRate   = 0;
-Application* Main::app         = nullptr;
+bool         Main::running        = false;
+bool         Main::paused         = false;
+uint16_t     Main::inputRate      = 144;
+uint16_t     Main::updateRate     = 144;
+uint16_t     Main::renderRate     = 144;
+uint16_t     Main::frameRate      = 0;
+uint16_t     Main::frameRateLimit = 144;
+Application* Main::app            = nullptr;
 WindowBase*  Main::window;
 
 int Main::main(int argc, char* argv[])
@@ -135,7 +136,7 @@ void Main::update(uint16_t dt)
 void Main::render(uint16_t dt)
 {
 	PROFILE_FUNC();
-	
+
 	static uint16_t lag = 0;
 	lag += dt;
 	if(lag >= msPerRender)
@@ -161,9 +162,11 @@ void Main::updateFrameRate(uint16_t dt)
 	}
 
 	// 积分控制. 限制主循环速度, 减少 CPU 占用
-	static const auto target   = std::min({msPerInput, msPerUpdate, msPerRender});
-	static uint16_t   integral = 0;
-	auto              error    = target - dt;
+	const auto      target   = static_cast<uint16_t>(std::max(
+      std::min({1000 / inputRate, 1000 / msPerUpdate, 1000 / msPerRender}),
+      1000 / frameRateLimit));
+	static uint16_t integral = 0;
+	auto            error    = target - dt;
 	integral += error > 0 ? 1 : (integral > 0 ? -1 : 0);
 	if(error < 0 && integral == 0)
 		return;

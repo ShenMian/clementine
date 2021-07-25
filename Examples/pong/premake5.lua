@@ -17,6 +17,7 @@ project "Pong"
     "%{thirdparty.asio}/include",
     "%{thirdparty.entt}/include",
     "%{thirdparty.glad}/include",
+    "%{thirdparty.glfw}/include",
     "%{thirdparty.imgui}/include",
     "%{thirdparty.imgui}/include/imgui",
     "%{thirdparty.spdlog}/include",

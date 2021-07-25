@@ -9,6 +9,9 @@
 using namespace std;
 using namespace clem;
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 class DevMenu : public Layer
 {
 public:
@@ -20,7 +23,18 @@ public:
 
 			if(ImGui::BeginMenu("Rendering"))
 			{
-				ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
+				ImGui::Text("%3u FPS, %2.1f ms/frame", Main::getFrameRate(), 1000.0f / Main::getFrameRate());
+				
+				static float fpsLimit = 60.0f;
+				ImGui::SliderFloat("FPS limit", &fpsLimit, 30.0f, 144.4f, "%.1f");
+
+				if(ImGui::BeginMenu("OpenGL info"))
+				{
+					ImGui::Text("Version : %s", glGetString(GL_VERSION));
+					ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
+					ImGui::Text("Vendor  : %s", glGetString(GL_VENDOR));
+					ImGui::EndMenu();
+				}
 				ImGui::EndMenu();
 			}
 

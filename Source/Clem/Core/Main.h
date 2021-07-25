@@ -58,15 +58,16 @@ public:
 	static Registry registry;
 
 	static void init();
-	static void deinit();
+	static void     deinit();
 
 private:
 	static bool     running;
 	static bool     paused;
-	static uint16_t msPerInput;
-	static uint16_t msPerUpdate;
-	static uint16_t msPerRender;
+	static uint16_t inputRate;
+	static uint16_t updateRate;
+	static uint16_t renderRate;
 	static uint16_t frameRate;
+	static uint16_t frameRateLimit;
 
 	static Application* app;
 	static WindowBase*  window;
