@@ -9,73 +9,6 @@
 using namespace std;
 using namespace clem;
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
-class DevMenu : public Layer
-{
-public:
-	void update(Time dt) override
-	{
-		if(flag)
-		{
-			ImGui::Begin("Dev Menu", &flag);
-
-			if(ImGui::BeginMenu("Rendering"))
-			{
-				ImGui::Text("%3u FPS, %2.1f ms/frame", Main::getFrameRate(), 1000.0f / Main::getFrameRate());
-				
-				static float fpsLimit = 60.0f;
-				ImGui::SliderFloat("FPS limit", &fpsLimit, 30.0f, 144.4f, "%.1f");
-
-				if(ImGui::BeginMenu("OpenGL info"))
-				{
-					ImGui::Text("Version : %s", glGetString(GL_VERSION));
-					ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
-					ImGui::Text("Vendor  : %s", glGetString(GL_VENDOR));
-					ImGui::EndMenu();
-				}
-				ImGui::EndMenu();
-			}
-
-			if(ImGui::BeginMenu("Entities"))
-			{
-				ImGui::Text("ID    Tag        Position");
-				Main::registry.all([](const auto& e) {
-					ImGui::Text("%-5d", e.id());
-					ImGui::SameLine();
-					if(e.anyOf<Tag>())
-						ImGui::Text("%-10s", e.get<Tag>().str.c_str());
-					else
-						ImGui::Text("(null)    ");
-					ImGui::SameLine();
-					if(e.anyOf<Transform>())
-						ImGui::Text("%-4.1f, %-4.1f", e.get<Transform>().getWorldPosition().x, e.get<Transform>().getWorldPosition().y);
-					else
-						ImGui::Text("(null)    ");
-				});
-				ImGui::EndMenu();
-			}
-
-			if(ImGui::BeginMenu("Profile"))
-			{
-				if(ImGui::MenuItem("Start", "Start profiling"))
-				{
-				}
-				if(ImGui::MenuItem("Stop", "Stop profiling"))
-				{
-				}
-				ImGui::EndMenu();
-			}
-			
-			ImGui::End();
-		}
-	}
-
-private:
-	bool flag = true;
-};
-
 // TODO: 碰撞检测: 乒乓球反弹, 约束球拍
 
 class App : public Application
@@ -88,7 +21,7 @@ public:
 
 	void init() override
 	{
-		Main::getMainWindow()->add(new DevMenu);
+		Main::getWindow()->add(new DevelopMenu);
 
 		// 加载音频文件
 		pop.loadFromFile("assets/pop.wav");

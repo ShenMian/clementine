@@ -18,6 +18,8 @@ public:
 
 	void init() override
 	{
+		Main::getWindow()->add(new DevelopMenu);
+
 		auto entity = Main::registry.create();
 		entity.add<Transform>();
 		entity.get<Transform>().setPosition({1, 1});
