@@ -17,16 +17,16 @@ namespace clem
 struct alignas(chunk_alignment) Chunk
 {
 public:
-	template <typename Com, typename... Args>
-	Com& addComponent(id_type id, Args&&... args);
+	template <typename T, typename... Args>
+	T& addComponent(id_type id, Args&&... args);
 
-	template <typename Com>
+	template <typename T>
 	void removeComponent(id_type id);
 
-	template <typename Com>
-	Com& getComponent(id_type id);
+	template <typename T>
+	T& getComponent(id_type id);
 
-	template <typename Com>
+	template <typename T>
 	bool hasComponent(id_type id);
 
 	size_t getSize() const;
@@ -42,32 +42,32 @@ private:
 	std::unordered_map<id_type, std::unordered_map<TypeIndex, std::any>> components;
 };
 
-template <typename Com, typename... Args>
-inline Com& Chunk::addComponent(id_type id, Args&&... args)
+template <typename T, typename... Args>
+inline T& Chunk::addComponent(id_type id, Args&&... args)
 {
-	components[id][Typeid<Com>()] = Com(args...);
+	components[id][Typeid<T>()] = T(args...);
 	size++;
-	return std::any_cast<Com&>(components[id][Typeid<Com>()]);
+	return std::any_cast<T&>(components[id][Typeid<T>()]);
 }
 
-template <typename Com>
+template <typename T>
 inline void Chunk::removeComponent(id_type id)
 {
-	components[id][Typeid<Com>()].reset();
+	components[id][Typeid<T>()].reset();
 	size--;
 }
 
-template <typename Com>
-[[nodiscard]] inline Com& Chunk::getComponent(id_type id)
+template <typename T>
+[[nodiscard]] inline T& Chunk::getComponent(id_type id)
 {
-	assert(components[id][Typeid<Com>()].has_value());
-	return std::any_cast<Com&>(components[id][Typeid<Com>()]);
+	assert(components[id][Typeid<T>()].has_value());
+	return std::any_cast<T&>(components[id][Typeid<T>()]);
 }
 
-template <typename Com>
+template <typename T>
 [[nodiscard]] inline bool Chunk::hasComponent(id_type id)
 {
-	return components[id][Typeid<Com>()].has_value();
+	return components[id][Typeid<T>()].has_value();
 }
 
 } // namespace clem
