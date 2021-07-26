@@ -7,7 +7,7 @@
 namespace clem
 {
 
-Archtype::Archtype(std::set<std::type_index>&& types)
+Archtype::Archtype(std::set<TypeIndex>&& types)
 		: types(std::move(types))
 {
 }
@@ -27,6 +27,7 @@ bool Archtype::operator<(const Archtype& rhs) const
 	return types < rhs.types;
 }
 
+/*
 [[nodiscard]] size_t Archtype::hashCode() const
 {
 	size_t code = 0;
@@ -34,5 +35,6 @@ bool Archtype::operator<(const Archtype& rhs) const
 		code ^= type.hash_code();
 	return code;
 }
+*/
 
 } // namespace clem

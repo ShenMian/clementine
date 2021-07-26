@@ -3,11 +3,10 @@
 
 #pragma once
 
+#include "config.h"
 #include <cstddef>
 #include <set>
 #include <typeindex>
-
-// TODO: Avoid RTTI
 
 namespace clem
 {
@@ -19,7 +18,7 @@ class Archtype
 public:
 	Archtype() = default;
 
-	Archtype(std::set<std::type_index>&&);
+	Archtype(std::set<TypeIndex>&&);
 
 	/**
 	 * @brief 判断是否有指定的全部类型.
@@ -59,16 +58,16 @@ public:
 	bool operator==(const Archtype& rhs) const;
 	bool operator<(const Archtype& rhs) const;
 
-	size_t hashCode() const;
+	// size_t hashCode() const;
 
 private:
-	std::set<std::type_index> types;
+	std::set<TypeIndex> types;
 };
 
 template <typename... Ts>
 inline Archtype makeArchtype()
 {
-	return Archtype(std::move({std::type_index(typeid(Ts))...}));
+	return Archtype(std::move({Typeid<Ts>()...}));
 }
 
 } // namespace clem
