@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -13,15 +13,15 @@ class OpenGLShader : public Shader
 {
 public:
 	/**
-	 * @brief ¹¹Ôìº¯Êı.
+	 * @brief æ„é€ å‡½æ•°.
 	 *
-	 * @param vertexSrc vertex shader µÄÔ´´úÂë.
-	 * @param fragmentSrc fragment shader µÄÔ´´úÂë.
+	 * @param vertexSrc vertex shader çš„æºä»£ç .
+	 * @param fragmentSrc fragment shader çš„æºä»£ç .
 	 */
 	OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
 
 	/**
-	 * @brief Ä¬ÈÏÎö¹¹º¯Êı.
+	 * @brief é»˜è®¤ææ„å‡½æ•°.
 	 */
 	~OpenGLShader();
 

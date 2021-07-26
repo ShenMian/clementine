@@ -4,6 +4,9 @@
 #include "OpenGLVertexBuffer.h"
 #include <glad/glad.h>
 
+#include <type_traits>
+static_assert(std::is_same<id_type, GLuint>::value);
+
 namespace clem
 {
 
