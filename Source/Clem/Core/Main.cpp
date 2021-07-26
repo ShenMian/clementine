@@ -38,9 +38,9 @@ static uint16_t frames = 0;
 Registry     Main::registry;
 bool         Main::running    = false;
 bool         Main::paused     = false;
-uint16_t     Main::inputRate  = 144;
+uint16_t     Main::inputRate  = 250; // 125, 250, 500, 1000 TODO: 根据外设回报率自动调整
 uint16_t     Main::updateRate = 144;
-uint16_t     Main::renderRate = 144;
+uint16_t     Main::renderRate = 144; // 60, 144, 165, 240 TODO: 根据显示器刷新率自动调整
 uint16_t     Main::frameRate  = 0;
 Application* Main::app        = nullptr;
 WindowBase*  Main::window;
@@ -145,7 +145,8 @@ void Main::render(uint16_t dt)
 	if(lag >= 1000 / renderRate)
 	{
 		window->update(milliseconds(dt));
-		lag = 0;
+		frames++;
+		lag -= 1000 / renderRate;
 	}
 }
 
@@ -162,8 +163,6 @@ void Main::updateFrameRate(uint16_t dt)
 		frames = lag = 0;
 		window->setTitle(app->getName() + " | " + std::to_string(frameRate) + "FPS");
 	}
-
-	frames++;
 
 	// 积分控制. 限制主循环速度, 减少 CPU 占用
 	const auto target = static_cast<uint16_t>(
