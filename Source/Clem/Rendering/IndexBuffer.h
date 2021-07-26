@@ -3,16 +3,16 @@
 
 #pragma once
 
-#include <string>
+#include <cstddef>
 #include <memory>
 
 namespace clem
 {
 
-class Shader
+class IndexBuffer
 {
 public:
-	static std::shared_ptr<Shader> create(const std::string& vertexSrc, const std::string& fragmentSrc);
+	static std::shared_ptr<IndexBuffer> create(const void* data, size_t size);
 
 	virtual void bind() = 0;
 };

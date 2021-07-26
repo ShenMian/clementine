@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Clem/Rendering/Shader.h"
+#include <string>
 
 namespace clem
 {
@@ -27,7 +28,7 @@ public:
 	void bind() override;
 
 private:
-	uint32_t program;
+	unsigned int program;
 };
 
 } // namespace clem

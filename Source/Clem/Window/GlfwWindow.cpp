@@ -6,7 +6,7 @@
 #include "Clem/GUI/GUI.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
-#include "Clem/Rendering/OpenGL/OpenGLShader.h"
+#include "Clem/Rendering/Rendering.h"
 #include <cassert>
 #include <cstdio>
 #include <glad/glad.h>
@@ -76,7 +76,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 	ImGui_ImplGlfw_InitForOpenGL(handle, true);
 	ImGui_ImplOpenGL3_Init("#version 410");
 
-	std::string vertexSrc = R"(
+	shader = Shader::create(R"(
 		#version 410
 
 		layout(location = 0) in vec3 a_Position;
@@ -85,8 +85,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 		{
 			gl_Position = vec4(a_Position, 1.0);
 		}
-	)";
-	std::string fregmentSrc = R"(
+	)", R"(
 		#version 410
 
 		layout(location = 0) out vec4 color;
@@ -94,15 +93,10 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 		void main()
 		{
 		}
-	)";
+	)");
 
-	shader = std::make_unique<OpenGLShader>(vertexSrc, fregmentSrc);
-
-	glGenVertexArrays(1, &vertexArray);
+	glCreateVertexArrays(1, &vertexArray);
 	glBindVertexArray(vertexArray);
-
-	glGenBuffers(1, &vertexBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 
 	float vertices[3 * 3] = {
 			-0.5f,
@@ -117,16 +111,15 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 			0.5f,
 			0.0f,
 	};
+	unsigned int indices[3] = {0, 1, 2};
 
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices, GL_STATIC_DRAW);
+	vertexBuffer = VertexBuffer::create(&vertices, sizeof(vertices));
+	indexBuffer  = IndexBuffer::create(&indices, sizeof(indices));
+
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
 
-	glGenBuffers(1, &indexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-
-	unsigned int indices[3] = {0, 1, 2};
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), &indices, GL_STATIC_DRAW);
+	assert(glGetError() == GL_NO_ERROR);
 }
 
 GlfwWindow::~GlfwWindow()
@@ -145,6 +138,8 @@ void GlfwWindow::update(Time dt)
 
 	glBindVertexArray(vertexArray);
 	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+
+	assert(glGetError() == GL_NO_ERROR);
 
 	renderGui(dt);
 	glfwSwapBuffers(handle);

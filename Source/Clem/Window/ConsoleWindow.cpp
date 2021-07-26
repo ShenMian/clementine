@@ -3,7 +3,7 @@
 
 #include "ConsoleWindow.h"
 #include "Clem/Platform.h"
-#include "Clem/Rendering/Output.h"
+#include "Clem/Rendering/Rendering.h"
 #include <cassert>
 #include <cstdio>
 
