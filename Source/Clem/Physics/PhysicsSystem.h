@@ -19,7 +19,7 @@ public:
 	{
 		registry.each<Rigidbody>([&](const Entity& e, Rigidbody& body) {
 			auto& tf = e.get<Transform>();
-			switch(body.getType())
+			switch(body.type)
 			{
 			case Rigidbody::Type::Dynamic:
 				body.velocity += (body.getAcceleration() + gravity) * dt.seconds(); // v += (a + g) * dt;

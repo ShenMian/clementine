@@ -28,25 +28,4 @@ Vector2 Rigidbody::getAcceleration() const
 	return force / mass;
 }
 
-void Rigidbody::setMass(float m)
-{
-	assert(m > 0);
-	mass = m;
-}
-
-float Rigidbody::getMass() const
-{
-	return mass;
-}
-
-void Rigidbody::setType(Type t)
-{
-	type = t;
-}
-
-Rigidbody::Type Rigidbody::getType() const
-{
-	return type;
-}
-
 } // namespace clem

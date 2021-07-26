@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include "Clem/Components/Component.h"
 #include "Clem/Core/Math/Math.h"
 #include "Clem/ECS/ECS.h"
 
@@ -18,7 +17,7 @@ namespace clem
 /**
  * @brief 刚体.
  */
-class Rigidbody : public Component
+class Rigidbody
 {
 	CLEM_DECLARE_TYPE;
 
@@ -55,33 +54,12 @@ public:
 	 * @brief 获取加速度.
 	 */
 	Vector2 getAcceleration() const;
-
-	/**
-	 * @brief 设置质量.
-	 *
-	 * @param m 质量, kg;
-	 */
-	void setMass(float m);
-
-	/**
-	 * @brief 获取质量.
-	 */
-	float getMass() const;
-
-	/**
-	 * @brief 设置类型.
-	 */
-	void setType(Type);
-
-	/**
-	 * @brief 获取类型.
-	 */
-	Type getType() const;
+	
+	float mass = 1.0f;
+	Type  type = Type::Kinematic;
 
 private:
 	Vector2 force;
-	float   mass = 1.0f;
-	Type    type = Type::Kinematic;
 };
 
 CLEM_DEFINE_TYPE(Rigidbody);

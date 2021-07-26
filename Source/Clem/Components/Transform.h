@@ -28,6 +28,9 @@ public:
 	void       setParent(Transform*);
 	Transform* getParent() const;
 
+	Vector2 rotation;
+	Vector2 scale;
+
 private:
 	Vector2    local;
 	Vector2    world;
