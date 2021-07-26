@@ -9,8 +9,7 @@
 using namespace std;
 using namespace clem;
 
-// TODO: UI: 剩余雷数, 计时, 开始菜单(难度选择)
-//       先揭开第一个方格再生成地雷, 防止第一次就触碰到地雷
+// TODO: 计时, 先揭开第一个方格再生成地雷, 防止第一次就触碰到地雷
 
 class App : public Application
 {
@@ -25,7 +24,6 @@ public:
 		opening.loadFromFile("assets/opening.wav");
 		explode.loadFromFile("assets/explode.wav");
 
-		// TODO: UI
 		puts(R"(
 /--[Level]--\
 | 1. Easy   |

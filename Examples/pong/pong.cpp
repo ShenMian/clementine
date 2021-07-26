@@ -9,7 +9,7 @@
 using namespace std;
 using namespace clem;
 
-// TODO: 碰撞检测: 乒乓球反弹, 约束球拍
+// TODO: 物理引擎: 碰撞检测, 乒乓球反弹, 约束球拍
 
 class App : public Application
 {
