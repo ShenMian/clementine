@@ -59,18 +59,13 @@ bool collision(BoxCollider box, Line2 l)
 	const auto k = dy / dx;
 	const auto b = l.start.y;
 
-	// �ж��Ƿ�������ཻ
 	auto y = k * rect.left() + b;
 	if(rect.bottom() <= y && y <= rect.top())
 		return true;
 
-	// �ж��Ƿ����ұ��ཻ
 	y = k * rect.right() + b;
 	if(rect.bottom() <= y && y <= rect.top())
 		return true;
-
-	// TODO: �ж��Ƿ����ϱ��ཻ
-	// TODO: �ж��Ƿ����±��ཻ
 
 	return false;
 }

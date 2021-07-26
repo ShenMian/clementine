@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include <Clem.h>
@@ -9,8 +9,8 @@
 using namespace std;
 using namespace clem;
 
-// TODO: UI: Ê£ÓàÀ×Êı, ¼ÆÊ±, ¿ªÊ¼²Ëµ¥(ÄÑ¶ÈÑ¡Ôñ)
-//       ÏÈ½Ò¿ªµÚÒ»¸ö·½¸ñÔÙÉú³ÉµØÀ×, ·ÀÖ¹µÚÒ»´Î¾Í´¥Åöµ½µØÀ×
+// TODO: UI: å‰©ä½™é›·æ•°, è®¡æ—¶, å¼€å§‹èœå•(éš¾åº¦é€‰æ‹©)
+//       å…ˆæ­å¼€ç¬¬ä¸€ä¸ªæ–¹æ ¼å†ç”Ÿæˆåœ°é›·, é˜²æ­¢ç¬¬ä¸€æ¬¡å°±è§¦ç¢°åˆ°åœ°é›·
 
 class App : public Application
 {
@@ -188,13 +188,13 @@ private:
 		return x >= 0 && x < board_size.x && y >= 0 && y < board_size.y;
 	}
 
-	Size2i            board_size;  // À×Çø´óĞ¡
-	int               mine_num;    // µØÀ×ÊıÁ¿
-	char              map[30][16]; // À×Çø
-	int               surplus;     // Ê£ÓàÎ´½Ò¿ª¸ñÊı
-	vector<Point2i>   flags;       // ±ê¼ÇÎ»ÖÃ
-	Sound             opening;     // ¿ª³¡ÒôĞ§(ÓÎÏ·¿ªÊ¼)
-	Sound             explode;     // Òı±¬µØÀ×ÒôĞ§(ÓÎÏ·Ê§°Ü)
+	Size2i            board_size;  // é›·åŒºå¤§å°
+	int               mine_num;    // åœ°é›·æ•°é‡
+	char              map[30][16]; // é›·åŒº
+	int               surplus;     // å‰©ä½™æœªæ­å¼€æ ¼æ•°
+	vector<Point2i>   flags;       // æ ‡è®°ä½ç½®
+	Sound             opening;     // å¼€åœºéŸ³æ•ˆ(æ¸¸æˆå¼€å§‹)
+	Sound             explode;     // å¼•çˆ†åœ°é›·éŸ³æ•ˆ(æ¸¸æˆå¤±è´¥)
 	Source            source;
 	Random            random;
 	Sprite*           sprite;

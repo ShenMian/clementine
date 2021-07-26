@@ -1,13 +1,13 @@
-// Copyright 2021 SMS
+Ôªø// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Session.h"
 #include "Recorder.h"
+#include <utility>
 
-// TODO: ¿˚”√“∆∂Ø”Ô“ÂÃ·∏ﬂ–‘ƒ‹
 void Session::addCpuSample(const CpuSample& s)
 {
-	samples.emplace_back(s);
+	samples.emplace_back(std::move(s));
 }
 
 void Session::clear()
