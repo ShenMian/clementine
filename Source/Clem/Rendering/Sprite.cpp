@@ -22,7 +22,7 @@ void Sprite::drawPoint(int x, int y, const Tile& t)
 	if(size.area() == 0)
 	{
 		CLEM_LOG_WARN("core", "try to draw something when the sprite size is zero");
-		assert(false); // TODO: debug 用
+		return;
 	}
 	drawPoint({x, y}, t);
 }
