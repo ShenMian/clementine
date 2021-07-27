@@ -17,6 +17,11 @@ class Transform
 	CLEM_DECLARE_TYPE;
 
 public:
+	Vector2 translation;
+	Vector2 rotation;
+	Vector2 scale;
+
+	/*
 	void   setPosition(const Point2&);
 	Point2 getPosition() const;
 
@@ -28,14 +33,12 @@ public:
 	void       setParent(Transform*);
 	Transform* getParent() const;
 
-	Vector2 rotation;
-	Vector2 scale;
-
 private:
 	Vector2    local;
 	Vector2    world;
 	bool       dirty  = true;
 	Transform* parent = nullptr;
+	*/
 };
 
 CLEM_DEFINE_TYPE(Transform);

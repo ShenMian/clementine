@@ -66,8 +66,6 @@ public:
 				ImGui::EndMenu();
 			}
 
-			ImGui::ShowDemoWindow();
-
 			ImGui::End();
 		}
 	}

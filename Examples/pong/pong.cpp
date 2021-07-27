@@ -86,16 +86,16 @@ public:
 			else if(event->keyCode == KeyCode::S)
 				body.velocity = {0, player_speed};
 
-			if(tf.getPosition().y + body.velocity.y < 1)
+			if(tf.translation.y + body.velocity.y < 1)
 			{
 				body.velocity = Vector2::zero;
-				tf.setPosition({tf.getPosition().x, 1});
+				tf.translation.y = 1;
 				return;
 			}
-			else if(tf.getPosition().y + body.velocity.y > 19)
+			else if(tf.translation.y + body.velocity.y > 19)
 			{
-				body.velocity = Vector2::zero;
-				tf.setPosition({tf.getPosition().x, 19});
+				body.velocity  = Vector2::zero;
+				tf.translation.y = 19;
 				return;
 			}
 		});
@@ -103,9 +103,9 @@ public:
 		// Bat2 由AI控制, 不推测路径
 		// 为 bats[1] 创建一个脚本
 		bats[1].add<Script>().onUpdate = [&](Time) {
-			auto  ballPos = Main::registry.get("ball").get<Transform>().getPosition();
+			auto  ballPos = Main::registry.get("ball").get<Transform>().translation;
 			auto& batBody = bats[1].get<Rigidbody>();
-			auto  batPos  = bats[1].get<Transform>().getPosition();
+			auto  batPos  = bats[1].get<Transform>().translation;
 			auto& batSize = bats[1].get<Sprite>().getSize();
 
 			// 获取 bats[1] 的 Sprite 的几何中心
@@ -121,13 +121,13 @@ public:
 			auto& ts      = ball.get<Transform>();
 			auto& vel     = ball.get<Rigidbody>().velocity;
 			auto& sprite  = ball.get<Sprite>();
-			auto& ballPos = ts.getPosition();
+			auto& ballPos = ts.translation;
 
 			// 球与球拍
 			for(int i = 0; i < 2; i++)
 			{
 				auto& tf   = bats[i].get<Transform>();
-				auto& pos  = tf.getPosition();
+				auto& pos  = tf.translation;
 				auto& size = bats[i].get<Sprite>().getSize();
 				Rect2 rect(pos, Size2((float)size.x, (float)size.y));
 
@@ -136,12 +136,12 @@ public:
 					if(ballPos.x < 39)
 					{
 						left.play(pop);
-						ts.setPosition({pos.x + 1, ballPos.y});
+						ts.translation.x++;
 					}
 					else
 					{
 						right.play(pop);
-						ts.setPosition({pos.x - 1, ballPos.y});
+						ts.translation.x--;
 					}
 					vel.x = -vel.x;
 					vel.y += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
@@ -151,15 +151,15 @@ public:
 			// 球拍与边界
 			auto& tf   = bats[1].get<Transform>();
 			auto& body = bats[1].get<Rigidbody>();
-			if(tf.getPosition().y + body.velocity.y < 1)
+			if(tf.translation.y + body.velocity.y < 1)
 			{
 				body.velocity = Vector2::zero;
-				tf.setPosition({tf.getPosition().x, 1});
+				tf.translation.y = 1;
 			}
-			else if(tf.getPosition().y + body.velocity.y > 19)
+			else if(tf.translation.y + body.velocity.y > 19)
 			{
-				body.velocity = Vector2::zero;
-				tf.setPosition({tf.getPosition().x, 19});
+				body.velocity  = Vector2::zero;
+				tf.translation.y = 19;
 			}
 
 			// 球与边界
@@ -185,14 +185,14 @@ public:
 			}
 			else if(ballPos.y < 1)
 			{
-				ts.setPosition({ballPos.x, 1});
+				ts.translation.y = 1;
 				vel.y = -vel.y;
 				vel.x += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 				up.play(pop);
 			}
 			else if(ballPos.y >= 24)
 			{
-				ts.setPosition({ballPos.x, 23});
+				ts.translation.y = 23;
 				vel.y = -vel.y;
 				vel.x += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 				down.play(pop);
@@ -209,7 +209,7 @@ public:
 	// 重置 ball 的位置
 	void resetBall()
 	{
-		Main::registry.get("ball").get<Transform>().setPosition({39, 12});
+		Main::registry.get("ball").get<Transform>().translation = {39, 12};
 		Main::registry.get("ball").get<Rigidbody>().velocity = Vector2::zero;
 
 		static future<void> h;
@@ -222,8 +222,8 @@ public:
 	// 重置 bat 的位置
 	void resetBats()
 	{
-		bats[0].get<Transform>().setPosition({2, 10});
-		bats[1].get<Transform>().setPosition({77, 10});
+		bats[0].get<Transform>().translation = {2, 10};
+		bats[1].get<Transform>().translation = {77, 10};
 	}
 
 private:

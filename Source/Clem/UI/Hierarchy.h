@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "Properties.h"
 #include "Layer.h"
+#include "Properties.h"
 #include <glad/glad.h>
 #include <imgui/imgui.h>
 
@@ -14,30 +14,60 @@ namespace clem::ui
 class Hierarchy : public Layer
 {
 public:
-  void update(Time dt) override
+	void update(Time dt) override
 	{
-		if(visible)
+		if(!visible)
+			return;
+
+		ImGui::Begin("Hierarchy", &visible);
+
+		if(ImGui::CollapsingHeader("Tagged", ImGuiTreeNodeFlags_DefaultOpen))
+			Main::registry.each<Tag>([this](const auto e) { showEntity(e); });
+
+		if(ImGui::CollapsingHeader("Untagged", ImGuiTreeNodeFlags_DefaultOpen))
+			Main::registry.all([this](const auto e) {
+			if(e.noneOf<Tag>())
+				showEntity(e);
+		});
+
+		// ¿Õ°×ÇøÓòÓÒ¼ü
+		if(ImGui::BeginPopupContextWindow(0, 1, false))
 		{
-			ImGui::Begin("Hierarchy", &visible);
-			if(ImGui::CollapsingHeader("Entities"))
-			{
-				Main::registry.all([](const auto& e) {
-					ImGui::Text("%-5d", e.id());
-					ImGui::SameLine();
-					if(e.anyOf<Tag>())
-						ImGui::Text("%-10s", e.get<Tag>().str.c_str());
-					else
-						ImGui::Text("(null)    ");
-					ImGui::SameLine();
-					if(ImGui::Button((std::string("Properties##") + std::to_string(e.id())).c_str()))
-						Properties::entity = e;
-				});
-			}
-			ImGui::End();
+			if(ImGui::MenuItem("Create empty entity"))
+				Main::registry.create();
+			ImGui::EndPopup();
 		}
+
+		// ¿Õ°×ÇøÓò×ó¼ü
+		if(ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
+			Properties::entity = Entity();
+
+		ImGui::End();
 	}
 
 private:
+	void showEntity(const Entity& e)
+	{
+		auto flags = (Properties::entity == e ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
+		bool open;
+		if(e.anyOf<Tag>())
+			open = ImGui::TreeNodeEx((void*)(intptr_t)e.id(), flags, e.get<Tag>().str.c_str());
+		else
+			open = ImGui::TreeNodeEx((void*)(intptr_t)e.id(), flags, std::to_string(e.id()).c_str());
+
+		if(ImGui::IsItemClicked())
+			Properties::entity = e;
+		if(open)
+			ImGui::TreePop();
+
+		if(ImGui::BeginPopupContextItem())
+		{
+			if(ImGui::MenuItem("Delete"))
+				Main::registry.destroy(e);
+			ImGui::EndPopup();
+		}
+	}
+
 	bool visible = true;
 };
 

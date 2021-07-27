@@ -33,11 +33,31 @@ public:
 			return;
 		}
 
-		tag();
-		transform();
-		rigidbody();
-		sprite();
-		script();
+		showTag();
+		showTransform();
+		showRigidbody();
+		showSprite();
+		showScript();
+
+		// 空白区域右键
+		if(ImGui::BeginPopupContextWindow(0, 1, false))
+		{
+			if(ImGui::BeginMenu("Add component"))
+			{
+				if(entity.noneOf<Transform>() && ImGui::MenuItem("Transform"))
+				{
+					entity.add<Transform>();
+					ImGui::CloseCurrentPopup();
+				}
+				if(entity.noneOf<Rigidbody>() && ImGui::MenuItem("Rigidbody"))
+				{
+					entity.add<Rigidbody>();
+					ImGui::CloseCurrentPopup();
+				}
+				ImGui::EndMenu();
+			}
+			ImGui::EndPopup();
+		}
 
 		ImGui::End();
 	}
@@ -45,22 +65,28 @@ public:
 	inline static Entity entity;
 
 private:
-	inline void tag()
+	inline void showTag()
 	{
+		constexpr size_t max_size = 256;
 		if(entity.anyOf<Tag>())
 		{
 			auto& tag = entity.get<Tag>();
 
-			char buf[20];
-			strcpy_s(buf, 20, tag.str.c_str());
-			LEFT_LABEL(ImGui::InputText, "Tag", buf, 20);
+			char buf[max_size];
+			strcpy_s(buf, max_size, tag.str.c_str());
+			LEFT_LABEL(ImGui::InputText, "Tag", buf, max_size);
 			tag.str = std::string(buf);
 		}
 		else
-			LEFT_LABEL(ImGui::InputText, "Tag", "(null)", 6, ImGuiInputTextFlags_ReadOnly);
+		{
+			char buf[max_size] = {0};
+			LEFT_LABEL(ImGui::InputText, "Tag", buf, max_size);
+			if(strlen(buf))
+				entity.add<Tag>(std::string(buf));
+		}
 	}
 
-	inline void transform()
+	inline void showTransform()
 	{
 		if(entity.anyOf<Transform>())
 		{
@@ -69,44 +95,14 @@ private:
 				ImGui::PushItemWidth(50);
 				auto& tf = entity.get<Transform>();
 
-				auto& pos = tf.getPosition();
-				Vector2Edit("Transform", pos);
-				tf.setPosition(pos);
-
+				Vector2Edit("Transform", tf.translation);
 				Vector2Edit("Rotation", tf.rotation);
 				Vector2Edit("Scale", tf.scale);
-
-				/*
-				ImGui::PushID("0");
-				ImGui::Text("Position");
-				ImGui::SameLine();
-				LEFT_LABEL(ImGui::InputFloat, "x", &pos.x);
-				ImGui::SameLine();
-				LEFT_LABEL(ImGui::InputFloat, "y", &pos.y);
-				ImGui::PopID();
-
-				ImGui::PushID("1");
-				ImGui::Text("Rotation");
-				ImGui::SameLine();
-				LEFT_LABEL(ImGui::InputFloat, "x", &tf.rotation.x);
-				ImGui::SameLine();
-				LEFT_LABEL(ImGui::InputFloat, "y", &tf.rotation.y);
-				ImGui::PopID();
-
-				ImGui::PushID("2");
-				ImGui::Text("Scale   ");
-				ImGui::SameLine();
-				LEFT_LABEL(ImGui::InputFloat, "x", &tf.scale.x);
-				ImGui::SameLine();
-				LEFT_LABEL(ImGui::InputFloat, "y", &tf.scale.y);
-				ImGui::PopItemWidth();
-				ImGui::PopID();
-				*/
 			}
 		}
 	}
 
-	inline void rigidbody()
+	inline void showRigidbody()
 	{
 		if(entity.anyOf<Rigidbody>())
 		{
@@ -136,7 +132,7 @@ private:
 		}
 	}
 
-	inline void sprite()
+	inline void showSprite()
 	{
 		if(entity.anyOf<Sprite>())
 		{
@@ -146,7 +142,7 @@ private:
 		}
 	}
 
-	inline void script()
+	inline void showScript()
 	{
 		if(entity.anyOf<Script>())
 		{

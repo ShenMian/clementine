@@ -7,6 +7,7 @@
 namespace clem
 {
 
+/*
 void Transform::setPosition(const Point2& p)
 {
 	dirty = true;
@@ -52,4 +53,6 @@ Transform* Transform::getParent() const
 {
 	return parent;
 }
+*/
+
 } // namespace clem

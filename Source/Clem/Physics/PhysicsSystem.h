@@ -32,7 +32,7 @@ public:
 			case Rigidbody::Type::Static:
 				break;
 			}
-			tf.setPosition(tf.getPosition() + body.velocity); // p += v * dt;
+			tf.translation += body.velocity; // p += v * dt;
 		});
 	}
 
