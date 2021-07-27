@@ -259,7 +259,7 @@ void Main::init()
 	// 初始化窗口
 	WindowBase::init();
 	// window = new ConsoleWindow("Clementine", {80, 25});
-	window          = new GlfwWindow("Clementine", {1920 / 2, 1080 / 2});
+	window          = new GlfwWindow("Clementine", {1060, 640});
 	window->onClose = []() { Main::running = false; };
 
 	// 初始化 I/O
