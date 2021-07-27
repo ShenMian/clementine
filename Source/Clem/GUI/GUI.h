@@ -1,14 +1,15 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
 
-#include "Layer.h"
 #include "DevelopMenu.h"
+#include "Inspector.h"
+#include "Layer.h"
 
-#include <imgui/imgui.h>
 #include <imgui/backends/imgui_impl_glfw.h>
 #include <imgui/backends/imgui_impl_opengl3.h>
+#include <imgui/imgui.h>
 
 namespace clem
 {
