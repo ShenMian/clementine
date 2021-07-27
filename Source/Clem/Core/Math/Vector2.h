@@ -112,6 +112,8 @@ struct Vector2
 
 	operator Vector2i() const;
 
+	float& operator[](size_t index);
+
 	bool     operator==(const Vector2& v) const;
 	bool     operator!=(const Vector2& v) const;
 	Vector2  operator*(float n) const;

@@ -3,6 +3,7 @@
 
 #include "Vector2.h"
 
+#include <cassert>
 #include <cfloat>
 #include <cmath>
 
@@ -82,6 +83,22 @@ Vector2i Vector2::asInt() const
 Vector2::operator Vector2i() const
 {
 	return asInt();
+}
+
+float& Vector2::operator[](size_t index)
+{
+	switch(index)
+	{
+	case 0:
+		return x;
+
+	case 1:
+		return y;
+
+	default:
+		assert(false);
+		break;
+	}
 }
 
 bool Vector2::operator==(const Vector2& v) const
