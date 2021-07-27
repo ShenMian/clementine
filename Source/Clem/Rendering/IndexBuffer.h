@@ -14,7 +14,7 @@ class IndexBuffer
 public:
 	/**
 	 * @brief 创建 IndexBuffer.
-	 * 
+	 *
 	 * @param data 缓冲区数据指针.
 	 * @param size 缓冲区数据大小.
 	 */

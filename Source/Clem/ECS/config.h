@@ -5,8 +5,8 @@
 
 #include <cstddef>
 #include <cstdint>
-#include <typeindex>
 #include <type_traits>
+#include <typeindex>
 
 namespace clem
 {

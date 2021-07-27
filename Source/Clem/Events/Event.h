@@ -15,7 +15,6 @@ public:
 		mouse,
 		window,
 
-
 		key_press,
 		key_release,
 		key_repeat,
@@ -24,7 +23,7 @@ public:
 		mouse_click,
 		mouse_double_click,
 		mouse_wheeled,
-		
+
 		window_resize,
 		window_close
 	};

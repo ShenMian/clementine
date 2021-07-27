@@ -85,7 +85,8 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 		{
 			gl_Position = vec4(a_Position, 1.0);
 		}
-	)", R"(
+	)",
+													R"(
 		#version 410
 
 		layout(location = 0) out vec4 color;

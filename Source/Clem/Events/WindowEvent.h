@@ -25,5 +25,5 @@ public:
 	Type getType() const;
 
 private:
-	Type   type;
+	Type type;
 };

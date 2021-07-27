@@ -54,7 +54,7 @@ public:
 	 * @brief 获取加速度.
 	 */
 	Vector2 getAcceleration() const;
-	
+
 	float mass = 1.0f;
 	Type  type = Type::Kinematic;
 

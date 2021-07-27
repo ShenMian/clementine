@@ -9,7 +9,7 @@
 
 /**
  * @brief 事件分发器.
- * 
+ *
  * @note 观察者模式.
  */
 class EventDispatcher
