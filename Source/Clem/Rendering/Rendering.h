@@ -1,9 +1,9 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
+#include "IndexBuffer.h"
 #include "Shader.h"
 #include "VertexBuffer.h"
-#include "IndexBuffer.h"
 
 #include "Console/Camera.h"
 #include "Console/CharMap.h"

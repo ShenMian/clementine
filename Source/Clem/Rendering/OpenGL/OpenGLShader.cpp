@@ -4,10 +4,13 @@
 #include "OpenGLShader.h"
 #include <cassert>
 #include <glad/glad.h>
+#include <type_traits>
 #include <vector>
 
 namespace clem
 {
+
+static_assert(std::is_same<OpenGLShader::id_type, GLuint>::value);
 
 OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
 {

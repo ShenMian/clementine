@@ -12,6 +12,8 @@ namespace clem
 class OpenGLShader : public Shader
 {
 public:
+	using id_type = unsigned int;
+
 	/**
 	 * @brief 构造函数.
 	 *
@@ -28,7 +30,7 @@ public:
 	void bind() override;
 
 private:
-	unsigned int program;
+	id_type program;
 };
 
 } // namespace clem

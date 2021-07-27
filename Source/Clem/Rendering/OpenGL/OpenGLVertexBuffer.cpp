@@ -3,12 +3,12 @@
 
 #include "OpenGLVertexBuffer.h"
 #include <glad/glad.h>
-
 #include <type_traits>
-static_assert(std::is_same<id_type, GLuint>::value);
 
 namespace clem
 {
+
+static_assert(std::is_same<OpenGLVertexBuffer::id_type, GLuint>::value);
 
 OpenGLVertexBuffer::OpenGLVertexBuffer(const void* data, size_t size)
 {

@@ -3,9 +3,12 @@
 
 #include "OpenGLIndexBuffer.h"
 #include <glad/glad.h>
+#include <type_traits>
 
 namespace clem
 {
+
+static_assert(std::is_same<OpenGLIndexBuffer::id_type, GLuint>::value);
 
 OpenGLIndexBuffer::OpenGLIndexBuffer(const void* data, size_t size)
 {
