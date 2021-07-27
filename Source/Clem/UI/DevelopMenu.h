@@ -4,14 +4,13 @@
 #pragma once
 
 #include "Clem/Components/Tag.h"
-#include "Inspector.h"
 #include "Layer.h"
 #include <array>
 #include <glad/glad.h>
 #include <imgui/imgui.h>
 #include <numeric>
 
-namespace clem
+namespace clem::ui
 {
 
 class DevelopMenu : public Layer
@@ -67,22 +66,7 @@ public:
 				ImGui::EndMenu();
 			}
 
-			if(ImGui::BeginMenu("Entities"))
-			{
-				ImGui::Text("ID    Tag        ");
-				Main::registry.all([](const auto& e) {
-					ImGui::Text("%-5d", e.id());
-					ImGui::SameLine();
-					if(e.anyOf<Tag>())
-						ImGui::Text("%-10s", e.get<Tag>().str.c_str());
-					else
-						ImGui::Text("(null)    ");
-					ImGui::SameLine();
-					if(ImGui::Button((std::string("Inspect##") + std::to_string(e.id())).c_str()))
-						Inspector::entity = e;
-				});
-				ImGui::EndMenu();
-			}
+			ImGui::ShowDemoWindow();
 
 			ImGui::End();
 		}
@@ -92,4 +76,4 @@ private:
 	bool visible = true;
 };
 
-} // namespace clem
+} // namespace clem::ui

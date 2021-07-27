@@ -7,7 +7,7 @@
 
 #define LEFT_LABEL(func, label, ...) (ImGui::TextUnformatted(label), ImGui::SameLine(), func("##" label, __VA_ARGS__))
 
-namespace clem
+namespace clem::ui
 {
 
 class Layer
@@ -18,4 +18,4 @@ public:
 	virtual void detach();
 };
 
-} // namespace clem
+} // namespace clem::ui

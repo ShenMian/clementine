@@ -4,8 +4,8 @@
 #pragma once
 
 #include "DevelopMenu.h"
-#include "Inspector.h"
-#include "Layer.h"
+#include "Hierarchy.h"
+#include "Properties.h"
 
 #include <imgui/backends/imgui_impl_glfw.h>
 #include <imgui/backends/imgui_impl_opengl3.h>
@@ -14,7 +14,7 @@
 namespace clem
 {
 
-class GUI
+class UI
 {
 public:
 	static void init()

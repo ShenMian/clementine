@@ -8,7 +8,7 @@
 #include "Clem/Core/Core.h"
 #include "Clem/ECS/ECS.h"
 #include "Clem/Events/Events.h"
-#include "Clem/GUI/GUI.h"
+#include "Clem/UI/UI.h"
 #include "Clem/Networking/Networking.h"
 #include "Clem/Physics/Physics.h"
 #include "Clem/Rendering/Rendering.h"

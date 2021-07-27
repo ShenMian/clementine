@@ -21,8 +21,10 @@ public:
 
 	void init() override
 	{
-		Main::getWindow()->add(new DevelopMenu);
-		Main::getWindow()->add(new Inspector);
+		Main::getWindow()->add(new ui::Hierarchy);
+		Main::getWindow()->add(new ui::Properties);
+
+		Main::getWindow()->add(new ui::DevelopMenu);
 
 		// 加载音频文件
 		pop.loadFromFile("assets/pop.wav");

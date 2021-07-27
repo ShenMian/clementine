@@ -3,7 +3,7 @@
 
 #include "Layer.h"
 
-namespace clem
+namespace clem::ui
 {
 
 void Layer::attach()
@@ -14,4 +14,4 @@ void Layer::detach()
 {
 }
 
-} // namespace clem
+} // namespace clem::ui

@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Clem/Core/Core.h"
+#include "Clem/UI/UI.h"
 #include <functional>
 #include <string>
 #include <vector>
@@ -85,9 +86,9 @@ public:
 	 */
 	virtual bool isVisible() = 0;
 
-	void add(Layer* layer);
+	void add(ui::Layer* layer);
 
-	void remove(Layer* layer);
+	void remove(ui::Layer* layer);
 
 	static void init();
 	static void deinit();
@@ -96,7 +97,7 @@ public:
 	std::function<void()>       onClose;
 
 protected:
-	std::vector<Layer*> layers;
+	std::vector<ui::Layer*> layers;
 
 private:
 	static bool initialized;

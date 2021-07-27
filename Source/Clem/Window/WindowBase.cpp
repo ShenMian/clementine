@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "WindowBase.h"
-#include "Clem/GUI/GUI.h"
+#include "Clem/UI/UI.h"
 #include "Clem/Platform.h"
 #include "ConsoleWindow.h"
 #include "Window.h"
@@ -23,14 +23,14 @@ WindowBase::~WindowBase()
 	assert(initialized);
 }
 
-void WindowBase::add(Layer* layer)
+void WindowBase::add(ui::Layer* layer)
 {
 	assert(std::find(layers.begin(), layers.end(), layer) == layers.end());
 	layers.push_back(layer);
 	layer->attach();
 }
 
-void WindowBase::remove(Layer* layer)
+void WindowBase::remove(ui::Layer* layer)
 {
 	assert(std::find(layers.begin(), layers.end(), layer) != layers.end());
 	layers.erase(std::remove(layers.begin(), layers.end(), layer));

@@ -3,7 +3,7 @@
 
 #include "GlfwWindow.h"
 #include "Clem/Events/Events.h"
-#include "Clem/GUI/GUI.h"
+#include "Clem/UI/UI.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
 #include "Clem/Rendering/Rendering.h"
@@ -194,12 +194,12 @@ void GlfwWindow::init()
 	auto success = glfwInit();
 	assert(success);
 
-	GUI::init();
+	UI::init();
 }
 
 void GlfwWindow::deinit()
 {
-	GUI::deinit();
+	UI::deinit();
 
 	glfwTerminate();
 }
