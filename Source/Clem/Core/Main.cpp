@@ -119,7 +119,7 @@ void Main::updateInput(uint16_t dt)
 	{
 		Keyboard::update();
 		Mouse::update();
-		lag = 0;
+		lag -= 1000 / inputRate;
 	}
 }
 
