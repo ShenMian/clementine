@@ -97,7 +97,7 @@ float& Vector2::operator[](size_t index)
 
 	default:
 		assert(false);
-		break;
+		return x;
 	}
 }
 
