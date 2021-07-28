@@ -22,6 +22,8 @@
 using namespace std::chrono_literals;
 using clem::Main;
 
+// #pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
+
 int main(int argc, char* argv[])
 {
 	Main::init();
@@ -117,8 +119,8 @@ void Main::updateInput(uint16_t dt)
 	lag += dt;
 	if(lag >= 1000 / inputRate)
 	{
-		Keyboard::update();
-		Mouse::update();
+		// Keyboard::update();
+		// Mouse::update();
 		lag -= 1000 / inputRate;
 	}
 }
@@ -259,7 +261,7 @@ void Main::init()
 	// 初始化窗口
 	WindowBase::init();
 	// window = new ConsoleWindow("Clementine", {80, 25});
-	window          = new GlfwWindow("Clementine", {1060, 640});
+	window          = new GlfwWindow("Clementine", {1160, 720});
 	window->onClose = []() { Main::running = false; };
 
 	// 初始化 I/O

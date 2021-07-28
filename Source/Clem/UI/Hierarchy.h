@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -30,7 +30,7 @@ public:
 				showEntity(e);
 		});
 
-		// ¿Õ°×ÇøÓòÓÒ¼ü
+		// ç©ºç™½åŒºåŸŸå³é”®
 		if(ImGui::BeginPopupContextWindow(0, 1, false))
 		{
 			if(ImGui::MenuItem("Create empty entity"))
@@ -38,7 +38,7 @@ public:
 			ImGui::EndPopup();
 		}
 
-		// ¿Õ°×ÇøÓò×ó¼ü
+		// ç©ºç™½åŒºåŸŸå·¦é”®
 		if(ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
 			Properties::entity = Entity();
 
