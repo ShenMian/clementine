@@ -8,13 +8,12 @@ project "ImGui"
 	objdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/obj")
 
 	files {
-    "include/**.h",
-    "include/**.cpp",
-    "backends/**.h",
-    "backends/imgui_impl_glfw.cpp",
-    "backends/imgui_impl_opengl3.cpp",
+        "include/imgui/**.h",
+        "include/imgui/*.cpp",
+        "include/imgui/backends/imgui_impl_glfw.cpp",
+        "include/imgui/backends/imgui_impl_opengl3.cpp",
 
-    "premake5.lua"}
+        "premake5.lua"}
 
 	includedirs {
         "include/imgui",
