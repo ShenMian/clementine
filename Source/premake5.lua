@@ -21,13 +21,13 @@ project "Clementine"
 
   includedirs {
     ".",
+    "%{thirdparty.stb}/include",
     "%{thirdparty.sdl}/include",
     "%{thirdparty.asio}/include",
     "%{thirdparty.entt}/include",
     "%{thirdparty.glad}/include",
     "%{thirdparty.glfw}/include",
     "%{thirdparty.imgui}/include",
-    "%{thirdparty.imgui}/include/imgui",
     "%{thirdparty.spdlog}/include",
     "%{thirdparty.openal}/include",
     "%{thirdparty.yaml_cpp}/include",
