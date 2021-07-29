@@ -94,6 +94,14 @@ struct Vector2
 	float angle() const;
 
 	/**
+	 * @brief 围绕指定点旋转指定弧度.
+	 * 
+	 * @param point 点.
+	 * @param angle 旋转角度, 弧度制.
+	 */
+	void rotate(const Vector2& point, float angle);
+
+	/**
 	 * @brief 获取与另一个点之间的中点.
 	 */
 	Vector2 getMidPoint(const Vector2& p) const;
@@ -102,15 +110,6 @@ struct Vector2
 	 * @brief 获取面积.
 	 */
 	float area() const;
-
-	/**
-	 * @brief 获取整型二维向量.
-	 *
-	 * @return 去除小数后的整型二维向量.
-	 */
-	Vector2i asInt() const;
-
-	operator Vector2i() const;
 
 	float& operator[](size_t index);
 
@@ -128,6 +127,15 @@ struct Vector2
 
 	Vector2 operator+(const Vector2i& v) const;
 	Vector2 operator-(const Vector2i& v) const;
+
+	/**
+	 * @brief 获取整型二维向量.
+	 *
+	 * @return 去除小数后的整型二维向量.
+	 */
+	Vector2i asInt() const;
+
+	operator Vector2i() const;
 
 	static const Vector2 zero; // (0, 0)
 	static const Vector2 unit; // (1, 1)

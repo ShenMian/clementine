@@ -27,7 +27,7 @@ float Vector2::size() const
 
 float Vector2::magnitude() const
 {
-	return std::sqrt(x * x + y * y);
+	return size();
 }
 
 float Vector2::sizeSquared() const
@@ -42,9 +42,9 @@ float Vector2::distance(const Vector2& p) const
 
 float Vector2::distanceSquared(const Vector2& p) const
 {
-	auto xDis = std::abs(x - p.x);
-	auto yDis = std::abs(y - p.y);
-	return xDis * xDis + yDis * yDis;
+	const auto dx = std::abs(x - p.x);
+	const auto dy = std::abs(y - p.y);
+	return dx * dx + dy * dy;
 }
 
 Vector2& Vector2::normalize()
@@ -65,6 +65,27 @@ float Vector2::angle() const
 	return std::atan2(y, x);
 }
 
+void Vector2::rotate(const Vector2& point, float angle)
+{
+	const auto sinAngle = std::sin(angle);
+	const auto cosAngle = std::cos(angle);
+
+	if(point == Vector2::zero)
+	{
+		const auto tempX = x * cosAngle - y * sinAngle;
+		y                = y * cosAngle + x * sinAngle;
+		x                = tempX;
+	}
+	else
+	{
+		const auto tempX = x - point.x;
+		const auto tempY = y - point.y;
+
+		x = tempX * cosAngle - tempY * sinAngle + point.x;
+		y = tempY * cosAngle + tempX * sinAngle + point.y;
+	}
+}
+
 Vector2 Vector2::getMidPoint(const Vector2& p) const
 {
 	return Vector2((x + p.x) / 2.0f, (y + p.y) / 2.0f);
@@ -73,16 +94,6 @@ Vector2 Vector2::getMidPoint(const Vector2& p) const
 float Vector2::area() const
 {
 	return x * y;
-}
-
-Vector2i Vector2::asInt() const
-{
-	return Vector2i(static_cast<int>(x), static_cast<int>(y));
-}
-
-Vector2::operator Vector2i() const
-{
-	return asInt();
 }
 
 float& Vector2::operator[](size_t index)
@@ -169,4 +180,14 @@ Vector2 Vector2::operator+(const Vector2i& v) const
 Vector2 Vector2::operator-(const Vector2i& v) const
 {
 	return Vector2(x - v.x, y - v.y);
+}
+
+Vector2i Vector2::asInt() const
+{
+	return Vector2i(static_cast<int>(x), static_cast<int>(y));
+}
+
+Vector2::operator Vector2i() const
+{
+	return asInt();
 }
