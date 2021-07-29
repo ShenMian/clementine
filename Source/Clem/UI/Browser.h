@@ -3,10 +3,11 @@
 
 #pragma once
 
+#include "Clem/Rendering/Rendering.h"
 #include "Layer.h"
+#include <filesystem>
 #include <glad/glad.h>
 #include <imgui/imgui.h>
-#include <filesystem>
 
 namespace fs = std::filesystem;
 
@@ -31,6 +32,10 @@ class Browser : public Layer
 				current = current.parent_path();
 		}
 
+		auto fileIcon = Texture2D::create("../Assets/SMS.png");
+		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
+		ImGui::ImageButton(fileIcon->nativeHandle(), {40, 40}, {0, 1}, {1, 0});
+		ImGui::PopStyleColor();
 		for(const auto& entry : fs::directory_iterator(current))
 		{
 			// TODO: 使用 Texture2D 创建 ImageButton
@@ -41,7 +46,9 @@ class Browser : public Layer
 					current = entry;
 			}
 			else
+			{
 				ImGui::Button(filename.c_str());
+			}
 		}
 
 		ImGui::End();

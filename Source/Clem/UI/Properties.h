@@ -73,7 +73,7 @@ private:
 			auto& tag = entity.get<Tag>();
 
 			char buf[max_size];
-			strcpy_s(buf, max_size, tag.str.c_str());
+			memcpy(buf, tag.str.c_str(), tag.str.size());
 			LEFT_LABEL(ImGui::InputText, "Tag", buf, max_size);
 			tag.str = std::string(buf);
 		}

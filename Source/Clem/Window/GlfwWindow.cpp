@@ -3,10 +3,10 @@
 
 #include "GlfwWindow.h"
 #include "Clem/Events/Events.h"
-#include "Clem/UI/UI.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
 #include "Clem/Rendering/Rendering.h"
+#include "Clem/UI/UI.h"
 #include <cassert>
 #include <cstdio>
 #include <glad/glad.h>

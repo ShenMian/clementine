@@ -5,6 +5,7 @@
 
 #include "Layer.h"
 #include "Properties.h"
+#include "Clem/ECS/Entity.h"
 #include <glad/glad.h>
 #include <imgui/imgui.h>
 
