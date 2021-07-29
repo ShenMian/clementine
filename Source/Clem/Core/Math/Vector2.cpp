@@ -7,8 +7,8 @@
 #include <cfloat>
 #include <cmath>
 
-const Vector2 Vector2::zero(0, 0);
 const Vector2 Vector2::unit(1, 1);
+const Vector2 Vector2::zero(0, 0);
 
 const Vector2 Vector2::up(0, 1);
 const Vector2 Vector2::down(0, -1);
@@ -22,7 +22,7 @@ Vector2::Vector2(float x, float y)
 
 float Vector2::size() const
 {
-	return std::sqrt(x * x + y * y);
+	return std::sqrt(sizeSquared());
 }
 
 float Vector2::magnitude() const

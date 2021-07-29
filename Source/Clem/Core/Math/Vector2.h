@@ -14,10 +14,11 @@
  */
 
 /**
- * @brief 二维向量, 单精度.
+ * @brief 二维向量, 单精度浮点数.
  */
-struct Vector2
+class Vector2
 {
+public:
 	float x = 0.0f;
 	float y = 0.0f;
 
@@ -95,7 +96,7 @@ struct Vector2
 
 	/**
 	 * @brief 围绕指定点旋转指定弧度.
-	 * 
+	 *
 	 * @param point 点.
 	 * @param angle 旋转角度, 弧度制.
 	 */
@@ -137,8 +138,8 @@ struct Vector2
 
 	operator Vector2i() const;
 
-	static const Vector2 zero; // (0, 0)
 	static const Vector2 unit; // (1, 1)
+	static const Vector2 zero; // (0, 0)
 
 	static const Vector2 up;    // (0, 1)
 	static const Vector2 down;  // (0, -1)

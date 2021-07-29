@@ -11,8 +11,9 @@
 /**
  * @brief 二维向量, 整型.
  */
-struct Vector2i
+class Vector2i
 {
+public:
 	int x = 0;
 	int y = 0;
 
