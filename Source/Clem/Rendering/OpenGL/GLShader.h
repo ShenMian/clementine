@@ -9,7 +9,7 @@
 namespace clem
 {
 
-class OpenGLShader : public Shader
+class GLShader : public Shader
 {
 public:
 	using id_type = unsigned int;
@@ -20,17 +20,17 @@ public:
 	 * @param vertexSrc vertex shader 的源代码.
 	 * @param fragmentSrc fragment shader 的源代码.
 	 */
-	OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+	GLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
 
 	/**
 	 * @brief 默认析构函数.
 	 */
-	~OpenGLShader();
+	~GLShader();
 
 	void bind() override;
 
 private:
-	id_type program;
+	id_type handle;
 };
 
 } // namespace clem

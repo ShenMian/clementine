@@ -3,12 +3,12 @@
 
 #pragma once
 
-#include "Clem/Rendering/IndexBuffer.h"
+#include "Clem/Rendering/VertexBuffer.h"
 
 namespace clem
 {
 
-class OpenGLIndexBuffer : public IndexBuffer
+class GLVertexBuffer : public VertexBuffer
 {
 public:
 	using id_type = unsigned int;
@@ -19,17 +19,17 @@ public:
 	 * @param data 缓冲区数据指针.
 	 * @param size 缓冲区数据大小.
 	 */
-	OpenGLIndexBuffer(const void* data, size_t size);
+	GLVertexBuffer(const void* data, size_t size);
 
 	/**
 	 * @brief 默认析构函数.
 	 */
-	~OpenGLIndexBuffer();
+	~GLVertexBuffer();
 
 	void bind() override;
 
 private:
-	id_type buffer;
+	id_type handle;
 };
 
 } // namespace clem

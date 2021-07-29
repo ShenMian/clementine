@@ -2,14 +2,14 @@
 // License(Apache-2.0)
 
 #include "Shader.h"
-#include "OpenGL/OpenGLShader.h"
+#include "OpenGL/GLShader.h"
 
 namespace clem
 {
 
 std::shared_ptr<Shader> Shader::create(const std::string& vertexSrc, const std::string& fragmentSrc)
 {
-	return std::make_shared<OpenGLShader>(vertexSrc, fragmentSrc);
+	return std::make_shared<GLShader>(vertexSrc, fragmentSrc);
 }
 
 } // namespace clem

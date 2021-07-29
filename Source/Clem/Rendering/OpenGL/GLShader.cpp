@@ -1,7 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "OpenGLShader.h"
+#include "GLShader.h"
 #include <cassert>
 #include <glad/glad.h>
 #include <type_traits>
@@ -10,9 +10,9 @@
 namespace clem
 {
 
-static_assert(std::is_same<OpenGLShader::id_type, GLuint>::value);
+static_assert(std::is_same<GLShader::id_type, GLuint>::value);
 
-OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
+GLShader::GLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
 {
 	// Create an empty vertex shader handle
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -73,28 +73,28 @@ OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& frag
 	// Vertex and fragment shaders are successfully compiled.
 	// Now time to link them together into a program.
 	// Get a program object.
-	program = glCreateProgram();
+	handle = glCreateProgram();
 
 	// Attach our shaders to our program
-	glAttachShader(program, vertexShader);
-	glAttachShader(program, fragmentShader);
+	glAttachShader(handle, vertexShader);
+	glAttachShader(handle, fragmentShader);
 
 	// Link our program
-	glLinkProgram(program);
+	glLinkProgram(handle);
 
 	// Note the different functions here: glGetProgram* instead of glGetShader*.
 	GLint isLinked = 0;
-	glGetProgramiv(program, GL_LINK_STATUS, (int*)&isLinked);
+	glGetProgramiv(handle, GL_LINK_STATUS, (int*)&isLinked);
 	if(isLinked == GL_FALSE)
 	{
 		GLint maxLength = 0;
-		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+		glGetProgramiv(handle, GL_INFO_LOG_LENGTH, &maxLength);
 
 		// The maxLength includes the NULL character
 		std::vector<GLchar> infoLog(maxLength);
-		glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
+		glGetProgramInfoLog(handle, maxLength, &maxLength, &infoLog[0]);
 
-		glDeleteProgram(program);
+		glDeleteProgram(handle);
 
 		glDeleteShader(vertexShader);
 		glDeleteShader(fragmentShader);
@@ -104,18 +104,18 @@ OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& frag
 	}
 
 	// Always detach shaders after a successful link.
-	glDetachShader(program, vertexShader);
-	glDetachShader(program, fragmentShader);
+	glDetachShader(handle, vertexShader);
+	glDetachShader(handle, fragmentShader);
 }
 
-OpenGLShader::~OpenGLShader()
+GLShader::~GLShader()
 {
-	glDeleteProgram(program);
+	glDeleteProgram(handle);
 }
 
-void OpenGLShader::bind()
+void GLShader::bind()
 {
-	glUseProgram(program);
+	glUseProgram(handle);
 }
 
 } // namespace clem

@@ -3,6 +3,7 @@
 
 #include "IndexBuffer.h"
 #include "Shader.h"
+#include "Texture2D.h"
 #include "VertexBuffer.h"
 
 #include "Console/Camera.h"
