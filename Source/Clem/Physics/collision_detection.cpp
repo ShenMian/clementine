@@ -14,7 +14,7 @@ struct Line2
 	Point2 end;
 };
 
-bool collision(Line2 l, Point2 p)
+bool collision(const Line2& l, const Point2& p)
 {
 	const auto dx = l.end.x - l.start.x;
 	const auto dy = l.end.y - l.start.y;
@@ -25,31 +25,31 @@ bool collision(Line2 l, Point2 p)
 	return p.y == k * p.x + b;
 }
 
-bool collision(BoxCollider b, Point2 p)
+bool collision(const BoxCollider& b, const Point2& p)
 {
 	return b.getRect().intersectsPoint(p);
 }
 
 // TODO: CircleCollider::getCenter();
-bool collision(CircleCollider c, Point2 p)
+bool collision(const CircleCollider& c, const Point2& p)
 {
 	const auto center = c.getPosition();
 	return center.distanceSquared(p) <= c.getRadius() * c.getRadius();
 }
 
-bool collision(BoxCollider a, BoxCollider b)
+bool collision(const BoxCollider& a, const BoxCollider& b)
 {
 	return a.getRect().intersectsRect(b.getRect());
 }
 
-bool collision(CircleCollider a, CircleCollider b)
+bool collision(const CircleCollider& a, const CircleCollider& b)
 {
 	const auto aCenter = a.getPosition();
 	const auto bCenter = b.getPosition();
 	return aCenter.distance(bCenter) <= a.getRadius() + b.getRadius();
 }
 
-bool collision(BoxCollider box, Line2 l)
+bool collision(const BoxCollider& box, const Line2& l)
 {
 	const auto rect = box.getRect();
 
@@ -70,7 +70,7 @@ bool collision(BoxCollider box, Line2 l)
 	return false;
 }
 
-bool collision(CircleCollider c, Line2 l)
+bool collision(const CircleCollider& c, const Line2& l)
 {
 	const auto center        = c.getPosition();
 	const auto startToCenter = center - l.start;
