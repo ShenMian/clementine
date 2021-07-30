@@ -7,7 +7,7 @@
 #include <cmath>
 #include <cstring>
 
-const Matrix4 Matrix4::unit = {
+const Matrix4 Matrix4::identity = {
 		1.0f, 0.0f, 0.0f, 0.0f,
 		0.0f, 1.0f, 0.0f, 0.0f,
 		0.0f, 0.0f, 1.0f, 0.0f,
@@ -20,7 +20,7 @@ const Matrix4 Matrix4::zero = {
 		0.0f, 0.0f, 0.0f, 0.0f};
 
 Matrix4::Matrix4()
-		: Matrix4(Matrix4::unit)
+		: Matrix4(Matrix4::identity)
 {
 }
 
@@ -55,7 +55,7 @@ Vector3 Matrix4::getScale() const
 
 void Matrix4::translate(const Vector3& vec)
 {
-	Matrix4 mat(Matrix4::unit);
+	Matrix4 mat(Matrix4::identity);
 	mat.m[3][0] = vec.x;
 	mat.m[3][1] = vec.y;
 	mat.m[3][2] = vec.z;
@@ -67,7 +67,7 @@ void Matrix4::rotateX(float angle)
 	const float sin = std::sin(angle);
 	const float cos = std::cos(angle);
 
-	Matrix4 mat(Matrix4::unit);
+	Matrix4 mat(Matrix4::identity);
 	m[1][1] = cos;
 	m[1][2] = -sin;
 	m[2][1] = sin;
@@ -80,7 +80,7 @@ void Matrix4::rotateY(float angle)
 	const float sin = std::sin(angle);
 	const float cos = std::cos(angle);
 
-	Matrix4 mat(Matrix4::unit);
+	Matrix4 mat(Matrix4::identity);
 	m[0][0] = cos;
 	m[0][2] = sin;
 	m[2][0] = -sin;
@@ -93,7 +93,7 @@ void Matrix4::rotateZ(float angle)
 	const float sin = std::sin(angle);
 	const float cos = std::cos(angle);
 
-	Matrix4 mat(Matrix4::unit);
+	Matrix4 mat(Matrix4::identity);
 	m[0][0] = cos;
 	m[0][1] = -sin;
 	m[1][0] = sin;
@@ -103,7 +103,7 @@ void Matrix4::rotateZ(float angle)
 
 void Matrix4::scale(const Vector3& vec)
 {
-	Matrix4 mat(Matrix4::unit);
+	Matrix4 mat(Matrix4::identity);
 	mat.m[0][0] = vec.x;
 	mat.m[1][1] = vec.y;
 	mat.m[2][2] = vec.z;

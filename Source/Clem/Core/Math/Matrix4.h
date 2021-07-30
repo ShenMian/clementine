@@ -48,7 +48,7 @@ public:
 	Matrix4  operator*(float rhs) const;
 	Matrix4& operator*=(float rhs);
 
-	static const Matrix4 unit;
+	static const Matrix4 identity;
 	static const Matrix4 zero;
 };
 

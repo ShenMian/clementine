@@ -37,17 +37,12 @@ public:
 
 	/**
 	 * @brief 获取长度.
+	 * 
+	 * @note 
 	 *
 	 * @see sizeSquared
 	 */
 	float size() const;
-
-	/**
-	 * @brief 获取长度.
-	 *
-	 * @see size
-	 */
-	float magnitude() const;
 
 	/**
 	 * @brief 获取长度平方.

@@ -27,11 +27,6 @@ float Vector3::size() const
 	return std::sqrt(sizeSquared());
 }
 
-float Vector3::magnitude() const
-{
-	return size();
-}
-
 float Vector3::sizeSquared() const
 {
 	return x * x + y * y + z * z;
@@ -61,11 +56,6 @@ Vector3& Vector3::normalize()
 float Vector3::dot(const Vector3& v) const
 {
 	return x * v.x + y * v.y;
-}
-
-float Vector3::angle() const
-{
-	return std::atan2(y, x);
 }
 
 void Vector3::rotate(const Vector3& point, float angle)

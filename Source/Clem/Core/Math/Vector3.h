@@ -43,13 +43,6 @@ public:
 	float size() const;
 
 	/**
-	 * @brief 获取长度.
-	 *
-	 * @see size
-	 */
-	float magnitude() const;
-
-	/**
 	 * @brief 获取长度平方.
 	 *
 	 * @see size

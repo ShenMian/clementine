@@ -25,11 +25,6 @@ float Vector2::size() const
 	return std::sqrt(sizeSquared());
 }
 
-float Vector2::magnitude() const
-{
-	return size();
-}
-
 float Vector2::sizeSquared() const
 {
 	return x * x + y * y;
