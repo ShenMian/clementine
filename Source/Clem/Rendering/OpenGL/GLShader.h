@@ -28,6 +28,7 @@ public:
 	~GLShader();
 
 	void bind() override;
+	void uploadUniform(std::string& name, const Matrix4& matrix) override;
 
 private:
 	id_type handle;

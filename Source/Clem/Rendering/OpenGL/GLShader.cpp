@@ -118,4 +118,10 @@ void GLShader::bind()
 	glUseProgram(handle);
 }
 
+void GLShader::uploadUniform(std::string& name, const Matrix4& matrix)
+{
+	auto location = glGetUniformLocation(handle, name.c_str());
+	glUniformMatrix4fv(location, 1, false, (float*)&matrix.m); // TODO: 验证参数 tanspose, value 是否正确性.
+}
+
 } // namespace clem

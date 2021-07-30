@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Clem/Core/Math/Math.h"
 #include <memory>
 #include <string>
 
@@ -21,6 +22,7 @@ public:
 	static std::shared_ptr<Shader> create(const std::string& vertexSrc, const std::string& fragmentSrc);
 
 	virtual void bind() = 0;
+	virtual void uploadUniform(std::string& name, const Matrix4& matrix) = 0;
 };
 
 } // namespace clem
