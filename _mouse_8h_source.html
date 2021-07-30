@@ -93,36 +93,37 @@ $(document).ready(function(){initNavTree('_mouse_8h_source.html',''); initResiza
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Clem/Core/Math/Math.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>clem</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classclem_1_1_mouse.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_mouse.html">Mouse</a></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">enum class</span> Key : uint8_t;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    static void update();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    static bool <a class="code" href="classclem_1_1_mouse.html#aa6d410543af3337d03a36f924ea57abd">getKeyState</a>(Key k);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    static void <a class="code" href="classclem_1_1_mouse.html#a1ea86ef0d10f94453d6607407f6e8413">setKeyState</a>(Key k, bool s);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    static <a class="code" href="struct_vector2.html">Point2</a> getPosition();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    static void   setPosition(Point2 p);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    static std::unordered_map&lt;Key, bool&gt; states;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    static <a class="code" href="struct_vector2.html">Point2</a>                        position;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;enum class Mouse::Key : uint8_t</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    left,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    right</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;} <span class="comment">// namespace clem</span></div>
-<div class="ttc" id="aclassclem_1_1_mouse_html"><div class="ttname"><a href="classclem_1_1_mouse.html">clem::Mouse</a></div><div class="ttdoc">鼠标.</div><div class="ttdef"><b>Definition:</b> Mouse.h:17</div></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>clem</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classclem_1_1_mouse.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classclem_1_1_mouse.html">Mouse</a></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">enum class</span> Key : uint8_t;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    static void update();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    static bool <a class="code" href="classclem_1_1_mouse.html#aa6d410543af3337d03a36f924ea57abd">getKeyState</a>(Key k);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    static void <a class="code" href="classclem_1_1_mouse.html#a1ea86ef0d10f94453d6607407f6e8413">setKeyState</a>(Key k, bool s);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    static <a class="code" href="struct_vector2.html">Point2</a> getPosition();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    static void   setPosition(Point2 p);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    static std::unordered_map&lt;Key, bool&gt; states;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    static <a class="code" href="struct_vector2.html">Point2</a>                        position;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;enum class Mouse::Key : uint8_t</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    left,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    right</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;} <span class="comment">// namespace clem</span></div>
+<div class="ttc" id="aclassclem_1_1_mouse_html"><div class="ttname"><a href="classclem_1_1_mouse.html">clem::Mouse</a></div><div class="ttdoc">鼠标.</div><div class="ttdef"><b>Definition:</b> Mouse.h:18</div></div>
 <div class="ttc" id="aclassclem_1_1_mouse_html_a1ea86ef0d10f94453d6607407f6e8413"><div class="ttname"><a href="classclem_1_1_mouse.html#a1ea86ef0d10f94453d6607407f6e8413">clem::Mouse::setKeyState</a></div><div class="ttdeci">static void setKeyState(Key k, bool s)</div><div class="ttdoc">设置按键状态.</div><div class="ttdef"><b>Definition:</b> Mouse.cpp:25</div></div>
 <div class="ttc" id="aclassclem_1_1_mouse_html_aa6d410543af3337d03a36f924ea57abd"><div class="ttname"><a href="classclem_1_1_mouse.html#aa6d410543af3337d03a36f924ea57abd">clem::Mouse::getKeyState</a></div><div class="ttdeci">static bool getKeyState(Key k)</div><div class="ttdoc">获取按键状态.</div><div class="ttdef"><b>Definition:</b> Mouse.cpp:17</div></div>
 <div class="ttc" id="astruct_vector2_html"><div class="ttname"><a href="struct_vector2.html">Vector2</a></div><div class="ttdoc">二维向量, 单精度.</div><div class="ttdef"><b>Definition:</b> Vector2.h:20</div></div>

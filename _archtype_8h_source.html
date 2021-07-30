@@ -92,10 +92,10 @@ $(document).ready(function(){initNavTree('_archtype_8h_source.html',''); initRes
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;set&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;typeindex&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// TODO: Avoid RTTI</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;config.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;set&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;typeindex&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>clem</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('_archtype_8h_source.html',''); initRes
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="classclem_1_1_archtype.html">Archtype</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="classclem_1_1_archtype.html">Archtype</a>(std::set&lt;std::type_index&gt;&amp;&amp;);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="classclem_1_1_archtype.html">Archtype</a>(std::set&lt;TypeIndex&gt;&amp;&amp;);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Ts&gt;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classclem_1_1_archtype.html#aa0196452cf858096034ee16872068870">all</a>() <span class="keyword">const</span>;</div>
@@ -129,28 +129,28 @@ $(document).ready(function(){initNavTree('_archtype_8h_source.html',''); initRes
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">bool</span> operator==(<span class="keyword">const</span> <a class="code" href="classclem_1_1_archtype.html">Archtype</a>&amp; rhs) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">bool</span> operator&lt;(<span class="keyword">const</span> <a class="code" href="classclem_1_1_archtype.html">Archtype</a>&amp; rhs) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">size_t</span> hashCode() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">// size_t hashCode() const;</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    std::set&lt;std::type_index&gt; types;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    std::set&lt;TypeIndex&gt; types;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Ts&gt;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">inline</span> <a class="code" href="classclem_1_1_archtype.html">Archtype</a> makeArchtype()</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;{</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classclem_1_1_archtype.html">Archtype</a>(std::move({std::type_index(<span class="keyword">typeid</span>(Ts))...}));</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classclem_1_1_archtype.html">Archtype</a>(std::move({Typeid&lt;Ts&gt;()...}));</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;} <span class="comment">// namespace clem</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#include &quot;Archtype.inl&quot;</span></div>
 <div class="ttc" id="aclassclem_1_1_archtype_html"><div class="ttname"><a href="classclem_1_1_archtype.html">clem::Archtype</a></div><div class="ttdef"><b>Definition:</b> Archtype.h:17</div></div>
-<div class="ttc" id="aclassclem_1_1_archtype_html_a268958c313ffda57ef338f1556ce5ae9"><div class="ttname"><a href="classclem_1_1_archtype.html#a268958c313ffda57ef338f1556ce5ae9">clem::Archtype::any</a></div><div class="ttdeci">bool any() const</div><div class="ttdoc">ÅĞ¶ÏÊÇ·ñÓĞÖ¸¶¨µÄÈÎÒâÀàĞÍ.</div><div class="ttdef"><b>Definition:</b> Archtype.inl:17</div></div>
-<div class="ttc" id="aclassclem_1_1_archtype_html_a71314e1ab7a9168c88e82dde01ba7af9"><div class="ttname"><a href="classclem_1_1_archtype.html#a71314e1ab7a9168c88e82dde01ba7af9">clem::Archtype::add</a></div><div class="ttdeci">Archtype &amp; add()</div><div class="ttdoc">Ìí¼ÓÀàĞÍ.</div><div class="ttdef"><b>Definition:</b> Archtype.inl:32</div></div>
-<div class="ttc" id="aclassclem_1_1_archtype_html_a93199c27398696c5495a5c058b678905"><div class="ttname"><a href="classclem_1_1_archtype.html#a93199c27398696c5495a5c058b678905">clem::Archtype::none</a></div><div class="ttdeci">bool none() const</div><div class="ttdoc">ÅĞ¶ÏÊÇ·ñÃ»ÓĞÖ¸¶¨µÄÈÎºÎÀàĞÍ.</div><div class="ttdef"><b>Definition:</b> Archtype.inl:26</div></div>
-<div class="ttc" id="aclassclem_1_1_archtype_html_aa0196452cf858096034ee16872068870"><div class="ttname"><a href="classclem_1_1_archtype.html#aa0196452cf858096034ee16872068870">clem::Archtype::all</a></div><div class="ttdeci">bool all() const</div><div class="ttdoc">ÅĞ¶ÏÊÇ·ñÓĞÖ¸¶¨µÄÈ«²¿ÀàĞÍ.</div><div class="ttdef"><b>Definition:</b> Archtype.inl:8</div></div>
-<div class="ttc" id="aclassclem_1_1_archtype_html_ae2379bade671c697fb44c356fece59e3"><div class="ttname"><a href="classclem_1_1_archtype.html#ae2379bade671c697fb44c356fece59e3">clem::Archtype::remove</a></div><div class="ttdeci">Archtype &amp; remove()</div><div class="ttdoc">ÒÆ³ıÀàĞÍ.</div><div class="ttdef"><b>Definition:</b> Archtype.inl:39</div></div>
-<div class="ttc" id="aclassclem_1_1_archtype_html_ae61b11a9bb3c72b404974dedae94ec52"><div class="ttname"><a href="classclem_1_1_archtype.html#ae61b11a9bb3c72b404974dedae94ec52">clem::Archtype::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">ÒÆ³ıÈ«²¿ÀàĞÍ.</div><div class="ttdef"><b>Definition:</b> Archtype.cpp:15</div></div>
+<div class="ttc" id="aclassclem_1_1_archtype_html_a268958c313ffda57ef338f1556ce5ae9"><div class="ttname"><a href="classclem_1_1_archtype.html#a268958c313ffda57ef338f1556ce5ae9">clem::Archtype::any</a></div><div class="ttdeci">bool any() const</div><div class="ttdoc">åˆ¤æ–­æ˜¯å¦æœ‰æŒ‡å®šçš„ä»»æ„ç±»å‹.</div><div class="ttdef"><b>Definition:</b> Archtype.inl:17</div></div>
+<div class="ttc" id="aclassclem_1_1_archtype_html_a71314e1ab7a9168c88e82dde01ba7af9"><div class="ttname"><a href="classclem_1_1_archtype.html#a71314e1ab7a9168c88e82dde01ba7af9">clem::Archtype::add</a></div><div class="ttdeci">Archtype &amp; add()</div><div class="ttdoc">æ·»åŠ ç±»å‹.</div><div class="ttdef"><b>Definition:</b> Archtype.inl:32</div></div>
+<div class="ttc" id="aclassclem_1_1_archtype_html_a93199c27398696c5495a5c058b678905"><div class="ttname"><a href="classclem_1_1_archtype.html#a93199c27398696c5495a5c058b678905">clem::Archtype::none</a></div><div class="ttdeci">bool none() const</div><div class="ttdoc">åˆ¤æ–­æ˜¯å¦æ²¡æœ‰æŒ‡å®šçš„ä»»ä½•ç±»å‹.</div><div class="ttdef"><b>Definition:</b> Archtype.inl:26</div></div>
+<div class="ttc" id="aclassclem_1_1_archtype_html_aa0196452cf858096034ee16872068870"><div class="ttname"><a href="classclem_1_1_archtype.html#aa0196452cf858096034ee16872068870">clem::Archtype::all</a></div><div class="ttdeci">bool all() const</div><div class="ttdoc">åˆ¤æ–­æ˜¯å¦æœ‰æŒ‡å®šçš„å…¨éƒ¨ç±»å‹.</div><div class="ttdef"><b>Definition:</b> Archtype.inl:8</div></div>
+<div class="ttc" id="aclassclem_1_1_archtype_html_ae2379bade671c697fb44c356fece59e3"><div class="ttname"><a href="classclem_1_1_archtype.html#ae2379bade671c697fb44c356fece59e3">clem::Archtype::remove</a></div><div class="ttdeci">Archtype &amp; remove()</div><div class="ttdoc">ç§»é™¤ç±»å‹.</div><div class="ttdef"><b>Definition:</b> Archtype.inl:39</div></div>
+<div class="ttc" id="aclassclem_1_1_archtype_html_ae61b11a9bb3c72b404974dedae94ec52"><div class="ttname"><a href="classclem_1_1_archtype.html#ae61b11a9bb3c72b404974dedae94ec52">clem::Archtype::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">ç§»é™¤å…¨éƒ¨ç±»å‹.</div><div class="ttdef"><b>Definition:</b> Archtype.cpp:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

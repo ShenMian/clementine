@@ -124,17 +124,18 @@ $(document).ready(function(){initNavTree('_sound_8h_source.html',''); initResiza
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    int16_t              channelCount;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    int16_t              bitsPerSample;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>         bufferId;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> loadWavFile(<span class="keyword">const</span> std::filesystem::path&amp; path);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;};</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;} <span class="comment">// namespace clem</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">bool</span>                 initialized = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> loadWavFile(<span class="keyword">const</span> std::filesystem::path&amp; path);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;};</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;} <span class="comment">// namespace clem</span></div>
 <div class="ttc" id="aclassclem_1_1_sound_html"><div class="ttname"><a href="classclem_1_1_sound.html">clem::Sound</a></div><div class="ttdef"><b>Definition:</b> Sound.h:18</div></div>
-<div class="ttc" id="aclassclem_1_1_sound_html_a8a4e433585e15a1b1d83f7ea91174907"><div class="ttname"><a href="classclem_1_1_sound.html#a8a4e433585e15a1b1d83f7ea91174907">clem::Sound::Sound</a></div><div class="ttdeci">Sound()</div><div class="ttdoc">默认构造函数.</div><div class="ttdef"><b>Definition:</b> Sound.cpp:14</div></div>
-<div class="ttc" id="aclassclem_1_1_sound_html_abb1d8819fc4442926e79db5850f683c2"><div class="ttname"><a href="classclem_1_1_sound.html#abb1d8819fc4442926e79db5850f683c2">clem::Sound::loadFromFile</a></div><div class="ttdeci">void loadFromFile(const std::filesystem::path &amp;path)</div><div class="ttdoc">从文件加载声音.</div><div class="ttdef"><b>Definition:</b> Sound.cpp:30</div></div>
-<div class="ttc" id="aclassclem_1_1_sound_html_ae46d3bde26957b4ee89a3f969014a6ef"><div class="ttname"><a href="classclem_1_1_sound.html#ae46d3bde26957b4ee89a3f969014a6ef">clem::Sound::~Sound</a></div><div class="ttdeci">~Sound()</div><div class="ttdoc">默认析构函数.</div><div class="ttdef"><b>Definition:</b> Sound.cpp:25</div></div>
+<div class="ttc" id="aclassclem_1_1_sound_html_a8a4e433585e15a1b1d83f7ea91174907"><div class="ttname"><a href="classclem_1_1_sound.html#a8a4e433585e15a1b1d83f7ea91174907">clem::Sound::Sound</a></div><div class="ttdeci">Sound()</div><div class="ttdoc">默认构造函数.</div><div class="ttdef"><b>Definition:</b> Sound.cpp:15</div></div>
+<div class="ttc" id="aclassclem_1_1_sound_html_abb1d8819fc4442926e79db5850f683c2"><div class="ttname"><a href="classclem_1_1_sound.html#abb1d8819fc4442926e79db5850f683c2">clem::Sound::loadFromFile</a></div><div class="ttdeci">void loadFromFile(const std::filesystem::path &amp;path)</div><div class="ttdoc">从文件加载声音.</div><div class="ttdef"><b>Definition:</b> Sound.cpp:31</div></div>
+<div class="ttc" id="aclassclem_1_1_sound_html_ae46d3bde26957b4ee89a3f969014a6ef"><div class="ttname"><a href="classclem_1_1_sound.html#ae46d3bde26957b4ee89a3f969014a6ef">clem::Sound::~Sound</a></div><div class="ttdeci">~Sound()</div><div class="ttdoc">默认析构函数.</div><div class="ttdef"><b>Definition:</b> Sound.cpp:26</div></div>
 <div class="ttc" id="aclassclem_1_1_sound_html_ae623923d8e296fa39c13f4da25140bb4"><div class="ttname"><a href="classclem_1_1_sound.html#ae623923d8e296fa39c13f4da25140bb4">clem::Sound::Sound</a></div><div class="ttdeci">Sound(const std::filesystem::path &amp;path)</div><div class="ttdoc">构造函数, 从文件导入声音.</div></div>
-<div class="ttc" id="aclassclem_1_1_sound_html_af2291bf0cc7f073eb03d8f6004f9ff4b"><div class="ttname"><a href="classclem_1_1_sound.html#af2291bf0cc7f073eb03d8f6004f9ff4b">clem::Sound::getTime</a></div><div class="ttdeci">size_t getTime() const</div><div class="ttdoc">获取声音总时长.</div><div class="ttdef"><b>Definition:</b> Sound.cpp:66</div></div>
+<div class="ttc" id="aclassclem_1_1_sound_html_af2291bf0cc7f073eb03d8f6004f9ff4b"><div class="ttname"><a href="classclem_1_1_sound.html#af2291bf0cc7f073eb03d8f6004f9ff4b">clem::Sound::getTime</a></div><div class="ttdeci">size_t getTime() const</div><div class="ttdoc">获取声音总时长.</div><div class="ttdef"><b>Definition:</b> Sound.cpp:73</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
