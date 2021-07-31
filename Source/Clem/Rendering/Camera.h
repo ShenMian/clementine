@@ -20,7 +20,7 @@ public:
 private:
 	Matrix4 projection;
 	Matrix4 view;
-	Matrix4 viewProjection;
+	Matrix4 viewProjection = Matrix4::identity;
 };
 
 } // namespace clem
