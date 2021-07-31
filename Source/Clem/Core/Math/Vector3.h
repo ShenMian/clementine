@@ -116,15 +116,15 @@ public:
 	static const Vector3 unit; // (1, 1, 1)
 	static const Vector3 zero; // (0, 0, 0)
 
-	static const Vector3 up;    // (0, 0, 1)
-	static const Vector3 down;  // (0, 0, -1)
-	static const Vector3 right; // ()
-	static const Vector3 left;  // ()
-	static const Vector3 front; // ()
-	static const Vector3 back;  // ()
+	static const Vector3 up;    // (0, 1, 0)
+	static const Vector3 down;  // (0, -1, 0)
+	static const Vector3 right; // (-1, 0, 0)
+	static const Vector3 left;  // (1, 0, 0)
+	static const Vector3 front; // (0, 0, -1)
+	static const Vector3 back;  // (0, 0, 1)
 };
 
-using Point3 = Vector3;
+using Point3 = Vector3; // TODO: 使用齐次坐标时, w 不等于 0 时, 点的坐标为 (x/w, y/w, z/w).
 using Vec3   = Vector3;
 
 /**
