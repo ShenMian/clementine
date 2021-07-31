@@ -12,4 +12,9 @@ std::shared_ptr<Shader> Shader::create(const std::string& vertexSrc, const std::
 	return std::make_shared<GLShader>(vertexSrc, fragmentSrc);
 }
 
+std::shared_ptr<Shader> Shader::create(const std::filesystem::path& path)
+{
+	return std::make_shared<GLShader>(path);
+}
+
 } // namespace clem

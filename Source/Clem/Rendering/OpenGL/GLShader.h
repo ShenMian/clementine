@@ -5,6 +5,7 @@
 
 #include "Clem/Rendering/Shader.h"
 #include <string>
+#include <filesystem>
 
 namespace clem
 {
@@ -17,10 +18,17 @@ public:
 	/**
 	 * @brief 构造函数.
 	 *
-	 * @param vertexSrc vertex shader 的源代码.
-	 * @param fragmentSrc fragment shader 的源代码.
+	 * @param vertexSrc 顶点着色器的源代码.
+	 * @param fragmentSrc 片段着色器的源代码.
 	 */
 	GLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+
+	/**
+	 * @brief 构造函数.
+	 *
+	 * @param path 着色器源代码文件路径.
+	 */
+	GLShader(const std::filesystem::path& path);
 
 	/**
 	 * @brief 默认析构函数.
@@ -28,9 +36,11 @@ public:
 	~GLShader();
 
 	void bind() override;
-	void uploadUniform(std::string& name, const Matrix4& matrix) override;
+	void uploadUniform(const std::string& name, const Matrix4& matrix) override;
 
 private:
+	void handleError(const std::string& msg);
+
 	id_type handle;
 };
 

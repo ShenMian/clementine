@@ -81,9 +81,11 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
 		layout(location = 0) in vec3 a_Position;
 
+		uniform mat4 u_ViewProjection;
+
 		void main()
 		{
-			gl_Position = vec4(a_Position, 1.0);
+			gl_Position = vec4(a_Position, 1.0) * u_ViewProjection;
 		}
 	)",
 													R"(
@@ -135,7 +137,11 @@ void GlfwWindow::update(Time dt)
 
 	glClearColor(30.0f / 255, 144.0f / 255, 255.0f / 255, 1.0f); // 湖蓝色
 	glClear(GL_COLOR_BUFFER_BIT);
-	// shader->bind();
+
+	static Camera camera;
+
+	shader->bind();
+	shader->uploadUniform("u_ViewProjection", camera.getViewProjection());
 
 	glBindVertexArray(vertexArray);
 	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
