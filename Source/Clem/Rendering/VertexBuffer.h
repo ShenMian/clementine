@@ -9,6 +9,11 @@
 namespace clem
 {
 
+/**
+ * @addtogroup Rendering
+ * @{
+ */
+
 class VertexBuffer
 {
 public:
@@ -22,5 +27,10 @@ public:
 
 	virtual void bind() = 0;
 };
+
+/**
+ * end of Rendering group
+ * @}
+ */
 
 } // namespace clem

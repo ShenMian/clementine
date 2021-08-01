@@ -11,6 +11,11 @@
 namespace clem
 {
 
+/**
+ * @addtogroup Rendering
+ * @{
+ */
+
 class Shader
 {
 public:
@@ -32,5 +37,10 @@ public:
 	virtual void bind()                                                        = 0;
 	virtual void uploadUniform(const std::string& name, const Matrix4& matrix) = 0;
 };
+
+/**
+ * end of Rendering group
+ * @}
+ */
 
 } // namespace clem

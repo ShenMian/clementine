@@ -9,6 +9,11 @@
 namespace clem
 {
 
+/**
+ * @addtogroup Rendering
+ * @{
+ */
+
 class Texture2D
 {
 public:
@@ -17,5 +22,10 @@ public:
 	virtual void  bind(unsigned int slot) = 0;
 	virtual void* nativeHandle()          = 0;
 };
+
+/**
+ * end of Rendering group
+ * @}
+ */
 
 } // namespace clem

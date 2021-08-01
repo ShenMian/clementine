@@ -10,6 +10,11 @@
 namespace clem
 {
 
+/**
+ * @addtogroup Rendering
+ * @{
+ */
+
 class Camera
 {
 public:
@@ -22,5 +27,10 @@ private:
 	Matrix4 view;
 	Matrix4 viewProjection = Matrix4::identity;
 };
+
+/**
+ * end of Rendering group
+ * @}
+ */
 
 } // namespace clem

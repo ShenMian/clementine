@@ -264,6 +264,9 @@ void Main::init()
 	window          = new GlfwWindow("Clementine", {1160, 720});
 	window->onClose = []() { Main::running = false; };
 
+	// 初始化渲染器
+	Renderer::get()->setApi(Renderer::API::OpenGL);
+
 	// 初始化 I/O
 	Audio::init();
 	Keyboard::init();
