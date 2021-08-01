@@ -13,7 +13,7 @@ template <typename T, typename... Args>
 inline T& Entity::add(Args&&... args)
 {
 	assert(valid());
-	CLEM_ASSERT_TRUE(noneOf<T>(), std::string("component already exist: ") + typeid(T).name());
+	Assert::isTrue(noneOf<T>(), std::format("component already exist: '{}'", typeid(T).name()));
 	return registry->addComponent<T>(*this, std::forward<Args>(args)...);
 }
 
@@ -21,7 +21,7 @@ template <typename T>
 inline void Entity::remove()
 {
 	assert(valid());
-	CLEM_ASSERT_TRUE(anyOf<T>(), std::string("component doesn't exist: ") + typeid(T).name());
+	Assert::isTrue(anyOf<T>(), std::format("component doesn't exist: '{}'", typeid(T).name()));
 	registry->removeComponent<T>(*this);
 }
 
@@ -29,7 +29,7 @@ template <typename T>
 [[nodiscard]] inline T& Entity::get() const
 {
 	assert(valid());
-	CLEM_ASSERT_TRUE(anyOf<T>(), std::string("component doesn't exist: ") + typeid(T).name());
+	Assert::isTrue(anyOf<T>(), std::format("component doesn't exist: '{}'", typeid(T).name()));
 	return registry->getComponent<T>(*this);
 }
 

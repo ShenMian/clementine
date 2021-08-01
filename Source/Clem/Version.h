@@ -3,6 +3,13 @@
 
 #pragma once
 
-#define CLEM_VERSION_MAJOR 0
-#define CLEM_VERSION_MINOR 0
-#define CLEM_VERSION_PATCH 1
+#include <cstdint>
+
+namespace clem
+{
+
+constexpr uint32_t version_major = 0;
+constexpr uint32_t version_minor = 0;
+constexpr uint32_t version_patch = 0;
+
+} // namespace clem

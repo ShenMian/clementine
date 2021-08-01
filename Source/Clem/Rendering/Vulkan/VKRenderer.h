@@ -1,9 +1,11 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
 
 #include "Clem/Rendering/Renderer.h"
+#include <tuple>
+#include <vulkan/vulkan.h>
 
 namespace clem
 {
@@ -24,6 +26,12 @@ private:
 	void deinitInstance();
 	void initDevice();
 	void deinitDevice();
+
+	VkPhysicalDevice findSuitableDevice() const;
+	bool             isDeviceSuitable(const VkPhysicalDevice device) const;
+
+	std::tuple<uint32_t, uint32_t> findSuitableQueueFamily(const VkPhysicalDevice device) const;
+	bool                           isQueueFamilySuitable(VkQueueFamilyProperties&) const;
 };
 
 /**

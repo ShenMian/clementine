@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Audio.h"
+#include "Clem/Assert.h"
 #include "Clem/Logger.h"
 #include "Clem/Profiler.h"
 
@@ -15,10 +16,10 @@ void Audio::init()
 	PROFILE_FUNC();
 	CLEM_LOG_INFO("audio", "audio init");
 
-	CLEM_ASSERT_NULL(device, "aleardy opened a audio device");
+	Assert::isTrue(device == nullptr, "aleardy opened a audio device");
 
 	device = alcOpenDevice(nullptr); // 获取首选设备
-	CLEM_ASSERT_NOT_NULL(device, "can't open audio device");
+	Assert::isTrue(device != nullptr, "can't open audio device");
 
 	const ALCchar* name = nullptr;
 	if(alcIsExtensionPresent(device, "ALC_ENUMERATE_ALL_EXT"))
@@ -38,8 +39,8 @@ void Audio::deinit()
 
 	alcMakeContextCurrent(nullptr);
 	alcDestroyContext(context);
-	alcCloseDevice(device);
 	context = nullptr;
-	device  = nullptr;
+	alcCloseDevice(device);
+	device = nullptr;
 }
 } // namespace clem

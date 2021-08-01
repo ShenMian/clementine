@@ -3,6 +3,8 @@
 
 #include "Sound.h"
 #include "AL/alext.h"
+#include "Clem/Assert.h"
+#include "Clem/Logger.h"
 #include "Clem/Profiler.h"
 #include <cassert>
 #include <fstream>
@@ -32,16 +34,15 @@ void Sound::loadFromFile(const fs::path& path)
 {
 	PROFILE_FUNC();
 
-	if(!fs::exists(path))
-		return; // file doesn't exist
+	Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
 
-	auto name      = path.filename().string();
-	auto extension = name.substr(name.find_last_of('.') + 1);
-
-	if(extension == "wav")
+	const auto extension = path.extension().string();
+	if(extension == ".wav")
 		loadWavFile(path);
 	else
-		return; // unsupported file extension
+		Assert::isTrue(false, std::format("file extension doesn't supported: '{}'", extension));
+
+	CLEM_LOG_INFO("audio", "sound loaded from file: '{}'", path.string());
 
 	initialized = true;
 }
@@ -111,7 +112,7 @@ void Sound::loadWavFile(const fs::path& path)
 {
 	std::ifstream file(path, std::ios::binary);
 	if(!file.is_open())
-		return; // can't open file
+		Assert::isTrue(false, std::format("can't open file: {}", path.string()));
 
 	RiffHeader riffHeader;
 	WaveFormat waveFormat;
@@ -119,7 +120,7 @@ void Sound::loadWavFile(const fs::path& path)
 
 	file.read((char*)&riffHeader, sizeof(RiffHeader));
 	if(std::memcmp(riffHeader.id, "RIFF", 4) != 0 || std::memcmp(riffHeader.format, "WAVE", 4) != 0)
-		return; // incorrect file content
+		Assert::isTrue(false, "incorrect file content");
 
 	file.read((char*)&waveFormat, sizeof(WaveFormat));
 	if(waveFormat.size > 16)
@@ -139,7 +140,7 @@ void Sound::loadWavFile(const fs::path& path)
 	}
 
 	if(std::memcmp(id, "data", 4) != 0)
-		return; // incorrect file content
+		Assert::isTrue(false, "incorrect file content");
 
 	file.seekg(-4, std::ios::cur);
 	file.read((char*)&waveData, sizeof(WaveData));
@@ -148,7 +149,7 @@ void Sound::loadWavFile(const fs::path& path)
 	channelCount  = waveFormat.numChannels;
 	bitsPerSample = waveFormat.bitsPerSample;
 
-	int format = 0;
+	int format = -1;
 	if(waveFormat.numChannels == 1)
 	{
 		if(waveFormat.bitsPerSample == 8)
@@ -163,8 +164,7 @@ void Sound::loadWavFile(const fs::path& path)
 		else if(waveFormat.bitsPerSample == 16)
 			format = AL_FORMAT_STEREO16;
 	}
-	if(format == 0)
-		return; // unknown audio format
+	Assert::isTrue(format != -1, "unknown audio format");
 
 	samples.resize(waveData.size);
 	file.read((char*)samples.data(), waveData.size);

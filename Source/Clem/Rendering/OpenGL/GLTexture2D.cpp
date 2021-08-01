@@ -20,7 +20,7 @@ static_assert(std::is_same<GLTexture2D::id_type, GLuint>::value);
 
 GLTexture2D::GLTexture2D(const fs::path& path)
 {
-	CLEM_ASSERT_TRUE(fs::exists(path), "texture file doesn't exist");
+	Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
 
 	int  height, width, channels;
 	auto data = loadFromFile(path, height, width, channels);

@@ -12,7 +12,8 @@ std::shared_ptr<VertexBuffer> VertexBuffer::create(const void* data, size_t size
 {
 	switch(Renderer::getAPI())
 	{
-	case Renderer::API::OpenGL:
+		using enum Renderer::API;
+	case OpenGL:
 		return std::make_shared<GLVertexBuffer>(data, size);
 	}
 	return nullptr;

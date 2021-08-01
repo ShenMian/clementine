@@ -82,13 +82,13 @@ private:
 template <typename T>
 void Server::write(std::shared_ptr<Connection> conn, const Message<T>& msg)
 {
-	CLEM_ASSERT_NOT_NULL(conn.get(), "connection doesn't exist");
+	Assert::isTrue(conn.get() != nullptr, "connection doesn't exist");
 
 	if(!conn->isConnected())
 	{
 		if(onDisconnect)
 			onDisconnect(conn);
-		connections.erase(std::find(connections.begin(), connections.end(), conn));
+		connections.erase(std::ranges::find(connections, conn));
 		return;
 	}
 
@@ -105,13 +105,13 @@ void Server::Server::write(const Message<T>& msg)
 template <typename T>
 void Server::read(std::shared_ptr<Connection> conn)
 {
-	CLEM_ASSERT_NOT_NULL(conn.get(), "connection doesn't exist");
+	Assert::isTrue(conn.get() != nullptr, "connection doesn't exist");
 
 	if(!conn->isConnected())
 	{
 		if(onDisconnect)
 			onDisconnect(conn);
-		connections.erase(std::find(connections.begin(), connections.end(), conn));
+		connections.erase(std::ranges::find(connections, conn));
 		return;
 	}
 

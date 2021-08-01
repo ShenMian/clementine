@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Renderer.h"
@@ -29,7 +29,7 @@ Renderer* Renderer::get()
 			assert(false);
 			break;
 
-		case API::DirectX12:
+		case API::D3D12:
 			assert(false);
 			break;
 

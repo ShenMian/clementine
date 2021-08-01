@@ -4,7 +4,7 @@
 project "Minesweeper"
   kind "ConsoleApp"
   language "C++"
-  cppdialect "C++17"
+  cppdialect "C++latest"
   staticruntime "on"
   
   targetdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/bin")

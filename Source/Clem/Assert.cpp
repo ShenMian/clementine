@@ -1,70 +1,35 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Assert.h"
 #include "Logger.h"
+#include <iostream>
 
-using std::string;
-using std::string_view;
+#if _MSC_VER
+#	define breakpoint() __debugbreak()
+#else
+#	define breakpoint() __builtin_trap()
+#endif
 
 namespace clem
 {
-void Assert::isTrue(bool expr, const char* file, const char* func, unsigned int line)
+
+void Assert::isTrue(bool expr, std::string_view msg, const std::source_location& loc)
 {
 	if(expr)
 		return;
 
-	printf("Assertion failed.\n"
-				 "- file: %s\n"
-				 "- func: %s\n"
-				 "- line: %u\n",
-				 file, func, line);
+	std::cout << "Assertion failed." << std::endl;
+	std::cout << "file    : " << loc.file_name() << std::endl;
+	std::cout << "function: " << loc.function_name() << std::endl;
+	std::cout << "line    : " << loc.line() << std::endl;
+
 	breakpoint();
-	CLEM_LOG_FATAL("assert", "Assertion failed: file: {}, line: {}", file, line);
 }
 
-void Assert::isTrue(bool expr, const string_view& msg, const char* file, const char* func, unsigned int line)
+void Assert::isFalse(bool expr, std::string_view msg, const std::source_location& loc)
 {
-	if(expr)
-		return;
-
-	printf("Assertion failed.\n"
-				 "- message: %s\n"
-				 "- file:    %s\n"
-				 "- func:    %s\n"
-				 "- line:    %u\n",
-				 string(msg).c_str(), file, func, line);
-	breakpoint();
-	CLEM_LOG_FATAL("assert", "Assertion failed: message: '{}', file: {}, line: {}", msg, file, line);
+	isTrue(!expr, msg, loc);
 }
 
-void Assert::isFalse(bool expr, const char* file, const char* func, unsigned int line)
-{
-	isTrue(!expr, file, func, line);
-}
-
-void Assert::isFalse(bool expr, const string_view& msg, const char* file, const char* func, unsigned int line)
-{
-	isTrue(!expr, msg, file, func, line);
-}
-
-void Assert::isNotNull(void* ptr, const char* file, const char* func, unsigned int line)
-{
-	isTrue(ptr != nullptr, file, func, line);
-}
-
-void Assert::isNotNull(void* ptr, const std::string_view& msg, const char* file, const char* func, unsigned int line)
-{
-	isTrue(ptr != nullptr, msg, file, func, line);
-}
-
-void Assert::isNull(void* ptr, const char* file, const char* func, unsigned int line)
-{
-	isTrue(ptr == nullptr, file, func, line);
-}
-
-void Assert::isNull(void* ptr, const std::string_view& msg, const char* file, const char* func, unsigned int line)
-{
-	isTrue(ptr == nullptr, msg, file, func, line);
-}
 } // namespace clem

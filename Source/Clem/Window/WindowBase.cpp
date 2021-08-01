@@ -25,14 +25,14 @@ WindowBase::~WindowBase()
 
 void WindowBase::add(ui::Layer* layer)
 {
-	assert(std::find(layers.begin(), layers.end(), layer) == layers.end());
+	assert(std::ranges::find(layers, layer) == layers.end());
 	layers.push_back(layer);
 	layer->attach();
 }
 
 void WindowBase::remove(ui::Layer* layer)
 {
-	assert(std::find(layers.begin(), layers.end(), layer) != layers.end());
+	assert(std::ranges::find(layers, layer) != layers.end());
 	layers.erase(std::remove(layers.begin(), layers.end(), layer));
 	layer->detach();
 }

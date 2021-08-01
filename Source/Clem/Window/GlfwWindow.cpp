@@ -57,15 +57,15 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 		switch(action)
 		{
 		case GLFW_PRESS:
-			dispatcher.dispatch(KeyPressEvent(key));
+			// dispatcher.dispatch(KeyPressEvent(key));
 			break;
 
 		case GLFW_RELEASE:
-			dispatcher.dispatch(KeyReleaseEvent(key));
+			// dispatcher.dispatch(KeyReleaseEvent(key));
 			break;
 
 		case GLFW_REPEAT:
-			dispatcher.dispatch(KeyRepeatEvent(key));
+			// dispatcher.dispatch(KeyRepeatEvent(key));
 			break;
 		}
 		// EventDispatcher::get().dispatch(KeyEvent(key, action == GLFW_PRESS || action == GLFW_REPEAT, action == GLFW_REPEAT));
@@ -127,6 +127,8 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
 GlfwWindow::~GlfwWindow()
 {
+	PROFILE_FUNC();
+
 	glfwMakeContextCurrent(handle);
 	glfwDestroyWindow(handle);
 }
@@ -197,6 +199,8 @@ bool GlfwWindow::isVisible()
 
 void GlfwWindow::init()
 {
+	PROFILE_FUNC();
+
 	auto success = glfwInit();
 	assert(success);
 
@@ -205,6 +209,8 @@ void GlfwWindow::init()
 
 void GlfwWindow::deinit()
 {
+	PROFILE_FUNC();
+
 	UI::deinit();
 
 	glfwTerminate();

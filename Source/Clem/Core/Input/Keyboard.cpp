@@ -95,10 +95,10 @@ void Keyboard::update()
 
 		const KEY_EVENT_RECORD* keyRecord = &record.Event.KeyEvent;
 		Keyboard::setState((Keyboard::Key)keyRecord->wVirtualKeyCode, keyRecord->bKeyDown);
-		EventDispatcher::get().dispatch(
+		/*EventDispatcher::get().dispatch(
 				KeyEvent(keyRecord->wVirtualKeyCode,
 								 keyRecord->bKeyDown,
-								 keyRecord->wRepeatCount));
+								 keyRecord->wRepeatCount));*/
 	}
 
 	for(size_t i = 0; i < inputRecords.size(); i++)

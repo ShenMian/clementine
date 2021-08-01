@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Logger.h"
+#include "Clem/Assert.h"
 #include "spdlog/sinks/basic_file_sink.h"
 #include "spdlog/sinks/rotating_file_sink.h"
 
@@ -33,7 +34,7 @@ void Logger::create(const string& name)
 Logger& Logger::get(const string& name)
 {
 	auto res = loggers.find(name);
-	CLEM_ASSERT_TRUE(res != loggers.end(), "logger named '" + name + "' doesn't exist");
+	Assert::isTrue(res != loggers.end(), std::format("logger named '{}' doesn't exist", name));
 	return res->second;
 }
 } // namespace clem

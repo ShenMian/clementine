@@ -181,7 +181,7 @@ void GLShader::handleError(const std::string& msg)
 	std::vector<char> infoLog(maxLength);
 	glGetProgramInfoLog(handle, maxLength, &maxLength, infoLog.data());
 
-	CLEM_ASSERT_TRUE(false, msg + ": " + std::string(infoLog.data()));
+	Assert::isTrue(false, std::format("{}: {}", msg, std::string(infoLog.data())));
 }
 
 } // namespace clem

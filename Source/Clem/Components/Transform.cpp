@@ -44,7 +44,7 @@ bool Transform::isDirty() const
 
 void Transform::setParent(Transform* p)
 {
-	CLEM_ASSERT_TRUE(p != this, "parent can't be itself");
+	Assert::isTrue(p != this, "parent can't be itself");
 	dirty  = true;
 	parent = p;
 }

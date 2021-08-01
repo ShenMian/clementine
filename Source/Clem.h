@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Clem/Assert.h"
 #include "Clem/Audio/Audio.h"
 #include "Clem/Components/Components.h"
 #include "Clem/Core/Core.h"
@@ -14,7 +15,6 @@
 #include "Clem/UI/UI.h"
 #include "Clem/Window/Window.h"
 
-#include "Clem/Assert.h"
 #include "Clem/Logger.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"

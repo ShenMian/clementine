@@ -52,7 +52,7 @@ int Main::main(int argc, char* argv[])
 	parseArgs(argc, argv);
 
 	app = CreateApplication();
-	CLEM_ASSERT_NOT_NULL(app, "CreateApplication() return nullptr");
+	Assert::isTrue(app != nullptr, "CreateApplication() return nullptr");
 
 	app->init();
 	run();
@@ -65,7 +65,7 @@ int Main::main(int argc, char* argv[])
 
 void Main::run()
 {
-	CLEM_ASSERT_FALSE(running, "already running");
+	Assert::isFalse(running, "already running");
 	running = true;
 	mainLoop();
 }
@@ -244,33 +244,34 @@ void Main::init()
 {
 	PROFILE_SESSION_BEGIN("profile.json");
 
-	// std::setlocale(LC_ALL, "");
-	std::signal(SIGINT, Main::onSignal);
-
 	// 初始化日志系统
 	Logger::create("core");
 	Logger::create("audio");
 	Logger::create("assert");
 	Logger::create("networking");
 
-	// 初始化 ECS, 添加默认系统
-	registry.addSystem(new PhysicsSystem());
-	registry.addSystem(new RenderSystem());
-	registry.addSystem(new ScriptSystem());
-
 	// 初始化窗口
 	WindowBase::init();
 	// window = new ConsoleWindow("Clementine", {80, 25});
 	window          = new GlfwWindow("Clementine", {1160, 720});
-	window->onClose = []() { Main::running = false; };
+	window->onClose = []() { Main::stop(); };
 
 	// 初始化渲染器
 	Renderer::setAPI(Renderer::API::OpenGL);
 	Renderer::get()->init();
 
+	// 初始化 ECS, 添加默认系统
+	registry.addSystem(new PhysicsSystem());
+	registry.addSystem(new ScriptSystem());
+
+	registry.addSystem(new RenderSystem());
+
 	// 初始化 I/O
 	Audio::init();
 	Keyboard::init();
+
+	// std::setlocale(LC_ALL, "");
+	std::signal(SIGINT, Main::onSignal);
 }
 
 void Main::deinit()
@@ -318,7 +319,7 @@ long Main::getCurrentMillSecond()
 {
 	static LARGE_INTEGER freq;
 	static BOOL          ret = QueryPerformanceFrequency(&freq);
-	CLEM_ASSERT_TRUE(ret != 0, "the installed hardware doesn't supports a high-resolution performance counter");
+	Assert::isTrue(ret != 0, "the installed hardware doesn't supports a high-resolution performance counter");
 
 	LARGE_INTEGER time;
 	QueryPerformanceCounter(&time);

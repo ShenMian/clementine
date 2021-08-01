@@ -3,60 +3,38 @@
 
 #pragma once
 
-#include <memory>
-#include <string>
-
-#if _MSC_VER
-#	define breakpoint() __debugbreak()
-#else
-#	define breakpoint() __builtin_trap()
-#endif
+#include <format>
+#include <source_location>
+#include <string_view>
 
 namespace clem
 {
-/**
- * @brief 断言.
- *
- * Assert.method(expr, [msg,] CALL_INFO);
- */
+
 class Assert
 {
 public:
-	static void isTrue(bool expr, const char*, const char*, unsigned int);
-	static void isTrue(bool expr, const std::string_view& msg, const char*, const char*, unsigned int);
+	/**
+	 * @brief 断言.
+	 * 表达式值为假时断言失败, 报告消息并结束程序.
+	 *
+	 * @param expression 要测试的表达式.
+	 * @param message 提示消息.
+	 * @param location 代码定位.
+	 */
+	static void isTrue(bool expression, std::string_view message, const std::source_location& location = std::source_location::current());
 
-	static void isFalse(bool expr, const char*, const char*, unsigned int);
-	static void isFalse(bool expr, const std::string_view& msg, const char*, const char*, unsigned int);
-
-	static void isNotNull(void* ptr, const char*, const char*, unsigned int);
-	static void isNotNull(void* ptr, const std::string_view& msg, const char*, const char*, unsigned int);
-	template <typename T>
-	static void isNotNull(std::shared_ptr<T>& ptr, const char*, const char*, unsigned int);
-
-	static void isNull(void* ptr, const char*, const char*, unsigned int);
-	static void isNull(void* ptr, const std::string_view& msg, const char*, const char*, unsigned int);
-	template <typename T>
-	static void isNull(std::shared_ptr<T>& ptr, const char*, const char*, unsigned int);
+	/**
+	 * @brief 断言.
+	 * 表达式值为真时断言失败, 报告消息并结束程序.
+	 *
+	 * @param expression 要测试的表达式.
+	 * @param message 提示消息.
+	 * @param location 代码定位.
+	 */
+	static void isFalse(bool expression, std::string_view message, const std::source_location& location = std::source_location::current());
 };
 
-template <typename T>
-inline void Assert::isNotNull(std::shared_ptr<T>& ptr, const char* file, const char* func, unsigned int line)
-{
-	isTrue(ptr, file, line);
-}
+// 仅限影响性能的测试使用
+#define CLEM_ASSERT(expression, message) Assert::isTrue(expression, message)
 
-template <typename T>
-inline void Assert::isNull(std::shared_ptr<T>& ptr, const char* file, const char* func, unsigned int line)
-{
-	isTrue(ptr == nullptr, file, line);
-}
 } // namespace clem
-
-#define CALL_INFO __FILE__, __FUNCTION__, __LINE__
-
-#define CLEM_ASSERT_TRUE(expr, msg)    clem::Assert::isTrue(expr, msg, CALL_INFO);
-#define CLEM_ASSERT_FALSE(expr, msg)   clem::Assert::isFalse(expr, msg, CALL_INFO);
-#define CLEM_ASSERT_NULL(ptr, msg)     clem::Assert::isNull(ptr, msg, CALL_INFO);
-#define CLEM_ASSERT_NOT_NULL(ptr, msg) clem::Assert::isNotNull(ptr, msg, CALL_INFO);
-#define CLEM_ASSERT_EQ(val1, val2)     clem::Assert::isTrue((val1) == (val2), msg, CALL_INFO);
-#define CLEM_ASSERT_NE(val1, val2)     clem::Assert::isTrue((val1) != (val2), msg, CALL_INFO);

@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include "Clem/Assert.h"
 #include "spdlog/spdlog.h"
 #include <memory>
 #include <string>

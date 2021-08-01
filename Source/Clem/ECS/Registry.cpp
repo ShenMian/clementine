@@ -9,6 +9,7 @@
 #include "System.h"
 #include <algorithm>
 #include <cassert>
+#include <ranges>
 
 namespace clem
 {
@@ -85,8 +86,7 @@ void Registry::removeSystem(System* system)
 
 void Registry::enableSystem(System* system)
 {
-	// assert(disabledSystems.contains(&system)); // C++20
-	const auto it = std::find(disabledSystems.begin(), disabledSystems.end(), system);
+	const auto it = std::ranges::find(disabledSystems, system);
 	assert(it != disabledSystems.end());
 	disabledSystems.erase(it);
 	systems.push_back(system);
@@ -94,8 +94,7 @@ void Registry::enableSystem(System* system)
 
 void Registry::disableSystem(System* system)
 {
-	// assert(systems.contains(&system)); // C++20
-	const auto it = std::find(systems.begin(), systems.end(), system);
+	const auto it = std::ranges::find(systems, system);
 	assert(it != systems.end());
 	systems.erase(it);
 	disabledSystems.push_back(system);
