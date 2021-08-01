@@ -5,22 +5,16 @@
 
 #if defined(WIN32) || defined(_WIN32) || defined(_WIN32_) || defined(__WIN32__) || defined(__MINGW32__) || defined(WIN64) || defined(_WIN64) || defined(_WIN64_)
 #	define OS_WIN
-#endif
-
-#if defined(__unix__) || defined(unix) || defined(__unix)
+#elif defined(__unix__) || defined(unix) || defined(__unix)
 #	define OS_UNIX
-#endif
-
-#if defined(__linux__) || defined(__linux)
+#elif defined(__linux__) || defined(__linux)
 #	define OS_LINUX
-#endif
-
-#if defined(ANDROID) || defined(_ANDROID_)
+#elif defined(ANDROID) || defined(_ANDROID_)
 #	define OS_ANDROID
-#endif
-
-#ifdef __APPLE__
+#elif define(__APPLE__)
 #	include <TargetConditionals.h>
+#else
+#error Platform not supported.
 #endif
 
 #if defined(TARGET_OS_MAC)
