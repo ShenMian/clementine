@@ -26,15 +26,14 @@ public:
 
 	static Renderer* get();
 
-	void setApi(API api);
-	API  getApi();
+	static void setApi(API api);
+	static API  getApi();
 
-	virtual void init() = 0;
+	virtual void init()   = 0;
 	virtual void deinit() = 0;
 
 private:
-	API api;
-
+	static API       api;
 	static Renderer* instance;
 };
 

@@ -9,33 +9,37 @@
 namespace clem
 {
 
-Renderer* Renderer::instance = nullptr;
+Renderer::API Renderer::api      = Renderer::API::OpenGL;
+Renderer*     Renderer::instance = nullptr;
 
 Renderer* Renderer::get()
 {
-	assert(instance != nullptr);
+	static API currentAPI;
+	if(currentAPI != api)
+	{
+		delete instance;
+		switch(api)
+		{
+		case API::OpenGL:
+			instance = new GLRenderer;
+			break;
+
+		case API::Vulkan:
+			instance = new VKRenderer;
+			break;
+
+		default:
+			assert(false);
+		}
+		currentAPI = api;
+	}
+
 	return instance;
 }
 
-void Renderer::setApi(API api)
+void Renderer::setApi(API newAPI)
 {
-	this->api = api;
-	instance->deinit();
-	delete instance;
-	switch(api)
-	{
-	case API::OpenGL:
-		instance = new GLRenderer;
-		break;
-
-	case API::Vulkan:
-		instance = new VKRenderer;
-		break;
-
-	default:
-		assert(false);
-	}
-	instance->init();
+	api = newAPI;
 }
 
 Renderer::API Renderer::getApi()

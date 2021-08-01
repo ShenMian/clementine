@@ -265,7 +265,8 @@ void Main::init()
 	window->onClose = []() { Main::running = false; };
 
 	// 初始化渲染器
-	Renderer::get()->setApi(Renderer::API::OpenGL);
+	Renderer::setApi(Renderer::API::OpenGL);
+	Renderer::get()->init();
 
 	// 初始化 I/O
 	Audio::init();
@@ -276,6 +277,9 @@ void Main::deinit()
 {
 	Keyboard::deinit();
 	Audio::deinit();
+
+	Renderer::get()->deinit();
+
 	window->deinit();
 
 	PROFILE_SESSION_END();
