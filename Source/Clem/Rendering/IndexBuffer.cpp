@@ -3,13 +3,19 @@
 
 #include "IndexBuffer.h"
 #include "OpenGL/GLIndexBuffer.h"
+#include "Renderer.h"
 
 namespace clem
 {
 
 std::shared_ptr<IndexBuffer> IndexBuffer::create(const void* data, size_t size)
 {
-	return std::make_shared<GLIndexBuffer>(data, size);
+	switch(Renderer::getAPI())
+	{
+	case Renderer::API::OpenGL:
+		return std::make_shared<GLIndexBuffer>(data, size);
+	}
+	return nullptr;
 }
 
 } // namespace clem

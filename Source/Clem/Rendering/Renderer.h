@@ -26,8 +26,8 @@ public:
 
 	static Renderer* get();
 
-	static void setApi(API api);
-	static API  getApi();
+	static void setAPI(API api);
+	static API  getAPI();
 
 	virtual void init()   = 0;
 	virtual void deinit() = 0;

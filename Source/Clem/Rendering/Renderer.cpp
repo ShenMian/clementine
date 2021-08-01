@@ -36,9 +36,6 @@ Renderer* Renderer::get()
 		case API::Metal:
 			assert(false);
 			break;
-
-		default:
-			assert(false);
 		}
 		currentAPI = api;
 	}
@@ -46,12 +43,12 @@ Renderer* Renderer::get()
 	return instance;
 }
 
-void Renderer::setApi(API newAPI)
+void Renderer::setAPI(API newAPI)
 {
 	api = newAPI;
 }
 
-Renderer::API Renderer::getApi()
+Renderer::API Renderer::getAPI()
 {
 	return api;
 }

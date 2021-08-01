@@ -3,13 +3,19 @@
 
 #include "VertexBuffer.h"
 #include "OpenGL/GLVertexBuffer.h"
+#include "Renderer.h"
 
 namespace clem
 {
 
 std::shared_ptr<VertexBuffer> VertexBuffer::create(const void* data, size_t size)
 {
-	return std::make_shared<GLVertexBuffer>(data, size);
+	switch(Renderer::getAPI())
+	{
+	case Renderer::API::OpenGL:
+		return std::make_shared<GLVertexBuffer>(data, size);
+	}
+	return nullptr;
 }
 
 } // namespace clem

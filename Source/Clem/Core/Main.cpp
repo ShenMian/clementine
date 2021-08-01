@@ -265,7 +265,7 @@ void Main::init()
 	window->onClose = []() { Main::running = false; };
 
 	// 初始化渲染器
-	Renderer::setApi(Renderer::API::OpenGL);
+	Renderer::setAPI(Renderer::API::OpenGL);
 	Renderer::get()->init();
 
 	// 初始化 I/O
