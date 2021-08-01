@@ -30,6 +30,7 @@ project "Clementine"
     "%{thirdparty.imgui}/include",
     "%{thirdparty.spdlog}/include",
     "%{thirdparty.openal}/include",
+    "%{thirdparty.vulkan}/include",
     "%{thirdparty.yaml_cpp}/include",
     "%{thirdparty.nlohmann_json}/include"}
 
