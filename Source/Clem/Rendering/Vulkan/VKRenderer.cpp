@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "VKRenderer.h"
+#include "Clem/Version.h"
 #include <cassert>
 #include <vector>
 #include <vulkan/vulkan.h>
@@ -97,8 +98,8 @@ void vkCheck(VkResult result)
 	}
 }
 
-static VkInstance        vkInstance      = nullptr;
-static VkDevice          vkDevice        = nullptr;
+static VkInstance        vkInstance = nullptr;
+static VkDevice          vkDevice   = nullptr;
 static VkApplicationInfo applicationInfo;
 
 void VKRenderer::init()
@@ -118,11 +119,13 @@ void VKRenderer::initInstance()
 	assert(vkInstance == nullptr);
 
 	memset(&applicationInfo, 0, sizeof(applicationInfo));
-	applicationInfo.apiVersion = VK_MAKE_VERSION(1, 0, 3); // 驱动应该支持的最低 API 版本
+	applicationInfo.apiVersion    = VK_MAKE_VERSION(1, 0, 3); // 驱动应该支持的最低 API 版本
+	applicationInfo.pEngineName   = "Clementine";
+	applicationInfo.engineVersion = VK_MAKE_VERSION(CLEM_VERSION_MAJOR, CLEM_VERSION_MINOR, CLEM_VERSION_PATCH);
 
 	VkInstanceCreateInfo instanceCreateInfo = {};
-	instanceCreateInfo.sType            = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-	instanceCreateInfo.pApplicationInfo = &applicationInfo;
+	instanceCreateInfo.sType                = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+	instanceCreateInfo.pApplicationInfo     = &applicationInfo;
 
 	auto ret = vkCreateInstance(&instanceCreateInfo, nullptr, &vkInstance);
 	vkCheck(ret);
@@ -166,12 +169,12 @@ void VKRenderer::initDevice()
 	float queuePriorities = {1.0f};
 
 	VkDeviceQueueCreateInfo deviceQueueCreateInfo = {};
-	deviceQueueCreateInfo.sType            = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-	deviceQueueCreateInfo.queueCount       = 1;
-	deviceQueueCreateInfo.queueFamilyIndex = queueFamilyIndex;
-	deviceQueueCreateInfo.pQueuePriorities = &queuePriorities;
+	deviceQueueCreateInfo.sType                   = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+	deviceQueueCreateInfo.queueCount              = 1;
+	deviceQueueCreateInfo.queueFamilyIndex        = queueFamilyIndex;
+	deviceQueueCreateInfo.pQueuePriorities        = &queuePriorities;
 
-	VkDeviceCreateInfo deviceCreateInfo = {};
+	VkDeviceCreateInfo deviceCreateInfo   = {};
 	deviceCreateInfo.sType                = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
 	deviceCreateInfo.queueCreateInfoCount = 1;
 	deviceCreateInfo.pQueueCreateInfos    = &deviceQueueCreateInfo;

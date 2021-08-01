@@ -186,16 +186,16 @@ private:
 		return x >= 0 && x < board_size.x && y >= 0 && y < board_size.y;
 	}
 
-	Size2i            board_size;  // 雷区大小
-	int               mine_num;    // 地雷数量
-	char              map[30][16]; // 雷区
-	int               surplus;     // 剩余未揭开格数
-	vector<Point2i>   flags;       // 标记位置
-	Sound             opening;     // 开场音效(游戏开始)
-	Sound             explode;     // 引爆地雷音效(游戏失败)
-	Source            source;
-	Random            random;
-	Sprite*           sprite;
+	Size2i          board_size;  // 雷区大小
+	int             mine_num;    // 地雷数量
+	char            map[30][16]; // 雷区
+	int             surplus;     // 剩余未揭开格数
+	vector<Point2i> flags;       // 标记位置
+	Sound           opening;     // 开场音效(游戏开始)
+	Sound           explode;     // 引爆地雷音效(游戏失败)
+	Source          source;
+	Random          random;
+	Sprite*         sprite;
 };
 
 Application* clem::CreateApplication()

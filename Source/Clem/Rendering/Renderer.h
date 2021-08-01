@@ -20,7 +20,7 @@ public:
 	{
 		OpenGL,
 		Vulkan,
-		Direct3D,
+		DirectX12,
 		Metal
 	};
 

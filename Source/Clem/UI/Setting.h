@@ -35,7 +35,6 @@ class Setting : public Layer
 		Main::setUpdateRate(updateRate);
 		Main::setRenderRate(renderRate);
 
-		
 		if(ImGui::BeginMenu("OpenGL info"))
 		{
 			ImGui::Text("Version : %s", glGetString(GL_VERSION));
@@ -43,7 +42,7 @@ class Setting : public Layer
 			ImGui::Text("Vendor  : %s", glGetString(GL_VENDOR));
 			ImGui::EndMenu();
 		}
-		
+
 		ImGui::End();
 	}
 

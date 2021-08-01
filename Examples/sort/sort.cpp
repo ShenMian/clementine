@@ -73,14 +73,14 @@ public:
 	}
 
 private:
-	Size2i            size = {118, 28};
-	vector<int>       data;
-	Sprite*           sprite = nullptr;
-	Random            random;
-	Color             white = Color(Color::white, Color::white);
-	Color             green = Color(Color::green, Color::green);
-	Color             blue  = Color(Color::blue, Color::blue);
-	Color             red   = Color(Color::red, Color::red);
+	Size2i      size = {118, 28};
+	vector<int> data;
+	Sprite*     sprite = nullptr;
+	Random      random;
+	Color       white = Color(Color::white, Color::white);
+	Color       green = Color(Color::green, Color::green);
+	Color       blue  = Color(Color::blue, Color::blue);
+	Color       red   = Color(Color::red, Color::red);
 };
 
 Application* clem::CreateApplication()

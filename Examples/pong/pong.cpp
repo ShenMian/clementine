@@ -88,13 +88,13 @@ public:
 
 			if(tf.translation.y + body.velocity.y < 1)
 			{
-				body.velocity = Vector2::zero;
+				body.velocity    = Vector2::zero;
 				tf.translation.y = 1;
 				return;
 			}
 			else if(tf.translation.y + body.velocity.y > 19)
 			{
-				body.velocity  = Vector2::zero;
+				body.velocity    = Vector2::zero;
 				tf.translation.y = 19;
 				return;
 			}
@@ -153,12 +153,12 @@ public:
 			auto& body = bats[1].get<Rigidbody>();
 			if(tf.translation.y + body.velocity.y < 1)
 			{
-				body.velocity = Vector2::zero;
+				body.velocity    = Vector2::zero;
 				tf.translation.y = 1;
 			}
 			else if(tf.translation.y + body.velocity.y > 19)
 			{
-				body.velocity  = Vector2::zero;
+				body.velocity    = Vector2::zero;
 				tf.translation.y = 19;
 			}
 
@@ -186,14 +186,14 @@ public:
 			else if(ballPos.y < 1)
 			{
 				ts.translation.y = 1;
-				vel.y = -vel.y;
+				vel.y            = -vel.y;
 				vel.x += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 				up.play(pop);
 			}
 			else if(ballPos.y >= 24)
 			{
 				ts.translation.y = 23;
-				vel.y = -vel.y;
+				vel.y            = -vel.y;
 				vel.x += (float)random.getInt32(-random_rebound_angle, random_rebound_angle) / 100;
 				down.play(pop);
 			}
@@ -210,7 +210,7 @@ public:
 	void resetBall()
 	{
 		Main::registry.get("ball").get<Transform>().translation = {39, 12};
-		Main::registry.get("ball").get<Rigidbody>().velocity = Vector2::zero;
+		Main::registry.get("ball").get<Rigidbody>().velocity    = Vector2::zero;
 
 		static future<void> h;
 		h = async([this]() {

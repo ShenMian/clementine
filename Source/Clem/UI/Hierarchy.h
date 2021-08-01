@@ -3,9 +3,9 @@
 
 #pragma once
 
+#include "Clem/ECS/Entity.h"
 #include "Layer.h"
 #include "Properties.h"
-#include "Clem/ECS/Entity.h"
 #include <glad/glad.h>
 #include <imgui/imgui.h>
 
@@ -27,9 +27,9 @@ public:
 
 		if(ImGui::CollapsingHeader("Untagged", ImGuiTreeNodeFlags_DefaultOpen))
 			Main::registry.all([this](const auto e) {
-			if(e.noneOf<Tag>())
-				showEntity(e);
-		});
+				if(e.noneOf<Tag>())
+					showEntity(e);
+			});
 
 		// 空白区域右键
 		if(ImGui::BeginPopupContextWindow(0, 1, false))

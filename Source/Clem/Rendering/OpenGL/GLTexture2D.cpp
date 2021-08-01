@@ -3,10 +3,10 @@
 
 #include "GLTexture2D.h"
 #include "Clem/Assert.h"
+#include <cassert>
 #include <glad/glad.h>
 #include <stb/stb_image.h>
 #include <type_traits>
-#include <cassert>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
@@ -22,7 +22,7 @@ GLTexture2D::GLTexture2D(const fs::path& path)
 {
 	CLEM_ASSERT_TRUE(fs::exists(path), "texture file doesn't exist");
 
-	int height, width, channels;
+	int  height, width, channels;
 	auto data = loadFromFile(path, height, width, channels);
 
 	GLenum internalFormat, dataFormat;

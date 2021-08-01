@@ -15,7 +15,7 @@ Renderer*     Renderer::instance = nullptr;
 Renderer* Renderer::get()
 {
 	static API currentAPI;
-	if(currentAPI != api)
+	if(instance == nullptr || currentAPI != api)
 	{
 		delete instance;
 		switch(api)
@@ -25,7 +25,16 @@ Renderer* Renderer::get()
 			break;
 
 		case API::Vulkan:
-			instance = new VKRenderer;
+			// instance = new VKRenderer;
+			assert(false);
+			break;
+
+		case API::DirectX12:
+			assert(false);
+			break;
+
+		case API::Metal:
+			assert(false);
 			break;
 
 		default:

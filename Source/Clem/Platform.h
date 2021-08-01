@@ -14,7 +14,7 @@
 #elif define(__APPLE__)
 #	include <TargetConditionals.h>
 #else
-#error Platform not supported.
+#	error Platform not supported.
 #endif
 
 #if defined(TARGET_OS_MAC)

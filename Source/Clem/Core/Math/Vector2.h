@@ -37,8 +37,8 @@ public:
 
 	/**
 	 * @brief 获取长度.
-	 * 
-	 * @note 
+	 *
+	 * @note
 	 *
 	 * @see sizeSquared
 	 */

@@ -4,8 +4,8 @@
 #pragma once
 
 #include "Clem/Rendering/Shader.h"
-#include <string>
 #include <filesystem>
+#include <string>
 
 namespace clem
 {

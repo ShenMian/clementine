@@ -28,7 +28,7 @@ public:
 
 private:
 	id_type handle;
-	
+
 	void* loadFromFile(const std::filesystem::path& path, int& width, int& height, int& channels);
 };
 

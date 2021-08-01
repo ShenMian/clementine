@@ -104,7 +104,7 @@ GLShader::GLShader(const fs::path& path)
 	size_t           pos = 0, eol;
 	std::string_view src(source), line;
 	eol = src.find("\r\n", pos);
-	do 
+	do
 	{
 		line = src.substr(pos, eol - pos);
 
@@ -129,8 +129,6 @@ GLShader::GLShader(const fs::path& path)
 	if(eol == std::string::npos)
 		sources[currentType] = source.substr(begin, pos);
 
-
-
 	handle = glCreateProgram();
 
 	const auto  name        = path.filename().string();
@@ -152,7 +150,7 @@ GLShader::GLShader(const fs::path& path)
 		file.close();
 
 		auto shader = glCreateShader(type[i]);
-		glShaderBinary(1, &shader, GL_SHADER_BINARY_FORMAT_SPIR_V, buffer.data(), buffer.size());
+		glShaderBinary(1, &shader, GL_SHADER_BINARY_FORMAT_SPIR_V, buffer.data(), (GLsizei)buffer.size());
 		glAttachShader(handle, shader);
 	}
 }
