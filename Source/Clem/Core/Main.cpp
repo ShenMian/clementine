@@ -248,7 +248,8 @@ void Main::init()
 	Logger::create("core");
 	Logger::create("audio");
 	Logger::create("assert");
-	Logger::create("networking");
+	Logger::create("render");
+	Logger::create("network");
 
 	// 初始化窗口
 	WindowBase::init();
