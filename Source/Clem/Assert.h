@@ -21,7 +21,7 @@ public:
 	 * @param message 提示消息.
 	 * @param location 代码定位.
 	 */
-	static void isTrue(bool expression, std::string_view message, const std::source_location& location = std::source_location::current());
+	static void isTrue(bool expression, std::string_view message = "", const std::source_location& location = std::source_location::current());
 
 	/**
 	 * @brief 断言.
@@ -31,7 +31,7 @@ public:
 	 * @param message 提示消息.
 	 * @param location 代码定位.
 	 */
-	static void isFalse(bool expression, std::string_view message, const std::source_location& location = std::source_location::current());
+	static void isFalse(bool expression, std::string_view message = "", const std::source_location& location = std::source_location::current());
 };
 
 // 仅限影响性能的测试使用

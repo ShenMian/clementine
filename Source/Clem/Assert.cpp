@@ -3,6 +3,7 @@
 
 #include "Assert.h"
 #include "Logger.h"
+#include "Platform.h"
 #include <iostream>
 
 #if _MSC_VER
@@ -19,10 +20,15 @@ void Assert::isTrue(bool expr, std::string_view msg, const std::source_location&
 	if(expr)
 		return;
 
-	std::cout << "Assertion failed." << std::endl;
-	std::cout << "file    : " << loc.file_name() << std::endl;
-	std::cout << "function: " << loc.function_name() << std::endl;
-	std::cout << "line    : " << loc.line() << std::endl;
+	auto str = std::format("Assertion failed.\nfile    : {}\nfunction: {}\nline    : {}\n", loc.file_name(), loc.function_name(), loc.line());
+    if(!msg.empty())
+      str += std::format("message : {}", msg);
+
+	std::cout << str << std::endl;
+
+	#ifdef OS_WIN
+    MessageBoxA(nullptr, str.c_str(), "Clementine", 0);
+	#endif
 
 	breakpoint();
 }

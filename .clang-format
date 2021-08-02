@@ -29,5 +29,5 @@ SortUsingDeclarations: true
 
 IndentPPDirectives: AfterHash
 
-TabWidth: 2
-UseTab:   ForContinuationAndIndentation
+TabWidth: 4
+UseTab:   Never

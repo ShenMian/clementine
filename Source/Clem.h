@@ -13,10 +13,10 @@
 #include "Clem/Physics/Physics.h"
 #include "Clem/Rendering/Rendering.h"
 #include "Clem/UI/UI.h"
+#include "Clem/Version.h"
 #include "Clem/Window/Window.h"
 
 #include "Clem/Logger.h"
 #include "Clem/Platform.h"
 #include "Clem/Profiler.h"
 #include "Clem/Random.h"
-#include "Clem/Version.h"
