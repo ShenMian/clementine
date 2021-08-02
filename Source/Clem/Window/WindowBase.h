@@ -84,7 +84,9 @@ public:
 	 *
 	 * @return true 为可见, false 为不可见.
 	 */
-	virtual bool isVisible() = 0;
+	virtual bool isVisible() const = 0;
+
+	virtual void* nativeHandle() const = 0;
 
 	void add(ui::Layer* layer);
 

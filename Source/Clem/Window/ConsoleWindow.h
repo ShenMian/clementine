@@ -68,7 +68,9 @@ public:
 	/**
 	 * @brief 终端窗口不支持.
 	 */
-	bool isVisible() override;
+	bool isVisible() const override;
+
+	void* nativeHandle() const override;
 
 	static void init();
 	static void deinit();

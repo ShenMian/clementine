@@ -11,9 +11,11 @@
 #include <cstdio>
 #include <glad/glad.h>
 #include <glfw/glfw3.h>
+#include <vulkan/vulkan.hpp>
 
 #include <imgui/backends/imgui_impl_glfw.h>
 #include <imgui/backends/imgui_impl_opengl3.h>
+#include <imgui/backends/imgui_impl_vulkan.h>
 #include <imgui/imgui.h>
 
 using std::string;
@@ -21,7 +23,7 @@ using std::string;
 namespace clem
 {
 
-static unsigned int vertexArray, vertexBuffer, indexBuffer;
+static unsigned int vertexArray;
 
 GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 {
@@ -73,9 +75,6 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
 	glfwSetMouseButtonCallback(handle, nullptr);
 
-	ImGui_ImplGlfw_InitForOpenGL(handle, true);
-	ImGui_ImplOpenGL3_Init("#version 410");
-
 	shader = Shader::create(R"(
 		#version 410
 
@@ -123,12 +122,15 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
 
 	assert(glGetError() == GL_NO_ERROR);
+
+	UI::init(this);
 }
 
 GlfwWindow::~GlfwWindow()
 {
 	PROFILE_FUNC();
 
+	UI::deinit();
 	glfwMakeContextCurrent(handle);
 	glfwDestroyWindow(handle);
 }
@@ -192,9 +194,14 @@ void GlfwWindow::setVisible(bool visible)
 		glfwHideWindow(handle);
 }
 
-bool GlfwWindow::isVisible()
+bool GlfwWindow::isVisible() const
 {
 	return glfwGetWindowAttrib(handle, GLFW_VISIBLE);
+}
+
+void* GlfwWindow::nativeHandle() const
+{
+	return handle;
 }
 
 void GlfwWindow::init()
@@ -203,16 +210,11 @@ void GlfwWindow::init()
 
 	auto success = glfwInit();
 	assert(success);
-
-	UI::init();
 }
 
 void GlfwWindow::deinit()
 {
 	PROFILE_FUNC();
-
-	UI::deinit();
-
 	glfwTerminate();
 }
 
@@ -220,15 +222,32 @@ void GlfwWindow::renderGui(Time dt)
 {
 	PROFILE_FUNC();
 
-	ImGui_ImplOpenGL3_NewFrame();
+	if(Renderer::getAPI() == Renderer::API::OpenGL)
+		ImGui_ImplOpenGL3_NewFrame();
+	else
+		ImGui_ImplVulkan_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
+
 	ImGui::NewFrame();
 
 	for(auto layer : layers)
 		layer->update(dt);
 
 	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+	if(Renderer::getAPI() == Renderer::API::OpenGL)
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	else
+		; // ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData());
 }
+
+/*
+vk::SurfaceKHR GlfwWindow::getWindowSurface(const vk::Instance& vkInstance) const
+{
+	VkSurfaceKHR surface;
+	auto ret = static_cast<vk::Result>(glfwCreateWindowSurface((VkInstance)vkInstance, handle, nullptr, &surface));
+	return surface;
+}
+*/
 
 } // namespace clem

@@ -46,9 +46,14 @@ void ConsoleWindow::setVisible(bool visible)
 	assert(false);
 }
 
-bool ConsoleWindow::isVisible()
+bool ConsoleWindow::isVisible() const
 {
 	return true;
+}
+
+void* ConsoleWindow::nativeHandle() const
+{
+	return nullptr;
 }
 
 // width / height = 80 / 25 => width * 25 = height * 80

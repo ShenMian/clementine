@@ -5,8 +5,16 @@
 
 #include "WindowBase.h"
 #include <memory>
+#include <string_view>
+#include <vector>
 
 struct GLFWwindow;
+
+namespace vk
+{
+class Instance;
+class SurfaceKHR;
+}; // namespace vk
 
 namespace clem
 {
@@ -84,7 +92,13 @@ public:
 	 *
 	 * @return true 为可见, false 为不可见.
 	 */
-	bool isVisible() override;
+	bool isVisible() const override;
+
+	void* nativeHandle() const override;
+
+	// Vulkan
+	std::vector<std::string_view> getRequiredInstanceExtensions() const;
+	vk::SurfaceKHR                getWindowSurface(const vk::Instance& vkInstance) const;
 
 	static void init();
 	static void deinit();
