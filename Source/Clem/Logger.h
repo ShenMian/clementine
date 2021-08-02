@@ -107,7 +107,7 @@ void Logger::fatal(const FmtStr& fmt, Args&&... args)
 }
 } // namespace clem
 
-#define CLEM_LOG_INFO(name, ...)  clem::Logger::get(name).info(__VA_ARGS__)
-#define CLEM_LOG_WARN(name, ...)  clem::Logger::get(name).warn(__VA_ARGS__)
-#define CLEM_LOG_ERROR(name, ...) clem::Logger::get(name).error(__VA_ARGS__)
-#define CLEM_LOG_FATAL(name, ...) clem::Logger::get(name).fatal(__VA_ARGS__)
+#define CLEM_LOG_INFO(name, ...)  ::clem::Logger::get(name).info(__VA_ARGS__)
+#define CLEM_LOG_WARN(name, ...)  ::clem::Logger::get(name).warn(__VA_ARGS__)
+#define CLEM_LOG_ERROR(name, ...) ::clem::Logger::get(name).error(__VA_ARGS__)
+#define CLEM_LOG_FATAL(name, ...) ::clem::Logger::get(name).fatal(__VA_ARGS__)
