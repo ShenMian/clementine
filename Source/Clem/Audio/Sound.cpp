@@ -111,16 +111,14 @@ struct WaveData
 void Sound::loadWavFile(const fs::path& path)
 {
 	std::ifstream file(path, std::ios::binary);
-	if(!file.is_open())
-		Assert::isTrue(false, std::format("can't open file: {}", path.string()));
+	Assert::isTrue(file.is_open(), std::format("can't open file: {}", path.string()));
 
 	RiffHeader riffHeader;
 	WaveFormat waveFormat;
 	WaveData   waveData;
 
 	file.read((char*)&riffHeader, sizeof(RiffHeader));
-	if(std::memcmp(riffHeader.id, "RIFF", 4) != 0 || std::memcmp(riffHeader.format, "WAVE", 4) != 0)
-		Assert::isTrue(false, "incorrect file content");
+	Assert::isTrue(std::memcmp(riffHeader.id, "RIFF", 4) == 0 && std::memcmp(riffHeader.format, "WAVE", 4) == 0, "incorrect file content");
 
 	file.read((char*)&waveFormat, sizeof(WaveFormat));
 	if(waveFormat.size > 16)
@@ -139,8 +137,7 @@ void Sound::loadWavFile(const fs::path& path)
 		file.read(id, 4);
 	}
 
-	if(std::memcmp(id, "data", 4) != 0)
-		Assert::isTrue(false, "incorrect file content");
+	Assert::isTrue(std::memcmp(id, "data", 4) == 0, "incorrect file content");
 
 	file.seekg(-4, std::ios::cur);
 	file.read((char*)&waveData, sizeof(WaveData));
