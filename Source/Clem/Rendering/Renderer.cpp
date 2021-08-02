@@ -25,8 +25,7 @@ Renderer* Renderer::get()
 			break;
 
 		case API::Vulkan:
-			// instance = new VKRenderer;
-			assert(false);
+			instance = new VKRenderer;
 			break;
 
 		case API::D3D12:

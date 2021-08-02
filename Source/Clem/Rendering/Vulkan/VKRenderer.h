@@ -5,7 +5,8 @@
 
 #include "Clem/Rendering/Renderer.h"
 #include <tuple>
-#include <vulkan/vulkan.h>
+#include <vector>
+#include <vulkan/vulkan.hpp>
 
 namespace clem
 {
@@ -22,16 +23,26 @@ public:
 	void deinit() override;
 
 private:
-	void initInstance();
-	void deinitInstance();
-	void initDevice();
-	void deinitDevice();
+    void initInstance();
+    void deinitInstance();
 
-	VkPhysicalDevice findSuitableDevice() const;
-	bool             isDeviceSuitable(const VkPhysicalDevice device) const;
+    void initDebug();
+    void deinitDebug();
 
-	std::tuple<uint32_t, uint32_t> findSuitableQueueFamily(const VkPhysicalDevice device) const;
-	bool                           isQueueFamilySuitable(VkQueueFamilyProperties&) const;
+    void initDevice();
+    void deinitDevice();
+
+	vk::PhysicalDevice findSuitablePhysicalDevice() const;
+	bool               isSuitable(const vk::PhysicalDevice& device) const;
+	bool               isSuitable(const vk::QueueFamilyProperties& props) const;
+
+    vk::Instance              vkInstance;
+    vk::Device                vkDevice;
+    std::vector<const char*>  instanceLayers;
+    std::vector<const char*>  instanceExtensions;
+    std::vector<const char*>  deviceLayers;
+    std::vector<const char*>  deviceExtensions;
+    vk::DispatchLoaderDynamic dynamicLoader;
 };
 
 /**
