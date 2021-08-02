@@ -4,6 +4,8 @@
 #pragma once
 
 #include "Clem/Rendering/Renderer.h"
+#include "VKCommandBuffer.h"
+#include "VKCommandPool.h"
 #include <tuple>
 #include <vector>
 #include <vulkan/vulkan.hpp>
@@ -19,30 +21,40 @@ namespace clem
 class VKRenderer : public Renderer
 {
 public:
-	void init() override;
-	void deinit() override;
+  static VKRenderer& get();
+
+  void init() override;
+  void deinit() override;
+
+  vk::Device device;
+  uint32_t   queueFamilyIndex;
 
 private:
-    void initInstance();
-    void deinitInstance();
+  VKRenderer() = default;
 
-    void initDebug();
-    void deinitDebug();
+  void createInstance();
+  void destroyInstance();
 
-    void initDevice();
-    void deinitDevice();
+  void createDebugCallback();
+  void destroyDebugCallback();
 
-	vk::PhysicalDevice findSuitablePhysicalDevice() const;
-	bool               isSuitable(const vk::PhysicalDevice& device) const;
-	bool               isSuitable(const vk::QueueFamilyProperties& props) const;
+  void createDevice();
+  void destroyDevice();
 
-    vk::Instance              vkInstance;
-    vk::Device                vkDevice;
-    std::vector<const char*>  instanceLayers;
-    std::vector<const char*>  instanceExtensions;
-    std::vector<const char*>  deviceLayers;
-    std::vector<const char*>  deviceExtensions;
-    vk::DispatchLoaderDynamic dynamicLoader;
+  vk::PhysicalDevice findSuitablePhysicalDevice() const;
+  bool               isSuitable(const vk::PhysicalDevice& device) const;
+  bool               isSuitable(const vk::QueueFamilyProperties& props) const;
+
+  vk::Instance              instance;
+  vk::Queue                 queue;
+  std::vector<const char*>  instanceLayers;
+  std::vector<const char*>  instanceExtensions;
+  std::vector<const char*>  deviceLayers;
+  std::vector<const char*>  deviceExtensions;
+  vk::DispatchLoaderDynamic dynamicLoader;
+
+  VKCommandPool   commandPool;
+  VKCommandBuffer commandBuffer;
 };
 
 /**

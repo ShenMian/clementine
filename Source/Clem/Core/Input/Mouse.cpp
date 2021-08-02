@@ -11,6 +11,7 @@
 
 namespace clem
 {
+
 std::unordered_map<Mouse::Key, bool> Mouse::states;
 Point2                               Mouse::position;
 
@@ -68,6 +69,7 @@ void Mouse::update()
 
 		const MOUSE_EVENT_RECORD* mouseRecord = &record.Event.MouseEvent;
 		auto&                     dispatcher  = EventDispatcher::get();
+        /*
 		switch(mouseRecord->dwEventFlags)
 		{
 		case MOUSE_MOVED:
@@ -102,6 +104,7 @@ void Mouse::update()
 																		 MouseEvent::Key::right_buttom));
 		Mouse::setKeyState(Mouse::Key::left, mouseRecord->dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED);
 		Mouse::setKeyState(Mouse::Key::right, mouseRecord->dwButtonState & RIGHTMOST_BUTTON_PRESSED);
+		*/
 	}
 
 	for(size_t i = 0; i < inputRecords.size(); i++)

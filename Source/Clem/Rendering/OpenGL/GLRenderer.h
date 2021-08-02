@@ -16,8 +16,13 @@ namespace clem
 class GLRenderer : public Renderer
 {
 public:
-	void init() override;
-	void deinit() override;
+  static GLRenderer& get();
+
+  void init() override;
+  void deinit() override;
+
+private:
+  GLRenderer() = default;
 };
 
 /**

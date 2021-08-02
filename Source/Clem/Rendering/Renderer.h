@@ -56,7 +56,7 @@ public:
 
 private:
 	static API       api;
-	static Renderer* instance;
+	static Renderer* instance_;
 };
 
 /**

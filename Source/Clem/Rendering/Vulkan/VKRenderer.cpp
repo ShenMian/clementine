@@ -26,30 +26,53 @@ VKAPI_ATTR vk::Bool32 VKAPI_CALL DebugReportCallback(
 
 void vkCheck(VkResult);
 
+VKRenderer& VKRenderer::get()
+{
+  static auto* instance = new VKRenderer;
+  return *instance;
+}
+
 void VKRenderer::init()
 {
-  initInstance();
-  initDebug();
-  initDevice();
+  createInstance();
+  createDebugCallback();
+  createDevice();
+
+  commandPool.create();
+  commandBuffer = commandPool.allocateCommandBuffer();
+  commandBuffer.begin();
+
+  vk::SubmitInfo                 submitInfo;
+  std::vector<vk::CommandBuffer> commandBuffers(1);
+  commandBuffers[0]             = commandBuffer;
+  submitInfo.commandBufferCount = 1;
+  submitInfo.pCommandBuffers    = commandBuffers.data();
+
+  queue.submit(submitInfo);
+
+  queue.waitIdle();
 }
 
 void VKRenderer::deinit()
 {
-  deinitDevice();
-  deinitDebug();
-  deinitInstance();
+  commandBuffer.end();
+  commandPool.destroy();
+
+  destroyDevice();
+  destroyDebugCallback();
+  destroyInstance();
 }
 
-void VKRenderer::initInstance()
+void VKRenderer::createInstance()
 {
-  Assert::isTrue(!vkInstance);
+  Assert::isTrue(!instance);
 
   // instanceLayers.push_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
 
   vk::ApplicationInfo appInfo;
   appInfo.apiVersion    = VK_MAKE_VERSION(1, 0, 3); // 驱动应该支持的最低 API 版本
   appInfo.pEngineName   = "Clementine";
-  appInfo.engineVersion = VK_MAKE_VERSION(clem::version_major, clem::version_minor, clem::version_patch);
+  appInfo.engineVersion = VK_MAKE_VERSION(version_major, version_minor, version_patch);
 
   vk::InstanceCreateInfo instanceCreateInfo;
   instanceCreateInfo.pApplicationInfo        = &appInfo;
@@ -60,7 +83,7 @@ void VKRenderer::initInstance()
 
   try
   {
-    vkInstance = vk::createInstance(instanceCreateInfo);
+    instance = vk::createInstance(instanceCreateInfo);
   }
   catch(const std::exception& e)
   {
@@ -68,16 +91,16 @@ void VKRenderer::initInstance()
   }
 }
 
-void VKRenderer::deinitInstance()
+void VKRenderer::destroyInstance()
 {
-  vkInstance.destroy();
+  instance.destroy();
 }
 
 static vk::DebugReportCallbackEXT debugReport;
 
-void VKRenderer::initDebug()
+void VKRenderer::createDebugCallback()
 {
-  dynamicLoader.init(vkInstance, vkGetInstanceProcAddr);
+  dynamicLoader.init(instance, vkGetInstanceProcAddr);
   if(dynamicLoader.vkCreateDebugReportCallbackEXT == nullptr)
     return;
 
@@ -88,19 +111,19 @@ void VKRenderer::initDebug()
                      vk::DebugReportFlagBitsEXT::eInformation |
                      vk::DebugReportFlagBitsEXT::ePerformanceWarning |
                      vk::DebugReportFlagBitsEXT::eWarning;
-  debugReport = vkInstance.createDebugReportCallbackEXT(createInfo, nullptr, dynamicLoader);
+  debugReport = instance.createDebugReportCallbackEXT(createInfo, nullptr, dynamicLoader);
 }
 
-void VKRenderer::deinitDebug()
+void VKRenderer::destroyDebugCallback()
 {
   if(dynamicLoader.vkDestroyDebugReportCallbackEXT == nullptr)
     return;
-  vkInstance.destroyDebugReportCallbackEXT(debugReport, nullptr, dynamicLoader);
+  instance.destroyDebugReportCallbackEXT(debugReport, nullptr, dynamicLoader);
 }
 
-void VKRenderer::initDevice()
+void VKRenderer::createDevice()
 {
-  Assert::isTrue(!vkDevice);
+  Assert::isTrue(!device);
 
   auto physicalDevice = findSuitablePhysicalDevice();
   Assert::isTrue(physicalDevice, "can't find suitable physical device");
@@ -112,11 +135,12 @@ void VKRenderer::initDevice()
     if(isSuitable(queueFamilyProps[i]))
       queueIndex = i;
   Assert::isTrue(queueIndex != -1, "can't find suitable queue family");
+  queueFamilyIndex = queueIndex;
 
   float                     queuePriorities = 1.0f;
   vk::DeviceQueueCreateInfo deviceQueueCreateInfo;
-  deviceQueueCreateInfo.queueFamilyIndex = queueIndex;
-  deviceQueueCreateInfo.queueCount       = queueFamilyProps[queueIndex].queueCount;
+  deviceQueueCreateInfo.queueFamilyIndex = queueFamilyIndex;
+  deviceQueueCreateInfo.queueCount       = queueFamilyProps[queueFamilyIndex].queueCount;
   deviceQueueCreateInfo.pQueuePriorities = &queuePriorities;
 
   vk::DeviceCreateInfo deviceCreateInfo;
@@ -129,12 +153,14 @@ void VKRenderer::initDevice()
 
   try
   {
-    vkDevice = physicalDevice.createDevice(deviceCreateInfo);
+    device = physicalDevice.createDevice(deviceCreateInfo);
   }
   catch(const std::exception& e)
   {
     Assert::isTrue(false, std::format("create device faild: {}", e.what()));
   }
+
+  queue = device.getQueue(queueFamilyIndex, 0);
 
   // vkInstance.createDebugReportCallbackEXT(debugReportCallbackCreateInfo);
 
@@ -147,14 +173,14 @@ void VKRenderer::initDevice()
 	*/
 }
 
-void VKRenderer::deinitDevice()
+void VKRenderer::destroyDevice()
 {
-  vkDevice.destroy();
+  device.destroy();
 }
 
 vk::PhysicalDevice VKRenderer::findSuitablePhysicalDevice() const
 {
-  for(const auto device : vkInstance.enumeratePhysicalDevices())
+  for(const auto device : instance.enumeratePhysicalDevices())
     if(isSuitable(device))
       return device;
   return nullptr;

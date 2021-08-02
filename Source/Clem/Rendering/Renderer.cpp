@@ -9,23 +9,23 @@
 namespace clem
 {
 
-Renderer::API Renderer::api      = Renderer::API::OpenGL;
-Renderer*     Renderer::instance = nullptr;
+Renderer::API Renderer::api       = Renderer::API::OpenGL;
+Renderer*     Renderer::instance_ = nullptr;
 
 Renderer* Renderer::get()
 {
 	static API currentAPI;
-	if(instance == nullptr || currentAPI != api)
+	if(instance_ == nullptr || currentAPI != api)
 	{
-		delete instance;
+		delete instance_;
 		switch(api)
 		{
 		case API::OpenGL:
-			instance = new GLRenderer;
+			instance_ = &GLRenderer::get();
 			break;
 
 		case API::Vulkan:
-			instance = new VKRenderer;
+			instance_ = &VKRenderer::get();
 			break;
 
 		case API::D3D12:
@@ -39,7 +39,7 @@ Renderer* Renderer::get()
 		currentAPI = api;
 	}
 
-	return instance;
+	return instance_;
 }
 
 void Renderer::setAPI(API newAPI)
