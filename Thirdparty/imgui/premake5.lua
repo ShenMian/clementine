@@ -12,13 +12,15 @@ project "ImGui"
         "include/imgui/*.cpp",
         "include/imgui/backends/imgui_impl_glfw.cpp",
         "include/imgui/backends/imgui_impl_opengl3.cpp",
+        "include/imgui/backends/imgui_impl_vulkan.cpp",
 
         "premake5.lua"}
 
 	includedirs {
         "include/imgui",
         "%{thirdparty.glad}/include",
-        "%{thirdparty.glfw}/include"}
+        "%{thirdparty.glfw}/include",
+        "%{thirdparty.vulkan}/include"}
 
 	filter "system:windows"
 		systemversion "latest"

@@ -38,4 +38,5 @@ project "Clementine"
     "GLAD",
     "GLFW",
     "ImGui",
+    "%{thirdparty.vulkan}/lib/vulkan-1",
     "%{thirdparty.openal}/lib/openal32"}
