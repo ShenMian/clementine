@@ -15,6 +15,7 @@ namespace clem
 {
 
 Sound::Sound()
+    : bitsPerSample(0), channelCount(0), sampleRate(0)
 {
 	alGenBuffers(1, &bufferId);
 }
