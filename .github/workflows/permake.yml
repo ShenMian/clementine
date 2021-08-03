@@ -1,4 +1,4 @@
-name: build-action
+name: Premake
 
 on: [push, pull_request]
 
@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
 
     steps:
     - uses: actions/checkout@v2
