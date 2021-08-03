@@ -24,6 +24,8 @@ Logger::Logger(const string& name)
 		printf("Logger init failed: %s", e.what());
 		abort();
 	}
+
+	logger->info("------------------------------------");
 }
 
 void Logger::create(const string& name)
