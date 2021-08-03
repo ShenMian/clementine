@@ -7,10 +7,10 @@
 
 void Session::addCpuSample(const CpuSample& s)
 {
-	samples.emplace_back(std::move(s));
+    samples.emplace_back(std::move(s));
 }
 
 void Session::clear()
 {
-	samples.clear();
+    samples.clear();
 }

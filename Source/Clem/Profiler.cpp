@@ -9,87 +9,87 @@ using namespace std::chrono;
 
 Instrumentor& Instrumentor::get()
 {
-	static Instrumentor instance;
-	return instance;
+    static Instrumentor instance;
+    return instance;
 }
 
 void Instrumentor::begin(const char* filename)
 {
-	assert(!session);
+    assert(!session);
 
-	session = true;
-	file.open(filename);
-	if(!file.is_open())
-	{
-		return;
-	}
-	// CLEM_CORE_WARN("Profile session begin: {}", filename);
-	writeHead();
+    session = true;
+    file.open(filename);
+    if(!file.is_open())
+    {
+        return;
+    }
+    // CLEM_CORE_WARN("Profile session begin: {}", filename);
+    writeHead();
 }
 
 void Instrumentor::end()
 {
-	assert(session);
-	// CLEM_CORE_WARN("Profile session end");
+    assert(session);
+    // CLEM_CORE_WARN("Profile session end");
 
-	writeFooter();
-	file.close();
-	session = false;
+    writeFooter();
+    file.close();
+    session = false;
 }
 
 void Instrumentor::writeRecord(const ProfileRecord& r)
 {
-	assert(session);
+    assert(session);
 
-	std::stringstream s;
-	s << std::setprecision(3) << std::fixed;
-	s << ",{";
-	s << "\"cat\":\"function\",";
-	s << "\"dur\":" << r.elapsed.count() << ',';
-	s << "\"name\":\"" << r.name << "\",";
-	s << "\"ph\":\"X\",";
-	s << "\"pid\":0,";
-	s << "\"tid\":" << r.threadId << ",";
-	s << "\"ts\":" << r.start.count();
-	s << "}";
+    std::stringstream s;
+    s << std::setprecision(3) << std::fixed;
+    s << ",{";
+    s << "\"cat\":\"function\",";
+    s << "\"dur\":" << r.elapsed.count() << ',';
+    s << "\"name\":\"" << r.name << "\",";
+    s << "\"ph\":\"X\",";
+    s << "\"pid\":0,";
+    s << "\"tid\":" << r.threadId << ",";
+    s << "\"ts\":" << r.start.count();
+    s << "}";
 
-	std::lock_guard<std::mutex> lock(mutex);
-	file << s.str();
+    std::lock_guard<std::mutex> lock(mutex);
+    file << s.str();
 }
 
 Instrumentor::~Instrumentor()
 {
-	if(session)
-		end();
-	std::lock_guard<std::mutex> lock(mutex);
+    if(session)
+        end();
+    std::lock_guard<std::mutex> lock(mutex);
 }
 
 void Instrumentor::writeHead()
 {
-	file << "{\"otherData\": {},\"traceEvents\":[{}";
+    file << "{\"otherData\": {},\"traceEvents\":[{}";
 }
 
 void Instrumentor::writeFooter()
 {
-	file << "]}";
+    file << "]}";
 }
 
 InstrumentationCounter::InstrumentationCounter(const char* name)
-		: name(name), stopped(false), begin(std::chrono::steady_clock::now())
+    : name(name), stopped(false), begin(std::chrono::steady_clock::now())
 {
 }
 
 InstrumentationCounter::~InstrumentationCounter()
 {
-	if(!stopped)
-		stop();
+    if(!stopped)
+        stop();
 }
 
 void InstrumentationCounter::stop()
 {
-	stopped      = true;
-	auto end     = steady_clock::now();
-	auto start   = begin.time_since_epoch();
-	auto elapsed = time_point_cast<microseconds>(end).time_since_epoch() - time_point_cast<microseconds>(begin).time_since_epoch();
-	Instrumentor::get().writeRecord({name, start, elapsed, std::this_thread::get_id()});
+    stopped      = true;
+    auto end     = steady_clock::now();
+    auto start   = begin.time_since_epoch();
+    auto elapsed = time_point_cast<microseconds>(end).time_since_epoch() - time_point_cast<microseconds>(begin).time_since_epoch();
+    Instrumentor::get().writeRecord({name, start, elapsed, std::this_thread::get_id()});
 }

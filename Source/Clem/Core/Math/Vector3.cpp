@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "Vector3.h"
-
+#include "Vector2.h"
 #include <cassert>
 #include <cfloat>
 #include <cmath>
@@ -21,149 +21,154 @@ const Vector3 Vector3::front(0, 0, -1);
 const Vector3 Vector3::back(0, 0, -1);
 
 Vector3::Vector3(float x, float y, float z)
-		: x(x), y(y), z(z)
+    : x(x), y(y), z(z)
+{
+}
+
+Vector3::Vector3(const Vector2& v)
+    : x(v.x), y(v.y), z(0)
 {
 }
 
 float Vector3::size() const
 {
-	return std::sqrt(sizeSquared());
+    return std::sqrt(sizeSquared());
 }
 
 float Vector3::sizeSquared() const
 {
-	return x * x + y * y + z * z;
+    return x * x + y * y + z * z;
 }
 
 float Vector3::distance(const Vector3& p) const
 {
-	return std::sqrt(distanceSquared(p));
+    return std::sqrt(distanceSquared(p));
 }
 
 float Vector3::distanceSquared(const Vector3& p) const
 {
-	const auto dx = std::abs(x - p.x);
-	const auto dy = std::abs(y - p.y);
-	const auto dz = std::abs(z - p.z);
-	return dx * dx + dy * dy + dz * dz;
+    const auto dx = std::abs(x - p.x);
+    const auto dy = std::abs(y - p.y);
+    const auto dz = std::abs(z - p.z);
+    return dx * dx + dy * dy + dz * dz;
 }
 
 Vector3& Vector3::normalize()
 {
-	const auto len = size();
-	if(len < FLT_EPSILON)
-		return *this;
-	return *this *= 1.0f / len;
+    const auto len = size();
+    if(len < FLT_EPSILON)
+        return *this;
+    return *this *= 1.0f / len;
 }
 
 float Vector3::dot(const Vector3& v) const
 {
-	return x * v.x + y * v.y;
+    return x * v.x + y * v.y;
 }
 
 void Vector3::rotate(const Vector3& point, float angle)
 {
-	const auto sinAngle = std::sin(angle);
-	const auto cosAngle = std::cos(angle);
+    const auto sinAngle = std::sin(angle);
+    const auto cosAngle = std::cos(angle);
 
-	if(point == Vector3::zero)
-	{
-		const auto tempX = x * cosAngle - y * sinAngle;
-		y                = y * cosAngle + x * sinAngle;
-		x                = tempX;
-	}
-	else
-	{
-		const auto tempX = x - point.x;
-		const auto tempY = y - point.y;
+    if(point == Vector3::zero)
+    {
+        const auto tempX = x * cosAngle - y * sinAngle;
+        y                = y * cosAngle + x * sinAngle;
+        x                = tempX;
+    }
+    else
+    {
+        const auto tempX = x - point.x;
+        const auto tempY = y - point.y;
 
-		x = tempX * cosAngle - tempY * sinAngle + point.x;
-		y = tempY * cosAngle + tempX * sinAngle + point.y;
-	}
+        x = tempX * cosAngle - tempY * sinAngle + point.x;
+        y = tempY * cosAngle + tempX * sinAngle + point.y;
+    }
 }
 
 Vector3 Vector3::getMidPoint(const Vector3& p) const
 {
-	return Vector3((x + p.x) / 2.0f, (y + p.y) / 2.0f, (z + p.z) / 2.0f);
+    return Vector3((x + p.x) / 2.0f, (y + p.y) / 2.0f, (z + p.z) / 2.0f);
 }
 float& Vector3::operator[](size_t index)
 {
-	switch(index)
-	{
-	case 0:
-		return x;
+    switch(index)
+    {
+    case 0:
+        return x;
 
-	case 1:
-		return y;
+    case 1:
+        return y;
 
-	case 2:
-		return z;
+    case 2:
+        return z;
 
-	default:
-		assert(false);
-		return x;
-	}
+    default:
+        assert(false);
+        return x;
+    }
 }
 
 bool Vector3::operator==(const Vector3& v) const
 {
-	return (std::abs(x - v.x) < FLT_EPSILON) &&
-				 (std::abs(y - v.y) < FLT_EPSILON) &&
-				 (std::abs(z - v.z) < FLT_EPSILON);
+    return (std::abs(x - v.x) < FLT_EPSILON) &&
+           (std::abs(y - v.y) < FLT_EPSILON) &&
+           (std::abs(z - v.z) < FLT_EPSILON);
 }
 
 bool Vector3::operator!=(const Vector3& v) const
 {
-	return !(*this == v);
+    return !(*this == v);
 }
 
 Vector3 Vector3::operator*(float n) const
 {
-	return Vector3(x * n, y * n, z * n);
+    return Vector3(x * n, y * n, z * n);
 }
 
 Vector3 Vector3::operator/(float n) const
 {
-	return Vector3(x / n, y / n, z / n);
+    return Vector3(x / n, y / n, z / n);
 }
 
 Vector3 Vector3::operator+(const Vector3& v) const
 {
-	return Vector3(x + v.x, y + v.y, z + v.z);
+    return Vector3(x + v.x, y + v.y, z + v.z);
 }
 
 Vector3 Vector3::operator-(const Vector3& v) const
 {
-	return Vector3(x - v.x, y - v.y, z - v.z);
+    return Vector3(x - v.x, y - v.y, z - v.z);
 }
 
 Vector3 Vector3::operator-() const
 {
-	return Vector3(-x, -y, -z);
+    return Vector3(-x, -y, -z);
 }
 
 Vector3& Vector3::operator+=(const Vector3& v)
 {
-	x += v.x;
-	y += v.y;
-	z += v.z;
-	return *this;
+    x += v.x;
+    y += v.y;
+    z += v.z;
+    return *this;
 }
 
 Vector3& Vector3::operator-=(const Vector3& v)
 {
-	x -= v.x;
-	y -= v.y;
-	z -= v.z;
-	return *this;
+    x -= v.x;
+    y -= v.y;
+    z -= v.z;
+    return *this;
 }
 
 Vector3& Vector3::operator*=(float n)
 {
-	return *this = *this * n;
+    return *this = *this * n;
 }
 
 Vector3& Vector3::operator/=(float n)
 {
-	return *this = *this / n;
+    return *this = *this / n;
 }

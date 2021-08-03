@@ -10,21 +10,21 @@ namespace clem
 {
 void Collider::setOffset(Point2 o)
 {
-	offset = o;
+    offset = o;
 }
 
 Point2 Collider::getOffset() const
 {
-	return offset;
+    return offset;
 }
 
 void Collider::setRigidbody(Rigidbody* rb)
 {
-	rigidbody = rb;
+    rigidbody = rb;
 }
 
 Rigidbody* Collider::getRigidbody() const
 {
-	return rigidbody;
+    return rigidbody;
 }
 } // namespace clem

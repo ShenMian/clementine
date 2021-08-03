@@ -14,14 +14,14 @@ namespace clem
  */
 class Script
 {
-	CLEM_DECLARE_TYPE;
+    CLEM_DECLARE_TYPE;
 
 public:
-	Script() = default;
+    Script() = default;
 
-	virtual void update(float dt);
+    virtual void update(float dt);
 
-	std::function<void(Time)> onUpdate;
+    std::function<void(Time)> onUpdate;
 };
 
 CLEM_DEFINE_TYPE(Script);

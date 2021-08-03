@@ -21,21 +21,21 @@ Application* Application::instance = nullptr;
 
 Application& Application::get()
 {
-	Assert::isTrue(instance != nullptr, "get the instance before creating the instance");
-	return *instance;
+    Assert::isTrue(instance != nullptr, "get the instance before creating the instance");
+    return *instance;
 }
 
 Application::Application(const string& name)
-		: name(name)
+    : name(name)
 {
-	Assert::isTrue(instance == nullptr, "try to create the application twice");
-	instance = this;
-	PROFILE_FUNC();
+    Assert::isTrue(instance == nullptr, "try to create the application twice");
+    instance = this;
+    PROFILE_FUNC();
 }
 
 Application::~Application()
 {
-	PROFILE_FUNC();
+    PROFILE_FUNC();
 }
 
 /*
@@ -59,7 +59,7 @@ void Application::replaceScene(const shared_ptr<Scene>& s)
 
 const string& Application::getName() const
 {
-	return name;
+    return name;
 }
 
 void Application::init()

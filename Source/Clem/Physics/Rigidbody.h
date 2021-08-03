@@ -19,47 +19,47 @@ namespace clem
  */
 class Rigidbody
 {
-	CLEM_DECLARE_TYPE;
+    CLEM_DECLARE_TYPE;
 
 public:
-	enum class Type
-	{
-		Dynamic,
-		Kinematic,
-		Static
-	};
+    enum class Type
+    {
+        Dynamic,
+        Kinematic,
+        Static
+    };
 
-	Vector2 velocity;
+    Vector2 velocity;
 
-	/**
+    /**
 	 * @brief 向刚体施加一个持续的力.
 	 *
 	 * @param force 施加的持续的力.
 	 */
-	void addForce(const Vector2& force);
+    void addForce(const Vector2& force);
 
-	/**
+    /**
 	 * @brief 获取刚体收到的持续的力.
 	 */
-	const Vector2& getForce() const;
+    const Vector2& getForce() const;
 
-	/**
+    /**
 	 * @brief 设置加速度.
 	 *
 	 * @param acc 加速度.
 	 */
-	void setAcceleration(const Vector2& acc);
+    void setAcceleration(const Vector2& acc);
 
-	/**
+    /**
 	 * @brief 获取加速度.
 	 */
-	Vector2 getAcceleration() const;
+    Vector2 getAcceleration() const;
 
-	float mass = 1.0f;
-	Type  type = Type::Kinematic;
+    float mass = 1.0f;
+    Type  type = Type::Kinematic;
 
 private:
-	Vector2 force;
+    Vector2 force;
 };
 
 CLEM_DEFINE_TYPE(Rigidbody);

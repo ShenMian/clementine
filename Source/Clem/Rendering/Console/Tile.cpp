@@ -6,6 +6,6 @@
 const Tile Tile::blank;
 
 Tile::Tile(wchar_t ch, Color color)
-		: ch(ch), color(color)
+    : ch(ch), color(color)
 {
 }

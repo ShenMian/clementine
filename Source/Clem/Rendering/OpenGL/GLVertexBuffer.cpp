@@ -12,19 +12,19 @@ static_assert(std::is_same<GLVertexBuffer::id_type, GLuint>::value);
 
 GLVertexBuffer::GLVertexBuffer(const void* data, size_t size)
 {
-	glCreateBuffers(1, &handle);
-	bind();
-	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+    glCreateBuffers(1, &handle);
+    bind();
+    glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 }
 
 GLVertexBuffer::~GLVertexBuffer()
 {
-	glDeleteBuffers(1, &handle);
+    glDeleteBuffers(1, &handle);
 }
 
 void GLVertexBuffer::bind()
 {
-	glBindBuffer(GL_ARRAY_BUFFER, handle);
+    glBindBuffer(GL_ARRAY_BUFFER, handle);
 }
 
 } // namespace clem

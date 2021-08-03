@@ -13,9 +13,9 @@ namespace clem::ui
 class Layer
 {
 public:
-	virtual void update(Time dt) = 0;
-	virtual void attach();
-	virtual void detach();
+    virtual void update(Time dt) = 0;
+    virtual void attach();
+    virtual void detach();
 };
 
 } // namespace clem::ui

@@ -13,67 +13,67 @@ namespace clem
 {
 
 ConsoleWindow::ConsoleWindow(const std::string& title, Size2i size)
-		: size(getSize())
+    : size(getSize())
 {
-	setTitle(title);
-	Output::get().setSize(size);
+    setTitle(title);
+    Output::get().setSize(size);
 }
 
 void ConsoleWindow::update(Time dt)
 {
-	auto newSize = getSize();
-	if(newSize == size)
-		return;
-	size = newSize;
-	setSize(size);
-	if(onResize)
-		onResize(size);
+    auto newSize = getSize();
+    if(newSize == size)
+        return;
+    size = newSize;
+    setSize(size);
+    if(onResize)
+        onResize(size);
 }
 
 void ConsoleWindow::setPosition(Size2i size)
 {
-	assert(false);
+    assert(false);
 }
 
 Size2i ConsoleWindow::getPosition()
 {
-	assert(false);
-	return Size2i();
+    assert(false);
+    return Size2i();
 }
 
 void ConsoleWindow::setVisible(bool visible)
 {
-	assert(false);
+    assert(false);
 }
 
 bool ConsoleWindow::isVisible() const
 {
-	return true;
+    return true;
 }
 
 void* ConsoleWindow::nativeHandle() const
 {
-	return nullptr;
+    return nullptr;
 }
 
 // width / height = 80 / 25 => width * 25 = height * 80
 
 #ifdef OS_UNIX
 
-#	include <sys/ioctl.h>
-#	include <termios.h>
-#	include <unistd.h>
+#    include <sys/ioctl.h>
+#    include <termios.h>
+#    include <unistd.h>
 
 void ConsoleWindow::setTitle(const string& title)
 {
-	std::printf("\033]0;%s\007", title.c_str());
+    std::printf("\033]0;%s\007", title.c_str());
 }
 
 Size2i ConsoleWindow::getSize()
 {
-	winsize size;
-	ioctl(STDIN_FILENO, TIOCGWINSZ, &size);
-	return Size2(size.ws_col, size.ws_row + 1);
+    winsize size;
+    ioctl(STDIN_FILENO, TIOCGWINSZ, &size);
+    return Size2(size.ws_col, size.ws_row + 1);
 }
 
 void ConsoleWindow::init()
@@ -90,19 +90,19 @@ void ConsoleWindow::deinit()
 
 void ConsoleWindow::setTitle(const string& title)
 {
-	SetConsoleTitleA(title.c_str());
+    SetConsoleTitleA(title.c_str());
 }
 
 void ConsoleWindow::setSize(Size2i size)
 {
-	Output::get().setSize(size);
+    Output::get().setSize(size);
 }
 
 Size2i ConsoleWindow::getSize()
 {
-	return Output::get().getSize();
+    return Output::get().getSize();
 
-	/*
+    /*
 	const auto hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	CONSOLE_SCREEN_BUFFER_INFO screenInfo;
@@ -115,21 +115,21 @@ Size2i ConsoleWindow::getSize()
 
 void ConsoleWindow::init()
 {
-	DWORD mode;
+    DWORD mode;
 
-	const auto hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	if(!GetConsoleMode(hOut, &mode))
-		assert(false);
-	// mode &= ENABLE_VIRTUAL_TERMINAL_PROCESSING; // 启用 VT100 模式 // TODO: Win10 以下會失敗
-	if(!SetConsoleMode(hOut, mode))
-		assert(false);
+    const auto hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    if(!GetConsoleMode(hOut, &mode))
+        assert(false);
+    // mode &= ENABLE_VIRTUAL_TERMINAL_PROCESSING; // 启用 VT100 模式 // TODO: Win10 以下會失敗
+    if(!SetConsoleMode(hOut, mode))
+        assert(false);
 
-	const auto hIn = GetStdHandle(STD_INPUT_HANDLE);
-	if(!GetConsoleMode(hIn, &mode))
-		assert(false);
-	mode &= ~ENABLE_QUICK_EDIT_MODE; // 禁用 快速编辑模式
-	if(!SetConsoleMode(hIn, mode))
-		assert(false);
+    const auto hIn = GetStdHandle(STD_INPUT_HANDLE);
+    if(!GetConsoleMode(hIn, &mode))
+        assert(false);
+    mode &= ~ENABLE_QUICK_EDIT_MODE; // 禁用 快速编辑模式
+    if(!SetConsoleMode(hIn, mode))
+        assert(false);
 }
 
 void ConsoleWindow::deinit()

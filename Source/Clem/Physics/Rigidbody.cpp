@@ -10,22 +10,22 @@ namespace clem
 
 void Rigidbody::addForce(const Vector2& f)
 {
-	force += f;
+    force += f;
 }
 
 const Vector2& Rigidbody::getForce() const
 {
-	return force;
+    return force;
 }
 
 void Rigidbody::setAcceleration(const Vector2& acc)
 {
-	force = acc * mass;
+    force = acc * mass;
 }
 
 Vector2 Rigidbody::getAcceleration() const
 {
-	return force / mass;
+    return force / mass;
 }
 
 } // namespace clem

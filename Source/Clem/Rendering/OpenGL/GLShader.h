@@ -13,35 +13,35 @@ namespace clem
 class GLShader : public Shader
 {
 public:
-	using id_type = unsigned int;
+    using id_type = unsigned int;
 
-	/**
+    /**
 	 * @brief 构造函数.
 	 *
 	 * @param vertexSrc 顶点着色器的源代码.
 	 * @param fragmentSrc 片段着色器的源代码.
 	 */
-	GLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+    GLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
 
-	/**
+    /**
 	 * @brief 构造函数.
 	 *
 	 * @param path 着色器源代码文件路径.
 	 */
-	GLShader(const std::filesystem::path& path);
+    GLShader(const std::filesystem::path& path);
 
-	/**
+    /**
 	 * @brief 默认析构函数.
 	 */
-	~GLShader();
+    ~GLShader();
 
-	void bind() override;
-	void uploadUniform(const std::string& name, const Matrix4& matrix) override;
+    void bind() override;
+    void uploadUniform(const std::string& name, const Matrix4& matrix) override;
 
 private:
-	void handleError(const std::string& msg);
+    void handleError(const std::string& msg);
 
-	id_type handle;
+    id_type handle;
 };
 
 } // namespace clem

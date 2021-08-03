@@ -19,15 +19,15 @@ class VKCommandBuffer;
 class VKCommandPool
 {
 public:
-  void create();
-  void destroy();
+    void create();
+    void destroy();
 
-  VKCommandBuffer allocateCommandBuffer();
+    VKCommandBuffer allocateCommandBuffer();
 
-  operator vk::CommandPool();
+    operator vk::CommandPool();
 
 private:
-  vk::CommandPool handle;
+    vk::CommandPool handle;
 };
 
 /**

@@ -16,23 +16,23 @@
 class Rect2i
 {
 public:
-	Vector2i origin;
-	Size2i   size;
+    Vector2i origin;
+    Size2i   size;
 
-	/**
+    /**
 	 * @brief 默认构造函数.
 	 */
-	Rect2i() = default;
+    Rect2i() = default;
 
-	/**
+    /**
 	 * @brief 构造函数.
 	 *
 	 * @param origin 矩形坐标, 左上角.
 	 * @param size   矩形大小.
 	 */
-	Rect2i(const Point2i& origin, Size2i size);
+    Rect2i(const Point2i& origin, Size2i size);
 
-	/**
+    /**
 	 * @brief 构造函数.
 	 *
 	 * @param x      x坐标.
@@ -40,20 +40,20 @@ public:
 	 * @param width  宽度.
 	 * @param height 高度.
 	 */
-	Rect2i(int x, int y, int width, int height);
+    Rect2i(int x, int y, int width, int height);
 
-	int top() const;
-	int bottom() const;
-	int left() const;
-	int right() const;
+    int top() const;
+    int bottom() const;
+    int left() const;
+    int right() const;
 
-	Point2i tl() const;
-	Point2i tr() const;
-	Point2i bl() const;
-	Point2i br() const;
+    Point2i tl() const;
+    Point2i tr() const;
+    Point2i bl() const;
+    Point2i br() const;
 
-	bool containsPoint(const Point2i& point) const;
-	bool intersectsRect(const Rect2i& rect) const;
+    bool containsPoint(const Point2i& point) const;
+    bool intersectsRect(const Rect2i& rect) const;
 };
 
 /**

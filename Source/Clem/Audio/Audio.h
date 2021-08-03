@@ -19,14 +19,14 @@ namespace clem
 class Audio
 {
 public:
-	static void init();
-	static void deinit();
+    static void init();
+    static void deinit();
 
-	Audio() = delete;
+    Audio() = delete;
 
 private:
-	static ALCdevice*  device;
-	static ALCcontext* context;
+    static ALCdevice*  device;
+    static ALCcontext* context;
 };
 
 /**

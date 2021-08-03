@@ -20,17 +20,17 @@ class Vector3;
 class Matrix4
 {
 public:
-	float m[4][4];
+    float m[4][4];
 
-	Matrix4();
-	Matrix4(std::initializer_list<float> list);
-	Matrix4(const float* m);
+    Matrix4();
+    Matrix4(std::initializer_list<float> list);
+    Matrix4(const float* m);
 
-	void translate(const Vector3& vec);
+    void translate(const Vector3& vec);
     void rotate(float angle, Vector3& axis);
     void scale(const Vector3& vec);
 
-	const float* data() const;
+    const float* data() const;
 
     void rotateX(float angle);
     void rotateY(float angle);
@@ -40,19 +40,19 @@ public:
     Vector3 rotation() const;
     Vector3 scale() const;
 
-	Matrix4  operator-() const;
-	Matrix4& operator=(const Matrix4& rhs);
-	Matrix4  operator+(const Matrix4& rhs) const;
-	Matrix4& operator+=(const Matrix4& rhs);
-	Matrix4  operator-(const Matrix4& rhs) const;
-	Matrix4& operator-=(const Matrix4& rhs);
-	Matrix4  operator*(const Matrix4& rhs) const;
-	Matrix4& operator*=(const Matrix4& rhs);
-	Matrix4  operator*(float rhs) const;
-	Matrix4& operator*=(float rhs);
+    Matrix4  operator-() const;
+    Matrix4& operator=(const Matrix4& rhs);
+    Matrix4  operator+(const Matrix4& rhs) const;
+    Matrix4& operator+=(const Matrix4& rhs);
+    Matrix4  operator-(const Matrix4& rhs) const;
+    Matrix4& operator-=(const Matrix4& rhs);
+    Matrix4  operator*(const Matrix4& rhs) const;
+    Matrix4& operator*=(const Matrix4& rhs);
+    Matrix4  operator*(float rhs) const;
+    Matrix4& operator*=(float rhs);
 
-	static const Matrix4 identity;
-	static const Matrix4 zero;
+    static const Matrix4 identity;
+    static const Matrix4 zero;
 };
 
 using Mat4 = Matrix4;

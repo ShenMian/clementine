@@ -10,13 +10,13 @@ namespace clem
 
 std::shared_ptr<IndexBuffer> IndexBuffer::create(const void* data, size_t size)
 {
-	switch(Renderer::getAPI())
-	{
-		using enum Renderer::API;
-	case OpenGL:
-		return std::make_shared<GLIndexBuffer>(data, size);
-	}
-	return nullptr;
+    switch(Renderer::getAPI())
+    {
+        using enum Renderer::API;
+    case OpenGL:
+        return std::make_shared<GLIndexBuffer>(data, size);
+    }
+    return nullptr;
 }
 
 } // namespace clem

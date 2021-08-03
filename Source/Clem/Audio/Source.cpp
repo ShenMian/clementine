@@ -9,113 +9,113 @@ namespace clem
 {
 Source::Source()
 {
-	alGenSources(1, &id);
+    alGenSources(1, &id);
 }
 
 Source::~Source()
 {
-	stop();
-	alDeleteSources(1, &id);
+    stop();
+    alDeleteSources(1, &id);
 }
 
 void Source::play(const Sound& s)
 {
-	stop();
-	alSourcei(id, AL_BUFFER, s.getBufferId());
-	assert(alGetError() == AL_NO_ERROR);
-	alSourcePlay(id);
+    stop();
+    alSourcei(id, AL_BUFFER, s.getBufferId());
+    assert(alGetError() == AL_NO_ERROR);
+    alSourcePlay(id);
 }
 
 void Source::stop()
 {
-	alSourceStop(id);
+    alSourceStop(id);
 }
 
 void Source::pause()
 {
-	alSourcePause(id);
+    alSourcePause(id);
 }
 
 void Source::rewind()
 {
-	alSourceRewind(id);
+    alSourceRewind(id);
 }
 
 void Source::setVolume(float v)
 {
-	assert(0 <= v && v <= 1);
-	alSourcef(id, AL_GAIN, v);
-	assert(alGetError() == AL_NO_ERROR);
+    assert(0 <= v && v <= 1);
+    alSourcef(id, AL_GAIN, v);
+    assert(alGetError() == AL_NO_ERROR);
 }
 
 float Source::getVolume()
 {
-	ALfloat v;
-	alGetSourcef(id, AL_GAIN, &v);
-	return v;
+    ALfloat v;
+    alGetSourcef(id, AL_GAIN, &v);
+    return v;
 }
 
 void Source::setPitch(float p)
 {
-	assert(0.5f <= p && p <= 2.0f);
-	alSourcef(id, AL_PITCH, p);
-	assert(alGetError() == AL_NO_ERROR);
+    assert(0.5f <= p && p <= 2.0f);
+    alSourcef(id, AL_PITCH, p);
+    assert(alGetError() == AL_NO_ERROR);
 }
 
 void Source::setLoop(bool v)
 {
-	alSourcei(id, AL_LOOPING, v ? AL_TRUE : AL_FALSE);
-	assert(alGetError() == AL_NO_ERROR);
+    alSourcei(id, AL_LOOPING, v ? AL_TRUE : AL_FALSE);
+    assert(alGetError() == AL_NO_ERROR);
 }
 
 void Source::setPosition(const Point2& p)
 {
-	alSource3f(id, AL_POSITION, p.x, p.y, 0);
-	assert(alGetError() == AL_NO_ERROR);
+    alSource3f(id, AL_POSITION, p.x, p.y, 0);
+    assert(alGetError() == AL_NO_ERROR);
 }
 
 Point2 Source::getPosition()
 {
-	ALfloat x, y, z;
-	alGetSource3f(id, AL_POSITION, &x, &y, &z);
-	return Point2(x, y);
+    ALfloat x, y, z;
+    alGetSource3f(id, AL_POSITION, &x, &y, &z);
+    return Point2(x, y);
 }
 
 void Source::setVelocity(const Vector2& v)
 {
-	alSource3f(id, AL_VELOCITY, v.x, v.y, 0);
-	assert(alGetError() == AL_NO_ERROR);
+    alSource3f(id, AL_VELOCITY, v.x, v.y, 0);
+    assert(alGetError() == AL_NO_ERROR);
 }
 
 Vector2 Source::getVelocity()
 {
-	ALfloat x, y, z;
-	alGetSource3f(id, AL_VELOCITY, &x, &y, &z);
-	return Point2(x, y);
+    ALfloat x, y, z;
+    alGetSource3f(id, AL_VELOCITY, &x, &y, &z);
+    return Point2(x, y);
 }
 
 Source::Status Source::getStatus() const
 {
-	ALint status;
-	alGetSourcei(id, AL_SOURCE_STATE, &status);
+    ALint status;
+    alGetSourcei(id, AL_SOURCE_STATE, &status);
 
-	switch(status)
-	{
-	case AL_INITIAL:
-	case AL_STOPPED:
-		return Status::Stopped;
-	case AL_PAUSED:
-		return Status::Paused;
-	case AL_PLAYING:
-		return Status::Playing;
-	}
+    switch(status)
+    {
+    case AL_INITIAL:
+    case AL_STOPPED:
+        return Status::Stopped;
+    case AL_PAUSED:
+        return Status::Paused;
+    case AL_PLAYING:
+        return Status::Playing;
+    }
 
-	assert(false && "unknown status");
-	return Status::Stopped;
+    assert(false && "unknown status");
+    return Status::Stopped;
 }
 
 Source::operator id_t() const
 {
-	return id;
+    return id;
 }
 } // namespace clem

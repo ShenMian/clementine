@@ -12,10 +12,10 @@ namespace clem
 class System
 {
 public:
-	virtual void update(Time dt, Registry& reg) = 0;
+    virtual void update(Time dt, Registry& reg) = 0;
 
-	virtual void init();
-	virtual void deinit();
+    virtual void init();
+    virtual void deinit();
 };
 
 } // namespace clem

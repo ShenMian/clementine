@@ -8,17 +8,17 @@ namespace clem
 
 size_t Chunk::getSize() const
 {
-	return size;
+    return size;
 }
 
 size_t Chunk::getSizeBytes() const
 {
-	return buffer.size();
+    return buffer.size();
 }
 
 bool Chunk::empty() const
 {
-	return components.empty(); // buffer.empty()
+    return components.empty(); // buffer.empty()
 }
 
 } // namespace clem

@@ -19,25 +19,25 @@ namespace clem
 class CircleCollider : public Collider
 {
 public:
-	CircleCollider() = default;
-	explicit CircleCollider(float radius);
+    CircleCollider() = default;
+    explicit CircleCollider(float radius);
 
-	/**
+    /**
 	 * @brief 设置半径
 	 *
 	 * @param r 半径
 	 */
-	void setRadius(float r);
+    void setRadius(float r);
 
-	/**
+    /**
 	 * @brief 获取半径
 	 *
 	 * @return float 半径
 	 */
-	float getRadius() const;
+    float getRadius() const;
 
 private:
-	float radius = 0;
+    float radius = 0;
 };
 
 /**

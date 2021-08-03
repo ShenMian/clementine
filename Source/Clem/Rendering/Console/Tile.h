@@ -12,13 +12,13 @@
 class Tile
 {
 public:
-	Tile() = default;
-	Tile(wchar_t ch, Color color = Color());
+    Tile() = default;
+    Tile(wchar_t ch, Color color = Color());
 
-	wchar_t ch = L' ';
-	Color   color;
+    wchar_t ch = L' ';
+    Color   color;
 
-	static const Tile blank;
+    static const Tile blank;
 };
 
 #endif // !CLEM_RENDERER_TILE_H_

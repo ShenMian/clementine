@@ -8,41 +8,41 @@ namespace clem
 {
 Output::Output()
 {
-	front = &buffer[0];
-	back  = &buffer[1];
+    front = &buffer[0];
+    back  = &buffer[1];
 }
 
 Output& Output::get()
 {
-	static Output instance;
-	return instance;
+    static Output instance;
+    return instance;
 }
 
 void Output::update()
 {
-	front->output();
+    front->output();
 }
 
 void Output::swapBuffers()
 {
-	auto t = front;
-	front  = back;
-	back   = t;
+    auto t = front;
+    front  = back;
+    back   = t;
 }
 
 Framebuffer& Output::getBuffer() const
 {
-	return *back;
+    return *back;
 }
 
 void Output::setSize(const Size2i& s)
 {
-	buffer[0].setSize(s);
-	buffer[1].setSize(s);
+    buffer[0].setSize(s);
+    buffer[1].setSize(s);
 }
 
 const Size2i& Output::getSize()
 {
-	return buffer[0].getSize();
+    return buffer[0].getSize();
 }
 } // namespace clem

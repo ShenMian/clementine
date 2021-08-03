@@ -11,11 +11,11 @@
 class KeyEvent : public Event
 {
 public:
-	EVENT_CLASS_TYPE(key);
+    EVENT_CLASS_TYPE(key);
 
-	short keyCode;
-	bool  state;
-	short repeatCount;
+    short keyCode;
+    bool  state;
+    short repeatCount;
 
-	KeyEvent(short keyCode, bool state, short repeatCount = 0);
+    KeyEvent(short keyCode, bool state, short repeatCount = 0);
 };

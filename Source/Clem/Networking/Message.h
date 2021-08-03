@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Assert.h"
+#include "Assert.hpp"
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
@@ -26,67 +26,67 @@ template <typename T>
 class Message
 {
 public:
-	struct
-	{
-		T       id;
-		uint8_t size = 0;
-	} header;
-	std::vector<std::byte> body;
+    struct
+    {
+        T       id;
+        uint8_t size = 0;
+    } header;
+    std::vector<std::byte> body;
 
-	Message() = default;
-	Message(T id)
-	{
-		header.id = id;
-	}
+    Message() = default;
+    Message(T id)
+    {
+        header.id = id;
+    }
 
-	template <typename Data>
-	friend Message<T>& operator<<(Message<T>& msg, const Data& data)
-	{
-		static_assert(std::is_standard_layout<Data>::value, "Data type is not suppoted");
-		Assert::isTrue(msg.header.size < (size_t)-1 - sizeof(Data), "Message is full");
+    template <typename Data>
+    friend Message<T>& operator<<(Message<T>& msg, const Data& data)
+    {
+        static_assert(std::is_standard_layout<Data>::value, "Data type is not suppoted");
+        Assert::isTrue(msg.header.size < (size_t)-1 - sizeof(Data), "Message is full");
 
-		const auto offset = msg.body.size();
-		msg.body.resize(msg.body.size() + sizeof(Data));
-		std::memcpy(msg.body.data() + offset, &data, sizeof(Data));
-		msg.header.size = (uint8_t)msg.body.size();
+        const auto offset = msg.body.size();
+        msg.body.resize(msg.body.size() + sizeof(Data));
+        std::memcpy(msg.body.data() + offset, &data, sizeof(Data));
+        msg.header.size = (uint8_t)msg.body.size();
 
-		return msg;
-	}
+        return msg;
+    }
 
-	template <typename Data>
-	friend Message<T>& operator>>(Message<T>& msg, Data& data)
-	{
-		static_assert(std::is_standard_layout<Data>::value, "Data type is not suppoted");
+    template <typename Data>
+    friend Message<T>& operator>>(Message<T>& msg, Data& data)
+    {
+        static_assert(std::is_standard_layout<Data>::value, "Data type is not suppoted");
 
-		const auto offset = msg.body.size() - sizeof(Data);
-		std::memcpy(&data, msg.body.data() + offset, sizeof(Data));
-		msg.body.resize(msg.body.size() - sizeof(Data));
-		msg.header.size = (uint8_t)msg.body.size();
+        const auto offset = msg.body.size() - sizeof(Data);
+        std::memcpy(&data, msg.body.data() + offset, sizeof(Data));
+        msg.body.resize(msg.body.size() - sizeof(Data));
+        msg.header.size = (uint8_t)msg.body.size();
 
-		return msg;
-	}
+        return msg;
+    }
 
-	template <typename Data>
-	friend Message<T>& operator<<(Message<T>& msg, const std::vector<Data>& data)
-	{
-		Assert::isTrue(msg.header.size < (size_t)-1 - data.size() * sizeof(Data), "Message is full");
+    template <typename Data>
+    friend Message<T>& operator<<(Message<T>& msg, const std::vector<Data>& data)
+    {
+        Assert::isTrue(msg.header.size < (size_t)-1 - data.size() * sizeof(Data), "Message is full");
 
-		for(const auto& i : data)
-			msg << i;
-		msg << data.size();
-		return msg;
-	}
+        for(const auto& i : data)
+            msg << i;
+        msg << data.size();
+        return msg;
+    }
 
-	template <typename Data>
-	friend Message<T>& operator>>(Message<T>& msg, std::vector<Data>& data)
-	{
-		size_t size;
-		msg >> size;
-		data.resize(size);
-		for(auto& i : data)
-			msg >> i;
-		return msg;
-	}
+    template <typename Data>
+    friend Message<T>& operator>>(Message<T>& msg, std::vector<Data>& data)
+    {
+        size_t size;
+        msg >> size;
+        data.resize(size);
+        for(auto& i : data)
+            msg >> i;
+        return msg;
+    }
 };
 
 /**

@@ -5,11 +5,11 @@
 
 EventDispatcher& EventDispatcher::get()
 {
-	static EventDispatcher instance;
-	return instance;
+    static EventDispatcher instance;
+    return instance;
 }
 
 void EventDispatcher::addListener(Event::Type t, const listener_t& l)
 {
-	listeners.insert({t, l});
+    listeners.insert({t, l});
 }

@@ -5,62 +5,62 @@
 #include <cassert>
 
 Rect2i::Rect2i(const Point2i& o, Size2i s)
-		: origin(o), size(s)
+    : origin(o), size(s)
 {
 }
 
 Rect2i::Rect2i(int x, int y, int w, int h)
-		: origin(x, y), size(w, h)
+    : origin(x, y), size(w, h)
 {
 }
 
 int Rect2i::top() const
 {
-	return origin.y;
+    return origin.y;
 }
 
 int Rect2i::bottom() const
 {
-	return origin.y + size.y - 1;
+    return origin.y + size.y - 1;
 }
 
 int Rect2i::left() const
 {
-	return origin.x;
+    return origin.x;
 }
 
 int Rect2i::right() const
 {
-	return origin.x + size.x - 1;
+    return origin.x + size.x - 1;
 }
 
 Point2i Rect2i::tl() const
 {
-	return Point2i(left(), top());
+    return Point2i(left(), top());
 }
 
 Point2i Rect2i::tr() const
 {
-	return Point2i(right(), top());
+    return Point2i(right(), top());
 }
 
 Point2i Rect2i::bl() const
 {
-	return Point2i(left(), bottom());
+    return Point2i(left(), bottom());
 }
 
 Point2i Rect2i::br() const
 {
-	return Point2i(right(), bottom());
+    return Point2i(right(), bottom());
 }
 
 bool Rect2i::containsPoint(const Point2i& p) const
 {
-	return top() <= p.y && p.y <= bottom() && left() <= p.x && p.x <= right();
+    return top() <= p.y && p.y <= bottom() && left() <= p.x && p.x <= right();
 }
 
 bool Rect2i::intersectsRect(const Rect2i& r) const
 {
-	return containsPoint(r.tl()) || containsPoint(r.tr()) ||
-				 containsPoint(r.bl()) || containsPoint(r.br());
+    return containsPoint(r.tl()) || containsPoint(r.tr()) ||
+           containsPoint(r.bl()) || containsPoint(r.br());
 }

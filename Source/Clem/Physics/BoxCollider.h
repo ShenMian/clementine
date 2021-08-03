@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "Core/Math/Math.h"
 #include "Collider.h"
+#include "Core/Math/Math.h"
 
 namespace clem
 {
@@ -20,27 +20,27 @@ namespace clem
 class BoxCollider : public Collider
 {
 public:
-	BoxCollider() = default;
-	explicit BoxCollider(Size2 size);
+    BoxCollider() = default;
+    explicit BoxCollider(Size2 size);
 
-	/**
+    /**
 	* @brief 设置大小
 	*
 	* @param size 大小
 	*/
-	void setSize(Size2 size);
+    void setSize(Size2 size);
 
-	/**
+    /**
     * @brief 获取大小
     *
     * @return Size2 大小
     */
-	Size2 getSize() const;
+    Size2 getSize() const;
 
-	Rect2 getRect() const;
+    Rect2 getRect() const;
 
 private:
-	Size2 size;
+    Size2 size;
 };
 
 /**

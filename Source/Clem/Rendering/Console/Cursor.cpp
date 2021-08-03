@@ -6,18 +6,18 @@
 
 void Cursor::move(const Point2i& p)
 {
-	move(p.x, p.y);
+    move(p.x, p.y);
 }
 
 void Cursor::move(short x, short y)
 {
-	printf("\x1b[%d;%dH", y + 1, x + 1);
+    printf("\x1b[%d;%dH", y + 1, x + 1);
 }
 
 void Cursor::setVisible(bool v)
 {
-	if(v)
-		printf("\x1b[?25h");
-	else
-		printf("\x1b[?25l");
+    if(v)
+        printf("\x1b[?25h");
+    else
+        printf("\x1b[?25l");
 }

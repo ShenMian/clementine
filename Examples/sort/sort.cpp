@@ -11,79 +11,79 @@ using namespace clem;
 class Sort : public Application
 {
 public:
-	Sort()
-			: Application("Sort")
-	{
-	}
+    Sort()
+        : Application("Sort")
+    {
+    }
 
-	void init() override
-	{
-		auto entity = Main::registry.create();
-		entity.add<Transform>();
-		entity.get<Transform>().setPosition({1, 1});
-		sprite = &entity.add<Sprite>(size);
+    void init() override
+    {
+        auto entity = Main::registry.create();
+        entity.add<Transform>();
+        entity.get<Transform>().setPosition({1, 1});
+        sprite = &entity.add<Sprite>(size);
 
-		// 生成随机数
-		for(int i = 0; i < size.x; i++)
-			data.push_back(random.getUint32(1, size.y));
+        // 生成随机数
+        for(int i = 0; i < size.x; i++)
+            data.push_back(random.getUint32(1, size.y));
 
-		// 启动排序线程
-		static std::thread thread(&Sort::sort, this);
-		thread.detach();
-	}
+        // 启动排序线程
+        static std::thread thread(&Sort::sort, this);
+        thread.detach();
+    }
 
-	// 排序算法
-	void sort()
-	{
-		for(size_t i = 0; i < data.size() - 1; i++)
-		{
-			for(size_t j = i + 1; j < data.size(); j++)
-				if(data[i] > data[j])
-				{
-					swap(data[i], data[j]);
-					showSwap(i, j);
-				}
-			this_thread::sleep_for(chrono::milliseconds(20));
-		}
-		showDone();
-	}
+    // 排序算法
+    void sort()
+    {
+        for(size_t i = 0; i < data.size() - 1; i++)
+        {
+            for(size_t j = i + 1; j < data.size(); j++)
+                if(data[i] > data[j])
+                {
+                    swap(data[i], data[j]);
+                    showSwap(i, j);
+                }
+            this_thread::sleep_for(chrono::milliseconds(20));
+        }
+        showDone();
+    }
 
-	// 展示交换
-	void showSwap(int a, int b)
-	{
-		sprite->clear();
-		for(size_t i = 0; i < data.size(); i++)
-			sprite->fillRect(Rect2i({1 * (int)i, size.y - data[i]}, {1, data[i]}),
-											 Tile(' ', i == a || i == b ? blue : white));
-	}
+    // 展示交换
+    void showSwap(int a, int b)
+    {
+        sprite->clear();
+        for(size_t i = 0; i < data.size(); i++)
+            sprite->fillRect(Rect2i({1 * (int)i, size.y - data[i]}, {1, data[i]}),
+                             Tile(' ', i == a || i == b ? blue : white));
+    }
 
-	// 展示结果
-	void showDone()
-	{
-		showSwap(-1, -1);
-		sprite->fillRect(Rect2i({0, size.y - data[0]}, {1, data[1]}), Tile(' ', green));
-		for(size_t i = 1; i < data.size(); i++)
-		{
-			if(data[i - 1] <= data[i])
-				sprite->fillRect(Rect2i({1 * (int)i, size.y - data[i]}, {1, data[i]}), Tile(' ', green));
-			else
-				sprite->fillRect(Rect2i({1 * (int)i, size.y - data[i]}, {1, data[i]}), Tile(' ', red));
-			this_thread::sleep_for(chrono::milliseconds(8));
-		}
-	}
+    // 展示结果
+    void showDone()
+    {
+        showSwap(-1, -1);
+        sprite->fillRect(Rect2i({0, size.y - data[0]}, {1, data[1]}), Tile(' ', green));
+        for(size_t i = 1; i < data.size(); i++)
+        {
+            if(data[i - 1] <= data[i])
+                sprite->fillRect(Rect2i({1 * (int)i, size.y - data[i]}, {1, data[i]}), Tile(' ', green));
+            else
+                sprite->fillRect(Rect2i({1 * (int)i, size.y - data[i]}, {1, data[i]}), Tile(' ', red));
+            this_thread::sleep_for(chrono::milliseconds(8));
+        }
+    }
 
 private:
-	Size2i      size = {118, 28};
-	vector<int> data;
-	Sprite*     sprite = nullptr;
-	Random      random;
-	Color       white = Color(Color::white, Color::white);
-	Color       green = Color(Color::green, Color::green);
-	Color       blue  = Color(Color::blue, Color::blue);
-	Color       red   = Color(Color::red, Color::red);
+    Size2i      size = {118, 28};
+    vector<int> data;
+    Sprite*     sprite = nullptr;
+    Random      random;
+    Color       white = Color(Color::white, Color::white);
+    Color       green = Color(Color::green, Color::green);
+    Color       blue  = Color(Color::blue, Color::blue);
+    Color       red   = Color(Color::red, Color::red);
 };
 
 Application* clem::CreateApplication()
 {
-	return new Sort;
+    return new Sort;
 }

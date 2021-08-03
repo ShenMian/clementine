@@ -20,53 +20,82 @@ namespace clem
 class Listener
 {
 public:
-	/**
+    /**
 	 * @brief 设置音量.
 	 *
 	 * @param volume 音量. 范围: [0.0, 1.0].
 	 */
-	static void setVolume(float volume);
+    static void setVolume(float volume);
 
-	/**
+    /**
 	 * @brief 获取音量.
 	 */
-	static float getVolume();
+    static float getVolume();
 
-	/**
+    /**
 	 * @brief 设置听者位置.
 	 *
-	 * @param position 听者坐标.
+	 * @param pos 听者坐标.
 	 */
-	static void setPosition(const Point2& position);
+    static void setPosition(const Point3& pos);
 
-	/**
+#if 0
+    /**
+	 * @brief 设置听者位置.
+	 *
+	 * @param pos 听者坐标.
+	 */
+    static void setPosition(const Point2& pos);
+
+    /**
 	 * @brief 设置听者位置.
 	 *
 	 * @param x 听者的 X 坐标.
 	 * @param y 听者的 Y 坐标.
+	 * @param z 听者的 Z 坐标.
 	 */
-	static void setPosition(float x, float y);
+    static void setPosition(float x, float y, float z = 0.0f);
+#endif
 
-	/**
+
+    /**
 	 * @brief 获取听者位置.
 	 *
 	 * @return 听者坐标.
 	 */
-	static Point2 getPosition();
+    static Point3 getPosition();
 
-	/**
+    /**
 	 * @brief 设置听者速度.
 	 *
 	 * @param v 听者速度.
 	 */
-	static void setVelocity(const Vector2& v);
+    static void setVelocity(const Vector3& v);
 
-	/**
+#if 0
+    /**
+	 * @brief 设置听者速度.
+	 *
+	 * @param v 听者速度.
+	 */
+    static void setVelocity(const Vector2& v);
+
+    /**
+	 * @brief 设置听者速度.
+	 *
+	 * @param x 听者 X 方向上的速度.
+	 * @param y 听者 Y 方向上的速度.
+	 * @param y 听者 Y 方向上的速度.
+	 */
+    static void setVelocity(float x, float y, float z = 0.0f);
+#endif
+
+    /**
 	 * @brief 获取听者速度.
 	 *
 	 * @return 听者速度.
 	 */
-	static Vector2 getVelocity();
+    static Vector3 getVelocity();
 };
 
 /**

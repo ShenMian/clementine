@@ -14,52 +14,52 @@ bool WindowBase::initialized = false;
 
 WindowBase::WindowBase()
 {
-	assert(initialized);
+    assert(initialized);
 }
 
 WindowBase::~WindowBase()
 {
-	assert(initialized);
+    assert(initialized);
 }
 
 void WindowBase::add(ui::Layer* layer)
 {
-	assert(std::ranges::find(layers, layer) == layers.end());
-	layers.push_back(layer);
-	layer->attach();
+    assert(std::ranges::find(layers, layer) == layers.end());
+    layers.push_back(layer);
+    layer->attach();
 }
 
 void WindowBase::remove(ui::Layer* layer)
 {
-	assert(std::ranges::find(layers, layer) != layers.end());
-	layers.erase(std::remove(layers.begin(), layers.end(), layer));
-	layer->detach();
+    assert(std::ranges::find(layers, layer) != layers.end());
+    layers.erase(std::remove(layers.begin(), layers.end(), layer));
+    layer->detach();
 }
 
 void WindowBase::init()
 {
-	assert(!initialized);
+    assert(!initialized);
 
 #if defined(USE_CONSOLE)
-	ConsoleWindow::init();
+    ConsoleWindow::init();
 #else
-	GlfwWindow::init();
+    GlfwWindow::init();
 #endif
 
-	initialized = true;
+    initialized = true;
 }
 
 void WindowBase::deinit()
 {
-	assert(initialized);
+    assert(initialized);
 
 #if defined(USE_CONSOLE)
-	ConsoleWindow::deinit();
+    ConsoleWindow::deinit();
 #else
-	GlfwWindow::deinit();
+    GlfwWindow::deinit();
 #endif
 
-	initialized = false;
+    initialized = false;
 }
 
 } // namespace clem

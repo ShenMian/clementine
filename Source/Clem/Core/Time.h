@@ -11,29 +11,29 @@ namespace clem
 class Time
 {
 public:
-	/**
+    /**
 	 * @brief 获取以秒为单位的时间.
 	 */
-	float seconds() const;
+    float seconds() const;
 
-	/**
+    /**
 	 * @brief 获取以毫秒为单位的时间.
 	 */
-	uint32_t milliseconds() const;
+    uint32_t milliseconds() const;
 
-	/**
+    /**
 	 * @brief 获取以微秒为单位的时间.
 	 */
-	uint64_t microseconds() const;
+    uint64_t microseconds() const;
 
 private:
-	Time(uint64_t us);
+    Time(uint64_t us);
 
-	uint64_t microseconds_;
+    uint64_t microseconds_;
 
-	friend Time seconds(float);
-	friend Time milliseconds(uint32_t);
-	friend Time microseconds(uint64_t);
+    friend Time seconds(float);
+    friend Time milliseconds(uint32_t);
+    friend Time microseconds(uint64_t);
 };
 
 Time seconds(float sec);

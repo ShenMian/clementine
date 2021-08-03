@@ -17,16 +17,16 @@ namespace clem
 class VKCommandBuffer
 {
 public:
-  VKCommandBuffer() = default;
-  VKCommandBuffer(const vk::CommandBuffer&);
+    VKCommandBuffer() = default;
+    VKCommandBuffer(const vk::CommandBuffer&);
 
-  void begin();
-  void end();
+    void begin();
+    void end();
 
-  operator vk::CommandBuffer();
+    operator vk::CommandBuffer();
 
 private:
-  vk::CommandBuffer handle;
+    vk::CommandBuffer handle;
 };
 
 /**

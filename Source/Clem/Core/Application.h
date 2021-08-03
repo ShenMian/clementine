@@ -27,49 +27,49 @@ class Scene;
 class Application
 {
 public:
-	/**
+    /**
 	 * @brief 获取单例实例.
 	 */
-	static Application& get();
+    static Application& get();
 
-	/**
+    /**
 	 * @brief 构造函数.
 	 */
-	Application(const std::string& name = "Clementine");
+    Application(const std::string& name = "Clementine");
 
-	/**
+    /**
 	 * @brief 析构函数.
 	 */
-	virtual ~Application();
+    virtual ~Application();
 
-	/**
+    /**
 	 * @brief 获取应用名称.
 	 */
-	const std::string& getName() const;
+    const std::string& getName() const;
 
-	virtual void init();
-	virtual void deinit();
+    virtual void init();
+    virtual void deinit();
 
-	/**
+    /**
 	 * @brief 压入场景.
 	 */
-	// void pushScene(std::shared_ptr<Scene>& scene);
+    // void pushScene(std::shared_ptr<Scene>& scene);
 
-	/**
+    /**
 	 * @brief 弹出场景.
 	 */
-	// void popScene();
+    // void popScene();
 
-	/**
+    /**
 	 * @brief 替换场景.
 	 */
-	// void replaceScene(const std::shared_ptr<Scene>& scene);
+    // void replaceScene(const std::shared_ptr<Scene>& scene);
 
 private:
-	const std::string name;
-	// std::vector<std::shared_ptr<Scene>> scenes;
+    const std::string name;
+    // std::vector<std::shared_ptr<Scene>> scenes;
 
-	static Application* instance;
+    static Application* instance;
 };
 
 Application* CreateApplication();

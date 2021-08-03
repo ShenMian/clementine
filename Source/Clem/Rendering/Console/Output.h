@@ -11,35 +11,35 @@ namespace clem
 class Output
 {
 public:
-	static Output& get();
+    static Output& get();
 
-	void update();
+    void update();
 
-	/**
+    /**
 	 * @brief 交换缓冲区.
 	 */
-	void swapBuffers();
+    void swapBuffers();
 
-	/**
+    /**
 	 * @brief 获取下一个缓冲区.
 	 */
-	Framebuffer& getBuffer() const;
+    Framebuffer& getBuffer() const;
 
-	/**
+    /**
 	 * @brief 设置缓冲区大小.
 	 */
-	void setSize(const Size2i&);
+    void setSize(const Size2i&);
 
-	/**
+    /**
 	 * @brief 获取缓冲区大小.
 	 */
-	const Size2i& getSize();
+    const Size2i& getSize();
 
 private:
-	Output();
+    Output();
 
-	Framebuffer* front;
-	Framebuffer* back;
-	Framebuffer  buffer[2];
+    Framebuffer* front;
+    Framebuffer* back;
+    Framebuffer  buffer[2];
 };
 } // namespace clem

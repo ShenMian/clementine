@@ -4,7 +4,7 @@
 #pragma once
 
 #include "VKCommandBuffer.h"
-#include "Assert.h"
+#include "Assert.hpp"
 #include "VKRenderer.h"
 #include <vulkan/vulkan.hpp>
 
@@ -18,19 +18,19 @@ VKCommandBuffer::VKCommandBuffer(const vk::CommandBuffer& handle)
 
 void VKCommandBuffer::begin()
 {
-  vk::CommandBufferBeginInfo beginInfo;
+    vk::CommandBufferBeginInfo beginInfo;
 
-  handle.begin(beginInfo);
+    handle.begin(beginInfo);
 }
 
 void VKCommandBuffer::end()
 {
-  handle.end();
+    handle.end();
 }
 
 VKCommandBuffer::operator vk::CommandBuffer()
 {
-  return handle;
+    return handle;
 }
 
 } // namespace clem

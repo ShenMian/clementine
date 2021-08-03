@@ -10,13 +10,13 @@ namespace clem
 
 GLRenderer& GLRenderer::get()
 {
-  static auto* instance = new GLRenderer;
-  return *instance;
+    static auto* instance = new GLRenderer;
+    return *instance;
 }
 
 void GLRenderer::init()
 {
-	CLEM_LOG_INFO("render", "Physical Device: {}", glGetString(GL_RENDERER));
+    CLEM_LOG_INFO("render", "Physical Device: {}", glGetString(GL_RENDERER));
 }
 
 void GLRenderer::deinit()

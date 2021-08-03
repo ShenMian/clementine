@@ -17,19 +17,19 @@ namespace clem
 class RenderSystem : public System
 {
 public:
-	void update(Time dt, Registry& registry)
-	{
-		static auto& output = Output::get();
-		output.getBuffer().clear();
+    void update(Time dt, Registry& registry)
+    {
+        static auto& output = Output::get();
+        output.getBuffer().clear();
 
-		registry.each<Sprite>([](const Entity& e, Sprite& sprite) {
-			auto& tf = e.get<Transform>();
-			output.getBuffer().drawSprite(tf.translation, sprite);
-		});
+        registry.each<Sprite>([](const Entity& e, Sprite& sprite) {
+            auto& tf = e.get<Transform>();
+            output.getBuffer().drawSprite(tf.translation, sprite);
+        });
 
-		output.swapBuffers();
-		output.update();
-	}
+        output.swapBuffers();
+        output.update();
+    }
 };
 
 /**

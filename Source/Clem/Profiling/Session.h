@@ -13,10 +13,10 @@
 class Session
 {
 public:
-	void addCpuSample(const CpuSample&);
-	void clear();
+    void addCpuSample(const CpuSample&);
+    void clear();
 
 private:
-	std::string            name;
-	std::vector<CpuSample> samples;
+    std::string            name;
+    std::vector<CpuSample> samples;
 };

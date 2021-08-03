@@ -12,6 +12,6 @@ class Camera
 {
 public:
 private:
-	Rect2 viewport;
-	short depth;
+    Rect2 viewport;
+    short depth;
 };

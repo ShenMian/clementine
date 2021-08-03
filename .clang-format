@@ -3,7 +3,7 @@
 
 Language: Cpp
 
-AccessModifierOffset: -2
+AccessModifierOffset: -4
 
 AlignConsecutiveAssignments:         true
 AlignConsecutiveDeclarations:        true
@@ -28,6 +28,8 @@ SortIncludes:          true
 SortUsingDeclarations: true
 
 IndentPPDirectives: AfterHash
+
+IndentWidth: 4
 
 TabWidth: 4
 UseTab:   Never

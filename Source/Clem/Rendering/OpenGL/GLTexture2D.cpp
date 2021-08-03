@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "GLTexture2D.h"
-#include "Assert.h"
+#include "Assert.hpp"
 #include <cassert>
 #include <glad/glad.h>
 #include <stb/stb_image.h>
@@ -20,65 +20,65 @@ static_assert(std::is_same<GLTexture2D::id_type, GLuint>::value);
 
 GLTexture2D::GLTexture2D(const fs::path& path)
 {
-	Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
+    Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
 
-	int  height, width, channels;
-	auto data = loadFromFile(path, height, width, channels);
+    int  height, width, channels;
+    auto data = loadFromFile(path, height, width, channels);
 
-	GLenum internalFormat, dataFormat;
-	switch(channels)
-	{
-	case 3:
-		internalFormat = GL_RGB8;
-		dataFormat     = GL_RGB;
-		break;
+    GLenum internalFormat, dataFormat;
+    switch(channels)
+    {
+    case 3:
+        internalFormat = GL_RGB8;
+        dataFormat     = GL_RGB;
+        break;
 
-	case 4:
-		internalFormat = GL_RGBA8;
-		dataFormat     = GL_RGBA;
-		break;
+    case 4:
+        internalFormat = GL_RGBA8;
+        dataFormat     = GL_RGBA;
+        break;
 
-	default:
-		assert(false);
-	}
+    default:
+        assert(false);
+    }
 
-	glCreateTextures(GL_TEXTURE_2D, 1, &handle);
-	glTextureStorage2D(handle, 1, internalFormat, width, height);
+    glCreateTextures(GL_TEXTURE_2D, 1, &handle);
+    glTextureStorage2D(handle, 1, internalFormat, width, height);
 
-	glTextureParameteri(handle, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTextureParameteri(handle, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTextureParameteri(handle, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTextureParameteri(handle, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	glTextureParameteri(handle, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTextureParameteri(handle, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTextureParameteri(handle, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTextureParameteri(handle, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-	glTextureSubImage2D(handle, 0, 0, 0, width, height, dataFormat, GL_UNSIGNED_BYTE, data);
+    glTextureSubImage2D(handle, 0, 0, 0, width, height, dataFormat, GL_UNSIGNED_BYTE, data);
 
-	assert(glGetError() == GL_NO_ERROR);
+    assert(glGetError() == GL_NO_ERROR);
 
-	stbi_image_free(data);
+    stbi_image_free(data);
 }
 
 GLTexture2D::~GLTexture2D()
 {
-	glDeleteTextures(1, &handle);
+    glDeleteTextures(1, &handle);
 }
 
 void GLTexture2D::bind(id_type slot)
 {
-	glBindTextureUnit(slot, handle);
+    glBindTextureUnit(slot, handle);
 }
 
 void* GLTexture2D::nativeHandle()
 {
-	return &handle;
+    return &handle;
 }
 
 void* GLTexture2D::loadFromFile(const std::filesystem::path& path, int& width, int& height, int& channels)
 {
-	auto data = stbi_load(path.string().c_str(), &width, &height, &channels, 0);
-	assert(data);
+    auto data = stbi_load(path.string().c_str(), &width, &height, &channels, 0);
+    assert(data);
 
-	return data;
+    return data;
 }
 
 } // namespace clem

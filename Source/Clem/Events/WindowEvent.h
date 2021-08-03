@@ -12,18 +12,18 @@
 class WindowEvent : public Event
 {
 public:
-	EVENT_CLASS_TYPE(window);
+    EVENT_CLASS_TYPE(window);
 
-	enum class Type
-	{
-		move,
-		resize
-	};
+    enum class Type
+    {
+        move,
+        resize
+    };
 
-	WindowEvent(Type type);
+    WindowEvent(Type type);
 
-	Type getType() const;
+    Type getType() const;
 
 private:
-	Type type;
+    Type type;
 };

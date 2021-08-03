@@ -17,15 +17,15 @@ namespace clem
 class IndexBuffer
 {
 public:
-	/**
+    /**
 	 * @brief 创建 IndexBuffer.
 	 *
 	 * @param data 缓冲区数据指针.
 	 * @param size 缓冲区数据大小.
 	 */
-	static std::shared_ptr<IndexBuffer> create(const void* data, size_t size);
+    static std::shared_ptr<IndexBuffer> create(const void* data, size_t size);
 
-	virtual void bind() = 0;
+    virtual void bind() = 0;
 };
 
 /**

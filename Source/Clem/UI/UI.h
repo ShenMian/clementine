@@ -16,8 +16,8 @@ class WindowBase;
 class UI
 {
 public:
-	static void init(WindowBase* window);
-	static void deinit();
+    static void init(WindowBase* window);
+    static void deinit();
 };
 
 } // namespace clem

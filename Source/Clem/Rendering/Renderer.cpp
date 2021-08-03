@@ -14,42 +14,42 @@ Renderer*     Renderer::instance_ = nullptr;
 
 Renderer* Renderer::get()
 {
-	static API currentAPI;
-	if(instance_ == nullptr || currentAPI != api)
-	{
-		delete instance_;
-		switch(api)
-		{
-		case API::OpenGL:
-			instance_ = &GLRenderer::get();
-			break;
+    static API currentAPI;
+    if(instance_ == nullptr || currentAPI != api)
+    {
+        delete instance_;
+        switch(api)
+        {
+        case API::OpenGL:
+            instance_ = &GLRenderer::get();
+            break;
 
-		case API::Vulkan:
-			instance_ = &VKRenderer::get();
-			break;
+        case API::Vulkan:
+            instance_ = &VKRenderer::get();
+            break;
 
-		case API::D3D12:
-			assert(false);
-			break;
+        case API::D3D12:
+            assert(false);
+            break;
 
-		case API::Metal:
-			assert(false);
-			break;
-		}
-		currentAPI = api;
-	}
+        case API::Metal:
+            assert(false);
+            break;
+        }
+        currentAPI = api;
+    }
 
-	return instance_;
+    return instance_;
 }
 
 void Renderer::setAPI(API newAPI)
 {
-	api = newAPI;
+    api = newAPI;
 }
 
 Renderer::API Renderer::getAPI()
 {
-	return api;
+    return api;
 }
 
 } // namespace clem

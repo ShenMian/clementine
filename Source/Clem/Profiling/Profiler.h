@@ -14,10 +14,10 @@ class Session;
 class Profiler
 {
 public:
-	static Profiler& get();
+    static Profiler& get();
 
-	void addSession(Session& s);
+    void addSession(Session& s);
 
 private:
-	std::vector<Session> sessions;
+    std::vector<Session> sessions;
 };

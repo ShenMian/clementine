@@ -9,29 +9,29 @@ namespace clem
 template <typename Com>
 inline void Registry::each(std::function<void(const Entity&)> func)
 {
-	all([&](const Entity& entity) {
-		if(entity.valid() && entity.anyOf<Com>())
-			func(entity);
-	});
+    all([&](const Entity& entity) {
+        if(entity.valid() && entity.anyOf<Com>())
+            func(entity);
+    });
 }
 
 template <typename Com>
 inline void Registry::each(std::function<void(const Entity&, Com&)> func)
 {
-	each<Com>([&](const Entity& entity) {
-		func(entity, getComponent<Com>(entity));
-	});
+    each<Com>([&](const Entity& entity) {
+        func(entity, getComponent<Com>(entity));
+    });
 }
 
 // FIXME: 改变 Chunk 却没有转移 Components
 template <typename Com, typename... Args>
 inline Com& Registry::addComponent(const Entity& e, Args&&... args)
 {
-	auto& archtype = entities[e.id()].archtype;
-	auto  chunk    = entities[e.id()].chunk;
+    auto& archtype = entities[e.id()].archtype;
+    auto  chunk    = entities[e.id()].chunk;
 
-	archtype.add<Com>();
-	/*
+    archtype.add<Com>();
+    /*
 	auto it = chunks.find(archtype);
 	if(it == chunks.end())
 	{
@@ -43,18 +43,18 @@ inline Com& Registry::addComponent(const Entity& e, Args&&... args)
 		chunk = it->second;
 	*/
 
-	return chunk->addComponent<Com>(e.id(), std::forward<Args>(args)...);
+    return chunk->addComponent<Com>(e.id(), std::forward<Args>(args)...);
 }
 
 template <typename Com>
 inline void Registry::removeComponent(const Entity& e)
 {
-	auto& archtype = entities[e.id()].archtype;
-	auto  chunk    = entities[e.id()].chunk;
+    auto& archtype = entities[e.id()].archtype;
+    auto  chunk    = entities[e.id()].chunk;
 
-	chunk->removeComponent<Com>(e.id());
+    chunk->removeComponent<Com>(e.id());
 
-	/*
+    /*
 	auto it = chunks.find(archtype);
 	if(it->second->empty())
 	{
@@ -64,8 +64,8 @@ inline void Registry::removeComponent(const Entity& e)
 	}
 	*/
 
-	archtype.remove<Com>();
-	/*
+    archtype.remove<Com>();
+    /*
 	it = chunks.find(archtype);
 	if(it == chunks.end())
 		chunk = chunks.emplace(archtype, allocator.allocate(1)); // �����µ� Chunk
@@ -77,25 +77,25 @@ inline void Registry::removeComponent(const Entity& e)
 template <typename Com>
 [[nodiscard]] inline Com& Registry::getComponent(const Entity& e)
 {
-	return entities[e.id()].chunk->getComponent<Com>(e.id());
+    return entities[e.id()].chunk->getComponent<Com>(e.id());
 }
 
 template <typename... Coms>
 [[nodiscard]] inline bool Registry::allOf(const Entity& e) const
 {
-	return entities[e.id()].archtype.all<Coms...>();
+    return entities[e.id()].archtype.all<Coms...>();
 }
 
 template <typename... Coms>
 [[nodiscard]] inline bool Registry::anyOf(const Entity& e) const
 {
-	return entities[e.id()].archtype.any<Coms...>();
+    return entities[e.id()].archtype.any<Coms...>();
 }
 
 template <typename... Coms>
 [[nodiscard]] inline bool Registry::noneOf(const Entity& e) const
 {
-	return entities[e.id()].archtype.none<Coms...>();
+    return entities[e.id()].archtype.none<Coms...>();
 }
 
 } // namespace clem

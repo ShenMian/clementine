@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "Platform.h"
 #include "Connection.h"
+#include "Platform.h"
 #include "asio.hpp"
 #include <cstdint>
 #include <string>
@@ -23,10 +23,10 @@ namespace clem
 class Client
 {
 public:
-	Client();
-	virtual ~Client();
+    Client();
+    virtual ~Client();
 
-	/**
+    /**
 	 * @brief 启动客户端并与指定主机(服务器)的端口建立连接.
 	 *
 	 * @param host 主机, IP 或域名.
@@ -35,68 +35,68 @@ public:
 	 * @return true  启动成功.
 	 * @return false 启动失败.
 	 */
-	bool connect(const std::string_view& host, uint16_t port);
+    bool connect(const std::string_view& host, uint16_t port);
 
-	/**
+    /**
 	 * @brief 断开连接.
 	 */
-	void disconnect();
+    void disconnect();
 
-	/**
+    /**
 	 * @brief 判断是否已建立连接.
 	 *
 	 * @return true  连接已建立.
 	 * @return false 连接未建立.
 	 */
-	bool isConnected() const;
+    bool isConnected() const;
 
-	/**
+    /**
 	 * @brief 发送消息.
 	 */
-	template <typename T>
-	void write(const Message<T>& msg);
+    template <typename T>
+    void write(const Message<T>& msg);
 
-	/**
+    /**
 	 * @brief 持续接收任何消息并转换为特定类型.
 	 */
-	template <typename T>
-	void read();
+    template <typename T>
+    void read();
 
-	std::function<void()>                onConnected;
-	std::function<void()>                onDisconnect;
-	std::function<void()>                onMessage;
-	std::function<void(std::error_code)> onError;
+    std::function<void()>                onConnected;
+    std::function<void()>                onDisconnect;
+    std::function<void()>                onMessage;
+    std::function<void(std::error_code)> onError;
 
 private:
-	asio::io_context context;
-	Connection       connection;
-	std::thread      thread;
+    asio::io_context context;
+    Connection       connection;
+    std::thread      thread;
 };
 
 template <typename T>
 void Client::write(const Message<T>& msg)
 {
-	if(!connection.isConnected())
-	{
-		if(onDisconnect)
-			onDisconnect();
-		return;
-	}
+    if(!connection.isConnected())
+    {
+        if(onDisconnect)
+            onDisconnect();
+        return;
+    }
 
-	connection.write(msg);
+    connection.write(msg);
 }
 
 template <typename T>
 void Client::read()
 {
-	if(!connection.isConnected())
-	{
-		if(onDisconnect)
-			onDisconnect();
-		return;
-	}
+    if(!connection.isConnected())
+    {
+        if(onDisconnect)
+            onDisconnect();
+        return;
+    }
 
-	connection.read<T>();
+    connection.read<T>();
 }
 
 /**

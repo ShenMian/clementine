@@ -8,23 +8,23 @@ namespace clem
 {
 
 Archtype::Archtype(std::set<TypeIndex>&& types)
-		: types(std::move(types))
+    : types(std::move(types))
 {
 }
 
 void Archtype::clear()
 {
-	types.clear();
+    types.clear();
 }
 
 bool Archtype::operator==(const Archtype& rhs) const
 {
-	return types == rhs.types;
+    return types == rhs.types;
 }
 
 bool Archtype::operator<(const Archtype& rhs) const
 {
-	return types < rhs.types;
+    return types < rhs.types;
 }
 
 /*

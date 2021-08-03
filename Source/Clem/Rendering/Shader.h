@@ -19,23 +19,23 @@ namespace clem
 class Shader
 {
 public:
-	/**
+    /**
 	 * @brief 创建着色器.
 	 *
 	 * @param vertexSrc vertex shader 的源代码.
 	 * @param fragmentSrc fragment shader 的源代码.
 	 */
-	static std::shared_ptr<Shader> create(const std::string& vertexSrc, const std::string& fragmentSrc);
+    static std::shared_ptr<Shader> create(const std::string& vertexSrc, const std::string& fragmentSrc);
 
-	/**
+    /**
 	 * @brief 创建着色器.
 	 *
 	 * @param path 着色器源代码文件路径.
 	 */
-	static std::shared_ptr<Shader> create(const std::filesystem::path& path);
+    static std::shared_ptr<Shader> create(const std::filesystem::path& path);
 
-	virtual void bind()                                                        = 0;
-	virtual void uploadUniform(const std::string& name, const Matrix4& matrix) = 0;
+    virtual void bind()                                                        = 0;
+    virtual void uploadUniform(const std::string& name, const Matrix4& matrix) = 0;
 };
 
 /**

@@ -21,40 +21,40 @@ namespace clem
 class VKRenderer : public Renderer
 {
 public:
-  static VKRenderer& get();
+    static VKRenderer& get();
 
-  void init() override;
-  void deinit() override;
+    void init() override;
+    void deinit() override;
 
-  vk::Device device;
-  uint32_t   queueFamilyIndex;
+    vk::Device device;
+    uint32_t   queueFamilyIndex;
 
 private:
-  VKRenderer() = default;
+    VKRenderer() = default;
 
-  void createInstance();
-  void destroyInstance();
+    void createInstance();
+    void destroyInstance();
 
-  void createDebugCallback();
-  void destroyDebugCallback();
+    void createDebugCallback();
+    void destroyDebugCallback();
 
-  void createDevice();
-  void destroyDevice();
+    void createDevice();
+    void destroyDevice();
 
-  vk::PhysicalDevice findSuitablePhysicalDevice() const;
-  bool               isSuitable(const vk::PhysicalDevice& device) const;
-  bool               isSuitable(const vk::QueueFamilyProperties& props) const;
+    vk::PhysicalDevice findSuitablePhysicalDevice() const;
+    bool               isSuitable(const vk::PhysicalDevice& device) const;
+    bool               isSuitable(const vk::QueueFamilyProperties& props) const;
 
-  vk::Instance              instance;
-  vk::Queue                 queue;
-  std::vector<const char*>  instanceLayers;
-  std::vector<const char*>  instanceExtensions;
-  std::vector<const char*>  deviceLayers;
-  std::vector<const char*>  deviceExtensions;
-  vk::DispatchLoaderDynamic dynamicLoader;
+    vk::Instance              instance;
+    vk::Queue                 queue;
+    std::vector<const char*>  instanceLayers;
+    std::vector<const char*>  instanceExtensions;
+    std::vector<const char*>  deviceLayers;
+    std::vector<const char*>  deviceExtensions;
+    vk::DispatchLoaderDynamic dynamicLoader;
 
-  VKCommandPool   commandPool;
-  VKCommandBuffer commandBuffer;
+    VKCommandPool   commandPool;
+    VKCommandBuffer commandBuffer;
 };
 
 /**

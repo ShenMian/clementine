@@ -3,9 +3,9 @@
 
 #pragma once
 
+#include "Component.h"
 #include "Core/Math/Math.h"
 #include "ECS/ECS.h"
-#include "Component.h"
 
 namespace clem
 {
@@ -14,14 +14,14 @@ namespace clem
  */
 class Transform
 {
-	CLEM_DECLARE_TYPE;
+    CLEM_DECLARE_TYPE;
 
 public:
-	Vector2 translation;
-	Vector2 rotation;
-	Vector2 scale;
+    Vector2 translation;
+    Vector2 rotation;
+    Vector2 scale;
 
-	/*
+    /*
 	void   setPosition(const Point2&);
 	Point2 getPosition() const;
 

@@ -1,15 +1,15 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "Assert.h"
+#include "Assert.hpp"
 #include "Logger.h"
 #include "Platform.h"
 #include <iostream>
 
 #if _MSC_VER
-#	define breakpoint() __debugbreak()
+#    define breakpoint() __debugbreak()
 #else
-#	define breakpoint() __builtin_trap()
+#    define breakpoint() __builtin_trap()
 #endif
 
 namespace clem
@@ -17,39 +17,39 @@ namespace clem
 
 void Assert::isTrue(bool expr, std::string_view msg, const std::source_location& loc)
 {
-	if(expr)
-		return;
+    if(expr)
+        return;
 
-	auto str = std::format("Assertion failed.\nfile     : {}\nfunction : {}\nline     : {}", loc.file_name(), loc.function_name(), loc.line());
+    auto str = std::format("Assertion failed.\nfile     : {}\nfunction : {}\nline     : {}", loc.file_name(), loc.function_name(), loc.line());
     if(!msg.empty())
-      str += std::format("\nmessage  : {}", msg);
+        str += std::format("\nmessage  : {}", msg);
     CLEM_LOG_ERROR("assert", msg);
 
-	std::cout << str << std::endl;
+    std::cout << str << std::endl;
 
-	#ifdef OS_WIN
+#ifdef OS_WIN
     str += "\n\nPress Retry to debug the application";
     switch(MessageBoxA(nullptr, str.c_str(), "Clementine", MB_ICONERROR | MB_ABORTRETRYIGNORE))
     {
     case IDABORT:
-      exit(-1);
-      break;
+        exit(-1);
+        break;
 
     case IDRETRY:
-      breakpoint();
-      break;
+        breakpoint();
+        break;
 
     case IGNORE:
-      break;
+        break;
     }
-    #else
-        breakpoint();
-    #endif
+#else
+    breakpoint();
+#endif
 }
 
 void Assert::isFalse(bool expr, std::string_view msg, const std::source_location& loc)
 {
-	isTrue(!expr, msg, loc);
+    isTrue(!expr, msg, loc);
 }
 
 } // namespace clem

@@ -9,39 +9,39 @@ namespace clem
 {
 
 Client::Client()
-		: connection(context, ip::tcp::socket(context))
+    : connection(context, ip::tcp::socket(context))
 {
 }
 
 Client::~Client()
 {
-	disconnect();
+    disconnect();
 }
 
 bool Client::connect(const std::string_view& host, uint16_t port)
 {
-	connection.connect(host, port);
-	connection.onConnected  = [this]() { if(onConnected) onConnected(); };
-	connection.onDisconnect = [this]() { if(onDisconnect) onDisconnect(); };
-	connection.onMessage    = [this]() { if(onMessage) onMessage(); };
-	connection.onError      = [this](auto ec) { if(onError) onError(ec); };
+    connection.connect(host, port);
+    connection.onConnected  = [this]() { if(onConnected) onConnected(); };
+    connection.onDisconnect = [this]() { if(onDisconnect) onDisconnect(); };
+    connection.onMessage    = [this]() { if(onMessage) onMessage(); };
+    connection.onError      = [this](auto ec) { if(onError) onError(ec); };
 
-	thread = std::thread([this]() { context.run(); });
+    thread = std::thread([this]() { context.run(); });
 
-	return true;
+    return true;
 }
 
 void Client::disconnect()
 {
-	connection.disconnect();
-	context.stop();
-	if(thread.joinable())
-		thread.join();
+    connection.disconnect();
+    context.stop();
+    if(thread.joinable())
+        thread.join();
 }
 
 bool Client::isConnected() const
 {
-	return connection.isConnected();
+    return connection.isConnected();
 }
 
 } // namespace clem

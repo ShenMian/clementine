@@ -17,10 +17,10 @@ namespace clem
 class Texture2D
 {
 public:
-	static std::shared_ptr<Texture2D> create(const std::filesystem::path& path);
+    static std::shared_ptr<Texture2D> create(const std::filesystem::path& path);
 
-	virtual void  bind(unsigned int slot) = 0;
-	virtual void* nativeHandle()          = 0;
+    virtual void  bind(unsigned int slot) = 0;
+    virtual void* nativeHandle()          = 0;
 };
 
 /**

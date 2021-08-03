@@ -8,17 +8,17 @@
 namespace clem
 {
 CircleCollider::CircleCollider(float r)
-		: radius(r)
+    : radius(r)
 {
 }
 
 void CircleCollider::setRadius(float r)
 {
-	radius = r;
+    radius = r;
 }
 
 float CircleCollider::getRadius() const
 {
-	return radius;
+    return radius;
 }
 } // namespace clem

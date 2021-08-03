@@ -13,16 +13,16 @@ namespace clem
  */
 class Tag
 {
-	CLEM_DECLARE_TYPE;
+    CLEM_DECLARE_TYPE;
 
 public:
-	std::string str;
+    std::string str;
 
-	Tag() = default;
-	Tag(const std::string& tag)
-			: str(tag)
-	{
-	}
+    Tag() = default;
+    Tag(const std::string& tag)
+        : str(tag)
+    {
+    }
 };
 
 CLEM_DEFINE_TYPE(Tag);

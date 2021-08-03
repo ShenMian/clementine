@@ -17,56 +17,56 @@ namespace clem
 class Sound
 {
 public:
-	/**
+    /**
 	 * @brief 默认构造函数.
 	 */
-	Sound();
+    Sound();
 
-	/**
+    /**
 	 * @brief 构造函数, 从文件导入声音.
 	 */
-	Sound(const std::filesystem::path& path);
+    Sound(const std::filesystem::path& path);
 
-	/**
+    /**
 	 * @brief 默认析构函数.
 	 */
-	~Sound();
+    ~Sound();
 
-	/**
+    /**
 	 * @brief 从文件加载声音.
 	 *
 	 * @param path 声音文件路径.
 	 */
-	void loadFromFile(const std::filesystem::path& path);
+    void loadFromFile(const std::filesystem::path& path);
 
-	const uint8_t* getSamples() const;
-	size_t         getSampleCount() const;
-	unsigned int   getSampleRate() const;
-	unsigned int   getChannelCount() const;
+    const uint8_t* getSamples() const;
+    size_t         getSampleCount() const;
+    unsigned int   getSampleRate() const;
+    unsigned int   getChannelCount() const;
 
-	/**
+    /**
 	 * @brief 获取声音总时长.
 	 *
 	 * @return 声音总时长, 单位: 秒.
 	 */
-	size_t getTime() const;
+    size_t getTime() const;
 
-	int getBufferId() const;
+    int getBufferId() const;
 
 private:
-	std::vector<uint8_t> samples;
-	int32_t              sampleRate;
-	int16_t              channelCount;
-	int16_t              bitsPerSample;
-	unsigned int         bufferId;
-	bool                 initialized = false;
+    std::vector<uint8_t> samples;
+    int32_t              sampleRate;
+    int16_t              channelCount;
+    int16_t              bitsPerSample;
+    unsigned int         bufferId;
+    bool                 initialized = false;
 
-	/**
+    /**
 	 * 从 WAV 文件载入声音.
 	 *
 	 * @param path 文件路径.
 	 */
-	void loadWavFile(const std::filesystem::path& path);
+    void loadWavFile(const std::filesystem::path& path);
 };
 
 /**

@@ -6,6 +6,6 @@
 
 Profiler& Profiler::get()
 {
-	static Profiler instance;
-	return instance;
+    static Profiler instance;
+    return instance;
 }

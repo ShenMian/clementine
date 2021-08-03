@@ -22,38 +22,38 @@ class CircleCollider;
 class Collider
 {
 public:
-	Collider() = default;
+    Collider() = default;
 
-	/**
+    /**
 	 * @brief 获取坐标.
 	 */
-	Point2 getPosition() const;
+    Point2 getPosition() const;
 
-	/**
+    /**
 	 * @brief 设置偏移量.
 	 */
-	void setOffset(Point2 offset);
+    void setOffset(Point2 offset);
 
-	/**
+    /**
 	 * @brief 获取偏移量.
 	 */
-	Point2 getOffset() const;
+    Point2 getOffset() const;
 
-	/**
+    /**
 	 * @brief 设置附加到的刚体.
 	 */
-	void setRigidbody(Rigidbody* rb);
+    void setRigidbody(Rigidbody* rb);
 
-	/**
+    /**
 	 * @brief 获取附加到的刚体.
 	 */
-	Rigidbody* getRigidbody() const;
+    Rigidbody* getRigidbody() const;
 
 protected:
-	Point2 offset;
+    Point2 offset;
 
 private:
-	Rigidbody* rigidbody = nullptr;
+    Rigidbody* rigidbody = nullptr;
 };
 
 /**

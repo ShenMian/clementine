@@ -6,9 +6,9 @@
 #include "ComponentSerializer.h"
 #include "Components/Tag.h"
 #include "Components/Transform.h"
+#include "MathSerializer.h"
 #include "Physics/Rigidbody.h"
 #include "Rendering/Sprite.h"
-#include "MathSerializer.h"
 
 YAML::Emitter& operator<<(YAML::Emitter& o, const Tag& t)
 {

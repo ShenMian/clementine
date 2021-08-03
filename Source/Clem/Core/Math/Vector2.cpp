@@ -2,7 +2,6 @@
 // License(Apache-2.0)
 
 #include "Vector2.h"
-
 #include <cassert>
 #include <cfloat>
 #include <cmath>
@@ -18,173 +17,173 @@ const Vector2 Vector2::right(1, 0);
 const Vector2 Vector2::left(-1, 0);
 
 Vector2::Vector2(float x, float y)
-		: x(x), y(y)
+    : x(x), y(y)
 {
 }
 
 float Vector2::size() const
 {
-	return std::sqrt(sizeSquared());
+    return std::sqrt(sizeSquared());
 }
 
 float Vector2::sizeSquared() const
 {
-	return x * x + y * y;
+    return x * x + y * y;
 }
 
 float Vector2::distance(const Vector2& p) const
 {
-	return std::sqrt(distanceSquared(p));
+    return std::sqrt(distanceSquared(p));
 }
 
 float Vector2::distanceSquared(const Vector2& p) const
 {
-	const auto dx = std::abs(x - p.x);
-	const auto dy = std::abs(y - p.y);
-	return dx * dx + dy * dy;
+    const auto dx = std::abs(x - p.x);
+    const auto dy = std::abs(y - p.y);
+    return dx * dx + dy * dy;
 }
 
 Vector2& Vector2::normalize()
 {
-	const auto len = size();
-	if(len < FLT_EPSILON)
-		return *this;
-	return *this *= 1.0f / len;
+    const auto len = size();
+    if(len < FLT_EPSILON)
+        return *this;
+    return *this *= 1.0f / len;
 }
 
 float Vector2::dot(const Vector2& v) const
 {
-	return x * v.x + y * v.y;
+    return x * v.x + y * v.y;
 }
 
 float Vector2::angle() const
 {
-	return std::atan2(y, x);
+    return std::atan2(y, x);
 }
 
 void Vector2::rotate(const Vector2& point, float angle)
 {
-	const auto sinAngle = std::sin(angle);
-	const auto cosAngle = std::cos(angle);
+    const auto sinAngle = std::sin(angle);
+    const auto cosAngle = std::cos(angle);
 
-	if(point == Vector2::zero)
-	{
-		const auto tempX = x * cosAngle - y * sinAngle;
-		y                = y * cosAngle + x * sinAngle;
-		x                = tempX;
-	}
-	else
-	{
-		const auto tempX = x - point.x;
-		const auto tempY = y - point.y;
+    if(point == Vector2::zero)
+    {
+        const auto tempX = x * cosAngle - y * sinAngle;
+        y                = y * cosAngle + x * sinAngle;
+        x                = tempX;
+    }
+    else
+    {
+        const auto tempX = x - point.x;
+        const auto tempY = y - point.y;
 
-		x = tempX * cosAngle - tempY * sinAngle + point.x;
-		y = tempY * cosAngle + tempX * sinAngle + point.y;
-	}
+        x = tempX * cosAngle - tempY * sinAngle + point.x;
+        y = tempY * cosAngle + tempX * sinAngle + point.y;
+    }
 }
 
 Vector2 Vector2::getMidPoint(const Vector2& p) const
 {
-	return Vector2((x + p.x) / 2.0f, (y + p.y) / 2.0f);
+    return Vector2((x + p.x) / 2.0f, (y + p.y) / 2.0f);
 }
 
 float Vector2::area() const
 {
-	return x * y;
+    return x * y;
 }
 
 float& Vector2::operator[](size_t index)
 {
-	switch(index)
-	{
-	case 0:
-		return x;
+    switch(index)
+    {
+    case 0:
+        return x;
 
-	case 1:
-		return y;
+    case 1:
+        return y;
 
-	default:
-		assert(false);
-		return x;
-	}
+    default:
+        assert(false);
+        return x;
+    }
 }
 
 bool Vector2::operator==(const Vector2& v) const
 {
-	return (std::abs(x - v.x) < FLT_EPSILON) &&
-				 (std::abs(y - v.y) < FLT_EPSILON);
+    return (std::abs(x - v.x) < FLT_EPSILON) &&
+           (std::abs(y - v.y) < FLT_EPSILON);
 }
 
 bool Vector2::operator!=(const Vector2& v) const
 {
-	return !(*this == v);
+    return !(*this == v);
 }
 
 Vector2 Vector2::operator*(float n) const
 {
-	return Vector2(x * n, y * n);
+    return Vector2(x * n, y * n);
 }
 
 Vector2 Vector2::operator/(float n) const
 {
-	return Vector2(x / n, y / n);
+    return Vector2(x / n, y / n);
 }
 
 Vector2 Vector2::operator+(const Vector2& v) const
 {
-	return Vector2(x + v.x, y + v.y);
+    return Vector2(x + v.x, y + v.y);
 }
 
 Vector2 Vector2::operator-(const Vector2& v) const
 {
-	return Vector2(x - v.x, y - v.y);
+    return Vector2(x - v.x, y - v.y);
 }
 
 Vector2 Vector2::operator-() const
 {
-	return Vector2(-x, -y);
+    return Vector2(-x, -y);
 }
 
 Vector2& Vector2::operator+=(const Vector2& v)
 {
-	x += v.x;
-	y += v.y;
-	return *this;
+    x += v.x;
+    y += v.y;
+    return *this;
 }
 
 Vector2& Vector2::operator-=(const Vector2& v)
 {
-	x -= v.x;
-	y -= v.y;
-	return *this;
+    x -= v.x;
+    y -= v.y;
+    return *this;
 }
 
 Vector2& Vector2::operator*=(float n)
 {
-	return *this = *this * n;
+    return *this = *this * n;
 }
 
 Vector2& Vector2::operator/=(float n)
 {
-	return *this = *this / n;
+    return *this = *this / n;
 }
 
 Vector2 Vector2::operator+(const Vector2i& v) const
 {
-	return Vector2(x + v.x, y + v.y);
+    return Vector2(x + v.x, y + v.y);
 }
 
 Vector2 Vector2::operator-(const Vector2i& v) const
 {
-	return Vector2(x - v.x, y - v.y);
+    return Vector2(x - v.x, y - v.y);
 }
 
 Vector2i Vector2::asInt() const
 {
-	return Vector2i(static_cast<int>(x), static_cast<int>(y));
+    return Vector2i(static_cast<int>(x), static_cast<int>(y));
 }
 
 Vector2::operator Vector2i() const
 {
-	return asInt();
+    return asInt();
 }

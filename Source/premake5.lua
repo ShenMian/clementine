@@ -10,7 +10,7 @@ project "Clementine"
   targetdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/lib")
   objdir("%{wks.location}/build/" .. outputdir .. "/%{prj.name}/obj")
 
-  files {"**.cpp", "**.h", "**.inl", "premake5.lua", "CMakeLists.txt"}
+  files {"**.cpp", "**.hpp", "**.h", "**.inl", "premake5.lua", "CMakeLists.txt"}
 
   filter "system:windows"
     links "xinput"
@@ -20,7 +20,7 @@ project "Clementine"
     "USE_ASSERT"}
 
   includedirs {
-    "./Clem",
+    "Clem",
     "%{thirdparty.stb}/include",
     "%{thirdparty.sdl}/include",
     "%{thirdparty.asio}/include",

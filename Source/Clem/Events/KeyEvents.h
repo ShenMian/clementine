@@ -8,38 +8,38 @@
 class KeyPressEvent : public Event
 {
 public:
-	EVENT_CLASS_TYPE(key_press);
+    EVENT_CLASS_TYPE(key_press);
 
-	int key;
+    int key;
 
-	KeyPressEvent(int key)
-			: key(key)
-	{
-	}
+    KeyPressEvent(int key)
+        : key(key)
+    {
+    }
 };
 
 class KeyReleaseEvent : public Event
 {
 public:
-	EVENT_CLASS_TYPE(key_release);
+    EVENT_CLASS_TYPE(key_release);
 
-	int key;
+    int key;
 
-	KeyReleaseEvent(int key)
-			: key(key)
-	{
-	}
+    KeyReleaseEvent(int key)
+        : key(key)
+    {
+    }
 };
 
 class KeyRepeatEvent : public Event
 {
 public:
-	EVENT_CLASS_TYPE(key_repeat);
+    EVENT_CLASS_TYPE(key_repeat);
 
-	int key;
+    int key;
 
-	KeyRepeatEvent(int key)
-			: key(key)
-	{
-	}
+    KeyRepeatEvent(int key)
+        : key(key)
+    {
+    }
 };
