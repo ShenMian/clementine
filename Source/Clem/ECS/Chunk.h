@@ -14,6 +14,11 @@
 namespace clem
 {
 
+/**
+ * @addtogroup ECS
+ * @{
+ */
+
 struct alignas(chunk_alignment) Chunk
 {
 public:
@@ -69,5 +74,10 @@ template <typename T>
 {
     return components[id][Typeid<T>()].has_value();
 }
+
+/**
+ * end of ECS group
+ * @}
+ */
 
 } // namespace clem

@@ -8,6 +8,9 @@
 namespace clem
 {
 
+/**
+ * @brief 时间.
+ */
 class Time
 {
 public:

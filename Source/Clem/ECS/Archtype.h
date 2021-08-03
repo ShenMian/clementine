@@ -11,8 +11,16 @@
 namespace clem
 {
 
+/**
+ * @addtogroup ECS
+ * @{
+ */
+
 struct Chunk;
 
+/**
+ * @brief 原型.
+ */
 class Archtype
 {
 public:
@@ -69,6 +77,11 @@ inline Archtype makeArchtype()
 {
     return Archtype(std::move({Typeid<Ts>()...}));
 }
+
+/**
+ * end of ECS group
+ * @}
+ */
 
 } // namespace clem
 

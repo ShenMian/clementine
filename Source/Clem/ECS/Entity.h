@@ -11,6 +11,14 @@ namespace clem
 
 class Registry;
 
+/**
+ * @addtogroup ECS
+ * @{
+ */
+
+/**
+ * @brief 实体.
+ */
 class Entity
 {
 public:
@@ -106,6 +114,11 @@ private:
     version_type version_ = 0;
     Registry*    registry = nullptr;
 };
+
+/**
+ * end of ECS group
+ * @}
+ */
 
 } // namespace clem
 

@@ -19,6 +19,11 @@ class Time;
 class Entity;
 class System;
 
+/**
+ * @addtogroup ECS
+ * @{
+ */
+
 struct EntityInfo
 {
     Archtype     archtype;
@@ -26,6 +31,9 @@ struct EntityInfo
     Chunk*       chunk   = nullptr;
 };
 
+/**
+ * @brief 注册器, 管理实体和系统.
+ */
 class Registry
 {
 public:
@@ -170,6 +178,11 @@ private:
     id_type requestId();
     void    recycleId(id_type);
 };
+
+/**
+ * end of ECS group
+ * @}
+ */
 
 } // namespace clem
 
