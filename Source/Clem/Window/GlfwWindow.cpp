@@ -33,7 +33,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     glfwMakeContextCurrent(handle);
 
     auto success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-    assert(success);
+    Assert::isTrue(success, "can't load OpenGL API");
 
     glfwSetWindowUserPointer(handle, static_cast<void*>(this));
 
@@ -206,7 +206,7 @@ void GlfwWindow::init()
     PROFILE_FUNC();
 
     auto success = glfwInit();
-    assert(success);
+    Assert::isTrue(success, "GLFW init failed");
 }
 
 void GlfwWindow::deinit()

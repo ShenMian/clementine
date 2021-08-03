@@ -33,7 +33,7 @@ public:
     /**
 	 * @brief 获取单例句柄.
 	 *
-	 * @return Renderer* 单例句柄.
+	 * @return 单例句柄.
 	 */
     static Renderer* get();
 

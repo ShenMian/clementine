@@ -2,9 +2,9 @@
 // License(Apache-2.0)
 
 #include "Renderer.h"
+#include "Assert.hpp"
 #include "OpenGL/GLRenderer.h"
 #include "Vulkan/VKRenderer.h"
-#include <cassert>
 
 namespace clem
 {
@@ -29,11 +29,11 @@ Renderer* Renderer::get()
             break;
 
         case API::D3D12:
-            assert(false);
+            Assert::isTrue(false, "this API is not supported");
             break;
 
         case API::Metal:
-            assert(false);
+            Assert::isTrue(false, "this API is not supported");
             break;
         }
         currentAPI = api;

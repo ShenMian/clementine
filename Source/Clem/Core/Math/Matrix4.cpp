@@ -1,9 +1,9 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Matrix4.h"
 #include "Vector3.h"
-#include <cassert>
+#include "Assert.hpp"
 #include <cmath>
 #include <cstring>
 
@@ -26,7 +26,7 @@ Matrix4::Matrix4()
 
 Matrix4::Matrix4(std::initializer_list<float> list)
 {
-    assert(list.size() == 4 * 4);
+    Assert::isTrue(list.size() == 4 * 4, "too many elements in the initializer list");
     auto value = list.begin();
     for(size_t x = 0; x < 4; x++)
         for(size_t y = 0; y < 4; y++)
@@ -56,7 +56,7 @@ void Matrix4::rotate(float angle, Vector3& axis)
     else if(axis == Vector3::unit_z)
         rotateZ(angle);
     else
-        assert(false);
+        Assert::isTrue(false, "unknown axis");
 }
 
 void Matrix4::scale(const Vector3& vec)
@@ -114,17 +114,17 @@ void Matrix4::rotateZ(float angle)
 
 Vector3 Matrix4::translation() const
 {
-    return Vector3(m[3][0], m[3][1], m[3][2]);
+    return {m[3][0], m[3][1], m[3][2]};
 }
 
 Vector3 Matrix4::rotation() const
 {
-    return Vector3();
+    return {}; // TODO
 }
 
 Vector3 Matrix4::scale() const
 {
-    return Vector3(m[0][0], m[1][1], m[2][2]);
+    return {m[0][0], m[1][1], m[2][2]};
 }
 
 Matrix4 Matrix4::operator-() const
@@ -173,7 +173,7 @@ Matrix4 Matrix4::operator*(const Matrix4& rhs) const
     return Matrix4(*this) *= rhs;
 }
 
-// TODO: ÑéÖ¤Ëã·¨ÕýÈ·ÐÔ
+// TODO: ç¼–å†™æµ‹è¯•ç”¨ä¾‹
 Matrix4& Matrix4::operator*=(const Matrix4& rhs)
 {
     float product[4][4] = {0};

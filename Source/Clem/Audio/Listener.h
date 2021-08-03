@@ -39,14 +39,6 @@ public:
 	 */
     static void setPosition(const Point3& pos);
 
-#if 0
-    /**
-	 * @brief 设置听者位置.
-	 *
-	 * @param pos 听者坐标.
-	 */
-    static void setPosition(const Point2& pos);
-
     /**
 	 * @brief 设置听者位置.
 	 *
@@ -55,8 +47,6 @@ public:
 	 * @param z 听者的 Z 坐标.
 	 */
     static void setPosition(float x, float y, float z = 0.0f);
-#endif
-
 
     /**
 	 * @brief 获取听者位置.
@@ -72,14 +62,6 @@ public:
 	 */
     static void setVelocity(const Vector3& v);
 
-#if 0
-    /**
-	 * @brief 设置听者速度.
-	 *
-	 * @param v 听者速度.
-	 */
-    static void setVelocity(const Vector2& v);
-
     /**
 	 * @brief 设置听者速度.
 	 *
@@ -88,7 +70,6 @@ public:
 	 * @param y 听者 Y 方向上的速度.
 	 */
     static void setVelocity(float x, float y, float z = 0.0f);
-#endif
 
     /**
 	 * @brief 获取听者速度.

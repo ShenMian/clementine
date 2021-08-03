@@ -2,11 +2,12 @@
 // License(Apache-2.0)
 
 #include "Source.h"
+#include "Assert.hpp"
 #include "Sound.h"
-#include <cassert>
 
 namespace clem
 {
+
 Source::Source()
 {
     alGenSources(1, &id);
@@ -22,7 +23,7 @@ void Source::play(const Sound& s)
 {
     stop();
     alSourcei(id, AL_BUFFER, s.getBufferId());
-    assert(alGetError() == AL_NO_ERROR);
+    Assert::isTrue(alGetError() == AL_NO_ERROR);
     alSourcePlay(id);
 }
 
@@ -43,9 +44,9 @@ void Source::rewind()
 
 void Source::setVolume(float v)
 {
-    assert(0 <= v && v <= 1);
+    Assert::isTrue(0 <= v && v <= 1);
     alSourcef(id, AL_GAIN, v);
-    assert(alGetError() == AL_NO_ERROR);
+    Assert::isTrue(alGetError() == AL_NO_ERROR);
 }
 
 float Source::getVolume()
@@ -57,41 +58,51 @@ float Source::getVolume()
 
 void Source::setPitch(float p)
 {
-    assert(0.5f <= p && p <= 2.0f);
+    Assert::isTrue(0.5f <= p && p <= 2.0f);
     alSourcef(id, AL_PITCH, p);
-    assert(alGetError() == AL_NO_ERROR);
+    Assert::isTrue(alGetError() == AL_NO_ERROR);
 }
 
 void Source::setLoop(bool v)
 {
     alSourcei(id, AL_LOOPING, v ? AL_TRUE : AL_FALSE);
-    assert(alGetError() == AL_NO_ERROR);
+    Assert::isTrue(alGetError() == AL_NO_ERROR);
 }
 
-void Source::setPosition(const Point2& p)
+void Source::setPosition(const Point3& p)
 {
-    alSource3f(id, AL_POSITION, p.x, p.y, 0);
-    assert(alGetError() == AL_NO_ERROR);
+    alSource3f(id, AL_POSITION, p.x, p.y, p.z);
+    Assert::isTrue(alGetError() == AL_NO_ERROR);
 }
 
-Point2 Source::getPosition()
+void Source::setPosition(float x, float y, float z)
+{
+    setPosition({x, y, z});
+}
+
+Point3 Source::getPosition()
 {
     ALfloat x, y, z;
     alGetSource3f(id, AL_POSITION, &x, &y, &z);
-    return Point2(x, y);
+    return {x, y, z};
 }
 
-void Source::setVelocity(const Vector2& v)
+void Source::setVelocity(const Vector3& v)
 {
-    alSource3f(id, AL_VELOCITY, v.x, v.y, 0);
-    assert(alGetError() == AL_NO_ERROR);
+    alSource3f(id, AL_VELOCITY, v.x, v.y, v.z);
+    Assert::isTrue(alGetError() == AL_NO_ERROR);
 }
 
-Vector2 Source::getVelocity()
+void Source::setVelocity(float x, float y, float z)
+{
+    setVelocity({x, y, z});
+}
+
+Vector3 Source::getVelocity()
 {
     ALfloat x, y, z;
     alGetSource3f(id, AL_VELOCITY, &x, &y, &z);
-    return Point2(x, y);
+    return {x, y, z};
 }
 
 Source::Status Source::getStatus() const
@@ -110,7 +121,7 @@ Source::Status Source::getStatus() const
         return Status::Playing;
     }
 
-    assert(false && "unknown status");
+    Assert::isTrue(false, "unknown status");
     return Status::Stopped;
 }
 
@@ -118,4 +129,5 @@ Source::operator id_t() const
 {
     return id;
 }
+
 } // namespace clem

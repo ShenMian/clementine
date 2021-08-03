@@ -82,30 +82,48 @@ public:
     /**
 	 * @brief 设置声源位置.
 	 *
-	 * @param p 坐标.
+	 * @param pos 声源的坐标.
 	 */
-    void setPosition(const Point2& p);
+    void setPosition(const Point3& pos);
+
+    /**
+	 * @brief 设置声源位置.
+	 *
+	 * @param x 声源的 X 坐标.
+	 * @param y 声源的 Y 坐标.
+	 * @param z 声源的 Z 坐标.
+	 */
+    void setPosition(float x, float y, float z = 0.0f);
 
     /**
 	 * @brief 获取声源位置.
 	 *
 	 * @return 声源坐标.
 	 */
-    Point2 getPosition();
+    Point3 getPosition();
 
     /**
 	 * @brief 设置声源速度.
 	 *
 	 * @param v 速度.
 	 */
-    void setVelocity(const Vector2& v);
+    void setVelocity(const Vector3& v);
+
+    /**
+	 * @brief 设置声源速度.
+	 *
+	 * @param x 声源 X 方向上的速度.
+	 * @param y 声源 Y 方向上的速度.
+	 * @param y 声源 Y 方向上的速度.
+	 */
+    void setVelocity(float x, float y, float z = 0.0f);
 
     /**
 	 * @brief 获取声源速度.
 	 *
 	 * @return 声源速度.
 	 */
-    Vector2 getVelocity();
+    Vector3 getVelocity();
 
     Status getStatus() const;
 

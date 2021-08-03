@@ -50,37 +50,37 @@ void Sound::loadFromFile(const fs::path& path)
 
 const uint8_t* Sound::getSamples() const
 {
-    assert(initialized);
+    Assert::isTrue(initialized);
     return samples.data();
 }
 
 size_t Sound::getSampleCount() const
 {
-    assert(initialized);
+    Assert::isTrue(initialized);
     return samples.size() * 8 / bitsPerSample;
 }
 
 unsigned int Sound::getSampleRate() const
 {
-    assert(initialized);
+    Assert::isTrue(initialized);
     return sampleRate;
 }
 
 unsigned int Sound::getChannelCount() const
 {
-    assert(initialized);
+    Assert::isTrue(initialized);
     return channelCount;
 }
 
 size_t Sound::getTime() const
 {
-    assert(initialized);
+    Assert::isTrue(initialized);
     return getSampleCount() / (getChannelCount() * getSampleRate());
 }
 
 int32_t Sound::getBufferId() const
 {
-    assert(initialized);
+    Assert::isTrue(initialized);
     return bufferId;
 }
 

@@ -27,17 +27,10 @@ void Listener::setPosition(const Point3& pos)
     Assert::isTrue(alGetError() == AL_NO_ERROR);
 }
 
-/*
-void Listener::setPosition(const Point2& pos)
-{
-    setPosition(pos.x, pos.y, 0);
-}
-
 void Listener::setPosition(float x, float y, float z)
 {
     setPosition({x, y, z});
 }
-*/
 
 Point3 Listener::getPosition()
 {
@@ -52,17 +45,10 @@ void Listener::setVelocity(const Vector3& v)
     Assert::isTrue(alGetError() == AL_NO_ERROR);
 }
 
-/*
-void Listener::setVelocity(const Vector2& v)
-{
-    setVelocity({v.x, v.y, 0});
-}
-
 void Listener::setVelocity(float x, float y, float z)
 {
     setVelocity({x, y, z});
 }
-*/
 
 Vector3 Listener::getVelocity()
 {

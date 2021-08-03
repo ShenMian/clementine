@@ -209,7 +209,7 @@ WindowBase* Main::getWindow()
 
 void Main::setInputRate(uint16_t rate)
 {
-    assert(rate != 0);
+    Assert::isTrue(rate != 0);
     inputRate = rate;
 }
 
@@ -220,7 +220,7 @@ uint16_t Main::getInputRate()
 
 void Main::setUpdateRate(uint16_t rate)
 {
-    assert(rate != 0);
+    Assert::isTrue(rate != 0);
     updateRate = rate;
 }
 
@@ -231,7 +231,7 @@ uint16_t Main::getUpdateRate()
 
 void Main::setRenderRate(uint16_t rate)
 {
-    assert(rate != 0);
+    Assert::isTrue(rate != 0);
     renderRate = rate;
 }
 
