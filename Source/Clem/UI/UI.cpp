@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "UI.h"
@@ -21,7 +21,7 @@ void UI::init(WindowBase* window)
 	ImGui::StyleColorsDark();
 	auto& io = ImGui::GetIO();
 
-	// ×Ô¶¨Òå×ÖÌå
+	// è‡ªå®šä¹‰å­—ä½“
 	// io.Fonts->AddFontFromFileTTF("../Assets/Fonts/open_sans/OpenSans-Bold.ttf", 18.0f);
 	// io.FontDefault = io.Fonts->AddFontFromFileTTF("../Assets/Fonts/open_sans/OpenSans-Regular.ttf", 18.0f);
 
