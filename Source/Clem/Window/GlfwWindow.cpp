@@ -30,12 +30,10 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 	PROFILE_FUNC();
 
 	handle = glfwCreateWindow(size.x, size.y, title.c_str(), nullptr, nullptr);
-	glfwMakeContextCurrent(handle);
+    glfwMakeContextCurrent(handle);
 
 	auto success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	assert(success);
-
-	glViewport(0, 0, size.x, size.y);
 
 	glfwSetWindowUserPointer(handle, static_cast<void*>(this));
 
@@ -75,16 +73,18 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
 	glfwSetMouseButtonCallback(handle, nullptr);
 
+	
+
+	glViewport(0, 0, size.x, size.y);
+
 	shader = Shader::create(R"(
 		#version 410
 
 		layout(location = 0) in vec3 a_Position;
 
-		uniform mat4 u_ViewProjection;
-
 		void main()
 		{
-			gl_Position = vec4(a_Position, 1.0) * u_ViewProjection;
+			gl_Position = vec4(1.0) * vec4(a_Position, 1.0);
 		}
 	)",
 													R"(
@@ -94,11 +94,9 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
 		void main()
 		{
+			color = vec4(0.0, 1.0, 0.0, 0.0);
 		}
 	)");
-
-	glCreateVertexArrays(1, &vertexArray);
-	glBindVertexArray(vertexArray);
 
 	float vertices[3 * 3] = {
 			-0.5f,
@@ -113,17 +111,20 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 			0.5f,
 			0.0f,
 	};
-	unsigned int indices[3] = {0, 1, 2};
+    unsigned int indices[3] = {0, 1, 2};
+
+    glCreateVertexArrays(1, &vertexArray);
+    glBindVertexArray(vertexArray);
 
 	vertexBuffer = VertexBuffer::create(&vertices, sizeof(vertices));
-	indexBuffer  = IndexBuffer::create(&indices, sizeof(indices));
+    indexBuffer  = IndexBuffer::create(&indices, sizeof(indices));
 
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
 
-	assert(glGetError() == GL_NO_ERROR);
+    UI::init(this);
 
-	UI::init(this);
+	Assert::isTrue(glGetError() == GL_NO_ERROR);
 }
 
 GlfwWindow::~GlfwWindow()
@@ -140,15 +141,16 @@ void GlfwWindow::update(Time dt)
 	PROFILE_FUNC();
 
 	glClearColor(30.0f / 255, 144.0f / 255, 255.0f / 255, 1.0f); // 湖蓝色
-	glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
 
 	static Camera camera;
 
 	shader->bind();
-	shader->uploadUniform("u_ViewProjection", camera.getViewProjection());
+    // shader->uploadUniform("u_ViewProjection", camera.getViewProjection());
 
 	glBindVertexArray(vertexArray);
-	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
 	assert(glGetError() == GL_NO_ERROR);
 
@@ -188,10 +190,7 @@ Size2i GlfwWindow::getPosition()
 
 void GlfwWindow::setVisible(bool visible)
 {
-	if(visible)
-		glfwShowWindow(handle);
-	else
-		glfwHideWindow(handle);
+    glfwSetWindowAttrib(handle, GLFW_VISIBLE, visible);
 }
 
 bool GlfwWindow::isVisible() const
