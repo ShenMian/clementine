@@ -43,26 +43,6 @@ public:
 	virtual ~Application();
 
 	/**
-	 * @brief 启动主循环.
-	 */
-	void run();
-
-	/**
-	 * @brief 终止主循环.
-	 */
-	void stop();
-
-	/**
-	 * @brief 暂停主循环.
-	 */
-	void pause();
-
-	/**
-	 * @brief 恢复主循环.
-	 */
-	void resume();
-
-	/**
 	 * @brief 获取应用名称.
 	 */
 	const std::string& getName() const;
@@ -98,4 +78,5 @@ Application* CreateApplication();
  * end of Core group
  * @}
  */
+
 } // namespace clem
