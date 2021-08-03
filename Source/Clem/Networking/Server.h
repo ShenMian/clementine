@@ -14,6 +14,7 @@
 
 namespace clem
 {
+
 /**
  * @addtogroup Networking
  * @{
@@ -122,4 +123,5 @@ void Server::read(std::shared_ptr<Connection> conn)
  * end of Networking group
  * @}
  */
+
 } // namespace clem

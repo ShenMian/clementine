@@ -11,6 +11,7 @@
 
 namespace clem
 {
+
 /**
  * @addtogroup Networking
  * @{
@@ -92,4 +93,5 @@ public:
  * end of Networking group
  * @}
  */
+
 } // namespace clem

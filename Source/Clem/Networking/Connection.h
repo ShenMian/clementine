@@ -11,6 +11,7 @@
 
 namespace clem
 {
+
 /**
  * @addtogroup Networking
  * @{
@@ -175,4 +176,5 @@ Message<T>& Connection::getMessage()
  * end of Networking group
  * @}
  */
+
 } // namespace clem

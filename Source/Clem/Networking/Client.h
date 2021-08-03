@@ -11,6 +11,7 @@
 
 namespace clem
 {
+
 /**
  * @addtogroup Networking
  * @{
@@ -102,4 +103,5 @@ void Client::read()
  * end of Networking group
  * @}
  */
+
 } // namespace clem

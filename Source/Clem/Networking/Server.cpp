@@ -9,6 +9,7 @@ using namespace asio;
 
 namespace clem
 {
+
 Server::Server()
 		: socket(context), acceptor(context)
 {
@@ -73,4 +74,5 @@ void Server::accept()
 		accept();
 	});
 }
+
 } // namespace clem
