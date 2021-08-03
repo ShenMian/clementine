@@ -92,7 +92,6 @@ private:
         {
             if(ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen))
             {
-                ImGui::PushItemWidth(50);
                 auto& tf = entity.get<Transform>();
 
                 Vector2Edit("Transform", tf.translation);
@@ -188,7 +187,9 @@ private:
             ImGui::PopStyleColor(3);
             ImGui::PopFont();
             ImGui::SameLine();
+            ImGui::PushItemWidth(50);
             ImGui::DragFloat((std::string("##") + std::to_string(i)).c_str(), &value[i], 0.1f, 0.0f, 0.0f, "%.2f");
+            ImGui::PopItemWidth();
             ImGui::SameLine();
         }
         ImGui::NewLine();
