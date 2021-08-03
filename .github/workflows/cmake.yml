@@ -1,4 +1,4 @@
-name: CI
+name: CMake
 
 on: [push, pull_request]
 

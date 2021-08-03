@@ -1,0 +1,31 @@
+name: build-action
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: get premake5
+      run: |
+       wget -qO- https://github.com/premake/premake-core/releases/download/v5.0.0-alpha15/premake-5.0.0-alpha15-linux.tar.gz | \
+       tar xvz premake5 | \
+       xargs -I"{}" sudo mv {} /usr/bin
+       
+    - name: generate Makefiles
+      run: premake5 --file=premake5.lua gmake
+
+    - name: get dependencies
+      run: DEBIAN_FRONTEND=noninteractive sudo apt-get update -yqq --allow-releaseinfo-change -o::Dpkg::Use-Pty=0 && DEBIAN_FRONTEND=noninteractive sudo apt-get install -yqq -o::Dpkg::Use-Pty=0 libopenal-dev build-essential libgl1-mesa-dev libglm-dev libglfw3-dev ocl-icd-opencl-dev libc++abi-dev
+
+    - name: probe commit
+      run: git log -p -2 || true
+
+    - name: make
+      run: make all
