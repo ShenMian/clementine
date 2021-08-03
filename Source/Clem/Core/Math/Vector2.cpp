@@ -8,6 +8,8 @@
 #include <cmath>
 
 const Vector2 Vector2::unit(1, 1);
+const Vector2 Vector2::unit_x(1, 0);
+const Vector2 Vector2::unit_y(0, 1);
 const Vector2 Vector2::zero(0, 0);
 
 const Vector2 Vector2::up(0, 1);

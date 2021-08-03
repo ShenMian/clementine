@@ -133,8 +133,10 @@ public:
 
 	operator Vector2i() const;
 
-	static const Vector2 unit; // (1, 1)
-	static const Vector2 zero; // (0, 0)
+    static const Vector2 unit;   // (1, 1)
+    static const Vector2 unit_x; // (1, 0)
+	static const Vector2 unit_y; // (0, 1)
+	static const Vector2 zero;   // (0, 0)
 
 	static const Vector2 up;    // (0, 1)
 	static const Vector2 down;  // (0, -1)

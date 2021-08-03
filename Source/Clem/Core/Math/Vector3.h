@@ -113,8 +113,11 @@ public:
 	Vector3& operator*=(float n);
 	Vector3& operator/=(float n);
 
-	static const Vector3 unit; // (1, 1, 1)
-	static const Vector3 zero; // (0, 0, 0)
+	static const Vector3 unit;   // (1, 1, 1)
+    static const Vector3 unit_x; // (1, 0, 0)
+    static const Vector3 unit_y; // (0, 1, 0)
+    static const Vector3 unit_z; // (0, 0, 1)
+	static const Vector3 zero;   // (0, 0, 0)
 
 	static const Vector3 up;    // (0, 1, 0)
 	static const Vector3 down;  // (0, -1, 0)

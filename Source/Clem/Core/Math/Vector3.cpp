@@ -8,6 +8,9 @@
 #include <cmath>
 
 const Vector3 Vector3::unit(1, 1, 1);
+const Vector3 Vector3::unit_x(1, 0, 0);
+const Vector3 Vector3::unit_y(0, 1, 0);
+const Vector3 Vector3::unit_z(0, 0, 1);
 const Vector3 Vector3::zero(0, 0, 0);
 
 const Vector3 Vector3::up(0, 1, 0);
