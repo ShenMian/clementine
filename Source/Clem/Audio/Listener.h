@@ -4,7 +4,7 @@
 #pragma once
 
 #include "AL/alext.h"
-#include "Clem/Core/Math/Math.h"
+#include "Core/Math/Math.h"
 
 namespace clem
 {

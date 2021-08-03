@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "Clem/Core/Math/Math.h"
-#include "Clem/ECS/Registry.h"
+#include "Core/Math/Math.h"
+#include "ECS/Registry.h"
 #include <cstdint>
 #include <memory>
 #include <string>

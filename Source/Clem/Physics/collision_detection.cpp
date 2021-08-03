@@ -1,7 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "Clem/Core/Math/Math.h"
+#include "Core/Math/Math.h"
 #include "BoxCollider.h"
 #include "CircleCollider.h"
 #include <cassert>

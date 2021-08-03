@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "Clem/Core/Core.h"
-#include "Clem/UI/UI.h"
+#include "Core/Core.h"
+#include "UI/UI.h"
 #include <functional>
 #include <string>
 #include <vector>

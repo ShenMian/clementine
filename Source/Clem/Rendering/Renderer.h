@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Platform.h"
+#include "Platform.h"
 
 #ifdef OS_WIN
 #	include <d3d12.h>

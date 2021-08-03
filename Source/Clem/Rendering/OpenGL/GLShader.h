@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Rendering/Shader.h"
+#include "Rendering/Shader.h"
 #include <filesystem>
 #include <string>
 

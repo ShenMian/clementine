@@ -1,11 +1,11 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Sound.h"
 #include "AL/alext.h"
-#include "Clem/Assert.h"
-#include "Clem/Logger.h"
-#include "Clem/Profiler.h"
+#include "Assert.h"
+#include "Logger.h"
+#include "Profiler.h"
 #include <cassert>
 #include <fstream>
 
@@ -17,159 +17,159 @@ namespace clem
 Sound::Sound()
     : bitsPerSample(0), channelCount(0), sampleRate(0)
 {
-	alGenBuffers(1, &bufferId);
+  alGenBuffers(1, &bufferId);
 }
 
 Sound::Sound(const fs::path& path)
 {
-	alGenBuffers(1, &bufferId);
-	loadFromFile(path);
+  alGenBuffers(1, &bufferId);
+  loadFromFile(path);
 }
 
 Sound::~Sound()
 {
-	alDeleteBuffers(1, &bufferId);
+  alDeleteBuffers(1, &bufferId);
 }
 
 void Sound::loadFromFile(const fs::path& path)
 {
-	PROFILE_FUNC();
+  PROFILE_FUNC();
 
-	Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
+  Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
 
-	const auto extension = path.extension().string();
-	if(extension == ".wav")
-		loadWavFile(path);
-	else
-		Assert::isTrue(false, std::format("file extension doesn't supported: '{}'", extension));
+  const auto extension = path.extension().string();
+  if(extension == ".wav")
+    loadWavFile(path);
+  else
+    Assert::isTrue(false, std::format("file extension doesn't supported: '{}'", extension));
 
-	CLEM_LOG_INFO("audio", "sound loaded from file: '{}'", path.string());
+  CLEM_LOG_INFO("audio", "sound loaded from file: '{}'", path.string());
 
-	initialized = true;
+  initialized = true;
 }
 
 const uint8_t* Sound::getSamples() const
 {
-	assert(initialized);
-	return samples.data();
+  assert(initialized);
+  return samples.data();
 }
 
 size_t Sound::getSampleCount() const
 {
-	assert(initialized);
-	return samples.size() * 8 / bitsPerSample;
+  assert(initialized);
+  return samples.size() * 8 / bitsPerSample;
 }
 
 unsigned int Sound::getSampleRate() const
 {
-	assert(initialized);
-	return sampleRate;
+  assert(initialized);
+  return sampleRate;
 }
 
 unsigned int Sound::getChannelCount() const
 {
-	assert(initialized);
-	return channelCount;
+  assert(initialized);
+  return channelCount;
 }
 
 size_t Sound::getTime() const
 {
-	assert(initialized);
-	return getSampleCount() / (getChannelCount() * getSampleRate());
+  assert(initialized);
+  return getSampleCount() / (getChannelCount() * getSampleRate());
 }
 
 int32_t Sound::getBufferId() const
 {
-	assert(initialized);
-	return bufferId;
+  assert(initialized);
+  return bufferId;
 }
 
 struct RiffHeader
 {
-	char    id[4];     // ×ÊÔ´½»»»ÎÄ¼ş±êÖ¾, "RIFF"
-	int32_t size;      // ÎÄ¼ş×Ü´óĞ¡
-	char    format[4]; // WAV ÎÄ¼ş±êÖ¾
+  char    id[4];     // èµ„æºäº¤æ¢æ–‡ä»¶æ ‡å¿—, "RIFF"
+  int32_t size;      // æ–‡ä»¶æ€»å¤§å°
+  char    format[4]; // WAV æ–‡ä»¶æ ‡å¿—
 };
 
 struct WaveFormat
 {
-	char    id[4];         // ²¨ĞÎ¸ñÊ½±êÖ¾, "WAVE"
-	int32_t size;          // ´óĞ¡
-	int16_t audioFormat;   // ÒôÆµ¸ñÊ½, ÏßĞÔ PCM ±àÂë
-	int16_t numChannels;   // ÉùµÀÊı
-	int32_t sampleRate;    // ²ÉÑùÂÊ, Hz
-	int32_t byteRate;      // ²¨ĞÎÊı¾İ´«ÊäÂÊ, Bps
-	int16_t blockAlign;    // ¿é¶ÔÆë
-	int16_t bitsPerSample; // ²ÉÑùÎ»Êı
+  char    id[4];         // æ³¢å½¢æ ¼å¼æ ‡å¿—, "WAVE"
+  int32_t size;          // å¤§å°
+  int16_t audioFormat;   // éŸ³é¢‘æ ¼å¼, çº¿æ€§ PCM ç¼–ç 
+  int16_t numChannels;   // å£°é“æ•°
+  int32_t sampleRate;    // é‡‡æ ·ç‡, Hz
+  int32_t byteRate;      // æ³¢å½¢æ•°æ®ä¼ è¾“ç‡, Bps
+  int16_t blockAlign;    // å—å¯¹é½
+  int16_t bitsPerSample; // é‡‡æ ·ä½æ•°
 };
 
 struct WaveData
 {
-	char    id[4];
-	int32_t size;
+  char    id[4];
+  int32_t size;
 };
 
 void Sound::loadWavFile(const fs::path& path)
 {
-	std::ifstream file(path, std::ios::binary);
-	Assert::isTrue(file.is_open(), std::format("can't open file: {}", path.string()));
+  std::ifstream file(path, std::ios::binary);
+  Assert::isTrue(file.is_open(), std::format("can't open file: {}", path.string()));
 
-	RiffHeader riffHeader;
-	WaveFormat waveFormat;
-	WaveData   waveData;
+  RiffHeader riffHeader;
+  WaveFormat waveFormat;
+  WaveData   waveData;
 
-	file.read((char*)&riffHeader, sizeof(RiffHeader));
-	Assert::isTrue(std::memcmp(riffHeader.id, "RIFF", 4) == 0 && std::memcmp(riffHeader.format, "WAVE", 4) == 0, "incorrect file content");
+  file.read((char*)&riffHeader, sizeof(RiffHeader));
+  Assert::isTrue(std::memcmp(riffHeader.id, "RIFF", 4) == 0 && std::memcmp(riffHeader.format, "WAVE", 4) == 0, "incorrect file content");
 
-	file.read((char*)&waveFormat, sizeof(WaveFormat));
-	if(waveFormat.size > 16)
-		file.seekg(2, std::ios::cur);
+  file.read((char*)&waveFormat, sizeof(WaveFormat));
+  if(waveFormat.size > 16)
+    file.seekg(2, std::ios::cur);
 
-	char id[4];
-	file.read(id, 4);
+  char id[4];
+  file.read(id, 4);
 
-	// Èç¹û WAV ÎÄ¼şÊÇÓÉÆäËû¸ñÊ½×ª»»¶øÀ´, »á°üº¬ ID Îª LIST µÄ¸ñÊ½×ª»»ĞÅÏ¢.
-	// Ìø¹ıÕâ²¿·ÖÄÚÈİ, Ö±½Ó»ñÈ¡ÒôÆµÑù±¾Êı¾İ.
-	if(std::memcmp(id, "LIST", 4) == 0)
-	{
-		int32_t list_size;
-		file.read((char*)&list_size, sizeof(list_size));
-		file.seekg(list_size, std::ios::cur);
-		file.read(id, 4);
-	}
+  // å¦‚æœ WAV æ–‡ä»¶æ˜¯ç”±å…¶ä»–æ ¼å¼è½¬æ¢è€Œæ¥, ä¼šåŒ…å« ID ä¸º LIST çš„æ ¼å¼è½¬æ¢ä¿¡æ¯.
+  // è·³è¿‡è¿™éƒ¨åˆ†å†…å®¹, ç›´æ¥è·å–éŸ³é¢‘æ ·æœ¬æ•°æ®.
+  if(std::memcmp(id, "LIST", 4) == 0)
+  {
+    int32_t list_size;
+    file.read((char*)&list_size, sizeof(list_size));
+    file.seekg(list_size, std::ios::cur);
+    file.read(id, 4);
+  }
 
-	Assert::isTrue(std::memcmp(id, "data", 4) == 0, "incorrect file content");
+  Assert::isTrue(std::memcmp(id, "data", 4) == 0, "incorrect file content");
 
-	file.seekg(-4, std::ios::cur);
-	file.read((char*)&waveData, sizeof(WaveData));
+  file.seekg(-4, std::ios::cur);
+  file.read((char*)&waveData, sizeof(WaveData));
 
-	sampleRate    = waveFormat.sampleRate;
-	channelCount  = waveFormat.numChannels;
-	bitsPerSample = waveFormat.bitsPerSample;
+  sampleRate    = waveFormat.sampleRate;
+  channelCount  = waveFormat.numChannels;
+  bitsPerSample = waveFormat.bitsPerSample;
 
-	int format = -1;
-	if(waveFormat.numChannels == 1)
-	{
-		if(waveFormat.bitsPerSample == 8)
-			format = AL_FORMAT_MONO8;
-		else if(waveFormat.bitsPerSample == 16)
-			format = AL_FORMAT_MONO16;
-	}
-	else if(waveFormat.numChannels == 2)
-	{
-		if(waveFormat.bitsPerSample == 8)
-			format = AL_FORMAT_STEREO8;
-		else if(waveFormat.bitsPerSample == 16)
-			format = AL_FORMAT_STEREO16;
-	}
-	Assert::isTrue(format != -1, "unknown audio format");
+  int format = -1;
+  if(waveFormat.numChannels == 1)
+  {
+    if(waveFormat.bitsPerSample == 8)
+      format = AL_FORMAT_MONO8;
+    else if(waveFormat.bitsPerSample == 16)
+      format = AL_FORMAT_MONO16;
+  }
+  else if(waveFormat.numChannels == 2)
+  {
+    if(waveFormat.bitsPerSample == 8)
+      format = AL_FORMAT_STEREO8;
+    else if(waveFormat.bitsPerSample == 16)
+      format = AL_FORMAT_STEREO16;
+  }
+  Assert::isTrue(format != -1, "unknown audio format");
 
-	samples.resize(waveData.size);
-	file.read((char*)samples.data(), waveData.size);
+  samples.resize(waveData.size);
+  file.read((char*)samples.data(), waveData.size);
 
-	file.close();
+  file.close();
 
-	alBufferData(bufferId, format, (void*)samples.data(), (ALsizei)samples.size(), sampleRate);
+  alBufferData(bufferId, format, (void*)samples.data(), (ALsizei)samples.size(), sampleRate);
 }
 
 } // namespace clem

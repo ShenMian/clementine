@@ -2,8 +2,8 @@
 // License(Apache-2.0)
 
 #include "WindowBase.h"
-#include "Clem/Platform.h"
-#include "Clem/UI/UI.h"
+#include "Platform.h"
+#include "UI/UI.h"
 #include "Window.h"
 #include <cassert>
 

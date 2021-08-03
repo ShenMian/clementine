@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -10,6 +10,7 @@
 
 namespace clem
 {
+
 /**
  * @addtogroup Audio
  * @{
@@ -32,4 +33,5 @@ private:
  * end of Audio group
  * @}
  */
+
 } // namespace clem

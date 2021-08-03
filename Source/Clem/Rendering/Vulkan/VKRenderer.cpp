@@ -2,10 +2,10 @@
 // License(Apache-2.0)
 
 #include "VKRenderer.h"
-#include "Clem/Assert.h"
-#include "Clem/Core/Application.h"
-#include "Clem/Logger.h"
-#include "Clem/Version.h"
+#include "Assert.h"
+#include "Core/Application.h"
+#include "Logger.h"
+#include "Version.h"
 #include <cassert>
 #include <vector>
 

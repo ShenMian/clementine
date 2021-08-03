@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -18,24 +18,24 @@ class Sound
 {
 public:
 	/**
-	 * @brief Ä¬ÈÏ¹¹Ôìº¯Êı.
+	 * @brief é»˜è®¤æ„é€ å‡½æ•°.
 	 */
 	Sound();
 
 	/**
-	 * @brief ¹¹Ôìº¯Êı, ´ÓÎÄ¼şµ¼ÈëÉùÒô.
+	 * @brief æ„é€ å‡½æ•°, ä»æ–‡ä»¶å¯¼å…¥å£°éŸ³.
 	 */
 	Sound(const std::filesystem::path& path);
 
 	/**
-	 * @brief Ä¬ÈÏÎö¹¹º¯Êı.
+	 * @brief é»˜è®¤ææ„å‡½æ•°.
 	 */
 	~Sound();
 
 	/**
-	 * @brief ´ÓÎÄ¼ş¼ÓÔØÉùÒô.
+	 * @brief ä»æ–‡ä»¶åŠ è½½å£°éŸ³.
 	 *
-	 * @param path ÉùÒôÎÄ¼şÂ·¾¶.
+	 * @param path å£°éŸ³æ–‡ä»¶è·¯å¾„.
 	 */
 	void loadFromFile(const std::filesystem::path& path);
 
@@ -45,9 +45,9 @@ public:
 	unsigned int   getChannelCount() const;
 
 	/**
-	 * @brief »ñÈ¡ÉùÒô×ÜÊ±³¤.
+	 * @brief è·å–å£°éŸ³æ€»æ—¶é•¿.
 	 *
-	 * @return ÉùÒô×ÜÊ±³¤, µ¥Î»: Ãë.
+	 * @return å£°éŸ³æ€»æ—¶é•¿, å•ä½: ç§’.
 	 */
 	size_t getTime() const;
 
@@ -62,9 +62,9 @@ private:
 	bool                 initialized = false;
 
 	/**
-	 * ´Ó WAV ÎÄ¼şÔØÈëÉùÒô.
+	 * ä» WAV æ–‡ä»¶è½½å…¥å£°éŸ³.
 	 *
-	 * @param path ÎÄ¼şÂ·¾¶.
+	 * @param path æ–‡ä»¶è·¯å¾„.
 	 */
 	void loadWavFile(const std::filesystem::path& path);
 };

@@ -4,7 +4,7 @@
 #pragma once
 
 #include "VKCommandBuffer.h"
-#include "Clem/Assert.h"
+#include "Assert.h"
 #include "VKRenderer.h"
 #include <vulkan/vulkan.hpp>
 

@@ -4,10 +4,10 @@
 /*
 
 #include "ComponentSerializer.h"
-#include "Clem/Components/Tag.h"
-#include "Clem/Components/Transform.h"
-#include "Clem/Physics/Rigidbody.h"
-#include "Clem/Rendering/Sprite.h"
+#include "Components/Tag.h"
+#include "Components/Transform.h"
+#include "Physics/Rigidbody.h"
+#include "Rendering/Sprite.h"
 #include "MathSerializer.h"
 
 YAML::Emitter& operator<<(YAML::Emitter& o, const Tag& t)

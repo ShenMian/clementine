@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "GLTexture2D.h"
-#include "Clem/Assert.h"
+#include "Assert.h"
 #include <cassert>
 #include <glad/glad.h>
 #include <stb/stb_image.h>

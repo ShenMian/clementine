@@ -20,7 +20,7 @@ project "Clementine"
     "USE_ASSERT"}
 
   includedirs {
-    ".",
+    "./Clem",
     "%{thirdparty.stb}/include",
     "%{thirdparty.sdl}/include",
     "%{thirdparty.asio}/include",

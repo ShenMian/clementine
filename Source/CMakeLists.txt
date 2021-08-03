@@ -3,7 +3,7 @@
 
 find_package(Threads REQUIRED)
 
-file(GLOB_RECURSE sources "Clem/*.cpp")
+file(GLOB_RECURSE sources "*.cpp")
 
 link_directories("${PROJECT_SOURCE_DIR}/Thirdparty/openal/lib")
 

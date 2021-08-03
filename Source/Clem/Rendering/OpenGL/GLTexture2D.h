@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Rendering/Texture2D.h"
+#include "Rendering/Texture2D.h"
 
 namespace clem
 {

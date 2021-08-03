@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Rendering/VertexBuffer.h"
+#include "Rendering/VertexBuffer.h"
 
 namespace clem
 {

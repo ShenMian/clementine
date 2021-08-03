@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "Rigidbody.h"
-#include "Clem/Components/Transform.h"
+#include "Components/Transform.h"
 #include <cassert>
 
 namespace clem

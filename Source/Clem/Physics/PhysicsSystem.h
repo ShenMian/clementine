@@ -1,7 +1,7 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "Clem/Components/Transform.h"
+#include "Components/Transform.h"
 #include "Rigidbody.h"
 
 namespace clem

@@ -2,8 +2,8 @@
 // License(Apache-2.0)
 
 #include "ConsoleWindow.h"
-#include "Clem/Platform.h"
-#include "Clem/Rendering/Rendering.h"
+#include "Platform.h"
+#include "Rendering/Rendering.h"
 #include <cassert>
 #include <cstdio>
 

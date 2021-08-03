@@ -3,11 +3,11 @@
 
 #pragma once
 
-#include "Clem/Components/Script.h"
-#include "Clem/Components/Tag.h"
-#include "Clem/Components/Transform.h"
-#include "Clem/Physics/Rigidbody.h"
-#include "Clem/Rendering/Console/Sprite.h"
+#include "Components/Script.h"
+#include "Components/Tag.h"
+#include "Components/Transform.h"
+#include "Physics/Rigidbody.h"
+#include "Rendering/Console/Sprite.h"
 #include "Layer.h"
 #include <glad/glad.h>
 #include <imgui/imgui.h>

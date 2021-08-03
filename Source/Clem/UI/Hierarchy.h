@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/ECS/Entity.h"
+#include "ECS/Entity.h"
 #include "Layer.h"
 #include "Properties.h"
 #include <glad/glad.h>

@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Assert.h"
+#include "Assert.h"
 #include <cstddef>
 #include <cstdint>
 #include <cstring>

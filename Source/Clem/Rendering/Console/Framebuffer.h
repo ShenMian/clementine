@@ -3,9 +3,9 @@
 
 #pragma once
 
-#include "Clem/Core/Math/Rect2.h"
-#include "Clem/Core/Math/Vector2i.h"
-#include "Clem/Platform.h"
+#include "Core/Math/Rect2.h"
+#include "Core/Math/Vector2i.h"
+#include "Platform.h"
 #include "Sprite.h"
 #include <vector>
 

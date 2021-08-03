@@ -3,8 +3,8 @@
 
 #include "UI.h"
 
-#include "Clem/Rendering/Renderer.h"
-#include "Clem/Window/WindowBase.h"
+#include "Rendering/Renderer.h"
+#include "Window/WindowBase.h"
 
 #include <imgui/backends/imgui_impl_glfw.h>
 #include <imgui/backends/imgui_impl_opengl3.h>

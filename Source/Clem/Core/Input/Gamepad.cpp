@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "Gamepad.h"
-#include "Clem/Platform.h"
+#include "Platform.h"
 #include <cassert>
 #include <cmath>
 
@@ -63,10 +63,10 @@ void Gamepad::update()
 	if(!check(XInputGetState(deviceId, &state)))
 		return;
 
-	// °´¼ü
+	// ï¿½ï¿½ï¿½ï¿½
 	buttons = state.Gamepad.wButtons;
 
-	// ÏßÐÔ°´¼ü
+	// ï¿½ï¿½ï¿½Ô°ï¿½ï¿½ï¿½
 	if(state.Gamepad.bLeftTrigger > triggerThreshold)
 		leftTrigger = state.Gamepad.bLeftTrigger - triggerThreshold;
 	else
@@ -77,7 +77,7 @@ void Gamepad::update()
 	else
 		rightTrigger = 0;
 
-	// Ò¡¸Ë
+	// Ò¡ï¿½ï¿½
 	leftThumb.x = state.Gamepad.sThumbLX;
 	leftThumb.y = state.Gamepad.sThumbLY;
 	if(leftThumb.sizeSquared() < leftThumbDeadzone * leftThumbDeadzone)

@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Core/Core.h"
+#include "Core/Core.h"
 
 #define LEFT_LABEL(func, label, ...) (ImGui::TextUnformatted(label), ImGui::SameLine(), func("##" label, __VA_ARGS__))
 

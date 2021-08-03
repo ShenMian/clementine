@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Audio.h"
@@ -18,7 +18,7 @@ void Audio::init()
 
 	Assert::isTrue(device == nullptr, "aleardy opened a audio device");
 
-	device = alcOpenDevice(nullptr); // ��ȡ��ѡ�豸
+	device = alcOpenDevice(nullptr); // 获取首选设备
 	Assert::isTrue(device != nullptr, "can't open audio device");
 
 	const ALCchar* name = nullptr;

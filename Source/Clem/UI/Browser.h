@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Rendering/Rendering.h"
+#include "Rendering/Rendering.h"
 #include "Layer.h"
 #include <filesystem>
 #include <glad/glad.h>

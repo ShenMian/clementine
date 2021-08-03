@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Platform.h"
+#include "Platform.h"
 #include "Gamepad.h"
 #include "Keyboard.h"
 #include "Mouse.h"

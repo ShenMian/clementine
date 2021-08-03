@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "Output.h"
-#include "Clem/Profiler.h"
+#include "Profiler.h"
 
 namespace clem
 {

@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Rendering/Renderer.h"
+#include "Rendering/Renderer.h"
 
 namespace clem
 {

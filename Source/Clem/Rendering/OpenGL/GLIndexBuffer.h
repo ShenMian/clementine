@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Rendering/IndexBuffer.h"
+#include "Rendering/IndexBuffer.h"
 
 namespace clem
 {

@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "Clem/Assert.h"
-#include "Clem/Platform.h"
+#include "Assert.h"
+#include "Platform.h"
 #include "Connection.h"
 #include "asio.hpp"
 #include <cstdint>

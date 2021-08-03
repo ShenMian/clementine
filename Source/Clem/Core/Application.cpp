@@ -5,7 +5,7 @@
 // #include "SDL.h"
 
 #include "Application.h"
-#include "Clem/Profiler.h"
+#include "Profiler.h"
 #include <map>
 #include <string>
 

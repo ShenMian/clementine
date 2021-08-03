@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/ECS/ECS.h"
+#include "ECS/ECS.h"
 #include <string>
 
 namespace clem

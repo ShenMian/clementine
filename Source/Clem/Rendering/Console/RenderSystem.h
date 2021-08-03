@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Components/Transform.h"
+#include "Components/Transform.h"
 #include "Output.h"
 
 namespace clem

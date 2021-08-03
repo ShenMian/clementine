@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Core/Math/Vector2i.h"
+#include "Core/Math/Vector2i.h"
 
 /**
  * @brief 光标.

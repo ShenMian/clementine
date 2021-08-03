@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Core/Math/Math.h"
+#include "Core/Math/Math.h"
 
 namespace clem
 {

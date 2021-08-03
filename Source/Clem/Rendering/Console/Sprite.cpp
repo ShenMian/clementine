@@ -2,8 +2,8 @@
 // License(Apache-2.0)
 
 #include "Sprite.h"
-#include "Clem/Core/Math/Rect2i.h"
-#include "Clem/Logger.h"
+#include "Core/Math/Rect2i.h"
+#include "Logger.h"
 #include <algorithm>
 #include <cmath>
 #include <fstream>

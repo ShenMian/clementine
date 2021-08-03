@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "Clem/Core/Math/Math.h"
-#include "Clem/ECS/ECS.h"
+#include "Core/Math/Math.h"
+#include "ECS/ECS.h"
 #include "Component.h"
 
 namespace clem

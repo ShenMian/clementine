@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "Clem/Logger.h"
-#include "Clem/Platform.h"
+#include "Logger.h"
+#include "Platform.h"
 #include "Message.h"
 #include "asio.hpp"
 #include <functional>

@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "GLShader.h"
-#include "Clem/Assert.h"
+#include "Assert.h"
 #include <cassert>
 #include <fstream>
 #include <glad/glad.h>

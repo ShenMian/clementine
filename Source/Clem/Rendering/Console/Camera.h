@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Clem/Core/Math/Rect2.h"
+#include "Core/Math/Rect2.h"
 
 /**
  * @brief 摄像机.

@@ -2,11 +2,11 @@
 // License(Apache-2.0)
 
 #include "Keyboard.h"
-#include "Clem/Events/EventDispatcher.h"
-#include "Clem/Events/KeyEvent.h"
-#include "Clem/Logger.h"
-#include "Clem/Platform.h"
-#include "Clem/Profiler.h"
+#include "Events/EventDispatcher.h"
+#include "Events/KeyEvent.h"
+#include "Logger.h"
+#include "Platform.h"
+#include "Profiler.h"
 #include "Input.h"
 #include <cassert>
 

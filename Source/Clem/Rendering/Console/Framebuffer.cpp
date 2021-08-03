@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "Framebuffer.h"
-#include "Clem/Profiler.h"
+#include "Profiler.h"
 #include "Color.h"
 #include "Cursor.h"
 #include <cassert>

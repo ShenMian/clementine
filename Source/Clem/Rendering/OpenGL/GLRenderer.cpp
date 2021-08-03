@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "GLRenderer.h"
-#include "Clem/Logger.h"
+#include "Logger.h"
 #include <glad/glad.h>
 
 namespace clem

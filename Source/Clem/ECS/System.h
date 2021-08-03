@@ -1,10 +1,10 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
 
-#include "Clem/Core/Core.h"
-#include "Clem/ECS/ECS.h"
+#include "Core/Core.h"
+#include "ECS/ECS.h"
 
 namespace clem
 {

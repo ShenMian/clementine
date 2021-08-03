@@ -3,9 +3,9 @@
 
 #pragma once
 
-#include "Clem/Components/Component.h"
-#include "Clem/Core/Math/Math.h"
-#include "Clem/ECS/ECS.h"
+#include "Components/Component.h"
+#include "Core/Math/Math.h"
+#include "ECS/ECS.h"
 #include "Tile.h"
 #include <filesystem>
 #include <vector>
