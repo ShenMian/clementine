@@ -20,17 +20,31 @@ void Assert::isTrue(bool expr, std::string_view msg, const std::source_location&
 	if(expr)
 		return;
 
-	auto str = std::format("Assertion failed.\nfile    : {}\nfunction: {}\nline    : {}\n", loc.file_name(), loc.function_name(), loc.line());
+	auto str = std::format("Assertion failed.\nfile     : {}\nfunction : {}\nline     : {}", loc.file_name(), loc.function_name(), loc.line());
     if(!msg.empty())
-      str += std::format("message : {}", msg);
+      str += std::format("\nmessage  : {}", msg);
+    CLEM_LOG_ERROR("assert", msg);
 
 	std::cout << str << std::endl;
 
 	#ifdef OS_WIN
-    MessageBoxA(nullptr, str.c_str(), "Clementine", 0);
-	#endif
+    str += "\n\nPress Retry to debug the application";
+    switch(MessageBoxA(nullptr, str.c_str(), "Clementine", MB_ICONERROR | MB_ABORTRETRYIGNORE))
+    {
+    case IDABORT:
+      exit(-1);
+      break;
 
-	breakpoint();
+    case IDRETRY:
+      breakpoint();
+      break;
+
+    case IGNORE:
+      break;
+    }
+    #else
+        breakpoint();
+    #endif
 }
 
 void Assert::isFalse(bool expr, std::string_view msg, const std::source_location& loc)
