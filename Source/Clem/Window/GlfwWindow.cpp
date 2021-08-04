@@ -75,7 +75,6 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
     glViewport(0, 0, size.x, size.y);
 
-    Shader::create("shader");
     shader = Shader::create(R"(
 		#version 410
 
@@ -189,7 +188,10 @@ Size2i GlfwWindow::getPosition()
 
 void GlfwWindow::setVisible(bool visible)
 {
-    glfwSetWindowAttrib(handle, GLFW_VISIBLE, visible);
+    if(visible)
+        glfwShowWindow(handle);
+    else
+        glfwHideWindow(handle);
 }
 
 bool GlfwWindow::isVisible() const
