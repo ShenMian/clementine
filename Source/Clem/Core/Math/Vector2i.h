@@ -3,6 +3,9 @@
 
 #pragma once
 
+namespace clem
+{
+
 /**
  * @addtogroup Math
  * @{
@@ -55,3 +58,5 @@ using Size2i  = Vector2i;
  * end of Math group
  * @}
  */
+
+} // namespace clem

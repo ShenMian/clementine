@@ -3,6 +3,9 @@
 
 #include "Rect2.h"
 
+namespace clem
+{
+
 Rect2::Rect2(const Point2& o, const Size2& s)
     : origin(o), size(s)
 {
@@ -85,3 +88,5 @@ bool Rect2::isValid() const
 {
     return origin.area() >= 0 && size.area() >= 0;
 }
+
+} // namespace clem

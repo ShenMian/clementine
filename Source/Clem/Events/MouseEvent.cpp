@@ -3,6 +3,9 @@
 
 #include "MouseEvent.h"
 
+namespace clem
+{
+
 MouseEvent::MouseEvent(Type t, const Point2& p, Key s)
     : type(t), position(p), key(s)
 {
@@ -22,3 +25,5 @@ MouseEvent::Type MouseEvent::getType() const
 {
     return type;
 }
+
+} // namespace clem

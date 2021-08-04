@@ -6,6 +6,9 @@
 #include "Core/Math/Math.h"
 #include "Event.h"
 
+namespace clem
+{
+
 /**
  * @brief 鼠标事件.
  */
@@ -40,3 +43,5 @@ private:
     Point2 position;
     Key    key;
 };
+
+} // namespace clem

@@ -8,6 +8,9 @@
 
 #include "Vector2i.h"
 
+namespace clem
+{
+
 /**
  * @addtogroup Math
  * @{
@@ -152,3 +155,5 @@ using Vec2   = Vector2;
  * end of Math group
  * @}
  */
+
+} // namespace clem

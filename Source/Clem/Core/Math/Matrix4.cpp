@@ -7,6 +7,9 @@
 #include <cmath>
 #include <cstring>
 
+namespace clem
+{
+
 const Matrix4 Matrix4::identity = {
     1.0f, 0.0f, 0.0f, 0.0f,
     0.0f, 1.0f, 0.0f, 0.0f,
@@ -202,3 +205,5 @@ Matrix4& Matrix4::operator*=(float rhs)
             m[x][y] *= rhs;
     return *this;
 }
+
+} // namespace clem

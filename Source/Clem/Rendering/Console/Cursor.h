@@ -5,6 +5,9 @@
 
 #include "Core/Math/Vector2i.h"
 
+namespace clem
+{
+
 /**
  * @brief 光标.
  */
@@ -33,3 +36,5 @@ public:
    */
     static void setVisible(bool v);
 };
+
+} // namespace clem

@@ -7,12 +7,15 @@
 #include <cmath>
 #include <initializer_list>
 
+namespace clem
+{
+
+class Vector3;
+
 /**
  * @addtogroup Math
  * @{
  */
-
-class Vector3;
 
 /**
  * @brief 4x4 矩阵, 单精度浮点数.
@@ -61,3 +64,5 @@ using Mat4 = Matrix4;
  * end of Math group
  * @}
  */
+
+} // namespace clem

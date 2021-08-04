@@ -6,6 +6,9 @@
 using std::uniform_int_distribution;
 using std::uniform_real_distribution;
 
+namespace clem
+{
+
 Random::Random()
 {
     setSeed(std::random_device()());
@@ -43,3 +46,5 @@ Point2i Random::getPoint2i(const Point2i& min, const Point2i& max)
 {
     return Point2i(getInt32(min.x, max.x), getInt32(min.y, max.y));
 }
+
+} // namespace clem

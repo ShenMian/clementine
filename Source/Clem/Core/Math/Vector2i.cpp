@@ -6,6 +6,9 @@
 #include <cfloat>
 #include <cmath>
 
+namespace clem
+{
+
 Vector2i::Vector2i(int x, int y)
     : x(x), y(y)
 {
@@ -75,3 +78,5 @@ Vector2i& Vector2i::operator/=(int n)
 {
     return *this = *this / n;
 }
+
+} // namespace clem

@@ -4,6 +4,9 @@
 #include "Cursor.h"
 #include <stdio.h>
 
+namespace clem
+{
+
 void Cursor::move(const Point2i& p)
 {
     move(p.x, p.y);
@@ -21,3 +24,5 @@ void Cursor::setVisible(bool v)
     else
         printf("\x1b[?25l");
 }
+
+} // namespace clem

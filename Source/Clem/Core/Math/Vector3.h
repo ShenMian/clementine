@@ -6,6 +6,9 @@
 #include <cfloat>
 #include <cmath>
 
+namespace clem
+{
+
 class Vector2;
 
 /**
@@ -143,3 +146,5 @@ using Vec3   = Vector3;
  * end of Math group
  * @}
  */
+
+} // namespace clem

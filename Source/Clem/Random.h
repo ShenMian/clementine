@@ -8,6 +8,9 @@
 #include <random>
 #include <stdint.h>
 
+namespace clem
+{
+
 /**
  * @brief 伪随机数生成器.
  * 生成均匀分布的随机数.
@@ -63,3 +66,5 @@ public:
 private:
     std::mt19937 generator;
 };
+
+} // namespace clem

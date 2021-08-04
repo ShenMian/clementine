@@ -6,6 +6,9 @@
 #include <cfloat>
 #include <cmath>
 
+namespace clem
+{
+
 const Vector2 Vector2::unit(1, 1);
 const Vector2 Vector2::unit_x(1, 0);
 const Vector2 Vector2::unit_y(0, 1);
@@ -187,3 +190,5 @@ Vector2::operator Vector2i() const
 {
     return asInt();
 }
+
+} // namespace clem

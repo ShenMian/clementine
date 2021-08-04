@@ -5,6 +5,9 @@
 
 #include "Vector2.h"
 
+namespace clem
+{
+
 /**
  * @addtogroup Math
  * @{
@@ -109,3 +112,5 @@ public:
  * end of Math group
  * @}
  */
+
+} // namespace clem

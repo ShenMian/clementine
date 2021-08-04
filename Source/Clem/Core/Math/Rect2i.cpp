@@ -4,6 +4,9 @@
 #include "Rect2i.h"
 #include <cassert>
 
+namespace clem
+{
+
 Rect2i::Rect2i(const Point2i& o, Size2i s)
     : origin(o), size(s)
 {
@@ -64,3 +67,5 @@ bool Rect2i::intersectsRect(const Rect2i& r) const
     return containsPoint(r.tl()) || containsPoint(r.tr()) ||
            containsPoint(r.bl()) || containsPoint(r.br());
 }
+
+} // namespace clem

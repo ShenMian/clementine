@@ -7,6 +7,9 @@
 #include <cfloat>
 #include <cmath>
 
+namespace clem
+{
+
 const Vector3 Vector3::unit(1, 1, 1);
 const Vector3 Vector3::unit_x(1, 0, 0);
 const Vector3 Vector3::unit_y(0, 1, 0);
@@ -172,3 +175,5 @@ Vector3& Vector3::operator/=(float n)
 {
     return *this = *this / n;
 }
+
+} // namespace clem
