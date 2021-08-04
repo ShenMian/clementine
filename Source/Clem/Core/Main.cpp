@@ -257,7 +257,7 @@ void Main::init()
     WindowBase::init();
     // window = new ConsoleWindow("Clementine", {80, 25});
     window          = new GlfwWindow("Clementine", {1160, 720});
-    window->onClose = []() { Main::stop(); };
+    window->onClose = [&]() { window->setVisible(false); Main::stop(); };
 
     // 初始化渲染器
     Renderer::get()->init();
