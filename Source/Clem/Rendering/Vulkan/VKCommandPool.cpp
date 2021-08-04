@@ -17,11 +17,11 @@ void VKCommandPool::create()
 {
     vk::CommandPoolCreateInfo createInfo;
     createInfo.flags            = vk::CommandPoolCreateFlagBits::eResetCommandBuffer;
-    createInfo.queueFamilyIndex = VKRenderer::get().queueFamilyIndex;
+    createInfo.queueFamilyIndex = VKRenderer::get().device.queueFamilyIndex;
 
     try
     {
-        handle = VKRenderer::get().device.createCommandPool(createInfo);
+        handle = VKRenderer::get().device.handle().createCommandPool(createInfo);
     }
     catch(const std::exception& e)
     {
@@ -31,7 +31,7 @@ void VKCommandPool::create()
 
 void VKCommandPool::destroy()
 {
-    VKRenderer::get().device.destroyCommandPool(handle);
+    VKRenderer::get().device.handle().destroyCommandPool(handle);
 }
 
 VKCommandBuffer VKCommandPool::allocateCommandBuffer()
@@ -45,7 +45,7 @@ VKCommandBuffer VKCommandPool::allocateCommandBuffer()
 
     try
     {
-        buffers = VKRenderer::get().device.allocateCommandBuffers(allocateInfo);
+        buffers = VKRenderer::get().device.handle().allocateCommandBuffers(allocateInfo);
     }
     catch(const std::exception& e)
     {

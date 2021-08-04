@@ -75,6 +75,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
     glViewport(0, 0, size.x, size.y);
 
+    Shader::create("shader");
     shader = Shader::create(R"(
 		#version 410
 

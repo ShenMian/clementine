@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Rendering/Renderer.h"
+#include "VKDevice.h"
 #include "VKCommandBuffer.h"
 #include "VKCommandPool.h"
 #include <tuple>
@@ -26,8 +27,8 @@ public:
     void init() override;
     void deinit() override;
 
-    vk::Device device;
-    uint32_t   queueFamilyIndex;
+    vk::Instance instance;
+    VKDevice     device;
 
 private:
     VKRenderer() = default;
@@ -38,19 +39,8 @@ private:
     void createDebugCallback();
     void destroyDebugCallback();
 
-    void createDevice();
-    void destroyDevice();
-
-    vk::PhysicalDevice findSuitablePhysicalDevice() const;
-    bool               isSuitable(const vk::PhysicalDevice& device) const;
-    bool               isSuitable(const vk::QueueFamilyProperties& props) const;
-
-    vk::Instance              instance;
-    vk::Queue                 queue;
     std::vector<const char*>  instanceLayers;
     std::vector<const char*>  instanceExtensions;
-    std::vector<const char*>  deviceLayers;
-    std::vector<const char*>  deviceExtensions;
     vk::DispatchLoaderDynamic dynamicLoader;
 
     VKCommandPool   commandPool;

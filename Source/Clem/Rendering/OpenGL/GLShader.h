@@ -36,7 +36,11 @@ public:
     ~GLShader();
 
     void bind() override;
+
     void uploadUniform(const std::string& name, const Matrix4& matrix) override;
+    void uploadUniform(const std::string& name, const Vector3& vector) override;
+    void uploadUniform(const std::string& name, const Vector2& vector) override;
+    void uploadUniform(const std::string& name, float value) override;
 
 private:
     void handleError(const std::string& msg);

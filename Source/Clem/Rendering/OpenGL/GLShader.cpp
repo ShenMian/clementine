@@ -20,6 +20,8 @@ static_assert(std::is_same<char, GLchar>::value);
 
 GLShader::GLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
 {
+    Assert::isTrue(false);
+
     GLint success;
 
     // 编译顶点着色器
@@ -79,61 +81,107 @@ GLShader::GLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
 
 GLShader::GLShader(const fs::path& path)
 {
-    fs::path cache = "assets/cache/shader/opengl";
+    fs::path assets = "assets";
+    fs::path cache  = assets / "cache/shader/";
     if(!fs::exists(cache))
         fs::create_directories(cache);
-
-    // 读入源代码
-    std::string   source;
-    std::ifstream file(path, std::ios::binary);
-    if(!file.is_open())
-        return;
-    source.resize(fs::file_size(path));
-    file.read(source.data(), source.size());
-
-    // 拆分顶点着色器源代码与片段着色器源代码
-    std::string sources[2];
-
-    std::unordered_map<int, std::string> tokens = {
-        {0, "#type vertex"},
-        {1, "#type fragment"},
-        {1, "#type pixel"}};
-
-    size_t begin = 0, currentType;
-
-    size_t           pos = 0, eol;
-    std::string_view src(source), line;
-    eol = src.find("\r\n", pos);
-    do
-    {
-        line = src.substr(pos, eol - pos);
-
-        for(auto [type, token] : tokens)
-        {
-            if(line == token)
-            {
-                if(begin)
-                {
-                    sources[currentType] = source.substr(begin, pos);
-                    begin                = 0;
-                }
-                currentType = type;
-                begin       = pos + token.size();
-            }
-        }
-
-        pos = eol + 2;
-        eol = src.find("\r\n", pos);
-    } while(eol != std::string::npos);
-
-    if(eol == std::string::npos)
-        sources[currentType] = source.substr(begin, pos);
-
-    handle = glCreateProgram();
 
     const auto  name        = path.filename().string();
     const char* extension[] = {".vert", ".freg"};
     GLenum      type[]      = {GL_VERTEX_SHADER, GL_FRAGMENT_SHADER};
+
+    std::string sources[2];
+
+    if(path.filename().extension() == ".glsl")
+    {
+        std::string   source;
+        std::ifstream file(path, std::ios::binary);
+        if(!file.is_open())
+            return;
+        source.resize(fs::file_size(path));
+        file.read(source.data(), source.size());
+
+        // 拆分顶点着色器源代码与片段着色器源代码
+        std::unordered_map<int, std::string> tokens = {
+            {0, "#type vertex"},
+            {1, "#type fragment"},
+            {1, "#type pixel"}};
+
+        size_t begin = 0, currentType;
+
+        size_t           pos = 0, eol;
+        std::string_view src(source), line;
+        eol = src.find("\r\n", pos);
+        do
+        {
+            line = src.substr(pos, eol - pos);
+
+            for(auto [type, token] : tokens)
+            {
+                if(line == token)
+                {
+                    if(begin)
+                    {
+                        sources[currentType] = source.substr(begin, pos);
+                        begin                = 0;
+                    }
+                    currentType = type;
+                    begin       = pos + token.size();
+                }
+            }
+
+            pos = eol + 2;
+            eol = src.find("\r\n", pos);
+        } while(eol != std::string::npos);
+
+        if(eol == std::string::npos)
+            sources[currentType] = source.substr(begin, pos);
+    }
+    else
+    {
+        for(int i = 0; i < 2; i++)
+        {
+            const fs::path path = name + extension[i];
+
+            const auto size = fs::file_size(path);
+
+            std::ifstream file(path, std::ios::binary);
+            assert(file.is_open());
+
+            sources[i].resize(size / sizeof(std::string::value_type));
+            file.read((char*)sources[i].data(), size);
+            file.close();
+        }
+    }
+
+    for(int i = 0; i < 2; i++)
+    {
+        const fs::path path = cache / (name + extension[i]);
+        if(fs::exists(path))
+        {
+            // 读取 spv
+            const auto size = fs::file_size(path);
+
+            std::ifstream file(path, std::ios::binary);
+            assert(file.is_open());
+
+            std::vector<std::byte> buffer;
+            buffer.resize(size);
+            file.read((char*)buffer.data(), size);
+            file.close();
+
+            auto shader = glCreateShader(type[i]);
+            glShaderBinary(1, &shader, GL_SHADER_BINARY_FORMAT_SPIR_V, buffer.data(), (GLsizei)buffer.size());
+            glAttachShader(handle, shader);
+        }
+        else
+        {
+            // 编译 sources[] 为 spv
+            i--;
+        }
+    }
+
+    handle = glCreateProgram();
 
     for(int i = 0; i < 2; i++)
     {
@@ -165,21 +213,46 @@ void GLShader::bind()
     glUseProgram(handle);
 }
 
-void GLShader::uploadUniform(const std::string& name, const Matrix4& matrix)
+void GLShader::uploadUniform(const std::string& name, const Matrix4& mat)
 {
     auto location = glGetUniformLocation(handle, name.c_str());
-    glUniformMatrix4fv(location, 1, false, matrix.data()); // column major: GL_FALSE, row major: GL_TRUE
+    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    glUniformMatrix4fv(location, 1, false, mat.data()); // column major: GL_FALSE, row major: GL_TRUE
+
+    Assert::isTrue(glGetError() == GL_NO_ERROR);
+}
+
+void GLShader::uploadUniform(const std::string& name, const Vector3& vec)
+{
+    auto location = glGetUniformLocation(handle, name.c_str());
+    glUniform3f(location, vec.x, vec.y, vec.z);
+
+    Assert::isTrue(glGetError() == GL_NO_ERROR);
+}
+
+void GLShader::uploadUniform(const std::string& name, const Vector2& vec)
+{
+    auto location = glGetUniformLocation(handle, name.c_str());
+    glUniform2f(location, vec.x, vec.y);
+
+    Assert::isTrue(glGetError() == GL_NO_ERROR);
+}
+
+void GLShader::uploadUniform(const std::string& name, float value)
+{
+    auto location = glGetUniformLocation(handle, name.c_str());
+    glUniform1f(location, value);
 
     Assert::isTrue(glGetError() == GL_NO_ERROR);
 }
 
 void GLShader::handleError(const std::string& msg)
 {
+    // std::vector<char> infoLog(size);
+
     GLint size = 0;
     glGetProgramiv(handle, GL_INFO_LOG_LENGTH, &size);
     std::string info(size, '0');
-
-    // std::vector<char> infoLog(size);
     glGetProgramInfoLog(handle, (GLsizei)info.size(), &size, info.data());
     info.resize(0, size);
 

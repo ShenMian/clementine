@@ -34,8 +34,12 @@ public:
 	 */
     static std::shared_ptr<Shader> create(const std::filesystem::path& path);
 
-    virtual void bind()                                                        = 0;
+    virtual void bind() = 0;
+
     virtual void uploadUniform(const std::string& name, const Matrix4& matrix) = 0;
+    virtual void uploadUniform(const std::string& name, const Vector3& vector) = 0;
+    virtual void uploadUniform(const std::string& name, const Vector2& vector) = 0;
+    virtual void uploadUniform(const std::string& name, float value) = 0;
 };
 
 /**

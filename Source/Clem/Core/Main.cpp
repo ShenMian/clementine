@@ -251,6 +251,8 @@ void Main::init()
     Logger::create("render");
     Logger::create("network");
 
+    // Renderer::setAPI(Renderer::API::Vulkan);
+
     // 初始化窗口
     WindowBase::init();
     // window = new ConsoleWindow("Clementine", {80, 25});
@@ -258,7 +260,6 @@ void Main::init()
     window->onClose = []() { Main::stop(); };
 
     // 初始化渲染器
-    // Renderer::setAPI(Renderer::API::Vulkan);
     Renderer::get()->init();
 
     // 初始化 ECS, 添加默认系统
