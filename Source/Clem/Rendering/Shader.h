@@ -4,7 +4,6 @@
 #pragma once
 
 #include "Core/Math/Math.h"
-#include <filesystem>
 #include <memory>
 #include <string>
 
@@ -19,6 +18,12 @@ namespace clem
 class Shader
 {
 public:
+	enum class Type
+    {
+        Vertex,
+        Fragment
+    };
+
     /**
 	 * @brief 创建着色器.
 	 *
@@ -30,9 +35,9 @@ public:
     /**
 	 * @brief 创建着色器.
 	 *
-	 * @param path 着色器源代码文件路径.
+	 * @param name 着色器名称.
 	 */
-    static std::shared_ptr<Shader> create(const std::filesystem::path& path);
+    static std::shared_ptr<Shader> create(const std::string& name);
 
     virtual void bind() = 0;
 

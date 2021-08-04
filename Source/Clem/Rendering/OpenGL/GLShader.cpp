@@ -4,6 +4,7 @@
 #include "GLShader.h"
 #include "Assert.hpp"
 #include <cassert>
+#include <filesystem>
 #include <fstream>
 #include <glad/glad.h>
 #include <type_traits>
@@ -11,6 +12,55 @@
 #include <vector>
 
 namespace fs = std::filesystem;
+
+#include <type_traits>
+
+template <typename T, T beginVal, T endVal>
+class Iterator
+{
+    using value_type = std::underlying_type<T>::type;
+
+public:
+    Iterator(const T& v)
+        : value(static_cast<value_type>(v))
+    {
+    }
+
+    Iterator()
+        : value(static_cast<value_type>(beginVal))
+    {
+    }
+
+    Iterator begin()
+    {
+        return *this;
+    }
+
+    Iterator end()
+    {
+        static const Iterator endIter = ++Iterator(endVal);
+        return endIter;
+    }
+
+    Iterator operator++()
+    {
+        ++value;
+        return *this;
+    }
+
+    T operator*()
+    {
+        return static_cast<T>(value);
+    }
+
+    bool operator!=(const Iterator& i)
+    {
+        return value != i.value;
+    }
+
+private:
+    value_type value;
+};
 
 namespace clem
 {
@@ -20,8 +70,6 @@ static_assert(std::is_same<char, GLchar>::value);
 
 GLShader::GLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
 {
-    Assert::isTrue(false);
-
     GLint success;
 
     // 编译顶点着色器
@@ -79,26 +127,60 @@ GLShader::GLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
     glDetachShader(handle, fragmentShader);
 }
 
-GLShader::GLShader(const fs::path& path)
+GLShader::GLShader(const std::string& name)
 {
-    fs::path assets = "assets";
-    fs::path cache  = assets / "cache/shader/";
+    // SPIR-V
+
+    fs::path assets  = "assets";
+    fs::path shaders = assets / "shaders";
+    fs::path cache   = assets / "cache/shaders";
+    if(!fs::exists(shaders))
+        fs::create_directories(shaders);
     if(!fs::exists(cache))
         fs::create_directories(cache);
 
-    const auto  name        = path.filename().string();
-    const char* extension[] = {".vert", ".freg"};
+    std::unordered_map<Type, const char*> extensions = {
+        {Type::Vertex, ".vert"},
+        {Type::Fragment, ".frag"}};
+    std::unordered_map<Type, GLenum> glType = {
+        {Type::Vertex, GL_VERTEX_SHADER},
+        {Type::Vertex, GL_FRAGMENT_SHADER}};
+
+    handle = glCreateProgram();
+
+    for(auto type : Iterator<Type, Type::Vertex, Type::Fragment>())
+    {
+        fs::path path = shaders / (name + extensions[type]);
+        Assert::isTrue(fs::exists(path), "file doesn't exist");
+        auto size = fs::file_size(path);
+
+        std::ifstream file(path, std::ios::binary);
+        Assert::isTrue(file.is_open(), std::format("can't open file {}", path.filename().string()));
+
+        std::vector<std::byte> buffer;
+        buffer.resize(size);
+        file.read((char*)buffer.data(), size);
+        file.close();
+
+        auto shader = glCreateShader(glType[type]);
+        glShaderBinary(1, &shader, GL_SHADER_BINARY_FORMAT_SPIR_V, buffer.data(), (GLsizei)buffer.size());
+        glAttachShader(handle, shader);
+    }
+
+    /*
+    const char* extension[] = {".vert", ".frag"};
     GLenum      type[]      = {GL_VERTEX_SHADER, GL_FRAGMENT_SHADER};
 
     std::string sources[2];
 
-    if(path.filename().extension() == ".glsl")
+    fs::path glslPath = path.filename().string() + ".glsl";
+    if(fs::exists(glslPath))
     {
         std::string   source;
-        std::ifstream file(path, std::ios::binary);
+        std::ifstream file(glslPath, std::ios::binary);
         if(!file.is_open())
             return;
-        source.resize(fs::file_size(path));
+        source.resize(fs::file_size(glslPath));
         file.read(source.data(), source.size());
 
         // 拆分顶点着色器源代码与片段着色器源代码
@@ -142,6 +224,7 @@ GLShader::GLShader(const fs::path& path)
         for(int i = 0; i < 2; i++)
         {
             const fs::path path = name + extension[i];
+            Assert::isTrue(fs::exists(path), std::format("file {} and {} doesn't exist", path.string(), glslPath.string()));
 
             const auto size = fs::file_size(path);
 
@@ -201,6 +284,7 @@ GLShader::GLShader(const fs::path& path)
         glShaderBinary(1, &shader, GL_SHADER_BINARY_FORMAT_SPIR_V, buffer.data(), (GLsizei)buffer.size());
         glAttachShader(handle, shader);
     }
+    */
 }
 
 GLShader::~GLShader()

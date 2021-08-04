@@ -19,13 +19,13 @@ std::shared_ptr<Shader> Shader::create(const std::string& vertexSrc, const std::
     return nullptr;
 }
 
-std::shared_ptr<Shader> Shader::create(const std::filesystem::path& path)
+std::shared_ptr<Shader> Shader::create(const std::string& name)
 {
     switch(Renderer::getAPI())
     {
         using enum Renderer::API;
     case OpenGL:
-        return std::make_shared<GLShader>(path);
+        return std::make_shared<GLShader>(name);
     }
     return nullptr;
 }

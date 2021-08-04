@@ -4,7 +4,6 @@
 #pragma once
 
 #include "Rendering/Shader.h"
-#include <filesystem>
 #include <string>
 
 namespace clem
@@ -25,10 +24,10 @@ public:
 
     /**
 	 * @brief 构造函数.
-	 *
-	 * @param path 着色器源代码文件路径.
+     * 
+	 * @param name 着色器名称.
 	 */
-    GLShader(const std::filesystem::path& path);
+    GLShader(const std::string& name);
 
     /**
 	 * @brief 默认析构函数.
