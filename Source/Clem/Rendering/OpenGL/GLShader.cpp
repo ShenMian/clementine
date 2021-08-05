@@ -7,60 +7,9 @@
 #include <filesystem>
 #include <fstream>
 #include <glad/glad.h>
-#include <type_traits>
-#include <unordered_map>
 #include <vector>
 
 namespace fs = std::filesystem;
-
-#include <type_traits>
-
-template <typename T, T beginVal, T endVal>
-class Iterator
-{
-    using value_type = std::underlying_type<T>::type;
-
-public:
-    Iterator(const T& v)
-        : value(static_cast<value_type>(v))
-    {
-    }
-
-    Iterator()
-        : value(static_cast<value_type>(beginVal))
-    {
-    }
-
-    Iterator begin()
-    {
-        return *this;
-    }
-
-    Iterator end()
-    {
-        static const Iterator endIter = ++Iterator(endVal);
-        return endIter;
-    }
-
-    Iterator operator++()
-    {
-        ++value;
-        return *this;
-    }
-
-    T operator*()
-    {
-        return static_cast<T>(value);
-    }
-
-    bool operator!=(const Iterator& i)
-    {
-        return value != i.value;
-    }
-
-private:
-    value_type value;
-};
 
 namespace clem
 {
@@ -68,83 +17,19 @@ namespace clem
 static_assert(std::is_same<GLShader::id_type, GLuint>::value);
 static_assert(std::is_same<char, GLchar>::value);
 
-GLShader::GLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
-{
-    GLint success;
-
-    // 编译顶点着色器
-    auto vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
-    const GLchar* source = (const GLchar*)vertexSrc.c_str();
-
-    glShaderSource(vertexShader, 1, &source, 0);
-    glCompileShader(vertexShader);
-
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    if(!success)
-    {
-        glDeleteShader(vertexShader);
-        handleError("vertex shader compilation failure");
-        return;
-    }
-
-    // 编译片段着色器
-    auto fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-    source = (const GLchar*)fragmentSrc.c_str();
-
-    glShaderSource(fragmentShader, 1, &source, 0);
-    glCompileShader(fragmentShader);
-
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-    if(!success)
-    {
-        glDeleteShader(fragmentShader);
-        glDeleteShader(vertexShader);
-        handleError("fragment shader compilation failure");
-        return;
-    }
-
-    // 创建程序
-    handle = glCreateProgram();
-
-    glAttachShader(handle, vertexShader);
-    glAttachShader(handle, fragmentShader);
-
-    glLinkProgram(handle);
-
-    glGetProgramiv(handle, GL_LINK_STATUS, (int*)&success);
-    if(success == GL_FALSE)
-    {
-        glDeleteProgram(handle);
-        glDeleteShader(vertexShader);
-        glDeleteShader(fragmentShader);
-        handleError("shader link failure");
-        return;
-    }
-
-    glDetachShader(handle, vertexShader);
-    glDetachShader(handle, fragmentShader);
-}
+static std::unordered_map<Shader::Type, GLenum> GLType = {
+    {Shader::Type::Vertex, GL_VERTEX_SHADER},
+    {Shader::Type::Fragment, GL_FRAGMENT_SHADER}};
 
 GLShader::GLShader(const std::string& name)
 {
-    // SPIR-V
-
-    fs::path assets  = "assets";
-    fs::path shaders = assets / "shaders";
-    fs::path cache   = assets / "cache/shaders";
+    const fs::path assets  = "assets";
+    const fs::path shaders = assets / "shaders";
+    const fs::path cache   = assets / "cache/shaders";
     if(!fs::exists(shaders))
         fs::create_directories(shaders);
     if(!fs::exists(cache))
         fs::create_directories(cache);
-
-    std::unordered_map<Type, const char*> extensions = {
-        {Type::Vertex, ".vert"},
-        {Type::Fragment, ".frag"}};
-    std::unordered_map<Type, GLenum> glType = {
-        {Type::Vertex, GL_VERTEX_SHADER},
-        {Type::Vertex, GL_FRAGMENT_SHADER}};
 
     handle = glCreateProgram();
 
@@ -162,7 +47,7 @@ GLShader::GLShader(const std::string& name)
         file.read((char*)buffer.data(), size);
         file.close();
 
-        auto shader = glCreateShader(glType[type]);
+        auto shader = glCreateShader(GLType[type]);
         glShaderBinary(1, &shader, GL_SHADER_BINARY_FORMAT_SPIR_V, buffer.data(), (GLsizei)buffer.size());
         glAttachShader(handle, shader);
     }
@@ -285,6 +170,65 @@ GLShader::GLShader(const std::string& name)
         glAttachShader(handle, shader);
     }
     */
+}
+
+GLShader::GLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
+{
+    GLint success;
+
+    // 编译顶点着色器
+    auto vertexShader = glCreateShader(GL_VERTEX_SHADER);
+
+    const GLchar* source = (const GLchar*)vertexSrc.c_str();
+
+    glShaderSource(vertexShader, 1, &source, 0);
+    glCompileShader(vertexShader);
+
+    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+    if(!success)
+    {
+        glDeleteShader(vertexShader);
+        handleError("vertex shader compilation failure");
+        return;
+    }
+
+    // 编译片段着色器
+    auto fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+    source = (const GLchar*)fragmentSrc.c_str();
+
+    glShaderSource(fragmentShader, 1, &source, 0);
+    glCompileShader(fragmentShader);
+
+    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+    if(!success)
+    {
+        glDeleteShader(fragmentShader);
+        glDeleteShader(vertexShader);
+        handleError("fragment shader compilation failure");
+        return;
+    }
+
+    // 创建程序
+    handle = glCreateProgram();
+
+    glAttachShader(handle, vertexShader);
+    glAttachShader(handle, fragmentShader);
+
+    glLinkProgram(handle);
+
+    glGetProgramiv(handle, GL_LINK_STATUS, (int*)&success);
+    if(success == GL_FALSE)
+    {
+        glDeleteProgram(handle);
+        glDeleteShader(vertexShader);
+        glDeleteShader(fragmentShader);
+        handleError("shader link failure");
+        return;
+    }
+
+    glDetachShader(handle, vertexShader);
+    glDetachShader(handle, fragmentShader);
 }
 
 GLShader::~GLShader()

@@ -21,7 +21,7 @@ void VKCommandPool::create()
 
     try
     {
-        handle = VKRenderer::get().device.handle().createCommandPool(createInfo);
+        handle = VKRenderer::get().device().createCommandPool(createInfo);
     }
     catch(const std::exception& e)
     {
@@ -31,7 +31,7 @@ void VKCommandPool::create()
 
 void VKCommandPool::destroy()
 {
-    VKRenderer::get().device.handle().destroyCommandPool(handle);
+    VKRenderer::get().device().destroyCommandPool(handle);
 }
 
 VKCommandBuffer VKCommandPool::allocateCommandBuffer()
@@ -45,7 +45,7 @@ VKCommandBuffer VKCommandPool::allocateCommandBuffer()
 
     try
     {
-        buffers = VKRenderer::get().device.handle().allocateCommandBuffers(allocateInfo);
+        buffers = VKRenderer::get().device().allocateCommandBuffers(allocateInfo);
     }
     catch(const std::exception& e)
     {

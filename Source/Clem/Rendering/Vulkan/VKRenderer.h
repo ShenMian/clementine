@@ -4,9 +4,9 @@
 #pragma once
 
 #include "Rendering/Renderer.h"
-#include "VKDevice.h"
 #include "VKCommandBuffer.h"
 #include "VKCommandPool.h"
+#include "VKDevice.h"
 #include <tuple>
 #include <vector>
 #include <vulkan/vulkan.hpp>

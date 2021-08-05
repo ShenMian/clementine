@@ -2,9 +2,9 @@
 // License(Apache-2.0)
 
 #include "VKDevice.h"
-#include "VKRenderer.h"
 #include "Assert.hpp"
 #include "Logger.h"
+#include "VKRenderer.h"
 
 namespace clem
 {
@@ -96,7 +96,7 @@ void VKDevice::destroyBuffer(vk::Buffer& buffer)
     device.destroyBuffer(buffer);
 }
 
-vk::Device& VKDevice::handle()
+vk::Device& VKDevice::operator()()
 {
     return device;
 }
@@ -111,7 +111,8 @@ vk::PhysicalDevice VKDevice::findSuitablePhysicalDevice() const
 
 bool VKDevice::isSuitable(const vk::PhysicalDevice& device) const
 {
-    if(device.getProperties().deviceType != vk::PhysicalDeviceType::eDiscreteGpu && device.getFeatures().geometryShader)
+    // 检查是否为独立显卡
+    if(device.getProperties().deviceType != vk::PhysicalDeviceType::eDiscreteGpu)
         return false;
     return true;
 }

@@ -4,22 +4,24 @@
 #pragma once
 
 #include "Rendering/Shader.h"
+#include <cstddef>
+#include <filesystem>
 #include <string>
+#include <vector>
+#include <vulkan/vulkan.hpp>
 
 namespace clem
 {
 
-class GLShader : public Shader
+class VKShader : public Shader
 {
 public:
-    using id_type = unsigned int;
-
     /**
 	 * @brief 构造函数.
      *
 	 * @param name 着色器名称.
 	 */
-    GLShader(const std::string& name);
+    VKShader(const std::string& name);
 
     /**
 	 * @brief 构造函数.
@@ -27,12 +29,12 @@ public:
 	 * @param vertexSrc 顶点着色器的源代码.
 	 * @param fragmentSrc 片段着色器的源代码.
 	 */
-    GLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+    VKShader(const std::string& vertexSrc, const std::string& fragmentSrc);
 
     /**
 	 * @brief 默认析构函数.
 	 */
-    ~GLShader();
+    ~VKShader();
 
     void bind() override;
 
@@ -42,9 +44,8 @@ public:
     void uploadUniform(const std::string& name, float value) override;
 
 private:
-    void handleError(const std::string& msg);
-
-    id_type handle;
+    vk::PipelineShaderStageCreateInfo createShaderStage(const std::filesystem::path& path, Type type);
+    vk::ShaderModule                  createShaderModule(const std::vector<std::byte>& code);
 };
 
 } // namespace clem

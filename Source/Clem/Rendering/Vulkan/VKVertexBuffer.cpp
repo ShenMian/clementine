@@ -14,12 +14,12 @@ VKVertexBuffer::VKVertexBuffer(const void* data, size_t size)
 
     // Host: CPU, Device: GPU
     device.createBuffer(buffer, memory, size, vk::BufferUsageFlagBits::eVertexBuffer,
-        vk::MemoryPropertyFlagBits::eHostCoherent | vk::MemoryPropertyFlagBits::eHostVisible);
+                        vk::MemoryPropertyFlagBits::eHostCoherent | vk::MemoryPropertyFlagBits::eHostVisible);
 
     void* bufferData;
-    device.handle().mapMemory(memory, 0, static_cast<vk::DeviceSize>(size), {}, &bufferData);
+    device().mapMemory(memory, 0, static_cast<vk::DeviceSize>(size), {}, &bufferData);
     std::memcpy(bufferData, data, size);
-    device.handle().unmapMemory(memory);
+    device().unmapMemory(memory);
 }
 
 VKVertexBuffer::~VKVertexBuffer()

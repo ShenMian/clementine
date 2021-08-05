@@ -3,8 +3,8 @@
 
 #include "VertexBuffer.h"
 #include "OpenGL/GLVertexBuffer.h"
-#include "Vulkan/VKVertexBuffer.h"
 #include "Renderer.h"
+#include "Vulkan/VKVertexBuffer.h"
 
 namespace clem
 {

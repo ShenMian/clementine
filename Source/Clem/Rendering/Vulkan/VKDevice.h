@@ -22,9 +22,9 @@ public:
         vk::MemoryPropertyFlags properties);
     void destroyBuffer(vk::Buffer& buffer);
 
-    vk::Device& handle();
-
     uint32_t queueFamilyIndex;
+
+    vk::Device& operator()();
 
 private:
     vk::PhysicalDevice findSuitablePhysicalDevice() const;
