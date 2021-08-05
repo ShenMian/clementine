@@ -5,8 +5,10 @@
 
 #include "config.h"
 #include <cstddef>
+#include <functional>
 #include <set>
 #include <typeindex>
+#include <unordered_set>
 
 namespace clem
 {
@@ -77,6 +79,24 @@ inline Archtype makeArchtype()
 {
     return Archtype(std::move({Typeid<Ts>()...}));
 }
+
+/*
+
+namespace std
+{
+
+template <>
+struct hash<Archtype>
+{
+    size_t operator()(const Archtype& archtype) const
+    {
+        return 0;
+    }
+};
+
+} // namespace std
+
+*/
 
 /**
  * end of ECS group
