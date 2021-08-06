@@ -12,7 +12,7 @@ namespace clem
 class VKVertexBuffer : public VertexBuffer
 {
 public:
-    using id_type = unsigned int;
+    using handle_type = vk::Buffer;
 
     /**
 	 * @brief 构造函数.
@@ -30,7 +30,7 @@ public:
     void bind() override;
 
 private:
-    vk::Buffer       buffer;
+    handle_type      buffer;
     vk::DeviceMemory memory;
 };
 

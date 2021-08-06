@@ -44,8 +44,11 @@ public:
     void uploadUniform(const std::string& name, float value) override;
 
 private:
-    vk::PipelineShaderStageCreateInfo createShaderStage(const std::filesystem::path& path, Type type);
+    vk::PipelineShaderStageCreateInfo createShaderStage(const std::filesystem::path& path, Stage type);
     vk::ShaderModule                  createShaderModule(const std::vector<std::byte>& code);
+
+    vk::Pipeline                      pipeline;
+    vk::PipelineShaderStageCreateInfo shaderStages[2];
 };
 
 } // namespace clem

@@ -11,9 +11,9 @@ namespace fs = std::filesystem;
 namespace clem
 {
 
-static std::unordered_map<Shader::Type, vk::ShaderStageFlagBits> VKType = {
-    {Shader::Type::Vertex, vk::ShaderStageFlagBits::eVertex},
-    {Shader::Type::Fragment, vk::ShaderStageFlagBits::eFragment}};
+static std::unordered_map<Shader::Stage, vk::ShaderStageFlagBits> VKStage = {
+    {Shader::Stage::Vertex, vk::ShaderStageFlagBits::eVertex},
+    {Shader::Stage::Fragment, vk::ShaderStageFlagBits::eFragment}};
 
 VKShader::VKShader(const std::string& name)
 {
@@ -27,9 +27,8 @@ VKShader::VKShader(const std::string& name)
 
     fs::path path = name;
 
-    vk::PipelineShaderStageCreateInfo shaderStages[2];
-    shaderStages[0] = createShaderStage(path / extensions[Type::Vertex], Type::Vertex);
-    shaderStages[1] = createShaderStage(path / extensions[Type::Fragment], Type::Fragment);
+    shaderStages[0] = createShaderStage(path / extensions[Stage::Vertex], Stage::Vertex);
+    shaderStages[1] = createShaderStage(path / extensions[Stage::Fragment], Stage::Fragment);
 
     vk::PipelineVertexInputStateCreateInfo vertexInputInfo;
 
@@ -39,15 +38,12 @@ VKShader::VKShader(const std::string& name)
     pipelineInfo.pVertexInputState = &vertexInputInfo;
     // ...
 
-
-    try
-    {
-        VKRenderer::get().device().createGraphicsPipeline(nullptr, pipelineInfo);
-    }
-    catch(const std::exception& e)
-    {
-        Assert::isTrue(false, std::format("create graphics pipeline: {}", e.what()));
-    }
+    auto& device = VKRenderer::get().device();
+    auto  ret    = device.createGraphicsPipeline(nullptr, pipelineInfo);
+    if(ret.result == vk::Result::eSuccess)
+        pipeline = std::move(ret.value);
+    else
+        Assert::isTrue(false, "create graphics pipeline faild");
 }
 
 VKShader::VKShader(const std::string& vertexSrc, const std::string& fragmentSrc)
@@ -57,6 +53,9 @@ VKShader::VKShader(const std::string& vertexSrc, const std::string& fragmentSrc)
 
 VKShader::~VKShader()
 {
+    auto& device = VKRenderer::get().device();
+    device.destroyShaderModule(shaderStages[0].module);
+    device.destroyPipeline(pipeline);
 }
 
 void VKShader::bind()
@@ -79,7 +78,7 @@ void VKShader::uploadUniform(const std::string& name, float value)
 {
 }
 
-vk::PipelineShaderStageCreateInfo VKShader::createShaderStage(const std::filesystem::path& path, Type type)
+vk::PipelineShaderStageCreateInfo VKShader::createShaderStage(const std::filesystem::path& path, Stage type)
 {
     Assert::isTrue(fs::exists(path), "file doesn't exist");
     auto size = fs::file_size(path);
@@ -97,7 +96,7 @@ vk::PipelineShaderStageCreateInfo VKShader::createShaderStage(const std::filesys
     vk::PipelineShaderStageCreateInfo shaderInfo;
     shaderInfo.module = module;
     shaderInfo.pName  = "main";
-    shaderInfo.stage  = VKType[type];
+    shaderInfo.stage  = VKStage[type];
     
     return shaderInfo;
 }

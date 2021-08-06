@@ -17,9 +17,9 @@ namespace clem
 static_assert(std::is_same<GLShader::id_type, GLuint>::value);
 static_assert(std::is_same<char, GLchar>::value);
 
-static std::unordered_map<Shader::Type, GLenum> GLType = {
-    {Shader::Type::Vertex, GL_VERTEX_SHADER},
-    {Shader::Type::Fragment, GL_FRAGMENT_SHADER}};
+static std::unordered_map<Shader::Stage, GLenum> GLStage = {
+    {Shader::Stage::Vertex, GL_VERTEX_SHADER},
+    {Shader::Stage::Fragment, GL_FRAGMENT_SHADER}};
 
 GLShader::GLShader(const std::string& name)
 {
@@ -33,7 +33,7 @@ GLShader::GLShader(const std::string& name)
 
     handle = glCreateProgram();
 
-    for(auto type : Iterator<Type, Type::Vertex, Type::Fragment>())
+    for(auto type : Iterator<Stage, Stage::Vertex, Stage::Fragment>())
     {
         fs::path path = shaders / (name + extensions[type]);
         Assert::isTrue(fs::exists(path), "file doesn't exist");
@@ -47,7 +47,7 @@ GLShader::GLShader(const std::string& name)
         file.read((char*)buffer.data(), size);
         file.close();
 
-        auto shader = glCreateShader(GLType[type]);
+        auto shader = glCreateShader(GLStage[type]);
         glShaderBinary(1, &shader, GL_SHADER_BINARY_FORMAT_SPIR_V, buffer.data(), (GLsizei)buffer.size());
         glAttachShader(handle, shader);
     }

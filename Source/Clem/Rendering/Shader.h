@@ -69,10 +69,25 @@ namespace clem
 class Shader
 {
 public:
-    enum class Type
+    enum class Stage
     {
         Vertex,
         Fragment
+    };
+
+    enum class Type
+    {
+        Float,
+        Float2,
+        Float3,
+        Float4,
+        Mat3,
+        Mat4,
+        Int,
+        Int2,
+        Int3,
+        Int4,
+        Bool
     };
 
     /**
@@ -98,9 +113,9 @@ public:
     virtual void uploadUniform(const std::string& name, float value)           = 0;
 
 protected:
-    std::unordered_map<Type, const char*> extensions = {
-        {Type::Vertex, ".vert"},
-        {Type::Fragment, ".frag"}};
+    std::unordered_map<Stage, const char*> extensions = {
+        {Stage::Vertex, ".vert"},
+        {Stage::Fragment, ".frag"}};
 };
 
 /**

@@ -11,6 +11,8 @@ namespace clem
 class VKDevice
 {
 public:
+    using handle_type = vk::Device;
+
     void create();
     void destroy();
 
@@ -24,14 +26,14 @@ public:
 
     uint32_t queueFamilyIndex;
 
-    vk::Device& operator()();
+    handle_type& operator()();
 
 private:
     vk::PhysicalDevice findSuitablePhysicalDevice() const;
     bool               isSuitable(const vk::PhysicalDevice& device) const;
     bool               isSuitable(const vk::QueueFamilyProperties& props) const;
 
-    vk::Device               device;
+    handle_type              device;
     vk::Queue                queue;
     vk::PhysicalDevice       physicalDevice;
     std::vector<const char*> deviceLayers;
