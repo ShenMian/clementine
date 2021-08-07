@@ -6,7 +6,6 @@
 #include "config.h"
 #include <cstddef>
 #include <functional>
-#include <set>
 #include <typeindex>
 #include <unordered_set>
 
@@ -28,7 +27,7 @@ class Archtype
 public:
     Archtype() = default;
 
-    Archtype(std::set<TypeIndex>&&);
+    Archtype(std::unordered_set<TypeIndex>&&);
 
     /**
 	 * @brief 判断是否有指定的全部类型.
@@ -66,12 +65,11 @@ public:
     void clear();
 
     bool operator==(const Archtype& rhs) const;
-    bool operator<(const Archtype& rhs) const;
 
-    // size_t hashCode() const;
+    size_t hashCode() const;
 
 private:
-    std::set<TypeIndex> types;
+    std::unordered_set<TypeIndex> types;
 };
 
 template <typename... Ts>
@@ -79,24 +77,6 @@ inline Archtype makeArchtype()
 {
     return Archtype(std::move({Typeid<Ts>()...}));
 }
-
-/*
-
-namespace std
-{
-
-template <>
-struct hash<Archtype>
-{
-    size_t operator()(const Archtype& archtype) const
-    {
-        return 0;
-    }
-};
-
-} // namespace std
-
-*/
 
 /**
  * end of ECS group

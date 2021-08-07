@@ -37,7 +37,52 @@ TypeIndex Typeid()
 
 #else
 
-using TypeIndex = uint32_t;
+class TypeIndex
+{
+public:
+    TypeIndex(uint32_t id)
+        : id(id)
+    {
+    }
+
+    [[nodiscard]] size_t hash_code() const noexcept
+    {
+        return id;
+    }
+
+    [[nodiscard]] bool operator==(const TypeIndex& rhs) const noexcept
+    {
+        return id == rhs.id;
+    }
+
+    [[nodiscard]] bool operator<(const TypeIndex& rhs) const noexcept
+    {
+        return id < rhs.id;
+    }
+
+    [[nodiscard]] bool operator!=(const TypeIndex& rhs) const noexcept
+    {
+        return !(*this == rhs);
+    }
+
+    [[nodiscard]] bool operator>=(const TypeIndex& rhs) const noexcept
+    {
+        return !(*this < rhs);
+    }
+
+    [[nodiscard]] bool operator>(const TypeIndex& rhs) const noexcept
+    {
+        return rhs < *this;
+    }
+
+    [[nodiscard]] bool operator<=(const TypeIndex& rhs) const noexcept
+    {
+        return !(rhs < *this);
+    }
+
+private:
+    uint32_t id;
+};
 
 namespace detal
 {
@@ -46,18 +91,17 @@ class TypeRegistry
 {
 public:
     TypeRegistry()
-        : index(size)
+        : index(size++)
     {
-        size++;
     }
 
     const TypeIndex index;
 
 private:
-    static TypeIndex size;
+    static uint32_t size;
 };
 
-inline TypeIndex TypeRegistry::size = 0;
+inline uint32_t TypeRegistry::size = 0;
 
 #    define CLEM_DECLARE_TYPE \
     public:                   \
@@ -76,3 +120,30 @@ TypeIndex Typeid()
 #endif
 
 } // namespace clem
+
+#ifndef CLEM_HAVE_RTTI
+
+namespace std
+{
+
+template <>
+struct hash<clem::TypeIndex>
+{
+    size_t operator()(const clem::TypeIndex& index) const
+    {
+        return index.hash_code();
+    }
+};
+
+template <>
+struct equal_to<clem::TypeIndex>
+{
+    size_t operator()(const clem::TypeIndex& lhs, const clem::TypeIndex& rhs) const
+    {
+        return lhs == rhs;
+    }
+};
+
+}; // namespace std
+
+#endif

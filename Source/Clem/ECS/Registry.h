@@ -6,11 +6,8 @@
 #include "Archtype.h"
 #include "Chunk.h"
 #include <functional>
-#include <map>
 #include <memory_resource>
-#include <set>
 #include <unordered_map>
-#include <unordered_set>
 
 namespace clem
 {
@@ -168,9 +165,9 @@ private:
     std::vector<EntityInfo> entities;
     std::vector<id_type>    freeIds;
 
-    Chunk                      chunk;
-    std::map<Archtype, Chunk*> chunks;
-    Allocator<Chunk>           allocator;
+    Chunk                                chunk;
+    std::unordered_map<Archtype, Chunk*> chunks;
+    Allocator<Chunk>                     allocator;
 
     std::vector<System*> systems;
     std::vector<System*> disabledSystems;

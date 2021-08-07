@@ -5,7 +5,7 @@ namespace clem
 {
 
 template <typename T, typename... Ts>
-inline bool Archtype::all() const
+[[nodiscard]] inline bool Archtype::all() const
 {
     if constexpr(sizeof...(Ts) > 0)
         return types.find(Typeid<T>()) != types.end() && all<Ts...>();
@@ -14,7 +14,7 @@ inline bool Archtype::all() const
 }
 
 template <typename T, typename... Ts>
-inline bool Archtype::any() const
+[[nodiscard]] inline bool Archtype::any() const
 {
     if constexpr(sizeof...(Ts) > 0)
         return types.find(Typeid<T>()) != types.end() || any<Ts...>();
@@ -23,7 +23,7 @@ inline bool Archtype::any() const
 }
 
 template <typename... Ts>
-inline bool Archtype::none() const
+[[nodiscard]] inline bool Archtype::none() const
 {
     return !any<Ts...>();
 }
@@ -44,22 +44,25 @@ inline Archtype& Archtype::remove()
 
 } // namespace clem
 
-/*
-template <>
-struct std::hash<clem::Archtype>
+namespace std
 {
-	size_t operator()(const clem::Archtype& v) const noexcept
-	{
-		return v.hashCode();
-	}
+
+template <>
+struct hash<clem::Archtype>
+{
+    size_t operator()(const clem::Archtype& archtype) const
+    {
+        return archtype.hashCode();
+    }
 };
 
 template <>
-struct std::equal_to<clem::Archtype>
+struct equal_to<clem::Archtype>
 {
-	bool operator()(const clem::Archtype& lhs, const clem::Archtype& rhs) const
-	{
-		return lhs == rhs;
-	}
+    size_t operator()(const clem::Archtype& lhs, const clem::Archtype& rhs) const
+    {
+        return lhs == rhs;
+    }
 };
-*/
+
+} // namespace std
