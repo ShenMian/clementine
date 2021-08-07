@@ -96,7 +96,6 @@ public:
 
     void* nativeHandle() const override;
 
-    // Vulkan
     std::vector<std::string_view> getRequiredInstanceExtensions() const;
     vk::SurfaceKHR                getWindowSurface(const vk::Instance& vkInstance) const;
 
@@ -108,6 +107,7 @@ private:
 
     GLFWwindow*                   handle;
     std::shared_ptr<Shader>       shader;
+    std::shared_ptr<VertexArray>  vertexArray;
     std::shared_ptr<VertexBuffer> vertexBuffer;
     std::shared_ptr<IndexBuffer>  indexBuffer;
 };

@@ -23,8 +23,6 @@ using std::string;
 namespace clem
 {
 
-static unsigned int vertexArray;
-
 GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 {
     PROFILE_FUNC();
@@ -111,14 +109,16 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     };
     unsigned int indices[3] = {0, 1, 2};
 
-    glCreateVertexArrays(1, &vertexArray);
-    glBindVertexArray(vertexArray);
-
     vertexBuffer = VertexBuffer::create(&vertices, sizeof(vertices));
     indexBuffer  = IndexBuffer::create(&indices, sizeof(indices));
+    vertexArray  = VertexArray::create();
 
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+    vertexBuffer->layout = {
+        {"a_Position", Shader::Type::Float3}
+    };
+
+    vertexArray->setIndexBuffer(indexBuffer);
+    vertexArray->addVertexBuffer(vertexBuffer);
 
     UI::init(this);
 
@@ -145,8 +145,7 @@ void GlfwWindow::update(Time dt)
 
     shader->bind();
     // shader->uploadUniform("u_ViewProjection", camera.getViewProjection());
-
-    glBindVertexArray(vertexArray);
+    vertexArray->bind();
 
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
