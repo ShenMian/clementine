@@ -29,7 +29,6 @@ VKVertexBuffer::~VKVertexBuffer()
 
 void VKVertexBuffer::bind()
 {
-    // TODO
 }
 
 } // namespace clem

@@ -51,6 +51,7 @@ public:
 	 */
     static API getAPI();
 
+    // virtual void submit() = 0;
     virtual void init()   = 0;
     virtual void deinit() = 0;
 

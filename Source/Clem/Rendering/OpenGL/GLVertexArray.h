@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Rendering/VertexArray.h"
 #include "Rendering/IndexBuffer.h"
 #include "Rendering/VertexBuffer.h"
 #include <memory>
@@ -11,21 +12,22 @@
 namespace clem
 {
 
-class VertexArray
+class GLVertexArray : public VertexArray
 {
     using id_type = unsigned int;
 
 public:
-    VertexArray();
-    ~VertexArray();
+    GLVertexArray();
+    ~GLVertexArray();
 
-    void bind();
+    void bind() override;
 
-    void addVertexBuffer(std::shared_ptr<VertexBuffer> buffer);
-    void setIndexBuffer(std::shared_ptr<IndexBuffer> buffer);
+    void addVertexBuffer(std::shared_ptr<VertexBuffer> buffer) override;
+    void setIndexBuffer(std::shared_ptr<IndexBuffer> buffer) override;
 
 private:
     id_type                                    handle;
+    size_t                                     index = 0;
     std::shared_ptr<IndexBuffer>               indexBuffer;
     std::vector<std::shared_ptr<VertexBuffer>> vertexBuffers;
 };

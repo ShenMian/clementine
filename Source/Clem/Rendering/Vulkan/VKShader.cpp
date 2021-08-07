@@ -40,10 +40,8 @@ VKShader::VKShader(const std::string& name)
 
     auto& device = VKRenderer::get().device();
     auto  ret    = device.createGraphicsPipeline(nullptr, pipelineInfo);
-    if(ret.result == vk::Result::eSuccess)
-        pipeline = std::move(ret.value);
-    else
-        Assert::isTrue(false, "create graphics pipeline faild");
+    Assert::isTrue(ret.result == vk::Result::eSuccess, "create graphics pipeline faild");
+    pipeline = std::move(ret.value);
 }
 
 VKShader::VKShader(const std::string& vertexSrc, const std::string& fragmentSrc)
