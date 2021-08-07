@@ -24,7 +24,6 @@ std::shared_ptr<VertexBuffer> VertexBuffer::create(const void* data, size_t size
     return nullptr;
 }
 
-
 VertexBuffer::Layout::Layout(const std::initializer_list<Element>& list)
     : elements_(list)
 {
@@ -74,7 +73,6 @@ VertexBuffer::Layout::Element::Element(const std::string& name, Shader::Type typ
     : name(name), type(type), normalized(normalized)
 {
 }
-
 
 size_t VertexBuffer::Layout::Element::count() const
 {

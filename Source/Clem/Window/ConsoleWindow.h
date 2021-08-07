@@ -67,14 +67,14 @@ public:
 
     /**
 	  * @warning 终端窗口不支持.
-		* 
+		*
 		* @return true
 	  */
     bool isVisible() const override;
 
     /**
 	  * @warning 终端窗口不支持.
-		* 
+		*
 		* @return nullptr
 	  */
     void* nativeHandle() const override;

@@ -19,7 +19,7 @@ public:
     virtual void bind() = 0;
 
     virtual void addVertexBuffer(std::shared_ptr<VertexBuffer> buffer) = 0;
-    virtual void setIndexBuffer(std::shared_ptr<IndexBuffer> buffer) = 0;
+    virtual void setIndexBuffer(std::shared_ptr<IndexBuffer> buffer)   = 0;
 };
 
 } // namespace clem

@@ -95,7 +95,7 @@ vk::PipelineShaderStageCreateInfo VKShader::createShaderStage(const std::filesys
     shaderInfo.module = module;
     shaderInfo.pName  = "main";
     shaderInfo.stage  = VKStage[type];
-    
+
     return shaderInfo;
 }
 

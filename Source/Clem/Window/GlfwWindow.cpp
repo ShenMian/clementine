@@ -20,8 +20,22 @@
 
 using std::string;
 
+///
+#include "Core/Math/Math.h"
+///
+
 namespace clem
 {
+
+///
+struct Vertex
+{
+    Vector3 position;
+    Vector3 color;
+    Vector3 normal;
+    Vector2 uv;
+};
+///
 
 GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 {
@@ -77,9 +91,17 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 		#version 410
 
 		layout(location = 0) in vec3 a_Position;
+		layout(location = 1) in vec3 a_Color;
+		layout(location = 2) in vec3 a_Normal;
+		layout(location = 3) in vec2 a_Uv;
+
+        out vec3 v_Position;
+        out vec3 v_Color;
 
 		void main()
 		{
+            v_Position  = a_Position;
+            v_Color     = a_Color;
 			gl_Position = vec4(1.0) * vec4(a_Position, 1.0);
 		}
 	)",
@@ -88,33 +110,32 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
 		layout(location = 0) out vec4 color;
 
+        in vec3 v_Position;
+        in vec3 v_Color;
+
 		void main()
 		{
-			color = vec4(0.0, 1.0, 0.0, 0.0);
+            // color = vec4(v_Color, 0.0);
+			color = vec4(v_Position + 0.5, 0.0);
 		}
 	)");
 
-    float vertices[3 * 3] = {
-        -0.5f,
-        -0.5f,
-        0.0f,
-
-        0.5f,
-        -0.5f,
-        0.0f,
-
-        0.0f,
-        0.5f,
-        0.0f,
+    Vertex vertices[3] = {
+        {{-0.5f, -0.5f, 0.0f}, {0.0f, 1.0f, 0.0f}},
+        {{0.5f, -0.5f, 0.0f}, {0.0f, 1.0f, 0.0f}},
+        {{0.0f, 0.5f, 0.0f}, {0.0f, 1.0f, 0.0f}},
     };
-    unsigned int indices[3] = {0, 1, 2};
+    unsigned int indices[] = {0, 1, 2};
 
     vertexBuffer = VertexBuffer::create(&vertices, sizeof(vertices));
     indexBuffer  = IndexBuffer::create(&indices, sizeof(indices));
     vertexArray  = VertexArray::create();
 
     vertexBuffer->layout = {
-        {"a_Position", Shader::Type::Float3}
+        {"a_Position", Shader::Type::Float3},
+        {"a_Color", Shader::Type::Float3},
+        {"a_Normal", Shader::Type::Float3},
+        {"a_Uv", Shader::Type::Float2},
     };
 
     vertexArray->setIndexBuffer(indexBuffer);

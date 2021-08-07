@@ -2,8 +2,8 @@
 // License(Apache-2.0)
 
 #include "Matrix4.h"
-#include "Vector3.h"
 #include "Assert.hpp"
+#include "Vector3.h"
 #include <cmath>
 #include <cstring>
 

@@ -21,7 +21,7 @@ class System
 public:
     /**
      * @brief 更新.
-     * 
+     *
      * @param dt 时间.
      * @param reg 注册器.
      */

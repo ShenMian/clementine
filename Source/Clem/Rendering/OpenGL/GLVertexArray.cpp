@@ -3,8 +3,8 @@
 
 #include "GLVertexArray.h"
 #include "Assert.hpp"
-#include <unordered_map>
 #include <glad/glad.h>
+#include <unordered_map>
 
 namespace clem
 {
@@ -58,7 +58,7 @@ void GLVertexArray::addVertexBuffer(std::shared_ptr<VertexBuffer> buffer)
         {
             glEnableVertexAttribArray((GLuint)index);
             glVertexAttribPointer((GLuint)index, (GLint)element.count(), GLType[element.type], element.normalized,
-                (GLsizei)buffer->layout.stride(), (const void*)element.offset);
+                                  (GLsizei)buffer->layout.stride(), (const void*)element.offset);
             index++;
         }
         else

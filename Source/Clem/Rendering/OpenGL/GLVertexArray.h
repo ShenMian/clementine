@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "Rendering/VertexArray.h"
 #include "Rendering/IndexBuffer.h"
+#include "Rendering/VertexArray.h"
 #include "Rendering/VertexBuffer.h"
 #include <memory>
 #include <vector>
