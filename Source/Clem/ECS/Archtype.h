@@ -64,9 +64,9 @@ public:
 	 */
     void clear();
 
-    bool operator==(const Archtype& rhs) const;
-
     size_t hashCode() const;
+
+    auto operator<=>(const Archtype&) const = default;
 
 private:
     std::unordered_set<TypeIndex> types;

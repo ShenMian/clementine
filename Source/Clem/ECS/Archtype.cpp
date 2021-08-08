@@ -17,11 +17,6 @@ void Archtype::clear()
     types.clear();
 }
 
-[[nodiscard]] bool Archtype::operator==(const Archtype& rhs) const
-{
-    return types == rhs.types;
-}
-
 [[nodiscard]] size_t Archtype::hashCode() const
 {
     size_t code = 0;
