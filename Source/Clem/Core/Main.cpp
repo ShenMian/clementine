@@ -133,7 +133,7 @@ void Main::update(uint16_t dt)
     lag += dt;
     while(lag >= 1000 / updateRate)
     {
-        registry.update(milliseconds(dt));
+        registry.update(Time::milliseconds(dt));
         lag -= 1000 / updateRate;
     }
 }
@@ -146,7 +146,7 @@ void Main::render(uint16_t dt)
     lag += dt;
     if(lag >= 1000 / renderRate)
     {
-        window->update(milliseconds(dt));
+        window->update(Time::milliseconds(dt));
         frames++;
         lag -= 1000 / renderRate;
     }
@@ -265,7 +265,6 @@ void Main::init()
     // 初始化 ECS, 添加默认系统
     registry.addSystem(new PhysicsSystem());
     registry.addSystem(new ScriptSystem());
-
     registry.addSystem(new RenderSystem());
 
     // 初始化 I/O

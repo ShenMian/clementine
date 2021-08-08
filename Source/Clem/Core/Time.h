@@ -10,6 +10,10 @@ namespace clem
 
 /**
  * @brief 时间.
+ * 
+ * 表示不同时间单位的时间间隔.
+ * 
+ * @waring 不能表示负数.
  */
 class Time
 {
@@ -29,18 +33,25 @@ public:
 	 */
     uint64_t microseconds() const;
 
+    /**
+	 * @brief 以秒为单位创建时间.
+	 */
+    static Time seconds(float sec);
+
+    /**
+	 * @brief 以毫秒为单位创建时间.
+	 */
+    static Time milliseconds(uint32_t ms);
+
+    /**
+	 * @brief 以微秒为单位创建时间.
+	 */
+    static Time microseconds(uint64_t us);
+
 private:
     Time(uint64_t us);
 
     uint64_t microseconds_;
-
-    friend Time seconds(float);
-    friend Time milliseconds(uint32_t);
-    friend Time microseconds(uint64_t);
 };
-
-Time seconds(float sec);
-Time milliseconds(uint32_t ms);
-Time microseconds(uint64_t us);
 
 } // namespace clem
