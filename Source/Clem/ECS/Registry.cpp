@@ -57,7 +57,7 @@ void Registry::destroy(const Entity& e)
 
 void Registry::all(std::function<void(const Entity&)> func)
 {
-    for(id_type i = 0; i < entities.size(); i++)
+    for(id_type i = 0; i < getSize(); i++)
         func(Entity(i, entities[i].version, *this));
 }
 

@@ -34,7 +34,7 @@ public:
         // 空白区域右键
         if(ImGui::BeginPopupContextWindow(0, 1, false))
         {
-            if(ImGui::MenuItem("Create empty entity"))
+            if(ImGui::MenuItem("Create entity"))
                 Main::registry.create();
             ImGui::EndPopup();
         }
