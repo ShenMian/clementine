@@ -58,7 +58,7 @@
 
 截图
 ----
-![](Docs/pictures/v0_0_1.png)
+![Current](Docs/pictures/current.png)
 ![Pong](Docs/pictures/pong.png)
 ![Minesweeper](Docs/pictures/minesweeper.png)
 ![Sort](Docs/pictures/sort.gif)
