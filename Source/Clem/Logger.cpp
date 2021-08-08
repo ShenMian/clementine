@@ -3,8 +3,9 @@
 
 #include "Logger.h"
 #include "Assert.hpp"
-#include "spdlog/sinks/basic_file_sink.h"
-#include "spdlog/sinks/rotating_file_sink.h"
+#include <spdlog/sinks/basic_file_sink.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
+#include <memory>
 
 using std::string;
 
@@ -14,10 +15,14 @@ std::unordered_map<std::string, Logger> Logger::loggers;
 
 Logger::Logger(const string& name)
 {
+    std::vector<spdlog::sink_ptr> sinks;
+    sinks.emplace_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
+    sinks.emplace_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>("logs/" + name + ".log"));
+    sinks.back()->set_pattern("[%D %T][thread %t][%L] %v.");
+
     try
     {
-        logger = spdlog::basic_logger_mt(name, "logs/" + name + ".log");
-        logger->set_pattern("[%D %T][thread %t][%L] %v.");
+        logger = std::make_shared<spdlog::logger>(name, begin(sinks), end(sinks));
     }
     catch(const spdlog::spdlog_ex& e)
     {
