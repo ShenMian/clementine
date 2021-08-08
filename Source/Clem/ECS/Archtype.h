@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "TypeIndex.hpp"
 #include "config.h"
 #include <cstddef>
 #include <functional>
