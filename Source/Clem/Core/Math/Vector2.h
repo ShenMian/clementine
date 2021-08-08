@@ -110,30 +110,27 @@ public:
 	 */
     float area() const;
 
-    float& operator[](size_t index);
-
-    bool     operator==(const Vector2& v) const;
-    bool     operator!=(const Vector2& v) const;
-    Vector2  operator*(float n) const;
-    Vector2  operator/(float n) const;
-    Vector2  operator+(const Vector2& v) const;
-    Vector2  operator-(const Vector2& v) const;
+    float&   operator[](size_t index);
+    bool     operator==(const Vector2&) const;
+    bool     operator!=(const Vector2&) const;
+    Vector2& operator+=(const Vector2&);
+    Vector2& operator-=(const Vector2&);
+    Vector2& operator*=(float);
+    Vector2& operator/=(float);
+    Vector2  operator+(const Vector2&) const;
+    Vector2  operator-(const Vector2&) const;
+    Vector2  operator*(float) const;
+    Vector2  operator/(float) const;
     Vector2  operator-() const;
-    Vector2& operator+=(const Vector2& v);
-    Vector2& operator-=(const Vector2& v);
-    Vector2& operator*=(float n);
-    Vector2& operator/=(float n);
 
-    Vector2 operator+(const Vector2i& v) const;
-    Vector2 operator-(const Vector2i& v) const;
+    Vector2 operator+(const Vector2i&) const;
+    Vector2 operator-(const Vector2i&) const;
 
     /**
 	 * @brief 获取整型二维向量.
 	 *
 	 * @return 去除小数后的整型二维向量.
 	 */
-    Vector2i asInt() const;
-
     operator Vector2i() const;
 
     static const Vector2 unit;   // (1, 1)

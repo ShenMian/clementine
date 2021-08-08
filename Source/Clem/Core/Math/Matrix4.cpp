@@ -122,12 +122,18 @@ Vector3 Matrix4::translation() const
 
 Vector3 Matrix4::rotation() const
 {
-    return {}; // TODO
+    return {}; // FIXME
 }
 
 Vector3 Matrix4::scale() const
 {
     return {m[0][0], m[1][1], m[2][2]};
+}
+
+Matrix4& Matrix4::inverse()
+{
+    // FIXME
+    return *this;
 }
 
 Matrix4 Matrix4::operator-() const
@@ -205,5 +211,16 @@ Matrix4& Matrix4::operator*=(float rhs)
             m[x][y] *= rhs;
     return *this;
 }
+
+/*
+Vector4 Matrix4::operator*(const Vector4& vec) const
+{
+    Vector4 product;
+    for(size_t i = 0; i < 4; i++)
+        for(size_t j = 0; j < 4; j++)
+            product[i] += m[i][j];
+    return product;
+}
+*/
 
 } // namespace clem

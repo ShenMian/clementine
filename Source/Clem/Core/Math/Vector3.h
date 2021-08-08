@@ -113,17 +113,17 @@ public:
     Vector3 getMidPoint(const Vector3& p) const;
 
     float&   operator[](size_t index);
-    bool     operator==(const Vector3& v) const;
-    bool     operator!=(const Vector3& v) const;
-    Vector3  operator*(float n) const;
-    Vector3  operator/(float n) const;
-    Vector3  operator+(const Vector3& v) const;
-    Vector3  operator-(const Vector3& v) const;
+    bool     operator==(const Vector3&) const;
+    bool     operator!=(const Vector3&) const;
+    Vector3& operator+=(const Vector3&);
+    Vector3& operator-=(const Vector3&);
+    Vector3& operator*=(float);
+    Vector3& operator/=(float);
+    Vector3  operator*(float) const;
+    Vector3  operator/(float) const;
+    Vector3  operator+(const Vector3&) const;
+    Vector3  operator-(const Vector3&) const;
     Vector3  operator-() const;
-    Vector3& operator+=(const Vector3& v);
-    Vector3& operator-=(const Vector3& v);
-    Vector3& operator*=(float n);
-    Vector3& operator/=(float n);
 
     static const Vector3 unit;   // (1, 1, 1)
     static const Vector3 unit_x; // (1, 0, 0)

@@ -4,8 +4,8 @@
 #include "Clem/Clem.h"
 #include "gtest/gtest.h"
 
-int main(int argc, char* argv[])
+using namespace clem;
+
+TEST(Martix4, addition)
 {
-	testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
 }

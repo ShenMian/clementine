@@ -113,16 +113,42 @@ float& Vector3::operator[](size_t index)
     }
 }
 
-bool Vector3::operator==(const Vector3& v) const
+bool Vector3::operator==(const Vector3& rhs) const
 {
-    return (std::abs(x - v.x) < FLT_EPSILON) &&
-           (std::abs(y - v.y) < FLT_EPSILON) &&
-           (std::abs(z - v.z) < FLT_EPSILON);
+    return (std::abs(x - rhs.x) < FLT_EPSILON) &&
+           (std::abs(y - rhs.y) < FLT_EPSILON) &&
+           (std::abs(z - rhs.z) < FLT_EPSILON);
 }
 
-bool Vector3::operator!=(const Vector3& v) const
+bool Vector3::operator!=(const Vector3& rhs) const
 {
-    return !(*this == v);
+    return !(*this == rhs);
+}
+
+Vector3& Vector3::operator+=(const Vector3& rhs)
+{
+    x += rhs.x;
+    y += rhs.y;
+    z += rhs.z;
+    return *this;
+}
+
+Vector3& Vector3::operator-=(const Vector3& rhs)
+{
+    x -= rhs.x;
+    y -= rhs.y;
+    z -= rhs.z;
+    return *this;
+}
+
+Vector3& Vector3::operator*=(float n)
+{
+    return *this = *this * n;
+}
+
+Vector3& Vector3::operator/=(float n)
+{
+    return *this = *this / n;
 }
 
 Vector3 Vector3::operator*(float n) const
@@ -135,45 +161,19 @@ Vector3 Vector3::operator/(float n) const
     return Vector3(x / n, y / n, z / n);
 }
 
-Vector3 Vector3::operator+(const Vector3& v) const
+Vector3 Vector3::operator+(const Vector3& rhs) const
 {
-    return Vector3(x + v.x, y + v.y, z + v.z);
+    return Vector3(x + rhs.x, y + rhs.y, z + rhs.z);
 }
 
-Vector3 Vector3::operator-(const Vector3& v) const
+Vector3 Vector3::operator-(const Vector3& rhs) const
 {
-    return Vector3(x - v.x, y - v.y, z - v.z);
+    return Vector3(x - rhs.x, y - rhs.y, z - rhs.z);
 }
 
 Vector3 Vector3::operator-() const
 {
     return Vector3(-x, -y, -z);
-}
-
-Vector3& Vector3::operator+=(const Vector3& v)
-{
-    x += v.x;
-    y += v.y;
-    z += v.z;
-    return *this;
-}
-
-Vector3& Vector3::operator-=(const Vector3& v)
-{
-    x -= v.x;
-    y -= v.y;
-    z -= v.z;
-    return *this;
-}
-
-Vector3& Vector3::operator*=(float n)
-{
-    return *this = *this * n;
-}
-
-Vector3& Vector3::operator/=(float n)
-{
-    return *this = *this / n;
 }
 
 } // namespace clem

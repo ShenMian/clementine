@@ -111,53 +111,28 @@ float& Vector2::operator[](size_t index)
     }
 }
 
-bool Vector2::operator==(const Vector2& v) const
+bool Vector2::operator==(const Vector2& rhs) const
 {
-    return (std::abs(x - v.x) < FLT_EPSILON) &&
-           (std::abs(y - v.y) < FLT_EPSILON);
+    return (std::abs(x - rhs.x) < FLT_EPSILON) &&
+           (std::abs(y - rhs.y) < FLT_EPSILON);
 }
 
-bool Vector2::operator!=(const Vector2& v) const
+bool Vector2::operator!=(const Vector2& rhs) const
 {
-    return !(*this == v);
+    return !(*this == rhs);
 }
 
-Vector2 Vector2::operator*(float n) const
+Vector2& Vector2::operator+=(const Vector2& rhs)
 {
-    return Vector2(x * n, y * n);
-}
-
-Vector2 Vector2::operator/(float n) const
-{
-    return Vector2(x / n, y / n);
-}
-
-Vector2 Vector2::operator+(const Vector2& v) const
-{
-    return Vector2(x + v.x, y + v.y);
-}
-
-Vector2 Vector2::operator-(const Vector2& v) const
-{
-    return Vector2(x - v.x, y - v.y);
-}
-
-Vector2 Vector2::operator-() const
-{
-    return Vector2(-x, -y);
-}
-
-Vector2& Vector2::operator+=(const Vector2& v)
-{
-    x += v.x;
-    y += v.y;
+    x += rhs.x;
+    y += rhs.y;
     return *this;
 }
 
-Vector2& Vector2::operator-=(const Vector2& v)
+Vector2& Vector2::operator-=(const Vector2& rhs)
 {
-    x -= v.x;
-    y -= v.y;
+    x -= rhs.x;
+    y -= rhs.y;
     return *this;
 }
 
@@ -171,24 +146,44 @@ Vector2& Vector2::operator/=(float n)
     return *this = *this / n;
 }
 
-Vector2 Vector2::operator+(const Vector2i& v) const
+Vector2 Vector2::operator*(float n) const
 {
-    return Vector2(x + v.x, y + v.y);
+    return Vector2(x * n, y * n);
 }
 
-Vector2 Vector2::operator-(const Vector2i& v) const
+Vector2 Vector2::operator/(float n) const
 {
-    return Vector2(x - v.x, y - v.y);
+    return Vector2(x / n, y / n);
 }
 
-Vector2i Vector2::asInt() const
+Vector2 Vector2::operator+(const Vector2& rhs) const
 {
-    return Vector2i(static_cast<int>(x), static_cast<int>(y));
+    return Vector2(x + rhs.x, y + rhs.y);
+}
+
+Vector2 Vector2::operator-(const Vector2& rhs) const
+{
+    return Vector2(x - rhs.x, y - rhs.y);
+}
+
+Vector2 Vector2::operator-() const
+{
+    return Vector2(-x, -y);
+}
+
+Vector2 Vector2::operator+(const Vector2i& rhs) const
+{
+    return Vector2(x + rhs.x, y + rhs.y);
+}
+
+Vector2 Vector2::operator-(const Vector2i& rhs) const
+{
+    return Vector2(x - rhs.x, y - rhs.y);
 }
 
 Vector2::operator Vector2i() const
 {
-    return asInt();
+    return Vector2i(static_cast<int>(x), static_cast<int>(y));
 }
 
 } // namespace clem

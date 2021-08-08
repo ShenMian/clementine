@@ -43,16 +43,20 @@ public:
     Vector3 rotation() const;
     Vector3 scale() const;
 
+    Matrix4& inverse();
+
     Matrix4  operator-() const;
-    Matrix4& operator=(const Matrix4& rhs);
-    Matrix4  operator+(const Matrix4& rhs) const;
-    Matrix4& operator+=(const Matrix4& rhs);
-    Matrix4  operator-(const Matrix4& rhs) const;
-    Matrix4& operator-=(const Matrix4& rhs);
-    Matrix4  operator*(const Matrix4& rhs) const;
-    Matrix4& operator*=(const Matrix4& rhs);
-    Matrix4  operator*(float rhs) const;
-    Matrix4& operator*=(float rhs);
+    Matrix4& operator=(const Matrix4&);
+    Matrix4  operator+(const Matrix4&) const;
+    Matrix4& operator+=(const Matrix4&);
+    Matrix4  operator-(const Matrix4&) const;
+    Matrix4& operator-=(const Matrix4&);
+    Matrix4  operator*(const Matrix4&) const;
+    Matrix4& operator*=(const Matrix4&);
+    Matrix4  operator*(float) const;
+    Matrix4& operator*=(float);
+
+    // Vector4 operator*(const Vector4&) const;
 
     static const Matrix4 identity;
     static const Matrix4 zero;
