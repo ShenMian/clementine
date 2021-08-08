@@ -9,7 +9,7 @@
 #include "Components/ScriptSystem.h"
 #include "Core/Core.h"
 #include "ECS/Registry.h"
-#include "Logger.h"
+#include "Logging/Logging.h"
 #include "Physics/Physics.h"
 #include "Profiler.h"
 #include "Rendering/Rendering.h"
@@ -244,12 +244,7 @@ void Main::init()
 {
     PROFILE_SESSION_BEGIN("profile.json");
 
-    // 初始化日志系统
-    Logger::create("core");
-    Logger::create("audio");
-    Logger::create("assert");
-    Logger::create("render");
-    Logger::create("network");
+    Logger::init();
 
     // Renderer::setAPI(Renderer::API::Vulkan);
 
@@ -283,6 +278,8 @@ void Main::deinit()
     Renderer::get()->deinit();
 
     window->deinit();
+
+    Logger::deinit();
 
     PROFILE_SESSION_END();
 }

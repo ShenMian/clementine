@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Logger.h"
+#include "Logging/Logging.h"
 #include "Message.h"
 #include "Platform.h"
 #include "asio.hpp"

@@ -4,7 +4,7 @@
 #include "Sound.h"
 #include "AL/alext.h"
 #include "Assert.hpp"
-#include "Logger.h"
+#include "Logging/Logging.h"
 #include "Profiler.h"
 #include <cassert>
 #include <fstream>
@@ -43,7 +43,7 @@ void Sound::loadFromFile(const fs::path& path)
     else
         Assert::isTrue(false, std::format("file extension doesn't supported: '{}'", extension));
 
-    CLEM_LOG_INFO("audio", "sound loaded from file: '{}'", path.string());
+    CLEM_LOG_INFO("audio", std::format("sound loaded from file: '{}'", path.string()));
 
     initialized = true;
 }

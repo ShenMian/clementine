@@ -5,7 +5,7 @@
 #include "Events/EventDispatcher.h"
 #include "Events/KeyEvent.h"
 #include "Input.h"
-#include "Logger.h"
+#include "Logging/Logging.h"
 #include "Platform.h"
 #include "Profiler.h"
 #include <cassert>

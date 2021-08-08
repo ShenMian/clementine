@@ -3,7 +3,7 @@
 
 #include "VKDevice.h"
 #include "Assert.hpp"
-#include "Logger.h"
+#include "Logging/Logging.h"
 #include "VKRenderer.h"
 
 namespace clem
@@ -15,7 +15,7 @@ void VKDevice::create()
 
     physicalDevice = findSuitablePhysicalDevice();
     Assert::isTrue(physicalDevice, "can't find suitable physical device");
-    CLEM_LOG_INFO("render", "physical device: {}", physicalDevice.getProperties().deviceName);
+    CLEM_LOG_INFO("render", std::format("physical device: {}", physicalDevice.getProperties().deviceName));
 
     auto     queueFamilyProps = physicalDevice.getQueueFamilyProperties();
     uint32_t queueIndex       = -1;
@@ -111,7 +111,7 @@ vk::PhysicalDevice VKDevice::findSuitablePhysicalDevice() const
 
 bool VKDevice::isSuitable(const vk::PhysicalDevice& device) const
 {
-    // ¼ì²éÊÇ·ñÎª¶ÀÁ¢ÏÔ¿¨
+    // ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½
     if(device.getProperties().deviceType != vk::PhysicalDeviceType::eDiscreteGpu)
         return false;
     return true;

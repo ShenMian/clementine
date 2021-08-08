@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "Assert.hpp"
-#include "Logger.h"
+#include "Logging/Logging.h"
 #include "Platform.h"
 #include <iostream>
 
@@ -23,7 +23,9 @@ void Assert::isTrue(bool expr, std::string_view msg, const std::source_location&
     auto str = std::format("Assertion failed.\nfile     : {}\nfunction : {}\nline     : {}", loc.file_name(), loc.function_name(), loc.line());
     if(!msg.empty())
         str += std::format("\nmessage  : {}", msg);
+
     CLEM_LOG_ERROR("assert", msg);
+    CLEM_LOG_FLUSH();
 
     std::cout << str << std::endl;
 

@@ -4,7 +4,7 @@
 #include "VKRenderer.h"
 #include "Assert.hpp"
 #include "Core/Application.h"
-#include "Logger.h"
+#include "Logging/Logging.h"
 #include "Version.h"
 #include <cassert>
 #include <vector>

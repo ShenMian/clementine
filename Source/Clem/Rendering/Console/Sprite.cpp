@@ -3,7 +3,7 @@
 
 #include "Sprite.h"
 #include "Core/Math/Rect2i.h"
-#include "Logger.h"
+#include "Logging/Logging.h"
 #include <algorithm>
 #include <cmath>
 #include <fstream>

@@ -3,7 +3,7 @@
 
 #include "Server.h"
 #include "Connection.h"
-#include "Logger.h"
+#include "Logging/Logging.h"
 
 using namespace asio;
 

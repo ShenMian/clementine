@@ -9,7 +9,7 @@
 #include "Core/Core.h"
 #include "ECS/ECS.h"
 #include "Events/Events.h"
-#include "Logger.h"
+#include "Logging/Logging.h"
 #include "Networking/Networking.h"
 #include "Physics/Physics.h"
 #include "Platform.h"
