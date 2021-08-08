@@ -15,7 +15,7 @@ void VKDevice::create()
 
     physicalDevice = findSuitablePhysicalDevice();
     Assert::isTrue(physicalDevice, "can't find suitable physical device");
-    CLEM_LOG_INFO("render", "Physical Device: {}", physicalDevice.getProperties().deviceName);
+    CLEM_LOG_INFO("render", "physical device: {}", physicalDevice.getProperties().deviceName);
 
     auto     queueFamilyProps = physicalDevice.getQueueFamilyProperties();
     uint32_t queueIndex       = -1;

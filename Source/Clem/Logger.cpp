@@ -17,6 +17,7 @@ Logger::Logger(const string& name)
 {
     std::vector<spdlog::sink_ptr> sinks;
     sinks.emplace_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
+    sinks.back()->set_pattern("[%-7n][thread %t][%^%L%$] %v. - %oms");
     sinks.emplace_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>("logs/" + name + ".log"));
     sinks.back()->set_pattern("[%D %T][thread %t][%L] %v.");
 

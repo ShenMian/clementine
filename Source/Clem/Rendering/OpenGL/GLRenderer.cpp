@@ -16,7 +16,7 @@ GLRenderer& GLRenderer::get()
 
 void GLRenderer::init()
 {
-    CLEM_LOG_INFO("render", "Physical Device: {}", glGetString(GL_RENDERER));
+    CLEM_LOG_INFO("render", "physical device: {}", glGetString(GL_RENDERER));
 }
 
 void GLRenderer::deinit()

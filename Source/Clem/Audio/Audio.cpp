@@ -26,7 +26,7 @@ void Audio::init()
         name = alcGetString(device, ALC_ALL_DEVICES_SPECIFIER);
     if(!name || alcGetError(device) != AL_NO_ERROR)
         name = alcGetString(device, ALC_DEVICE_SPECIFIER);
-    CLEM_LOG_INFO("audio", "opened audio device: '{}'", name);
+    CLEM_LOG_INFO("audio", "audio device: '{}'", name);
 
     context = alcCreateContext(device, nullptr);
     alcMakeContextCurrent(context);
