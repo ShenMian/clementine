@@ -137,6 +137,7 @@ private:
         {
             if(ImGui::CollapsingHeader("Sprite", ImGuiTreeNodeFlags_DefaultOpen))
             {
+                ;
             }
         }
     }
@@ -147,6 +148,7 @@ private:
         {
             if(ImGui::CollapsingHeader("Script", ImGuiTreeNodeFlags_DefaultOpen))
             {
+                ;
             }
         }
     }

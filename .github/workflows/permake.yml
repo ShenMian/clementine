@@ -17,7 +17,7 @@ jobs:
        wget -qO- https://github.com/premake/premake-core/releases/download/v5.0.0-alpha15/premake-5.0.0-alpha15-linux.tar.gz | \
        tar xvz premake5 | \
        xargs -I"{}" sudo mv {} /usr/bin
-       
+
     - name: Generate Makefiles
       run: premake5 --file=premake5.lua gmake
 

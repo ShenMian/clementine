@@ -23,8 +23,8 @@ public:
 	 */
     ~GLTexture2D();
 
-    void          bind(id_type slot) override;
-    virtual void* nativeHandle() override;
+    void  bind(id_type slot) override;
+    void* nativeHandle() override;
 
 private:
     id_type handle;
