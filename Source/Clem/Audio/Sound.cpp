@@ -118,18 +118,18 @@ void Sound::loadWavFile(const fs::path& path)
     WaveFormat waveFormat;
     WaveData   waveData;
 
-    file.read(reinterpret_cast<char*>(&riffHeader), sizeof(RiffHeader));
+    file.read(reinterpret_cast<char*>(&riffHeader), sizeof(riffHeader));
     Assert::isTrue(file.good(), "unable to read data from file");
     Assert::isTrue(std::memcmp(riffHeader.id, "RIFF", 4) == 0 && std::memcmp(riffHeader.format, "WAVE", 4) == 0,
         "incorrect file content");
 
-    file.read((char*)&waveFormat, sizeof(WaveFormat));
+    file.read((char*)&waveFormat, sizeof(waveFormat));
     Assert::isTrue(file.good(), "unable to read data from file");
     if(waveFormat.size > 16)
         file.seekg(2, std::ios::cur);
 
     char id[4];
-    file.read(id, 4);
+    file.read(id, sizeof(id));
     Assert::isTrue(file.good(), "unable to read data from file");
 
     // 如果 WAV 文件是由其他格式转换而来, 会包含 ID 为 LIST 的格式转换信息.
@@ -140,14 +140,14 @@ void Sound::loadWavFile(const fs::path& path)
         file.read(reinterpret_cast<char*>(&list_size), sizeof(list_size));
         Assert::isTrue(file.good(), "unable to read data from file");
         file.seekg(list_size, std::ios::cur);
-        file.read(id, 4);
+        file.read(id, sizeof(id));
         Assert::isTrue(file.good(), "unable to read data from file");
     }
 
     Assert::isTrue(std::memcmp(id, "data", 4) == 0, "incorrect file content");
 
     file.seekg(-4, std::ios::cur);
-    file.read(reinterpret_cast<char*>(&waveData), sizeof(WaveData));
+    file.read(reinterpret_cast<char*>(&waveData), sizeof(waveData));
     Assert::isTrue(file.good(), "unable to read data from file");
 
     sampleRate    = waveFormat.sampleRate;

@@ -42,9 +42,8 @@ GLShader::GLShader(const std::string& name)
         std::ifstream file(path, std::ios::binary);
         Assert::isTrue(file.is_open(), std::format("can't open file {}", path.filename().string()));
 
-        std::vector<std::byte> buffer;
-        buffer.resize(size);
-        file.read((char*)buffer.data(), size);
+        std::vector<std::byte> buffer(size);
+        file.read(reinterpret_cast<char*>(buffer.data()), buffer.size());
         file.close();
 
         auto shader = glCreateShader(GLStage[type]);
