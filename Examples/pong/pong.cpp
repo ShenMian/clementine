@@ -36,84 +36,25 @@ public:
         left.setPosition({-5, 0});
         right.setPosition({5, 0});
 
-        auto& reg = Main::registry;
+        createBall();
+        createBats();
+        createBackground();
 
-        // 创建背景
-        auto board = reg.create("board");
-        board.add<Transform>();
-        auto& boardSprite = board.add<Sprite>(Size2(80, 25));
-        boardSprite.drawRect(Rect2i({0, 0}, {80, 25}), Tile('#'));
-        boardSprite.fillRect(Rect2i({39, 1}, {2, 23}), Tile('.', Color::green));
-        board.add<Script>().onUpdate = [&](Time dt) {
-            boardSprite.drawString({34, 2}, to_wstring(player_score));
-            boardSprite.drawString({44, 2}, to_wstring(ai_score));
-        };
+        resetBall();
+        resetBats();
+    }
 
+    void createBall()
+    {
         // 创建乒乓球 Sprite
         Sprite ballSprite({1, 1});
         ballSprite.drawPoint({0, 0}, Tile('O', Color::yellow));
 
         // 创建乒乓球
-        auto ball = reg.create("ball");
+        auto ball = Main::registry.create("ball");
         ball.add<Sprite>(ballSprite);
         ball.add<Rigidbody>();
         ball.add<Transform>();
-
-        // 创建乒乓球球拍 Sprite
-        Sprite batSprite({1, 5});
-        batSprite.fillRect(Rect2i({0, 0}, {1, 5}), Tile(L'█', Color::blue));
-
-        // 创建两个乒乓球拍
-        for(int i = 0; i < 2; i++)
-        {
-            bats[i] = reg.create();
-            bats[i].add<Sprite>(batSprite);
-            bats[i].add<Rigidbody>();
-            bats[i].add<Transform>();
-        }
-
-        // Bat1 由玩家控制
-        // 为 bats[0] 创建一个事件监听器, 监听按键事件
-        EventDispatcher::get().addListener(Event::Type::key, [&](Event* e) {
-            auto  event = dynamic_cast<KeyEvent*>(e);
-            auto& body  = bats[0].get<Rigidbody>(); // 通过 Tag 组件获取 bats[0] 实体的 Rigidbody 组件
-            auto& tf    = bats[0].get<Transform>();
-
-            if(event->state == false)
-                body.velocity = Vector2::zero;
-            else if(event->keyCode == KeyCode::W)
-                body.velocity = {0, -player_speed};
-            else if(event->keyCode == KeyCode::S)
-                body.velocity = {0, player_speed};
-
-            if(tf.translation.y + body.velocity.y < 1)
-            {
-                body.velocity    = Vector2::zero;
-                tf.translation.y = 1;
-                return;
-            }
-            else if(tf.translation.y + body.velocity.y > 19)
-            {
-                body.velocity    = Vector2::zero;
-                tf.translation.y = 19;
-                return;
-            }
-        });
-
-        // Bat2 由AI控制, 不推测路径
-        // 为 bats[1] 创建一个脚本
-        bats[1].add<Script>().onUpdate = [&](Time) {
-            auto  ballPos = Main::registry.get("ball").get<Transform>().translation;
-            auto& batBody = bats[1].get<Rigidbody>();
-            auto  batPos  = bats[1].get<Transform>().translation;
-            auto& batSize = bats[1].get<Sprite>().getSize();
-
-            // 获取 bats[1] 的 Sprite 的几何中心
-            auto batCenter = batPos + batSize / 2;
-
-            // 以 ai_speed 速度向 ball 所在的 y 坐标移动
-            batBody.velocity = Vector2(0, ballPos.y - batCenter.y).normalize() * ai_speed;
-        };
 
         // 碰撞检测
         ball.add<Script>().onUpdate = [&](Time) {
@@ -201,9 +142,79 @@ public:
                 return;
             vel = vel.normalize() * ball_speed;
         };
+    }
 
-        resetBall();
-        resetBats();
+    void createBats()
+    {
+        // 创建乒乓球球拍 Sprite
+        Sprite batSprite({1, 5});
+        batSprite.fillRect(Rect2i({0, 0}, {1, 5}), Tile(L'█', Color::blue));
+
+        // 创建两个乒乓球拍
+        for(int i = 0; i < 2; i++)
+        {
+            bats[i] = Main::registry.create();
+            bats[i].add<Sprite>(batSprite);
+            bats[i].add<Rigidbody>();
+            bats[i].add<Transform>();
+        }
+
+        // Bat1 由玩家控制
+        // 为 bats[0] 创建一个事件监听器, 监听按键事件
+        EventDispatcher::get().addListener(Event::Type::key, [&](Event* e) {
+            auto  event = dynamic_cast<KeyEvent*>(e);
+            auto& body  = bats[0].get<Rigidbody>(); // 通过 Tag 组件获取 bats[0] 实体的 Rigidbody 组件
+            auto& tf    = bats[0].get<Transform>();
+
+            if(event->state == false)
+                body.velocity = Vector2::zero;
+            else if(event->keyCode == KeyCode::W)
+                body.velocity = {0, -player_speed};
+            else if(event->keyCode == KeyCode::S)
+                body.velocity = {0, player_speed};
+
+            if(tf.translation.y + body.velocity.y < 1)
+            {
+                body.velocity    = Vector2::zero;
+                tf.translation.y = 1;
+                return;
+            }
+            else if(tf.translation.y + body.velocity.y > 19)
+            {
+                body.velocity    = Vector2::zero;
+                tf.translation.y = 19;
+                return;
+            }
+        });
+
+        // Bat2 由AI控制, 不推测路径
+        // 为 bats[1] 创建一个脚本
+        bats[1].add<Script>().onUpdate = [&](Time) {
+            auto  ballPos = Main::registry.get("ball").get<Transform>().translation;
+            auto& batBody = bats[1].get<Rigidbody>();
+            auto  batPos  = bats[1].get<Transform>().translation;
+            auto& batSize = bats[1].get<Sprite>().getSize();
+
+            // 获取 bats[1] 的 Sprite 的几何中心
+            auto batCenter = batPos + batSize / 2;
+
+            // 以 ai_speed 速度向 ball 所在的 y 坐标移动
+            batBody.velocity = Vector2(0, ballPos.y - batCenter.y).normalize() * ai_speed;
+        };
+    }
+
+    void createBackground()
+    {
+        // 创建背景
+        auto board = Main::registry.create("board");
+        board.add<Transform>();
+        auto& boardSprite = board.add<Sprite>(Size2(80, 25));
+        boardSprite.drawRect(Rect2i({0, 0}, {80, 25}), Tile('#'));
+        boardSprite.fillRect(Rect2i({39, 1}, {2, 23}), Tile('.', Color::green));
+        board.add<Script>().onUpdate = [&](Time dt) {
+            boardSprite.drawString({34, 2}, to_wstring(player_score));
+            boardSprite.drawString({44, 2}, to_wstring(ai_score));
+        };
     }
 
     // 重置 ball 的位置
