@@ -3,7 +3,7 @@
 # License(Apache-2.0)
 
 # 切换到主目录
-cd "$( cd "$( dirname "$0"  )" && pwd  )"
+cd "$( cd "$( dirname "$0"  )" && pwd  )" || exit
 cd ..
 
 ./Thirdparty/premake/bin/premake5 xcode4
