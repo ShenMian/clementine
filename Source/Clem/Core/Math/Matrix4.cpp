@@ -82,10 +82,10 @@ void Matrix4::rotateX(float angle)
     const float cos = std::cos(angle);
 
     Matrix4 mat(Matrix4::identity);
-    m[1][1] = cos;
-    m[1][2] = -sin;
-    m[2][1] = sin;
-    m[2][2] = cos;
+    mat.m[1][1] = cos;
+    mat.m[1][2] = -sin;
+    mat.m[2][1] = sin;
+    mat.m[2][2] = cos;
     *this *= mat;
 }
 
@@ -95,10 +95,10 @@ void Matrix4::rotateY(float angle)
     const float cos = std::cos(angle);
 
     Matrix4 mat(Matrix4::identity);
-    m[0][0] = cos;
-    m[0][2] = sin;
-    m[2][0] = -sin;
-    m[2][2] = cos;
+    mat.m[0][0] = cos;
+    mat.m[0][2] = sin;
+    mat.m[2][0] = -sin;
+    mat.m[2][2] = cos;
     *this *= mat;
 }
 
@@ -108,10 +108,10 @@ void Matrix4::rotateZ(float angle)
     const float cos = std::cos(angle);
 
     Matrix4 mat(Matrix4::identity);
-    m[0][0] = cos;
-    m[0][1] = -sin;
-    m[1][0] = sin;
-    m[1][1] = cos;
+    mat.m[0][0] = cos;
+    mat.m[0][1] = -sin;
+    mat.m[1][0] = sin;
+    mat.m[1][1] = cos;
     *this *= mat;
 }
 

@@ -10,6 +10,7 @@ constexpr float rad_to_deg = 180 / pi;
 #include "Matrix4.h"
 #include "Vector2.h"
 #include "Vector3.h"
+#include "Vector4.h"
 
 #include "Rect2.h"
 #include "Rect2i.h"

@@ -45,7 +45,7 @@ public:
 	 *
 	 * @param v 二维向量.
 	 */
-    Vector3(const Vector2& v);
+    Vector3(const Vector2& v, float z = 0.0f);
 
     /**
 	 * @brief 获取长度.
