@@ -118,30 +118,37 @@ void Sound::loadWavFile(const fs::path& path)
     WaveFormat waveFormat;
     WaveData   waveData;
 
-    file.read((char*)&riffHeader, sizeof(RiffHeader));
-    Assert::isTrue(std::memcmp(riffHeader.id, "RIFF", 4) == 0 && std::memcmp(riffHeader.format, "WAVE", 4) == 0, "incorrect file content");
+    file.read(reinterpret_cast<char*>(&riffHeader), sizeof(RiffHeader));
+    Assert::isTrue(file.good(), "unable to read data from file");
+    Assert::isTrue(std::memcmp(riffHeader.id, "RIFF", 4) == 0 && std::memcmp(riffHeader.format, "WAVE", 4) == 0,
+        "incorrect file content");
 
     file.read((char*)&waveFormat, sizeof(WaveFormat));
+    Assert::isTrue(file.good(), "unable to read data from file");
     if(waveFormat.size > 16)
         file.seekg(2, std::ios::cur);
 
     char id[4];
     file.read(id, 4);
+    Assert::isTrue(file.good(), "unable to read data from file");
 
     // 如果 WAV 文件是由其他格式转换而来, 会包含 ID 为 LIST 的格式转换信息.
     // 跳过这部分内容, 直接获取音频样本数据.
     if(std::memcmp(id, "LIST", 4) == 0)
     {
         int32_t list_size;
-        file.read((char*)&list_size, sizeof(list_size));
+        file.read(reinterpret_cast<char*>(&list_size), sizeof(list_size));
+        Assert::isTrue(file.good(), "unable to read data from file");
         file.seekg(list_size, std::ios::cur);
         file.read(id, 4);
+        Assert::isTrue(file.good(), "unable to read data from file");
     }
 
     Assert::isTrue(std::memcmp(id, "data", 4) == 0, "incorrect file content");
 
     file.seekg(-4, std::ios::cur);
-    file.read((char*)&waveData, sizeof(WaveData));
+    file.read(reinterpret_cast<char*>(&waveData), sizeof(WaveData));
+    Assert::isTrue(file.good(), "unable to read data from file");
 
     sampleRate    = waveFormat.sampleRate;
     channelCount  = waveFormat.numChannels;
@@ -165,7 +172,8 @@ void Sound::loadWavFile(const fs::path& path)
     Assert::isTrue(format != -1, "unknown audio format");
 
     samples.resize(waveData.size);
-    file.read((char*)samples.data(), waveData.size);
+    file.read(reinterpret_cast<char*>(samples.data()), waveData.size);
+    Assert::isTrue(file.good(), "unable to read data from file");
 
     file.close();
 
