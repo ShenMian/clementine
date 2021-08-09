@@ -88,12 +88,15 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     glViewport(0, 0, size.x, size.y);
 
     shader = Shader::create(R"(
-		#version 410
+		#version 450 core
 
 		layout(location = 0) in vec3 a_Position;
 		layout(location = 1) in vec3 a_Color;
 		layout(location = 2) in vec3 a_Normal;
 		layout(location = 3) in vec2 a_Uv;
+
+        uniform mat4 u_View;
+        uniform mat4 u_Projection;
 
         out vec3 v_Position;
         out vec3 v_Color;
@@ -102,11 +105,11 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 		{
             v_Position  = a_Position;
             v_Color     = a_Color;
-			gl_Position = vec4(1.0) * vec4(a_Position, 1.0);
+			gl_Position = u_Projection * u_View * vec4(a_Position, 1.0);
 		}
 	)",
                             R"(
-		#version 410
+		#version 450 core
 
 		layout(location = 0) out vec4 color;
 
@@ -159,18 +162,25 @@ void GlfwWindow::update(Time dt)
 {
     PROFILE_FUNC();
 
+    static Camera camera;
+
+    auto renderer = Renderer::get();
+
     glClearColor(30.0f / 255, 144.0f / 255, 255.0f / 255, 1.0f); // 湖蓝色
     glClear(GL_COLOR_BUFFER_BIT);
 
-    static Camera camera;
-
-    shader->bind();
-    // shader->uploadUniform("u_ViewProjection", camera.getViewProjection());
-    vertexArray->bind();
-
-    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
-
-    assert(glGetError() == GL_NO_ERROR);
+    /*
+    shader->uploadUniform("u_View", camera.getView());
+    shader->uploadUniform("u_Projection", camera.getProjection());
+    */
+    
+    static Mat4 view, projection;
+    view.rotateX(1 * deg_to_rad);
+    view.rotateY(1 * deg_to_rad);
+    view.rotateZ(1 * deg_to_rad);
+    shader->uploadUniform("u_View", view);
+    shader->uploadUniform("u_Projection", projection);
+    renderer->submit(vertexArray, shader);
 
     renderGui(dt);
     glfwSwapBuffers(handle);

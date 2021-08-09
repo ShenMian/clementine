@@ -8,12 +8,16 @@ namespace clem
 
 void Camera::setPosition(const Point3& pos)
 {
-    view.translate(pos);
 }
 
-const Matrix4& Camera::getViewProjection() const
+const Matrix4& Camera::getView() const
 {
-    return viewProjection;
+    return view;
+}
+
+const Matrix4& Camera::getProjection() const
+{
+    return projection;
 }
 
 } // namespace clem

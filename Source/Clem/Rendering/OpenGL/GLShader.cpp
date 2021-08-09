@@ -217,7 +217,7 @@ GLShader::GLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
     glLinkProgram(handle);
 
     glGetProgramiv(handle, GL_LINK_STATUS, (int*)&success);
-    if(success == GL_FALSE)
+    if(!success)
     {
         glDeleteProgram(handle);
         glDeleteShader(vertexShader);
@@ -242,8 +242,8 @@ void GLShader::bind()
 
 void GLShader::uploadUniform(const std::string& name, const Matrix4& mat)
 {
+    bind();
     auto location = glGetUniformLocation(handle, name.c_str());
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
     glUniformMatrix4fv(location, 1, false, mat.data()); // column major: GL_FALSE, row major: GL_TRUE
 
     Assert::isTrue(glGetError() == GL_NO_ERROR);
@@ -251,6 +251,7 @@ void GLShader::uploadUniform(const std::string& name, const Matrix4& mat)
 
 void GLShader::uploadUniform(const std::string& name, const Vector3& vec)
 {
+    bind();
     auto location = glGetUniformLocation(handle, name.c_str());
     glUniform3f(location, vec.x, vec.y, vec.z);
 
@@ -259,6 +260,7 @@ void GLShader::uploadUniform(const std::string& name, const Vector3& vec)
 
 void GLShader::uploadUniform(const std::string& name, const Vector2& vec)
 {
+    bind();
     auto location = glGetUniformLocation(handle, name.c_str());
     glUniform2f(location, vec.x, vec.y);
 
@@ -267,6 +269,7 @@ void GLShader::uploadUniform(const std::string& name, const Vector2& vec)
 
 void GLShader::uploadUniform(const std::string& name, float value)
 {
+    bind();
     auto location = glGetUniformLocation(handle, name.c_str());
     glUniform1f(location, value);
 

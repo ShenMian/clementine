@@ -11,6 +11,7 @@ namespace clem
 static_assert(std::is_same<GLIndexBuffer::id_type, GLuint>::value);
 
 GLIndexBuffer::GLIndexBuffer(const void* data, size_t size)
+    : count_(size / sizeof(unsigned int))
 {
     glCreateBuffers(1, &handle);
     bind();
@@ -25,6 +26,11 @@ GLIndexBuffer::~GLIndexBuffer()
 void GLIndexBuffer::bind()
 {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, handle);
+}
+
+size_t GLIndexBuffer::count()
+{
+    return count_;
 }
 
 } // namespace clem

@@ -32,6 +32,10 @@ VKRenderer& VKRenderer::get()
     return *instance;
 }
 
+void VKRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader)
+{
+}
+
 void VKRenderer::init()
 {
     createInstance();

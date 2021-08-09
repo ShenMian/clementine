@@ -25,11 +25,11 @@ public:
     void addVertexBuffer(std::shared_ptr<VertexBuffer> buffer) override;
     void setIndexBuffer(std::shared_ptr<IndexBuffer> buffer) override;
 
+    std::shared_ptr<IndexBuffer> getIndexBuffer() const;
+
 private:
-    id_type                                    handle;
-    size_t                                     index = 0;
-    std::shared_ptr<IndexBuffer>               indexBuffer;
-    std::vector<std::shared_ptr<VertexBuffer>> vertexBuffers;
+    id_type handle;
+    size_t  index = 0;
 };
 
 } // namespace clem

@@ -14,6 +14,9 @@
 namespace clem
 {
 
+class Shader;
+class VertexArray;
+
 /**
  * @addtogroup Rendering
  * @{
@@ -50,8 +53,9 @@ public:
 	 * @return 图形 API.
 	 */
     static API getAPI();
+    
+    virtual void submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader) = 0;
 
-    // virtual void submit() = 0;
     virtual void init()   = 0;
     virtual void deinit() = 0;
 

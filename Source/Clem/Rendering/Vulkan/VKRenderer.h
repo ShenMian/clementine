@@ -24,6 +24,7 @@ class VKRenderer : public Renderer
 public:
     static VKRenderer& get();
 
+    void submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader);
     void init() override;
     void deinit() override;
 

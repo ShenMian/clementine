@@ -20,12 +20,12 @@ class Camera
 public:
     void setPosition(const Point3& pos);
 
-    const Matrix4& getViewProjection() const;
+    const Matrix4& getView() const;
+    const Matrix4& getProjection() const;
 
 private:
-    Matrix4 projection;
     Matrix4 view;
-    Matrix4 viewProjection = Matrix4::identity;
+    Matrix4 projection;
 };
 
 /**

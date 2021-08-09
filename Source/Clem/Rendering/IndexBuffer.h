@@ -25,7 +25,8 @@ public:
 	 */
     static std::shared_ptr<IndexBuffer> create(const void* data, size_t size);
 
-    virtual void bind() = 0;
+    virtual void   bind()  = 0;
+    virtual size_t count() = 0;
 };
 
 /**
