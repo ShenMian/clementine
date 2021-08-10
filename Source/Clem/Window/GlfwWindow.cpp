@@ -37,6 +37,8 @@ struct Vertex
 };
 ///
 
+static Camera camera;
+
 GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 {
     PROFILE_FUNC();
@@ -123,9 +125,9 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 	)");
 
     Vertex vertices[3] = {
-        {{-0.5f, -0.5f, 0.0f}, {0.0f, 1.0f, 0.0f}},
-        {{0.5f, -0.5f, 0.0f}, {0.0f, 1.0f, 0.0f}},
-        {{0.0f, 0.5f, 0.0f}, {0.0f, 1.0f, 0.0f}},
+        {{-0.5f, -0.375f, 0.0f}, {0.0f, 1.0f, 0.0f}},
+        {{0.5f, -0.375f, 0.0f}, {0.0f, 1.0f, 0.0f}},
+        {{0.0f, 0.375f, 0.0f}, {0.0f, 1.0f, 0.0f}},
     };
     unsigned int indices[] = {0, 1, 2};
 
@@ -161,14 +163,12 @@ void GlfwWindow::update(Time dt)
 {
     PROFILE_FUNC();
 
-    static Camera camera;
-
     auto renderer = Renderer::get();
+    auto size     = getSize();
 
     glClearColor(30.0f / 255, 144.0f / 255, 255.0f / 255, 1.0f); // 湖蓝色
     glClear(GL_COLOR_BUFFER_BIT);
 
-    auto size = getSize();
     camera.projection = Matrix4::createOrthographicOffCenter(-(float)size.x / (float)size.y, (float)size.x / (float)size.y, -1.0f, 1.0f, -1, 1);
     // camera.projection = Matrix4::createOrthographicOffCenter(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
     camera.view.setTranslation({0, 0});
@@ -198,7 +198,7 @@ Size2 GlfwWindow::getSize()
 {
     int x, y;
     glfwGetWindowSize(handle, &x, &y);
-    return Size2(x, y);
+    return {(float)x, (float)y};
 }
 
 void GlfwWindow::setPosition(Size2i size)
