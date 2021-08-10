@@ -154,3 +154,17 @@ using Vec2   = Vector2;
  */
 
 } // namespace clem
+
+namespace std
+{
+
+template <>
+struct hash<clem::Vector2>
+{
+    size_t operator()(const clem::Vector2& v) const
+    {
+        return (size_t)(v.x + v.y);
+    }
+};
+
+} // namespace std

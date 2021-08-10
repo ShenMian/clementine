@@ -142,9 +142,23 @@ public:
 using Point3 = Vector3; // TODO: 使用齐次坐标时, w 不等于 0 时, 点的坐标为 (x/w, y/w, z/w).
 using Vec3   = Vector3;
 
+} // namespace clem
+
 /**
  * end of Math group
  * @}
  */
 
-} // namespace clem
+namespace std
+{
+
+template <>
+struct hash<clem::Vector3>
+{
+    size_t operator()(const clem::Vector3& v) const
+    {
+        return (size_t)(v.x + v.y + v.z);
+    }
+};
+
+} // namespace std
