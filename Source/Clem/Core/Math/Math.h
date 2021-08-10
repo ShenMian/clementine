@@ -7,6 +7,24 @@ constexpr float pi         = 3.14159265358979323846f;
 constexpr float deg_to_rad = pi / 180;
 constexpr float rad_to_deg = 180 / pi;
 
+namespace clem
+{
+
+float radians(float degree);
+float degree(float radians);
+
+inline float radians(float degree)
+{
+    return degree * deg_to_rad;
+}
+
+inline float degree(float radians)
+{
+    return radians * rad_to_deg;
+}
+
+} // namespace clem
+
 #include "Matrix4.h"
 #include "Vector2.h"
 #include "Vector3.h"
