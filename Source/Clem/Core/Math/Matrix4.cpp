@@ -43,14 +43,11 @@ Matrix4::Matrix4(const float* m)
 
 void Matrix4::translate(const Vector3& vec)
 {
-    Matrix4 mat(Matrix4::identity);
-    mat.m[3][0] = vec.x;
-    mat.m[3][1] = vec.y;
-    mat.m[3][2] = vec.z;
-    *this *= mat;
+    Matrix4 mat;
+    *this *= mat.setTranslation(vec);
 }
 
-void Matrix4::rotate(float angle, Vector3& axis)
+void Matrix4::rotate(float angle, const Vector3& axis)
 {
     if(axis == Vector3::unit_x)
         rotateX(angle);
@@ -64,11 +61,8 @@ void Matrix4::rotate(float angle, Vector3& axis)
 
 void Matrix4::scale(const Vector3& vec)
 {
-    Matrix4 mat(Matrix4::identity);
-    mat.m[0][0] = vec.x;
-    mat.m[1][1] = vec.y;
-    mat.m[2][2] = vec.z;
-    *this *= mat;
+    Matrix4 mat;
+    *this *= mat.setScale(vec);
 }
 
 const float* Matrix4::data() const
@@ -76,43 +70,27 @@ const float* Matrix4::data() const
     return &m[0][0];
 }
 
-void Matrix4::rotateX(float angle)
+Matrix4 Matrix4::createPerspective(float left, float right, float bottom, float top)
 {
-    const float sin = std::sin(angle);
-    const float cos = std::cos(angle);
-
-    Matrix4 mat(Matrix4::identity);
-    mat.m[1][1] = cos;
-    mat.m[1][2] = -sin;
-    mat.m[2][1] = sin;
-    mat.m[2][2] = cos;
-    *this *= mat;
+    return Mat4(); // FIXME
 }
 
-void Matrix4::rotateY(float angle)
+Matrix4 Matrix4::createOrthographic(float zoomX, float zoomY, float nearPlane, float farPlane)
 {
-    const float sin = std::sin(angle);
-    const float cos = std::cos(angle);
-
-    Matrix4 mat(Matrix4::identity);
-    mat.m[0][0] = cos;
-    mat.m[0][2] = sin;
-    mat.m[2][0] = -sin;
-    mat.m[2][2] = cos;
-    *this *= mat;
+    return Matrix4();
 }
 
-void Matrix4::rotateZ(float angle)
+Matrix4 Matrix4::createOrthographicOffCenter(float l, float r, float b, float t, float n, float f)
 {
-    const float sin = std::sin(angle);
-    const float cos = std::cos(angle);
-
-    Matrix4 mat(Matrix4::identity);
-    mat.m[0][0] = cos;
-    mat.m[0][1] = -sin;
-    mat.m[1][0] = sin;
-    mat.m[1][1] = cos;
-    *this *= mat;
+    Matrix4 mat;
+    mat.m[0][0] = 2 / (r - l);
+    mat.m[0][3] = (r + l) / (l - r);
+    mat.m[1][1] = 2 / (t - b);
+    mat.m[1][3] = (t + b) / (b - t);
+    mat.m[2][2] = 2 / (n - f);
+    mat.m[2][3] = (f + n) / (n - f);
+    mat.m[3][3] = 1;
+    return mat;
 }
 
 Vector3 Matrix4::translation() const
@@ -130,10 +108,94 @@ Vector3 Matrix4::scale() const
     return {m[0][0], m[1][1], m[2][2]};
 }
 
+Matrix4& Matrix4::setTranslation(const Vector3& vec)
+{
+    m[3][0] = vec.x;
+    m[3][1] = vec.y;
+    m[3][2] = vec.z;
+    return *this;
+}
+
+// FIXME: 会直接改变缩放
+Matrix4& Matrix4::setRotation(float angle, const Vector3& axis)
+{
+    if(axis == Vector3::unit_x)
+        setRotationX(angle);
+    else if(axis == Vector3::unit_y)
+        setRotationY(angle);
+    else if(axis == Vector3::unit_z)
+        setRotationZ(angle);
+    else
+        Assert::isTrue(false, "unknown axis");
+    return *this;
+}
+
+Matrix4& Matrix4::setScale(const Vector3& vec)
+{
+    m[0][0] = vec.x;
+    m[1][1] = vec.y;
+    m[2][2] = vec.z;
+    return *this;
+}
+
+Matrix4& Matrix4::setRotationX(float angle)
+{
+    const float sin = std::sin(angle);
+    const float cos = std::cos(angle);
+
+    m[1][1] = cos;
+    m[1][2] = -sin;
+    m[2][1] = sin;
+    m[2][2] = cos;
+    return *this;
+}
+
+Matrix4& Matrix4::setRotationY(float angle)
+{
+    const float sin = std::sin(angle);
+    const float cos = std::cos(angle);
+
+    m[0][0] = cos;
+    m[0][2] = sin;
+    m[2][0] = -sin;
+    m[2][2] = cos;
+    return *this;
+}
+
+Matrix4& Matrix4::setRotationZ(float angle)
+{
+    const float sin = std::sin(angle);
+    const float cos = std::cos(angle);
+
+    m[0][0] = cos;
+    m[0][1] = -sin;
+    m[1][0] = sin;
+    m[1][1] = cos;
+    return *this;
+}
+
 Matrix4& Matrix4::inverse()
 {
     // FIXME
     return *this;
+}
+
+void Matrix4::rotateX(float angle)
+{
+    Matrix4 mat;
+    *this *= mat.setRotationX(angle);
+}
+
+void Matrix4::rotateY(float angle)
+{
+    Matrix4 mat;
+    *this *= mat.setRotationY(angle);
+}
+
+void Matrix4::rotateZ(float angle)
+{
+    Matrix4 mat;
+    *this *= mat.setRotationZ(angle);
 }
 
 Matrix4 Matrix4::operator-() const
