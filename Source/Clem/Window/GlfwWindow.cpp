@@ -54,6 +54,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
     glfwSetWindowSizeCallback(handle, [](GLFWwindow* native, int width, int height) {
         auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
+        glViewport(0, 0, width, height);
         if(win->onResize)
             win->onResize({width, height});
     });
@@ -84,8 +85,6 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     });
 
     glfwSetMouseButtonCallback(handle, nullptr);
-
-    glViewport(0, 0, size.x, size.y);
 
     shader = Shader::create(R"(
 		#version 450 core
@@ -169,17 +168,15 @@ void GlfwWindow::update(Time dt)
     glClearColor(30.0f / 255, 144.0f / 255, 255.0f / 255, 1.0f); // 湖蓝色
     glClear(GL_COLOR_BUFFER_BIT);
 
-    /*
-    shader->uploadUniform("u_View", camera.getView());
-    shader->uploadUniform("u_Projection", camera.getProjection());
-    */
-    
-    static Mat4 view, projection;
-    view.rotateX(1 * deg_to_rad);
-    view.rotateY(1 * deg_to_rad);
-    view.rotateZ(1 * deg_to_rad);
-    shader->uploadUniform("u_View", view);
-    shader->uploadUniform("u_Projection", projection);
+    auto size = getSize();
+    camera.projection = Matrix4::createOrthographicOffCenter(-(float)size.x / (float)size.y, (float)size.x / (float)size.y, -1.0f, 1.0f, -1, 1);
+    // camera.projection = Matrix4::createOrthographicOffCenter(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
+    camera.view.setTranslation({0, 0});
+    camera.view.rotateZ(1 * deg_to_rad);
+
+    shader->uploadUniform("u_View", camera.view);
+    shader->uploadUniform("u_Projection", camera.projection);
+
     renderer->submit(vertexArray, shader);
 
     renderGui(dt);
@@ -197,11 +194,11 @@ void GlfwWindow::setSize(Size2i size)
     glfwSetWindowSize(handle, size.x, size.y);
 }
 
-Size2i GlfwWindow::getSize()
+Size2 GlfwWindow::getSize()
 {
-    Size2i size;
-    glfwGetWindowSize(handle, &size.x, &size.y);
-    return size;
+    int x, y;
+    glfwGetWindowSize(handle, &x, &y);
+    return Size2(x, y);
 }
 
 void GlfwWindow::setPosition(Size2i size)

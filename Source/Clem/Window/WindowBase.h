@@ -56,7 +56,7 @@ public:
 	 *
 	 * @return 当前窗口大小.
 	 */
-    virtual Size2i getSize() = 0;
+    virtual Size2 getSize() = 0;
 
     /**
 	 * @brief 设置窗口坐标.

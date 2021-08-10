@@ -98,9 +98,10 @@ void ConsoleWindow::setSize(Size2i size)
     Output::get().setSize(size);
 }
 
-Size2i ConsoleWindow::getSize()
+Size2 ConsoleWindow::getSize()
 {
-    return Output::get().getSize();
+    auto size = Output::get().getSize();
+    return Size2(size.x, size.y);
 
     /*
 	const auto hOut = GetStdHandle(STD_OUTPUT_HANDLE);

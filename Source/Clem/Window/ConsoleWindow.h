@@ -48,7 +48,7 @@ public:
  	  *
  	  * @warning 不代表终端窗口大小.
  	  */
-    Size2i getSize() override;
+    Size2 getSize() override;
 
     /**
 	  * @warning 终端窗口不支持.

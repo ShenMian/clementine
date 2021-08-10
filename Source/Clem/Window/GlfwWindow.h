@@ -64,7 +64,7 @@ public:
     /**
 	 * @brief 获取窗口大小.
 	 */
-    Size2i getSize() override;
+    Size2 getSize() override;
 
     /**
 	 * @brief 设置窗口坐标.
