@@ -28,7 +28,7 @@ Vector3::Vector3(float x, float y, float z)
 {
 }
 
-Vector3::Vector3(const Vector2& v, float z = 0.0f)
+Vector3::Vector3(const Vector2& v, float z)
     : x(v.x), y(v.y), z(z)
 {
 }
