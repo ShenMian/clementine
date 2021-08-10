@@ -47,6 +47,7 @@ thirdparty["spdlog"] = "%{wks.location}/Thirdparty/spdlog"
 thirdparty["openal"] = "%{wks.location}/Thirdparty/openal"
 thirdparty["vulkan"] = "%{wks.location}/Thirdparty/vulkan"
 thirdparty["yaml_cpp"] = "%{wks.location}/Thirdparty/yaml_cpp"
+thirdparty["tiny_obj_loader"] = "%{wks.location}/Thirdparty/tiny_obj_loader"
 thirdparty["googletest"] = "%{wks.location}/Thirdparty/googletest/googletest"
 thirdparty["nlohmann_json"] = "%{wks.location}/Thirdparty/nlohmann_json"
 

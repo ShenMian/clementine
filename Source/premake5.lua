@@ -32,7 +32,8 @@ project "Clementine"
     "%{thirdparty.openal}/include",
     "%{thirdparty.vulkan}/include",
     "%{thirdparty.yaml_cpp}/include",
-    "%{thirdparty.nlohmann_json}/include"}
+    "%{thirdparty.nlohmann_json}/include",
+    "%{thirdparty.tiny_obj_loader}/include"}
 
   links {
     "GLAD",
