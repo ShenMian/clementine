@@ -17,7 +17,7 @@ VKVertexBuffer::VKVertexBuffer(const void* data, size_t size)
                         vk::MemoryPropertyFlagBits::eHostCoherent | vk::MemoryPropertyFlagBits::eHostVisible);
 
     void* bufferData;
-    auto ret = device().mapMemory(memory, 0, static_cast<vk::DeviceSize>(size), {}, &bufferData);
+    auto  ret = device().mapMemory(memory, 0, static_cast<vk::DeviceSize>(size), {}, &bufferData);
     Assert::isTrue(ret == vk::Result::eSuccess);
     std::memcpy(bufferData, data, size);
     device().unmapMemory(memory);

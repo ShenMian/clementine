@@ -22,8 +22,8 @@ namespace clem
 class Vector2
 {
 public:
-    float x = 0.0f;
-    float y = 0.0f;
+    float x = 0.f;
+    float y = 0.f;
 
     /**
 	 * @brief 默认构造函数.

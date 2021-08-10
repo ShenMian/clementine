@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "VKDevice.h"
@@ -25,7 +25,7 @@ void VKDevice::create()
     Assert::isTrue(queueIndex != -1, "can't find suitable queue family");
     queueFamilyIndex = queueIndex;
 
-    float                     queuePriorities = 1.0f;
+    float                     queuePriorities = 1.f;
     vk::DeviceQueueCreateInfo deviceQueueCreateInfo;
     deviceQueueCreateInfo.queueFamilyIndex = queueFamilyIndex;
     deviceQueueCreateInfo.queueCount       = queueFamilyProps[queueFamilyIndex].queueCount;
@@ -111,7 +111,6 @@ vk::PhysicalDevice VKDevice::findSuitablePhysicalDevice() const
 
 bool VKDevice::isSuitable(const vk::PhysicalDevice& device) const
 {
-    // ����Ƿ�Ϊ�����Կ�
     if(device.getProperties().deviceType != vk::PhysicalDeviceType::eDiscreteGpu)
         return false;
     return true;

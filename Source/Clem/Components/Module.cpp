@@ -5,6 +5,9 @@
 #include "Assert.hpp"
 #include "Core/Math/Math.h"
 #include "Logging/Logging.h"
+#include "Rendering/Rendering.h"
+
+#define TINYOBJLOADER_IMPLEMENTATION
 #include <tiny_obj_loader/tiny_obj_loader.h>
 
 namespace fs = std::filesystem;

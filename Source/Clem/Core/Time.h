@@ -10,9 +10,9 @@ namespace clem
 
 /**
  * @brief 时间.
- * 
+ *
  * 表示不同时间单位的时间间隔.
- * 
+ *
  * @waring 不能表示负数.
  */
 class Time

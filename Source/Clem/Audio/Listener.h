@@ -46,7 +46,7 @@ public:
 	 * @param y 听者的 Y 坐标.
 	 * @param z 听者的 Z 坐标.
 	 */
-    static void setPosition(float x, float y, float z = 0.0f);
+    static void setPosition(float x, float y, float z = 0.f);
 
     /**
 	 * @brief 获取听者位置.
@@ -69,7 +69,7 @@ public:
 	 * @param y 听者 Y 方向上的速度.
 	 * @param y 听者 Y 方向上的速度.
 	 */
-    static void setVelocity(float x, float y, float z = 0.0f);
+    static void setVelocity(float x, float y, float z = 0.f);
 
     /**
 	 * @brief 获取听者速度.

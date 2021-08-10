@@ -121,7 +121,7 @@ void Sound::loadWavFile(const fs::path& path)
     file.read(reinterpret_cast<char*>(&riffHeader), sizeof(riffHeader));
     Assert::isTrue(file.good(), "unable to read data from file");
     Assert::isTrue(std::memcmp(riffHeader.id, "RIFF", 4) == 0 && std::memcmp(riffHeader.format, "WAVE", 4) == 0,
-        "incorrect file content");
+                   "incorrect file content");
 
     file.read((char*)&waveFormat, sizeof(waveFormat));
     Assert::isTrue(file.good(), "unable to read data from file");

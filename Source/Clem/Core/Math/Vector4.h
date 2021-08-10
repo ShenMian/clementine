@@ -22,10 +22,10 @@ class Vector3;
 class Vector4
 {
 public:
-    float x = 0.0f;
-    float y = 0.0f;
-    float z = 0.0f;
-    float w = 0.0f;
+    float x = 0.f;
+    float y = 0.f;
+    float z = 0.f;
+    float w = 0.f;
 
     /**
 	 * @brief 默认构造函数.
@@ -39,14 +39,14 @@ public:
 	 * @param y y坐标.
 	 * @param z z坐标.
 	 */
-    Vector4(float x, float y, float z, float w = 0.0f);
+    Vector4(float x, float y, float z, float w = 0.f);
 
     /**
 	 * @brief 构造函数.
 	 *
 	 * @param v 二维向量.
 	 */
-    Vector4(const Vector3& v, float w = 0.0f);
+    Vector4(const Vector3& v, float w = 0.f);
 };
 
 using Vec4 = Vector4;

@@ -93,7 +93,7 @@ public:
 	 * @param y 声源的 Y 坐标.
 	 * @param z 声源的 Z 坐标.
 	 */
-    void setPosition(float x, float y, float z = 0.0f);
+    void setPosition(float x, float y, float z = 0.f);
 
     /**
 	 * @brief 获取声源位置.
@@ -116,7 +116,7 @@ public:
 	 * @param y 声源 Y 方向上的速度.
 	 * @param y 声源 Y 方向上的速度.
 	 */
-    void setVelocity(float x, float y, float z = 0.0f);
+    void setVelocity(float x, float y, float z = 0.f);
 
     /**
 	 * @brief 获取声源速度.

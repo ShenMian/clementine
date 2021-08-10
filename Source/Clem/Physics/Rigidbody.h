@@ -55,7 +55,7 @@ public:
 	 */
     Vector2 getAcceleration() const;
 
-    float mass = 1.0f;
+    float mass = 1.f;
     Type  type = Type::Kinematic;
 
 private:

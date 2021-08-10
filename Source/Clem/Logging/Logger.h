@@ -78,9 +78,9 @@ public:
     static void                    remove(const std::string& name);
     static std::shared_ptr<Logger> get(const std::string& name);
 
-	static void flushAll();
+    static void flushAll();
 
-	static void init();
+    static void init();
     static void deinit();
 
 private:

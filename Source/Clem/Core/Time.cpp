@@ -15,7 +15,7 @@ Time::Time(uint64_t us)
 
 [[nodiscard]] float Time::seconds() const
 {
-    return (microseconds_ / 1000000.0f);
+    return (microseconds_ / 1000000.f);
 }
 
 [[nodiscard]] uint32_t Time::milliseconds() const

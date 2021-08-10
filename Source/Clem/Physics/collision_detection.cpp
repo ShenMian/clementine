@@ -88,7 +88,7 @@ bool collision(const CircleCollider& c, const Line2& l)
 
 	const auto t = startToCenter.dot(startToEnd) / startToEnd.dot(startToEnd);
 
-	if(t < 0.0f || t > 1.0f)
+	if(t < 0.f || t > 1.f)
 		return false;
 
 	const auto closestPoint = l.start + startToEnd * t;

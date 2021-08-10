@@ -55,7 +55,7 @@ private:
         static std::array<float, 120> fpsArray;
         static int                    i = 0;
         if(i < 120)
-            fpsArray[i++] = 1000.0f / dt.milliseconds();
+            fpsArray[i++] = 1000.f / dt.milliseconds();
         else
             i = 0;
         // auto fps = std::accumulate(fpsArray.begin(), fpsArray.end(), 0) / fpsArray.size();
@@ -70,7 +70,7 @@ private:
             color = green;
         ImGui::TextColored(color, "%3u", fps);
         ImGui::SameLine();
-        ImGui::Text("FPS, %4.1f ms/frame", 1000.0f / fps);
+        ImGui::Text("FPS, %4.1f ms/frame", 1000.f / fps);
     }
 
     bool visible = true;

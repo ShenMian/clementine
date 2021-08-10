@@ -37,7 +37,7 @@ public:
     }
 
 private:
-    const Vector2 gravity = {0.0f, 9.8f};
+    const Vector2 gravity = {0.f, 9.8f};
 };
 
 /**

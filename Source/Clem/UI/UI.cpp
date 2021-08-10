@@ -22,8 +22,8 @@ void UI::init(WindowBase* window)
     auto& io = ImGui::GetIO();
 
     // 自定义字体
-    // io.Fonts->AddFontFromFileTTF("../Assets/Fonts/open_sans/OpenSans-Bold.ttf", 18.0f);
-    // io.FontDefault = io.Fonts->AddFontFromFileTTF("../Assets/Fonts/open_sans/OpenSans-Regular.ttf", 18.0f);
+    // io.Fonts->AddFontFromFileTTF("../Assets/Fonts/open_sans/OpenSans-Bold.ttf", 18.f);
+    // io.FontDefault = io.Fonts->AddFontFromFileTTF("../Assets/Fonts/open_sans/OpenSans-Regular.ttf", 18.f);
 
     switch(Renderer::getAPI())
     {

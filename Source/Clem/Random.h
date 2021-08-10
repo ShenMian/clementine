@@ -51,7 +51,7 @@ public:
 	 * @param min 范围下限, 包含, 默认值: 0.
 	 * @param max 范围上限, 包含, 默认值: 1.
 	 */
-    float getFloat(float min = 0.0f, float max = 1.0f);
+    float getFloat(float min = 0.f, float max = 1.f);
 
     /**
 	 * @brief 生成指定范围内的随机二维点.

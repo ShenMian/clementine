@@ -61,7 +61,7 @@ Vector3& Vector3::normalize()
     const auto len = size();
     if(len < FLT_EPSILON)
         return *this;
-    return *this *= 1.0f / len;
+    return *this *= 1.f / len;
 }
 
 float Vector3::dot(const Vector3& v) const
@@ -92,7 +92,7 @@ void Vector3::rotate(const Vector3& point, float angle)
 
 Vector3 Vector3::getMidPoint(const Vector3& p) const
 {
-    return Vector3((x + p.x) / 2.0f, (y + p.y) / 2.0f, (z + p.z) / 2.0f);
+    return Vector3((x + p.x) / 2.f, (y + p.y) / 2.f, (z + p.z) / 2.f);
 }
 float& Vector3::operator[](size_t index)
 {

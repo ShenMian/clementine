@@ -11,16 +11,16 @@ namespace clem
 {
 
 const Matrix4 Matrix4::identity = {
-    1.0f, 0.0f, 0.0f, 0.0f,
-    0.0f, 1.0f, 0.0f, 0.0f,
-    0.0f, 0.0f, 1.0f, 0.0f,
-    0.0f, 0.0f, 0.0f, 1.0f};
+    1.f, 0.f, 0.f, 0.f,
+    0.f, 1.f, 0.f, 0.f,
+    0.f, 0.f, 1.f, 0.f,
+    0.f, 0.f, 0.f, 1.f};
 
 const Matrix4 Matrix4::zero = {
-    0.0f, 0.0f, 0.0f, 0.0f,
-    0.0f, 0.0f, 0.0f, 0.0f,
-    0.0f, 0.0f, 0.0f, 0.0f,
-    0.0f, 0.0f, 0.0f, 0.0f};
+    0.f, 0.f, 0.f, 0.f,
+    0.f, 0.f, 0.f, 0.f,
+    0.f, 0.f, 0.f, 0.f,
+    0.f, 0.f, 0.f, 0.f};
 
 Matrix4::Matrix4()
     : Matrix4(Matrix4::identity)

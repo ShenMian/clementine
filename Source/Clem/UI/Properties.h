@@ -161,20 +161,20 @@ private:
         };
 
         buttonStyle styles[] = {
-            {{0.8f, 0.1f, 0.15f, 1.0f}, {0.9f, 0.2f, 0.2f, 1.0f}, {0.8f, 0.1f, 0.15f, 1.0f}}, // red
-            {{0.2f, 0.7f, 0.2f, 1.0f}, {0.3f, 0.8f, 0.3f, 1.0f}, {0.2f, 0.7f, 0.2f, 1.0f}}    // green
+            {{0.8f, 0.1f, 0.15f, 1.f}, {0.9f, 0.2f, 0.2f, 1.f}, {0.8f, 0.1f, 0.15f, 1.f}}, // red
+            {{0.2f, 0.7f, 0.2f, 1.f}, {0.3f, 0.8f, 0.3f, 1.f}, {0.2f, 0.7f, 0.2f, 1.f}}    // green
         };
 
         const char* strs[] = {"X", "Y"};
 
         auto   bold       = ImGui::GetIO().Fonts->Fonts[0];
-        float  fontHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
-        ImVec2 size(fontHeight + 3.0f, fontHeight);
+        float  fontHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.f;
+        ImVec2 size(fontHeight + 3.f, fontHeight);
 
         ImGui::PushID(label.c_str());
 
         ImGui::Columns(2);
-        ImGui::SetColumnWidth(0, 100.0f);
+        ImGui::SetColumnWidth(0, 100.f);
         ImGui::Text(label.c_str());
         ImGui::NextColumn();
 
@@ -185,12 +185,12 @@ private:
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, styles[i].hovered);
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, styles[i].active);
             if(ImGui::Button(strs[i], size))
-                value[i] = 0.0f;
+                value[i] = 0.f;
             ImGui::PopStyleColor(3);
             ImGui::PopFont();
             ImGui::SameLine();
             ImGui::PushItemWidth(50);
-            ImGui::DragFloat((std::string("##") + std::to_string(i)).c_str(), &value[i], 0.1f, 0.0f, 0.0f, "%.2f");
+            ImGui::DragFloat((std::string("##") + std::to_string(i)).c_str(), &value[i], 0.1f, 0.f, 0.f, "%.2f");
             ImGui::PopItemWidth();
             ImGui::SameLine();
         }

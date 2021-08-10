@@ -58,7 +58,7 @@ float Source::getVolume()
 
 void Source::setPitch(float p)
 {
-    Assert::isTrue(0.5f <= p && p <= 2.0f);
+    Assert::isTrue(0.5f <= p && p <= 2.f);
     alSourcef(id, AL_PITCH, p);
     Assert::isTrue(alGetError() == AL_NO_ERROR);
 }

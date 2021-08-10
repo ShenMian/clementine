@@ -51,7 +51,7 @@ Vector2& Vector2::normalize()
     const auto len = size();
     if(len < FLT_EPSILON)
         return *this;
-    return *this *= 1.0f / len;
+    return *this *= 1.f / len;
 }
 
 float Vector2::dot(const Vector2& v) const
@@ -87,7 +87,7 @@ void Vector2::rotate(const Vector2& point, float angle)
 
 Vector2 Vector2::getMidPoint(const Vector2& p) const
 {
-    return Vector2((x + p.x) / 2.0f, (y + p.y) / 2.0f);
+    return Vector2((x + p.x) / 2.f, (y + p.y) / 2.f);
 }
 
 float Vector2::area() const

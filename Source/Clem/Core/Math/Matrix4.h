@@ -50,11 +50,10 @@ public:
     Matrix4&     inverse();
     const float* data() const;
 
-
     static Matrix4 createPerspective(float fieldOfView, float aspectRatio, float nearPlane, float farPlane);
     static Matrix4 createOrthographic(float zoomX, float zoomY, float nearPlane, float farPlane);
     static Matrix4 createOrthographicOffCenter(float left, float right, float bottom, float top,
-                                        float zNearPlane, float zFarPlane);
+                                               float zNearPlane, float zFarPlane);
 
     Matrix4  operator-() const;
     Matrix4& operator=(const Matrix4&);

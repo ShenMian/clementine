@@ -22,9 +22,9 @@ class Vector2;
 class Vector3
 {
 public:
-    float x = 0.0f;
-    float y = 0.0f;
-    float z = 0.0f;
+    float x = 0.f;
+    float y = 0.f;
+    float z = 0.f;
 
     /**
 	 * @brief 默认构造函数.
@@ -38,14 +38,14 @@ public:
 	 * @param y y坐标.
 	 * @param z z坐标.
 	 */
-    Vector3(float x, float y, float z = 0.0f);
+    Vector3(float x, float y, float z = 0.f);
 
     /**
 	 * @brief 构造函数.
 	 *
 	 * @param v 二维向量.
 	 */
-    Vector3(const Vector2& v, float z = 0.0f);
+    Vector3(const Vector2& v, float z = 0.f);
 
     /**
 	 * @brief 获取长度.
