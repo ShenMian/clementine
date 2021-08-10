@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -18,12 +18,6 @@ namespace clem
 class Camera
 {
 public:
-    void setPosition(const Point3& pos);
-
-    const Matrix4& getView() const;
-    const Matrix4& getProjection() const;
-
-private:
     Matrix4 view;
     Matrix4 projection;
 };
