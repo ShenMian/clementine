@@ -11,33 +11,18 @@
 #include <cstdio>
 #include <glad/glad.h>
 #include <glfw/glfw3.h>
-#include <vulkan/vulkan.hpp>
 
 #include <imgui/backends/imgui_impl_glfw.h>
 #include <imgui/backends/imgui_impl_opengl3.h>
 #include <imgui/backends/imgui_impl_vulkan.h>
 #include <imgui/imgui.h>
 
-using std::string;
+#include "Components/Components.h"
 
-///
-#include "Core/Math/Math.h"
-///
+using std::string;
 
 namespace clem
 {
-
-///
-struct Vertex
-{
-    Vector3 position;
-    Vector3 color;
-    Vector3 normal;
-    Vector2 uv;
-};
-///
-
-static Camera camera;
 
 GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 {
@@ -139,8 +124,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
         {"a_Position", Shader::Type::Float3},
         {"a_Color", Shader::Type::Float3},
         {"a_Normal", Shader::Type::Float3},
-        {"a_Uv", Shader::Type::Float2},
-    };
+        {"a_Uv", Shader::Type::Float2}};
 
     vertexArray->setIndexBuffer(indexBuffer);
     vertexArray->addVertexBuffer(vertexBuffer);
@@ -169,15 +153,20 @@ void GlfwWindow::update(Time dt)
     glClearColor(30.f / 255, 144.f / 255, 255.f / 255, 1.f); // 湖蓝色
     glClear(GL_COLOR_BUFFER_BIT);
 
+    static Camera camera;
     camera.projection = Matrix4::createOrthographicOffCenter(-(float)size.x / (float)size.y, (float)size.x / (float)size.y, -1.f, 1.f, -1, 1);
-    // camera.projection = Matrix4::createOrthographicOffCenter(-1.f, 1.f, -1.f, 1.f, -1.f, 1.f);
-    camera.view.setTranslation({0, 0});
-    camera.view.rotateZ(1 * deg_to_rad);
+    // camera.view.setTranslation({0, 0});
+    camera.view.rotateX(radians(1));
+    camera.view.rotateY(radians(1));
 
     shader->uploadUniform("u_View", camera.view);
     shader->uploadUniform("u_Projection", camera.projection);
 
-    renderer->submit(vertexArray, shader);
+    Model model;
+    model.load("../assets/models/cube.obj");
+    renderer->submit(model.vertexArray, shader);
+
+    // renderer->submit(vertexArray, shader);
 
     renderGui(dt);
     glfwSwapBuffers(handle);
