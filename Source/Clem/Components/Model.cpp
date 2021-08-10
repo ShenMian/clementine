@@ -1,9 +1,8 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "Module.h"
+#include "Model.h"
 #include "Assert.hpp"
-#include "Core/Math/Math.h"
 #include "Logging/Logging.h"
 #include "Rendering/Rendering.h"
 
@@ -12,22 +11,31 @@
 
 namespace fs = std::filesystem;
 
+namespace std
+{
+
+template <>
+struct hash<clem::Vertex>
+{
+    size_t operator()(const clem::Vertex& v) const
+    {
+        size_t hash = 0;
+        clem::hashCombine(hash, v.position, v.color, v.normal, v.uv);
+        return hash;
+    }
+};
+
+} // namespace std
+
 namespace clem
 {
 
-struct Vertex
-{
-    Vector3 position;
-    Vector3 color;
-    Vector3 normal;
-    Vector2 uv;
-};
-
-void Module::load(std::filesystem::path path)
+void Model::load(std::filesystem::path path)
 {
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
 
-    std::vector<Vertex> vertices;
+    std::vector<Vertex>       vertices;
+    std::vector<unsigned int> indices;
 
     tinyobj::attrib_t                attrib;
     std::vector<tinyobj::shape_t>    shapes;
@@ -40,6 +48,7 @@ void Module::load(std::filesystem::path path)
     if(warn.empty())
         CLEM_LOG_WARN("core", std::format("loading module warn: {}", warn));
 
+    std::unordered_map<Vertex, unsigned int> uniqueVertices;
     for(const auto& shape : shapes)
     {
         for(const auto& index : shape.mesh.indices)
@@ -74,9 +83,25 @@ void Module::load(std::filesystem::path path)
                     attrib.vertices[2 * index.texcoord_index + 0],
                     attrib.vertices[2 * index.texcoord_index + 1]};
 
-            vertices.emplace_back(vertex);
+            if(uniqueVertices.count(vertex) == 0)
+            {
+                uniqueVertices[vertex] = static_cast<uint32_t>(vertices.size());
+                vertices.push_back(vertex);
+            }
+            indices.push_back(uniqueVertices[vertex]);
         }
     }
+
+    vertexBuffer = VertexBuffer::create(vertices.data(), vertices.size() * sizeof(vertices[0]));
+    vertexBuffer->layout = {
+        {"a_Position", Shader::Type::Float3},
+        {"a_Color", Shader::Type::Float3},
+        {"a_Normal", Shader::Type::Float3},
+        {"a_Uv", Shader::Type::Float2}};
+    indexBuffer = IndexBuffer::create(indices.data(), indices.size() * sizeof(indices[0]));
+    vertexArray = VertexArray::create();
+    vertexArray->addVertexBuffer(vertexBuffer);
+    vertexArray->setIndexBuffer(indexBuffer);
 }
 
 } // namespace clem
