@@ -21,7 +21,9 @@ class GLRenderer : public Renderer
 public:
     static GLRenderer& get();
 
-    void submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader);
+    void beginFrame() override;
+    void endFrame() override;
+    void submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader) override;
 
     void init() override;
     void deinit() override;

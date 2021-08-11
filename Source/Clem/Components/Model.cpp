@@ -14,7 +14,12 @@ namespace fs = std::filesystem;
 namespace clem
 {
 
-void Model::load(std::filesystem::path path)
+Model::Model(const fs::path& path)
+{
+    load(path);
+}
+
+void Model::load(const fs::path& path)
 {
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
 

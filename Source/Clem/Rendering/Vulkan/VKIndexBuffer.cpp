@@ -1,26 +1,28 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "VKVertexBuffer.h"
+#include "VKIndexBuffer.h"
 #include "Assert.hpp"
 #include "VKRenderer.h"
 
 namespace clem
 {
 
-VKVertexBuffer::VKVertexBuffer(const std::vector<value_type>& buf)
-    : VKVertexBuffer(buf.data(), buf.size() * sizeof(value_type))
+
+
+VKIndexBuffer::VKIndexBuffer(const std::vector<value_type>& buf)
+    : VKIndexBuffer(buf.data(), buf.size() * sizeof(value_type))
 {
 }
 
-VKVertexBuffer::VKVertexBuffer(const void* data, size_t size)
+VKIndexBuffer::VKIndexBuffer(const void* data, size_t size)
 {
     size_ = size;
+    count_ = size / sizeof(value_type);
 
     auto& device = VKRenderer::get().device;
 
-    // Host: CPU, Device: GPU
-    device.createBuffer(buffer, memory, size, vk::BufferUsageFlagBits::eVertexBuffer,
+    device.createBuffer(buffer, memory, size, vk::BufferUsageFlagBits::eIndexBuffer,
                         vk::MemoryPropertyFlagBits::eHostCoherent | vk::MemoryPropertyFlagBits::eHostVisible);
 
     void* bufferData;
@@ -30,12 +32,12 @@ VKVertexBuffer::VKVertexBuffer(const void* data, size_t size)
     device().unmapMemory(memory);
 }
 
-VKVertexBuffer::~VKVertexBuffer()
+VKIndexBuffer::~VKIndexBuffer()
 {
     VKRenderer::get().device.destroyBuffer(buffer);
 }
 
-void VKVertexBuffer::bind()
+void VKIndexBuffer::bind()
 {
 }
 

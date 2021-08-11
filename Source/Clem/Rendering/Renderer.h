@@ -54,6 +54,8 @@ public:
 	 */
     static API getAPI();
 
+    virtual void beginFrame() = 0;
+    virtual void endFrame() = 0;
     virtual void submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader) = 0;
 
     virtual void init()   = 0;

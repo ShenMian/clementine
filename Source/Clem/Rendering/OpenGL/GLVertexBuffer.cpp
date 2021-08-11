@@ -17,6 +17,8 @@ GLVertexBuffer::GLVertexBuffer(const std::vector<value_type>& buf)
 
 GLVertexBuffer::GLVertexBuffer(const void* data, size_t size)
 {
+    size_ = size;
+
     glCreateBuffers(1, &handle);
     bind();
     glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);

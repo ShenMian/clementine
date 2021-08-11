@@ -33,4 +33,9 @@ VKCommandBuffer::operator vk::CommandBuffer()
     return handle;
 }
 
+vk::CommandBuffer& VKCommandBuffer::operator()()
+{
+    return handle;
+}
+
 } // namespace clem

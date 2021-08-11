@@ -5,6 +5,7 @@
 #include "Assert.hpp"
 #include "Core/Application.h"
 #include "Logging/Logging.h"
+#include "Rendering/VertexArray.h"
 #include "Version.h"
 #include <cassert>
 #include <vector>
@@ -32,8 +33,19 @@ VKRenderer& VKRenderer::get()
     return *instance;
 }
 
+void VKRenderer::beginFrame()
+{
+    cmdBuffer.begin();
+}
+
+void VKRenderer::endFrame()
+{
+    cmdBuffer.end();
+}
+
 void VKRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader)
 {
+    // cmdBuffer().drawIndexed(vertexArray->getIndexBuffer()->count(), 1, 0, 0, 0);
 }
 
 void VKRenderer::init()
@@ -42,13 +54,13 @@ void VKRenderer::init()
     createDebugCallback();
     device.create();
 
-    commandPool.create();
-    commandBuffer = commandPool.allocateCommandBuffer();
-    commandBuffer.begin();
+    cmdPool.create();
+    cmdBuffer = cmdPool.allocateCommandBuffer();
+    cmdBuffer.begin();
 
     vk::SubmitInfo                 submitInfo;
     std::vector<vk::CommandBuffer> commandBuffers(1);
-    commandBuffers[0]             = commandBuffer;
+    commandBuffers[0]             = cmdBuffer;
     submitInfo.commandBufferCount = 1;
     submitInfo.pCommandBuffers    = commandBuffers.data();
 
@@ -58,8 +70,8 @@ void VKRenderer::init()
 
 void VKRenderer::deinit()
 {
-    commandBuffer.end();
-    commandPool.destroy();
+    cmdBuffer.end();
+    cmdPool.destroy();
 
     device.destroy();
     destroyDebugCallback();

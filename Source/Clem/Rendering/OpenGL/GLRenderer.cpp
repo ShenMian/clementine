@@ -15,6 +15,14 @@ GLRenderer& GLRenderer::get()
     return *instance;
 }
 
+void GLRenderer::beginFrame()
+{
+}
+
+void GLRenderer::endFrame()
+{
+}
+
 void GLRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader)
 {
     static_assert(sizeof(IndexBuffer::value_type) == sizeof(unsigned int));

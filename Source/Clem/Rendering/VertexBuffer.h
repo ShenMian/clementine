@@ -46,8 +46,8 @@ public:
             bool         normalized;
             size_t       offset;
 
-            size_t count() const;
             size_t size() const;
+            size_t count() const;
 
         private:
             static std::unordered_map<Shader::Type, size_t> sizeOf;
@@ -86,9 +86,14 @@ public:
 	 */
     static std::shared_ptr<VertexBuffer> create(const void* data, size_t size);
 
+    size_t size() const;
+
     virtual void bind() = 0;
 
     Layout layout;
+
+protected:
+    size_t size_;
 };
 
 /**

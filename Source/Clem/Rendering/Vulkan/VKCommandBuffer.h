@@ -24,6 +24,7 @@ public:
     void end();
 
     operator vk::CommandBuffer();
+    vk::CommandBuffer& operator()();
 
 private:
     vk::CommandBuffer handle;

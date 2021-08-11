@@ -16,8 +16,10 @@ GLIndexBuffer::GLIndexBuffer(const std::vector<value_type>& buf)
 }
 
 GLIndexBuffer::GLIndexBuffer(const void* data, size_t size)
-    : count_(size / sizeof(unsigned int))
 {
+    size_ = size;
+    count_ = size / sizeof(value_type);
+
     glCreateBuffers(1, &handle);
     bind();
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
@@ -31,11 +33,6 @@ GLIndexBuffer::~GLIndexBuffer()
 void GLIndexBuffer::bind()
 {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, handle);
-}
-
-size_t GLIndexBuffer::count()
-{
-    return count_;
 }
 
 } // namespace clem

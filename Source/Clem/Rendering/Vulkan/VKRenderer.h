@@ -24,7 +24,10 @@ class VKRenderer : public Renderer
 public:
     static VKRenderer& get();
 
-    void submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader);
+    void beginFrame() override;
+    void endFrame() override;
+    void submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader) override;
+
     void init() override;
     void deinit() override;
 
@@ -44,8 +47,8 @@ private:
     std::vector<const char*>  instanceExtensions;
     vk::DispatchLoaderDynamic dynamicLoader;
 
-    VKCommandPool   commandPool;
-    VKCommandBuffer commandBuffer;
+    VKCommandPool   cmdPool;
+    VKCommandBuffer cmdBuffer;
 };
 
 /**

@@ -33,12 +33,10 @@ public:
 	 */
     ~GLIndexBuffer();
 
-    void   bind() override;
-    size_t count() override;
+    void bind() override;
 
 private:
     handle_type handle;
-    size_t      count_;
 };
 
 } // namespace clem

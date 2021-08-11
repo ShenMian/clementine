@@ -35,8 +35,14 @@ public:
 	 */
     static std::shared_ptr<IndexBuffer> create(const void* data, size_t size);
 
-    virtual void   bind()  = 0;
-    virtual size_t count() = 0;
+	size_t size() const;
+    size_t count() const;
+
+    virtual void bind() = 0;
+
+protected:
+    size_t size_;
+    size_t count_;
 };
 
 /**

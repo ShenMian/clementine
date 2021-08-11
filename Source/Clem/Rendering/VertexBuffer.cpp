@@ -35,6 +35,11 @@ std::shared_ptr<VertexBuffer> VertexBuffer::create(const void* data, size_t size
     return nullptr;
 }
 
+size_t VertexBuffer::size() const
+{
+    return size_;
+}
+
 VertexBuffer::Layout::Layout(const std::initializer_list<Element>& list)
     : elements_(list)
 {
