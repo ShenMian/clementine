@@ -68,20 +68,18 @@ void Model::load(std::filesystem::path path)
                         attrib.colors[colorIndex - 2],
                         attrib.colors[colorIndex - 1],
                         attrib.colors[colorIndex - 0]};
-                else
-                    vertex.color = {1.f, 1.f, 1.f};
             }
 
             if(index.normal_index >= 0)
                 vertex.normal = {
-                    attrib.vertices[3 * index.normal_index + 0],
-                    attrib.vertices[3 * index.normal_index + 1],
-                    attrib.vertices[3 * index.normal_index + 2]};
+                    attrib.normals[3 * index.normal_index + 0],
+                    attrib.normals[3 * index.normal_index + 1],
+                    attrib.normals[3 * index.normal_index + 2]};
 
             if(index.texcoord_index >= 0)
                 vertex.uv = {
-                    attrib.vertices[2 * index.texcoord_index + 0],
-                    attrib.vertices[2 * index.texcoord_index + 1]};
+                    attrib.texcoords[2 * index.texcoord_index + 0],
+                    attrib.texcoords[2 * index.texcoord_index + 1]};
 
             if(uniqueVertices.count(vertex) == 0)
             {
@@ -92,7 +90,7 @@ void Model::load(std::filesystem::path path)
         }
     }
 
-    vertexBuffer = VertexBuffer::create(vertices.data(), vertices.size() * sizeof(vertices[0]));
+    vertexBuffer         = VertexBuffer::create(vertices.data(), vertices.size() * sizeof(vertices[0]));
     vertexBuffer->layout = {
         {"a_Position", Shader::Type::Float3},
         {"a_Color", Shader::Type::Float3},
