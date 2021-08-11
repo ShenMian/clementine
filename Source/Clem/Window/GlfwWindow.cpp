@@ -82,8 +82,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 		layout(location = 2) in vec3 a_Normal;
 		layout(location = 3) in vec2 a_Uv;
 
-        uniform mat4 u_View;
-        uniform mat4 u_Projection;
+        uniform mat4 u_ViewProjection;
 
         out vec3 v_Position;
         out vec3 v_Color;
@@ -92,7 +91,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 		{
             v_Position  = a_Position;
             v_Color     = a_Color;
-			gl_Position = u_Projection * u_View * vec4(a_Position, 1.0);
+			gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
 		}
 	)",
                             R"(
@@ -138,13 +137,14 @@ void GlfwWindow::update(Time dt)
 
     renderer->beginFrame();
 
-    camera.projection = Matrix4::createOrthographicOffCenter(-(float)size.x / (float)size.y, (float)size.x / (float)size.y, -1.f, 1.f, -1, 1);
+    Vector2 scale = {1.f, 1.f};
+    camera.setOrthographic(-(float)size.x / (float)size.y * scale.y, (float)size.x / (float)size.y * scale.y, -1.f * scale.x, 1.f * scale.x, -1, 1);
+
     camera.view.rotateY(radians(1));
     camera.view.rotateX(radians(1));
     camera.view.rotateZ(radians(1));
 
-    shader->uploadUniform("u_View", camera.view);
-    shader->uploadUniform("u_Projection", camera.projection);
+    shader->uploadUniform("u_ViewProjection", camera.getViewProjectionMatrix());
 
     renderer->submit(model.vertexArray, shader);
 
