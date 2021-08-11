@@ -8,8 +8,6 @@
 namespace clem
 {
 
-
-
 VKIndexBuffer::VKIndexBuffer(const std::vector<value_type>& buf)
     : VKIndexBuffer(buf.data(), buf.size() * sizeof(value_type))
 {
@@ -17,7 +15,7 @@ VKIndexBuffer::VKIndexBuffer(const std::vector<value_type>& buf)
 
 VKIndexBuffer::VKIndexBuffer(const void* data, size_t size)
 {
-    size_ = size;
+    size_  = size;
     count_ = size / sizeof(value_type);
 
     auto& device = VKRenderer::get().device;

@@ -35,16 +35,25 @@ VKRenderer& VKRenderer::get()
 
 void VKRenderer::beginFrame()
 {
-    cmdBuffer.begin();
+    cmdBuffer.beginFrame();
 }
 
 void VKRenderer::endFrame()
 {
-    cmdBuffer.end();
+    cmdBuffer.endFrame();
 }
 
 void VKRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader)
 {
+
+    vk::SubmitInfo                 submitInfo;
+    std::vector<vk::CommandBuffer> commandBuffers(1);
+    commandBuffers[0]             = cmdBuffer;
+    submitInfo.commandBufferCount = 1;
+    submitInfo.pCommandBuffers    = commandBuffers.data();
+
+    // device.queue.submit(submitInfo);
+    // device.queue.waitIdle();
     // cmdBuffer().drawIndexed(vertexArray->getIndexBuffer()->count(), 1, 0, 0, 0);
 }
 
@@ -56,21 +65,10 @@ void VKRenderer::init()
 
     cmdPool.create();
     cmdBuffer = cmdPool.allocateCommandBuffer();
-    cmdBuffer.begin();
-
-    vk::SubmitInfo                 submitInfo;
-    std::vector<vk::CommandBuffer> commandBuffers(1);
-    commandBuffers[0]             = cmdBuffer;
-    submitInfo.commandBufferCount = 1;
-    submitInfo.pCommandBuffers    = commandBuffers.data();
-
-    // device.queue.submit(submitInfo);
-    // device.queue.waitIdle();
 }
 
 void VKRenderer::deinit()
 {
-    cmdBuffer.end();
     cmdPool.destroy();
 
     device.destroy();

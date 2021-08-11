@@ -3,6 +3,7 @@
 
 #include "GLRenderer.h"
 #include "Logging/Logging.h"
+#include "Rendering/CommandBuffer.h"
 #include "Rendering/VertexArray.h"
 #include <glad/glad.h>
 
@@ -17,10 +18,12 @@ GLRenderer& GLRenderer::get()
 
 void GLRenderer::beginFrame()
 {
+    cmdBuffer->beginFrame();
 }
 
 void GLRenderer::endFrame()
 {
+    cmdBuffer->endFrame();
 }
 
 void GLRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader)
@@ -39,6 +42,8 @@ void GLRenderer::init()
     // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glEnable(GL_DEPTH_TEST);
+
+    cmdBuffer = CommandBuffer::create();
 
     CLEM_LOG_INFO("render", std::format("physical device: {}", (const char*)glGetString(GL_RENDERER)));
 }

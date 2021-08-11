@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "GLCommandBuffer.h"
 #include "Rendering/Renderer.h"
 
 namespace clem
@@ -30,6 +31,8 @@ public:
 
 private:
     GLRenderer() = default;
+
+    std::shared_ptr<CommandBuffer> cmdBuffer;
 };
 
 /**

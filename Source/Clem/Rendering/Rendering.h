@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Camera.h"
+#include "CommandBuffer.h"
 #include "IndexBuffer.h"
 #include "Renderer.h"
 #include "Shader.h"

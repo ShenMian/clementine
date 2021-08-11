@@ -17,7 +17,7 @@ GLIndexBuffer::GLIndexBuffer(const std::vector<value_type>& buf)
 
 GLIndexBuffer::GLIndexBuffer(const void* data, size_t size)
 {
-    size_ = size;
+    size_  = size;
     count_ = size / sizeof(value_type);
 
     glCreateBuffers(1, &handle);

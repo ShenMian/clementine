@@ -16,16 +16,21 @@ VKCommandBuffer::VKCommandBuffer(const vk::CommandBuffer& handle)
 {
 }
 
-void VKCommandBuffer::begin()
+void VKCommandBuffer::beginFrame()
 {
     vk::CommandBufferBeginInfo beginInfo;
-
     handle.begin(beginInfo);
 }
 
-void VKCommandBuffer::end()
+void VKCommandBuffer::endFrame()
 {
     handle.end();
+}
+
+void VKCommandBuffer::setViewport(int x, int y, int w, int h)
+{
+    vk::Viewport viewport((float)x, (float)y, (float)w, (float)h);
+    handle.setViewport(0, viewport);
 }
 
 VKCommandBuffer::operator vk::CommandBuffer()

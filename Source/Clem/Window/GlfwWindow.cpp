@@ -131,13 +131,13 @@ void GlfwWindow::update(Time dt)
 {
     PROFILE_FUNC();
 
+    static Camera camera;
+
     auto renderer = Renderer::get();
     auto size     = getSize();
 
-    glClearColor(30.f / 255, 144.f / 255, 255.f / 255, 1.f); // 湖蓝色
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    renderer->beginFrame();
 
-    static Camera camera;
     camera.projection = Matrix4::createOrthographicOffCenter(-(float)size.x / (float)size.y, (float)size.x / (float)size.y, -1.f, 1.f, -1, 1);
     camera.view.rotateY(radians(1));
     camera.view.rotateX(radians(1));
@@ -151,6 +151,9 @@ void GlfwWindow::update(Time dt)
     // renderer->submit(vertexArray, shader);
 
     renderGui(dt);
+
+    renderer->endFrame();
+
     glfwSwapBuffers(handle);
     glfwPollEvents();
 }

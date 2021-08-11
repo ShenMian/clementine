@@ -36,7 +36,7 @@ public:
 
     void bind() override;
 
- private:
+private:
     handle_type      buffer;
     vk::DeviceMemory memory;
 };
