@@ -25,6 +25,11 @@ void GLRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_pt
 
 void GLRenderer::init()
 {
+    // glEnable(GL_BLEND);
+    // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glEnable(GL_DEPTH_TEST);
+
     CLEM_LOG_INFO("render", std::format("physical device: {}", (const char*)glGetString(GL_RENDERER)));
 }
 

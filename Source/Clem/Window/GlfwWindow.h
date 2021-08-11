@@ -105,11 +105,8 @@ public:
 private:
     void renderGui(Time dt);
 
-    GLFWwindow*                   handle;
-    std::shared_ptr<Shader>       shader;
-    std::shared_ptr<VertexArray>  vertexArray;
-    std::shared_ptr<VertexBuffer> vertexBuffer;
-    std::shared_ptr<IndexBuffer>  indexBuffer;
+    GLFWwindow*             handle;
+    std::shared_ptr<Shader> shader;
 };
 
 } // namespace clem
