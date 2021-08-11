@@ -9,6 +9,17 @@
 namespace clem
 {
 
+std::shared_ptr<VertexBuffer> VertexBuffer::create(const std::vector<value_type>& data)
+{
+    switch(Renderer::getAPI())
+    {
+        using enum Renderer::API;
+
+    case OpenGL:
+        return std::make_shared<GLVertexBuffer>(data);
+    }
+    return nullptr;
+}
 std::shared_ptr<VertexBuffer> VertexBuffer::create(const void* data, size_t size)
 {
     switch(Renderer::getAPI())

@@ -17,6 +17,13 @@ public:
     /**
 	 * @brief 构造函数.
 	 *
+	 * @param data 缓冲区.
+	 */
+    VKVertexBuffer(const std::vector<value_type>& buffer);
+
+    /**
+	 * @brief 构造函数.
+	 *
 	 * @param data 缓冲区数据指针.
 	 * @param size 缓冲区数据大小.
 	 */

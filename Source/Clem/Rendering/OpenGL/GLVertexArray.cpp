@@ -9,6 +9,8 @@
 namespace clem
 {
 
+static_assert(std::is_same<GLVertexArray::handle_type, GLuint>::value);
+
 static std::unordered_map<Shader::Type, GLenum> GLType = {
     {Shader::Type::Float, GL_FLOAT},
     {Shader::Type::Float2, GL_FLOAT},

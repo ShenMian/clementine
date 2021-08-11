@@ -18,9 +18,21 @@ namespace clem
  * @{
  */
 
+struct Vertex
+{
+    Vector3 position;
+    Vector3 color = {1.f, 1.f, 1.f};
+    Vector3 normal;
+    Vector2 uv;
+
+    bool operator==(const Vertex& rhs) const = default;
+};
+
 class VertexBuffer
 {
 public:
+    using value_type = Vertex;
+
     class Layout
     {
     public:
@@ -62,6 +74,13 @@ public:
     /**
 	 * @brief 创建 VertexBuffer.
 	 *
+	 * @param data 缓冲区.
+	 */
+    static std::shared_ptr<VertexBuffer> create(const std::vector<value_type>& data);
+
+    /**
+	 * @brief 创建 VertexBuffer.
+	 *
 	 * @param data 缓冲区数据指针.
 	 * @param size 缓冲区数据大小.
 	 */
@@ -77,4 +96,27 @@ public:
  * @}
  */
 
+template <typename T, typename... Ts>
+void hashCombine(std::size_t& seed, const T& v, const Ts&... rest)
+{
+    seed ^= std::hash<T>{}(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+    (hashCombine(seed, rest), ...);
+};
+
 } // namespace clem
+
+namespace std
+{
+
+template <>
+struct hash<clem::Vertex>
+{
+    size_t operator()(const clem::Vertex& v) const
+    {
+        size_t hash = 0;
+        clem::hashCombine(hash, v.position, v.color, v.normal, v.uv);
+        return hash;
+    }
+};
+
+} // namespace std

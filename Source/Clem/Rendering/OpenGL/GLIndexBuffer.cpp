@@ -8,7 +8,12 @@
 namespace clem
 {
 
-static_assert(std::is_same<GLIndexBuffer::id_type, GLuint>::value);
+static_assert(std::is_same<GLIndexBuffer::handle_type, GLuint>::value);
+
+GLIndexBuffer::GLIndexBuffer(const std::vector<value_type>& buf)
+    : GLIndexBuffer(buf.data(), buf.size() * sizeof(value_type))
+{
+}
 
 GLIndexBuffer::GLIndexBuffer(const void* data, size_t size)
     : count_(size / sizeof(unsigned int))

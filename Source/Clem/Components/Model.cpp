@@ -11,22 +11,6 @@
 
 namespace fs = std::filesystem;
 
-namespace std
-{
-
-template <>
-struct hash<clem::Vertex>
-{
-    size_t operator()(const clem::Vertex& v) const
-    {
-        size_t hash = 0;
-        clem::hashCombine(hash, v.position, v.color, v.normal, v.uv);
-        return hash;
-    }
-};
-
-} // namespace std
-
 namespace clem
 {
 
@@ -40,8 +24,7 @@ void Model::load(std::filesystem::path path)
     tinyobj::attrib_t                attrib;
     std::vector<tinyobj::shape_t>    shapes;
     std::vector<tinyobj::material_t> materials;
-
-    std::string warn, error;
+    std::string                      warn, error;
 
     bool success = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &error, path.string().c_str());
     Assert::isTrue(success && error.empty(), std::format("loading module error: {}", error));

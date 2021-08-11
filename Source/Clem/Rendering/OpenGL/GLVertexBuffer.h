@@ -11,7 +11,14 @@ namespace clem
 class GLVertexBuffer : public VertexBuffer
 {
 public:
-    using id_type = unsigned int;
+    using handle_type = unsigned int;
+
+    /**
+	 * @brief 构造函数.
+	 *
+	 * @param data 缓冲区.
+	 */
+    GLVertexBuffer(const std::vector<value_type>& buffer);
 
     /**
 	 * @brief 构造函数.
@@ -29,7 +36,7 @@ public:
     void bind() override;
 
 private:
-    id_type handle;
+    handle_type handle;
 };
 
 } // namespace clem

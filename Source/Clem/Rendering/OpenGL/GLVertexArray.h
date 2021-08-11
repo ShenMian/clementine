@@ -14,9 +14,9 @@ namespace clem
 
 class GLVertexArray : public VertexArray
 {
-    using id_type = unsigned int;
-
 public:
+    using handle_type = unsigned int;
+
     GLVertexArray();
     ~GLVertexArray();
 
@@ -28,8 +28,8 @@ public:
     std::shared_ptr<IndexBuffer> getIndexBuffer() const;
 
 private:
-    id_type handle;
-    size_t  index = 0;
+    handle_type handle;
+    size_t      index = 0;
 };
 
 } // namespace clem

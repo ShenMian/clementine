@@ -11,7 +11,14 @@ namespace clem
 class GLIndexBuffer : public IndexBuffer
 {
 public:
-    using id_type = unsigned int;
+    using handle_type = unsigned int;
+
+    /**
+	 * @brief 构造函数.
+	 *
+	 * @param data 缓冲区.
+	 */
+    GLIndexBuffer(const std::vector<value_type>& buffer);
 
     /**
 	 * @brief 构造函数.
@@ -30,8 +37,8 @@ public:
     size_t count() override;
 
 private:
-    id_type handle;
-    size_t  count_;
+    handle_type handle;
+    size_t      count_;
 };
 
 } // namespace clem

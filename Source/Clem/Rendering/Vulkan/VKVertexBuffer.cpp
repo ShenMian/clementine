@@ -8,6 +8,11 @@
 namespace clem
 {
 
+VKVertexBuffer::VKVertexBuffer(const std::vector<value_type>& buf)
+    : VKVertexBuffer(buf.data(), buf.size() * sizeof(Vertex))
+{
+}
+
 VKVertexBuffer::VKVertexBuffer(const void* data, size_t size)
 {
     auto& device = VKRenderer::get().device;

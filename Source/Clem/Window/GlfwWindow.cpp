@@ -105,8 +105,8 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
 		void main()
 		{
-            // color = vec4(v_Color, 0.0);
 			color = vec4(v_Position + 0.5, 0.0);
+            // color = vec4(v_Color, 0.0);
 		}
 	)");
 

@@ -5,6 +5,7 @@
 
 #include <cstddef>
 #include <memory>
+#include <vector>
 
 namespace clem
 {
@@ -17,6 +18,15 @@ namespace clem
 class IndexBuffer
 {
 public:
+    using value_type = unsigned int;
+
+    /**
+	 * @brief 创建 IndexBuffer.
+	 *
+	 * @param data 缓冲区.
+	 */
+    static std::shared_ptr<IndexBuffer> create(const std::vector<value_type>& buffer);
+
     /**
 	 * @brief 创建 IndexBuffer.
 	 *
