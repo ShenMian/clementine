@@ -96,15 +96,6 @@ struct hash<clem::TypeIndex>
     }
 };
 
-template <>
-struct equal_to<clem::TypeIndex>
-{
-    size_t operator()(const clem::TypeIndex& lhs, const clem::TypeIndex& rhs) const
-    {
-        return lhs == rhs;
-    }
-};
-
 }; // namespace std
 
 #endif

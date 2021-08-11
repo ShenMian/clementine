@@ -56,13 +56,4 @@ struct hash<clem::Archtype>
     }
 };
 
-template <>
-struct equal_to<clem::Archtype>
-{
-    size_t operator()(const clem::Archtype& lhs, const clem::Archtype& rhs) const
-    {
-        return lhs == rhs;
-    }
-};
-
 } // namespace std
