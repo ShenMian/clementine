@@ -104,13 +104,13 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
 		void main()
 		{
-			color = vec4(v_Position + 0.5, 0.0);
+			color = vec4(v_Position * 0.1 + 0.6, 0.0);
             // color = vec4(v_Color, 0.0);
 		}
 	)");
 
     // cube.obj, cone.obj, sphere.obj
-    model.load("../assets/models/cube.obj");
+    model.load("../assets/models/weapon/m4a1/m4a1.obj");
 
     UI::init(this);
 
@@ -137,12 +137,12 @@ void GlfwWindow::update(Time dt)
 
     renderer->beginFrame();
 
-    Vector2 scale = {1.f, 1.f};
-    camera.setOrthographic(-(float)size.x / (float)size.y * scale.y, (float)size.x / (float)size.y * scale.y, -1.f * scale.x, 1.f * scale.x, -1, 1);
+    Vector2 scale = Vector2::unit * 40;
+    camera.setOrthographic(-(float)size.x / (float)size.y * scale.y, (float)size.x / (float)size.y * scale.y, -1.f * scale.x, 1.f * scale.x, -50, 50);
 
     camera.view.rotateY(radians(1));
-    camera.view.rotateX(radians(1));
-    camera.view.rotateZ(radians(1));
+    camera.view.rotateX(radians(0.5));
+    // camera.view.rotateZ(radians(1));
 
     shader->uploadUniform("u_ViewProjection", camera.getViewProjectionMatrix());
 
