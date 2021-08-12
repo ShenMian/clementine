@@ -3,21 +3,36 @@
 
 #pragma once
 
+#include "Rendering/VertexBuffer.h"
 #include <d3d12.h>
 
 namespace clem
 {
 
-class D3D12VertexBuffer
+class D3D12VertexBuffer : public VertexBuffer
 {
 public:
-    // using handle_type = ;
+    /**
+	 * @brief 构造函数.
+	 *
+	 * @param data 缓冲区.
+	 */
+    D3D12VertexBuffer(const std::vector<value_type>& buffer);
 
-    void create();
-    void destroy();
+    /**
+	 * @brief 构造函数.
+	 *
+	 * @param data 缓冲区数据指针.
+	 * @param size 缓冲区数据大小.
+	 */
+    D3D12VertexBuffer(const void* data, size_t size);
+
+    /**
+	 * @brief 默认析构函数.
+	 */
+    ~D3D12VertexBuffer();
 
 private:
-    // handle_type handle = nullptr;
 };
 
 } // namespace clem
