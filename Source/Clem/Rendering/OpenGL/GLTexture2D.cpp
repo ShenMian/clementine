@@ -22,8 +22,8 @@ GLTexture2D::GLTexture2D(const fs::path& path)
 {
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
 
-    int channels;
-    auto data = loadFromFile(path, height, width, channels);
+    int  channels;
+    auto data = loadFromFile(path, size.x, size.y, channels);
 
     GLenum internalFormat, dataFormat;
     switch(channels)
@@ -42,16 +42,16 @@ GLTexture2D::GLTexture2D(const fs::path& path)
         assert(false && "format not supported");
     }
 
-    glCreateTextures(GL_TEXTURE_2D, 1, &handle);
-    glTextureStorage2D(handle, 1, internalFormat, width, height);
+    glCreateTextures(GL_TEXTURE_2D, 1, &handle_);
+    glTextureStorage2D(handle_, 1, internalFormat, size.x, size.y);
 
-    glTextureParameteri(handle, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTextureParameteri(handle, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTextureParameteri(handle_, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTextureParameteri(handle_, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-    glTextureParameteri(handle, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTextureParameteri(handle, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTextureParameteri(handle_, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTextureParameteri(handle_, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    glTextureSubImage2D(handle, 0, 0, 0, width, height, dataFormat, GL_UNSIGNED_BYTE, data);
+    glTextureSubImage2D(handle_, 0, 0, 0, size.x, size.y, dataFormat, GL_UNSIGNED_BYTE, data);
 
     assert(glGetError() == GL_NO_ERROR);
 
@@ -60,17 +60,22 @@ GLTexture2D::GLTexture2D(const fs::path& path)
 
 GLTexture2D::~GLTexture2D()
 {
-    glDeleteTextures(1, &handle);
+    glDeleteTextures(1, &handle_);
 }
 
 void GLTexture2D::bind(id_type slot)
 {
-    glBindTextureUnit(slot, handle);
+    glBindTextureUnit(slot, handle_);
 }
 
-void* GLTexture2D::nativeHandle()
+Size2i GLTexture2D::getSize() const
 {
-    return &handle;
+    return size;
+}
+
+void* GLTexture2D::getHandle()
+{
+    return &handle_;
 }
 
 void* GLTexture2D::loadFromFile(const std::filesystem::path& path, int& width, int& height, int& channels)

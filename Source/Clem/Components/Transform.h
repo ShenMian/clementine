@@ -21,6 +21,8 @@ public:
     Vector2 rotation;
     Vector2 scale;
 
+	Matrix4 transform;
+
     /*
 	void   setPosition(const Point2&);
 	Point2 getPosition() const;

@@ -24,9 +24,9 @@ public:
         Orthographic
     };
 
-    void setPerspective(float fieldOfView, float aspectRatio, float nearPlane, float farPlane);
+    void setPerspective(float yFOV, float aspectRatio, float nearPlane, float farPlane);
     void setOrthographic(float left, float right, float bottom, float top,
-                         float zNearPlane, float zFarPlane);
+                         float nearPlane, float farPlane);
 
     const Matrix4& getViewMatrix() const;
     const Matrix4& getProjectionMatrix() const;

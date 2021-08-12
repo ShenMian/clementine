@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Core/Math/Math.h"
+#include "ECS/ECS.h"
 #include <filesystem>
 
 namespace clem
@@ -15,6 +16,8 @@ class VertexBuffer;
 
 struct Model
 {
+    CLEM_DECLARE_TYPE;
+
 public:
     /**
      * @brief 默认构造函数.
@@ -42,5 +45,7 @@ private:
     std::shared_ptr<VertexBuffer> vertexBuffer;
     std::shared_ptr<IndexBuffer>  indexBuffer;
 };
+
+CLEM_DEFINE_TYPE(Model);
 
 } // namespace clem

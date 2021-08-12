@@ -26,6 +26,12 @@ public:
         Main::getWindow()->add(new ui::Properties);
         Main::getWindow()->add(new ui::Setting);
 
+        // cube.obj, cone.obj, sphere.obj
+        
+        auto model = Main::registry.create("M4A1");
+        model.add<Model>("../assets/models/weapon/m4a1.obj");
+        auto& tf = model.add<Transform>().transform.setScale({0.1, 0.1, 0.1});
+
         // 加载音频文件
         pop.loadFromFile("assets/pop.wav");
         score.loadFromFile("assets/score.wav");

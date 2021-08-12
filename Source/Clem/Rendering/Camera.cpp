@@ -6,9 +6,9 @@
 namespace clem
 {
 
-void Camera::setPerspective(float fieldOfView, float aspectRatio, float nearPlane, float farPlane)
+void Camera::setPerspective(float yFOV, float aspectRatio, float n, float f)
 {
-    projection = Matrix4::createPerspective(fieldOfView, aspectRatio, nearPlane, farPlane);
+    projection = Matrix4::createPerspective(yFOV, aspectRatio, n, f);
     dirty      = true;
     type       = Type::Perspective;
 }

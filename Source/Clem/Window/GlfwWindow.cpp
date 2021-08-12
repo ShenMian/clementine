@@ -23,7 +23,6 @@ using std::string;
 
 namespace clem
 {
-static Model model[2];
 
 GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 {
@@ -38,19 +37,26 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     glfwSetWindowUserPointer(handle, static_cast<void*>(this));
 
     glfwSetErrorCallback([](int error, const char* desc) {
+        Assert::isTrue(false, desc);
     });
 
     glfwSetWindowSizeCallback(handle, [](GLFWwindow* native, int width, int height) {
-        auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
+        const auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
         Renderer::get()->setViewport(0, 0, width, height);
         if(win->onResize)
             win->onResize({width, height});
     });
 
     glfwSetWindowCloseCallback(handle, [](GLFWwindow* native) {
-        auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
+        const auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
         if(win->onClose)
             win->onClose();
+    });
+
+    glfwSetScrollCallback(handle, [](GLFWwindow* native, double xOffset, double yOffset) {
+        const auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
+        if(win->onScroll)
+            win->onScroll(xOffset, yOffset);
     });
 
     glfwSetKeyCallback(handle, [](GLFWwindow* native, int key, int scancode, int action, int mods) {
@@ -114,10 +120,6 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 		}
 	)");
 
-    // cube.obj, cone.obj, sphere.obj
-    model[0].load("../assets/models/weapon/m4a1.obj");
-    // model[1].load("../assets/models/weapon/1911.obj");
-
     UI::init(this);
 
     Assert::isTrue(glGetError() == GL_NO_ERROR);
@@ -143,21 +145,27 @@ void GlfwWindow::update(Time dt)
 
     renderer->beginFrame();
 
-    Vector2 scale = Vector2::unit * 5;
-    camera.setOrthographic(-(float)size.x / (float)size.y * scale.y, (float)size.x / (float)size.y * scale.y, -1.f * scale.x, 1.f * scale.x, -50, 50);
+    Vector3 scale = Vector3::unit * 5;
+    camera.setPerspective(radians(50), size.x / size.y, 0.1f, 50.f);
+    // camera.setOrthographic(-(float)size.x / (float)size.y * scale.y, (float)size.x / (float)size.y * scale.y, -scale.x, scale.x, -scale.z, scale.z);
+    camera.view.setTranslation({0, 0, 20});
 
     camera.view.rotateY(radians(1));
-    camera.view.rotateX(radians(0.5));
+    // camera.view.rotateX(radians(0.5));
     // camera.view.rotateZ(radians(1));
 
     shader->uploadUniform("u_ViewProjection", camera.getViewProjectionMatrix());
 
-    renderer->submit(model[0].vertexArray, shader, Mat4().setScale({0.1, 0.1, 0.1}));
-    // renderer->submit(model[1].vertexArray, shader, Mat4().setScale({2, 2, 2}));
+    Main::registry.each<Model>([&](const Entity& e) {
+        auto& model = e.get<Model>();
+        auto& tf    = e.get<Transform>();
 
-    renderGui(dt);
+        renderer->submit(model.vertexArray, shader, tf.transform);
+    });
 
     renderer->endFrame();
+
+    renderGui(dt);
 
     glfwSwapBuffers(handle);
     glfwPollEvents();

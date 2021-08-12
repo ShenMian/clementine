@@ -30,7 +30,7 @@ class Browser : public Layer
             if(ImGui::Button("<"))
                 current = current.parent_path();
 
-        ImGui::Columns((int)(ImGui::GetContentRegionAvail().x / 80));
+        ImGui::Columns((int)(ImGui::GetContentRegionAvail().x / 70));
 
         for(const auto& entry : fs::directory_iterator(current))
         {
@@ -38,7 +38,7 @@ class Browser : public Layer
             if(entry.is_directory())
             {
                 ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
-                if(ImGui::ImageButton(folderIcon->nativeHandle(), {48, 48}, {0, 1}, {1, 0}))
+                if(ImGui::ImageButton(folderIcon->getHandle(), {48, 48}, {0, 1}, {1, 0}))
                     current = entry;
                 ImGui::TextWrapped(filename.c_str());
                 ImGui::PopStyleColor();
@@ -46,7 +46,7 @@ class Browser : public Layer
             else
             {
                 ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
-                ImGui::ImageButton(fileIcon->nativeHandle(), {48, 48}, {0, 1}, {1, 0});
+                ImGui::ImageButton(fileIcon->getHandle(), {48, 48}, {0, 1}, {1, 0});
                 ImGui::TextWrapped(filename.c_str());
                 ImGui::PopStyleColor();
             }

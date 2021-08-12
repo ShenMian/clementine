@@ -4,6 +4,7 @@
 #include "Model.h"
 #include "Assert.hpp"
 #include "Logging/Logging.h"
+#include "Profiler.h"
 #include "Rendering/Rendering.h"
 
 #define TINYOBJLOADER_IMPLEMENTATION
@@ -21,6 +22,8 @@ Model::Model(const fs::path& path)
 
 void Model::load(const fs::path& path)
 {
+    PROFILE_FUNC();
+
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
 
     std::vector<Vertex>       vertices;

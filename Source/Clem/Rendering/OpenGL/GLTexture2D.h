@@ -23,12 +23,14 @@ public:
 	 */
     ~GLTexture2D();
 
-    void  bind(id_type slot) override;
-    void* nativeHandle() override;
+    Size2i getSize() const override;
+    void*  getHandle() override;
+
+    void bind(id_type slot) override;
 
 private:
-    id_type handle;
-    int     height, width;
+    id_type handle_;
+    Size2i  size;
 
     void* loadFromFile(const std::filesystem::path& path, int& width, int& height, int& channels);
 };

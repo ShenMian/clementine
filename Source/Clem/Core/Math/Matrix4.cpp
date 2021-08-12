@@ -70,9 +70,17 @@ const float* Matrix4::data() const
     return &m[0][0];
 }
 
-Matrix4 Matrix4::createPerspective(float left, float right, float bottom, float top)
+Matrix4 Matrix4::createPerspective(float FOV, float aspectRatio, float n, float f)
 {
-    return Mat4(); // FIXME
+    const float tanFOV = std::tan(FOV / 2.f);
+
+    Matrix4 mat;
+    mat.m[0][0]  = 1.f / (aspectRatio * (tanFOV / 2));
+    mat.m[1][1]  = 1.f / (tanFOV / 2);
+    mat.m[2][2]  = f / (f - n);
+    mat.m[2][3]  = 1.f;
+    mat.m[3][2]  = -(f * n) / (f - n);
+    return mat;
 }
 
 Matrix4 Matrix4::createOrthographic(float zoomX, float zoomY, float nearPlane, float farPlane)

@@ -95,8 +95,9 @@ public:
     static void init();
     static void deinit();
 
-    std::function<void(Size2i)> onResize;
-    std::function<void()>       onClose;
+    std::function<void(Size2i)>         onResize;
+    std::function<void(double, double)> onScroll;
+    std::function<void()>               onClose;
 
 protected:
     std::vector<ui::Layer*> layers;
