@@ -26,14 +26,20 @@ void GLRenderer::endFrame()
     cmdBuffer->endFrame();
 }
 
-void GLRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader)
+void GLRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader, const Matrix4& transform)
 {
     static_assert(sizeof(IndexBuffer::value_type) == sizeof(unsigned int));
 
     vertexArray->bind();
     shader->bind();
+    shader->uploadUniform("u_Transform", transform);
     glDrawElements(GL_TRIANGLES, (GLsizei)vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
     assert(glGetError() == GL_NO_ERROR);
+}
+
+void GLRenderer::setViewport(int x, int y, int w, int h)
+{
+    cmdBuffer->setViewport(x, y, w, h);
 }
 
 void GLRenderer::init()

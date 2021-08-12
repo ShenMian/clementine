@@ -23,7 +23,7 @@ using std::string;
 
 namespace clem
 {
-static Model  model;
+static Model model[2];
 
 GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 {
@@ -42,7 +42,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
     glfwSetWindowSizeCallback(handle, [](GLFWwindow* native, int width, int height) {
         auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
-        glViewport(0, 0, width, height);
+        Renderer::get()->setViewport(0, 0, width, height);
         if(win->onResize)
             win->onResize({width, height});
     });
@@ -83,15 +83,19 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 		layout(location = 3) in vec2 a_Uv;
 
         uniform mat4 u_ViewProjection;
+        uniform mat4 u_Transform;
 
         out vec3 v_Position;
         out vec3 v_Color;
+        out vec2 v_Uv;
 
 		void main()
 		{
             v_Position  = a_Position;
             v_Color     = a_Color;
-			gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+            v_Uv        = a_Uv;
+
+			gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
 		}
 	)",
                             R"(
@@ -101,16 +105,18 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
         in vec3 v_Position;
         in vec3 v_Color;
+        in vec2 v_Uv;
 
 		void main()
 		{
-			color = vec4(v_Position * 0.1 + 0.6, 0.0);
+			color = vec4(v_Uv, 0.0, 1.0);
             // color = vec4(v_Color, 0.0);
 		}
 	)");
 
     // cube.obj, cone.obj, sphere.obj
-    model.load("../assets/models/weapon/m4a1/m4a1.obj");
+    model[0].load("../assets/models/weapon/m4a1.obj");
+    // model[1].load("../assets/models/weapon/1911.obj");
 
     UI::init(this);
 
@@ -137,7 +143,7 @@ void GlfwWindow::update(Time dt)
 
     renderer->beginFrame();
 
-    Vector2 scale = Vector2::unit * 40;
+    Vector2 scale = Vector2::unit * 5;
     camera.setOrthographic(-(float)size.x / (float)size.y * scale.y, (float)size.x / (float)size.y * scale.y, -1.f * scale.x, 1.f * scale.x, -50, 50);
 
     camera.view.rotateY(radians(1));
@@ -146,9 +152,8 @@ void GlfwWindow::update(Time dt)
 
     shader->uploadUniform("u_ViewProjection", camera.getViewProjectionMatrix());
 
-    renderer->submit(model.vertexArray, shader);
-
-    // renderer->submit(vertexArray, shader);
+    renderer->submit(model[0].vertexArray, shader, Mat4().setScale({0.1, 0.1, 0.1}));
+    // renderer->submit(model[1].vertexArray, shader, Mat4().setScale({2, 2, 2}));
 
     renderGui(dt);
 

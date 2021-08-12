@@ -43,7 +43,7 @@ void VKRenderer::endFrame()
     cmdBuffer.endFrame();
 }
 
-void VKRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader)
+void VKRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader, const Matrix4& transform)
 {
 
     vk::SubmitInfo                 submitInfo;
@@ -55,6 +55,11 @@ void VKRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_pt
     // device.queue.submit(submitInfo);
     // device.queue.waitIdle();
     // cmdBuffer().drawIndexed(vertexArray->getIndexBuffer()->count(), 1, 0, 0, 0);
+}
+
+void VKRenderer::setViewport(int x, int y, int w, int h)
+{
+    cmdBuffer.setViewport(x, y, w, h);
 }
 
 void VKRenderer::init()

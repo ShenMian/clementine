@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Core/Math/Math.h"
 #include "Platform.h"
 
 #ifdef OS_WIN
@@ -10,6 +11,8 @@
 #endif
 
 #include <memory>
+
+// TODO: 将对 CommandBuffer 的包装实现转移到这里
 
 namespace clem
 {
@@ -54,6 +57,8 @@ public:
 	 */
     static API getAPI();
 
+    virtual void submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader, const Matrix4& transform) = 0;
+
     /**
      * @brief 新帧开始.
      */
@@ -62,9 +67,17 @@ public:
     /**
      * @brief 新帧结束.
      */
-    virtual void endFrame()   = 0;
+    virtual void endFrame() = 0;
 
-    virtual void submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader) = 0;
+    /**
+     * @brief 设置视口.
+     * 
+     * @param x      视口 x 坐标.
+     * @param y      视口 y 坐标.
+     * @param width  视口宽度.
+     * @param height 视口高度.
+     */
+    virtual void setViewport(int x, int y, int width, int height) = 0;
 
     virtual void init()   = 0;
     virtual void deinit() = 0;

@@ -22,7 +22,7 @@ GLTexture2D::GLTexture2D(const fs::path& path)
 {
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
 
-    int  height, width, channels;
+    int channels;
     auto data = loadFromFile(path, height, width, channels);
 
     GLenum internalFormat, dataFormat;
@@ -39,7 +39,7 @@ GLTexture2D::GLTexture2D(const fs::path& path)
         break;
 
     default:
-        assert(false);
+        assert(false && "format not supported");
     }
 
     glCreateTextures(GL_TEXTURE_2D, 1, &handle);
