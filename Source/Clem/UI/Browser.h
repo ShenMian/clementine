@@ -27,36 +27,40 @@ class Browser : public Layer
         assert(fs::exists(current));
 
         if(current != assets)
-        {
             if(ImGui::Button("<"))
                 current = current.parent_path();
-        }
 
-        auto fileIcon = Texture2D::create("../Assets/SMS.png");
-        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
-        ImGui::ImageButton(fileIcon->nativeHandle(), {40, 40}, {0, 1}, {1, 0});
-        ImGui::PopStyleColor();
+        ImGui::Columns((int)(ImGui::GetContentRegionAvail().x / 80));
+
         for(const auto& entry : fs::directory_iterator(current))
         {
-            // TODO: 使用 Texture2D 创建 ImageButton
             auto filename = entry.path().filename().string();
             if(entry.is_directory())
             {
-                if(ImGui::Button(filename.c_str()))
+                ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
+                if(ImGui::ImageButton(folderIcon->nativeHandle(), {48, 48}, {0, 1}, {1, 0}))
                     current = entry;
+                ImGui::TextWrapped(filename.c_str());
+                ImGui::PopStyleColor();
             }
             else
             {
-                ImGui::Button(filename.c_str());
+                ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
+                ImGui::ImageButton(fileIcon->nativeHandle(), {48, 48}, {0, 1}, {1, 0});
+                ImGui::TextWrapped(filename.c_str());
+                ImGui::PopStyleColor();
             }
+            ImGui::NextColumn();
         }
 
         ImGui::End();
     }
 
 private:
-    fs::path assets  = "assets";
-    fs::path current = "assets";
+    fs::path                   assets  = "assets";
+    fs::path                   current = "assets";
+    std::shared_ptr<Texture2D> fileIcon = Texture2D::create("../assets/textures/file_icon.png");
+    std::shared_ptr<Texture2D> folderIcon = Texture2D::create("../assets/textures/folder_icon.png");
 
     bool visible = true;
 };
