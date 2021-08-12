@@ -32,8 +32,9 @@ public:
     void init() override;
     void deinit() override;
 
-    vk::Instance instance;
-    VKDevice     device;
+    vk::Instance    instance;
+    VKDevice        device;
+    VKCommandBuffer cmdBuffer;
 
 private:
     VKRenderer() = default;
@@ -49,7 +50,6 @@ private:
     vk::DispatchLoaderDynamic dynamicLoader;
 
     VKCommandPool   cmdPool;
-    VKCommandBuffer cmdBuffer;
 };
 
 /**

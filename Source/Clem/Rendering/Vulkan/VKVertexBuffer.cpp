@@ -20,7 +20,7 @@ VKVertexBuffer::VKVertexBuffer(const void* data, size_t size)
     auto& device = VKRenderer::get().device;
 
     // Host: CPU, Device: GPU
-    device.createBuffer(buffer, memory, size, vk::BufferUsageFlagBits::eVertexBuffer,
+    device.createBuffer(handle, memory, size, vk::BufferUsageFlagBits::eVertexBuffer,
                         vk::MemoryPropertyFlagBits::eHostCoherent | vk::MemoryPropertyFlagBits::eHostVisible);
 
     void* bufferData;
@@ -32,11 +32,13 @@ VKVertexBuffer::VKVertexBuffer(const void* data, size_t size)
 
 VKVertexBuffer::~VKVertexBuffer()
 {
-    VKRenderer::get().device.destroyBuffer(buffer);
+    VKRenderer::get().device.destroyBuffer(handle);
 }
 
 void VKVertexBuffer::bind()
 {
+    vk::DeviceSize offset = 0;
+    VKRenderer::get().cmdBuffer().bindVertexBuffers(0, handle, offset);
 }
 
 } // namespace clem

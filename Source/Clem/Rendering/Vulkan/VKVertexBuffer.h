@@ -37,7 +37,7 @@ public:
     void bind() override;
 
 private:
-    handle_type      buffer;
+    handle_type      handle;
     vk::DeviceMemory memory;
 };
 
