@@ -26,6 +26,7 @@ public:
     float m[4][4];
 
     Matrix4();
+    Matrix4(const Matrix4&);
     Matrix4(std::initializer_list<float> list);
     Matrix4(const float* m);
 
@@ -47,8 +48,17 @@ public:
     Matrix4& setRotationY(float angle);
     Matrix4& setRotationZ(float angle);
 
+    float        determinant() const;
     Matrix4&     inverse();
+    Matrix4      getInversed() const;
     const float* data() const;
+
+    Vector3 up() const;
+    Vector3 down() const;
+    Vector3 left() const;
+    Vector3 right() const;
+    Vector3 forword() const;
+    Vector3 back() const;
 
     static Matrix4 createPerspective(float fieldOfView, float aspectRatio, float nearPlane, float farPlane);
     static Matrix4 createOrthographic(float zoomX, float zoomY, float nearPlane, float farPlane);
