@@ -6,6 +6,11 @@
 namespace clem
 {
 
+void Camera::lookAt(const Vector3& pos, const Vector3& up)
+{
+    ;
+}
+
 void Camera::setPerspective(float yFOV, float aspectRatio, float n, float f)
 {
     projection = Matrix4::createPerspective(yFOV, aspectRatio, n, f);
@@ -35,6 +40,7 @@ const Matrix4& Camera::getViewProjectionMatrix()
 {
     if(dirty)
     {
+        // viewProjection = projection * view.getInversed();
         viewProjection = view * projection; // FIXME
         dirty          = false;
     }

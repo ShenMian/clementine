@@ -32,7 +32,7 @@ void GLRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_pt
 
     vertexArray->bind();
     shader->bind();
-    shader->uploadUniform("u_Transform", transform);
+    shader->uploadUniform("u_Model", transform);
     glDrawElements(GL_TRIANGLES, (GLsizei)vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
     assert(glGetError() == GL_NO_ERROR);
 }

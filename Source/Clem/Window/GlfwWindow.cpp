@@ -24,6 +24,8 @@ using std::string;
 namespace clem
 {
 
+static Camera camera;
+
 GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 {
     PROFILE_FUNC();
@@ -55,6 +57,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
     glfwSetScrollCallback(handle, [](GLFWwindow* native, double xOffset, double yOffset) {
         const auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
+        camera.view.scale(Vector3(1 + 0.1 * yOffset, 1 + 0.1 * yOffset, 1 + 0.1 * yOffset)); // TODO: 调试用
         if(win->onScroll)
             win->onScroll(xOffset, yOffset);
     });
@@ -89,34 +92,62 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 		layout(location = 3) in vec2 a_Uv;
 
         uniform mat4 u_ViewProjection;
-        uniform mat4 u_Transform;
+        uniform mat4 u_Model;
 
         out vec3 v_Position;
         out vec3 v_Color;
+        out vec3 v_Normal;
         out vec2 v_Uv;
 
 		void main()
 		{
             v_Position  = a_Position;
             v_Color     = a_Color;
+            v_Normal    = a_Normal;
             v_Uv        = a_Uv;
 
-			gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+			gl_Position = u_ViewProjection * u_Model * vec4(a_Position, 1.0);
 		}
 	)",
                             R"(
 		#version 450 core
 
-		layout(location = 0) out vec4 color;
-
         in vec3 v_Position;
         in vec3 v_Color;
+        in vec3 v_Normal;
         in vec2 v_Uv;
+
+        vec4 light()
+        {
+            vec3 light_direction  = normalize(vec3(0.0, 0.0, -1.0));
+            vec3 camera_direction = normalize(vec3(0.0, 0.0, -1.0));
+
+            // 全局光
+            float ka            = 0.1;
+            vec3  ia            = vec3(1.0, 1.0, 1.0);
+            vec3  ambient_light = ka * ia;
+
+            // 漫反射
+            float kd                  = 0.7;
+            vec3  id                  = vec3(1.0, 1.0, 1.0);
+            float amont_diffuse_light = max(0.0, dot(light_direction, v_Normal));
+            vec3  diffuse_light       = kd * amont_diffuse_light * id;
+
+            // 镜面反射
+            float ks                    = 0.1;
+            vec3  is                    = vec3(1.0, 1.0, 1.0);
+            vec3  reflected_light       = reflect(light_direction, v_Normal);
+            float shininess             = 100.0;
+            float amount_specular_light = max(0.0, pow(dot(reflected_light, -camera_direction), shininess));
+            vec3  specular_light        = ks * amount_specular_light * is;
+            
+            return vec4(ambient_light + diffuse_light + specular_light, 1.0);
+        }
 
 		void main()
 		{
-			color = vec4(v_Uv, 0.0, 1.0);
-            // color = vec4(v_Color, 0.0);
+			// gl_FragColor = vec4(v_Uv, 0.0, 1.0) + light();
+            gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0) + light();
 		}
 	)");
 
@@ -138,19 +169,18 @@ void GlfwWindow::update(Time dt)
 {
     PROFILE_FUNC();
 
-    static Camera camera;
-
     auto renderer = Renderer::get();
     auto size     = getSize();
 
     renderer->beginFrame();
 
-    Vector3 scale = Vector3::unit * 5;
     camera.setPerspective(radians(50), size.x / size.y, 0.1f, 50.f);
+    // Vector3 scale = Vector3::unit * 50;
     // camera.setOrthographic(-(float)size.x / (float)size.y * scale.y, (float)size.x / (float)size.y * scale.y, -scale.x, scale.x, -scale.z, scale.z);
+    
     camera.view.setTranslation({0, 0, 20});
 
-    camera.view.rotateY(radians(1));
+    // camera.view.rotateY(radians(1));
     // camera.view.rotateX(radians(0.5));
     // camera.view.rotateZ(radians(1));
 
