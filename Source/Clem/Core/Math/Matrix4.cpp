@@ -35,7 +35,7 @@ Matrix4::Matrix4(const Matrix4& mat)
 
 Matrix4::Matrix4(std::initializer_list<float> list)
 {
-    Assert::isTrue(list.size() == 4 * 4, "too many elements in the initializer list");
+    Assert::isTrue(list.size() == 4 * 4, "incorrect number of elements");
     auto value = list.begin();
     for(size_t x = 0; x < 4; x++)
         for(size_t y = 0; y < 4; y++)

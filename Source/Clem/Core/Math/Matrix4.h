@@ -75,6 +75,7 @@ public:
     Matrix4& operator*=(const Matrix4&);
     Matrix4  operator*(float) const;
     Matrix4& operator*=(float);
+    bool     operator==(const Matrix4&) const = default;
 
     // Vector4 operator*(const Vector4&) const;
 
