@@ -276,6 +276,15 @@ void GLShader::uploadUniform(const std::string& name, float value)
     Assert::isTrue(glGetError() == GL_NO_ERROR);
 }
 
+void GLShader::uploadUniform(const std::string& name, int value)
+{
+    bind();
+    auto location = glGetUniformLocation(handle, name.c_str());
+    glUniform1i(location, value);
+
+    Assert::isTrue(glGetError() == GL_NO_ERROR);
+}
+
 void GLShader::handleError(const std::string& msg)
 {
     // std::vector<char> infoLog(size);

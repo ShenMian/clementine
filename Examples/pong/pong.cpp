@@ -26,7 +26,7 @@ public:
         Main::getWindow()->add(new ui::Properties);
         Main::getWindow()->add(new ui::Setting);
 
-        // cube.obj, cone.obj, sphere.obj
+        // cube.obj, cone.obj, sphere.obj, teapot.obj, wood_dining_chair
         
         auto model = Main::registry.create("M4A1");
         model.add<Model>("../assets/models/weapon/m4a1.obj");

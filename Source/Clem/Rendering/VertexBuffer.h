@@ -28,6 +28,10 @@ struct Vertex
     bool operator==(const Vertex& rhs) const = default;
 };
 
+/**
+ * @brief 顶点缓冲区.
+ * 包含顶点数据以及数据布局.
+ */
 class VertexBuffer
 {
 public:

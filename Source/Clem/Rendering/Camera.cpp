@@ -38,10 +38,10 @@ const Matrix4& Camera::getProjectionMatrix() const
 
 const Matrix4& Camera::getViewProjectionMatrix()
 {
+    dirty = true;
     if(dirty)
     {
-        // viewProjection = projection * view.getInversed();
-        viewProjection = view * projection; // FIXME
+        viewProjection = projection * view.getInversed();
         dirty          = false;
     }
     return viewProjection;

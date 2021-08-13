@@ -42,6 +42,7 @@ public:
     void uploadUniform(const std::string& name, const Vector3& vector) override;
     void uploadUniform(const std::string& name, const Vector2& vector) override;
     void uploadUniform(const std::string& name, float value) override;
+    void uploadUniform(const std::string& name, int value) override;
 
 private:
     vk::PipelineShaderStageCreateInfo createShaderStage(const std::filesystem::path& path, Stage type);

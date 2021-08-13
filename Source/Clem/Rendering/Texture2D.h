@@ -23,7 +23,7 @@ public:
     virtual Size2i getSize() const = 0;
     virtual void*  getHandle()     = 0;
 
-    virtual void bind(unsigned int slot) = 0;
+    virtual void bind(unsigned int slot = 0) = 0;
 };
 
 /**

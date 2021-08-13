@@ -15,6 +15,10 @@ namespace clem
  * @{
  */
 
+/**
+ * @brief 索引缓冲区.
+ * 包含索引数据.
+ */
 class IndexBuffer
 {
 public:

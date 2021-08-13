@@ -59,6 +59,7 @@ public:
     virtual void uploadUniform(const std::string& name, const Vector3& vector) = 0;
     virtual void uploadUniform(const std::string& name, const Vector2& vector) = 0;
     virtual void uploadUniform(const std::string& name, float value)           = 0;
+    virtual void uploadUniform(const std::string& name, int value)             = 0;
 
     virtual void bind() = 0;
 

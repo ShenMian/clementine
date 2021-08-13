@@ -76,6 +76,10 @@ void VKShader::uploadUniform(const std::string& name, float value)
 {
 }
 
+void VKShader::uploadUniform(const std::string& name, int value)
+{
+}
+
 vk::PipelineShaderStageCreateInfo VKShader::createShaderStage(const std::filesystem::path& path, Stage type)
 {
     Assert::isTrue(fs::exists(path), "file doesn't exist");
