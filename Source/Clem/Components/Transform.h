@@ -17,30 +17,18 @@ class Transform
     CLEM_DECLARE_TYPE;
 
 public:
-    Vector2 translation;
-    Vector2 rotation;
-    Vector2 scale;
+    Vector3 translation;
+    Vector3 rotation;
+    Vector3 scale = {1.f, 1.f, 1.f};
 
-	Matrix4 transform;
-
-    /*
-	void   setPosition(const Point2&);
-	Point2 getPosition() const;
-
-	Point2 getWorldPosition();
-
-	void setDirty(bool);
-	bool isDirty() const;
-
-	void       setParent(Transform*);
-	Transform* getParent() const;
+    Matrix4 getModelMatrix();
 
 private:
-	Vector2    local;
-	Vector2    world;
-	bool       dirty  = true;
-	Transform* parent = nullptr;
-	*/
+    bool isDirty() const;
+
+    Vector3 lastTranslation;
+    Vector3 lastRotation;
+    Vector3 lastScale;
 };
 
 CLEM_DEFINE_TYPE(Transform);

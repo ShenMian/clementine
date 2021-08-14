@@ -18,10 +18,9 @@ void Camera::setPerspective(float yFOV, float aspectRatio, float n, float f)
     type       = Type::Perspective;
 }
 
-void Camera::setOrthographic(float l, float r, float b, float t,
-                             float n, float f)
+void Camera::setOrthographic(float w, float h, float n, float f)
 {
-    projection = Matrix4::createOrthographicOffCenter(l, r, b, t, n, f);
+    projection = Matrix4::createOrthographic(w, h, n, f);
     dirty      = true;
     type       = Type::Orthographic;
 }
@@ -41,7 +40,8 @@ const Matrix4& Camera::getViewProjectionMatrix()
     dirty = true;
     if(dirty)
     {
-        viewProjection = projection * view.getInversed();
+        // viewProjection = projection * view.getInversed();
+        viewProjection = view.getInversed() * projection;
         dirty          = false;
     }
     return viewProjection;

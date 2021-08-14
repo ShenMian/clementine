@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #pragma once
@@ -18,14 +18,14 @@ class Vector3;
  */
 
 /**
- * @brief 4x4 矩阵, 单精度浮点数.
+ * @brief 4x4 矩阵, 单精度浮点数. 行优先.
  */
 class Matrix4
 {
 public:
     float m[4][4];
 
-    Matrix4();
+    Matrix4(float v = 1.f);
     Matrix4(const Matrix4&);
     Matrix4(std::initializer_list<float> list);
     Matrix4(const float* m);
@@ -48,9 +48,35 @@ public:
     Matrix4& setRotationY(float angle);
     Matrix4& setRotationZ(float angle);
 
-    float        determinant() const;
-    Matrix4&     inverse();
-    Matrix4      getInversed() const;
+    /**
+     * @brief 计算行列式的值.
+     */
+    float determinant() const;
+
+    /**
+     * @brief 求逆.
+     */
+    Matrix4& inverse();
+
+    /**
+     * @brief 获取求逆结果.
+     */
+    Matrix4 getInversed() const;
+
+    /**
+     * @brief 转置.
+     */
+    void transpose();
+
+    /**
+     * @brief 获取转置结果.
+     */
+    Matrix4 getTransposed() const;
+
+    /**
+     * @brief 返回矩阵数据.
+     * 行优先矩阵. (有一说一, 比较喜欢列优先矩阵)
+     */
     const float* data() const;
 
     Vector3 up() const;
@@ -60,10 +86,38 @@ public:
     Vector3 forword() const;
     Vector3 back() const;
 
-    static Matrix4 createPerspective(float fieldOfView, float aspectRatio, float nearPlane, float farPlane);
-    static Matrix4 createOrthographic(float zoomX, float zoomY, float nearPlane, float farPlane);
+    /**
+     * @brief 创建截头锥体观察体, 用于透视投影.
+     *
+     * @param yFOV        垂直视角范围, 弧度制.
+     * @param aspectRatio 宽高比.
+     * @param nearPlane   近平面 z 坐标.
+     * @param farPlane    远平面 z 坐标.
+     */
+    static Matrix4 createPerspective(float yFOV, float aspectRatio, float nearPlane, float farPlane);
+
+    /**
+     * @brief 以原点为近平面中心创建正投影观观察体, 用于正交投影.
+     *
+     * @param width     宽度.
+     * @param height    高度.
+     * @param nearPlane 近平面 z 坐标.
+     * @param farPlane  远平面 z 坐标.
+     */
+    static Matrix4 createOrthographic(float width, float height, float nearPlane, float farPlane);
+
+    /**
+     * @brief 创建正投影观观察体, 用于正交投影.
+     *
+     * @param left      左平面 x 坐标.
+     * @param right     右平面 x 坐标.
+     * @param bottom    底面 y 坐标.
+     * @param top       顶面 y 坐标.
+     * @param nearPlane 近平面 z 坐标.
+     * @param farPlane  远平面 z 坐标.
+     */
     static Matrix4 createOrthographicOffCenter(float left, float right, float bottom, float top,
-                                               float zNearPlane, float zFarPlane);
+                                               float nearPlane, float farPlane);
 
     Matrix4  operator-() const;
     Matrix4& operator=(const Matrix4&);

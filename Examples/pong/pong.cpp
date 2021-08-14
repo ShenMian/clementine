@@ -28,9 +28,10 @@ public:
 
         // cube.obj, cone.obj, sphere.obj, teapot.obj, wood_dining_chair
         
-        auto model = Main::registry.create("M4A1");
+        auto model = Main::registry.create("model");
         model.add<Model>("../assets/models/weapon/m4a1.obj");
-        auto& tf = model.add<Transform>().transform.setScale({0.1, 0.1, 0.1});
+        auto& tf = model.add<Transform>();
+        tf.scale = {0.1, 0.1, 0.1};
 
         // 加载音频文件
         pop.loadFromFile("assets/pop.wav");
@@ -76,9 +77,9 @@ public:
                 auto& tf   = bats[i].get<Transform>();
                 auto& pos  = tf.translation;
                 auto& size = bats[i].get<Sprite>().getSize();
-                Rect2 rect(pos, Size2((float)size.x, (float)size.y));
+                Rect2 rect({pos.x, pos.y}, Size2((float)size.x, (float)size.y));
 
-                if(rect.intersectsPoint(ballPos))
+                if(rect.intersectsPoint({ballPos.x, ballPos.y}))
                 {
                     if(ballPos.x < 39)
                     {
@@ -202,7 +203,7 @@ public:
             auto& batSize = bats[1].get<Sprite>().getSize();
 
             // 获取 bats[1] 的 Sprite 的几何中心
-            auto batCenter = batPos + batSize / 2;
+            auto batCenter = batPos + Vector3((batSize / 2).x, (batSize / 2).y, 0.f);
 
             // 以 ai_speed 速度向 ball 所在的 y 坐标移动
             batBody.velocity = Vector2(0, ballPos.y - batCenter.y).normalize() * ai_speed;

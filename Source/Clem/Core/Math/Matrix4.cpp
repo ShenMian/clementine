@@ -23,9 +23,10 @@ const Matrix4 Matrix4::zero = {
     0.f, 0.f, 0.f, 0.f,
     0.f, 0.f, 0.f, 0.f};
 
-Matrix4::Matrix4()
-    : Matrix4(Matrix4::identity)
+Matrix4::Matrix4(float v)
+    : Matrix4(identity * v)
 {
+    Assert::isTrue(identity != zero);
 }
 
 Matrix4::Matrix4(const Matrix4& mat)
@@ -108,32 +109,48 @@ Vector3 Matrix4::back() const
 
 Matrix4 Matrix4::createPerspective(float FOV, float aspectRatio, float n, float f)
 {
-    const float tanFOV = std::tan(FOV / 2.f);
+    Assert::isTrue(std::abs(aspectRatio - std::numeric_limits<float>::epsilon()) > 0.0f);
+
+    const float tanHalfFOV = std::tan(FOV / 2.f);
 
     Matrix4 mat;
-    mat.m[0][0]  = 1.f / (aspectRatio * (tanFOV / 2));
-    mat.m[1][1]  = 1.f / (tanFOV / 2);
-    mat.m[2][2]  = f / (f - n);
-    mat.m[2][3]  = 1.f;
-    mat.m[3][2]  = -(f * n) / (f - n);
+    mat.m[0][0] = 1.f / (aspectRatio * tanHalfFOV);
+    mat.m[1][1] = 1.f / tanHalfFOV;
+    mat.m[2][2] = f / (f - n);
+    mat.m[2][3] = 1.f;
+    mat.m[3][2] = -(f * n) / (f - n);
     return mat;
 }
 
-Matrix4 Matrix4::createOrthographic(float zoomX, float zoomY, float nearPlane, float farPlane)
+Matrix4 Matrix4::createOrthographic(float w, float h, float n, float f)
 {
-    return Matrix4();
+    return createOrthographicOffCenter(-w / 2, w / 2, -h / 2, h / 2, n, f);
 }
 
 Matrix4 Matrix4::createOrthographicOffCenter(float l, float r, float b, float t, float n, float f)
 {
+    Assert::isTrue(l != r && b != t && n != f);
+
     Matrix4 mat;
+    mat.m[0][0] = 2.f / (r - l);
+    mat.m[1][1] = 2.f / (b - t);
+    mat.m[2][2] = 1.f / (f - n);
+    mat.m[3][0] = -(r + l) / (r - l);
+    mat.m[3][1] = -(b + t) / (b - t);
+    mat.m[3][2] = -n / (f - n);
+
+    /*
+    Matrix4 mat(0.f);
+
     mat.m[0][0] = 2 / (r - l);
-    mat.m[0][3] = (r + l) / (l - r);
     mat.m[1][1] = 2 / (t - b);
-    mat.m[1][3] = (t + b) / (b - t);
     mat.m[2][2] = 2 / (n - f);
-    mat.m[2][3] = (f + n) / (n - f);
+
+    mat.m[3][0] = (l + r) / (l - r);
+    mat.m[3][1] = (t + b) / (b - t);
+    mat.m[3][2] = (n + f) / (n - f);
     mat.m[3][3] = 1;
+    */
     return mat;
 }
 
@@ -286,6 +303,38 @@ Matrix4 Matrix4::getInversed() const
 {
     Matrix4 mat(*this);
     mat.inverse();
+    return mat;
+}
+
+void Matrix4::transpose()
+{
+    Matrix4 mat = {
+        m[0][0],
+        m[1][0],
+        m[2][0],
+        m[3][0],
+
+        m[0][1],
+        m[1][1],
+        m[2][1],
+        m[0][1],
+
+        m[1][2],
+        m[2][2],
+        m[3][2],
+        m[3][2],
+
+        m[1][3],
+        m[2][3],
+        m[3][3],
+        m[3][3]};
+    *this = mat;
+}
+
+Matrix4 Matrix4::getTransposed() const
+{
+    Matrix4 mat(*this);
+    mat.transpose();
     return mat;
 }
 

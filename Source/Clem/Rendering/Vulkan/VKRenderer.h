@@ -49,7 +49,7 @@ private:
     std::vector<const char*>  instanceExtensions;
     vk::DispatchLoaderDynamic dynamicLoader;
 
-    VKCommandPool   cmdPool;
+    VKCommandPool cmdPool;
 };
 
 /**

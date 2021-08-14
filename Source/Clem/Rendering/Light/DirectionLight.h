@@ -13,7 +13,7 @@ class DirectionLight : public Light
 public:
     /**
      * @brief 构造函数.
-     * 
+     *
      * @param dir 光照方向.
      * @param color 光源颜色.
      */
@@ -21,7 +21,7 @@ public:
 
     /**
      * @brief 设置光照方向.
-     * 
+     *
      * @param dir 光照方向.
      */
     void setDirection(const Vector3& dir);

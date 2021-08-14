@@ -55,11 +55,24 @@ public:
 
     static WindowBase* getWindow();
 
+    /**
+     * @brief 设置输入设备轮询帧率. (未来将移除, 放在 BaseWindow::update 中)
+     */
     static void     setInputRate(uint16_t rate);
     static uint16_t getInputRate();
     static void     setUpdateRate(uint16_t rate);
     static uint16_t getUpdateRate();
+
+    /**
+     * @brief 设置目标渲染帧率, 单位: Hz.
+     * 
+     * @param rate 目标渲染帧率.
+     */
     static void     setRenderRate(uint16_t rate);
+
+    /**
+     * @brief 获取目标渲染帧率, 单位: Hz.
+     */
     static uint16_t getRenderRate();
 
     static void init();

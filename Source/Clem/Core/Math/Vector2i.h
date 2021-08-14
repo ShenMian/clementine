@@ -33,10 +33,14 @@ public:
 	 */
     Vector2i(int x, int y);
 
+    Vector2i(float x, float y);
+
     /**
 	 * @brief 获取面积.
 	 */
     int area() const;
+
+    // operator Vector2() const;
 
     bool      operator==(const Vector2i& v) const;
     bool      operator!=(const Vector2i& v) const;

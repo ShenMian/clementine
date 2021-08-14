@@ -94,9 +94,9 @@ private:
             {
                 auto& tf = entity.get<Transform>();
 
-                Vector2Edit("Transform", tf.translation);
-                Vector2Edit("Rotation", tf.rotation);
-                Vector2Edit("Scale", tf.scale);
+                Vector3Edit("Transform", tf.translation);
+                Vector3Edit("Rotation", tf.rotation);
+                Vector3Edit("Scale", tf.scale);
             }
         }
     }
@@ -153,7 +153,7 @@ private:
         }
     }
 
-    void Vector2Edit(const std::string& label, Vector2& value)
+    void Vector3Edit(const std::string& label, Vector3& value)
     {
         struct buttonStyle
         {
@@ -161,11 +161,12 @@ private:
         };
 
         buttonStyle styles[] = {
-            {{0.8f, 0.1f, 0.15f, 1.f}, {0.9f, 0.2f, 0.2f, 1.f}, {0.8f, 0.1f, 0.15f, 1.f}}, // red
-            {{0.2f, 0.7f, 0.2f, 1.f}, {0.3f, 0.8f, 0.3f, 1.f}, {0.2f, 0.7f, 0.2f, 1.f}}    // green
+            {{0.8f, 0.1f, 0.15f, 1.f}, {0.9f, 0.2f, 0.2f, 1.f}, {0.8f, 0.1f, 0.15f, 1.f}},    // red
+            {{0.2f, 0.7f, 0.2f, 1.f}, {0.3f, 0.8f, 0.3f, 1.f}, {0.2f, 0.7f, 0.2f, 1.f}},      // green
+            {{0.1f, 0.25f, 0.8f, 1.0f}, {0.2f, 0.35f, 0.9f, 1.0f}, {0.1f, 0.25f, 0.8f, 1.0f}} // blue
         };
 
-        const char* strs[] = {"X", "Y"};
+        const char* strs[] = {"X", "Y", "Z"};
 
         auto   bold       = ImGui::GetIO().Fonts->Fonts[0];
         float  fontHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.f;
@@ -174,11 +175,11 @@ private:
         ImGui::PushID(label.c_str());
 
         ImGui::Columns(2);
-        ImGui::SetColumnWidth(0, 100.f);
+        ImGui::SetColumnWidth(0, 80.f);
         ImGui::Text(label.c_str());
         ImGui::NextColumn();
 
-        for(int i = 0; i < 2; i++)
+        for(int i = 0; i < 3; i++)
         {
             ImGui::PushFont(bold);
             ImGui::PushStyleColor(ImGuiCol_Button, styles[i].normal);

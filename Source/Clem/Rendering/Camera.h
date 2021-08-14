@@ -27,8 +27,7 @@ public:
     void lookAt(const Vector3& pos, const Vector3& up = Vector3::unit_y);
 
     void setPerspective(float yFOV, float aspectRatio, float nearPlane, float farPlane);
-    void setOrthographic(float left, float right, float bottom, float top,
-                         float nearPlane, float farPlane);
+    void setOrthographic(float width, float height, float nearPlane, float farPlane);
 
     const Matrix4& getViewMatrix() const;
     const Matrix4& getProjectionMatrix() const;

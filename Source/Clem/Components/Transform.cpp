@@ -7,6 +7,31 @@
 namespace clem
 {
 
+Matrix4 Transform::getModelMatrix()
+{
+    static Matrix4 model;
+
+    if(isDirty())
+    {
+        model = Matrix4::identity;
+        model.translate(translation);
+        model.rotateX(rotation.x);
+        model.rotateY(rotation.y);
+        model.rotateZ(rotation.z);
+        model.scale(scale);
+
+        lastTranslation = translation;
+        lastRotation    = rotation;
+        lastScale       = scale;
+    }
+    return model;
+}
+
+bool Transform::isDirty() const
+{
+    return lastTranslation != translation || lastRotation != rotation || lastScale != scale;
+}
+
 /*
 void Transform::setPosition(const Point2& p)
 {

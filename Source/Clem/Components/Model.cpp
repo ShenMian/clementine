@@ -83,10 +83,10 @@ void Model::load(const fs::path& path)
 
     vertexBuffer         = VertexBuffer::create(vertices.data(), vertices.size() * sizeof(vertices[0]));
     vertexBuffer->layout = {
-        {"a_Position", Shader::Type::Float3},
-        {"a_Color", Shader::Type::Float3},
-        {"a_Normal", Shader::Type::Float3},
-        {"a_Uv", Shader::Type::Float2}};
+        {"a_position", Shader::Type::Float3},
+        {"a_color", Shader::Type::Float3},
+        {"a_normal", Shader::Type::Float3},
+        {"a_uv", Shader::Type::Float2}};
     indexBuffer = IndexBuffer::create(indices.data(), indices.size() * sizeof(indices[0]));
     vertexArray = VertexArray::create();
     vertexArray->addVertexBuffer(vertexBuffer);

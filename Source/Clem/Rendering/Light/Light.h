@@ -21,7 +21,7 @@ public:
 
     /**
      * @brief 设置光照强度.
-     * 
+     *
      * @param intesity 光照强度.
      */
     void setIntesity(float intesity);
@@ -33,7 +33,7 @@ public:
 
     /**
      * @brief 设置光源位置.
-     * 
+     *
      * @param pos 光源位置.
      */
     void setPosition(const Vector3& pos);
@@ -45,7 +45,7 @@ public:
 
     /**
      * @brief 设置光源颜色.
-     * 
+     *
      * @param color 光源颜色.
      */
     void setColor(const Vector3& color);

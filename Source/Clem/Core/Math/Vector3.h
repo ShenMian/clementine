@@ -92,6 +92,8 @@ public:
 	 */
     float dot(const Vector3& v) const;
 
+    float cross(const Vector3& v) const;
+
     /**
 	 * @brief 获取角度.
 	 *

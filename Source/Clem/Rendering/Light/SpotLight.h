@@ -13,7 +13,7 @@ class SpotLight : public Light
 public:
     /**
      * @brief 设置光源光照方向.
-     * 
+     *
      * @param dir 光照方向.
      */
     void setDirection(const Vector3& dir);

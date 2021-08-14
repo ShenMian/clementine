@@ -57,9 +57,9 @@ class Browser : public Layer
     }
 
 private:
-    fs::path                   assets  = "assets";
-    fs::path                   current = "assets";
-    std::shared_ptr<Texture2D> fileIcon = Texture2D::create("../assets/textures/file_icon.png");
+    fs::path                   assets     = "assets";
+    fs::path                   current    = "assets";
+    std::shared_ptr<Texture2D> fileIcon   = Texture2D::create("../assets/textures/file_icon.png");
     std::shared_ptr<Texture2D> folderIcon = Texture2D::create("../assets/textures/folder_icon.png");
 
     bool visible = true;
