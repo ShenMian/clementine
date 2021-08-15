@@ -64,9 +64,24 @@ Vector3& Vector3::normalize()
     return *this *= 1.f / len;
 }
 
+Vector3 Vector3::getNormalized() const
+{
+    Vector3 vec(*this);
+    return vec.normalize();
+}
+
 float Vector3::dot(const Vector3& v) const
 {
-    return x * v.x + y * v.y;
+    return x * v.x + y * v.y + z * v.z;
+}
+
+Vector3 Vector3::cross(const Vector3& v) const
+{
+    Vector3 vec;
+    vec.x = (y * v.z) - (z * v.y);
+    vec.y = (z * v.x) - (x * v.z);
+    vec.z = (x * v.y) - (y * v.x);
+    return vec;
 }
 
 void Vector3::rotate(const Vector3& point, float angle)

@@ -96,7 +96,7 @@ private:
 
                 Vector3Edit("Transform", tf.translation);
                 Vector3Edit("Rotation", tf.rotation);
-                Vector3Edit("Scale", tf.scale);
+                Vector3Edit("Scale", tf.scale, 1.f);
             }
         }
     }
@@ -153,7 +153,7 @@ private:
         }
     }
 
-    void Vector3Edit(const std::string& label, Vector3& value)
+    void Vector3Edit(const std::string& label, Vector3& value, float defaultValue = 0.f)
     {
         struct buttonStyle
         {
@@ -186,7 +186,7 @@ private:
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, styles[i].hovered);
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, styles[i].active);
             if(ImGui::Button(strs[i], size))
-                value[i] = 0.f;
+                value[i] = defaultValue;
             ImGui::PopStyleColor(3);
             ImGui::PopFont();
             ImGui::SameLine();

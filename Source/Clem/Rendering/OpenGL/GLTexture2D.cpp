@@ -45,11 +45,15 @@ GLTexture2D::GLTexture2D(const fs::path& path)
     glCreateTextures(GL_TEXTURE_2D, 1, &handle_);
     glTextureStorage2D(handle_, 1, internalFormat, size.x, size.y);
 
-    glTextureParameteri(handle_, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTextureParameteri(handle_, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
+    // 设置纹理环绕方式
     glTextureParameteri(handle_, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTextureParameteri(handle_, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    // 设置纹理过滤
+    glTextureParameteri(handle_, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTextureParameteri(handle_, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // glTextureParameteri(handle_, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    // glTextureParameteri(handle_, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     glTextureSubImage2D(handle_, 0, 0, 0, size.x, size.y, dataFormat, GL_UNSIGNED_BYTE, data);
 

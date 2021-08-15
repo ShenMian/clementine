@@ -24,6 +24,8 @@ public:
         Orthographic
     };
 
+    void setDirection(const Vector3& pos, const Vector3& dir, const Vector3& up = Vector3::unit_y);
+
     void lookAt(const Vector3& pos, const Vector3& up = Vector3::unit_y);
 
     void setPerspective(float yFOV, float aspectRatio, float nearPlane, float farPlane);

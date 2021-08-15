@@ -14,7 +14,7 @@ namespace fs = std::filesystem;
 namespace clem
 {
 
-static_assert(std::is_same<GLShader::id_type, GLuint>::value);
+static_assert(std::is_same<GLShader::handle_type, GLuint>::value);
 static_assert(std::is_same<char, GLchar>::value);
 
 static std::unordered_map<Shader::Stage, GLenum> GLStage = {
@@ -180,14 +180,19 @@ GLShader::GLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
 
     const GLchar* source = (const GLchar*)vertexSrc.c_str();
 
-    glShaderSource(vertexShader, 1, &source, 0);
+    glShaderSource(vertexShader, 1, &source, nullptr);
     glCompileShader(vertexShader);
 
     glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
     if(!success)
     {
+        GLint size = 0;
+        glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &size);
+        std::string info(size, '\0');
+        glGetShaderInfoLog(vertexShader, (GLsizei)info.size(), &size, info.data());
+        Assert::isTrue(false, std::format("vertex shader compilation failure: {}", info));
+
         glDeleteShader(vertexShader);
-        handleError("vertex shader compilation failure");
         return;
     }
 
@@ -196,15 +201,20 @@ GLShader::GLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
 
     source = (const GLchar*)fragmentSrc.c_str();
 
-    glShaderSource(fragmentShader, 1, &source, 0);
+    glShaderSource(fragmentShader, 1, &source, nullptr);
     glCompileShader(fragmentShader);
 
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
     if(!success)
     {
+        GLint size = 0;
+        glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &size);
+        std::string info(size, '\0');
+        glGetShaderInfoLog(fragmentShader, (GLsizei)info.size(), &size, info.data());
+        Assert::isTrue(false, std::format("fragment shader compilation failure: {}", info));
+
         glDeleteShader(fragmentShader);
         glDeleteShader(vertexShader);
-        handleError("fragment shader compilation failure");
         return;
     }
 
@@ -216,13 +226,18 @@ GLShader::GLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
 
     glLinkProgram(handle);
 
-    glGetProgramiv(handle, GL_LINK_STATUS, (int*)&success);
+    glGetProgramiv(handle, GL_LINK_STATUS, &success);
     if(!success)
     {
+        GLint size = 0;
+        glGetProgramiv(handle, GL_INFO_LOG_LENGTH, &size);
+        std::string info(size, 0);
+        glGetProgramInfoLog(handle, (GLsizei)info.size(), &size, info.data());
+        Assert::isTrue(false, std::format("shader link failure: {}", info));
+
         glDeleteProgram(handle);
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
-        handleError("shader link failure");
         return;
     }
 
@@ -283,19 +298,6 @@ void GLShader::uploadUniform(const std::string& name, int value)
     glUniform1i(location, value);
 
     Assert::isTrue(glGetError() == GL_NO_ERROR);
-}
-
-void GLShader::handleError(const std::string& msg)
-{
-    // std::vector<char> infoLog(size);
-
-    GLint size = 0;
-    glGetProgramiv(handle, GL_INFO_LOG_LENGTH, &size);
-    std::string info(size, '0');
-    glGetProgramInfoLog(handle, (GLsizei)info.size(), &size, info.data());
-    info.resize(0, size);
-
-    Assert::isTrue(false, std::format("{}: {}", msg, info));
 }
 
 } // namespace clem

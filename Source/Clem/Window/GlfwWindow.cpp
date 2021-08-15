@@ -79,9 +79,30 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
             {
             case GLFW_KEY_ESCAPE:
                 win->onClose();
+                break;
 
             case GLFW_KEY_W:
-                move = win->camera.view.forword().normalize();
+                move = win->camera.view.getInversed().forword().normalize() * 0.1;
+                break;
+
+            case GLFW_KEY_S:
+                move = win->camera.view.getInversed().back().normalize() * 0.1;
+                break;
+
+            case GLFW_KEY_A:
+                move = win->camera.view.getInversed().left().normalize() * 0.1;
+                break;
+
+            case GLFW_KEY_D:
+                move = win->camera.view.getInversed().right().normalize() * 0.1;
+                break;
+
+            case GLFW_KEY_LEFT_SHIFT:
+                move = win->camera.view.getInversed().up().normalize() * 0.1;
+                break;
+
+            case GLFW_KEY_SPACE:
+                move = win->camera.view.getInversed().down().normalize() * 0.1;
                 break;
             }
             break;
@@ -96,17 +117,34 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
         // EventDispatcher::get().dispatch(KeyEvent(key, action == GLFW_PRESS || action == GLFW_REPEAT, action == GLFW_REPEAT));
     });
 
+    glfwSetCursorPosCallback(handle, [](GLFWwindow* native, double x, double y) {
+        const auto    win   = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
+        /*
+        static double lastX = 0.f, lastY = 0.f;
+        float         ix = 0.001, iy = 0.001;
+        win->camera.view.rotateY(-ix * (x - lastX));
+        win->camera.view.rotateX(-iy * (y - lastY));
+        lastX = x, lastY = y;
+        */
+    });
+
     glfwSetMouseButtonCallback(handle, nullptr);
 
+    // 开启 MASS 抗锯齿
+    glfwWindowHint(GLFW_SAMPLES, 2);
+    glEnable(GL_MULTISAMPLE);
+
     shader = Shader::create(R"(
-		#version 450 core
+		#version 330 core
 
 		layout(location = 0) in vec3 a_position;
 		layout(location = 1) in vec3 a_color;
 		layout(location = 2) in vec3 a_normal;
 		layout(location = 3) in vec2 a_uv;
 
-        uniform mat4 u_ViewProjection;
+        uniform mat4 u_view_projection;
+        uniform mat4 u_view;
+        uniform mat4 u_projection;
         uniform mat4 u_model;
 
         out vec3 v_position;
@@ -118,18 +156,18 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
 		void main()
 		{
-            v_position  = normalize(mat3(u_model) * a_position);
+            v_position  = mat3(u_model) * a_position;
             v_color     = a_color;
             v_normal    = normalize(mat3(u_model) * a_normal);
             v_uv        = a_uv;
 
-            v_cam_position = vec3(-u_ViewProjection[3][0], -u_ViewProjection[3][1], -u_ViewProjection[3][2]);
+            v_cam_position = vec3(-u_view_projection[3][0], -u_view_projection[3][1], -u_view_projection[3][2]);
 
-			gl_Position = u_ViewProjection * u_model * vec4(a_position, 1.0);
+			gl_Position = u_projection * inverse(u_view) * u_model * vec4(a_position, 1.0);
 		}
 	)",
                             R"(
-		#version 450 core
+		#version 330 core
 
         in vec3 v_position;
         in vec3 v_color;
@@ -138,14 +176,14 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
         in vec3 v_cam_position;
 
-        uniform sampler2D u_Texture;
+        uniform sampler2D u_texture;
 
         vec4 light()
         {
-            vec3 light_direction = vec3(0.0, 0.0, 1.0);
+            vec3 light_direction = normalize(vec3(0.0, 0.0, 1.0));
 
-            vec3 direction_to_light = normalize(-light_direction);
-            vec3 direction_to_cam   = normalize(v_cam_position - v_position);
+            vec3 direction_to_light = -light_direction;
+            vec3 direction_to_cam   = normalize(v_position - v_cam_position);
 
             // 全局光
             const float ka            = 0.1;
@@ -155,14 +193,14 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
             // 漫反射
             const float kd                  = 0.7;
             const vec3  id                  = vec3(1.0, 1.0, 1.0);
-            float       amont_diffuse_light = max(0.0, dot(direction_to_light, v_normal));
+            float       amont_diffuse_light = max(0.0, dot(-direction_to_light, v_normal));
             vec3        diffuse_light       = kd * amont_diffuse_light * id;
 
             // 镜面反射
             const float ks                    = 0.7;
             const vec3  is                    = vec3(1.0, 1.0, 1.0);
             vec3        reflected_light       = reflect(direction_to_light, v_normal);
-            float       shininess             = 10.0;
+            float       shininess             = 30.0;
             float       amount_specular_light = pow(max(0.0, dot(reflected_light, direction_to_cam)), shininess);
             vec3        specular_light        = ks * amount_specular_light * is;
 
@@ -171,17 +209,23 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
 		void main()
 		{
+            // gl_FragColor = texture(u_texture, v_uv);
 			// gl_FragColor = vec4(v_uv, 0.0, 1.0);
-            // gl_FragColor = texture(u_Texture, v_uv);
             gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0) * light();
 		}
 	)");
 
+#if 1
+    camera.setPerspective(radians(50), (float)size.x / (float)size.y, 0.1f, 100.f);
+#else
+    camera.setOrthographic((float)size.x / 20, (float)size.y / 20, -100, 100);
+    // camera.view.rotateZ(radians(180));
+#endif
+    camera.setDirection({0, 0, -20}, {0, 0, -1});
+    camera.view.setTranslation({0, 0, -20});
+
     // static auto texture = Texture2D::create("../assets/textures/SMS.png");
     // texture->bind();
-
-    camera.view.rotateZ(radians(180));
-    camera.view.setTranslation({0, 0, 20});
 
     UI::init(this);
 
@@ -208,17 +252,16 @@ void GlfwWindow::update(Time dt)
 
     // FIXME: Camera::view 被不断改变
 
-    // camera.setPerspective(radians(50), size.x / size.y, 0.1f, 50.f);
-    camera.setOrthographic(size.x / 20, size.y / 20, -50, 50);
-
-    // camera.view.translate(move);
+    camera.view.translate(move);
 
     // camera.view.rotateY(radians(1));
     // camera.view.rotateX(radians(0.5));
     // camera.view.rotateZ(radians(1));
 
     shader->uploadUniform("u_Texture", 0);
-    shader->uploadUniform("u_ViewProjection", camera.getViewProjectionMatrix());
+    shader->uploadUniform("u_view", camera.getViewMatrix());
+    shader->uploadUniform("u_projection", camera.getProjectionMatrix());
+    shader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
 
     Main::registry.each<Model>([&](const Entity& e) {
         auto& model = e.get<Model>();

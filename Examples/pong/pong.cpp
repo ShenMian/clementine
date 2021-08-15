@@ -26,12 +26,14 @@ public:
         Main::getWindow()->add(new ui::Properties);
         Main::getWindow()->add(new ui::Setting);
 
+        Listener::setVolume(0.f);
+
         // cube.obj, cone.obj, sphere.obj, teapot.obj, wood_dining_chair
         
         auto model = Main::registry.create("model");
         model.add<Model>("../assets/models/weapon/m4a1.obj");
         auto& tf = model.add<Transform>();
-        tf.scale = {0.1, 0.1, 0.1};
+        tf.scale = {0.5, 0.5, 0.5};
 
         // 加载音频文件
         pop.loadFromFile("assets/pop.wav");

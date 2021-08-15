@@ -15,9 +15,9 @@ Matrix4 Transform::getModelMatrix()
     {
         model = Matrix4::identity;
         model.translate(translation);
-        model.rotateX(rotation.x);
-        model.rotateY(rotation.y);
-        model.rotateZ(rotation.z);
+        model.rotateX(radians(rotation.x));
+        model.rotateY(radians(rotation.y));
+        model.rotateZ(radians(rotation.z));
         model.scale(scale);
 
         lastTranslation = translation;

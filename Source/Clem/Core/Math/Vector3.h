@@ -85,6 +85,11 @@ public:
     Vector3& normalize();
 
     /**
+	 * @brief 标准化成单位向量.
+	 */
+    Vector3 getNormalized() const;
+
+    /**
 	 * @brief 计算向量点积.
 	 *
 	 * @param v 另一个向量.
@@ -92,7 +97,7 @@ public:
 	 */
     float dot(const Vector3& v) const;
 
-    float cross(const Vector3& v) const;
+    Vector3 cross(const Vector3& v) const;
 
     /**
 	 * @brief 获取角度.

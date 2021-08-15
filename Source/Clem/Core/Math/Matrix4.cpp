@@ -56,6 +56,11 @@ void Matrix4::translate(const Vector3& vec)
 
 void Matrix4::rotate(float angle, const Vector3& axis)
 {
+    Matrix4 mat;
+    mat.setRotation(angle, axis);
+    *this *= mat;
+
+    /*
     if(axis == Vector3::unit_x)
         rotateX(angle);
     else if(axis == Vector3::unit_y)
@@ -64,6 +69,7 @@ void Matrix4::rotate(float angle, const Vector3& axis)
         rotateZ(angle);
     else
         Assert::isTrue(false, "unknown axis");
+    */
 }
 
 void Matrix4::scale(const Vector3& vec)
@@ -79,7 +85,7 @@ const float* Matrix4::data() const
 
 Vector3 Matrix4::up() const
 {
-    return {m[1][0], m[1][1], m[1][2]};
+    return {-m[1][0], -m[1][1], -m[1][2]};
 }
 
 Vector3 Matrix4::down() const
@@ -99,7 +105,7 @@ Vector3 Matrix4::right() const
 
 Vector3 Matrix4::forword() const
 {
-    return {-m[2][0], -m[2][1], -m[2][2]};
+    return {m[2][0], m[2][1], m[2][2]};
 }
 
 Vector3 Matrix4::back() const
@@ -110,7 +116,9 @@ Vector3 Matrix4::back() const
 Matrix4 Matrix4::createPerspective(float FOV, float aspectRatio, float n, float f)
 {
     Assert::isTrue(std::abs(aspectRatio - std::numeric_limits<float>::epsilon()) > 0.0f);
+    Assert::isTrue(aspectRatio != 0 && n != f);
 
+#if 1 // v
     const float tanHalfFOV = std::tan(FOV / 2.f);
 
     Matrix4 mat;
@@ -120,6 +128,21 @@ Matrix4 Matrix4::createPerspective(float FOV, float aspectRatio, float n, float 
     mat.m[2][3] = 1.f;
     mat.m[3][2] = -(f * n) / (f - n);
     return mat;
+#else // c
+    float f_n   = 1.0f / (f - n);
+    float theta = FOV * 0.5f;
+
+    float divisor = std::tan(theta);
+    float factor = 1.0f / divisor;
+
+    Matrix4 mat(0.f);
+    mat.m[0][0]  = (1.0f / aspectRatio) * factor;
+    mat.m[1][1]  = factor;
+    mat.m[2][2] = (-(f + n)) * f_n;
+    mat.m[2][3] = -1.0f;
+    mat.m[3][2] = -2.0f * f * n * f_n;
+    return mat;
+#endif
 }
 
 Matrix4 Matrix4::createOrthographic(float w, float h, float n, float f)
@@ -131,6 +154,7 @@ Matrix4 Matrix4::createOrthographicOffCenter(float l, float r, float b, float t,
 {
     Assert::isTrue(l != r && b != t && n != f);
 
+#if 0 // v
     Matrix4 mat;
     mat.m[0][0] = 2.f / (r - l);
     mat.m[1][1] = 2.f / (b - t);
@@ -138,20 +162,18 @@ Matrix4 Matrix4::createOrthographicOffCenter(float l, float r, float b, float t,
     mat.m[3][0] = -(r + l) / (r - l);
     mat.m[3][1] = -(b + t) / (b - t);
     mat.m[3][2] = -n / (f - n);
-
-    /*
+    return mat;
+#else // c
     Matrix4 mat(0.f);
-
     mat.m[0][0] = 2 / (r - l);
     mat.m[1][1] = 2 / (t - b);
     mat.m[2][2] = 2 / (n - f);
-
     mat.m[3][0] = (l + r) / (l - r);
     mat.m[3][1] = (t + b) / (b - t);
     mat.m[3][2] = (n + f) / (n - f);
     mat.m[3][3] = 1;
-    */
     return mat;
+#endif
 }
 
 Vector3 Matrix4::translation() const
@@ -180,6 +202,38 @@ Matrix4& Matrix4::setTranslation(const Vector3& vec)
 // FIXME: 会直接改变缩放
 Matrix4& Matrix4::setRotation(float angle, const Vector3& axis)
 {
+    const auto  normal = axis.getNormalized();
+    const float x      = normal.x;
+    const float y      = normal.y;
+    const float z      = normal.z;
+
+    const float sin = std::sin(angle);
+    const float cos = std::cos(angle);
+
+    float t   = 1.0f - cos;
+    float tx  = t * x;
+    float ty  = t * y;
+    float tz  = t * z;
+    float txy = tx * y;
+    float txz = tx * z;
+    float tyz = ty * z;
+    float sx  = sin * x;
+    float sy  = sin * y;
+    float sz  = sin * z;
+
+    Matrix4 mat;
+    mat.m[0][0] = cos + tx * x;
+    mat.m[0][1] = txy + sz;
+    mat.m[0][2] = txz - sy;
+    mat.m[1][0] = txy - sz;
+    mat.m[1][1] = cos + ty * y;
+    mat.m[1][2] = tyz + sx;
+    mat.m[2][0] = txz + sy;
+    mat.m[2][1] = tyz - sx;
+    mat.m[2][2] = cos + tz * z;
+    return *this *= mat;
+
+    /*
     if(axis == Vector3::unit_x)
         setRotationX(angle);
     else if(axis == Vector3::unit_y)
@@ -189,6 +243,7 @@ Matrix4& Matrix4::setRotation(float angle, const Vector3& axis)
     else
         Assert::isTrue(false, "unknown axis");
     return *this;
+    */
 }
 
 Matrix4& Matrix4::setScale(const Vector3& vec)
@@ -205,8 +260,8 @@ Matrix4& Matrix4::setRotationX(float angle)
     const float cos = std::cos(angle);
 
     m[1][1] = cos;
-    m[1][2] = -sin;
-    m[2][1] = sin;
+    m[1][2] = sin;
+    m[2][1] = -sin;
     m[2][2] = cos;
     return *this;
 }
@@ -229,8 +284,8 @@ Matrix4& Matrix4::setRotationZ(float angle)
     const float cos = std::cos(angle);
 
     m[0][0] = cos;
-    m[0][1] = -sin;
-    m[1][0] = sin;
+    m[0][1] = sin;
+    m[1][0] = -sin;
     m[1][1] = cos;
     return *this;
 }

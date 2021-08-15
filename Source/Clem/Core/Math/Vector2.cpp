@@ -59,6 +59,11 @@ float Vector2::dot(const Vector2& v) const
     return x * v.x + y * v.y;
 }
 
+float Vector2::cross(const Vector2& v) const
+{
+    return x * v.y - y * v.x;
+}
+
 float Vector2::angle() const
 {
     return std::atan2(y, x);

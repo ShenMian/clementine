@@ -12,7 +12,7 @@ namespace clem
 class GLShader : public Shader
 {
 public:
-    using id_type = unsigned int;
+    using handle_type = unsigned int;
 
     /**
 	 * @brief 构造函数.
@@ -43,9 +43,9 @@ public:
     void uploadUniform(const std::string& name, int value) override;
 
 private:
-    void handleError(const std::string& msg);
+    void handleError(handle_type handle, const std::string& msg);
 
-    id_type handle;
+    handle_type handle;
 };
 
 } // namespace clem
