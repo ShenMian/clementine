@@ -161,7 +161,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
             v_normal    = normalize(mat3(u_model) * a_normal);
             v_uv        = a_uv;
 
-            v_cam_position = vec3(-u_view_projection[3][0], -u_view_projection[3][1], -u_view_projection[3][2]);
+            v_cam_position = vec3(u_view[3][0], u_view[3][1], u_view[3][2]);
 
 			gl_Position = u_projection * inverse(u_view) * u_model * vec4(a_position, 1.0);
 		}
@@ -180,10 +180,8 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
         vec4 light()
         {
-            vec3 light_direction = normalize(vec3(0.0, 0.0, 1.0));
-
-            vec3 direction_to_light = -light_direction;
-            vec3 direction_to_cam   = normalize(v_position - v_cam_position);
+            vec3 light_direction  = normalize(vec3(0.0, 0.0, 1.0));
+            vec3 direction_to_cam = normalize(v_position - v_cam_position);
 
             // 全局光
             const float ka            = 0.1;
@@ -193,13 +191,13 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
             // 漫反射
             const float kd                  = 0.7;
             const vec3  id                  = vec3(1.0, 1.0, 1.0);
-            float       amont_diffuse_light = max(0.0, dot(-direction_to_light, v_normal));
+            float       amont_diffuse_light = max(0.0, dot(light_direction, v_normal));
             vec3        diffuse_light       = kd * amont_diffuse_light * id;
 
             // 镜面反射
             const float ks                    = 0.7;
             const vec3  is                    = vec3(1.0, 1.0, 1.0);
-            vec3        reflected_light       = reflect(direction_to_light, v_normal);
+            vec3        reflected_light       = reflect(light_direction, v_normal);
             float       shininess             = 30.0;
             float       amount_specular_light = pow(max(0.0, dot(reflected_light, direction_to_cam)), shininess);
             vec3        specular_light        = ks * amount_specular_light * is;
@@ -219,10 +217,13 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     camera.setPerspective(radians(50), (float)size.x / (float)size.y, 0.1f, 100.f);
 #else
     camera.setOrthographic((float)size.x / 20, (float)size.y / 20, -100, 100);
-    // camera.view.rotateZ(radians(180));
 #endif
-    camera.setDirection({0, 0, -20}, {0, 0, -1});
-    camera.view.setTranslation({0, 0, -20});
+
+#if 1
+    camera.setDirection({0, 0, 20}, {0, 0, -1}, -Vector3::unit_y);
+#else
+    camera.setDirection({0, 0, 20}, {0, 0, 1}, -Vector3::unit_y);
+#endif
 
     // static auto texture = Texture2D::create("../assets/textures/SMS.png");
     // texture->bind();
