@@ -9,8 +9,6 @@ namespace clem
 
 Matrix4 Transform::getModelMatrix()
 {
-    static Matrix4 model;
-
     if(isDirty())
     {
         model = Matrix4::identity;

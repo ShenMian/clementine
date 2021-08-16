@@ -108,7 +108,8 @@ private:
     GLFWwindow*             handle;
     std::shared_ptr<Shader> shader;
 
-    Camera camera;
+    Camera  camera;
+    Matrix4 light;
 };
 
 } // namespace clem

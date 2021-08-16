@@ -26,6 +26,18 @@ void GLRenderer::endFrame()
     cmdBuffer->endFrame();
 }
 
+void GLRenderer::submit(const Entity& entity, std::shared_ptr<Shader> shader)
+{
+    auto& model     = entity.get<Model>();
+    auto& transform = entity.get<Transform>();
+
+    model.vertexArray->bind();
+    shader->bind();
+    shader->uploadUniform("u_model", transform.getModelMatrix());
+    glDrawElements(GL_TRIANGLES, (GLsizei)model.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
+    assert(glGetError() == GL_NO_ERROR);
+}
+
 void GLRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader, const Matrix4& transform)
 {
     static_assert(sizeof(IndexBuffer::value_type) == sizeof(unsigned int));

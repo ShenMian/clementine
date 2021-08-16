@@ -29,11 +29,16 @@ public:
         Listener::setVolume(0.f);
 
         // cube.obj, cone.obj, sphere.obj, teapot.obj, wood_dining_chair
+
+        Entity model[2];
         
-        auto model = Main::registry.create("model");
-        model.add<Model>("../assets/models/weapon/m4a1.obj");
-        auto& tf = model.add<Transform>();
-        tf.scale = {0.5, 0.5, 0.5};
+        model[0] = Main::registry.create("model");
+        model[0].add<Model>("../assets/models/weapon/m4a1.obj");
+        model[0].add<Transform>().scale = {0.5, 0.5, 0.5};
+
+        model[1] = Main::registry.create("model_1");
+        model[1].add<Model>("../assets/models/sphere.obj");
+        model[1].add<Transform>();
 
         // 加载音频文件
         pop.loadFromFile("assets/pop.wav");

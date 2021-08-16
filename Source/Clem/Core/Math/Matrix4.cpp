@@ -26,7 +26,7 @@ const Matrix4 Matrix4::zero = {
 Matrix4::Matrix4(float v)
     : Matrix4(identity * v)
 {
-    Assert::isTrue(identity != zero);
+    Assert::isTrue(identity != zero, "Do not declare a matrix as a static global variable");
 }
 
 Matrix4::Matrix4(const Matrix4& mat)

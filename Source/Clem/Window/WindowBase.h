@@ -97,6 +97,7 @@ public:
 
     std::function<void(Size2i)>         onResize;
     std::function<void(double, double)> onScroll;
+    std::function<void(double, double)> onMouseMove;
     std::function<void()>               onClose;
 
 protected:

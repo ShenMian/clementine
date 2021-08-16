@@ -26,6 +26,7 @@ public:
 private:
     bool isDirty() const;
 
+    Matrix4 model;
     Vector3 lastTranslation;
     Vector3 lastRotation;
     Vector3 lastScale;

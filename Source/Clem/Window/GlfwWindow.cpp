@@ -65,13 +65,15 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
     glfwSetScrollCallback(handle, [](GLFWwindow* native, double xOffset, double yOffset) {
         const auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
-        win->camera.view.scale(Vector3(1 - 0.1 * yOffset, 1 - 0.1 * yOffset, 1 - 0.1 * yOffset)); // TODO: 调试用
         if(win->onScroll)
             win->onScroll(xOffset, yOffset);
     });
 
+    // FIXME: Camera 世界坐标不正确导致光照不正确
     glfwSetKeyCallback(handle, [](GLFWwindow* native, int key, int scancode, int action, int mods) {
         const auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
+
+        const float speed = 0.1f;
         switch(action)
         {
         case GLFW_PRESS:
@@ -82,27 +84,33 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
                 break;
 
             case GLFW_KEY_W:
-                move = win->camera.view.getInversed().forword().normalize() * 0.1;
+                move = -Vector3::unit_z * speed;
+                // move = win->camera.view.forword().normalize() * 0.1;
                 break;
 
             case GLFW_KEY_S:
-                move = win->camera.view.getInversed().back().normalize() * 0.1;
+                move = Vector3::unit_z * speed;
+                // move = win->camera.view.back().normalize() * 0.1;
                 break;
 
             case GLFW_KEY_A:
-                move = win->camera.view.getInversed().left().normalize() * 0.1;
+                move = Vector3::unit_x * speed;
+                // move = win->camera.view.left().normalize() * 0.1;
                 break;
 
             case GLFW_KEY_D:
-                move = win->camera.view.getInversed().right().normalize() * 0.1;
+                move = -Vector3::unit_x * speed;
+                // move = win->camera.view.right().normalize() * 0.1;
                 break;
 
             case GLFW_KEY_LEFT_SHIFT:
-                move = win->camera.view.getInversed().up().normalize() * 0.1;
+                move = Vector3::unit_y * speed;
+                // move = -win->camera.view.up().normalize() * 0.1;
                 break;
 
             case GLFW_KEY_SPACE:
-                move = win->camera.view.getInversed().down().normalize() * 0.1;
+                move = -Vector3::unit_y * speed;
+                // move = -win->camera.view.down().normalize() * 0.1;
                 break;
             }
             break;
@@ -118,14 +126,9 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     });
 
     glfwSetCursorPosCallback(handle, [](GLFWwindow* native, double x, double y) {
-        const auto    win   = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
-        /*
-        static double lastX = 0.f, lastY = 0.f;
-        float         ix = 0.001, iy = 0.001;
-        win->camera.view.rotateY(-ix * (x - lastX));
-        win->camera.view.rotateX(-iy * (y - lastY));
-        lastX = x, lastY = y;
-        */
+        const auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
+        if(win->onMouseMove)
+            win->onMouseMove(x, y);
     });
 
     glfwSetMouseButtonCallback(handle, nullptr);
@@ -134,8 +137,24 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     glfwWindowHint(GLFW_SAMPLES, 2);
     glEnable(GL_MULTISAMPLE);
 
+
+
+    glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    onMouseMove = [this](double x, double y) {
+        static auto last  = getSize() / 2;
+        static auto speed = Vector2::unit * 0.09;
+
+        camera.view.rotateY(speed.x * radians(x - last.x));
+        camera.view.rotateX(-speed.y * radians(y - last.y));
+        last = Vector2(x, y);
+    };
+
+    onScroll = [this](double xOfffset, double yOffset) {
+        camera.view.scale(Vector3(1 + 0.1 * yOffset, 1 + 0.1 * yOffset, 1 + 0.1 * yOffset));
+    };
+
     shader = Shader::create(R"(
-		#version 330 core
+		#version 450 core
 
 		layout(location = 0) in vec3 a_position;
 		layout(location = 1) in vec3 a_color;
@@ -158,16 +177,16 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 		{
             v_position  = mat3(u_model) * a_position;
             v_color     = a_color;
-            v_normal    = normalize(mat3(u_model) * a_normal);
+            v_normal    = normalize(mat3(transpose(inverse(u_model))) * a_normal);
             v_uv        = a_uv;
 
             v_cam_position = vec3(u_view[3][0], u_view[3][1], u_view[3][2]);
 
-			gl_Position = u_projection * inverse(u_view) * u_model * vec4(a_position, 1.0);
+			gl_Position = u_projection * u_view * u_model * vec4(a_position, 1.0);
 		}
 	)",
                             R"(
-		#version 330 core
+		#version 450 core
 
         in vec3 v_position;
         in vec3 v_color;
@@ -176,29 +195,30 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
         in vec3 v_cam_position;
 
+        uniform vec3      u_light_position;
         uniform sampler2D u_texture;
 
         vec4 light()
         {
-            vec3 light_direction  = normalize(vec3(0.0, 0.0, 1.0));
+            vec3 light_direction  = normalize(u_light_position - v_position);
             vec3 direction_to_cam = normalize(v_position - v_cam_position);
 
-            // 全局光
+            // 环境光照
             const float ka            = 0.1;
             const vec3  ia            = vec3(1.0, 1.0, 1.0);
             vec3        ambient_light = ka * ia;
 
-            // 漫反射
+            // 漫反射光照
             const float kd                  = 0.7;
             const vec3  id                  = vec3(1.0, 1.0, 1.0);
             float       amont_diffuse_light = max(0.0, dot(light_direction, v_normal));
             vec3        diffuse_light       = kd * amont_diffuse_light * id;
 
-            // 镜面反射
+            // 镜面反射光照
             const float ks                    = 0.7;
             const vec3  is                    = vec3(1.0, 1.0, 1.0);
             vec3        reflected_light       = reflect(light_direction, v_normal);
-            float       shininess             = 30.0;
+            float       shininess             = 32.0;
             float       amount_specular_light = pow(max(0.0, dot(reflected_light, direction_to_cam)), shininess);
             vec3        specular_light        = ks * amount_specular_light * is;
 
@@ -207,16 +227,17 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
 		void main()
 		{
-            // gl_FragColor = texture(u_texture, v_uv);
 			// gl_FragColor = vec4(v_uv, 0.0, 1.0);
+            // gl_FragColor = texture(u_texture, v_uv);
             gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0) * light();
 		}
 	)");
 
 #if 1
-    camera.setPerspective(radians(50), (float)size.x / (float)size.y, 0.1f, 100.f);
+    camera.setPerspective(radians(45), (float)size.x / (float)size.y, 0.1f, 100.f);
 #else
-    camera.setOrthographic((float)size.x / 20, (float)size.y / 20, -100, 100);
+    camera.setOrthographic((float)size.x / 20, (float)size.y / 20, -100.f, 100.f);
+    // camera.setOrthographic((float)size.x / 20, (float)size.y / 20, 0.1f, 100.f);
 #endif
 
 #if 1
@@ -225,8 +246,10 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     camera.setDirection({0, 0, 20}, {0, 0, 1}, -Vector3::unit_y);
 #endif
 
-    // static auto texture = Texture2D::create("../assets/textures/SMS.png");
-    // texture->bind();
+    light.translate({0, 0, 20});
+
+    static auto texture = Texture2D::create("../assets/textures/SMS.png");
+    texture->bind();
 
     UI::init(this);
 
@@ -259,15 +282,18 @@ void GlfwWindow::update(Time dt)
     // camera.view.rotateX(radians(0.5));
     // camera.view.rotateZ(radians(1));
 
-    shader->uploadUniform("u_Texture", 0);
+    light.rotateY(radians(0.5));
+
+    shader->uploadUniform("u_light_position", light.translation());
+
+    shader->uploadUniform("u_texture", 0);
+
     shader->uploadUniform("u_view", camera.getViewMatrix());
     shader->uploadUniform("u_projection", camera.getProjectionMatrix());
     shader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
 
     Main::registry.each<Model>([&](const Entity& e) {
-        auto& model = e.get<Model>();
-        auto& tf    = e.get<Transform>();
-        renderer->submit(model.vertexArray, shader, tf.getModelMatrix());
+        renderer->submit(e, shader);
     });
 
     renderer->endFrame();

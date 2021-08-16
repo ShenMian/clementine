@@ -37,12 +37,15 @@ GLVertexArray::~GLVertexArray()
 void GLVertexArray::bind()
 {
     glBindVertexArray(handle);
+
+    if(indexBuffer)
+        indexBuffer->bind();
+    for(const auto& buf : vertexBuffers)
+        buf->bind();
 }
 
 void GLVertexArray::setIndexBuffer(std::shared_ptr<IndexBuffer> buffer)
 {
-    bind();
-    buffer->bind();
     indexBuffer = buffer;
 }
 
