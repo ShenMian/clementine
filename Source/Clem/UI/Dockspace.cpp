@@ -1,0 +1,50 @@
+// Copyright 2021 SMS
+// License(Apache-2.0)
+
+#include "Dockspace.h"
+#include <glad/glad.h>
+#include <imgui/imgui.h>
+
+namespace clem::ui
+{
+
+void Dockspace::update(Time dt)
+{
+    if(!visible)
+        return;
+
+    if(ImGui::GetIO().ConfigFlags & ~ImGuiConfigFlags_DockingEnable)
+        return;
+
+    // 创建覆盖窗口的 UI 窗口组件
+    bool fullWindow = true; // 使整个窗口成为 dockspace
+
+    auto dockspaceFlags = ImGuiDockNodeFlags_None;
+    auto windowFlags    = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
+    if(fullWindow)
+    {
+        ImGuiViewport* viewport = ImGui::GetMainViewport();
+        ImGui::SetNextWindowPos(viewport->Pos);
+        ImGui::SetNextWindowSize(viewport->Size);
+        ImGui::SetNextWindowViewport(viewport->ID);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+        windowFlags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+        windowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+    }
+    if(dockspaceFlags & ImGuiDockNodeFlags_PassthruCentralNode)
+        windowFlags |= ImGuiWindowFlags_NoBackground;
+
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+    ImGui::Begin("Dock space", &visible, windowFlags);
+    ImGui::PopStyleVar();
+
+    if(fullWindow)
+        ImGui::PopStyleVar(2);
+
+    ImGui::DockSpace(ImGui::GetID("dock_space"), ImVec2(0.0f, 0.0f), dockspaceFlags);
+
+    ImGui::End();
+}
+
+} // namespace clem::ui

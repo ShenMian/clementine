@@ -25,7 +25,7 @@ namespace clem
 
 static Vector3 move;
 
-GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
+GlfwWindow::GlfwWindow(const std::string& title, Size2 size)
 {
     PROFILE_FUNC();
 
@@ -68,7 +68,6 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
             win->onScroll(xOffset, yOffset);
     });
 
-    // FIXME: Camera 世界坐标不正确导致光照不正确
     glfwSetKeyCallback(handle, [](GLFWwindow* native, int key, int scancode, int action, int mods) {
         const auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
 
@@ -242,7 +241,6 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     camera.setPerspective(radians(45), (float)size.x / (float)size.y, 0.1f, 100.f);
 #else
     camera.setOrthographic((float)size.x / 20, (float)size.y / 20, -100.f, 100.f);
-    // camera.setOrthographic((float)size.x / 20, (float)size.y / 20, 0.1f, 100.f);
 #endif
 
 #if 1
@@ -281,8 +279,6 @@ void GlfwWindow::update(Time dt)
 
     // FIXME: Camera::view 被不断改变
 
-    setSize({1920 * 0.6, 1080 * 0.6});
-
     camera.view.translate(move);
 
     // camera.view.rotateY(radians(1));
@@ -299,13 +295,15 @@ void GlfwWindow::update(Time dt)
     shader->uploadUniform("u_projection", camera.getProjectionMatrix());
     shader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
 
-    Main::registry.each<Model>([&](const Entity& e) {
-        renderer->submit(e, shader);
-    });
+    Main::registry.each<Model>([&](const Entity& e)
+                               { renderer->submit(e, shader); });
+
+    UI::beginFrame();
+    for(auto layer : layers)
+        layer->update(dt);
+    UI::endFrame();
 
     renderer->endFrame();
-
-    renderGui(dt);
 
     glfwSwapBuffers(handle);
     glfwPollEvents();
@@ -370,29 +368,6 @@ void GlfwWindow::deinit()
 {
     PROFILE_FUNC();
     glfwTerminate();
-}
-
-void GlfwWindow::renderGui(Time dt)
-{
-    PROFILE_FUNC();
-
-    if(Renderer::getAPI() == Renderer::API::OpenGL)
-        ImGui_ImplOpenGL3_NewFrame();
-    else
-        ImGui_ImplVulkan_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-
-    ImGui::NewFrame();
-
-    for(auto layer : layers)
-        layer->update(dt);
-
-    ImGui::Render();
-
-    if(Renderer::getAPI() == Renderer::API::OpenGL)
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-    else
-        ; // ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData());
 }
 
 /*

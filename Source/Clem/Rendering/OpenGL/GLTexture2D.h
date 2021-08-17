@@ -24,9 +24,9 @@ public:
     ~GLTexture2D();
 
     Size2i getSize() const override;
-    void*  getHandle() override;
+    size_t getHandle() override;
 
-    void bind(id_type slot) override;
+    void bind(unsigned int slot) override;
 
 private:
     id_type handle_;

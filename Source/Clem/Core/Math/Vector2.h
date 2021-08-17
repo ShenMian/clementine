@@ -165,7 +165,7 @@ struct hash<clem::Vector2>
 {
     size_t operator()(const clem::Vector2& v) const
     {
-        return (size_t)(v.x + v.y);
+        return ((size_t)v.x + (size_t)v.y);
     }
 };
 

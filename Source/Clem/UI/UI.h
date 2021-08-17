@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Browser.h"
+#include "Dockspace.h"
 #include "Hierarchy.h"
 #include "Properties.h"
 #include "Setting.h"
@@ -16,6 +17,9 @@ class WindowBase;
 class UI
 {
 public:
+    static void beginFrame();
+    static void endFrame();
+
     static void init(WindowBase* window);
     static void deinit();
 };

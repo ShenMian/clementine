@@ -67,7 +67,7 @@ GLTexture2D::~GLTexture2D()
     glDeleteTextures(1, &handle_);
 }
 
-void GLTexture2D::bind(id_type slot)
+void GLTexture2D::bind(unsigned int slot)
 {
     glBindTextureUnit(slot, handle_);
 }
@@ -77,9 +77,9 @@ Size2i GLTexture2D::getSize() const
     return size;
 }
 
-void* GLTexture2D::getHandle()
+size_t GLTexture2D::getHandle()
 {
-    return (void*)handle_;
+    return (size_t)handle_;
 }
 
 void* GLTexture2D::loadFromFile(const std::filesystem::path& path, int& width, int& height, int& channels)

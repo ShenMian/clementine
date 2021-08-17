@@ -25,6 +25,7 @@ void Model::load(const fs::path& path)
     PROFILE_FUNC();
 
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
+    this->path = fs::absolute(path);
 
     std::vector<Vertex>       vertices;
     std::vector<unsigned int> indices;

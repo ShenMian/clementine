@@ -164,7 +164,7 @@ struct hash<clem::Vector3>
 {
     size_t operator()(const clem::Vector3& v) const
     {
-        return (size_t)(v.x + v.y + v.z);
+        return ((size_t)v.x + (size_t)v.y + (size_t)v.z);
     }
 };
 

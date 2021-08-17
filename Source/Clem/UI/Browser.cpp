@@ -13,6 +13,13 @@ void Browser::update(Time dt)
     if(!visible)
         return;
 
+    bool open = false;
+    ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.0f, 0.0f, 0.0f, 0.0f));
+    ImGui::Begin("Viewport", &open);
+    ImGui::Image(0, ImGui::GetContentRegionAvail());
+    ImGui::PopStyleColor();
+    ImGui::End();
+
     ImGui::Begin("Browser", &visible);
 
     assert(fs::exists(assets));
@@ -22,7 +29,7 @@ void Browser::update(Time dt)
         if(ImGui::Button("<"))
             current = current.parent_path();
 
-    ImGui::Columns((int)(ImGui::GetContentRegionAvail().x / 70));
+    ImGui::Columns((int)(ImGui::GetContentRegionAvailWidth() / 70));
 
     for(const auto& entry : fs::directory_iterator(current))
     {
@@ -45,7 +52,11 @@ void Browser::update(Time dt)
 
             if(ImGui::BeginDragDropSource())
             {
-                ImGui::SetDragDropPayload("browser", entry.path().string().c_str(), entry.path().string().size() * sizeof(char));
+                const auto     absPath = fs::absolute(entry.path()).wstring();
+                const wchar_t* data    = absPath.c_str();
+                const size_t   size    = (absPath.size() + 1) * sizeof(wchar_t);
+                ImGui::SetDragDropPayload("browser_file", data, size);
+                ImGui::TextUnformatted(filename.c_str());
                 ImGui::EndDragDropSource();
             }
 

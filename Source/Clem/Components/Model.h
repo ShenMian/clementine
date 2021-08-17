@@ -41,6 +41,8 @@ public:
 
     std::shared_ptr<VertexArray> vertexArray;
 
+    std::filesystem::path path;
+
 private:
     std::shared_ptr<VertexBuffer> vertexBuffer;
     std::shared_ptr<IndexBuffer>  indexBuffer;

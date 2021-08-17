@@ -21,10 +21,11 @@ public:
 
     void init() override
     {
+        // Main::getWindow()->add(new ui::Dockspace);
+        Main::getWindow()->add(new ui::Setting);
         Main::getWindow()->add(new ui::Browser);
         Main::getWindow()->add(new ui::Hierarchy);
         Main::getWindow()->add(new ui::Properties);
-        Main::getWindow()->add(new ui::Setting);
 
         Listener::setVolume(0.f);
 
