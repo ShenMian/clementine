@@ -20,7 +20,10 @@ public:
     static void beginFrame();
     static void endFrame();
 
-    static void init(WindowBase* window);
+    static void windowInit(WindowBase* win);
+    static void windowDeinit();
+
+    static void init();
     static void deinit();
 };
 

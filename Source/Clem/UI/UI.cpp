@@ -44,7 +44,41 @@ void UI::endFrame()
     }
 }
 
-void UI::init(WindowBase* window)
+void UI::windowInit(WindowBase* win)
+{
+    switch(Renderer::getAPI())
+    {
+        using enum Renderer::API;
+
+    case OpenGL:
+        ImGui_ImplGlfw_InitForOpenGL((GLFWwindow*)win->nativeHandle(), true);
+        ImGui_ImplOpenGL3_Init("#version 450");
+        break;
+
+    case Vulkan:
+        ImGui_ImplGlfw_InitForVulkan((GLFWwindow*)win->nativeHandle(), true);
+        // ImGui_ImplVulkan_Init(); // FIXME
+        break;
+    }
+}
+
+void UI::windowDeinit()
+{
+    switch(Renderer::getAPI())
+    {
+        using enum Renderer::API;
+
+    case OpenGL:
+        ImGui_ImplOpenGL3_Shutdown();
+        break;
+
+    case Vulkan:
+        ImGui_ImplVulkan_Shutdown();
+        break;
+    }
+}
+
+void UI::init()
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -63,38 +97,10 @@ void UI::init(WindowBase* window)
     // 自定义字体
     // io.Fonts->AddFontFromFileTTF("../assets/fonts/open_sans/OpenSans-Bold.ttf", 18.f);
     // io.FontDefault = io.Fonts->AddFontFromFileTTF("../assets/fonts/open_sans/OpenSans-Regular.ttf", 18.f);
-
-    switch(Renderer::getAPI())
-    {
-        using enum Renderer::API;
-
-    case OpenGL:
-        ImGui_ImplGlfw_InitForOpenGL((GLFWwindow*)window->nativeHandle(), true);
-        ImGui_ImplOpenGL3_Init("#version 450");
-        break;
-
-    case Vulkan:
-        ImGui_ImplGlfw_InitForVulkan((GLFWwindow*)window->nativeHandle(), true);
-        // ImGui_ImplVulkan_Init(); // FIXME
-        break;
-    }
 }
 
 void UI::deinit()
 {
-    switch(Renderer::getAPI())
-    {
-        using enum Renderer::API;
-
-    case OpenGL:
-        ImGui_ImplOpenGL3_Shutdown();
-        break;
-
-    case Vulkan:
-        ImGui_ImplVulkan_Shutdown();
-        break;
-    }
-
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 }

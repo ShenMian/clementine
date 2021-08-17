@@ -248,10 +248,15 @@ void Main::init()
 
     // Renderer::setAPI(Renderer::API::Vulkan);
 
-    // 初始化窗口
+    // 初始化窗口库
     WindowBase::init();
+
+    // UI 库初始化
+    UI::init();
+
+    // 创建主窗口
     // window = new ConsoleWindow("Clementine", {80, 25});
-    window          = new GlfwWindow("Clementine", {1920 * 0.6, 1080 * 0.7});
+    window          = new GlfwWindow("Clementine", {1920 * 0.7, 1080 * 0.7});
     window->onClose = [&]() { window->setVisible(false); Main::stop(); };
 
     // 初始化渲染器
@@ -276,6 +281,8 @@ void Main::deinit()
     Audio::deinit();
 
     Renderer::get()->deinit();
+
+    UI::deinit();
 
     window->deinit();
 

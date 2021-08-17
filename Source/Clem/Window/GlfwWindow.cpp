@@ -215,7 +215,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2 size)
             // gl_FragColor = texture(u_texture, v_uv);
             gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0) * light();
 		}
-	)");                                                                                            //指定光源位置
+	)");
 
 #if 0
     glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -254,7 +254,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2 size)
     texture = Texture2D::create("../assets/textures/SMS.png");
     texture->bind();
 
-    UI::init(this);
+    UI::windowInit(this);
 
     Assert::isTrue(glGetError() == GL_NO_ERROR);
 }
@@ -263,7 +263,7 @@ GlfwWindow::~GlfwWindow()
 {
     PROFILE_FUNC();
 
-    UI::deinit();
+    UI::windowDeinit();
     glfwMakeContextCurrent(handle);
     glfwDestroyWindow(handle);
 }
