@@ -50,6 +50,8 @@ void Properties::update(Time dt)
                         entity.add<Rigidbody>();
                         ImGui::CloseCurrentPopup();
                     }
+                    ImGui::MenuItem("BoxCollider");
+                    ImGui::MenuItem("CircleCollider");
                     ImGui::EndMenu();
                 }
                 if(ImGui::BeginMenu("Rendering"))
@@ -64,23 +66,6 @@ void Properties::update(Time dt)
                 ImGui::EndMenu();
             }
             ImGui::EndPopup();
-        }
-
-        ImGui::Button("Drop here");
-        if(ImGui::BeginDragDropTarget())
-        {
-            const auto payload = ImGui::AcceptDragDropPayload("browser_file");
-            if(payload != nullptr)
-            {
-                fs::path path((const wchar_t*)payload->Data);
-
-                // TODO: 添加组件已存在提示, UI 使用提示而不是断言
-                if(path.extension() == L".obj")
-                    entity.add<Model>(Browser::assets / path);
-                else
-                    Assert::isTrue(false);
-            }
-            ImGui::EndDragDropTarget();
         }
 
         ImGui::End();
@@ -160,7 +145,27 @@ void Properties::showModel()
         if(ImGui::CollapsingHeader("Model", ImGuiTreeNodeFlags_DefaultOpen))
         {
             auto& model = entity.get<Model>();
-            ImGui::Text("File: %s", model.path.string().c_str());
+            if(model.path == fs::path())
+            {
+                ImGui::Button("Drop asset here");
+                if(ImGui::BeginDragDropTarget())
+                {
+                    const auto payload = ImGui::AcceptDragDropPayload("browser_file");
+                    if(payload != nullptr)
+                    {
+                        fs::path path((const wchar_t*)payload->Data);
+
+                        // TODO: 添加组件已存在提示, UI 使用提示而不是断言
+                        if(path.extension() == L".obj")
+                            entity.get<Model>().load(Browser::assets / path);
+                        else
+                            Assert::isTrue(false);
+                    }
+                    ImGui::EndDragDropTarget();
+                }
+            }
+            else
+                ImGui::Text("File: %s", model.path.string().c_str());
         }
     }
 }

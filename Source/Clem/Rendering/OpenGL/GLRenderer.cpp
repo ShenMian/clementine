@@ -31,6 +31,9 @@ void GLRenderer::submit(const Entity& entity, std::shared_ptr<Shader> shader)
     auto& model     = entity.get<Model>();
     auto& transform = entity.get<Transform>();
 
+    if(model.vertexArray == nullptr)
+        return;
+
     model.vertexArray->bind();
     shader->bind();
     shader->uploadUniform("u_model", transform.getModelMatrix());

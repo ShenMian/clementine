@@ -34,7 +34,7 @@ public:
         Entity model[2];
         
         model[0] = Main::registry.create("model_0");
-        model[0].add<Model>("../assets/models/weapon/m4a1.obj");
+        model[0].add<Model>("../assets/models/teapot.obj");
         model[0].add<Transform>().scale = {0.5, 0.5, 0.5};
 
         model[1] = Main::registry.create("model_1");
