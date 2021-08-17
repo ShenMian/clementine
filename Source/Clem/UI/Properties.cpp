@@ -2,14 +2,15 @@
 // License(Apache-2.0)
 
 #include "Properties.h"
+#include "Browser.h"
 #include "Components/Components.h"
 #include "Physics/Rigidbody.h"
 #include "Rendering/Console/Sprite.h"
+#include <filesystem>
 #include <glad/glad.h>
 #include <imgui/imgui.h>
 #include <imgui/imgui_internal.h>
 #include <string>
-#include <filesystem>
 
 namespace fs = std::filesystem;
 
@@ -40,17 +41,25 @@ void Properties::update(Time dt)
         // 空白区域右键菜单
         if(ImGui::BeginPopupContextWindow(0, 1, false))
         {
-            if(ImGui::BeginMenu("Add component"))
+            if(ImGui::BeginMenu("Add..."))
             {
-                if(entity.noneOf<Transform>() && ImGui::MenuItem("Transform"))
+                if(ImGui::BeginMenu("Physics"))
                 {
-                    entity.add<Transform>();
-                    ImGui::CloseCurrentPopup();
+                    if(entity.noneOf<Rigidbody>() && ImGui::MenuItem("Rigidbody"))
+                    {
+                        entity.add<Rigidbody>();
+                        ImGui::CloseCurrentPopup();
+                    }
+                    ImGui::EndMenu();
                 }
-                if(entity.noneOf<Rigidbody>() && ImGui::MenuItem("Rigidbody"))
+                if(ImGui::BeginMenu("Rendering"))
                 {
-                    entity.add<Rigidbody>();
-                    ImGui::CloseCurrentPopup();
+                    if(entity.noneOf<Model>() && ImGui::MenuItem("Model"))
+                    {
+                        entity.add<Model>();
+                        ImGui::CloseCurrentPopup();
+                    }
+                    ImGui::EndMenu();
                 }
                 ImGui::EndMenu();
             }
@@ -67,7 +76,9 @@ void Properties::update(Time dt)
 
                 // TODO: 添加组件已存在提示, UI 使用提示而不是断言
                 if(path.extension() == L".obj")
-                    entity.add<Model>(path);
+                    entity.add<Model>(Browser::assets / path);
+                else
+                    Assert::isTrue(false);
             }
             ImGui::EndDragDropTarget();
         }
@@ -149,7 +160,7 @@ void Properties::showModel()
         if(ImGui::CollapsingHeader("Model", ImGuiTreeNodeFlags_DefaultOpen))
         {
             auto& model = entity.get<Model>();
-            ImGui::Text("path: %s", model.path.string().c_str());
+            ImGui::Text("File: %s", model.path.string().c_str());
         }
     }
 }

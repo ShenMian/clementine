@@ -6,6 +6,7 @@
 #include "Logging/Logging.h"
 #include "Profiler.h"
 #include "Rendering/Rendering.h"
+#include "UI/Browser.h"
 
 #define TINYOBJLOADER_IMPLEMENTATION
 #include <tiny_obj_loader/tiny_obj_loader.h>
@@ -25,7 +26,7 @@ void Model::load(const fs::path& path)
     PROFILE_FUNC();
 
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
-    this->path = fs::absolute(path);
+    this->path = fs::relative(path, ui::Browser::assets);
 
     std::vector<Vertex>       vertices;
     std::vector<unsigned int> indices;

@@ -35,7 +35,7 @@ public:
         if(ImGui::BeginPopupContextWindow(0, 1, false))
         {
             if(ImGui::MenuItem("Create entity"))
-                Main::registry.create();
+                Main::registry.create().add<Transform>();
             ImGui::EndPopup();
         }
 
@@ -45,6 +45,8 @@ public:
 
         ImGui::End();
     }
+
+    inline static bool visible = true;
 
 private:
     void showEntity(const Entity& e)
@@ -68,8 +70,6 @@ private:
             ImGui::EndPopup();
         }
     }
-
-    bool visible = true;
 };
 
 } // namespace clem::ui

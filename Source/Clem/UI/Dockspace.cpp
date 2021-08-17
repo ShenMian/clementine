@@ -2,6 +2,9 @@
 // License(Apache-2.0)
 
 #include "Dockspace.h"
+#include "Browser.h"
+#include "Hierarchy.h"
+#include "Properties.h"
 #include <glad/glad.h>
 #include <imgui/imgui.h>
 
@@ -15,6 +18,19 @@ void Dockspace::update(Time dt)
 
     if(ImGui::GetIO().ConfigFlags & ~ImGuiConfigFlags_DockingEnable)
         return;
+
+
+    if(ImGui::BeginMainMenuBar())
+    {
+        if(ImGui::BeginMenu("View"))
+        {
+            ImGui::MenuItem("Hierarchy", nullptr, &Hierarchy::visible);
+            ImGui::MenuItem("Properties", nullptr, &Properties::visible);
+            ImGui::MenuItem("Browser", nullptr, &Browser::visible);
+            ImGui::EndMenu();
+        }
+        ImGui::EndMainMenuBar();
+    }
 
     // 创建覆盖窗口的 UI 窗口组件
     bool fullWindow = true; // 使整个窗口成为 dockspace

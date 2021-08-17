@@ -14,6 +14,7 @@ public:
     void update(Time dt) override;
 
     inline static Entity entity;
+    inline static bool visible = true;
 
 private:
     void showTag();
@@ -24,8 +25,6 @@ private:
     void showScript();
 
     void Vector3Edit(const std::string& label, Vector3& value, float defaultValue = 0.f);
-
-    bool visible = true;
 };
 
 } // namespace clem::ui
