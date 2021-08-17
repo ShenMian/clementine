@@ -41,7 +41,7 @@ public:
 	  *
 	  * @warning 不影响终端窗口大小.
 	  */
-    void setSize(Size2i size) override;
+    void setSize(Size2 size) override;
 
     /**
 	  * @brief 获取终端缓冲区大小, 单位: 字符.

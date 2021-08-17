@@ -49,7 +49,7 @@ public:
 	 *
 	 * @param size 新窗口大小.
 	 */
-    virtual void setSize(Size2i size) = 0;
+    virtual void setSize(Size2 size) = 0;
 
     /**
 	 * @brief 获取窗口大小.
@@ -95,7 +95,7 @@ public:
     static void init();
     static void deinit();
 
-    std::function<void(Size2i)>         onResize;
+    std::function<void(Size2)>          onResize;
     std::function<void(double, double)> onScroll;
     std::function<void(double, double)> onMouseMove;
     std::function<void()>               onClose;

@@ -79,7 +79,7 @@ Size2i GLTexture2D::getSize() const
 
 void* GLTexture2D::getHandle()
 {
-    return &handle_;
+    return (void*)handle_;
 }
 
 void* GLTexture2D::loadFromFile(const std::filesystem::path& path, int& width, int& height, int& channels)

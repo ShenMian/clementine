@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "GlfwWindow.h"
+#include "Components/Components.h"
 #include "Events/Events.h"
 #include "Platform.h"
 #include "Profiler.h"
@@ -16,8 +17,6 @@
 #include <imgui/backends/imgui_impl_opengl3.h>
 #include <imgui/backends/imgui_impl_vulkan.h>
 #include <imgui/imgui.h>
-
-#include "Components/Components.h"
 
 using std::string;
 
@@ -54,7 +53,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
         const auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
         Renderer::get()->setViewport(0, 0, width, height);
         if(win->onResize)
-            win->onResize({width, height});
+            win->onResize(Size2(width, height));
     });
 
     glfwSetWindowCloseCallback(handle, [](GLFWwindow* native) {
@@ -138,23 +137,8 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     glEnable(GL_MULTISAMPLE);
 
 
-
-    glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    onMouseMove = [this](double x, double y) {
-        static auto last  = getSize() / 2;
-        static auto speed = Vector2::unit * 0.09;
-
-        camera.view.rotateY(speed.x * radians(x - last.x));
-        camera.view.rotateX(-speed.y * radians(y - last.y));
-        last = Vector2(x, y);
-    };
-
-    onScroll = [this](double xOfffset, double yOffset) {
-        camera.view.scale(Vector3(1 + 0.1 * yOffset, 1 + 0.1 * yOffset, 1 + 0.1 * yOffset));
-    };
-
     shader = Shader::create(R"(
-		#version 450 core
+		#version 450
 
 		layout(location = 0) in vec3 a_position;
 		layout(location = 1) in vec3 a_color;
@@ -186,7 +170,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 		}
 	)",
                             R"(
-		#version 450 core
+		#version 450
 
         in vec3 v_position;
         in vec3 v_color;
@@ -198,10 +182,11 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
         uniform vec3      u_light_position;
         uniform sampler2D u_texture;
 
+        // Blinn-Phong 反射模型
         vec4 light()
         {
-            vec3 light_direction  = normalize(u_light_position - v_position);
-            vec3 direction_to_cam = normalize(v_position - v_cam_position);
+            vec3 direction_to_light = normalize(u_light_position - v_position);
+            vec3 direction_to_cam   = normalize(v_position - v_cam_position);
 
             // 环境光照
             const float ka            = 0.1;
@@ -211,13 +196,13 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
             // 漫反射光照
             const float kd                  = 0.7;
             const vec3  id                  = vec3(1.0, 1.0, 1.0);
-            float       amont_diffuse_light = max(0.0, dot(light_direction, v_normal));
+            float       amont_diffuse_light = max(0.0, dot(direction_to_light, v_normal));
             vec3        diffuse_light       = kd * amont_diffuse_light * id;
 
             // 镜面反射光照
             const float ks                    = 0.7;
             const vec3  is                    = vec3(1.0, 1.0, 1.0);
-            vec3        reflected_light       = reflect(light_direction, v_normal);
+            vec3        reflected_light       = reflect(direction_to_light, v_normal);
             float       shininess             = 32.0;
             float       amount_specular_light = pow(max(0.0, dot(reflected_light, direction_to_cam)), shininess);
             vec3        specular_light        = ks * amount_specular_light * is;
@@ -231,7 +216,27 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
             // gl_FragColor = texture(u_texture, v_uv);
             gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0) * light();
 		}
-	)");
+	)");                                                                                            //指定光源位置
+
+#if 0
+    glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    onMouseMove = [this](double x, double y) {
+        static auto last  = getSize() / 2;
+        static auto speed = Vector2::unit * 0.09;
+
+        camera.view.rotateY(speed.x * radians(x - last.x));
+        camera.view.rotateX(-speed.y * radians(y - last.y));
+        last = Vector2(x, y);
+    };
+#endif
+
+    onScroll = [this](double xOfffset, double yOffset) {
+        camera.view.scale(Vector3(1 + 0.1 * yOffset, 1 + 0.1 * yOffset, 1 + 0.1 * yOffset));
+    };
+
+    onResize = [this](Size2 size) {
+        camera.setPerspective(radians(45), (float)(size.x / size.y), 0.1f, 100.f);
+    };
 
 #if 1
     camera.setPerspective(radians(45), (float)size.x / (float)size.y, 0.1f, 100.f);
@@ -246,9 +251,9 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     camera.setDirection({0, 0, 20}, {0, 0, 1}, -Vector3::unit_y);
 #endif
 
-    light.translate({0, 0, 20});
+    light.translate({0, 1, 20});
 
-    static auto texture = Texture2D::create("../assets/textures/SMS.png");
+    texture = Texture2D::create("../assets/textures/SMS.png");
     texture->bind();
 
     UI::init(this);
@@ -275,6 +280,8 @@ void GlfwWindow::update(Time dt)
     renderer->beginFrame();
 
     // FIXME: Camera::view 被不断改变
+
+    setSize({1920 * 0.6, 1080 * 0.6});
 
     camera.view.translate(move);
 
@@ -309,7 +316,7 @@ void GlfwWindow::setTitle(const string& title)
     glfwSetWindowTitle(handle, title.c_str());
 }
 
-void GlfwWindow::setSize(Size2i size)
+void GlfwWindow::setSize(Size2 size)
 {
     glfwSetWindowSize(handle, size.x, size.y);
 }

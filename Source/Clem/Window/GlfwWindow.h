@@ -59,7 +59,7 @@ public:
     /**
 	 * @brief 设置窗口大小.
 	 */
-    void setSize(Size2i size) override;
+    void setSize(Size2 size) override;
 
     /**
 	 * @brief 获取窗口大小.
@@ -108,8 +108,9 @@ private:
     GLFWwindow*             handle;
     std::shared_ptr<Shader> shader;
 
-    Camera  camera;
-    Matrix4 light;
+    Camera                     camera;
+    Matrix4                    light;
+    std::shared_ptr<Texture2D> texture;
 };
 
 } // namespace clem

@@ -21,7 +21,7 @@ public:
     static std::shared_ptr<Texture2D> create(const std::filesystem::path& path);
 
     virtual Size2i getSize() const = 0;
-    virtual void*  getHandle()     = 0;
+    virtual void*  getHandle()     = 0; // 返回值不是值, 不是指针
 
     virtual void bind(unsigned int slot = 0) = 0;
 };

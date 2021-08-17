@@ -51,6 +51,7 @@ void GLRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_pt
 
 void GLRenderer::setViewport(int x, int y, int w, int h)
 {
+    Assert::isTrue(cmdBuffer != nullptr);
     cmdBuffer->setViewport(x, y, w, h);
 }
 

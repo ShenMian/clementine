@@ -29,18 +29,29 @@ void Browser::update(Time dt)
         auto filename = entry.path().filename().string();
         if(entry.is_directory())
         {
+            ImGui::PushID(filename.c_str());
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
-            if(ImGui::ImageButton(folderIcon->getHandle(), {48, 48}, {0, 1}, {1, 0}))
+            if(ImGui::ImageButton((ImTextureID)folderIcon->getHandle(), {48, 48}, {1, 0}, {0, 1}))
                 current = entry;
             ImGui::TextWrapped(filename.c_str());
             ImGui::PopStyleColor();
+            ImGui::PopID();
         }
         else
         {
+            ImGui::PushID(filename.c_str());
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
-            ImGui::ImageButton(fileIcon->getHandle(), {48, 48}, {0, 1}, {1, 0});
+            ImGui::ImageButton((ImTextureID)fileIcon->getHandle(), {48, 48}, {1, 0}, {0, 1});
+
+            if(ImGui::BeginDragDropSource())
+            {
+                ImGui::SetDragDropPayload("browser", entry.path().string().c_str(), entry.path().string().size() * sizeof(char));
+                ImGui::EndDragDropSource();
+            }
+
             ImGui::TextWrapped(filename.c_str());
             ImGui::PopStyleColor();
+            ImGui::PopID();
         }
         ImGui::NextColumn();
     }

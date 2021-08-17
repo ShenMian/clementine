@@ -25,9 +25,9 @@ void ConsoleWindow::update(Time dt)
     if(newSize == size)
         return;
     size = newSize;
-    setSize(size);
+    setSize(Size2(size.x, size.y));
     if(onResize)
-        onResize(size);
+        onResize(Size2(size.x, size.y));
 }
 
 void ConsoleWindow::setPosition(Size2i size)
@@ -93,7 +93,7 @@ void ConsoleWindow::setTitle(const string& title)
     SetConsoleTitleA(title.c_str());
 }
 
-void ConsoleWindow::setSize(Size2i size)
+void ConsoleWindow::setSize(Size2 size)
 {
     Output::get().setSize(size);
 }
