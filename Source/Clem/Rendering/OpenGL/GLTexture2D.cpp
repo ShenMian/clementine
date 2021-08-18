@@ -85,7 +85,7 @@ size_t GLTexture2D::getHandle()
 void* GLTexture2D::loadFromFile(const std::filesystem::path& path, int& width, int& height, int& channels)
 {
     auto data = stbi_load(path.string().c_str(), &width, &height, &channels, 0);
-    assert(data);
+    Assert::isTrue(data != nullptr, std::format("can't load from file: '{}'", path.string()));
 
     return data;
 }

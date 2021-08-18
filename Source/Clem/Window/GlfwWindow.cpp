@@ -132,8 +132,8 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2 size)
     glfwSetMouseButtonCallback(handle, nullptr);
 
     // 开启 MASS 抗锯齿
-    glfwWindowHint(GLFW_SAMPLES, 2);
-    glEnable(GL_MULTISAMPLE);
+    // glfwWindowHint(GLFW_SAMPLES, 2);
+    // glEnable(GL_MULTISAMPLE);
 
     // TODO
     glClearColor(0, 0, 0, 0);
@@ -141,7 +141,41 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2 size)
     glViewport(0, 0, size.x, size.y);
     glfwSwapBuffers(handle);
 
-    shader = Shader::create(R"(
+    skybox = Shader::create(R"(
+		#version 450
+
+		layout(location = 0) in vec3 a_position;
+		layout(location = 1) in vec3 a_color;
+		layout(location = 3) in vec2 a_uv;
+
+        uniform mat4 u_view;
+        uniform mat4 u_projection;
+
+        out vec3 v_position;
+        out vec2 v_uv;
+
+		void main()
+		{
+            v_uv = a_uv;
+
+			gl_Position = u_projection * u_view * vec4(a_position, 1.0);
+		}
+	)",
+                            R"(
+		#version 450
+
+        in vec3 v_position;
+        in vec2 v_uv;
+
+        uniform sampler2D u_skybox;
+
+		void main()
+		{
+            gl_FragColor = texture(u_skybox, 1.0 - v_uv);
+		}
+	)");
+
+    standard = Shader::create(R"(
 		#version 450
 
 		layout(location = 0) in vec3 a_position;
@@ -158,7 +192,6 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2 size)
         out vec3 v_color;
         out vec3 v_normal;
         out vec2 v_uv;
-
         out vec3 v_cam_position;
 
 		void main()
@@ -287,21 +320,19 @@ void GlfwWindow::update(Time dt)
     camera.view.translate(move);
 
     // camera.view.rotateY(radians(1));
-    // camera.view.rotateX(radians(0.5));
-    // camera.view.rotateZ(radians(1));
 
-    light.rotateY(radians(0.5));
+    light.rotateY(radians(45) * dt.seconds());
 
-    shader->uploadUniform("u_light_position", light.translation());
+    standard->uploadUniform("u_light_position", light.translation());
 
-    shader->uploadUniform("u_texture", 0);
+    standard->uploadUniform("u_texture", 0);
 
-    shader->uploadUniform("u_view", camera.getViewMatrix());
-    shader->uploadUniform("u_projection", camera.getProjectionMatrix());
-    shader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
+    standard->uploadUniform("u_view", camera.getViewMatrix());
+    standard->uploadUniform("u_projection", camera.getProjectionMatrix());
+    standard->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
 
     Main::registry.each<Model>([&](const Entity& e)
-                               { renderer->submit(e, shader); });
+                               { renderer->submit(e, standard); });
 
     UI::beginFrame();
     for(auto layer : layers)

@@ -103,13 +103,11 @@ public:
     static void deinit();
 
 private:
-    void renderGui(Time dt);
-
-    GLFWwindow*             handle;
-    std::shared_ptr<Shader> shader;
+    GLFWwindow* handle;
 
     Camera                     camera;
     Matrix4                    light;
+    std::shared_ptr<Shader>    standard, skybox;
     std::shared_ptr<Texture2D> texture;
 };
 

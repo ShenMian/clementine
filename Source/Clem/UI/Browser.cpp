@@ -4,6 +4,7 @@
 #include "Browser.h"
 #include <glad/glad.h>
 #include <imgui/imgui.h>
+#include "Rendering/OpenGL/GLFrameBuffer.h"
 
 namespace clem::ui
 {
@@ -13,11 +14,10 @@ void Browser::update(Time dt)
     if(!visible)
         return;
 
+    static GLFrameBuffer framebuffer({1920 * 0.7, 1080 * 0.7}, 1);
     bool open = false;
-    ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.0f, 0.0f, 0.0f, 0.0f));
     ImGui::Begin("Viewport", &open);
-    ImGui::Image(0, ImGui::GetContentRegionAvail());
-    ImGui::PopStyleColor();
+    ImGui::Image((ImTextureID)framebuffer.colorAttachment, ImGui::GetContentRegionAvail());
     ImGui::End();
 
     ImGui::Begin("Browser", &visible);
