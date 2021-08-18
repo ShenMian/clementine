@@ -22,7 +22,8 @@ public:
         board.getComponent<Transform>().setPosition({0, 0});
         sprite = &board.addComponent<Sprite>(Size2i(4 * 5, 4 * 2));
 
-        board.addComponent<Script>().onUpdate = [&](float dt) {
+        board.addComponent<Script>().onUpdate = [&](float dt)
+        {
             static float lag = 0;
             lag += dt;
             if(lag < 0.1)

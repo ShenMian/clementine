@@ -49,11 +49,6 @@ void GLVertexArray::setIndexBuffer(std::shared_ptr<IndexBuffer> buffer)
     indexBuffer = buffer;
 }
 
-std::shared_ptr<IndexBuffer> GLVertexArray::getIndexBuffer() const
-{
-    return indexBuffer;
-}
-
 void GLVertexArray::addVertexBuffer(std::shared_ptr<VertexBuffer> buffer)
 {
     Assert::isTrue(!buffer->layout.empty(), "buffer has no layout");

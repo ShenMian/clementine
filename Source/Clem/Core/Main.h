@@ -65,10 +65,10 @@ public:
 
     /**
      * @brief 设置目标渲染帧率, 单位: Hz.
-     * 
+     *
      * @param rate 目标渲染帧率.
      */
-    static void     setRenderRate(uint16_t rate);
+    static void setRenderRate(uint16_t rate);
 
     /**
      * @brief 获取目标渲染帧率, 单位: Hz.

@@ -5,7 +5,6 @@
 #include <future>
 #include <iostream>
 #include <string>
-#include "Clem/Rendering/OpenGL/GLFrameBuffer.h"
 
 using namespace std;
 using namespace clem;
@@ -28,8 +27,8 @@ public:
 
         auto model = Main::registry.create("model");
         model.add<Transform>();
-        model.add<Model>();
-        
+        model.add<Model>("../assets/models/cube.obj");
+
         FrameBuffer::map.insert({"scene", FrameBuffer::create({1920 * 0.7, 1080 * 0.7}, 1)});
     }
 

@@ -25,18 +25,19 @@ bool Connection::connect(const std::string_view& host, uint16_t port)
         ip::tcp::resolver resolver(context);
         auto              endpoints = resolver.resolve(std::string(host), std::to_string(port));
 
-        async_connect(socket, endpoints, [this](std::error_code ec, ip::tcp::endpoint) {
-            if(ec)
-            {
-                CLEM_LOG_ERROR("networking", ec.message());
-                if(onError)
-                    onError(ec);
-                return;
-            }
+        async_connect(socket, endpoints, [this](std::error_code ec, ip::tcp::endpoint)
+                      {
+                          if(ec)
+                          {
+                              CLEM_LOG_ERROR("networking", ec.message());
+                              if(onError)
+                                  onError(ec);
+                              return;
+                          }
 
-            if(onConnected)
-                onConnected();
-        });
+                          if(onConnected)
+                              onConnected();
+                      });
     }
     catch(std::exception& e)
     {
@@ -53,7 +54,8 @@ void Connection::disconnect()
 
     if(onDisconnect)
         onDisconnect();
-    post(context, [this]() { socket.close(); });
+    post(context, [this]()
+         { socket.close(); });
 }
 
 bool Connection::isConnected() const

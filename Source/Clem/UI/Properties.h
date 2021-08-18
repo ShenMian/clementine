@@ -14,7 +14,7 @@ public:
     void update(Time dt) override;
 
     inline static Entity entity;
-    inline static bool visible = true;
+    inline static bool   visible = true;
 
 private:
     void showTag();

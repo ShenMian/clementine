@@ -16,6 +16,9 @@ namespace clem
  * @{
  */
 
+/**
+ * @brief Œ∆¿Ì.
+ */
 class Texture2D
 {
 public:
@@ -36,7 +39,7 @@ public:
 
     static std::shared_ptr<Texture2D> create(const std::filesystem::path& path);
 
-    virtual void load(const std::filesystem::path& path)                      = 0;
+    virtual void load(const std::filesystem::path& path) = 0;
 
     // right, left, top, bottom, back, front
     virtual void loadCubemap(const std::vector<std::filesystem::path>& faces) = 0;

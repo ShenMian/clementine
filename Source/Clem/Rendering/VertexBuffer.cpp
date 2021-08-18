@@ -40,6 +40,11 @@ size_t VertexBuffer::size() const
     return size_;
 }
 
+size_t VertexBuffer::count() const
+{
+    return count_;
+}
+
 VertexBuffer::Layout::Layout(const std::initializer_list<Element>& list)
     : elements_(list)
 {

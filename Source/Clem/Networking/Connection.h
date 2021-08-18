@@ -87,7 +87,8 @@ void Connection::write(const Message<T>& msg)
     Assert::isTrue(msg.header.size == msg.body.size(), "");
 
     asio::async_write(socket, asio::buffer(&msg.header, sizeof(msg.header)),
-                      [this](std::error_code ec, size_t size) {
+                      [this](std::error_code ec, size_t size)
+                      {
                           if(ec)
                           {
                               if(onError)
@@ -97,7 +98,8 @@ void Connection::write(const Message<T>& msg)
                           }
                       });
     asio::async_write(socket, asio::buffer(msg.body.data(), msg.header.size),
-                      [this](std::error_code ec, size_t size) {
+                      [this](std::error_code ec, size_t size)
+                      {
                           if(ec)
                           {
                               if(onError)
@@ -123,7 +125,8 @@ void Connection::readHeader()
 {
     Message<T>& msg = *static_cast<Message<T>*>(buffer);
     async_read(socket, asio::buffer(&msg.header, sizeof(Message<T>::header)),
-               [&, this](std::error_code ec, size_t size) {
+               [&, this](std::error_code ec, size_t size)
+               {
                    if(ec)
                    {
                        if(onError)
@@ -150,7 +153,8 @@ void Connection::readBody()
 {
     Message<T>& msg = *static_cast<Message<T>*>(buffer);
     async_read(socket, asio::buffer(msg.body.data(), msg.header.size),
-               [this](std::error_code ec, size_t size) {
+               [this](std::error_code ec, size_t size)
+               {
                    if(ec)
                    {
                        if(onError)

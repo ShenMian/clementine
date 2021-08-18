@@ -19,8 +19,8 @@ class Browser : public Layer
 public:
     void update(Time dt) override;
 
-    inline static bool           visible = true;
-    inline static fs::path       assets  = "../assets"; // 当前项目根目录
+    inline static bool     visible = true;
+    inline static fs::path assets  = "../assets"; // 当前项目根目录
 
 private:
     fs::path                   current    = assets;

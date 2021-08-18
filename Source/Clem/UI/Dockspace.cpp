@@ -19,7 +19,6 @@ void Dockspace::update(Time dt)
     if(ImGui::GetIO().ConfigFlags & ~ImGuiConfigFlags_DockingEnable)
         return;
 
-
     if(ImGui::BeginMainMenuBar())
     {
         if(ImGui::BeginMenu("View"))

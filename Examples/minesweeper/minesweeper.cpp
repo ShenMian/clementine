@@ -58,23 +58,25 @@ public:
         board.add<Transform>();
         sprite = &board.add<Sprite>(Size2i(board_size.x * 2 + 1, board_size.y + 2));
 
-        EventDispatcher::get().addListener(Event::Type::mouse, [&](Event* e) {
-            auto event = dynamic_cast<MouseEvent*>(e);
-            if(event->getType() == MouseEvent::Type::click)
-            {
-                Point2i p = event->getPosition();
-                p         = {((p.x + 1) / 2) - 1, p.y - 1};
-                if(event->getKey() == MouseEvent::Key::left_buttom)
-                    open(p.x, p.y);
-                else if(event->getKey() == MouseEvent::Key::right_buttom)
-                    flag(p.x, p.y);
-            }
-        });
+        EventDispatcher::get().addListener(Event::Type::mouse, [&](Event* e)
+                                           {
+                                               auto event = dynamic_cast<MouseEvent*>(e);
+                                               if(event->getType() == MouseEvent::Type::click)
+                                               {
+                                                   Point2i p = event->getPosition();
+                                                   p         = {((p.x + 1) / 2) - 1, p.y - 1};
+                                                   if(event->getKey() == MouseEvent::Key::left_buttom)
+                                                       open(p.x, p.y);
+                                                   else if(event->getKey() == MouseEvent::Key::right_buttom)
+                                                       flag(p.x, p.y);
+                                               }
+                                           });
 
         auto ui = Main::registry.create("info");
         ui.add<Sprite>(Size2i(15, board_size.y + 2));
         ui.add<Transform>().setPosition(Point2((float)board_size.x * 2 + 2, 0));
-        ui.add<Script>().onUpdate = [&](Time) {
+        ui.add<Script>().onUpdate = [&](Time)
+        {
             auto& s = Main::registry.get("info").get<Sprite>();
             s.drawString({0, 0}, L"Mines: " + to_wstring(mine_num - flags.size()));
         };
@@ -115,10 +117,11 @@ public:
         wstring str = L"-=[ You won ]=-";
         sprite->drawString({(board_size.x * 2 + 1 - (int)str.size()) / 2, board_size.y / 2}, str, Color::yellow);
 
-        static auto h = async([&]() {
-            (void)getchar();
-            stop();
-        });
+        static auto h = async([&]()
+                              {
+                                  (void)getchar();
+                                  stop();
+                              });
     }
 
     void lost()
@@ -133,10 +136,11 @@ public:
         wstring str = L"Press enter to exit";
         sprite->drawString({(board_size.x * 2 + 1 - (int)str.size()) / 2, 0}, str, Color::red);
 
-        static auto h = async([&]() {
-            (void)getchar();
-            stop();
-        });
+        static auto h = async([&]()
+                              {
+                                  (void)getchar();
+                                  stop();
+                              });
     }
 
     void open(int x, int y)

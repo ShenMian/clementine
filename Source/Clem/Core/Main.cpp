@@ -257,7 +257,11 @@ void Main::init()
     // 创建主窗口
     // window = new ConsoleWindow("Clementine", {80, 25});
     window          = new GlfwWindow("Clementine", {1920 * 0.7, 1080 * 0.7});
-    window->onClose = [&]() { window->setVisible(false); Main::stop(); };
+    window->onClose = [&]()
+    {
+        window->setVisible(false);
+        Main::stop();
+    };
 
     // 初始化渲染器
     Renderer::get()->init();

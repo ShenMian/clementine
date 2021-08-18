@@ -40,13 +40,14 @@ void Registry::destroy(const Entity& e)
 [[nodiscard]] Entity Registry::get(const std::string& str)
 {
     Entity entity;
-    each<Tag>([&](const Entity& e, const Tag& tag) {
-        if(tag.str == str)
-        {
-            entity = e;
-            return;
-        }
-    });
+    each<Tag>([&](const Entity& e, const Tag& tag)
+              {
+                  if(tag.str == str)
+                  {
+                      entity = e;
+                      return;
+                  }
+              });
     return entity;
 }
 

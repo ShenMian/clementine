@@ -20,4 +20,14 @@ std::shared_ptr<VertexArray> VertexArray::create()
     return nullptr;
 }
 
+std::shared_ptr<IndexBuffer> VertexArray::getIndexBuffer() const
+{
+    return indexBuffer;
+}
+
+std::vector<std::shared_ptr<VertexBuffer>> VertexArray::getVertexBuffer() const
+{
+    return vertexBuffers;
+}
+
 } // namespace clem

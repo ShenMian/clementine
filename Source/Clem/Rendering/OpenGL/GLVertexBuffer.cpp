@@ -11,13 +11,14 @@ namespace clem
 static_assert(std::is_same<GLVertexBuffer::handle_type, GLuint>::value);
 
 GLVertexBuffer::GLVertexBuffer(const std::vector<value_type>& buf)
-    : GLVertexBuffer(buf.data(), buf.size() * sizeof(Vertex))
+    : GLVertexBuffer(buf.data(), buf.size() * sizeof(value_type))
 {
 }
 
 GLVertexBuffer::GLVertexBuffer(const void* data, size_t size)
 {
-    size_ = size;
+    size_  = size;
+    count_ = size / sizeof(value_type);
 
     glCreateBuffers(1, &handle);
     bind();

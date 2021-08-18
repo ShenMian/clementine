@@ -17,7 +17,7 @@ void Browser::update(Time dt)
     bool open = false;
     ImGui::Begin("Viewport", &open);
     auto framebuffer = FrameBuffer::map["scene"];
-    ImGui::Image((ImTextureID)dynamic_cast<GLFrameBuffer*>(framebuffer.get())->colorAttachment, ImGui::GetContentRegionAvail(), {0, 1}, {1, 0}); // FIXME
+    ImGui::Image((ImTextureID) dynamic_cast<GLFrameBuffer*>(framebuffer.get())->colorAttachment, ImGui::GetContentRegionAvail(), {0, 1}, {1, 0}); // FIXME
     ImGui::End();
 
     ImGui::Begin("Browser", &visible);

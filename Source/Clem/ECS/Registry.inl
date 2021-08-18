@@ -9,18 +9,18 @@ namespace clem
 template <typename Com>
 inline void Registry::each(std::function<void(const Entity&)> func)
 {
-    all([&](const Entity& entity) {
-        if(entity.valid() && entity.anyOf<Com>())
-            func(entity);
-    });
+    all([&](const Entity& entity)
+        {
+            if(entity.valid() && entity.anyOf<Com>())
+                func(entity);
+        });
 }
 
 template <typename Com>
 inline void Registry::each(std::function<void(const Entity&, Com&)> func)
 {
-    each<Com>([&](const Entity& entity) {
-        func(entity, getComponent<Com>(entity));
-    });
+    each<Com>([&](const Entity& entity)
+              { func(entity, getComponent<Com>(entity)); });
 }
 
 // FIXME: 改变 Chunk 却没有转移 Components

@@ -23,13 +23,15 @@ public:
         ImGui::Begin("Hierarchy", &visible);
 
         if(ImGui::CollapsingHeader("Tagged", ImGuiTreeNodeFlags_DefaultOpen))
-            Main::registry.each<Tag>([this](const auto e) { showEntity(e); });
+            Main::registry.each<Tag>([this](const auto e)
+                                     { showEntity(e); });
 
         if(ImGui::CollapsingHeader("Untagged", ImGuiTreeNodeFlags_DefaultOpen))
-            Main::registry.all([this](const auto e) {
-                if(e.noneOf<Tag>())
-                    showEntity(e);
-            });
+            Main::registry.all([this](const auto e)
+                               {
+                                   if(e.noneOf<Tag>())
+                                       showEntity(e);
+                               });
 
         // 空白区域右键
         if(ImGui::BeginPopupContextWindow(0, 1, false))

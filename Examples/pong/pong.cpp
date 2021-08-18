@@ -32,7 +32,7 @@ public:
         // cube.obj, cone.obj, sphere.obj, teapot.obj, statue.obj, wood_dining_chair
 
         Entity model[2];
-        
+
         model[0] = Main::registry.create("model_0");
         model[0].add<Model>("../assets/models/teapot.obj");
         model[0].add<Transform>().scale = {0.5, 0.5, 0.5};
@@ -72,7 +72,8 @@ public:
         ball.add<Transform>();
 
         // 碰撞检测
-        ball.add<Script>().onUpdate = [&](Time) {
+        ball.add<Script>().onUpdate = [&](Time)
+        {
             auto  ball    = Main::registry.get("ball");
             auto& ts      = ball.get<Transform>();
             auto& vel     = ball.get<Rigidbody>().velocity;
@@ -176,35 +177,37 @@ public:
 
         // Bat1 由玩家控制
         // 为 bats[0] 创建一个事件监听器, 监听按键事件
-        EventDispatcher::get().addListener(Event::Type::key, [&](Event* e) {
-            auto  event = dynamic_cast<KeyEvent*>(e);
-            auto& body  = bats[0].get<Rigidbody>(); // 通过 Tag 组件获取 bats[0] 实体的 Rigidbody 组件
-            auto& tf    = bats[0].get<Transform>();
+        EventDispatcher::get().addListener(Event::Type::key, [&](Event* e)
+                                           {
+                                               auto  event = dynamic_cast<KeyEvent*>(e);
+                                               auto& body  = bats[0].get<Rigidbody>(); // 通过 Tag 组件获取 bats[0] 实体的 Rigidbody 组件
+                                               auto& tf    = bats[0].get<Transform>();
 
-            if(event->state == false)
-                body.velocity = Vector2::zero;
-            else if(event->keyCode == KeyCode::W)
-                body.velocity = {0, -player_speed};
-            else if(event->keyCode == KeyCode::S)
-                body.velocity = {0, player_speed};
+                                               if(event->state == false)
+                                                   body.velocity = Vector2::zero;
+                                               else if(event->keyCode == KeyCode::W)
+                                                   body.velocity = {0, -player_speed};
+                                               else if(event->keyCode == KeyCode::S)
+                                                   body.velocity = {0, player_speed};
 
-            if(tf.translation.y + body.velocity.y < 1)
-            {
-                body.velocity    = Vector2::zero;
-                tf.translation.y = 1;
-                return;
-            }
-            else if(tf.translation.y + body.velocity.y > 19)
-            {
-                body.velocity    = Vector2::zero;
-                tf.translation.y = 19;
-                return;
-            }
-        });
+                                               if(tf.translation.y + body.velocity.y < 1)
+                                               {
+                                                   body.velocity    = Vector2::zero;
+                                                   tf.translation.y = 1;
+                                                   return;
+                                               }
+                                               else if(tf.translation.y + body.velocity.y > 19)
+                                               {
+                                                   body.velocity    = Vector2::zero;
+                                                   tf.translation.y = 19;
+                                                   return;
+                                               }
+                                           });
 
         // Bat2 由AI控制, 不推测路径
         // 为 bats[1] 创建一个脚本
-        bats[1].add<Script>().onUpdate = [&](Time) {
+        bats[1].add<Script>().onUpdate = [&](Time)
+        {
             auto  ballPos = Main::registry.get("ball").get<Transform>().translation;
             auto& batBody = bats[1].get<Rigidbody>();
             auto  batPos  = bats[1].get<Transform>().translation;
@@ -226,7 +229,8 @@ public:
         auto& boardSprite = board.add<Sprite>(Size2(80, 25));
         boardSprite.drawRect(Rect2i({0, 0}, {80, 25}), Tile('#'));
         boardSprite.fillRect(Rect2i({39, 1}, {2, 23}), Tile('.', Color::green));
-        board.add<Script>().onUpdate = [&](Time dt) {
+        board.add<Script>().onUpdate = [&](Time dt)
+        {
             boardSprite.drawString({34, 2}, to_wstring(player_score));
             boardSprite.drawString({44, 2}, to_wstring(ai_score));
         };
@@ -239,10 +243,11 @@ public:
         Main::registry.get("ball").get<Rigidbody>().velocity    = Vector2::zero;
 
         static future<void> h;
-        h = async([this]() {
-            this_thread::sleep_for(chrono::seconds(2));
-            Main::registry.get("ball").get<Rigidbody>().velocity = Vector2::right * ball_speed;
-        });
+        h = async([this]()
+                  {
+                      this_thread::sleep_for(chrono::seconds(2));
+                      Main::registry.get("ball").get<Rigidbody>().velocity = Vector2::right * ball_speed;
+                  });
     }
 
     // 重置 bat 的位置
@@ -256,7 +261,7 @@ private:
     int player_score = 0;
     int ai_score     = 0;
 
-    const float ball_speed           = 1.f;  // 球的移动速度
+    const float ball_speed           = 1.f;   // 球的移动速度
     const float player_speed         = 0.15f; // 玩家乒乓球拍的移动速度
     const float ai_speed             = 0.1f;  // AI 乒乓球拍的移动速度
     const int   random_rebound_angle = 5;     // 碰撞时随机调整角度系数

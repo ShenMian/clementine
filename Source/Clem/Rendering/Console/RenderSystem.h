@@ -22,10 +22,11 @@ public:
         static auto& output = Output::get();
         output.getBuffer().clear();
 
-        registry.each<Sprite>([](const Entity& e, Sprite& sprite) {
-            auto& tf = e.get<Transform>();
-            output.getBuffer().drawSprite({tf.translation.x, tf.translation.y}, sprite);
-        });
+        registry.each<Sprite>([](const Entity& e, Sprite& sprite)
+                              {
+                                  auto& tf = e.get<Transform>();
+                                  output.getBuffer().drawSprite({tf.translation.x, tf.translation.y}, sprite);
+                              });
 
         output.swapBuffers();
         output.update();

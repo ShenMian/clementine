@@ -25,8 +25,6 @@ public:
     void addVertexBuffer(std::shared_ptr<VertexBuffer> buffer) override;
     void setIndexBuffer(std::shared_ptr<IndexBuffer> buffer) override;
 
-    std::shared_ptr<IndexBuffer> getIndexBuffer() const;
-
 private:
     handle_type handle;
     size_t      index = 0;

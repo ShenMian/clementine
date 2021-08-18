@@ -25,7 +25,8 @@ public:
 
         auto& s = scene->createEntity("source");
         s.addComponent<Sprite>(Size2i(1, 1)).drawPoint({0, 0}, '*');
-        s.addComponent<Script>().onUpdate = [&](float) {
+        s.addComponent<Script>().onUpdate = [&](float)
+        {
             if(Mouse::getKeyState(Mouse::Key::left))
             {
                 auto& ts  = scene->getEntity("source").getComponent<Transform>();
@@ -38,7 +39,8 @@ public:
         auto& l = scene->createEntity("listener");
         l.addComponent<Sprite>(Size2i(1, 1)).drawPoint({0, 0}, '@');
         l.getComponent<Transform>().setPosition(Point2(size.x / 2, size.y / 2));
-        l.addComponent<Script>().onUpdate = [&](float dt) {
+        l.addComponent<Script>().onUpdate = [&](float dt)
+        {
             auto& ts = scene->getEntity("listener").getComponent<Transform>();
             if(Keyboard::getKeyState(Keyboard::Key::W))
                 ts.setPosition(ts.getPosition() + Vector2::down * 5 * dt);

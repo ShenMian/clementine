@@ -13,7 +13,7 @@ GLFrameBuffer::GLFrameBuffer(Size2 size, int samples)
 {
     glCreateFramebuffers(1, &handle);
     bind();
-    
+
     attachColor();
     attachDepth();
     Assert::isTrue(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);

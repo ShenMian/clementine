@@ -16,6 +16,9 @@ namespace clem
  * @{
  */
 
+/**
+ * @brief 着色器.
+ */
 class Shader
 {
 public:

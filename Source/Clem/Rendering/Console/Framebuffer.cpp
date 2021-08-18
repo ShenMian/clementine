@@ -2,12 +2,12 @@
 // License(Apache-2.0)
 
 #include "Framebuffer.h"
+#include "..\FrameBuffer.h"
 #include "Color.h"
 #include "Cursor.h"
 #include "Profiler.h"
 #include <cassert>
 #include <cmath>
-#include "..\FrameBuffer.h"
 
 namespace clem
 {

@@ -91,6 +91,7 @@ public:
     static std::shared_ptr<VertexBuffer> create(const void* data, size_t size);
 
     size_t size() const;
+    size_t count() const;
 
     virtual void bind() = 0;
 
@@ -98,6 +99,7 @@ public:
 
 protected:
     size_t size_;
+    size_t count_;
 };
 
 /**

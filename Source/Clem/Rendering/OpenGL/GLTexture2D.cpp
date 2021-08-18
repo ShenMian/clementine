@@ -64,6 +64,7 @@ void GLTexture2D::load(const std::filesystem::path& path)
     }
 
     glCreateTextures(type, 1, &handle_);
+    // glActiveTexture(GL_TEXTURE0); // 激活纹理单元
     glBindTexture(type, handle_);
 
     glTexStorage2D(type, 1, internalFormat, size.x, size.y);

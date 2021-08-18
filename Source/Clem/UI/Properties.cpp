@@ -146,9 +146,9 @@ void Properties::showModel()
         {
             auto& model = entity.get<Model>();
             if(model.path == fs::path())
-                ImGui::Text("Source: (null)");
+                ImGui::Text("Mesh    : (null)");
             else
-                ImGui::Text("Source: %s", model.path.string().c_str());
+                ImGui::Text("Mesh    : %s", model.path.string().c_str());
             if(ImGui::BeginDragDropTarget())
             {
                 const auto payload = ImGui::AcceptDragDropPayload("browser_file");
@@ -164,6 +164,12 @@ void Properties::showModel()
                 }
                 ImGui::EndDragDropTarget();
             }
+
+            if(model.path == fs::path())
+                return;
+
+            auto vertices = model.vertexArray->getVertexBuffer()[0]->count();
+            ImGui::Text("Vertices: %d", vertices);
         }
     }
 }

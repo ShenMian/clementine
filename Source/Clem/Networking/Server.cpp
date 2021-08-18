@@ -31,7 +31,8 @@ bool Server::start(uint16_t port)
 
         accept();
 
-        thread = std::thread([this]() { context.run(); });
+        thread = std::thread([this]()
+                             { context.run(); });
     }
     catch(std::exception& e)
     {
@@ -58,21 +59,34 @@ const std::vector<std::shared_ptr<Connection>>& Server::getConnections() const
 
 void Server::accept()
 {
-    acceptor.async_accept([this](std::error_code ec, ip::tcp::socket sock) {
-        if(ec)
-            abort();
+    acceptor.async_accept([this](std::error_code ec, ip::tcp::socket sock)
+                          {
+                              if(ec)
+                                  abort();
 
-        auto conn = std::make_shared<Connection>(context, std::move(sock));
-        if(onAccept && onAccept(conn))
-        {
-            conn->onDisconnect = [this, conn]() { if(onDisconnect) onDisconnect(conn); };
-            conn->onMessage    = [this, conn]() { if(onMessage) onMessage(conn); };
-            conn->onError      = [this, conn](auto ec) { if(onError) onError(conn, ec); };
-            connections.push_back(conn);
-        }
+                              auto conn = std::make_shared<Connection>(context, std::move(sock));
+                              if(onAccept && onAccept(conn))
+                              {
+                                  conn->onDisconnect = [this, conn]()
+                                  {
+                                      if(onDisconnect)
+                                          onDisconnect(conn);
+                                  };
+                                  conn->onMessage = [this, conn]()
+                                  {
+                                      if(onMessage)
+                                          onMessage(conn);
+                                  };
+                                  conn->onError = [this, conn](auto ec)
+                                  {
+                                      if(onError)
+                                          onError(conn, ec);
+                                  };
+                                  connections.push_back(conn);
+                              }
 
-        accept();
-    });
+                              accept();
+                          });
 }
 
 } // namespace clem

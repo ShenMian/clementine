@@ -21,7 +21,8 @@ public:
     virtual void addVertexBuffer(std::shared_ptr<VertexBuffer> buffer) = 0;
     virtual void setIndexBuffer(std::shared_ptr<IndexBuffer> buffer)   = 0;
 
-    virtual std::shared_ptr<IndexBuffer> getIndexBuffer() const = 0;
+    std::shared_ptr<IndexBuffer>               getIndexBuffer() const;
+    std::vector<std::shared_ptr<VertexBuffer>> getVertexBuffer() const;
 
 protected:
     std::shared_ptr<IndexBuffer>               indexBuffer;

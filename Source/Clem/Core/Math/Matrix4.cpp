@@ -133,11 +133,11 @@ Matrix4 Matrix4::createPerspective(float FOV, float aspectRatio, float n, float 
     float theta = FOV * 0.5f;
 
     float divisor = std::tan(theta);
-    float factor = 1.0f / divisor;
+    float factor  = 1.0f / divisor;
 
     Matrix4 mat(0.f);
-    mat.m[0][0]  = (1.0f / aspectRatio) * factor;
-    mat.m[1][1]  = factor;
+    mat.m[0][0] = (1.0f / aspectRatio) * factor;
+    mat.m[1][1] = factor;
     mat.m[2][2] = (-(f + n)) * f_n;
     mat.m[2][3] = -1.0f;
     mat.m[3][2] = -2.0f * f * n * f_n;
