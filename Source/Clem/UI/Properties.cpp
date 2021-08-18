@@ -146,26 +146,24 @@ void Properties::showModel()
         {
             auto& model = entity.get<Model>();
             if(model.path == fs::path())
-            {
-                ImGui::Button("Drop asset here");
-                if(ImGui::BeginDragDropTarget())
-                {
-                    const auto payload = ImGui::AcceptDragDropPayload("browser_file");
-                    if(payload != nullptr)
-                    {
-                        fs::path path((const wchar_t*)payload->Data);
-
-                        // TODO: 添加组件已存在提示, UI 使用提示而不是断言
-                        if(path.extension() == L".obj")
-                            entity.get<Model>().load(Browser::assets / path);
-                        else
-                            Assert::isTrue(false);
-                    }
-                    ImGui::EndDragDropTarget();
-                }
-            }
+                ImGui::Text("Source: (null)");
             else
-                ImGui::Text("File: %s", model.path.string().c_str());
+                ImGui::Text("Source: %s", model.path.string().c_str());
+            if(ImGui::BeginDragDropTarget())
+            {
+                const auto payload = ImGui::AcceptDragDropPayload("browser_file");
+                if(payload != nullptr)
+                {
+                    fs::path path((const wchar_t*)payload->Data);
+
+                    // TODO: 添加组件已存在提示, UI 使用提示而不是断言
+                    if(path.extension() == L".obj")
+                        entity.get<Model>().load(Browser::assets / path);
+                    else
+                        Assert::isTrue(false);
+                }
+                ImGui::EndDragDropTarget();
+            }
         }
     }
 }

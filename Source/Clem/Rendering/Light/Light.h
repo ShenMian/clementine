@@ -13,9 +13,9 @@ class Light
 public:
     enum class Type
     {
-        Directional, // 方向光源, 平行光
+        Directional, // 平行光
         Point,       // 点光源
-        Spot,        // 聚光灯
+        Spot,        // 投射光
         Ambient      // 环境光
     };
 

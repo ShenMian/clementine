@@ -8,6 +8,9 @@
 namespace clem
 {
 
+/**
+ * @brief 投射光.
+ */
 class SpotLight : public Light
 {
 public:

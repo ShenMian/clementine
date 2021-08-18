@@ -219,7 +219,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2 size)
         uniform vec3      u_light_position;
         uniform sampler2D u_texture;
 
-        // Blinn-Phong 反射模型
+        // 光照. Blinn-Phong 反射模型
         vec4 light()
         {
             vec3 direction_to_light = normalize(u_light_position - v_position);
@@ -249,7 +249,6 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2 size)
 
 		void main()
 		{
-			// gl_FragColor = vec4(v_uv, 0.0, 1.0);
             // gl_FragColor = texture(u_texture, v_uv);
             gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0) * light();
 		}
@@ -289,7 +288,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2 size)
 
     light.translate({0, 1, 20});
 
-    texture = Texture2D::create("../assets/textures/SMS.png");
+    texture = Texture2D::create("../assets/textures/wall.jpg");
     texture->bind();
 
     UI::windowInit(this);
@@ -325,14 +324,17 @@ void GlfwWindow::update(Time dt)
 
     standard->uploadUniform("u_light_position", light.translation());
 
-    standard->uploadUniform("u_texture", 0);
+    standard->uploadUniform("u_texture", (int)2);
 
     standard->uploadUniform("u_view", camera.getViewMatrix());
     standard->uploadUniform("u_projection", camera.getProjectionMatrix());
     standard->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
 
+    auto framebuffer = FrameBuffer::map["scene"];
+    // framebuffer->bind();
     Main::registry.each<Model>([&](const Entity& e)
                                { renderer->submit(e, standard); });
+    // framebuffer->unbind();
 
     UI::beginFrame();
     for(auto layer : layers)

@@ -3,6 +3,7 @@
 
 #include "Camera.h"
 #include "CommandBuffer.h"
+#include "FrameBuffer.h"
 #include "IndexBuffer.h"
 #include "Renderer.h"
 #include "Shader.h"

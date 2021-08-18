@@ -2,9 +2,9 @@
 // License(Apache-2.0)
 
 #include "Browser.h"
+#include "Window/GlfwWindow.h"
 #include <glad/glad.h>
 #include <imgui/imgui.h>
-#include "Rendering/OpenGL/GLFrameBuffer.h"
 
 namespace clem::ui
 {
@@ -14,10 +14,10 @@ void Browser::update(Time dt)
     if(!visible)
         return;
 
-    static GLFrameBuffer framebuffer({1920 * 0.7, 1080 * 0.7}, 1);
     bool open = false;
     ImGui::Begin("Viewport", &open);
-    ImGui::Image((ImTextureID)framebuffer.colorAttachment, ImGui::GetContentRegionAvail());
+    auto framebuffer = FrameBuffer::map["scene"];
+    ImGui::Image((ImTextureID)dynamic_cast<GLFrameBuffer*>(framebuffer.get())->colorAttachment, ImGui::GetContentRegionAvail(), {0, 1}, {1, 0}); // FIXME
     ImGui::End();
 
     ImGui::Begin("Browser", &visible);

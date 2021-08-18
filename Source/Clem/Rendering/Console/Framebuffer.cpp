@@ -7,6 +7,7 @@
 #include "Profiler.h"
 #include <cassert>
 #include <cmath>
+#include "..\FrameBuffer.h"
 
 namespace clem
 {
@@ -236,4 +237,5 @@ void Framebuffer::output()
 }
 
 #endif
+
 } // namespace clem

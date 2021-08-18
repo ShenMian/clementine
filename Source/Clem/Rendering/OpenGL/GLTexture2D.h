@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Rendering/Texture2D.h"
+#include <unordered_map>
 
 namespace clem
 {
@@ -11,7 +12,7 @@ namespace clem
 class GLTexture2D : public Texture2D
 {
 public:
-    using id_type = unsigned int;
+    using handle_type = unsigned int;
 
     /**
 	 * @brief 构造函数.
@@ -23,14 +24,18 @@ public:
 	 */
     ~GLTexture2D();
 
+    void load(const std::filesystem::path& path) override;
+    void loadCubemap(const std::vector<std::filesystem::path>& faces) override;
+
     Size2i getSize() const override;
     size_t getHandle() override;
 
-    void bind(unsigned int slot) override;
+    void bind(unsigned int slot = 0) override;
 
 private:
-    id_type handle_;
-    Size2i  size;
+    handle_type handle_;
+    Size2i      size;
+    int         type;
 
     void* loadFromFile(const std::filesystem::path& path, int& width, int& height, int& channels);
 };

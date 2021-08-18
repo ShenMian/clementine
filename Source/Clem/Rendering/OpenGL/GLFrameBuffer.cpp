@@ -12,19 +12,31 @@ GLFrameBuffer::GLFrameBuffer(Size2 size, int samples)
     : size(size), samples(samples)
 {
     glCreateFramebuffers(1, &handle);
-    glBindFramebuffer(GL_FRAMEBUFFER, handle);
+    bind();
     
     attachColor();
     attachDepth();
-
     Assert::isTrue(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    unbind();
 }
 
 GLFrameBuffer::~GLFrameBuffer()
 {
     glDeleteFramebuffers(1, &handle);
+}
+
+static GLint defaultFBO;
+
+void GLFrameBuffer::bind()
+{
+    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &defaultFBO);
+    glBindFramebuffer(GL_FRAMEBUFFER, handle);
+}
+
+void GLFrameBuffer::unbind()
+{
+    glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
 }
 
 void GLFrameBuffer::attachColor()

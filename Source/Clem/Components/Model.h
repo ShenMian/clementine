@@ -7,6 +7,8 @@
 #include "ECS/ECS.h"
 #include <filesystem>
 
+// 一个模型包含多个 Mesh
+
 namespace clem
 {
 

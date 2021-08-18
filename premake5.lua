@@ -57,6 +57,7 @@ include "Source"
 include "Test"
 
 group "Examples"
+  include "Examples/Editor"
   include "Examples/2048"
   include "Examples/gobang"
   include "Examples/gamepad"

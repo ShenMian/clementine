@@ -16,13 +16,16 @@ public:
     GLFrameBuffer(Size2 size, int samples);
     virtual ~GLFrameBuffer();
 
-    void attachColor();
-    void attachDepth();
+    void bind() override;
+    void unbind() override;
 
     handle_type colorAttachment;
     handle_type depthAttachment;
 
 private:
+    void attachColor();
+    void attachDepth();
+
     handle_type handle;
     Size2       size;
     int         samples;
