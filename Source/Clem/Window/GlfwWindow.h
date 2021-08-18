@@ -104,11 +104,6 @@ public:
 
 private:
     GLFWwindow* handle;
-
-    Camera                     camera;
-    Matrix4                    light;
-    std::shared_ptr<Shader>    standard, skybox;
-    std::shared_ptr<Texture2D> texture;
 };
 
 } // namespace clem

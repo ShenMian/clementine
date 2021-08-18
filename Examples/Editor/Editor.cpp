@@ -19,21 +19,20 @@ public:
 
     void init() override
     {
-        // Main::getWindow()->add(new ui::Dockspace);
+        Main::getWindow()->add(new ui::Dockspace);
+        Main::getWindow()->add(new ui::Viewport);
         Main::getWindow()->add(new ui::Setting);
         Main::getWindow()->add(new ui::Browser);
         Main::getWindow()->add(new ui::Hierarchy);
         Main::getWindow()->add(new ui::Properties);
 
+        // cube.obj, cone.obj, sphere.obj, teapot.obj, statue.obj, wood_dining_chair
         auto model = Main::registry.create("model");
         model.add<Transform>();
         model.add<Model>("../assets/models/cube.obj");
-
-        FrameBuffer::map.insert({"scene", FrameBuffer::create({1920 * 0.7, 1080 * 0.7}, 1)});
     }
 
 private:
-    std::shared_ptr<FrameBuffer> framebuffer = FrameBuffer::create({1920 * 0.7, 1080 * 0.7}, 1);
 };
 
 Application* clem::CreateApplication()

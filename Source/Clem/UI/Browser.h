@@ -26,6 +26,11 @@ private:
     fs::path                   current    = assets;
     std::shared_ptr<Texture2D> fileIcon   = Texture2D::create("../assets/textures/file_icon.png");
     std::shared_ptr<Texture2D> folderIcon = Texture2D::create("../assets/textures/folder_icon.png");
+
+    Camera                     camera;
+    Matrix4                    light;
+    std::shared_ptr<Shader>    standard, skybox;
+    std::shared_ptr<Texture2D> texture;
 };
 
 } // namespace clem::ui

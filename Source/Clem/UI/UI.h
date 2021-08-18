@@ -8,6 +8,7 @@
 #include "Hierarchy.h"
 #include "Properties.h"
 #include "Setting.h"
+#include "Viewport.h"
 
 namespace clem
 {

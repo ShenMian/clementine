@@ -24,6 +24,9 @@ GLFrameBuffer::GLFrameBuffer(Size2 size, int samples)
 GLFrameBuffer::~GLFrameBuffer()
 {
     glDeleteFramebuffers(1, &handle);
+
+    glDeleteTextures(1, &colorAttachment);
+    glDeleteTextures(1, &depthAttachment);
 }
 
 static GLint defaultFBO;

@@ -5,6 +5,7 @@
 #include "CommandBuffer.h"
 #include "FrameBuffer.h"
 #include "IndexBuffer.h"
+#include "Material.h"
 #include "Renderer.h"
 #include "Shader.h"
 #include "Texture2D.h"

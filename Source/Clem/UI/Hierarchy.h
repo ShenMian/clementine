@@ -36,8 +36,33 @@ public:
         // 空白区域右键
         if(ImGui::BeginPopupContextWindow(0, 1, false))
         {
-            if(ImGui::MenuItem("Create entity"))
+            if(ImGui::MenuItem("Create Empty"))
                 Main::registry.create().add<Transform>();
+            if(ImGui::BeginMenu("3D Model"))
+            {
+                if(ImGui::MenuItem("Cube"))
+                {
+                    auto entity = Main::registry.create();
+                    entity.add<Transform>();
+                    entity.add<Model>("../assets/models/cube.obj");
+                }
+
+                if(ImGui::MenuItem("Sphere"))
+                {
+                    auto entity = Main::registry.create();
+                    entity.add<Transform>();
+                    entity.add<Model>("../assets/models/sphere.obj");
+                }
+
+                if(ImGui::MenuItem("Cone"))
+                {
+                    auto entity = Main::registry.create();
+                    entity.add<Transform>();
+                    entity.add<Model>("../assets/models/cone.obj");
+                }
+
+                ImGui::EndMenu();
+            }
             ImGui::EndPopup();
         }
 
