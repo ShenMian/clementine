@@ -23,9 +23,16 @@ static std::unordered_map<Texture2D::Filter, GLenum> GLFilter = {
 static std::unordered_map<Texture2D::Warp, GLenum> GLWarp = {
     {Texture2D::Warp::Repeat, GL_REPEAT},
     {Texture2D::Warp::MirrorRepeat, GL_MIRRORED_REPEAT},
-    {Texture2D::Warp::ClampToDege, GL_CLAMP_TO_EDGE}};
+    {Texture2D::Warp::ClampToEdge, GL_CLAMP_TO_EDGE}};
 
 static_assert(std::is_same<GLTexture2D::handle_type, GLuint>::value);
+
+GLTexture2D::GLTexture2D()
+{
+    type = GL_TEXTURE_2D;
+
+    glCreateTextures(type, 1, &handle);
+}
 
 GLTexture2D::GLTexture2D(const fs::path& path)
 {
@@ -34,7 +41,7 @@ GLTexture2D::GLTexture2D(const fs::path& path)
 
 GLTexture2D::~GLTexture2D()
 {
-    glDeleteTextures(1, &handle_);
+    glDeleteTextures(1, &handle);
 }
 
 void GLTexture2D::load(const std::filesystem::path& path)
@@ -42,6 +49,9 @@ void GLTexture2D::load(const std::filesystem::path& path)
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
 
     type = GL_TEXTURE_2D;
+
+    glCreateTextures(type, 1, &handle);
+    bind();
 
     int  channels;
     auto data = loadFromFile(path, size.x, size.y, channels);
@@ -63,15 +73,11 @@ void GLTexture2D::load(const std::filesystem::path& path)
         Assert::isTrue(false, "format not supported");
     }
 
-    glCreateTextures(type, 1, &handle_);
-    // glActiveTexture(GL_TEXTURE0); // 激活纹理单元
-    glBindTexture(type, handle_);
-
     glTexStorage2D(type, 1, internalFormat, size.x, size.y);
 
     // 设置纹理过滤方式
-    glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    setMinFilter(Filter::Nearest);
+    setMagFilter(Filter::Linear);
 
     // 设置纹理环绕方式
     glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -79,20 +85,20 @@ void GLTexture2D::load(const std::filesystem::path& path)
 
     glTexSubImage2D(type, 0, 0, 0, size.x, size.y, dataFormat, GL_UNSIGNED_BYTE, data);
 
-    assert(glGetError() == GL_NO_ERROR);
+    Assert::isTrue(glGetError() == GL_NO_ERROR);
 
     stbi_image_free(data);
 }
 
-// TODO: Texture3D?
+// TODO: 应该属于 Texture3D
 void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
 {
     Assert::isTrue(faces.size() == 6, "skybox should have 6 faces");
 
     type = GL_TEXTURE_CUBE_MAP;
 
-    glCreateTextures(type, 1, &handle_);
-    glBindTexture(type, handle_);
+    glCreateTextures(type, 1, &handle);
+    bind();
 
     // 读取六个面
     for(GLuint i = 0; i < faces.size(); i++)
@@ -116,8 +122,8 @@ void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
     }
 
     // 设置纹理过滤方式
-    glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    setMinFilter(Filter::Nearest);
+    setMagFilter(Filter::Linear);
 
     // 设置纹理环绕方式
     glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -125,13 +131,32 @@ void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
     glTexParameteri(type, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
     glBindTexture(type, 0);
+
+    Assert::isTrue(glGetError() == GL_NO_ERROR);
 }
 
-void GLTexture2D::bind(unsigned int slot)
+void GLTexture2D::setMinFilter(Filter filter)
 {
-    glBindTextureUnit(slot, handle_);
+    bind();
+    glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GLFilter[filter]);
+}
 
-    glBindTexture(type, handle_);
+void GLTexture2D::setMagFilter(Filter filter)
+{
+    bind();
+    glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GLFilter[filter]);
+}
+
+void GLTexture2D::bind()
+{
+    glBindTexture(type, handle);
+    Assert::isTrue(glGetError() == GL_NO_ERROR);
+}
+
+void GLTexture2D::bindUnit(unsigned int slot)
+{
+    glBindTextureUnit(slot, handle);
+    Assert::isTrue(glGetError() == GL_NO_ERROR);
 }
 
 Size2i GLTexture2D::getSize() const
@@ -141,7 +166,7 @@ Size2i GLTexture2D::getSize() const
 
 size_t GLTexture2D::getHandle()
 {
-    return (size_t)handle_;
+    return (size_t)handle;
 }
 
 void* GLTexture2D::loadFromFile(const std::filesystem::path& path, int& width, int& height, int& channels)

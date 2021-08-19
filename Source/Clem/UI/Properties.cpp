@@ -6,6 +6,7 @@
 #include "Components/Components.h"
 #include "Physics/Rigidbody.h"
 #include "Rendering/Console/Sprite.h"
+#include "Rendering/Material.h"
 #include <filesystem>
 #include <glad/glad.h>
 #include <imgui/imgui.h>
@@ -35,6 +36,7 @@ void Properties::update(Time dt)
         showTransform();
         showRigidbody();
         showModel();
+        showMaterial();
         showSprite();
         showScript();
 
@@ -170,6 +172,22 @@ void Properties::showModel()
 
             auto vertices = model.vertexArray->getVertexBuffer()[0]->count();
             ImGui::Text("Vertices: %d", vertices);
+        }
+    }
+}
+
+void Properties::showMaterial()
+{
+    if(entity.anyOf<Material>())
+    {
+        if(ImGui::CollapsingHeader("Material", ImGuiTreeNodeFlags_DefaultOpen))
+        {
+            auto& material = entity.get<Material>();
+            ImGui::Text("Shader   : Standard");
+            ImGui::Text("Ambient  : %.5f, %.5f, %.5f", material.ambient.x, material.ambient.y, material.ambient.z);
+            ImGui::Text("Diffuse  : %.5f, %.5f, %.5f", material.diffuse.x, material.diffuse.y, material.diffuse.z);
+            ImGui::Text("Specular : %.5f, %.5f, %.5f", material.specular.x, material.specular.y, material.specular.z);
+            ImGui::Text("Shininess: %.5f", material.shininess);
         }
     }
 }

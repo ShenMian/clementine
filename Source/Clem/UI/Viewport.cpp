@@ -17,7 +17,7 @@ void Viewport::update(Time dt)
     ImGui::Begin("Viewport", &visible);
     ImGui::PopStyleVar();
     render(dt);
-    ImGui::Image((ImTextureID) dynamic_cast<GLFrameBuffer*>(framebuffer.get())->colorAttachment, ImGui::GetContentRegionAvail(), {0, 1}, {1, 0}); // FIXME
+    ImGui::Image((ImTextureID)framebuffer->getColorAttachment(0)->getHandle(), ImGui::GetContentRegionAvail(), {0, 1}, {1, 0}); // FIXME
 
     if(ImGui::IsWindowFocused() && ImGui::IsWindowHovered())
         ;
@@ -27,7 +27,7 @@ void Viewport::update(Time dt)
 
 void Viewport::attach()
 {
-    skybox   = Shader::create(R"(
+    skyboxShader = Shader::create(R"(
 		#version 450
 
 		layout(location = 0) in vec3 a_position;
@@ -46,7 +46,7 @@ void Viewport::attach()
 			gl_Position = u_projection * u_view * vec4(a_position, 1.0);
 		}
 	)",
-                            R"(
+                                  R"(
 		#version 450
 
         in vec3 v_position;
@@ -60,7 +60,7 @@ void Viewport::attach()
 		}
 	)");
 
-    standard = Shader::create(R"(
+    standardShader = Shader::create(R"(
 		#version 450
 
 		layout(location = 0) in vec3 a_position;
@@ -94,6 +94,9 @@ void Viewport::attach()
                               R"(
 		#version 450
 
+        layout (location = 0) out vec4 frag_color;
+        layout (location = 1) out vec4 bright_color;
+
         struct Light
         {
             vec3 position;
@@ -122,7 +125,7 @@ void Viewport::attach()
         uniform sampler2D u_texture;
 
         // 光照. Blinn-Phong 反射模型
-        vec4 light()
+        vec4 lighting()
         {
             vec3 direction_to_light = normalize(u_light.position - v_position);
             vec3 direction_to_cam   = normalize(v_position - v_cam_position);
@@ -151,8 +154,12 @@ void Viewport::attach()
 
 		void main()
 		{
-            gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0) * light();
-            // gl_FragColor = texture(u_texture, vec2(1.0 - v_uv.x, v_uv.y)) * light();
+            // frag_color = vec4(1.0, 1.0, 1.0, 1.0) * lighting();
+            frag_color = texture(u_texture, vec2(1.0 - v_uv.x, v_uv.y)) * lighting();
+
+            float brightness = dot(frag_color.rgb, vec3(0.2126, 0.7152, 0.0722));
+            if(brightness > 1.0)
+                bright_color = vec4(frag_color.rgb, 1.0);
 		}
 	)");
 
@@ -163,6 +170,17 @@ void Viewport::attach()
 #endif
 
     light.translate({0, 1, 20});
+
+    skybox = Texture2D::create();
+    skybox->loadCubemap(
+        {
+            "../assets/textures/skybox/right.jpg",
+            "../assets/textures/skybox/left.jpg",
+            "../assets/textures/skybox/top.jpg",
+            "../assets/textures/skybox/bottom.jpg",
+            "../assets/textures/skybox/back.jpg",
+            "../assets/textures/skybox/front.jpg",
+        });
 
     texture = Texture2D::create("../assets/textures/wall.jpg");
     texture->bind();
@@ -196,30 +214,39 @@ void Viewport::render(Time dt)
 {
     onResize();
 
+    // 天空盒
+    skybox->bind();
+    skyboxShader->uploadUniform("u_skybox", 0);
+
+    // 纹理
     texture->bind();
-    standard->uploadUniform("u_texture", 0);
+    standardShader->uploadUniform("u_texture", 0);
 
+    // 光照
     light.rotateY(radians(90) * dt.seconds());
-    standard->uploadUniform("u_light.position", light.translation());
-    standard->uploadUniform("u_light.ambient", Vector3::unit * 1.0);
-    standard->uploadUniform("u_light.diffuse", Vector3::unit * 1.0);
-    standard->uploadUniform("u_light.specular", Vector3::unit * 1.0);
+    standardShader->uploadUniform("u_light.position", light.translation());
+    standardShader->uploadUniform("u_light.ambient", Vector3::unit * 1.0);
+    standardShader->uploadUniform("u_light.diffuse", Vector3::unit * 1.0);
+    standardShader->uploadUniform("u_light.specular", Vector3::unit * 1.0);
 
-    Material material = Material::silver;
-    standard->uploadUniform("u_material.ambient", material.ambient);
-    standard->uploadUniform("u_material.diffuse", material.diffuse);
-    standard->uploadUniform("u_material.specular", material.specular);
-    standard->uploadUniform("u_material.shininess", material.shininess);
-
-    standard->uploadUniform("u_view", camera.getViewMatrix());
-    standard->uploadUniform("u_projection", camera.getProjectionMatrix());
-    standard->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
+    standardShader->uploadUniform("u_view", camera.getViewMatrix());
+    standardShader->uploadUniform("u_projection", camera.getProjectionMatrix());
+    standardShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
 
     framebuffer->bind();
     glClearColor(.117f, .564f, 1.f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     Main::registry.each<Model>([&](const Entity& e)
-                               { Renderer::get()->submit(e, standard); });
+                               {
+                                   // 材质
+                                   const auto& material = e.get<Material>();
+                                   standardShader->uploadUniform("u_material.ambient", material.ambient);
+                                   standardShader->uploadUniform("u_material.diffuse", material.diffuse);
+                                   standardShader->uploadUniform("u_material.specular", material.specular);
+                                   standardShader->uploadUniform("u_material.shininess", material.shininess);
+
+                                   Renderer::get()->submit(e, standardShader);
+                               });
     framebuffer->unbind();
 }
 

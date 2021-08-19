@@ -10,6 +10,17 @@ namespace fs = std::filesystem;
 namespace clem
 {
 
+std::shared_ptr<Texture2D> Texture2D::create()
+{
+    switch(Renderer::getAPI())
+    {
+        using enum Renderer::API;
+    case OpenGL:
+        return std::make_shared<GLTexture2D>();
+    }
+    return nullptr;
+}
+
 std::shared_ptr<Texture2D> Texture2D::create(const fs::path& path)
 {
     switch(Renderer::getAPI())

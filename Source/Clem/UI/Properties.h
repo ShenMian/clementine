@@ -8,6 +8,10 @@
 namespace clem::ui
 {
 
+/**
+ * @brief 属性面板.
+ * 展示指定实体的组件.
+ */
 class Properties : public Layer
 {
 public:
@@ -21,6 +25,7 @@ private:
     void showTransform();
     void showRigidbody();
     void showModel();
+    void showMaterial();
     void showSprite();
     void showScript();
 

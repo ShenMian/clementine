@@ -15,16 +15,16 @@ public:
 
     GLFrameBuffer(Size2 size, int samples);
     virtual ~GLFrameBuffer();
-
+    
     void bind() override;
     void unbind() override;
 
-    handle_type colorAttachment;
-    handle_type depthAttachment;
+    std::shared_ptr<Texture2D> getColorAttachment(int index) override;
+    std::shared_ptr<Texture2D> getDepthAttachment() override;
 
 private:
-    void attachColor();
-    void attachDepth();
+    void addColorAttachment();
+    void addDepthAttachment();
 
     handle_type handle;
     Size2       size;

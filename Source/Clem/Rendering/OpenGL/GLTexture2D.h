@@ -15,6 +15,11 @@ public:
     using handle_type = unsigned int;
 
     /**
+	 * @brief 默认构造函数.
+	 */
+    GLTexture2D();
+
+    /**
 	 * @brief 构造函数.
 	 */
     GLTexture2D(const std::filesystem::path& path);
@@ -27,13 +32,18 @@ public:
     void load(const std::filesystem::path& path) override;
     void loadCubemap(const std::vector<std::filesystem::path>& faces) override;
 
+    void setMinFilter(Filter filter) override;
+    void setMagFilter(Filter filter) override;
+
     Size2i getSize() const override;
     size_t getHandle() override;
 
-    void bind(unsigned int slot = 0) override;
+    void bind() override;
+
+    void bindUnit(unsigned int slot = 0) override;
 
 private:
-    handle_type handle_;
+    handle_type handle;
     Size2i      size;
     int         type;
 

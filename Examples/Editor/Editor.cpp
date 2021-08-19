@@ -30,6 +30,7 @@ public:
         auto model = Main::registry.create("model");
         model.add<Transform>();
         model.add<Model>("../assets/models/cube.obj");
+        model.add<Material>();
     }
 
 private:
