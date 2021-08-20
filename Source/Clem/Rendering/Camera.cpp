@@ -41,7 +41,6 @@ void Camera::setPerspective(float yFOV, float aspectRatio, float n, float f)
     type       = Type::Perspective;
 }
 
-// FIXME: 结果不正确
 void Camera::setOrthographic(float w, float h, float n, float f)
 {
     projection = Matrix4::createOrthographic(w, h, n, f);

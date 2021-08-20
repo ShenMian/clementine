@@ -343,7 +343,7 @@ void Viewport::onResize()
 {
     Size2 size = {ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y};
 #if 1
-    camera.setPerspective(radians(45), size.x / size.y, 0.1f, 100.f);
+    camera.setPerspective(radians(60), size.x / size.y, 0.1f, 100.f);
 #else
     camera.setOrthographic(size.x / 20, size.y / 20, -100.f, 100.f);
 #endif

@@ -182,10 +182,36 @@ void Properties::showMaterial()
         if(ImGui::CollapsingHeader("Material", ImGuiTreeNodeFlags_DefaultOpen))
         {
             auto& material = entity.get<Material>();
-            ImGui::Text("Shader   : Standard");
-            ImGui::Text("Ambient  : %.5f, %.5f, %.5f", material.ambient.x, material.ambient.y, material.ambient.z);
-            ImGui::Text("Diffuse  : %.5f, %.5f, %.5f", material.diffuse.x, material.diffuse.y, material.diffuse.z);
-            ImGui::Text("Specular : %.5f, %.5f, %.5f", material.specular.x, material.specular.y, material.specular.z);
+
+            ImGui::Text("Shader : Standard");
+
+            ImGui::PushID(0);
+            ImGui::Columns(2);
+            ImGui::SetColumnWidth(0, 80.f);
+            ImGui::Text("Ambient");
+            ImGui::NextColumn();
+            LEFT_LABEL(ImGui::ColorEdit3, "", (float*)&material.ambient);
+            ImGui::Columns(1);
+            ImGui::PopID();
+
+            ImGui::PushID(1);
+            ImGui::Columns(2);
+            ImGui::SetColumnWidth(0, 80.f);
+            ImGui::Text("Diffuse");
+            ImGui::NextColumn();
+            LEFT_LABEL(ImGui::ColorEdit3, "", (float*)&material.diffuse);
+            ImGui::Columns(1);
+            ImGui::PopID();
+
+            ImGui::PushID(2);
+            ImGui::Columns(2);
+            ImGui::SetColumnWidth(0, 80.f);
+            ImGui::Text("Specular");
+            ImGui::NextColumn();
+            LEFT_LABEL(ImGui::ColorEdit3, "", (float*)&material.specular);
+            ImGui::Columns(1);
+            ImGui::PopID();
+
             ImGui::Text("Shininess: %.5f", material.shininess);
         }
     }
