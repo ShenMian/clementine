@@ -43,6 +43,10 @@ void VKRenderer::endFrame()
     cmdBuffer.endFrame();
 }
 
+void VKRenderer::submit(const Entity& entity)
+{
+}
+
 void VKRenderer::submit(const Entity& entity, std::shared_ptr<Shader> shader)
 {
 }

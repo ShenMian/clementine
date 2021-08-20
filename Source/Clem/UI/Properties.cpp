@@ -43,28 +43,27 @@ void Properties::update(Time dt)
         // ¿Õ°×ÇøÓòÓÒ¼ü²Ëµ¥
         if(ImGui::BeginPopupContextWindow(0, 1, false))
         {
-            if(ImGui::BeginMenu("Add..."))
+            if(ImGui::BeginMenu("Physics"))
             {
-                if(ImGui::BeginMenu("Physics"))
+                if(entity.noneOf<Rigidbody>() && ImGui::MenuItem("Rigidbody"))
                 {
-                    if(entity.noneOf<Rigidbody>() && ImGui::MenuItem("Rigidbody"))
-                    {
-                        entity.add<Rigidbody>();
-                        ImGui::CloseCurrentPopup();
-                    }
-                    ImGui::MenuItem("BoxCollider");
-                    ImGui::MenuItem("CircleCollider");
-                    ImGui::EndMenu();
+                    entity.add<Rigidbody>();
+                    ImGui::CloseCurrentPopup();
                 }
-                if(ImGui::BeginMenu("Rendering"))
+                ImGui::MenuItem("BoxCollider");
+                ImGui::MenuItem("CircleCollider");
+                ImGui::EndMenu();
+            }
+            if(ImGui::BeginMenu("Rendering"))
+            {
+                if(entity.noneOf<Model>() && ImGui::MenuItem("Model"))
                 {
-                    if(entity.noneOf<Model>() && ImGui::MenuItem("Model"))
-                    {
-                        entity.add<Model>();
-                        ImGui::CloseCurrentPopup();
-                    }
-                    ImGui::EndMenu();
+                    entity.add<Model>();
+                    ImGui::CloseCurrentPopup();
                 }
+                ImGui::MenuItem("Camera");
+                ImGui::MenuItem("Skybox");
+                ImGui::MenuItem("Light");
                 ImGui::EndMenu();
             }
             ImGui::EndPopup();

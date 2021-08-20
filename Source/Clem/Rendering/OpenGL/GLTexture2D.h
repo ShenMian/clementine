@@ -17,12 +17,14 @@ public:
     /**
 	 * @brief 默认构造函数.
 	 */
-    GLTexture2D();
+    static std::shared_ptr<Texture2D> create();
 
     /**
 	 * @brief 构造函数.
+     * 
+     * @param path 文件路径.
 	 */
-    GLTexture2D(const std::filesystem::path& path);
+    static std::shared_ptr<Texture2D> create(const std::filesystem::path& path);
 
     /**
 	 * @brief 默认析构函数.
@@ -41,6 +43,9 @@ public:
     void bind() override;
 
     void bindUnit(unsigned int slot = 0) override;
+
+    GLTexture2D();
+    GLTexture2D(const std::filesystem::path& path);
 
 private:
     handle_type handle;

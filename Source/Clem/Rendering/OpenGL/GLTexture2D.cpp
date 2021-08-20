@@ -18,7 +18,8 @@ namespace clem
 
 static std::unordered_map<Texture2D::Filter, GLenum> GLFilter = {
     {Texture2D::Filter::Nearest, GL_NEAREST},
-    {Texture2D::Filter::Linear, GL_LINEAR}};
+    {Texture2D::Filter::Bilinear, GL_LINEAR},
+    {Texture2D::Filter::Trilinear, GL_LINEAR_MIPMAP_LINEAR}};
 
 static std::unordered_map<Texture2D::Warp, GLenum> GLWarp = {
     {Texture2D::Warp::Repeat, GL_REPEAT},
@@ -26,6 +27,25 @@ static std::unordered_map<Texture2D::Warp, GLenum> GLWarp = {
     {Texture2D::Warp::ClampToEdge, GL_CLAMP_TO_EDGE}};
 
 static_assert(std::is_same<GLTexture2D::handle_type, GLuint>::value);
+
+std::shared_ptr<Texture2D> GLTexture2D::create()
+{
+    return std::make_shared<GLTexture2D>();
+}
+
+std::shared_ptr<Texture2D> GLTexture2D::create(const fs::path& path)
+{
+    auto it = cache.find(fs::absolute(path));
+    if(it == cache.end())
+    {
+        auto texture = create();
+        texture->load(path);
+        cache.insert({path, texture});
+        return texture;
+    }
+    else
+        return it->second;
+}
 
 GLTexture2D::GLTexture2D()
 {
@@ -77,7 +97,7 @@ void GLTexture2D::load(const std::filesystem::path& path)
 
     // 设置纹理过滤方式
     setMinFilter(Filter::Nearest);
-    setMagFilter(Filter::Linear);
+    setMagFilter(Filter::Bilinear);
 
     // 设置纹理环绕方式
     glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -123,7 +143,7 @@ void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
 
     // 设置纹理过滤方式
     setMinFilter(Filter::Nearest);
-    setMagFilter(Filter::Linear);
+    setMagFilter(Filter::Bilinear);
 
     // 设置纹理环绕方式
     glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);

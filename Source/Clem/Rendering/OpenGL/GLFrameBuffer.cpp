@@ -15,6 +15,7 @@ GLFrameBuffer::GLFrameBuffer(Size2 size, int samples)
     bind();
 
     addColorAttachment();
+    addColorAttachment();
     addDepthAttachment();
     Assert::isTrue(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 
@@ -78,8 +79,8 @@ void GLFrameBuffer::addColorAttachment()
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, (GLsizei)size.x, (GLsizei)size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
 
         // 设置纹理过滤
-        attach->setMinFilter(Texture2D::Filter::Linear);
-        attach->setMagFilter(Texture2D::Filter::Linear);
+        attach->setMinFilter(Texture2D::Filter::Bilinear);
+        attach->setMagFilter(Texture2D::Filter::Bilinear);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -111,8 +112,8 @@ void GLFrameBuffer::addDepthAttachment()
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH24_STENCIL8, (GLsizei)size.x, (GLsizei)size.y);
 
         // 设置纹理过滤
-        attach->setMinFilter(Texture2D::Filter::Linear);
-        attach->setMagFilter(Texture2D::Filter::Linear);
+        attach->setMinFilter(Texture2D::Filter::Bilinear);
+        attach->setMagFilter(Texture2D::Filter::Bilinear);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);

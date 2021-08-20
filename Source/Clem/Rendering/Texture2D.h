@@ -6,7 +6,22 @@
 #include "Core/Math/Math.h"
 #include <filesystem>
 #include <memory>
+#include <unordered_map>
 #include <vector>
+
+namespace std
+{
+
+template <>
+struct hash<std::filesystem::path>
+{
+    size_t operator()(const std::filesystem::path& path) const
+    {
+        return std::filesystem::hash_value(path);
+    }
+};
+
+} // namespace std
 
 namespace clem
 {
@@ -22,11 +37,18 @@ namespace clem
 class Texture2D
 {
 public:
+    enum class Type
+    {
+        Default,
+        NormalMap // 法线贴图
+    };
+
     // 纹理过滤方式
     enum class Filter
     {
-        Nearest, // 最近点采样
-        Linear   // 线性纹理过滤, 双线性过滤
+        Nearest,  // 最近点采样
+        Bilinear, // 双线性过滤
+        Trilinear // 三线性过滤
     };
 
     // 纹理环绕方式
@@ -38,7 +60,6 @@ public:
     };
 
     static std::shared_ptr<Texture2D> create();
-
     static std::shared_ptr<Texture2D> create(const std::filesystem::path& path);
 
     /**
@@ -84,6 +105,9 @@ public:
     virtual void bind() = 0;
 
     virtual void bindUnit(unsigned int slot = 0) = 0;
+
+protected:
+    static std::unordered_map<std::filesystem::path, std::shared_ptr<Texture2D>> cache;
 };
 
 /**

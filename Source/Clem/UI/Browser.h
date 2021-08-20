@@ -17,15 +17,17 @@ namespace clem::ui
 class Browser : public Layer
 {
 public:
+    Browser();
+
     void update(Time dt) override;
 
     inline static bool     visible = true;
     inline static fs::path assets  = "../assets"; // 当前项目根目录
 
 private:
-    fs::path                   current    = assets;
-    std::shared_ptr<Texture2D> fileIcon   = Texture2D::create("../assets/textures/file_icon.png");
-    std::shared_ptr<Texture2D> folderIcon = Texture2D::create("../assets/textures/folder_icon.png");
+    fs::path current = assets;
+
+    std::unordered_map<std::string, std::shared_ptr<Texture2D>> icons;
 
     Camera                     camera;
     Matrix4                    light;

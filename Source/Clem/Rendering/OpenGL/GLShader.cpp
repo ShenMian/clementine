@@ -21,6 +21,37 @@ static std::unordered_map<Shader::Stage, GLenum> GLStage = {
     {Shader::Stage::Vertex, GL_VERTEX_SHADER},
     {Shader::Stage::Fragment, GL_FRAGMENT_SHADER}};
 
+void create(const fs::path& vertexShader, const fs::path& fragmentShader)
+{
+    std::string vertexSrc;
+    {
+        Assert::isTrue(fs::exists(vertexShader), "file doesn't exist");
+        auto size = fs::file_size(vertexShader);
+
+        std::ifstream file(vertexShader, std::ios::binary);
+        Assert::isTrue(file.is_open(), std::format("can't open file {}", vertexShader.filename().string()));
+
+        vertexSrc.resize(size);
+        file.read(reinterpret_cast<char*>(vertexSrc.data()), vertexSrc.size());
+        file.close();
+    }
+
+    std::string fragmentSrc;
+    {
+        Assert::isTrue(fs::exists(fragmentShader), "file doesn't exist");
+        auto size = fs::file_size(fragmentShader);
+
+        std::ifstream file(fragmentShader, std::ios::binary);
+        Assert::isTrue(file.is_open(), std::format("can't open file {}", fragmentShader.filename().string()));
+
+        fragmentSrc.resize(size);
+        file.read(reinterpret_cast<char*>(fragmentSrc.data()), fragmentSrc.size());
+        file.close();
+    }
+
+    // GLShader(vertexSrc, fragmentSrc);
+}
+
 GLShader::GLShader(const std::string& name)
 {
     const fs::path assets  = "assets";

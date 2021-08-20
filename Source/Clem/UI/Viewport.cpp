@@ -31,32 +31,28 @@ void Viewport::attach()
 		#version 450
 
 		layout(location = 0) in vec3 a_position;
-		layout(location = 1) in vec3 a_color;
-		layout(location = 3) in vec2 a_uv;
 
         uniform mat4 u_view;
         uniform mat4 u_projection;
 
-        out vec3 v_position;
-        out vec2 v_uv;
+        out vec3 v_uvw;
 
 		void main()
 		{
-            v_uv = a_uv;
+            v_uvw = a_position;
 			gl_Position = u_projection * u_view * vec4(a_position, 1.0);
 		}
 	)",
                                   R"(
 		#version 450
 
-        in vec3 v_position;
-        in vec2 v_uv;
+        in vec3 v_uvw;
 
-        uniform sampler2D u_skybox;
+        uniform samplerCube u_skybox;
 
 		void main()
 		{
-            gl_FragColor = texture(u_skybox, 1.0 - v_uv);
+            gl_FragColor = texture(u_skybox, v_uvw);
 		}
 	)");
 
@@ -91,15 +87,44 @@ void Viewport::attach()
 			gl_Position = u_projection * u_view * u_model * vec4(a_position, 1.0);
 		}
 	)",
-                              R"(
+                                    R"(
 		#version 450
-
-        layout (location = 0) out vec4 frag_color;
-        layout (location = 1) out vec4 bright_color;
 
         struct Light
         {
             vec3 position;
+
+            vec3 ambient;
+            vec3 diffuse;
+            vec3 specular;
+        };
+
+        struct DirectionLight
+        {
+            vec3 direction;
+
+            vec3 ambient;
+            vec3 diffuse;
+            vec3 specular;
+        };
+
+        struct PointLight
+        {
+            vec3 position;
+    
+            float constant;
+            float linear;
+            float quadratic;
+
+            vec3 ambient;
+            vec3 diffuse;
+            vec3 specular;
+        };
+
+        struct SpotLight
+        {
+            vec3 direction;
+
             vec3 ambient;
             vec3 diffuse;
             vec3 specular;
@@ -113,6 +138,9 @@ void Viewport::attach()
             float shininess;
         };
 
+        layout (location = 0) out vec4 frag_color;
+        layout (location = 1) out vec4 bright_color;
+
         in vec3 v_position;
         in vec3 v_color;
         in vec3 v_normal;
@@ -124,7 +152,58 @@ void Viewport::attach()
         uniform Material  u_material;
         uniform sampler2D u_texture;
 
-        // 光照. Blinn-Phong 反射模型
+        vec4 lighting();
+
+		void main()
+		{
+            // frag_color = vec4(1.0, 1.0, 1.0, 1.0) * lighting();
+            frag_color = texture(u_texture, vec2(1.0 - v_uv.x, v_uv.y)) * lighting();
+
+            // 提取亮色
+            float brightness = dot(frag_color.rgb, vec3(0.2126, 0.7152, 0.0722));
+            if(brightness > 1.0)
+                bright_color = vec4(frag_color.rgb, 1.0);
+		}
+
+        // 计算平行光照
+        vec3 CalcDirLight(DirectionLight light, vec3 normal, vec3 dir_to_cam)
+        {
+            vec3 dir_to_light = normalize(-light.direction);
+
+            // 环境光照
+            vec3 ambient = light.ambient * u_material.ambient;
+
+            // 漫反射光照
+            float diffuse_amount = max(0.0, dot(dir_to_light, v_normal));
+            vec3  diffuse        = light.diffuse * (diffuse_amount * u_material.diffuse);
+
+            // 镜面反射光照
+            vec3  reflected_direction = reflect(dir_to_light, v_normal);
+            float specular_amount     = pow(max(0.0, dot(reflected_direction, dir_to_cam)), u_material.shininess);
+            vec3  specular            = light.specular * (specular_amount * u_material.specular);
+
+            return ambient + diffuse + specular;
+        }
+
+        // 计算点光源光照
+        vec3 CalcPointLight(PointLight light, vec3 normal, vec3 dir_to_cam)
+        {
+            vec3 dir_to_light = normalize(light.position - v_position);
+
+            // 衰减率
+            float distance    = length(light.position - v_position);
+            float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
+
+            return CalcDirLight(DirectionLight(-dir_to_light, light.ambient, light.diffuse, light.specular), normal, dir_to_cam) * attenuation;
+        }
+
+        // 计算总光照
+        vec4 CalcLighting()
+        {
+            vec3 light;
+            return vec4(light, 1.0);
+        }
+
         vec4 lighting()
         {
             vec3 direction_to_light = normalize(u_light.position - v_position);
@@ -152,15 +231,31 @@ void Viewport::attach()
             return vec4(ambient_light + diffuse_light + specular_light, 1.0);
         }
 
-		void main()
-		{
-            // frag_color = vec4(1.0, 1.0, 1.0, 1.0) * lighting();
-            frag_color = texture(u_texture, vec2(1.0 - v_uv.x, v_uv.y)) * lighting();
+        /*
+        struct Material
+        {
+            sampler2D diffuse;
+            sampler2D specular;
+            float     shininess;
+        };
 
-            float brightness = dot(frag_color.rgb, vec3(0.2126, 0.7152, 0.0722));
-            if(brightness > 1.0)
-                bright_color = vec4(frag_color.rgb, 1.0);
-		}
+        vec4 CalcDirLight(DirectionLight light, vec3 normal, vec3 direction_to_cam)
+        {
+            vec3 direction_to_light = normalize(-light.direction);
+
+            // 环境光照
+            vec3 ambient = light.ambient * vec3(texture(u_material.diffuse, v_uv));
+
+            // 漫反射光照
+            float diffuse_amount = max(0.0, dot(direction_to_light, v_normal));
+            vec3  diffuse        = light.diffuse * diffuse_amount * vec3(texture(u_material.diffuse, v_uv));
+
+            // 镜面反射光照
+            vec3  reflected_direction = reflect(direction_to_light, v_normal);
+            float specular_amount     = pow(max(0.0, dot(reflected_light, direction_to_cam)), u_material.shininess);
+            vec3  specular            = light.specular * specular_amount * vec3(texture(u_material.specular, v_uv));
+        }
+        */
 	)");
 
 #if 1
@@ -201,7 +296,7 @@ void Viewport::attach()
 
     win->onScroll = [this](double xOfffset, double yOffset)
     {
-        camera.view.scale(Vector3(1 + 0.1 * yOffset, 1 + 0.1 * yOffset, 1 + 0.1 * yOffset));
+        camera.view.scale(Vector3(1 + 0.1 * (float)yOffset, 1 + 0.1 * (float)yOffset, 1 + 0.1 * (float)yOffset));
     };
 
     win->onResize = [this](Size2 size)
@@ -238,14 +333,8 @@ void Viewport::render(Time dt)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     Main::registry.each<Model>([&](const Entity& e)
                                {
-                                   // 材质
-                                   const auto& material = e.get<Material>();
-                                   standardShader->uploadUniform("u_material.ambient", material.ambient);
-                                   standardShader->uploadUniform("u_material.diffuse", material.diffuse);
-                                   standardShader->uploadUniform("u_material.specular", material.specular);
-                                   standardShader->uploadUniform("u_material.shininess", material.shininess);
-
-                                   Renderer::get()->submit(e, standardShader);
+                                   e.get<Material>().shader = standardShader;
+                                   Renderer::get()->submit(e);
                                });
     framebuffer->unbind();
 }

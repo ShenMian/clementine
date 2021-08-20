@@ -9,6 +9,16 @@
 namespace clem::ui
 {
 
+Browser::Browser()
+{
+    icons["file"]   = Texture2D::create("../assets/textures/icons/file.png");
+    icons["folder"] = Texture2D::create("../assets/textures/icons/folder.png");
+
+    icons[".png"] = Texture2D::create("../assets/textures/icons/image.png");
+    icons[".jpg"] = Texture2D::create("../assets/textures/icons/image.png");
+    icons[".obj"] = Texture2D::create("../assets/textures/icons/3d_object.png");
+}
+
 void Browser::update(Time dt)
 {
     if(!visible)
@@ -32,7 +42,7 @@ void Browser::update(Time dt)
         {
             ImGui::PushID(filename.c_str());
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
-            if(ImGui::ImageButton((ImTextureID)folderIcon->getHandle(), {48, 48}, {1, 0}, {0, 1}))
+            if(ImGui::ImageButton((ImTextureID)icons["folder"]->getHandle(), {48, 48}, {1, 0}, {0, 1}))
                 current = entry;
             ImGui::TextWrapped(filename.c_str());
             ImGui::PopStyleColor();
@@ -42,7 +52,12 @@ void Browser::update(Time dt)
         {
             ImGui::PushID(filename.c_str());
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
-            ImGui::ImageButton((ImTextureID)fileIcon->getHandle(), {48, 48}, {1, 0}, {0, 1});
+
+            auto ext = entry.path().extension().string();
+            if(icons.contains(ext))
+                ImGui::ImageButton((ImTextureID)icons[ext]->getHandle(), {48, 48}, {1, 0}, {0, 1});
+            else
+                ImGui::ImageButton((ImTextureID)icons["file"]->getHandle(), {48, 48}, {1, 0}, {0, 1});
 
             if(ImGui::BeginDragDropSource())
             {

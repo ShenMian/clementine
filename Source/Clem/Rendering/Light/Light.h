@@ -15,8 +15,7 @@ public:
     {
         Directional, // 平行光
         Point,       // 点光源
-        Spot,        // 投射光
-        Ambient      // 环境光
+        Spot         // 投射光
     };
 
     /**
@@ -32,18 +31,6 @@ public:
     float getIntesity() const;
 
     /**
-     * @brief 设置光源位置.
-     *
-     * @param pos 光源位置.
-     */
-    void setPosition(const Vector3& pos);
-
-    /**
-     * @brief 获取光源位置.
-     */
-    const Vector3& getPosition() const;
-
-    /**
      * @brief 设置光源颜色.
      *
      * @param color 光源颜色.
@@ -51,9 +38,18 @@ public:
     void setColor(const Vector3& color);
 
     /**
+     * @brief 设置光源颜色.
+     *
+     * @param ambient  环境光颜色.
+     * @param diffuse  漫反射光颜色.
+     * @param specular 镜面反射光颜色.
+     */
+    void setColor(const Vector3& ambient, const Vector3& diffuse, const Vector3& specular = Vector3::unit);
+
+    /**
      * @brief 获取光源颜色.
      */
-    const Vector3& getColor() const;
+    void getColor(Vector3* ambient, Vector3* diffuse, Vector3* specular) const;
 
     /**
      * @brief 获取光源类型.
@@ -61,9 +57,11 @@ public:
     virtual Type getType() const = 0;
 
 protected:
-    Vector3 position;
-    Vector3 color    = Vector3(1.f, 1.f, 1.f);
-    float   intesity = 1;
+    Vector3 ambient  = Vector3(1.f, 1.f, 1.f);
+    Vector3 diffuse  = Vector3(1.f, 1.f, 1.f);
+    Vector3 specular = Vector3(1.f, 1.f, 1.f);
+
+    float intesity = 1;
 };
 
 } // namespace clem

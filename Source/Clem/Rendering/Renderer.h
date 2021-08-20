@@ -59,6 +59,8 @@ public:
 	 */
     static API getAPI();
 
+    virtual void submit(const Entity& entity) = 0;
+
     virtual void submit(const Entity& entity, std::shared_ptr<Shader> shader) = 0;
 
     virtual void submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader, const Matrix4& transform) = 0;

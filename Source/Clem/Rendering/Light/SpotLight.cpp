@@ -8,6 +8,12 @@ namespace clem
 
 void SpotLight::setDirection(const Vector3& dir)
 {
+    direction = dir;
+}
+
+const Vector3& SpotLight::getDirection() const
+{
+    return direction;
 }
 
 Light::Type SpotLight::getType() const

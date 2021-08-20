@@ -10,13 +10,16 @@ namespace fs = std::filesystem;
 namespace clem
 {
 
+std::unordered_map<std::filesystem::path, std::shared_ptr<Texture2D>> Texture2D::cache;
+
 std::shared_ptr<Texture2D> Texture2D::create()
 {
     switch(Renderer::getAPI())
     {
         using enum Renderer::API;
+
     case OpenGL:
-        return std::make_shared<GLTexture2D>();
+        return GLTexture2D::create();
     }
     return nullptr;
 }
@@ -26,8 +29,9 @@ std::shared_ptr<Texture2D> Texture2D::create(const fs::path& path)
     switch(Renderer::getAPI())
     {
         using enum Renderer::API;
+
     case OpenGL:
-        return std::make_shared<GLTexture2D>(path);
+        return GLTexture2D::create(path);
     }
     return nullptr;
 }

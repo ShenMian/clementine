@@ -16,24 +16,28 @@ float Light::getIntesity() const
     return intesity;
 }
 
-void Light::setPosition(const Vector3& pos)
-{
-    position = pos;
-}
-
-const Vector3& Light::getPosition() const
-{
-    return position;
-}
-
 void Light::setColor(const Vector3& color)
 {
-    this->color = color;
+    this->ambient  = color;
+    this->diffuse  = color;
+    this->specular = color;
 }
 
-const Vector3& Light::getColor() const
+void Light::setColor(const Vector3& ambient, const Vector3& diffuse, const Vector3& specular)
 {
-    return color;
+    this->ambient  = ambient;
+    this->diffuse  = diffuse;
+    this->specular = specular;
+}
+
+void Light::getColor(Vector3* ambient, Vector3* diffuse, Vector3* specular) const
+{
+    if(ambient)
+        *ambient  = this->ambient;
+    if(diffuse)
+        *diffuse  = this->diffuse;
+    if(specular)
+        *specular = this->specular;
 }
 
 } // namespace clem
