@@ -29,7 +29,8 @@ private:
     void showSprite();
     void showScript();
 
-    void Vector3Edit(const std::string& label, Vector3& value, float defaultValue = 0.f);
+    void VectorEdit(const std::string& label, Vector3& value, float defaultValue = 0.f);
+    void ColorEdit(const std::string& label, Vector3& value);
 };
 
 } // namespace clem::ui

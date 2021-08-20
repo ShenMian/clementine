@@ -24,14 +24,14 @@ public:
      * 
      * @param path 文件路径.
 	 */
-    static std::shared_ptr<Texture2D> create(const std::filesystem::path& path);
+    static std::shared_ptr<Texture2D> create(const std::filesystem::path& path, Format format = Format::Auto);
 
     /**
 	 * @brief 默认析构函数.
 	 */
     ~GLTexture2D();
 
-    void load(const std::filesystem::path& path) override;
+    void load(const std::filesystem::path& path, Format format = Format::Auto) override;
     void loadCubemap(const std::vector<std::filesystem::path>& faces) override;
 
     void setMinFilter(Filter filter) override;

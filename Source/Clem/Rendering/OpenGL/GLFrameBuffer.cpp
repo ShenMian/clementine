@@ -3,10 +3,20 @@
 
 #include "GLFrameBuffer.h"
 #include "Assert.hpp"
+#include "Rendering/Shader.h"
 #include <glad/glad.h>
+#include <unordered_map>
 
 namespace clem
 {
+
+static std::unordered_map<FrameBuffer::PixelFormat, GLenum> GLFormat = {
+    {FrameBuffer::PixelFormat::I8, GL_RED_INTEGER},
+    {FrameBuffer::PixelFormat::RGBA8888, GL_RGBA}};
+
+static std::unordered_map<FrameBuffer::PixelFormat, GLenum> GLInnerFormat = {
+    {FrameBuffer::PixelFormat::I8, GL_R32I},
+    {FrameBuffer::PixelFormat::RGBA8888, GL_RGBA8}};
 
 GLFrameBuffer::GLFrameBuffer(Size2 size, int samples)
     : size(size), samples(samples)
@@ -16,6 +26,7 @@ GLFrameBuffer::GLFrameBuffer(Size2 size, int samples)
 
     addColorAttachment();
     addColorAttachment();
+    addColorAttachment(PixelFormat::I8);
     addDepthAttachment();
     Assert::isTrue(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 
@@ -26,12 +37,12 @@ GLFrameBuffer::~GLFrameBuffer()
 {
     glDeleteFramebuffers(1, &handle);
 
-    for(auto& attach : colorAttachment)
+    for(auto& attach : colorAttachments)
     {
         GLuint id = attach->getHandle();
         glDeleteTextures(1, &id);
     }
-    GLuint id = depthAttachment->getHandle();
+    GLuint id = depthAttachments->getHandle();
     glDeleteTextures(1, &id);
 }
 
@@ -50,17 +61,37 @@ void GLFrameBuffer::unbind()
 
 std::shared_ptr<Texture2D> GLFrameBuffer::getColorAttachment(int index)
 {
-    Assert::isTrue(0 <= index && index < colorAttachment.size());
-    return colorAttachment[index];
+    Assert::isTrue(0 <= index && index < colorAttachments.size());
+    return colorAttachments[index];
 }
 
 std::shared_ptr<Texture2D> GLFrameBuffer::getDepthAttachment()
 {
-    return depthAttachment;
+    return depthAttachments;
 }
 
-void GLFrameBuffer::addColorAttachment()
+void GLFrameBuffer::clearColorAttachment(int index, int value)
 {
+    bind();
+    glClearTexImage(colorAttachments[index]->getHandle(), 0, GL_RED_INTEGER, GL_INT, &value);
+    unbind();
+}
+
+void GLFrameBuffer::read(int index, Vector2i pos, int& data)
+{
+    Assert::isTrue(0 <= index && index < colorAttachments.size());
+
+    bind();
+    glReadBuffer(GL_COLOR_ATTACHMENT0 + index);
+    glReadPixels(pos.x, pos.y, 1, 1, GL_RED_INTEGER, GL_INT, &data);
+    unbind();
+}
+
+void GLFrameBuffer::addColorAttachment(PixelFormat format)
+{
+    if(format == PixelFormat::Auto)
+        format = PixelFormat::RGBA8888;
+
     if(samples > 1)
     {
         /*
@@ -76,7 +107,7 @@ void GLFrameBuffer::addColorAttachment()
         auto attach = Texture2D::create();
         attach->bind();
 
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, (GLsizei)size.x, (GLsizei)size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+        glTexImage2D(GL_TEXTURE_2D, 0, GLInnerFormat[format], (GLsizei)size.x, (GLsizei)size.y, 0, GLFormat[format], GL_UNSIGNED_BYTE, nullptr);
 
         // ÉèÖÃÎÆÀí¹ýÂË
         attach->setMinFilter(Texture2D::Filter::Bilinear);
@@ -86,9 +117,9 @@ void GLFrameBuffer::addColorAttachment()
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + colorAttachment.size(), GL_TEXTURE_2D, attach->getHandle(), 0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + colorAttachments.size(), GL_TEXTURE_2D, attach->getHandle(), 0);
 
-        colorAttachment.push_back(attach);
+        colorAttachments.push_back(attach);
     }
     Assert::isTrue(glGetError() == GL_NO_ERROR);
 }
@@ -121,7 +152,7 @@ void GLFrameBuffer::addDepthAttachment()
 
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, attach->getHandle(), 0);
 
-        depthAttachment = attach;
+        depthAttachments = attach;
     }
     Assert::isTrue(glGetError() == GL_NO_ERROR);
 }

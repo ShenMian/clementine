@@ -102,9 +102,9 @@ void Properties::showTransform()
         {
             auto& tf = entity.get<Transform>();
 
-            Vector3Edit("Transform", tf.translation);
-            Vector3Edit("Rotation", tf.rotation);
-            Vector3Edit("Scale", tf.scale, 1.f);
+            VectorEdit("Transform", tf.translation);
+            VectorEdit("Rotation", tf.rotation);
+            VectorEdit("Scale", tf.scale, 1.f);
         }
     }
 }
@@ -183,35 +183,11 @@ void Properties::showMaterial()
         {
             auto& material = entity.get<Material>();
 
-            ImGui::Text("Shader : Standard");
+            ImGui::Text("Shader: Standard");
 
-            ImGui::PushID(0);
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 80.f);
-            ImGui::Text("Ambient");
-            ImGui::NextColumn();
-            LEFT_LABEL(ImGui::ColorEdit3, "", (float*)&material.ambient);
-            ImGui::Columns(1);
-            ImGui::PopID();
-
-            ImGui::PushID(1);
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 80.f);
-            ImGui::Text("Diffuse");
-            ImGui::NextColumn();
-            LEFT_LABEL(ImGui::ColorEdit3, "", (float*)&material.diffuse);
-            ImGui::Columns(1);
-            ImGui::PopID();
-
-            ImGui::PushID(2);
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 80.f);
-            ImGui::Text("Specular");
-            ImGui::NextColumn();
-            LEFT_LABEL(ImGui::ColorEdit3, "", (float*)&material.specular);
-            ImGui::Columns(1);
-            ImGui::PopID();
-
+            ColorEdit("Ambient", material.ambient);
+            ColorEdit("Diffuse", material.diffuse);
+            ColorEdit("Specular", material.specular);
             ImGui::Text("Shininess: %.5f", material.shininess);
         }
     }
@@ -239,7 +215,7 @@ void Properties::showScript()
     }
 }
 
-void Properties::Vector3Edit(const std::string& label, Vector3& value, float defaultValue)
+void Properties::VectorEdit(const std::string& label, Vector3& value, float defaultValue)
 {
     {
         struct buttonStyle
@@ -288,6 +264,18 @@ void Properties::Vector3Edit(const std::string& label, Vector3& value, float def
 
         ImGui::PopID();
     }
+}
+
+void Properties::ColorEdit(const std::string& label, Vector3& value)
+{
+    ImGui::PushID(label.c_str());
+    ImGui::Columns(2);
+    ImGui::SetColumnWidth(0, 80.f);
+    ImGui::Text(label.c_str());
+    ImGui::NextColumn();
+    LEFT_LABEL(ImGui::ColorEdit3, "", (float*)&value);
+    ImGui::Columns(1);
+    ImGui::PopID();
 }
 
 } // namespace clem::ui

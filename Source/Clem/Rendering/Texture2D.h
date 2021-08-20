@@ -59,6 +59,14 @@ public:
         ClampToEdge
     };
 
+    enum class Format
+    {
+        Auto,
+        RGBA8888,
+        RGB888,
+        I8
+    };
+
     static std::shared_ptr<Texture2D> create();
     static std::shared_ptr<Texture2D> create(const std::filesystem::path& path);
 
@@ -67,7 +75,7 @@ public:
      * 
      * @param path 文件路径.
      */
-    virtual void load(const std::filesystem::path& path) = 0;
+    virtual void load(const std::filesystem::path& path, Format format = Format::Auto) = 0;
 
     /**
      * @brief 从文件载入立方体纹理.

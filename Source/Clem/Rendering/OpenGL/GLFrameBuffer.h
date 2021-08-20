@@ -21,9 +21,12 @@ public:
 
     std::shared_ptr<Texture2D> getColorAttachment(int index) override;
     std::shared_ptr<Texture2D> getDepthAttachment() override;
+    void                       clearColorAttachment(int index, int value) override;
+
+    void read(int index, Vector2i pos, int& data) override;
 
 private:
-    void addColorAttachment();
+    void addColorAttachment(PixelFormat format = PixelFormat::Auto);
     void addDepthAttachment();
 
     handle_type handle;

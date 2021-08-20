@@ -33,13 +33,13 @@ std::shared_ptr<Texture2D> GLTexture2D::create()
     return std::make_shared<GLTexture2D>();
 }
 
-std::shared_ptr<Texture2D> GLTexture2D::create(const fs::path& path)
+std::shared_ptr<Texture2D> GLTexture2D::create(const fs::path& path, Format format)
 {
     auto it = cache.find(fs::absolute(path));
     if(it == cache.end())
     {
         auto texture = create();
-        texture->load(path);
+        texture->load(path, format);
         cache.insert({path, texture});
         return texture;
     }
@@ -64,7 +64,7 @@ GLTexture2D::~GLTexture2D()
     glDeleteTextures(1, &handle);
 }
 
-void GLTexture2D::load(const std::filesystem::path& path)
+void GLTexture2D::load(const std::filesystem::path& path, Format format)
 {
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
 
@@ -77,20 +77,40 @@ void GLTexture2D::load(const std::filesystem::path& path)
     auto data = loadFromFile(path, size.x, size.y, channels);
 
     GLenum internalFormat, dataFormat;
-    switch(channels)
+
+    switch(format)
     {
-    case 3:
+    case Format::Auto:
+        switch(channels)
+        {
+        case 3:
+            internalFormat = GL_RGB8;
+            dataFormat     = GL_RGB;
+            break;
+
+        case 4:
+            internalFormat = GL_RGBA8;
+            dataFormat     = GL_RGBA;
+            break;
+
+        default:
+            Assert::isTrue(false, "format not supported");
+        }
+        break;
+
+    case Format::RGB888:
         internalFormat = GL_RGB8;
         dataFormat     = GL_RGB;
         break;
 
-    case 4:
+    case Format::RGBA8888:
         internalFormat = GL_RGBA8;
         dataFormat     = GL_RGBA;
         break;
 
-    default:
-        Assert::isTrue(false, "format not supported");
+    case Format::I8:
+        internalFormat = GL_RED_INTEGER;
+        dataFormat     = GL_RED;
     }
 
     glTexStorage2D(type, 1, internalFormat, size.x, size.y);

@@ -28,7 +28,6 @@ public:
 
         Main::getWindow()->setIcon("../assets/textures/icons/game_controller.png");
 
-        // cube.obj, cone.obj, sphere.obj, teapot.obj, statue.obj, wood_dining_chair
         auto model = Main::registry.create("model");
         model.add<Transform>();
         model.add<Model>("../assets/models/cube.obj");

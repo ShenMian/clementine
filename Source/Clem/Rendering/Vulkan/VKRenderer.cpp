@@ -53,7 +53,6 @@ void VKRenderer::submit(const Entity& entity, std::shared_ptr<Shader> shader)
 
 void VKRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader, const Matrix4& transform)
 {
-
     vk::SubmitInfo                 submitInfo;
     std::vector<vk::CommandBuffer> commandBuffers(1);
     commandBuffers[0]             = cmdBuffer;

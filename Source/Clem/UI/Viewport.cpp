@@ -15,12 +15,26 @@ void Viewport::update(Time dt)
 {
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{0, 0});
     ImGui::Begin("Viewport", &visible);
+    ImVec2 viewport = {ImGui::GetWindowPos().x - ImGui::GetCursorPos().x, ImGui::GetWindowPos().y - ImGui::GetCursorPos().y};
     ImGui::PopStyleVar();
-    render(dt);
-    ImGui::Image((ImTextureID)framebuffer->getColorAttachment(0)->getHandle(), ImGui::GetContentRegionAvail(), {0, 1}, {1, 0}); // FIXME
 
-    if(ImGui::IsWindowFocused() && ImGui::IsWindowHovered())
-        ;
+    framebuffer->clearColorAttachment(2, -1);
+
+    render(dt);
+    ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), ImGui::GetContentRegionAvail(), {0, 1}, {1, 0}); // FIXME
+
+    if(ImGui::IsWindowFocused() || ImGui::IsWindowHovered())
+    {
+        // Picking
+        if(ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+        {
+            ImVec2 mouse = {ImGui::GetMousePos().x - viewport.x, ImGui::GetMousePos().y - viewport.y};
+
+            int id;
+            framebuffer->read(2, {0, 0}, id);
+            Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
+        }
+    }
 
     ImGui::End();
 }
@@ -140,6 +154,7 @@ void Viewport::attach()
 
         layout (location = 0) out vec4 frag_color;
         layout (location = 1) out vec4 bright_color;
+        layout (location = 2) out int  entity_id;
 
         in vec3 v_position;
         in vec3 v_color;
@@ -151,6 +166,7 @@ void Viewport::attach()
         uniform Light     u_light;
         uniform Material  u_material;
         uniform sampler2D u_texture;
+        uniform int       u_entity_id;
 
         vec4 lighting();
 
@@ -163,6 +179,8 @@ void Viewport::attach()
             float brightness = dot(frag_color.rgb, vec3(0.2126, 0.7152, 0.0722));
             if(brightness > 1.0)
                 bright_color = vec4(frag_color.rgb, 1.0);
+
+            entity_id = u_entity_id;
 		}
 
         // 计算平行光照
@@ -296,7 +314,7 @@ void Viewport::attach()
 
     win->onScroll = [this](double xOfffset, double yOffset)
     {
-        camera.view.scale(Vector3(1 + 0.1 * (float)yOffset, 1 + 0.1 * (float)yOffset, 1 + 0.1 * (float)yOffset));
+        camera.view.scale(Vector3(1 + 0.1f * (float)yOffset, 1 + 0.1f * (float)yOffset, 1 + 0.1f * (float)yOffset));
     };
 
     win->onResize = [this](Size2 size)
@@ -318,7 +336,7 @@ void Viewport::render(Time dt)
     standardShader->uploadUniform("u_texture", 0);
 
     // 光照
-    light.rotateY(radians(90) * dt.seconds());
+    light.rotateY(radians(60) * dt.seconds());
     standardShader->uploadUniform("u_light.position", light.translation());
     standardShader->uploadUniform("u_light.ambient", Vector3::unit * 1.0);
     standardShader->uploadUniform("u_light.diffuse", Vector3::unit * 1.0);

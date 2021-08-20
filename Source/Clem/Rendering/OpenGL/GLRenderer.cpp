@@ -48,6 +48,8 @@ void GLRenderer::submit(const Entity& entity)
     shader->uploadUniform("u_material.specular", material.specular);
     shader->uploadUniform("u_material.shininess", material.shininess);
 
+    shader->uploadUniform("u_entity_id", (int)entity.id());
+
     glDrawElements(GL_TRIANGLES, (GLsizei)model.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
     assert(glGetError() == GL_NO_ERROR);
 }

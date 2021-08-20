@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "GLVertexArray.h"
@@ -68,7 +68,7 @@ void GLVertexArray::addVertexBuffer(std::shared_ptr<VertexBuffer> buffer)
         }
         else
         {
-            // NxN ¾ØÕó·Ö½âÎª N ¸ö floatN
+            // NxN çŸ©é˜µåˆ†è§£ä¸º N ä¸ª floatN
             for(size_t i = 0; i < element.count(); i++)
             {
                 glEnableVertexAttribArray((GLuint)index);
