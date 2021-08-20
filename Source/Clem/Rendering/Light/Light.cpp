@@ -33,9 +33,9 @@ void Light::setColor(const Vector3& ambient, const Vector3& diffuse, const Vecto
 void Light::getColor(Vector3* ambient, Vector3* diffuse, Vector3* specular) const
 {
     if(ambient)
-        *ambient  = this->ambient;
+        *ambient = this->ambient;
     if(diffuse)
-        *diffuse  = this->diffuse;
+        *diffuse = this->diffuse;
     if(specular)
         *specular = this->specular;
 }

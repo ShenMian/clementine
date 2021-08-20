@@ -98,12 +98,12 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
         }
         break;
 
-    case Format::RGB888:
+    case Format::RGB8:
         internalFormat = GL_RGB8;
         dataFormat     = GL_RGB;
         break;
 
-    case Format::RGBA8888:
+    case Format::RGBA8:
         internalFormat = GL_RGBA8;
         dataFormat     = GL_RGBA;
         break;

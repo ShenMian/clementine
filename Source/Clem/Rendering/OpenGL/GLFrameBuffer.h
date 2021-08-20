@@ -13,9 +13,9 @@ class GLFrameBuffer : public FrameBuffer
 public:
     using handle_type = unsigned int;
 
-    GLFrameBuffer(Size2 size, int samples);
+    GLFrameBuffer(Size2 size, std::vector<PixelFormat> attachs, int samples = 1);
     virtual ~GLFrameBuffer();
-    
+
     void bind() override;
     void unbind() override;
 

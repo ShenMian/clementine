@@ -59,11 +59,12 @@ public:
         ClampToEdge
     };
 
+    // 像素格式
     enum class Format
     {
         Auto,
-        RGBA8888,
-        RGB888,
+        RGBA8,
+        RGB8,
         I8
     };
 
@@ -72,30 +73,30 @@ public:
 
     /**
      * @brief 从文件载入纹理.
-     * 
+     *
      * @param path 文件路径.
      */
     virtual void load(const std::filesystem::path& path, Format format = Format::Auto) = 0;
 
     /**
      * @brief 从文件载入立方体纹理.
-     * 
+     *
      * @param faces 6 个面的文件路径.
-     * 
+     *
      * right, left, top, bottom, back, front
      */
     virtual void loadCubemap(const std::vector<std::filesystem::path>& faces) = 0;
 
     /**
      * @brief 设置缩小过滤方式.
-     * 
+     *
      * @param filter 过滤方式.
      */
     virtual void setMinFilter(Filter filter) = 0;
 
     /**
      * @brief 设置放大过滤方式.
-     * 
+     *
      * @param filter 过滤方式.
      */
     virtual void setMagFilter(Filter filter) = 0;

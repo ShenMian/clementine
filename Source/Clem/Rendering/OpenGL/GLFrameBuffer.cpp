@@ -12,22 +12,22 @@ namespace clem
 
 static std::unordered_map<FrameBuffer::PixelFormat, GLenum> GLFormat = {
     {FrameBuffer::PixelFormat::I8, GL_RED_INTEGER},
-    {FrameBuffer::PixelFormat::RGBA8888, GL_RGBA}};
+    {FrameBuffer::PixelFormat::RGBA8, GL_RGBA}};
 
-static std::unordered_map<FrameBuffer::PixelFormat, GLenum> GLInnerFormat = {
+static std::unordered_map<FrameBuffer::PixelFormat, GLenum> GLInternalFormat = {
     {FrameBuffer::PixelFormat::I8, GL_R32I},
-    {FrameBuffer::PixelFormat::RGBA8888, GL_RGBA8}};
+    {FrameBuffer::PixelFormat::RGBA8, GL_RGBA8}};
 
-GLFrameBuffer::GLFrameBuffer(Size2 size, int samples)
+GLFrameBuffer::GLFrameBuffer(Size2 size, std::vector<PixelFormat> attachs, int samples)
     : size(size), samples(samples)
 {
     glCreateFramebuffers(1, &handle);
     bind();
 
-    addColorAttachment();
-    addColorAttachment();
-    addColorAttachment(PixelFormat::I8);
+    for(auto format : attachs)
+        addColorAttachment(format);
     addDepthAttachment();
+
     Assert::isTrue(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 
     unbind();
@@ -39,14 +39,14 @@ GLFrameBuffer::~GLFrameBuffer()
 
     for(auto& attach : colorAttachments)
     {
-        GLuint id = attach->getHandle();
+        auto id = (GLuint)attach->getHandle();
         glDeleteTextures(1, &id);
     }
-    GLuint id = depthAttachments->getHandle();
+    auto id = (GLuint)depthAttachments->getHandle();
     glDeleteTextures(1, &id);
 }
 
-static GLint defaultFBO;
+static GLint defaultFBO = 0;
 
 void GLFrameBuffer::bind()
 {
@@ -90,7 +90,7 @@ void GLFrameBuffer::read(int index, Vector2i pos, int& data)
 void GLFrameBuffer::addColorAttachment(PixelFormat format)
 {
     if(format == PixelFormat::Auto)
-        format = PixelFormat::RGBA8888;
+        format = PixelFormat::RGBA8;
 
     if(samples > 1)
     {
@@ -107,9 +107,8 @@ void GLFrameBuffer::addColorAttachment(PixelFormat format)
         auto attach = Texture2D::create();
         attach->bind();
 
-        glTexImage2D(GL_TEXTURE_2D, 0, GLInnerFormat[format], (GLsizei)size.x, (GLsizei)size.y, 0, GLFormat[format], GL_UNSIGNED_BYTE, nullptr);
+        glTexImage2D(GL_TEXTURE_2D, 0, GLInternalFormat[format], (GLsizei)size.x, (GLsizei)size.y, 0, GLFormat[format], GL_UNSIGNED_BYTE, nullptr);
 
-        // 设置纹理过滤
         attach->setMinFilter(Texture2D::Filter::Bilinear);
         attach->setMagFilter(Texture2D::Filter::Bilinear);
 
@@ -142,7 +141,6 @@ void GLFrameBuffer::addDepthAttachment()
 
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH24_STENCIL8, (GLsizei)size.x, (GLsizei)size.y);
 
-        // 设置纹理过滤
         attach->setMinFilter(Texture2D::Filter::Bilinear);
         attach->setMagFilter(Texture2D::Filter::Bilinear);
 

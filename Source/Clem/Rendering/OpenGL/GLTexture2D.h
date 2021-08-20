@@ -21,7 +21,7 @@ public:
 
     /**
 	 * @brief 构造函数.
-     * 
+     *
      * @param path 文件路径.
 	 */
     static std::shared_ptr<Texture2D> create(const std::filesystem::path& path, Format format = Format::Auto);

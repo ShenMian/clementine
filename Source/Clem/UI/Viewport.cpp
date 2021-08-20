@@ -23,9 +23,12 @@ void Viewport::update(Time dt)
     render(dt);
     ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), ImGui::GetContentRegionAvail(), {0, 1}, {1, 0}); // FIXME
 
-    if(ImGui::IsWindowFocused() || ImGui::IsWindowHovered())
+    // ImGui::IsWindowFocused()
+    if(ImGui::IsWindowHovered())
     {
-        // Picking
+        active = true;
+
+        // 选取实体
         if(ImGui::IsMouseClicked(ImGuiMouseButton_Left))
         {
             ImVec2 mouse = {ImGui::GetMousePos().x - viewport.x, ImGui::GetMousePos().y - viewport.y};
@@ -35,6 +38,8 @@ void Viewport::update(Time dt)
             Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
         }
     }
+    else
+        active = false;
 
     ImGui::End();
 }
@@ -125,7 +130,7 @@ void Viewport::attach()
         struct PointLight
         {
             vec3 position;
-    
+
             float constant;
             float linear;
             float quadratic;
@@ -303,8 +308,11 @@ void Viewport::attach()
 #if 0
     win->onMouseMove = [this](double x, double y)
     {
-        static auto last  = getSize() / 2;
-        static auto speed = Vector2::unit * 0.09;
+        if(!active)
+            return;
+
+        static Vector2 last;
+        static auto    speed = Vector2::unit * 0.09;
 
         camera.view.rotateY(speed.x * radians(x - last.x));
         camera.view.rotateX(speed.y * radians(last.y - y));
@@ -314,6 +322,9 @@ void Viewport::attach()
 
     win->onScroll = [this](double xOfffset, double yOffset)
     {
+        if(!active)
+            return;
+
         camera.view.scale(Vector3(1 + 0.1f * (float)yOffset, 1 + 0.1f * (float)yOffset, 1 + 0.1f * (float)yOffset));
     };
 

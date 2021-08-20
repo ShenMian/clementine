@@ -36,7 +36,7 @@ public:
 	 */
     Entity(id_type id, version_type version, Registry& reg);
 
-	Entity(id_type id, Registry& reg);
+    Entity(id_type id, Registry& reg);
 
     /**
 	 * @brief 添加组件.
