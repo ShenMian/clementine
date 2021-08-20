@@ -94,6 +94,8 @@ public:
 	 */
     bool isVisible() const override;
 
+    void setIcon(const std::filesystem::path& path) override;
+
     void* nativeHandle() const override;
 
     std::vector<std::string_view> getRequiredInstanceExtensions() const;

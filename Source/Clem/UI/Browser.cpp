@@ -25,29 +25,28 @@ Browser::Browser()
 
 void Browser::update(Time dt)
 {
+    assert(fs::exists(assets) && fs::exists(current));
+
     if(!visible)
         return;
 
     ImGui::Begin("Browser", &visible);
 
-    assert(fs::exists(assets));
-    assert(fs::exists(current));
-
-    if(current != assets)
-        if(ImGui::Button("<"))
+    if(ImGui::Button("<"))
+        if(current != assets)
             current = current.parent_path();
-
-    ImGui::Columns((int)(ImGui::GetContentRegionAvailWidth() / 70));
+    ImGui::SameLine();
+    ImGui::Text("%s", current.string().c_str());
 
     std::shared_ptr<Texture2D> icon;
+    ImGui::Columns((int)(ImGui::GetContentRegionAvailWidth() / 70));
     for(const auto& entry : fs::directory_iterator(current))
     {
-        auto path     = fs::relative(entry.path(), assets);
-        auto filename = path.filename().string();
+        auto filename = entry.path().filename().string();
 
         if(entry.is_directory())
         {
-            if(fs::is_empty(path))
+            if(fs::is_empty(entry))
                 icon = icons["folder_empty"];
             else
                 icon = icons["folder"];
@@ -55,14 +54,14 @@ void Browser::update(Time dt)
             ImGui::PushID(filename.c_str());
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
             if(ImGui::ImageButton((ImTextureID)icon->getHandle(), {48, 48}, {1, 0}, {0, 1}))
-                current = path;
+                current = entry;
             ImGui::TextWrapped(filename.c_str());
             ImGui::PopStyleColor();
             ImGui::PopID();
         }
         else
         {
-            auto ext = path.extension().string();
+            auto ext = entry.path().extension().string();
             if(icons.contains(ext))
                 icon = icons[ext];
             else

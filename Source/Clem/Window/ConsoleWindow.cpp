@@ -7,6 +7,8 @@
 #include <cassert>
 #include <cstdio>
 
+namespace fs = std::filesystem;
+
 using std::string;
 
 namespace clem
@@ -49,6 +51,11 @@ void ConsoleWindow::setVisible(bool visible)
 bool ConsoleWindow::isVisible() const
 {
     return true;
+}
+
+void ConsoleWindow::setIcon(const fs::path& path)
+{
+    assert(false);
 }
 
 void* ConsoleWindow::nativeHandle() const

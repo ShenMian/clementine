@@ -5,6 +5,7 @@
 
 #include "Core/Core.h"
 #include "UI/UI.h"
+#include <filesystem>
 #include <functional>
 #include <string>
 #include <vector>
@@ -85,6 +86,8 @@ public:
 	 * @return true 为可见, false 为不可见.
 	 */
     virtual bool isVisible() const = 0;
+
+    virtual void setIcon(const std::filesystem::path& path) = 0;
 
     virtual void* nativeHandle() const = 0;
 

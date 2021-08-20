@@ -72,6 +72,8 @@ public:
 	  */
     bool isVisible() const override;
 
+    void setIcon(const std::filesystem::path& path) override;
+
     /**
 	  * @warning 终端窗口不支持.
 		*

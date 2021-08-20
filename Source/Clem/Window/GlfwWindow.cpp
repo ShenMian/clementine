@@ -12,11 +12,9 @@
 #include <cstdio>
 #include <glad/glad.h>
 #include <glfw/glfw3.h>
+#include <stb/stb_image.h>
 
-#include <imgui/backends/imgui_impl_glfw.h>
-#include <imgui/backends/imgui_impl_opengl3.h>
-#include <imgui/backends/imgui_impl_vulkan.h>
-#include <imgui/imgui.h>
+namespace fs = std::filesystem;
 
 using std::string;
 
@@ -221,6 +219,20 @@ void GlfwWindow::setVisible(bool visible)
 bool GlfwWindow::isVisible() const
 {
     return glfwGetWindowAttrib(handle, GLFW_VISIBLE);
+}
+
+void GlfwWindow::setIcon(const fs::path& path)
+{
+    Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
+
+    GLFWimage image;
+    int       channels;
+    image.pixels = stbi_load(path.string().c_str(), &image.width, &image.height, &channels, 0);
+    Assert::isTrue(image.pixels != nullptr, std::format("can't load from file: '{}'", path.string()));
+
+    glfwSetWindowIcon(handle, 1, &image);
+
+    stbi_image_free(image.pixels);
 }
 
 void* GlfwWindow::nativeHandle() const
