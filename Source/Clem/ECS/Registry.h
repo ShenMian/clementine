@@ -158,6 +158,8 @@ public:
 	 */
     bool valid(const Entity&) const;
 
+    version_type getVersion(id_type id) const;
+
 private:
     template <typename T>
     using Allocator = std::pmr::polymorphic_allocator<T>;

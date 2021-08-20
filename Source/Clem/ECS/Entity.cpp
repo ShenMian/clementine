@@ -12,6 +12,11 @@ Entity::Entity(id_type id, version_type ver, Registry& reg)
 {
 }
 
+Entity::Entity(id_type id, Registry& reg)
+    : id_(id), registry(&reg), version_(reg.getVersion(id_))
+{
+}
+
 [[nodiscard]] bool Entity::valid() const
 {
     if(registry)

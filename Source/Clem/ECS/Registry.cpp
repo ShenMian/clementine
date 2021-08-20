@@ -67,6 +67,11 @@ void Registry::all(std::function<void(const Entity&)> func)
     return e.id() < entities.size() && e.version() == entities[e.id()].version;
 }
 
+version_type Registry::getVersion(id_type id) const
+{
+    return entities[id].version;
+}
+
 void Registry::update(Time dt)
 {
     for(auto& system : systems)
