@@ -11,12 +11,16 @@ namespace clem::ui
 
 Browser::Browser()
 {
-    icons["file"]   = Texture2D::create("../assets/textures/icons/file.png");
-    icons["folder"] = Texture2D::create("../assets/textures/icons/folder.png");
+    icons["file"]         = Texture2D::create("../assets/textures/icons/file.png");
+    icons["folder"]       = Texture2D::create("../assets/textures/icons/folder.png");
+    icons["folder_empty"] = Texture2D::create("../assets/textures/icons/folder_empty.png");
 
-    icons[".png"] = Texture2D::create("../assets/textures/icons/image.png");
-    icons[".jpg"] = Texture2D::create("../assets/textures/icons/image.png");
-    icons[".obj"] = Texture2D::create("../assets/textures/icons/3d_object.png");
+    icons[".png"]  = Texture2D::create("../assets/textures/icons/image.png");
+    icons[".jpg"]  = Texture2D::create("../assets/textures/icons/image.png");
+    icons[".obj"]  = Texture2D::create("../assets/textures/icons/3d_object.png");
+    icons[".vert"] = Texture2D::create("../assets/textures/icons/code.png");
+    icons[".frag"] = Texture2D::create("../assets/textures/icons/code.png");
+    icons[".wav"]  = Texture2D::create("../assets/textures/icons/audio.png");
 }
 
 void Browser::update(Time dt)
@@ -35,29 +39,38 @@ void Browser::update(Time dt)
 
     ImGui::Columns((int)(ImGui::GetContentRegionAvailWidth() / 70));
 
+    std::shared_ptr<Texture2D> icon;
     for(const auto& entry : fs::directory_iterator(current))
     {
-        auto filename = entry.path().filename().string();
+        auto path     = fs::relative(entry.path(), assets);
+        auto filename = path.filename().string();
+
         if(entry.is_directory())
         {
+            if(fs::is_empty(path))
+                icon = icons["folder_empty"];
+            else
+                icon = icons["folder"];
+
             ImGui::PushID(filename.c_str());
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
-            if(ImGui::ImageButton((ImTextureID)icons["folder"]->getHandle(), {48, 48}, {1, 0}, {0, 1}))
-                current = entry;
+            if(ImGui::ImageButton((ImTextureID)icon->getHandle(), {48, 48}, {1, 0}, {0, 1}))
+                current = path;
             ImGui::TextWrapped(filename.c_str());
             ImGui::PopStyleColor();
             ImGui::PopID();
         }
         else
         {
+            auto ext = path.extension().string();
+            if(icons.contains(ext))
+                icon = icons[ext];
+            else
+                icon = icons["file"];
+
             ImGui::PushID(filename.c_str());
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
-
-            auto ext = entry.path().extension().string();
-            if(icons.contains(ext))
-                ImGui::ImageButton((ImTextureID)icons[ext]->getHandle(), {48, 48}, {1, 0}, {0, 1});
-            else
-                ImGui::ImageButton((ImTextureID)icons["file"]->getHandle(), {48, 48}, {1, 0}, {0, 1});
+            ImGui::ImageButton((ImTextureID)icon->getHandle(), {48, 48}, {1, 0}, {0, 1});
 
             if(ImGui::BeginDragDropSource())
             {
