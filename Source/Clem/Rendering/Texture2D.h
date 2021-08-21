@@ -40,6 +40,8 @@ public:
     enum class Type
     {
         Default,
+        Diffuse,
+        Specular,
         NormalMap // 法线贴图
     };
 
@@ -69,7 +71,7 @@ public:
     };
 
     static std::shared_ptr<Texture2D> create();
-    static std::shared_ptr<Texture2D> create(const std::filesystem::path& path);
+    static std::shared_ptr<Texture2D> create(const std::filesystem::path& path, Type type = Type::Default);
 
     /**
      * @brief 从文件载入纹理.
@@ -115,7 +117,12 @@ public:
 
     virtual void bindUnit(unsigned int slot = 0) = 0;
 
+    void setType(Type type);
+    Type getType() const;
+
 protected:
+    Type type;
+
     static std::unordered_map<std::filesystem::path, std::shared_ptr<Texture2D>> cache;
 };
 

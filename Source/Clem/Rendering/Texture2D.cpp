@@ -24,16 +24,28 @@ std::shared_ptr<Texture2D> Texture2D::create()
     return nullptr;
 }
 
-std::shared_ptr<Texture2D> Texture2D::create(const fs::path& path)
+std::shared_ptr<Texture2D> Texture2D::create(const fs::path& path, Type type)
 {
     switch(Renderer::getAPI())
     {
         using enum Renderer::API;
 
     case OpenGL:
-        return GLTexture2D::create(path);
+        auto texture = GLTexture2D::create(path);
+        texture->setType(type);
+        return texture;
     }
     return nullptr;
+}
+
+void Texture2D::setType(Type type)
+{
+    this->type = type;
+}
+
+Texture2D::Type Texture2D::getType() const
+{
+    return type;
 }
 
 } // namespace clem

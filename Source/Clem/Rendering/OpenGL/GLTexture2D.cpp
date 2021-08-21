@@ -49,9 +49,9 @@ std::shared_ptr<Texture2D> GLTexture2D::create(const fs::path& path, Format form
 
 GLTexture2D::GLTexture2D()
 {
-    type = GL_TEXTURE_2D;
+    glType = GL_TEXTURE_2D;
 
-    glCreateTextures(type, 1, &handle);
+    glCreateTextures(glType, 1, &handle);
 }
 
 GLTexture2D::GLTexture2D(const fs::path& path)
@@ -68,9 +68,9 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
 {
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
 
-    type = GL_TEXTURE_2D;
+    glType = GL_TEXTURE_2D;
 
-    glCreateTextures(type, 1, &handle);
+    glCreateTextures(glType, 1, &handle);
     bind();
 
     int  channels;
@@ -113,17 +113,17 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
         dataFormat     = GL_RED;
     }
 
-    glTexStorage2D(type, 1, internalFormat, size.x, size.y);
+    glTexStorage2D(glType, 1, internalFormat, size.x, size.y);
 
     // 设置纹理过滤方式
     setMinFilter(Filter::Nearest);
     setMagFilter(Filter::Bilinear);
 
     // 设置纹理环绕方式
-    glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(type, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(glType, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(glType, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    glTexSubImage2D(type, 0, 0, 0, size.x, size.y, dataFormat, GL_UNSIGNED_BYTE, data);
+    glTexSubImage2D(glType, 0, 0, 0, size.x, size.y, dataFormat, GL_UNSIGNED_BYTE, data);
 
     Assert::isTrue(glGetError() == GL_NO_ERROR);
 
@@ -135,9 +135,9 @@ void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
 {
     Assert::isTrue(faces.size() == 6, "skybox should have 6 faces");
 
-    type = GL_TEXTURE_CUBE_MAP;
+    glType = GL_TEXTURE_CUBE_MAP;
 
-    glCreateTextures(type, 1, &handle);
+    glCreateTextures(glType, 1, &handle);
     bind();
 
     // 读取六个面
@@ -166,11 +166,11 @@ void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
     setMagFilter(Filter::Bilinear);
 
     // 设置纹理环绕方式
-    glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(type, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(type, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+    glTexParameteri(glType, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(glType, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(glType, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
-    glBindTexture(type, 0);
+    glBindTexture(glType, 0);
 
     Assert::isTrue(glGetError() == GL_NO_ERROR);
 }
@@ -178,18 +178,18 @@ void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
 void GLTexture2D::setMinFilter(Filter filter)
 {
     bind();
-    glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GLFilter[filter]);
+    glTexParameteri(glType, GL_TEXTURE_MIN_FILTER, GLFilter[filter]);
 }
 
 void GLTexture2D::setMagFilter(Filter filter)
 {
     bind();
-    glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GLFilter[filter]);
+    glTexParameteri(glType, GL_TEXTURE_MAG_FILTER, GLFilter[filter]);
 }
 
 void GLTexture2D::bind()
 {
-    glBindTexture(type, handle);
+    glBindTexture(glType, handle);
     Assert::isTrue(glGetError() == GL_NO_ERROR);
 }
 

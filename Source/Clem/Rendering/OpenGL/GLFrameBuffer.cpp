@@ -73,7 +73,7 @@ std::shared_ptr<Texture2D> GLFrameBuffer::getDepthAttachment()
 void GLFrameBuffer::clearColorAttachment(int index, int value)
 {
     bind();
-    glClearTexImage(colorAttachments[index]->getHandle(), 0, GL_RED_INTEGER, GL_INT, &value);
+    glClearTexImage((GLuint)colorAttachments[index]->getHandle(), 0, GL_RED_INTEGER, GL_INT, &value);
     unbind();
 }
 
@@ -112,11 +112,13 @@ void GLFrameBuffer::addColorAttachment(PixelFormat format)
         attach->setMinFilter(Texture2D::Filter::Bilinear);
         attach->setMagFilter(Texture2D::Filter::Bilinear);
 
+        /*
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        */
 
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + colorAttachments.size(), GL_TEXTURE_2D, attach->getHandle(), 0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + (GLenum)colorAttachments.size(), GL_TEXTURE_2D, (GLuint)attach->getHandle(), 0);
 
         colorAttachments.push_back(attach);
     }
@@ -144,11 +146,13 @@ void GLFrameBuffer::addDepthAttachment()
         attach->setMinFilter(Texture2D::Filter::Bilinear);
         attach->setMagFilter(Texture2D::Filter::Bilinear);
 
+        /*
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        */
 
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, attach->getHandle(), 0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, (GLuint)attach->getHandle(), 0);
 
         depthAttachments = attach;
     }

@@ -50,7 +50,7 @@ public:
 private:
     handle_type handle;
     Size2i      size;
-    int         type;
+    int         glType;
 
     void* loadFromFile(const std::filesystem::path& path, int& width, int& height, int& channels);
 };
