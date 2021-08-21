@@ -71,56 +71,8 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2 size)
     glfwSetKeyCallback(handle, [](GLFWwindow* native, int key, int scancode, int action, int mods)
                        {
                            const auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
-
-                           const float speed = 0.1f;
-                           switch(action)
-                           {
-                           case GLFW_PRESS:
-                               switch(key)
-                               {
-                               case GLFW_KEY_ESCAPE:
-                                   win->onClose();
-                                   break;
-
-                               case GLFW_KEY_W:
-                                   move = -Vector3::unit_z * speed;
-                                   // move = win->camera.view.forword().normalize() * 0.1;
-                                   break;
-
-                               case GLFW_KEY_S:
-                                   move = Vector3::unit_z * speed;
-                                   // move = win->camera.view.back().normalize() * 0.1;
-                                   break;
-
-                               case GLFW_KEY_A:
-                                   move = Vector3::unit_x * speed;
-                                   // move = win->camera.view.left().normalize() * 0.1;
-                                   break;
-
-                               case GLFW_KEY_D:
-                                   move = -Vector3::unit_x * speed;
-                                   // move = win->camera.view.right().normalize() * 0.1;
-                                   break;
-
-                               case GLFW_KEY_LEFT_SHIFT:
-                                   move = Vector3::unit_y * speed;
-                                   // move = -win->camera.view.up().normalize() * 0.1;
-                                   break;
-
-                               case GLFW_KEY_SPACE:
-                                   move = -Vector3::unit_y * speed;
-                                   // move = -win->camera.view.down().normalize() * 0.1;
-                                   break;
-                               }
-                               break;
-
-                           case GLFW_RELEASE:
-                               move = Vector3::zero;
-                               break;
-
-                           case GLFW_REPEAT:
-                               break;
-                           }
+                           if(win->onKey)
+                               win->onKey(action, key);
                            // EventDispatcher::get().dispatch(KeyEvent(key, action == GLFW_PRESS || action == GLFW_REPEAT, action == GLFW_REPEAT));
                        });
 

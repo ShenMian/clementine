@@ -8,6 +8,8 @@
 #include <glad/glad.h>
 #include <imgui/imgui.h>
 
+#include <glfw/glfw3.h>
+
 namespace clem::ui
 {
 
@@ -39,7 +41,10 @@ void Viewport::update(Time dt)
         }
     }
     else
+    {
         active = false;
+        move   = Vector3::zero;
+    }
 
     ImGui::End();
 }
@@ -281,28 +286,6 @@ void Viewport::attach()
         */
 	)");
 
-#if 1
-    camera.setDirection({0, 0, 20}, {0, 0, -1}, -Vector3::unit_y);
-#else
-    camera.setDirection({0, 0, 20}, {0, 0, 1}, -Vector3::unit_y);
-#endif
-
-    light.translate({0, 1, 20});
-
-    skybox = Texture2D::create();
-    skybox->loadCubemap(
-        {
-            "../assets/textures/skybox/right.jpg",
-            "../assets/textures/skybox/left.jpg",
-            "../assets/textures/skybox/top.jpg",
-            "../assets/textures/skybox/bottom.jpg",
-            "../assets/textures/skybox/back.jpg",
-            "../assets/textures/skybox/front.jpg",
-        });
-
-    texture = Texture2D::create("../assets/textures/wall.jpg");
-    texture->bind();
-
     auto win = Main::getWindow();
 
 #if 0
@@ -320,6 +303,62 @@ void Viewport::attach()
     };
 #endif
 
+    win->onKey = [&](int action, int key)
+    {
+        if(!active)
+            return;
+
+        const float speed = 0.1f;
+        switch(action)
+        {
+        case GLFW_PRESS:
+            switch(key)
+            {
+            case GLFW_KEY_ESCAPE:
+                win->onClose();
+                break;
+
+            case GLFW_KEY_W:
+                move = -Vector3::unit_z * speed;
+                // move = win->camera.view.forword().normalize() * 0.1;
+                break;
+
+            case GLFW_KEY_S:
+                move = Vector3::unit_z * speed;
+                // move = win->camera.view.back().normalize() * 0.1;
+                break;
+
+            case GLFW_KEY_A:
+                move = Vector3::unit_x * speed;
+                // move = win->camera.view.left().normalize() * 0.1;
+                break;
+
+            case GLFW_KEY_D:
+                move = -Vector3::unit_x * speed;
+                // move = win->camera.view.right().normalize() * 0.1;
+                break;
+
+            case GLFW_KEY_LEFT_SHIFT:
+                move = Vector3::unit_y * speed;
+                // move = -win->camera.view.up().normalize() * 0.1;
+                break;
+
+            case GLFW_KEY_SPACE:
+                move = -Vector3::unit_y * speed;
+                // move = -win->camera.view.down().normalize() * 0.1;
+                break;
+            }
+            break;
+
+        case GLFW_RELEASE:
+            move = Vector3::zero;
+            break;
+
+        case GLFW_REPEAT:
+            break;
+        }
+    };
+
     win->onScroll = [this](double xOfffset, double yOffset)
     {
         if(!active)
@@ -332,11 +371,34 @@ void Viewport::attach()
     {
         onResize();
     };
+
+    skybox = Texture2D::create();
+    skybox->loadCubemap(
+        {
+            "../assets/textures/skybox/right.jpg",
+            "../assets/textures/skybox/left.jpg",
+            "../assets/textures/skybox/top.jpg",
+            "../assets/textures/skybox/bottom.jpg",
+            "../assets/textures/skybox/back.jpg",
+            "../assets/textures/skybox/front.jpg",
+        });
+
+    texture = Texture2D::create("../assets/textures/wall.jpg");
+
+#if 1
+    camera.setDirection({0, 0, 20}, {0, 0, -1}, -Vector3::unit_y);
+#else
+    camera.setDirection({0, 0, 20}, {0, 0, 1}, -Vector3::unit_y);
+#endif
+
+    light.translate({0, 1, 0});
 }
 
 void Viewport::render(Time dt)
 {
     onResize();
+
+    camera.view.translate(move);
 
     // Ìì¿ÕºÐ
     skybox->bind();
@@ -347,7 +409,7 @@ void Viewport::render(Time dt)
     // standardShader->uploadUniform("u_texture", 0);
 
     // ¹âÕÕ
-    light.rotateY(radians(60) * dt.seconds());
+    // light.rotateY(radians(60) * dt.seconds());
     standardShader->uploadUniform("u_light.position", light.translation());
     standardShader->uploadUniform("u_light.ambient", Vector3::unit * 1.0);
     standardShader->uploadUniform("u_light.diffuse", Vector3::unit * 1.0);

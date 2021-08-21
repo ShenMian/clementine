@@ -32,6 +32,7 @@ private:
     std::shared_ptr<FrameBuffer> framebuffer = FrameBuffer::create({1920 * 0.7, 1080 * 0.7},
                                                                    {FrameBuffer::PixelFormat::Auto, FrameBuffer::PixelFormat::Auto, FrameBuffer::PixelFormat::I8});
     bool                         active;
+    Vector3                      move;
 };
 
 } // namespace clem::ui

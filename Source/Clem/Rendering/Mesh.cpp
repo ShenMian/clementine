@@ -28,12 +28,49 @@ void Mesh::load(const fs::path& path)
 {
     PROFILE_FUNC();
 
-    Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
+    Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", fs::absolute(path).string()));
     this->path = fs::relative(path, ui::Browser::assets);
 
     std::vector<Vertex>       vertices;
     std::vector<unsigned int> indices;
 
+    loadFromFile(this->path, vertices, indices);
+
+    vertexBuffer         = VertexBuffer::create(vertices.data(), vertices.size() * sizeof(vertices[0]));
+    vertexBuffer->layout = {
+        {"a_position", Shader::Type::Float3},
+        {"a_color", Shader::Type::Float3},
+        {"a_normal", Shader::Type::Float3},
+        {"a_uv", Shader::Type::Float2}};
+
+    indexBuffer = IndexBuffer::create(indices.data(), indices.size() * sizeof(indices[0]));
+
+    vertexArray = VertexArray::create();
+    vertexArray->setVertexBuffer(vertexBuffer);
+    vertexArray->setIndexBuffer(indexBuffer);
+
+    cache.insert({this->path, this});
+}
+
+void Mesh::addTexture(std::shared_ptr<Texture2D> texture)
+{
+    Assert::isTrue(!textures.contains(texture->getType()));
+    textures.insert({texture->getType(), texture});
+}
+
+std::shared_ptr<Texture2D> Mesh::getTexture(Texture2D::Type type) const
+{
+    Assert::isTrue(textures.contains(type));
+    return textures.at(type);
+}
+
+void Mesh::bind()
+{
+    vertexArray->bind();
+}
+
+void Mesh::loadFromFile(const std::filesystem::path& path, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices)
+{
     tinyobj::ObjReaderConfig config;
     tinyobj::ObjReader       reader;
 
@@ -79,7 +116,7 @@ void Mesh::load(const fs::path& path)
                     attrib.texcoords[2 * index.texcoord_index + 1]};
 
 #if 0
-            // TODO: 性能.
+            // 顶点去重. 可减少内存占用, 但大大降低读取速度. 性能警告.
             if(!uniqueVertices.contains(vertex))
             {
                 uniqueVertices[vertex] = static_cast<uint32_t>(vertices.size());
@@ -92,42 +129,6 @@ void Mesh::load(const fs::path& path)
 #endif
         }
     }
-
-    vertexBuffer         = VertexBuffer::create(vertices.data(), vertices.size() * sizeof(vertices[0]));
-    vertexBuffer->layout = {
-        {"a_position", Shader::Type::Float3},
-        {"a_color", Shader::Type::Float3},
-        {"a_normal", Shader::Type::Float3},
-        {"a_uv", Shader::Type::Float2}};
-
-    indexBuffer = IndexBuffer::create(indices.data(), indices.size() * sizeof(indices[0]));
-
-    vertexArray = VertexArray::create();
-    vertexArray->setVertexBuffer(vertexBuffer);
-    vertexArray->setIndexBuffer(indexBuffer);
-
-    cache.insert({this->path, this});
-}
-
-void Mesh::addTexture(std::shared_ptr<Texture2D> texture)
-{
-    Assert::isTrue(!textures.contains(texture->getType()));
-    textures.insert({texture->getType(), texture});
-}
-
-std::shared_ptr<Texture2D> Mesh::getTexture(Texture2D::Type type) const
-{
-    Assert::isTrue(textures.contains(type));
-    return textures.at(type);
-}
-
-void Mesh::bind()
-{
-    vertexArray->bind();
-}
-
-void Mesh::loadFromFile(const std::filesystem::path& path, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices)
-{
 }
 
 } // namespace clem

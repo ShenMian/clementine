@@ -100,6 +100,7 @@ public:
 
     std::function<void(Size2)>          onResize;
     std::function<void(double, double)> onScroll;
+    std::function<void(int, int)>       onKey;
     std::function<void(double, double)> onMouseMove;
     std::function<void()>               onClose;
 

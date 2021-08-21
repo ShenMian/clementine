@@ -170,8 +170,8 @@ void Properties::showMesh()
             if(mesh.path == fs::path())
                 return;
 
-            auto vertices = mesh.vertexArray->getVertexBuffer()->count();
-            ImGui::Text("Vertices: %d", vertices);
+            ImGui::Text("Vertices: %d", mesh.vertexArray->getVertexBuffer()->count());
+            ImGui::Text("Indices : %d", mesh.vertexArray->getIndexBuffer()->count());
         }
     }
 }
