@@ -50,10 +50,7 @@ void GLRenderer::submit(const Entity& entity)
 
     auto shader = material.shader;
 
-    if(mesh.vertexArray == nullptr)
-        return;
-
-    mesh.vertexArray->bind();
+    mesh.bind();
     shader->bind();
 
     shader->uploadUniform("u_model", transform.getModelMatrix());

@@ -99,12 +99,31 @@ void Mesh::load(const fs::path& path)
         {"a_color", Shader::Type::Float3},
         {"a_normal", Shader::Type::Float3},
         {"a_uv", Shader::Type::Float2}};
+
     indexBuffer = IndexBuffer::create(indices.data(), indices.size() * sizeof(indices[0]));
+
     vertexArray = VertexArray::create();
-    vertexArray->addVertexBuffer(vertexBuffer);
+    vertexArray->setVertexBuffer(vertexBuffer);
     vertexArray->setIndexBuffer(indexBuffer);
 
     cache.insert({this->path, this});
+}
+
+void Mesh::addTexture(std::shared_ptr<Texture2D> texture)
+{
+    Assert::isTrue(!textures.contains(texture->getType()));
+    textures.insert({texture->getType(), texture});
+}
+
+std::shared_ptr<Texture2D> Mesh::getTexture(Texture2D::Type type) const
+{
+    Assert::isTrue(textures.contains(type));
+    return textures.at(type);
+}
+
+void Mesh::bind()
+{
+    vertexArray->bind();
 }
 
 void Mesh::loadFromFile(const std::filesystem::path& path, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices)

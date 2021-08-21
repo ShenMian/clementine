@@ -40,8 +40,8 @@ void GLVertexArray::bind()
 
     if(indexBuffer)
         indexBuffer->bind();
-    for(const auto& buf : vertexBuffers)
-        buf->bind();
+    if(vertexBuffer)
+        vertexBuffer->bind();
 }
 
 void GLVertexArray::setIndexBuffer(std::shared_ptr<IndexBuffer> buffer)
@@ -49,13 +49,13 @@ void GLVertexArray::setIndexBuffer(std::shared_ptr<IndexBuffer> buffer)
     indexBuffer = buffer;
 }
 
-void GLVertexArray::addVertexBuffer(std::shared_ptr<VertexBuffer> buffer)
+void GLVertexArray::setVertexBuffer(std::shared_ptr<VertexBuffer> buffer)
 {
     Assert::isTrue(!buffer->layout.empty(), "buffer has no layout");
 
     bind();
     buffer->bind();
-    vertexBuffers.push_back(buffer);
+    vertexBuffer = buffer;
 
     for(const auto& element : buffer->layout)
     {

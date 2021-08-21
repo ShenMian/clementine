@@ -22,7 +22,7 @@ public:
 
     void bind() override;
 
-    void addVertexBuffer(std::shared_ptr<VertexBuffer> buffer) override;
+    void setVertexBuffer(std::shared_ptr<VertexBuffer> buffer) override;
     void setIndexBuffer(std::shared_ptr<IndexBuffer> buffer) override;
 
 private:
