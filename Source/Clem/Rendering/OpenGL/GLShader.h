@@ -14,20 +14,8 @@ class GLShader : public Shader
 public:
     using handle_type = unsigned int;
 
-    /**
-	 * @brief 构造函数.
-     *
-	 * @param name 着色器名称.
-	 */
     GLShader(const std::string& name);
-
-    /**
-	 * @brief 构造函数.
-	 *
-	 * @param vertexSrc 顶点着色器的源代码.
-	 * @param fragmentSrc 片段着色器的源代码.
-	 */
-    GLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+    GLShader(const std::filesystem::path& vertShader, const std::filesystem::path& fragShader);
 
     /**
 	 * @brief 默认析构函数.
@@ -43,6 +31,7 @@ public:
     void uploadUniform(const std::string& name, int value) override;
 
 private:
+    void loadFromSource(const std::string& vertSrc, const std::string& fragSrc);
     void handleError(handle_type handle, const std::string& msg);
 
     handle_type handle;

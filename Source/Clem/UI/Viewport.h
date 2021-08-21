@@ -28,10 +28,10 @@ private:
     Camera                       camera;
     Matrix4                      light;
     std::shared_ptr<Shader>      standardShader, skyboxShader;
-    std::shared_ptr<Texture2D>   texture, skybox;
+    std::shared_ptr<Texture2D>   texture;
     std::shared_ptr<FrameBuffer> framebuffer = FrameBuffer::create({1920 * 0.7, 1080 * 0.7},
                                                                    {FrameBuffer::PixelFormat::Auto, FrameBuffer::PixelFormat::Auto, FrameBuffer::PixelFormat::I8});
-    bool                         active;
+    bool                         activated, locked = false;
     Vector3                      move;
 };
 

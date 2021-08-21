@@ -28,15 +28,31 @@ public:
 
         Main::getWindow()->setIcon("../assets/textures/icons/game_controller.png");
 
+        skyboxTexture = Texture2D::create();
+        skyboxTexture->loadCubemap(
+            {
+                "../assets/textures/skybox/right.jpg",
+                "../assets/textures/skybox/left.jpg",
+                "../assets/textures/skybox/top.jpg",
+                "../assets/textures/skybox/bottom.jpg",
+                "../assets/textures/skybox/front.jpg",
+                "../assets/textures/skybox/back.jpg"
+            });
+
+        // 必须是第一个被渲染的物体且关闭深度测试
+        auto skybox = Main::registry.create("skybox");
+        skybox.add<Material>();
+        skybox.add<Mesh>("../assets/models/cube.obj").addTexture(skyboxTexture);
+
         auto model = Main::registry.create("model");
         model.add<Transform>();
-        model.add<Mesh>("../../../3DModel/scene/San_Miguel/san-miguel-low-poly.obj");
         model.add<Material>();
-
-        // model.add<Mesh>("../assets/Audi RS 6 Avant.obj");
+        // model.add<Mesh>("../assets/models/weapon/m4a1.obj");
+        model.add<Mesh>("../../../3DModel/scene/San_Miguel/san-miguel-low-poly.obj");
     }
 
 private:
+    std::shared_ptr<Texture2D> skyboxTexture;
 };
 
 Application* clem::CreateApplication()

@@ -53,6 +53,7 @@ struct Material
 
 layout (location = 0) out vec4 frag_color;
 layout (location = 1) out vec4 bright_color;
+layout (location = 2) out int  entity_id;
 
 in vec3 v_position;
 in vec3 v_color;
@@ -64,18 +65,21 @@ in vec3 v_cam_position;
 uniform Light     u_light;
 uniform Material  u_material;
 uniform sampler2D u_texture;
+uniform int       u_entity_id;
 
 vec4 lighting();
 
 void main()
 {
-    // frag_color = vec4(1.0, 1.0, 1.0, 1.0) * lighting();
-    frag_color = texture(u_texture, vec2(1.0 - v_uv.x, v_uv.y)) * lighting();
+    frag_color = vec4(1.0, 1.0, 1.0, 1.0) * lighting();
+    // frag_color = texture(u_texture, vec2(1.0 - v_uv.x, v_uv.y)) * lighting();
 
     // 提取亮色
     float brightness = dot(frag_color.rgb, vec3(0.2126, 0.7152, 0.0722));
     if(brightness > 1.0)
         bright_color = vec4(frag_color.rgb, 1.0);
+
+    entity_id = u_entity_id;
 }
 
 // 计算平行光照
@@ -88,12 +92,12 @@ vec3 CalcDirLight(DirectionLight light, vec3 normal, vec3 dir_to_cam)
 
     // 漫反射光照
     float diffuse_amount = max(0.0, dot(dir_to_light, v_normal));
-    vec3  diffuse        = light.diffuse * diffuse_amount * u_material.diffuse;
+    vec3  diffuse        = light.diffuse * (diffuse_amount * u_material.diffuse);
 
     // 镜面反射光照
     vec3  reflected_direction = reflect(dir_to_light, v_normal);
     float specular_amount     = pow(max(0.0, dot(reflected_direction, dir_to_cam)), u_material.shininess);
-    vec3  specular            = light.specular * specular_amount * u_material.specular;
+    vec3  specular            = light.specular * (specular_amount * u_material.specular);
 
     return ambient + diffuse + specular;
 }

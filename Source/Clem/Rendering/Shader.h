@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Core/Math/Math.h"
+#include <filesystem>
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -53,10 +54,10 @@ public:
     /**
 	 * @brief 创建着色器.
 	 *
-	 * @param vertexSrc vertex shader 的源代码.
-	 * @param fragmentSrc fragment shader 的源代码.
+	 * @param vertShader 顶点着色器源文件.
+	 * @param fragShader 片段着色器源文件.
 	 */
-    static std::shared_ptr<Shader> create(const std::string& vertexSrc, const std::string& fragmentSrc);
+    static std::shared_ptr<Shader> create(const std::filesystem::path& vertShader, const std::filesystem::path& fragShader);
 
     virtual void uploadUniform(const std::string& name, const Matrix4& matrix) = 0;
     virtual void uploadUniform(const std::string& name, const Vector3& vector) = 0;

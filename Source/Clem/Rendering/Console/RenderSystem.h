@@ -25,7 +25,7 @@ public:
         registry.each<Sprite>([](const Entity& e, Sprite& sprite)
                               {
                                   auto& tf = e.get<Transform>();
-                                  output.getBuffer().drawSprite({tf.translation.x, tf.translation.y}, sprite);
+                                  output.getBuffer().drawSprite({(int)tf.translation.x, (int)tf.translation.y}, sprite);
                               });
 
         output.swapBuffers();

@@ -44,7 +44,7 @@ VKShader::VKShader(const std::string& name)
     pipeline = std::move(ret.value);
 }
 
-VKShader::VKShader(const std::string& vertexSrc, const std::string& fragmentSrc)
+VKShader::VKShader(const std::filesystem::path& vertShader, const std::filesystem::path& fragShader)
 {
     Assert::isTrue(false);
 }

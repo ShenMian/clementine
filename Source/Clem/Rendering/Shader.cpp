@@ -21,17 +21,17 @@ std::shared_ptr<Shader> Shader::create(const std::string& name)
     return nullptr;
 }
 
-std::shared_ptr<Shader> Shader::create(const std::string& vertexSrc, const std::string& fragmentSrc)
+std::shared_ptr<Shader> Shader::create(const std::filesystem::path& vertShader, const std::filesystem::path& fragShader)
 {
     switch(Renderer::getAPI())
     {
         using enum Renderer::API;
 
     case OpenGL:
-        return std::make_shared<GLShader>(vertexSrc, fragmentSrc);
+        return std::make_shared<GLShader>(vertShader, fragShader);
 
     case Vulkan:
-        return std::make_shared<VKShader>(vertexSrc, fragmentSrc);
+        return std::make_shared<VKShader>(vertShader, fragShader);
     }
     return nullptr;
 }

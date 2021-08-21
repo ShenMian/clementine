@@ -12,14 +12,16 @@ namespace clem
 
 std::unordered_map<std::filesystem::path, std::shared_ptr<Texture2D>> Texture2D::cache;
 
-std::shared_ptr<Texture2D> Texture2D::create()
+std::shared_ptr<Texture2D> Texture2D::create(Type type)
 {
     switch(Renderer::getAPI())
     {
         using enum Renderer::API;
 
     case OpenGL:
-        return GLTexture2D::create();
+        auto texture = GLTexture2D::create();
+        texture->setType(type);
+        return texture;
     }
     return nullptr;
 }

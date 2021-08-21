@@ -33,8 +33,6 @@ public:
 	 */
     Vector2i(int x, int y);
 
-    Vector2i(float x, float y);
-
     /**
 	 * @brief 获取面积.
 	 */

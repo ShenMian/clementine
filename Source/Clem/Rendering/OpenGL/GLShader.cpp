@@ -21,37 +21,6 @@ static std::unordered_map<Shader::Stage, GLenum> GLStage = {
     {Shader::Stage::Vertex, GL_VERTEX_SHADER},
     {Shader::Stage::Fragment, GL_FRAGMENT_SHADER}};
 
-void create(const fs::path& vertexShader, const fs::path& fragmentShader)
-{
-    std::string vertexSrc;
-    {
-        Assert::isTrue(fs::exists(vertexShader), "file doesn't exist");
-        auto size = fs::file_size(vertexShader);
-
-        std::ifstream file(vertexShader, std::ios::binary);
-        Assert::isTrue(file.is_open(), std::format("can't open file {}", vertexShader.filename().string()));
-
-        vertexSrc.resize(size);
-        file.read(reinterpret_cast<char*>(vertexSrc.data()), vertexSrc.size());
-        file.close();
-    }
-
-    std::string fragmentSrc;
-    {
-        Assert::isTrue(fs::exists(fragmentShader), "file doesn't exist");
-        auto size = fs::file_size(fragmentShader);
-
-        std::ifstream file(fragmentShader, std::ios::binary);
-        Assert::isTrue(file.is_open(), std::format("can't open file {}", fragmentShader.filename().string()));
-
-        fragmentSrc.resize(size);
-        file.read(reinterpret_cast<char*>(fragmentSrc.data()), fragmentSrc.size());
-        file.close();
-    }
-
-    // GLShader(vertexSrc, fragmentSrc);
-}
-
 GLShader::GLShader(const std::string& name)
 {
     const fs::path assets  = "assets";
@@ -202,78 +171,35 @@ GLShader::GLShader(const std::string& name)
     */
 }
 
-GLShader::GLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
+GLShader::GLShader(const std::filesystem::path& vertShader, const std::filesystem::path& fragShader)
 {
-    GLint success;
-
-    // 编译顶点着色器
-    auto vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
-    const GLchar* source = (const GLchar*)vertexSrc.c_str();
-
-    glShaderSource(vertexShader, 1, &source, nullptr);
-    glCompileShader(vertexShader);
-
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    if(!success)
+    std::string vertSrc;
     {
-        GLint size = 0;
-        glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &size);
-        std::string info(size, '\0');
-        glGetShaderInfoLog(vertexShader, (GLsizei)info.size(), &size, info.data());
-        Assert::isTrue(false, std::format("vertex shader compilation failure: {}", info));
+        Assert::isTrue(fs::exists(vertShader), std::format("file doesn't exist: '{}'", fs::absolute(vertShader).string()));
+        auto size = fs::file_size(vertShader);
 
-        glDeleteShader(vertexShader);
-        return;
+        std::ifstream file(vertShader, std::ios::binary);
+        Assert::isTrue(file.is_open(), std::format("can't open file {}", vertShader.filename().string()));
+
+        vertSrc.resize(size);
+        file.read(reinterpret_cast<char*>(vertSrc.data()), vertSrc.size());
+        file.close();
     }
 
-    // 编译片段着色器
-    auto fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-    source = (const GLchar*)fragmentSrc.c_str();
-
-    glShaderSource(fragmentShader, 1, &source, nullptr);
-    glCompileShader(fragmentShader);
-
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-    if(!success)
+    std::string fragSrc;
     {
-        GLint size = 0;
-        glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &size);
-        std::string info(size, '\0');
-        glGetShaderInfoLog(fragmentShader, (GLsizei)info.size(), &size, info.data());
-        Assert::isTrue(false, std::format("fragment shader compilation failure: {}", info));
+        Assert::isTrue(fs::exists(fragShader), std::format("file doesn't exist: '{}'", fs::absolute(fragShader).string()));
+        auto size = fs::file_size(fragShader);
 
-        glDeleteShader(fragmentShader);
-        glDeleteShader(vertexShader);
-        return;
+        std::ifstream file(fragShader, std::ios::binary);
+        Assert::isTrue(file.is_open(), std::format("can't open file {}", fragShader.filename().string()));
+
+        fragSrc.resize(size);
+        file.read(reinterpret_cast<char*>(fragSrc.data()), fragSrc.size());
+        file.close();
     }
 
-    // 创建程序
-    handle = glCreateProgram();
-
-    glAttachShader(handle, vertexShader);
-    glAttachShader(handle, fragmentShader);
-
-    glLinkProgram(handle);
-
-    glGetProgramiv(handle, GL_LINK_STATUS, &success);
-    if(!success)
-    {
-        GLint size = 0;
-        glGetProgramiv(handle, GL_INFO_LOG_LENGTH, &size);
-        std::string info(size, 0);
-        glGetProgramInfoLog(handle, (GLsizei)info.size(), &size, info.data());
-        Assert::isTrue(false, std::format("shader link failure: {}", info));
-
-        glDeleteProgram(handle);
-        glDeleteShader(vertexShader);
-        glDeleteShader(fragmentShader);
-        return;
-    }
-
-    glDetachShader(handle, vertexShader);
-    glDetachShader(handle, fragmentShader);
+    loadFromSource(vertSrc, fragSrc);
 }
 
 GLShader::~GLShader()
@@ -329,6 +255,80 @@ void GLShader::uploadUniform(const std::string& name, int value)
     glUniform1i(location, value);
 
     Assert::isTrue(glGetError() == GL_NO_ERROR);
+}
+
+void GLShader::loadFromSource(const std::string& vertSrc, const std::string& fragSrc)
+{
+    GLint success;
+
+    // 编译顶点着色器
+    auto vertexShader = glCreateShader(GL_VERTEX_SHADER);
+
+    const GLchar* source = (const GLchar*)vertSrc.c_str();
+
+    glShaderSource(vertexShader, 1, &source, nullptr);
+    glCompileShader(vertexShader);
+
+    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+    if(!success)
+    {
+        GLint size = 0;
+        glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &size);
+        std::string info(size, '\0');
+        glGetShaderInfoLog(vertexShader, (GLsizei)info.size(), &size, info.data());
+        Assert::isTrue(false, std::format("vertex shader compilation failure: {}", info));
+
+        glDeleteShader(vertexShader);
+        return;
+    }
+
+    // 编译片段着色器
+    auto fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+    source = (const GLchar*)fragSrc.c_str();
+
+    glShaderSource(fragmentShader, 1, &source, nullptr);
+    glCompileShader(fragmentShader);
+
+    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+    if(!success)
+    {
+        GLint size = 0;
+        glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &size);
+        std::string info(size, '\0');
+        glGetShaderInfoLog(fragmentShader, (GLsizei)info.size(), &size, info.data());
+        Assert::isTrue(false, std::format("fragment shader compilation failure: {}", info));
+
+        glDeleteShader(fragmentShader);
+        glDeleteShader(vertexShader);
+        return;
+    }
+
+    // 创建程序
+    handle = glCreateProgram();
+
+    glAttachShader(handle, vertexShader);
+    glAttachShader(handle, fragmentShader);
+
+    glLinkProgram(handle);
+
+    glGetProgramiv(handle, GL_LINK_STATUS, &success);
+    if(!success)
+    {
+        GLint size = 0;
+        glGetProgramiv(handle, GL_INFO_LOG_LENGTH, &size);
+        std::string info(size, 0);
+        glGetProgramInfoLog(handle, (GLsizei)info.size(), &size, info.data());
+        Assert::isTrue(false, std::format("shader link failure: {}", info));
+
+        glDeleteProgram(handle);
+        glDeleteShader(vertexShader);
+        glDeleteShader(fragmentShader);
+        return;
+    }
+
+    glDetachShader(handle, vertexShader);
+    glDetachShader(handle, fragmentShader);
 }
 
 } // namespace clem

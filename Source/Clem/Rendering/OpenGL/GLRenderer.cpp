@@ -30,22 +30,7 @@ void GLRenderer::endFrame()
 
 void GLRenderer::submit(const Entity& entity)
 {
-    /*
-    auto& model     = entity.get<Model>();
-    auto& transform = entity.get<Transform>();
-    auto& material  = entity.get<Material>();
-
-    auto shader = material.shader;
-
-    if(model.vertexArray == nullptr)
-        return;
-
-    model.vertexArray->bind();
-    shader->bind();
-    */
-
     auto& mesh      = entity.get<Mesh>();
-    auto& transform = entity.get<Transform>();
     auto& material  = entity.get<Material>();
 
     auto shader = material.shader;
@@ -53,16 +38,30 @@ void GLRenderer::submit(const Entity& entity)
     mesh.bind();
     shader->bind();
 
-    shader->uploadUniform("u_model", transform.getModelMatrix());
+    if(entity.get<Tag>().str == "skybox")
+    {
+        mesh.getTexture(Texture2D::Type::Default)->bindUnit(0);
+        shader->uploadUniform("u_skybox", 0);
 
-    shader->uploadUniform("u_material.ambient", material.ambient);
-    shader->uploadUniform("u_material.diffuse", material.diffuse);
-    shader->uploadUniform("u_material.specular", material.specular);
-    shader->uploadUniform("u_material.shininess", material.shininess);
+        glDepthMask(false);
+        glDrawElements(GL_TRIANGLES, (GLsizei)mesh.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
+        glDepthMask(true);
+    }
+    else
+    {
+        auto& transform = entity.get<Transform>();
 
-    shader->uploadUniform("u_entity_id", (int)entity.id());
+        shader->uploadUniform("u_model", transform.getModelMatrix());
 
-    glDrawElements(GL_TRIANGLES, (GLsizei)mesh.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
+        shader->uploadUniform("u_material.ambient", material.ambient);
+        shader->uploadUniform("u_material.diffuse", material.diffuse);
+        shader->uploadUniform("u_material.specular", material.specular);
+        shader->uploadUniform("u_material.shininess", material.shininess);
+
+        shader->uploadUniform("u_entity_id", (int)entity.id());
+
+        glDrawElements(GL_TRIANGLES, (GLsizei)mesh.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
+    }
     assert(glGetError() == GL_NO_ERROR);
 }
 

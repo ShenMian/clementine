@@ -14,11 +14,6 @@ Vector2i::Vector2i(int x, int y)
 {
 }
 
-Vector2i::Vector2i(float x, float y)
-    : x(x), y(y)
-{
-}
-
 int Vector2i::area() const
 {
     return x * y;

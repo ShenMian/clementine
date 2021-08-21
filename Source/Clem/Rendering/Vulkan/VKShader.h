@@ -16,20 +16,8 @@ namespace clem
 class VKShader : public Shader
 {
 public:
-    /**
-	 * @brief 构造函数.
-     *
-	 * @param name 着色器名称.
-	 */
     VKShader(const std::string& name);
-
-    /**
-	 * @brief 构造函数.
-	 *
-	 * @param vertexSrc 顶点着色器的源代码.
-	 * @param fragmentSrc 片段着色器的源代码.
-	 */
-    VKShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+    VKShader(const std::filesystem::path& vertShader, const std::filesystem::path& fragShader);
 
     /**
 	 * @brief 默认析构函数.

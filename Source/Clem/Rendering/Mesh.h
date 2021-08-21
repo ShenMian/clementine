@@ -13,7 +13,7 @@
 namespace clem
 {
 
-class Vertex;
+struct Vertex;
 class IndexBuffer;
 class VertexArray;
 class VertexBuffer;

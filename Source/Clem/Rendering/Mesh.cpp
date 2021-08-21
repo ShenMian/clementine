@@ -28,13 +28,12 @@ void Mesh::load(const fs::path& path)
 {
     PROFILE_FUNC();
 
-    Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", fs::absolute(path).string()));
     this->path = fs::relative(path, ui::Browser::assets);
 
     std::vector<Vertex>       vertices;
     std::vector<unsigned int> indices;
 
-    loadFromFile(this->path, vertices, indices);
+    loadFromFile(path, vertices, indices);
 
     vertexBuffer         = VertexBuffer::create(vertices.data(), vertices.size() * sizeof(vertices[0]));
     vertexBuffer->layout = {
@@ -71,6 +70,8 @@ void Mesh::bind()
 
 void Mesh::loadFromFile(const std::filesystem::path& path, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices)
 {
+    Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", fs::absolute(path).string()));
+
     tinyobj::ObjReaderConfig config;
     tinyobj::ObjReader       reader;
 

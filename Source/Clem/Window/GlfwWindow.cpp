@@ -23,7 +23,7 @@ namespace clem
 
 static Vector3 move;
 
-GlfwWindow::GlfwWindow(const std::string& title, Size2 size)
+GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 {
     PROFILE_FUNC();
 

@@ -39,10 +39,14 @@ class Texture2D
 public:
     enum class Type
     {
-        Default,
-        Diffuse,
-        Specular,
-        NormalMap // 法线贴图
+        Diffuse,  // 参与漫反射
+        Specular, // 参与镜面反射
+
+        Normals,  // 法线
+        Opacity,  // 透明度
+        Emissive, // 被加入光照后的结果中
+        
+        Default = Diffuse
     };
 
     // 纹理过滤方式
@@ -70,7 +74,7 @@ public:
         I8
     };
 
-    static std::shared_ptr<Texture2D> create();
+    static std::shared_ptr<Texture2D> create(Type type = Type::Default);
     static std::shared_ptr<Texture2D> create(const std::filesystem::path& path, Type type = Type::Default);
 
     /**
