@@ -24,7 +24,7 @@ private:
     void showTag();
     void showTransform();
     void showRigidbody();
-    void showModel();
+    void showMesh();
     void showMaterial();
     void showSprite();
     void showScript();

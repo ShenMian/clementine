@@ -6,10 +6,14 @@
 #include "Core/Math/Math.h"
 #include "ECS/ECS.h"
 #include <filesystem>
+#include <unordered_map>
+
+#include "Texture2D.h"
 
 namespace clem
 {
 
+class Vertex;
 class IndexBuffer;
 class VertexArray;
 class VertexBuffer;
@@ -43,8 +47,12 @@ public:
     std::shared_ptr<VertexArray> vertexArray;
 
 private:
+    void loadFromFile(const std::filesystem::path& path, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices);
+
     std::shared_ptr<VertexBuffer> vertexBuffer;
     std::shared_ptr<IndexBuffer>  indexBuffer;
+
+    static std::unordered_map<std::filesystem::path, Mesh*> cache;
 };
 
 CLEM_DEFINE_TYPE(Mesh);

@@ -177,8 +177,8 @@ void Viewport::attach()
 
 		void main()
 		{
-            // frag_color = vec4(1.0, 1.0, 1.0, 1.0) * lighting();
-            frag_color = texture(u_texture, vec2(1.0 - v_uv.x, v_uv.y)) * lighting();
+            frag_color = vec4(1.0, 1.0, 1.0, 1.0) * lighting();
+            // frag_color = texture(u_texture, vec2(1.0 - v_uv.x, v_uv.y)) * lighting();
 
             // 提取亮色
             float brightness = dot(frag_color.rgb, vec3(0.2126, 0.7152, 0.0722));
@@ -343,8 +343,8 @@ void Viewport::render(Time dt)
     skyboxShader->uploadUniform("u_skybox", 0);
 
     // 纹理
-    texture->bind();
-    standardShader->uploadUniform("u_texture", 0);
+    // texture->bind();
+    // standardShader->uploadUniform("u_texture", 0);
 
     // 光照
     light.rotateY(radians(60) * dt.seconds());
@@ -360,7 +360,7 @@ void Viewport::render(Time dt)
     framebuffer->bind();
     glClearColor(.117f, .564f, 1.f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    Main::registry.each<Model>([&](const Entity& e)
+    Main::registry.each<Mesh>([&](const Entity& e)
                                {
                                    e.get<Material>().shader = standardShader;
                                    Renderer::get()->submit(e);

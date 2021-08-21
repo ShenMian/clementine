@@ -15,6 +15,55 @@
 
 namespace fs = std::filesystem;
 
+namespace ImGui
+{
+
+bool BufferingBar(const char* label, float value, const ImVec2& size_arg, const ImU32& bg_col, const ImU32& fg_col)
+{
+    ImGuiWindow* window = GetCurrentWindow();
+    if(window->SkipItems)
+        return false;
+
+    ImGuiContext&     g     = *GImGui;
+    const ImGuiStyle& style = g.Style;
+    const ImGuiID     id    = window->GetID(label);
+
+    ImVec2 pos  = window->DC.CursorPos;
+    ImVec2 size = size_arg;
+    size.x -= style.FramePadding.x * 2;
+
+    const ImRect bb(pos, ImVec2(pos.x + size.x, pos.y + size.y));
+    ItemSize(bb, style.FramePadding.y);
+    if(!ItemAdd(bb, id))
+        return false;
+
+    // Render
+    const float circleStart = size.x * 0.7f;
+    const float circleEnd   = size.x;
+    const float circleWidth = circleEnd - circleStart;
+
+    window->DrawList->AddRectFilled(bb.Min, ImVec2(pos.x + circleStart, bb.Max.y), bg_col);
+    window->DrawList->AddRectFilled(bb.Min, ImVec2(pos.x + circleStart * value, bb.Max.y), fg_col);
+
+    const float t     = g.Time;
+    const float r     = size.y / 2;
+    const float speed = 1.5f;
+
+    const float a = speed * 0;
+    const float b = speed * 0.333f;
+    const float c = speed * 0.666f;
+
+    const float o1 = (circleWidth + r) * (t + a - speed * (int)((t + a) / speed)) / speed;
+    const float o2 = (circleWidth + r) * (t + b - speed * (int)((t + b) / speed)) / speed;
+    const float o3 = (circleWidth + r) * (t + c - speed * (int)((t + c) / speed)) / speed;
+
+    window->DrawList->AddCircleFilled(ImVec2(pos.x + circleEnd - o1, bb.Min.y + r), r, bg_col);
+    window->DrawList->AddCircleFilled(ImVec2(pos.x + circleEnd - o2, bb.Min.y + r), r, bg_col);
+    window->DrawList->AddCircleFilled(ImVec2(pos.x + circleEnd - o3, bb.Min.y + r), r, bg_col);
+}
+
+} // namespace ImGui
+
 namespace clem::ui
 {
 
@@ -35,7 +84,7 @@ void Properties::update(Time dt)
         showTag();
         showTransform();
         showRigidbody();
-        showModel();
+        showMesh();
         showMaterial();
         showSprite();
         showScript();
@@ -56,14 +105,15 @@ void Properties::update(Time dt)
             }
             if(ImGui::BeginMenu("Rendering"))
             {
-                if(entity.noneOf<Model>() && ImGui::MenuItem("Model"))
+                if(entity.noneOf<Mesh>() && ImGui::MenuItem("Mesh"))
                 {
-                    entity.add<Model>();
+                    entity.add<Mesh>();
                     ImGui::CloseCurrentPopup();
                 }
                 ImGui::MenuItem("Camera");
                 ImGui::MenuItem("Skybox");
                 ImGui::MenuItem("Light");
+                ImGui::MenuItem("Material");
                 ImGui::EndMenu();
             }
             ImGui::EndPopup();
@@ -139,17 +189,17 @@ void Properties::showRigidbody()
     }
 }
 
-void Properties::showModel()
+void Properties::showMesh()
 {
-    if(entity.anyOf<Model>())
+    if(entity.anyOf<Mesh>())
     {
-        if(ImGui::CollapsingHeader("Model", ImGuiTreeNodeFlags_DefaultOpen))
+        if(ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_DefaultOpen))
         {
-            auto& model = entity.get<Model>();
+            auto& model = entity.get<Mesh>();
             if(model.path == fs::path())
-                ImGui::Text("Mesh    : (null)");
+                ImGui::Text("Source  : (null)");
             else
-                ImGui::Text("Mesh    : %s", model.path.string().c_str());
+                ImGui::Text("Source  : %s", model.path.string().c_str());
             if(ImGui::BeginDragDropTarget())
             {
                 const auto payload = ImGui::AcceptDragDropPayload("browser_file");
@@ -159,7 +209,7 @@ void Properties::showModel()
 
                     // TODO: 添加组件已存在提示, UI 使用提示而不是断言
                     if(path.extension() == L".obj")
-                        entity.get<Model>().load(Browser::assets / path);
+                        entity.get<Mesh>().load(Browser::assets / path);
                     else
                         Assert::isTrue(false);
                 }

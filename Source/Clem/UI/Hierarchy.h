@@ -44,21 +44,21 @@ public:
                 {
                     auto entity = Main::registry.create();
                     entity.add<Transform>();
-                    entity.add<Model>("../assets/models/cube.obj");
+                    entity.add<Mesh>("../assets/models/cube.obj");
                 }
 
                 if(ImGui::MenuItem("Sphere"))
                 {
                     auto entity = Main::registry.create();
                     entity.add<Transform>();
-                    entity.add<Model>("../assets/models/sphere.obj");
+                    entity.add<Mesh>("../assets/models/sphere.obj");
                 }
 
                 if(ImGui::MenuItem("Cone"))
                 {
                     auto entity = Main::registry.create();
                     entity.add<Transform>();
-                    entity.add<Model>("../assets/models/cone.obj");
+                    entity.add<Mesh>("../assets/models/cone.obj");
                 }
 
                 ImGui::EndMenu();

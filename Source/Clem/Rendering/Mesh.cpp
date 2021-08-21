@@ -16,11 +16,14 @@ namespace fs = std::filesystem;
 namespace clem
 {
 
+std::unordered_map<std::filesystem::path, Mesh*> Mesh::cache;
+
 Mesh::Mesh(const fs::path& path)
 {
     load(path);
 }
 
+// TODO: 资源管理, 自动释放资源.
 void Mesh::load(const fs::path& path)
 {
     PROFILE_FUNC();
@@ -31,15 +34,19 @@ void Mesh::load(const fs::path& path)
     std::vector<Vertex>       vertices;
     std::vector<unsigned int> indices;
 
-    tinyobj::attrib_t                attrib;
-    std::vector<tinyobj::shape_t>    shapes;
-    std::vector<tinyobj::material_t> materials;
-    std::string                      warn, error;
+    tinyobj::ObjReaderConfig config;
+    tinyobj::ObjReader       reader;
 
-    bool success = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &error, path.string().c_str());
-    Assert::isTrue(success && error.empty(), std::format("loading module error: {}", error));
-    if(warn.empty())
-        CLEM_LOG_WARN("core", std::format("loading module warn: {}", warn));
+    config.mtl_search_path = path.parent_path().string();
+
+    auto success = reader.ParseFromFile(path.string(), config);
+    Assert::isTrue(success, std::format("loading module error: {}", reader.Error()));
+    if(!reader.Warning().empty())
+        CLEM_LOG_WARN("core", std::format("loading module warn: {}", reader.Warning()));
+
+    auto& attrib    = reader.GetAttrib();
+    auto& shapes    = reader.GetShapes();
+    auto& materials = reader.GetMaterials();
 
     std::unordered_map<Vertex, unsigned int> uniqueVertices;
     for(const auto& shape : shapes)
@@ -48,20 +55,17 @@ void Mesh::load(const fs::path& path)
         {
             Vertex vertex;
 
-            if(index.vertex_index >= 0)
-            {
-                vertex.position = {
-                    attrib.vertices[3 * index.vertex_index + 0],
-                    attrib.vertices[3 * index.vertex_index + 1],
-                    attrib.vertices[3 * index.vertex_index + 2]};
+            vertex.position = {
+                attrib.vertices[3 * index.vertex_index + 0],
+                attrib.vertices[3 * index.vertex_index + 1],
+                attrib.vertices[3 * index.vertex_index + 2]};
 
-                auto colorIndex = 3 * index.vertex_index + 2;
-                if(colorIndex < attrib.colors.size())
-                    vertex.color = {
-                        attrib.colors[colorIndex - 2],
-                        attrib.colors[colorIndex - 1],
-                        attrib.colors[colorIndex - 0]};
-            }
+            auto colorIndex = 3 * index.vertex_index + 2;
+            if(colorIndex < attrib.colors.size())
+                vertex.color = {
+                    attrib.colors[colorIndex - 2],
+                    attrib.colors[colorIndex - 1],
+                    attrib.colors[colorIndex - 0]};
 
             if(index.normal_index >= 0)
                 vertex.normal = {
@@ -74,12 +78,18 @@ void Mesh::load(const fs::path& path)
                     attrib.texcoords[2 * index.texcoord_index + 0],
                     attrib.texcoords[2 * index.texcoord_index + 1]};
 
-            if(uniqueVertices.count(vertex) == 0)
+#if 0
+            // TODO: 性能.
+            if(!uniqueVertices.contains(vertex))
             {
                 uniqueVertices[vertex] = static_cast<uint32_t>(vertices.size());
                 vertices.push_back(vertex);
             }
             indices.push_back(uniqueVertices[vertex]);
+#else
+            indices.push_back(vertices.size());
+            vertices.push_back(vertex);
+#endif
         }
     }
 
@@ -93,6 +103,12 @@ void Mesh::load(const fs::path& path)
     vertexArray = VertexArray::create();
     vertexArray->addVertexBuffer(vertexBuffer);
     vertexArray->setIndexBuffer(indexBuffer);
+
+    cache.insert({this->path, this});
+}
+
+void Mesh::loadFromFile(const std::filesystem::path& path, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices)
+{
 }
 
 } // namespace clem

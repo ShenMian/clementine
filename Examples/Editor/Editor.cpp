@@ -30,8 +30,10 @@ public:
 
         auto model = Main::registry.create("model");
         model.add<Transform>();
-        model.add<Model>("../assets/models/cube.obj");
+        model.add<Mesh>("../assets/models/cube.obj");
         model.add<Material>();
+
+        // model.add<Mesh>("../assets/Audi RS 6 Avant.obj");
     }
 
 private:

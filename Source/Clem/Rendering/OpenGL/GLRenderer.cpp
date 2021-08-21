@@ -5,6 +5,7 @@
 #include "Logging/Logging.h"
 #include "Rendering/CommandBuffer.h"
 #include "Rendering/Material.h"
+#include "Rendering/Mesh.h"
 #include "Rendering/VertexArray.h"
 #include <glad/glad.h>
 
@@ -29,6 +30,7 @@ void GLRenderer::endFrame()
 
 void GLRenderer::submit(const Entity& entity)
 {
+    /*
     auto& model     = entity.get<Model>();
     auto& transform = entity.get<Transform>();
     auto& material  = entity.get<Material>();
@@ -40,6 +42,19 @@ void GLRenderer::submit(const Entity& entity)
 
     model.vertexArray->bind();
     shader->bind();
+    */
+
+    auto& mesh      = entity.get<Mesh>();
+    auto& transform = entity.get<Transform>();
+    auto& material  = entity.get<Material>();
+
+    auto shader = material.shader;
+
+    if(mesh.vertexArray == nullptr)
+        return;
+
+    mesh.vertexArray->bind();
+    shader->bind();
 
     shader->uploadUniform("u_model", transform.getModelMatrix());
 
@@ -50,19 +65,19 @@ void GLRenderer::submit(const Entity& entity)
 
     shader->uploadUniform("u_entity_id", (int)entity.id());
 
-    glDrawElements(GL_TRIANGLES, (GLsizei)model.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
+    glDrawElements(GL_TRIANGLES, (GLsizei)mesh.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
     assert(glGetError() == GL_NO_ERROR);
 }
 
 void GLRenderer::submit(const Entity& entity, std::shared_ptr<Shader> shader)
 {
-    auto& model     = entity.get<Model>();
+    auto& mesh      = entity.get<Mesh>();
     auto& transform = entity.get<Transform>();
 
-    if(model.vertexArray == nullptr)
+    if(mesh.vertexArray == nullptr)
         return;
 
-    model.vertexArray->bind();
+    mesh.vertexArray->bind();
 
     // shader = material.shader;
     shader->bind();
@@ -75,7 +90,7 @@ void GLRenderer::submit(const Entity& entity, std::shared_ptr<Shader> shader)
     shader->uploadUniform("u_material.specular", material.specular);
     shader->uploadUniform("u_material.shininess", material.shininess);
 
-    glDrawElements(GL_TRIANGLES, (GLsizei)model.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
+    glDrawElements(GL_TRIANGLES, (GLsizei)mesh.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
     assert(glGetError() == GL_NO_ERROR);
 }
 
