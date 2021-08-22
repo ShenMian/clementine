@@ -8,14 +8,14 @@
 namespace clem
 {
 
-std::shared_ptr<FrameBuffer> clem::FrameBuffer::create(Size2 size, std::vector<PixelFormat> attachs, int samples)
+std::shared_ptr<FrameBuffer> clem::FrameBuffer::create(Size2 size, std::vector<PixelFormat> formats, int samples)
 {
     switch(Renderer::getAPI())
     {
         using enum Renderer::API;
 
     case OpenGL:
-        return std::make_shared<GLFrameBuffer>(size, attachs, samples);
+        return std::make_shared<GLFrameBuffer>(size, formats, samples);
     }
     return nullptr;
 }

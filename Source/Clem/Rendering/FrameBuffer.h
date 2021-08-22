@@ -16,7 +16,7 @@ class FrameBuffer
 public:
     using PixelFormat = Texture2D::Format;
 
-    static std::shared_ptr<FrameBuffer> create(Size2 size, std::vector<PixelFormat> attachs = {PixelFormat::Auto}, int samples = 1);
+    static std::shared_ptr<FrameBuffer> create(Size2 size, std::vector<PixelFormat> formats = {}, int samples = 1);
 
     virtual std::shared_ptr<Texture2D> getColorAttachment(int index = 0)          = 0;
     virtual std::shared_ptr<Texture2D> getDepthAttachment()                       = 0;

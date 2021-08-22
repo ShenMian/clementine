@@ -31,10 +31,7 @@ private:
     Camera                       camera;
     std::shared_ptr<Shader>      standardShader, skyboxShader;
     std::shared_ptr<Texture2D>   texture;
-    std::shared_ptr<FrameBuffer> framebuffer = FrameBuffer::create({1920 * 0.7, 1080 * 0.7},
-                                                                   {FrameBuffer::PixelFormat::Auto,
-                                                                    FrameBuffer::PixelFormat::Auto,
-                                                                    FrameBuffer::PixelFormat::I8});
+    std::shared_ptr<FrameBuffer> framebuffer = FrameBuffer::create({1920 * 0.7, 1080 * 0.7}, {FrameBuffer::PixelFormat::RGBA8, FrameBuffer::PixelFormat::I8});
     bool                         hovered, locked = false;
     Vector2                      viewportSize;
 };

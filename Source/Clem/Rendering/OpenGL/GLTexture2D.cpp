@@ -113,7 +113,6 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
         dataFormat     = GL_RED;
     }
 
-    // 设置纹理过滤方式
     setMinFilter(Filter::Nearest);
     setMagFilter(Filter::Bilinear);
 
@@ -163,7 +162,6 @@ void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
         stbi_image_free(data);
     }
 
-    // 设置纹理过滤方式
     setMinFilter(Filter::Nearest);
     setMagFilter(Filter::Bilinear);
 
@@ -179,14 +177,20 @@ void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
 
 void GLTexture2D::setMinFilter(Filter filter)
 {
+    Assert::isTrue(filter == Filter::Nearest || filter == Filter::Bilinear || filter == Filter::Trilinear);
+
     bind();
     glTexParameteri(glType, GL_TEXTURE_MIN_FILTER, GLFilter[filter]);
+    Assert::isTrue(glGetError() == GL_NO_ERROR);
 }
 
 void GLTexture2D::setMagFilter(Filter filter)
 {
+    Assert::isTrue(filter == Filter::Nearest || filter == Filter::Bilinear);
+
     bind();
     glTexParameteri(glType, GL_TEXTURE_MAG_FILTER, GLFilter[filter]);
+    Assert::isTrue(glGetError() == GL_NO_ERROR);
 }
 
 void GLTexture2D::bind()

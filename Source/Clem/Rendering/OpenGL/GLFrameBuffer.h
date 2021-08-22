@@ -13,7 +13,7 @@ class GLFrameBuffer : public FrameBuffer
 public:
     using handle_type = unsigned int;
 
-    GLFrameBuffer(Size2 size, std::vector<PixelFormat> attachs, int samples = 1);
+    GLFrameBuffer(Size2 size, std::vector<PixelFormat> formats, int samples = 1);
     virtual ~GLFrameBuffer();
 
     void bind() override;
@@ -26,8 +26,8 @@ public:
     void read(int index, Vector2i pos, int& data) override;
 
 private:
-    void addColorAttachment(PixelFormat format = PixelFormat::Auto);
-    void addDepthAttachment();
+    void addColorAttachment(PixelFormat format);
+    void addDepthAttachment(PixelFormat format);
 
     handle_type handle;
     Size2       size;

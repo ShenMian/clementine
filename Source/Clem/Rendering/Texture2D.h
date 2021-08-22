@@ -71,7 +71,9 @@ public:
         Auto,
         RGBA8,
         RGB8,
-        I8
+        I8,
+        Depth24Stencil8,
+        DepthComponent
     };
 
     static std::shared_ptr<Texture2D> create(Type type = Type::Default);
