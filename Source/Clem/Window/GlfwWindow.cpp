@@ -91,12 +91,6 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     // glfwWindowHint(GLFW_SAMPLES, 2);
     // glEnable(GL_MULTISAMPLE);
 
-    // TODO
-    glClearColor(0, 0, 0, 0);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glViewport(0, 0, size.x, size.y);
-    glfwSwapBuffers(handle);
-
     UI::windowInit(this);
 
     Assert::isTrue(glGetError() == GL_NO_ERROR);

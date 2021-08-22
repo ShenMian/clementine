@@ -52,8 +52,8 @@ public:
         auto model = Main::registry.create("model");
         model.add<Transform>();
         model.add<Material>();
-        // model.add<Mesh>("../assets/models/weapon/m4a1.obj");
-        model.add<Mesh>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Exterior/exterior.obj");
+        model.add<Mesh>("../assets/models/weapon/m4a1.obj");
+        // model.add<Mesh>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Exterior/exterior.obj");
         // model.add<Mesh>("../../../3DModel/scene/San_Miguel/san-miguel-low-poly.obj");
     }
 };

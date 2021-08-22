@@ -33,6 +33,9 @@ void Viewport::update(Time dt)
     render(dt);
     ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {0, 1}, {1, 0}); // FIXME
 
+    ImGui::Text("POS: (%f,%f,%f) DIR: (%f,%f,%f)", camera.view.translate().x, camera.view.translate().y, camera.view.translate().z,
+                camera.view.forword().x, camera.view.forword().y, camera.view.forword().z);
+
     if(ImGui::IsWindowHovered())
     {
         hovered = true;
@@ -74,7 +77,7 @@ void Viewport::attach()
             fov -= yOffset;
         fov = std::max(1.f, fov);
         fov = std::min(60.f, fov);
-        camera.setPerspective(radians(fov), viewportSize.x / viewportSize.y, 0.1, 1000.f);
+        camera.setPerspective(radians(fov), viewportSize.x / viewportSize.y, 0.03, 10000.f);
     };
 #endif
 
@@ -143,15 +146,13 @@ void Viewport::render(Time dt)
                                   Renderer::get()->submit(e);
                               });
     framebuffer->unbind();
-
-    ImGui::Text("%f, %f, %f", camera.view.translate().x, camera.view.translate().y, camera.view.translate().z);
 }
 
 void Viewport::onResize(float x, float y)
 {
     // TODO: resize framebuffer
 #if 1
-    camera.setPerspective(radians(60), x / y, 0.1f, 1000.f);
+    camera.setPerspective(radians(60), x / y, 0.03f, 10000.f);
 #else
     camera.setOrthographic(size.x / 20, size.y / 20, -100.f, 100.f);
 #endif
@@ -159,8 +160,11 @@ void Viewport::onResize(float x, float y)
 
 void Viewport::updateLight(Time dt)
 {
+    static Mat4 mat;
+    mat.rotateY(radians(60) * dt.seconds());
+
     DirectionLight dirLights[1];
-    dirLights[0].setDirection({1, -1, -1});
+    dirLights[0].setDirection(mat.forword());
     for(int i = 0; i < 1; i++)
     {
         Vector3 ambient, diffuse, specular;

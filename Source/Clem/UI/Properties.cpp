@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Properties.h"
@@ -40,7 +40,7 @@ void Properties::update(Time dt)
         showSprite();
         showScript();
 
-        // ¿Õ°×ÇøÓòÓÒ¼ü²Ëµ¥
+        // ç©ºç™½åŒºåŸŸå³é”®èœå•
         if(ImGui::BeginPopupContextWindow(0, 1, false))
         {
             if(ImGui::BeginMenu("Physics"))
@@ -158,7 +158,7 @@ void Properties::showMesh()
                 {
                     fs::path path((const wchar_t*)payload->Data);
 
-                    // TODO: Ìí¼Ó×é¼şÒÑ´æÔÚÌáÊ¾, UI Ê¹ÓÃÌáÊ¾¶ø²»ÊÇ¶ÏÑÔ
+                    // TODO: æ·»åŠ ç»„ä»¶å·²å­˜åœ¨æç¤º, UI ä½¿ç”¨æç¤ºè€Œä¸æ˜¯æ–­è¨€
                     if(path.extension() == L".obj")
                         entity.get<Mesh>().load(Browser::assets / path);
                     else

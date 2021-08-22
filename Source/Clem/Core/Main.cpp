@@ -266,6 +266,8 @@ void Main::init()
     // 初始化渲染器
     Renderer::get()->init();
 
+    window->update(Time::milliseconds(0));
+
     // 初始化 ECS, 添加默认系统
     registry.addSystem(new PhysicsSystem());
     registry.addSystem(new ScriptSystem());

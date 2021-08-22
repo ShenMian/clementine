@@ -113,8 +113,6 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
         dataFormat     = GL_RED;
     }
 
-    glTexStorage2D(glType, 1, internalFormat, size.x, size.y);
-
     // 设置纹理过滤方式
     setMinFilter(Filter::Nearest);
     setMagFilter(Filter::Bilinear);
@@ -123,8 +121,12 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
     glTexParameteri(glType, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(glType, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    glTexSubImage2D(glType, 0, 0, 0, size.x, size.y, dataFormat, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, size.x, size.y, 0, dataFormat, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
 
+    /*glTexStorage2D(glType, 1, internalFormat, size.x, size.y);
+    glTexSubImage2D(glType, 0, 0, 0, size.x, size.y, dataFormat, GL_UNSIGNED_BYTE, data);*/
+    
     Assert::isTrue(glGetError() == GL_NO_ERROR);
 
     stbi_image_free(data);

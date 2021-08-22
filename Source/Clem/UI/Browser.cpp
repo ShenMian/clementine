@@ -39,7 +39,8 @@ void Browser::update(Time dt)
     ImGui::Text("%s", current.string().c_str());
 
     std::shared_ptr<Texture2D> icon;
-    ImGui::Columns((int)(ImGui::GetContentRegionAvailWidth() / 70));
+    auto columnsNum = std::max((int)(ImGui::GetContentRegionAvailWidth() / 70), 1);
+    ImGui::Columns();
     for(const auto& entry : fs::directory_iterator(current))
     {
         auto filename = entry.path().filename().string();
