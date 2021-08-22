@@ -58,7 +58,7 @@ void Viewport::update(Time dt)
 
 void Viewport::attach()
 {
-    skyboxShader   = Shader::create("../assets/shaders/skybox.vert", "../assets/shaders/skybox.frag");
+    skyboxShader   = Shader::create("../assets/shaders/skybox_sphere.vert", "../assets/shaders/skybox_sphere.frag");
     standardShader = Shader::create("../assets/shaders/standard.vert", "../assets/shaders/standard.frag");
 
     auto win = Main::getWindow();
@@ -160,7 +160,7 @@ void Viewport::onResize(float x, float y)
 void Viewport::updateLight(Time dt)
 {
     DirectionLight dirLights[1];
-    dirLights[0].setDirection({1, 1, -1});
+    dirLights[0].setDirection({1, -1, -1});
     for(int i = 0; i < 1; i++)
     {
         Vector3 ambient, diffuse, specular;
@@ -212,7 +212,7 @@ void Viewport::updateCameraControl(Time dt)
     if(!ImGui::IsWindowHovered())
         return;
 
-    float speed = 20 * dt.seconds();
+    float speed = 50 * dt.seconds();
 
     if(isKeyPressed(GLFW_KEY_LEFT_SHIFT))
         speed *= 3;

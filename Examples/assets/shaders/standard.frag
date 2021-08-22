@@ -78,7 +78,7 @@ vec4 CalcLighting();
 void main()
 {
     frag_color = vec4(1.0, 1.0, 1.0, 1.0) * CalcLighting();
-    // frag_color = texture(u_texture, vec2(1.0 - v_uv.x, v_uv.y)) * lighting();
+    // frag_color = texture(u_texture, vec2(1.0 - v_uv.x, v_uv.y)) * CalcLighting();
 
     // 提取亮色
     float brightness = dot(frag_color.rgb, vec3(0.2126, 0.7152, 0.0722));
