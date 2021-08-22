@@ -5,7 +5,6 @@
 #include "Assert.hpp"
 #include "Logging/Logging.h"
 #include "Profiler.h"
-#include "Rendering/Rendering.h"
 #include "UI/Browser.h"
 
 #define TINYOBJLOADER_IMPLEMENTATION
@@ -30,8 +29,8 @@ void Mesh::load(const fs::path& path)
 
     this->path = fs::relative(path, ui::Browser::assets);
 
-    std::vector<Vertex>       vertices;
-    std::vector<unsigned int> indices;
+    std::vector<vertex_type> vertices;
+    std::vector<index_type>  indices;
 
     loadFromFile(path, vertices, indices);
 
@@ -59,8 +58,10 @@ void Mesh::addTexture(std::shared_ptr<Texture2D> texture)
 
 std::shared_ptr<Texture2D> Mesh::getTexture(Texture2D::Type type) const
 {
-    Assert::isTrue(textures.contains(type));
-    return textures.at(type);
+    if(textures.contains(type))
+        return textures.at(type);
+    else
+        return nullptr;
 }
 
 void Mesh::bind()
@@ -68,7 +69,7 @@ void Mesh::bind()
     vertexArray->bind();
 }
 
-void Mesh::loadFromFile(const std::filesystem::path& path, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices)
+void Mesh::loadFromFile(const std::filesystem::path& path, std::vector<vertex_type>& vertices, std::vector<index_type>& indices)
 {
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", fs::absolute(path).string()));
 
@@ -86,7 +87,7 @@ void Mesh::loadFromFile(const std::filesystem::path& path, std::vector<Vertex>& 
     auto& shapes    = reader.GetShapes();
     auto& materials = reader.GetMaterials();
 
-    std::unordered_map<Vertex, unsigned int> uniqueVertices;
+    std::unordered_map<Vertex, IndexBuffer::value_type> uniqueVertices;
     for(const auto& shape : shapes)
     {
         for(const auto& index : shape.mesh.indices)
@@ -94,40 +95,46 @@ void Mesh::loadFromFile(const std::filesystem::path& path, std::vector<Vertex>& 
             Vertex vertex;
 
             vertex.position = {
-                attrib.vertices[3 * index.vertex_index + 0],
-                attrib.vertices[3 * index.vertex_index + 1],
-                attrib.vertices[3 * index.vertex_index + 2]};
+                attrib.vertices[3 * (size_t)index.vertex_index + 0],
+                attrib.vertices[3 * (size_t)index.vertex_index + 1],
+                attrib.vertices[3 * (size_t)index.vertex_index + 2]};
 
             auto colorIndex = 3 * index.vertex_index + 2;
             if(colorIndex < attrib.colors.size())
                 vertex.color = {
-                    attrib.colors[colorIndex - 2],
-                    attrib.colors[colorIndex - 1],
-                    attrib.colors[colorIndex - 0]};
+                    attrib.colors[(size_t)colorIndex - 2],
+                    attrib.colors[(size_t)colorIndex - 1],
+                    attrib.colors[(size_t)colorIndex - 0]};
 
             if(index.normal_index >= 0)
                 vertex.normal = {
-                    attrib.normals[3 * index.normal_index + 0],
-                    attrib.normals[3 * index.normal_index + 1],
-                    attrib.normals[3 * index.normal_index + 2]};
+                    attrib.normals[3 * (size_t)index.normal_index + 0],
+                    attrib.normals[3 * (size_t)index.normal_index + 1],
+                    attrib.normals[3 * (size_t)index.normal_index + 2]};
 
             if(index.texcoord_index >= 0)
                 vertex.uv = {
-                    attrib.texcoords[2 * index.texcoord_index + 0],
-                    attrib.texcoords[2 * index.texcoord_index + 1]};
+                    attrib.texcoords[2 * (size_t)index.texcoord_index + 0],
+                    attrib.texcoords[2 * (size_t)index.texcoord_index + 1]};
 
-#if 0
-            // 顶点去重. 可减少内存占用, 但大大降低读取速度. 性能警告.
-            if(!uniqueVertices.contains(vertex))
+            constexpr bool compress = false;
+            if constexpr (compress)
             {
-                uniqueVertices[vertex] = static_cast<uint32_t>(vertices.size());
+                // 焊接顶点, 性能警告
+                if(!uniqueVertices.contains(vertex))
+                {
+                    if(uniqueVertices.size() >= 1000)
+                        uniqueVertices.clear();
+                    uniqueVertices[vertex] = static_cast<index_type>(vertices.size());
+                    vertices.push_back(vertex);
+                }
+                indices.push_back(uniqueVertices[vertex]);
+            }
+            else
+            {
+                indices.push_back(static_cast<index_type>(vertices.size()));
                 vertices.push_back(vertex);
             }
-            indices.push_back(uniqueVertices[vertex]);
-#else
-            indices.push_back(vertices.size());
-            vertices.push_back(vertex);
-#endif
         }
     }
 }

@@ -29,9 +29,9 @@ void Camera::setDirection(const Vector3& pos, const Vector3& dir, const Vector3&
     view.m[3][2] = -w.dot(pos);
 }
 
-void Camera::lookAt(const Vector3& pos, const Vector3& up)
+void Camera::lookAt(const Vector3& pos, const Vector3& target, const Vector3& up)
 {
-    setDirection(view.translation(), pos - view.translation(), up);
+    setDirection(pos, target - pos, up);
 }
 
 void Camera::setPerspective(float yFOV, float aspectRatio, float n, float f)

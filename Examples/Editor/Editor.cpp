@@ -28,31 +28,40 @@ public:
 
         Main::getWindow()->setIcon("../assets/textures/icons/game_controller.png");
 
-        skyboxTexture = Texture2D::create();
+#if 0
+        auto skyboxTexture = Texture2D::create();
         skyboxTexture->loadCubemap(
             {
-                "../assets/textures/skybox/right.jpg",
-                "../assets/textures/skybox/left.jpg",
-                "../assets/textures/skybox/top.jpg",
-                "../assets/textures/skybox/bottom.jpg",
-                "../assets/textures/skybox/front.jpg",
-                "../assets/textures/skybox/back.jpg"
+                "../assets/textures/skybox/cube/right.jpg",
+                "../assets/textures/skybox/cube/left.jpg",
+                "../assets/textures/skybox/cube/top.jpg",
+                "../assets/textures/skybox/cube/bottom.jpg",
+                "../assets/textures/skybox/cube/front.jpg",
+                "../assets/textures/skybox/cube/back.jpg"
             });
 
         // 必须是第一个被渲染的物体且关闭深度测试
+        // FIXME: 天空盒存在BUG, 会覆盖较大场景中的其他物体
         auto skybox = Main::registry.create("skybox");
-        skybox.add<Material>();
         skybox.add<Mesh>("../assets/models/cube.obj").addTexture(skyboxTexture);
+        skybox.add<Material>();
+#else
+        // auto skyboxTexture = Texture2D::create("../assets/textures/skybox/sphere.jpg");
+        auto skyboxTexture = Texture2D::create("../assets/textures/wall.jpg");
+        auto skybox        = Main::registry.create("skybox_");
+        skybox.add<Mesh>("../assets/models/cube.obj").addTexture(skyboxTexture);
+        skybox.add<Material>();
+
+        skybox.add<Transform>();
+#endif
 
         auto model = Main::registry.create("model");
         model.add<Transform>();
         model.add<Material>();
-        // model.add<Mesh>("../assets/models/weapon/m4a1.obj");
-        model.add<Mesh>("../../../3DModel/scene/San_Miguel/san-miguel-low-poly.obj");
+        model.add<Mesh>("../assets/models/weapon/m4a1.obj");
+        // model.add<Mesh>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Exterior/exterior.obj");
+        // model.add<Mesh>("../../../3DModel/scene/San_Miguel/san-miguel-low-poly.obj");
     }
-
-private:
-    std::shared_ptr<Texture2D> skyboxTexture;
 };
 
 Application* clem::CreateApplication()

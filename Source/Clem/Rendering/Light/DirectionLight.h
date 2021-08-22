@@ -17,7 +17,7 @@ public:
      * @param dir 光照方向.
      * @param color 光源颜色.
      */
-    DirectionLight(const Vector3& dir, const Vector3& color = Vector3::unit);
+    DirectionLight(const Vector3& dir = Vector3::zero, const Vector3& color = Vector3::unit);
 
     /**
      * @brief 设置光照方向.

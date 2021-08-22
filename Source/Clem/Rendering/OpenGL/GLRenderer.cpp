@@ -30,27 +30,33 @@ void GLRenderer::endFrame()
 
 void GLRenderer::submit(const Entity& entity)
 {
-    auto& mesh      = entity.get<Mesh>();
-    auto& material  = entity.get<Material>();
+    auto& mesh     = entity.get<Mesh>();
+    auto& material = entity.get<Material>();
 
     auto shader = material.shader;
 
     mesh.bind();
-    shader->bind();
 
     if(entity.get<Tag>().str == "skybox")
     {
         mesh.getTexture(Texture2D::Type::Default)->bindUnit(0);
+
+        shader->bind();
         shader->uploadUniform("u_skybox", 0);
 
-        glDepthMask(false);
+        glDepthFunc(GL_LEQUAL);
         glDrawElements(GL_TRIANGLES, (GLsizei)mesh.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
-        glDepthMask(true);
+        glDepthFunc(GL_LESS);
     }
     else
     {
         auto& transform = entity.get<Transform>();
 
+        auto texture = mesh.getTexture(Texture2D::Type::Default);
+        if(texture)
+            texture->bindUnit(0);
+
+        shader->bind();
         shader->uploadUniform("u_model", transform.getModelMatrix());
 
         shader->uploadUniform("u_material.ambient", material.ambient);

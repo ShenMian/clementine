@@ -3,15 +3,6 @@
 
 #version 450
 
-struct Light
-{
-    vec3 position;
-
-    vec3 ambient;
-    vec3 diffuse;
-    vec3 specular;
-};
-
 struct DirectionLight
 {
     vec3 direction;
@@ -36,7 +27,15 @@ struct PointLight
 
 struct SpotLight
 {
+    vec3 position;
     vec3 direction;
+
+    float cutOff;
+    float outerCutOff;
+  
+    float constant;
+    float linear;
+    float quadratic;
 
     vec3 ambient;
     vec3 diffuse;
@@ -59,19 +58,26 @@ in vec3 v_position;
 in vec3 v_color;
 in vec3 v_normal;
 in vec2 v_uv;
+in vec3 v_u_cam_position;
 
-in vec3 v_cam_position;
+#define DIRECTION_LIGHT_MAX 1
+#define POINT_LIGHT_MAX     1
 
-uniform Light     u_light;
+uniform DirectionLight u_direction_lights[DIRECTION_LIGHT_MAX];
+uniform PointLight     u_point_lights[POINT_LIGHT_MAX];
+
 uniform Material  u_material;
 uniform sampler2D u_texture;
+uniform vec3      u_cam_pos;
 uniform int       u_entity_id;
 
 vec4 lighting();
 
+vec4 CalcLighting();
+
 void main()
 {
-    frag_color = vec4(1.0, 1.0, 1.0, 1.0) * lighting();
+    frag_color = vec4(1.0, 1.0, 1.0, 1.0) * CalcLighting();
     // frag_color = texture(u_texture, vec2(1.0 - v_uv.x, v_uv.y)) * lighting();
 
     // 提取亮色
@@ -83,27 +89,32 @@ void main()
 }
 
 // 计算平行光照
-vec3 CalcDirLight(DirectionLight light, vec3 normal, vec3 dir_to_cam)
+vec3 CalcDirLight(DirectionLight light)
 {
-    vec3 dir_to_light = normalize(-light.direction);
+    const vec3 dir_to_cam   = normalize(u_cam_pos - v_position);
+    const vec3 dir_to_light = normalize(-light.direction);
+
+    const float ka = 1.0;
+    const float kd = 1.0;
+    const float ks = 1.0;
 
     // 环境光照
-    vec3 ambient = light.ambient * u_material.ambient;
+    vec3 ambient = ka * light.ambient * u_material.ambient;
 
     // 漫反射光照
     float diffuse_amount = max(0.0, dot(dir_to_light, v_normal));
-    vec3  diffuse        = light.diffuse * (diffuse_amount * u_material.diffuse);
+    vec3  diffuse        = kd * light.diffuse * diffuse_amount * u_material.diffuse;
 
     // 镜面反射光照
     vec3  reflected_direction = reflect(dir_to_light, v_normal);
     float specular_amount     = pow(max(0.0, dot(reflected_direction, dir_to_cam)), u_material.shininess);
-    vec3  specular            = light.specular * (specular_amount * u_material.specular);
+    vec3  specular            = ks * light.specular * specular_amount * u_material.specular;
 
     return ambient + diffuse + specular;
 }
 
 // 计算点光源光照
-vec3 CalcPointLight(PointLight light, vec3 normal, vec3 dir_to_cam)
+vec3 CalcPointLight(PointLight light)
 {
     vec3 dir_to_light = normalize(light.position - v_position);
 
@@ -111,41 +122,18 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 dir_to_cam)
     float distance    = length(light.position - v_position);
     float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
 
-    return CalcDirLight(DirectionLight(-dir_to_light, light.ambient, light.diffuse, light.specular), normal, dir_to_cam) * attenuation;
+    return CalcDirLight(DirectionLight(-dir_to_light, light.ambient, light.diffuse, light.specular)) * attenuation;
 }
 
 // 计算总光照
 vec4 CalcLighting()
 {
     vec3 light;
+    for(int i = 0; i < DIRECTION_LIGHT_MAX; ++i)
+        light += CalcDirLight(u_direction_lights[i]);
+    // for(int i = 0; i < POINT_LIGHT_MAX; ++i)
+        // light += CalcPointLight(u_point_lights[i]);
     return vec4(light, 1.0);
-}
-
-vec4 lighting()
-{
-    vec3 direction_to_light = normalize(u_light.position - v_position);
-    vec3 direction_to_cam   = normalize(v_position - v_cam_position);
-
-    // 环境光照
-    const vec3 ka            = u_material.ambient;
-    const vec3 ia            = u_light.ambient;
-    vec3       ambient_light = ka * ia;
-
-    // 漫反射光照
-    const vec3 kd                  = u_material.diffuse;
-    const vec3 id                  = u_light.diffuse;
-    float      amont_diffuse_light = max(0.0, dot(direction_to_light, v_normal));
-    vec3       diffuse_light       = kd * amont_diffuse_light * id;
-
-    // 镜面反射光照
-    const vec3 ks                    = u_material.specular;
-    const vec3 is                    = u_light.specular;
-    vec3       reflected_light       = reflect(direction_to_light, v_normal);
-    float      shininess             = u_material.shininess;
-    float      amount_specular_light = pow(max(0.0, dot(reflected_light, direction_to_cam)), shininess);
-    vec3       specular_light        = ks * amount_specular_light * is;
-
-    return vec4(ambient_light + diffuse_light + specular_light, 1.0);
 }
 
 /*

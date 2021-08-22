@@ -13,6 +13,10 @@
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 
+#include "Light/Light.h"
+#include "Light/DirectionLight.h"
+#include "Light/PointLight.h"
+
 #include "Console/CharMap.h"
 #include "Console/Color.h"
 #include "Console/Cursor.h"

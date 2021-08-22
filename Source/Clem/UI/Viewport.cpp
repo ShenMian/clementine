@@ -17,22 +17,30 @@ void Viewport::update(Time dt)
 {
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{0, 0});
     ImGui::Begin("Viewport", &visible);
-    ImVec2 viewport = {ImGui::GetWindowPos().x - ImGui::GetCursorPos().x, ImGui::GetWindowPos().y - ImGui::GetCursorPos().y};
+    ImVec2 viewportPos = {ImGui::GetWindowPos().x - ImGui::GetCursorPos().x, ImGui::GetWindowPos().y - ImGui::GetCursorPos().y};
     ImGui::PopStyleVar();
+
+    static Vector2 lastViewportSize;
+    viewportSize = {ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y};
+    if(viewportSize != lastViewportSize)
+    {
+        onResize(viewportSize.x, viewportSize.y);
+        lastViewportSize = viewportSize;
+    }
 
     framebuffer->clearColorAttachment(2, -1);
 
     render(dt);
-    ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), ImGui::GetContentRegionAvail(), {0, 1}, {1, 0}); // FIXME
+    ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {0, 1}, {1, 0}); // FIXME
 
     if(ImGui::IsWindowHovered())
     {
-        activated = true;
+        hovered = true;
 
         // 选取实体
         if(ImGui::IsMouseClicked(ImGuiMouseButton_Left))
         {
-            ImVec2 mouse = {ImGui::GetMousePos().x - viewport.x, ImGui::GetMousePos().y - viewport.y};
+            ImVec2 mouse = {ImGui::GetMousePos().x - viewportPos.x, ImGui::GetMousePos().y - viewportPos.y};
 
             int id;
             framebuffer->read(2, {0, 0}, id);
@@ -43,10 +51,7 @@ void Viewport::update(Time dt)
         locked = ImGui::IsMouseDown(ImGuiMouseButton_Right);
     }
     else
-    {
-        activated = false;
-        move      = Vector3::zero;
-    }
+        hovered = false;
 
     ImGui::End();
 }
@@ -57,6 +62,21 @@ void Viewport::attach()
     standardShader = Shader::create("../assets/shaders/standard.vert", "../assets/shaders/standard.frag");
 
     auto win = Main::getWindow();
+
+#if 1
+    win->onScroll = [this](double xOfffset, double yOffset)
+    {
+        if(!hovered)
+            return;
+
+        static float fov = 60;
+        if(1.f <= fov && fov <= 60.f)
+            fov -= yOffset;
+        fov = std::max(1.f, fov);
+        fov = std::min(60.f, fov);
+        camera.setPerspective(radians(fov), viewportSize.x / viewportSize.y, 0.1, 1000.f);
+    };
+#endif
 
     win->onMouseMove = [this](double x, double y)
     {
@@ -70,119 +90,49 @@ void Viewport::attach()
             return;
         }
 
-        camera.view.rotateY(speed.x * radians(x - last.x));
-        camera.view.rotateX(speed.y * radians(last.y - y));
-        last = Vector2(x, y);
-    };
+        auto xOffset = x - last.x;
+        auto yOffset = last.y - y;
+        last         = Vector2(x, y);
 
-    win->onKey = [&](int action, int key)
-    {
-        if(!activated)
-            return;
+        float sensitivity = 0.05;
+        xOffset *= sensitivity;
+        yOffset *= sensitivity;
 
-        const float speed = 0.1f;
-        switch(action)
-        {
-        case GLFW_PRESS:
-            switch(key)
-            {
-            case GLFW_KEY_ESCAPE:
-                locked = false;
-                break;
+        static float yaw = 90.0f, pitch = 0;
+        yaw -= xOffset;
+        pitch += yOffset;
 
-            case GLFW_KEY_W:
-                move = -Vector3::unit_z * speed;
-                // move = win->camera.view.forword().normalize() * 0.1;
-                break;
+        pitch = std::max(-89.f, pitch);
+        pitch = std::min(89.f, pitch);
 
-            case GLFW_KEY_S:
-                move = Vector3::unit_z * speed;
-                // move = win->camera.view.back().normalize() * 0.1;
-                break;
+        Vector3 front;
+        front.x = std::cos(radians(yaw)) * std::cos(radians(pitch));
+        front.y = std::sin(radians(pitch));
+        front.z = std::sin(radians(yaw)) * std::cos(radians(pitch));
+        front.normalize();
 
-            case GLFW_KEY_A:
-                move = Vector3::unit_x * speed;
-                // move = win->camera.view.left().normalize() * 0.1;
-                break;
+        // camera.setDirection(camera.view.translate(), front);
+        // camera.lookAt(camera.view.translate(), camera.view.translate() + front);
 
-            case GLFW_KEY_D:
-                move = -Vector3::unit_x * speed;
-                // move = win->camera.view.right().normalize() * 0.1;
-                break;
-
-            case GLFW_KEY_LEFT_SHIFT:
-                move = Vector3::unit_y * speed;
-                // move = -win->camera.view.up().normalize() * 0.1;
-                break;
-
-            case GLFW_KEY_SPACE:
-                move = -Vector3::unit_y * speed;
-                // move = -win->camera.view.down().normalize() * 0.1;
-                break;
-            }
-            break;
-
-        case GLFW_RELEASE:
-            move = Vector3::zero;
-            break;
-
-        case GLFW_REPEAT:
-            break;
-        }
-    };
-
-    win->onScroll = [this](double xOfffset, double yOffset)
-    {
-        if(!activated)
-            return;
-
-        camera.view.scale(Vector3(1 + 0.1f * (float)yOffset, 1 + 0.1f * (float)yOffset, 1 + 0.1f * (float)yOffset));
-    };
-
-    win->onResize = [this](Size2 size)
-    {
-        onResize();
+        // FIXME: 不是这样计算的
+        // camera.view.rotateY(speed.x * radians(xOffset));
+        // camera.view.rotateX(speed.y * radians(yOffset));
     };
 
     texture = Texture2D::create("../assets/textures/wall.jpg");
 
-#if 1
-    camera.setDirection({0, 0, 20}, {0, 0, -1}, -Vector3::unit_y);
-#else
-    camera.setDirection({0, 0, 20}, {0, 0, 1}, -Vector3::unit_y);
-#endif
-
-    light.translate({0, 1, 20});
+    camera.setDirection({0, 0, -30}, {0, 0, 1});
+    camera.view.scale({2.1, 2.1, 2.1});
 }
 
 void Viewport::render(Time dt)
 {
-    onResize();
-
-    camera.view.translate(move);
-
-    // 纹理
-    // texture->bind();
-    // standardShader->uploadUniform("u_texture", 0);
-
-    // 光照
-    light.rotateY(radians(60) * dt.seconds());
-    standardShader->uploadUniform("u_light.position", light.translation());
-    standardShader->uploadUniform("u_light.ambient", Vector3::unit * 1.0);
-    standardShader->uploadUniform("u_light.diffuse", Vector3::unit * 1.0);
-    standardShader->uploadUniform("u_light.specular", Vector3::unit * 1.0);
-
-    skyboxShader->uploadUniform("u_view", camera.getViewMatrix());
-    skyboxShader->uploadUniform("u_projection", camera.getProjectionMatrix());
-    skyboxShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
-
-    standardShader->uploadUniform("u_view", camera.getViewMatrix());
-    standardShader->uploadUniform("u_projection", camera.getProjectionMatrix());
-    standardShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
+    updateLight(dt);
+    updateCamera(dt);
 
     framebuffer->bind();
     glClearColor(.117f, .564f, 1.f, 1.f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT /* | GL_STENCIL_BUFFER_BIT*/);
     Main::registry.each<Mesh>([&](const Entity& e)
                               {
                                   if(e.get<Tag>().str == "skybox")
@@ -193,16 +143,101 @@ void Viewport::render(Time dt)
                                   Renderer::get()->submit(e);
                               });
     framebuffer->unbind();
+
+    ImGui::Text("%f, %f, %f", camera.view.translate().x, camera.view.translate().y, camera.view.translate().z);
 }
 
-void Viewport::onResize()
+void Viewport::onResize(float x, float y)
 {
-    Size2 size = {ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y};
+    // TODO: resize framebuffer
 #if 1
-    camera.setPerspective(radians(60), size.x / size.y, 0.1f, 100.f);
+    camera.setPerspective(radians(60), x / y, 0.1f, 1000.f);
 #else
     camera.setOrthographic(size.x / 20, size.y / 20, -100.f, 100.f);
 #endif
+}
+
+void Viewport::updateLight(Time dt)
+{
+    DirectionLight dirLights[1];
+    dirLights[0].setDirection({1, 1, -1});
+    for(int i = 0; i < 1; i++)
+    {
+        Vector3 ambient, diffuse, specular;
+        dirLights[i].getColor(&ambient, &diffuse, &specular);
+        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].direction", dirLights[i].getDirection());
+        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].ambient", ambient);
+        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].diffuse", diffuse);
+        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].specular", specular);
+    }
+
+    /*
+    PointLight pointLights[1];
+    for(int i = 0; i < 1; i++)
+    {
+        Vector3 ambient, diffuse, specular;
+        pointLights[i].getColor(&ambient, &diffuse, &specular);
+        standardShader->uploadUniform("u_point_lights[" + std::to_string(i) + "].position", pointLights[i].getPosition());
+
+        standardShader->uploadUniform("u_point_lights[" + std::to_string(i) + "].ambient", ambient);
+        standardShader->uploadUniform("u_point_lights[" + std::to_string(i) + "].diffuse", diffuse);
+        standardShader->uploadUniform("u_point_lights[" + std::to_string(i) + "].specular", specular);
+    }
+    */
+}
+
+void Viewport::updateCamera(Time dt)
+{
+    updateCameraControl(dt);
+
+    skyboxShader->uploadUniform("u_view", camera.getViewMatrix());
+    skyboxShader->uploadUniform("u_projection", camera.getProjectionMatrix());
+    skyboxShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
+
+    standardShader->uploadUniform("u_view", camera.getViewMatrix());
+    standardShader->uploadUniform("u_projection", camera.getProjectionMatrix());
+    standardShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
+
+    standardShader->uploadUniform("u_cam_pos", camera.view.translate());
+}
+
+bool isKeyPressed(int key)
+{
+    auto win = Main::getWindow();
+    return glfwGetKey((GLFWwindow*)win->nativeHandle(), key) == GLFW_PRESS;
+}
+
+void Viewport::updateCameraControl(Time dt)
+{
+    if(!ImGui::IsWindowHovered())
+        return;
+
+    float speed = 20 * dt.seconds();
+
+    if(isKeyPressed(GLFW_KEY_LEFT_SHIFT))
+        speed *= 3;
+
+    if(isKeyPressed(GLFW_KEY_W))
+        camera.view.translate(-Vector3::unit_z * speed);
+    if(isKeyPressed(GLFW_KEY_S))
+        camera.view.translate(Vector3::unit_z * speed);
+    if(isKeyPressed(GLFW_KEY_A))
+        camera.view.translate(Vector3::unit_x * speed);
+    if(isKeyPressed(GLFW_KEY_D))
+        camera.view.translate(-Vector3::unit_x * speed);
+    if(isKeyPressed(GLFW_KEY_Q))
+        camera.view.translate(Vector3::unit_y * speed);
+    if(isKeyPressed(GLFW_KEY_E))
+        camera.view.translate(-Vector3::unit_y * speed);
+
+    if(isKeyPressed(GLFW_KEY_LEFT))
+        camera.view.rotateY(radians(-0.5));
+    else if(isKeyPressed(GLFW_KEY_RIGHT))
+        camera.view.rotateY(radians(0.5));
+    else if(isKeyPressed(GLFW_KEY_UP))
+        camera.view.rotateX(radians(0.5));
+    else if(isKeyPressed(GLFW_KEY_DOWN))
+        camera.view.rotateX(radians(-0.5));
 }
 
 } // namespace clem::ui

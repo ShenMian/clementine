@@ -13,5 +13,6 @@ out vec3 v_uvw;
 void main()
 {
   v_uvw = a_position;
-  gl_Position = u_projection * mat4(mat3(u_view)) * vec4(a_position, 1.0);
+  vec4 pos = u_projection * mat4(mat3(u_view)) * vec4(a_position, 1.0);
+  gl_Position = pos.xyww;
 }

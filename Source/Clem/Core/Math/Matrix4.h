@@ -30,10 +30,6 @@ public:
     Matrix4(std::initializer_list<float> list);
     Matrix4(const float* m);
 
-    Vector3 translation() const;
-    Vector3 rotation() const;
-    Vector3 scale() const;
-
     void translate(const Vector3& vec);
     void rotate(float angle, const Vector3& axis);
     void scale(const Vector3& vec);
@@ -41,12 +37,11 @@ public:
     void rotateY(float angle);
     void rotateZ(float angle);
 
+    Vector3 translate() const;
+    Vector3 rotate() const;
+    Vector3 scale() const;
+
     Matrix4& setTranslation(const Vector3& vec);
-    Matrix4& setRotation(float angle, const Vector3& axis);
-    Matrix4& setScale(const Vector3& vec);
-    Matrix4& setRotationX(float angle);
-    Matrix4& setRotationY(float angle);
-    Matrix4& setRotationZ(float angle);
 
     /**
      * @brief 计算行列式的值.
@@ -86,6 +81,13 @@ public:
     Vector3 forword() const;
     Vector3 back() const;
 
+    static Matrix4 createTranslation(const Vector3& pos);
+    static Matrix4 createRotation(float angle, const Vector3& axis);
+    static Matrix4 createScale(const Vector3& scale);
+    static Matrix4 createRotationX(float angle);
+    static Matrix4 createRotationY(float angle);
+    static Matrix4 createRotationZ(float angle);
+
     /**
      * @brief 创建截头锥体观察体, 用于透视投影.
      *
@@ -118,6 +120,9 @@ public:
      */
     static Matrix4 createOrthographicOffCenter(float left, float right, float bottom, float top,
                                                float nearPlane, float farPlane);
+
+    float*       operator[](size_t row);
+    const float* operator[](size_t row) const;
 
     Matrix4  operator-() const;
     Matrix4& operator=(const Matrix4&);

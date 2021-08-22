@@ -56,26 +56,12 @@ void Matrix4::translate(const Vector3& vec)
 
 void Matrix4::rotate(float angle, const Vector3& axis)
 {
-    Matrix4 mat;
-    mat.setRotation(angle, axis);
-    *this *= mat;
-
-    /*
-    if(axis == Vector3::unit_x)
-        rotateX(angle);
-    else if(axis == Vector3::unit_y)
-        rotateY(angle);
-    else if(axis == Vector3::unit_z)
-        rotateZ(angle);
-    else
-        Assert::isTrue(false, "unknown axis");
-    */
+    *this *= createRotation(angle, axis);
 }
 
 void Matrix4::scale(const Vector3& vec)
 {
-    Matrix4 mat;
-    *this *= mat.setScale(vec);
+    *this *= createScale(vec);
 }
 
 const float* Matrix4::data() const
@@ -111,6 +97,163 @@ Vector3 Matrix4::forword() const
 Vector3 Matrix4::back() const
 {
     return -forword();
+}
+
+Vector3 Matrix4::translate() const
+{
+    return {m[3][0], m[3][1], m[3][2]};
+}
+
+Vector3 Matrix4::rotate() const
+{
+    return {}; // FIXME
+}
+
+Vector3 Matrix4::scale() const
+{
+    return {m[0][0], m[1][1], m[2][2]};
+}
+
+Matrix4& Matrix4::setTranslation(const Vector3& vec)
+{
+    m[3][0] = vec.x;
+    m[3][1] = vec.y;
+    m[3][2] = vec.z;
+    return *this;
+}
+
+Matrix4 Matrix4::createTranslation(const Vector3& pos)
+{
+    Matrix4 mat = Matrix4::identity;
+    mat[3][0]   = pos.x;
+    mat[3][1]   = pos.y;
+    mat[3][2]   = pos.z;
+    return mat;
+}
+
+Matrix4 Matrix4::createRotation(float angle, const Vector3& axis)
+{
+#if 1
+    const float c = std::cos(angle);
+    const float s = std::sin(angle);
+    const float t = 1.f - c;
+
+    Vector3     normal = axis.getNormalized();
+    const float x      = normal.x;
+    const float y      = normal.y;
+    const float z      = normal.z;
+
+    Matrix4 mat;
+    mat.m[0][0] = 1 + t * (x * x - 1);
+    mat.m[0][1] = z * s + t * x * y;
+    mat.m[0][2] = -y * s + t * x * z;
+    mat.m[0][3] = 0.0f;
+
+    mat.m[1][0] = -z * s + t * x * y;
+    mat.m[1][1] = 1 + t * (y * y - 1);
+    mat.m[1][2] = x * s + t * y * z;
+    mat.m[1][3] = 0.0f;
+
+    mat.m[2][0] = y * s + t * x * z;
+    mat.m[2][1] = -x * s + t * y * z;
+    mat.m[2][2] = 1 + t * (z * z - 1);
+    mat.m[2][3] = 0.0f;
+
+    mat.m[3][0] = 0.0f;
+    mat.m[3][1] = 0.0f;
+    mat.m[3][2] = 0.0f;
+    mat.m[3][3] = 1.0f;
+    return mat;
+#else
+    const auto  normal = axis.getNormalized();
+    const float x      = normal.x;
+    const float y      = normal.y;
+    const float z      = normal.z;
+
+    const float sin = std::sin(angle);
+    const float cos = std::cos(angle);
+
+    float t   = 1.0f - cos;
+    float tx  = t * x;
+    float ty  = t * y;
+    float tz  = t * z;
+    float txy = tx * y;
+    float txz = tx * z;
+    float tyz = ty * z;
+    float sx  = sin * x;
+    float sy  = sin * y;
+    float sz  = sin * z;
+
+    Matrix4 mat;
+    mat.m[0][0] = cos + tx * x;
+    mat.m[0][1] = txy + sz;
+    mat.m[0][2] = txz - sy;
+    mat.m[0][3] = 0.0f;
+
+    mat.m[1][0] = txy - sz;
+    mat.m[1][1] = cos + ty * y;
+    mat.m[1][2] = tyz + sx;
+    mat.m[1][3] = 0.0f;
+
+    mat.m[2][0] = txz + sy;
+    mat.m[2][1] = tyz - sx;
+    mat.m[2][2] = cos + tz * z;
+    mat.m[2][3] = 0.0f;
+
+    mat.m[3][0] = 0.0f;
+    mat.m[3][1] = 0.0f;
+    mat.m[3][2] = 0.0f;
+    mat.m[3][3] = 1.0f;
+    return mat;
+#endif
+}
+
+Matrix4 Matrix4::createScale(const Vector3& scale)
+{
+    Matrix4 mat = Matrix4::identity;
+    mat.m[0][0] = scale.x;
+    mat.m[1][1] = scale.y;
+    mat.m[2][2] = scale.z;
+    return mat;
+}
+
+Matrix4 Matrix4::createRotationX(float angle)
+{
+    const float sin = std::sin(angle);
+    const float cos = std::cos(angle);
+
+    Matrix4 mat = Matrix4::identity;
+    mat.m[1][1] = cos;
+    mat.m[1][2] = sin;
+    mat.m[2][1] = -sin;
+    mat.m[2][2] = cos;
+    return mat;
+}
+
+Matrix4 Matrix4::createRotationY(float angle)
+{
+    const float sin = std::sin(angle);
+    const float cos = std::cos(angle);
+
+    Matrix4 mat = Matrix4::identity;
+    mat.m[0][0] = cos;
+    mat.m[0][2] = sin;
+    mat.m[2][0] = -sin;
+    mat.m[2][2] = cos;
+    return mat;
+}
+
+Matrix4 Matrix4::createRotationZ(float angle)
+{
+    const float sin = std::sin(angle);
+    const float cos = std::cos(angle);
+
+    Matrix4 mat = Matrix4::identity;
+    mat.m[0][0] = cos;
+    mat.m[0][1] = sin;
+    mat.m[1][0] = -sin;
+    mat.m[1][1] = cos;
+    return mat;
 }
 
 Matrix4 Matrix4::createPerspective(float FOV, float aspectRatio, float n, float f)
@@ -176,118 +319,14 @@ Matrix4 Matrix4::createOrthographicOffCenter(float l, float r, float b, float t,
 #endif
 }
 
-Vector3 Matrix4::translation() const
+float* Matrix4::operator[](size_t row)
 {
-    return {m[3][0], m[3][1], m[3][2]};
+    return m[row];
 }
 
-Vector3 Matrix4::rotation() const
+const float* Matrix4::operator[](size_t row) const
 {
-    return {}; // FIXME
-}
-
-Vector3 Matrix4::scale() const
-{
-    return {m[0][0], m[1][1], m[2][2]};
-}
-
-Matrix4& Matrix4::setTranslation(const Vector3& vec)
-{
-    m[3][0] = vec.x;
-    m[3][1] = vec.y;
-    m[3][2] = vec.z;
-    return *this;
-}
-
-// FIXME: 会直接改变缩放
-Matrix4& Matrix4::setRotation(float angle, const Vector3& axis)
-{
-    const auto  normal = axis.getNormalized();
-    const float x      = normal.x;
-    const float y      = normal.y;
-    const float z      = normal.z;
-
-    const float sin = std::sin(angle);
-    const float cos = std::cos(angle);
-
-    float t   = 1.0f - cos;
-    float tx  = t * x;
-    float ty  = t * y;
-    float tz  = t * z;
-    float txy = tx * y;
-    float txz = tx * z;
-    float tyz = ty * z;
-    float sx  = sin * x;
-    float sy  = sin * y;
-    float sz  = sin * z;
-
-    Matrix4 mat;
-    mat.m[0][0] = cos + tx * x;
-    mat.m[0][1] = txy + sz;
-    mat.m[0][2] = txz - sy;
-    mat.m[1][0] = txy - sz;
-    mat.m[1][1] = cos + ty * y;
-    mat.m[1][2] = tyz + sx;
-    mat.m[2][0] = txz + sy;
-    mat.m[2][1] = tyz - sx;
-    mat.m[2][2] = cos + tz * z;
-    return *this *= mat;
-
-    /*
-    if(axis == Vector3::unit_x)
-        setRotationX(angle);
-    else if(axis == Vector3::unit_y)
-        setRotationY(angle);
-    else if(axis == Vector3::unit_z)
-        setRotationZ(angle);
-    else
-        Assert::isTrue(false, "unknown axis");
-    return *this;
-    */
-}
-
-Matrix4& Matrix4::setScale(const Vector3& vec)
-{
-    m[0][0] = vec.x;
-    m[1][1] = vec.y;
-    m[2][2] = vec.z;
-    return *this;
-}
-
-Matrix4& Matrix4::setRotationX(float angle)
-{
-    const float sin = std::sin(angle);
-    const float cos = std::cos(angle);
-
-    m[1][1] = cos;
-    m[1][2] = sin;
-    m[2][1] = -sin;
-    m[2][2] = cos;
-    return *this;
-}
-
-Matrix4& Matrix4::setRotationY(float angle)
-{
-    const float sin = std::sin(angle);
-    const float cos = std::cos(angle);
-
-    m[0][0] = cos;
-    m[0][2] = sin;
-    m[2][0] = -sin;
-    m[2][2] = cos;
-    return *this;
-}
-
-Matrix4& Matrix4::setRotationZ(float angle)
-{
-    const float sin = std::sin(angle);
-    const float cos = std::cos(angle);
-
-    m[0][0] = cos;
-    m[0][1] = sin;
-    m[1][0] = -sin;
-    m[1][1] = cos;
-    return *this;
+    return m[row];
 }
 
 float Matrix4::determinant() const
@@ -363,6 +402,7 @@ Matrix4 Matrix4::getInversed() const
 
 void Matrix4::transpose()
 {
+#if 1
     Matrix4 mat = {
         m[0][0],
         m[1][0],
@@ -383,6 +423,16 @@ void Matrix4::transpose()
         m[2][3],
         m[3][3],
         m[3][3]};
+#else
+    Matrix4 mat;
+    for(size_t i = 0; i < 4; i++)
+    {
+        for(size_t j = 0; j < 4; j++)
+        {
+            mat.m[j][i] = m[i][j];
+        }
+    }
+#endif
     *this = mat;
 }
 
@@ -395,20 +445,17 @@ Matrix4 Matrix4::getTransposed() const
 
 void Matrix4::rotateX(float angle)
 {
-    Matrix4 mat;
-    *this *= mat.setRotationX(angle);
+    *this *= createRotationX(angle);
 }
 
 void Matrix4::rotateY(float angle)
 {
-    Matrix4 mat;
-    *this *= mat.setRotationY(angle);
+    *this *= createRotationY(angle);
 }
 
 void Matrix4::rotateZ(float angle)
 {
-    Matrix4 mat;
-    *this *= mat.setRotationZ(angle);
+    *this *= createRotationZ(angle);
 }
 
 Matrix4 Matrix4::operator-() const

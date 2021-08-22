@@ -5,6 +5,8 @@
 
 #include "Core/Math/Math.h"
 #include "ECS/ECS.h"
+#include "Rendering/IndexBuffer.h"
+#include "Rendering/VertexBuffer.h"
 #include <filesystem>
 #include <unordered_map>
 
@@ -14,15 +16,16 @@ namespace clem
 {
 
 struct Vertex;
-class IndexBuffer;
 class VertexArray;
-class VertexBuffer;
 
 struct Mesh
 {
     CLEM_DECLARE_TYPE;
 
 public:
+    using index_type  = IndexBuffer::value_type;
+    using vertex_type = VertexBuffer::value_type;
+
     /**
      * @brief 默认构造函数.
      *
@@ -52,7 +55,7 @@ public:
     std::shared_ptr<VertexArray> vertexArray;
 
 private:
-    void loadFromFile(const std::filesystem::path& path, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices);
+    void loadFromFile(const std::filesystem::path& path, std::vector<vertex_type>& vertices, std::vector<index_type>& indices);
 
     std::shared_ptr<IndexBuffer>  indexBuffer;
     std::shared_ptr<VertexBuffer> vertexBuffer;
