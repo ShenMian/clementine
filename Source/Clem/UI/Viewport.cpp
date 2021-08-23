@@ -169,13 +169,13 @@ void Viewport::updateLight(Time dt)
 
     DirectionLight dirLights[1];
     dirLights[0].setColor({255.f / 255.f, 244.f / 255.f, 214.f / 255.f});
+    dirLights[0].setIntesity(1.0f);
     dirLights[0].setDirection(mat.forword());
     for(int i = 0; i < 1; i++)
     {
+        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].color", dirLights[i].getColor());
+        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].intesity", dirLights[i].getIntesity());
         standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].direction", dirLights[i].getDirection());
-        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].ambient", dirLights[i].getColor());
-        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].diffuse", dirLights[i].getColor());
-        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].specular", dirLights[i].getColor());
     }
 
     /*

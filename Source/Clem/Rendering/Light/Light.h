@@ -48,7 +48,7 @@ public:
     virtual Type getType() const = 0;
 
 protected:
-    float   intesity = 1;
+    float   intesity = 1.f;
     Vector3 color    = Vector3(1.f, 1.f, 1.f);
 };
 

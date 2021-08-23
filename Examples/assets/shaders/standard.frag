@@ -5,28 +5,29 @@
 
 struct DirectionLight
 {
-    vec3 direction;
+    vec3  color;
+    float intesity;
 
-    vec3 ambient;
-    vec3 diffuse;
-    vec3 specular;
+    vec3 direction;
 };
 
 struct PointLight
 {
+    vec3  color;
+    float intesity;
+    
     vec3 position;
 
     float constant;
     float linear;
     float quadratic;
-
-    vec3 ambient;
-    vec3 diffuse;
-    vec3 specular;
 };
 
 struct SpotLight
 {
+    vec3  color;
+    float intesity;
+
     vec3 position;
     vec3 direction;
 
@@ -36,10 +37,6 @@ struct SpotLight
     float constant;
     float linear;
     float quadratic;
-
-    vec3 ambient;
-    vec3 diffuse;
-    vec3 specular;
 };
 
 struct Material
@@ -94,21 +91,21 @@ vec3 CalcDirLight(DirectionLight light)
     const vec3 dir_to_cam   = normalize(u_cam_pos - v_position);
     const vec3 dir_to_light = normalize(-light.direction);
 
-    const float ka = 1.0;
-    const float kd = 1.0;
-    const float ks = 1.0;
+    const float ka = 1.0 * light.intesity;
+    const float kd = 1.0 * light.intesity;
+    const float ks = 1.0 * light.intesity;
 
     // 环境光照
-    vec3 ambient = ka * light.ambient * u_material.ambient;
+    vec3 ambient = ka * light.color * u_material.ambient;
 
     // 漫反射光照
     float diffuse_amount = max(0.0, dot(dir_to_light, v_normal));
-    vec3  diffuse        = kd * light.diffuse * diffuse_amount * u_material.diffuse;
+    vec3  diffuse        = kd * light.color * diffuse_amount * u_material.diffuse;
 
     // 镜面反射光照
     vec3  reflected_direction = reflect(dir_to_light, v_normal);
     float specular_amount     = pow(max(0.0, dot(reflected_direction, dir_to_cam)), u_material.shininess);
-    vec3  specular            = ks * light.specular * specular_amount * u_material.specular;
+    vec3  specular            = ks * light.color * specular_amount * u_material.specular;
 
     return ambient + diffuse + specular;
 }
@@ -122,7 +119,11 @@ vec3 CalcPointLight(PointLight light)
     float distance    = length(light.position - v_position);
     float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
 
-    return CalcDirLight(DirectionLight(-dir_to_light, light.ambient, light.diffuse, light.specular)) * attenuation;
+    DirectionLight dirLight;
+    dirLight.color     = light.color;
+    dirLight.intesity  = light.intesity;
+    dirLight.direction = -dir_to_light;
+    return CalcDirLight(dirLight) * attenuation;
 }
 
 // 计算总光照
