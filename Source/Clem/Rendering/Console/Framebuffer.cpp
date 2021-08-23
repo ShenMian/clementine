@@ -238,4 +238,9 @@ void Framebuffer::output()
 
 #endif
 
+Size2i FrameBuffer::getSize() const
+{
+    return size;
+}
+
 } // namespace clem

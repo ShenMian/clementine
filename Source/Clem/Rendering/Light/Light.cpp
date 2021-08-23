@@ -18,26 +18,12 @@ float Light::getIntesity() const
 
 void Light::setColor(const Vector3& color)
 {
-    this->ambient  = color;
-    this->diffuse  = color;
-    this->specular = color;
+    this->color = color;
 }
 
-void Light::setColor(const Vector3& ambient, const Vector3& diffuse, const Vector3& specular)
+Vector3 Light::getColor() const
 {
-    this->ambient  = ambient;
-    this->diffuse  = diffuse;
-    this->specular = specular;
-}
-
-void Light::getColor(Vector3* ambient, Vector3* diffuse, Vector3* specular) const
-{
-    if(ambient)
-        *ambient = this->ambient;
-    if(diffuse)
-        *diffuse = this->diffuse;
-    if(specular)
-        *specular = this->specular;
+    return color;
 }
 
 } // namespace clem

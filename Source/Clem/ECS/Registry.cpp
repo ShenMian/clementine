@@ -69,6 +69,7 @@ void Registry::all(std::function<void(const Entity&)> func)
 
 version_type Registry::getVersion(id_type id) const
 {
+    Assert::isTrue(id < entities.size() || std::ranges::find(freeIds, id) != freeIds.end());
     return entities[id].version;
 }
 

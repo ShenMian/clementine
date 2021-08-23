@@ -40,7 +40,7 @@ void Browser::update(Time dt)
 
     std::shared_ptr<Texture2D> icon;
     auto columnsNum = std::max((int)(ImGui::GetContentRegionAvailWidth() / 70), 1);
-    ImGui::Columns();
+    ImGui::Columns(columnsNum);
     for(const auto& entry : fs::directory_iterator(current))
     {
         auto filename = entry.path().filename().string();

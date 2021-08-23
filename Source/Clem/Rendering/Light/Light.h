@@ -38,18 +38,9 @@ public:
     void setColor(const Vector3& color);
 
     /**
-     * @brief 设置光源颜色.
-     *
-     * @param ambient  环境光颜色.
-     * @param diffuse  漫反射光颜色.
-     * @param specular 镜面反射光颜色.
-     */
-    void setColor(const Vector3& ambient, const Vector3& diffuse, const Vector3& specular = Vector3::unit);
-
-    /**
      * @brief 获取光源颜色.
      */
-    void getColor(Vector3* ambient, Vector3* diffuse, Vector3* specular) const;
+    Vector3 getColor() const;
 
     /**
      * @brief 获取光源类型.
@@ -57,11 +48,8 @@ public:
     virtual Type getType() const = 0;
 
 protected:
-    Vector3 ambient  = Vector3(1.f, 1.f, 1.f);
-    Vector3 diffuse  = Vector3(1.f, 1.f, 1.f);
-    Vector3 specular = Vector3(1.f, 1.f, 1.f);
-
-    float intesity = 1;
+    float   intesity = 1;
+    Vector3 color    = Vector3(1.f, 1.f, 1.f);
 };
 
 } // namespace clem

@@ -13,56 +13,11 @@
 namespace clem::ui
 {
 
-void Viewport::update(Time dt)
-{
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{0, 0});
-    ImGui::Begin("Viewport", &visible);
-    ImVec2 viewportPos = {ImGui::GetWindowPos().x - ImGui::GetCursorPos().x, ImGui::GetWindowPos().y - ImGui::GetCursorPos().y};
-    ImGui::PopStyleVar();
-
-    static Vector2 lastViewportSize;
-    viewportSize = {ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y};
-    if(viewportSize != lastViewportSize)
-    {
-        onResize(viewportSize.x, viewportSize.y);
-        lastViewportSize = viewportSize;
-    }
-
-    framebuffer->clearColorAttachment(2, -1);
-
-    render(dt);
-    ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {0, 1}, {1, 0}); // FIXME
-
-    ImGui::Text("POS: (%f,%f,%f) DIR: (%f,%f,%f)", camera.view.translate().x, camera.view.translate().y, camera.view.translate().z,
-                camera.view.forword().x, camera.view.forword().y, camera.view.forword().z);
-
-    if(ImGui::IsWindowHovered())
-    {
-        hovered = true;
-
-        // 选取实体
-        if(ImGui::IsMouseClicked(ImGuiMouseButton_Left))
-        {
-            ImVec2 mouse = {ImGui::GetMousePos().x - viewportPos.x, ImGui::GetMousePos().y - viewportPos.y};
-
-            int id;
-            framebuffer->read(2, {0, 0}, id);
-            Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
-        }
-
-        // 自由视角
-        locked = ImGui::IsMouseDown(ImGuiMouseButton_Right);
-    }
-    else
-        hovered = false;
-
-    ImGui::End();
-}
-
 void Viewport::attach()
 {
-    skyboxShader   = Shader::create("../assets/shaders/skybox_sphere.vert", "../assets/shaders/skybox_sphere.frag");
     standardShader = Shader::create("../assets/shaders/standard.vert", "../assets/shaders/standard.frag");
+    shadowShader = Shader::create("../assets/shaders/shadow.vert", "../assets/shaders/shadow.frag");
+    skyboxShader   = Shader::create("../assets/shaders/skybox_sphere.vert", "../assets/shaders/skybox_sphere.frag");
 
     auto win = Main::getWindow();
 
@@ -128,11 +83,60 @@ void Viewport::attach()
     camera.view.scale({2.1, 2.1, 2.1});
 }
 
+void Viewport::update(Time dt)
+{
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{0, 0});
+    ImGui::Begin("Viewport", &visible);
+    ImVec2 viewportPos = {ImGui::GetWindowPos().x - ImGui::GetCursorPos().x, ImGui::GetWindowPos().y - ImGui::GetCursorPos().y};
+    ImGui::PopStyleVar();
+
+    static Vector2 lastViewportSize;
+    viewportSize = {ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y};
+    if(viewportSize != lastViewportSize)
+    {
+        onResize(viewportSize.x, viewportSize.y);
+        lastViewportSize = viewportSize;
+    }
+
+    framebuffer->clearColorAttachment(2, -1);
+
+    render(dt);
+    ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {0, 1}, {1, 0}); // FIXME
+
+    ImGui::Text("CAM: POS(%.3f,%.3f,%.3f) DIR(%.3f,%.3f,%.3f)", camera.view.translate().x, camera.view.translate().y, camera.view.translate().z,
+                camera.view.forword().normalize().x, camera.view.forword().normalize().y, camera.view.forword().normalize().z);
+
+    if(ImGui::IsWindowHovered())
+    {
+        hovered = true;
+
+        // 选取实体
+        if(ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+        {
+            ImVec2 mouse = {ImGui::GetMousePos().x - viewportPos.x, ImGui::GetMousePos().y - viewportPos.y};
+
+            int id;
+            framebuffer->read(2, {0, 0}, id);
+            Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
+        }
+
+        // 自由视角
+        locked = ImGui::IsMouseDown(ImGuiMouseButton_Right);
+    }
+    else
+        hovered = false;
+
+    ImGui::End();
+}
+
 void Viewport::render(Time dt)
 {
     updateLight(dt);
+    updateShadow(dt);
     updateCamera(dt);
 
+    const auto size = framebuffer->getSize();
+    Renderer::get()->setViewport(0, 0, size.x, size.y);
     framebuffer->bind();
     glClearColor(.117f, .564f, 1.f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT /* | GL_STENCIL_BUFFER_BIT*/);
@@ -164,15 +168,14 @@ void Viewport::updateLight(Time dt)
     mat.rotateY(radians(60) * dt.seconds());
 
     DirectionLight dirLights[1];
+    dirLights[0].setColor({255.f / 255.f, 244.f / 255.f, 214.f / 255.f});
     dirLights[0].setDirection(mat.forword());
     for(int i = 0; i < 1; i++)
     {
-        Vector3 ambient, diffuse, specular;
-        dirLights[i].getColor(&ambient, &diffuse, &specular);
         standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].direction", dirLights[i].getDirection());
-        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].ambient", ambient);
-        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].diffuse", diffuse);
-        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].specular", specular);
+        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].ambient", dirLights[i].getColor());
+        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].diffuse", dirLights[i].getColor());
+        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].specular", dirLights[i].getColor());
     }
 
     /*
@@ -188,6 +191,22 @@ void Viewport::updateLight(Time dt)
         standardShader->uploadUniform("u_point_lights[" + std::to_string(i) + "].specular", specular);
     }
     */
+}
+
+void Viewport::updateShadow(Time dt)
+{
+    const auto size = shadowMap->getSize();
+    Renderer::get()->setViewport(0, 0, size.x, size.y);
+
+    shadowMap->bind();
+    glClear(GL_DEPTH_BUFFER_BIT);
+
+    Main::registry.each<Mesh>([&](const Entity& e)
+                              {
+                                  Renderer::get()->submit(e, shadowShader);
+                              });
+
+    shadowMap->unbind();
 }
 
 void Viewport::updateCamera(Time dt)

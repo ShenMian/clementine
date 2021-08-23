@@ -73,26 +73,32 @@ void GLRenderer::submit(const Entity& entity)
 
 void GLRenderer::submit(const Entity& entity, std::shared_ptr<Shader> shader)
 {
-    auto& mesh      = entity.get<Mesh>();
-    auto& transform = entity.get<Transform>();
+    auto& mesh     = entity.get<Mesh>();
+    auto& material = entity.get<Material>();
 
-    if(mesh.vertexArray == nullptr)
+    if(entity.get<Tag>().str == "skybox")
         return;
 
-    mesh.vertexArray->bind();
+    mesh.bind();
 
-    // shader = material.shader;
+    auto& transform = entity.get<Transform>();
+
+    auto texture = mesh.getTexture(Texture2D::Type::Default);
+    if(texture)
+        texture->bindUnit(0);
+
     shader->bind();
-
     shader->uploadUniform("u_model", transform.getModelMatrix());
 
-    const auto& material = entity.get<Material>();
     shader->uploadUniform("u_material.ambient", material.ambient);
     shader->uploadUniform("u_material.diffuse", material.diffuse);
     shader->uploadUniform("u_material.specular", material.specular);
     shader->uploadUniform("u_material.shininess", material.shininess);
 
+    shader->uploadUniform("u_entity_id", (int)entity.id());
+
     glDrawElements(GL_TRIANGLES, (GLsizei)mesh.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
+
     assert(glGetError() == GL_NO_ERROR);
 }
 

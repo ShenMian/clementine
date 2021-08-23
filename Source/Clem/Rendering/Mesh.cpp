@@ -117,13 +117,13 @@ void Mesh::loadFromFile(const std::filesystem::path& path, std::vector<vertex_ty
                     attrib.texcoords[2 * (size_t)index.texcoord_index + 0],
                     attrib.texcoords[2 * (size_t)index.texcoord_index + 1]};
 
-            constexpr bool compress = false;
-            if constexpr (compress)
+            constexpr bool deduplicate = false;
+            if constexpr (deduplicate)
             {
-                // 焊接顶点, 性能警告
+                // 顶点去重. 焊接顶点, 性能警告
                 if(!uniqueVertices.contains(vertex))
                 {
-                    if(uniqueVertices.size() >= 1000)
+                    if(uniqueVertices.size() >= 500)
                         uniqueVertices.clear();
                     uniqueVertices[vertex] = static_cast<index_type>(vertices.size());
                     vertices.push_back(vertex);
@@ -133,7 +133,7 @@ void Mesh::loadFromFile(const std::filesystem::path& path, std::vector<vertex_ty
             else
             {
                 indices.push_back(static_cast<index_type>(vertices.size()));
-                vertices.push_back(vertex);
+                vertices.push_back(std::move(vertex));
             }
         }
     }

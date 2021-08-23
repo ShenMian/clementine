@@ -8,7 +8,7 @@
 namespace clem
 {
 
-std::shared_ptr<FrameBuffer> clem::FrameBuffer::create(Size2 size, std::vector<PixelFormat> formats, int samples)
+std::shared_ptr<FrameBuffer> clem::FrameBuffer::create(Size2i size, const std::vector<PixelFormat>& formats, int samples)
 {
     switch(Renderer::getAPI())
     {

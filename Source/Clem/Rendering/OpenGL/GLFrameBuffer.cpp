@@ -38,14 +38,16 @@ static std::unordered_set<FrameBuffer::PixelFormat> colorAttachmentFormat =
 static std::unordered_set<FrameBuffer::PixelFormat> depthAttachmentFormat =
     {FrameBuffer::PixelFormat::Depth24Stencil8, FrameBuffer::PixelFormat::DepthComponent};
 
-GLFrameBuffer::GLFrameBuffer(Size2 size, std::vector<PixelFormat> formats, int samples)
-    : size(size), samples(samples)
+GLFrameBuffer::GLFrameBuffer(Size2i size, const std::vector<PixelFormat>& formats, int samples)
+    : samples(samples)
 {
+    Assert::isTrue(formats.size() > 0);
+    Assert::isTrue(samples > 0);
+
+    this->size = size;
+
     glCreateFramebuffers(1, &handle);
     bind();
-
-    addColorAttachment(PixelFormat::RGBA8);
-    addDepthAttachment(PixelFormat::Depth24Stencil8);
 
     for(const auto& format : formats)
     {
@@ -56,6 +58,18 @@ GLFrameBuffer::GLFrameBuffer(Size2 size, std::vector<PixelFormat> formats, int s
         else
             Assert::isTrue(false, "unknown pixel format");
     }
+
+    /*
+    if(colorAttachments.empty())
+        glDrawBuffer(GL_NONE);
+    else
+    {
+        std::vector<GLenum> bufs;
+        for(int i = 0; i < colorAttachments.size(); i++)
+            bufs.push_back(GL_COLOR_ATTACHMENT0 + i);
+        glDrawBuffers(colorAttachments.size(), bufs.data());
+    }
+    */
 
     Assert::isTrue(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 
@@ -81,11 +95,14 @@ void GLFrameBuffer::bind()
 {
     glGetIntegerv(GL_FRAMEBUFFER_BINDING, &defaultFBO);
     glBindFramebuffer(GL_FRAMEBUFFER, handle);
+
+    Assert::isTrue(glGetError() == GL_NO_ERROR);
 }
 
 void GLFrameBuffer::unbind()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
+    Assert::isTrue(glGetError() == GL_NO_ERROR);
 }
 
 std::shared_ptr<Texture2D> GLFrameBuffer::getColorAttachment(int index)
@@ -103,6 +120,7 @@ void GLFrameBuffer::clearColorAttachment(int index, int value)
 {
     bind();
     glClearTexImage((GLuint)colorAttachments[index]->getHandle(), 0, GL_RED_INTEGER, GL_INT, &value);
+    Assert::isTrue(glGetError() == GL_NO_ERROR);
     unbind();
 }
 
@@ -145,16 +163,6 @@ void GLFrameBuffer::addColorAttachment(PixelFormat format)
         glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGBA8, (GLsizei)size.x, (GLsizei)size.y, GL_FALSE);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + (GLenum)colorAttachments.size(), GL_TEXTURE_2D_MULTISAMPLE, colorAttachment, 0);
         */
-    }
-
-    if(colorAttachments.empty())
-        glDrawBuffer(GL_NONE);
-    else
-    {
-        std::vector<GLenum> bufs;
-        for(int i = 0; i < colorAttachments.size(); i++)
-            bufs.push_back(GL_COLOR_ATTACHMENT0 + i);
-        glDrawBuffers(colorAttachments.size(), bufs.data());
     }
 
     Assert::isTrue(glGetError() == GL_NO_ERROR);

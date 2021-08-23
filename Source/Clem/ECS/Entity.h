@@ -27,15 +27,6 @@ public:
 	 */
     Entity() = default;
 
-    /**
-	 * @brief 构造函数.
-	 *
-	 * @param id 实体 id.
-	 * @param version 实体 version.
-	 * @param reg 实体所属的 Registry.
-	 */
-    Entity(id_type id, version_type version, Registry& reg);
-
     Entity(id_type id, Registry& reg);
 
     /**
@@ -112,9 +103,20 @@ public:
     Entity& operator=(const Entity& rhs);
 
 private:
+    /**
+	 * @brief 构造函数.
+	 *
+	 * @param id 实体 id.
+	 * @param version 实体 version.
+	 * @param reg 实体所属的 Registry.
+	 */
+    Entity(id_type id, version_type version, Registry& reg);
+
     id_type      id_      = 0;
     version_type version_ = 0;
     Registry*    registry = nullptr;
+
+	friend class Registry;
 };
 
 /**
