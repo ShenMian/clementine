@@ -26,10 +26,23 @@ public:
      */
     const Vector3& getDirection() const;
 
+    /**
+     * @brief 设置光源坐标.
+     *
+     * @param pos 光源坐标.
+     */
+    void setPosition(const Vector3& pos);
+
+    /**
+     * @brief 获取光源坐标.
+     */
+    const Vector3& getPosition() const;
+
     Type getType() const override;
 
 private:
     Vector3 direction;
+    Vector3 position;
 };
 
 } // namespace clem

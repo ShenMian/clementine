@@ -50,8 +50,7 @@ Matrix4::Matrix4(const float* m)
 
 void Matrix4::translate(const Vector3& vec)
 {
-    Matrix4 mat;
-    *this *= mat.setTranslation(vec);
+    *this *= createTranslation(vec);
 }
 
 void Matrix4::rotate(float angle, const Vector3& axis)
@@ -69,14 +68,14 @@ const float* Matrix4::data() const
     return &m[0][0];
 }
 
-Vector3 Matrix4::up() const
+Vector3 Matrix4::forword() const
 {
-    return {-m[1][0], -m[1][1], -m[1][2]};
+    return {-m[2][0], -m[2][1], -m[2][2]};
 }
 
-Vector3 Matrix4::down() const
+Vector3 Matrix4::back() const
 {
-    return -up();
+    return -forword();
 }
 
 Vector3 Matrix4::left() const
@@ -89,14 +88,14 @@ Vector3 Matrix4::right() const
     return -left();
 }
 
-Vector3 Matrix4::forword() const
+Vector3 Matrix4::up() const
 {
-    return {m[2][0], m[2][1], m[2][2]};
+    return {m[1][0], m[1][1], m[1][2]};
 }
 
-Vector3 Matrix4::back() const
+Vector3 Matrix4::down() const
 {
-    return -forword();
+    return -up();
 }
 
 Vector3 Matrix4::translate() const
@@ -507,6 +506,29 @@ Matrix4 Matrix4::operator*(const Matrix4& rhs) const
 // TODO: 编写测试用例
 Matrix4& Matrix4::operator*=(const Matrix4& rhs)
 {
+#if 1
+    Matrix4 mat;
+    mat[0][0] = m[0][0] * rhs[0][0] + m[1][0] * rhs[0][1] + m[2][0] * rhs[0][2] + m[3][0] * rhs[0][3];
+    mat[0][1] = m[0][1] * rhs[0][0] + m[1][1] * rhs[0][1] + m[2][1] * rhs[0][2] + m[3][1] * rhs[0][3];
+    mat[0][2] = m[0][2] * rhs[0][0] + m[1][2] * rhs[0][1] + m[2][2] * rhs[0][2] + m[3][2] * rhs[0][3];
+    mat[0][3] = m[0][3] * rhs[0][0] + m[1][3] * rhs[0][1] + m[2][3] * rhs[0][2] + m[3][3] * rhs[0][3];
+
+    mat[1][0] = m[0][0] * rhs[1][0] + m[1][0] * rhs[1][1] + m[2][0] * rhs[1][2] + m[3][0] * rhs[1][3];
+    mat[1][1] = m[0][1] * rhs[1][0] + m[1][1] * rhs[1][1] + m[2][1] * rhs[1][2] + m[3][1] * rhs[1][3];
+    mat[1][2] = m[0][2] * rhs[1][0] + m[1][2] * rhs[1][1] + m[2][2] * rhs[1][2] + m[3][2] * rhs[1][3];
+    mat[1][3] = m[0][3] * rhs[1][0] + m[1][3] * rhs[1][1] + m[2][3] * rhs[1][2] + m[3][3] * rhs[1][3];
+
+    mat[2][0] = m[0][0] * rhs[2][0] + m[1][0] * rhs[2][1] + m[2][0] * rhs[2][2] + m[3][0] * rhs[2][3];
+    mat[2][1] = m[0][1] * rhs[2][0] + m[1][1] * rhs[2][1] + m[2][1] * rhs[2][2] + m[3][1] * rhs[2][3];
+    mat[2][2] = m[0][2] * rhs[2][0] + m[1][2] * rhs[2][1] + m[2][2] * rhs[2][2] + m[3][2] * rhs[2][3];
+    mat[2][3] = m[0][3] * rhs[2][0] + m[1][3] * rhs[2][1] + m[2][3] * rhs[2][2] + m[3][3] * rhs[2][3];
+
+    mat[3][0] = m[0][0] * rhs[3][0] + m[1][0] * rhs[3][1] + m[2][0] * rhs[3][2] + m[3][0] * rhs[3][3];
+    mat[3][1] = m[0][1] * rhs[3][0] + m[1][1] * rhs[3][1] + m[2][1] * rhs[3][2] + m[3][1] * rhs[3][3];
+    mat[3][2] = m[0][2] * rhs[3][0] + m[1][2] * rhs[3][1] + m[2][2] * rhs[3][2] + m[3][2] * rhs[3][3];
+    mat[3][3] = m[0][3] * rhs[3][0] + m[1][3] * rhs[3][1] + m[2][3] * rhs[3][2] + m[3][3] * rhs[3][3];
+    *this     = mat;
+#else
     float product[4][4] = {0};
     for(size_t i = 0; i < 4; ++i)
     {
@@ -518,6 +540,7 @@ Matrix4& Matrix4::operator*=(const Matrix4& rhs)
         }
     }
     std::memcpy(m, product, sizeof(m));
+#endif
     return *this;
 }
 

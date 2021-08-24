@@ -7,6 +7,7 @@
 #include "Rendering/Material.h"
 #include "Rendering/Mesh.h"
 #include "Rendering/VertexArray.h"
+#include "Rendering/Model.h"
 #include <glad/glad.h>
 
 namespace clem
@@ -30,20 +31,19 @@ void GLRenderer::endFrame()
 
 void GLRenderer::submit(const Entity& entity)
 {
-    auto& mesh     = entity.get<Mesh>();
     auto& material = entity.get<Material>();
 
     auto shader = material.shader;
 
-    mesh.bind();
-
     if(entity.get<Tag>().str == "skybox")
     {
-        mesh.getTexture(Texture2D::Type::Default)->bindUnit(0);
+        auto& mesh = entity.get<Model>().getMeshs()[0];
+        entity.get<Material>().albedo->bindUnit(0);
 
         shader->bind();
         shader->uploadUniform("u_skybox", 0);
 
+        mesh.vertexArray->bind();
         glDepthFunc(GL_LEQUAL);
         glDrawElements(GL_TRIANGLES, (GLsizei)mesh.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
         glDepthFunc(GL_LESS);
@@ -51,22 +51,28 @@ void GLRenderer::submit(const Entity& entity)
     else
     {
         auto& transform = entity.get<Transform>();
+        auto& model     = entity.get<Model>();
 
-        auto texture = mesh.getTexture(Texture2D::Type::Default);
-        if(texture)
-            texture->bindUnit(0);
+        auto& meshs = model.getMeshs();
+        auto& mats  = model.getMaterials();
 
         shader->bind();
-        shader->uploadUniform("u_model", transform.getModelMatrix());
-
-        shader->uploadUniform("u_material.ambient", material.ambient);
-        shader->uploadUniform("u_material.diffuse", material.diffuse);
-        shader->uploadUniform("u_material.specular", material.specular);
-        shader->uploadUniform("u_material.shininess", material.shininess);
-
+        shader->uploadUniform("u_model", transform);
         shader->uploadUniform("u_entity_id", (int)entity.id());
 
-        glDrawElements(GL_TRIANGLES, (GLsizei)mesh.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
+        for(size_t i = 0; i < meshs.size(); i++)
+        {
+            if(mats[i].albedo)
+                mats[i].albedo->bindUnit(0);
+
+            shader->uploadUniform("u_material.ambient", material.ambient);
+            shader->uploadUniform("u_material.diffuse", material.diffuse);
+            shader->uploadUniform("u_material.specular", material.specular);
+            shader->uploadUniform("u_material.shininess", material.shininess);
+
+            meshs[i].vertexArray->bind();
+            glDrawElements(GL_TRIANGLES, (GLsizei)meshs[i].vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
+        }
     }
     assert(glGetError() == GL_NO_ERROR);
 }

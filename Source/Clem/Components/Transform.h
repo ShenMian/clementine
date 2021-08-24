@@ -18,8 +18,10 @@ class Transform
 
 public:
     Vector3 translation;
-    Vector3 rotation;
+    Vector3 rotation; // 单位: 角度.
     Vector3 scale = {1.f, 1.f, 1.f};
+
+    operator Matrix4();
 
     Matrix4 getModelMatrix();
 

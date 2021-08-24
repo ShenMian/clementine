@@ -5,6 +5,7 @@
 #include <cassert>
 #include <cfloat>
 #include <cmath>
+#include <limits>
 
 namespace clem
 {
@@ -49,7 +50,7 @@ float Vector2::distanceSquared(const Vector2& p) const
 Vector2& Vector2::normalize()
 {
     const auto len = size();
-    if(len < FLT_EPSILON)
+    if(len < std::numeric_limits<float>::epsilon())
         return *this;
     return *this *= 1.f / len;
 }

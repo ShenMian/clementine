@@ -35,7 +35,7 @@ void Properties::update(Time dt)
         showTag();
         showTransform();
         showRigidbody();
-        showMesh();
+        showModel();
         showMaterial();
         showSprite();
         showScript();
@@ -56,9 +56,9 @@ void Properties::update(Time dt)
             }
             if(ImGui::BeginMenu("Rendering"))
             {
-                if(entity.noneOf<Mesh>() && ImGui::MenuItem("Mesh"))
+                if(entity.noneOf<Model>() && ImGui::MenuItem("Model"))
                 {
-                    entity.add<Mesh>();
+                    entity.add<Model>();
                     ImGui::CloseCurrentPopup();
                 }
                 ImGui::MenuItem("Camera");
@@ -140,17 +140,17 @@ void Properties::showRigidbody()
     }
 }
 
-void Properties::showMesh()
+void Properties::showModel()
 {
-    if(entity.anyOf<Mesh>())
+    if(entity.anyOf<Model>())
     {
-        if(ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_DefaultOpen))
+        if(ImGui::CollapsingHeader("Model", ImGuiTreeNodeFlags_DefaultOpen))
         {
-            auto& mesh = entity.get<Mesh>();
-            if(mesh.path == fs::path())
+            auto& model = entity.get<Model>();
+            if(model.getPath() == fs::path())
                 ImGui::Text("Source  : (null)");
             else
-                ImGui::Text("Source  : %s", mesh.path.string().c_str());
+                ImGui::Text("Source  : %s", model.getPath().string().c_str());
             if(ImGui::BeginDragDropTarget())
             {
                 const auto payload = ImGui::AcceptDragDropPayload("browser_file");
@@ -160,18 +160,20 @@ void Properties::showMesh()
 
                     // TODO: 添加组件已存在提示, UI 使用提示而不是断言
                     if(path.extension() == L".obj")
-                        entity.get<Mesh>().load(Browser::assets / path);
+                        entity.get<Model>().load(Browser::assets / path);
                     else
                         Assert::isTrue(false);
                 }
                 ImGui::EndDragDropTarget();
             }
 
-            if(mesh.path == fs::path())
+            if(model.getPath() == fs::path())
                 return;
 
-            ImGui::Text("Vertices: %d", mesh.vertexArray->getVertexBuffer()->count());
-            ImGui::Text("Indices : %d", mesh.vertexArray->getIndexBuffer()->count());
+            // TODO
+            ImGui::Text("Shapes  : %d", model.getMeshs().size());
+            ImGui::Text("Vertices: %d", model.getMeshs()[0].vertexArray->getVertexBuffer()->count());
+            ImGui::Text("Indices : %d", model.getMeshs()[0].vertexArray->getIndexBuffer()->count());
         }
     }
 }

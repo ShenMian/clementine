@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Core/Math/Math.h"
+#include "Components/Transform.h"
 #include <memory>
 #include <string>
 
@@ -24,14 +25,14 @@ public:
         Orthographic
     };
 
-    void setDirection(const Vector3& pos, const Vector3& dir, const Vector3& up = -Vector3::unit_y);
-
-    void lookAt(const Vector3& pos, const Vector3& target, const Vector3& up = -Vector3::unit_y);
+    // void setDirection(const Vector3& pos, const Vector3& dir, const Vector3& up = -Vector3::unit_y);
+    // void setViewYXZ(const Vector3& pos, const Vector3& rotation);
+    // void lookAt(const Vector3& pos, const Vector3& target, const Vector3& up = -Vector3::unit_y);
 
     void setPerspective(float yFOV, float aspectRatio, float nearPlane, float farPlane);
     void setOrthographic(float width, float height, float nearPlane, float farPlane);
 
-    const Matrix4& getViewMatrix() const;
+    Matrix4 getViewMatrix();
     const Matrix4& getProjectionMatrix() const;
     const Matrix4& getViewProjectionMatrix();
 
@@ -40,7 +41,7 @@ public:
 
     Type getType() const;
 
-    Matrix4 view;
+    Transform view;
 
 private:
     Matrix4 projection;

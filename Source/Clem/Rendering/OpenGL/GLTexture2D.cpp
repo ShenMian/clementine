@@ -73,6 +73,13 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
     glCreateTextures(glType, 1, &handle);
     bind();
 
+    setMinFilter(Filter::Nearest);
+    setMagFilter(Filter::Bilinear);
+
+    // 设置纹理环绕方式
+    glTexParameteri(glType, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(glType, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
     int  channels;
     auto data = loadFromFile(path, size.x, size.y, channels);
 
@@ -83,6 +90,7 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
     case Format::Auto:
         switch(channels)
         {
+        case 1:
         case 3:
             internalFormat = GL_RGB8;
             dataFormat     = GL_RGB;
@@ -94,7 +102,7 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
             break;
 
         default:
-            Assert::isTrue(false, "format not supported");
+            Assert::isTrue(false);
         }
         break;
 
@@ -111,14 +119,11 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
     case Format::I8:
         internalFormat = GL_RED_INTEGER;
         dataFormat     = GL_RED;
+        break;
+
+    default:
+        Assert::isTrue(false);
     }
-
-    setMinFilter(Filter::Nearest);
-    setMagFilter(Filter::Bilinear);
-
-    // 设置纹理环绕方式
-    glTexParameteri(glType, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(glType, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
     glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, size.x, size.y, 0, dataFormat, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
@@ -141,6 +146,14 @@ void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
     glCreateTextures(glType, 1, &handle);
     bind();
 
+    setMinFilter(Filter::Nearest);
+    setMagFilter(Filter::Bilinear);
+
+    // 设置纹理环绕方式
+    glTexParameteri(glType, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(glType, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(glType, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
     // 读取六个面
     for(GLuint i = 0; i < faces.size(); i++)
     {
@@ -161,14 +174,6 @@ void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
 
         stbi_image_free(data);
     }
-
-    setMinFilter(Filter::Nearest);
-    setMagFilter(Filter::Bilinear);
-
-    // 设置纹理环绕方式
-    glTexParameteri(glType, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(glType, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(glType, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
     glBindTexture(glType, 0);
 

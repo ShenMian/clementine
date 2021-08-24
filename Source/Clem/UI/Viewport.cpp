@@ -18,10 +18,10 @@ void Viewport::attach()
     standardShader = Shader::create("../assets/shaders/standard.vert", "../assets/shaders/standard.frag");
     shadowShader = Shader::create("../assets/shaders/shadow.vert", "../assets/shaders/shadow.frag");
     skyboxShader   = Shader::create("../assets/shaders/skybox_sphere.vert", "../assets/shaders/skybox_sphere.frag");
+    // skyboxShader = Shader::create("../assets/shaders/skybox_cube.vert", "../assets/shaders/skybox_cube.frag");
 
     auto win = Main::getWindow();
 
-#if 1
     win->onScroll = [this](double xOfffset, double yOffset)
     {
         if(!hovered)
@@ -29,34 +29,33 @@ void Viewport::attach()
 
         static float fov = 60;
         if(1.f <= fov && fov <= 60.f)
-            fov -= yOffset;
+            fov -= (float)yOffset;
         fov = std::max(1.f, fov);
         fov = std::min(60.f, fov);
         camera.setPerspective(radians(fov), viewportSize.x / viewportSize.y, 0.03, 10000.f);
     };
-#endif
 
     win->onMouseMove = [this](double x, double y)
     {
-        static auto    speed = Vector2::unit * 0.09;
+        static auto    speed = Vector2::unit * 1;
         static Vector2 last;
 
         if(!locked || !ImGui::IsMouseDown(ImGuiMouseButton_Right))
         {
-            last   = Vector2(x, y);
+            last   = {(float)x, (float)y};
             locked = false;
             return;
         }
 
         auto xOffset = x - last.x;
         auto yOffset = last.y - y;
-        last         = Vector2(x, y);
+        last         = {(float)x, (float)y};
 
         float sensitivity = 0.05;
         xOffset *= sensitivity;
         yOffset *= sensitivity;
 
-        static float yaw = 90.0f, pitch = 0;
+        static float yaw = 180.f, pitch = 0.f;
         yaw -= xOffset;
         pitch += yOffset;
 
@@ -69,6 +68,8 @@ void Viewport::attach()
         front.z = std::sin(radians(yaw)) * std::cos(radians(pitch));
         front.normalize();
 
+        camera.view.rotation = {-pitch, yaw, 0.f};
+
         // camera.setDirection(camera.view.translate(), front);
         // camera.lookAt(camera.view.translate(), camera.view.translate() + front);
 
@@ -79,8 +80,10 @@ void Viewport::attach()
 
     texture = Texture2D::create("../assets/textures/wall.jpg");
 
-    camera.setDirection({0, 0, -30}, {0, 0, 1});
-    camera.view.scale({2.1, 2.1, 2.1});
+    // camera.setDirection({0, 0, -30}, {0, 0, 1});
+    camera.view.translation = {0, 0, -30};
+    camera.view.rotation    = {0, 180, 0};
+    camera.view.scale       = {2.1, 2.1, 2.1};
 }
 
 void Viewport::update(Time dt)
@@ -103,8 +106,8 @@ void Viewport::update(Time dt)
     render(dt);
     ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {0, 1}, {1, 0}); // FIXME
 
-    ImGui::Text("CAM: POS(%.3f,%.3f,%.3f) DIR(%.3f,%.3f,%.3f)", camera.view.translate().x, camera.view.translate().y, camera.view.translate().z,
-                camera.view.forword().normalize().x, camera.view.forword().normalize().y, camera.view.forword().normalize().z);
+    ImGui::Text("CAM: POS(%.3f,%.3f,%.3f) DIR(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z,
+                Matrix4(camera.view).forword().normalize().x, Matrix4(camera.view).forword().normalize().y, Matrix4(camera.view).forword().normalize().z);
 
     if(ImGui::IsWindowHovered())
     {
@@ -140,7 +143,7 @@ void Viewport::render(Time dt)
     framebuffer->bind();
     glClearColor(.117f, .564f, 1.f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT /* | GL_STENCIL_BUFFER_BIT*/);
-    Main::registry.each<Mesh>([&](const Entity& e)
+    Main::registry.each<Model>([&](const Entity& e)
                               {
                                   if(e.get<Tag>().str == "skybox")
                                       e.get<Material>().shader = skyboxShader;
@@ -164,33 +167,44 @@ void Viewport::onResize(float x, float y)
 
 void Viewport::updateLight(Time dt)
 {
-    static Mat4 mat;
-    mat.rotateY(radians(60) * dt.seconds());
+    std::vector<DirectionLight> dirLights;
+    std::vector<PointLight>     pointLights;
+    std::vector<SpotLight>      spotLights;
 
-    DirectionLight dirLights[1];
-    dirLights[0].setColor({255.f / 255.f, 244.f / 255.f, 214.f / 255.f});
-    dirLights[0].setIntesity(1.0f);
-    dirLights[0].setDirection(mat.forword());
-    for(int i = 0; i < 1; i++)
+    DirectionLight dirLight;
+    dirLight.setColor({255.f / 255.f, 244.f / 255.f, 214.f / 255.f});
+    dirLight.setIntesity(2.f);
+    dirLight.setDirection({0, -1, 0});
+    dirLights.push_back(dirLight);
+
+    PointLight pointLight;
+    pointLight.setIntesity(3.f);
+    pointLight.setPosition({0, 5, 0});
+    pointLights.push_back(pointLight);
+
+    standardShader->uploadUniform("u_direction_lights_size", (int)pointLights.size());
+    for(int i = 0; i < dirLights.size(); i++)
     {
         standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].color", dirLights[i].getColor());
         standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].intesity", dirLights[i].getIntesity());
         standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].direction", dirLights[i].getDirection());
     }
 
-    /*
-    PointLight pointLights[1];
-    for(int i = 0; i < 1; i++)
+    standardShader->uploadUniform("u_point_lights_size", (int)pointLights.size());
+    for(int i = 0; i < pointLights.size(); i++)
     {
-        Vector3 ambient, diffuse, specular;
-        pointLights[i].getColor(&ambient, &diffuse, &specular);
+        standardShader->uploadUniform("u_point_lights[" + std::to_string(i) + "].color", pointLights[i].getColor());
+        standardShader->uploadUniform("u_point_lights[" + std::to_string(i) + "].intesity", pointLights[i].getIntesity());
         standardShader->uploadUniform("u_point_lights[" + std::to_string(i) + "].position", pointLights[i].getPosition());
-
-        standardShader->uploadUniform("u_point_lights[" + std::to_string(i) + "].ambient", ambient);
-        standardShader->uploadUniform("u_point_lights[" + std::to_string(i) + "].diffuse", diffuse);
-        standardShader->uploadUniform("u_point_lights[" + std::to_string(i) + "].specular", specular);
     }
-    */
+
+    for(int i = 0; i < spotLights.size(); i++)
+    {
+        standardShader->uploadUniform("u_spot_lights[" + std::to_string(i) + "].color", spotLights[i].getColor());
+        standardShader->uploadUniform("u_spot_lights[" + std::to_string(i) + "].intesity", spotLights[i].getIntesity());
+        standardShader->uploadUniform("u_spot_lights[" + std::to_string(i) + "].direction", spotLights[i].getDirection());
+        standardShader->uploadUniform("u_spot_lights[" + std::to_string(i) + "].position", spotLights[i].getPosition());
+    }
 }
 
 void Viewport::updateShadow(Time dt)
@@ -220,8 +234,6 @@ void Viewport::updateCamera(Time dt)
     standardShader->uploadUniform("u_view", camera.getViewMatrix());
     standardShader->uploadUniform("u_projection", camera.getProjectionMatrix());
     standardShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
-
-    standardShader->uploadUniform("u_cam_pos", camera.view.translate());
 }
 
 bool isKeyPressed(int key)
@@ -235,32 +247,92 @@ void Viewport::updateCameraControl(Time dt)
     if(!ImGui::IsWindowHovered())
         return;
 
-    float speed = 50 * dt.seconds();
+    float speed = 30 * dt.seconds();
 
     if(isKeyPressed(GLFW_KEY_LEFT_SHIFT))
-        speed *= 3;
+        speed *= 2;
 
+#if 0
     if(isKeyPressed(GLFW_KEY_W))
-        camera.view.translate(-Vector3::unit_z * speed);
+        camera.view.translation += Matrix4(camera.view).forword().normalize() * speed;
     if(isKeyPressed(GLFW_KEY_S))
-        camera.view.translate(Vector3::unit_z * speed);
+        camera.view.translation += Matrix4(camera.view).back().normalize() * speed;
     if(isKeyPressed(GLFW_KEY_A))
-        camera.view.translate(Vector3::unit_x * speed);
+        camera.view.translation += Matrix4(camera.view).left().normalize() * speed;
     if(isKeyPressed(GLFW_KEY_D))
-        camera.view.translate(-Vector3::unit_x * speed);
-    if(isKeyPressed(GLFW_KEY_Q))
-        camera.view.translate(Vector3::unit_y * speed);
+        camera.view.translation += Matrix4(camera.view).right().normalize() * speed;
     if(isKeyPressed(GLFW_KEY_E))
-        camera.view.translate(-Vector3::unit_y * speed);
+        camera.view.translation += Matrix4(camera.view).up().normalize() * speed;
+    if(isKeyPressed(GLFW_KEY_Q))
+        camera.view.translation += Matrix4(camera.view).down().normalize() * speed;
+#else
+    if(isKeyPressed(GLFW_KEY_W))
+        camera.view.translation += -Vector3::unit_z * speed;
+    if(isKeyPressed(GLFW_KEY_S))
+        camera.view.translation += Vector3::unit_z * speed;
+    if(isKeyPressed(GLFW_KEY_A))
+        camera.view.translation += Vector3::unit_x * speed;
+    if(isKeyPressed(GLFW_KEY_D))
+        camera.view.translation += -Vector3::unit_x * speed;
+    if(isKeyPressed(GLFW_KEY_E))
+        camera.view.translation += -Vector3::unit_y * speed;
+    if(isKeyPressed(GLFW_KEY_Q))
+        camera.view.translation += Vector3::unit_y * speed;
+#endif
 
     if(isKeyPressed(GLFW_KEY_LEFT))
-        camera.view.rotateY(radians(-0.5));
+        camera.view.rotation.y += 0.5;
     else if(isKeyPressed(GLFW_KEY_RIGHT))
-        camera.view.rotateY(radians(0.5));
+        camera.view.rotation.y += -0.5;
     else if(isKeyPressed(GLFW_KEY_UP))
-        camera.view.rotateX(radians(0.5));
+        camera.view.rotation.x += -0.5;
     else if(isKeyPressed(GLFW_KEY_DOWN))
-        camera.view.rotateX(radians(-0.5));
+        camera.view.rotation.x += 0.5;
+
+    /*
+    static Transform transform;
+
+    Vector3 rotate;
+    if(isKeyPressed(GLFW_KEY_RIGHT))
+        rotate.y += 1.f;
+    if(isKeyPressed(GLFW_KEY_LEFT))
+        rotate.y -= 1.f;
+    if(isKeyPressed(GLFW_KEY_UP))
+        rotate.x += 1.f;
+    if(isKeyPressed(GLFW_KEY_DOWN))
+        rotate.x -= 1.f;
+
+    if(rotate.dot(rotate) > std::numeric_limits<float>::epsilon())
+        transform.rotation += rotate.getNormalized() * speed * dt.seconds();
+
+    // limit pitch values between about +/- 85ish degrees
+    transform.rotation.x = std::clamp(transform.rotation.x, -89.f, 89.f);
+    // transform.rotation.y = transform.rotation.y % 360.f;
+
+    float         yaw = transform.rotation.y;
+    const Vector3 forward(std::sin(yaw), 0.f, std::cos(yaw));
+    const Vector3 right(forward.z, 0.f, -forward.x);
+    const Vector3 up(0.f, -1.f, 0.f);
+
+    Vector3 move;
+    if(isKeyPressed(GLFW_KEY_W))
+        move += forward;
+    if(isKeyPressed(GLFW_KEY_S))
+        move -= forward;
+    if(isKeyPressed(GLFW_KEY_D))
+        move += right;
+    if(isKeyPressed(GLFW_KEY_A))
+        move -= right;
+    if(isKeyPressed(GLFW_KEY_E))
+        move += up;
+    if(isKeyPressed(GLFW_KEY_Q))
+        move -= up;
+
+    if(move.dot(move) > std::numeric_limits<float>::epsilon())
+        transform.translation += move.getNormalized() * speed * dt.seconds();
+
+    camera.view = transform;
+    */
 }
 
 } // namespace clem::ui

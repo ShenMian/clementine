@@ -51,7 +51,7 @@ private:
 template <typename T, typename... Args>
 inline T& Chunk::addComponent(id_type id, Args&&... args)
 {
-    components[id][Typeid<T>()] = T(args...);
+    components[id][Typeid<T>()] = T(args...); // 调用方错误: 构造函数重载不存在
     size++;
     return std::any_cast<T&>(components[id][Typeid<T>()]);
 }

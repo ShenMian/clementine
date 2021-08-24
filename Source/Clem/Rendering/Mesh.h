@@ -33,6 +33,14 @@ public:
     Mesh() = default;
 
     /**
+     * @brief 构造函数.
+     *
+     * @param indexBuffer  顶点缓冲区.
+     * @param vertexBuffer 索引缓冲区.
+     */
+    Mesh(std::shared_ptr<IndexBuffer> indexBuffer, std::shared_ptr<VertexBuffer> vertexBuffer);
+
+    /**
      * @brief 构造函数. 从文件载入 3D 模型.
      *
      * @param path 文件路径.
@@ -46,13 +54,13 @@ public:
      */
     void load(const std::filesystem::path& path);
 
-    void                       addTexture(std::shared_ptr<Texture2D> texture);
-    std::shared_ptr<Texture2D> getTexture(Texture2D::Type type) const;
-
     void bind();
 
     std::filesystem::path        path;
     std::shared_ptr<VertexArray> vertexArray;
+
+    void                       addTexture(std::shared_ptr<Texture2D> texture);
+    std::shared_ptr<Texture2D> getTexture(Texture2D::Type type) const;
 
 private:
     void loadFromFile(const std::filesystem::path& path, std::vector<vertex_type>& vertices, std::vector<index_type>& indices);

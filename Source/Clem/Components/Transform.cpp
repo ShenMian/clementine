@@ -7,6 +7,40 @@
 namespace clem
 {
 
+Transform::operator Matrix4()
+{
+    Matrix4 mat;
+
+    const float c3 = std::cos(radians(rotation.z));
+    const float s3 = std::sin(radians(rotation.z));
+    const float c2 = std::cos(radians(rotation.x));
+    const float s2 = std::sin(radians(rotation.x));
+    const float c1 = std::cos(radians(rotation.y));
+    const float s1 = std::sin(radians(rotation.y));
+
+    mat[0][0]      = scale.x * (c1 * c3 + s1 * s2 * s3);
+    mat[0][1]      = scale.x * (c2 * s3);
+    mat[0][2]      = scale.x * (c1 * s2 * s3 - c3 * s1);
+    mat[0][3]      = 0.0f;
+
+    mat[1][0]      = scale.y * (c3 * s1 * s2 - c1 * s3);
+    mat[1][1]      = scale.y * (c2 * c3);
+    mat[1][2]      = scale.y * (c1 * c3 * s2 + s1 * s3);
+    mat[1][3]      = 0.0f;
+
+    mat[2][0] = scale.z * (c2 * s1);
+    mat[2][1] = scale.z * (-s2);
+    mat[2][2] = scale.z * (c1 * c2);
+    mat[2][3] = 0.0f;
+
+    mat[3][0] = translation.x;
+    mat[3][1] = translation.y;
+    mat[3][2] = translation.z;
+    mat[3][3] = 1.0f;
+
+	return mat;
+}
+
 Matrix4 Transform::getModelMatrix()
 {
     if(isDirty())

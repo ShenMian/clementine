@@ -17,7 +17,7 @@ out vec3 v_position;
 out vec3 v_color;
 out vec3 v_normal;
 out vec2 v_uv;
-out vec3 v_cam_position;
+out vec3 v_dir_to_cam;
 
 void main()
 {
@@ -26,7 +26,7 @@ void main()
   v_normal   = normalize(mat3(transpose(inverse(u_model))) * a_normal);
   v_uv       = a_uv;
 
-  v_cam_position = vec3(u_view[3][0], u_view[3][1], u_view[3][2]);
+  v_dir_to_cam = normalize(u_view[3].xyz - v_position);
 
   gl_Position = u_projection * u_view * u_model * vec4(a_position, 1.0);
 }

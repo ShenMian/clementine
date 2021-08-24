@@ -70,16 +70,16 @@ public:
 
     /**
      * @brief 返回矩阵数据.
-     * 行优先矩阵. (有一说一, 比较喜欢列优先矩阵)
+     * 行优先矩阵.
      */
     const float* data() const;
 
-    Vector3 up() const;
-    Vector3 down() const;
-    Vector3 left() const;
-    Vector3 right() const;
     Vector3 forword() const;
     Vector3 back() const;
+    Vector3 left() const;
+    Vector3 right() const;
+    Vector3 up() const;
+    Vector3 down() const;
 
     static Matrix4 createTranslation(const Vector3& pos);
     static Matrix4 createRotation(float angle, const Vector3& axis);

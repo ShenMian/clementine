@@ -21,7 +21,7 @@ namespace clem
 struct Vertex
 {
     Vector3 position;
-    Vector3 color = {1.f, 1.f, 1.f};
+    Vector3 color;
     Vector3 normal;
     Vector2 uv;
 

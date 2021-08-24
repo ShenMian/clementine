@@ -7,15 +7,16 @@
 #include "IndexBuffer.h"
 #include "Material.h"
 #include "Mesh.h"
+#include "Model.h"
 #include "Renderer.h"
 #include "Shader.h"
 #include "Texture2D.h"
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 
-#include "Light/Light.h"
 #include "Light/DirectionLight.h"
 #include "Light/PointLight.h"
+#include "Light/SpotLight.h"
 
 #include "Console/CharMap.h"
 #include "Console/Color.h"
