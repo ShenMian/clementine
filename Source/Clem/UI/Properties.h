@@ -10,7 +10,7 @@ namespace clem::ui
 
 /**
  * @brief 属性面板.
- * 展示指定实体的组件.
+ * 管理指定实体的组件.
  */
 class Properties : public Layer
 {

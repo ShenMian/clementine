@@ -12,6 +12,9 @@ namespace fs = std::filesystem;
 namespace clem::ui
 {
 
+/**
+ * @brief 视口面板.
+ */
 class Viewport : public Layer
 {
 public:

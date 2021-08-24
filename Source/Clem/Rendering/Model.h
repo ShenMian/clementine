@@ -6,11 +6,14 @@
 #include "Rendering.h"
 #include <filesystem>
 
-// TODO: Ìí¼Ó×ÊÔ´¹ÜÀí. std::shared_ptr<ModelData>
+// TODO: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½. std::shared_ptr<ModelData>
 
 namespace clem
 {
 
+/**
+ * @brief 3D æ¨¡åž‹.
+ */
 class Model
 {
     CLEM_DECLARE_TYPE;

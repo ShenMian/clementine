@@ -18,6 +18,9 @@ namespace clem
 struct Vertex;
 class VertexArray;
 
+/**
+ * @brief 网格.
+ */
 struct Mesh
 {
     CLEM_DECLARE_TYPE;

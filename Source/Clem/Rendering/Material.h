@@ -12,6 +12,9 @@
 namespace clem
 {
 
+/**
+ * @brief 材质.
+ */
 class Material
 {
     CLEM_DECLARE_TYPE;

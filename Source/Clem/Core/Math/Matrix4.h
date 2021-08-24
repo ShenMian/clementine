@@ -91,7 +91,7 @@ public:
     /**
      * @brief 创建截头锥体观察体, 用于透视投影.
      *
-     * @param yFOV        垂直视角范围, 弧度制.
+     * @param yFOV        垂直视角范围, 单位: 弧度制.
      * @param aspectRatio 宽高比.
      * @param nearPlane   近平面 z 坐标.
      * @param farPlane    远平面 z 坐标.

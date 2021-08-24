@@ -14,6 +14,10 @@ namespace fs = std::filesystem;
 namespace clem::ui
 {
 
+/**
+ * @brief 项目文件浏览面板.
+ * 管理当前项目具有的各种资源.
+ */
 class Browser : public Layer
 {
 public:

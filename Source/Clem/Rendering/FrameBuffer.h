@@ -11,6 +11,9 @@
 namespace clem
 {
 
+/**
+ * @brief 帧缓冲区.
+ */
 class FrameBuffer
 {
 public:
