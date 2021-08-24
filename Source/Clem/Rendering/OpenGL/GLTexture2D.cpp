@@ -4,7 +4,6 @@
 #include "GLTexture2D.h"
 #include "Assert.hpp"
 #include <cassert>
-#include <glad/glad.h>
 #include <stb/stb_image.h>
 #include <type_traits>
 
@@ -80,24 +79,38 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
     glTexParameteri(glType, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(glType, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    int  channels;
-    auto data = loadFromFile(path, size.x, size.y, channels);
+    int bits;
+    auto data = loadFromFile(path, size.x, size.y, bits);
 
     GLenum internalFormat, dataFormat;
 
     switch(format)
     {
     case Format::Auto:
-        switch(channels)
+        switch(bits)
         {
-        case 1:
-        case 3:
+        case 8:
+            internalFormat = GL_R8;
+            dataFormat     = GL_RED;
+            break;
+
+        case 24:
             internalFormat = GL_RGB8;
             dataFormat     = GL_RGB;
             break;
 
-        case 4:
+        case 32:
             internalFormat = GL_RGBA8;
+            dataFormat     = GL_RGBA;
+            break;
+
+        case 48:
+            internalFormat = GL_RGB16;
+            dataFormat     = GL_RGB;
+            break;
+
+        case 64:
+            internalFormat = GL_RGBA16;
             dataFormat     = GL_RGBA;
             break;
 
@@ -116,8 +129,8 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
         dataFormat     = GL_RGBA;
         break;
 
-    case Format::I8:
-        internalFormat = GL_RED_INTEGER;
+    case Format::R8:
+        internalFormat = GL_R8;
         dataFormat     = GL_RED;
         break;
 
@@ -125,11 +138,13 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
         Assert::isTrue(false);
     }
 
+    // glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, size.x, size.y, 0, dataFormat, GL_UNSIGNED_BYTE, data);
     glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, size.x, size.y, 0, dataFormat, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
-
+    
     /*glTexStorage2D(glType, 1, internalFormat, size.x, size.y);
-    glTexSubImage2D(glType, 0, 0, 0, size.x, size.y, dataFormat, GL_UNSIGNED_BYTE, data);*/
+    glTexSubImage2D(glType, 0, 0, 0, size.x, size.y, dataFormat, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);*/
     
     Assert::isTrue(glGetError() == GL_NO_ERROR);
 
@@ -160,17 +175,17 @@ void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
         int  channels;
         auto data = loadFromFile(faces[i], size.x, size.y, channels);
 
-        GLenum dataFormat;
+        GLenum format;
         if(channels == 3)
-            dataFormat = GL_RGB;
+            format = GL_RGB;
         else if(channels == 4)
-            dataFormat = GL_RGBA;
+            format = GL_RGBA;
         else
             Assert::isTrue(false, "format not supported");
 
         glTexImage2D(
             GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0,
-            GL_RGB, size.x, size.y, 0, dataFormat, GL_UNSIGNED_BYTE, data);
+            GL_RGB, size.x, size.y, 0, format, GL_UNSIGNED_BYTE, data);
 
         stbi_image_free(data);
     }
@@ -220,10 +235,13 @@ size_t GLTexture2D::getHandle()
     return (size_t)handle;
 }
 
-void* GLTexture2D::loadFromFile(const std::filesystem::path& path, int& width, int& height, int& channels)
+void* GLTexture2D::loadFromFile(const std::filesystem::path& path, int& width, int& height, int& bits)
 {
+    int  channels;
     auto data = stbi_load(path.string().c_str(), &width, &height, &channels, 0);
-    Assert::isTrue(data != nullptr, std::format("can't load from file: '{}'", path.string()));
+    Assert::isTrue(data != nullptr, std::format("can't load image from file: '{}'", path.string()));
+
+    bits = channels * 8;
 
     return data;
 }

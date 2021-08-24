@@ -39,7 +39,7 @@ private:
     std::shared_ptr<FrameBuffer> framebuffer = FrameBuffer::create({(int)(1920 * 0.7), (int)(1080 * 0.7)},
                                                                    {FrameBuffer::PixelFormat::RGBA8,
                                                                     FrameBuffer::PixelFormat::RGBA8,
-                                                                    FrameBuffer::PixelFormat::I8,
+                                                                    FrameBuffer::PixelFormat::R8,
                                                                     FrameBuffer::PixelFormat::Depth24Stencil8});
     std::shared_ptr<FrameBuffer> shadowMap    = FrameBuffer::create({1024, 1024}, {FrameBuffer::PixelFormat::DepthComponent});
 };

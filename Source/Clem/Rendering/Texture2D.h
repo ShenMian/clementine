@@ -71,7 +71,7 @@ public:
         Auto,
         RGBA8,
         RGB8,
-        I8,
+        R8,
         Depth24Stencil8,
         DepthComponent
     };

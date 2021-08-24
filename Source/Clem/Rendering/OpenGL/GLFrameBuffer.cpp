@@ -14,26 +14,26 @@ namespace clem
 static std::unordered_map<FrameBuffer::PixelFormat, GLenum> GLFormat = {
     {FrameBuffer::PixelFormat::RGBA8, GL_RGBA},
     {FrameBuffer::PixelFormat::RGB8, GL_RGB},
-    {FrameBuffer::PixelFormat::I8, GL_RED_INTEGER},
+    {FrameBuffer::PixelFormat::R8, GL_RED_INTEGER},
     {FrameBuffer::PixelFormat::Depth24Stencil8, GL_DEPTH_STENCIL},
     {FrameBuffer::PixelFormat::DepthComponent, GL_DEPTH_COMPONENT}};
 
 static std::unordered_map<FrameBuffer::PixelFormat, GLenum> GLInternalFormat = {
     {FrameBuffer::PixelFormat::RGBA8, GL_RGBA8},
     {FrameBuffer::PixelFormat::RGB8, GL_RGB8},
-    {FrameBuffer::PixelFormat::I8, GL_R32I},
+    {FrameBuffer::PixelFormat::R8, GL_R32I},
     {FrameBuffer::PixelFormat::Depth24Stencil8, GL_DEPTH24_STENCIL8},
     {FrameBuffer::PixelFormat::DepthComponent, GL_DEPTH_COMPONENT}};
 
 static std::unordered_map<FrameBuffer::PixelFormat, GLenum> GLType = {
     {FrameBuffer::PixelFormat::RGBA8, GL_UNSIGNED_BYTE},
     {FrameBuffer::PixelFormat::RGB8, GL_UNSIGNED_BYTE},
-    {FrameBuffer::PixelFormat::I8, GL_UNSIGNED_BYTE},
+    {FrameBuffer::PixelFormat::R8, GL_UNSIGNED_BYTE},
     {FrameBuffer::PixelFormat::Depth24Stencil8, GL_UNSIGNED_INT_24_8},
     {FrameBuffer::PixelFormat::DepthComponent, GL_FLOAT}};
 
 static std::unordered_set<FrameBuffer::PixelFormat> colorAttachmentFormat =
-    {FrameBuffer::PixelFormat::RGBA8, FrameBuffer::PixelFormat::RGB8, FrameBuffer::PixelFormat::I8};
+    {FrameBuffer::PixelFormat::RGBA8, FrameBuffer::PixelFormat::RGB8, FrameBuffer::PixelFormat::R8};
 
 static std::unordered_set<FrameBuffer::PixelFormat> depthAttachmentFormat =
     {FrameBuffer::PixelFormat::Depth24Stencil8, FrameBuffer::PixelFormat::DepthComponent};

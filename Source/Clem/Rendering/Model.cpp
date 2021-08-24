@@ -120,8 +120,8 @@ void Model::load(const std::filesystem::path& path)
             if(mat.diffuse_texname.size())
                 material.albedo = Texture2D::create(path.parent_path() / mat.diffuse_texname);
 
-            // if(mat.bump_texname.size())
-            //     material.normal = Texture2D::create(path.parent_path() / mat.bump_texname);
+            if(mat.bump_texname.size())
+                material.normal = Texture2D::create(path.parent_path() / mat.bump_texname);
 
             if(mat.roughness_texname.size())
                 material.roughness = Texture2D::create(path.parent_path() / mat.roughness_texname);

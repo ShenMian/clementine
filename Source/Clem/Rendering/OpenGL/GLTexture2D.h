@@ -5,6 +5,7 @@
 
 #include "Rendering/Texture2D.h"
 #include <unordered_map>
+#include <glad/glad.h>
 
 namespace clem
 {
@@ -52,7 +53,7 @@ private:
     Size2i      size;
     int         glType;
 
-    void* loadFromFile(const std::filesystem::path& path, int& width, int& height, int& channels);
+    void* loadFromFile(const std::filesystem::path& path, int& width, int& height, int& bits);
 };
 
 } // namespace clem
