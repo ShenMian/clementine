@@ -26,10 +26,10 @@ public:
     void update(Time dt) override;
 
     inline static bool     visible = true;
-    inline static fs::path assets  = "../assets"; // 当前项目根目录
+    inline static fs::path assets;
 
 private:
-    fs::path current = assets;
+    fs::path current;
 
     std::unordered_map<std::string, std::shared_ptr<Texture2D>> icons;
 

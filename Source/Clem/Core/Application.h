@@ -6,6 +6,7 @@
 #include "Core/Math/Math.h"
 #include "ECS/Registry.h"
 #include <cstdint>
+#include <filesystem>
 #include <memory>
 #include <string>
 #include <vector>
@@ -47,6 +48,11 @@ public:
 	 */
     const std::string& getName() const;
 
+    /**
+	 * @brief 获取应用资源目录.
+	 */
+    const std::filesystem::path& getAssetPath();
+
     virtual void init();
     virtual void deinit();
 
@@ -66,7 +72,9 @@ public:
     // void replaceScene(const std::shared_ptr<Scene>& scene);
 
 private:
-    const std::string name;
+    const std::string     name;
+    std::filesystem::path asset = "../assets";
+
     // std::vector<std::shared_ptr<Scene>> scenes;
 
     static Application* instance;

@@ -62,6 +62,11 @@ const string& Application::getName() const
     return name;
 }
 
+const std::filesystem::path& Application::getAssetPath()
+{
+    return asset;
+}
+
 void Application::init()
 {
 }

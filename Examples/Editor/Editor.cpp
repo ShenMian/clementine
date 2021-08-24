@@ -34,8 +34,8 @@ public:
         // model.add<Model>("../assets/models/scene.obj");
         // model.add<Model>("../assets/models/weapon/m4a1.obj");
 
-        model.add<Model>("../../../3DModel/scene/Dabrovic_Sponza/sponza.obj");
-        // model.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj");
+        // model.add<Model>("../../../3DModel/scene/Dabrovic_Sponza/sponza.obj");
+        model.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj");
 
         // model.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Exterior/exterior.obj");
         // model.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Interior/interior.obj");

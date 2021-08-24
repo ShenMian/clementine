@@ -2,6 +2,7 @@
 // License(Apache-2.0)
 
 #include "Browser.h"
+#include "Core/Application.h"
 #include "Window/GlfwWindow.h"
 #include <glad/glad.h>
 #include <imgui/imgui.h>
@@ -11,6 +12,9 @@ namespace clem::ui
 
 Browser::Browser()
 {
+    assets  = Application::get().getAssetPath();
+    current = assets;
+
     icons["file"]         = Texture2D::create("../assets/textures/icons/file.png");
     icons["folder"]       = Texture2D::create("../assets/textures/icons/folder.png");
     icons["folder_empty"] = Texture2D::create("../assets/textures/icons/folder_empty.png");
@@ -39,7 +43,7 @@ void Browser::update(Time dt)
     ImGui::Text("%s", current.string().c_str());
 
     std::shared_ptr<Texture2D> icon;
-    auto columnsNum = std::max((int)(ImGui::GetContentRegionAvailWidth() / 70), 1);
+    auto                       columnsNum = std::max((int)(ImGui::GetContentRegionAvailWidth() / 70), 1);
     ImGui::Columns(columnsNum);
     for(const auto& entry : fs::directory_iterator(current))
     {

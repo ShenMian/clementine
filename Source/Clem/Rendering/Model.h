@@ -6,7 +6,7 @@
 #include "Rendering.h"
 #include <filesystem>
 
-// TODO: ������Դ����. std::shared_ptr<ModelData>
+// TODO: 内存管理. std::shared_ptr<ModelData>
 
 namespace clem
 {

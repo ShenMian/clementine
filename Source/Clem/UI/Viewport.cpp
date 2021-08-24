@@ -250,7 +250,7 @@ void Viewport::updateCameraControl(Time dt)
     float speed = 30 * dt.seconds();
 
     if(isKeyPressed(GLFW_KEY_LEFT_SHIFT))
-        speed *= 2;
+        speed *= 3;
 
 #if 0
     if(isKeyPressed(GLFW_KEY_W))
