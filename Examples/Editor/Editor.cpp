@@ -24,9 +24,6 @@ public:
         createPanels();
         createSkybox();
 
-        Mat4 mat;
-        mat *= Mat4::createTranslation({1, -1, 0.5});
-
         auto model = Main::registry.create("model");
         model.add<Transform>().rotation = {0, 90, 0};
         model.add<Material>();
@@ -35,7 +32,9 @@ public:
         // model.add<Model>("../assets/models/weapon/m4a1.obj");
 
         // model.add<Model>("../../../3DModel/scene/Dabrovic_Sponza/sponza.obj");
+
         model.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj");
+        model.get<Transform>().scale = {0.1, 0.1, 0.1};
 
         // model.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Exterior/exterior.obj");
         // model.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Interior/interior.obj");

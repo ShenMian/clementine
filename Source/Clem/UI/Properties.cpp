@@ -186,12 +186,10 @@ void Properties::showMaterial()
         {
             auto& material = entity.get<Material>();
 
-            ImGui::Text("Shader: Standard");
-
-            ColorEdit("Ambient", material.ambient);
-            ColorEdit("Diffuse", material.diffuse);
-            ColorEdit("Specular", material.specular);
-            ImGui::Text("Shininess: %.5f", material.shininess);
+            ImGui::Text("Shader   : Standard");
+            ImGui::Text("Albedo   : ");
+            ImGui::Text("Metallic : ");
+            ImGui::Text("Shininess: %.3f", material.shininess);
         }
     }
 }

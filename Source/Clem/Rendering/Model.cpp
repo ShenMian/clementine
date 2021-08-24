@@ -89,7 +89,7 @@ void Model::load(const std::filesystem::path& path)
             if(index.texcoord_index >= 0)
                 vertex.uv = {
                     attrib.texcoords[2 * (size_t)index.texcoord_index + 0],
-                    attrib.texcoords[2 * (size_t)index.texcoord_index + 1]};
+                    1.f - attrib.texcoords[2 * (size_t)index.texcoord_index + 1]};
 
             constexpr bool compress = false;
             if constexpr(compress)
@@ -123,11 +123,16 @@ void Model::load(const std::filesystem::path& path)
             if(mat.bump_texname.size())
                 material.normal = Texture2D::create(path.parent_path() / mat.bump_texname);
 
+            if(mat.metallic_texname.size())
+                material.metallic = Texture2D::create(path.parent_path() / mat.metallic_texname);
+
             if(mat.roughness_texname.size())
                 material.roughness = Texture2D::create(path.parent_path() / mat.roughness_texname);
 
-            if(mat.metallic_texname.size())
-                material.metallic = Texture2D::create(path.parent_path() / mat.metallic_texname);
+            if(mat.emissive_texname.size())
+                material.emissive = Texture2D::create(path.parent_path() / mat.emissive_texname);
+
+            material.shininess = mat.shininess;
         }
 
         auto vertexBuffer    = VertexBuffer::create(vertices);

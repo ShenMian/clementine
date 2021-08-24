@@ -41,10 +41,10 @@ struct SpotLight
 
 struct Material
 {
-    vec3  ambient;
-    vec3  diffuse;
-    vec3  specular;
-    float shininess;
+    sampler2D diffuse;
+    sampler2D specular;
+    sampler2D emission;
+    float     shininess;
 };
 
 layout (location = 0) out vec4 frag_color;
@@ -73,8 +73,8 @@ vec4 CalcLighting();
 
 void main()
 {
-    // frag_color = vec4(1.0, 1.0, 1.0, 1.0) * CalcLighting();
-    frag_color = texture(u_texture, vec2(1.0 - v_uv.x, 1.0 - v_uv.y)) * CalcLighting();
+    frag_color = texture(u_texture, vec2(v_uv)) * CalcLighting();
+    // frag_color = CalcLighting();
 
     // 提取亮色
     float brightness = dot(frag_color.rgb, vec3(0.2126, 0.7152, 0.0722));
@@ -89,23 +89,26 @@ vec3 CalcDirLight(DirectionLight light)
 {
     const vec3 dir_to_light = normalize(-light.direction);
 
-    const float ka = 1.0 * light.intesity;
-    const float kd = 1.0 * light.intesity;
-    const float ks = 1.0 * light.intesity;
+    const float ka = light.intesity;
+    const float kd = light.intesity;
+    const float ks = light.intesity;
 
     // 环境光照
-    vec3 ambient = ka * light.color * u_material.ambient;
+    vec3 ambient = ka * light.color * texture(u_material.diffuse, v_uv).rgb;
 
     // 漫反射光照
     float diffuse_amount = max(dot(dir_to_light, v_normal), 0.0);
-    vec3  diffuse        = kd * light.color * diffuse_amount * u_material.diffuse;
+    vec3  diffuse        = kd * light.color * diffuse_amount * texture(u_material.diffuse, v_uv).rgb;
 
     // 镜面反射光照
     vec3  reflected_direction = reflect(dir_to_light, v_normal);
     float specular_amount     = pow(max(dot(reflected_direction, v_dir_to_cam), 0.0), u_material.shininess);
-    vec3  specular            = ks * light.color * specular_amount * u_material.specular;
+    vec3  specular            = ks * light.color * specular_amount * texture(u_material.specular, v_uv).rgb;
 
-    return ambient + diffuse + specular;
+    // 放射光
+    vec3 emission = texture(u_material.emission, v_uv).rgb;
+
+    return ambient + diffuse + specular + emission;
 }
 
 // 计算点光源光照

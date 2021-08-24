@@ -173,12 +173,12 @@ void Viewport::updateLight(Time dt)
 
     DirectionLight dirLight;
     dirLight.setColor({255.f / 255.f, 244.f / 255.f, 214.f / 255.f});
-    dirLight.setIntesity(2.f);
+    dirLight.setIntesity(1.f);
     dirLight.setDirection({0, -1, 0});
     dirLights.push_back(dirLight);
 
     PointLight pointLight;
-    pointLight.setIntesity(3.f);
+    pointLight.setIntesity(1.f);
     pointLight.setPosition({0, 5, 0});
     pointLights.push_back(pointLight);
 

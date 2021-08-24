@@ -11,5 +11,5 @@ uniform sampler2D u_skybox;
 
 void main()
 {
-  frag_color = texture(u_skybox, vec2(v_uv.x, 1.0 - v_uv.y));
+  frag_color = texture(u_skybox, vec2(v_uv.x, v_uv.y));
 }

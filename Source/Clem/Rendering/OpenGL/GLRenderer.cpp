@@ -64,10 +64,14 @@ void GLRenderer::submit(const Entity& entity)
         {
             if(mats[i].albedo)
                 mats[i].albedo->bindUnit(0);
+            if(mats[i].metallic)
+                mats[i].metallic->bindUnit(1);
+            if(mats[i].emissive)
+                mats[i].emissive->bindUnit(2);
 
-            shader->uploadUniform("u_material.ambient", material.ambient);
-            shader->uploadUniform("u_material.diffuse", material.diffuse);
-            shader->uploadUniform("u_material.specular", material.specular);
+            shader->uploadUniform("u_material.diffuse", 0);
+            shader->uploadUniform("u_material.specular", 1);
+            shader->uploadUniform("u_material.emission", 2);
             shader->uploadUniform("u_material.shininess", material.shininess);
 
             meshs[i].vertexArray->bind();
@@ -79,44 +83,12 @@ void GLRenderer::submit(const Entity& entity)
 
 void GLRenderer::submit(const Entity& entity, std::shared_ptr<Shader> shader)
 {
-    auto& mesh     = entity.get<Mesh>();
-    auto& material = entity.get<Material>();
-
-    if(entity.get<Tag>().str == "skybox")
-        return;
-
-    mesh.bind();
-
-    auto& transform = entity.get<Transform>();
-
-    auto texture = mesh.getTexture(Texture2D::Type::Default);
-    if(texture)
-        texture->bindUnit(0);
-
-    shader->bind();
-    shader->uploadUniform("u_model", transform.getModelMatrix());
-
-    shader->uploadUniform("u_material.ambient", material.ambient);
-    shader->uploadUniform("u_material.diffuse", material.diffuse);
-    shader->uploadUniform("u_material.specular", material.specular);
-    shader->uploadUniform("u_material.shininess", material.shininess);
-
-    shader->uploadUniform("u_entity_id", (int)entity.id());
-
-    glDrawElements(GL_TRIANGLES, (GLsizei)mesh.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
-
-    assert(glGetError() == GL_NO_ERROR);
+    Assert::isTrue(false);
 }
 
 void GLRenderer::submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader, const Matrix4& transform)
 {
-    static_assert(sizeof(IndexBuffer::value_type) == sizeof(unsigned int));
-
-    vertexArray->bind();
-    shader->bind();
-    shader->uploadUniform("u_model", transform);
-    glDrawElements(GL_TRIANGLES, (GLsizei)vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
-    assert(glGetError() == GL_NO_ERROR);
+    Assert::isTrue(false);
 }
 
 void GLRenderer::setViewport(int x, int y, int w, int h)
