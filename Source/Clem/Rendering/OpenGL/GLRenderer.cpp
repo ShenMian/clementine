@@ -6,12 +6,62 @@
 #include "Rendering/CommandBuffer.h"
 #include "Rendering/Material.h"
 #include "Rendering/Mesh.h"
-#include "Rendering/VertexArray.h"
 #include "Rendering/Model.h"
+#include "Rendering/VertexArray.h"
 #include <glad/glad.h>
 
 namespace clem
 {
+
+const char* GLGetErrorString(GLenum error)
+{
+    switch(error)
+    {
+    case GL_NO_ERROR:
+        return "GL_NO_ERROR";
+
+    case GL_INVALID_ENUM:
+        return "GL_INVALID_ENUM";
+
+    case GL_INVALID_VALUE:
+        return "GL_INVALID_VALUE";
+
+    case GL_INVALID_OPERATION:
+        return "GL_INVALID_OPERATION";
+
+    case GL_STACK_OVERFLOW:
+        return "GL_STACK_OVERFLOW";
+
+    case GL_STACK_UNDERFLOW:
+        return "GL_STACK_UNDERFLOW";
+
+    case GL_OUT_OF_MEMORY:
+        return "GL_OUT_OF_MEMORY";
+
+    case GL_INVALID_FRAMEBUFFER_OPERATION:
+        return "GL_INVALID_FRAMEBUFFER_OPERATION";
+
+    default:
+        return "unknown";
+    }
+}
+
+void GLCheckError()
+{
+    while(const auto error = glGetError())
+    {
+        if(error == GL_NO_ERROR)
+            break;
+
+        Assert::isTrue(false, std::format("OpenGL unknown error: ({}): {}", error, GLGetErrorString(error)));
+    }
+}
+
+void GLClearError()
+{
+    while(glGetError() != GL_NO_ERROR)
+        ;
+}
 
 GLRenderer& GLRenderer::get()
 {
@@ -78,7 +128,7 @@ void GLRenderer::submit(const Entity& entity)
             glDrawElements(GL_TRIANGLES, (GLsizei)meshs[i].vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
         }
     }
-    assert(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 }
 
 void GLRenderer::submit(const Entity& entity, std::shared_ptr<Shader> shader)

@@ -3,6 +3,7 @@
 
 #include "Viewport.h"
 #include "Browser.h"
+#include "Profiler.h"
 #include "Rendering/OpenGL/GLFrameBuffer.h"
 #include "Window/GlfwWindow.h"
 #include <glad/glad.h>
@@ -16,7 +17,7 @@ namespace clem::ui
 void Viewport::attach()
 {
     standardShader = Shader::create("../assets/shaders/standard.vert", "../assets/shaders/standard.frag");
-    shadowShader = Shader::create("../assets/shaders/shadow.vert", "../assets/shaders/shadow.frag");
+    shadowShader   = Shader::create("../assets/shaders/shadow.vert", "../assets/shaders/shadow.frag");
     skyboxShader   = Shader::create("../assets/shaders/skybox_sphere.vert", "../assets/shaders/skybox_sphere.frag");
     // skyboxShader = Shader::create("../assets/shaders/skybox_cube.vert", "../assets/shaders/skybox_cube.frag");
 
@@ -78,16 +79,27 @@ void Viewport::attach()
         // camera.view.rotateX(speed.y * radians(yOffset));
     };
 
-    texture = Texture2D::create("../assets/textures/wall.jpg");
-
     // camera.setDirection({0, 0, -30}, {0, 0, 1});
     camera.view.translation = {0, 0, -30};
     camera.view.rotation    = {0, 180, 0};
     camera.view.scale       = {2.1, 2.1, 2.1};
+
+    DirectionLight dirLight;
+    dirLight.setColor({255.f / 255.f, 244.f / 255.f, 214.f / 255.f});
+    dirLight.setIntesity(1.f);
+    dirLight.setDirection({0, -1, 0});
+    dirLights.push_back(dirLight);
+
+    PointLight pointLight;
+    pointLight.setIntesity(1.f);
+    pointLight.setPosition({0, 5, 0});
+    pointLights.push_back(pointLight);
 }
 
 void Viewport::update(Time dt)
 {
+    PROFILE_FUNC();
+
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{0, 0});
     ImGui::Begin("Viewport", &visible);
     ImVec2 viewportPos = {ImGui::GetWindowPos().x - ImGui::GetCursorPos().x, ImGui::GetWindowPos().y - ImGui::GetCursorPos().y};
@@ -134,6 +146,8 @@ void Viewport::update(Time dt)
 
 void Viewport::render(Time dt)
 {
+    PROFILE_FUNC();
+
     updateLight(dt);
     updateShadow(dt);
     updateCamera(dt);
@@ -144,14 +158,14 @@ void Viewport::render(Time dt)
     glClearColor(.117f, .564f, 1.f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT /* | GL_STENCIL_BUFFER_BIT*/);
     Main::registry.each<Model>([&](const Entity& e)
-                              {
-                                  if(e.get<Tag>().str == "skybox")
-                                      e.get<Material>().shader = skyboxShader;
-                                  else
-                                      e.get<Material>().shader = standardShader;
+                               {
+                                   if(e.get<Tag>().str == "skybox")
+                                       e.get<Material>().shader = skyboxShader;
+                                   else
+                                       e.get<Material>().shader = standardShader;
 
-                                  Renderer::get()->submit(e);
-                              });
+                                   Renderer::get()->submit(e);
+                               });
     framebuffer->unbind();
 }
 
@@ -167,20 +181,7 @@ void Viewport::onResize(float x, float y)
 
 void Viewport::updateLight(Time dt)
 {
-    std::vector<DirectionLight> dirLights;
-    std::vector<PointLight>     pointLights;
-    std::vector<SpotLight>      spotLights;
-
-    DirectionLight dirLight;
-    dirLight.setColor({255.f / 255.f, 244.f / 255.f, 214.f / 255.f});
-    dirLight.setIntesity(1.f);
-    dirLight.setDirection({0, -1, 0});
-    dirLights.push_back(dirLight);
-
-    PointLight pointLight;
-    pointLight.setIntesity(1.f);
-    pointLight.setPosition({0, 5, 0});
-    pointLights.push_back(pointLight);
+    PROFILE_FUNC();
 
     standardShader->uploadUniform("u_direction_lights_size", (int)pointLights.size());
     for(int i = 0; i < dirLights.size(); i++)
@@ -209,22 +210,33 @@ void Viewport::updateLight(Time dt)
 
 void Viewport::updateShadow(Time dt)
 {
+    PROFILE_FUNC();
+
     const auto size = shadowMap->getSize();
     Renderer::get()->setViewport(0, 0, size.x, size.y);
 
-    shadowMap->bind();
-    glClear(GL_DEPTH_BUFFER_BIT);
+    static Camera shadowCam;
 
-    Main::registry.each<Mesh>([&](const Entity& e)
-                              {
-                                  Renderer::get()->submit(e, shadowShader);
-                              });
+    for(const auto& light : dirLights)
+    {
+        shadowCam.setOrthographic(10, 10, 0.1, 10);
 
-    shadowMap->unbind();
+        shadowShader->uploadUniform("u_view", camera.getViewMatrix());
+        shadowShader->uploadUniform("u_projection", camera.getProjectionMatrix());
+        shadowShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
+
+        shadowMap->bind();
+        glClear(GL_DEPTH_BUFFER_BIT);
+        Main::registry.each<Mesh>([&](const Entity& e)
+                                  { Renderer::get()->submit(e, shadowShader); });
+        shadowMap->unbind();
+    }
 }
 
 void Viewport::updateCamera(Time dt)
 {
+    PROFILE_FUNC();
+
     updateCameraControl(dt);
 
     skyboxShader->uploadUniform("u_view", camera.getViewMatrix());

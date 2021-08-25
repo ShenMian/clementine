@@ -3,6 +3,7 @@
 
 #include "Browser.h"
 #include "Core/Application.h"
+#include "Profiler.h"
 #include "Window/GlfwWindow.h"
 #include <glad/glad.h>
 #include <imgui/imgui.h>
@@ -29,6 +30,8 @@ Browser::Browser()
 
 void Browser::update(Time dt)
 {
+    PROFILE_FUNC();
+
     assert(fs::exists(assets) && fs::exists(current));
 
     if(!visible)

@@ -3,6 +3,7 @@
 
 #include "GLTexture2D.h"
 #include "Assert.hpp"
+#include "GLRenderer.h"
 #include <cassert>
 #include <stb/stb_image.h>
 #include <type_traits>
@@ -146,7 +147,7 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
     glTexSubImage2D(glType, 0, 0, 0, size.x, size.y, dataFormat, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);*/
     
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 
     stbi_image_free(data);
 }
@@ -192,7 +193,7 @@ void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
 
     glBindTexture(glType, 0);
 
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 }
 
 void GLTexture2D::setMinFilter(Filter filter)
@@ -201,7 +202,7 @@ void GLTexture2D::setMinFilter(Filter filter)
 
     bind();
     glTexParameteri(glType, GL_TEXTURE_MIN_FILTER, GLFilter[filter]);
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 }
 
 void GLTexture2D::setMagFilter(Filter filter)
@@ -210,19 +211,19 @@ void GLTexture2D::setMagFilter(Filter filter)
 
     bind();
     glTexParameteri(glType, GL_TEXTURE_MAG_FILTER, GLFilter[filter]);
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 }
 
 void GLTexture2D::bind()
 {
     glBindTexture(glType, handle);
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 }
 
 void GLTexture2D::bindUnit(unsigned int slot)
 {
     glBindTextureUnit(slot, handle);
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 }
 
 Size2i GLTexture2D::getSize() const

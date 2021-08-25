@@ -4,6 +4,7 @@
 #include "Dockspace.h"
 #include "Browser.h"
 #include "Hierarchy.h"
+#include "Profiler.h"
 #include "Properties.h"
 #include <glad/glad.h>
 #include <imgui/imgui.h>
@@ -13,6 +14,8 @@ namespace clem::ui
 
 void Dockspace::update(Time dt)
 {
+    PROFILE_FUNC();
+
     if(!visible)
         return;
 

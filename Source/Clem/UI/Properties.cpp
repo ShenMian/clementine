@@ -5,6 +5,7 @@
 #include "Browser.h"
 #include "Components/Components.h"
 #include "Physics/Rigidbody.h"
+#include "Profiler.h"
 #include "Rendering/Console/Sprite.h"
 #include "Rendering/Material.h"
 #include <filesystem>
@@ -20,58 +21,58 @@ namespace clem::ui
 
 void Properties::update(Time dt)
 {
+    PROFILE_FUNC();
+
+    if(!visible)
+        return;
+
+    ImGui::Begin("Properties", &visible);
+
+    if(!entity.valid())
     {
-        if(!visible)
-            return;
-
-        ImGui::Begin("Properties", &visible);
-
-        if(!entity.valid())
-        {
-            ImGui::End();
-            return;
-        }
-
-        showTag();
-        showTransform();
-        showRigidbody();
-        showModel();
-        showMaterial();
-        showSprite();
-        showScript();
-
-        // 空白区域右键菜单
-        if(ImGui::BeginPopupContextWindow(0, 1, false))
-        {
-            if(ImGui::BeginMenu("Physics"))
-            {
-                if(entity.noneOf<Rigidbody>() && ImGui::MenuItem("Rigidbody"))
-                {
-                    entity.add<Rigidbody>();
-                    ImGui::CloseCurrentPopup();
-                }
-                ImGui::MenuItem("BoxCollider");
-                ImGui::MenuItem("CircleCollider");
-                ImGui::EndMenu();
-            }
-            if(ImGui::BeginMenu("Rendering"))
-            {
-                if(entity.noneOf<Model>() && ImGui::MenuItem("Model"))
-                {
-                    entity.add<Model>();
-                    ImGui::CloseCurrentPopup();
-                }
-                ImGui::MenuItem("Camera");
-                ImGui::MenuItem("Skybox");
-                ImGui::MenuItem("Light");
-                ImGui::MenuItem("Material");
-                ImGui::EndMenu();
-            }
-            ImGui::EndPopup();
-        }
-
         ImGui::End();
+        return;
     }
+
+    showTag();
+    showTransform();
+    showRigidbody();
+    showModel();
+    showMaterial();
+    showSprite();
+    showScript();
+
+    // 空白区域右键菜单
+    if(ImGui::BeginPopupContextWindow(0, 1, false))
+    {
+        if(ImGui::BeginMenu("Physics"))
+        {
+            if(entity.noneOf<Rigidbody>() && ImGui::MenuItem("Rigidbody"))
+            {
+                entity.add<Rigidbody>();
+                ImGui::CloseCurrentPopup();
+            }
+            ImGui::MenuItem("BoxCollider");
+            ImGui::MenuItem("CircleCollider");
+            ImGui::EndMenu();
+        }
+        if(ImGui::BeginMenu("Rendering"))
+        {
+            if(entity.noneOf<Model>() && ImGui::MenuItem("Model"))
+            {
+                entity.add<Model>();
+                ImGui::CloseCurrentPopup();
+            }
+            ImGui::MenuItem("Camera");
+            ImGui::MenuItem("Skybox");
+            ImGui::MenuItem("Light");
+            ImGui::MenuItem("Material");
+            ImGui::EndMenu();
+        }
+        ImGui::EndPopup();
+    }
+
+    ImGui::End();
 }
 
 void Properties::showTag()

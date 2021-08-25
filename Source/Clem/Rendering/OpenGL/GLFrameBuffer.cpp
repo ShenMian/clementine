@@ -4,6 +4,7 @@
 #include "GLFrameBuffer.h"
 #include "Assert.hpp"
 #include "Rendering/Shader.h"
+#include "GLRenderer.h"
 #include <glad/glad.h>
 #include <unordered_map>
 #include <unordered_set>
@@ -96,13 +97,13 @@ void GLFrameBuffer::bind()
     glGetIntegerv(GL_FRAMEBUFFER_BINDING, &defaultFBO);
     glBindFramebuffer(GL_FRAMEBUFFER, handle);
 
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 }
 
 void GLFrameBuffer::unbind()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 }
 
 std::shared_ptr<Texture2D> GLFrameBuffer::getColorAttachment(int index)
@@ -120,7 +121,7 @@ void GLFrameBuffer::clearColorAttachment(int index, int value)
 {
     bind();
     glClearTexImage((GLuint)colorAttachments[index]->getHandle(), 0, GL_RED_INTEGER, GL_INT, &value);
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
     unbind();
 }
 
@@ -165,7 +166,7 @@ void GLFrameBuffer::addColorAttachment(PixelFormat format)
         */
     }
 
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 }
 
 void GLFrameBuffer::addDepthAttachment(PixelFormat format)
@@ -207,7 +208,7 @@ void GLFrameBuffer::addDepthAttachment(PixelFormat format)
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D_MULTISAMPLE, depthAttachment, 0);
         */
     }
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 }
 
 } // namespace clem

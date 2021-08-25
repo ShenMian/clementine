@@ -66,15 +66,17 @@ uniform int            u_point_lights_size;
 uniform PointLight     u_point_lights[POINT_LIGHT_MAX];
 
 uniform Material  u_material;
-uniform sampler2D u_texture;
 uniform int       u_entity_id;
 
+uniform sampler2D u_shadow_map;
+
 vec4 CalcLighting();
+vec3 CalcShadow();
 
 void main()
 {
-    frag_color = texture(u_texture, vec2(v_uv)) * CalcLighting();
-    // frag_color = CalcLighting();
+    // frag_color = texture(u_texture, vec2(v_uv)) * CalcLighting();
+    frag_color = texture(u_material.diffuse, v_uv) * CalcLighting();
 
     // 提取亮色
     float brightness = dot(frag_color.rgb, vec3(0.2126, 0.7152, 0.0722));
@@ -107,8 +109,10 @@ vec3 CalcDirLight(DirectionLight light)
 
     // 放射光
     vec3 emission = texture(u_material.emission, v_uv).rgb;
+    
+    vec3 shadow = CalcShadow();
 
-    return ambient + diffuse + specular + emission;
+    return ambient + (shadow * (diffuse + specular)) + emission;
 }
 
 // 计算点光源光照
@@ -143,28 +147,7 @@ vec4 CalcLighting()
     return vec4(light, 1.0);
 }
 
-/*
-struct Material
+vec3 CalcShadow()
 {
-    sampler2D diffuse;
-    sampler2D specular;
-    float     shininess;
-};
-
-vec4 CalcDirLight(DirectionLight light, vec3 normal, vec3 direction_to_cam)
-{
-    vec3 direction_to_light = normalize(-light.direction);
-
-    // 环境光照
-    vec3 ambient = light.ambient * vec3(texture(u_material.diffuse, v_uv));
-
-    // 漫反射光照
-    float diffuse_amount = max(0.0, dot(direction_to_light, v_normal));
-    vec3  diffuse        = light.diffuse * diffuse_amount * vec3(texture(u_material.diffuse, v_uv));
-
-    // 镜面反射光照
-    vec3  reflected_direction = reflect(direction_to_light, v_normal);
-    float specular_amount     = pow(max(0.0, dot(reflected_light, direction_to_cam)), u_material.shininess);
-    vec3  specular            = light.specular * specular_amount * vec3(texture(u_material.specular, v_uv));
+    return vec3(1.0);
 }
-*/

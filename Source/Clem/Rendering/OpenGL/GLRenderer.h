@@ -9,6 +9,17 @@
 namespace clem
 {
 
+void GLCheckError();
+void GLClearError();
+
+#define GLCall(func)    \
+    do                  \
+    {                   \
+        GLClearError(); \
+        func;           \
+        GLCheckError(); \
+    } while(false)
+
 class Model;
 class Shader;
 class VertexArray;

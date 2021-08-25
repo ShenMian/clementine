@@ -33,7 +33,6 @@ private:
 
     Camera                       camera;
     std::shared_ptr<Shader>      standardShader, shadowShader, skyboxShader;
-    std::shared_ptr<Texture2D>   texture;
     bool                         hovered, locked = false;
     Vector2                      viewportSize;
     std::shared_ptr<FrameBuffer> framebuffer = FrameBuffer::create({(int)(1920 * 0.7), (int)(1080 * 0.7)},
@@ -41,7 +40,11 @@ private:
                                                                     FrameBuffer::PixelFormat::RGBA8,
                                                                     FrameBuffer::PixelFormat::R8,
                                                                     FrameBuffer::PixelFormat::Depth24Stencil8});
-    std::shared_ptr<FrameBuffer> shadowMap    = FrameBuffer::create({1024, 1024}, {FrameBuffer::PixelFormat::DepthComponent});
+    std::shared_ptr<FrameBuffer> shadowMap   = FrameBuffer::create({1024, 1024}, {FrameBuffer::PixelFormat::DepthComponent});
+
+    std::vector<DirectionLight> dirLights;
+    std::vector<PointLight>     pointLights;
+    std::vector<SpotLight>      spotLights;
 };
 
 } // namespace clem::ui

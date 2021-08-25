@@ -3,6 +3,7 @@
 
 #include "GLShader.h"
 #include "Assert.hpp"
+#include "GLRenderer.h"
 #include <cassert>
 #include <filesystem>
 #include <fstream>
@@ -218,7 +219,7 @@ void GLShader::uploadUniform(const std::string& name, const Matrix4& mat)
     auto location = glGetUniformLocation(handle, name.c_str());
     glUniformMatrix4fv(location, 1, false, mat.data()); // column major: GL_FALSE, row major: GL_TRUE
 
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 }
 
 void GLShader::uploadUniform(const std::string& name, const Vector3& vec)
@@ -227,7 +228,7 @@ void GLShader::uploadUniform(const std::string& name, const Vector3& vec)
     auto location = glGetUniformLocation(handle, name.c_str());
     glUniform3f(location, vec.x, vec.y, vec.z);
 
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 }
 
 void GLShader::uploadUniform(const std::string& name, const Vector2& vec)
@@ -236,7 +237,7 @@ void GLShader::uploadUniform(const std::string& name, const Vector2& vec)
     auto location = glGetUniformLocation(handle, name.c_str());
     glUniform2f(location, vec.x, vec.y);
 
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 }
 
 void GLShader::uploadUniform(const std::string& name, float value)
@@ -245,7 +246,7 @@ void GLShader::uploadUniform(const std::string& name, float value)
     auto location = glGetUniformLocation(handle, name.c_str());
     glUniform1f(location, value);
 
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 }
 
 void GLShader::uploadUniform(const std::string& name, int value)
@@ -254,7 +255,7 @@ void GLShader::uploadUniform(const std::string& name, int value)
     auto location = glGetUniformLocation(handle, name.c_str());
     glUniform1i(location, value);
 
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
+    GLCheckError();
 }
 
 void GLShader::loadFromSource(const std::string& vertSrc, const std::string& fragSrc)

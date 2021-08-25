@@ -92,8 +92,6 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     // glEnable(GL_MULTISAMPLE);
 
     UI::windowInit(this);
-
-    Assert::isTrue(glGetError() == GL_NO_ERROR);
 }
 
 GlfwWindow::~GlfwWindow()
