@@ -14,7 +14,7 @@ DirectionLight::DirectionLight(const Vector3& dir, const Vector3& color)
 
 void DirectionLight::setDirection(const Vector3& dir)
 {
-    direction = dir;
+    direction = dir.getNormalized();
 }
 
 const Vector3& DirectionLight::getDirection() const

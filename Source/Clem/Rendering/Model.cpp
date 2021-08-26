@@ -1,8 +1,9 @@
-// Copyright 2021 SMS
+Ôªø// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Model.h"
 #include "Logging/Logging.h"
+#include "Profiler.h"
 
 #include "Core/Main.h"
 #include "Window/Window.h"
@@ -38,9 +39,11 @@ const std::filesystem::path& Model::getPath() const
 
 void Model::load(const std::filesystem::path& path)
 {
+    PROFILE_FUNC();
+
     Assert::isTrue(path.extension() == ".obj");
 
-    this->path = fs::absolute(path);
+    this->path = fs::relative(path, Application::get().getAssetPath());
 
     meshs.clear();
     materials.clear();
@@ -51,9 +54,9 @@ void Model::load(const std::filesystem::path& path)
     config.mtl_search_path = path.parent_path().string();
 
     auto success = reader.ParseFromFile(path.string(), config);
-    Assert::isTrue(success, std::format("loading module error: {}", reader.Error()));
+    Assert::isTrue(success, std::format("loading module '{}' error:\n{}", fs::absolute(path).string(), reader.Error()));
     if(!reader.Warning().empty())
-        CLEM_LOG_WARN("core", std::format("loading module warn: {}", reader.Warning()));
+        CLEM_LOG_WARN("core", std::format("loading module '{}' warn:\n{}", fs::absolute(path).string(), reader.Warning()));
 
     auto& shapes = reader.GetShapes();
     auto& attrib = reader.GetAttrib();
@@ -64,7 +67,7 @@ void Model::load(const std::filesystem::path& path)
         std::vector<vertex_type> vertices;
         std::vector<index_type>  indices;
 
-        // º”‘ÿ∂•µ„
+        // Âä†ËΩΩÈ°∂ÁÇπ
         std::unordered_map<Vertex, IndexBuffer::value_type> uniqueVertices;
         for(const auto& index : shape.mesh.indices)
         {
@@ -94,7 +97,7 @@ void Model::load(const std::filesystem::path& path)
             constexpr bool compress = false;
             if constexpr(compress)
             {
-                // ∂•µ„»•÷ÿ + ∂•µ„∫∏Ω”, –‘ƒ‹æØ∏Ê
+                // È°∂ÁÇπÂéªÈáç + È°∂ÁÇπÁÑäÊé•, ÊÄßËÉΩË≠¶Âëä
                 if(!uniqueVertices.contains(vertex))
                 {
                     if(uniqueVertices.size() >= 500)
@@ -111,12 +114,19 @@ void Model::load(const std::filesystem::path& path)
             }
         }
 
-        // º”‘ÿ≤ƒ÷ 
+        // Âä†ËΩΩÊùêË¥®
         Material material;
         if(shape.mesh.material_ids[0] >= 0)
         {
-            auto& mat = mats[shape.mesh.material_ids[0]];
+            const auto& mat = mats[shape.mesh.material_ids[0]];
 
+            material.ambient   = {mat.ambient[0], mat.ambient[1], mat.ambient[2]};
+            material.diffuse   = {mat.diffuse[0], mat.diffuse[1], mat.diffuse[2]};
+            material.specular  = {mat.specular[0], mat.specular[1], mat.specular[2]};
+            material.emission  = {mat.emission[0], mat.emission[1], mat.emission[2]};
+            material.shininess = mat.shininess;
+
+            // FIXME: ÂèØËÉΩÂ¥©Ê∫É
             if(mat.diffuse_texname.size())
                 material.albedo = Texture2D::create(path.parent_path() / mat.diffuse_texname);
 
@@ -131,8 +141,6 @@ void Model::load(const std::filesystem::path& path)
 
             if(mat.emissive_texname.size())
                 material.emissive = Texture2D::create(path.parent_path() / mat.emissive_texname);
-
-            material.shininess = mat.shininess;
         }
 
         auto vertexBuffer    = VertexBuffer::create(vertices);
@@ -145,7 +153,7 @@ void Model::load(const std::filesystem::path& path)
         meshs.emplace_back(IndexBuffer::create(indices), vertexBuffer);
         materials.push_back(material);
 
-        static int  i   = 0; // µ˜ ‘”√. “ÚŒ™≤ª”¶∏√ «æ≤Ã¨±‰¡ø
+        static int  i   = 0; // Ë∞ÉËØïÁî®. Âõ†‰∏∫‰∏çÂ∫îËØ•ÊòØÈùôÊÄÅÂèòÈáè
         std::string str = "Importing " + std::to_string(++i) + "/" + std::to_string(shapes.size()) + " shapes";
         Main::getWindow()->setTitle(str);
     }

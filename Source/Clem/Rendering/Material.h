@@ -21,7 +21,12 @@ class Material
 
 public:
     Material() = default;
-    Material(float shininess, std::shared_ptr<Shader> shader = nullptr);
+    Material(std::shared_ptr<Shader> shader);
+
+    Vector3 ambient;
+    Vector3 diffuse;
+    Vector3 specular;
+    Vector3 emission;
 
     std::shared_ptr<Texture2D> albedo;
     std::shared_ptr<Texture2D> normal;

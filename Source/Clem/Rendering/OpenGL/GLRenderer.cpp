@@ -88,12 +88,14 @@ void GLRenderer::submit(const Entity& entity)
     if(entity.get<Tag>().str == "skybox")
     {
         auto& mesh = entity.get<Model>().getMeshs()[0];
-        entity.get<Material>().albedo->bindUnit(0);
 
         shader->bind();
+
+        entity.get<Material>().albedo->bindUnit(0);
         shader->uploadUniform("u_skybox", 0);
 
         mesh.vertexArray->bind();
+
         glDepthFunc(GL_LEQUAL);
         glDrawElements(GL_TRIANGLES, (GLsizei)mesh.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
         glDepthFunc(GL_LESS);
@@ -119,12 +121,18 @@ void GLRenderer::submit(const Entity& entity)
             if(mats[i].emissive)
                 mats[i].emissive->bindUnit(2);
 
-            shader->uploadUniform("u_material.diffuse", 0);
-            shader->uploadUniform("u_material.specular", 1);
-            shader->uploadUniform("u_material.emission", 2);
+            shader->uploadUniform("u_material.ambient", material.ambient);
+            shader->uploadUniform("u_material.diffuse", material.diffuse);
+            shader->uploadUniform("u_material.specular", material.specular);
+            shader->uploadUniform("u_material.emission", material.emission);
             shader->uploadUniform("u_material.shininess", material.shininess);
 
+            shader->uploadUniform("u_material.diffuse_tex", 0);
+            shader->uploadUniform("u_material.specular_tex", 1);
+            shader->uploadUniform("u_material.emission_tex", 2);
+
             meshs[i].vertexArray->bind();
+
             glDrawElements(GL_TRIANGLES, (GLsizei)meshs[i].vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
         }
     }

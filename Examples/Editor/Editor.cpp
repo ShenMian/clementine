@@ -31,10 +31,8 @@ public:
         // model.add<Model>("../assets/models/scene.obj");
         // model.add<Model>("../assets/models/weapon/m4a1.obj");
 
-        model.add<Model>("../../../3DModel/scene/Dabrovic_Sponza/sponza.obj");
-
-        // model.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj");
-        // model.get<Transform>().scale = {0.1, 0.1, 0.1};
+        model.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj");
+        model.get<Transform>().scale = {0.1, 0.1, 0.1};
 
         // model.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Exterior/exterior.obj");
         // model.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Interior/interior.obj");
@@ -57,10 +55,9 @@ private:
     {
 #if 1
         // 球形天空盒
-        auto skyboxTexture = Texture2D::create("../assets/textures/skybox/sphere.jpg");
-        auto skybox        = Main::registry.create("skybox");
+        auto skybox = Main::registry.create("skybox");
         skybox.add<Model>("../assets/models/sphere/sphere.obj");
-        skybox.add<Material>().albedo = skyboxTexture;
+        skybox.add<Material>().albedo = Texture2D::create("../assets/textures/skybox/sphere.jpg");
 #else
         // 立方体天空盒
         auto skyboxTexture = Texture2D::create();
@@ -72,8 +69,8 @@ private:
              "../assets/textures/skybox/cube/front.jpg",
              "../assets/textures/skybox/cube/back.jpg"});
         auto skybox = Main::registry.create("skybox");
-        skybox.add<Mesh>("../assets/models/cube.obj").addTexture(skyboxTexture);
-        skybox.add<Material>();
+        skybox.add<Model>("../assets/models/cube.obj");
+        skybox.add<Material>().albedo = skyboxTexture;
 #endif
     }
 };

@@ -95,6 +95,11 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
             dataFormat     = GL_RED;
             break;
 
+        case 16:
+            internalFormat = GL_RG8;
+            dataFormat     = GL_RG;
+            break;
+
         case 24:
             internalFormat = GL_RGB8;
             dataFormat     = GL_RGB;

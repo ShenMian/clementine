@@ -74,26 +74,24 @@ void Viewport::attach()
         // camera.setDirection(camera.view.translate(), front);
         // camera.lookAt(camera.view.translate(), camera.view.translate() + front);
 
-        // FIXME: 不是这样计算的
         // camera.view.rotateY(speed.x * radians(xOffset));
         // camera.view.rotateX(speed.y * radians(yOffset));
     };
 
     // camera.setDirection({0, 0, -30}, {0, 0, 1});
-    camera.view.translation = {0, 0, -30};
-    camera.view.rotation    = {0, 180, 0};
-    camera.view.scale       = {2.1, 2.1, 2.1};
+    camera.view.translation = {0.f,  0.f,  -30.f};
+    camera.view.rotation    = {0.f,  180.f, 0.f};
+    camera.view.scale       = {2.1f, 2.1f,  2.1f};
 
-    DirectionLight dirLight;
-    dirLight.setColor({255.f / 255.f, 244.f / 255.f, 214.f / 255.f});
-    dirLight.setIntesity(1.f);
-    dirLight.setDirection({0, -1, 0});
-    dirLights.push_back(dirLight);
+    dirLights.resize(1);
+    dirLights[0].setColor({255.f / 255.f, 244.f / 255.f, 214.f / 255.f});
+    dirLights[0].setIntesity(1.f);
+    dirLights[0].setDirection({0.5, -1, -0.5});
 
-    PointLight pointLight;
-    pointLight.setIntesity(1.f);
-    pointLight.setPosition({0, 5, 0});
-    pointLights.push_back(pointLight);
+    pointLights.resize(1);
+    pointLights[0].setColor({1, 1, 1});
+    pointLights[0].setIntesity(1.f);
+    pointLights[0].setPosition({0, 5, 0});
 }
 
 void Viewport::update(Time dt)
@@ -125,7 +123,7 @@ void Viewport::update(Time dt)
     {
         hovered = true;
 
-        // 选取实体
+        // 榧犳爣閫夊彇
         if(ImGui::IsMouseClicked(ImGuiMouseButton_Left))
         {
             ImVec2 mouse = {ImGui::GetMousePos().x - viewportPos.x, ImGui::GetMousePos().y - viewportPos.y};
@@ -135,7 +133,7 @@ void Viewport::update(Time dt)
             Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
         }
 
-        // 自由视角
+        // 榧犳爣鍙抽敭鏄惁鎸変笅
         locked = ImGui::IsMouseDown(ImGuiMouseButton_Right);
     }
     else
@@ -183,28 +181,32 @@ void Viewport::updateLight(Time dt)
 {
     PROFILE_FUNC();
 
-    standardShader->uploadUniform("u_direction_lights_size", (int)pointLights.size());
+    standardShader->uploadUniform("u_direction_lights_size", (int)dirLights.size());
     for(int i = 0; i < dirLights.size(); i++)
     {
-        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].color", dirLights[i].getColor());
-        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].intesity", dirLights[i].getIntesity());
-        standardShader->uploadUniform("u_direction_lights[" + std::to_string(i) + "].direction", dirLights[i].getDirection());
+        const auto name = "u_direction_lights[" + std::to_string(i) + "].";
+        standardShader->uploadUniform(name + "color", dirLights[i].getColor());
+        standardShader->uploadUniform(name + "intesity", dirLights[i].getIntesity());
+        standardShader->uploadUniform(name + "direction", dirLights[i].getDirection());
     }
 
     standardShader->uploadUniform("u_point_lights_size", (int)pointLights.size());
     for(int i = 0; i < pointLights.size(); i++)
     {
-        standardShader->uploadUniform("u_point_lights[" + std::to_string(i) + "].color", pointLights[i].getColor());
-        standardShader->uploadUniform("u_point_lights[" + std::to_string(i) + "].intesity", pointLights[i].getIntesity());
-        standardShader->uploadUniform("u_point_lights[" + std::to_string(i) + "].position", pointLights[i].getPosition());
+        const auto name = "u_point_lights[" + std::to_string(i) + "].";
+        standardShader->uploadUniform(name + "color", pointLights[i].getColor());
+        standardShader->uploadUniform(name + "intesity", pointLights[i].getIntesity());
+        standardShader->uploadUniform(name + "position", pointLights[i].getPosition());
     }
 
+    standardShader->uploadUniform("u_spot_lights_size", (int)spotLights.size());
     for(int i = 0; i < spotLights.size(); i++)
     {
-        standardShader->uploadUniform("u_spot_lights[" + std::to_string(i) + "].color", spotLights[i].getColor());
-        standardShader->uploadUniform("u_spot_lights[" + std::to_string(i) + "].intesity", spotLights[i].getIntesity());
-        standardShader->uploadUniform("u_spot_lights[" + std::to_string(i) + "].direction", spotLights[i].getDirection());
-        standardShader->uploadUniform("u_spot_lights[" + std::to_string(i) + "].position", spotLights[i].getPosition());
+        const auto name = "u_spot_lights[" + std::to_string(i) + "].";
+        standardShader->uploadUniform(name + "color", spotLights[i].getColor());
+        standardShader->uploadUniform(name + "intesity", spotLights[i].getIntesity());
+        standardShader->uploadUniform(name + "direction", spotLights[i].getDirection());
+        standardShader->uploadUniform(name + "position", spotLights[i].getPosition());
     }
 }
 
@@ -219,7 +221,7 @@ void Viewport::updateShadow(Time dt)
 
     for(const auto& light : dirLights)
     {
-        shadowCam.setOrthographic(10, 10, 0.1, 10);
+        shadowCam.setOrthographic(10, 10, 0.1f, 10.f);
 
         shadowShader->uploadUniform("u_view", camera.getViewMatrix());
         shadowShader->uploadUniform("u_projection", camera.getProjectionMatrix());
@@ -227,8 +229,10 @@ void Viewport::updateShadow(Time dt)
 
         shadowMap->bind();
         glClear(GL_DEPTH_BUFFER_BIT);
-        Main::registry.each<Mesh>([&](const Entity& e)
-                                  { Renderer::get()->submit(e, shadowShader); });
+        /*
+        Main::registry.each<Model>([&](const Entity& e)
+                                   { Renderer::get()->submit(e, shadowShader); });
+        */
         shadowMap->unbind();
     }
 }

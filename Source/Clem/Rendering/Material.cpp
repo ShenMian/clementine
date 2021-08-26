@@ -8,8 +8,8 @@
 namespace clem
 {
 
-Material::Material(float shininess, std::shared_ptr<Shader> shader)
-    : shininess(shininess), shader(shader)
+Material::Material(std::shared_ptr<Shader> shader)
+    : shader(shader)
 {
 }
 

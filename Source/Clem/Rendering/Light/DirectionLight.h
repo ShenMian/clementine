@@ -34,7 +34,7 @@ public:
     Type getType() const override;
 
 private:
-    Vector3 direction;
+    Vector3 direction = {0, 0, 1};
 };
 
 } // namespace clem

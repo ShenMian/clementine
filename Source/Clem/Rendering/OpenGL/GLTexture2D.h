@@ -49,11 +49,11 @@ public:
     GLTexture2D(const std::filesystem::path& path);
 
 private:
+    void* loadFromFile(const std::filesystem::path& path, int& width, int& height, int& bits);
+
     handle_type handle;
     Size2i      size;
     int         glType;
-
-    void* loadFromFile(const std::filesystem::path& path, int& width, int& height, int& bits);
 };
 
 } // namespace clem

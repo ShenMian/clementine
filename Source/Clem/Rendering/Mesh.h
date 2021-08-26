@@ -18,17 +18,14 @@ namespace clem
 struct Vertex;
 class VertexArray;
 
+// TODO: 内存管理.
+
 /**
  * @brief 网格.
  */
 struct Mesh
 {
-    CLEM_DECLARE_TYPE;
-
 public:
-    using index_type  = IndexBuffer::value_type;
-    using vertex_type = VertexBuffer::value_type;
-
     /**
      * @brief 默认构造函数.
      *
@@ -43,39 +40,16 @@ public:
      */
     Mesh(std::shared_ptr<IndexBuffer> indexBuffer, std::shared_ptr<VertexBuffer> vertexBuffer);
 
-    /**
-     * @brief 构造函数. 从文件载入 3D 模型.
-     *
-     * @param path 文件路径.
-     */
-    Mesh(const std::filesystem::path& path);
-
-    /**
-     * @brief 从文件载入 3D 模型.
-     *
-     * @param path 文件路径.
-     */
-    void load(const std::filesystem::path& path);
-
     void bind();
 
     std::filesystem::path        path;
     std::shared_ptr<VertexArray> vertexArray;
 
-    void                       addTexture(std::shared_ptr<Texture2D> texture);
-    std::shared_ptr<Texture2D> getTexture(Texture2D::Type type) const;
-
 private:
-    void loadFromFile(const std::filesystem::path& path, std::vector<vertex_type>& vertices, std::vector<index_type>& indices);
-
     std::shared_ptr<IndexBuffer>  indexBuffer;
     std::shared_ptr<VertexBuffer> vertexBuffer;
 
-    std::unordered_map<Texture2D::Type, std::shared_ptr<Texture2D>> textures;
-
     static std::unordered_map<std::filesystem::path, Mesh*> cache;
 };
-
-CLEM_DEFINE_TYPE(Mesh);
 
 } // namespace clem

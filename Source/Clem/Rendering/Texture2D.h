@@ -76,7 +76,22 @@ public:
         DepthComponent
     };
 
+    Texture2D() = default;
+
+    /**
+     * @brief 创建空纹理.
+     * 
+     * @param type 纹理类型.
+     */
     static std::shared_ptr<Texture2D> create(Type type = Type::Default);
+
+    /**
+     * @brief 从文件创建纹理.
+     * 
+     * @param path 文件路径.
+     * @param type 纹理类型.
+     * @return std::shared_ptr<Texture2D> 
+     */
     static std::shared_ptr<Texture2D> create(const std::filesystem::path& path, Type type = Type::Default);
 
     /**
@@ -127,6 +142,9 @@ public:
     Type getType() const;
 
 protected:
+    Texture2D(const Texture2D&) = delete;
+    Texture2D& operator=(const Texture2D&) = delete;
+
     Type type;
 
     static std::unordered_map<std::filesystem::path, std::shared_ptr<Texture2D>> cache;

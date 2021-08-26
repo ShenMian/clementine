@@ -8,7 +8,7 @@ namespace clem
 
 void SpotLight::setDirection(const Vector3& dir)
 {
-    direction = dir;
+    direction = dir.getNormalized();
 }
 
 const Vector3& SpotLight::getDirection() const
