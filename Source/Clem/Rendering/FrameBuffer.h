@@ -8,6 +8,8 @@
 #include <memory>
 #include <vector>
 
+// TODO: 支持 resize
+
 namespace clem
 {
 
@@ -21,17 +23,17 @@ public:
 
     /**
      * @brief 创建帧缓冲区.
-     * 
+     *
      * @param size    缓冲区大小.
      * @param formats .
      * @param samples .
-     * @return std::shared_ptr<FrameBuffer> 
+     * @return std::shared_ptr<FrameBuffer>
      */
     static std::shared_ptr<FrameBuffer> create(Size2i size, const std::vector<PixelFormat>& formats, int samples = 1);
 
     /**
      * @brief 获取指定颜色渲染目标.
-     * 
+     *
      * @param index 颜色渲染目标索引.
      */
     virtual std::shared_ptr<Texture2D> getColorAttachment(int index = 0) = 0;
@@ -43,7 +45,7 @@ public:
 
     /**
      * @brief 初始化颜色渲染目标.
-     * 
+     *
      * @param index 颜色渲染目标索引.
      * @param value 初始化的值.
      */
@@ -56,7 +58,7 @@ public:
 
     /**
      * @brief 获取指定颜色渲染目标中某个像素的值.
-     * 
+     *
      * @param index 颜色渲染目标索引.
      * @param pos   像素坐标.
      * @param data  像素数据.

@@ -116,7 +116,7 @@ private:
     version_type version_ = 0;
     Registry*    registry = nullptr;
 
-	friend class Registry;
+    friend class Registry;
 };
 
 /**

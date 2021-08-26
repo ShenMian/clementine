@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "Core/Math/Math.h"
 #include "Components/Transform.h"
+#include "Core/Math/Math.h"
 #include <memory>
 #include <string>
 
@@ -52,7 +52,7 @@ public:
      */
     void setOrthographic(float width, float height, float nearPlane, float farPlane);
 
-    Matrix4 getViewMatrix();
+    Matrix4        getViewMatrix();
     const Matrix4& getProjectionMatrix() const;
     const Matrix4& getViewProjectionMatrix();
 

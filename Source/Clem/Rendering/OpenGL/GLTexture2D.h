@@ -4,8 +4,8 @@
 #pragma once
 
 #include "Rendering/Texture2D.h"
-#include <unordered_map>
 #include <glad/glad.h>
+#include <unordered_map>
 
 namespace clem
 {

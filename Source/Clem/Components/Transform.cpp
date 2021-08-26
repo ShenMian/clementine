@@ -18,15 +18,15 @@ Transform::operator Matrix4()
     const float c1 = std::cos(radians(rotation.y));
     const float s1 = std::sin(radians(rotation.y));
 
-    mat[0][0]      = scale.x * (c1 * c3 + s1 * s2 * s3);
-    mat[0][1]      = scale.x * (c2 * s3);
-    mat[0][2]      = scale.x * (c1 * s2 * s3 - c3 * s1);
-    mat[0][3]      = 0.0f;
+    mat[0][0] = scale.x * (c1 * c3 + s1 * s2 * s3);
+    mat[0][1] = scale.x * (c2 * s3);
+    mat[0][2] = scale.x * (c1 * s2 * s3 - c3 * s1);
+    mat[0][3] = 0.0f;
 
-    mat[1][0]      = scale.y * (c3 * s1 * s2 - c1 * s3);
-    mat[1][1]      = scale.y * (c2 * c3);
-    mat[1][2]      = scale.y * (c1 * c3 * s2 + s1 * s3);
-    mat[1][3]      = 0.0f;
+    mat[1][0] = scale.y * (c3 * s1 * s2 - c1 * s3);
+    mat[1][1] = scale.y * (c2 * c3);
+    mat[1][2] = scale.y * (c1 * c3 * s2 + s1 * s3);
+    mat[1][3] = 0.0f;
 
     mat[2][0] = scale.z * (c2 * s1);
     mat[2][1] = scale.z * (-s2);
@@ -38,7 +38,7 @@ Transform::operator Matrix4()
     mat[3][2] = translation.z;
     mat[3][3] = 1.0f;
 
-	return mat;
+    return mat;
 }
 
 Matrix4 Transform::getModelMatrix()
@@ -78,7 +78,7 @@ Point2 Transform::getPosition() const
 
 Point2 Transform::getWorldPosition()
 {
-	// FIXME
+	// FIXME: 实现不正确
 	if(dirty)
 	{
 		if(parent)

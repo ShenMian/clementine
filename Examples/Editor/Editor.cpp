@@ -24,7 +24,7 @@ public:
         createPanels();
         createSkybox();
 
-        auto model = Main::registry.create("model");
+        auto model                      = Main::registry.create("model");
         model.add<Transform>().rotation = {0, 90, 0};
         model.add<Material>();
 

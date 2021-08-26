@@ -105,7 +105,7 @@ Vector3 Matrix4::translate() const
 
 Vector3 Matrix4::rotate() const
 {
-    return {}; // FIXME
+    return {}; // FIXME: 完善实现
 }
 
 Vector3 Matrix4::scale() const

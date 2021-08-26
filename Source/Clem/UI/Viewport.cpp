@@ -79,9 +79,9 @@ void Viewport::attach()
     };
 
     // camera.setDirection({0, 0, -30}, {0, 0, 1});
-    camera.view.translation = {0.f,  0.f,  -30.f};
-    camera.view.rotation    = {0.f,  180.f, 0.f};
-    camera.view.scale       = {2.1f, 2.1f,  2.1f};
+    camera.view.translation = {0.f, 0.f, -30.f};
+    camera.view.rotation    = {0.f, 180.f, 0.f};
+    camera.view.scale       = {2.1f, 2.1f, 2.1f};
 
     dirLights.resize(1);
     dirLights[0].setColor({255.f / 255.f, 244.f / 255.f, 214.f / 255.f});
@@ -114,7 +114,7 @@ void Viewport::update(Time dt)
     framebuffer->clearColorAttachment(2, -1);
 
     render(dt);
-    ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {0, 1}, {1, 0}); // FIXME
+    ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {0, 1}, {1, 0});
 
     ImGui::Text("CAM: POS(%.3f,%.3f,%.3f) DIR(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z,
                 Matrix4(camera.view).forword().normalize().x, Matrix4(camera.view).forword().normalize().y, Matrix4(camera.view).forword().normalize().z);
