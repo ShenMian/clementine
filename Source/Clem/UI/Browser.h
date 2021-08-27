@@ -26,21 +26,13 @@ public:
     void update(Time dt) override;
 
     inline static bool     visible = true;
-    inline static fs::path assets;
 
 private:
     void refresh();
 
-    fs::path current;
-
-    std::vector<fs::directory_entry> cache;
-
+    fs::path                                                    current;
+    std::vector<fs::directory_entry>                            cache;
     std::unordered_map<std::string, std::shared_ptr<Texture2D>> icons;
-
-    Camera                     camera;
-    Matrix4                    light;
-    std::shared_ptr<Shader>    standard, skybox;
-    std::shared_ptr<Texture2D> texture;
 };
 
 } // namespace clem::ui

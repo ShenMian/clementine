@@ -13,8 +13,8 @@ namespace clem::ui
 
 Browser::Browser()
 {
-    assets  = Application::get().getAssetPath();
-    current = assets;
+    current = Application::get().getAssetPath();
+    refresh();
 
     icons["file"]         = Texture2D::create("../assets/textures/icons/file.png");
     icons["folder"]       = Texture2D::create("../assets/textures/icons/folder.png");
@@ -37,22 +37,18 @@ void Browser::update(Time dt)
 
     ImGui::Begin("Browser", &visible);
 
-    if(ImGui::Button("<"))
-        if(current != assets)
-            current = current.parent_path();
+    const auto assets = Application::get().getAssetPath();
+
+    if(ImGui::Button("<") && current != assets)
+    {
+        current = current.parent_path();
+        refresh();
+    }
     ImGui::SameLine();
     ImGui::Text("%s", current.string().c_str());
 
     std::shared_ptr<Texture2D> icon;
-    auto                       columnsNum = std::max((int)(ImGui::GetContentRegionAvailWidth() / 70), 1);
-    ImGui::Columns(columnsNum);
-
-    static fs::path last;
-    if(current != last)
-    {
-        last = current;
-        refresh();
-    }
+    ImGui::Columns(std::max((int)(ImGui::GetContentRegionAvailWidth() / 70), 1));
     
     for(const auto& entry : cache)
     {
@@ -68,7 +64,15 @@ void Browser::update(Time dt)
             ImGui::PushID(filename.c_str());
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
             if(ImGui::ImageButton((ImTextureID)icon->getHandle(), {48, 48}, {1, 0}, {0, 1}))
+            {
                 current = entry;
+                refresh();
+                
+                ImGui::PopStyleColor();
+                ImGui::PopID();
+
+                break;
+            }
             ImGui::TextWrapped(filename.c_str());
             ImGui::PopStyleColor();
             ImGui::PopID();
@@ -91,6 +95,7 @@ void Browser::update(Time dt)
                 const wchar_t* data    = absPath.c_str();
                 const size_t   size    = (absPath.size() + 1) * sizeof(wchar_t);
                 ImGui::SetDragDropPayload("browser_file", data, size);
+                ImGui::ImageButton((ImTextureID)icon->getHandle(), {48, 48}, {1, 0}, {0, 1});
                 ImGui::TextUnformatted(filename.c_str());
                 ImGui::EndDragDropSource();
             }
