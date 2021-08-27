@@ -91,7 +91,7 @@ void GLRenderer::submit(const Entity& entity)
 
         shader->bind();
 
-        entity.get<Material>().albedo->bindUnit(0);
+        entity.get<Material>().albedo->bind(0);
         shader->uploadUniform("u_skybox", 0);
 
         mesh.vertexArray->bind();
@@ -118,11 +118,11 @@ void GLRenderer::submit(const Entity& entity)
         for(size_t i = 0; i < meshs.size(); i++)
         {
             if(mats[i].albedo)
-                mats[i].albedo->bindUnit(0);
+                mats[i].albedo->bind(0);
             if(mats[i].metallic)
-                mats[i].metallic->bindUnit(1);
+                mats[i].metallic->bind(1);
             if(mats[i].emissive)
-                mats[i].emissive->bindUnit(2);
+                mats[i].emissive->bind(2);
 
             shader->uploadUniform("u_material.ambient", material.ambient);
             shader->uploadUniform("u_material.diffuse", material.diffuse);

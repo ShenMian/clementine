@@ -26,14 +26,14 @@ std::shared_ptr<Texture2D> Texture2D::create(Type type)
     return nullptr;
 }
 
-std::shared_ptr<Texture2D> Texture2D::create(const fs::path& path, Type type)
+std::shared_ptr<Texture2D> Texture2D::create(const fs::path& path, bool genMipmap, Type type)
 {
     switch(Renderer::getAPI())
     {
         using enum Renderer::API;
 
     case OpenGL:
-        auto texture = GLTexture2D::create(path);
+        auto texture = GLTexture2D::create(path, genMipmap);
         texture->setType(type);
         return texture;
     }

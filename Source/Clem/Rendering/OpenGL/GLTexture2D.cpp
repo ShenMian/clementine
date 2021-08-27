@@ -33,13 +33,13 @@ std::shared_ptr<Texture2D> GLTexture2D::create()
     return std::make_shared<GLTexture2D>();
 }
 
-std::shared_ptr<Texture2D> GLTexture2D::create(const fs::path& path, Format format)
+std::shared_ptr<Texture2D> GLTexture2D::create(const fs::path& path, bool genMipmap, Format fmt)
 {
     auto it = cache.find(fs::absolute(path));
     if(it == cache.end())
     {
         auto texture = create();
-        texture->load(path, format);
+        texture->load(path, genMipmap, fmt);
         cache.insert({path, texture});
         return texture;
     }
@@ -63,7 +63,7 @@ GLTexture2D::~GLTexture2D()
     glDeleteTextures(1, &handle);
 }
 
-void GLTexture2D::load(const std::filesystem::path& path, Format format)
+void GLTexture2D::load(const std::filesystem::path& path, bool genMipmap, Format fmt)
 {
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
 
@@ -81,81 +81,52 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
     int  bits;
     auto data = loadFromFile(path, size.x, size.y, bits);
 
-    GLenum internalFormat, dataFormat;
-
-    switch(format)
+    if(fmt == Format::Auto)
     {
-    case Format::Auto:
         switch(bits)
         {
         case 8:
-            internalFormat = GL_R8;
-            dataFormat     = GL_RED;
+            fmt = Format::R8;
             break;
 
         case 16:
-            internalFormat = GL_RG8;
-            dataFormat     = GL_RG;
+            fmt = Format::RG8;
             break;
 
         case 24:
-            internalFormat = GL_RGB8;
-            dataFormat     = GL_RGB;
+            fmt = Format::RGB8;
             break;
 
         case 32:
-            internalFormat = GL_RGBA8;
-            dataFormat     = GL_RGBA;
+            fmt = Format::RGBA8;
             break;
 
         case 48:
-            internalFormat = GL_RGB16;
-            dataFormat     = GL_RGB;
+            fmt = Format::RGB16;
             break;
 
         case 64:
-            internalFormat = GL_RGBA16;
-            dataFormat     = GL_RGBA;
+            fmt = Format::RGBA16;
             break;
 
         default:
             Assert::isTrue(false);
         }
-        break;
-
-    case Format::RGB8:
-        internalFormat = GL_RGB8;
-        dataFormat     = GL_RGB;
-        break;
-
-    case Format::RGBA8:
-        internalFormat = GL_RGBA8;
-        dataFormat     = GL_RGBA;
-        break;
-
-    case Format::R8:
-        internalFormat = GL_R8;
-        dataFormat     = GL_RED;
-        break;
-
-    default:
-        Assert::isTrue(false);
     }
 
-    // glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, size.x, size.y, 0, dataFormat, GL_UNSIGNED_BYTE, data);
-    glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, size.x, size.y, 0, dataFormat, GL_UNSIGNED_BYTE, data);
-    glGenerateMipmap(GL_TEXTURE_2D);
+    // glTexStorage2D(glType, 1, GLInternalFormat(fmt), size.x, size.y);
+    // glTexSubImage2D(glType, 0, 0, 0, size.x, size.y, GLFormat(fmt), GL_UNSIGNED_BYTE, data);
 
-    /*glTexStorage2D(glType, 1, internalFormat, size.x, size.y);
-    glTexSubImage2D(glType, 0, 0, 0, size.x, size.y, dataFormat, GL_UNSIGNED_BYTE, data);
-    glGenerateMipmap(GL_TEXTURE_2D);*/
+    glTexImage2D(glType, 0, GLInternalFormat(fmt), size.x, size.y, 0, GLFormat(fmt), GL_UNSIGNED_BYTE, data);
+
+    if(genMipmap)
+        glGenerateMipmap(glType);
 
     GLCheckError();
 
     stbi_image_free(data);
 }
 
-// TODO: 应该属于 Texture3D
 void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
 {
     Assert::isTrue(faces.size() == 6, "skybox should have 6 faces");
@@ -216,13 +187,7 @@ void GLTexture2D::setMagFilter(Filter filter)
     GLCheckError();
 }
 
-void GLTexture2D::bind()
-{
-    glBindTexture(glType, handle);
-    GLCheckError();
-}
-
-void GLTexture2D::bindUnit(unsigned int slot)
+void GLTexture2D::bind(unsigned int slot) const
 {
     glBindTextureUnit(slot, handle);
     GLCheckError();
@@ -233,7 +198,7 @@ Size2i GLTexture2D::getSize() const
     return size;
 }
 
-size_t GLTexture2D::getHandle()
+size_t GLTexture2D::getHandle() const
 {
     return (size_t)handle;
 }
@@ -247,6 +212,48 @@ void* GLTexture2D::loadFromFile(const std::filesystem::path& path, int& width, i
     bits = channels * 8;
 
     return data;
+}
+
+uint32_t GLTexture2D::GLInternalFormat(Format fmt)
+{
+    switch(fmt)
+    {
+    case Format::RGBA8:
+        return GL_RGBA8;
+
+    case Format::RGB8:
+        return GL_RGB8;
+
+    case Format::RG8:
+        return GL_RG8;
+
+    case Format::R8:
+        return GL_R8;
+
+    default:
+        Assert::isTrue(false);
+    }
+}
+
+uint32_t GLTexture2D::GLFormat(Format fmt)
+{
+    switch(fmt)
+    {
+    case Format::RGBA8:
+        return GL_RGBA;
+
+    case Format::RGB8:
+        return GL_RGB;
+
+    case Format::RG8:
+        return GL_RG;
+
+    case Format::R8:
+        return GL_RED;
+
+    default:
+        Assert::isTrue(false);
+    }
 }
 
 } // namespace clem

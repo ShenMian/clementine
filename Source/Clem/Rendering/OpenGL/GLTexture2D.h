@@ -25,25 +25,23 @@ public:
      *
      * @param path 文件路径.
 	 */
-    static std::shared_ptr<Texture2D> create(const std::filesystem::path& path, Format format = Format::Auto);
+    static std::shared_ptr<Texture2D> create(const std::filesystem::path& path, bool genMipmap = true, Format fmt = Format::Auto);
 
     /**
 	 * @brief 默认析构函数.
 	 */
     ~GLTexture2D();
 
-    void load(const std::filesystem::path& path, Format format = Format::Auto) override;
+    void load(const std::filesystem::path& path, bool genMipmap = true, Format fmt = Format::Auto) override;
     void loadCubemap(const std::vector<std::filesystem::path>& faces) override;
 
     void setMinFilter(Filter filter) override;
     void setMagFilter(Filter filter) override;
 
     Size2i getSize() const override;
-    size_t getHandle() override;
+    size_t getHandle() const override;
 
-    void bind() override;
-
-    void bindUnit(unsigned int slot = 0) override;
+    void bind(unsigned int slot = 0) const override;
 
     GLTexture2D();
     GLTexture2D(const std::filesystem::path& path);
@@ -54,6 +52,9 @@ private:
     handle_type handle;
     Size2i      size;
     int         glType;
+
+    static uint32_t GLInternalFormat(Format fmt);
+    static uint32_t GLFormat(Format fmt);
 };
 
 } // namespace clem

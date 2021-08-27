@@ -71,8 +71,11 @@ public:
         Auto,
         RGBA8,
         RGB8,
+        RG8,
         R8,
-        Depth24Stencil8,
+        RGBA16,
+        RGB16,
+        DepthStencil,
         DepthComponent
     };
 
@@ -92,14 +95,14 @@ public:
      * @param type 纹理类型.
      * @return std::shared_ptr<Texture2D>
      */
-    static std::shared_ptr<Texture2D> create(const std::filesystem::path& path, Type type = Type::Default);
+    static std::shared_ptr<Texture2D> create(const std::filesystem::path& path, bool genMipmap = true, Type type = Type::Default);
 
     /**
      * @brief 从文件载入纹理.
      *
      * @param path 文件路径.
      */
-    virtual void load(const std::filesystem::path& path, Format format = Format::Auto) = 0;
+    virtual void load(const std::filesystem::path& path, bool genMipmap = true, Format format = Format::Auto) = 0;
 
     /**
      * @brief 从文件载入立方体纹理.
@@ -132,11 +135,9 @@ public:
     /**
      * @brief 获取本地句柄.
      */
-    virtual size_t getHandle() = 0;
+    virtual size_t getHandle() const = 0;
 
-    virtual void bind() = 0;
-
-    virtual void bindUnit(unsigned int slot = 0) = 0;
+    virtual void bind(unsigned int slot = 0) const = 0;
 
     void setType(Type type);
     Type getType() const;

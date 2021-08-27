@@ -8,12 +8,12 @@
 namespace clem
 {
 
-VKVertexBuffer::VKVertexBuffer(const std::vector<value_type>& buf)
-    : VKVertexBuffer(buf.data(), buf.size() * sizeof(value_type))
+VKVertexBuffer::VKVertexBuffer(const std::vector<value_type>& buf, Usage usage)
+    : VKVertexBuffer(buf.data(), buf.size() * sizeof(value_type), usage)
 {
 }
 
-VKVertexBuffer::VKVertexBuffer(const void* data, size_t size)
+VKVertexBuffer::VKVertexBuffer(const void* data, size_t size, Usage usage)
 {
     size_ = size;
 

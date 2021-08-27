@@ -18,7 +18,7 @@ public:
 	 *
 	 * @param data 缓冲区.
 	 */
-    GLIndexBuffer(const std::vector<value_type>& buffer);
+    GLIndexBuffer(const std::vector<value_type>& buffer, Usage usage);
 
     /**
 	 * @brief 构造函数.
@@ -26,7 +26,7 @@ public:
 	 * @param data 缓冲区数据指针.
 	 * @param size 缓冲区数据大小.
 	 */
-    GLIndexBuffer(const void* data, size_t size);
+    GLIndexBuffer(const void* data, size_t size, Usage usage);
 
     /**
 	 * @brief 默认析构函数.

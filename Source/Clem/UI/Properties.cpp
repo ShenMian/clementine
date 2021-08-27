@@ -160,7 +160,7 @@ void Properties::showModel()
 
                     // TODO: 添加组件已存在提示, UI 使用提示而不是断言
                     if(path.extension() == L".obj")
-                        entity.get<Model>().load(Browser::assets / path);
+                        entity.get<Model>().load(Application::get().getAssetPath() / path);
                     else
                         Assert::isTrue(false);
                 }

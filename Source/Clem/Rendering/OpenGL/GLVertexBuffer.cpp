@@ -10,19 +10,24 @@ namespace clem
 
 static_assert(std::is_same<GLVertexBuffer::handle_type, GLuint>::value);
 
-GLVertexBuffer::GLVertexBuffer(const std::vector<value_type>& buf)
-    : GLVertexBuffer(buf.data(), buf.size() * sizeof(value_type))
+static std::unordered_map<VertexBuffer::Usage, uint32_t> GLusage = {
+    {VertexBuffer::Usage::Static, GL_STATIC_DRAW},
+    {VertexBuffer::Usage::Dynamic, GL_DYNAMIC_DRAW},
+    {VertexBuffer::Usage::Stream, GL_STREAM_DRAW}};
+
+GLVertexBuffer::GLVertexBuffer(const std::vector<value_type>& buf, Usage usage)
+    : GLVertexBuffer(buf.data(), buf.size() * sizeof(value_type), usage)
 {
 }
 
-GLVertexBuffer::GLVertexBuffer(const void* data, size_t size)
+GLVertexBuffer::GLVertexBuffer(const void* data, size_t size, Usage usage)
 {
     size_  = size;
     count_ = size / sizeof(value_type);
 
     glCreateBuffers(1, &handle);
     bind();
-    glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, size, data, GLusage[usage]);
 }
 
 GLVertexBuffer::~GLVertexBuffer()

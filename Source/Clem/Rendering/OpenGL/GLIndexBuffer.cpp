@@ -4,25 +4,31 @@
 #include "GLIndexBuffer.h"
 #include <glad/glad.h>
 #include <type_traits>
+#include <unordered_map>
 
 namespace clem
 {
 
 static_assert(std::is_same<GLIndexBuffer::handle_type, GLuint>::value);
 
-GLIndexBuffer::GLIndexBuffer(const std::vector<value_type>& buf)
-    : GLIndexBuffer(buf.data(), buf.size() * sizeof(value_type))
+static std::unordered_map<IndexBuffer::Usage, uint32_t> GLusage = {
+    {IndexBuffer::Usage::Static, GL_STATIC_DRAW},
+    {IndexBuffer::Usage::Dynamic, GL_DYNAMIC_DRAW},
+    {IndexBuffer::Usage::Stream, GL_STREAM_DRAW}};
+
+GLIndexBuffer::GLIndexBuffer(const std::vector<value_type>& buf, Usage usage)
+    : GLIndexBuffer(buf.data(), buf.size() * sizeof(value_type), usage)
 {
 }
 
-GLIndexBuffer::GLIndexBuffer(const void* data, size_t size)
+GLIndexBuffer::GLIndexBuffer(const void* data, size_t size, Usage usage)
 {
     size_  = size;
     count_ = size / sizeof(value_type);
 
     glCreateBuffers(1, &handle);
     bind();
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, GLusage[usage]);
 }
 
 GLIndexBuffer::~GLIndexBuffer()

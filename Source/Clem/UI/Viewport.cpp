@@ -268,7 +268,7 @@ void Viewport::updateCameraControl(Time dt)
     if(!ImGui::IsWindowHovered())
         return;
 
-    float speed = 30 * dt.seconds();
+    float speed = 40 * dt.seconds();
 
     if(isKeyPressed(GLFW_KEY_LEFT_SHIFT))
         speed *= 3;

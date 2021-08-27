@@ -9,28 +9,28 @@
 namespace clem
 {
 
-std::shared_ptr<VertexBuffer> VertexBuffer::create(const std::vector<value_type>& data)
+std::shared_ptr<VertexBuffer> VertexBuffer::create(const std::vector<value_type>& data, Usage usage)
 {
     switch(Renderer::getAPI())
     {
         using enum Renderer::API;
 
     case OpenGL:
-        return std::make_shared<GLVertexBuffer>(data);
+        return std::make_shared<GLVertexBuffer>(data, usage);
     }
     return nullptr;
 }
-std::shared_ptr<VertexBuffer> VertexBuffer::create(const void* data, size_t size)
+std::shared_ptr<VertexBuffer> VertexBuffer::create(const void* data, size_t size, Usage usage)
 {
     switch(Renderer::getAPI())
     {
         using enum Renderer::API;
 
     case OpenGL:
-        return std::make_shared<GLVertexBuffer>(data, size);
+        return std::make_shared<GLVertexBuffer>(data, size, usage);
 
     case Vulkan:
-        return std::make_shared<VKVertexBuffer>(data, size);
+        return std::make_shared<VKVertexBuffer>(data, size, usage);
     }
     return nullptr;
 }

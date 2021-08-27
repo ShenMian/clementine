@@ -8,12 +8,12 @@
 namespace clem
 {
 
-VKIndexBuffer::VKIndexBuffer(const std::vector<value_type>& buf)
-    : VKIndexBuffer(buf.data(), buf.size() * sizeof(value_type))
+VKIndexBuffer::VKIndexBuffer(const std::vector<value_type>& buf, Usage usage)
+    : VKIndexBuffer(buf.data(), buf.size() * sizeof(value_type), usage)
 {
 }
 
-VKIndexBuffer::VKIndexBuffer(const void* data, size_t size)
+VKIndexBuffer::VKIndexBuffer(const void* data, size_t size, Usage usage)
 {
     size_  = size;
     count_ = size / sizeof(value_type);

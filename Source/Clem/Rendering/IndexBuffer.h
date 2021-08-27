@@ -24,12 +24,19 @@ class IndexBuffer
 public:
     using value_type = unsigned int;
 
+    enum class Usage
+    {
+        Static,
+        Dynamic,
+        Stream
+    };
+
     /**
 	 * @brief 创建 IndexBuffer.
 	 *
 	 * @param data 缓冲区.
 	 */
-    static std::shared_ptr<IndexBuffer> create(const std::vector<value_type>& buffer);
+    static std::shared_ptr<IndexBuffer> create(const std::vector<value_type>& buffer, Usage usage = Usage::Static);
 
     /**
 	 * @brief 创建 IndexBuffer.
@@ -37,7 +44,7 @@ public:
 	 * @param data 缓冲区数据指针.
 	 * @param size 缓冲区数据大小.
 	 */
-    static std::shared_ptr<IndexBuffer> create(const void* data, size_t size);
+    static std::shared_ptr<IndexBuffer> create(const void* data, size_t size, Usage usage = Usage::Static);
 
     size_t size() const;
     size_t count() const;

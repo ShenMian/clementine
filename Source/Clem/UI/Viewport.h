@@ -39,7 +39,7 @@ private:
                                                                    {FrameBuffer::PixelFormat::RGBA8,
                                                                     FrameBuffer::PixelFormat::RGBA8,
                                                                     FrameBuffer::PixelFormat::R8,
-                                                                    FrameBuffer::PixelFormat::Depth24Stencil8});
+                                                                    FrameBuffer::PixelFormat::DepthStencil});
     std::shared_ptr<FrameBuffer> shadowMap   = FrameBuffer::create({1024, 1024}, {FrameBuffer::PixelFormat::DepthComponent});
 
     std::vector<DirectionLight> dirLights;

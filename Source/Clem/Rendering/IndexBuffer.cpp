@@ -9,32 +9,32 @@
 namespace clem
 {
 
-std::shared_ptr<IndexBuffer> IndexBuffer::create(const std::vector<value_type>& data)
+std::shared_ptr<IndexBuffer> IndexBuffer::create(const std::vector<value_type>& data, Usage usage)
 {
     switch(Renderer::getAPI())
     {
         using enum Renderer::API;
 
     case OpenGL:
-        return std::make_shared<GLIndexBuffer>(data);
+        return std::make_shared<GLIndexBuffer>(data, usage);
 
     case Vulkan:
-        return std::make_shared<VKIndexBuffer>(data);
+        return std::make_shared<VKIndexBuffer>(data, usage);
     }
     return nullptr;
 }
 
-std::shared_ptr<IndexBuffer> IndexBuffer::create(const void* data, size_t size)
+std::shared_ptr<IndexBuffer> IndexBuffer::create(const void* data, size_t size, Usage usage)
 {
     switch(Renderer::getAPI())
     {
         using enum Renderer::API;
 
     case OpenGL:
-        return std::make_shared<GLIndexBuffer>(data, size);
+        return std::make_shared<GLIndexBuffer>(data, size, usage);
 
     case Vulkan:
-        return std::make_shared<VKIndexBuffer>(data, size);
+        return std::make_shared<VKIndexBuffer>(data, size, usage);
     }
     return nullptr;
 }
