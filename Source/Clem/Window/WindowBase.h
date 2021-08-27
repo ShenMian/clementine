@@ -87,6 +87,18 @@ public:
 	 */
     virtual bool isVisible() const = 0;
 
+    /**
+	 * @brief 设置是否开启垂直同步.
+	 *
+	 * @param enable true 为开启, false 为关闭.
+	 */
+    virtual void setSync(bool enable) = 0;
+
+    /**
+	 * @brief 设置窗口图标.
+	 *
+	 * @param path 图标文件路径.
+	 */
     virtual void setIcon(const std::filesystem::path& path) = 0;
 
     virtual void* nativeHandle() const = 0;

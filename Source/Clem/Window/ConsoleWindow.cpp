@@ -53,6 +53,11 @@ bool ConsoleWindow::isVisible() const
     return true;
 }
 
+void ConsoleWindow::setSync(bool enable)
+{
+    assert(false);
+}
+
 void ConsoleWindow::setIcon(const fs::path& path)
 {
     assert(false);

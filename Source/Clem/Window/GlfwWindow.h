@@ -42,61 +42,17 @@ public:
 	 */
     ~GlfwWindow();
 
-    /**
-	 * @brief 更新.
-	 *
-	 * 轮询事件, 响应窗口事件.
-	 */
-    void update(Time dt) override;
-
-    /**
-	 * @brief 设置终端窗口标题.
-	 *
-	 * @warn 此函数性能不稳定, 可能造成超高延迟, 不应该频繁调用.
-	 */
-    void setTitle(const std::string& title) override;
-
-    /**
-	 * @brief 设置窗口大小.
-	 */
-    void setSize(Size2 size) override;
-
-    /**
-	 * @brief 获取窗口大小.
-	 */
-    Size2 getSize() override;
-
-    /**
-	 * @brief 设置窗口坐标.
-	 *
-	 * @param pos 新窗口坐标.
-	 */
-    void setPosition(Size2i pos) override;
-
-    /**
-	 * @brief 获取窗口坐标.
-	 *
-	 * @return 当前窗口坐标.
-	 */
+    void   update(Time dt) override;
+    void   setTitle(const std::string& title) override;
+    void   setSize(Size2 size) override;
+    Size2  getSize() override;
+    void   setPosition(Size2i pos) override;
     Size2i getPosition() override;
-
-    /**
-	 * @brief 设置窗口可见性.
-	 *
-	 * @param visible true 为可见, false 为不可见.
-	 */
-    void setVisible(bool visible) override;
-
-    /**
-	 * @brief 获取窗口可见性.
-	 *
-	 * @return true 为可见, false 为不可见.
-	 */
-    bool isVisible() const override;
-
-    void setIcon(const std::filesystem::path& path) override;
-
-    void* nativeHandle() const override;
+    void   setVisible(bool visible) override;
+    bool   isVisible() const override;
+    void   setSync(bool enable) override;
+    void   setIcon(const std::filesystem::path& path) override;
+    void*  nativeHandle() const override;
 
     std::vector<std::string_view> getRequiredInstanceExtensions() const;
     vk::SurfaceKHR                getWindowSurface(const vk::Instance& vkInstance) const;

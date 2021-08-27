@@ -22,30 +22,19 @@ public:
 	  */
     ConsoleWindow(const std::string& title, Size2i size);
 
-    /**
-	  * @brief 更新.
-	  *
-	  * 轮询事件, 响应窗口事件.
-	  */
     void update(Time dt) override;
 
     /**
-	  * @brief 设置终端窗口标题.
-	  *
 	  * @warning 此函数性能不稳定, 可能造成超高延迟, 不应该频繁调用.
  	  */
     void setTitle(const std::string& title) override;
 
     /**
-	  * @brief 设置终端缓冲区大小, 单位: 字符.
-	  *
 	  * @warning 不影响终端窗口大小.
 	  */
     void setSize(Size2 size) override;
 
     /**
-	  * @brief 获取终端缓冲区大小, 单位: 字符.
- 	  *
  	  * @warning 不代表终端窗口大小.
  	  */
     Size2 getSize() override;
@@ -67,11 +56,19 @@ public:
 
     /**
 	  * @warning 终端窗口不支持.
-		*
-		* @return true
+	  *
+	  * @return true
 	  */
     bool isVisible() const override;
 
+    /**
+	  * @warning 终端窗口不支持.
+	  */
+    void setSync(bool enable) override;
+
+    /**
+	  * @warning 终端窗口不支持.
+	  */
     void setIcon(const std::filesystem::path& path) override;
 
     /**

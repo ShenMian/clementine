@@ -177,6 +177,14 @@ bool GlfwWindow::isVisible() const
     return glfwGetWindowAttrib(handle, GLFW_VISIBLE);
 }
 
+void GlfwWindow::setSync(bool enable)
+{
+    if(enable)
+        glfwSwapInterval(1);
+    else
+        glfwSwapInterval(0);
+}
+
 void GlfwWindow::setIcon(const fs::path& path)
 {
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
