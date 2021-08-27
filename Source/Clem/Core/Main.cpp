@@ -108,6 +108,14 @@ void Main::mainLoop()
             std::this_thread::sleep_for(500ms);
             previous = getCurrentMillSecond();
         }
+
+        // 帧率控制. 积分控制
+        const auto target   = static_cast<uint16_t>(1000.f / std::max({inputRate, updateRate, renderRate}) + 0.5);
+        static int integral = 0;
+        auto       error    = target - dt;
+        integral += error;
+        if(integral > 0)
+            std::this_thread::sleep_for(std::chrono::milliseconds(integral));
     }
 }
 
@@ -164,19 +172,6 @@ void Main::updateFrameRate(uint16_t dt)
         frameRate = frames;
         frames = lag = 0;
         window->setTitle(app->getName() + " | " + std::to_string(frameRate) + "FPS");
-    }
-
-    // 积分控制. 限制主循环速度, 减少 CPU 占用
-    const auto target = static_cast<uint16_t>(
-        1000 / std::max({inputRate, updateRate, renderRate}));
-    static int integral = 0;
-    auto       error    = target - dt;
-    if(error)
-    {
-        integral += error > 0 ? std::abs(error) : -std::abs(error);
-        if(error + integral <= 0)
-            return;
-        std::this_thread::sleep_for(std::chrono::milliseconds(error + integral));
     }
 }
 

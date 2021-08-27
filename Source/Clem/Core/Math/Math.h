@@ -10,15 +10,15 @@ constexpr float rad_to_deg = 180 / pi;
 namespace clem
 {
 
-float radians(float degree);
-float degree(float radians);
+float radians(float degrees);
+float degrees(float radians);
 
-inline float radians(float degree)
+inline float radians(float degrees)
 {
-    return degree * deg_to_rad;
+    return degrees * deg_to_rad;
 }
 
-inline float degree(float radians)
+inline float degrees(float radians)
 {
     return radians * rad_to_deg;
 }

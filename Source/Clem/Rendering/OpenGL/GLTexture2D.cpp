@@ -50,7 +50,6 @@ std::shared_ptr<Texture2D> GLTexture2D::create(const fs::path& path, Format form
 GLTexture2D::GLTexture2D()
 {
     glType = GL_TEXTURE_2D;
-
     glCreateTextures(glType, 1, &handle);
 }
 
@@ -69,7 +68,6 @@ void GLTexture2D::load(const std::filesystem::path& path, Format format)
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
 
     glType = GL_TEXTURE_2D;
-
     glCreateTextures(glType, 1, &handle);
     bind();
 
@@ -163,7 +161,6 @@ void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
     Assert::isTrue(faces.size() == 6, "skybox should have 6 faces");
 
     glType = GL_TEXTURE_CUBE_MAP;
-
     glCreateTextures(glType, 1, &handle);
     bind();
 

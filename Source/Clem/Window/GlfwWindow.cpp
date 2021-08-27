@@ -85,6 +85,18 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
 
     glfwSetMouseButtonCallback(handle, nullptr);
 
+    glfwSetWindowFocusCallback(handle, [](GLFWwindow* window, int focused)
+                               {
+                                   static uint16_t rate = Main::getRenderRate();
+                                   if(focused)
+                                       Main::setRenderRate(rate);
+                                   else
+                                   {
+                                       rate = Main::getRenderRate();
+                                       Main::setRenderRate(1);
+                                   }
+                               });
+
     // glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // 开启 MASS 抗锯齿

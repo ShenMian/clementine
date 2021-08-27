@@ -23,9 +23,9 @@ public:
     using vertex_type = VertexBuffer::value_type;
 
     Model() = default;
-    Model(const std::filesystem::path& path);
+    Model(const std::filesystem::path& path, bool compress = false);
 
-    void load(const std::filesystem::path& path);
+    void load(const std::filesystem::path& path, bool compress = false);
 
     const std::vector<Mesh>&     getMeshs() const;
     const std::vector<Material>& getMaterials() const;

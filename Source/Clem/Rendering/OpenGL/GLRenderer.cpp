@@ -108,6 +108,9 @@ void GLRenderer::submit(const Entity& entity)
         auto& meshs = model.getMeshs();
         auto& mats  = model.getMaterials();
 
+        if(meshs.empty())
+            return;
+
         shader->bind();
         shader->uploadUniform("u_model", transform);
         shader->uploadUniform("u_entity_id", (int)entity.id());
@@ -127,9 +130,9 @@ void GLRenderer::submit(const Entity& entity)
             shader->uploadUniform("u_material.emission", material.emission);
             shader->uploadUniform("u_material.shininess", material.shininess);
 
-            shader->uploadUniform("u_material.diffuse_tex", 0);
-            shader->uploadUniform("u_material.specular_tex", 1);
-            shader->uploadUniform("u_material.emission_tex", 2);
+            shader->uploadUniform("u_material.albedo", 0);
+            shader->uploadUniform("u_material.metallic", 1);
+            shader->uploadUniform("u_material.emissive", 2);
 
             meshs[i].vertexArray->bind();
 

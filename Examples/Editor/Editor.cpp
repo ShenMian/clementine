@@ -5,6 +5,7 @@
 #include <future>
 #include <iostream>
 #include <string>
+#include <thread>
 
 using namespace std;
 using namespace clem;
@@ -28,8 +29,8 @@ public:
         model.add<Transform>().rotation = {0, 90, 0};
         model.add<Material>();
 
-        // model.add<Model>("../assets/models/scene.obj");
-        // model.add<Model>("../assets/models/weapon/m4a1.obj");
+        // model.add<Model>("../assets/models/scene.obj", true);
+        // model.add<Model>("../assets/models/weapon/m4a1.obj", true);
 
         model.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj");
         model.get<Transform>().scale = {0.1, 0.1, 0.1};

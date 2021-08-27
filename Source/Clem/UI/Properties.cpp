@@ -38,7 +38,6 @@ void Properties::update(Time dt)
     showTransform();
     showRigidbody();
     showModel();
-    showMaterial();
     showSprite();
     showScript();
 

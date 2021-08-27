@@ -16,10 +16,10 @@ namespace fs = std::filesystem;
 namespace clem
 {
 
-Model::Model(const std::filesystem::path& path)
+Model::Model(const std::filesystem::path& path, bool compress)
 {
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", fs::absolute(path).string()));
-    load(path);
+    load(path, compress);
 }
 
 const std::vector<Mesh>& Model::getMeshs() const
@@ -37,7 +37,7 @@ const std::filesystem::path& Model::getPath() const
     return path;
 }
 
-void Model::load(const std::filesystem::path& path)
+void Model::load(const std::filesystem::path& path, bool compress)
 {
     PROFILE_FUNC();
 
@@ -94,8 +94,7 @@ void Model::load(const std::filesystem::path& path)
                     attrib.texcoords[2 * (size_t)index.texcoord_index + 0],
                     1.f - attrib.texcoords[2 * (size_t)index.texcoord_index + 1]};
 
-            constexpr bool compress = false;
-            if constexpr(compress)
+            if(compress)
             {
                 // 顶点去重 + 顶点焊接, 性能警告
                 if(!uniqueVertices.contains(vertex))
@@ -130,8 +129,11 @@ void Model::load(const std::filesystem::path& path)
             if(mat.diffuse_texname.size())
                 material.albedo = Texture2D::create(path.parent_path() / mat.diffuse_texname);
 
-            if(mat.bump_texname.size())
-                material.normal = Texture2D::create(path.parent_path() / mat.bump_texname);
+            if(mat.normal_texname.size())
+                material.normal = Texture2D::create(path.parent_path() / mat.normal_texname);
+
+            // if(mat.bump_texname.size())
+            //     material.normal = Texture2D::create(path.parent_path() / mat.bump_texname);
 
             if(mat.metallic_texname.size())
                 material.metallic = Texture2D::create(path.parent_path() / mat.metallic_texname);

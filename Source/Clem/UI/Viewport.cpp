@@ -33,7 +33,7 @@ void Viewport::attach()
             fov -= (float)yOffset;
         fov = std::max(1.f, fov);
         fov = std::min(60.f, fov);
-        camera.setPerspective(radians(fov), viewportSize.x / viewportSize.y, 0.03, 10000.f);
+        camera.setPerspective(radians(fov), viewportSize.x / viewportSize.y, 0.03f, 10000.f);
     };
 
     win->onMouseMove = [this](double x, double y)
@@ -48,8 +48,8 @@ void Viewport::attach()
             return;
         }
 
-        auto xOffset = x - last.x;
-        auto yOffset = last.y - y;
+        auto xOffset = (float)x - last.x;
+        auto yOffset = last.y - (float)y;
         last         = {(float)x, (float)y};
 
         float sensitivity = 0.05;
@@ -57,7 +57,7 @@ void Viewport::attach()
         yOffset *= sensitivity;
 
         static float yaw = 180.f, pitch = 0.f;
-        yaw -= xOffset;
+        yaw   -= xOffset;
         pitch += yOffset;
 
         pitch = std::max(-89.f, pitch);
@@ -68,7 +68,7 @@ void Viewport::attach()
         front.y = std::sin(radians(pitch));
         front.z = std::sin(radians(yaw)) * std::cos(radians(pitch));
         front.normalize();
-
+        
         camera.view.rotation = {-pitch, yaw, 0.f};
 
         // camera.setDirection(camera.view.translate(), front);
@@ -88,10 +88,13 @@ void Viewport::attach()
     dirLights[0].setIntesity(1.f);
     dirLights[0].setDirection({0.5, -1, -0.5});
 
-    pointLights.resize(1);
-    pointLights[0].setColor({1, 1, 1});
+    pointLights.resize(2);
+    pointLights[0].setColor({1, 0, 0});
     pointLights[0].setIntesity(1.f);
-    pointLights[0].setPosition({0, 5, 0});
+    pointLights[0].setPosition({5, 5, 0});
+    pointLights[1].setColor({0, 1, 0});
+    pointLights[1].setIntesity(1.f);
+    pointLights[1].setPosition({-5, 5, 0});
 }
 
 void Viewport::update(Time dt)
