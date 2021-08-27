@@ -99,6 +99,8 @@ private:
     static void render(uint16_t dt);
     static void updateFrameRate(uint16_t dt);
 
+    static void sleep(float ms);
+
     static long getCurrentMillSecond();
 
     static void onSignal(int signal);

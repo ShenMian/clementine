@@ -15,6 +15,7 @@
 #include "Rendering/Rendering.h"
 #include "Time.h"
 #include "Window/Window.h"
+#include <numeric>
 #include <csignal>
 #include <map>
 #include <string>
@@ -110,12 +111,10 @@ void Main::mainLoop()
         }
 
         // 帧率控制. 积分控制
-        const auto target   = static_cast<uint16_t>(1000.f / std::max({inputRate, updateRate, renderRate}) + 0.5);
-        static int integral = 0;
-        auto       error    = target - dt;
-        integral += error;
-        if(integral > 0)
-            std::this_thread::sleep_for(std::chrono::milliseconds(integral));
+        const float  target   = 1000.f / std::max({inputRate, updateRate, renderRate});
+        static float integral = 0;
+        integral += target - dt;
+        sleep(integral);
     }
 }
 
@@ -173,6 +172,21 @@ void Main::updateFrameRate(uint16_t dt)
         frames = lag = 0;
         window->setTitle(app->getName() + " | " + std::to_string(frameRate) + "FPS");
     }
+}
+
+void Main::sleep(float ms)
+{
+#if 1
+    if(ms > 0)
+        std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<uint16_t>(ms + 0.5)));
+#else
+    if(ms > 0)
+    {
+        const auto end = getCurrentMillSecond() + static_cast<uint16_t>(ms + 0.5);
+        while(getCurrentMillSecond() < end)
+            ;
+    }
+#endif
 }
 
 void Main::parseArgs(int argc, char* argv[])
