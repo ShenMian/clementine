@@ -25,6 +25,7 @@ private:
     void showTransform();
     void showRigidbody();
     void showModel();
+    void showLight();
     void showMaterial();
     void showSprite();
     void showScript();

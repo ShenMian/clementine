@@ -38,6 +38,7 @@ void Properties::update(Time dt)
     showTransform();
     showRigidbody();
     showModel();
+    showLight();
     showSprite();
     showScript();
 
@@ -173,19 +174,87 @@ void Properties::showModel()
             // TODO
             ImGui::Text("Shapes  : %d", model.getMeshs().size());
 
-            auto vertices = model.getMeshs()[0].vertexArray->getVertexBuffer()->count();
-            if(vertices < 1000)
-                ImGui::Text("Vertices: %d", vertices);
-            else
-                ImGui::Text("Vertices: %.1fk", (float)vertices / 1000);
+            const auto& meshs = model.getMeshs();
+            const auto& mats  = model.getMaterials();
 
-            auto indices = model.getMeshs()[0].vertexArray->getIndexBuffer()->count();
-            if(indices < 1000)
-                ImGui::Text("Indices : %d", indices);
-            else
-                ImGui::Text("Indices : %.1fk", (float)indices / 1000);
+            for(int i = 0; i < meshs.size(); i++)
+            {
+                if(ImGui::TreeNodeEx(std::format("Shape {}", i).c_str()))
+                {
+                    auto vertices = meshs[i].vertexArray->getVertexBuffer()->count();
+                    if(vertices < 1000)
+                        ImGui::Text("Vertices: %d", vertices);
+                    else
+                        ImGui::Text("Vertices: %.1fk", (float)vertices / 1000);
+
+                    auto indices = meshs[i].vertexArray->getIndexBuffer()->count();
+                    if(indices < 1000)
+                        ImGui::Text("Indices : %d", indices);
+                    else
+                        ImGui::Text("Indices : %.1fk", (float)indices / 1000);
+
+                    if(i < mats.size())
+                    {
+                        const auto& mat = mats[i];
+
+                        ImGui::Columns(2);
+
+                        if(mat.albedo)
+                        {
+                            ImGui::Image((ImTextureID)mat.albedo->getHandle(), {24, 24}, {1, 0}, {0, 1});
+                            if(ImGui::IsItemHovered())
+                                ImGui::Image((ImTextureID)mat.albedo->getHandle(), {64, 64}, {1, 0}, {0, 1});
+                            ImGui::NextColumn();
+                            ImGui::Text("Albedo");
+                            ImGui::Columns(1);
+                            ImGui::Separator();
+                        }
+
+                        if(mat.normal)
+                        {
+                            ImGui::Image((ImTextureID)mat.normal->getHandle(), {24, 24}, {1, 0}, {0, 1});
+                            ImGui::NextColumn();
+                            ImGui::Text("Normal");
+                            ImGui::Columns(1);
+                            ImGui::Separator();
+                        }
+
+                        if(mat.metallic)
+                        {
+                            ImGui::Image((ImTextureID)mat.metallic->getHandle(), {24, 24}, {1, 0}, {0, 1});
+                            ImGui::NextColumn();
+                            ImGui::Text("Metallic");
+                            ImGui::Columns(1);
+                            ImGui::Separator();
+                        }
+
+                        if(mat.roughness)
+                        {
+                            ImGui::Image((ImTextureID)mat.roughness->getHandle(), {24, 24}, {1, 0}, {0, 1});
+                            ImGui::NextColumn();
+                            ImGui::Text("Roughness");
+                            ImGui::Columns(1);
+                            ImGui::Separator();
+                        }
+
+                        if(mat.emissive)
+                        {
+                            ImGui::Image((ImTextureID)mat.emissive->getHandle(), {24, 24}, {1, 0}, {0, 1});
+                            ImGui::NextColumn();
+                            ImGui::Text("Emissive");
+                            ImGui::Columns(1);
+                            ImGui::Separator();
+                        }
+                    }
+                    ImGui::TreePop();
+                }
+            }
         }
     }
+}
+
+void Properties::showLight()
+{
 }
 
 void Properties::showMaterial()
