@@ -32,8 +32,6 @@ void Browser::update(Time dt)
 {
     PROFILE_FUNC();
 
-    assert(fs::exists(assets) && fs::exists(current));
-
     if(!visible)
         return;
 
@@ -48,7 +46,15 @@ void Browser::update(Time dt)
     std::shared_ptr<Texture2D> icon;
     auto                       columnsNum = std::max((int)(ImGui::GetContentRegionAvailWidth() / 70), 1);
     ImGui::Columns(columnsNum);
-    for(const auto& entry : fs::directory_iterator(current))
+
+    static fs::path last;
+    if(current != last)
+    {
+        last = current;
+        refresh();
+    }
+    
+    for(const auto& entry : cache)
     {
         auto filename = entry.path().filename().string();
 
@@ -97,6 +103,13 @@ void Browser::update(Time dt)
     }
 
     ImGui::End();
+}
+
+void Browser::refresh()
+{
+    cache.clear();
+    for(const auto& entry : fs::directory_iterator(current))
+        cache.push_back(entry);
 }
 
 } // namespace clem::ui

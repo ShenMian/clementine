@@ -172,8 +172,18 @@ void Properties::showModel()
 
             // TODO
             ImGui::Text("Shapes  : %d", model.getMeshs().size());
-            ImGui::Text("Vertices: %d", model.getMeshs()[0].vertexArray->getVertexBuffer()->count());
-            ImGui::Text("Indices : %d", model.getMeshs()[0].vertexArray->getIndexBuffer()->count());
+
+            auto vertices = model.getMeshs()[0].vertexArray->getVertexBuffer()->count();
+            if(vertices < 1000)
+                ImGui::Text("Vertices: %d", vertices);
+            else
+                ImGui::Text("Vertices: %.1fk", (float)vertices / 1000);
+
+            auto indices = model.getMeshs()[0].vertexArray->getIndexBuffer()->count();
+            if(indices < 1000)
+                ImGui::Text("Indices : %d", indices);
+            else
+                ImGui::Text("Indices : %.1fk", (float)indices / 1000);
         }
     }
 }

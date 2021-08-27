@@ -29,7 +29,11 @@ public:
     inline static fs::path assets;
 
 private:
+    void refresh();
+
     fs::path current;
+
+    std::vector<fs::directory_entry> cache;
 
     std::unordered_map<std::string, std::shared_ptr<Texture2D>> icons;
 

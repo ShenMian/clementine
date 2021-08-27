@@ -23,6 +23,8 @@ void Viewport::attach()
 
     auto win = Main::getWindow();
 
+    win->setSync(false);
+
     win->onScroll = [this](double xOfffset, double yOffset)
     {
         if(!hovered)
@@ -57,7 +59,7 @@ void Viewport::attach()
         yOffset *= sensitivity;
 
         static float yaw = 180.f, pitch = 0.f;
-        yaw   -= xOffset;
+        yaw -= xOffset;
         pitch += yOffset;
 
         pitch = std::max(-89.f, pitch);
@@ -68,7 +70,7 @@ void Viewport::attach()
         front.y = std::sin(radians(pitch));
         front.z = std::sin(radians(yaw)) * std::cos(radians(pitch));
         front.normalize();
-        
+
         camera.view.rotation = {-pitch, yaw, 0.f};
 
         // camera.setDirection(camera.view.translate(), front);
