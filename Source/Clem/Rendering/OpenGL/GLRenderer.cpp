@@ -94,10 +94,8 @@ void GLRenderer::submit(const Entity& entity)
         entity.get<Material>().albedo->bind(0);
         shader->uploadUniform("u_skybox", 0);
 
-        mesh.vertexArray->bind();
-
         glDepthFunc(GL_LEQUAL);
-        glDrawElements(GL_TRIANGLES, (GLsizei)mesh.vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
+        draw(mesh.vertexArray);
         glDepthFunc(GL_LESS);
     }
     else
@@ -134,9 +132,7 @@ void GLRenderer::submit(const Entity& entity)
             shader->uploadUniform("u_material.metallic", 1);
             shader->uploadUniform("u_material.emissive", 2);
 
-            meshs[i].vertexArray->bind();
-
-            glDrawElements(GL_TRIANGLES, (GLsizei)meshs[i].vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
+            draw(meshs[i].vertexArray);
         }
     }
     GLCheckError();
@@ -156,6 +152,12 @@ void GLRenderer::setViewport(int x, int y, int w, int h)
 {
     Assert::isTrue(cmdBuffer != nullptr);
     cmdBuffer->setViewport(x, y, w, h);
+}
+
+void GLRenderer::draw(std::shared_ptr<VertexArray> vertexArray)
+{
+    vertexArray->bind();
+    glDrawElements(GL_TRIANGLES, (GLsizei)vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
 }
 
 void GLRenderer::init()

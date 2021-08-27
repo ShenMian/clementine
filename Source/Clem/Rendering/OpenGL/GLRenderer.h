@@ -12,13 +12,17 @@ namespace clem
 void GLCheckError();
 void GLClearError();
 
-#define GLCall(func)    \
-    do                  \
-    {                   \
-        GLClearError(); \
-        func;           \
-        GLCheckError(); \
-    } while(false)
+#if 1
+#    define GLCall(func)    \
+        do                  \
+        {                   \
+            GLClearError(); \
+            func;           \
+            GLCheckError(); \
+        } while(false)
+#else
+#    define GLCall(func) func
+#endif
 
 class Model;
 class Shader;
@@ -40,6 +44,8 @@ public:
     void submit(const Entity& entity, std::shared_ptr<Shader> shader) override;
     void submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader, const Matrix4& transform) override;
     void setViewport(int x, int y, int width, int height) override;
+
+    void draw(std::shared_ptr<VertexArray> vertexArray);
 
     void init() override;
     void deinit() override;
