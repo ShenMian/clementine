@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Layer.h"
+#include "Rendering/Rendering.h"
 
 namespace clem::ui
 {
@@ -30,8 +31,9 @@ private:
     void showSprite();
     void showScript();
 
-    void VectorEdit(const std::string& label, Vector3& value, float defaultValue = 0.f);
-    void ColorEdit(const std::string& label, Vector3& value);
+    void textureEdit(const std::string& label, std::shared_ptr<Texture2D> texture);
+    void vectorEdit(const std::string& label, Vector3& value, float defaultValue = 0.f);
+    void colorEdit(const std::string& label, Vector3& value);
 };
 
 } // namespace clem::ui

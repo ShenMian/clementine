@@ -22,6 +22,16 @@ Model::Model(const std::filesystem::path& path, bool compress)
     load(path, compress);
 }
 
+std::vector<Mesh>& Model::getMeshs()
+{
+    return meshs;
+}
+
+std::vector<Material>& Model::getMaterials()
+{
+    return materials;
+}
+
 const std::vector<Mesh>& Model::getMeshs() const
 {
     return meshs;
@@ -37,16 +47,25 @@ const std::filesystem::path& Model::getPath() const
     return path;
 }
 
+size_t Model::getIndexCount() const
+{
+    return indexCount;
+}
+
+size_t Model::getVertexCount() const
+{
+    return vertexCount;
+}
+
 void Model::load(const std::filesystem::path& path, bool compress)
 {
     PROFILE_FUNC();
 
     Assert::isTrue(path.extension() == ".obj");
 
-    this->path = fs::relative(path, Application::get().getAssetPath());
+    clear();
 
-    meshs.clear();
-    materials.clear();
+    this->path = fs::relative(path, Application::get().getAssetPath());
 
     tinyobj::ObjReaderConfig config;
     tinyobj::ObjReader       reader;
@@ -99,7 +118,7 @@ void Model::load(const std::filesystem::path& path, bool compress)
                 // 顶点去重 + 顶点焊接, 性能警告
                 if(!uniqueVertices.contains(vertex))
                 {
-                    if(uniqueVertices.size() >= 500)
+                    if(uniqueVertices.size() >= 100)
                         uniqueVertices.clear();
                     uniqueVertices[vertex] = static_cast<index_type>(vertices.size());
                     vertices.push_back(vertex);
@@ -145,6 +164,7 @@ void Model::load(const std::filesystem::path& path, bool compress)
                 material.emissive = Texture2D::create(path.parent_path() / mat.emissive_texname);
         }
 
+        auto indexBuffer     = IndexBuffer::create(indices);
         auto vertexBuffer    = VertexBuffer::create(vertices);
         vertexBuffer->layout = {
             {"a_position", Shader::Type::Float3},
@@ -152,13 +172,25 @@ void Model::load(const std::filesystem::path& path, bool compress)
             {"a_normal", Shader::Type::Float3},
             {"a_uv", Shader::Type::Float2}};
 
-        meshs.emplace_back(IndexBuffer::create(indices), vertexBuffer);
+        meshs.emplace_back(indexBuffer, vertexBuffer);
         materials.push_back(material);
+
+        indexCount  += indexBuffer->count();
+        vertexCount += vertexBuffer->count();
 
         static int  i   = 0; // 调试用. 因为不应该是静态变量
         std::string str = "Importing " + std::to_string(++i) + "/" + std::to_string(shapes.size()) + " shapes";
         Main::getWindow()->setTitle(str);
     }
+}
+
+void Model::clear()
+{
+    path        = "";
+    indexCount  = 0;
+    vertexCount = 0;
+    meshs.clear();
+    materials.clear();
 }
 
 } // namespace clem

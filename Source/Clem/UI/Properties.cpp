@@ -6,8 +6,6 @@
 #include "Components/Components.h"
 #include "Physics/Rigidbody.h"
 #include "Profiler.h"
-#include "Rendering/Console/Sprite.h"
-#include "Rendering/Material.h"
 #include <filesystem>
 #include <glad/glad.h>
 #include <imgui/imgui.h>
@@ -104,9 +102,9 @@ void Properties::showTransform()
         {
             auto& tf = entity.get<Transform>();
 
-            VectorEdit("Transform", tf.translation);
-            VectorEdit("Rotation", tf.rotation);
-            VectorEdit("Scale", tf.scale, 1.f);
+            vectorEdit("Transform", tf.translation);
+            vectorEdit("Rotation", tf.rotation);
+            vectorEdit("Scale", tf.scale, 1.f);
         }
     }
 }
@@ -171,11 +169,22 @@ void Properties::showModel()
             if(model.getPath() == fs::path())
                 return;
 
-            // TODO
             ImGui::Text("Shapes  : %d", model.getMeshs().size());
 
-            const auto& meshs = model.getMeshs();
-            const auto& mats  = model.getMaterials();
+            auto vertices = model.getVertexCount();
+            if(vertices < 1000)
+                ImGui::Text("Vertices: %d", vertices);
+            else
+                ImGui::Text("Vertices: %.1fk", (float)vertices / 1000);
+
+            auto indices = model.getIndexCount();
+            if(indices < 1000)
+                ImGui::Text("Indices : %d", indices);
+            else
+                ImGui::Text("Indices : %.1fk", (float)indices / 1000);
+
+            auto& meshs = model.getMeshs();
+            auto& mats  = model.getMaterials();
 
             for(int i = 0; i < meshs.size(); i++)
             {
@@ -195,56 +204,20 @@ void Properties::showModel()
 
                     if(i < mats.size())
                     {
-                        const auto& mat = mats[i];
+                        auto& mat = mats[i];
 
-                        ImGui::Columns(2);
+                        textureEdit("Albedo", mat.albedo);
+                        textureEdit("Normal", mat.normal);
+                        textureEdit("Metallic", mat.metallic);
+                        textureEdit("Roughness", mat.roughness);
+                        textureEdit("Emissive", mat.emissive);
 
-                        if(mat.albedo)
-                        {
-                            ImGui::Image((ImTextureID)mat.albedo->getHandle(), {24, 24}, {1, 0}, {0, 1});
-                            if(ImGui::IsItemHovered())
-                                ImGui::Image((ImTextureID)mat.albedo->getHandle(), {64, 64}, {1, 0}, {0, 1});
-                            ImGui::NextColumn();
-                            ImGui::Text("Albedo");
-                            ImGui::Columns(1);
-                            ImGui::Separator();
-                        }
+                        ImGui::Separator();
 
-                        if(mat.normal)
-                        {
-                            ImGui::Image((ImTextureID)mat.normal->getHandle(), {24, 24}, {1, 0}, {0, 1});
-                            ImGui::NextColumn();
-                            ImGui::Text("Normal");
-                            ImGui::Columns(1);
-                            ImGui::Separator();
-                        }
-
-                        if(mat.metallic)
-                        {
-                            ImGui::Image((ImTextureID)mat.metallic->getHandle(), {24, 24}, {1, 0}, {0, 1});
-                            ImGui::NextColumn();
-                            ImGui::Text("Metallic");
-                            ImGui::Columns(1);
-                            ImGui::Separator();
-                        }
-
-                        if(mat.roughness)
-                        {
-                            ImGui::Image((ImTextureID)mat.roughness->getHandle(), {24, 24}, {1, 0}, {0, 1});
-                            ImGui::NextColumn();
-                            ImGui::Text("Roughness");
-                            ImGui::Columns(1);
-                            ImGui::Separator();
-                        }
-
-                        if(mat.emissive)
-                        {
-                            ImGui::Image((ImTextureID)mat.emissive->getHandle(), {24, 24}, {1, 0}, {0, 1});
-                            ImGui::NextColumn();
-                            ImGui::Text("Emissive");
-                            ImGui::Columns(1);
-                            ImGui::Separator();
-                        }
+                        colorEdit("Ambient", mat.ambient);
+                        colorEdit("Diffuse", mat.diffuse);
+                        colorEdit("Specular", mat.specular);
+                        colorEdit("Emssion", mat.emission);
                     }
                     ImGui::TreePop();
                 }
@@ -295,7 +268,24 @@ void Properties::showScript()
     }
 }
 
-void Properties::VectorEdit(const std::string& label, Vector3& value, float defaultValue)
+void Properties::textureEdit(const std::string& label, std::shared_ptr<Texture2D> texture)
+{
+    if(texture)
+    {
+        ImGui::Columns(2);
+
+        ImGui::SetColumnWidth(0, 80.f);
+        ImGui::Text(label.c_str());
+        ImGui::NextColumn();
+
+        ImGui::Image((ImTextureID)texture->getHandle(), {16, 16}, {1, 0}, {0, 1});
+        if(ImGui::IsItemHovered())
+            ImGui::Image((ImTextureID)texture->getHandle(), {64, 64}, {1, 0}, {0, 1});
+        ImGui::Columns(1);
+    }
+}
+
+void Properties::vectorEdit(const std::string& label, Vector3& value, float defaultValue)
 {
     {
         struct buttonStyle
@@ -346,7 +336,7 @@ void Properties::VectorEdit(const std::string& label, Vector3& value, float defa
     }
 }
 
-void Properties::ColorEdit(const std::string& label, Vector3& value)
+void Properties::colorEdit(const std::string& label, Vector3& value)
 {
     ImGui::PushID(label.c_str());
     ImGui::Columns(2);

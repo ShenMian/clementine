@@ -27,13 +27,21 @@ public:
 
     void load(const std::filesystem::path& path, bool compress = false);
 
+    void clear();
+
+    std::vector<Mesh>&           getMeshs();
+    std::vector<Material>&       getMaterials();
     const std::vector<Mesh>&     getMeshs() const;
     const std::vector<Material>& getMaterials() const;
     const std::filesystem::path& getPath() const;
+    size_t                       getIndexCount() const;
+    size_t                       getVertexCount() const;
 
 private:
     std::vector<Mesh>     meshs;
     std::vector<Material> materials;
+    size_t                indexCount;
+    size_t                vertexCount;
 
     std::filesystem::path path;
 };

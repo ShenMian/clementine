@@ -32,7 +32,7 @@ public:
         // model.add<Model>("../assets/models/scene.obj", true);
         // model.add<Model>("../assets/models/weapon/m4a1.obj", true);
 
-        model.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj");
+        model.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj", true);
         model.get<Transform>().scale = {0.1, 0.1, 0.1};
 
         // model.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Exterior/exterior.obj");

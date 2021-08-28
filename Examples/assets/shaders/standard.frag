@@ -104,8 +104,10 @@ vec3 CalcDirLight(DirectionLight light, vec3 normal)
 
     vec3 diffuse_color  = texture(u_material.albedo, v_uv).rgb;
     vec3 specular_color = texture(u_material.metallic, v_uv).rgb;
-    // diffuse_color  = vec3(1.0);
-    specular_color = vec3(1.0);
+    if(diffuse_color == vec3(0.0))
+        diffuse_color  = vec3(1.0);
+    if(specular_color == vec3(0.0))
+        specular_color = vec3(1.0);
 
     // 环境光照
     const vec3 ambient = ka * light.color * diffuse_color;
