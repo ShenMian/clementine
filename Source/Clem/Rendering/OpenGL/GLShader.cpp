@@ -22,18 +22,109 @@ static std::unordered_map<Shader::Stage, GLenum> GLStage = {
     {Shader::Stage::Vertex, GL_VERTEX_SHADER},
     {Shader::Stage::Fragment, GL_FRAGMENT_SHADER}};
 
+void GLShader::compile(const std::string& name, Stage stage)
+{
+    const auto assets = Application::get().getAssetPath();
+    if(!fs::exists(assets / "shaders"))
+        fs::create_directories(assets / "shaders");
+
+    const fs::path path = assets / "shaders" / (name + extensions[stage]);
+
+    auto shader = glCreateShader(GLStage[stage]);
+
+    Assert::isTrue(fs::exists(path), std::format("shader source file doesn't exist: '{}'", fs::absolute(path).string()));
+    auto size = fs::file_size(path);
+
+    std::ifstream file(path, std::ios::binary);
+    Assert::isTrue(file.is_open(), std::format("can't open file: '{}'", fs::absolute(path).string()));
+
+    std::vector<char> source(size);
+    file.read(source.data(), source.size() * sizeof(char));
+    file.close();
+    source.push_back('\0');
+    
+    const auto* ptr = reinterpret_cast<GLchar*>(source.data());
+    glShaderSource(shader, 1, &ptr, nullptr);
+    glCompileShader(shader);
+
+    int success;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+    if(!success)
+    {
+        GLint size = 0;
+        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &size);
+        std::string info(size, '\0');
+        glGetShaderInfoLog(shader, (GLsizei)info.size(), &size, info.data());
+        Assert::isTrue(false, std::format("shader compilation failure: {}", info));
+
+        glDeleteShader(shader);
+        return;
+    }
+
+    glAttachShader(handle, shader);
+}
+
+void GLShader::link()
+{
+    glLinkProgram(handle);
+
+    int success;
+    glGetProgramiv(handle, GL_LINK_STATUS, &success);
+    if(!success)
+    {
+        GLint size = 0;
+        glGetProgramiv(handle, GL_INFO_LOG_LENGTH, &size);
+        std::string info(size, 0);
+        glGetProgramInfoLog(handle, (GLsizei)info.size(), &size, info.data());
+        Assert::isTrue(false, std::format("shader link failure: {}", info));
+
+        glDeleteProgram(handle);
+        return;
+    }
+}
+
 GLShader::GLShader(const std::string& name)
 {
-    const fs::path assets  = "assets";
+    const fs::path assets  = Application::get().getAssetPath();
     const fs::path shaders = assets / "shaders";
     const fs::path cache   = assets / "cache/shaders";
+
     if(!fs::exists(shaders))
         fs::create_directories(shaders);
-    if(!fs::exists(cache))
-        fs::create_directories(cache);
 
     handle = glCreateProgram();
 
+    for(auto stage : Iterator<Stage, Stage::Vertex, Stage::Fragment>())
+        compile(name, stage);
+    link();
+
+    /*
+    for(auto stage : Iterator<Stage, Stage::Vertex, Stage::Fragment>())
+    {
+        fs::path path = assets / "cache/shaders" / (name + extensions[stage]);
+
+        // 若未编译则编译
+        if(!fs::exists(path))
+        {
+            compile(name, stage);
+        }
+
+        const auto size = fs::file_size(path);
+
+        std::ifstream file(path, std::ios::binary);
+        Assert::isTrue(file.is_open(), std::format("can't open file {}", path.filename().string()));
+
+        std::vector<std::byte> buffer(size);
+        file.read(reinterpret_cast<char*>(buffer.data()), buffer.size());
+        file.close();
+
+        auto shader = glCreateShader(GLStage[stage]);
+        glShaderBinary(1, &shader, GL_SHADER_BINARY_FORMAT_SPIR_V, buffer.data(), (GLsizei)buffer.size());
+        glAttachShader(handle, shader);
+    }
+    */
+
+    /*
     for(auto type : Iterator<Stage, Stage::Vertex, Stage::Fragment>())
     {
         fs::path path = shaders / (name + extensions[type]);
@@ -51,6 +142,7 @@ GLShader::GLShader(const std::string& name)
         glShaderBinary(1, &shader, GL_SHADER_BINARY_FORMAT_SPIR_V, buffer.data(), (GLsizei)buffer.size());
         glAttachShader(handle, shader);
     }
+    */
 
     /*
     const char* extension[] = {".vert", ".frag"};
@@ -193,7 +285,7 @@ GLShader::GLShader(const std::filesystem::path& vertShader, const std::filesyste
         auto size = fs::file_size(fragShader);
 
         std::ifstream file(fragShader, std::ios::binary);
-        Assert::isTrue(file.is_open(), std::format("can't open file {}", fragShader.filename().string()));
+        Assert::isTrue(file.is_open(), std::format("can't open file: '{}'", fragShader.filename().string()));
 
         fragSrc.resize(size);
         file.read(reinterpret_cast<char*>(fragSrc.data()), fragSrc.size());

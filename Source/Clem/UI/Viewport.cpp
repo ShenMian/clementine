@@ -16,10 +16,9 @@ namespace clem::ui
 
 void Viewport::attach()
 {
-    standardShader = Shader::create("../assets/shaders/standard.vert", "../assets/shaders/standard.frag");
-    shadowShader   = Shader::create("../assets/shaders/shadow.vert", "../assets/shaders/shadow.frag");
-    skyboxShader   = Shader::create("../assets/shaders/skybox_sphere.vert", "../assets/shaders/skybox_sphere.frag");
-    // skyboxShader = Shader::create("../assets/shaders/skybox_cube.vert", "../assets/shaders/skybox_cube.frag");
+    standardShader = Shader::create("standard");
+    shadowShader   = Shader::create("shadow");
+    skyboxShader   = Shader::create("skybox_sphere");
 
     auto win = Main::getWindow();
 
@@ -161,14 +160,7 @@ void Viewport::render(Time dt)
     glClearColor(.117f, .564f, 1.f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT /* | GL_STENCIL_BUFFER_BIT*/);
     Main::registry.each<Model>([&](const Entity& e)
-                               {
-                                   if(e.get<Tag>().str == "skybox")
-                                       e.get<Material>().shader = skyboxShader;
-                                   else
-                                       e.get<Material>().shader = standardShader;
-
-                                   Renderer::get()->submit(e);
-                               });
+                               { Renderer::get()->submit(e); });
     framebuffer->unbind();
 }
 

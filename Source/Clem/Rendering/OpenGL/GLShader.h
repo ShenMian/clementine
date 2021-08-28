@@ -31,8 +31,10 @@ public:
     void uploadUniform(const std::string& name, int value) override;
 
 private:
+    void compile(const std::string& name, Stage stage);
+    void link();
+
     void loadFromSource(const std::string& vertSrc, const std::string& fragSrc);
-    void handleError(handle_type handle, const std::string& msg);
 
     handle_type handle;
 };

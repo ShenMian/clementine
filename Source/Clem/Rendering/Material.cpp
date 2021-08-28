@@ -8,6 +8,11 @@
 namespace clem
 {
 
+Material::Material()
+    : shader(Shader::get("standard"))
+{
+}
+
 Material::Material(std::shared_ptr<Shader> shader)
     : shader(shader)
 {

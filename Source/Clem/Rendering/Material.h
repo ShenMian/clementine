@@ -20,7 +20,7 @@ class Material
     CLEM_DECLARE_TYPE;
 
 public:
-    Material() = default;
+    Material();
     Material(std::shared_ptr<Shader> shader);
 
     Vector3 ambient;

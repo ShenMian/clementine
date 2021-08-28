@@ -9,16 +9,31 @@
 namespace clem
 {
 
+std::unordered_map<std::string, std::shared_ptr<Shader>> Shader::cache;
+
 std::shared_ptr<Shader> Shader::create(const std::string& name)
 {
-    switch(Renderer::getAPI())
+    const auto it = cache.find(name);
+    if(it == cache.end())
     {
-        using enum Renderer::API;
+        std::shared_ptr<Shader> result;
+        switch(Renderer::getAPI())
+        {
+            using enum Renderer::API;
 
-    case OpenGL:
-        return std::make_shared<GLShader>(name);
+        case OpenGL:
+            result = std::make_shared<GLShader>(name);
+            break;
+
+        case Vulkan:
+            result = std::make_shared<VKShader>(name);
+            break;
+        }
+        cache.insert({name, result});
+        return result;
     }
-    return nullptr;
+    else
+        return it->second;
 }
 
 std::shared_ptr<Shader> Shader::create(const std::filesystem::path& vertShader, const std::filesystem::path& fragShader)
@@ -34,6 +49,12 @@ std::shared_ptr<Shader> Shader::create(const std::filesystem::path& vertShader, 
         return std::make_shared<VKShader>(vertShader, fragShader);
     }
     return nullptr;
+}
+
+std::shared_ptr<Shader> Shader::get(const std::string& name)
+{
+    Assert::isTrue(cache.contains(name));
+    return cache[name];
 }
 
 } // namespace clem

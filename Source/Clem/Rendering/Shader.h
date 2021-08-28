@@ -46,8 +46,9 @@ public:
 
     /**
 	 * @brief 创建着色器.
+     * 加载对应 SPIR-V 文件， 否则对寻找对应源代码进行编译.
 	 *
-	 * @param name 着色器 SPIR-V 名称.
+	 * @param name 着色器名称.
 	 */
     static std::shared_ptr<Shader> create(const std::string& name);
 
@@ -67,10 +68,15 @@ public:
 
     virtual void bind() = 0;
 
+    static std::shared_ptr<Shader> get(const std::string& name);
+
 protected:
     std::unordered_map<Stage, const char*> extensions = {
         {Stage::Vertex, ".vert"},
         {Stage::Fragment, ".frag"}};
+
+private:
+    static std::unordered_map<std::string, std::shared_ptr<Shader>> cache;
 };
 
 /**
