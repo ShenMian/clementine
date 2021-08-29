@@ -38,14 +38,18 @@ public:
      * @param indexBuffer  顶点缓冲区.
      * @param vertexBuffer 索引缓冲区.
      */
-    Mesh(std::shared_ptr<IndexBuffer> indexBuffer, std::shared_ptr<VertexBuffer> vertexBuffer);
+    Mesh(std::string name, std::shared_ptr<IndexBuffer> indexBuffer, std::shared_ptr<VertexBuffer> vertexBuffer);
+
+    const std::string&           getName() const;
+    const std::filesystem::path& getPath() const;
 
     void bind();
 
-    std::filesystem::path        path;
     std::shared_ptr<VertexArray> vertexArray;
 
 private:
+    std::string                   name;
+    std::filesystem::path         path;
     std::shared_ptr<IndexBuffer>  indexBuffer;
     std::shared_ptr<VertexBuffer> vertexBuffer;
 

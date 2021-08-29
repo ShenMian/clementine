@@ -14,12 +14,22 @@ namespace clem
 
 std::unordered_map<std::filesystem::path, Mesh*> Mesh::cache;
 
-Mesh::Mesh(std::shared_ptr<IndexBuffer> indexBuffer, std::shared_ptr<VertexBuffer> vertexBuffer)
-    : indexBuffer(indexBuffer), vertexBuffer(vertexBuffer)
+Mesh::Mesh(std::string name, std::shared_ptr<IndexBuffer> indexBuffer, std::shared_ptr<VertexBuffer> vertexBuffer)
+    : name(name), indexBuffer(indexBuffer), vertexBuffer(vertexBuffer)
 {
     vertexArray = VertexArray::create();
     vertexArray->setVertexBuffer(vertexBuffer);
     vertexArray->setIndexBuffer(indexBuffer);
+}
+
+const std::string& Mesh::getName() const
+{
+    return name;
+}
+
+const fs::path& Mesh::getPath() const
+{
+    return path;
 }
 
 void Mesh::bind()
