@@ -183,47 +183,51 @@ void Properties::showModel()
             else
                 ImGui::Text("Indices : %.1fk", (float)indices / 1000);
 
-            auto& meshs = model.getMeshs();
-            auto& mats  = model.getMaterials();
-
-            for(int i = 0; i < meshs.size(); i++)
+            if(ImGui::TreeNodeEx("Meshs"))
             {
-                if(ImGui::TreeNodeEx(std::format("Shape {}", i).c_str()))
+                auto& meshs = model.getMeshs();
+                auto& mats  = model.getMaterials();
+
+                for(int i = 0; i < meshs.size(); i++)
                 {
-                    auto vertices = meshs[i].vertexArray->getVertexBuffer()->count();
-                    if(vertices < 1000)
-                        ImGui::Text("Vertices: %d", vertices);
-                    else
-                        ImGui::Text("Vertices: %.1fk", (float)vertices / 1000);
-
-                    auto indices = meshs[i].vertexArray->getIndexBuffer()->count();
-                    if(indices < 1000)
-                        ImGui::Text("Indices : %d", indices);
-                    else
-                        ImGui::Text("Indices : %.1fk", (float)indices / 1000);
-
-                    if(i < mats.size())
+                    if(ImGui::TreeNodeEx(meshs[i].getName().c_str()))
                     {
-                        auto& mat = mats[i];
+                        auto vertices = meshs[i].vertexArray->getVertexBuffer()->count();
+                        if(vertices < 1000)
+                            ImGui::Text("Vertices: %d", vertices);
+                        else
+                            ImGui::Text("Vertices: %.1fk", (float)vertices / 1000);
 
-                        if(ImGui::TreeNodeEx(mat.name.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
+                        auto indices = meshs[i].vertexArray->getIndexBuffer()->count();
+                        if(indices < 1000)
+                            ImGui::Text("Indices : %d", indices);
+                        else
+                            ImGui::Text("Indices : %.1fk", (float)indices / 1000);
+
+                        if(i < mats.size())
                         {
-                            textureEdit("Albedo", mat.tex.diffuse);
-                            textureEdit("Normal", mat.tex.normal);
-                            textureEdit("Metallic", mat.tex.metallic);
-                            textureEdit("Roughness", mat.tex.roughness);
-                            textureEdit("Emissive", mat.tex.emissive);
-                            ImGui::Separator();
+                            auto& mat = mats[i];
 
-                            colorEdit("Ambient", mat.ambient);
-                            colorEdit("Diffuse", mat.diffuse);
-                            colorEdit("Specular", mat.specular);
-                            colorEdit("Emssion", mat.emission);
-                            ImGui::TreePop();
+                            if(ImGui::TreeNodeEx(mat.name.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
+                            {
+                                textureEdit("Albedo", mat.tex.diffuse);
+                                textureEdit("Normal", mat.tex.normal);
+                                textureEdit("Metallic", mat.tex.metallic);
+                                textureEdit("Roughness", mat.tex.roughness);
+                                textureEdit("Emissive", mat.tex.emissive);
+                                ImGui::Separator();
+
+                                colorEdit("Ambient", mat.ambient);
+                                colorEdit("Diffuse", mat.diffuse);
+                                colorEdit("Specular", mat.specular);
+                                colorEdit("Emssion", mat.emission);
+                                ImGui::TreePop();
+                            }
                         }
+                        ImGui::TreePop();
                     }
-                    ImGui::TreePop();
                 }
+                ImGui::TreePop();
             }
         }
     }
