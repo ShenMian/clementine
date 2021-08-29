@@ -16,10 +16,10 @@ std::shared_ptr<IndexBuffer> IndexBuffer::create(const std::vector<value_type>& 
         using enum Renderer::API;
 
     case OpenGL:
-        return std::make_shared<GLIndexBuffer>(data, usage);
+        return std::make_shared<GLIndexBuffer>(data.data(), data.size() * sizeof(value_type), usage);
 
     case Vulkan:
-        return std::make_shared<VKIndexBuffer>(data, usage);
+        return std::make_shared<VKIndexBuffer>(data.data(), data.size() * sizeof(value_type), usage);
     }
     return nullptr;
 }

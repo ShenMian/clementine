@@ -183,7 +183,7 @@ void Model::load(const std::filesystem::path& path, bool compress)
             {"a_normal", Shader::Type::Float3},
             {"a_uv", Shader::Type::Float2}};
 
-        meshs.emplace_back(indexBuffer, vertexBuffer);
+        meshs.emplace_back(shape.name, indexBuffer, vertexBuffer);
         materials.push_back(material);
 
         indexCount  += indexBuffer->count();

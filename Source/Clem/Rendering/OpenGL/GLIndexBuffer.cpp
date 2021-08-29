@@ -16,11 +16,6 @@ static std::unordered_map<IndexBuffer::Usage, uint32_t> GLusage = {
     {IndexBuffer::Usage::Dynamic, GL_DYNAMIC_DRAW},
     {IndexBuffer::Usage::Stream, GL_STREAM_DRAW}};
 
-GLIndexBuffer::GLIndexBuffer(const std::vector<value_type>& buf, Usage usage)
-    : GLIndexBuffer(buf.data(), buf.size() * sizeof(value_type), usage)
-{
-}
-
 GLIndexBuffer::GLIndexBuffer(const void* data, size_t size, Usage usage)
 {
     size_  = size;

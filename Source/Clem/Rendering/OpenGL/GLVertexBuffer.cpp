@@ -15,11 +15,6 @@ static std::unordered_map<VertexBuffer::Usage, uint32_t> GLusage = {
     {VertexBuffer::Usage::Dynamic, GL_DYNAMIC_DRAW},
     {VertexBuffer::Usage::Stream, GL_STREAM_DRAW}};
 
-GLVertexBuffer::GLVertexBuffer(const std::vector<value_type>& buf, Usage usage)
-    : GLVertexBuffer(buf.data(), buf.size() * sizeof(value_type), usage)
-{
-}
-
 GLVertexBuffer::GLVertexBuffer(const void* data, size_t size, Usage usage)
 {
     size_  = size;
