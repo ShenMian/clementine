@@ -86,7 +86,7 @@ void Viewport::attach()
 
     dirLights.resize(1);
     dirLights[0].setColor({255.f / 255.f, 244.f / 255.f, 214.f / 255.f});
-    dirLights[0].setIntesity(1.f);
+    dirLights[0].setIntesity(2.f);
     dirLights[0].setDirection({0.5, -1, -0.5});
 
     pointLights.resize(2);
@@ -96,6 +96,7 @@ void Viewport::attach()
     pointLights[1].setColor({0, 1, 0});
     pointLights[1].setIntesity(1.f);
     pointLights[1].setPosition({-5, 5, 0});
+    pointLights.clear();
 }
 
 void Viewport::update(Time dt)

@@ -206,18 +206,21 @@ void Properties::showModel()
                     {
                         auto& mat = mats[i];
 
-                        textureEdit("Albedo", mat.albedo);
-                        textureEdit("Normal", mat.normal);
-                        textureEdit("Metallic", mat.metallic);
-                        textureEdit("Roughness", mat.roughness);
-                        textureEdit("Emissive", mat.emissive);
+                        if(ImGui::TreeNodeEx(mat.name.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
+                        {
+                            textureEdit("Albedo", mat.tex.diffuse);
+                            textureEdit("Normal", mat.tex.normal);
+                            textureEdit("Metallic", mat.tex.metallic);
+                            textureEdit("Roughness", mat.tex.roughness);
+                            textureEdit("Emissive", mat.tex.emissive);
+                            ImGui::Separator();
 
-                        ImGui::Separator();
-
-                        colorEdit("Ambient", mat.ambient);
-                        colorEdit("Diffuse", mat.diffuse);
-                        colorEdit("Specular", mat.specular);
-                        colorEdit("Emssion", mat.emission);
+                            colorEdit("Ambient", mat.ambient);
+                            colorEdit("Diffuse", mat.diffuse);
+                            colorEdit("Specular", mat.specular);
+                            colorEdit("Emssion", mat.emission);
+                            ImGui::TreePop();
+                        }
                     }
                     ImGui::TreePop();
                 }
@@ -270,19 +273,23 @@ void Properties::showScript()
 
 void Properties::textureEdit(const std::string& label, std::shared_ptr<Texture2D> texture)
 {
-    if(texture)
-    {
-        ImGui::Columns(2);
+    if(texture == nullptr)
+        return;
 
-        ImGui::SetColumnWidth(0, 80.f);
-        ImGui::Text(label.c_str());
-        ImGui::NextColumn();
+    ImGui::PushID(label.c_str());
 
-        ImGui::Image((ImTextureID)texture->getHandle(), {16, 16}, {1, 0}, {0, 1});
-        if(ImGui::IsItemHovered())
-            ImGui::Image((ImTextureID)texture->getHandle(), {64, 64}, {1, 0}, {0, 1});
-        ImGui::Columns(1);
-    }
+    ImGui::Columns(2);
+
+    ImGui::SetColumnWidth(0, 80.f);
+    ImGui::Text(label.c_str());
+    ImGui::NextColumn();
+
+    ImGui::Image((ImTextureID)texture->getHandle(), {16, 16}, {1, 0}, {0, 1});
+    if(ImGui::IsItemHovered())
+        ImGui::Image((ImTextureID)texture->getHandle(), {64, 64}, {1, 0}, {0, 1});
+    ImGui::Columns(1);
+
+    ImGui::PopID();
 }
 
 void Properties::vectorEdit(const std::string& label, Vector3& value, float defaultValue)

@@ -81,8 +81,6 @@ void GLRenderer::endFrame()
 
 void GLRenderer::submit(const Entity& entity)
 {
-    auto& material = entity.get<Material>();
-
     if(entity.get<Tag>().str == "skybox")
     {
         auto shader = Shader::get("skybox_sphere");
@@ -90,52 +88,63 @@ void GLRenderer::submit(const Entity& entity)
 
         shader->bind();
 
-        entity.get<Material>().albedo->bind(0);
-        shader->uploadUniform("u_skybox", 0);
+        entity.get<Material>().tex.diffuse->bind(10);
+        shader->uploadUniform("u_skybox", 10);
 
         glDepthFunc(GL_LEQUAL);
         draw(mesh.vertexArray);
         glDepthFunc(GL_LESS);
+
+        return;
     }
-    else
+
+    auto shader = Shader::get("standard");
+
+    auto& transform = entity.get<Transform>();
+    auto& model     = entity.get<Model>();
+
+    auto& meshs = model.getMeshs();
+    auto& mats  = model.getMaterials();
+
+    if(meshs.empty())
+        return;
+
+    shader->bind();
+    shader->uploadUniform("u_model", transform);
+    shader->uploadUniform("u_entity_id", (int)entity.id());
+
+    for(size_t i = 0; i < meshs.size(); i++)
     {
-        auto shader = Shader::get("standard");
+        shader->uploadUniform("u_material.ambient", mats[i].ambient);
+        shader->uploadUniform("u_material.diffuse", mats[i].diffuse);
+        shader->uploadUniform("u_material.specular", mats[i].specular);
+        shader->uploadUniform("u_material.emission", mats[i].emission);
+        shader->uploadUniform("u_material.shininess", mats[i].shininess);
 
-        auto& transform = entity.get<Transform>();
-        auto& model     = entity.get<Model>();
+        if(mats[i].tex.ambient)
+            mats[i].tex.ambient->bind(0);
 
-        auto& meshs = model.getMeshs();
-        auto& mats  = model.getMaterials();
+        if(mats[i].tex.diffuse)
+            mats[i].tex.diffuse->bind(1);
 
-        if(meshs.empty())
-            return;
+        if(mats[i].tex.specular)
+            mats[i].tex.specular->bind(2);
 
-        shader->bind();
-        shader->uploadUniform("u_model", transform);
-        shader->uploadUniform("u_entity_id", (int)entity.id());
+        if(mats[i].tex.specular_highlight)
+            mats[i].tex.specular_highlight->bind(3);
 
-        for(size_t i = 0; i < meshs.size(); i++)
-        {
-            if(mats[i].albedo)
-                mats[i].albedo->bind(0);
-            if(mats[i].metallic)
-                mats[i].metallic->bind(1);
-            if(mats[i].emissive)
-                mats[i].emissive->bind(2);
+        if(mats[i].tex.emissive)
+            mats[i].tex.emissive->bind(4);
 
-            shader->uploadUniform("u_material.ambient", material.ambient);
-            shader->uploadUniform("u_material.diffuse", material.diffuse);
-            shader->uploadUniform("u_material.specular", material.specular);
-            shader->uploadUniform("u_material.emission", material.emission);
-            shader->uploadUniform("u_material.shininess", material.shininess);
+        shader->uploadUniform("u_material.tex.ambient", 0);
+        shader->uploadUniform("u_material.tex.diffuse", 1);
+        shader->uploadUniform("u_material.tex.specular", 2);
+        shader->uploadUniform("u_material.tex.specular_highlight", 3);
+        shader->uploadUniform("u_material.tex.emissive", 4);
 
-            shader->uploadUniform("u_material.albedo", 0);
-            shader->uploadUniform("u_material.metallic", 1);
-            shader->uploadUniform("u_material.emissive", 2);
-
-            draw(meshs[i].vertexArray);
-        }
+        draw(meshs[i].vertexArray);
     }
+
     GLCheckError();
 }
 

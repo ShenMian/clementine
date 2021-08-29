@@ -138,30 +138,41 @@ void Model::load(const std::filesystem::path& path, bool compress)
         {
             const auto& mat = mats[shape.mesh.material_ids[0]];
 
+            material.name      = mat.name;
             material.ambient   = {mat.ambient[0], mat.ambient[1], mat.ambient[2]};
             material.diffuse   = {mat.diffuse[0], mat.diffuse[1], mat.diffuse[2]};
             material.specular  = {mat.specular[0], mat.specular[1], mat.specular[2]};
             material.emission  = {mat.emission[0], mat.emission[1], mat.emission[2]};
             material.shininess = mat.shininess;
 
+            if(mat.ambient_texname.size())
+                material.tex.ambient = Texture2D::create(path.parent_path() / mat.ambient_texname);
+
             // FIXME: 可能崩溃
             if(mat.diffuse_texname.size())
-                material.albedo = Texture2D::create(path.parent_path() / mat.diffuse_texname);
+                material.tex.diffuse = Texture2D::create(path.parent_path() / mat.diffuse_texname);
 
-            if(mat.normal_texname.size())
-                material.normal = Texture2D::create(path.parent_path() / mat.normal_texname);
+            if(mat.specular_texname.size())
+                material.tex.specular = Texture2D::create(path.parent_path() / mat.specular_texname);
 
-            // if(mat.bump_texname.size())
-            //     material.normal = Texture2D::create(path.parent_path() / mat.bump_texname);
+            if(mat.specular_highlight_texname.size())
+                material.tex.specular_highlight = Texture2D::create(path.parent_path() / mat.specular_highlight_texname);
 
             if(mat.metallic_texname.size())
-                material.metallic = Texture2D::create(path.parent_path() / mat.metallic_texname);
+                material.tex.metallic = Texture2D::create(path.parent_path() / mat.metallic_texname);
 
             if(mat.roughness_texname.size())
-                material.roughness = Texture2D::create(path.parent_path() / mat.roughness_texname);
+                material.tex.roughness = Texture2D::create(path.parent_path() / mat.roughness_texname);
 
             if(mat.emissive_texname.size())
-                material.emissive = Texture2D::create(path.parent_path() / mat.emissive_texname);
+                material.tex.emissive = Texture2D::create(path.parent_path() / mat.emissive_texname);
+
+            if(mat.normal_texname.size())
+                material.tex.normal = Texture2D::create(path.parent_path() / mat.normal_texname);
+
+
+            if(material.tex.ambient == nullptr)
+                material.tex.ambient = material.tex.diffuse;
         }
 
         auto indexBuffer     = IndexBuffer::create(indices);

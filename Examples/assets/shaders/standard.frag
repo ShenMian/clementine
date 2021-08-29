@@ -43,17 +43,24 @@ struct SpotLight
     float quadratic;
 };
 
+struct Texture
+{
+    sampler2D ambient;
+    sampler2D diffuse;
+    sampler2D specular;
+    sampler2D specular_highlight;
+    sampler2D emissive;
+};
+
 struct Material
 {
-    vec3      ambient;
-    vec3      diffuse;
-    vec3      specular;
-    vec3      emission;
-    float     shininess;
-
-    sampler2D albedo;
-    sampler2D metallic;
-    sampler2D emissive;
+    vec3  ambient;
+    vec3  diffuse;
+    vec3  specular;
+    vec3  emission;
+    float shininess;
+    
+    Texture tex;
 };
 
 layout (location = 0) out vec4 frag_color;
@@ -81,7 +88,7 @@ vec4 CalcLighting();
 
 void main()
 {
-    frag_color = texture(u_material.albedo, v_uv) * CalcLighting();
+    frag_color = texture(u_material.tex.diffuse, v_uv) * CalcLighting();
 
     // 提取亮色
     float brightness = dot(frag_color.rgb, vec3(0.2126, 0.7152, 0.0722));
@@ -98,31 +105,30 @@ vec3 CalcDirLight(DirectionLight light, vec3 normal)
 {
     const vec3 dir_to_light = normalize(-light.direction);
 
-    const vec3 ka = vec3(0.5) + u_material.ambient * vec3(light.intesity);
-    const vec3 kd = vec3(1.2) + u_material.diffuse * vec3(light.intesity);
-    const vec3 ks = vec3(1.2) + u_material.specular * vec3(light.intesity);
-
-    vec3 diffuse_color  = texture(u_material.albedo, v_uv).rgb;
-    vec3 specular_color = texture(u_material.metallic, v_uv).rgb;
-    if(diffuse_color == vec3(0.0))
-        diffuse_color  = vec3(1.0);
-    if(specular_color == vec3(0.0))
-        specular_color = vec3(1.0);
-
     // 环境光照
-    const vec3 ambient = ka * light.color * diffuse_color;
+    const vec3 ambient_color = texture(u_material.tex.ambient, v_uv).rgb;
+    const vec3 ka            = u_material.ambient * vec3(light.intesity);
+    const vec3 ambient       = ka * light.color * ambient_color;
 
     // 漫反射光照
+    const vec3  diffuse_color  = texture(u_material.tex.diffuse, v_uv).rgb;
+    const vec3  kd             = u_material.diffuse * vec3(light.intesity);
     const float diffuse_amount = max(dot(dir_to_light, normal), 0.0);
     const vec3  diffuse        = kd * light.color * diffuse_amount * diffuse_color;
 
     // 镜面反射光照
+    float shininess = texture(u_material.tex.specular_highlight, v_uv).r;
+    if(shininess == 0.0)
+        shininess = u_material.shininess;
+
+    const vec3  ks              = u_material.specular * vec3(light.intesity);
+    const vec3  specular_color  = texture(u_material.tex.specular, v_uv).rgb;
     const vec3  reflected_dir   = reflect(-dir_to_light, normal);
-    const float specular_amount = pow(max(dot(reflected_dir, v_dir_to_cam), 0.0), u_material.shininess);
+    const float specular_amount = pow(max(dot(reflected_dir, v_dir_to_cam), 0.0), shininess);
     const vec3  specular        = ks * light.color * specular_amount * specular_color;
 
     // 放射光
-    const vec3 emission = u_material.emission * texture(u_material.emissive, v_uv).rgb;
+    const vec3 emission = u_material.emission * texture(u_material.tex.emissive, v_uv).rgb;
     
     const vec3 shadow = CalcShadow();
 

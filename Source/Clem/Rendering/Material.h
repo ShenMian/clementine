@@ -20,23 +20,37 @@ class Material
     CLEM_DECLARE_TYPE;
 
 public:
+    struct Texture
+    {
+        std::shared_ptr<Texture2D> ambient;            // Ka
+        std::shared_ptr<Texture2D> diffuse;            // Kd, albedo
+        std::shared_ptr<Texture2D> specular;           // Ks
+        std::shared_ptr<Texture2D> specular_highlight; // Ns
+        std::shared_ptr<Texture2D> bump;
+        std::shared_ptr<Texture2D> displacement;
+        std::shared_ptr<Texture2D> alpha;
+        std::shared_ptr<Texture2D> reflection;
+
+        std::shared_ptr<Texture2D> roughness; // Pr
+        std::shared_ptr<Texture2D> metallic;  // Pm
+        std::shared_ptr<Texture2D> sheen;     // Ps
+        std::shared_ptr<Texture2D> emissive;  // Ke
+        std::shared_ptr<Texture2D> normal;
+    };
+
     Material();
     Material(std::shared_ptr<Shader> shader);
+
+    std::string             name;
+    std::shared_ptr<Shader> shader;
 
     Vector3 ambient;
     Vector3 diffuse;
     Vector3 specular;
     Vector3 emission;
+    float   shininess = 0.f;
 
-    std::shared_ptr<Texture2D> albedo;
-    std::shared_ptr<Texture2D> normal;
-    std::shared_ptr<Texture2D> metallic;
-    std::shared_ptr<Texture2D> roughness;
-    std::shared_ptr<Texture2D> emissive;
-
-    float shininess = 32.f;
-
-    std::shared_ptr<Shader> shader;
+    Texture tex;
 };
 
 CLEM_DEFINE_TYPE(Material);
