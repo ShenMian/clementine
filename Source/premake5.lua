@@ -31,6 +31,7 @@ project "Clementine"
     "%{thirdparty.spdlog}/include",
     "%{thirdparty.openal}/include",
     "%{thirdparty.vulkan}/include",
+    "%{thirdparty.tinygltf}/include",
     "%{thirdparty.yaml_cpp}/include",
     "%{thirdparty.nlohmann_json}/include",
     "%{thirdparty.tiny_obj_loader}/include"}
