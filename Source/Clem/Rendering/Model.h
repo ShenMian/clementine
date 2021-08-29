@@ -38,10 +38,13 @@ public:
     size_t                       getVertexCount() const;
 
 private:
+    void loadObj(const std::filesystem::path& path, bool compress);
+    void loadGltf(const std::filesystem::path& path, bool compress);
+
     std::vector<Mesh>     meshs;
     std::vector<Material> materials;
-    size_t                indexCount;
-    size_t                vertexCount;
+    size_t                indexCount  = 0;
+    size_t                vertexCount = 0;
 
     std::filesystem::path path;
 };
