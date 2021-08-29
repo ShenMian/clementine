@@ -15,24 +15,15 @@ class GLTexture2D : public Texture2D
 public:
     using handle_type = unsigned int;
 
-    /**
-	 * @brief 默认构造函数.
-	 */
-    static std::shared_ptr<Texture2D> create();
-
-    /**
-	 * @brief 构造函数.
-     *
-     * @param path 文件路径.
-	 */
-    static std::shared_ptr<Texture2D> create(const std::filesystem::path& path, bool genMipmap = true, Format fmt = Format::Auto);
+    GLTexture2D();
+    GLTexture2D(const std::filesystem::path& path, bool genMipmap = true, Format fmt = Format::Auto);
+    GLTexture2D(const void* data, Size2i size, int bits, bool genMipmap = true, Format fmt = Format::Auto);
 
     /**
 	 * @brief 默认析构函数.
 	 */
     ~GLTexture2D();
 
-    void load(const std::filesystem::path& path, bool genMipmap = true, Format fmt = Format::Auto) override;
     void loadCubemap(const std::vector<std::filesystem::path>& faces) override;
 
     void setMinFilter(Filter filter) override;
@@ -43,14 +34,12 @@ public:
 
     void bind(unsigned int slot = 0) const override;
 
-    GLTexture2D();
-    GLTexture2D(const std::filesystem::path& path);
-
 private:
+    void  init(const void* data, Size2i size, int bits, bool genMipmap, Format fmt);
     void* loadFromFile(const std::filesystem::path& path, int& width, int& height, int& bits);
 
-    handle_type handle;
     Size2i      size;
+    handle_type handle;
     int         glType;
 
     static uint32_t GLInternalFormat(Format fmt);

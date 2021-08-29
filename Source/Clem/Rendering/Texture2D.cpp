@@ -12,42 +12,46 @@ namespace clem
 
 std::unordered_map<std::filesystem::path, std::shared_ptr<Texture2D>> Texture2D::cache;
 
-std::shared_ptr<Texture2D> Texture2D::create(Type type)
+std::shared_ptr<Texture2D> Texture2D::create()
 {
     switch(Renderer::getAPI())
     {
         using enum Renderer::API;
 
     case OpenGL:
-        auto texture = GLTexture2D::create();
-        texture->setType(type);
-        return texture;
+        return std::make_shared<GLTexture2D>();
     }
     return nullptr;
 }
 
-std::shared_ptr<Texture2D> Texture2D::create(const fs::path& path, bool genMipmap, Type type)
+std::shared_ptr<Texture2D> Texture2D::create(const fs::path& path, bool genMipmap, Format fmt)
+{
+    auto it = cache.find(path);
+    if(it != cache.end())
+        return it->second;
+
+    switch(Renderer::getAPI())
+    {
+        using enum Renderer::API;
+
+    case OpenGL:
+        auto tex = std::make_shared<GLTexture2D>(path, genMipmap, fmt);
+        cache.insert({path, tex});
+        return tex;
+    }
+    return nullptr;
+}
+
+std::shared_ptr<Texture2D> Texture2D::create(const void* data, Size2i size, int bits, bool genMipmap, Format fmt)
 {
     switch(Renderer::getAPI())
     {
         using enum Renderer::API;
 
     case OpenGL:
-        auto texture = GLTexture2D::create(path, genMipmap);
-        texture->setType(type);
-        return texture;
+        return std::make_shared<GLTexture2D>(data, size, bits, genMipmap, fmt);
     }
     return nullptr;
-}
-
-void Texture2D::setType(Type type)
-{
-    this->type = type;
-}
-
-Texture2D::Type Texture2D::getType() const
-{
-    return type;
 }
 
 } // namespace clem

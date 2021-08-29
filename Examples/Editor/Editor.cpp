@@ -29,8 +29,9 @@ public:
         model.add<Transform>().rotation = {0, 90, 0};
 
         // model.add<Model>("../assets/models/scene.obj", true);
-        
-        model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj", true);
+
+        model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf", true);
+        // model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj", true);
         model.get<Transform>().translation = {0, 0, -20};
 
         // model.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj", true);

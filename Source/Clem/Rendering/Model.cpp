@@ -29,7 +29,7 @@ Model::Model(const std::filesystem::path& path, bool compress)
 
 std::vector<Mesh>& Model::getMeshs()
 {
-    return meshs;
+    return meshes;
 }
 
 std::vector<Material>& Model::getMaterials()
@@ -39,7 +39,7 @@ std::vector<Material>& Model::getMaterials()
 
 const std::vector<Mesh>& Model::getMeshs() const
 {
-    return meshs;
+    return meshes;
 }
 
 const std::vector<Material>& Model::getMaterials() const
@@ -95,6 +95,12 @@ void Model::loadObj(const std::filesystem::path& path, bool compress)
     auto& attrib = reader.GetAttrib();
     auto& mats   = reader.GetMaterials();
 
+    auto load = [&](const std::string& name) {
+        if(!name.empty())
+            return Texture2D::create(path.parent_path() / name);
+        return std::shared_ptr<Texture2D>();
+    };
+
     for(const auto& shape : shapes)
     {
         std::vector<vertex_type> vertices;
@@ -145,6 +151,7 @@ void Model::loadObj(const std::filesystem::path& path, bool compress)
                 vertices.push_back(std::move(vertex));
             }
         }
+
         auto indexBuffer     = IndexBuffer::create(indices);
         auto vertexBuffer    = VertexBuffer::create(vertices);
         vertexBuffer->layout = {
@@ -153,7 +160,7 @@ void Model::loadObj(const std::filesystem::path& path, bool compress)
             {"a_normal", Shader::Type::Float3},
             {"a_uv", Shader::Type::Float2}};
 
-        meshs.emplace_back(shape.name, indexBuffer, vertexBuffer);
+        meshes.emplace_back(shape.name, indexBuffer, vertexBuffer);
 
         // 加载材质
         Material material;
@@ -168,45 +175,58 @@ void Model::loadObj(const std::filesystem::path& path, bool compress)
             material.emission  = {mat.emission[0], mat.emission[1], mat.emission[2]};
             material.shininess = mat.shininess;
 
-            if(!mat.ambient_texname.empty())
-                material.tex.ambient = Texture2D::create(path.parent_path() / mat.ambient_texname);
-
-            // FIXME: 可能崩溃
-            if(!mat.diffuse_texname.empty())
-                material.tex.diffuse = Texture2D::create(path.parent_path() / mat.diffuse_texname);
-
-            if(!mat.specular_texname.empty())
-                material.tex.specular = Texture2D::create(path.parent_path() / mat.specular_texname);
-
-            if(!mat.specular_highlight_texname.empty())
-                material.tex.specular_highlight = Texture2D::create(path.parent_path() / mat.specular_highlight_texname);
-
-            if(!mat.metallic_texname.empty())
-                material.tex.metallic = Texture2D::create(path.parent_path() / mat.metallic_texname);
-
-            if(!mat.roughness_texname.empty())
-                material.tex.roughness = Texture2D::create(path.parent_path() / mat.roughness_texname);
-
-            if(!mat.emissive_texname.empty())
-                material.tex.emissive = Texture2D::create(path.parent_path() / mat.emissive_texname);
-
-            if(!mat.normal_texname.empty())
-                material.tex.normal = Texture2D::create(path.parent_path() / mat.normal_texname);
-
+            material.tex.ambient            = load(mat.ambient_texname);
+            material.tex.diffuse            = load(mat.diffuse_texname); // FIXME: 可能崩溃
+            material.tex.specular           = load(mat.specular_texname);
+            material.tex.specular_highlight = load(mat.specular_highlight_texname);
+            material.tex.metallic           = load(mat.metallic_texname);
+            material.tex.roughness          = load(mat.roughness_texname);
+            material.tex.emissive           = load(mat.emissive_texname);
+            material.tex.normal             = load(mat.normal_texname);
 
             if(material.tex.ambient == nullptr)
                 material.tex.ambient = material.tex.diffuse;
         }
-        materials.push_back(material);
+        materials.push_back(std::move(material));
 
         indexCount += indexBuffer->count();
         vertexCount += vertexBuffer->count();
 
         static int  i   = 0; // 调试用. 因为不应该是静态变量
-        std::string str = "Importing " + std::to_string(++i) + "/" + std::to_string(shapes.size()) + " shapes";
+        std::string str = std::format("Importing {}/{}", ++i, shapes.size());
         Main::getWindow()->setTitle(str);
     }
 }
+
+static std::unordered_map<int, size_t> GltfComponentLength = {
+    {TINYGLTF_TYPE_SCALAR, 1},
+    {TINYGLTF_TYPE_VEC2, 2},
+    {TINYGLTF_TYPE_VEC3, 3},
+    {TINYGLTF_TYPE_VEC4, 4},
+    {TINYGLTF_TYPE_MAT2, 4},
+    {TINYGLTF_TYPE_MAT3, 9},
+    {TINYGLTF_TYPE_MAT4, 16}};
+
+static std::unordered_map<int, size_t> GltfComponentTypeBytes = {
+    {TINYGLTF_COMPONENT_TYPE_BYTE, 1},
+    {TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE, 1},
+    {TINYGLTF_COMPONENT_TYPE_SHORT, 2},
+    {TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT, 2},
+    {TINYGLTF_COMPONENT_TYPE_UNSIGNED_INT, 4},
+    {TINYGLTF_COMPONENT_TYPE_FLOAT, 4}};
+
+static std::unordered_map<int, Texture2D::Warp> GltfToWarp = {
+    {TINYGLTF_TEXTURE_WRAP_REPEAT, Texture2D::Warp::Repeat},
+    {TINYGLTF_TEXTURE_WRAP_CLAMP_TO_EDGE, Texture2D::Warp::ClampToEdge},
+    {TINYGLTF_TEXTURE_WRAP_MIRRORED_REPEAT, Texture2D::Warp::MirrorRepeat}};
+
+static std::unordered_map<int, Texture2D::Filter> GltfToFilter = {
+    {TINYGLTF_TEXTURE_FILTER_NEAREST, Texture2D::Filter::Nearest},
+    {TINYGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_NEAREST, Texture2D::Filter::Nearest},
+    {TINYGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_LINEAR, Texture2D::Filter::Nearest},
+    {TINYGLTF_TEXTURE_FILTER_LINEAR, Texture2D::Filter::Bilinear},
+    {TINYGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_NEAREST, Texture2D::Filter::Trilinear},
+    {TINYGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_LINEAR, Texture2D::Filter::Trilinear}};
 
 void Model::loadGltf(const std::filesystem::path& path, bool compress)
 {
@@ -224,21 +244,132 @@ void Model::loadGltf(const std::filesystem::path& path, bool compress)
     if(!warn.empty())
         CLEM_LOG_WARN("core", std::format("loading module '{}' warn:\n{}", fs::absolute(path).string(), warn));
 
-    
-
-    for(const auto& mesh : model.meshes)
+    auto load = [&](int index)
     {
+        if(index < 0)
+            return std::shared_ptr<Texture2D>();
+        const auto& tex = model.textures[index];
+        if(tex.source != -1)
+        {
+            const auto& image   = model.images[tex.source];
+            auto        texture = Texture2D::create(path.parent_path() / image.uri);
+            // auto        texture = Texture2D::create(image.image.data(), {image.width, image.height}, image.bits * image.component);
+
+            if(tex.sampler != -1)
+            {
+                const auto& sampler = model.samplers[tex.sampler];
+                texture->setMinFilter(GltfToFilter[sampler.minFilter]);
+                texture->setMagFilter(GltfToFilter[sampler.magFilter]);
+                // TODO: 设置环绕方式
+            }
+            return texture;
+        }
+        return std::shared_ptr<Texture2D>();
+    };
+
+    for(const auto& node : model.nodes)
+    {
+        if(node.mesh < 0)
+            continue;
+
+        const auto& mesh = model.meshes[node.mesh];
+
         for(const auto& primitive : mesh.primitives)
         {
-            std::vector<vertex_type> vertices;
-            std::vector<index_type>  indices;
-
             const auto& indicesAccessor = model.accessors[primitive.indices];
 
-            for(const auto& attribute : primitive.attributes)
+            std::vector<vertex_type> vertices(indicesAccessor.count);
+            std::vector<index_type>  indices(indicesAccessor.count);
+
+            for(const auto& attr : primitive.attributes)
             {
+                const auto& accessor   = model.accessors[attr.second];
+                const auto& bufferView = model.bufferViews[accessor.bufferView];
+                const auto& buffer     = model.buffers[bufferView.buffer];
+
+                const auto comLength       = GltfComponentLength[accessor.type];
+                const auto comTypeByteSize = GltfComponentTypeBytes[accessor.componentType];
+
+                const size_t bufferOffset = bufferView.byteOffset + accessor.byteOffset;
+                const int    bufferLength = accessor.count * comLength * comTypeByteSize;
+                const auto   first        = buffer.data.begin() + bufferOffset;
+                const auto   data         = std::vector<uint8_t>(first, first + bufferLength);
+
+                if(attr.first == "POSITION")
+                    for(size_t i = 0; i < accessor.count; i++)
+                        vertices[i].position = reinterpret_cast<const Vector3*>(data.data())[i];
+                else if(attr.first == "NORMAL")
+                    for(size_t i = 0; i < accessor.count; i++)
+                        vertices[i].normal = reinterpret_cast<const Vector3*>(data.data())[i];
+                else if(attr.first == "TEXCOORD_0")
+                    for(size_t i = 0; i < accessor.count; i++)
+                        vertices[i].uv = reinterpret_cast<const Vector2*>(data.data())[i];
             }
+
+            {
+                const auto accessor   = model.accessors[primitive.indices];
+                const auto bufferView = model.bufferViews[accessor.bufferView];
+                const auto buffer     = model.buffers[bufferView.buffer];
+
+                const auto comLength       = GltfComponentLength[accessor.type];
+                const auto comTypeByteSize = GltfComponentTypeBytes[accessor.componentType];
+
+                const size_t bufferOffset = bufferView.byteOffset + accessor.byteOffset;
+                const int    bufferLength = accessor.count * comLength * comTypeByteSize;
+                const auto   first        = buffer.data.begin() + bufferOffset;
+                const auto   data         = std::vector<uint8_t>(first, first + bufferLength);
+
+                size_t indicesCount = accessor.count;
+                if(comTypeByteSize == 2)
+                {
+                    auto in = reinterpret_cast<const uint16_t*>(data.data());
+                    for(size_t i = 0; i < accessor.count; i++)
+                        indices[i] = (IndexBuffer::value_type)in[i];
+                }
+                else if(comTypeByteSize == 4)
+                {
+                    auto in = reinterpret_cast<const uint32_t*>(data.data());
+                    for(size_t i = 0; i < accessor.count; i++)
+                        indices[i] = (IndexBuffer::value_type)in[i];
+                }
+            }
+
+            auto indexBuffer     = IndexBuffer::create(indices);
+            auto vertexBuffer    = VertexBuffer::create(vertices);
+            vertexBuffer->layout = {
+                {"a_position", Shader::Type::Float3},
+                {"a_color", Shader::Type::Float3},
+                {"a_normal", Shader::Type::Float3},
+                {"a_uv", Shader::Type::Float2}};
+
+            meshes.emplace_back(mesh.name, indexBuffer, vertexBuffer);
+
+            indexCount += indexBuffer->count();
+            vertexCount += vertexBuffer->count();
+
+            const auto& mat = model.materials[primitive.material];
+            const auto& pbr = mat.pbrMetallicRoughness;
+
+            Material material;
+
+            material.name     = mat.name;
+            material.diffuse  = {(float)pbr.baseColorFactor[0], (float)pbr.baseColorFactor[1], (float)pbr.baseColorFactor[2]};
+            material.emission = {(float)mat.emissiveFactor[0], (float)mat.emissiveFactor[1], (float)mat.emissiveFactor[2]};
+
+            material.tex.diffuse  = load(pbr.baseColorTexture.index);
+            material.tex.metallic = load(pbr.metallicRoughnessTexture.index);
+            material.tex.emissive = load(mat.emissiveTexture.index);
+            material.tex.normal   = load(mat.normalTexture.index);
+
+            if(material.tex.ambient == nullptr)
+                material.tex.ambient = material.tex.diffuse;
+
+            materials.push_back(std::move(material));
         }
+
+        static int  i   = 0; // 调试用. 因为不应该是静态变量
+        std::string str = std::format("Importing {}/{}", ++i, model.meshes.size());
+        Main::getWindow()->setTitle(str);
     }
 }
 
@@ -247,7 +378,7 @@ void Model::clear()
     path        = "";
     indexCount  = 0;
     vertexCount = 0;
-    meshs.clear();
+    meshes.clear();
     materials.clear();
 }
 

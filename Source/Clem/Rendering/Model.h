@@ -41,7 +41,7 @@ private:
     void loadObj(const std::filesystem::path& path, bool compress);
     void loadGltf(const std::filesystem::path& path, bool compress);
 
-    std::vector<Mesh>     meshs;
+    std::vector<Mesh>     meshes;
     std::vector<Material> materials;
     size_t                indexCount  = 0;
     size_t                vertexCount = 0;

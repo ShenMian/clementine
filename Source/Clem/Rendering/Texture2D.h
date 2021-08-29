@@ -37,18 +37,6 @@ namespace clem
 class Texture2D
 {
 public:
-    enum class Type
-    {
-        Diffuse,  // 参与漫反射
-        Specular, // 参与镜面反射
-
-        Normals,  // 法线
-        Opacity,  // 透明度
-        Emissive, // 被加入光照后的结果中
-
-        Default = Diffuse
-    };
-
     // 纹理过滤方式
     enum class Filter
     {
@@ -60,9 +48,9 @@ public:
     // 纹理环绕方式
     enum class Warp
     {
-        Repeat,       // 重复
-        MirrorRepeat, // 镜像重复
-        ClampToEdge
+        Repeat,      // 重复
+        ClampToEdge,
+        MirrorRepeat // 镜像重复
     };
 
     // 像素格式
@@ -83,26 +71,28 @@ public:
 
     /**
      * @brief 创建空纹理.
-     *
-     * @param type 纹理类型.
      */
-    static std::shared_ptr<Texture2D> create(Type type = Type::Default);
+    static std::shared_ptr<Texture2D> create();
 
     /**
      * @brief 从文件创建纹理.
      *
-     * @param path 文件路径.
-     * @param type 纹理类型.
-     * @return std::shared_ptr<Texture2D>
+     * @param path      文件路径.
+     * @param genMipmap 是否生成 mipmap.
+     * @param format    像素格式.
      */
-    static std::shared_ptr<Texture2D> create(const std::filesystem::path& path, bool genMipmap = true, Type type = Type::Default);
+    static std::shared_ptr<Texture2D> create(const std::filesystem::path& path, bool genMipmap = true, Format format = Format::Auto);
 
     /**
-     * @brief 从文件载入纹理.
+     * @brief 从文件创建纹理.
      *
-     * @param path 文件路径.
-     */
-    virtual void load(const std::filesystem::path& path, bool genMipmap = true, Format format = Format::Auto) = 0;
+     * @param data      图像数据.
+     * @param size      图像宽高.
+     * @param bits      像素大小.
+     * @param genMipmap 是否生成 mipmap.
+     * @param format    像素格式.
+	 */
+    static std::shared_ptr<Texture2D> create(const void* data, Size2i size, int bits, bool genMipmap = true, Format format = Format::Auto);
 
     /**
      * @brief 从文件载入立方体纹理.
@@ -139,14 +129,11 @@ public:
 
     virtual void bind(unsigned int slot = 0) const = 0;
 
-    void setType(Type type);
-    Type getType() const;
-
 protected:
     Texture2D(const Texture2D&) = delete;
     Texture2D& operator=(const Texture2D&) = delete;
 
-    Type type;
+    std::filesystem::path path;
 
     static std::unordered_map<std::filesystem::path, std::shared_ptr<Texture2D>> cache;
 };

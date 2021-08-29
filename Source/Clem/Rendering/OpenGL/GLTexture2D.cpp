@@ -26,26 +26,15 @@ static std::unordered_map<Texture2D::Warp, GLenum> GLWarp = {
     {Texture2D::Warp::MirrorRepeat, GL_MIRRORED_REPEAT},
     {Texture2D::Warp::ClampToEdge, GL_CLAMP_TO_EDGE}};
 
+static std::unordered_map<int, Texture2D::Format> BitsToFormat = {
+    {8, Texture2D::Format::R8},
+    {16, Texture2D::Format::RG8},
+    {24, Texture2D::Format::RGB8},
+    {32, Texture2D::Format::RGBA8},
+    {48, Texture2D::Format::RGB16},
+    {64, Texture2D::Format::RGBA16}};
+
 static_assert(std::is_same<GLTexture2D::handle_type, GLuint>::value);
-
-std::shared_ptr<Texture2D> GLTexture2D::create()
-{
-    return std::make_shared<GLTexture2D>();
-}
-
-std::shared_ptr<Texture2D> GLTexture2D::create(const fs::path& path, bool genMipmap, Format fmt)
-{
-    auto it = cache.find(fs::absolute(path));
-    if(it == cache.end())
-    {
-        auto texture = create();
-        texture->load(path, genMipmap, fmt);
-        cache.insert({path, texture});
-        return texture;
-    }
-    else
-        return it->second;
-}
 
 GLTexture2D::GLTexture2D()
 {
@@ -53,78 +42,27 @@ GLTexture2D::GLTexture2D()
     glCreateTextures(glType, 1, &handle);
 }
 
-GLTexture2D::GLTexture2D(const fs::path& path)
+GLTexture2D::GLTexture2D(const fs::path& path, bool genMipmap, Format fmt)
 {
-    load(path);
+    Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
+    
+    this->path = path;
+
+    int  bits;
+    auto data = loadFromFile(path, size.x, size.y, bits);
+    init(data, size, bits, genMipmap, fmt);
+    stbi_image_free(data);
+}
+
+GLTexture2D::GLTexture2D(const void* data, Size2i size, int bits, bool genMipmap, Format fmt)
+    : size(size)
+{
+    init(data, size, bits, genMipmap, fmt);
 }
 
 GLTexture2D::~GLTexture2D()
 {
     glDeleteTextures(1, &handle);
-}
-
-void GLTexture2D::load(const std::filesystem::path& path, bool genMipmap, Format fmt)
-{
-    Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
-
-    glType = GL_TEXTURE_2D;
-    glCreateTextures(glType, 1, &handle);
-    bind();
-
-    setMinFilter(Filter::Nearest);
-    setMagFilter(Filter::Bilinear);
-
-    // 设置纹理环绕方式
-    glTexParameteri(glType, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(glType, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-    int  bits;
-    auto data = loadFromFile(path, size.x, size.y, bits);
-
-    if(fmt == Format::Auto)
-    {
-        switch(bits)
-        {
-        case 8:
-            fmt = Format::R8;
-            break;
-
-        case 16:
-            fmt = Format::RG8;
-            break;
-
-        case 24:
-            fmt = Format::RGB8;
-            break;
-
-        case 32:
-            fmt = Format::RGBA8;
-            break;
-
-        case 48:
-            fmt = Format::RGB16;
-            break;
-
-        case 64:
-            fmt = Format::RGBA16;
-            break;
-
-        default:
-            Assert::isTrue(false);
-        }
-    }
-
-    // glTexStorage2D(glType, 1, GLInternalFormat(fmt), size.x, size.y);
-    // glTexSubImage2D(glType, 0, 0, 0, size.x, size.y, GLFormat(fmt), GL_UNSIGNED_BYTE, data);
-
-    glTexImage2D(glType, 0, GLInternalFormat(fmt), size.x, size.y, 0, GLFormat(fmt), GL_UNSIGNED_BYTE, data);
-
-    if(genMipmap)
-        glGenerateMipmap(glType);
-
-    GLCheckError();
-
-    stbi_image_free(data);
 }
 
 void GLTexture2D::loadCubemap(const std::vector<std::filesystem::path>& faces)
@@ -203,14 +141,36 @@ size_t GLTexture2D::getHandle() const
     return (size_t)handle;
 }
 
+void GLTexture2D::init(const void* data, Size2i size, int bits, bool genMipmap, Format fmt)
+{
+    glType = GL_TEXTURE_2D;
+    glCreateTextures(glType, 1, &handle);
+    bind();
+
+    setMinFilter(Filter::Nearest);
+    setMagFilter(Filter::Bilinear);
+
+    // 设置纹理环绕方式
+    glTexParameteri(glType, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(glType, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    if(fmt == Format::Auto)
+        fmt = BitsToFormat[bits];
+
+    glTexImage2D(glType, 0, GLInternalFormat(fmt), size.x, size.y, 0, GLFormat(fmt), GL_UNSIGNED_BYTE, data);
+
+    if(genMipmap)
+        glGenerateMipmap(glType);
+
+    GLCheckError();
+}
+
 void* GLTexture2D::loadFromFile(const std::filesystem::path& path, int& width, int& height, int& bits)
 {
     int  channels;
     auto data = stbi_load(path.string().c_str(), &width, &height, &channels, 0);
     Assert::isTrue(data != nullptr, std::format("can't load image from file: '{}'", path.string()));
-
     bits = channels * 8;
-
     return data;
 }
 
