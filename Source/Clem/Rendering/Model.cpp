@@ -197,16 +197,6 @@ void Model::loadObj(const std::filesystem::path& path, bool compress)
             if(material.tex.ambient == nullptr)
                 material.tex.ambient = material.tex.diffuse;
         }
-
-        auto indexBuffer     = IndexBuffer::create(indices);
-        auto vertexBuffer    = VertexBuffer::create(vertices);
-        vertexBuffer->layout = {
-            {"a_position", Shader::Type::Float3},
-            {"a_color", Shader::Type::Float3},
-            {"a_normal", Shader::Type::Float3},
-            {"a_uv", Shader::Type::Float2}};
-
-        meshs.emplace_back(indexBuffer, vertexBuffer);
         materials.push_back(material);
 
         indexCount += indexBuffer->count();
