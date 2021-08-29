@@ -16,7 +16,10 @@ std::shared_ptr<VertexBuffer> VertexBuffer::create(const std::vector<value_type>
         using enum Renderer::API;
 
     case OpenGL:
-        return std::make_shared<GLVertexBuffer>(data, usage);
+        return std::make_shared<GLVertexBuffer>(data.data(), data.size() * sizeof(value_type), usage);
+
+    case Vulkan:
+        return std::make_shared<VKVertexBuffer>(data.data(), data.size() * sizeof(value_type), usage);
     }
     return nullptr;
 }

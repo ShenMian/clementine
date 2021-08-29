@@ -63,7 +63,7 @@ public:
      * @param pos   像素坐标.
      * @param data  像素数据.
      */
-    virtual void read(int index, Vector2i pos, int& data) = 0;
+    virtual void readColorAttachment(int index, Vector2i pos, int& data) = 0;
 
     virtual void bind()   = 0;
     virtual void unbind() = 0;

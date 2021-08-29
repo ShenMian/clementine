@@ -64,8 +64,7 @@ struct Material
 };
 
 layout (location = 0) out vec4 frag_color;
-layout (location = 1) out vec4 bright_color;
-layout (location = 2) out int  entity_id;
+layout (location = 1) out int  entity_id;
 
 in vec3 v_position;
 in vec3 v_color;
@@ -91,9 +90,9 @@ void main()
     frag_color = texture(u_material.tex.diffuse, v_uv) * CalcLighting();
 
     // 提取亮色
-    float brightness = dot(frag_color.rgb, vec3(0.2126, 0.7152, 0.0722));
-    if(brightness > 1.0)
-        bright_color = vec4(frag_color.rgb, 1.0);
+    // float brightness = dot(frag_color.rgb, vec3(0.2126, 0.7152, 0.0722));
+    // if(brightness > 1.0)
+    //     bright_color = vec4(frag_color.rgb, 1.0);
 
     entity_id = u_entity_id;
 }

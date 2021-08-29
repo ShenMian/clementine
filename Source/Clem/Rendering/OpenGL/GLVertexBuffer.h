@@ -16,13 +16,6 @@ public:
     /**
 	 * @brief 构造函数.
 	 *
-	 * @param data 缓冲区.
-	 */
-    GLVertexBuffer(const std::vector<value_type>& buffer, Usage usage);
-
-    /**
-	 * @brief 构造函数.
-	 *
 	 * @param data 缓冲区数据指针.
 	 * @param size 缓冲区数据大小.
 	 */

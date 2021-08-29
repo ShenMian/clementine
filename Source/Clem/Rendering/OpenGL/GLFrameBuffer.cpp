@@ -125,7 +125,7 @@ void GLFrameBuffer::clearColorAttachment(int index, int value)
     unbind();
 }
 
-void GLFrameBuffer::read(int index, Vector2i pos, int& data)
+void GLFrameBuffer::readColorAttachment(int index, Vector2i pos, int& data)
 {
     Assert::isTrue(0 <= index && index < colorAttachments.size());
 
