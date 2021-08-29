@@ -37,7 +37,6 @@ private:
     Vector2                      viewportSize;
     std::shared_ptr<FrameBuffer> framebuffer = FrameBuffer::create({(int)(1920 * 0.7), (int)(1080 * 0.7)},
                                                                    {FrameBuffer::PixelFormat::RGBA8,
-                                                                    FrameBuffer::PixelFormat::RGBA8,
                                                                     FrameBuffer::PixelFormat::R8,
                                                                     FrameBuffer::PixelFormat::DepthStencil});
     std::shared_ptr<FrameBuffer> shadowMap   = FrameBuffer::create({1024, 1024}, {FrameBuffer::PixelFormat::DepthComponent});

@@ -116,7 +116,7 @@ void Viewport::update(Time dt)
         lastViewportSize = viewportSize;
     }
 
-    framebuffer->clearColorAttachment(2, -1);
+    framebuffer->clearColorAttachment(1, -1);
 
     render(dt);
     ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {0, 1}, {1, 0});
@@ -134,7 +134,7 @@ void Viewport::update(Time dt)
             ImVec2 mouse = {ImGui::GetMousePos().x - viewportPos.x, ImGui::GetMousePos().y - viewportPos.y};
 
             int id;
-            framebuffer->read(2, {0, 0}, id);
+            framebuffer->readColorAttachment(1, {0, 0}, id);
             Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
         }
 

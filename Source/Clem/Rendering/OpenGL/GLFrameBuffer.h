@@ -20,7 +20,7 @@ public:
     std::shared_ptr<Texture2D> getDepthAttachment() override;
     void                       clearColorAttachment(int index, int value) override;
 
-    void read(int index, Vector2i pos, int& data) override;
+    void readColorAttachment(int index, Vector2i pos, int& data) override;
 
     void bind() override;
     void unbind() override;
