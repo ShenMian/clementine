@@ -27,11 +27,12 @@ private:
     void showRigidbody();
     void showModel();
     void showLight();
-    void showMaterial();
     void showSprite();
     void showScript();
 
-    void textureEdit(const std::string& label, std::shared_ptr<Texture2D> texture);
+    void showMaterial(Material mat);
+
+    void textureEdit(const std::string& label, std::shared_ptr<Texture2D>& texture);
     void vectorEdit(const std::string& label, Vector3& value, float defaultValue = 0.f);
     void colorEdit(const std::string& label, Vector3& value);
 };

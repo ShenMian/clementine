@@ -113,11 +113,11 @@ vec3 CalcDirLight(DirectionLight light, vec3 normal)
 
     // 镜面反射光照
     float shininess = 1.0 - texture(u_material.roughness, v_uv).r;
-    // if(shininess == 0.0)
-    //     shininess = u_material.shininess;
+    if(shininess == 0.0)
+        shininess = u_material.shininess;
 
     const vec3  ks              = u_material.specular * vec3(light.intesity);
-    const vec3  specular_color  = texture(u_material.metallic, v_uv).rgb;
+    const vec3  specular_color  = vec3(texture(u_material.metallic, v_uv).r);
     const vec3  reflected_dir   = reflect(-dir_to_light, normal);
     const float specular_amount = pow(max(dot(reflected_dir, v_dir_to_cam), 0.0), shininess);
     const vec3  specular        = ks * light.color * specular_amount * specular_color;

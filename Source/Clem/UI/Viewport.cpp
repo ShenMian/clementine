@@ -87,7 +87,7 @@ void Viewport::attach()
     dirLights.resize(1);
     dirLights[0].setColor({255.f / 255.f, 244.f / 255.f, 214.f / 255.f});
     dirLights[0].setIntesity(2.f);
-    dirLights[0].setDirection({0.5, -1, -0.5});
+    dirLights[0].setDirection({-0.5, -1, -0.5});
 
     pointLights.resize(2);
     pointLights[0].setColor({1, 0, 0});
@@ -120,7 +120,7 @@ void Viewport::update(Time dt)
     framebuffer->clearColorAttachment(1, -1);
 
     render(dt);
-    ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {0, 1}, {1, 0});
+    ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
 
     ImGui::Text("CAM: POS(%.3f,%.3f,%.3f) DIR(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z,
                 Matrix4(camera.view).forword().normalize().x, Matrix4(camera.view).forword().normalize().y, Matrix4(camera.view).forword().normalize().z);
@@ -224,7 +224,7 @@ void Viewport::updateShadow(Time dt)
 
         shadowShader->uploadUniform("u_view", camera.getViewMatrix());
         shadowShader->uploadUniform("u_projection", camera.getProjectionMatrix());
-        shadowShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
+        // shadowShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
 
         shadowMap->bind();
         glClear(GL_DEPTH_BUFFER_BIT);
@@ -286,9 +286,9 @@ void Viewport::updateCameraControl(Time dt)
     if(isKeyPressed(GLFW_KEY_S))
         camera.view.translation += Vector3::unit_z * speed;
     if(isKeyPressed(GLFW_KEY_A))
-        camera.view.translation += Vector3::unit_x * speed;
-    if(isKeyPressed(GLFW_KEY_D))
         camera.view.translation += -Vector3::unit_x * speed;
+    if(isKeyPressed(GLFW_KEY_D))
+        camera.view.translation += Vector3::unit_x * speed;
     if(isKeyPressed(GLFW_KEY_E))
         camera.view.translation += -Vector3::unit_y * speed;
     if(isKeyPressed(GLFW_KEY_Q))
@@ -296,9 +296,9 @@ void Viewport::updateCameraControl(Time dt)
 #endif
 
     if(isKeyPressed(GLFW_KEY_LEFT))
-        camera.view.rotation.y += 0.5;
-    else if(isKeyPressed(GLFW_KEY_RIGHT))
         camera.view.rotation.y += -0.5;
+    else if(isKeyPressed(GLFW_KEY_RIGHT))
+        camera.view.rotation.y += 0.5;
     else if(isKeyPressed(GLFW_KEY_UP))
         camera.view.rotation.x += -0.5;
     else if(isKeyPressed(GLFW_KEY_DOWN))

@@ -309,6 +309,7 @@ void GLShader::uploadUniform(const std::string& name, const Matrix4& mat)
 {
     bind();
     auto location = glGetUniformLocation(handle, name.c_str());
+    // Assert::isTrue(location != -1, std::format("uniform '{}' doesn't exist", name));
     glUniformMatrix4fv(location, 1, false, mat.data()); // column major: GL_FALSE, row major: GL_TRUE
 
     GLCheckError();
@@ -318,6 +319,7 @@ void GLShader::uploadUniform(const std::string& name, const Vector3& vec)
 {
     bind();
     auto location = glGetUniformLocation(handle, name.c_str());
+    // Assert::isTrue(location != -1, std::format("uniform '{}' doesn't exist", name));
     glUniform3f(location, vec.x, vec.y, vec.z);
 
     GLCheckError();
@@ -327,6 +329,7 @@ void GLShader::uploadUniform(const std::string& name, const Vector2& vec)
 {
     bind();
     auto location = glGetUniformLocation(handle, name.c_str());
+    // Assert::isTrue(location != -1, std::format("uniform '{}' doesn't exist", name));
     glUniform2f(location, vec.x, vec.y);
 
     GLCheckError();
@@ -336,6 +339,7 @@ void GLShader::uploadUniform(const std::string& name, float value)
 {
     bind();
     auto location = glGetUniformLocation(handle, name.c_str());
+    // Assert::isTrue(location != -1, std::format("uniform '{}' doesn't exist", name));
     glUniform1f(location, value);
 
     GLCheckError();
@@ -345,6 +349,7 @@ void GLShader::uploadUniform(const std::string& name, int value)
 {
     bind();
     auto location = glGetUniformLocation(handle, name.c_str());
+    // Assert::isTrue(location != -1, std::format("uniform '{}' doesn't exist", name));
     glUniform1i(location, value);
 
     GLCheckError();

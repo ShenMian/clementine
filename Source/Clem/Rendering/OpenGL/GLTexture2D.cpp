@@ -179,6 +179,7 @@ void GLTexture2D::init(const void* data, Size2i size, int bits, bool genMipmap, 
 
 void* GLTexture2D::loadFromFile(const std::filesystem::path& path, int& width, int& height, int& bits)
 {
+    // stbi_set_flip_vertically_on_load(1);
     int  channels;
     auto data = stbi_load(path.string().c_str(), &width, &height, &channels, 0);
     Assert::isTrue(data != nullptr, std::format("can't load image from file: '{}'", path.string()));

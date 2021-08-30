@@ -238,19 +238,16 @@ void Properties::showLight()
 {
 }
 
-void Properties::showMaterial()
+void Properties::showMaterial(Material mat)
 {
-    if(entity.anyOf<Material>())
+    if(ImGui::CollapsingHeader("Material", ImGuiTreeNodeFlags_DefaultOpen))
     {
-        if(ImGui::CollapsingHeader("Material", ImGuiTreeNodeFlags_DefaultOpen))
-        {
-            auto& material = entity.get<Material>();
+        auto& material = entity.get<Material>();
 
-            ImGui::Text("Shader   : Standard");
-            ImGui::Text("Albedo   : ");
-            ImGui::Text("Metallic : ");
-            ImGui::Text("Shininess: %.3f", material.shininess);
-        }
+        ImGui::Text("Shader   : Standard");
+        ImGui::Text("Albedo   : ");
+        ImGui::Text("Metallic : ");
+        ImGui::Text("Shininess: %.3f", material.shininess);
     }
 }
 
@@ -276,7 +273,7 @@ void Properties::showScript()
     }
 }
 
-void Properties::textureEdit(const std::string& label, std::shared_ptr<Texture2D> texture)
+void Properties::textureEdit(const std::string& label, std::shared_ptr<Texture2D>& texture)
 {
     if(texture == nullptr)
         return;
@@ -290,8 +287,22 @@ void Properties::textureEdit(const std::string& label, std::shared_ptr<Texture2D
     ImGui::NextColumn();
 
     ImGui::Image((ImTextureID)texture->getHandle(), {16, 16}, {1, 0}, {0, 1});
+    if(ImGui::BeginDragDropTarget())
+    {
+        const auto payload = ImGui::AcceptDragDropPayload("browser_file");
+        if(payload != nullptr)
+        {
+            fs::path path((const wchar_t*)payload->Data);
+            Assert::isTrue(path.extension() == L".jpg" || path.extension() == L".png");
+            
+            texture = Texture2D::create(path);
+        }
+        ImGui::EndDragDropTarget();
+    }
+
     if(ImGui::IsItemHovered())
         ImGui::Image((ImTextureID)texture->getHandle(), {64, 64}, {1, 0}, {0, 1});
+
     ImGui::Columns(1);
 
     ImGui::PopID();

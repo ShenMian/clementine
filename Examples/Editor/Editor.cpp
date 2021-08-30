@@ -30,8 +30,10 @@ public:
 
         // model.add<Model>("../assets/models/scene.obj", true);
 
-        // model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf", true);
-        model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj", true);
+        // model.add<Model>("../../../3DModel/weapon/m1911/m1911.gltf");
+
+        model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf");
+        // model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj", true);
         model.get<Transform>().translation = {0, 0, -20};
 
         // model.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj", true);
@@ -39,6 +41,7 @@ public:
 
         // model.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Exterior/exterior.obj");
         // model.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Interior/interior.obj");
+        // model.get<Transform>().scale = {0.07, 0.07, 0.07};
 
         // model.add<Model>("../../../3DModel/scene/San_Miguel/san-miguel-low-poly.obj", true);
     }

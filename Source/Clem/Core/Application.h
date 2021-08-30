@@ -73,11 +73,11 @@ public:
 	 */
     // void replaceScene(const std::shared_ptr<Scene>& scene);
 
-private:
-    const std::string     name;
+protected:
     std::filesystem::path asset = "../assets";
 
-    // std::vector<std::shared_ptr<Scene>> scenes;
+private:
+    const std::string name;
 
     static Application* instance;
 };

@@ -350,6 +350,7 @@ void Model::loadGltf(const std::filesystem::path& path, bool compress)
 
             material.name     = mat.name;
             material.diffuse  = {(float)pbr.baseColorFactor[0], (float)pbr.baseColorFactor[1], (float)pbr.baseColorFactor[2]};
+            material.specular = {(float)pbr.metallicFactor, (float)pbr.metallicFactor, (float)pbr.metallicFactor};
             material.emission = {(float)mat.emissiveFactor[0], (float)mat.emissiveFactor[1], (float)mat.emissiveFactor[2]};
 
             material.albedo   = loadTexture(pbr.baseColorTexture.index);
