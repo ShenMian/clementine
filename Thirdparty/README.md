@@ -1,7 +1,7 @@
-- [dear-imgui](https://github.com/ocornut/imgui): Bloat-free Immediate Mode Graphical User interface.
+- [dear-imgui](https://github.com/ocornut/imgui): Bloat-free immediate mode graphical user interface.
 - [glfw](https://github.com/glfw/glfw): A multi-platform library for OpenGL, OpenGL ES, Vulkan, window and input.
 - [spdlog](https://github.com/gabime/spdlog): Fast C++ logging library.
 - [stb](https://github.com/nothings/stb): Single-file public domain libraries.
 - [tinygltf](https://github.com/syoyo/tinygltf): Header only C++11 tiny glTF 2.0 library.
-- [tinyobjloader](https://github.com/syoyo/tinyobjloader): Tiny but powerful single file wavefront obj loader
+- [tinyobjloader](https://github.com/syoyo/tinyobjloader): Header only tiny wavefront obj loader.
 - [glad](https://github.com/Dav1dde/glad): Meta loader for OpenGL API.

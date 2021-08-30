@@ -44,8 +44,7 @@ Screenshots
 ![Pong](Docs/pictures/pong.png)
 ![Minesweeper](Docs/pictures/minesweeper.png)
 ![Sort](Docs/pictures/sort.gif)
-![Gamepad](Docs/pictures/gamepad.gif)
-![Profiler](Docs/pictures/profiler.png)
+**[More...](Docs/pictures)**
 
 [cn]:                  README-cn.md
 [github wiki]:         https://github.com/ShenMian/Clementine/wiki
