@@ -125,6 +125,20 @@ void GLTexture2D::setMagFilter(Filter filter)
     GLCheckError();
 }
 
+void GLTexture2D::setSWarp(Warp warp)
+{
+    bind();
+    glTexParameteri(glType, GL_TEXTURE_WRAP_S, GLWarp[warp]);
+    GLCheckError();
+}
+
+void GLTexture2D::setTWarp(Warp warp)
+{
+    bind();
+    glTexParameteri(glType, GL_TEXTURE_WRAP_T, GLWarp[warp]);
+    GLCheckError();
+}
+
 void GLTexture2D::bind(unsigned int slot) const
 {
     glBindTextureUnit(slot, handle);
@@ -149,10 +163,8 @@ void GLTexture2D::init(const void* data, Size2i size, int bits, bool genMipmap, 
 
     setMinFilter(Filter::Nearest);
     setMagFilter(Filter::Bilinear);
-
-    // 设置纹理环绕方式
-    glTexParameteri(glType, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(glType, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    setSWarp(Warp::Repeat);
+    setTWarp(Warp::Repeat);
 
     if(fmt == Format::Auto)
         fmt = BitsToFormat[bits];

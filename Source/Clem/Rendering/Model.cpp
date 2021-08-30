@@ -95,10 +95,11 @@ void Model::loadObj(const std::filesystem::path& path, bool compress)
     auto& attrib = reader.GetAttrib();
     auto& mats   = reader.GetMaterials();
 
-    auto load = [&](const std::string& name) {
-        if(!name.empty())
-            return Texture2D::create(path.parent_path() / name);
-        return std::shared_ptr<Texture2D>();
+    auto loadTexture = [&](const std::string& name)
+    {
+        if(name.empty())
+            return std::shared_ptr<Texture2D>();
+        return Texture2D::create(path.parent_path() / name);
     };
 
     for(const auto& shape : shapes)
@@ -162,6 +163,9 @@ void Model::loadObj(const std::filesystem::path& path, bool compress)
 
         meshes.emplace_back(shape.name, indexBuffer, vertexBuffer);
 
+        indexCount += indexBuffer->count();
+        vertexCount += vertexBuffer->count();
+
         // 加载材质
         Material material;
         if(shape.mesh.material_ids[0] >= 0)
@@ -175,22 +179,14 @@ void Model::loadObj(const std::filesystem::path& path, bool compress)
             material.emission  = {mat.emission[0], mat.emission[1], mat.emission[2]};
             material.shininess = mat.shininess;
 
-            material.tex.ambient            = load(mat.ambient_texname);
-            material.tex.diffuse            = load(mat.diffuse_texname); // FIXME: 可能崩溃
-            material.tex.specular           = load(mat.specular_texname);
-            material.tex.specular_highlight = load(mat.specular_highlight_texname);
-            material.tex.metallic           = load(mat.metallic_texname);
-            material.tex.roughness          = load(mat.roughness_texname);
-            material.tex.emissive           = load(mat.emissive_texname);
-            material.tex.normal             = load(mat.normal_texname);
-
-            if(material.tex.ambient == nullptr)
-                material.tex.ambient = material.tex.diffuse;
+            material.albedo    = loadTexture(mat.diffuse_texname); // FIXME: 可能崩溃
+            material.metallic  = loadTexture(mat.metallic_texname);
+            material.metallic  = loadTexture(mat.specular_highlight_texname);
+            material.roughness = loadTexture(mat.roughness_texname);
+            material.normal    = loadTexture(mat.bump_texname);
+            material.emissive  = loadTexture(mat.emissive_texname);
         }
         materials.push_back(std::move(material));
-
-        indexCount += indexBuffer->count();
-        vertexCount += vertexBuffer->count();
 
         static int  i   = 0; // 调试用. 因为不应该是静态变量
         std::string str = std::format("Importing {}/{}", ++i, shapes.size());
@@ -244,7 +240,7 @@ void Model::loadGltf(const std::filesystem::path& path, bool compress)
     if(!warn.empty())
         CLEM_LOG_WARN("core", std::format("loading module '{}' warn:\n{}", fs::absolute(path).string(), warn));
 
-    auto load = [&](int index)
+    auto loadTexture = [&](int index)
     {
         if(index < 0)
             return std::shared_ptr<Texture2D>();
@@ -290,10 +286,10 @@ void Model::loadGltf(const std::filesystem::path& path, bool compress)
                 const auto comLength       = GltfComponentLength[accessor.type];
                 const auto comTypeByteSize = GltfComponentTypeBytes[accessor.componentType];
 
-                const size_t bufferOffset = bufferView.byteOffset + accessor.byteOffset;
-                const int    bufferLength = accessor.count * comLength * comTypeByteSize;
-                const auto   first        = buffer.data.begin() + bufferOffset;
-                const auto   data         = std::vector<uint8_t>(first, first + bufferLength);
+                const auto bufferOffset = bufferView.byteOffset + accessor.byteOffset;
+                const auto bufferLength = accessor.count * comLength * comTypeByteSize;
+                const auto first        = buffer.data.begin() + bufferOffset;
+                const auto data         = std::vector<uint8_t>(first, first + bufferLength);
 
                 if(attr.first == "POSITION")
                     for(size_t i = 0; i < accessor.count; i++)
@@ -314,10 +310,10 @@ void Model::loadGltf(const std::filesystem::path& path, bool compress)
                 const auto comLength       = GltfComponentLength[accessor.type];
                 const auto comTypeByteSize = GltfComponentTypeBytes[accessor.componentType];
 
-                const size_t bufferOffset = bufferView.byteOffset + accessor.byteOffset;
-                const int    bufferLength = accessor.count * comLength * comTypeByteSize;
-                const auto   first        = buffer.data.begin() + bufferOffset;
-                const auto   data         = std::vector<uint8_t>(first, first + bufferLength);
+                const auto bufferOffset = bufferView.byteOffset + accessor.byteOffset;
+                const auto bufferLength = accessor.count * comLength * comTypeByteSize;
+                const auto first        = buffer.data.begin() + bufferOffset;
+                const auto data         = std::vector<uint8_t>(first, first + bufferLength);
 
                 size_t indicesCount = accessor.count;
                 if(comTypeByteSize == 2)
@@ -356,13 +352,10 @@ void Model::loadGltf(const std::filesystem::path& path, bool compress)
             material.diffuse  = {(float)pbr.baseColorFactor[0], (float)pbr.baseColorFactor[1], (float)pbr.baseColorFactor[2]};
             material.emission = {(float)mat.emissiveFactor[0], (float)mat.emissiveFactor[1], (float)mat.emissiveFactor[2]};
 
-            material.tex.diffuse  = load(pbr.baseColorTexture.index);
-            material.tex.metallic = load(pbr.metallicRoughnessTexture.index);
-            material.tex.emissive = load(mat.emissiveTexture.index);
-            material.tex.normal   = load(mat.normalTexture.index);
-
-            if(material.tex.ambient == nullptr)
-                material.tex.ambient = material.tex.diffuse;
+            material.albedo   = loadTexture(pbr.baseColorTexture.index);
+            material.metallic = loadTexture(pbr.metallicRoughnessTexture.index);
+            material.emissive = loadTexture(mat.emissiveTexture.index);
+            material.normal   = loadTexture(mat.normalTexture.index);
 
             materials.push_back(std::move(material));
         }

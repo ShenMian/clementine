@@ -88,7 +88,7 @@ void GLRenderer::submit(const Entity& entity)
 
         shader->bind();
 
-        entity.get<Material>().tex.diffuse->bind(10);
+        entity.get<Material>().albedo->bind(10);
         shader->uploadUniform("u_skybox", 10);
 
         glDepthFunc(GL_LEQUAL);
@@ -121,26 +121,30 @@ void GLRenderer::submit(const Entity& entity)
         shader->uploadUniform("u_material.emission", mats[i].emission);
         shader->uploadUniform("u_material.shininess", mats[i].shininess);
 
-        if(mats[i].tex.ambient)
-            mats[i].tex.ambient->bind(0);
+        if(mats[i].albedo)
+            mats[i].albedo->bind(0);
 
-        if(mats[i].tex.diffuse)
-            mats[i].tex.diffuse->bind(1);
+        if(mats[i].metallic)
+            mats[i].metallic->bind(1);
 
-        if(mats[i].tex.specular)
-            mats[i].tex.specular->bind(2);
+        if(mats[i].roughness)
+            mats[i].roughness->bind(2);
 
-        if(mats[i].tex.specular_highlight)
-            mats[i].tex.specular_highlight->bind(3);
+        if(mats[i].ao)
+            mats[i].ao->bind(3);
 
-        if(mats[i].tex.emissive)
-            mats[i].tex.emissive->bind(4);
+        if(mats[i].emissive)
+            mats[i].emissive->bind(4);
 
-        shader->uploadUniform("u_material.tex.ambient", 0);
-        shader->uploadUniform("u_material.tex.diffuse", 1);
-        shader->uploadUniform("u_material.tex.specular", 2);
-        shader->uploadUniform("u_material.tex.specular_highlight", 3);
-        shader->uploadUniform("u_material.tex.emissive", 4);
+        if(mats[i].normal)
+            mats[i].normal->bind(5);
+
+        shader->uploadUniform("u_material.albedo", 0);
+        shader->uploadUniform("u_material.metallic", 1);
+        shader->uploadUniform("u_material.roughness", 2);
+        shader->uploadUniform("u_material.ao", 3);
+        shader->uploadUniform("u_material.emissive", 4);
+        shader->uploadUniform("u_material.normal", 5);
 
         draw(meshs[i].vertexArray);
     }

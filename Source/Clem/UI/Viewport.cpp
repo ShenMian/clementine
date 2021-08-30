@@ -96,6 +96,7 @@ void Viewport::attach()
     pointLights[1].setColor({0, 1, 0});
     pointLights[1].setIntesity(1.f);
     pointLights[1].setPosition({-5, 5, 0});
+
     pointLights.clear();
 }
 

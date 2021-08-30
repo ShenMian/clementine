@@ -210,11 +210,12 @@ void Properties::showModel()
 
                             if(ImGui::TreeNodeEx(mat.name.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
                             {
-                                textureEdit("Albedo", mat.tex.diffuse);
-                                textureEdit("Normal", mat.tex.normal);
-                                textureEdit("Metallic", mat.tex.metallic);
-                                textureEdit("Roughness", mat.tex.roughness);
-                                textureEdit("Emissive", mat.tex.emissive);
+                                textureEdit("Albedo", mat.albedo);
+                                textureEdit("Metallic", mat.metallic);
+                                textureEdit("Roughness", mat.roughness);
+                                textureEdit("AO", mat.ao);
+                                textureEdit("Emissive", mat.emissive);
+                                textureEdit("Normal", mat.normal);
                                 ImGui::Separator();
 
                                 colorEdit("Ambient", mat.ambient);

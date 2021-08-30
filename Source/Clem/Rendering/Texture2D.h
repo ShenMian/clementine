@@ -118,6 +118,20 @@ public:
     virtual void setMagFilter(Filter filter) = 0;
 
     /**
+     * @brief 设置 S 环绕方式.
+     *
+     * @param warp 环绕方式.
+     */
+    virtual void setSWarp(Warp warp) = 0;
+
+    /**
+     * @brief 设置 T 环绕方式.
+     *
+     * @param warp 环绕方式.
+     */
+    virtual void setTWarp(Warp warp) = 0;
+
+    /**
      * @brief 获取纹理大小.
      */
     virtual Size2i getSize() const = 0;

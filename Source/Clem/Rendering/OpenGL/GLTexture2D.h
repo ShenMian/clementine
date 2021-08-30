@@ -28,6 +28,8 @@ public:
 
     void setMinFilter(Filter filter) override;
     void setMagFilter(Filter filter) override;
+    void setSWarp(Warp warp) override;
+    void setTWarp(Warp warp) override;
 
     Size2i getSize() const override;
     size_t getHandle() const override;

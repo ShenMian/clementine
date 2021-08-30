@@ -30,8 +30,8 @@ public:
 
         // model.add<Model>("../assets/models/scene.obj", true);
 
-        model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf", true);
-        // model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj", true);
+        // model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf", true);
+        model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj", true);
         model.get<Transform>().translation = {0, 0, -20};
 
         // model.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj", true);
@@ -61,8 +61,8 @@ private:
         auto skybox = Main::registry.create("skybox");
         auto& model = skybox.add<Model>("../assets/models/sphere/sphere.obj");
         model.getMaterials().resize(1);
-        model.getMaterials()[0].tex.diffuse = Texture2D::create("../assets/textures/skybox/sphere.jpg");
-        skybox.add<Material>().tex.diffuse = Texture2D::create("../assets/textures/skybox/sphere.jpg");
+        model.getMaterials()[0].albedo = Texture2D::create("../assets/textures/skybox/sphere.jpg");
+        skybox.add<Material>().albedo  = Texture2D::create("../assets/textures/skybox/sphere.jpg");
 #else
         // 立方体天空盒
         auto skyboxTexture = Texture2D::create();
