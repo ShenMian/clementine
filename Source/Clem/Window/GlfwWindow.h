@@ -44,8 +44,8 @@ public:
 
     void   update(Time dt) override;
     void   setTitle(const std::string& title) override;
-    void   setSize(Size2 size) override;
-    Size2  getSize() override;
+    void   setSize(Size2i size) override;
+    Size2i getSize() override;
     void   setPosition(Size2i pos) override;
     Size2i getPosition() override;
     void   setVisible(bool visible) override;

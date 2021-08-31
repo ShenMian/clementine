@@ -32,12 +32,12 @@ public:
     /**
 	  * @warning 不影响终端窗口大小.
 	  */
-    void setSize(Size2 size) override;
+    void setSize(Size2i size) override;
 
     /**
  	  * @warning 不代表终端窗口大小.
  	  */
-    Size2 getSize() override;
+    Size2i getSize() override;
 
     /**
 	  * @warning 终端窗口不支持.

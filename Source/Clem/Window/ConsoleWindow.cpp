@@ -105,15 +105,14 @@ void ConsoleWindow::setTitle(const string& title)
     SetConsoleTitleA(title.c_str());
 }
 
-void ConsoleWindow::setSize(Size2 size)
+void ConsoleWindow::setSize(Size2i size)
 {
     Output::get().setSize(size);
 }
 
-Size2 ConsoleWindow::getSize()
+Size2i ConsoleWindow::getSize()
 {
-    auto size = Output::get().getSize();
-    return {(float)size.x, (float)size.y};
+    return Output::get().getSize();
 
     /*
 	const auto hOut = GetStdHandle(STD_OUTPUT_HANDLE);

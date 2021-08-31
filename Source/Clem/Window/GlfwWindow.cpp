@@ -93,7 +93,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
                                    else
                                    {
                                        rate = Main::getRenderRate();
-                                       Main::setRenderRate(1);
+                                       Main::setRenderRate(5);
                                    }
                                });
 
@@ -140,16 +140,16 @@ void GlfwWindow::setTitle(const string& title)
     glfwSetWindowTitle(handle, title.c_str());
 }
 
-void GlfwWindow::setSize(Size2 size)
+void GlfwWindow::setSize(Size2i size)
 {
     glfwSetWindowSize(handle, size.x, size.y);
 }
 
-Size2 GlfwWindow::getSize()
+Size2i GlfwWindow::getSize()
 {
     int x, y;
     glfwGetWindowSize(handle, &x, &y);
-    return {(float)x, (float)y};
+    return {x, y};
 }
 
 void GlfwWindow::setPosition(Size2i size)

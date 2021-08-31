@@ -50,14 +50,14 @@ public:
 	 *
 	 * @param size 新窗口大小.
 	 */
-    virtual void setSize(Size2 size) = 0;
+    virtual void setSize(Size2i size) = 0;
 
     /**
 	 * @brief 获取窗口大小.
 	 *
 	 * @return 当前窗口大小.
 	 */
-    virtual Size2 getSize() = 0;
+    virtual Size2i getSize() = 0;
 
     /**
 	 * @brief 设置窗口坐标.
