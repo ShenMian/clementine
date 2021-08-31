@@ -36,15 +36,13 @@ void Hierarchy::update(Time dt)
               auto entity = Main::registry.create();
               entity.add<Transform>();
               entity.add<Model>("../assets/models/cube.obj");
-              entity.add<Material>();
           }
 
           if(ImGui::MenuItem("Sphere"))
           {
               auto entity = Main::registry.create();
               entity.add<Transform>();
-              entity.add<Model>("../assets/models/sphere.obj");
-              entity.add<Material>();
+              entity.add<Model>("../assets/models/sphere/sphere.obj");
           }
 
           if(ImGui::MenuItem("Cone"))
@@ -52,7 +50,6 @@ void Hierarchy::update(Time dt)
               auto entity = Main::registry.create();
               entity.add<Transform>();
               entity.add<Model>("../assets/models/cone.obj");
-              entity.add<Material>();
           }
 
           ImGui::EndMenu();
