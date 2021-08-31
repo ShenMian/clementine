@@ -81,7 +81,7 @@ void GLRenderer::endFrame()
 
 void GLRenderer::submit(const Entity& entity)
 {
-    if(entity.get<Tag>().str == "skybox")
+    if(entity.anyOf<Tag>() && entity.get<Tag>().str == "skybox")
     {
         auto shader = Shader::get("skybox_sphere");
         auto& mesh = entity.get<Model>().getMeshs()[0];

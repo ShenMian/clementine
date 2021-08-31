@@ -25,9 +25,17 @@ public:
      * @brief 创建帧缓冲区.
      *
      * @param size    缓冲区大小.
+     * @param attachs 要附加的 Texture2D.
+     * @param samples 多重采样数.
+     */
+    static std::shared_ptr<FrameBuffer> create(Size2i size, const std::vector<std::shared_ptr<Texture2D>>& attachs, int samples = 1);
+
+    /**
+     * @brief 创建帧缓冲区.
+     *
+     * @param size    缓冲区大小.
      * @param formats .
-     * @param samples .
-     * @return std::shared_ptr<FrameBuffer>
+     * @param samples 多重采样数.
      */
     static std::shared_ptr<FrameBuffer> create(Size2i size, const std::vector<PixelFormat>& formats, int samples = 1);
 
@@ -52,11 +60,6 @@ public:
     virtual void clearColorAttachment(int index, int value) = 0;
 
     /**
-     * @brief 获取帧缓冲区大小.
-     */
-    virtual Size2i getSize() const;
-
-    /**
      * @brief 获取指定颜色渲染目标中某个像素的值.
      *
      * @param index 颜色渲染目标索引.
@@ -65,13 +68,18 @@ public:
      */
     virtual void readColorAttachment(int index, Vector2i pos, int& data) = 0;
 
+    /**
+     * @brief 获取帧缓冲区大小.
+     */
+    virtual Size2i getSize() const;
+
     virtual void bind()   = 0;
     virtual void unbind() = 0;
 
 protected:
     Size2i                                  size;
     std::vector<std::shared_ptr<Texture2D>> colorAttachments;
-    std::shared_ptr<Texture2D>              depthAttachments;
+    std::shared_ptr<Texture2D>              depthAttachment;
 };
 
 } // namespace clem

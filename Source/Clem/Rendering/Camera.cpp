@@ -81,7 +81,11 @@ void Camera::setOrthographic(float w, float h, float n, float f)
 
 Matrix4 Camera::getViewMatrix()
 {
+#if 0
+    return view_;
+#else
     return static_cast<Matrix4>(view);
+#endif
 }
 
 const Matrix4& Camera::getProjectionMatrix() const

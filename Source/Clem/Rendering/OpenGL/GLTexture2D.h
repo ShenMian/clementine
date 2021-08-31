@@ -16,6 +16,7 @@ public:
     using handle_type = unsigned int;
 
     GLTexture2D();
+    GLTexture2D(const Size2i& size, Format fmt = Format::Auto);
     GLTexture2D(const std::filesystem::path& path, bool genMipmap = true, Format fmt = Format::Auto);
     GLTexture2D(const void* data, Size2i size, int bits, bool genMipmap = true, Format fmt = Format::Auto);
 
@@ -31,7 +32,6 @@ public:
     void setSWarp(Warp warp) override;
     void setTWarp(Warp warp) override;
 
-    Size2i getSize() const override;
     size_t getHandle() const override;
 
     void bind(unsigned int slot = 0) const override;

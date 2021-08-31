@@ -64,6 +64,7 @@ public:
      */
     Type getType() const;
 
+    Matrix4   view_;
     Transform view;
 
 private:

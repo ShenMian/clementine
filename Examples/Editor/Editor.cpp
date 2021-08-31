@@ -32,16 +32,22 @@ public:
 
         // model.add<Model>("../../../3DModel/weapon/m1911/m1911.gltf");
 
+#if 1
         model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf");
-        // model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj", true);
-        model.get<Transform>().translation = {0, 0, -20};
+        // model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj");
+        model.get<Transform>().translation = {0, 0, -90};
+#endif
 
-        // model.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj", true);
-        // model.get<Transform>().scale = {0.1, 0.1, 0.1};
+#if 0
+        model.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj", true);
+        model.get<Transform>().scale = {0.1, 0.1, 0.1};
+#endif
 
-        // model.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Exterior/exterior.obj");
+#if 0
+        model.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Exterior/exterior.obj");
         // model.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Interior/interior.obj");
-        // model.get<Transform>().scale = {0.07, 0.07, 0.07};
+        model.get<Transform>().scale = {0.07, 0.07, 0.07};
+#endif
 
         // model.add<Model>("../../../3DModel/scene/San_Miguel/san-miguel-low-poly.obj", true);
     }
@@ -61,8 +67,8 @@ private:
     {
 #if 1
         // 球形天空盒
-        auto skybox = Main::registry.create("skybox");
-        auto& model = skybox.add<Model>("../assets/models/sphere/sphere.obj");
+        auto  skybox = Main::registry.create("skybox");
+        auto& model  = skybox.add<Model>("../assets/models/sphere/sphere.obj");
         model.getMaterials().resize(1);
         model.getMaterials()[0].albedo = Texture2D::create("../assets/textures/skybox/sphere.jpg");
         skybox.add<Material>().albedo  = Texture2D::create("../assets/textures/skybox/sphere.jpg");

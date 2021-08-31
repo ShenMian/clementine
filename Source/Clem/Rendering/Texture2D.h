@@ -64,7 +64,8 @@ public:
         RGBA16,
         RGB16,
         DepthStencil,
-        DepthComponent
+        Depth,
+        Stencil
     };
 
     Texture2D() = default;
@@ -73,6 +74,13 @@ public:
      * @brief 创建空纹理.
      */
     static std::shared_ptr<Texture2D> create();
+
+    /**
+     * @brief 创建指定大小的纹理.
+     * 
+     * @param 纹理大小.
+     */
+    static std::shared_ptr<Texture2D> create(const Size2i size, Format fmt = Format::Auto);
 
     /**
      * @brief 从文件创建纹理.
@@ -99,7 +107,7 @@ public:
      *
      * @param faces 6 个面的文件路径.
      *
-     * right, left, top, bottom, back, front
+     * right, left, top, bottom, back, front.
      */
     virtual void loadCubemap(const std::vector<std::filesystem::path>& faces) = 0;
 
@@ -132,20 +140,28 @@ public:
     virtual void setTWarp(Warp warp) = 0;
 
     /**
-     * @brief 获取纹理大小.
-     */
-    virtual Size2i getSize() const = 0;
-
-    /**
      * @brief 获取本地句柄.
      */
     virtual size_t getHandle() const = 0;
+
+    /**
+     * @brief 获取纹理大小.
+     */
+    Size2i getSize() const;
+
+    /**
+     * @brief 获取像素格式.
+     */
+    Format getFormat() const;
 
     virtual void bind(unsigned int slot = 0) const = 0;
 
 protected:
     Texture2D(const Texture2D&) = delete;
     Texture2D& operator=(const Texture2D&) = delete;
+
+    Size2i size;
+    Format format;
 
     std::filesystem::path path;
 

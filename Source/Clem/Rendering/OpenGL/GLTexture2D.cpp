@@ -42,11 +42,21 @@ GLTexture2D::GLTexture2D()
     glCreateTextures(glType, 1, &handle);
 }
 
+GLTexture2D::GLTexture2D(const Size2i& size, Format fmt)
+{
+    this->size = size;
+
+    glType     = GL_TEXTURE_2D;
+    glCreateTextures(glType, 1, &handle);
+    glTextureStorage2D(handle, 1, GLInternalFormat(fmt), size.x, size.y);
+}
+
 GLTexture2D::GLTexture2D(const fs::path& path, bool genMipmap, Format fmt)
 {
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
     
-    this->path = path;
+    this->format = fmt;
+    this->path   = path;
 
     int  bits;
     auto data = loadFromFile(path, size.x, size.y, bits);
@@ -55,8 +65,10 @@ GLTexture2D::GLTexture2D(const fs::path& path, bool genMipmap, Format fmt)
 }
 
 GLTexture2D::GLTexture2D(const void* data, Size2i size, int bits, bool genMipmap, Format fmt)
-    : size(size)
 {
+    this->size   = size;
+    this->format = fmt;
+
     init(data, size, bits, genMipmap, fmt);
 }
 
@@ -143,11 +155,6 @@ void GLTexture2D::bind(unsigned int slot) const
 {
     glBindTextureUnit(slot, handle);
     GLCheckError();
-}
-
-Size2i GLTexture2D::getSize() const
-{
-    return size;
 }
 
 size_t GLTexture2D::getHandle() const

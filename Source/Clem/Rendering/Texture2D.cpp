@@ -24,6 +24,18 @@ std::shared_ptr<Texture2D> Texture2D::create()
     return nullptr;
 }
 
+std::shared_ptr<Texture2D> Texture2D::create(const Size2i size, Format fmt)
+{
+    switch(Renderer::getAPI())
+    {
+        using enum Renderer::API;
+
+    case OpenGL:
+        return std::make_shared<GLTexture2D>(size, fmt);
+    }
+    return nullptr;
+}
+
 std::shared_ptr<Texture2D> Texture2D::create(const fs::path& path, bool genMipmap, Format fmt)
 {
     auto it = cache.find(path);
@@ -52,6 +64,16 @@ std::shared_ptr<Texture2D> Texture2D::create(const void* data, Size2i size, int 
         return std::make_shared<GLTexture2D>(data, size, bits, genMipmap, fmt);
     }
     return nullptr;
+}
+
+Size2i Texture2D::getSize() const
+{
+    return size;
+}
+
+Texture2D::Format Texture2D::getFormat() const
+{
+    return format;
 }
 
 } // namespace clem

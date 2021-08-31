@@ -102,6 +102,7 @@ void Model::loadObj(const std::filesystem::path& path, bool compress)
         return Texture2D::create(path.parent_path() / name);
     };
 
+    size_t loadedMeshesCount = 0;
     for(const auto& shape : shapes)
     {
         std::vector<vertex_type> vertices;
@@ -187,10 +188,9 @@ void Model::loadObj(const std::filesystem::path& path, bool compress)
             material.emissive  = loadTexture(mat.emissive_texname);
         }
         materials.push_back(std::move(material));
-
-        static int  i   = 0; // 调试用. 因为不应该是静态变量
-        std::string str = std::format("Importing {}/{}", ++i, shapes.size());
-        Main::getWindow()->setTitle(str);
+        
+        loadedMeshesCount++;
+        Main::getWindow()->setTitle(std::format("Importing {}/{}", loadedMeshesCount, shapes.size()));
     }
 }
 
@@ -256,13 +256,15 @@ void Model::loadGltf(const std::filesystem::path& path, bool compress)
                 const auto& sampler = model.samplers[tex.sampler];
                 texture->setMinFilter(GltfToFilter[sampler.minFilter]);
                 texture->setMagFilter(GltfToFilter[sampler.magFilter]);
-                // TODO: 设置环绕方式
+                texture->setSWarp(GltfToWarp[sampler.wrapS]);
+                texture->setTWarp(GltfToWarp[sampler.wrapT]);
             }
             return texture;
         }
         return std::shared_ptr<Texture2D>();
     };
 
+    size_t loadedMeshesCount = 0;
     for(const auto& node : model.nodes)
     {
         if(node.mesh < 0)
@@ -301,7 +303,7 @@ void Model::loadGltf(const std::filesystem::path& path, bool compress)
                     for(size_t i = 0; i < accessor.count; i++)
                         vertices[i].uv = reinterpret_cast<const Vector2*>(data.data())[i];
             }
-
+            
             {
                 const auto accessor   = model.accessors[primitive.indices];
                 const auto bufferView = model.bufferViews[accessor.bufferView];
@@ -361,9 +363,8 @@ void Model::loadGltf(const std::filesystem::path& path, bool compress)
             materials.push_back(std::move(material));
         }
 
-        static int  i   = 0; // 调试用. 因为不应该是静态变量
-        std::string str = std::format("Importing {}/{}", ++i, model.meshes.size());
-        Main::getWindow()->setTitle(str);
+        loadedMeshesCount++;
+        Main::getWindow()->setTitle(std::format("Importing {}/{}", loadedMeshesCount, model.meshes.size()));
     }
 }
 

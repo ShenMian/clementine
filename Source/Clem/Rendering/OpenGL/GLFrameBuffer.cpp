@@ -17,27 +17,65 @@ static std::unordered_map<FrameBuffer::PixelFormat, GLenum> GLFormat = {
     {FrameBuffer::PixelFormat::RGB8, GL_RGB},
     {FrameBuffer::PixelFormat::R8, GL_RED_INTEGER},
     {FrameBuffer::PixelFormat::DepthStencil, GL_DEPTH_STENCIL},
-    {FrameBuffer::PixelFormat::DepthComponent, GL_DEPTH_COMPONENT}};
+    {FrameBuffer::PixelFormat::Depth, GL_DEPTH_COMPONENT}};
 
 static std::unordered_map<FrameBuffer::PixelFormat, GLenum> GLInternalFormat = {
     {FrameBuffer::PixelFormat::RGBA8, GL_RGBA8},
     {FrameBuffer::PixelFormat::RGB8, GL_RGB8},
     {FrameBuffer::PixelFormat::R8, GL_R32I},
     {FrameBuffer::PixelFormat::DepthStencil, GL_DEPTH24_STENCIL8},
-    {FrameBuffer::PixelFormat::DepthComponent, GL_DEPTH_COMPONENT}};
+    {FrameBuffer::PixelFormat::Depth, GL_DEPTH_COMPONENT}};
 
 static std::unordered_map<FrameBuffer::PixelFormat, GLenum> GLType = {
     {FrameBuffer::PixelFormat::RGBA8, GL_UNSIGNED_BYTE},
     {FrameBuffer::PixelFormat::RGB8, GL_UNSIGNED_BYTE},
     {FrameBuffer::PixelFormat::R8, GL_UNSIGNED_BYTE},
     {FrameBuffer::PixelFormat::DepthStencil, GL_UNSIGNED_INT_24_8},
-    {FrameBuffer::PixelFormat::DepthComponent, GL_FLOAT}};
+    {FrameBuffer::PixelFormat::Depth, GL_FLOAT}};
 
 static std::unordered_set<FrameBuffer::PixelFormat> colorAttachmentFormat =
     {FrameBuffer::PixelFormat::RGBA8, FrameBuffer::PixelFormat::RGB8, FrameBuffer::PixelFormat::R8};
 
 static std::unordered_set<FrameBuffer::PixelFormat> depthAttachmentFormat =
-    {FrameBuffer::PixelFormat::DepthStencil, FrameBuffer::PixelFormat::DepthComponent};
+    {FrameBuffer::PixelFormat::DepthStencil, FrameBuffer::PixelFormat::Depth, FrameBuffer::PixelFormat::Stencil};
+
+GLFrameBuffer::GLFrameBuffer(Size2i size, const std::vector<std::shared_ptr<Texture2D>>& attachs, int samples)
+    : samples(samples)
+{
+    Assert::isTrue(attachs.size() > 0);
+    Assert::isTrue(samples > 0);
+
+    this->size = size;
+
+    glCreateFramebuffers(1, &handle);
+    bind();
+
+    for(const auto& attach : attachs)
+    {
+        if(colorAttachmentFormat.contains(attach->getFormat()))
+            addColorAttachment(attach);
+        else if(depthAttachmentFormat.contains(attach->getFormat()))
+            addDepthAttachment(attach);
+        else
+            Assert::isTrue(false, "unknown format");
+    }
+
+#if 0
+    if(colorAttachments.empty())
+        glDrawBuffer(GL_NONE);
+    else
+    {
+        std::vector<GLenum> bufs;
+        for(int i = 0; i < colorAttachments.size(); i++)
+            bufs.push_back(GL_COLOR_ATTACHMENT0 + i);
+        glDrawBuffers((GLsizei)colorAttachments.size(), bufs.data());
+    }
+#endif
+
+    Assert::isTrue(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
+
+    unbind();
+}
 
 GLFrameBuffer::GLFrameBuffer(Size2i size, const std::vector<PixelFormat>& formats, int samples)
     : samples(samples)
@@ -57,10 +95,10 @@ GLFrameBuffer::GLFrameBuffer(Size2i size, const std::vector<PixelFormat>& format
         else if(depthAttachmentFormat.contains(format))
             addDepthAttachment(format);
         else
-            Assert::isTrue(false, "unknown pixel format");
+            Assert::isTrue(false, "unknown format");
     }
 
-    /*
+#if 0
     if(colorAttachments.empty())
         glDrawBuffer(GL_NONE);
     else
@@ -68,9 +106,9 @@ GLFrameBuffer::GLFrameBuffer(Size2i size, const std::vector<PixelFormat>& format
         std::vector<GLenum> bufs;
         for(int i = 0; i < colorAttachments.size(); i++)
             bufs.push_back(GL_COLOR_ATTACHMENT0 + i);
-        glDrawBuffers(colorAttachments.size(), bufs.data());
+        glDrawBuffers((GLsizei)colorAttachments.size(), bufs.data());
     }
-    */
+#endif
 
     Assert::isTrue(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 
@@ -86,7 +124,7 @@ GLFrameBuffer::~GLFrameBuffer()
         auto id = (GLuint)attach->getHandle();
         glDeleteTextures(1, &id);
     }
-    auto id = (GLuint)depthAttachments->getHandle();
+    auto id = (GLuint)depthAttachment->getHandle();
     glDeleteTextures(1, &id);
 }
 
@@ -114,7 +152,7 @@ std::shared_ptr<Texture2D> GLFrameBuffer::getColorAttachment(int index)
 
 std::shared_ptr<Texture2D> GLFrameBuffer::getDepthAttachment()
 {
-    return depthAttachments;
+    return depthAttachment;
 }
 
 void GLFrameBuffer::clearColorAttachment(int index, int value)
@@ -135,9 +173,38 @@ void GLFrameBuffer::readColorAttachment(int index, Vector2i pos, int& data)
     unbind();
 }
 
-void GLFrameBuffer::addColorAttachment(PixelFormat format)
+void GLFrameBuffer::addColorAttachment(std::shared_ptr<Texture2D> attach)
 {
-    Assert::isTrue(colorAttachmentFormat.contains(format));
+    Assert::isTrue(colorAttachmentFormat.contains(attach->getFormat()));
+
+    attach->bind();
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + (GLenum)colorAttachments.size(), GL_TEXTURE_2D, (GLuint)attach->getHandle(), 0);
+    colorAttachments.push_back(attach);
+
+    GLCheckError();
+}
+
+void GLFrameBuffer::addDepthAttachment(std::shared_ptr<Texture2D> attach)
+{
+    Assert::isTrue(depthAttachmentFormat.contains(attach->getFormat()));
+
+    attach->bind();
+    if(attach->getFormat() == PixelFormat::DepthStencil)
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, (GLuint)attach->getHandle(), 0);
+    else if(attach->getFormat() == PixelFormat::Depth)
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, (GLuint)attach->getHandle(), 0);
+    else if(attach->getFormat() == PixelFormat::Stencil)
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_TEXTURE_2D, (GLuint)attach->getHandle(), 0);
+    // glDrawBuffers(0, GL_NONE);
+
+    depthAttachment = attach;
+
+    GLCheckError();
+}
+
+void GLFrameBuffer::addColorAttachment(PixelFormat fmt)
+{
+    Assert::isTrue(colorAttachmentFormat.contains(fmt));
 
     if(samples == 1)
     {
@@ -146,12 +213,16 @@ void GLFrameBuffer::addColorAttachment(PixelFormat format)
 
         attach->setMinFilter(Texture2D::Filter::Bilinear);
         attach->setMagFilter(Texture2D::Filter::Bilinear);
+        attach->setSWarp(Texture2D::Warp::ClampToEdge);
+        attach->setTWarp(Texture2D::Warp::ClampToEdge);
+        
+        glTexImage2D(GL_TEXTURE_2D, 0, GLInternalFormat[fmt], (GLsizei)size.x, (GLsizei)size.y, 0, GLFormat[fmt], GLType[fmt], nullptr);
 
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-        glTexImage2D(GL_TEXTURE_2D, 0, GLInternalFormat[format], (GLsizei)size.x, (GLsizei)size.y, 0, GLFormat[format], GLType[format], nullptr);
+#if 1
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + (GLenum)colorAttachments.size(), GL_TEXTURE_2D, (GLuint)attach->getHandle(), 0);
+#else
+        glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + (GLenum)colorAttachments.size(), GL_TEXTURE_2D, (GLuint)attach->getHandle(), 0);
+#endif
 
         colorAttachments.push_back(attach);
     }
@@ -169,9 +240,9 @@ void GLFrameBuffer::addColorAttachment(PixelFormat format)
     GLCheckError();
 }
 
-void GLFrameBuffer::addDepthAttachment(PixelFormat format)
+void GLFrameBuffer::addDepthAttachment(PixelFormat fmt)
 {
-    Assert::isTrue(depthAttachmentFormat.contains(format));
+    Assert::isTrue(depthAttachmentFormat.contains(fmt));
 
     if(samples == 1)
     {
@@ -180,24 +251,25 @@ void GLFrameBuffer::addDepthAttachment(PixelFormat format)
 
         attach->setMinFilter(Texture2D::Filter::Bilinear);
         attach->setMagFilter(Texture2D::Filter::Bilinear);
+        attach->setSWarp(Texture2D::Warp::ClampToEdge);
+        attach->setTWarp(Texture2D::Warp::ClampToEdge);
 
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-        if(format == PixelFormat::DepthStencil)
+        if(fmt == PixelFormat::DepthStencil)
         {
-            glTexStorage2D(GL_TEXTURE_2D, 1, GLInternalFormat[format], (GLsizei)size.x, (GLsizei)size.y);
+            glTexStorage2D(GL_TEXTURE_2D, 1, GLInternalFormat[fmt], (GLsizei)size.x, (GLsizei)size.y);
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, (GLuint)attach->getHandle(), 0);
         }
-        else if(format == PixelFormat::DepthComponent)
+        else if(fmt == PixelFormat::Depth)
         {
-            glTexImage2D(GL_TEXTURE_2D, 0, GLInternalFormat[format], (GLsizei)size.x, (GLsizei)size.y, 0, GLFormat[format], GLType[format], nullptr);
+            glTexImage2D(GL_TEXTURE_2D, 0, GLInternalFormat[fmt], (GLsizei)size.x, (GLsizei)size.y, 0, GLFormat[fmt], GLType[fmt], nullptr);
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, (GLuint)attach->getHandle(), 0);
         }
         else
             Assert::isTrue(false);
 
-        depthAttachments = attach;
+        // glDrawBuffers(0, GL_NONE);
+
+        depthAttachment = attach;
     }
     else
     {

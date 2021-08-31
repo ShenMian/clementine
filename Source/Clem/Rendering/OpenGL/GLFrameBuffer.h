@@ -13,6 +13,7 @@ class GLFrameBuffer : public FrameBuffer
 public:
     using handle_type = unsigned int;
 
+    GLFrameBuffer(Size2i size, const std::vector<std::shared_ptr<Texture2D>>& attachs, int samples = 1);
     GLFrameBuffer(Size2i size, const std::vector<PixelFormat>& formats, int samples = 1);
     virtual ~GLFrameBuffer();
 
@@ -26,6 +27,9 @@ public:
     void unbind() override;
 
 private:
+    void addColorAttachment(std::shared_ptr<Texture2D> attach);
+    void addDepthAttachment(std::shared_ptr<Texture2D> attach);
+
     void addColorAttachment(PixelFormat format);
     void addDepthAttachment(PixelFormat format);
 
