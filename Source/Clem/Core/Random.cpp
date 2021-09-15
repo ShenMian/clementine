@@ -1,7 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "Random.h"
+#include "Core/Random.h"
 
 using std::uniform_int_distribution;
 using std::uniform_real_distribution;

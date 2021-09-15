@@ -8,4 +8,5 @@
 #include "Input/Input.h"
 #include "Main.h"
 #include "Math/Math.h"
+#include "Random.h"
 #include "Time.h"
