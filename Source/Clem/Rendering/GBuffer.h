@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "FrameBuffer.h"
@@ -14,7 +14,9 @@ public:
     enum TextureType : int
     {
         Position,
-        Normal,
+        Normals,
+        PBR,
+        DepthStencil,
         Num
     };
     

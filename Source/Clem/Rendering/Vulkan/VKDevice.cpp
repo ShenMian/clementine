@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "VKDevice.h"
-#include "Assert.hpp"
+#include "Core/Assert.hpp"
 #include "Logging/Logging.h"
 #include "VKRenderer.h"
 

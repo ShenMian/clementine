@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include "Assert.hpp"
 #include "Audio/Audio.h"
 #include "Components/Components.h"
 #include "Core/Core.h"

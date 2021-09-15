@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "GLVertexArray.h"
-#include "Assert.hpp"
+#include "Core/Assert.hpp"
 #include <glad/glad.h>
 #include <unordered_map>
 

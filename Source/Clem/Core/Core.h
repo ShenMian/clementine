@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Application.h"
+#include "Assert.hpp"
 #include "Input/Input.h"
 #include "Main.h"
 #include "Math/Math.h"

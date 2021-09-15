@@ -4,7 +4,7 @@
 #include "Main.h"
 #include "Application.h"
 
-#include "Assert.hpp"
+#include "Core/Assert.hpp"
 #include "Audio/Audio.h"
 #include "Components/ScriptSystem.h"
 #include "Core/Core.h"

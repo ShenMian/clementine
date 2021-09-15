@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "Camera.h"
-#include "Assert.hpp"
+#include "Core/Assert.hpp"
 
 namespace clem
 {

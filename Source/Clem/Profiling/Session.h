@@ -7,8 +7,18 @@
 #include <string>
 #include <vector>
 
+namespace clem
+{
+
 /**
- * @brief 会话. 对样本进行分组.
+ * @addtogroup Profiling
+ * @{
+ */
+
+/**
+ * @brief 会话.
+ * 
+ * 记录 CPU 样本.
  */
 class Session
 {
@@ -20,3 +30,10 @@ private:
     std::string            name;
     std::vector<CpuSample> samples;
 };
+
+/**
+ * end of Profiling group
+ * @}
+ */
+
+} // namespace clem

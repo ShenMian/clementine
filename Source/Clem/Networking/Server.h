@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Assert.hpp"
+#include "Core/Assert.hpp"
 #include "Connection.h"
 #include "Platform.h"
 #include "asio.hpp"

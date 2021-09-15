@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "Logger.h"
-#include "Assert.hpp"
+#include "Core/Assert.hpp"
 #include "FileLogger.h"
 
 namespace clem

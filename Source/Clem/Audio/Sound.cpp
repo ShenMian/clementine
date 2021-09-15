@@ -3,7 +3,7 @@
 
 #include "Sound.h"
 #include "AL/alext.h"
-#include "Assert.hpp"
+#include "Core/Assert.hpp"
 #include "Logging/Logging.h"
 #include "Profiler.h"
 #include <cassert>

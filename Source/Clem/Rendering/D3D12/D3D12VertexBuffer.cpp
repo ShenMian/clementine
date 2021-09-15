@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "D3D12VertexBuffer.h"
-#include "Assert.hpp"
+#include "Core/Assert.hpp"
 #include <dxgi.h>
 
 namespace clem

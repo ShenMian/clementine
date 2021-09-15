@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "VKVertexBuffer.h"
-#include "Assert.hpp"
+#include "Core/Assert.hpp"
 #include "VKRenderer.h"
 
 namespace clem

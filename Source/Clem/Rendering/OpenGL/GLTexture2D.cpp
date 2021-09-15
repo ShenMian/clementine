@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "GLTexture2D.h"
-#include "Assert.hpp"
+#include "Core/Assert.hpp"
 #include "GLRenderer.h"
 #include <cassert>
 #include <stb/stb_image.h>

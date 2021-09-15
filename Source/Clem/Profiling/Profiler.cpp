@@ -4,8 +4,13 @@
 #include "Profiler.h"
 #include "Session.h"
 
+namespace clem
+{
+
 Profiler& Profiler::get()
 {
     static Profiler instance;
     return instance;
 }
+
+} // namespace clem

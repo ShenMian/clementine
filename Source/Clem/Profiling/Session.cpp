@@ -5,6 +5,9 @@
 #include "Recorder.h"
 #include <utility>
 
+namespace clem
+{
+
 void Session::addCpuSample(const CpuSample& s)
 {
     samples.emplace_back(std::move(s));
@@ -14,3 +17,5 @@ void Session::clear()
 {
     samples.clear();
 }
+
+} // namespace clem

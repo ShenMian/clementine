@@ -3,11 +3,15 @@
 
 #include "Recorder.h"
 #include "Session.h"
+#include "Core/Assert.hpp"
 
 using namespace std::chrono;
 
+namespace clem
+{
+
 Recorder::Recorder(std::string_view n, Session& s)
-    : stopped(false), begin(steady_clock::now()), session(s)
+    : stopped(false), session(s), begin(steady_clock::now())
 {
     sample.name     = n;
     sample.threadId = std::this_thread::get_id();
@@ -21,9 +25,13 @@ Recorder::~Recorder()
 
 void Recorder::stop()
 {
+    Assert::isFalse(stopped, "recorder has stopped");
+
     stopped        = true;
-    auto end       = steady_clock::now();
+    const auto end = steady_clock::now();
     sample.start   = begin.time_since_epoch();
     sample.elapsed = time_point_cast<microseconds>(end).time_since_epoch() - time_point_cast<microseconds>(begin).time_since_epoch();
     session.addCpuSample(sample);
 }
+
+} // namespace clem

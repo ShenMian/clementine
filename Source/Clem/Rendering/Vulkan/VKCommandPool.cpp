@@ -4,7 +4,7 @@
 #pragma once
 
 #include "VKCommandPool.h"
-#include "Assert.hpp"
+#include "Core/Assert.hpp"
 #include "VKCommandBuffer.h"
 #include "VKRenderer.h"
 #include <vector>
