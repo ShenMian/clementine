@@ -11,6 +11,12 @@
 namespace clem::ui
 {
 
+enum class FileDisplayMode
+{
+    Icon,
+    List
+};
+
 Browser::Browser()
 {
     current = Application::get().getAssetPath();
@@ -47,9 +53,37 @@ void Browser::update(Time dt)
     ImGui::SameLine();
     ImGui::Text("%s", current.string().c_str());
 
+    static FileDisplayMode mode = FileDisplayMode::Icon;
+    if(mode == FileDisplayMode::Icon)
+        showFileIcons();
+    else if(mode == FileDisplayMode::List)
+        showFileList();
+
+    // ¿Õ°×ÇøÓòÓÒ¼ü²Ëµ¥
+    if(ImGui::BeginPopupContextWindow(0, 1, false))
+    {
+        if(ImGui::BeginMenu("File Display"))
+        {
+            if(ImGui::MenuItem("Icon"))
+                mode = FileDisplayMode::Icon;
+            if(ImGui::MenuItem("List"))
+                mode = FileDisplayMode::List;
+
+            ImGui::EndMenu();
+        }
+
+        ImGui::EndPopup();
+    }
+
+    ImGui::End();
+}
+
+void Browser::showFileIcons()
+{
     std::shared_ptr<Texture2D> icon;
+
     ImGui::Columns(std::max((int)(ImGui::GetContentRegionAvailWidth() / 70), 1));
-    
+
     for(const auto& entry : cache)
     {
         auto filename = entry.path().filename().string();
@@ -67,7 +101,7 @@ void Browser::update(Time dt)
             {
                 current = entry;
                 refresh();
-                
+
                 ImGui::PopStyleColor();
                 ImGui::PopID();
 
@@ -88,26 +122,61 @@ void Browser::update(Time dt)
             ImGui::PushID(filename.c_str());
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
             ImGui::ImageButton((ImTextureID)icon->getHandle(), {48, 48}, {1, 0}, {0, 1});
-
-            if(ImGui::BeginDragDropSource())
-            {
-                const auto     absPath = fs::absolute(entry.path()).wstring();
-                const wchar_t* data    = absPath.c_str();
-                const size_t   size    = (absPath.size() + 1) * sizeof(wchar_t);
-                ImGui::SetDragDropPayload("browser_file", data, size);
-                ImGui::ImageButton((ImTextureID)icon->getHandle(), {48, 48}, {1, 0}, {0, 1});
-                ImGui::TextUnformatted(filename.c_str());
-                ImGui::EndDragDropSource();
-            }
-
+            fileDragDrop(entry.path(), icon);
             ImGui::TextWrapped(filename.c_str());
             ImGui::PopStyleColor();
             ImGui::PopID();
         }
         ImGui::NextColumn();
     }
+}
 
-    ImGui::End();
+void Browser::showFileList()
+{
+    for(const auto& entry : cache)
+        showFileNode(entry);
+}
+
+void Browser::showFileNode(const fs::directory_entry& entry)
+{
+    if(ImGui::TreeNode(entry.path().filename().string().c_str()))
+    {
+        for(const auto& e : fs::directory_iterator(entry))
+        {
+            if(e.is_directory())
+                showFileNode(e);
+            else
+            {
+                ImGui::Button(e.path().filename().string().c_str());
+
+                std::shared_ptr<Texture2D> icon;
+                auto ext = e.path().extension().string();
+                if(icons.contains(ext))
+                    icon = icons[ext];
+                else
+                    icon = icons["file"];
+                fileDragDrop(e, icon);
+            }
+        }
+        ImGui::TreePop();
+    }
+}
+
+void Browser::fileDragDrop(const fs::path& path, std::shared_ptr<Texture2D> icon)
+{
+    if(ImGui::BeginDragDropSource())
+    {
+        const auto     absPath = fs::absolute(path).wstring();
+        const wchar_t* data    = absPath.c_str();
+        const size_t   size     = (absPath.size() + 1) * sizeof(wchar_t);
+        const auto     filename = path.filename().string();
+
+        ImGui::SetDragDropPayload("browser_file", data, size);
+        ImGui::ImageButton((ImTextureID)icon->getHandle(), {48, 48}, {1, 0}, {0, 1});
+        ImGui::TextUnformatted(filename.c_str());
+
+        ImGui::EndDragDropSource();
+    }
 }
 
 void Browser::refresh()

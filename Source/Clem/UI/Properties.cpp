@@ -65,8 +65,10 @@ void Properties::update(Time dt)
             ImGui::MenuItem("Skybox");
             ImGui::MenuItem("Light");
             ImGui::MenuItem("Material");
+
             ImGui::EndMenu();
         }
+
         ImGui::EndPopup();
     }
 

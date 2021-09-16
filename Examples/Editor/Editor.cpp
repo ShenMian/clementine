@@ -32,7 +32,7 @@ public:
 
         // model.add<Model>("../../../3DModel/weapon/m1911/m1911.gltf");
 
-#if 1
+#if 0
         model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf");
         // model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj");
         model.get<Transform>().translation = {0, 0, -90};
