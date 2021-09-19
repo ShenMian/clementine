@@ -35,7 +35,7 @@ public:
 
     /**
 	 * @brief 构造函数.
-     * 
+     *
      * @param name 应用名称.
 	 */
     Application(const std::string& name = "Clementine");

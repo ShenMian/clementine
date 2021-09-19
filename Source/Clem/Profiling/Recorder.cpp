@@ -2,8 +2,8 @@
 // License(Apache-2.0)
 
 #include "Recorder.h"
-#include "Session.h"
 #include "Core/Assert.hpp"
+#include "Session.h"
 
 using namespace std::chrono;
 

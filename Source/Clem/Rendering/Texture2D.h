@@ -48,7 +48,7 @@ public:
     // 纹理环绕方式
     enum class Warp
     {
-        Repeat,      // 重复
+        Repeat, // 重复
         ClampToEdge,
         MirrorRepeat // 镜像重复
     };
@@ -77,7 +77,7 @@ public:
 
     /**
      * @brief 创建指定大小的纹理.
-     * 
+     *
      * @param 纹理大小.
      */
     static std::shared_ptr<Texture2D> create(const Size2i size, Format fmt = Format::Auto);

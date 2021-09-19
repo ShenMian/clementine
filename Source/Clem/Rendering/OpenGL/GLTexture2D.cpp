@@ -46,7 +46,7 @@ GLTexture2D::GLTexture2D(const Size2i& size, Format fmt)
 {
     this->size = size;
 
-    glType     = GL_TEXTURE_2D;
+    glType = GL_TEXTURE_2D;
     glCreateTextures(glType, 1, &handle);
     glTextureStorage2D(handle, 1, GLInternalFormat(fmt), size.x, size.y);
 }
@@ -54,7 +54,7 @@ GLTexture2D::GLTexture2D(const Size2i& size, Format fmt)
 GLTexture2D::GLTexture2D(const fs::path& path, bool genMipmap, Format fmt)
 {
     Assert::isTrue(fs::exists(path), std::format("file doesn't exist: '{}'", path.string()));
-    
+
     this->format = fmt;
     this->path   = path;
 

@@ -7,7 +7,7 @@
 
 namespace clem
 {
-  
+
 class GBuffer
 {
 public:
@@ -19,7 +19,7 @@ public:
         DepthStencil,
         Num
     };
-    
+
     GBuffer(const Size2i& size);
 
 private:
@@ -28,5 +28,3 @@ private:
 };
 
 } // namespace clem
-
-

@@ -17,7 +17,7 @@ namespace clem
 
 /**
  * @brief 会话.
- * 
+ *
  * 记录 CPU 样本.
  */
 class Session

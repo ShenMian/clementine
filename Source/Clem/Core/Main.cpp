@@ -4,9 +4,9 @@
 #include "Main.h"
 #include "Application.h"
 
-#include "Core/Assert.hpp"
 #include "Audio/Audio.h"
 #include "Components/ScriptSystem.h"
+#include "Core/Assert.hpp"
 #include "Core/Core.h"
 #include "ECS/Registry.h"
 #include "Logging/Logging.h"
@@ -15,9 +15,9 @@
 #include "Rendering/Rendering.h"
 #include "Time.h"
 #include "Window/Window.h"
-#include <numeric>
 #include <csignal>
 #include <map>
+#include <numeric>
 #include <string>
 
 using namespace std::chrono_literals;
@@ -110,10 +110,11 @@ void Main::mainLoop()
             previous = getCurrentMillSecond();
         }
 
-        // 帧率控制. 积分控制
-        const float  target   = 1000.f / std::max({inputRate, updateRate, renderRate});
+        // 帧率控制
         static float integral = 0;
-        integral += target - dt;
+        const float  target   = 1000.f / std::max({inputRate, updateRate, renderRate});
+        const float  error    = target - dt;
+        integral += error;
         sleep(integral);
     }
 }
@@ -193,17 +194,14 @@ void Main::parseArgs(int argc, char* argv[])
 {
     std::map<std::string, std::string> args;
 
-    std::string_view str;
     for(int i = 1; i < argc; i++)
     {
-        str      = argv[i];
-        auto it  = str.find('=');
-        auto opt = str.substr(0, it);
-        auto val = str.substr(it + 1);
+        std::string_view str = argv[i];
+        const auto       it  = str.find('=');
+        const auto       opt = str.substr(0, it);
+        const auto       val = str.substr(it + 1);
         args.emplace(opt, val);
     }
-
-    args.clear();
 }
 
 uint16_t Main::getFrameRate()

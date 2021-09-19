@@ -188,7 +188,7 @@ void Model::loadObj(const std::filesystem::path& path, bool compress)
             material.emissive  = loadTexture(mat.emissive_texname);
         }
         materials.push_back(std::move(material));
-        
+
         loadedMeshesCount++;
         Main::getWindow()->setTitle(std::format("Importing {}/{}", loadedMeshesCount, shapes.size()));
     }
@@ -303,7 +303,7 @@ void Model::loadGltf(const std::filesystem::path& path, bool compress)
                     for(size_t i = 0; i < accessor.count; i++)
                         vertices[i].uv = reinterpret_cast<const Vector2*>(data.data())[i];
             }
-            
+
             {
                 const auto accessor   = model.accessors[primitive.indices];
                 const auto bufferView = model.bufferViews[accessor.bufferView];

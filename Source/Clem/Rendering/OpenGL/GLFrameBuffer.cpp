@@ -215,7 +215,7 @@ void GLFrameBuffer::addColorAttachment(PixelFormat fmt)
         attach->setMagFilter(Texture2D::Filter::Bilinear);
         attach->setSWarp(Texture2D::Warp::ClampToEdge);
         attach->setTWarp(Texture2D::Warp::ClampToEdge);
-        
+
         glTexImage2D(GL_TEXTURE_2D, 0, GLInternalFormat[fmt], (GLsizei)size.x, (GLsizei)size.y, 0, GLFormat[fmt], GLType[fmt], nullptr);
 
 #if 1

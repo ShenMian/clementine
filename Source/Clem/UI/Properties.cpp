@@ -296,7 +296,7 @@ void Properties::textureEdit(const std::string& label, std::shared_ptr<Texture2D
         {
             fs::path path((const wchar_t*)payload->Data);
             Assert::isTrue(path.extension() == L".jpg" || path.extension() == L".png");
-            
+
             texture = Texture2D::create(path);
         }
         ImGui::EndDragDropTarget();

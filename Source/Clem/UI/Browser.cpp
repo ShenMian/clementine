@@ -150,7 +150,7 @@ void Browser::showFileNode(const fs::directory_entry& entry)
                 ImGui::Button(e.path().filename().string().c_str());
 
                 std::shared_ptr<Texture2D> icon;
-                auto ext = e.path().extension().string();
+                auto                       ext = e.path().extension().string();
                 if(icons.contains(ext))
                     icon = icons[ext];
                 else
@@ -166,8 +166,8 @@ void Browser::fileDragDrop(const fs::path& path, std::shared_ptr<Texture2D> icon
 {
     if(ImGui::BeginDragDropSource())
     {
-        const auto     absPath = fs::absolute(path).wstring();
-        const wchar_t* data    = absPath.c_str();
+        const auto     absPath  = fs::absolute(path).wstring();
+        const wchar_t* data     = absPath.c_str();
         const size_t   size     = (absPath.size() + 1) * sizeof(wchar_t);
         const auto     filename = path.filename().string();
 

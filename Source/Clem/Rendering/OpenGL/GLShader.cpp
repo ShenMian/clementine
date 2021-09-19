@@ -42,7 +42,7 @@ void GLShader::compile(const std::string& name, Stage stage)
     file.read(source.data(), source.size() * sizeof(char));
     file.close();
     source.push_back('\0');
-    
+
     const auto* ptr = reinterpret_cast<GLchar*>(source.data());
     glShaderSource(shader, 1, &ptr, nullptr);
     glCompileShader(shader);

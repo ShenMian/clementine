@@ -304,20 +304,18 @@ void Viewport::updateCameraControl(Time dt)
     else if(isKeyPressed(GLFW_KEY_DOWN))
         camera.view.rotation.x += 0.5;
 
-
-
     if(isKeyPressed(GLFW_KEY_W))
         camera.view_.translate(Vector3::unit_z * speed);
 
     Vector3 pos = camera.view_.translate();
-    
+
     camera.view_.translate(camera.view_.translate() - pos);
 
     if(isKeyPressed(GLFW_KEY_LEFT))
         camera.view_.rotateY(radians(0.5));
     if(isKeyPressed(GLFW_KEY_RIGHT))
         camera.view_.rotateY(radians(-0.5));
-    
+
     camera.view_.translate(pos);
 
     /*

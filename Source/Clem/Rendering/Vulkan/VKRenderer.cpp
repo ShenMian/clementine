@@ -2,8 +2,8 @@
 // License(Apache-2.0)
 
 #include "VKRenderer.h"
-#include "Core/Assert.hpp"
 #include "Core/Application.h"
+#include "Core/Assert.hpp"
 #include "Logging/Logging.h"
 #include "Rendering/VertexArray.h"
 #include "Version.h"
