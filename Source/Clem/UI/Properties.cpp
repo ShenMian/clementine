@@ -160,7 +160,7 @@ void Properties::showModel()
                     fs::path path((const wchar_t*)payload->Data);
 
                     // TODO: 添加组件已存在提示, UI 使用提示而不是断言
-                    if(path.extension() == L".obj")
+                    if(path.extension() == L".obj" || path.extension() == L".gltf")
                         entity.get<Model>().load(Application::get().getAssetPath() / path);
                     else
                         Assert::isTrue(false);

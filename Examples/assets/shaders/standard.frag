@@ -85,6 +85,7 @@ void main()
 {
     frag_color = texture(u_material.albedo, v_uv) * CalcLighting();
 
+    // 泛光
     // 提取亮色
     // float brightness = dot(frag_color.rgb, vec3(0.2126, 0.7152, 0.0722));
     // if(brightness > 1.0)

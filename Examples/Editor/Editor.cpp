@@ -10,6 +10,13 @@
 using namespace std;
 using namespace clem;
 
+class CollisionMaterial
+{
+private:
+    Sound sound;
+    float friction = 0.f;
+};
+
 class App : public Application
 {
 public:
@@ -32,7 +39,7 @@ public:
 
         // model.add<Model>("../../../3DModel/weapon/m1911/m1911.gltf");
 
-#if 0
+#if 1
         model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf");
         // model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj");
         model.get<Transform>().translation = {0, 0, -90};
