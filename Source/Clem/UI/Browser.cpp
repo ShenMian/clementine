@@ -29,6 +29,7 @@ Browser::Browser()
     icons[".png"]  = Texture2D::create("../assets/textures/icons/image.png");
     icons[".jpg"]  = Texture2D::create("../assets/textures/icons/image.png");
     icons[".obj"]  = Texture2D::create("../assets/textures/icons/3d_object.png");
+    icons[".gltf"]  = Texture2D::create("../assets/textures/icons/3d_object.png");
     icons[".vert"] = Texture2D::create("../assets/textures/icons/code.png");
     icons[".frag"] = Texture2D::create("../assets/textures/icons/code.png");
     icons[".wav"]  = Texture2D::create("../assets/textures/icons/audio.png");
