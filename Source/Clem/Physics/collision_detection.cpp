@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "BoxCollider.h"
-#include "CircleCollider.h"
+#include "SphereCollider.h"
 #include "Core/Math/Math.h"
 #include <cassert>
 
@@ -34,7 +34,7 @@ bool collision(const BoxCollider& b, const Point2& p)
 }
 
 // TODO: CircleCollider::getCenter();
-bool collision(const CircleCollider& c, const Point2& p)
+bool collision(const SphereCollider& c, const Point2& p)
 {
     const auto center = c.getPosition();
     return center.distanceSquared(p) <= c.getRadius() * c.getRadius();
@@ -45,7 +45,7 @@ bool collision(const BoxCollider& a, const BoxCollider& b)
     return a.getRect().intersectsRect(b.getRect());
 }
 
-bool collision(const CircleCollider& a, const CircleCollider& b)
+bool collision(const SphereCollider& a, const SphereCollider& b)
 {
     const auto aCenter = a.getPosition();
     const auto bCenter = b.getPosition();
@@ -73,7 +73,7 @@ bool collision(const BoxCollider& box, const Line2& l)
     return false;
 }
 
-bool collision(const CircleCollider& c, const Line2& l)
+bool collision(const SphereCollider& c, const Line2& l)
 {
     const auto center        = c.getPosition();
     const auto startToCenter = center - l.start;
@@ -95,7 +95,7 @@ bool collision(const CircleCollider& c, const Line2& l)
 
 	collision(c, closestPoint);*/
 
-bool collision(BoxCollider b, CircleCollider c)
+bool collision(BoxCollider b, SphereCollider c)
 {
     return false;
 }

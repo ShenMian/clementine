@@ -37,8 +37,6 @@ public:
     */
     Size2 getSize() const;
 
-    Rect2 getRect() const;
-
 private:
     Size2 size;
 };

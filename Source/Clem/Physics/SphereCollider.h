@@ -14,25 +14,29 @@ namespace clem
  */
 
 /**
- * @brief 圆形碰撞体.
+ * @brief 球形碰撞体.
  */
-class CircleCollider : public Collider
+class SphereCollider : public Collider
 {
 public:
-    CircleCollider() = default;
-    explicit CircleCollider(float radius);
+    SphereCollider() = default;
 
     /**
-	 * @brief 设置半径
+	 * @brief 构造函数.
 	 *
-	 * @param r 半径
+	 * @param radius 半径.
 	 */
-    void setRadius(float r);
+    explicit SphereCollider(float radius);
 
     /**
-	 * @brief 获取半径
+	 * @brief 设置半径.
 	 *
-	 * @return float 半径
+	 * @param radius 半径.
+	 */
+    void setRadius(float radius);
+
+    /**
+	 * @brief 获取半径.
 	 */
     float getRadius() const;
 

@@ -1,24 +1,25 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
-// 圆形碰撞体
 
-#include "CircleCollider.h"
+#include "SphereCollider.h"
 #include <cassert>
 
 namespace clem
 {
-CircleCollider::CircleCollider(float r)
+
+SphereCollider::SphereCollider(float r)
     : radius(r)
 {
 }
 
-void CircleCollider::setRadius(float r)
+void SphereCollider::setRadius(float r)
 {
     radius = r;
 }
 
-float CircleCollider::getRadius() const
+float SphereCollider::getRadius() const
 {
     return radius;
 }
+
 } // namespace clem

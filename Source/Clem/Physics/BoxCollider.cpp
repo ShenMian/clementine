@@ -7,6 +7,7 @@
 
 namespace clem
 {
+
 BoxCollider::BoxCollider(Size2 size)
     : size(size)
 {
@@ -22,10 +23,4 @@ Size2 BoxCollider::getSize() const
     return size;
 }
 
-Rect2 BoxCollider::getRect() const
-{
-    return Rect2(getPosition(), size);
-    // auto p = getPosition();
-    // return Rect2({p.x - size.x / 2, p.y - size.y / 2}, size);
-}
 } // namespace clem

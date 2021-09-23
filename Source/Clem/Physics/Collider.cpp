@@ -1,6 +1,5 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
-// 碰撞体
 
 #include "Collider.h"
 #include "Rigidbody.h"
@@ -8,23 +7,15 @@
 
 namespace clem
 {
-void Collider::setOffset(Point2 o)
+
+void Collider::setOffset(Point3 o)
 {
     offset = o;
 }
 
-Point2 Collider::getOffset() const
+const Point3& Collider::getOffset() const
 {
     return offset;
 }
 
-void Collider::setRigidbody(Rigidbody* rb)
-{
-    rigidbody = rb;
-}
-
-Rigidbody* Collider::getRigidbody() const
-{
-    return rigidbody;
-}
 } // namespace clem
