@@ -1,5 +1,6 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
+// 标准网格着色器
 
 #version 450
 
@@ -100,25 +101,29 @@ vec3 CalcShadow();
 vec3 CalcDirLight(DirectionLight light, vec3 normal)
 {
     const vec3 dir_to_light = normalize(-light.direction);
+    const vec3 albedo       = texture(u_material.albedo, v_uv).rgb;
 
     // 环境光照
-    const vec3 ambient_color = texture(u_material.albedo, v_uv).rgb;
-    const vec3 ka            = u_material.ambient * vec3(light.intesity);
-    const vec3 ambient       = ka * light.color * ambient_color;
+    const vec3 ka      = u_material.ambient * vec3(light.intesity);
+    const vec3 ambient = ka * light.color * albedo;
 
     // 漫反射光照
-    const vec3  diffuse_color  = texture(u_material.albedo, v_uv).rgb;
     const vec3  kd             = u_material.diffuse * vec3(light.intesity);
     const float diffuse_amount = max(dot(dir_to_light, normal), 0.0);
-    const vec3  diffuse        = kd * light.color * diffuse_amount * diffuse_color;
+    const vec3  diffuse        = kd * light.color * diffuse_amount * albedo;
 
     // 镜面反射光照
     float shininess = 1.0 - texture(u_material.roughness, v_uv).r;
     if(shininess == 0.0)
         shininess = u_material.shininess;
 
+#if 1
     const vec3  ks              = u_material.specular * vec3(light.intesity);
     const vec3  specular_color  = vec3(texture(u_material.metallic, v_uv).r);
+#else
+    const vec3  ks              = vec3(texture(u_material.metallic, v_uv).r);
+    const vec3  specular_color  = vec3(0.0);
+#endif
     const vec3  reflected_dir   = reflect(-dir_to_light, normal);
     const float specular_amount = pow(max(dot(reflected_dir, v_dir_to_cam), 0.0), shininess);
     const vec3  specular        = ks * light.color * specular_amount * specular_color;

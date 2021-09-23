@@ -1,5 +1,6 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
+// 标准网格着色器
 
 #version 450
 
