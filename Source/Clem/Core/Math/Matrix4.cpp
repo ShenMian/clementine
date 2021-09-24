@@ -364,7 +364,7 @@ Matrix4& Matrix4::inverse()
     float det = a0 * b5 - a1 * b4 + a2 * b3 + a3 * b2 - a4 * b1 + a5 * b0;
 
     // 接近 0, 无法求逆.
-    det = determinant();
+    // det = determinant();
     if(det <= 2e-37f)
         return *this;
 

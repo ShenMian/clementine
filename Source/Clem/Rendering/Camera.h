@@ -70,9 +70,9 @@ public:
 private:
     Matrix4 projection;
     Matrix4 viewProjection;
-    bool    dirty = true;
-    Type    type;
-    int     deepth;
+    bool    dirty  = true;
+    Type    type   = Type::Perspective;
+    int     deepth = 0;
 };
 
 /**

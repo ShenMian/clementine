@@ -31,6 +31,11 @@ public:
 	 */
     const Point3& getOffset() const;
 
+    /**
+	 * @brief 检测是否与指定点相交.
+	 */
+    // virtual bool intersect(const Point3& point) const = 0;
+
 protected:
     Point3 offset;
 };

@@ -42,7 +42,7 @@ public:
     bool empty() const;
 
 private:
-    size_t                            size;
+    size_t                            size = 0;
     std::array<std::byte, chunk_size> buffer;
 
     std::unordered_map<id_type, std::unordered_map<TypeIndex, std::any>> components;

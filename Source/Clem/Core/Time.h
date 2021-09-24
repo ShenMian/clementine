@@ -49,7 +49,7 @@ public:
     static Time microseconds(uint64_t us);
 
 private:
-    Time(uint64_t us);
+    explicit Time(uint64_t us);
 
     uint64_t microseconds_;
 };

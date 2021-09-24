@@ -38,7 +38,7 @@ public:
      * @param indexBuffer  顶点缓冲区.
      * @param vertexBuffer 索引缓冲区.
      */
-    Mesh(std::string name, std::shared_ptr<IndexBuffer> indexBuffer, std::shared_ptr<VertexBuffer> vertexBuffer);
+    Mesh(const std::string& name, std::shared_ptr<IndexBuffer> indexBuffer, std::shared_ptr<VertexBuffer> vertexBuffer);
 
     const std::string&           getName() const;
     const std::filesystem::path& getPath() const;

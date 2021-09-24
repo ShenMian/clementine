@@ -28,12 +28,12 @@ bool collision(const Line2& l, const Point2& p)
     return p.y == k * p.x + b;
 }
 
+/*
 bool collision(const BoxCollider& b, const Point2& p)
 {
     return b.getRect().intersectsPoint(p);
 }
 
-// TODO: CircleCollider::getCenter();
 bool collision(const SphereCollider& c, const Point2& p)
 {
     const auto center = c.getPosition();
@@ -81,6 +81,7 @@ bool collision(const SphereCollider& c, const Line2& l)
     const auto angle         = std::abs(startToCenter.angle() - startToEnd.angle());
     return sin(angle) * startToCenter.size() <= c.getRadius();
 }
+*/
 
 /*const auto center        = c.getPosition();
 	const auto startToCenter = center - l.start;

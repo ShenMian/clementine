@@ -30,8 +30,6 @@ private:
     void showSprite();
     void showScript();
 
-    void showMaterial(Material mat);
-
     void textureEdit(const std::string& label, std::shared_ptr<Texture2D>& texture);
     void vectorEdit(const std::string& label, Vector3& value, float defaultValue = 0.f);
     void colorEdit(const std::string& label, Vector3& value);

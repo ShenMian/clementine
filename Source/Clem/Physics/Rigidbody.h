@@ -30,6 +30,8 @@ public:
     };
 
     Vector2 velocity;
+    float   mass = 1.f;
+    Type    type = Type::Kinematic;
 
     /**
 	 * @brief 向刚体施加一个持续的力.
@@ -54,9 +56,6 @@ public:
 	 * @brief 获取加速度.
 	 */
     Vector2 getAcceleration() const;
-
-    float mass = 1.f;
-    Type  type = Type::Kinematic;
 
 private:
     Vector2 force;

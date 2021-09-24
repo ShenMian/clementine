@@ -103,4 +103,5 @@ enum KeyCode
     F23       = 0x86,
     F24       = 0x87
 };
+
 } // namespace clem

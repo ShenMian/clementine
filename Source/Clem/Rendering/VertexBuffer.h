@@ -55,7 +55,7 @@ public:
             std::string  name;
             Shader::Type type;
             bool         normalized;
-            size_t       offset;
+            size_t       offset = 0;
 
             size_t size() const;
             size_t count() const;

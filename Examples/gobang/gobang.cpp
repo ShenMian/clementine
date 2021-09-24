@@ -30,13 +30,12 @@ public:
 
     void init() override
     {
-        pushScene(scene);
-
         server.onAccept = [this](shared_ptr<Connection> conn)
         {
             conn->read<NetCommand>();
             return true;
         };
+
         server.onMessage = [this](shared_ptr<Connection> conn)
         {
             auto& msg = conn->getMessage<NetCommand>();
@@ -56,19 +55,23 @@ public:
                 abort();
             }
         };
+
         server.onError = [this](shared_ptr<Connection> conn, error_code ec)
         {
             printf("%s", ec.message().c_str());
         };
+
         server.start(25565);
+
 
         client.onError = [](error_code ec)
         {
             printf("%s", ec.message().c_str());
         };
+
         client.connect("127.0.0.1", 25565);
 
-        scene->createEntity("board").addComponent<Sprite>(Size2i(15 * 2, 15));
+        Main::registry.create("board").add<Sprite>(Size2i(15 * 2, 15));
 
         EventDispatcher::get().addListener(Event::Type::mouse, [&](Event* e)
                                            {
@@ -102,16 +105,15 @@ public:
     void show()
     {
         const char tiles[] = {'.', 'X', 'O'};
-        auto&      sprite  = scene->getEntity("board").getComponent<Sprite>();
+        auto&      sprite  = Main::registry.create("board").get<Sprite>();
         for(int x = 0; x < 15; x++)
             for(int y = 0; y < 15; y++)
                 sprite.drawPoint(x * 2, y, tiles[map[x][y]]);
     }
 
 private:
-    int               map[15][15];
-    Client            client;
-    shared_ptr<Scene> scene = make_shared<Scene>();
+    int    map[15][15];
+    Client client;
 };
 
 Application* clem::CreateApplication()

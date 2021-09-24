@@ -25,15 +25,20 @@ namespace clem
 template <typename T>
 class Message
 {
+    static_assert(sizeof(T) == sizeof(uint32_t));
+
 public:
-    struct
+    struct Header
     {
         T       id;
         uint8_t size = 0;
-    } header;
+    };
+
+    Header                 header;
     std::vector<std::byte> body;
 
     Message() = default;
+
     Message(T id)
     {
         header.id = id;
@@ -42,8 +47,8 @@ public:
     template <typename Data>
     friend Message<T>& operator<<(Message<T>& msg, const Data& data)
     {
-        static_assert(std::is_standard_layout<Data>::value, "Data type is not suppoted");
-        Assert::isTrue(msg.header.size < (size_t)-1 - sizeof(Data), "Message is full");
+        static_assert(std::is_standard_layout<Data>::value, "data type is not suppoted");
+        Assert::isTrue(msg.header.size < (size_t)-1 - sizeof(Data), "message is full");
 
         const auto offset = msg.body.size();
         msg.body.resize(msg.body.size() + sizeof(Data));
@@ -56,7 +61,7 @@ public:
     template <typename Data>
     friend Message<T>& operator>>(Message<T>& msg, Data& data)
     {
-        static_assert(std::is_standard_layout<Data>::value, "Data type is not suppoted");
+        static_assert(std::is_standard_layout<Data>::value, "data type is not suppoted");
 
         const auto offset = msg.body.size() - sizeof(Data);
         std::memcpy(&data, msg.body.data() + offset, sizeof(Data));
@@ -69,7 +74,7 @@ public:
     template <typename Data>
     friend Message<T>& operator<<(Message<T>& msg, const std::vector<Data>& data)
     {
-        Assert::isTrue(msg.header.size < (size_t)-1 - data.size() * sizeof(Data), "Message is full");
+        Assert::isTrue(msg.header.size < (size_t)-1 - data.size() * sizeof(Data), "message is full");
 
         for(const auto& i : data)
             msg << i;

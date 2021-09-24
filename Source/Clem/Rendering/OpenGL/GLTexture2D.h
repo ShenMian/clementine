@@ -40,7 +40,6 @@ private:
     void  init(const void* data, Size2i size, int bits, bool genMipmap, Format fmt);
     void* loadFromFile(const std::filesystem::path& path, int& width, int& height, int& bits);
 
-    Size2i      size;
     handle_type handle;
     int         glType;
 

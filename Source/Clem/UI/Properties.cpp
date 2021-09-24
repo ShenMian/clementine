@@ -173,13 +173,13 @@ void Properties::showModel()
 
             ImGui::Text("Shapes  : %d", model.getMeshs().size());
 
-            auto vertices = model.getVertexCount();
+            const auto vertices = model.getVertexCount();
             if(vertices < 1000)
                 ImGui::Text("Vertices: %d", vertices);
             else
                 ImGui::Text("Vertices: %.1fk", (float)vertices / 1000);
 
-            auto indices = model.getIndexCount();
+            const auto indices = model.getIndexCount();
             if(indices < 1000)
                 ImGui::Text("Indices : %d", indices);
             else
@@ -194,13 +194,13 @@ void Properties::showModel()
                 {
                     if(ImGui::TreeNodeEx(meshs[i].getName().c_str()))
                     {
-                        auto vertices = meshs[i].vertexArray->getVertexBuffer()->count();
+                        const auto vertices = meshs[i].vertexArray->getVertexBuffer()->count();
                         if(vertices < 1000)
                             ImGui::Text("Vertices: %d", vertices);
                         else
                             ImGui::Text("Vertices: %.1fk", (float)vertices / 1000);
 
-                        auto indices = meshs[i].vertexArray->getIndexBuffer()->count();
+                        const auto indices = meshs[i].vertexArray->getIndexBuffer()->count();
                         if(indices < 1000)
                             ImGui::Text("Indices : %d", indices);
                         else
@@ -238,19 +238,6 @@ void Properties::showModel()
 
 void Properties::showLight()
 {
-}
-
-void Properties::showMaterial(Material mat)
-{
-    if(ImGui::CollapsingHeader("Material", ImGuiTreeNodeFlags_DefaultOpen))
-    {
-        auto& material = entity.get<Material>();
-
-        ImGui::Text("Shader   : Standard");
-        ImGui::Text("Albedo   : ");
-        ImGui::Text("Metallic : ");
-        ImGui::Text("Shininess: %.3f", material.shininess);
-    }
 }
 
 void Properties::showSprite()

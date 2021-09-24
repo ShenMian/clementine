@@ -17,6 +17,9 @@ private:
     float friction = 0.f;
 };
 
+/**
+ * 编辑器.
+ */
 class App : public Application
 {
 public:
@@ -36,7 +39,6 @@ public:
         model.add<Transform>().rotation = {0, 90, 0};
 
         // model.add<Model>("../assets/models/scene.obj", true);
-
         // model.add<Model>("../../../3DModel/weapon/m1911/m1911.gltf");
 
 #if 1
