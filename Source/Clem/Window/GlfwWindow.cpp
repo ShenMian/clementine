@@ -120,7 +120,6 @@ void GlfwWindow::update(Time dt)
     PROFILE_FUNC();
 
     auto renderer = Renderer::get();
-    auto size     = getSize();
 
     renderer->beginFrame();
 
