@@ -87,7 +87,6 @@ GLShader::GLShader(const std::string& name)
 {
     const fs::path assets  = Application::get().getAssetPath();
     const fs::path shaders = assets / "shaders";
-    const fs::path cache   = assets / "cache/shaders";
 
     if(!fs::exists(shaders))
         fs::create_directories(shaders);
