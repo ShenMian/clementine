@@ -135,7 +135,7 @@ void Viewport::update(Time dt)
             ImVec2 mouse = {ImGui::GetMousePos().x - viewportPos.x, ImGui::GetMousePos().y - viewportPos.y};
 
             int id;
-            framebuffer->readColorAttachment(1, {0, 0}, id); // FIXME
+            framebuffer->readColorAttachment(1, {mouse.x, mouse.y}, id); // FIXME
             Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
         }
 
