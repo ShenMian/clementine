@@ -4,3 +4,6 @@
 [submodule "Thirdparty/glfw"]
 	path = Thirdparty/glfw
 	url = https://github.com/glfw/glfw
+[submodule "Thirdparty/imguizmo"]
+	path = Thirdparty/imguizmo
+	url = https://github.com/CedricGuillemet/ImGuizmo.git
