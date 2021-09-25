@@ -84,6 +84,7 @@ void GLShader::link()
 }
 
 GLShader::GLShader(const std::string& name)
+    : Shader(name)
 {
     const fs::path assets  = Application::get().getAssetPath();
     const fs::path shaders = assets / "shaders";
@@ -264,6 +265,7 @@ GLShader::GLShader(const std::string& name)
 }
 
 GLShader::GLShader(const std::filesystem::path& vertShader, const std::filesystem::path& fragShader)
+    : Shader(name)
 {
     std::string vertSrc;
     {

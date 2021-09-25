@@ -51,6 +51,16 @@ std::shared_ptr<Shader> Shader::create(const std::filesystem::path& vertShader, 
     return nullptr;
 }
 
+Shader::Shader(const std::string& name)
+    : name(name)
+{
+}
+
+const std::string& Shader::getName() const
+{
+    return name;
+}
+
 std::shared_ptr<Shader> Shader::get(const std::string& name)
 {
     Assert::isTrue(cache.contains(name));

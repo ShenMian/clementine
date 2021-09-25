@@ -1,0 +1,6 @@
+[submodule "Thirdparty/googletest"]
+	path = Thirdparty/googletest
+	url = https://github.com/google/googletest
+[submodule "Thirdparty/glfw"]
+	path = Thirdparty/glfw
+	url = https://github.com/glfw/glfw

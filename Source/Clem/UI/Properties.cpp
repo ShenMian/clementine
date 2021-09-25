@@ -192,6 +192,8 @@ void Properties::showModel()
 
                 for(int i = 0; i < meshs.size(); i++)
                 {
+                    ImGui::Text("Shader  : %s", mats[i].shader->getName().c_str());
+
                     if(ImGui::TreeNodeEx(meshs[i].getName().c_str()))
                     {
                         const auto vertices = meshs[i].vertexArray->getVertexBuffer()->count();

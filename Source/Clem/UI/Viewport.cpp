@@ -132,10 +132,10 @@ void Viewport::update(Time dt)
         // 鼠标选取
         if(ImGui::IsMouseClicked(ImGuiMouseButton_Left))
         {
-            ImVec2 mouse = {ImGui::GetMousePos().x - viewportPos.x, ImGui::GetMousePos().y - viewportPos.y};
+            Vector2 mouse = {ImGui::GetMousePos().x - viewportPos.x, ImGui::GetMousePos().y - viewportPos.y};
 
             int id;
-            framebuffer->readColorAttachment(1, {mouse.x, mouse.y}, id); // FIXME
+            framebuffer->readColorAttachment(1, mouse, id); // FIXME
             Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
         }
 

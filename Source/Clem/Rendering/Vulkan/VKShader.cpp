@@ -16,6 +16,7 @@ static std::unordered_map<Shader::Stage, vk::ShaderStageFlagBits> VKStage = {
     {Shader::Stage::Fragment, vk::ShaderStageFlagBits::eFragment}};
 
 VKShader::VKShader(const std::string& name)
+    : Shader(name)
 {
     const fs::path assets  = "assets";
     const fs::path shaders = assets / "shaders";
@@ -45,6 +46,7 @@ VKShader::VKShader(const std::string& name)
 }
 
 VKShader::VKShader(const std::filesystem::path& vertShader, const std::filesystem::path& fragShader)
+    : Shader(name)
 {
     Assert::isTrue(false);
 }

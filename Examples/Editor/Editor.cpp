@@ -40,6 +40,8 @@ public:
 
         // model.add<Model>("../assets/models/scene.obj", true);
         // model.add<Model>("../../../3DModel/weapon/m1911/m1911.gltf");
+        // model.add<Model>("../../../3DModel/weapon/steampunk_handgun/scene.gltf");
+        // model.add<Model>("../../../3DModel/weapon/makarov_pm/scene.gltf");
 
 #if 1
         model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf");

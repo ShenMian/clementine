@@ -60,6 +60,8 @@ public:
 	 */
     static std::shared_ptr<Shader> create(const std::filesystem::path& vertShader, const std::filesystem::path& fragShader);
 
+    Shader(const std::string& name);
+
     virtual void uploadUniform(const std::string& name, const Matrix4& matrix) = 0;
     virtual void uploadUniform(const std::string& name, const Vector3& vector) = 0;
     virtual void uploadUniform(const std::string& name, const Vector2& vector) = 0;
@@ -68,9 +70,13 @@ public:
 
     virtual void bind() = 0;
 
+    const std::string& getName() const;
+
     static std::shared_ptr<Shader> get(const std::string& name);
 
 protected:
+    std::string name;
+
     std::unordered_map<Stage, const char*> extensions = {
         {Stage::Vertex, ".vert"},
         {Stage::Fragment, ".frag"}};
