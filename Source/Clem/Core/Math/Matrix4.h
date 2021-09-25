@@ -73,6 +73,7 @@ public:
      * 行优先矩阵.
      */
     const float* data() const;
+    float*       data();
 
     Vector3 forword() const;
     Vector3 back() const;

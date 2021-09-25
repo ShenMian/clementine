@@ -68,6 +68,11 @@ const float* Matrix4::data() const
     return &m[0][0];
 }
 
+float* Matrix4::data()
+{
+    return &m[0][0];
+}
+
 Vector3 Matrix4::forword() const
 {
     return {-m[2][0], -m[2][1], -m[2][2]};

@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Viewport.h"
@@ -6,6 +6,7 @@
 #include "Profiler.h"
 #include "Rendering/OpenGL/GLFrameBuffer.h"
 #include "Window/GlfwWindow.h"
+#include <ImGuizmo.h>
 #include <glad/glad.h>
 #include <imgui/imgui.h>
 
@@ -109,6 +110,7 @@ void Viewport::update(Time dt)
     ImVec2 viewportPos = {ImGui::GetWindowPos().x - ImGui::GetCursorPos().x, ImGui::GetWindowPos().y - ImGui::GetCursorPos().y};
     ImGui::PopStyleVar();
 
+    // 窗口大小发生变化时, 调用 onResize()
     static Vector2 lastViewportSize;
     viewportSize = {ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y};
     if(viewportSize != lastViewportSize)
@@ -120,15 +122,43 @@ void Viewport::update(Time dt)
     framebuffer->clearColorAttachment(1, -1);
 
     render(dt);
+
     ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
 
     ImGui::Text("CAM: POS(%.3f,%.3f,%.3f) DIR(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z,
                 Matrix4(camera.view).forword().normalize().x, Matrix4(camera.view).forword().normalize().y, Matrix4(camera.view).forword().normalize().z);
+    
+    // 辅助线框
+    auto& entity = Properties::entity;
+    if(entity.valid() && entity.anyOf<Transform>())
+    {
+        ImGuizmo::SetOrthographic(false);
+        ImGuizmo::SetDrawlist();
+
+        const auto pos  = ImGui::GetWindowPos();
+        const auto size = ImGui::GetWindowSize();
+        ImGuizmo::SetRect(pos.x, pos.y, size.x, size.y); // FIXME
+
+        auto& transform = entity.get<Transform>();
+
+        const auto& view  = camera.getViewMatrix();
+        const auto& proj  = camera.getProjectionMatrix();
+        Matrix4     model = transform.getModelMatrix();
+
+        ImGuizmo::Manipulate(view.data(), proj.data(), ImGuizmo::OPERATION::TRANSLATE, ImGuizmo::LOCAL, model.data());
+
+        if(ImGuizmo::IsUsing())
+        {
+            ImGuizmo::DecomposeMatrixToComponents(model.data(), transform.translation.data(), transform.rotation.data(), transform.scale.data());   
+        }
+    }
 
     if(ImGui::IsWindowHovered())
     {
         hovered = true;
 
+        // FIXME: 会使窗口失去焦点, 导致辅助线框无法使用
+        #if 0
         // 鼠标选取
         if(ImGui::IsMouseClicked(ImGuiMouseButton_Left))
         {
@@ -138,6 +168,7 @@ void Viewport::update(Time dt)
             framebuffer->readColorAttachment(1, mouse, id); // FIXME
             Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
         }
+        #endif
 
         // 鼠标右键是否按下
         locked = ImGui::IsMouseDown(ImGuiMouseButton_Right);
@@ -168,7 +199,7 @@ void Viewport::render(Time dt)
 
 void Viewport::onResize(float x, float y)
 {
-    // TODO: resize framebuffer
+    // 重新生成相机投影矩阵
 #if 1
     camera.setPerspective(radians(60), x / y, 0.03f, 10000.f);
 #else

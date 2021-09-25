@@ -6,6 +6,7 @@
 #include "Rendering/Renderer.h"
 #include "Window/WindowBase.h"
 
+#include <ImGuizmo.h>
 #include <glfw/glfw3.h>
 #include <imgui/backends/imgui_impl_glfw.h>
 #include <imgui/backends/imgui_impl_opengl3.h>
@@ -24,6 +25,7 @@ void UI::beginFrame()
     ImGui_ImplGlfw_NewFrame();
 
     ImGui::NewFrame();
+    ImGuizmo::BeginFrame();
 }
 
 void UI::endFrame()

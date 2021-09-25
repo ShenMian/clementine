@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Browser.h"
@@ -60,7 +60,7 @@ void Browser::update(Time dt)
     else if(mode == FileDisplayMode::List)
         showFileList();
 
-    // ¿Õ°×ÇøÓòÓÒ¼ü²Ëµ¥
+    // ç©ºç™½åŒºåŸŸå³é”®èœå•
     if(ImGui::BeginPopupContextWindow(0, 1, false))
     {
         if(ImGui::BeginMenu("File Display"))

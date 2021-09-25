@@ -51,7 +51,7 @@ void Properties::update(Time dt)
                 ImGui::CloseCurrentPopup();
             }
             ImGui::MenuItem("BoxCollider");
-            ImGui::MenuItem("CircleCollider");
+            ImGui::MenuItem("SphereCollider");
             ImGui::EndMenu();
         }
         if(ImGui::BeginMenu("Rendering"))

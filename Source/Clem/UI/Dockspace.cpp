@@ -1,4 +1,4 @@
-// Copyright 2021 SMS
+ï»¿// Copyright 2021 SMS
 // License(Apache-2.0)
 
 #include "Dockspace.h"
@@ -34,8 +34,8 @@ void Dockspace::update(Time dt)
         ImGui::EndMainMenuBar();
     }
 
-    // ´´½¨¸²¸Ç´°¿ÚµÄ UI ´°¿Ú×é¼þ
-    bool fullWindow = true; // Ê¹Õû¸ö´°¿Ú³ÉÎª dockspace
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½Úµï¿½ UI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    bool fullWindow = true; // Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú³ï¿½Îª dockspace
 
     auto dockspaceFlags = ImGuiDockNodeFlags_None;
     auto windowFlags    = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;

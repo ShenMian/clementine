@@ -105,6 +105,16 @@ void Vector3::rotate(const Vector3& point, float angle)
     }
 }
 
+const float* Vector3::data() const
+{
+    return &x;
+}
+
+float* Vector3::data()
+{
+    return &x;
+}
+
 Vector3 Vector3::getMidPoint(const Vector3& p) const
 {
     return Vector3((x + p.x) / 2.f, (y + p.y) / 2.f, (z + p.z) / 2.f);

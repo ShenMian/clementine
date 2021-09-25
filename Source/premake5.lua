@@ -31,6 +31,7 @@ project "Clementine"
     "%{thirdparty.spdlog}/include",
     "%{thirdparty.openal}/include",
     "%{thirdparty.vulkan}/include",
+    "%{thirdparty.imguizmo}",
     "%{thirdparty.tinygltf}/include",
     "%{thirdparty.yaml_cpp}/include",
     "%{thirdparty.nlohmann_json}/include",
@@ -41,4 +42,5 @@ project "Clementine"
     "GLFW",
     "ImGui",
     "%{thirdparty.vulkan}/lib/vulkan-1",
-    "%{thirdparty.openal}/lib/openal32"}
+    "%{thirdparty.openal}/lib/openal32",
+    "ImGuizmo"}

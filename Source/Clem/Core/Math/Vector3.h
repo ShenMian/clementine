@@ -114,6 +114,9 @@ public:
 	 */
     void rotate(const Vector3& point, float angle);
 
+    const float* data() const;
+    float*       data();
+
     /**
 	 * @brief 获取与另一个点之间的中点.
 	 */
