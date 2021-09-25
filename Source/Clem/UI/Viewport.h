@@ -5,6 +5,7 @@
 
 #include "Layer.h"
 #include "Rendering/Rendering.h"
+#include "Core/Core.h"
 #include <filesystem>
 
 namespace fs = std::filesystem;
@@ -35,7 +36,7 @@ private:
     std::shared_ptr<Shader>      standardShader, shadowShader, skyboxShader;
     bool                         hovered, locked = false;
     Vector2                      viewportSize;
-    std::shared_ptr<FrameBuffer> framebuffer = FrameBuffer::create({(int)(1920 * 0.7), (int)(1080 * 0.7)},
+    std::shared_ptr<FrameBuffer> framebuffer = FrameBuffer::create(Configuration::displayResolution,
                                                                    {FrameBuffer::PixelFormat::RGBA8,
                                                                     FrameBuffer::PixelFormat::R8,
                                                                     FrameBuffer::PixelFormat::DepthStencil});

@@ -3,6 +3,7 @@
 
 #include "GlfwWindow.h"
 #include "Components/Components.h"
+#include "Core/Core.h"
 #include "Events/Events.h"
 #include "Platform.h"
 #include "Profiler.h"
@@ -30,8 +31,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     auto       monitor   = glfwGetPrimaryMonitor();
     const auto videoMode = glfwGetVideoMode(monitor);
 
-    bool fullscreen = false;
-    if(fullscreen)
+    if(Configuration::fullscreen)
         handle = glfwCreateWindow(videoMode->width, videoMode->height, title.c_str(), monitor, nullptr);
     else
         handle = glfwCreateWindow(size.x, size.y, title.c_str(), nullptr, nullptr);
