@@ -17,9 +17,12 @@ namespace clem::ui
 
 void Viewport::attach()
 {
-    standardShader = Shader::create("standard");
-    shadowShader   = Shader::create("shadow");
-    skyboxShader   = Shader::create("skybox_sphere");
+    // geomertyPass = Shader::create("geometry");
+    // lightingPass = Shader::create("lighting");
+
+    forwardShader = Shader::create("forward");
+    shadowShader  = Shader::create("shadow");
+    skyboxShader  = Shader::create("skybox_sphere");
 
     auto win = Main::getWindow();
 
@@ -106,6 +109,8 @@ void Viewport::update(Time dt)
 {
     PROFILE_FUNC();
 
+    toolbar();
+
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{0, 0});
     ImGui::Begin("Viewport", &visible);
     ImVec2 viewportPos = {ImGui::GetWindowPos().x - ImGui::GetCursorPos().x, ImGui::GetWindowPos().y - ImGui::GetCursorPos().y};
@@ -122,84 +127,93 @@ void Viewport::update(Time dt)
 
     framebuffer->clearColorAttachment(1, -1);
 
-    render(dt);
+    // deferredRender(dt);
+    forwardRender(dt);
 
     ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
 
-    if(status == Status::Stopping)
+    if(status == Status::Playing)
     {
-        updateCamera(dt);
-
-        // 辅助线框
-        auto& entity = Properties::entity;
-        if(entity.valid() && entity.anyOf<Transform>())
-        {
-            ImGuizmo::SetOrthographic(false);
-            ImGuizmo::SetDrawlist();
-
-            const auto pos  = ImGui::GetWindowPos();
-            const auto size = ImGui::GetWindowSize();
-            // ImGuizmo::SetRect(pos.x, pos.y, size.x, size.y);
-            ImGuizmo::SetRect(viewportPos.x, viewportPos.y, viewportSize.x, viewportSize.y);
-
-            auto& transform = entity.get<Transform>();
-
-            const auto& view  = camera.getViewMatrix();
-            const auto& proj  = camera.getProjectionMatrix();
-            Matrix4     model = transform.getModelMatrix();
-
-            ImGuizmo::Manipulate(view.data(), proj.data(), ImGuizmo::OPERATION::TRANSLATE, ImGuizmo::LOCAL, model.data());
-
-            if(ImGuizmo::IsUsing())
-            {
-                // FIXME: 完善旋转
-                Vector3 a;
-                ImGuizmo::DecomposeMatrixToComponents(model.data(), transform.translation.data(), a.data(), transform.scale.data());
-            }
-        }
-
-        if(ImGui::IsWindowHovered())
-        {
-            hovered = true;
-
-// FIXME: 会使窗口失去焦点, 导致辅助线框无法使用
-#if 0
-            // 鼠标选取
-            if(ImGui::IsMouseClicked(ImGuiMouseButton_Left))
-            {
-                Vector2 mouse = {ImGui::GetMousePos().x - viewportPos.x, ImGui::GetMousePos().y - viewportPos.y};
-
-                int id;
-                framebuffer->readColorAttachment(1, mouse, id); // FIXME
-                Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
-            }
-#endif
-
-            // 鼠标右键是否按下
-            locked = ImGui::IsMouseDown(ImGuiMouseButton_Right);
-        }
-        else
-            hovered = false;
-
-        // TODO: 临时相机信息, 当相机作为组件后移除
-        ImGui::Text("CAM: POS(%.3f,%.3f,%.3f) DIR(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z,
-                    Matrix4(camera.view).forword().normalize().x, Matrix4(camera.view).forword().normalize().y, Matrix4(camera.view).forword().normalize().z);
-
+        ImGui::End();
+        return;
     }
+
+    updateCamera(dt);
+
+    // 辅助线框
+    auto& entity = Properties::entity;
+    if(entity.valid() && entity.anyOf<Transform>())
+    {
+        ImGuizmo::SetOrthographic(false);
+        ImGuizmo::SetDrawlist();
+
+        const auto pos  = ImGui::GetWindowPos();
+        const auto size = ImGui::GetWindowSize();
+        // ImGuizmo::SetRect(pos.x, pos.y, size.x, size.y);
+        ImGuizmo::SetRect(viewportPos.x, viewportPos.y, viewportSize.x, viewportSize.y);
+
+        auto& transform = entity.get<Transform>();
+
+        const auto& view  = camera.getViewMatrix();
+        const auto& proj  = camera.getProjectionMatrix();
+        Matrix4     model = transform.getModelMatrix();
+
+        ImGuizmo::Manipulate(view.data(), proj.data(), ImGuizmo::OPERATION::TRANSLATE, ImGuizmo::LOCAL, model.data());
+
+        if(ImGuizmo::IsUsing())
+        {
+            // FIXME: 完善旋转
+            Vector3 a;
+            ImGuizmo::DecomposeMatrixToComponents(model.data(), transform.translation.data(), a.data(), transform.scale.data());
+        }
+    }
+
+    if(ImGui::IsWindowHovered())
+    {
+        hovered = true;
+
+        // 鼠标选取
+        if(!ImGuizmo::IsOver() && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+        {
+            Vector2 mouse = {ImGui::GetMousePos().x - viewportPos.x, ImGui::GetMousePos().y - viewportPos.y};
+
+            int id;
+            framebuffer->readColorAttachment(1, mouse, id); // FIXME
+            Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
+        }
+
+        // 鼠标右键是否按下
+        locked = ImGui::IsMouseDown(ImGuiMouseButton_Right);
+    }
+    else
+        hovered = false;
+
+    // TODO: 临时相机信息, 当相机作为组件后移除
+    ImGui::Text("CAM: POS(%.3f,%.3f,%.3f) DIR(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z,
+                Matrix4(camera.view).forword().normalize().x, Matrix4(camera.view).forword().normalize().y, Matrix4(camera.view).forword().normalize().z);
 
     // ImGui::Text("POS(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z);
     // ImGui::Text("DIR(%.3f,%.3f,%.3f)", Matrix4(camera.view).forword().normalize().x, Matrix4(camera.view).forword().normalize().y, Matrix4(camera.view).forword().normalize().z);
 
-    toolbar();
-
     ImGui::End();
 }
 
-void Viewport::render(Time dt)
+void Viewport::deferredRender(Time dt)
+{
+    geomertyPass->bind();
+
+    lightingPass->bind();
+    lightingPass->uploadUniform("position", 0);
+    lightingPass->uploadUniform("normal", 1);
+    lightingPass->uploadUniform("albedo_spec", 2);
+    uploadLights(lightingPass);
+}
+
+void Viewport::forwardRender(Time dt)
 {
     PROFILE_FUNC();
 
-    updateLight(dt);
+    uploadLights(forwardShader);
     updateShadow(dt);
 
     const auto size = framebuffer->getSize();
@@ -267,36 +281,36 @@ void Viewport::onResize(float x, float y)
 #endif
 }
 
-void Viewport::updateLight(Time dt)
+void Viewport::uploadLights(std::shared_ptr<Shader> shader)
 {
     PROFILE_FUNC();
 
-    standardShader->uploadUniform("u_direction_lights_size", (int)dirLights.size());
+    shader->uploadUniform("u_direction_lights_size", (int)dirLights.size());
     for(int i = 0; i < dirLights.size(); i++)
     {
         const auto name = "u_direction_lights[" + std::to_string(i) + "].";
-        standardShader->uploadUniform(name + "color", dirLights[i].getColor());
-        standardShader->uploadUniform(name + "intesity", dirLights[i].getIntesity());
-        standardShader->uploadUniform(name + "direction", dirLights[i].getDirection());
+        shader->uploadUniform(name + "color", dirLights[i].getColor());
+        shader->uploadUniform(name + "intesity", dirLights[i].getIntesity());
+        shader->uploadUniform(name + "direction", dirLights[i].getDirection());
     }
 
-    standardShader->uploadUniform("u_point_lights_size", (int)pointLights.size());
+    shader->uploadUniform("u_point_lights_size", (int)pointLights.size());
     for(int i = 0; i < pointLights.size(); i++)
     {
         const auto name = "u_point_lights[" + std::to_string(i) + "].";
-        standardShader->uploadUniform(name + "color", pointLights[i].getColor());
-        standardShader->uploadUniform(name + "intesity", pointLights[i].getIntesity());
-        standardShader->uploadUniform(name + "position", pointLights[i].getPosition());
+        shader->uploadUniform(name + "color", pointLights[i].getColor());
+        shader->uploadUniform(name + "intesity", pointLights[i].getIntesity());
+        shader->uploadUniform(name + "position", pointLights[i].getPosition());
     }
 
-    standardShader->uploadUniform("u_spot_lights_size", (int)spotLights.size());
+    shader->uploadUniform("u_spot_lights_size", (int)spotLights.size());
     for(int i = 0; i < spotLights.size(); i++)
     {
         const auto name = "u_spot_lights[" + std::to_string(i) + "].";
-        standardShader->uploadUniform(name + "color", spotLights[i].getColor());
-        standardShader->uploadUniform(name + "intesity", spotLights[i].getIntesity());
-        standardShader->uploadUniform(name + "direction", spotLights[i].getDirection());
-        standardShader->uploadUniform(name + "position", spotLights[i].getPosition());
+        shader->uploadUniform(name + "color", spotLights[i].getColor());
+        shader->uploadUniform(name + "intesity", spotLights[i].getIntesity());
+        shader->uploadUniform(name + "direction", spotLights[i].getDirection());
+        shader->uploadUniform(name + "position", spotLights[i].getPosition());
     }
 }
 
@@ -337,9 +351,9 @@ void Viewport::updateCamera(Time dt)
     skyboxShader->uploadUniform("u_projection", camera.getProjectionMatrix());
     skyboxShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
 
-    standardShader->uploadUniform("u_view", camera.getViewMatrix());
-    standardShader->uploadUniform("u_projection", camera.getProjectionMatrix());
-    standardShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
+    forwardShader->uploadUniform("u_view", camera.getViewMatrix());
+    forwardShader->uploadUniform("u_projection", camera.getProjectionMatrix());
+    forwardShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
 }
 
 bool isKeyPressed(int key)

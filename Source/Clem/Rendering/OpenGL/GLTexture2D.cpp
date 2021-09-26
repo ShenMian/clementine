@@ -44,7 +44,10 @@ GLTexture2D::GLTexture2D()
 
 GLTexture2D::GLTexture2D(const Size2i& size, Format fmt)
 {
-    this->size = size;
+    Assert::isTrue(fmt != Format::Auto);
+
+    this->size   = size;
+    this->format = fmt;
 
     glType = GL_TEXTURE_2D;
     glCreateTextures(glType, 1, &handle);
@@ -211,7 +214,7 @@ uint32_t GLTexture2D::GLInternalFormat(Format fmt)
         return GL_R8;
 
     default:
-        Assert::isTrue(false);
+        Assert::isTrue(false, "no corresponding GL internal format");
     }
 }
 
@@ -232,7 +235,7 @@ uint32_t GLTexture2D::GLFormat(Format fmt)
         return GL_RED;
 
     default:
-        Assert::isTrue(false);
+        Assert::isTrue(false, "no corresponding GL format");
     }
 }
 

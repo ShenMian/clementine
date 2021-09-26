@@ -1,6 +1,6 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
-// 标准网格着色器
+// 正向渲染着色器
 
 #version 450
 
@@ -36,12 +36,12 @@ struct SpotLight
     vec3 position;
     vec3 direction;
 
-    float cutOff;
-    float outerCutOff;
-
     float constant;
     float linear;
     float quadratic;
+
+    float cutOff;
+    float outerCutOff;
 };
 
 struct Material
@@ -148,13 +148,13 @@ vec3 CalcPointLight(PointLight light, vec3 normal)
 
     // 衰减率
     const float distance    = length(light.position - v_position);
-    const float attenuation = light.constant + light.linear * distance + light.quadratic * (distance * distance);
+    const float attenuation = light.intesity / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
 
     DirectionLight dirLight;
     dirLight.color     = light.color;
     dirLight.intesity  = light.intesity;
     dirLight.direction = -dir_to_light;
-    return CalcDirLight(dirLight, normal) / attenuation; // FIXME
+    return CalcDirLight(dirLight, normal) * attenuation; // FIXME
 }
 
 // 计算聚光灯光照

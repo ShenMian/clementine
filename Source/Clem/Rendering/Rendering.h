@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "CommandBuffer.h"
 #include "FrameBuffer.h"
+#include "GBuffer.h"
 #include "IndexBuffer.h"
 #include "Material.h"
 #include "Mesh.h"

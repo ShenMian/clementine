@@ -55,7 +55,7 @@ void GLShader::compile(const std::string& name, Stage stage)
         glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &size);
         std::string info(size, '\0');
         glGetShaderInfoLog(shader, (GLsizei)info.size(), &size, info.data());
-        Assert::isTrue(false, std::format("shader compilation failure: {}", info));
+        Assert::isTrue(false, std::format("shader '{}' compilation failure: {}", name, info));
 
         glDeleteShader(shader);
         return;
@@ -76,7 +76,7 @@ void GLShader::link()
         glGetProgramiv(handle, GL_INFO_LOG_LENGTH, &size);
         std::string info(size, 0);
         glGetProgramInfoLog(handle, (GLsizei)info.size(), &size, info.data());
-        Assert::isTrue(false, std::format("shader link failure: {}", info));
+        Assert::isTrue(false, std::format("shader '{}' link failure: {}", name, info));
 
         glDeleteProgram(handle);
         return;

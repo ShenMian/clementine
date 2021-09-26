@@ -98,7 +98,7 @@ void GLRenderer::submit(const Entity& entity)
         return;
     }
 
-    auto shader = Shader::get("standard");
+    auto shader = Shader::get("forward");
 
     auto& transform = entity.get<Transform>();
     auto& model     = entity.get<Model>();

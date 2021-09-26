@@ -31,21 +31,25 @@ public:
     inline static bool visible = true;
 
 private:
-    void render(Time dt);
+    void deferredRender(Time dt);
+    void forwardRender(Time dt);
     void toolbar();
     void playScene();
     void stopScene();
 
     void onResize(float x, float y);
     void updateCameraControl(Time dt);
-    void updateLight(Time dt);
     void updateShadow(Time dt);
     void updateCamera(Time dt);
 
-    Status status = Status::Stopping;
+    void uploadLights(std::shared_ptr<Shader> shader);
+
+    Status                  status  = Status::Stopping;
+    GBuffer                 gbuffer = GBuffer(Configuration::displayResolution);
+    std::shared_ptr<Shader> geomertyPass, lightingPass;
 
     Camera                       camera;
-    std::shared_ptr<Shader>      standardShader, shadowShader, skyboxShader;
+    std::shared_ptr<Shader>      forwardShader, shadowShader, skyboxShader;
     bool                         hovered, locked = false;
     Vector2                      viewportSize;
     std::shared_ptr<FrameBuffer> framebuffer = FrameBuffer::create(Configuration::displayResolution,

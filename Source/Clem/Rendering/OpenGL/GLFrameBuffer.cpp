@@ -34,7 +34,12 @@ static std::unordered_map<FrameBuffer::PixelFormat, GLenum> GLType = {
     {FrameBuffer::PixelFormat::Depth, GL_FLOAT}};
 
 static std::unordered_set<FrameBuffer::PixelFormat> colorAttachmentFormat =
-    {FrameBuffer::PixelFormat::RGBA8, FrameBuffer::PixelFormat::RGB8, FrameBuffer::PixelFormat::R8};
+    {
+        FrameBuffer::PixelFormat::RGBA8,
+        FrameBuffer::PixelFormat::RGB8,
+        FrameBuffer::PixelFormat::R8,
+        FrameBuffer::PixelFormat::RGBA16,
+        FrameBuffer::PixelFormat::RGB16};
 
 static std::unordered_set<FrameBuffer::PixelFormat> depthAttachmentFormat =
     {FrameBuffer::PixelFormat::DepthStencil, FrameBuffer::PixelFormat::Depth, FrameBuffer::PixelFormat::Stencil};
@@ -60,7 +65,7 @@ GLFrameBuffer::GLFrameBuffer(Size2i size, const std::vector<std::shared_ptr<Text
             Assert::isTrue(false, "unknown format");
     }
 
-#if 0
+#if 1
     if(colorAttachments.empty())
         glDrawBuffer(GL_NONE);
     else

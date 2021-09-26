@@ -15,9 +15,9 @@ public:
     {
         Position,
         Normals,
-        PBR,
-        DepthStencil,
-        Num
+        AlbedoSpec
+        // PBR,
+        // DepthStencil
     };
 
     GBuffer(const Size2i& size);

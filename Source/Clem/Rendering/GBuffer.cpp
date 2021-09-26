@@ -8,8 +8,9 @@ namespace clem
 
 GBuffer::GBuffer(const Size2i& size)
 {
-    for(int i = 0; i < TextureType::Num; i++)
-        textures.push_back(Texture2D::create(size));
+    textures.push_back(Texture2D::create(size, Texture2D::Format::RGB8));
+    textures.push_back(Texture2D::create(size, Texture2D::Format::RGB8));
+    textures.push_back(Texture2D::create(size, Texture2D::Format::RGBA8));
     framebuffer = FrameBuffer::create(size, textures);
 }
 
