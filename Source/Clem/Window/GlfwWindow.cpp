@@ -51,7 +51,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
                                   const auto win = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(native));
                                   Renderer::get()->setViewport(0, 0, width, height);
                                   if(win->onResize)
-                                      win->onResize(Size2(width, height));
+                                      win->onResize({width, height});
                               });
 
     glfwSetWindowCloseCallback(handle, [](GLFWwindow* native)

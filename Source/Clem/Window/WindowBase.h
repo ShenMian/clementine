@@ -110,7 +110,7 @@ public:
     static void init();
     static void deinit();
 
-    std::function<void(Size2)>          onResize;
+    std::function<void(Size2i)>         onResize;
     std::function<void(double, double)> onScroll;
     std::function<void(int, int)>       onKey;
     std::function<void(double, double)> onMouseMove;

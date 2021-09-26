@@ -27,9 +27,9 @@ void ConsoleWindow::update(Time dt)
     if(newSize == size)
         return;
     size = newSize;
-    setSize(Size2(size.x, size.y));
+    setSize(Size2((float)size.x, (float)size.y));
     if(onResize)
-        onResize(Size2(size.x, size.y));
+        onResize({size.x, size.y});
 }
 
 void ConsoleWindow::setPosition(Size2i size)
