@@ -154,7 +154,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal)
     dirLight.color     = light.color;
     dirLight.intesity  = light.intesity;
     dirLight.direction = -dir_to_light;
-    return CalcDirLight(dirLight, normal) / attenuation;
+    return CalcDirLight(dirLight, normal) / attenuation; // FIXME
 }
 
 // 计算聚光灯光照

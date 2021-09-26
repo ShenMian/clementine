@@ -8,7 +8,6 @@ namespace clem
 {
 
 /*
-
 void Camera::setDirection(const Vector3& pos, const Vector3& dir, const Vector3& up)
 {
     // 构建三个相互垂直且长度为一的向量, 其中 w 与 dir 方向相同.

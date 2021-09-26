@@ -19,6 +19,12 @@ namespace clem::ui
 class Viewport : public Layer
 {
 public:
+    enum Status
+    {
+        Playing,
+        Stopping
+    };
+
     void attach() override;
     void update(Time dt) override;
 
@@ -31,6 +37,10 @@ private:
     void updateLight(Time dt);
     void updateShadow(Time dt);
     void updateCamera(Time dt);
+
+    void toolbar();
+
+    Status status = Status::Stopping;
 
     Camera                       camera;
     std::shared_ptr<Shader>      standardShader, shadowShader, skyboxShader;

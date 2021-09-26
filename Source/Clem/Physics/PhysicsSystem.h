@@ -23,17 +23,17 @@ public:
                                      switch(body.type)
                                      {
                                      case Rigidbody::Type::Dynamic:
-                                         body.velocity += (body.getAcceleration() + gravity) * dt.seconds(); // v += (a + g) * dt;
+                                         body.linearVelocity += (body.getAcceleration() + gravity) * dt.seconds(); // v += (a + g) * dt;
                                          break;
 
                                      case Rigidbody::Type::Kinematic:
-                                         body.velocity += body.getAcceleration() * dt.seconds(); // v += a * dt;
+                                         body.linearVelocity += body.getAcceleration() * dt.seconds(); // v += a * dt;
                                          break;
 
                                      case Rigidbody::Type::Static:
                                          break;
                                      }
-                                     tf.translation += body.velocity; // p += v * dt;
+                                     tf.translation += body.linearVelocity; // p += v * dt;
                                  });
     }
 

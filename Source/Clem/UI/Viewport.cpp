@@ -40,6 +40,7 @@ void Viewport::attach()
 
     win->onMouseMove = [this](double x, double y)
     {
+        const float    sensitivity = 0.05;
         static auto    speed = Vector2::unit * 1;
         static Vector2 last;
 
@@ -54,7 +55,6 @@ void Viewport::attach()
         auto yOffset = last.y - (float)y;
         last         = {(float)x, (float)y};
 
-        float sensitivity = 0.05;
         xOffset *= sensitivity;
         yOffset *= sensitivity;
 
@@ -98,7 +98,8 @@ void Viewport::attach()
     pointLights[1].setIntesity(1.f);
     pointLights[1].setPosition({-5, 5, 0});
 
-    pointLights.clear();
+    dirLights.clear();
+    // pointLights.clear();
 }
 
 void Viewport::update(Time dt)
@@ -149,9 +150,13 @@ void Viewport::update(Time dt)
 
         if(ImGuizmo::IsUsing())
         {
-            ImGuizmo::DecomposeMatrixToComponents(model.data(), transform.translation.data(), transform.rotation.data(), transform.scale.data());   
+            // FIXME: 完善旋转
+            Vector3 a;
+            ImGuizmo::DecomposeMatrixToComponents(model.data(), transform.translation.data(), a.data(), transform.scale.data());   
         }
     }
+
+    toolbar();
 
     if(ImGui::IsWindowHovered())
     {
@@ -280,6 +285,36 @@ void Viewport::updateCamera(Time dt)
     standardShader->uploadUniform("u_view", camera.getViewMatrix());
     standardShader->uploadUniform("u_projection", camera.getProjectionMatrix());
     standardShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
+}
+
+void Viewport::toolbar()
+{
+    static auto playIcon = Texture2D::create("../assets/textures/icons/play_button.png");
+    static auto stopIcon = Texture2D::create("../assets/textures/icons/stop_button.png");
+
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 2));
+    ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, ImVec2(0, 0));
+    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+    auto&       colors        = ImGui::GetStyle().Colors;
+    const auto& buttonHovered = colors[ImGuiCol_ButtonHovered];
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(buttonHovered.x, buttonHovered.y, buttonHovered.z, 0.5f));
+    const auto& buttonActive = colors[ImGuiCol_ButtonActive];
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(buttonActive.x, buttonActive.y, buttonActive.z, 0.5f));
+
+    ImGui::Begin("##toolbar", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+    float                      size = ImGui::GetWindowHeight() - 4.0f;
+    std::shared_ptr<Texture2D> icon = status == Status::Stopping ? playIcon : stopIcon;
+    ImGui::SetCursorPosX((ImGui::GetWindowContentRegionMax().x * 0.5f) - (size * 0.5f));
+    if(ImGui::ImageButton((ImTextureID)icon->getHandle(), ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1), 0))
+    {
+        if(status == Status::Playing)
+            status = Status::Stopping;
+        else
+            status = Status::Playing;
+    }
+    ImGui::PopStyleVar(2);
+    ImGui::PopStyleColor(3);
+    ImGui::End();
 }
 
 bool isKeyPressed(int key)

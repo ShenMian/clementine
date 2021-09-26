@@ -29,7 +29,8 @@ public:
         Static
     };
 
-    Vector2 velocity;
+    Vector3 linearVelocity;
+    Vector3 angularVelocity;
     float   mass = 1.f;
     Type    type = Type::Kinematic;
 
