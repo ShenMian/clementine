@@ -15,93 +15,165 @@ namespace clem
 inline std::vector<INPUT_RECORD> inputRecords;
 #endif
 
-enum KeyCode
+enum class KeyCode;
+enum class MouseCode;
+
+class Input
 {
-    A = 0x41,
-    B,
-    C,
-    D,
-    E,
-    F,
-    G,
-    H,
-    I,
-    J,
-    K,
-    L,
-    M,
-    N,
-    O,
-    P,
-    Q,
-    R,
-    S,
-    T,
-    U,
-    V,
-    W,
-    X,
-    Y,
-    Z,
+public:
+    static bool isPressed(KeyCode code);
+    static bool isPressed(MouseCode code);
+};
 
-    ESCAPE = 0x1B,
+enum class KeyCode
+{
+    Space      = 32,
+    Apostrophe = 39, /* ' */
+    Comma      = 44, /* , */
+    Minus      = 45, /* - */
+    Period     = 46, /* . */
+    Slash      = 47, /* / */
 
-    SPACE    = 0x20,
-    PRIOR    = 0x21,
-    NEXT     = 0x22,
-    END      = 0x23,
-    HOME     = 0x24,
-    LEFT     = 0x25,
-    UP       = 0x26,
-    RIGHT    = 0x27,
-    DOWN     = 0x28,
-    SELECT   = 0x29,
-    PRINT    = 0x2A,
-    EXECUTE  = 0x2B,
-    SNAPSHOT = 0x2C,
-    INSERT   = 0x2D,
-    DELETE_  = 0x2E,
+    D0 = 48, /* 0 */
+    D1 = 49, /* 1 */
+    D2 = 50, /* 2 */
+    D3 = 51, /* 3 */
+    D4 = 52, /* 4 */
+    D5 = 53, /* 5 */
+    D6 = 54, /* 6 */
+    D7 = 55, /* 7 */
+    D8 = 56, /* 8 */
+    D9 = 57, /* 9 */
 
-    NUMPAD0   = 0x60,
-    NUMPAD1   = 0x61,
-    NUMPAD2   = 0x62,
-    NUMPAD3   = 0x63,
-    NUMPAD4   = 0x64,
-    NUMPAD5   = 0x65,
-    NUMPAD6   = 0x66,
-    NUMPAD7   = 0x67,
-    NUMPAD8   = 0x68,
-    NUMPAD9   = 0x69,
-    MULTIPLY  = 0x6A,
-    ADD       = 0x6B,
-    SEPARATOR = 0x6C,
-    SUBTRACT  = 0x6D,
-    DECIMAL   = 0x6E,
-    DIVIDE    = 0x6F,
-    F1        = 0x70,
-    F2        = 0x71,
-    F3        = 0x72,
-    F4        = 0x73,
-    F5        = 0x74,
-    F6        = 0x75,
-    F7        = 0x76,
-    F8        = 0x77,
-    F9        = 0x78,
-    F10       = 0x79,
-    F11       = 0x7A,
-    F12       = 0x7B,
-    F13       = 0x7C,
-    F14       = 0x7D,
-    F15       = 0x7E,
-    F16       = 0x7F,
-    F17       = 0x80,
-    F18       = 0x81,
-    F19       = 0x82,
-    F20       = 0x83,
-    F21       = 0x84,
-    F22       = 0x85,
-    F23       = 0x86,
-    F24       = 0x87
+    Semicolon = 59, /* ; */
+    Equal     = 61, /* = */
+
+    A = 65,
+    B = 66,
+    C = 67,
+    D = 68,
+    E = 69,
+    F = 70,
+    G = 71,
+    H = 72,
+    I = 73,
+    J = 74,
+    K = 75,
+    L = 76,
+    M = 77,
+    N = 78,
+    O = 79,
+    P = 80,
+    Q = 81,
+    R = 82,
+    S = 83,
+    T = 84,
+    U = 85,
+    V = 86,
+    W = 87,
+    X = 88,
+    Y = 89,
+    Z = 90,
+
+    LBracket    = 91, /* [ */
+    Backslash   = 92, /* \ */
+    RBracket    = 93, /* ] */
+    GraveAccent = 96, /* ` */
+
+    World1 = 161, /* non-US #1 */
+    World2 = 162, /* non-US #2 */
+
+    /* Function keys */
+    Escape      = 256,
+    Enter       = 257,
+    Tab         = 258,
+    Backspace   = 259,
+    Insert      = 260,
+    Delete      = 261,
+    Right       = 262,
+    Left        = 263,
+    Down        = 264,
+    Up          = 265,
+    PageUp      = 266,
+    PageDown    = 267,
+    Home        = 268,
+    End         = 269,
+    CapsLock    = 280,
+    ScrollLock  = 281,
+    NumLock     = 282,
+    PrintScreen = 283,
+    Pause       = 284,
+    F1          = 290,
+    F2          = 291,
+    F3          = 292,
+    F4          = 293,
+    F5          = 294,
+    F6          = 295,
+    F7          = 296,
+    F8          = 297,
+    F9          = 298,
+    F10         = 299,
+    F11         = 300,
+    F12         = 301,
+    F13         = 302,
+    F14         = 303,
+    F15         = 304,
+    F16         = 305,
+    F17         = 306,
+    F18         = 307,
+    F19         = 308,
+    F20         = 309,
+    F21         = 310,
+    F22         = 311,
+    F23         = 312,
+    F24         = 313,
+    F25         = 314,
+
+    /* Keypad */
+    KP0        = 320,
+    KP1        = 321,
+    KP2        = 322,
+    KP3        = 323,
+    KP4        = 324,
+    KP5        = 325,
+    KP6        = 326,
+    KP7        = 327,
+    KP8        = 328,
+    KP9        = 329,
+    KPDecimal  = 330,
+    KPDivide   = 331,
+    KPMultiply = 332,
+    KPSubtract = 333,
+    KPAdd      = 334,
+    KPEnter    = 335,
+    KPEqual    = 336,
+
+    LShift   = 340,
+    LControl = 341,
+    LAlt     = 342,
+    LSuper   = 343,
+    RShift   = 344,
+    RControl = 345,
+    RAlt     = 346,
+    RSuper   = 347,
+    Menu     = 348
+};
+
+enum class MouseCode
+{
+    Button0 = 0,
+    Button1 = 1,
+    Button2 = 2,
+    Button3 = 3,
+    Button4 = 4,
+    Button5 = 5,
+    Button6 = 6,
+    Button7 = 7,
+
+    ButtonLast   = Button7,
+    ButtonLeft   = Button0,
+    ButtonRight  = Button1,
+    ButtonMiddle = Button2
 };
 
 } // namespace clem

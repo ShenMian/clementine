@@ -356,12 +356,6 @@ void Viewport::updateCamera(Time dt)
     forwardShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
 }
 
-bool isKeyPressed(int key)
-{
-    auto win = Main::getWindow();
-    return glfwGetKey((GLFWwindow*)win->nativeHandle(), key) == GLFW_PRESS;
-}
-
 void Viewport::updateCameraControl(Time dt)
 {
     if(!ImGui::IsWindowHovered())
@@ -369,56 +363,56 @@ void Viewport::updateCameraControl(Time dt)
 
     float speed = 40 * dt.seconds();
 
-    if(isKeyPressed(GLFW_KEY_LEFT_SHIFT))
+    if(Input::isPressed(KeyCode::LShift))
         speed *= 3;
 
 #if 0
-    if(isKeyPressed(GLFW_KEY_W))
+    if(Input::isKeyPressed(KeyCode::W))
         camera.view.translation += Matrix4(camera.view).forword().normalize() * speed;
-    if(isKeyPressed(GLFW_KEY_S))
+    if(Input::isKeyPressed(KeyCode::S))
         camera.view.translation += Matrix4(camera.view).back().normalize() * speed;
-    if(isKeyPressed(GLFW_KEY_A))
+    if(Input::isKeyPressed(KeyCode::A))
         camera.view.translation += Matrix4(camera.view).left().normalize() * speed;
-    if(isKeyPressed(GLFW_KEY_D))
+    if(Input::isKeyPressed(KeyCode::D))
         camera.view.translation += Matrix4(camera.view).right().normalize() * speed;
-    if(isKeyPressed(GLFW_KEY_E))
+    if(Input::isKeyPressed(KeyCode::E))
         camera.view.translation += Matrix4(camera.view).up().normalize() * speed;
-    if(isKeyPressed(GLFW_KEY_Q))
+    if(Input::isKeyPressed(KeyCode::Q))
         camera.view.translation += Matrix4(camera.view).down().normalize() * speed;
 #else
-    if(isKeyPressed(GLFW_KEY_W))
+    if(Input::isPressed(KeyCode::W))
         camera.view.translation += -Vector3::unit_z * speed;
-    if(isKeyPressed(GLFW_KEY_S))
+    if(Input::isPressed(KeyCode::S))
         camera.view.translation += Vector3::unit_z * speed;
-    if(isKeyPressed(GLFW_KEY_A))
+    if(Input::isPressed(KeyCode::A))
         camera.view.translation += -Vector3::unit_x * speed;
-    if(isKeyPressed(GLFW_KEY_D))
+    if(Input::isPressed(KeyCode::D))
         camera.view.translation += Vector3::unit_x * speed;
-    if(isKeyPressed(GLFW_KEY_E))
+    if(Input::isPressed(KeyCode::E))
         camera.view.translation += -Vector3::unit_y * speed;
-    if(isKeyPressed(GLFW_KEY_Q))
+    if(Input::isPressed(KeyCode::Q))
         camera.view.translation += Vector3::unit_y * speed;
 #endif
 
-    if(isKeyPressed(GLFW_KEY_LEFT))
+    if(Input::isPressed(KeyCode::Left))
         camera.view.rotation.y += -0.5;
-    else if(isKeyPressed(GLFW_KEY_RIGHT))
+    else if(Input::isPressed(KeyCode::Right))
         camera.view.rotation.y += 0.5;
-    else if(isKeyPressed(GLFW_KEY_UP))
+    else if(Input::isPressed(KeyCode::Up))
         camera.view.rotation.x += -0.5;
-    else if(isKeyPressed(GLFW_KEY_DOWN))
+    else if(Input::isPressed(KeyCode::Down))
         camera.view.rotation.x += 0.5;
 
-    if(isKeyPressed(GLFW_KEY_W))
+    if(Input::isPressed(KeyCode::W))
         camera.view_.translate(Vector3::unit_z * speed);
 
     Vector3 pos = camera.view_.translate();
 
     camera.view_.translate(camera.view_.translate() - pos);
 
-    if(isKeyPressed(GLFW_KEY_LEFT))
+    if(Input::isPressed(KeyCode::Left))
         camera.view_.rotateY(radians(0.5));
-    if(isKeyPressed(GLFW_KEY_RIGHT))
+    if(Input::isPressed(KeyCode::Right))
         camera.view_.rotateY(radians(-0.5));
 
     camera.view_.translate(pos);

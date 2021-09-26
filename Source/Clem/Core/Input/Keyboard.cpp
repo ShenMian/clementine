@@ -17,6 +17,7 @@
 
 namespace clem
 {
+
 std::unordered_map<Keyboard::Key, bool> Keyboard::states;
 
 bool Keyboard::getState(Key k)
@@ -119,4 +120,5 @@ void Keyboard::deinit()
 }
 
 #endif
+
 } // namespace clem
