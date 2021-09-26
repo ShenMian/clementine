@@ -43,7 +43,7 @@ public:
         // model.add<Model>("../../../3DModel/weapon/steampunk_handgun/scene.gltf");
         // model.add<Model>("../../../3DModel/weapon/makarov_pm/scene.gltf");
 
-#if 0
+#if 1
         model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf");
         // model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj");
         model.get<Transform>().translation = {0, 0, -90};

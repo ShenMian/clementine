@@ -41,7 +41,7 @@ void Viewport::attach()
     win->onMouseMove = [this](double x, double y)
     {
         const float    sensitivity = 0.05;
-        static auto    speed = Vector2::unit * 1;
+        static auto    speed       = Vector2::unit * 1;
         static Vector2 last;
 
         if(!locked || !ImGui::IsMouseDown(ImGuiMouseButton_Right))
@@ -71,7 +71,7 @@ void Viewport::attach()
         front.z = std::sin(radians(yaw)) * std::cos(radians(pitch));
         front.normalize();
 
-        camera.view.rotation = {-pitch, yaw, 0.f};
+        camera.view.rotation = {-pitch, -yaw, 0.f};
 
         // camera.setDirection(camera.view.translate(), front);
         // camera.lookAt(camera.view.translate(), camera.view.translate() + front);
@@ -98,8 +98,8 @@ void Viewport::attach()
     pointLights[1].setIntesity(1.f);
     pointLights[1].setPosition({-5, 5, 0});
 
-    dirLights.clear();
-    // pointLights.clear();
+    // dirLights.clear();
+    pointLights.clear();
 }
 
 void Viewport::update(Time dt)
@@ -126,60 +126,71 @@ void Viewport::update(Time dt)
 
     ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
 
-    ImGui::Text("CAM: POS(%.3f,%.3f,%.3f) DIR(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z,
-                Matrix4(camera.view).forword().normalize().x, Matrix4(camera.view).forword().normalize().y, Matrix4(camera.view).forword().normalize().z);
-    
-    // 辅助线框
-    auto& entity = Properties::entity;
-    if(entity.valid() && entity.anyOf<Transform>())
+    if(status == Status::Stopping)
     {
-        ImGuizmo::SetOrthographic(false);
-        ImGuizmo::SetDrawlist();
+        updateCamera(dt);
 
-        const auto pos  = ImGui::GetWindowPos();
-        const auto size = ImGui::GetWindowSize();
-        ImGuizmo::SetRect(pos.x, pos.y, size.x, size.y); // FIXME
-
-        auto& transform = entity.get<Transform>();
-
-        const auto& view  = camera.getViewMatrix();
-        const auto& proj  = camera.getProjectionMatrix();
-        Matrix4     model = transform.getModelMatrix();
-
-        ImGuizmo::Manipulate(view.data(), proj.data(), ImGuizmo::OPERATION::TRANSLATE, ImGuizmo::LOCAL, model.data());
-
-        if(ImGuizmo::IsUsing())
+        // 辅助线框
+        auto& entity = Properties::entity;
+        if(entity.valid() && entity.anyOf<Transform>())
         {
-            // FIXME: 完善旋转
-            Vector3 a;
-            ImGuizmo::DecomposeMatrixToComponents(model.data(), transform.translation.data(), a.data(), transform.scale.data());   
+            ImGuizmo::SetOrthographic(false);
+            ImGuizmo::SetDrawlist();
+
+            const auto pos  = ImGui::GetWindowPos();
+            const auto size = ImGui::GetWindowSize();
+            // ImGuizmo::SetRect(pos.x, pos.y, size.x, size.y);
+            ImGuizmo::SetRect(viewportPos.x, viewportPos.y, viewportSize.x, viewportSize.y);
+
+            auto& transform = entity.get<Transform>();
+
+            const auto& view  = camera.getViewMatrix();
+            const auto& proj  = camera.getProjectionMatrix();
+            Matrix4     model = transform.getModelMatrix();
+
+            ImGuizmo::Manipulate(view.data(), proj.data(), ImGuizmo::OPERATION::TRANSLATE, ImGuizmo::LOCAL, model.data());
+
+            if(ImGuizmo::IsUsing())
+            {
+                // FIXME: 完善旋转
+                Vector3 a;
+                ImGuizmo::DecomposeMatrixToComponents(model.data(), transform.translation.data(), a.data(), transform.scale.data());
+            }
         }
+
+        if(ImGui::IsWindowHovered())
+        {
+            hovered = true;
+
+// FIXME: 会使窗口失去焦点, 导致辅助线框无法使用
+#if 0
+            // 鼠标选取
+            if(ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+            {
+                Vector2 mouse = {ImGui::GetMousePos().x - viewportPos.x, ImGui::GetMousePos().y - viewportPos.y};
+
+                int id;
+                framebuffer->readColorAttachment(1, mouse, id); // FIXME
+                Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
+            }
+#endif
+
+            // 鼠标右键是否按下
+            locked = ImGui::IsMouseDown(ImGuiMouseButton_Right);
+        }
+        else
+            hovered = false;
+
+        // TODO: 临时相机信息, 当相机作为组件后移除
+        ImGui::Text("CAM: POS(%.3f,%.3f,%.3f) DIR(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z,
+                    Matrix4(camera.view).forword().normalize().x, Matrix4(camera.view).forword().normalize().y, Matrix4(camera.view).forword().normalize().z);
+
     }
+
+    // ImGui::Text("POS(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z);
+    // ImGui::Text("DIR(%.3f,%.3f,%.3f)", Matrix4(camera.view).forword().normalize().x, Matrix4(camera.view).forword().normalize().y, Matrix4(camera.view).forword().normalize().z);
 
     toolbar();
-
-    if(ImGui::IsWindowHovered())
-    {
-        hovered = true;
-
-        // FIXME: 会使窗口失去焦点, 导致辅助线框无法使用
-        #if 0
-        // 鼠标选取
-        if(ImGui::IsMouseClicked(ImGuiMouseButton_Left))
-        {
-            Vector2 mouse = {ImGui::GetMousePos().x - viewportPos.x, ImGui::GetMousePos().y - viewportPos.y};
-
-            int id;
-            framebuffer->readColorAttachment(1, mouse, id); // FIXME
-            Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
-        }
-        #endif
-
-        // 鼠标右键是否按下
-        locked = ImGui::IsMouseDown(ImGuiMouseButton_Right);
-    }
-    else
-        hovered = false;
 
     ImGui::End();
 }
@@ -190,7 +201,6 @@ void Viewport::render(Time dt)
 
     updateLight(dt);
     updateShadow(dt);
-    updateCamera(dt);
 
     const auto size = framebuffer->getSize();
     Renderer::get()->setViewport(0, 0, size.x, size.y);
@@ -200,6 +210,51 @@ void Viewport::render(Time dt)
     Main::registry.each<Model>([&](const Entity& e)
                                { Renderer::get()->submit(e); });
     framebuffer->unbind();
+}
+
+void Viewport::toolbar()
+{
+    static auto playIcon = Texture2D::create("../assets/textures/icons/play_button.png");
+    static auto stopIcon = Texture2D::create("../assets/textures/icons/stop_button.png");
+
+    ImGui::Begin("##toolbar", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+
+    // 开始/结束 按钮
+    float                      size = ImGui::GetWindowHeight() - 4.0f;
+    std::shared_ptr<Texture2D> icon = status == Status::Stopping ? playIcon : stopIcon;
+    ImGui::SetCursorPosX((ImGui::GetWindowContentRegionMax().x * 0.5f) - (size * 0.5f));
+
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 2));
+    ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, ImVec2(0, 0));
+    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+    auto&       colors        = ImGui::GetStyle().Colors;
+    const auto& buttonHovered = colors[ImGuiCol_ButtonHovered];
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(buttonHovered.x, buttonHovered.y, buttonHovered.z, 0.5f));
+    const auto& buttonActive = colors[ImGuiCol_ButtonActive];
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(buttonActive.x, buttonActive.y, buttonActive.z, 0.5f));
+
+    if(ImGui::ImageButton((ImTextureID)icon->getHandle(), ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1), 0))
+    {
+        if(status == Status::Playing)
+            stopScene();
+        else
+            playScene();
+    }
+
+    ImGui::PopStyleVar(2);
+    ImGui::PopStyleColor(3);
+
+    ImGui::End();
+}
+
+void Viewport::playScene()
+{
+    status = Status::Playing;
+}
+
+void Viewport::stopScene()
+{
+    status = Status::Stopping;
 }
 
 void Viewport::onResize(float x, float y)
@@ -285,36 +340,6 @@ void Viewport::updateCamera(Time dt)
     standardShader->uploadUniform("u_view", camera.getViewMatrix());
     standardShader->uploadUniform("u_projection", camera.getProjectionMatrix());
     standardShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
-}
-
-void Viewport::toolbar()
-{
-    static auto playIcon = Texture2D::create("../assets/textures/icons/play_button.png");
-    static auto stopIcon = Texture2D::create("../assets/textures/icons/stop_button.png");
-
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 2));
-    ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, ImVec2(0, 0));
-    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
-    auto&       colors        = ImGui::GetStyle().Colors;
-    const auto& buttonHovered = colors[ImGuiCol_ButtonHovered];
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(buttonHovered.x, buttonHovered.y, buttonHovered.z, 0.5f));
-    const auto& buttonActive = colors[ImGuiCol_ButtonActive];
-    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(buttonActive.x, buttonActive.y, buttonActive.z, 0.5f));
-
-    ImGui::Begin("##toolbar", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
-    float                      size = ImGui::GetWindowHeight() - 4.0f;
-    std::shared_ptr<Texture2D> icon = status == Status::Stopping ? playIcon : stopIcon;
-    ImGui::SetCursorPosX((ImGui::GetWindowContentRegionMax().x * 0.5f) - (size * 0.5f));
-    if(ImGui::ImageButton((ImTextureID)icon->getHandle(), ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1), 0))
-    {
-        if(status == Status::Playing)
-            status = Status::Stopping;
-        else
-            status = Status::Playing;
-    }
-    ImGui::PopStyleVar(2);
-    ImGui::PopStyleColor(3);
-    ImGui::End();
 }
 
 bool isKeyPressed(int key)

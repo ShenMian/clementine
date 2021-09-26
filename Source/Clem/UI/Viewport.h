@@ -32,13 +32,15 @@ public:
 
 private:
     void render(Time dt);
+    void toolbar();
+    void playScene();
+    void stopScene();
+
     void onResize(float x, float y);
     void updateCameraControl(Time dt);
     void updateLight(Time dt);
     void updateShadow(Time dt);
     void updateCamera(Time dt);
-
-    void toolbar();
 
     Status status = Status::Stopping;
 
