@@ -6,18 +6,18 @@
 
 struct Material
 {
-    vec3  ambient;
-    vec3  diffuse;
-    vec3  specular;
-    vec3  emission;
-    float shininess;
-    
-    sampler2D albedo;
-    sampler2D metallic;
-    sampler2D roughness;
-    sampler2D ao;
-    sampler2D emissive;
-    sampler2D normal;
+  vec3  ambient;
+  vec3  diffuse;
+  vec3  specular;
+  vec3  emission;
+  float shininess;
+  
+  sampler2D albedo;
+  sampler2D metallic;
+  sampler2D roughness;
+  sampler2D ao;
+  sampler2D emissive;
+  sampler2D normal;
 };
 
 layout(location = 0) out vec3 position;
