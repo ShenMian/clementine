@@ -14,4 +14,19 @@ GBuffer::GBuffer(const Size2i& size)
     framebuffer = FrameBuffer::create(size, textures);
 }
 
+void GBuffer::bind()
+{
+    framebuffer->bind();
+}
+
+void GBuffer::unbind()
+{
+    framebuffer->unbind();
+}
+
+std::shared_ptr<Texture2D> GBuffer::getTexture(int i)
+{
+    return textures[i];
+}
+
 } // namespace clem

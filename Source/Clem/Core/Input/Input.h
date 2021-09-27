@@ -21,8 +21,9 @@ enum class MouseCode;
 class Input
 {
 public:
-    static bool isPressed(KeyCode code);
-    static bool isPressed(MouseCode code);
+    static bool    isPressed(KeyCode code);
+    static bool    isPressed(MouseCode code);
+    static Vector2 getMousePosition();
 };
 
 enum class KeyCode

@@ -63,6 +63,11 @@ public:
 	 */
     Point2i getPoint2i(const Point2i& min, const Point2i& max);
 
+    /**
+	 * @brief 生成指定范围内的随机三维点.
+	 */
+    Point3 getPoint3(const Point3& min, const Point3& max);
+
 private:
     std::mt19937 generator;
 };

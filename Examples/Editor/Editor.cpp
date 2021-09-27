@@ -37,7 +37,7 @@ public:
         auto model                      = Main::registry.create("model");
         model.add<Transform>().rotation = {0, 90, 0};
 
-#if 1
+#if 0
         model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf");
         // model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj");
         model.get<Transform>().translation = {0, 0, -90};
@@ -54,7 +54,7 @@ public:
         model.get<Transform>().scale = {0.07, 0.07, 0.07};
 #endif
 
-        // model.add<Model>("../../../3DModel/scene/San_Miguel/san-miguel-low-poly.obj", true);
+        model.add<Model>("../../../3DModel/scene/San_Miguel/san-miguel-low-poly.obj", true);
     }
 
 private:
@@ -91,6 +91,7 @@ private:
         skybox.add<Model>("../assets/models/cube.obj");
         skybox.add<Material>().albedo = skyboxTexture;
 #endif
+        skybox.add<Transform>();
     }
 };
 

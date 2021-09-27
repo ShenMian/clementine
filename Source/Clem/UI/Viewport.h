@@ -19,7 +19,7 @@ namespace clem::ui
 class Viewport : public Layer
 {
 public:
-    enum Status
+    enum class Status
     {
         Playing,
         Stopping

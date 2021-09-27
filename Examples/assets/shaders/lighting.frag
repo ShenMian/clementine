@@ -4,6 +4,46 @@
 
 #version 450
 
+#define DIRECTION_LIGHT_MAX 8
+#define POINT_LIGHT_MAX     16
+#define SPOT_LIGHT_MAX      16
+
+struct DirectionLight
+{
+    vec3  color;
+    float intesity;
+
+    vec3 direction;
+};
+
+struct PointLight
+{
+    vec3  color;
+    float intesity;
+
+    vec3 position;
+
+    float constant;
+    float linear;
+    float quadratic;
+};
+
+struct SpotLight
+{
+    vec3  color;
+    float intesity;
+
+    vec3 position;
+    vec3 direction;
+
+    float constant;
+    float linear;
+    float quadratic;
+
+    float cutOff;
+    float outerCutOff;
+};
+
 struct Material
 {
     vec3  ambient;
@@ -24,21 +64,29 @@ layout(location = 0) out vec4 frag_color;
 
 in vec2 v_uv;
 
+uniform int            u_direction_lights_size;
+uniform DirectionLight u_direction_lights[DIRECTION_LIGHT_MAX];
+uniform int            u_point_lights_size;
+uniform PointLight     u_point_lights[POINT_LIGHT_MAX];
+uniform int            u_spot_lights_size;
+uniform SpotLight      u_spot_lights[SPOT_LIGHT_MAX];
+
 uniform sampler2D u_position;
 uniform sampler2D u_normal;
 uniform sampler2D u_albedo_spec;
 uniform Material  u_material;
+uniform vec3      u_dir_to_cam;
 
-vec4 CalcLighting();
+vec4 CalcLighting(vec3 position, vec3 normal);
 
 void main()
 {
-  vec3  position = texture(position, v_uv).rgb;
-  vec3  normal   = texture(normal, v_uv).rgb;
-  vec3  dlbedo   = texture(albedo_spec, v_uv).rgb;
-  float specular = texture(albedo_spec, v_uv).r;
+    vec3  position = texture(u_position, v_uv).rgb;
+    vec3  normal   = texture(u_normal, v_uv).rgb;
+    vec3  albedo   = texture(u_albedo_spec, v_uv).rgb;
+    float specular = texture(u_albedo_spec, v_uv).r;
 
-  frag_color = vec4(CalcLighting(), 1.0);
+    frag_color = CalcLighting(position, normal);
 }
 
 // 计算平行光照
@@ -69,42 +117,35 @@ vec3 CalcDirLight(DirectionLight light, vec3 normal)
     const vec3  specular_color  = vec3(0.0);
 #endif
     const vec3  reflected_dir   = reflect(-dir_to_light, normal);
-    const float specular_amount = pow(max(dot(reflected_dir, v_dir_to_cam), 0.0), shininess);
+    const float specular_amount = pow(max(dot(reflected_dir, u_dir_to_cam), 0.0), shininess);
     const vec3  specular        = ks * light.color * specular_amount * specular_color;
 
     // 放射光
     const vec3 emissive = u_material.emission * texture(u_material.emissive, v_uv).rgb;
-    
-    const vec3 shadow = CalcShadow();
 
-    return ambient + (shadow * (diffuse + specular)) + emissive;
+    return ambient + diffuse + specular + emissive;
 }
 
 // 计算点光源光照
-vec3 CalcPointLight(PointLight light, vec3 normal)
+vec3 CalcPointLight(PointLight light, vec3 position, vec3 normal)
 {
-    const vec3 dir_to_light = normalize(light.position - v_position);
-
-    // FIXME: 临时调试用
-    light.constant  = 1.0;
-    light.linear    = 0.09;
-    light.quadratic = 0.032;
+    const vec3 dir_to_light = normalize(light.position - position);
 
     // 衰减率
-    const float distance    = length(light.position - v_position);
+    const float distance    = length(light.position - position);
     const float attenuation = light.intesity / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
 
     DirectionLight dirLight;
     dirLight.color     = light.color;
     dirLight.intesity  = light.intesity;
     dirLight.direction = -dir_to_light;
-    return CalcDirLight(dirLight, normal) * attenuation; // FIXME
+    return CalcDirLight(dirLight, normal) * attenuation;
 }
 
 // 计算聚光灯光照
-vec3 CaclSpotLight(SpotLight light, vec3 normal)
+vec3 CaclSpotLight(SpotLight light, vec3 position, vec3 normal)
 {
-    const vec3 dir_to_light = normalize(light.position - v_position);
+    const vec3 dir_to_light = normalize(light.position - position);
 
     const float theta     = dot(dir_to_light, normalize(-light.direction)); 
     const float epsilon   = light.cutOff - light.outerCutOff;
@@ -118,18 +159,18 @@ vec3 CaclSpotLight(SpotLight light, vec3 normal)
     pointLight.linear    = light.linear;
     pointLight.quadratic = light.quadratic;
 
-    return CalcPointLight(pointLight, normal) * intensity;
+    return CalcPointLight(pointLight, position, normal) * intensity;
 }
 
 // 计算总光照
-vec4 CalcLighting()
+vec4 CalcLighting(vec3 position, vec3 normal)
 {
     vec3 light;
     for(int i = 0; i < u_direction_lights_size; ++i)
-        light += CalcDirLight(u_direction_lights[i], v_normal);
+        light += CalcDirLight(u_direction_lights[i], normal);
     for(int i = 0; i < u_point_lights_size; ++i)
-        light += CalcPointLight(u_point_lights[i], v_normal);
+        light += CalcPointLight(u_point_lights[i], position, normal);
     for(int i = 0; i < u_spot_lights_size; ++i)
-        light += CaclSpotLight(u_spot_lights[i], v_normal);
+        light += CaclSpotLight(u_spot_lights[i], position, normal);
     return vec4(light, 1.0);
 }

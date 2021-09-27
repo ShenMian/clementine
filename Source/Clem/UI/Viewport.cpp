@@ -17,8 +17,8 @@ namespace clem::ui
 
 void Viewport::attach()
 {
-    // geomertyPass = Shader::create("geometry");
-    // lightingPass = Shader::create("lighting");
+    geomertyPass = Shader::create("geometry");
+    lightingPass = Shader::create("lighting");
 
     forwardShader = Shader::create("forward");
     shadowShader  = Shader::create("shadow");
@@ -93,13 +93,14 @@ void Viewport::attach()
     dirLights[0].setIntesity(2.f);
     dirLights[0].setDirection({-0.5, -1, -0.5});
 
-    pointLights.resize(2);
-    pointLights[0].setColor({1, 0, 0});
-    pointLights[0].setIntesity(1.f);
-    pointLights[0].setPosition({5, 5, 0});
-    pointLights[1].setColor({0, 1, 0});
-    pointLights[1].setIntesity(1.f);
-    pointLights[1].setPosition({-5, 5, 0});
+    Random random;
+    pointLights.resize(16);
+    for(size_t i = 0; i < 16; i++)
+    {
+        pointLights[i].setColor(random.getPoint3({0, 0, 0}, {1, 1, 1}));
+        pointLights[i].setIntesity(1.f);
+        pointLights[i].setPosition(random.getPoint3({-100, 0, -100}, {100, 100, 100}));
+    }
 
     // dirLights.clear();
     pointLights.clear();
@@ -127,8 +128,11 @@ void Viewport::update(Time dt)
 
     framebuffer->clearColorAttachment(1, -1);
 
-    // deferredRender(dt);
+#if 0
+    deferredRender(dt);
+#else
     forwardRender(dt);
+#endif
 
     ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
 
@@ -178,7 +182,7 @@ void Viewport::update(Time dt)
             Vector2 mouse = {ImGui::GetMousePos().x - viewportPos.x, ImGui::GetMousePos().y - viewportPos.y};
 
             int id;
-            framebuffer->readColorAttachment(1, mouse, id); // FIXME
+            framebuffer->readColorAttachment(1, mouse, id);
             Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
         }
 
@@ -200,11 +204,30 @@ void Viewport::update(Time dt)
 
 void Viewport::deferredRender(Time dt)
 {
+    // 几何处理阶段
+    gbuffer.bind();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     geomertyPass->bind();
+    geomertyPass->uploadUniform("u_view", camera.getViewMatrix());
+    geomertyPass->uploadUniform("u_projection", camera.getProjectionMatrix());
+    geomertyPass->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
+    Main::registry.each<Model>([&](const Entity& e)
+                               {
+                                   auto& tf    = e.get<Transform>();
+                                   auto& model = e.get<Model>();
+                                   geomertyPass->uploadUniform("u_model", tf.getModelMatrix());
+                                   Renderer::get()->submit(e, geomertyPass);
+                               });
+    gbuffer.unbind();
 
+    // 光照阶段
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     lightingPass->bind();
+    gbuffer.getTexture(0)->bind(0);
     lightingPass->uploadUniform("position", 0);
+    gbuffer.getTexture(1)->bind(1);
     lightingPass->uploadUniform("normal", 1);
+    gbuffer.getTexture(2)->bind(2);
     lightingPass->uploadUniform("albedo_spec", 2);
     uploadLights(lightingPass);
 }
@@ -291,6 +314,7 @@ void Viewport::uploadLights(std::shared_ptr<Shader> shader)
         const auto name = "u_direction_lights[" + std::to_string(i) + "].";
         shader->uploadUniform(name + "color", dirLights[i].getColor());
         shader->uploadUniform(name + "intesity", dirLights[i].getIntesity());
+
         shader->uploadUniform(name + "direction", dirLights[i].getDirection());
     }
 
@@ -300,7 +324,12 @@ void Viewport::uploadLights(std::shared_ptr<Shader> shader)
         const auto name = "u_point_lights[" + std::to_string(i) + "].";
         shader->uploadUniform(name + "color", pointLights[i].getColor());
         shader->uploadUniform(name + "intesity", pointLights[i].getIntesity());
+
         shader->uploadUniform(name + "position", pointLights[i].getPosition());
+
+        shader->uploadUniform(name + "constant", 1.0f);
+        shader->uploadUniform(name + "linear", 0.09f);
+        shader->uploadUniform(name + "quadratic", 0.032f);
     }
 
     shader->uploadUniform("u_spot_lights_size", (int)spotLights.size());
@@ -309,8 +338,13 @@ void Viewport::uploadLights(std::shared_ptr<Shader> shader)
         const auto name = "u_spot_lights[" + std::to_string(i) + "].";
         shader->uploadUniform(name + "color", spotLights[i].getColor());
         shader->uploadUniform(name + "intesity", spotLights[i].getIntesity());
+
         shader->uploadUniform(name + "direction", spotLights[i].getDirection());
         shader->uploadUniform(name + "position", spotLights[i].getPosition());
+
+        shader->uploadUniform(name + "constant", 1.0f);
+        shader->uploadUniform(name + "linear", 0.09f);
+        shader->uploadUniform(name + "quadratic", 0.032f);
     }
 }
 

@@ -22,6 +22,11 @@ public:
 
     GBuffer(const Size2i& size);
 
+    void bind();
+    void unbind();
+
+    std::shared_ptr<Texture2D> getTexture(int i);
+
 private:
     std::vector<std::shared_ptr<Texture2D>> textures;
     std::shared_ptr<FrameBuffer>            framebuffer;

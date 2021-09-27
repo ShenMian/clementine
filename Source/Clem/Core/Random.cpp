@@ -47,4 +47,9 @@ Point2i Random::getPoint2i(const Point2i& min, const Point2i& max)
     return Point2i(getInt32(min.x, max.x), getInt32(min.y, max.y));
 }
 
+Point3 Random::getPoint3(const Point3& min, const Point3& max)
+{
+    return Point3(getFloat(min.x, max.x), getFloat(min.y, max.y), getFloat(min.z, max.z));
+}
+
 } // namespace clem
