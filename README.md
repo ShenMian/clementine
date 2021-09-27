@@ -21,10 +21,6 @@ Features
 - Lightweight.
 - Multi-platform: Windows, Linux, macOS.
 
-Goals
------
-Make the framework as simple as possible and reduce the mental burden of users.
-
 Documentation
 -------------
 - **[Github Wiki]**
