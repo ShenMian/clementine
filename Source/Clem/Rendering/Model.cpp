@@ -302,6 +302,8 @@ void Model::loadGltf(const std::filesystem::path& path, bool compress)
                 else if(attr.first == "TEXCOORD_0")
                     for(size_t i = 0; i < accessor.count; i++)
                         vertices[i].uv = reinterpret_cast<const Vector2*>(data.data())[i];
+                else if(attr.first == "TANGENT")
+                    ;
             }
 
             {

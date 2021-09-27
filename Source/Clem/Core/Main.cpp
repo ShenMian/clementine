@@ -253,7 +253,10 @@ void Main::init()
 
     Logger::init();
 
-    // Renderer::setAPI(Renderer::API::Vulkan);
+    Configuration::load();
+    Configuration::save();
+
+    Renderer::setAPI(Renderer::API::OpenGL);
 
     // 初始化窗口库
     WindowBase::init();

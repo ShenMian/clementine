@@ -26,9 +26,9 @@ void Viewport::attach()
 
     auto win = Main::getWindow();
 
-    win->setSync(false);
+    win->setSync(Configuration::sync);
 
-    win->onScroll = [this](double xOfffset, double yOffset)
+    win->onScroll = [this](double xOffset, double yOffset)
     {
         if(!hovered)
             return;
