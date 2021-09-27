@@ -21,8 +21,19 @@ enum class MouseCode;
 class Input
 {
 public:
-    static bool    isPressed(KeyCode code);
-    static bool    isPressed(MouseCode code);
+    /**
+	 * @brief 检测键盘按键是否按下.
+	 */
+    static bool isPressed(KeyCode code);
+
+    /**
+	 * @brief 检测鼠标按键是否按下.
+	 */
+    static bool isPressed(MouseCode code);
+
+    /**
+	 * @brief 获取鼠标相对窗口的坐标.
+	 */
     static Vector2 getMousePosition();
 };
 

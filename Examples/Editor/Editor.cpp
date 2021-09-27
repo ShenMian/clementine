@@ -43,7 +43,7 @@ public:
         model.get<Transform>().translation = {0, 0, -90};
 #endif
 
-#if 0
+#if 1
         model.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj", true);
         model.get<Transform>().scale = {0.1, 0.1, 0.1};
 #endif
@@ -54,7 +54,7 @@ public:
         model.get<Transform>().scale = {0.07, 0.07, 0.07};
 #endif
 
-        model.add<Model>("../../../3DModel/scene/San_Miguel/san-miguel-low-poly.obj", true);
+        // model.add<Model>("../../../3DModel/scene/San_Miguel/san-miguel-low-poly.obj", true);
     }
 
 private:

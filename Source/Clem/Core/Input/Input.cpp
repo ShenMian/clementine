@@ -26,9 +26,11 @@ bool Input::isPressed(MouseCode code)
 Vector2 Input::getMousePosition()
 {
     auto* handle = static_cast<GLFWwindow*>(Main::getWindow()->nativeHandle());
-    double x, y;
-    glfwGetCursorPos(handle, &x, &y);
-    return {(float)x, (float)y};
+    double mouseX, mouseY;
+    int    winX, winY;
+    glfwGetWindowPos(handle, &winX, &winY);
+    glfwGetCursorPos(handle, &mouseX, &mouseY);
+    return {(float)(mouseX - winX), (float)(mouseY - winY)};
 }
 
 } // namespace clem
