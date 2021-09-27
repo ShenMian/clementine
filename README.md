@@ -41,9 +41,6 @@ Contact
 Screenshots
 -----------
 ![Current](Docs/pictures/current.png)
-![Pong](Docs/pictures/pong.png)
-![Minesweeper](Docs/pictures/minesweeper.png)
-![Sort](Docs/pictures/sort.gif)
 **[More...](Docs/pictures)**
 
 [cn]:                  README-cn.md

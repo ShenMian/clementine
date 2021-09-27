@@ -41,9 +41,6 @@
 截图
 ----
 ![Current](Docs/pictures/current.png)
-![Pong](Docs/pictures/pong.png)
-![Minesweeper](Docs/pictures/minesweeper.png)
-![Sort](Docs/pictures/sort.gif)
 **[更多...](Docs/pictures)**
 
 [en]:                 README.md
