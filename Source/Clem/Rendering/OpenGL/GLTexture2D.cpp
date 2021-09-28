@@ -215,6 +215,7 @@ uint32_t GLTexture2D::GLInternalFormat(Format fmt)
 
     default:
         Assert::isTrue(false, "no corresponding GL internal format");
+        return 0;
     }
 }
 
@@ -236,6 +237,7 @@ uint32_t GLTexture2D::GLFormat(Format fmt)
 
     default:
         Assert::isTrue(false, "no corresponding GL format");
+        return 0;
     }
 }
 
