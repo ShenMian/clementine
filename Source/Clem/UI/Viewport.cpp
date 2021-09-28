@@ -90,20 +90,20 @@ void Viewport::attach()
 
     dirLights.resize(1);
     dirLights[0].setColor({255.f / 255.f, 244.f / 255.f, 214.f / 255.f});
-    dirLights[0].setIntesity(2.f);
+    dirLights[0].setIntesity(0.15f);
     dirLights[0].setDirection({-0.5, -1, -0.5});
 
     Random random;
-    pointLights.resize(16);
-    for(size_t i = 0; i < 16; i++)
+    pointLights.resize(8);
+    for(size_t i = 0; i < 8; i++)
     {
-        pointLights[i].setColor(random.getPoint3({0, 0, 0}, {1, 1, 1}));
+        pointLights[i].setColor(random.getVector3({0.5, 0.5, 0.5}, {1, 1, 1}));
         pointLights[i].setIntesity(1.f);
-        pointLights[i].setPosition(random.getPoint3({-100, 0, -100}, {100, 100, 100}));
+        pointLights[i].setPosition(random.getVector3({-30, 0, -30}, {30, 20, 30}));
     }
 
     // dirLights.clear();
-    pointLights.clear();
+    // pointLights.clear();
 }
 
 void Viewport::update(Time dt)
@@ -114,7 +114,7 @@ void Viewport::update(Time dt)
 
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{0, 0});
     ImGui::Begin("Viewport", &visible);
-    ImVec2 viewportPos = {ImGui::GetWindowPos().x - ImGui::GetCursorPos().x, ImGui::GetWindowPos().y - ImGui::GetCursorPos().y};
+    Vector2 viewportPos = {ImGui::GetWindowPos().x - ImGui::GetCursorPos().x, ImGui::GetWindowPos().y - ImGui::GetCursorPos().y};
     ImGui::PopStyleVar();
 
     // 窗口大小发生变化时, 调用 onResize()
@@ -142,60 +142,12 @@ void Viewport::update(Time dt)
         return;
     }
 
-    updateCamera(dt);
+    gizmos(viewportPos, viewportSize);
+    mousePicking(viewportPos);
 
-    // 辅助线框
-    auto& entity = Properties::entity;
-    if(entity.valid() && entity.anyOf<Transform>())
-    {
-        ImGuizmo::SetOrthographic(false);
-        ImGuizmo::SetDrawlist();
-
-        const auto pos  = ImGui::GetWindowPos();
-        const auto size = ImGui::GetWindowSize();
-        // ImGuizmo::SetRect(pos.x, pos.y, size.x, size.y);
-        ImGuizmo::SetRect(viewportPos.x, viewportPos.y, viewportSize.x, viewportSize.y);
-
-        auto& transform = entity.get<Transform>();
-
-        const auto& view  = camera.getViewMatrix();
-        const auto& proj  = camera.getProjectionMatrix();
-        Matrix4     model = transform.getModelMatrix();
-
-        ImGuizmo::Manipulate(view.data(), proj.data(), ImGuizmo::OPERATION::TRANSLATE, ImGuizmo::LOCAL, model.data());
-
-        if(ImGuizmo::IsUsing())
-        {
-            // FIXME: 完善旋转
-            Vector3 a;
-            ImGuizmo::DecomposeMatrixToComponents(model.data(), transform.translation.data(), a.data(), transform.scale.data());
-        }
-    }
-
-    if(ImGui::IsWindowHovered())
-    {
-        hovered = true;
-
-        // 鼠标选取
-        if(!ImGuizmo::IsOver() && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
-        {
-            Vector2 mouse = {ImGui::GetMousePos().x - viewportPos.x, ImGui::GetMousePos().y - viewportPos.y};
-
-            int id;
-            framebuffer->readColorAttachment(1, mouse, id);
-            Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
-        }
-
-        // 鼠标右键是否按下
-        locked = ImGui::IsMouseDown(ImGuiMouseButton_Right);
-    }
-    else
-        hovered = false;
-
-    // TODO: 临时相机信息, 当相机作为组件后移除
+    // TODO: 临时场景相机信息, 移动到 toolbar
     ImGui::Text("CAM: POS(%.3f,%.3f,%.3f) DIR(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z,
                 Matrix4(camera.view).forword().normalize().x, Matrix4(camera.view).forword().normalize().y, Matrix4(camera.view).forword().normalize().z);
-
     // ImGui::Text("POS(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z);
     // ImGui::Text("DIR(%.3f,%.3f,%.3f)", Matrix4(camera.view).forword().normalize().x, Matrix4(camera.view).forword().normalize().y, Matrix4(camera.view).forword().normalize().z);
 
@@ -238,6 +190,7 @@ void Viewport::forwardRender(Time dt)
 
     uploadLights(forwardShader);
     updateShadow(dt);
+    updateCamera(dt);
 
     const auto size = framebuffer->getSize();
     Renderer::get()->setViewport(0, 0, size.x, size.y);
@@ -282,6 +235,60 @@ void Viewport::toolbar()
     ImGui::PopStyleColor(3);
 
     ImGui::End();
+}
+
+void Viewport::gizmos(const Vector2& pos, const Vector2& size)
+{
+    // 辅助线框
+    auto& entity = Properties::entity;
+    if(entity.valid() && entity.anyOf<Transform>())
+    {
+        ImGuizmo::SetOrthographic(camera.getType() == Camera::Type::Orthographic);
+        ImGuizmo::SetDrawlist();
+
+        const auto pos  = ImGui::GetWindowPos();
+        const auto size = ImGui::GetWindowSize();
+        // ImGuizmo::SetRect(pos.x, pos.y, size.x, size.y);
+        ImGuizmo::SetRect(pos.x, pos.y, size.x, size.y);
+
+        auto& transform = entity.get<Transform>();
+
+        const auto& view  = camera.getViewMatrix();
+        const auto& proj  = camera.getProjectionMatrix();
+        Matrix4     model = transform.getModelMatrix();
+
+        ImGuizmo::Manipulate(view.data(), proj.data(), ImGuizmo::OPERATION::TRANSLATE, ImGuizmo::LOCAL, model.data());
+
+        if(ImGuizmo::IsUsing())
+        {
+            // FIXME: 完善旋转
+            Vector3 a;
+            ImGuizmo::DecomposeMatrixToComponents(model.data(), transform.translation.data(), a.data(), transform.scale.data());
+        }
+    }
+}
+
+void Viewport::mousePicking(const Vector2& pos)
+{
+    // 鼠标选取
+    if(ImGui::IsWindowHovered())
+    {
+        hovered = true;
+
+        if(!ImGuizmo::IsOver() && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+        {
+            Vector2 mouse = {ImGui::GetMousePos().x - pos.x, ImGui::GetMousePos().y - pos.y};
+
+            int id;
+            framebuffer->readColorAttachment(1, mouse, id);
+            Properties::entity = id == -1 ? Entity() : Entity(id, Main::registry);
+        }
+
+        // 鼠标右键是否按下
+        locked = ImGui::IsMouseDown(ImGuiMouseButton_Right);
+    }
+    else
+        hovered = false;
 }
 
 void Viewport::playScene()

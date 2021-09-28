@@ -34,6 +34,8 @@ private:
     void deferredRender(Time dt);
     void forwardRender(Time dt);
     void toolbar();
+    void gizmos(const Vector2& pos, const Vector2& size);
+    void mousePicking(const Vector2& pos);
     void playScene();
     void stopScene();
 

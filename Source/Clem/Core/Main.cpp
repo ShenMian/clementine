@@ -254,7 +254,6 @@ void Main::init()
     Logger::init();
 
     Configuration::load();
-    Configuration::save();
 
     Renderer::setAPI(Renderer::API::OpenGL);
 

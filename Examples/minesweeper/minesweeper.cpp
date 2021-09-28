@@ -89,7 +89,7 @@ public:
         memset(map, '0', sizeof(map));
         for(int i = 0; i < mine_num; i++)
         {
-            Point2i p = random.getPoint2i({0, 0}, {board_size.x - 1, board_size.y - 1});
+            Point2i p = random.getVector2i({0, 0}, {board_size.x - 1, board_size.y - 1});
             if(map[p.x][p.y] == '*')
             {
                 i--;

@@ -37,17 +37,17 @@ float Random::getFloat(float min, float max)
     return dist(generator);
 }
 
-Point2 Random::getPoint2(const Point2& min, const Point2& max)
+Point2 Random::getVector2(const Vector2& min, const Vector2& max)
 {
     return Point2(getFloat(min.x, max.x), getFloat(min.y, max.y));
 }
 
-Point2i Random::getPoint2i(const Point2i& min, const Point2i& max)
+Point2i Random::getVector2i(const Vector2i& min, const Vector2i& max)
 {
     return Point2i(getInt32(min.x, max.x), getInt32(min.y, max.y));
 }
 
-Point3 Random::getPoint3(const Point3& min, const Point3& max)
+Point3 Random::getVector3(const Vector3& min, const Vector3& max)
 {
     return Point3(getFloat(min.x, max.x), getFloat(min.y, max.y), getFloat(min.z, max.z));
 }

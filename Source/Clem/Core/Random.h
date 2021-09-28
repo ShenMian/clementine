@@ -55,18 +55,27 @@ public:
 
     /**
 	 * @brief 生成指定范围内的随机二维点.
+	 *
+	 * @param min 范围下限.
+	 * @param max 范围上限.
 	 */
-    Point2 getPoint2(const Point2& min, const Point2& max);
+    Point2 getVector2(const Vector2& min, const Vector2& max);
 
     /**
 	 * @brief 生成指定范围内的随机二维点.
+	 *
+	 * @param min 范围下限.
+	 * @param max 范围上限.
 	 */
-    Point2i getPoint2i(const Point2i& min, const Point2i& max);
+    Point2i getVector2i(const Vector2i& min, const Vector2i& max);
 
     /**
 	 * @brief 生成指定范围内的随机三维点.
+	 *
+	 * @param min 范围下限.
+	 * @param max 范围上限.
 	 */
-    Point3 getPoint3(const Point3& min, const Point3& max);
+    Point3 getVector3(const Vector3& min, const Vector3& max);
 
 private:
     std::mt19937 generator;

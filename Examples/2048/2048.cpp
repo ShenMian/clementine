@@ -95,7 +95,7 @@ public:
     {
         while(true)
         {
-            auto pos = random.getPoint2i({0, 0}, {3, 3});
+            auto pos = random.getVector2i({0, 0}, {3, 3});
             if(map[pos.x][pos.y] != 0)
                 continue;
             map[pos.x][pos.y] = nums[random.getUint32(0, (uint32_t)nums.size() - 1)];
