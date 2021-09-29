@@ -53,7 +53,7 @@ public:
     static std::shared_ptr<Shader> load(const std::string& name);
 
     static void                    unload(const std::string& name);
-    static void                    reload(const std::string& name);
+    static std::shared_ptr<Shader> reload(const std::string& name);
     static std::shared_ptr<Shader> get(const std::string& name);
 
     /**

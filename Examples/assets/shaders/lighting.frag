@@ -113,7 +113,7 @@ vec3 CalcDirLight(DirectionLight light, vec3 normal)
     const vec3  ks              = vec3(texture(u_material.metallic, v_uv).r) * vec3(light.intesity);
     const vec3  specular_color  = light.color;
     const vec3  reflected_dir   = reflect(-dir_to_light, normal);
-    const float specular_amount = pow(max(dot(reflected_dir, v_dir_to_cam), 0.0), shininess);
+    const float specular_amount = pow(max(dot(reflected_dir, u_dir_to_cam), 0.0), shininess);
     const vec3  specular        = ks * light.color * specular_amount * specular_color;
 
     // 放射光

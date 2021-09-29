@@ -33,9 +33,11 @@ public:
 private:
     void deferredRender(Time dt);
     void forwardRender(Time dt);
+    
     void toolbar();
     void gizmos();
     void mousePicking();
+
     void playScene();
     void stopScene();
 

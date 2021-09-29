@@ -192,8 +192,7 @@ void Viewport::forwardRender(Time dt)
     static auto lastWriteTime = writeTime;
     if(writeTime != lastWriteTime)
     {
-        Shader::reload("forward");
-        forwardShader = Shader::get("forward");
+        forwardShader = Shader::reload("forward");
         lastWriteTime = writeTime;
     }
 
@@ -313,11 +312,10 @@ void Viewport::stopScene()
 void Viewport::onResize(Size2 size)
 {
     // 重新生成相机投影矩阵
-#if 1
-    camera.setPerspective(radians(60), size.x / size.y, 0.03f, 10000.f);
-#else
-    camera.setOrthographic(size.x / 20, size.y / 20, -100.f, 100.f);
-#endif
+    if(camera.getType() == Camera::Type::Perspective)
+        camera.setPerspective(radians(60), size.x / size.y, 0.03f, 10000.f);
+    else
+        camera.setOrthographic(size.x / 20, size.y / 20, -100.f, 100.f);
 }
 
 void Viewport::uploadCamera(std::shared_ptr<Shader> shader)
