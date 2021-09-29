@@ -5,8 +5,8 @@
 #version 450
 
 #define DIRECTION_LIGHT_MAX 4
-#define POINT_LIGHT_MAX     8
-#define SPOT_LIGHT_MAX      8
+#define POINT_LIGHT_MAX     16
+#define SPOT_LIGHT_MAX      16
 
 struct DirectionLight
 {
@@ -117,13 +117,9 @@ vec3 CalcDirLight(DirectionLight light, vec3 normal)
     if(shininess == 0.0)
         shininess = u_material.shininess;
 
-#if 1
-    const vec3  ks              = u_material.specular * vec3(light.intesity);
-    const vec3  specular_color  = vec3(texture(u_material.metallic, v_uv).r);
-#else
-    const vec3  ks              = vec3(texture(u_material.metallic, v_uv).r);
-    const vec3  specular_color  = vec3(0.0);
-#endif
+    // const vec3  ks              = u_material.specular * vec3(light.intesity);
+    const vec3  ks              = vec3(texture(u_material.metallic, v_uv).r) * vec3(light.intesity);
+    const vec3  specular_color  = light.color;
     const vec3  reflected_dir   = reflect(-dir_to_light, normal);
     const float specular_amount = pow(max(dot(reflected_dir, v_dir_to_cam), 0.0), shininess);
     const vec3  specular        = ks * light.color * specular_amount * specular_color;
@@ -154,7 +150,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal)
     dirLight.color     = light.color;
     dirLight.intesity  = light.intesity;
     dirLight.direction = -dir_to_light;
-    return CalcDirLight(dirLight, normal) * attenuation; // FIXME
+    return CalcDirLight(dirLight, normal) * attenuation;
 }
 
 // 计算聚光灯光照

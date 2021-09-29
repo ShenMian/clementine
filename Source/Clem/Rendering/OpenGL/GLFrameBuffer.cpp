@@ -65,13 +65,13 @@ GLFrameBuffer::GLFrameBuffer(Size2i size, const std::vector<std::shared_ptr<Text
             Assert::isTrue(false, "unknown format");
     }
 
-#if 1
+#if 0
     if(colorAttachments.empty())
         glDrawBuffer(GL_NONE);
     else
     {
         std::vector<GLenum> bufs;
-        for(int i = 0; i < colorAttachments.size(); i++)
+        for(size_t i = 0; i < colorAttachments.size(); i++)
             bufs.push_back(GL_COLOR_ATTACHMENT0 + i);
         glDrawBuffers((GLsizei)colorAttachments.size(), bufs.data());
     }
@@ -162,6 +162,7 @@ std::shared_ptr<Texture2D> GLFrameBuffer::getDepthAttachment()
 
 void GLFrameBuffer::clearColorAttachment(int index, int value)
 {
+    Assert::isTrue(0 <= index && index < colorAttachments.size());
     bind();
     glClearTexImage((GLuint)colorAttachments[index]->getHandle(), 0, GL_RED_INTEGER, GL_INT, &value);
     GLCheckError();

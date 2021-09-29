@@ -17,16 +17,16 @@ namespace clem::ui
 
 void Viewport::attach()
 {
-    geomertyPass = Shader::create("geometry");
-    lightingPass = Shader::create("lighting");
+    geomertyPass = Shader::load("geometry");
+    lightingPass = Shader::load("lighting");
 
-    forwardShader = Shader::create("forward");
-    shadowShader  = Shader::create("shadow");
-    skyboxShader  = Shader::create("skybox_sphere");
+    forwardShader = Shader::load("forward");
+    shadowShader  = Shader::load("shadow");
+    skyboxShader  = Shader::load("skybox_sphere");
 
     auto win = Main::getWindow();
 
-    win->setSync(Configuration::sync);
+    win->setSync(Configuration::Display::vsync);
 
     win->onScroll = [this](double xOffset, double yOffset)
     {
@@ -43,7 +43,6 @@ void Viewport::attach()
 
     win->onMouseMove = [this](double x, double y)
     {
-        const float    sensitivity = 0.05;
         static auto    speed       = Vector2::unit * 1;
         static Vector2 last;
 
@@ -58,8 +57,8 @@ void Viewport::attach()
         auto yOffset = last.y - (float)y;
         last         = {(float)x, (float)y};
 
-        xOffset *= sensitivity;
-        yOffset *= sensitivity;
+        xOffset *= Configuration::Controls::mouseSensitivity.x;
+        yOffset *= Configuration::Controls::mouseSensitivity.y;
 
         static float yaw = 180.f, pitch = 0.f;
         yaw -= xOffset;
@@ -90,20 +89,20 @@ void Viewport::attach()
 
     dirLights.resize(1);
     dirLights[0].setColor({255.f / 255.f, 244.f / 255.f, 214.f / 255.f});
-    dirLights[0].setIntesity(0.15f);
+    dirLights[0].setIntesity(1.f);
     dirLights[0].setDirection({-0.5, -1, -0.5});
 
     Random random;
-    pointLights.resize(8);
-    for(size_t i = 0; i < 8; i++)
+    pointLights.resize(16);
+    for(size_t i = 0; i < 16; i++)
     {
         pointLights[i].setColor(random.getVector3({0.5, 0.5, 0.5}, {1, 1, 1}));
-        pointLights[i].setIntesity(1.f);
-        pointLights[i].setPosition(random.getVector3({-30, 0, -30}, {30, 20, 30}));
+        pointLights[i].setIntesity(2.f);
+        pointLights[i].setPosition(random.getVector3({-30, 0, -100}, {30, 80, 100}));
     }
 
     // dirLights.clear();
-    // pointLights.clear();
+    pointLights.clear();
 }
 
 void Viewport::update(Time dt)
@@ -114,7 +113,7 @@ void Viewport::update(Time dt)
 
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{0, 0});
     ImGui::Begin("Viewport", &visible);
-    Vector2 viewportPos = {ImGui::GetWindowPos().x - ImGui::GetCursorPos().x, ImGui::GetWindowPos().y - ImGui::GetCursorPos().y};
+    viewportPos = {ImGui::GetWindowPos().x - ImGui::GetCursorPos().x, ImGui::GetWindowPos().y - ImGui::GetCursorPos().y};
     ImGui::PopStyleVar();
 
     // 窗口大小发生变化时, 调用 onResize()
@@ -122,7 +121,7 @@ void Viewport::update(Time dt)
     viewportSize = {ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y};
     if(viewportSize != lastViewportSize)
     {
-        onResize(viewportSize.x, viewportSize.y);
+        onResize(viewportSize);
         lastViewportSize = viewportSize;
     }
 
@@ -142,8 +141,9 @@ void Viewport::update(Time dt)
         return;
     }
 
-    gizmos(viewportPos, viewportSize);
-    mousePicking(viewportPos);
+    updateCameraControl(dt);
+    gizmos();
+    mousePicking();
 
     // TODO: 临时场景相机信息, 移动到 toolbar
     ImGui::Text("CAM: POS(%.3f,%.3f,%.3f) DIR(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z,
@@ -157,6 +157,7 @@ void Viewport::update(Time dt)
 void Viewport::deferredRender(Time dt)
 {
     // 几何处理阶段
+    uploadCamera(geomertyPass);
     gbuffer.bind();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     geomertyPass->bind();
@@ -164,12 +165,7 @@ void Viewport::deferredRender(Time dt)
     geomertyPass->uploadUniform("u_projection", camera.getProjectionMatrix());
     geomertyPass->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
     Main::registry.each<Model>([&](const Entity& e)
-                               {
-                                   auto& tf    = e.get<Transform>();
-                                   auto& model = e.get<Model>();
-                                   geomertyPass->uploadUniform("u_model", tf.getModelMatrix());
-                                   Renderer::get()->submit(e, geomertyPass);
-                               });
+                               { Renderer::get()->submit(e, geomertyPass); });
     gbuffer.unbind();
 
     // 光照阶段
@@ -181,16 +177,29 @@ void Viewport::deferredRender(Time dt)
     lightingPass->uploadUniform("normal", 1);
     gbuffer.getTexture(2)->bind(2);
     lightingPass->uploadUniform("albedo_spec", 2);
+    uploadCamera(lightingPass);
     uploadLights(lightingPass);
+    Main::registry.each<Model>([&](const Entity& e)
+                               { ; });
 }
 
 void Viewport::forwardRender(Time dt)
 {
     PROFILE_FUNC();
 
+    fs::path    path          = "../assets/shaders/forward.frag";
+    const auto  writeTime     = fs::last_write_time(path);
+    static auto lastWriteTime = writeTime;
+    if(writeTime != lastWriteTime)
+    {
+        Shader::reload("forward");
+        forwardShader = Shader::get("forward");
+        lastWriteTime = writeTime;
+    }
+
     uploadLights(forwardShader);
     updateShadow(dt);
-    updateCamera(dt);
+    uploadCamera(forwardShader);
 
     const auto size = framebuffer->getSize();
     Renderer::get()->setViewport(0, 0, size.x, size.y);
@@ -237,7 +246,7 @@ void Viewport::toolbar()
     ImGui::End();
 }
 
-void Viewport::gizmos(const Vector2& pos, const Vector2& size)
+void Viewport::gizmos()
 {
     // 辅助线框
     auto& entity = Properties::entity;
@@ -268,7 +277,7 @@ void Viewport::gizmos(const Vector2& pos, const Vector2& size)
     }
 }
 
-void Viewport::mousePicking(const Vector2& pos)
+void Viewport::mousePicking()
 {
     // 鼠标选取
     if(ImGui::IsWindowHovered())
@@ -277,7 +286,7 @@ void Viewport::mousePicking(const Vector2& pos)
 
         if(!ImGuizmo::IsOver() && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
         {
-            Vector2 mouse = {ImGui::GetMousePos().x - pos.x, ImGui::GetMousePos().y - pos.y};
+            Vector2 mouse = {ImGui::GetMousePos().x - viewportPos.x, ImGui::GetMousePos().y - viewportPos.y};
 
             int id;
             framebuffer->readColorAttachment(1, mouse, id);
@@ -301,14 +310,27 @@ void Viewport::stopScene()
     status = Status::Stopping;
 }
 
-void Viewport::onResize(float x, float y)
+void Viewport::onResize(Size2 size)
 {
     // 重新生成相机投影矩阵
 #if 1
-    camera.setPerspective(radians(60), x / y, 0.03f, 10000.f);
+    camera.setPerspective(radians(60), size.x / size.y, 0.03f, 10000.f);
 #else
     camera.setOrthographic(size.x / 20, size.y / 20, -100.f, 100.f);
 #endif
+}
+
+void Viewport::uploadCamera(std::shared_ptr<Shader> shader)
+{
+    PROFILE_FUNC();
+
+    skyboxShader->uploadUniform("u_view", camera.getViewMatrix());
+    skyboxShader->uploadUniform("u_projection", camera.getProjectionMatrix());
+    skyboxShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
+
+    shader->uploadUniform("u_view", camera.getViewMatrix());
+    shader->uploadUniform("u_projection", camera.getProjectionMatrix());
+    shader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
 }
 
 void Viewport::uploadLights(std::shared_ptr<Shader> shader)
@@ -380,21 +402,6 @@ void Viewport::updateShadow(Time dt)
         */
         shadowMap->unbind();
     }
-}
-
-void Viewport::updateCamera(Time dt)
-{
-    PROFILE_FUNC();
-
-    updateCameraControl(dt);
-
-    skyboxShader->uploadUniform("u_view", camera.getViewMatrix());
-    skyboxShader->uploadUniform("u_projection", camera.getProjectionMatrix());
-    skyboxShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
-
-    forwardShader->uploadUniform("u_view", camera.getViewMatrix());
-    forwardShader->uploadUniform("u_projection", camera.getProjectionMatrix());
-    forwardShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
 }
 
 void Viewport::updateCameraControl(Time dt)

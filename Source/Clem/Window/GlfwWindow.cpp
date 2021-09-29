@@ -31,7 +31,7 @@ GlfwWindow::GlfwWindow(const std::string& title, Size2i size)
     auto       monitor   = glfwGetPrimaryMonitor();
     const auto videoMode = glfwGetVideoMode(monitor);
 
-    if(Configuration::fullscreen)
+    if(Configuration::Display::mode == Configuration::Display::Mode::Fullscreen)
         handle = glfwCreateWindow(videoMode->width, videoMode->height, title.c_str(), monitor, nullptr);
     else
         handle = glfwCreateWindow(size.x, size.y, title.c_str(), nullptr, nullptr);

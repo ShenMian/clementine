@@ -34,27 +34,27 @@ private:
     void deferredRender(Time dt);
     void forwardRender(Time dt);
     void toolbar();
-    void gizmos(const Vector2& pos, const Vector2& size);
-    void mousePicking(const Vector2& pos);
+    void gizmos();
+    void mousePicking();
     void playScene();
     void stopScene();
 
-    void onResize(float x, float y);
-    void updateCameraControl(Time dt);
-    void updateShadow(Time dt);
-    void updateCamera(Time dt);
-
+    void uploadCamera(std::shared_ptr<Shader> shader);
     void uploadLights(std::shared_ptr<Shader> shader);
 
+    void onResize(Size2 size);
+    void updateCameraControl(Time dt);
+    void updateShadow(Time dt);
+
     Status                  status  = Status::Stopping;
-    GBuffer                 gbuffer = GBuffer(Configuration::displayResolution);
+    GBuffer                 gbuffer = GBuffer(Configuration::Display::resolution);
     std::shared_ptr<Shader> geomertyPass, lightingPass;
+    Vector2                 viewportPos, viewportSize;
 
     Camera                       camera;
     std::shared_ptr<Shader>      forwardShader, shadowShader, skyboxShader;
     bool                         hovered, locked = false;
-    Vector2                      viewportSize;
-    std::shared_ptr<FrameBuffer> framebuffer = FrameBuffer::create(Configuration::displayResolution,
+    std::shared_ptr<FrameBuffer> framebuffer = FrameBuffer::create(Configuration::Display::resolution,
                                                                    {FrameBuffer::PixelFormat::RGBA8,
                                                                     FrameBuffer::PixelFormat::R8,
                                                                     FrameBuffer::PixelFormat::DepthStencil});

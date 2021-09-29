@@ -50,7 +50,11 @@ public:
 	 *
 	 * @param name 着色器名称.
 	 */
-    static std::shared_ptr<Shader> create(const std::string& name);
+    static std::shared_ptr<Shader> load(const std::string& name);
+
+    static void                    unload(const std::string& name);
+    static void                    reload(const std::string& name);
+    static std::shared_ptr<Shader> get(const std::string& name);
 
     /**
 	 * @brief 创建着色器.
@@ -71,8 +75,6 @@ public:
     virtual void bind() = 0;
 
     const std::string& getName() const;
-
-    static std::shared_ptr<Shader> get(const std::string& name);
 
 protected:
     std::string name;

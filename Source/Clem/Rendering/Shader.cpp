@@ -11,7 +11,7 @@ namespace clem
 
 std::unordered_map<std::string, std::shared_ptr<Shader>> Shader::cache;
 
-std::shared_ptr<Shader> Shader::create(const std::string& name)
+std::shared_ptr<Shader> Shader::load(const std::string& name)
 {
     const auto it = cache.find(name);
     if(it == cache.end())
@@ -59,6 +59,17 @@ Shader::Shader(const std::string& name)
 const std::string& Shader::getName() const
 {
     return name;
+}
+
+void Shader::unload(const std::string& name)
+{
+    cache.erase(name);
+}
+
+void Shader::reload(const std::string& name)
+{
+    unload(name);
+    load(name);
 }
 
 std::shared_ptr<Shader> Shader::get(const std::string& name)

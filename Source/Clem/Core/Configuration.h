@@ -12,9 +12,26 @@ namespace clem
 class Configuration
 {
 public:
-    static Vector2i displayResolution;
-    static bool     fullscreen;
-    static bool     sync;
+    class Display
+    {
+    public:
+        enum class Mode
+        {
+            Fullscreen,
+            Windowed,
+            Borderless
+        };
+
+        static Vector2i resolution;
+        static Mode     mode;
+        static bool     vsync;
+    };
+
+    class Controls
+    {
+    public:
+        static Vector2 mouseSensitivity;
+    };
 
     /**
      * @brief 从文件加载配置.

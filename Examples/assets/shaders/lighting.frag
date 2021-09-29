@@ -5,8 +5,8 @@
 #version 450
 
 #define DIRECTION_LIGHT_MAX 8
-#define POINT_LIGHT_MAX     16
-#define SPOT_LIGHT_MAX      16
+#define POINT_LIGHT_MAX     32
+#define SPOT_LIGHT_MAX      32
 
 struct DirectionLight
 {
@@ -77,7 +77,7 @@ uniform sampler2D u_albedo_spec;
 uniform Material  u_material;
 uniform vec3      u_dir_to_cam;
 
-vec4 CalcLighting(vec3 position, vec3 normal);
+vec4 CalcLighting(vec3 position, vec3 normal, vec3 albedo);
 
 void main()
 {
@@ -86,7 +86,7 @@ void main()
     vec3  albedo   = texture(u_albedo_spec, v_uv).rgb;
     float specular = texture(u_albedo_spec, v_uv).r;
 
-    frag_color = CalcLighting(position, normal);
+    frag_color = CalcLighting(position, normal, albedo);
 }
 
 // 计算平行光照
@@ -109,15 +109,11 @@ vec3 CalcDirLight(DirectionLight light, vec3 normal)
     if(shininess == 0.0)
         shininess = u_material.shininess;
 
-#if 1
-    const vec3  ks              = u_material.specular * vec3(light.intesity);
-    const vec3  specular_color  = vec3(texture(u_material.metallic, v_uv).r);
-#else
-    const vec3  ks              = vec3(texture(u_material.metallic, v_uv).r);
-    const vec3  specular_color  = vec3(0.0);
-#endif
+    // const vec3  ks              = u_material.specular * vec3(light.intesity);
+    const vec3  ks              = vec3(texture(u_material.metallic, v_uv).r) * vec3(light.intesity);
+    const vec3  specular_color  = light.color;
     const vec3  reflected_dir   = reflect(-dir_to_light, normal);
-    const float specular_amount = pow(max(dot(reflected_dir, u_dir_to_cam), 0.0), shininess);
+    const float specular_amount = pow(max(dot(reflected_dir, v_dir_to_cam), 0.0), shininess);
     const vec3  specular        = ks * light.color * specular_amount * specular_color;
 
     // 放射光
@@ -163,7 +159,7 @@ vec3 CaclSpotLight(SpotLight light, vec3 position, vec3 normal)
 }
 
 // 计算总光照
-vec4 CalcLighting(vec3 position, vec3 normal)
+vec4 CalcLighting(vec3 position, vec3 normal, vec3 albedo)
 {
     vec3 light;
     for(int i = 0; i < u_direction_lights_size; ++i)
