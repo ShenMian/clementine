@@ -17,8 +17,8 @@ namespace clem::ui
 
 void Viewport::attach()
 {
-    geomertyPass = Shader::load("geometry");
-    lightingPass = Shader::load("lighting");
+    geometryShader = Shader::load("geometry");
+    lightingShader = Shader::load("lighting");
 
     forwardShader = Shader::load("forward");
     shadowShader  = Shader::load("shadow");
@@ -127,13 +127,14 @@ void Viewport::update(Time dt)
 
     framebuffer->clearColorAttachment(1, -1);
 
-#if 0
+#if 1
     deferredRender(dt);
 #else
     forwardRender(dt);
 #endif
 
-    ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
+    // ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
+    ImGui::Image((ImTextureID)gbuffer.getTexture(GBuffer::TextureType::Normals)->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
 
     if(status == Status::Playing)
     {
@@ -156,39 +157,34 @@ void Viewport::update(Time dt)
 
 void Viewport::deferredRender(Time dt)
 {
-    // 几何处理阶段
-    uploadCamera(geomertyPass);
-    gbuffer.bind();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    geomertyPass->bind();
-    geomertyPass->uploadUniform("u_view", camera.getViewMatrix());
-    geomertyPass->uploadUniform("u_projection", camera.getProjectionMatrix());
-    geomertyPass->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
-    Main::registry.each<Model>([&](const Entity& e)
-                               { Renderer::get()->submit(e, geomertyPass); });
-    gbuffer.unbind();
+    {
+        const auto  writeTime     = fs::last_write_time("../assets/shaders/geometry.frag");
+        static auto lastWriteTime = writeTime;
+        if(writeTime != lastWriteTime)
+        {
+            forwardShader = Shader::reload("forward");
+            lastWriteTime = writeTime;
+        }
+    }
+    {
+        const auto  writeTime     = fs::last_write_time("../assets/shaders/lighting.frag");
+        static auto lastWriteTime = writeTime;
+        if(writeTime != lastWriteTime)
+        {
+            forwardShader = Shader::reload("forward");
+            lastWriteTime = writeTime;
+        }
+    }
 
-    // 光照阶段
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    lightingPass->bind();
-    gbuffer.getTexture(0)->bind(0);
-    lightingPass->uploadUniform("position", 0);
-    gbuffer.getTexture(1)->bind(1);
-    lightingPass->uploadUniform("normal", 1);
-    gbuffer.getTexture(2)->bind(2);
-    lightingPass->uploadUniform("albedo_spec", 2);
-    uploadCamera(lightingPass);
-    uploadLights(lightingPass);
-    Main::registry.each<Model>([&](const Entity& e)
-                               { ; });
+    geometryPass();
+    lightingPass();
 }
 
 void Viewport::forwardRender(Time dt)
 {
     PROFILE_FUNC();
 
-    fs::path    path          = "../assets/shaders/forward.frag";
-    const auto  writeTime     = fs::last_write_time(path);
+    const auto  writeTime     = fs::last_write_time("../assets/shaders/forward.frag");
     static auto lastWriteTime = writeTime;
     if(writeTime != lastWriteTime)
     {
@@ -208,6 +204,46 @@ void Viewport::forwardRender(Time dt)
     Main::registry.each<Model>([&](const Entity& e)
                                { Renderer::get()->submit(e); });
     framebuffer->unbind();
+}
+
+void Viewport::geometryPass()
+{
+    glDepthMask(GL_TRUE);
+    glEnable(GL_DEPTH_TEST);
+
+    uploadCamera(geometryShader);
+    gbuffer.bind();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    geometryShader->bind();
+    geometryShader->uploadUniform("u_view", camera.getViewMatrix());
+    geometryShader->uploadUniform("u_projection", camera.getProjectionMatrix());
+    geometryShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
+    Main::registry.each<Model>([&](const Entity& e)
+                               { Renderer::get()->submit(e, geometryShader); });
+    gbuffer.unbind();
+
+    glDepthMask(GL_FALSE);
+    glDisable(GL_DEPTH_TEST);
+}
+
+void Viewport::lightingPass()
+{
+    // glEnable(GL_BLEND);
+    // glBlendEquation(GL_FUNC_ADD);
+    // glBlendFunc(GL_ONE, GL_ONE);
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    lightingShader->bind();
+    gbuffer.getTexture(GBuffer::TextureType::Position)->bind(0);
+    lightingShader->uploadUniform("position", 0);
+    gbuffer.getTexture(GBuffer::TextureType::Normals)->bind(1);
+    lightingShader->uploadUniform("normal", 1);
+    gbuffer.getTexture(GBuffer::TextureType::AlbedoSpec)->bind(2);
+    lightingShader->uploadUniform("albedo_spec", 2);
+    uploadCamera(lightingShader);
+    uploadLights(lightingShader);
+    Main::registry.each<Model>([&](const Entity& e)
+                               { ; });
 }
 
 void Viewport::toolbar()

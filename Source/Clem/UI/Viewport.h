@@ -33,6 +33,9 @@ public:
 private:
     void deferredRender(Time dt);
     void forwardRender(Time dt);
+
+    void geometryPass(); // 几何处理阶段
+    void lightingPass(); // 光照阶段
     
     void toolbar();
     void gizmos();
@@ -50,7 +53,7 @@ private:
 
     Status                  status  = Status::Stopping;
     GBuffer                 gbuffer = GBuffer(Configuration::Display::resolution);
-    std::shared_ptr<Shader> geomertyPass, lightingPass;
+    std::shared_ptr<Shader> geometryShader, lightingShader;
     Vector2                 viewportPos, viewportSize;
 
     Camera                       camera;
