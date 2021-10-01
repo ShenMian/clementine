@@ -1,7 +1,7 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include <Clem.h>
+#include <Clem/Clem.h>
 
 using namespace std;
 using namespace clem;
@@ -20,7 +20,7 @@ public:
     {
         auto entity = Main::registry.create();
         entity.add<Transform>();
-        entity.get<Transform>().setPosition({1, 1});
+        entity.get<Transform>().translation = {1, 1};
         sprite = &entity.add<Sprite>(size);
 
         // 生成随机数
