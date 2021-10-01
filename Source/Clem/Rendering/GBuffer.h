@@ -11,13 +11,13 @@ namespace clem
 class GBuffer
 {
 public:
-    enum TextureType : int
+    enum class TextureType
     {
         Position,
         Normals,
-        AlbedoSpec
+        AlbedoSpec,
         // PBR,
-        // DepthStencil
+        DepthStencil
     };
 
     GBuffer(const Size2i& size);
@@ -25,11 +25,11 @@ public:
     void bind();
     void unbind();
 
-    std::shared_ptr<Texture2D> getTexture(int i);
+    std::shared_ptr<Texture2D> getTexture(TextureType type);
 
 private:
-    std::vector<std::shared_ptr<Texture2D>> textures;
-    std::shared_ptr<FrameBuffer>            framebuffer;
+    std::unordered_map<TextureType, std::shared_ptr<Texture2D>> textures;
+    std::shared_ptr<FrameBuffer>                                framebuffer;
 };
 
 } // namespace clem

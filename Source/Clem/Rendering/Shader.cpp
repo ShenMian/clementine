@@ -68,8 +68,9 @@ void Shader::unload(const std::string& name)
 
 std::shared_ptr<Shader> Shader::reload(const std::string& name)
 {
-    unload(name);
-    return load(name);
+    const auto shader = load(name);
+    cache[name]       = shader;
+    return shader;
 }
 
 std::shared_ptr<Shader> Shader::get(const std::string& name)

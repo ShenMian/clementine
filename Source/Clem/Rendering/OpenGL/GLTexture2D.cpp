@@ -213,6 +213,9 @@ uint32_t GLTexture2D::GLInternalFormat(Format fmt)
     case Format::R8:
         return GL_R8;
 
+    case Format::DepthStencil:
+        return GL_DEPTH24_STENCIL8;
+
     default:
         Assert::isTrue(false, "no corresponding GL internal format");
         return 0;

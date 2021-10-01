@@ -65,7 +65,7 @@ GLFrameBuffer::GLFrameBuffer(Size2i size, const std::vector<std::shared_ptr<Text
             Assert::isTrue(false, "unknown format");
     }
 
-#if 0
+#if 1
     if(colorAttachments.empty())
         glDrawBuffer(GL_NONE);
     else
