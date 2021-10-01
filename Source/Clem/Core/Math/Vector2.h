@@ -41,8 +41,6 @@ public:
     /**
 	 * @brief 获取长度.
 	 *
-	 * @note
-	 *
 	 * @see sizeSquared
 	 */
     float size() const;
