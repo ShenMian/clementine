@@ -36,7 +36,13 @@ Contact
 
 Screenshots
 -----------
-![Current](Docs/pictures/current.png)
+<p align="center">
+<img src="Docs/pictures/current.png"     width="204px" title="Current">
+<img src="Docs/pictures/minesweeper.png" width="204px" title="Minesweeper">
+<img src="Docs/pictures/sort.png"        width="204px" title="Sort">
+<br/>
+</p>
+
 **[More...](Docs/pictures)**
 
 [cn]:                  README-cn.md
