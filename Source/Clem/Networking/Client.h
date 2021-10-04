@@ -4,7 +4,6 @@
 #pragma once
 
 #include "Connection.h"
-#include "Platform.h"
 #include "asio.hpp"
 #include <cstdint>
 #include <string>

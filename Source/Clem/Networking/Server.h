@@ -5,7 +5,6 @@
 
 #include "Connection.h"
 #include "Core/Assert.hpp"
-#include "Platform.h"
 #include "asio.hpp"
 #include <cstdint>
 #include <functional>

@@ -7,3 +7,6 @@
 [submodule "Thirdparty/imguizmo"]
 	path = Thirdparty/imguizmo
 	url = https://github.com/CedricGuillemet/ImGuizmo.git
+[submodule "Thirdparty/asio"]
+	path = Thirdparty/asio
+	url = https://github.com/chriskohlhoff/asio.git

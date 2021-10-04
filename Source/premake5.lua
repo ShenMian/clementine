@@ -23,7 +23,7 @@ project "Clementine"
     "Clem",
     "%{thirdparty.stb}/include",
     "%{thirdparty.sdl}/include",
-    "%{thirdparty.asio}/include",
+    "%{thirdparty.asio}/asio/include",
     "%{thirdparty.entt}/include",
     "%{thirdparty.glad}/include",
     "%{thirdparty.glfw}/include",

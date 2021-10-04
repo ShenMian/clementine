@@ -25,7 +25,7 @@ bool Connection::connect(const std::string_view& host, uint16_t port)
         ip::tcp::resolver resolver(context);
         auto              endpoints = resolver.resolve(std::string(host), std::to_string(port));
 
-        async_connect(socket, endpoints, [this](std::error_code ec, ip::tcp::endpoint)
+        async_connect(socket, endpoints, [this](std::error_code ec, ip::tcp::endpoint ep)
                       {
                           if(ec)
                           {

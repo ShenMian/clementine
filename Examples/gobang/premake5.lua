@@ -14,7 +14,7 @@ project "Gobang"
 
   includedirs {
     "%{wks.location}/Source",
-    "%{thirdparty.asio}/include",
+    "%{thirdparty.asio}/asio/include",
     "%{thirdparty.entt}/include",
     "%{thirdparty.glad}/include",
     "%{thirdparty.imgui}/include",

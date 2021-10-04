@@ -449,17 +449,17 @@ void Viewport::updateCameraControl(Time dt)
         speed *= 3;
 
 #if 0
-    if(Input::isKeyPressed(KeyCode::W))
+    if(Input::isPressed(KeyCode::W))
         camera.view.translation += Matrix4(camera.view).forword().normalize() * speed;
-    if(Input::isKeyPressed(KeyCode::S))
+    if(Input::isPressed(KeyCode::S))
         camera.view.translation += Matrix4(camera.view).back().normalize() * speed;
-    if(Input::isKeyPressed(KeyCode::A))
+    if(Input::isPressed(KeyCode::A))
         camera.view.translation += Matrix4(camera.view).left().normalize() * speed;
-    if(Input::isKeyPressed(KeyCode::D))
+    if(Input::isPressed(KeyCode::D))
         camera.view.translation += Matrix4(camera.view).right().normalize() * speed;
-    if(Input::isKeyPressed(KeyCode::E))
+    if(Input::isPressed(KeyCode::E))
         camera.view.translation += Matrix4(camera.view).up().normalize() * speed;
-    if(Input::isKeyPressed(KeyCode::Q))
+    if(Input::isPressed(KeyCode::Q))
         camera.view.translation += Matrix4(camera.view).down().normalize() * speed;
 #else
     if(Input::isPressed(KeyCode::W))

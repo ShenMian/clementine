@@ -11,16 +11,6 @@ namespace clem
 Client::Client()
     : connection(context, ip::tcp::socket(context))
 {
-}
-
-Client::~Client()
-{
-    disconnect();
-}
-
-bool Client::connect(const std::string_view& host, uint16_t port)
-{
-    connection.connect(host, port);
     connection.onConnected = [this]()
     {
         if(onConnected)
@@ -41,6 +31,16 @@ bool Client::connect(const std::string_view& host, uint16_t port)
         if(onError)
             onError(ec);
     };
+}
+
+Client::~Client()
+{
+    disconnect();
+}
+
+bool Client::connect(const std::string_view& host, uint16_t port)
+{
+    connection.connect(host, port);
 
     thread = std::thread([this]()
                          { context.run(); });
