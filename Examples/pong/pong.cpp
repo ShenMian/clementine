@@ -56,7 +56,7 @@ public:
         {
             auto  ball    = Main::registry.get("ball");
             auto& ts      = ball.get<Transform>();
-            auto& vel     = ball.get<Rigidbody>().velocity;
+            auto& vel     = ball.get<Rigidbody>().linearVelocity;
             auto& sprite  = ball.get<Sprite>();
             auto& ballPos = ts.translation;
 
@@ -88,15 +88,15 @@ public:
             // 球拍与边界
             auto& tf   = bats[1].get<Transform>();
             auto& body = bats[1].get<Rigidbody>();
-            if(tf.translation.y + body.velocity.y < 1)
+            if(tf.translation.y + body.linearVelocity.y < 1)
             {
-                body.velocity    = Vector2::zero;
-                tf.translation.y = 1;
+                body.linearVelocity = Vector2::zero;
+                tf.translation.y    = 1;
             }
-            else if(tf.translation.y + body.velocity.y > 19)
+            else if(tf.translation.y + body.linearVelocity.y > 19)
             {
-                body.velocity    = Vector2::zero;
-                tf.translation.y = 19;
+                body.linearVelocity = Vector2::zero;
+                tf.translation.y    = 19;
             }
 
             // 球与边界
@@ -164,22 +164,22 @@ public:
                                                auto& tf    = bats[0].get<Transform>();
 
                                                if(event->state == false)
-                                                   body.velocity = Vector2::zero;
+                                                   body.linearVelocity = Vector2::zero;
                                                else if(event->keyCode == KeyCode::W)
-                                                   body.velocity = {0, -player_speed};
+                                                   body.linearVelocity = {0, -player_speed};
                                                else if(event->keyCode == KeyCode::S)
-                                                   body.velocity = {0, player_speed};
+                                                   body.linearVelocity = {0, player_speed};
 
-                                               if(tf.translation.y + body.velocity.y < 1)
+                                               if(tf.translation.y + body.linearVelocity.y < 1)
                                                {
-                                                   body.velocity    = Vector2::zero;
-                                                   tf.translation.y = 1;
+                                                   body.linearVelocity = Vector2::zero;
+                                                   tf.translation.y    = 1;
                                                    return;
                                                }
-                                               else if(tf.translation.y + body.velocity.y > 19)
+                                               else if(tf.translation.y + body.linearVelocity.y > 19)
                                                {
-                                                   body.velocity    = Vector2::zero;
-                                                   tf.translation.y = 19;
+                                                   body.linearVelocity = Vector2::zero;
+                                                   tf.translation.y    = 19;
                                                    return;
                                                }
                                            });
@@ -197,7 +197,7 @@ public:
             auto batCenter = batPos + Vector3((batSize / 2).x, (batSize / 2).y, 0.f);
 
             // 以 ai_speed 速度向 ball 所在的 y 坐标移动
-            batBody.velocity = Vector2(0, ballPos.y - batCenter.y).normalize() * ai_speed;
+            batBody.linearVelocity = Vector2(0, ballPos.y - batCenter.y).normalize() * ai_speed;
         };
     }
 
@@ -219,14 +219,14 @@ public:
     // 重置 ball 的位置
     void resetBall()
     {
-        Main::registry.get("ball").get<Transform>().translation = {39, 12};
-        Main::registry.get("ball").get<Rigidbody>().velocity    = Vector2::zero;
+        Main::registry.get("ball").get<Transform>().translation    = {39, 12};
+        Main::registry.get("ball").get<Rigidbody>().linearVelocity = Vector2::zero;
 
         static future<void> h;
         h = async([this]()
                   {
                       this_thread::sleep_for(chrono::seconds(2));
-                      Main::registry.get("ball").get<Rigidbody>().velocity = Vector2::right * ball_speed;
+                      Main::registry.get("ball").get<Rigidbody>().linearVelocity = Vector2::right * ball_speed;
                   });
     }
 

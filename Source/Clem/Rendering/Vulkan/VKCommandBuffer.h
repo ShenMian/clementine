@@ -20,8 +20,8 @@ public:
     VKCommandBuffer() = default;
     VKCommandBuffer(const vk::CommandBuffer&);
 
-    void beginFrame() override;
-    void endFrame() override;
+    void begin() override;
+    void end() override;
     void setViewport(int x, int y, int width, int height) override;
 
                        operator vk::CommandBuffer();

@@ -71,12 +71,12 @@ GLRenderer& GLRenderer::get()
 
 void GLRenderer::beginFrame()
 {
-    cmdBuffer->beginFrame();
+    cmdBuffer->begin();
 }
 
 void GLRenderer::endFrame()
 {
-    cmdBuffer->endFrame();
+    cmdBuffer->end();
 }
 
 void GLRenderer::submit(const Entity& entity)

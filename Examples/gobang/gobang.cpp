@@ -48,7 +48,7 @@ public:
             case Command::place:
                 msg >> c >> y >> x;
                 this->map[x][y] = c;
-                show();
+                refresh();
                 break;
 
             default:
@@ -70,6 +70,7 @@ public:
         };
 
         client.connect("127.0.0.1", 25565);
+        place(0, 0, Chess::black);
 
         /*
         Main::registry.create("board").add<Sprite>(Size2i(15 * 2, 15));
@@ -93,18 +94,17 @@ public:
     void place(int x, int y, Chess c)
     {
         Assert::isTrue(0 <= x && x <= 15 && 0 <= y && y <= 15, "out of range");
-        if(map[x][y] != Chess::none)
-            return;
+        Assert::isTrue(map[x][y] != Chess::none);
 
-        // map[x][y] = c;
+        map[x][y] = c;
 
         Message msg(Command::place);
         msg << x << y << c;
         client.write(msg);
-        show();
+        refresh();
     }
 
-    void show()
+    void refresh()
     {
         const char tiles[] = {'.', 'X', 'O'};
         auto&      sprite  = Main::registry.create("board").get<Sprite>();

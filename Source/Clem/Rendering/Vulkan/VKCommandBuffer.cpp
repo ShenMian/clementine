@@ -16,13 +16,13 @@ VKCommandBuffer::VKCommandBuffer(const vk::CommandBuffer& handle)
 {
 }
 
-void VKCommandBuffer::beginFrame()
+void VKCommandBuffer::begin()
 {
     vk::CommandBufferBeginInfo beginInfo;
     handle.begin(beginInfo);
 }
 
-void VKCommandBuffer::endFrame()
+void VKCommandBuffer::end()
 {
     handle.end();
 }

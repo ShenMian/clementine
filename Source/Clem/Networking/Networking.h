@@ -5,5 +5,6 @@
 
 #include "Client.h"
 #include "Connection.h"
+#include "MemoryStream.h"
 #include "Message.h"
 #include "Server.h"

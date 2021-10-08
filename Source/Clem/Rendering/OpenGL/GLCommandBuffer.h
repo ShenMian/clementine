@@ -16,8 +16,8 @@ namespace clem
 class GLCommandBuffer : public CommandBuffer
 {
 public:
-    void beginFrame() override;
-    void endFrame() override;
+    void begin() override;
+    void end() override;
     void setViewport(int x, int y, int width, int height) override;
 };
 

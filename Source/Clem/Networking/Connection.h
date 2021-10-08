@@ -93,7 +93,7 @@ void Connection::write(const Message<T>& msg)
                           {
                               if(onError)
                                   onError(ec);
-                              CLEM_LOG_ERROR("networking", ec.message());
+                              CLEM_LOG_ERROR("network", ec.message());
                               return;
                           }
                       });
@@ -104,7 +104,7 @@ void Connection::write(const Message<T>& msg)
                           {
                               if(onError)
                                   onError(ec);
-                              CLEM_LOG_ERROR("networking", ec.message());
+                              CLEM_LOG_ERROR("network", ec.message());
                               return;
                           }
                       });
@@ -131,7 +131,7 @@ void Connection::readHeader()
                    {
                        if(onError)
                            onError(ec);
-                       CLEM_LOG_ERROR("networking", ec.message());
+                       CLEM_LOG_ERROR("network", ec.message());
                        return;
                    }
 
@@ -159,7 +159,7 @@ void Connection::readBody()
                    {
                        if(onError)
                            onError(ec);
-                       CLEM_LOG_ERROR("networking", ec.message());
+                       CLEM_LOG_ERROR("network", ec.message());
                        return;
                    }
 

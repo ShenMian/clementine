@@ -252,15 +252,9 @@ void Main::init()
     PROFILE_SESSION_BEGIN("profile.json");
 
     Logger::init();
-
     Configuration::load();
-
     Renderer::setAPI(Renderer::API::OpenGL);
-
-    // 初始化窗口库
     WindowBase::init();
-
-    // UI 库初始化
     UI::init();
 
 // 创建主窗口

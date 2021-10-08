@@ -123,6 +123,9 @@ void GlfwWindow::update(Time dt)
 
     renderer->beginFrame();
 
+    glClearColor(30.f / 255, 144.f / 255, 255.f / 255, 1.f); // 湖蓝色
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
     UI::beginFrame();
     for(auto layer : layers)
         layer->update(dt);

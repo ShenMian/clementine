@@ -23,6 +23,7 @@ std::shared_ptr<VertexBuffer> VertexBuffer::create(const std::vector<value_type>
     }
     return nullptr;
 }
+
 std::shared_ptr<VertexBuffer> VertexBuffer::create(const void* data, size_t size, Usage usage)
 {
     switch(Renderer::getAPI())

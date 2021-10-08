@@ -20,8 +20,8 @@ class CommandBuffer
 public:
     static std::shared_ptr<CommandBuffer> create();
 
-    virtual void beginFrame()                                     = 0;
-    virtual void endFrame()                                       = 0;
+    virtual void begin()                                          = 0;
+    virtual void end()                                            = 0;
     virtual void setViewport(int x, int y, int width, int height) = 0;
 };
 

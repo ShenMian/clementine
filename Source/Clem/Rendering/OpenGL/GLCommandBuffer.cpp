@@ -7,13 +7,11 @@
 namespace clem
 {
 
-void GLCommandBuffer::beginFrame()
+void GLCommandBuffer::begin()
 {
-    glClearColor(30.f / 255, 144.f / 255, 255.f / 255, 1.f); // ºþÀ¶É«
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
-void GLCommandBuffer::endFrame()
+void GLCommandBuffer::end()
 {
 }
 

@@ -35,12 +35,12 @@ VKRenderer& VKRenderer::get()
 
 void VKRenderer::beginFrame()
 {
-    cmdBuffer.beginFrame();
+    cmdBuffer.begin();
 }
 
 void VKRenderer::endFrame()
 {
-    cmdBuffer.endFrame();
+    cmdBuffer.end();
 }
 
 void VKRenderer::submit(const Entity& entity)

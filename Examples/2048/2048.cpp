@@ -36,7 +36,7 @@ public:
                     generate({2});
             }
 
-            show();
+            refresh();
         };
 
         start();
@@ -103,7 +103,7 @@ public:
         }
     }
 
-    void show()
+    void refresh()
     {
         for(int x = 0; x < 4; x++)
             for(int y = 0; y < 4; y++)
