@@ -43,7 +43,7 @@ void Viewport::attach()
 
     win->onMouseMove = [this](double x, double y)
     {
-        static auto    speed       = Vector2::unit * 1;
+        static auto    speed = Vector2::unit * 1;
         static Vector2 last;
 
         if(!locked || !ImGui::IsMouseDown(ImGuiMouseButton_Right))
@@ -127,14 +127,13 @@ void Viewport::update(Time dt)
 
     framebuffer->clearColorAttachment(1, -1);
 
-#if 1
+#if 0
     deferredRender(dt);
+    ImGui::Image((ImTextureID)gbuffer.getTexture(GBuffer::TextureType::Normals)->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
 #else
     forwardRender(dt);
+    ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
 #endif
-
-    // ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
-    ImGui::Image((ImTextureID)gbuffer.getTexture(GBuffer::TextureType::Normals)->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
 
     if(status == Status::Playing)
     {

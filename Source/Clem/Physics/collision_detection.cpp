@@ -2,8 +2,8 @@
 // License(Apache-2.0)
 
 #include "BoxCollider.h"
-#include "SphereCollider.h"
 #include "Core/Math/Math.h"
+#include "SphereCollider.h"
 #include <cassert>
 
 using namespace clem;

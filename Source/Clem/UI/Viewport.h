@@ -3,9 +3,9 @@
 
 #pragma once
 
+#include "Core/Core.h"
 #include "Layer.h"
 #include "Rendering/Rendering.h"
-#include "Core/Core.h"
 #include <filesystem>
 
 namespace fs = std::filesystem;
@@ -36,7 +36,7 @@ private:
 
     void geometryPass(); // 几何处理阶段
     void lightingPass(); // 光照阶段
-    
+
     void toolbar();
     void gizmos();
     void mousePicking();

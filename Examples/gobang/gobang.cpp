@@ -63,7 +63,6 @@ public:
 
         server.start(25565);
 
-
         client.onError = [](error_code ec)
         {
             printf("%s", ec.message().c_str());

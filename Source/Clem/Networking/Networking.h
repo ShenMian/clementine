@@ -7,4 +7,5 @@
 #include "Connection.h"
 #include "MemoryStream.h"
 #include "Message.h"
+#include "Properties.hpp"
 #include "Server.h"

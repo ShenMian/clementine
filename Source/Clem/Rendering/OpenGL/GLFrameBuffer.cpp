@@ -169,7 +169,7 @@ void GLFrameBuffer::clearColorAttachment(int index, int value)
     unbind();
 }
 
- // FIXME: 返回结果不正确
+// FIXME: 返回结果不正确
 void GLFrameBuffer::readColorAttachment(int index, Vector2i pos, int& data)
 {
     Assert::isTrue(0 <= index && index < colorAttachments.size());

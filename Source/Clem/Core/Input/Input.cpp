@@ -25,7 +25,7 @@ bool Input::isPressed(MouseCode code)
 
 Vector2 Input::getMousePosition()
 {
-    auto* handle = static_cast<GLFWwindow*>(Main::getWindow()->nativeHandle());
+    auto*  handle = static_cast<GLFWwindow*>(Main::getWindow()->nativeHandle());
     double mouseX, mouseY;
     int    winX, winY;
     glfwGetWindowPos(handle, &winX, &winY);

@@ -21,7 +21,7 @@ public:
         auto entity = Main::registry.create();
         entity.add<Transform>();
         entity.get<Transform>().translation = {1, 1};
-        sprite = &entity.add<Sprite>(size);
+        sprite                              = &entity.add<Sprite>(size);
 
         // 生成随机数
         for(int i = 0; i < size.x; i++)
