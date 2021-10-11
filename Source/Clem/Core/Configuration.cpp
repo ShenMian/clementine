@@ -15,7 +15,7 @@ namespace clem
 Vector2i                     Configuration::Display::resolution        = {1920, 1080};
 Configuration::Display::Mode Configuration::Display::mode              = Mode::Windowed;
 bool                         Configuration::Display::vsync             = true;
-Vector2                      Configuration::Controls::mouseSensitivity = {0.05, 0.05};
+Vector2                      Configuration::Controls::mouseSensitivity = {0.05f, 0.05f};
 
 void Configuration::load(const std::filesystem::path& path)
 {
