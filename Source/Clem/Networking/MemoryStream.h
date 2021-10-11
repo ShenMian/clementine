@@ -9,6 +9,9 @@
 #include <type_traits>
 #include <vector>
 
+/**
+ * @brief 内存流.
+ */
 class MemoryStream
 {
 public:
@@ -30,8 +33,8 @@ public:
 
     void unserialize(void* data, const Properties& properties);
 
-    size_t byteSize() const;
-    size_t bitSize() const;
+    size_t getByteSize() const;
+    size_t getBitSize() const;
 
     template <typename T>
     MemoryStream& operator<<(T);
@@ -40,8 +43,11 @@ public:
     MemoryStream& operator>>(T&);
 
 private:
-    size_t                 size = 0;
+    size_t                 bitSize = 0;
     std::vector<std::byte> buf;
+
+    void writeBits(std::byte data, size_t size);
+    void readBits(std::byte& data, size_t size);
 };
 
 template <>
@@ -53,7 +59,7 @@ inline void MemoryStream::write(bool data)
 template <typename T>
 inline void MemoryStream::write(T data)
 {
-    static_assert(std::is_arithmetic<T>::value || std::is_enum<T>::value);
+    static_assert(std::is_arithmetic<T>::value || std::is_enum<T>::value, "only support primitive data type");
     writeBytes(&data, sizeof(T));
 }
 
@@ -66,7 +72,7 @@ inline void MemoryStream::read(bool& data)
 template <typename T>
 inline void MemoryStream::read(T& data)
 {
-    static_assert(std::is_arithmetic<T>::value || std::is_enum<T>::value);
+    static_assert(std::is_arithmetic<T>::value || std::is_enum<T>::value, "only support primitive data type");
     readBytes(&data, sizeof(T));
 }
 

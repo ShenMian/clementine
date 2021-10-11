@@ -10,6 +10,19 @@ void MemoryStream::writeBytes(const void* data, size_t size)
 
 void MemoryStream::writeBits(const void* data, size_t size)
 {
+    if(bitSize + size > buf.size() * 8)
+        buf.resize(buf.size() * 2);
+
+    auto ptr = static_cast<const std::byte*>(data);
+    while(size >= 8)
+    {
+        writeBits(*ptr++, 8);
+        size -= 8;
+    }
+    if(size)
+        writeBits(*ptr, size);
+
+    bitSize += size;
 }
 
 void MemoryStream::serialize(const void* data, const Properties& properties)
@@ -33,8 +46,6 @@ void MemoryStream::serialize(const void* data, const Properties& properties)
             write(*(const uint32_t*)ptr);
         else if(member.type == typeid(uint64_t))
             write(*(const uint64_t*)ptr);
-        else if(member.type == typeid(float))
-            write(*(const float*)ptr);
         else if(member.type == typeid(float))
             write(*(const float*)ptr);
         else if(member.type == typeid(double))
@@ -85,12 +96,20 @@ void MemoryStream::unserialize(void* data, const Properties& properties)
     }
 }
 
-size_t MemoryStream::byteSize() const
+size_t MemoryStream::getByteSize() const
 {
-    return (size + 7) / 8;
+    return (bitSize + 7) / 8;
 }
 
-size_t MemoryStream::bitSize() const
+size_t MemoryStream::getBitSize() const
 {
-    return size;
+    return bitSize;
+}
+
+void MemoryStream::writeBits(std::byte data, size_t size)
+{
+    const auto byteOffset = getByteSize();
+    const auto bitOffset  = getBitSize() & 0x7; // 获取最后 3 bits, 7h = 111b, 2^3 = 8
+
+    buf[byteOffset] |= data << bitOffset;
 }
