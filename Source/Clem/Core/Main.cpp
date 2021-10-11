@@ -266,6 +266,18 @@ void Main::init()
         Main::stop();
     };
 
+    window->onFocus = [&](bool focused)
+    {
+        static uint16_t rate = Main::getRenderRate();
+        if(focused)
+            Main::setRenderRate(rate);
+        else
+        {
+            rate = Main::getRenderRate();
+            Main::setRenderRate(5);
+        }
+    };
+
     // 初始化渲染器
     Renderer::get()->init();
 #else

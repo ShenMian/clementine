@@ -114,6 +114,7 @@ public:
     std::function<void(double, double)> onScroll;
     std::function<void(int, int)>       onKey;
     std::function<void(double, double)> onMouseMove;
+    std::function<void(bool)>           onFocus;
     std::function<void()>               onClose;
 
 protected:
