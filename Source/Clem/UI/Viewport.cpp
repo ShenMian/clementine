@@ -127,8 +127,9 @@ void Viewport::update(Time dt)
 
     framebuffer->clearColorAttachment(1, -1);
 
-#if 0
+#if 1
     deferredRender(dt);
+    // ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
     ImGui::Image((ImTextureID)gbuffer.getTexture(GBuffer::TextureType::Normals)->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
 #else
     forwardRender(dt);
@@ -179,6 +180,49 @@ void Viewport::deferredRender(Time dt)
     lightingPass();
 }
 
+void Viewport::geometryPass()
+{
+    // glDepthMask(GL_TRUE);
+    // glEnable(GL_DEPTH_TEST);
+
+    uploadCamera(geometryShader);
+    gbuffer.bind();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    geometryShader->bind();
+    geometryShader->uploadUniform("u_view", camera.getViewMatrix());
+    geometryShader->uploadUniform("u_projection", camera.getProjectionMatrix());
+    geometryShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
+    Main::registry.each<Model>([&](const Entity& e)
+                               { Renderer::get()->submit(e, geometryShader); });
+    gbuffer.unbind();
+
+    // glDepthMask(GL_FALSE);
+    // glDisable(GL_DEPTH_TEST);
+}
+
+void Viewport::lightingPass()
+{
+    // glEnable(GL_BLEND);
+    // glBlendEquation(GL_FUNC_ADD);
+    // glBlendFunc(GL_ONE, GL_ONE);
+
+    framebuffer->bind();
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    lightingShader->bind();
+    gbuffer.getTexture(GBuffer::TextureType::Position)->bind(0);
+    lightingShader->uploadUniform("position", 0);
+    gbuffer.getTexture(GBuffer::TextureType::Normals)->bind(1);
+    lightingShader->uploadUniform("normal", 1);
+    gbuffer.getTexture(GBuffer::TextureType::AlbedoSpec)->bind(2);
+    lightingShader->uploadUniform("albedo_spec", 2);
+    uploadCamera(lightingShader);
+    uploadLights(lightingShader);
+    Main::registry.each<Model>([&](const Entity& e) { /*Renderer::get()->submit(e, lightingShader);*/ });
+
+    framebuffer->unbind();
+}
+
 void Viewport::forwardRender(Time dt)
 {
     PROFILE_FUNC();
@@ -203,46 +247,6 @@ void Viewport::forwardRender(Time dt)
     Main::registry.each<Model>([&](const Entity& e)
                                { Renderer::get()->submit(e); });
     framebuffer->unbind();
-}
-
-void Viewport::geometryPass()
-{
-    glDepthMask(GL_TRUE);
-    glEnable(GL_DEPTH_TEST);
-
-    uploadCamera(geometryShader);
-    gbuffer.bind();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    geometryShader->bind();
-    geometryShader->uploadUniform("u_view", camera.getViewMatrix());
-    geometryShader->uploadUniform("u_projection", camera.getProjectionMatrix());
-    geometryShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
-    Main::registry.each<Model>([&](const Entity& e)
-                               { Renderer::get()->submit(e, geometryShader); });
-    gbuffer.unbind();
-
-    glDepthMask(GL_FALSE);
-    glDisable(GL_DEPTH_TEST);
-}
-
-void Viewport::lightingPass()
-{
-    // glEnable(GL_BLEND);
-    // glBlendEquation(GL_FUNC_ADD);
-    // glBlendFunc(GL_ONE, GL_ONE);
-
-    glClear(GL_COLOR_BUFFER_BIT);
-    lightingShader->bind();
-    gbuffer.getTexture(GBuffer::TextureType::Position)->bind(0);
-    lightingShader->uploadUniform("position", 0);
-    gbuffer.getTexture(GBuffer::TextureType::Normals)->bind(1);
-    lightingShader->uploadUniform("normal", 1);
-    gbuffer.getTexture(GBuffer::TextureType::AlbedoSpec)->bind(2);
-    lightingShader->uploadUniform("albedo_spec", 2);
-    uploadCamera(lightingShader);
-    uploadLights(lightingShader);
-    Main::registry.each<Model>([&](const Entity& e)
-                               { ; });
 }
 
 void Viewport::toolbar()

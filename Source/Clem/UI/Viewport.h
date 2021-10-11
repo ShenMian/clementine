@@ -32,10 +32,10 @@ public:
 
 private:
     void deferredRender(Time dt);
-    void forwardRender(Time dt);
-
     void geometryPass(); // 几何处理阶段
     void lightingPass(); // 光照阶段
+
+    void forwardRender(Time dt);
 
     void toolbar();
     void gizmos();

@@ -22,67 +22,6 @@ static std::unordered_map<Shader::Stage, GLenum> GLStage = {
     {Shader::Stage::Vertex, GL_VERTEX_SHADER},
     {Shader::Stage::Fragment, GL_FRAGMENT_SHADER}};
 
-void GLShader::compile(const std::string& name, Stage stage)
-{
-    const auto assets = Application::get().getAssetPath();
-    if(!fs::exists(assets / "shaders"))
-        fs::create_directories(assets / "shaders");
-
-    const fs::path path = assets / "shaders" / (name + extensions[stage]);
-
-    auto shader = glCreateShader(GLStage[stage]);
-
-    Assert::isTrue(fs::exists(path), std::format("shader source file doesn't exist: '{}'", fs::absolute(path).string()));
-    auto size = fs::file_size(path);
-
-    std::ifstream file(path, std::ios::binary);
-    Assert::isTrue(file.is_open(), std::format("can't open file: '{}'", fs::absolute(path).string()));
-
-    std::vector<char> source(size);
-    file.read(source.data(), source.size() * sizeof(char));
-    file.close();
-    source.push_back('\0');
-
-    const auto* ptr = reinterpret_cast<GLchar*>(source.data());
-    glShaderSource(shader, 1, &ptr, nullptr);
-    glCompileShader(shader);
-
-    int success;
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-    if(!success)
-    {
-        GLint size = 0;
-        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &size);
-        std::string info(size, '\0');
-        glGetShaderInfoLog(shader, (GLsizei)info.size(), &size, info.data());
-        Assert::isTrue(false, std::format("shader '{}' compilation failure: {}", name, info));
-
-        glDeleteShader(shader);
-        return;
-    }
-
-    glAttachShader(handle, shader);
-}
-
-void GLShader::link()
-{
-    glLinkProgram(handle);
-
-    int success;
-    glGetProgramiv(handle, GL_LINK_STATUS, &success);
-    if(!success)
-    {
-        GLint size = 0;
-        glGetProgramiv(handle, GL_INFO_LOG_LENGTH, &size);
-        std::string info(size, 0);
-        glGetProgramInfoLog(handle, (GLsizei)info.size(), &size, info.data());
-        Assert::isTrue(false, std::format("shader '{}' link failure: {}", name, info));
-
-        glDeleteProgram(handle);
-        return;
-    }
-}
-
 GLShader::GLShader(const std::string& name)
     : Shader(name)
 {
@@ -309,51 +248,110 @@ void GLShader::bind()
 void GLShader::uploadUniform(const std::string& name, const Matrix4& mat)
 {
     bind();
-    auto location = glGetUniformLocation(handle, name.c_str());
-    // Assert::isTrue(location != -1, std::format("uniform '{}' doesn't exist", name));
-    glUniformMatrix4fv(location, 1, false, mat.data()); // column major: GL_FALSE, row major: GL_TRUE
-
+    glUniformMatrix4fv(getLocation(name), 1, false, mat.data()); // column major: GL_FALSE, row major: GL_TRUE
     GLCheckError();
 }
 
 void GLShader::uploadUniform(const std::string& name, const Vector3& vec)
 {
     bind();
-    auto location = glGetUniformLocation(handle, name.c_str());
-    // Assert::isTrue(location != -1, std::format("uniform '{}' doesn't exist", name));
-    glUniform3f(location, vec.x, vec.y, vec.z);
-
+    glUniform3f(getLocation(name), vec.x, vec.y, vec.z);
     GLCheckError();
 }
 
 void GLShader::uploadUniform(const std::string& name, const Vector2& vec)
 {
     bind();
-    auto location = glGetUniformLocation(handle, name.c_str());
-    // Assert::isTrue(location != -1, std::format("uniform '{}' doesn't exist", name));
-    glUniform2f(location, vec.x, vec.y);
-
+    glUniform2f(getLocation(name), vec.x, vec.y);
     GLCheckError();
 }
 
 void GLShader::uploadUniform(const std::string& name, float value)
 {
     bind();
-    auto location = glGetUniformLocation(handle, name.c_str());
-    // Assert::isTrue(location != -1, std::format("uniform '{}' doesn't exist", name));
-    glUniform1f(location, value);
-
+    glUniform1f(getLocation(name), value);
     GLCheckError();
 }
 
 void GLShader::uploadUniform(const std::string& name, int value)
 {
     bind();
-    auto location = glGetUniformLocation(handle, name.c_str());
-    // Assert::isTrue(location != -1, std::format("uniform '{}' doesn't exist", name));
-    glUniform1i(location, value);
-
+    glUniform1i(getLocation(name), value);
     GLCheckError();
+}
+
+int GLShader::getLocation(const std::string& name)
+{
+    const auto it = locations.find(name);
+    if(it == locations.end())
+    {
+        // Assert::isTrue(location != -1, std::format("uniform '{}' doesn't exist", name));
+        const auto location   = glGetUniformLocation(handle, name.c_str());
+        locations[name] = location;
+        return location;
+    }
+    return it->second;
+}
+
+void GLShader::compile(const std::string& name, Stage stage)
+{
+    const auto assets = Application::get().getAssetPath();
+    if(!fs::exists(assets / "shaders"))
+        fs::create_directories(assets / "shaders");
+
+    const fs::path path = assets / "shaders" / (name + extensions[stage]);
+
+    auto shader = glCreateShader(GLStage[stage]);
+
+    Assert::isTrue(fs::exists(path), std::format("shader source file doesn't exist: '{}'", fs::absolute(path).string()));
+    auto size = fs::file_size(path);
+
+    std::ifstream file(path, std::ios::binary);
+    Assert::isTrue(file.is_open(), std::format("can't open file: '{}'", fs::absolute(path).string()));
+
+    std::vector<char> source(size);
+    file.read(source.data(), source.size() * sizeof(char));
+    file.close();
+    source.push_back('\0');
+
+    const auto* ptr = reinterpret_cast<GLchar*>(source.data());
+    glShaderSource(shader, 1, &ptr, nullptr);
+    glCompileShader(shader);
+
+    int success;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+    if(!success)
+    {
+        GLint size = 0;
+        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &size);
+        std::string info(size, '\0');
+        glGetShaderInfoLog(shader, (GLsizei)info.size(), &size, info.data());
+        Assert::isTrue(false, std::format("shader '{}' compilation failure: {}", name, info));
+
+        glDeleteShader(shader);
+        return;
+    }
+
+    glAttachShader(handle, shader);
+}
+
+void GLShader::link()
+{
+    glLinkProgram(handle);
+
+    int success;
+    glGetProgramiv(handle, GL_LINK_STATUS, &success);
+    if(!success)
+    {
+        GLint size = 0;
+        glGetProgramiv(handle, GL_INFO_LOG_LENGTH, &size);
+        std::string info(size, 0);
+        glGetProgramInfoLog(handle, (GLsizei)info.size(), &size, info.data());
+        Assert::isTrue(false, std::format("shader '{}' link failure: {}", name, info));
+
+        glDeleteProgram(handle);
+        return;
+    }
 }
 
 void GLShader::loadFromSource(const std::string& vertSrc, const std::string& fragSrc)

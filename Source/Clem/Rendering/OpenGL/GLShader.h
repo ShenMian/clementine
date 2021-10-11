@@ -5,6 +5,7 @@
 
 #include "Rendering/Shader.h"
 #include <string>
+#include <unordered_map>
 
 namespace clem
 {
@@ -31,12 +32,14 @@ public:
     void uploadUniform(const std::string& name, int value) override;
 
 private:
+    int  getLocation(const std::string& name);
     void compile(const std::string& name, Stage stage);
     void link();
 
     void loadFromSource(const std::string& vertSrc, const std::string& fragSrc);
 
-    handle_type handle;
+    handle_type                          handle;
+    std::unordered_map<std::string, int> locations;
 };
 
 } // namespace clem
