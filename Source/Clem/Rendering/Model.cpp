@@ -97,7 +97,7 @@ void Model::loadObj(const std::filesystem::path& path, bool compress)
 
     auto loadTexture = [&](const std::string& name)
     {
-        if(name.empty())
+        if(name.empty() || !fs::exists(path.parent_path() / name))
             return std::shared_ptr<Texture2D>();
         return Texture2D::create(path.parent_path() / name);
     };
@@ -168,9 +168,10 @@ void Model::loadObj(const std::filesystem::path& path, bool compress)
         vertexCount += vertexBuffer->count();
 
         // 加载材质
-        Material material;
         if(shape.mesh.material_ids[0] >= 0)
         {
+            Material material;
+
             const auto& mat = mats[shape.mesh.material_ids[0]];
 
             material.name      = mat.name;
@@ -186,8 +187,9 @@ void Model::loadObj(const std::filesystem::path& path, bool compress)
             material.roughness = loadTexture(mat.roughness_texname);
             material.normal    = loadTexture(mat.bump_texname);
             material.emissive  = loadTexture(mat.emissive_texname);
+
+            materials.push_back(std::move(material));
         }
-        materials.push_back(std::move(material));
 
         loadedMeshesCount++;
         Main::getWindow()->setTitle(std::format("Importing {}/{}", loadedMeshesCount, shapes.size()));
