@@ -14,8 +14,6 @@
 
 #include <memory>
 
-// TODO: 将对 CommandBuffer 的包装实现转移到这里
-
 namespace clem
 {
 

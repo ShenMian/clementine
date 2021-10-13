@@ -181,7 +181,7 @@ void Model::loadObj(const std::filesystem::path& path, bool compress)
             material.emission  = {mat.emission[0], mat.emission[1], mat.emission[2]};
             material.shininess = mat.shininess;
 
-            material.albedo    = loadTexture(mat.diffuse_texname); // FIXME: 可能崩溃
+            material.albedo    = loadTexture(mat.diffuse_texname);
             material.metallic  = loadTexture(mat.metallic_texname);
             material.metallic  = loadTexture(mat.specular_highlight_texname);
             material.roughness = loadTexture(mat.roughness_texname);
