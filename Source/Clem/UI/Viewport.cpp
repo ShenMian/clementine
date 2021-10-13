@@ -127,7 +127,7 @@ void Viewport::update(Time dt)
 
     framebuffer->clearColorAttachment(1, -1);
 
-#if 1
+#if 0
     deferredRender(dt);
     // ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
     ImGui::Image((ImTextureID)gbuffer.getTexture(GBuffer::TextureType::Normals)->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
@@ -446,10 +446,14 @@ void Viewport::updateCameraControl(Time dt)
     if(!ImGui::IsWindowHovered())
         return;
 
-    float speed = 40 * dt.seconds();
+    float moveSpeed   = 40 * dt.seconds();
+    float rotateSpeed = 25 * dt.seconds();
 
     if(Input::isPressed(KeyCode::LShift))
-        speed *= 3;
+    {
+        moveSpeed   *= 3;
+        rotateSpeed *= 3;
+    }
 
 #if 0
     if(Input::isPressed(KeyCode::W))
@@ -466,39 +470,39 @@ void Viewport::updateCameraControl(Time dt)
         camera.view.translation += Matrix4(camera.view).down().normalize() * speed;
 #else
     if(Input::isPressed(KeyCode::W))
-        camera.view.translation += -Vector3::unit_z * speed;
+        camera.view.translation += -Vector3::unit_z * moveSpeed;
     if(Input::isPressed(KeyCode::S))
-        camera.view.translation += Vector3::unit_z * speed;
+        camera.view.translation += Vector3::unit_z * moveSpeed;
     if(Input::isPressed(KeyCode::A))
-        camera.view.translation += -Vector3::unit_x * speed;
+        camera.view.translation += -Vector3::unit_x * moveSpeed;
     if(Input::isPressed(KeyCode::D))
-        camera.view.translation += Vector3::unit_x * speed;
+        camera.view.translation += Vector3::unit_x * moveSpeed;
     if(Input::isPressed(KeyCode::E))
-        camera.view.translation += -Vector3::unit_y * speed;
+        camera.view.translation += -Vector3::unit_y * moveSpeed;
     if(Input::isPressed(KeyCode::Q))
-        camera.view.translation += Vector3::unit_y * speed;
+        camera.view.translation += Vector3::unit_y * moveSpeed;
 #endif
 
     if(Input::isPressed(KeyCode::Left))
-        camera.view.rotation.y += -0.5;
+        camera.view.rotation.y += -rotateSpeed;
     else if(Input::isPressed(KeyCode::Right))
-        camera.view.rotation.y += 0.5;
+        camera.view.rotation.y += rotateSpeed;
     else if(Input::isPressed(KeyCode::Up))
-        camera.view.rotation.x += -0.5;
+        camera.view.rotation.x += -rotateSpeed;
     else if(Input::isPressed(KeyCode::Down))
-        camera.view.rotation.x += 0.5;
+        camera.view.rotation.x += rotateSpeed;
 
     if(Input::isPressed(KeyCode::W))
-        camera.view_.translate(Vector3::unit_z * speed);
+        camera.view_.translate(Vector3::unit_z * moveSpeed);
 
     Vector3 pos = camera.view_.translate();
 
     camera.view_.translate(camera.view_.translate() - pos);
 
     if(Input::isPressed(KeyCode::Left))
-        camera.view_.rotateY(radians(0.5));
+        camera.view_.rotateY(radians(rotateSpeed));
     if(Input::isPressed(KeyCode::Right))
-        camera.view_.rotateY(radians(-0.5));
+        camera.view_.rotateY(radians(-rotateSpeed));
 
     camera.view_.translate(pos);
 
