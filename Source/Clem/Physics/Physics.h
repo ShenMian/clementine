@@ -1,8 +1,8 @@
 // Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "Physics/BoxCollider.h"
-#include "Physics/Collider.h"
+#include "Colliders/BoxCollider.h"
+#include "Colliders/Collider.h"
+#include "Colliders/SphereCollider.h"
 #include "Physics/PhysicsSystem.h"
 #include "Physics/Rigidbody.h"
-#include "Physics/SphereCollider.h"

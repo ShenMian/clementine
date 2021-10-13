@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include "Collider.h"
-#include "Rigidbody.h"
+#include "Physics/Rigidbody.h"
 #include <cassert>
 
 namespace clem
