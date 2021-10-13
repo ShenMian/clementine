@@ -34,27 +34,68 @@ public:
         createPanels();
         createSkybox();
 
-        auto model                      = Main::registry.create("model");
-        model.add<Transform>().rotation = {0, 90, 0};
+        std::vector<std::future<void>> futures;
 
-#if 0
-        model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf");
-        // model.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj");
-        model.get<Transform>().translation = {0, 0, -90};
+#if 1
+        {
+            auto  entity   = Main::registry.create("m4a1");
+            auto& tf       = entity.add<Transform>();
+            tf.translation = {0, 0, 0};
+            tf.scale       = {0.2, 0.2, 0.2};
+            entity.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf");
+            // entity.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj");
+        }
+
+        /*
+        futures.emplace_back(std::async([]()
+                                        {
+                                            auto entity                         = Main::registry.create("m4a1");
+                                            entity.add<Transform>().translation = {0, 0, -90};
+                                            entity.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf");
+                                            // entity.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj");
+                                        }));
+        */
 #endif
 
 #if 1
-        model.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj", true);
-        model.get<Transform>().scale = {0.1, 0.1, 0.1};
+        {
+            auto entity                   = Main::registry.create("crytek_sponza");
+            entity.add<Transform>().scale = {0.1, 0.1, 0.1};
+            entity.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj", true);
+        }
+
+        /*
+        futures.emplace_back(std::async([&]()
+                                        {
+                                            auto entity                   = Main::registry.create("crytek_sponza");
+                                            entity.add<Transform>().scale = {0.1, 0.1, 0.1};
+                                            entity.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj", true);
+                                        }));
+        */
 #endif
 
 #if 0
-        model.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Exterior/exterior.obj");
-        // model.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Interior/interior.obj");
-        model.get<Transform>().scale = {0.07, 0.07, 0.07};
+        {
+            auto entity                   = Main::registry.create("bistro");
+            entity.add<Transform>().scale = {0.07, 0.07, 0.07};
+            entity.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Exterior/exterior.obj");
+            // entity.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Interior/interior.obj");
+        }
+
+        /*
+        futures.emplace_back(std::async([&]()
+                                        {
+                                            auto entity                   = Main::registry.create("bistro");
+                                            entity.add<Transform>().scale = {0.07, 0.07, 0.07};
+                                            entity.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Exterior/exterior.obj");
+                                            // entity.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Interior/interior.obj");
+                                        }));
+        */
 #endif
 
-        // model.add<Model>("../../../3DModel/scene/Kitbash3d/Kitbash3d_Steampunk.obj");
+        for(auto& future : futures)
+            future.wait();
+
         // model.add<Model>("../../../3DModel/scene/San_Miguel/san-miguel-low-poly.obj", true);
     }
 
