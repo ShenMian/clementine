@@ -27,6 +27,18 @@ void VKCommandBuffer::end()
     handle.end();
 }
 
+void VKCommandBuffer::clear(uint8_t flags)
+{
+}
+
+void VKCommandBuffer::setClearColor(const Vector4& color)
+{
+}
+
+void VKCommandBuffer::setClearDepth(float depth)
+{
+}
+
 void VKCommandBuffer::setViewport(int x, int y, int w, int h)
 {
     vk::Viewport viewport((float)x, (float)y, (float)w, (float)h);
