@@ -5,6 +5,7 @@
 
 #include <memory>
 #include <string>
+#include <unordered_map>
 
 class Vector2;
 class Vector3;
@@ -30,7 +31,8 @@ public:
         Vertex,
         Geometry,
         Fragment,
-        Pixel = Fragment
+        Pixel = Fragment,
+        Compute
     };
 
     /**
@@ -50,16 +52,14 @@ public:
     Shader_(const std::string& name, Stage stage);
 
     /**
-     * @brief 设置名称.
-     * 
-     * @param name 名称.
-     */
-    void setName(const std::string& name);
-
-    /**
      * @brief 获取名称.
      */
     const std::string& getName() const;
+
+    /**
+     * @brief 获取阶段.
+     */
+    Stage getStage() const;
 
     /*
     virtual void uploadUniform(const std::string& name, int value)             = 0;
@@ -75,6 +75,8 @@ public:
 protected:
     std::string name;
     Stage       stage;
+
+    static std::unordered_map<Shader_::Stage, const char*> extension;
 };
 
 /**

@@ -10,6 +10,12 @@
 namespace clem
 {
 
+std::unordered_map<Shader_::Stage, const char*> Shader_::extension = {
+    {Shader_::Stage::Vertex, "vert"},
+    {Shader_::Stage::Geometry, "geom"},
+    {Shader_::Stage::Fragment, "frag"},
+    {Shader_::Stage::Compute, "comp"}};
+
 std::shared_ptr<Shader_> Shader_::create(const std::string& name, Stage stage)
 {
     switch(Renderer_::getAPI())
@@ -31,14 +37,14 @@ Shader_::Shader_(const std::string& name, Stage stage)
 {
 }
 
-void Shader_::setName(const std::string& name)
-{
-    this->name = name;
-}
-
 const std::string& Shader_::getName() const
 {
     return name;
+}
+
+Shader_::Stage Shader_::getStage() const
+{
+    return stage;
 }
 
 } // namespace clem

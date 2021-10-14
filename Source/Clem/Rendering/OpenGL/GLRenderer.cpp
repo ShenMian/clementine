@@ -115,6 +115,9 @@ void GLRenderer::submit(const Entity& entity)
 
     for(size_t i = 0; i < meshs.size(); i++)
     {
+        if(i >= mats.size())
+            break;
+
         if(mats[i].albedo)
             mats[i].albedo->bind(0);
         if(mats[i].metallic)

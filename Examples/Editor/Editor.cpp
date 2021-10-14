@@ -36,12 +36,12 @@ public:
 
         std::vector<std::future<void>> futures;
 
-#if 1
+#if 0
         {
             auto  entity   = Main::registry.create("m4a1");
             auto& tf       = entity.add<Transform>();
             tf.translation = {0, 0, 0};
-            tf.scale       = {0.2, 0.2, 0.2};
+            tf.scale       = {0.21, 0.21, 0.21};
             entity.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf");
             // entity.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj");
         }
