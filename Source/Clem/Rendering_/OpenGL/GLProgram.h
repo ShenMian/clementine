@@ -17,7 +17,7 @@ namespace clem
 class GLProgram : public Program
 {
 public:
-    GLProgram(const std::string name);
+    explicit GLProgram(const std::string& name);
     virtual ~GLProgram();
 
 private:

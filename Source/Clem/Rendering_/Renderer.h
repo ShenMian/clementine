@@ -22,10 +22,20 @@ public:
         Metal
     };
 
-    static API getAPI()
-    {
-        return API::OpenGL;
-    }
+    /**
+	 * @brief 设置图形 API.
+	 *
+	 * @param api 图形 API.
+	 */
+    static void setAPI(API api);
+
+    /**
+	 * @brief 获取图形 API.
+	 */
+    static API getAPI();
+
+private:
+    static API api;
 };
 
 /**

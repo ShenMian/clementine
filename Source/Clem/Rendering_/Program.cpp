@@ -3,6 +3,7 @@
 
 #include "Program.h"
 #include "Renderer.h"
+#include <cassert>
 
 #include "OpenGL/GLProgram.h"
 
@@ -17,6 +18,9 @@ std::shared_ptr<Program> Program::create(const std::string& name)
 
     case OpenGL:
         return std::make_shared<GLProgram>(name);
+
+    default:
+        assert(false);
     }
     return nullptr;
 }

@@ -7,11 +7,6 @@
 #include <string>
 #include <unordered_map>
 
-class Vector2;
-class Vector3;
-class Vector4;
-class Matrix4;
-
 namespace clem
 {
 
@@ -60,17 +55,6 @@ public:
      * @brief 获取阶段.
      */
     Stage getStage() const;
-
-    /*
-    virtual void uploadUniform(const std::string& name, int value)             = 0;
-    virtual void uploadUniform(const std::string& name, float value)           = 0;
-    virtual void uploadUniform(const std::string& name, const Vector2& vector) = 0;
-    virtual void uploadUniform(const std::string& name, const Vector3& vector) = 0;
-    virtual void uploadUniform(const std::string& name, const Vector4& vector) = 0;
-    virtual void uploadUniform(const std::string& name, const Matrix4& matrix) = 0;
-
-    virtual void bind() = 0;
-    */
 
 protected:
     std::string name;

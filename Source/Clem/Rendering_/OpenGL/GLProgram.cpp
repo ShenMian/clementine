@@ -12,20 +12,18 @@ namespace fs = std::filesystem;
 namespace clem
 {
 
-GLProgram::GLProgram(const std::string name)
+GLProgram::GLProgram(const std::string& name)
     : Program(name)
 {
     handle = glCreateProgram();
 
-    // .vert.glsl
-
-    if(fs::exists(name + ".vert.spv"))
+    if(fs::exists(name + ".vert.spv") || fs::exists(name + ".vert.glsl"))
         Shader_::create(name, Shader_::Stage::Vertex);
-    else if(fs::exists(name + ".geom.spv"))
+    else if(fs::exists(name + ".geom.spv") || fs::exists(name + ".geom.glsl"))
         Shader_::create(name, Shader_::Stage::Geometry);
-    else if(fs::exists(name + ".frag.spv"))
+    else if(fs::exists(name + ".frag.spv") || fs::exists(name + ".frag.glsl"))
         Shader_::create(name, Shader_::Stage::Fragment);
-    else if(fs::exists(name + ".comp.spv"))
+    else if(fs::exists(name + ".comp.spv") || fs::exists(name + ".comp.glsl"))
         Shader_::create(name, Shader_::Stage::Compute);
 }
 

@@ -3,6 +3,7 @@
 
 #include "Shader.h"
 #include "Renderer.h"
+#include <cassert>
 
 #include "OpenGL/GLShader.h"
 #include "Vulkan/VKShader.h"
@@ -27,10 +28,12 @@ std::shared_ptr<Shader_> Shader_::create(const std::string& name, Stage stage)
 
     case Vulkan:
         return std::make_shared<VKShader_>(name, stage);
+
+    default:
+        assert(false);
     }
     return nullptr;
 }
-
 
 Shader_::Shader_(const std::string& name, Stage stage)
     : name(name), stage(stage)
