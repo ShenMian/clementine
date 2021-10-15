@@ -20,11 +20,11 @@ struct Material
   sampler2D normal;
 };
 
-layout(location = 0) out vec3 position;
+layout(location = 0) out vec3 pos;
 layout(location = 1) out vec3 normal;
 layout(location = 2) out vec4 albedo_spec;
 
-in vec3 v_position;
+in vec3 v_pos;
 in vec3 v_normal;
 in vec2 v_uv;
 
@@ -32,7 +32,7 @@ uniform Material u_material;
 
 void main()
 {
-  position        = v_position;
+  pos             = v_pos;
   normal          = v_normal;
   albedo_spec.rbg = texture(u_material.albedo, v_uv).rgb;
   albedo_spec.a   = texture(u_material.metallic, v_uv).r;

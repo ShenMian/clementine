@@ -60,15 +60,6 @@ struct Material
     sampler2D normal;
 };
 
-layout (location = 0) out vec4 frag_color;
-layout (location = 1) out int  entity_id;
-
-in vec3 v_position;
-in vec3 v_color;
-in vec3 v_normal;
-in vec2 v_uv;
-in vec3 v_dir_to_cam;
-
 uniform int            u_direction_lights_size;
 uniform DirectionLight u_direction_lights[DIRECTION_LIGHT_MAX];
 uniform int            u_point_lights_size;
@@ -79,6 +70,16 @@ uniform SpotLight      u_spot_lights[SPOT_LIGHT_MAX];
 uniform Material  u_material;
 uniform int       u_entity_id;
 uniform sampler2D u_shadow_map;
+
+layout (location = 0) out vec4 frag_color;
+layout (location = 1) out int  entity_id;
+
+in vec3 v_pos;
+in vec3 v_color;
+in vec3 v_normal;
+in vec2 v_uv;
+
+in vec3 v_dir_to_cam;
 
 vec4 CalcLighting();
 
@@ -135,7 +136,7 @@ vec3 CalcDirLight(DirectionLight light, vec3 normal)
 // 计算点光源光照
 vec3 CalcPointLight(PointLight light, vec3 normal)
 {
-    const vec3 dir_to_light = normalize(light.position - v_position);
+    const vec3 dir_to_light = normalize(light.position - v_pos);
 
     // FIXME: 临时调试用
     light.constant  = 1.0;
@@ -143,7 +144,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal)
     light.quadratic = 0.032;
 
     // 衰减率
-    const float distance    = length(light.position - v_position);
+    const float distance    = length(light.position - v_pos);
     const float attenuation = light.intesity / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
 
     DirectionLight dirLight;
@@ -156,7 +157,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal)
 // 计算聚光灯光照
 vec3 CaclSpotLight(SpotLight light, vec3 normal)
 {
-    const vec3 dir_to_light = normalize(light.position - v_position);
+    const vec3 dir_to_light = normalize(light.position - v_pos);
 
     const float theta     = dot(dir_to_light, normalize(-light.direction)); 
     const float epsilon   = light.cutOff - light.outerCutOff;
