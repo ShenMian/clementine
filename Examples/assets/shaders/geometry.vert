@@ -16,9 +16,12 @@ layout (location = 3) in vec2 uv;
 layout (location = 4) in vec3 tangent;
 layout (location = 5) in vec3 bitangent;
 
-out vec3 v_pos;
-out vec3 v_normal;
-out vec2 v_uv;
+out Out
+{
+  vec3 world_pos;
+  vec3 normal;
+  vec2 uv;
+} vert;
 
 void main()
 {
@@ -27,9 +30,9 @@ void main()
   vec3 N   = normalize(vec3(u_model * vec4(normal,    0.0)));
   mat3 TBN = transpose(mat3(T, B, N));
 
-  v_pos    = vec3(u_model * vec4(pos, 1.0));
-  v_normal = normalize(mat3(transpose(inverse(u_model))) * normal);
-  v_uv     = uv;
+  vert.world_pos = vec3(u_model * vec4(pos, 1.0));
+  vert.normal    = normalize(mat3(transpose(inverse(u_model))) * normal);
+  vert.uv        = uv;
 
-  gl_Position = u_projection * u_view * vec4(v_pos, 1.0);
+  gl_Position = u_projection * u_view * vec4(vert.world_pos, 1.0);
 }

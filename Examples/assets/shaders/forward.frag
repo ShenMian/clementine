@@ -74,10 +74,13 @@ uniform sampler2D u_shadow_map;
 layout (location = 0) out vec4 frag_color;
 layout (location = 1) out int  entity_id;
 
-in vec3 v_pos;
-in vec3 v_color;
-in vec3 v_normal;
-in vec2 v_uv;
+in Out
+{
+  vec3 world_pos;
+  vec3 color;
+  vec3 normal;
+  vec2 uv;
+} vert;
 
 in vec3 v_dir_to_cam;
 
@@ -85,7 +88,7 @@ vec4 CalcLighting();
 
 void main()
 {
-    frag_color = texture(u_material.albedo, v_uv) * CalcLighting();
+    frag_color = texture(u_material.albedo, vert.uv) * CalcLighting();
 
     // 泛光
     // 提取亮色
@@ -102,7 +105,7 @@ vec3 CalcShadow();
 vec3 CalcDirLight(DirectionLight light, vec3 normal)
 {
     const vec3 dir_to_light = normalize(-light.direction);
-    const vec3 albedo       = texture(u_material.albedo, v_uv).rgb;
+    const vec3 albedo       = texture(u_material.albedo, vert.uv).rgb;
 
     // 环境光照
     const vec3 ka      = u_material.ambient * vec3(light.intesity);
@@ -114,19 +117,19 @@ vec3 CalcDirLight(DirectionLight light, vec3 normal)
     const vec3  diffuse        = kd * light.color * diffuse_amount * albedo;
 
     // 镜面反射光照
-    float shininess = 1.0 - texture(u_material.roughness, v_uv).r;
+    float shininess = 1.0 - texture(u_material.roughness, vert.uv).r;
     if(shininess == 0.0)
         shininess = u_material.shininess;
 
     // const vec3  ks              = u_material.specular * vec3(light.intesity);
-    const vec3  ks              = vec3(texture(u_material.metallic, v_uv).r) * vec3(light.intesity);
+    const vec3  ks              = vec3(texture(u_material.metallic, vert.uv).r) * vec3(light.intesity);
     const vec3  specular_color  = light.color;
     const vec3  reflected_dir   = reflect(-dir_to_light, normal);
     const float specular_amount = pow(max(dot(reflected_dir, v_dir_to_cam), 0.0), shininess);
     const vec3  specular        = ks * light.color * specular_amount * specular_color;
 
     // 放射光
-    const vec3 emissive = u_material.emission * texture(u_material.emissive, v_uv).rgb;
+    const vec3 emissive = u_material.emission * texture(u_material.emissive, vert.uv).rgb;
     
     const vec3 shadow = CalcShadow();
 
@@ -136,7 +139,7 @@ vec3 CalcDirLight(DirectionLight light, vec3 normal)
 // 计算点光源光照
 vec3 CalcPointLight(PointLight light, vec3 normal)
 {
-    const vec3 dir_to_light = normalize(light.position - v_pos);
+    const vec3 dir_to_light = normalize(light.position - vert.world_pos);
 
     // FIXME: 临时调试用
     light.constant  = 1.0;
@@ -144,7 +147,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal)
     light.quadratic = 0.032;
 
     // 衰减率
-    const float distance    = length(light.position - v_pos);
+    const float distance    = length(light.position - vert.world_pos);
     const float attenuation = light.intesity / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
 
     DirectionLight dirLight;
@@ -157,7 +160,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal)
 // 计算聚光灯光照
 vec3 CaclSpotLight(SpotLight light, vec3 normal)
 {
-    const vec3 dir_to_light = normalize(light.position - v_pos);
+    const vec3 dir_to_light = normalize(light.position - vert.world_pos);
 
     const float theta     = dot(dir_to_light, normalize(-light.direction)); 
     const float epsilon   = light.cutOff - light.outerCutOff;
@@ -179,11 +182,11 @@ vec4 CalcLighting()
 {
     vec3 light;
     for(int i = 0; i < u_direction_lights_size; ++i)
-        light += CalcDirLight(u_direction_lights[i], v_normal);
+        light += CalcDirLight(u_direction_lights[i], vert.normal);
     for(int i = 0; i < u_point_lights_size; ++i)
-        light += CalcPointLight(u_point_lights[i], v_normal);
+        light += CalcPointLight(u_point_lights[i], vert.normal);
     for(int i = 0; i < u_spot_lights_size; ++i)
-        light += CaclSpotLight(u_spot_lights[i], v_normal);
+        light += CaclSpotLight(u_spot_lights[i], vert.normal);
     return vec4(light, 1.0);
 }
 

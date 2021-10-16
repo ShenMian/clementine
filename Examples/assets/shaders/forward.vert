@@ -16,20 +16,24 @@ layout (location = 3) in vec2 uv;
 layout (location = 4) in vec3 tangent;
 layout (location = 5) in vec3 bitangent;
 
-out vec3 v_pos;
-out vec3 v_color;
-out vec3 v_normal;
-out vec2 v_uv;
+out Out
+{
+  vec3 world_pos;
+  vec3 color;
+  vec3 normal;
+  vec2 uv;
+} vert;
+
 out vec3 v_dir_to_cam;
 
 void main()
 {
-  v_pos    = vec3(u_model * vec4(pos, 1.0));
-  v_color  = color;
-  v_normal = normalize(mat3(transpose(inverse(u_model))) * normal);
-  v_uv     = uv;
+  vert.world_pos = vec3(u_model * vec4(pos, 1.0));
+  vert.color     = color;
+  vert.normal    = normalize(mat3(transpose(inverse(u_model))) * normal);
+  vert.uv        = uv;
 
-  v_dir_to_cam = normalize(u_view[3].xyz - v_pos);
+  v_dir_to_cam = normalize(u_view[3].xyz - vert.world_pos);
 
   gl_Position = u_projection * u_view * u_model * vec4(pos, 1.0);
 }

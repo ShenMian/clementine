@@ -24,16 +24,19 @@ layout(location = 0) out vec3 pos;
 layout(location = 1) out vec3 normal;
 layout(location = 2) out vec4 albedo_spec;
 
-in vec3 v_pos;
-in vec3 v_normal;
-in vec2 v_uv;
+in Out
+{
+  vec3 world_pos;
+  vec3 normal;
+  vec2 uv;
+} vert;
 
 uniform Material u_material;
 
 void main()
 {
-  pos             = v_pos;
-  normal          = v_normal;
-  albedo_spec.rbg = texture(u_material.albedo, v_uv).rgb;
-  albedo_spec.a   = texture(u_material.metallic, v_uv).r;
+  pos             = vert.world_pos;
+  normal          = vert.normal;
+  albedo_spec.rbg = texture(u_material.albedo, vert.uv).rgb;
+  albedo_spec.a   = texture(u_material.metallic, vert.uv).r;
 }

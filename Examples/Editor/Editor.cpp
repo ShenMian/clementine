@@ -59,8 +59,11 @@ public:
 
 #if 1
         {
-            auto entity                   = Main::registry.create("crytek_sponza");
-            entity.add<Transform>().scale = {0.1, 0.1, 0.1};
+            auto  entity   = Main::registry.create("crytek_sponza");
+            auto& tf       = entity.add<Transform>();
+            tf.scale       = {0.1, 0.1, 0.1};
+            tf.rotation    = {0, 90, 0};
+            tf.translation = {0, -55, -110};
             entity.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj", true);
         }
 

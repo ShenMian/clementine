@@ -162,7 +162,7 @@ void Viewport::deferredRender(Time dt)
         static auto lastWriteTime = writeTime;
         if(writeTime != lastWriteTime)
         {
-            forwardShader = Shader::reload("forward");
+            geometryShader = Shader::reload("geometry");
             lastWriteTime = writeTime;
         }
     }
@@ -171,7 +171,7 @@ void Viewport::deferredRender(Time dt)
         static auto lastWriteTime = writeTime;
         if(writeTime != lastWriteTime)
         {
-            forwardShader = Shader::reload("forward");
+            lightingShader = Shader::reload("lighting");
             lastWriteTime = writeTime;
         }
     }
@@ -227,12 +227,23 @@ void Viewport::forwardRender(Time dt)
 {
     PROFILE_FUNC();
 
-    const auto  writeTime     = fs::last_write_time("../assets/shaders/forward.frag");
-    static auto lastWriteTime = writeTime;
-    if(writeTime != lastWriteTime)
     {
-        forwardShader = Shader::reload("forward");
-        lastWriteTime = writeTime;
+        const auto  writeTime     = fs::last_write_time("../assets/shaders/forward.vert");
+        static auto lastWriteTime = writeTime;
+        if(writeTime != lastWriteTime)
+        {
+            forwardShader = Shader::reload("forward");
+            lastWriteTime = writeTime;
+        }
+    }
+    {
+        const auto  writeTime     = fs::last_write_time("../assets/shaders/forward.frag");
+        static auto lastWriteTime = writeTime;
+        if(writeTime != lastWriteTime)
+        {
+            forwardShader = Shader::reload("forward");
+            lastWriteTime = writeTime;
+        }
     }
 
     uploadLights(forwardShader);
