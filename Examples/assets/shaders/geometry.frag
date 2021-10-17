@@ -20,9 +20,9 @@ struct Material
   sampler2D normal;
 };
 
-layout(location = 0) out vec3 pos;
-layout(location = 1) out vec3 normal;
-layout(location = 2) out vec4 albedo_spec;
+layout (location = 0) out vec3 pos;
+layout (location = 1) out vec3 normal;
+layout (location = 2) out vec4 albedo_spec;
 
 in Out
 {

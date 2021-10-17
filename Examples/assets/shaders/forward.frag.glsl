@@ -4,7 +4,7 @@
 
 #version 450
 
-#define PI 3.141592654
+const float PI =  3.141592654;
 
 #define DIRECTION_LIGHT_MAX 4
 #define POINT_LIGHT_MAX     16

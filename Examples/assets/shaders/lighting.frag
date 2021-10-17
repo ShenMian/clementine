@@ -4,6 +4,8 @@
 
 #version 450
 
+const float PI = 3.141592654;
+
 #define DIRECTION_LIGHT_MAX 8
 #define POINT_LIGHT_MAX     32
 #define SPOT_LIGHT_MAX      32
@@ -60,10 +62,6 @@ struct Material
     sampler2D normal;
 };
 
-layout(location = 0) out vec4 frag_color;
-
-in vec2 v_uv;
-
 uniform int            u_direction_lights_size;
 uniform DirectionLight u_direction_lights[DIRECTION_LIGHT_MAX];
 uniform int            u_point_lights_size;
@@ -77,16 +75,20 @@ uniform sampler2D u_albedo_spec;
 uniform Material  u_material;
 uniform vec3      u_dir_to_cam;
 
-vec4 CalcLighting(vec3 position, vec3 normal, vec3 albedo);
+layout (location = 0) out vec4 frag_color;
+
+in vec2 v_uv;
+
+vec3 CalcLighting(vec3 position, vec3 normal, vec3 albedo);
 
 void main()
 {
     vec3  position = texture(u_position, v_uv).rgb;
-    vec3  normal   = texture(u_normal, v_uv).rgb;
+    vec3  normal   = texture(u_normal, v_uv).rgb; // texture(u_material.normal, v_uv).rgb;
     vec3  albedo   = texture(u_albedo_spec, v_uv).rgb;
     float specular = texture(u_albedo_spec, v_uv).r;
 
-    frag_color = CalcLighting(position, normal, albedo);
+    frag_color = vec4(CalcLighting(position, normal, albedo), 1.0);
 }
 
 // 计算平行光照
@@ -159,7 +161,7 @@ vec3 CaclSpotLight(SpotLight light, vec3 position, vec3 normal)
 }
 
 // 计算总光照
-vec4 CalcLighting(vec3 position, vec3 normal, vec3 albedo)
+vec3 CalcLighting(vec3 position, vec3 normal, vec3 albedo)
 {
     vec3 light;
     for(int i = 0; i < u_direction_lights_size; ++i)
@@ -168,5 +170,79 @@ vec4 CalcLighting(vec3 position, vec3 normal, vec3 albedo)
         light += CalcPointLight(u_point_lights[i], position, normal);
     for(int i = 0; i < u_spot_lights_size; ++i)
         light += CaclSpotLight(u_spot_lights[i], position, normal);
-    return vec4(light, 1.0);
+    return light;
+}
+
+////////////////////
+
+vec3  SchlickFresnel(vec3 f0, float cosT);
+float GeometricOcclusion(float a, float NdotV);
+float NormalDistribution(float a, float NdotH);
+
+// Cook-Torance microfacet BRDF
+vec3 BRDF(vec3 albedo, vec3 normal, vec3 dir_to_light)
+{
+    vec3 light_dir = -dir_to_light;
+    vec3 cam_dir   = -u_dir_to_cam;
+
+    float roughness = 0.0;
+    float metallic  = texture(u_material.metallic, v_uv).r;
+
+    // Compute color at normal incidence
+    vec3 f0 = vec3(1.0 - 0.04);
+    f0      = abs((1.0 - f0) / (1.0 + f0));
+    f0      = f0 * f0;
+    f0      = mix(f0, albedo, metallic);
+
+    // Compute half vector and all scalar products
+    vec3  halfVec = normalize(cam_dir + light_dir);
+    float NdotL   = clamp(dot(normal, light_dir),  0.0,   1.0);
+    float NdotV   = clamp(dot(normal, cam_dir),    0.001, 1.0);
+    float NdotH   = clamp(dot(normal, halfVec),    0.001, 1.0);
+    float LdotH   = clamp(dot(light_dir, halfVec), 0.0,   1.0);
+    float VdotH   = clamp(dot(cam_dir, halfVec),   0.0,   1.0);
+
+    float alpha = roughness * roughness;
+    vec3  F     = SchlickFresnel(f0, VdotH);
+    float G     = GeometricOcclusion(alpha, NdotV);
+    float D     = NormalDistribution(alpha, NdotH);
+
+    // Compute specular term and accumulate light
+    vec3 specular = F * G * D / (4.0 * NdotV);
+
+    return albedo * NdotL + specular;
+}
+
+// 菲涅尔方程
+// f0   平面的基础反射率
+// cosT 表面法向量n与观察方向v的点乘的结果
+vec3 SchlickFresnel(vec3 f0, float cosT)
+{
+    return f0 + (1.0 - f0) * pow(1.0 - cosT, 5.0);
+}
+
+float GeometricOcclusion(float a, float NdotV)
+{
+    const float a2 = a * 2;
+    return 2.0 * NdotV / (NdotV + sqrt(a2 + (1.0 - a2) * (NdotV * NdotV)));
+}
+
+float GeometrySchlickGGX(float NdotV, float k)
+{
+    return NdotV / (NdotV * (1.0 - k) + k);
+}
+
+float GeometrySmith(vec3 N, vec3 V, vec3 L, float k)
+{
+    float NdotV = max(dot(N, V), 0.0);
+    float NdotL = max(dot(N, L), 0.0);
+    return GeometrySchlickGGX(NdotV, k) * GeometrySchlickGGX(NdotL, k);
+}
+
+// 正态分布 GGX
+float NormalDistribution(float a, float NdotH)
+{
+    const float a2    = a * a;
+    const float denom = NdotH * NdotH * (a2 - 1.0) + 1.0;
+    return a2 / (PI * denom * denom);
 }
