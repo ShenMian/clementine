@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Core/Math/Math.h"
 #include <memory>
 #include <string>
 
@@ -26,16 +27,14 @@ public:
 
     explicit Program(const std::string& name);
 
-    /*
-    virtual void uploadUniform(const std::string& name, int value)             = 0;
-    virtual void uploadUniform(const std::string& name, float value)           = 0;
-    virtual void uploadUniform(const std::string& name, const Vector2& vector) = 0;
-    virtual void uploadUniform(const std::string& name, const Vector3& vector) = 0;
-    virtual void uploadUniform(const std::string& name, const Vector4& vector) = 0;
-    virtual void uploadUniform(const std::string& name, const Matrix4& matrix) = 0;
-
     virtual void bind() = 0;
-    */
+
+    virtual void uploadUniform(const std::string& name, int value)            = 0;
+    virtual void uploadUniform(const std::string& name, float value)          = 0;
+    virtual void uploadUniform(const std::string& name, const Vector2& value) = 0;
+    virtual void uploadUniform(const std::string& name, const Vector3& value) = 0;
+    virtual void uploadUniform(const std::string& name, const Vector4& value) = 0;
+    virtual void uploadUniform(const std::string& name, const Matrix4& value) = 0;
 
 protected:
     std::string name;

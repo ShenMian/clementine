@@ -52,7 +52,6 @@ void GLCheckError()
     {
         if(error == GL_NO_ERROR)
             break;
-
         Assert::isTrue(false, std::format("OpenGL unknown error: ({}): {}", error, GLGetErrorString(error)));
     }
 }
@@ -226,6 +225,7 @@ void GLRenderer::setViewport(int x, int y, int w, int h)
 
 void GLRenderer::draw(std::shared_ptr<VertexArray> vertexArray)
 {
+    // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); »æÖÆÏß¿òÍ¼
     vertexArray->bind();
     glDrawElements(GL_TRIANGLES, (GLsizei)vertexArray->getIndexBuffer()->count(), GL_UNSIGNED_INT, nullptr);
 }

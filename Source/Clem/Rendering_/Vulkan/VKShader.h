@@ -17,6 +17,8 @@ class VKShader_ : public Shader_
 {
 public:
     VKShader_(const std::string& name, Stage stage);
+
+    size_t getNativeHandle() const override;
 };
 
 /**

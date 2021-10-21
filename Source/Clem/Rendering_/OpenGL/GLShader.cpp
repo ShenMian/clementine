@@ -2,10 +2,11 @@
 // License(Apache-2.0)
 
 #include "GLShader.h"
-#include <cassert>
+#include "Core/Assert.hpp"
 #include <filesystem>
 #include <format>
 #include <fstream>
+#include <glad/glad.h>
 #include <unordered_map>
 
 namespace fs = std::filesystem;
@@ -22,7 +23,16 @@ GLShader_::GLShader_(const std::string& name, Stage stage)
     : Shader_(name, stage)
 {
     handle = glCreateShader(GLStage[stage]);
+    load();
+}
 
+GLShader_::~GLShader_()
+{
+    glDeleteShader(handle);
+}
+
+void GLShader_::load()
+{
     // 从 SPIR-V 文件载入
     if(fs::exists(std::format("{}.{}.spv", name, extension[stage])))
     {
@@ -30,7 +40,7 @@ GLShader_::GLShader_(const std::string& name, Stage stage)
         const auto     size = fs::file_size(path);
 
         std::ifstream file(path, std::ios::binary);
-        assert(file.is_open());
+        Assert::isTrue(file.is_open());
 
         std::vector<std::byte> buffer(size);
         file.read((char*)buffer.data(), size);
@@ -49,7 +59,7 @@ GLShader_::GLShader_(const std::string& name, Stage stage)
         const auto     size = fs::file_size(path);
 
         std::ifstream file(path, std::ios::binary);
-        assert(file.is_open());
+        Assert::isTrue(file.is_open());
 
         // 读取源代码
         std::string buffer;
@@ -68,10 +78,9 @@ GLShader_::GLShader_(const std::string& name, Stage stage)
         glGetShaderiv(handle, GL_COMPILE_STATUS, &status);
         if(status == GL_FALSE)
         {
+            // 获取报错内容
             int size;
             glGetShaderiv(handle, GL_INFO_LOG_LENGTH, &size);
-
-            // 获取报错内容
             std::string info(size, '\0');
             glGetShaderInfoLog(handle, (GLsizei)info.size(), &size, info.data());
         }
@@ -79,13 +88,12 @@ GLShader_::GLShader_(const std::string& name, Stage stage)
         return;
     }
 
-    else
-        assert(false);
+    Assert::isTrue(false);
 }
 
-GLShader_::~GLShader_()
+size_t GLShader_::getNativeHandle() const
 {
-    glDeleteShader(handle);
+    return handle;
 }
 
 } // namespace clem

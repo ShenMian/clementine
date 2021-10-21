@@ -12,6 +12,11 @@ namespace clem
 
 std::shared_ptr<Program> Program::create(const std::string& name)
 {
+    // 防止路径穿透
+    // assert(name.find("/") == std::string::npos);
+    // assert(name.find("\\") == std::string::npos);
+    // assert(name.find("..") == std::string::npos);
+
     switch(Renderer_::getAPI())
     {
         using enum Renderer_::API;

@@ -15,6 +15,7 @@
 #include "Profiler.h"
 #include "Profiling/Profiling.h"
 #include "Rendering/Rendering.h"
+#include "Rendering_/Rendering.h"
 #include "UI/UI.h"
 #include "Version.h"
 #include "Window/Window.h"

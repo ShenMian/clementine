@@ -4,7 +4,6 @@
 #pragma once
 
 #include "../Shader.h"
-#include <glad/glad.h>
 
 namespace clem
 {
@@ -20,8 +19,12 @@ public:
     GLShader_(const std::string& name, Stage stage);
     virtual ~GLShader_();
 
+    void load();
+
+    size_t getNativeHandle() const override;
+
 private:
-    GLuint handle;
+    unsigned int handle;
 };
 
 /**

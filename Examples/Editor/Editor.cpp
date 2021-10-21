@@ -45,19 +45,9 @@ public:
             entity.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf");
             // entity.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj");
         }
-
-        /*
-        futures.emplace_back(std::async([]()
-                                        {
-                                            auto entity                         = Main::registry.create("m4a1");
-                                            entity.add<Transform>().translation = {0, 0, -90};
-                                            entity.add<Model>("../../../3DModel/weapon/m4a1/m4a1.gltf");
-                                            // entity.add<Model>("../../../3DModel/weapon/m4a1/m4a1.obj");
-                                        }));
-        */
 #endif
 
-#if 1
+#if 0
         {
             auto  entity   = Main::registry.create("crytek_sponza");
             auto& tf       = entity.add<Transform>();
@@ -66,15 +56,6 @@ public:
             tf.translation = {0, -55, -110};
             entity.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj", true);
         }
-
-        /*
-        futures.emplace_back(std::async([&]()
-                                        {
-                                            auto entity                   = Main::registry.create("crytek_sponza");
-                                            entity.add<Transform>().scale = {0.1, 0.1, 0.1};
-                                            entity.add<Model>("../../../3DModel/scene/Crytek_Sponza/sponza.obj", true);
-                                        }));
-        */
 #endif
 
 #if 0
@@ -84,20 +65,7 @@ public:
             entity.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Exterior/exterior.obj");
             // entity.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Interior/interior.obj");
         }
-
-        /*
-        futures.emplace_back(std::async([&]()
-                                        {
-                                            auto entity                   = Main::registry.create("bistro");
-                                            entity.add<Transform>().scale = {0.07, 0.07, 0.07};
-                                            entity.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Exterior/exterior.obj");
-                                            // entity.add<Model>("../../../3DModel/scene/Amazon_Lumberyard_Bistro/Interior/interior.obj");
-                                        }));
-        */
 #endif
-
-        for(auto& future : futures)
-            future.wait();
 
         // model.add<Model>("../../../3DModel/scene/San_Miguel/san-miguel-low-poly.obj", true);
     }

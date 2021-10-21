@@ -1,9 +1,9 @@
 ﻿// Copyright 2021 SMS
 // License(Apache-2.0)
 
-#include "BoxCollider.h"
+#include "Colliders/BoxCollider.h"
+#include "Colliders/SphereCollider.h"
 #include "Core/Math/Math.h"
-#include "SphereCollider.h"
 #include <cassert>
 
 using namespace clem;

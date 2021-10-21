@@ -10,6 +10,7 @@
 #include <glad/glad.h>
 #include <imgui/imgui.h>
 
+#include "Rendering/OpenGL/GLRenderer.h"
 #include <glfw/glfw3.h>
 
 namespace clem::ui
@@ -17,6 +18,12 @@ namespace clem::ui
 
 void Viewport::attach()
 {
+    // geometry = Program::create("../assets/shaders/geometry");
+    // lighting = Program::create("../assets/shaders/lighting");
+    forward  = Program::create("../assets/shaders/forward");
+    // shadow   = Program::create("../assets/shaders/shadow");
+    // skybox   = Program::create("../assets/shaders/skybox");
+
     geometryShader = Shader::load("geometry");
     lightingShader = Shader::load("lighting");
 
@@ -127,10 +134,10 @@ void Viewport::update(Time dt)
 
     framebuffer->clearColorAttachment(1, -1);
 
-#if 0
+#if 1
     deferredRender(dt);
-    // ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
-    ImGui::Image((ImTextureID)gbuffer.getTexture(GBuffer::TextureType::Normals)->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
+    ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
+    // ImGui::Image((ImTextureID)gbuffer.getTexture(GBuffer::TextureType::Normals)->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
 #else
     forwardRender(dt);
     ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
@@ -147,8 +154,8 @@ void Viewport::update(Time dt)
     mousePicking();
 
     // TODO: 临时场景相机信息, 移动到 toolbar
-    ImGui::Text("CAM: POS(%.3f,%.3f,%.3f) DIR(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z,
-                Matrix4(camera.view).forword().normalize().x, Matrix4(camera.view).forword().normalize().y, Matrix4(camera.view).forword().normalize().z);
+    // ImGui::Text("CAM: POS(%.3f,%.3f,%.3f) DIR(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z,
+    //             Matrix4(camera.view).forword().normalize().x, Matrix4(camera.view).forword().normalize().y, Matrix4(camera.view).forword().normalize().z);
     // ImGui::Text("POS(%.3f,%.3f,%.3f)", camera.view.translation.x, camera.view.translation.y, camera.view.translation.z);
     // ImGui::Text("DIR(%.3f,%.3f,%.3f)", Matrix4(camera.view).forword().normalize().x, Matrix4(camera.view).forword().normalize().y, Matrix4(camera.view).forword().normalize().z);
 
@@ -157,24 +164,7 @@ void Viewport::update(Time dt)
 
 void Viewport::deferredRender(Time dt)
 {
-    {
-        const auto  writeTime     = fs::last_write_time("../assets/shaders/geometry.frag");
-        static auto lastWriteTime = writeTime;
-        if(writeTime != lastWriteTime)
-        {
-            geometryShader = Shader::reload("geometry");
-            lastWriteTime = writeTime;
-        }
-    }
-    {
-        const auto  writeTime     = fs::last_write_time("../assets/shaders/lighting.frag");
-        static auto lastWriteTime = writeTime;
-        if(writeTime != lastWriteTime)
-        {
-            lightingShader = Shader::reload("lighting");
-            lastWriteTime = writeTime;
-        }
-    }
+    uploadCamera(skybox);
 
     geometryPass();
     lightingPass();
@@ -185,13 +175,10 @@ void Viewport::geometryPass()
     // glDepthMask(GL_TRUE);
     // glEnable(GL_DEPTH_TEST);
 
+    // uploadCamera(geometry);
     uploadCamera(geometryShader);
     gbuffer.bind();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    geometryShader->bind();
-    geometryShader->uploadUniform("u_view", camera.getViewMatrix());
-    geometryShader->uploadUniform("u_projection", camera.getProjectionMatrix());
-    geometryShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
     Main::registry.each<Model>([&](const Entity& e)
                                { Renderer::get()->submit(e, geometryShader); });
     gbuffer.unbind();
@@ -209,12 +196,19 @@ void Viewport::lightingPass()
     framebuffer->bind();
 
     glClear(GL_COLOR_BUFFER_BIT);
-    lightingShader->bind();
     gbuffer.getTexture(GBuffer::TextureType::Position)->bind(0);
-    lightingShader->uploadUniform("position", 0);
     gbuffer.getTexture(GBuffer::TextureType::Normals)->bind(1);
-    lightingShader->uploadUniform("normal", 1);
     gbuffer.getTexture(GBuffer::TextureType::AlbedoSpec)->bind(2);
+    /*
+    lighting->uploadUniform("position", 0);
+    lighting->uploadUniform("normal", 1);
+    lighting->uploadUniform("albedo_spec", 2);
+    uploadCamera(lighting);
+    uploadLights(lighting);
+    */
+
+    lightingShader->uploadUniform("position", 0);
+    lightingShader->uploadUniform("normal", 1);
     lightingShader->uploadUniform("albedo_spec", 2);
     uploadCamera(lightingShader);
     uploadLights(lightingShader);
@@ -368,6 +362,54 @@ void Viewport::onResize(Size2 size)
         camera.setOrthographic(size.x / 20, size.y / 20, -100.f, 100.f);
 }
 
+void Viewport::uploadCamera(std::shared_ptr<Program> program)
+{
+    PROFILE_FUNC();
+
+    program->uploadUniform("u_view", camera.getViewMatrix());
+    program->uploadUniform("u_projection", camera.getProjectionMatrix());
+    program->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
+}
+
+void Viewport::uploadLights(std::shared_ptr<Program> program)
+{
+    PROFILE_FUNC();
+
+    program->uploadUniform("u_direction_lights_size", (int)dirLights.size());
+    for(int i = 0; i < dirLights.size(); i++)
+    {
+        const auto name = "u_direction_lights[" + std::to_string(i) + "].";
+        program->uploadUniform(name + "color", dirLights[i].getColor());
+        program->uploadUniform(name + "intesity", dirLights[i].getIntesity());
+        program->uploadUniform(name + "direction", dirLights[i].getDirection());
+    }
+
+    program->uploadUniform("u_point_lights_size", (int)pointLights.size());
+    for(int i = 0; i < pointLights.size(); i++)
+    {
+        const auto name = "u_point_lights[" + std::to_string(i) + "].";
+        program->uploadUniform(name + "color", pointLights[i].getColor());
+        program->uploadUniform(name + "intesity", pointLights[i].getIntesity());
+        program->uploadUniform(name + "position", pointLights[i].getPosition());
+        program->uploadUniform(name + "constant", 1.0f);
+        program->uploadUniform(name + "linear", 0.09f);
+        program->uploadUniform(name + "quadratic", 0.032f);
+    }
+
+    program->uploadUniform("u_spot_lights_size", (int)spotLights.size());
+    for(int i = 0; i < spotLights.size(); i++)
+    {
+        const auto name = "u_spot_lights[" + std::to_string(i) + "].";
+        program->uploadUniform(name + "color", spotLights[i].getColor());
+        program->uploadUniform(name + "intesity", spotLights[i].getIntesity());
+        program->uploadUniform(name + "direction", spotLights[i].getDirection());
+        program->uploadUniform(name + "position", spotLights[i].getPosition());
+        program->uploadUniform(name + "constant", 1.0f);
+        program->uploadUniform(name + "linear", 0.09f);
+        program->uploadUniform(name + "quadratic", 0.032f);
+    }
+}
+
 void Viewport::uploadCamera(std::shared_ptr<Shader> shader)
 {
     PROFILE_FUNC();
@@ -462,7 +504,7 @@ void Viewport::updateCameraControl(Time dt)
 
     if(Input::isPressed(KeyCode::LShift))
     {
-        moveSpeed   *= 3;
+        moveSpeed *= 3;
         rotateSpeed *= 3;
     }
 

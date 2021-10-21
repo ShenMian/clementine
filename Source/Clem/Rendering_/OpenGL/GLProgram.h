@@ -4,10 +4,12 @@
 #pragma once
 
 #include "../Program.h"
-#include <glad/glad.h>
+#include <unordered_map>
 
 namespace clem
 {
+
+class Shader_;
 
 /**
  * @addtogroup Rendering
@@ -20,8 +22,20 @@ public:
     explicit GLProgram(const std::string& name);
     virtual ~GLProgram();
 
+    void bind() override;
+
+    void uploadUniform(const std::string& name, int value) override;
+    void uploadUniform(const std::string& name, float value) override;
+    void uploadUniform(const std::string& name, const Vector2& value) override;
+    void uploadUniform(const std::string& name, const Vector3& value) override;
+    void uploadUniform(const std::string& name, const Vector4& value) override;
+    void uploadUniform(const std::string& name, const Matrix4& value) override;
+
 private:
-    GLuint handle;
+    int  getUniformLocation(const std::string& name);
+    void attach(const std::shared_ptr<Shader_> shader);
+
+    unsigned int handle;
 };
 
 /**

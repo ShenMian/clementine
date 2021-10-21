@@ -6,6 +6,7 @@
 #include "Core/Core.h"
 #include "Layer.h"
 #include "Rendering/Rendering.h"
+#include "Rendering_/Rendering.h"
 #include <filesystem>
 
 namespace fs = std::filesystem;
@@ -44,6 +45,9 @@ private:
     void playScene();
     void stopScene();
 
+    void uploadCamera(std::shared_ptr<Program> program);
+    void uploadLights(std::shared_ptr<Program> program);
+
     void uploadCamera(std::shared_ptr<Shader> shader);
     void uploadLights(std::shared_ptr<Shader> shader);
 
@@ -51,10 +55,11 @@ private:
     void updateCameraControl(Time dt);
     void updateShadow(Time dt);
 
-    Status                  status  = Status::Stopping;
-    GBuffer                 gbuffer = GBuffer(Configuration::Display::resolution);
-    std::shared_ptr<Shader> geometryShader, lightingShader;
-    Vector2                 viewportPos, viewportSize;
+    Status                   status  = Status::Stopping;
+    GBuffer                  gbuffer = GBuffer(Configuration::Display::resolution);
+    std::shared_ptr<Program> geometry, lighting, forward, shadow, skybox;
+    std::shared_ptr<Shader>  geometryShader, lightingShader;
+    Vector2                  viewportPos, viewportSize;
 
     Camera                       camera;
     std::shared_ptr<Shader>      forwardShader, shadowShader, skyboxShader;

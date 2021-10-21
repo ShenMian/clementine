@@ -56,6 +56,11 @@ public:
      */
     Stage getStage() const;
 
+    /**
+     * @brief 获取本地句柄.
+     */
+    virtual size_t getNativeHandle() const = 0;
+
 protected:
     std::string name;
     Stage       stage;
