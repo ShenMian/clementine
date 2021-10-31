@@ -12,6 +12,7 @@
 #    include <d3d12.h>
 #endif
 
+#include "Rendering_/Rendering.h"
 #include <memory>
 
 namespace clem
@@ -59,7 +60,7 @@ public:
 
     virtual void submit(const Entity& entity) = 0;
 
-    virtual void submit(const Entity& entity, std::shared_ptr<Shader> shader) = 0;
+    virtual void submit(const Entity& entity, std::shared_ptr<Program> shader) = 0;
 
     virtual void submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader, const Matrix4& transform) = 0;
 

@@ -47,7 +47,7 @@ public:
         }
 #endif
 
-#if 0
+#if 1
         {
             auto  entity   = Main::registry.create("crytek_sponza");
             auto& tf       = entity.add<Transform>();

@@ -9,7 +9,7 @@ namespace clem
 {
 
 Material::Material()
-    : shader(Shader::get("forward"))
+    : shader(nullptr)
 {
 }
 

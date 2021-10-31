@@ -80,7 +80,7 @@ void GLRenderer::endFrame()
 
 void GLRenderer::submit(const Entity& entity)
 {
-    if(entity.anyOf<Tag>() && entity.get<Tag>().str == "skybox")
+    /*if(entity.anyOf<Tag>() && entity.get<Tag>().str == "skybox")
     {
         auto  shader = Shader::get("skybox_sphere");
         auto& mesh   = entity.get<Model>().getMeshs()[0];
@@ -95,7 +95,7 @@ void GLRenderer::submit(const Entity& entity)
         glDepthFunc(GL_LESS);
 
         return;
-    }
+    }*/
 
     auto shader = Shader::get("forward");
 
@@ -148,7 +148,7 @@ void GLRenderer::submit(const Entity& entity)
     GLCheckError();
 }
 
-void GLRenderer::submit(const Entity& entity, std::shared_ptr<Shader> shader)
+void GLRenderer::submit(const Entity& entity, std::shared_ptr<Program> shader)
 {
     if(entity.anyOf<Tag>() && entity.get<Tag>().str == "skybox")
     {

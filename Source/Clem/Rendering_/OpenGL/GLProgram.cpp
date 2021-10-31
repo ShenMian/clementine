@@ -116,14 +116,12 @@ void GLProgram::uploadUniform(const std::string& name, const Matrix4& value)
 
 int GLProgram::getUniformLocation(const std::string& name)
 {
-    static std::unordered_map<std::string, int> locations;
-
-    const auto it = locations.find(name);
-    if(it == locations.end())
+    const auto it = uniformLocations.find(name);
+    if(it == uniformLocations.end())
     {
         const auto location = glGetUniformLocation(handle, name.c_str());
         // Assert::isTrue(location != -1, std::format("uniform '{}' doesn't exist", name));
-        locations[name] = location;
+        uniformLocations[name] = location;
         return location;
     }
     return it->second;

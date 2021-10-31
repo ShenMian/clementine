@@ -1,0 +1,42 @@
+// Copyright 2021 SMS
+// License(Apache-2.0)
+// 延迟渲染几何阶段
+
+#version 450
+
+struct Material
+{
+  vec3  ambient;
+  vec3  diffuse;
+  vec3  specular;
+  vec3  emission;
+  float shininess;
+  
+  sampler2D albedo;
+  sampler2D metallic;
+  sampler2D roughness;
+  sampler2D ao;
+  sampler2D emissive;
+  sampler2D normal;
+};
+
+layout (location = 0) out vec3 pos;
+layout (location = 1) out vec3 normal;
+layout (location = 2) out vec4 albedo_spec;
+
+in Out
+{
+  vec3 world_pos;
+  vec3 normal;
+  vec2 uv;
+} vert;
+
+uniform Material u_material;
+
+void main()
+{
+  pos             = vert.world_pos;
+  normal          = vert.normal;
+  albedo_spec.rbg = texture(u_material.albedo, vert.uv).rgb;
+  albedo_spec.a   = texture(u_material.metallic, vert.uv).r;
+}

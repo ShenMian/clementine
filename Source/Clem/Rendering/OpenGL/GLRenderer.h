@@ -42,7 +42,7 @@ public:
     void endFrame() override;
 
     void submit(const Entity& entity) override;
-    void submit(const Entity& entity, std::shared_ptr<Shader> shader) override;
+    void submit(const Entity& entity, std::shared_ptr<Program> shader) override;
     void submit(std::shared_ptr<VertexArray> vertexArray, std::shared_ptr<Shader> shader, const Matrix4& transform) override;
 
     void setViewport(int x, int y, int width, int height) override;

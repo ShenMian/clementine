@@ -62,7 +62,7 @@ private:
     Vector2                  viewportPos, viewportSize;
 
     Camera                       camera;
-    std::shared_ptr<Shader>      forwardShader, shadowShader, skyboxShader;
+    std::shared_ptr<Shader>      forwardShader;
     bool                         hovered, locked = false;
     std::shared_ptr<FrameBuffer> framebuffer = FrameBuffer::create(Configuration::Display::resolution,
                                                                    {FrameBuffer::PixelFormat::RGBA8,

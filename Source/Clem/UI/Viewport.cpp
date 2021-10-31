@@ -18,18 +18,13 @@ namespace clem::ui
 
 void Viewport::attach()
 {
-    // geometry = Program::create("../assets/shaders/geometry");
-    // lighting = Program::create("../assets/shaders/lighting");
+    geometry = Program::create("../assets/shaders/geometry");
+    lighting = Program::create("../assets/shaders/lighting");
     forward  = Program::create("../assets/shaders/forward");
-    // shadow   = Program::create("../assets/shaders/shadow");
-    // skybox   = Program::create("../assets/shaders/skybox");
-
-    geometryShader = Shader::load("geometry");
-    lightingShader = Shader::load("lighting");
+    shadow   = Program::create("../assets/shaders/shadow");
+    skybox   = Program::create("../assets/shaders/skybox_sphere");
 
     forwardShader = Shader::load("forward");
-    shadowShader  = Shader::load("shadow");
-    skyboxShader  = Shader::load("skybox_sphere");
 
     auto win = Main::getWindow();
 
@@ -134,10 +129,10 @@ void Viewport::update(Time dt)
 
     framebuffer->clearColorAttachment(1, -1);
 
-#if 1
+#if 0
     deferredRender(dt);
-    ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
-    // ImGui::Image((ImTextureID)gbuffer.getTexture(GBuffer::TextureType::Normals)->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
+    // ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
+    ImGui::Image((ImTextureID)gbuffer.getTexture(GBuffer::TextureType::Normals)->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
 #else
     forwardRender(dt);
     ImGui::Image((ImTextureID)framebuffer->getColorAttachment()->getHandle(), {viewportSize.x, viewportSize.y}, {1, 1}, {0, 0});
@@ -172,46 +167,27 @@ void Viewport::deferredRender(Time dt)
 
 void Viewport::geometryPass()
 {
-    // glDepthMask(GL_TRUE);
-    // glEnable(GL_DEPTH_TEST);
-
-    // uploadCamera(geometry);
-    uploadCamera(geometryShader);
+    uploadCamera(geometry);
     gbuffer.bind();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     Main::registry.each<Model>([&](const Entity& e)
-                               { Renderer::get()->submit(e, geometryShader); });
+                               { Renderer::get()->submit(e, geometry); });
     gbuffer.unbind();
-
-    // glDepthMask(GL_FALSE);
-    // glDisable(GL_DEPTH_TEST);
 }
 
 void Viewport::lightingPass()
 {
-    // glEnable(GL_BLEND);
-    // glBlendEquation(GL_FUNC_ADD);
-    // glBlendFunc(GL_ONE, GL_ONE);
-
     framebuffer->bind();
 
     glClear(GL_COLOR_BUFFER_BIT);
     gbuffer.getTexture(GBuffer::TextureType::Position)->bind(0);
     gbuffer.getTexture(GBuffer::TextureType::Normals)->bind(1);
     gbuffer.getTexture(GBuffer::TextureType::AlbedoSpec)->bind(2);
-    /*
     lighting->uploadUniform("position", 0);
     lighting->uploadUniform("normal", 1);
     lighting->uploadUniform("albedo_spec", 2);
     uploadCamera(lighting);
     uploadLights(lighting);
-    */
-
-    lightingShader->uploadUniform("position", 0);
-    lightingShader->uploadUniform("normal", 1);
-    lightingShader->uploadUniform("albedo_spec", 2);
-    uploadCamera(lightingShader);
-    uploadLights(lightingShader);
     Main::registry.each<Model>([&](const Entity& e) { /*Renderer::get()->submit(e, lightingShader);*/ });
 
     framebuffer->unbind();
@@ -220,25 +196,10 @@ void Viewport::lightingPass()
 void Viewport::forwardRender(Time dt)
 {
     PROFILE_FUNC();
-
-    {
-        const auto  writeTime     = fs::last_write_time("../assets/shaders/forward.vert");
-        static auto lastWriteTime = writeTime;
-        if(writeTime != lastWriteTime)
-        {
-            forwardShader = Shader::reload("forward");
-            lastWriteTime = writeTime;
-        }
-    }
-    {
-        const auto  writeTime     = fs::last_write_time("../assets/shaders/forward.frag");
-        static auto lastWriteTime = writeTime;
-        if(writeTime != lastWriteTime)
-        {
-            forwardShader = Shader::reload("forward");
-            lastWriteTime = writeTime;
-        }
-    }
+    
+    uploadLights(forward);
+    updateShadow(dt);
+    uploadCamera(forward);
 
     uploadLights(forwardShader);
     updateShadow(dt);
@@ -414,10 +375,6 @@ void Viewport::uploadCamera(std::shared_ptr<Shader> shader)
 {
     PROFILE_FUNC();
 
-    skyboxShader->uploadUniform("u_view", camera.getViewMatrix());
-    skyboxShader->uploadUniform("u_projection", camera.getProjectionMatrix());
-    skyboxShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
-
     shader->uploadUniform("u_view", camera.getViewMatrix());
     shader->uploadUniform("u_projection", camera.getProjectionMatrix());
     shader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
@@ -480,9 +437,9 @@ void Viewport::updateShadow(Time dt)
     {
         shadowCam.setOrthographic(10, 10, 0.1f, 10.f);
 
-        shadowShader->uploadUniform("u_view", camera.getViewMatrix());
-        shadowShader->uploadUniform("u_projection", camera.getProjectionMatrix());
-        // shadowShader->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
+        shadow->uploadUniform("u_view", camera.getViewMatrix());
+        shadow->uploadUniform("u_projection", camera.getProjectionMatrix());
+        // shadow->uploadUniform("u_view_projection", camera.getViewProjectionMatrix());
 
         shadowMap->bind();
         glClear(GL_DEPTH_BUFFER_BIT);
