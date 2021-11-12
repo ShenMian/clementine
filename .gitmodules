@@ -1,0 +1,3 @@
+[submodule "Source/ThirdParty/Math"]
+	path = Source/ThirdParty/Math
+	url = https://github.com/ShenMian/Math
