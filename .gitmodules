@@ -1,3 +1,6 @@
 [submodule "Source/ThirdParty/Math"]
 	path = Source/ThirdParty/Math
 	url = https://github.com/ShenMian/Math
+[submodule "Source/ThirdParty/Graphics"]
+	path = Source/ThirdParty/Graphics
+	url = https://github.com/ShenMian/Graphics
