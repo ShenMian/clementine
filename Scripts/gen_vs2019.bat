@@ -6,6 +6,9 @@ REM 切换到主目录
 pushd %~dp0\..
 if not exist Graphics.sln set firstGenerate=true
 
+REM 签出第三方库
+git submodule update --init
+
 REM 生成VS解决方案
 Source\ThirdParty\premake\bin\premake5.exe vs2019
 if errorlevel 1 pause
