@@ -4,3 +4,12 @@
 [submodule "Source/ThirdParty/Graphics"]
 	path = Source/ThirdParty/Graphics
 	url = https://github.com/ShenMian/Graphics
+[submodule "Source/ThirdParty/imgui-node-editor"]
+	path = Source/ThirdParty/imgui-node-editor
+	url = https://github.com/thedmd/imgui-node-editor.git
+[submodule "Source/ThirdParty/imgui"]
+	path = Source/ThirdParty/imgui
+	url = https://github.com/ocornut/imgui
+[submodule "Source/ThirdParty/ImGuizmo"]
+	path = Source/ThirdParty/ImGuizmo
+	url = https://github.com/CedricGuillemet/ImGuizmo.git
