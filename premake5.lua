@@ -19,16 +19,23 @@ workspace "Clementine"
         optimize "on"
 
     deps = {}
-    deps["math"]     = "%{wks.location}/Source/ThirdParty/Math"
-    deps["graphics"] = "%{wks.location}/Source/ThirdParty/Graphics"
+    deps["math"]       = "%{wks.location}/Source/ThirdParty/Math"
+    deps["graphics"]   = "%{wks.location}/Source/ThirdParty/Graphics"
+    deps["steamworks"] = "%{wks.location}/Source/ThirdParty/steamworks"
 
-    deps_include = {}
-    deps_include["math"]     = "%{deps.math}/include"
-    deps_include["graphics"] = "%{deps.graphics}/Source"
+    deps_inc = {}
+    deps_inc["math"]       = "%{deps.math}/include"
+    deps_inc["graphics"]   = "%{deps.graphics}/Source"
+    deps_inc["steamworks"] = "%{deps.steamworks}/public"
+
+    deps_lib = {}
+    deps_lib["steamworks"] = "%{deps.steamworks}/redistributable_bin"
 
     include "Source/Engine"
     include "Source/Editor"
 
     group "ThirdParty"
-        include "Source/ThirdParty/Graphics"
+        externalproject "Graphics"
+            location "%{deps.graphics}"
+            kind "StaticLib"
     group ""
