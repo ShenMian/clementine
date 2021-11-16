@@ -28,6 +28,11 @@ void Application::setConfig(const Config& newConfig)
     config = newConfig;
 }
 
+Window& Application::getWindow()
+{
+    return window;
+}
+
 Application::Application()
     : window(config.about.name, config.display.resolution)
 {

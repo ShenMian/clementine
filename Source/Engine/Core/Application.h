@@ -4,7 +4,7 @@
 #pragma once
 
 #include <Math/Vector2.hpp>
-#include <Window.h>
+#include <Core/Window.h>
 #include <string>
 #include <filesystem>
 
@@ -42,6 +42,8 @@ public:
     const Config& getConfig() const;
 
     void setConfig(const Config& config);
+
+    Window& getWindow();
 
 private:
     Application();
