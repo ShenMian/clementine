@@ -6,5 +6,5 @@
 class BrowserPanel : public Panel
 {
 public:
-    virtual void update() override;
+    void update() override;
 };

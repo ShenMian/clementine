@@ -3,8 +3,12 @@
 
 #include "Panel.h"
 
-class ViewportPanel : public Panel
+class PropertiesPanel : public Panel
 {
 public:
     void update() override;
+
+private:
+    template <typename T>
+    void show();
 };
