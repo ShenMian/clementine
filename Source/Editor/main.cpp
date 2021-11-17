@@ -1,5 +1,5 @@
 #include <Core/Application.h>
-#include <GamerServices.h>
+#include <GamerServices/GamerServices.h>
 
 using namespace clem;
 
