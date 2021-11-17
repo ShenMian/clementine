@@ -1,4 +1,4 @@
-﻿// Copyright 2021 ShenMian
+// Copyright 2021 ShenMian
 // License(Apache-2.0)
 
 
@@ -43,9 +43,7 @@ void GamerServices::update()
 
 const Player& GamerServices::getPlayer()
 {
-    const auto id   = SteamUser()->GetSteamID().ConvertToUint64();
-    const auto name = SteamFriends()->GetPersonaName();
-    return {id, name};
+    return player;
 }
 
 void GamerServices::init()
