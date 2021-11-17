@@ -19,16 +19,18 @@ public:
 
     auto getId() const;
 
-    auto getName() const;
+    auto& getName() const;
 
     auto getState() const;
 
     void setState(State state);
 
+    bool operator==(const Player&) const;
+
 private:
-    uint64_t         id;
-    std::string_view name;
-    State            state;
+    uint64_t    id = 0;
+    std::string name;
+    State       state;
 };
 
 inline Player::Player(uint64_t id, std::string_view name, State state)
@@ -41,7 +43,7 @@ inline auto Player::getId() const
     return id;
 }
 
-inline auto Player::getName() const
+inline auto& Player::getName() const
 {
     return name;
 }
@@ -54,4 +56,9 @@ inline auto Player::getState() const
 inline void Player::setState(State state)
 {
     this->state = state;
+}
+
+inline bool Player::operator==(const Player& rhs) const
+{
+    return id == rhs.id;
 }
