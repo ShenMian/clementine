@@ -20,11 +20,13 @@ workspace "Clementine"
 
     deps = {}
     deps["math"]       = "%{wks.location}/Source/ThirdParty/Math"
+    deps["imgui"]      = "%{wks.location}/Source/ThirdParty/imgui"
     deps["graphics"]   = "%{wks.location}/Source/ThirdParty/Graphics"
     deps["steamworks"] = "%{wks.location}/Source/ThirdParty/steamworks"
 
     deps_inc = {}
     deps_inc["math"]       = "%{deps.math}/include"
+    deps_inc["imgui"]      = "%{deps.imgui}"
     deps_inc["graphics"]   = "%{deps.graphics}/Source"
     deps_inc["steamworks"] = "%{deps.steamworks}/public"
 
@@ -34,10 +36,11 @@ workspace "Clementine"
     include "Source/Engine"
     include "Source/Editor"
 
-    --[[
     group "ThirdParty"
+        include "Source/ThirdParty/imgui.lua"
+    --[[
         externalproject "Graphics"
             location "%{deps.graphics}"
             kind "StaticLib"
-    group ""
     --]]
+    group ""

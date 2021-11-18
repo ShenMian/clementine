@@ -9,9 +9,12 @@ project "Editor"
     includedirs {
         "../Engine",
         deps_inc["math"],
+        deps_inc["imgui"],
         deps_inc["graphics"]}
 
-    links "Engine"
+    links {
+        "Engine",
+        "ImGui"}
 
     filter "system:windows"
         links "%{deps_lib.steamworks}/win64/steam_api64"
