@@ -2,7 +2,7 @@
 // License(Apache-2.0)
 
 #include <cstdint>
-#include <string_view>
+#include <string>
 
 class Player
 {
@@ -15,7 +15,7 @@ public:
 
     Player() = default;
 
-    Player(uint64_t id, std::string_view name, State state);
+    Player(uint64_t id, const std::string& name, State state);
 
     auto getId() const;
 
@@ -33,7 +33,7 @@ private:
     State       state;
 };
 
-inline Player::Player(uint64_t id, std::string_view name, State state)
+inline Player::Player(uint64_t id, const std::string& name, State state)
     : id(id), name(name), state(state)
 {
 }

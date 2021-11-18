@@ -34,8 +34,10 @@ workspace "Clementine"
     include "Source/Engine"
     include "Source/Editor"
 
+    --[[
     group "ThirdParty"
         externalproject "Graphics"
             location "%{deps.graphics}"
             kind "StaticLib"
     group ""
+    --]]

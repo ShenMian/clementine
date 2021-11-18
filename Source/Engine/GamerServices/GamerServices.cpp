@@ -60,10 +60,10 @@ const std::string& GamerServices::getAppName()
 void GamerServices::init()
 {
     if(!SteamAPI_Init())
-        throw std::exception("steam api init failed");
+        throw "steam api init failed";
 
     if(!SteamUser()->BLoggedOn())
-        throw std::exception("steam user is not logged in");
+        throw "steam user is not logged in";
 
     // if(!SteamInput()->Init(true))
     //     throw std::exception("steam input init failed");
