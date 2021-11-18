@@ -5,8 +5,6 @@ using namespace clem;
 
 int main()
 {
-    GamerServices::init();
-
     /*
     Application::Config config = {
         .display = {
@@ -20,8 +18,6 @@ int main()
     auto& win = app.getWindow();
     win.setVisible(true);
     */
-
-    GamerServices::deinit();
 
     return 0;
 }
