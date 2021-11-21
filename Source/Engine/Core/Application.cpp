@@ -1,7 +1,8 @@
-// Copyright 2021 ShenMian
+﻿// Copyright 2021 ShenMian
 // License(Apache-2.0)
 
 #include "Application.h"
+#include "Platform.h"
 
 namespace clem
 {
@@ -31,6 +32,17 @@ void Application::setConfig(const Config& newConfig)
 Window& Application::getWindow()
 {
     return window;
+}
+
+constexpr Application::OS Application::getOS() const
+{
+#ifdef OS_WIN
+    return OS::Windows;
+#elif OS_LINUX
+    return OS::Linux;
+#elif OS_MACOS
+    return OS::MacOS;
+#endif
 }
 
 Application::Application()

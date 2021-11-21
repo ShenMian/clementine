@@ -7,6 +7,7 @@ project "Engine"
     files {"**.cpp", "**.hpp", "**.h", "**.inl", "premake5.lua", "CMakeLists.txt"}
 
     includedirs {
+        ".",
         deps_inc["math"],
         deps_inc["graphics"],
         deps_inc["steamworks"]}

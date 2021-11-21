@@ -37,6 +37,8 @@ public:
         std::filesystem::path asset;
     };
 
+    enum class OS;
+
     static Application& get();
 
     const Config& getConfig() const;
@@ -45,11 +47,20 @@ public:
 
     Window& getWindow();
 
+    constexpr OS getOS() const;
+
 private:
     Application();
     
     Config config;
     Window window;
+};
+
+enum class Application::OS
+{
+    Windows,
+    Linux,
+    MacOS
 };
 
 } // namespace clem
