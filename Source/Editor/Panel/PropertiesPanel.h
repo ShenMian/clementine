@@ -5,6 +5,9 @@
 
 #include "Panel.h"
 
+/**
+ * @brief 属性面板.
+ */
 class PropertiesPanel : public Panel
 {
 public:

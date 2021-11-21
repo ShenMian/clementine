@@ -2,8 +2,10 @@
 // License(Apache-2.0)
 
 #include "PropertiesPanel.h"
+#include <cassert>
 #include <imgui.h>
 
 void PropertiesPanel::update()
 {
+    assert(visible);
 }
