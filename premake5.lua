@@ -1,18 +1,24 @@
 workspace "Clementine"
     architecture "x86_64"
     startproject "Editor"
-    configurations {"Debug", "Release"}
     flags "MultiProcessorCompile"
+
+    -- 启用 OpenMP
+    openmp "On"
+    filter "toolset:not msc*"
+        buildoptions "-fopenmp"
 
     output_dir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
     targetdir("%{wks.location}/build/" .. output_dir .. "/%{prj.name}/lib")
     objdir("%{wks.location}/build/" .. output_dir .. "/%{prj.name}/obj")
 
+    configurations {"Debug", "Release"}
+
     filter "configurations:Debug"
         defines "DEBUG"
         runtime "Debug"
         symbols "on"
-  
+
     filter "configurations:Release"
         defines "NDEBUG"
         runtime "Release"
