@@ -25,7 +25,6 @@ public:
 
     template <typename Callback>
     void on(const std::string& name, Callback cb) {
-
         auto it = events.find(name);
         if (it != events.end()) {
             throw new std::runtime_error("duplicate listener");
@@ -57,7 +56,6 @@ public:
     }
 
     void off(const std::string& name) {
-
         auto it = events.find(name);
 
         if (it != events.end()) {
@@ -73,10 +71,8 @@ public:
 
     template <typename ...Args>
     void emit(std::string name, Args... args) {
-
         auto it = events.find(name);
         if (it != events.end()) {
-
             auto cb = events.at(name);
             auto fp = static_cast<std::function<void(Args...)>*>(cb);
             (*fp)(args...);
@@ -98,14 +94,11 @@ private:
 
     template <typename ClassType, typename R, typename... Args>
     struct traits<R(ClassType::*)(Args...) const> {
-
         typedef std::function<R(Args...)> fn;
     };
 
     template <typename Callback>
-    typename traits<Callback>::fn
-        to_function(Callback& cb) {
-
+    typename traits<Callback>::fn to_function(Callback& cb) {
         return static_cast<typename traits<Callback>::fn>(cb);
     }
 
