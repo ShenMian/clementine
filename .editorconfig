@@ -70,3 +70,6 @@ cpp_wrap_preserve_blocks                            = one_liners
 
 [Makefile]
 indent_style = tab
+
+[*.{bat, cmd}]
+end_of_line = crlf
