@@ -7,5 +7,5 @@
 
 void HierarchyPanel::update()
 {
-    assert(visible);
+	assert(visible);
 }

@@ -7,5 +7,5 @@
 
 void BrowserPanel::update()
 {
-    assert(visible);
+	assert(visible);
 }

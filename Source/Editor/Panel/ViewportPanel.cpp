@@ -7,14 +7,14 @@
 
 void ViewportPanel::update()
 {
-    assert(visible);
+	assert(visible);
 
-    /*
-    if(ImGui::Begin("Viewport"))
-    {
+	/*
+	if(ImGui::Begin("Viewport"))
+	{
 
 
-        ImGui::End();
-    }
-    */
+		ImGui::End();
+	}
+	*/
 }

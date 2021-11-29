@@ -11,9 +11,9 @@
 class PropertiesPanel : public Panel
 {
 public:
-    void update() override;
+	void update() override;
 
 private:
-    template <typename T>
-    void show();
+	template <typename T>
+	void show();
 };

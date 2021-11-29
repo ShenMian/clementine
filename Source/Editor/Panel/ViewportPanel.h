@@ -8,7 +8,7 @@
 class ViewportPanel : public Panel
 {
 public:
-    void update() override;
+	void update() override;
 
-    inline static bool visible = true;
+	inline static bool visible = true;
 };

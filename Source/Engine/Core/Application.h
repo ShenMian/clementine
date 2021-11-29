@@ -14,53 +14,53 @@ namespace clem
 class Application
 {
 public:
-    struct Config
-    {
-        struct About
-        {
-            std::string name;
-            std::string version;
-            std::string author;
-            std::string description;
-        };
+	struct Config
+	{
+		struct About
+		{
+			std::string name;
+			std::string version;
+			std::string author;
+			std::string description;
+		};
 
-        struct Display
-        {
-            bool     vsync = true;
-            Vector2i resolution;
+		struct Display
+		{
+			bool     vsync = true;
+			Vector2i resolution;
 
-            bool operator==(const Display&) const = default;
-        };
+			bool operator==(const Display&) const = default;
+		};
 
-        About                 about;
-        Display               display;
-        std::filesystem::path asset;
-    };
+		About                 about;
+		Display               display;
+		std::filesystem::path asset;
+	};
 
-    enum class OS;
+	enum class OS;
 
-    static Application& get();
+	static Application& get();
 
-    const Config& getConfig() const;
+	const Config& getConfig() const;
 
-    void setConfig(const Config& config);
+	void setConfig(const Config& config);
 
-    Window& getWindow();
+	Window& getWindow();
 
-    constexpr OS getOS() const;
+	constexpr OS getOS() const;
 
 private:
-    Application();
-    
-    Config config;
-    Window window;
+	Application();
+
+	Config config;
+	Window window;
 };
 
 enum class Application::OS
 {
-    Windows,
-    Linux,
-    MacOS
+	Windows,
+	Linux,
+	MacOS
 };
 
 } // namespace clem

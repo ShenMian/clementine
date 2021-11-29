@@ -9,12 +9,12 @@
 class SteamGamerServices : public GamerServices
 {
 public:
-    SteamGamerServices();
+	SteamGamerServices();
 
 private:
-    void requestStatsAsync();
+	void requestStatsAsync();
 
-    STEAM_CALLBACK(SteamGamerServices, onUserStatsReceived, UserStatsReceived_t, callbackUserStatsReceived);
-    // STEAM_CALLBACK(SteamGamerServices, OnUserStatsStored, UserStatsStored_t, callbackUserStatsStored);
-    // STEAM_CALLBACK(SteamGamerServices, OnAchievementStored,UserAchievementStored_t, callbackAchievementStored);
+	STEAM_CALLBACK(SteamGamerServices, onUserStatsReceived, UserStatsReceived_t, callbackUserStatsReceived);
+	// STEAM_CALLBACK(SteamGamerServices, OnUserStatsStored, UserStatsStored_t, callbackUserStatsStored);
+	// STEAM_CALLBACK(SteamGamerServices, OnAchievementStored,UserAchievementStored_t, callbackAchievementStored);
 };

@@ -3,27 +3,27 @@
 
 Panel::Panel()
 {
-    addPanel(this);
+	addPanel(this);
 }
 
 Panel::~Panel()
 {
-    removePanel(this);
+	removePanel(this);
 }
 
 void Panel::updateAll()
 {
-    for(const auto& panel : panels)
-        if(panel->visible)
-            panel->update();
+	for(const auto& panel : panels)
+		if(panel->visible)
+			panel->update();
 }
 
 void Panel::addPanel(Panel* panel)
 {
-    panels.push_back(panel);
+	panels.push_back(panel);
 }
 
 void Panel::removePanel(Panel* panel)
 {
-    panels.erase(std::remove(panels.begin(), panels.end(), panel));
+	panels.erase(std::remove(panels.begin(), panels.end(), panel));
 }

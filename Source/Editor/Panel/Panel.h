@@ -8,19 +8,19 @@
 class Panel
 {
 public:
-    Panel();
-    virtual ~Panel();
+	Panel();
+	virtual ~Panel();
 
-    static void updateAll();
+	static void updateAll();
 
-    virtual void update() = 0;
+	virtual void update() = 0;
 
-    bool visible;
+	bool visible;
 
 protected:
-    void addPanel(Panel* panel);
-    void removePanel(Panel* panel);
+	void addPanel(Panel* panel);
+	void removePanel(Panel* panel);
 
 private:
-    inline static std::vector<Panel*> panels;
+	inline static std::vector<Panel*> panels;
 };

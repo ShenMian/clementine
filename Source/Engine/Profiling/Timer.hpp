@@ -10,7 +10,7 @@ namespace clem
 
 /**
  * @brief 计时器.
- * 
+ *
  * 构造时开始计时, 调用成员函数来获取经过的时间.
  */
 class Timer
@@ -31,25 +31,25 @@ public:
 	/**
 	 * @brief 获取经过的微秒数.
 	 */
-    auto getMicroseconds() const;
+	auto getMicroseconds() const;
 
 private:
 	std::chrono::steady_clock::time_point start;
 };
 
 Timer::Timer()
-    : start(std::chrono::high_resolution_clock::now())
+	: start(std::chrono::high_resolution_clock::now())
 {
 }
 
 [[nodiscard]] auto Timer::getSeconds() const
 {
-    return getMilliseconds() / 1000.0;
+	return getMilliseconds() / 1000.0;
 }
 
 [[nodiscard]] auto Timer::getMilliseconds() const
 {
-    return getMilliseconds() / 1000.0;
+	return getMilliseconds() / 1000.0;
 }
 
 [[nodiscard]] auto Timer::getMicroseconds() const

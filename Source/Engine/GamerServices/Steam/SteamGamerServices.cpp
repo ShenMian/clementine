@@ -4,20 +4,20 @@
 #include "SteamGamerServices.h"
 
 SteamGamerServices::SteamGamerServices()
-    : callbackUserStatsReceived(this, &SteamGamerServices::onUserStatsReceived)
+	: callbackUserStatsReceived(this, &SteamGamerServices::onUserStatsReceived)
 {
-    requestStatsAsync();
+	requestStatsAsync();
 }
 
 void SteamGamerServices::requestStatsAsync()
 {
-    SteamUserStats()->RequestCurrentStats();
+	SteamUserStats()->RequestCurrentStats();
 }
 
 void SteamGamerServices::onUserStatsReceived(UserStatsReceived_t* data)
 {
-    if(data == nullptr || data->m_eResult != EResult::k_EResultOK)
-        return;
-    
-    printf("RECVED!");
+	if(data == nullptr || data->m_eResult != EResult::k_EResultOK)
+		return;
+
+	printf("RECVED!");
 }

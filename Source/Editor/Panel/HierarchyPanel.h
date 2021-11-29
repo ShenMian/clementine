@@ -11,5 +11,5 @@
 class HierarchyPanel : public Panel
 {
 public:
-    void update() override;
+	void update() override;
 };

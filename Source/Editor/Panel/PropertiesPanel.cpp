@@ -7,5 +7,5 @@
 
 void PropertiesPanel::update()
 {
-    assert(visible);
+	assert(visible);
 }
