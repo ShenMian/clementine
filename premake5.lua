@@ -3,11 +3,6 @@ workspace "Clementine"
     startproject "Editor"
     flags "MultiProcessorCompile"
 
-    -- 启用 OpenMP
-    openmp "On"
-    filter "toolset:not msc*"
-        buildoptions "-fopenmp"
-
     output_dir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
     targetdir("%{wks.location}/build/" .. output_dir .. "/%{prj.name}/lib")
     objdir("%{wks.location}/build/" .. output_dir .. "/%{prj.name}/obj")
@@ -24,18 +19,26 @@ workspace "Clementine"
         runtime "Release"
         optimize "on"
 
+    -- 启用 OpenMP
+    openmp "On"
+    filter "toolset:not msc*"
+        buildoptions "-fopenmp"
+
+    -- 第三方库路径
     deps = {}
     deps["math"]       = "%{wks.location}/Source/ThirdParty/Math"
     deps["imgui"]      = "%{wks.location}/Source/ThirdParty/imgui"
     deps["graphics"]   = "%{wks.location}/Source/ThirdParty/Graphics"
     deps["steamworks"] = "%{wks.location}/Source/ThirdParty/steamworks"
 
+    -- 第三方库头文件路径
     deps_inc = {}
     deps_inc["math"]       = "%{deps.math}/include"
     deps_inc["imgui"]      = "%{deps.imgui}"
     deps_inc["graphics"]   = "%{deps.graphics}/Source"
     deps_inc["steamworks"] = "%{deps.steamworks}/public"
 
+    -- 第三方库静态库路径
     deps_lib = {}
     deps_lib["steamworks"] = "%{deps.steamworks}/redistributable_bin"
 
