@@ -1,0 +1,14 @@
+src: 'Window'
+dst: '´°¿Ú'
+
+src: 'Hierarchy'
+dst: 'ŒÓ¼‰'
+
+src: 'Viewport'
+dst: 'Ò•¿Ú'
+
+src: 'Browser'
+dst: 'žgÓ[Æ÷'
+
+src: 'Properties'
+dst: 'ŒÙÐÔ'

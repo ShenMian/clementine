@@ -1,0 +1,14 @@
+src: 'Window'
+dst: '窗口'
+
+src: 'Hierarchy'
+dst: '层级'
+
+src: 'Viewport'
+dst: '视口'
+
+src: 'Browser'
+dst: '浏览器'
+
+src: 'Properties'
+dst: '属性'
