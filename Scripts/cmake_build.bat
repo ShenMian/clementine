@@ -13,14 +13,14 @@ call Scripts/cmake_install_deps || exit /b 1
 
 REM 生成 CMake 緩存
 echo Generating CMake cache...
-cmake -B build >NUL || (
+cmake -B build >nul || (
     echo Failed to generate CMake cache.
     exit /b 1
 )
 
 REM 構建
 echo Building...
-cmake --build build >NUL || (
+cmake --build build >nul || (
     echo Failed to build.
     cmake --build build
     exit /b 1
