@@ -13,3 +13,6 @@
 [submodule "Source/ThirdParty/ImGuizmo"]
 	path = Source/ThirdParty/ImGuizmo
 	url = https://github.com/CedricGuillemet/ImGuizmo.git
+[submodule "Source/ThirdParty/openal-soft"]
+	path = Source/ThirdParty/openal-soft
+	url = https://github.com/kcat/openal-soft.git

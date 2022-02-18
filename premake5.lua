@@ -26,17 +26,18 @@ workspace "Clementine"
 
     -- 第三方库路径
     deps = {}
-    deps["math"]       = "%{wks.location}/Source/ThirdParty/Math"
-    deps["imgui"]      = "%{wks.location}/Source/ThirdParty/imgui"
-    deps["graphics"]   = "%{wks.location}/Source/ThirdParty/Graphics"
-    deps["steamworks"] = "%{wks.location}/Source/ThirdParty/steamworks"
+    deps["math"]        = "%{wks.location}/Source/ThirdParty/Math"
+    deps["imgui"]       = "%{wks.location}/Source/ThirdParty/imgui"
+    deps["graphics"]    = "%{wks.location}/Source/ThirdParty/Graphics"
+    deps["openal_soft"] = "%{wks.location}/Source/ThirdParty/openal-soft"
 
     -- 第三方库头文件路径
     deps_inc = {}
-    deps_inc["math"]       = "%{deps.math}/include"
-    deps_inc["imgui"]      = "%{deps.imgui}"
-    deps_inc["graphics"]   = "%{deps.graphics}/Source"
-    deps_inc["steamworks"] = "%{deps.steamworks}/public"
+    deps_inc["math"]        = "%{deps.math}/include"
+    deps_inc["imgui"]       = "%{deps.imgui}"
+    deps_inc["graphics"]    = "%{deps.graphics}/Source"
+    deps_inc["steamworks"]  = "%{deps.steamworks}/public"
+    deps_inc["openal_soft"] = "%{deps.openal_soft}/include"
 
     -- 第三方库静态库路径
     deps_lib = {}
@@ -44,6 +45,8 @@ workspace "Clementine"
 
     include "Source/Engine"
     include "Source/Editor"
+
+    message("%{deps.openal_soft}")
 
     group "ThirdParty"
         include "Source/ThirdParty/imgui.lua"
