@@ -17,14 +17,14 @@ void Mapping::update()
 	}
 }
 
-void Mapping::add(Trigger& trigger, std::function<void()> action)
+void Mapping::add(std::shared_ptr<Trigger> trigger, std::function<void()> action)
 {
-	map.emplace_back(&trigger, action);
+	map.emplace_back(trigger, action);
 }
 
-void Mapping::remove(Trigger& trigger)
+void Mapping::remove(std::shared_ptr<Trigger> trigger)
 {
-	map.erase(std::remove_if(map.begin(), map.end(), [&](auto& value) { return value.first == &trigger; }));
+	map.erase(std::remove_if(map.begin(), map.end(), [&](auto& value) { return value.first == trigger; }));
 }
 
 }
