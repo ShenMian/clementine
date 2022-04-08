@@ -1,0 +1,69 @@
+﻿# Build
+[Bb]in
+[Oo]bj
+[Ll]ib
+/[Bb]uild
+!/Deps/premake/bin
+!/Deps/VulkanSDK/Lib
+
+# Makefile
+Makefile
+*.make
+
+# CMake
+.cache
+
+# Visual Studio
+*.sln
+*.vcxproj
+*.filters
+*.user
+/.vs
+/.vscode
+/out
+
+# IntelliJ IDEA
+/.idea
+
+# Doxygen
+/Docs/html
+/Docs/man
+/Docs/xml
+
+# SPIR-V
+*.spv
+
+# ImGui configure files
+imgui.ini
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+# *.lib
+
+# Executables
+*.out
+*.app

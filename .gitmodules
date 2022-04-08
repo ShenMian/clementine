@@ -1,0 +1,12 @@
+[submodule "Deps/openal-soft"]
+	path = Deps/openal-soft
+	url = https://github.com/kcat/openal-soft.git
+[submodule "Deps/Graphics"]
+	path = Deps/Graphics
+	url = https://github.com/ShenMian/Graphics
+[submodule "Deps/Math"]
+	path = Deps/Math
+	url = https://github.com/ShenMian/Math
+[submodule "Deps/EASTL"]
+	path = Deps/EASTL
+	url = https://github.com/electronicarts/EASTL.git
