@@ -1,22 +1,16 @@
-﻿#include <Graphics.h>
-#include <Core/Time.hpp>
-#include <Audio/Sound.h>
-#include <Audio/Source.h>
-#include <Audio/Listener.h>
-#include <Audio/Audio.h>
+﻿// Copyright 2021 ShenMian
+// License(Apache-2.0)
 
-using namespace core;
-using namespace audio;
+#include "Editor.h"
 
 int main()
 {
-	auto prev = std::chrono::high_resolution_clock::now();
-	while(true)
+	Editor::init();
 	{
-		const auto curr = std::chrono::high_resolution_clock::now();
-		const auto elapsed = curr - prev;
-		prev = curr;
+		Editor editor;
+		editor.loop();
 	}
+	Editor::deinit();
 
 	return 0;
 }
