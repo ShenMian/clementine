@@ -8,8 +8,13 @@ add_library(clementine::clementine ALIAS clementine)
 
 use_cpp20(clementine)
 
-target_include_directories(clementine PUBLIC
-	"${DEPS_DIR}/openal-soft/include"
-	"${DEPS_DIR}/Graphics/Source"
-	"${DEPS_DIR}/Math/include")
-target_link_libraries(clementine PUBLIC graphics OpenAL)
+# Math
+target_include_directories(clementine PUBLIC "${DEPS_DIR}/Math/include")
+
+# Graphics
+target_include_directories(clementine PUBLIC "${DEPS_DIR}/Graphics/Source")
+target_link_libraries(clementine PUBLIC graphics)
+
+# OpenAL
+target_include_directories(clementine PUBLIC "${DEPS_DIR}/openal-soft/include")
+target_link_libraries(clementine PUBLIC OpenAL)
