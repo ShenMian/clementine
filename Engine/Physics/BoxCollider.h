@@ -9,13 +9,16 @@
 namespace phys
 {
 
+class SphereCollider;
+
 class BoxCollider : public Collider
 {
 public:
+	bool intersects(const Collider& other) const;
 	bool intersects(const BoxCollider& other) const;
+	bool intersects(const SphereCollider& other) const;
 
 	bool contains(const BoxCollider& other) const;
-
 	bool contains(const Vector3& point) const;
 
 	Vector3 getMin() const;
@@ -27,5 +30,3 @@ public:
 };
 
 }
-
-#include "BoxCollider.inl"

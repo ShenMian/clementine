@@ -8,6 +8,8 @@ namespace phys
 
 class Collider
 {
+public:
+	virtual bool intersects(const Collider&) const = 0;
 };
 
 }
