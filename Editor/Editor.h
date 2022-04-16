@@ -6,8 +6,6 @@
 #include <Input/Mapping.h>
 #include <Graphics.h>
 
-using std::chrono::microseconds;
-
 class Editor final
 {
 public:
@@ -16,16 +14,18 @@ public:
 
 	void loop();
 
+	void requestExit();
+
 	static void init();
 	static void deinit();
 
 private:
-	void update(microseconds dt);
+	void update(std::chrono::microseconds dt);
 	void render();
 
 	void renderUI();
 
 	Window window;
-	bool running = true;
+	bool exitRequested = false;
 	input::Mapping actionMap;
 };
