@@ -7,10 +7,14 @@
 #include <Audio/Sound.h>
 #include <Audio/Source.h>
 #include <Audio/Listener.h>
-#include <Audio/Audio.h>
+#include <Audio/Device.h>
 #include <thread>
 
-using namespace audio;
+#include <Physics/Algorithm.hpp>
+#include <Physics/Rigidbody.h>
+
+using std::chrono::microseconds;
+
 using namespace input;
 
 Editor::Editor()
@@ -20,7 +24,9 @@ Editor::Editor()
 	UI::init(window);
 	Input::setWindow(window);
 
-	actionMap.add(std::make_shared<KeyTrigger>(Key::Escape), [this]() { this->running = false; });
+	window.onClose = [this]() { this->requestExit(); };
+
+	actionMap.add(std::make_shared<KeyTrigger>(Key::Escape), [this]() { this->requestExit(); });
 
 	window.setVisible(true);
 }
@@ -31,18 +37,57 @@ Editor::~Editor()
 	Renderer::deinit();
 }
 
+struct Contact
+{
+	Vector3 points[2];
+	int pointCount = 0;
+};
+
 void Editor::loop()
 {
 	auto prev = std::chrono::high_resolution_clock::now();
-	while(running)
+	while(!exitRequested)
 	{
 		const auto curr = std::chrono::high_resolution_clock::now();
 		const auto dt = std::chrono::duration_cast<microseconds>(curr - prev);
 		prev = curr;
 
+		// const auto& view = register.get<TransformComponent, RigidbodyComponent>();
+		// for(auto& [trans, body] : view) { ... };
+
+		{
+			float dt;
+			Transform trans;
+			phys::Rigidbody body;
+			auto linearAcc = body.force * body.invMass();
+			body.linearVelocity += dt * linearAcc;
+
+
+			trans.position() += dt * body.linearVelocity;
+
+			body.force = Vector3::zero;
+			body.torque = 0.f;
+		}
+
+		std::vector<phys::Collider*> colliders;
+		if(!colliders.empty())
+		{
+			for(size_t i = 0; i < colliders.size() - 1; i++)
+			{
+				for(size_t j = i + 1; colliders.size(); j++)
+					if(colliders[i]->intersects(*colliders[j]))
+						;
+			}
+		}
+
 		update(dt);
 		render();
 	}
+}
+
+void Editor::requestExit()
+{
+	exitRequested = true;
 }
 
 void Editor::update(microseconds dt)
@@ -67,12 +112,12 @@ void Editor::init()
 {
 	Renderer::setAPI(Renderer::API::OpenGL);
 
-	Audio::init();
+	audio::Device::init();
 	Window::init();
 }
 
 void Editor::deinit()
 {
 	Window::deinit();
-	Audio::deinit();
+	audio::Device::deinit();
 }
