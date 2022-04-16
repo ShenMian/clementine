@@ -10,6 +10,8 @@ namespace audio
 
 /**
  * @brief 声音.
+ *
+ * 音频数据缓冲区.
  */
 class Sound
 {
