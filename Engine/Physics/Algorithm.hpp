@@ -12,12 +12,12 @@ namespace phys
 namespace algo
 {
 
-bool intersects(const BoxCollider& box, const SphereCollider& sphere)
+inline bool intersects(const BoxCollider& box, const SphereCollider& sphere)
 {
 	return false;
 }
 
-bool intersects(const SphereCollider& sphere, const BoxCollider& box)
+inline bool intersects(const SphereCollider& sphere, const BoxCollider& box)
 {
 	return intersects(box, sphere);
 }
