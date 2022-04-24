@@ -13,8 +13,9 @@
 #include <Physics/Algorithm.hpp>
 #include <Physics/Rigidbody.h>
 
-using std::chrono::microseconds;
+#include <Event/Emitter.hpp>
 
+using std::chrono::microseconds;
 using namespace input;
 
 Editor::Editor()
@@ -54,19 +55,16 @@ void Editor::loop()
 
 		// const auto& view = register.get<TransformComponent, RigidbodyComponent>();
 		// for(auto& [trans, body] : view) { ... };
-
 		{
 			float dt;
 			Transform trans;
 			phys::Rigidbody body;
-			auto linearAcc = body.force * body.invMass();
-			body.linearVelocity += dt * linearAcc;
-
-
-			trans.position() += dt * body.linearVelocity;
-
+			body.linearVelocity += dt * body.force * body.invMass();
+			body.angularVelocity += dt * body.torque * body.invInertia();
 			body.force = Vector3::zero;
 			body.torque = 0.f;
+
+			trans.position() += dt * body.linearVelocity;
 		}
 
 		std::vector<phys::Collider*> colliders;
