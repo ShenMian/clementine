@@ -22,7 +22,6 @@ public:
 	bool contains(const Vector3& point) const;
 
 	Vector3 getMin() const;
-
 	Vector3 getMax() const;
 
 	Vector3 center;
