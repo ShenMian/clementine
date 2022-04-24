@@ -26,30 +26,59 @@ typename traits<Callback>::fn to_function(Callback& cb)
 }
 
 template<typename... Args>
-inline void Emitter::emit(const std::string& name, Args... args)
+inline void Emitter::emit(const std::string& event, Args... args)
 {
-	const auto it = listeners.find(name);
-	if(it == listeners.end())
-		throw std::runtime_error("listener do not exist");
-	auto fn = static_cast<std::function<void(Args...)>*>(it->second);
-	(*fn)(args...);
+	{
+		const auto it = listeners.find(event);
+		if(it != listeners.end())
+		{
+			auto fn = static_cast<std::function<void(Args...)>*>(it->second);
+			(*fn)(args...);
+		}
+	}
+	{
+		const auto it = onceListeners.find(event);
+		if(it != onceListeners.end())
+		{
+			auto fn = static_cast<std::function<void(Args...)>*>(it->second);
+			(*fn)(args...);
+			onceListeners.erase(event);
+		}
+	}
 }
 
 template<typename Callback>
-inline void Emitter::add(const std::string& name, Callback callback)
+inline void Emitter::on(const std::string& event, Callback callback)
 {
-	if(listeners.contains(name))
+	if(listeners.contains(event))
 		throw std::runtime_error("listener already exist");
 	auto f = to_function(callback);
 	auto fn = new decltype(f)(to_function(callback));
-	listeners[name] = static_cast<void*>(fn);
+	listeners[event] = static_cast<void*>(fn);
 }
 
-inline void Emitter::remove(const std::string& name)
+template<typename Callback>
+inline void Emitter::once(const std::string& event, Callback callback)
 {
-	if(!listeners.contains(name))
+	if(onceListeners.contains(event))
+		throw std::runtime_error("listener already exist");
+	auto f = to_function(callback);
+	auto fn = new decltype(f)(to_function(callback));
+	onceListeners[event] = static_cast<void*>(fn);
+}
+
+inline void Emitter::remove(const std::string& event)
+{
+	if(!listeners.contains(event))
 		return;
-	listeners.erase(name);
+	listeners.erase(event);
+	onceListeners.erase(event);
+}
+
+inline void Emitter::clear()
+{
+	listeners.clear();
+	onceListeners.clear();
 }
 
 }
