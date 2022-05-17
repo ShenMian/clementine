@@ -10,13 +10,39 @@
 #include <Audio/Device.h>
 #include <thread>
 
+#include <Event/Emitter.hpp>
+
 #include <Physics/Algorithm.hpp>
 #include <Physics/Rigidbody.h>
 
-#include <Event/Emitter.hpp>
+#include <ECS/Archetype.hpp>
+#include <ECS/Entity.hpp>
+#include <ECS/Registry.h>
+#include <ECS/View.hpp>
 
 using std::chrono::microseconds;
 using namespace input;
+
+struct PositionComponent
+{
+	DECLARE_TYPE
+
+	Vector3 position;
+};
+
+struct RotationComponent
+{
+	DECLARE_TYPE
+
+	Quaternion rotation;
+};
+
+struct ScaleComponent
+{
+	DECLARE_TYPE
+
+	Vector3 scale;
+};
 
 Editor::Editor()
 	: window("Editor", {1920 / 2, 1080 / 2})
@@ -30,6 +56,13 @@ Editor::Editor()
 	actionMap.add(std::make_shared<KeyTrigger>(Key::Escape), [this]() { this->requestExit(); });
 
 	window.setVisible(true);
+
+	ecs::Registry registry;
+	auto entity = registry.create();
+	registry.destroy(entity);
+
+	ecs::Iterator<PositionComponent, RotationComponent> it;
+	// const auto& [pos, rot] = *it;
 }
 
 Editor::~Editor()
