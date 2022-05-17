@@ -12,6 +12,10 @@ Makefile
 
 # CMake
 .cache
+CMakeSettings.json
+
+# Vcpkg
+vcpkg_installed
 
 # Visual Studio
 *.sln
