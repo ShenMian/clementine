@@ -16,3 +16,6 @@
 [submodule "Source/ThirdParty/openal-soft"]
 	path = Source/ThirdParty/openal-soft
 	url = https://github.com/kcat/openal-soft.git
+[submodule "Deps/EASTL"]
+	path = Deps/EASTL
+	url = https://github.com/electronicarts/EASTL
