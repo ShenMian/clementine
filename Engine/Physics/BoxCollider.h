@@ -14,6 +14,8 @@ class SphereCollider;
 class BoxCollider : public Collider
 {
 public:
+	BoxCollider(const Vector3& center, const Vector3& halfExtent);
+
 	bool intersects(const Collider& other) const;
 	bool intersects(const BoxCollider& other) const;
 	bool intersects(const SphereCollider& other) const;
@@ -21,8 +23,8 @@ public:
 	bool contains(const BoxCollider& other) const;
 	bool contains(const Vector3& point) const;
 
-	Vector3 getMin() const;
-	Vector3 getMax() const;
+	Vector3 min() const;
+	Vector3 max() const;
 
 	Vector3 center;
 	Vector3 halfExtent;
