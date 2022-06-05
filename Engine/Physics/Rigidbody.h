@@ -31,7 +31,7 @@ public:
 	float gravityScale = 0.f;
 
 	Vector3 force;
-	float torque;
+	float torque = 0.f;
 
 	void mass(float m);
 	float mass() const;
