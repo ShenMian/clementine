@@ -1,0 +1,15 @@
+﻿---
+BasedOnStyle: Microsoft
+
+AccessModifierOffset: '-4'
+SpaceBeforeParens: Never
+PointerAlignment: Left
+AlignConsecutiveAssignments: 'true'
+AlignConsecutiveDeclarations: 'true'
+AlwaysBreakTemplateDeclarations: 'Yes'
+AllowShortFunctionsOnASingleLine: InlineOnly
+
+MaxEmptyLinesToKeep: '2'
+UseTab: ForIndentation
+
+...
