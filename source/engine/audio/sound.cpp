@@ -58,11 +58,8 @@ struct WaveData
 	int32_t size;
 };
 
-void readWav(const fs::path& path,
-	std::vector<uint8_t>&    samples,
-	uint32_t&                sampleRate,
-	uint16_t&                channelCount,
-	uint16_t&                bitsPerSample)
+void readWav(const fs::path& path, std::vector<uint8_t>& samples, uint32_t& sampleRate, uint16_t& channelCount,
+             uint16_t& bitsPerSample)
 {
 	if(!fs::exists(path))
 		throw std::runtime_error("no such file");
@@ -101,44 +98,46 @@ void readWav(const fs::path& path,
 
 	file.close();
 
-	sampleRate = waveFormat.sampleRate;
-	channelCount = waveFormat.numChannels;
+	sampleRate    = waveFormat.sampleRate;
+	channelCount  = waveFormat.numChannels;
 	bitsPerSample = waveFormat.bitsPerSample;
 }
 
-}
+} // namespace
 
 namespace audio
 {
 
 Sound::Sound(const fs::path& path)
 {
-    alGenBuffers(1, &handle);
+	alGenBuffers(1, &handle);
 	loadFromFile(path);
 }
 
 Sound::~Sound()
 {
-    alDeleteBuffers(1, &handle);
+	alDeleteBuffers(1, &handle);
 }
 
-void Sound::loadFromFile(const fs::path &path)
+void Sound::loadFromFile(const fs::path& path)
 {
 	if(path.extension() == ".wav")
 		readWav(path, samples, sampleRate, channelCount, bitsPerSample);
 	else
 		throw std::runtime_error("file format do not support");
 
-	alBufferData(handle, GetALFormat(channelCount, bitsPerSample), (void*)samples.data(), (ALsizei)samples.size(), sampleRate);
+	alBufferData(handle, GetALFormat(channelCount, bitsPerSample), (void*)samples.data(), (ALsizei)samples.size(),
+	             sampleRate);
 }
 
-void Sound::loadFromMemory(const void* data, size_t size, uint32_t sampleRate, uint16_t channels, uint16_t bitsPerSample)
+void Sound::loadFromMemory(const void* data, size_t size, uint32_t sampleRate, uint16_t channels,
+                           uint16_t bitsPerSample)
 {
-	this->sampleRate = sampleRate;
-	this->channelCount = channels;
+	this->sampleRate    = sampleRate;
+	this->channelCount  = channels;
 	this->bitsPerSample = bitsPerSample;
 
 	alBufferData(handle, GetALFormat(channelCount, bitsPerSample), data, size, sampleRate);
 }
 
-}
+} // namespace audio

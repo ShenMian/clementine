@@ -70,12 +70,12 @@ void Device::init()
 			name += strlen(name) + 1;
 		}
 	}
-	
+
 	// 获取输入设备
 	{
 		if(!alcIsExtensionPresent(nullptr, "ALC_EXT_capture"))
 			throw std::runtime_error("do not support enumerate input devices");
-		
+
 		const auto names = alcGetString(nullptr, ALC_CAPTURE_DEVICE_SPECIFIER);
 		if(names == nullptr)
 			throw std::runtime_error("failed to get input devices name");
@@ -96,35 +96,35 @@ void Device::deinit()
 	context = nullptr;
 }
 
-}
+} // namespace audio
 
 /* 录音相关代码
 if(!alcIsExtensionPresent(device, "ALC_EXT_capture"))
-	throw std::runtime_error("do not support capture");
+    throw std::runtime_error("do not support capture");
 
 auto names = alcGetString(nullptr, ALC_CAPTURE_DEVICE_SPECIFIER);
 if(names == nullptr)
-	throw std::runtime_error("failed to get devices name");
+    throw std::runtime_error("failed to get devices name");
 
 auto name = names;
 while(*name != '\0')
 {
-	puts(name);
-	name += strlen(name) + 1;
+    puts(name);
+    name += strlen(name) + 1;
 }
 
 auto device = alcCaptureOpenDevice(nullptr, 48000, AL_FORMAT_STEREO16, 1024);
 if(device == nullptr)
-	throw std::runtime_error("failed to open audio capture device");
+    throw std::runtime_error("failed to open audio capture device");
 
 alcCaptureStart(device);
 
 char buffer[2 * (16 / 8) * 48000] = {'\0'};
 while(true)
 {
-	int samples;
-	alcGetIntegerv(device, ALC_CAPTURE_SAMPLES, sizeof(int), &samples); // 获取捕获的音频样本数
-	alcCaptureSamples(device, buffer, samples);
+    int samples;
+    alcGetIntegerv(device, ALC_CAPTURE_SAMPLES, sizeof(int), &samples); // 获取捕获的音频样本数
+    alcCaptureSamples(device, buffer, samples);
 }
 
 alcCaptureStop(device);

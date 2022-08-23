@@ -34,4 +34,4 @@ private:
 	inline static std::vector<Device> inputDevices;
 };
 
-}
+} // namespace audio

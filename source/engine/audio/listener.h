@@ -5,7 +5,8 @@
 
 #include <Math/Math.hpp>
 
-namespace audio {
+namespace audio
+{
 
 /**
  * @brief 听者.
@@ -13,55 +14,55 @@ namespace audio {
 class Listener
 {
 public:
-    /**
+	/**
 	 * @brief 设置音量.
 	 *
 	 * @param volume 音量. 范围: [0.0, 1.0].
 	 */
-    static void setVolume(float volume);
+	static void setVolume(float volume);
 
-    /**
+	/**
 	 * @brief 获取音量.
 	 */
-    static float getVolume();
+	static float getVolume();
 
-    /**
+	/**
 	 * @brief 设置听者位置.
 	 *
 	 * @param pos 听者的坐标.
 	 */
-    static void setPosition(const Vector3f& pos);
+	static void setPosition(const Vector3f& pos);
 
-    /**
+	/**
 	 * @brief 获取听者位置.
 	 */
-    static Vector3f getPosition();
+	static Vector3f getPosition();
 
-    /**
+	/**
 	 * @brief 设置听者方向.
 	 *
 	 * @param pos 听者的方向.
 	 */
-    // static void setDirection(const Vector3f& dir);
+	// static void setDirection(const Vector3f& dir);
 
-    /**
+	/**
 	 * @brief 获取听者方向.
 	 */
-    // static Vector3f getDirection();
+	// static Vector3f getDirection();
 
-    /**
+	/**
 	 * @brief 设置听者速度.
 	 *
 	 * @param v 听者速度.
 	 */
-    static void setVelocity(const Vector3f& v);
+	static void setVelocity(const Vector3f& v);
 
-    /**
+	/**
 	 * @brief 获取听者速度.
 	 *
 	 * @return 听者速度.
 	 */
-    static Vector3f getVelocity();
+	static Vector3f getVelocity();
 };
 
-}
+} // namespace audio

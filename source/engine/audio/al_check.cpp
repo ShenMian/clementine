@@ -57,7 +57,7 @@ std::string_view ALGetErrorDescString(ALenum error)
 	}
 }
 
-}
+} // namespace
 
 namespace audio
 {

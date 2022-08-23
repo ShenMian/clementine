@@ -20,12 +20,12 @@ public:
 	Sound(const std::filesystem::path& path);
 	virtual ~Sound();
 
-    /**
-     * @brief 从文件加载声音.
-     *
-     * @param path 声音文件路径.
-     */
-    void loadFromFile(const std::filesystem::path& path);
+	/**
+	 * @brief 从文件加载声音.
+	 *
+	 * @param path 声音文件路径.
+	 */
+	void loadFromFile(const std::filesystem::path& path);
 
 	/**
 	 * @brief 从内存加载声音.
@@ -41,50 +41,35 @@ public:
 	/**
 	 * @brief 获取声音总长度, 单位: 秒.
 	 */
-	float getDuration() const
-	{
-		return (float)samples.size() / channelCount / sampleRate;
-	}
+	float getDuration() const { return (float)samples.size() / channelCount / sampleRate; }
 
 	/**
 	 * @brief 获取样本.
 	 */
-	auto getSamples() const
-	{
-		return samples;
-	}
+	auto getSamples() const { return samples; }
 
 	/**
 	 * @brief 获取样本数.
 	 */
-	auto getSampleCount() const
-	{
-		return samples.size() / (bitsPerSample / 8);
-	}
+	auto getSampleCount() const { return samples.size() / (bitsPerSample / 8); }
 
 	/**
 	 * @brief 获取通道数.
 	 */
-	auto getChannelCount() const
-	{
-		return channelCount;
-	}
+	auto getChannelCount() const { return channelCount; }
 
 	/**
 	 * @brief 获取 OpenAL 句柄.
 	 */
-    auto getHandle() const
-    {
-        return handle;
-    }
+	auto getHandle() const { return handle; }
 
 private:
 	std::vector<uint8_t> samples;
-	uint32_t             sampleRate = 0;
-	uint16_t             channelCount = 0;
+	uint32_t             sampleRate    = 0;
+	uint16_t             channelCount  = 0;
 	uint16_t             bitsPerSample = 0;
 
 	unsigned int handle;
 };
 
-}
+} // namespace audio
