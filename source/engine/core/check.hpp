@@ -15,6 +15,9 @@
 	#define breakpoint() __builtin_trap()
 #endif
 
+namespace core
+{
+
 inline constexpr void check(bool condition)
 {
 	if(condition)
@@ -54,3 +57,5 @@ std::source_location& loc = std::source_location::current())
 message.data()); breakpoint();
 }
 */
+
+} // namespace core
