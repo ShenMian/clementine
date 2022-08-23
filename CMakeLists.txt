@@ -1,4 +1,4 @@
-﻿# Copyright 2021 SMS
+﻿# Copyright 2022 SMS
 # License(Apache-2.0)
 
 cmake_minimum_required(VERSION 3.16)
@@ -51,3 +51,4 @@ if(UNIX)
 endif()
 
 add_subdirectory(source/engine)
+add_subdirectory(source/editor)
