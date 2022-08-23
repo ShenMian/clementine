@@ -1,15 +1,23 @@
 ﻿---
 BasedOnStyle: Microsoft
 
-AccessModifierOffset: '-4'
-SpaceBeforeParens: Never
-PointerAlignment: Left
-AlignConsecutiveAssignments: 'true'
-AlignConsecutiveDeclarations: 'true'
-AlwaysBreakTemplateDeclarations: 'Yes'
-AllowShortFunctionsOnASingleLine: InlineOnly
+Standard: c++20
 
-MaxEmptyLinesToKeep: '2'
-UseTab: ForIndentation
+MaxEmptyLinesToKeep: 2
+PointerAlignment:    Left
+
+SortIncludes:          true
+SortUsingDeclarations: true
+
+AccessModifierOffset:         -4
+AlignConsecutiveAssignments:  true
+AlignConsecutiveDeclarations: true
+AlignConsecutiveMacros:       true
+IndentPPDirectives:           BeforeHash
+UseTab:                       ForIndentation
+
+SpaceBeforeParens: Never
+AlwaysBreakTemplateDeclarations: Yes
+AllowShortFunctionsOnASingleLine: InlineOnly
 
 ...
