@@ -1,9 +1,9 @@
-﻿// Copyright 2022 ShenMian
+// Copyright 2022 ShenMian
 // License(Apache-2.0)
 
 #pragma once
 
-#include <string>
+#include <string_view>
 #include <vector>
 
 class ALCdevice;
@@ -23,6 +23,9 @@ public:
 	std::string_view getName() const;
 
 	int getSampleRate() const;
+
+	static const std::vector<Device>& getOutputDevices();
+	static const std::vector<Device>& getInputDevices();
 
 	static void init();
 	static void deinit();

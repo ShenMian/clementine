@@ -1,4 +1,4 @@
-﻿// Copyright 2022 ShenMian
+// Copyright 2022 ShenMian
 // License(Apache-2.0)
 
 #pragma once
@@ -25,7 +25,7 @@ public:
 	 *
 	 * @param path 声音文件路径.
 	 */
-	void loadFromFile(const std::filesystem::path& path);
+	void load(const std::filesystem::path& path);
 
 	/**
 	 * @brief 从内存加载声音.
@@ -36,7 +36,7 @@ public:
 	 * @param channels      通道数.
 	 * @param bitsPerSample .
 	 */
-	void loadFromMemory(const void* data, size_t size, uint32_t sampleRate, uint16_t channels, uint16_t bitsPerSample);
+	void load(const void* data, size_t size, uint32_t sampleRate, uint16_t channels, uint16_t bitsPerSample);
 
 	/**
 	 * @brief 获取声音总长度, 单位: 秒.

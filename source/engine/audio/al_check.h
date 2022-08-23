@@ -1,7 +1,10 @@
-﻿// Copyright 2022 ShenMian
+// Copyright 2022 ShenMian
 // License(Apache-2.0)
 
 #pragma once
+
+namespace audio
+{
 
 void ALCheckError();
 void ALClearError();
@@ -17,3 +20,5 @@ void ALClearError();
 #else
 	#define ALCall(func) func
 #endif
+
+} // namespace audio

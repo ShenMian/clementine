@@ -1,4 +1,4 @@
-﻿// Copyright 2022 ShenMian
+// Copyright 2022 ShenMian
 // License(Apache-2.0)
 
 #include "Sound.h"
@@ -66,7 +66,7 @@ void readWav(const fs::path& path, std::vector<uint8_t>& samples, uint32_t& samp
 
 	std::ifstream file(path, std::ios::binary);
 	if(!file.is_open())
-		std::runtime_error("can not open file");
+		throw std::runtime_error("can not open file");
 
 	RiffHeader riffHeader;
 	file.read(reinterpret_cast<char*>(&riffHeader), sizeof(riffHeader));
@@ -111,7 +111,7 @@ namespace audio
 Sound::Sound(const fs::path& path)
 {
 	alGenBuffers(1, &handle);
-	loadFromFile(path);
+	load(path);
 }
 
 Sound::~Sound()
@@ -119,7 +119,7 @@ Sound::~Sound()
 	alDeleteBuffers(1, &handle);
 }
 
-void Sound::loadFromFile(const fs::path& path)
+void Sound::load(const fs::path& path)
 {
 	if(path.extension() == ".wav")
 		readWav(path, samples, sampleRate, channelCount, bitsPerSample);
@@ -130,8 +130,7 @@ void Sound::loadFromFile(const fs::path& path)
 	             sampleRate);
 }
 
-void Sound::loadFromMemory(const void* data, size_t size, uint32_t sampleRate, uint16_t channels,
-                           uint16_t bitsPerSample)
+void Sound::load(const void* data, size_t size, uint32_t sampleRate, uint16_t channels, uint16_t bitsPerSample)
 {
 	this->sampleRate    = sampleRate;
 	this->channelCount  = channels;

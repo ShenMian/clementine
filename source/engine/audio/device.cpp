@@ -1,4 +1,4 @@
-﻿// Copyright 2022 ShenMian
+// Copyright 2022 ShenMian
 // License(Apache-2.0)
 
 #include "Device.h"
@@ -45,6 +45,16 @@ int Device::getSampleRate() const
 	int frequency;
 	alcGetIntegerv(handle, ALC_FREQUENCY, 1, &frequency);
 	return frequency;
+}
+
+const std::vector<Device>& Device::getOutputDevices()
+{
+	return outputDevices;
+}
+
+const std::vector<Device>& Device::getInputDevices()
+{
+	return inputDevices;
 }
 
 void Device::init()
