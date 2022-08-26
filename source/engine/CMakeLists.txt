@@ -8,6 +8,7 @@ add_library(clementine::clementine ALIAS clementine)
 
 target_compile_features(clementine PRIVATE cxx_std_20)
 target_compile_definitions(clementine PUBLIC ${CLEMENTINE_DEFINES})
+target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/source/engine")
 
 # Math
 target_include_directories(clementine PUBLIC
