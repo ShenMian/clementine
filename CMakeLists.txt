@@ -3,12 +3,6 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-project(Clementine
-    VERSION      0.0.0
-    DESCRIPTION  "A simple game engine."
-    HOMEPAGE_URL "https://github.com/ShenMian/Clementine"
-    LANGUAGES    CXX C)
-
 # 指定默认编译类型
 if(NOT DEFINED CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
@@ -18,6 +12,12 @@ endif()
 if(NOT DEFINED CMAKE_EXPORT_COMPILE_COMMANDS)
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 endif()
+
+project(Clementine
+    VERSION      0.0.0
+    DESCRIPTION  "A simple game engine."
+    HOMEPAGE_URL "https://github.com/ShenMian/Clementine"
+    LANGUAGES    CXX C)
 
 # 选项
 option(USE_CONAN "Use conan" ON)
