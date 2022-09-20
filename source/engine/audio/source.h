@@ -54,6 +54,11 @@ public:
 	void setSound(Sound& sound);
 
 	/**
+	 * @brief 获取声音播放状态.
+	 */
+	Status getStatus() const;
+
+	/**
 	 * @brief 设置音量.
 	 *
 	 * @param volume 音量. 范围: [0.0, 1.0].
@@ -81,11 +86,6 @@ public:
 	 * @brief 设置是否循环播放.
 	 */
 	void setLoop(bool enable);
-
-	/**
-	 * @brief 获取声音播放状态.
-	 */
-	Status getStatus() const;
 
 	/**
 	 * @brief 设置声源位置.
@@ -126,8 +126,6 @@ public:
 	float getAttenuation() const;
 
 private:
-	Sound* sound = nullptr;
-
 	unsigned int handle;
 };
 

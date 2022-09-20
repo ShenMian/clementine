@@ -21,9 +21,34 @@ Source::~Source()
 	alDeleteSources(1, &handle);
 }
 
+void Source::play()
+{
+	alSourcePlay(handle);
+	ALCheckError();
+}
+
+void Source::stop()
+{
+	alSourceStop(handle);
+	ALCheckError();
+}
+
+void Source::pause()
+{
+	alSourcePause(handle);
+	ALCheckError();
+}
+
+void Source::rewind()
+{
+	alSourceRewind(handle);
+	ALCheckError();
+}
+
 void Source::setSound(Sound& sound)
 {
-	this->sound = &sound;
+	alSourcei(handle, AL_BUFFER, sound.getHandle());
+	ALCheckError();
 }
 
 Source::Status Source::getStatus() const
@@ -43,34 +68,6 @@ Source::Status Source::getStatus() const
 		return Status::Playing;
 	}
 	return Status::Stopped;
-}
-
-void Source::play()
-{
-	assert(sound);
-	alSourcePlay(sound->getHandle());
-	ALCheckError();
-}
-
-void Source::stop()
-{
-	assert(sound);
-	alSourceStop(sound->getHandle());
-	ALCheckError();
-}
-
-void Source::pause()
-{
-	assert(sound);
-	alSourcePause(sound->getHandle());
-	ALCheckError();
-}
-
-void Source::rewind()
-{
-	assert(sound);
-	alSourceRewind(sound->getHandle());
-	ALCheckError();
 }
 
 void Source::setVolume(float volume)
@@ -116,7 +113,7 @@ Vector3f Source::getPosition() const
 	return {x, y, z};
 }
 
-void Source::setVelocity(const Vector3& v)
+void Source::setVelocity(const Vector3f& v)
 {
 	alSource3f(handle, AL_VELOCITY, v.x, v.y, v.z);
 }
