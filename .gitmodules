@@ -10,3 +10,6 @@
 [submodule "deps/fmt"]
 	path = deps/fmt
 	url = https://github.com/fmtlib/fmt.git
+[submodule "deps/libnyquist"]
+	path = deps/libnyquist
+	url = https://github.com/ddiakopoulos/libnyquist

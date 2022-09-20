@@ -28,3 +28,8 @@ set(LIBTYPE STATIC)
 add_subdirectory("${PROJECT_SOURCE_DIR}/deps/openal-soft" "openal-soft")
 target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/deps/openal-soft/include")
 target_link_libraries(clementine PUBLIC OpenAL)
+
+# libnyquist
+add_subdirectory("${PROJECT_SOURCE_DIR}/deps/libnyquist" "libnyquist")
+target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/deps/libnyquist/include")
+target_link_libraries(clementine PUBLIC libnyquist)
