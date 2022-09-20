@@ -6,6 +6,8 @@
 #include <fstream>
 #include <stdexcept>
 
+#include <libnyquist/Decoders.h>
+
 namespace fs = std::filesystem;
 
 namespace
@@ -121,22 +123,49 @@ Sound::~Sound()
 
 void Sound::load(const fs::path& path)
 {
-	if(path.extension() == ".wav")
-		readWav(path, samples, sampleRate, channelCount, bitsPerSample);
-	else
+	nqr::NyquistIO loader;
+	if(!loader.IsFileSupported(path.string()))
 		throw std::runtime_error("file format do not support");
 
-	alBufferData(handle, GetALFormat(channelCount, bitsPerSample), (void*)samples.data(), (ALsizei)samples.size(),
-	             sampleRate);
+	nqr::AudioData data;
+	loader.Load(&data, path.string());
+
+	// libnyquist 内部 BUG 临时解决方案
+	if(data.frameSize == 32)
+		data.frameSize = 4;
+	else if(data.frameSize == 16)
+		data.frameSize = 2;
+	else
+		data.frameSize = 4;
+
+	const uint16_t bitsPerSample = (data.frameSize / data.channelCount) * 8;
+
+	if(bitsPerSample == 8)
+	{
+		std::vector<uint8_t> buf(data.samples.size());
+		std::transform(data.samples.begin(), data.samples.end(), buf.begin(),
+		               [](float x) { return static_cast<uint8_t>((x * 127.f) + 128.f); });
+		load(buf.data(), buf.size(), data.sampleRate, data.channelCount, bitsPerSample);
+	}
+	else if(bitsPerSample == 16)
+	{
+		std::vector<int16_t> buf(data.samples.size());
+		std::transform(data.samples.begin(), data.samples.end(), buf.begin(),
+		               [](float x) { return static_cast<int16_t>(x * std::numeric_limits<int16_t>::max()); });
+		load(buf.data(), buf.size() * sizeof(int16_t), data.sampleRate, data.channelCount, bitsPerSample);
+	}
+	else
+		throw std::runtime_error("unknown sample size");
 }
 
-void Sound::load(const void* data, size_t size, uint32_t sampleRate, uint16_t channels, uint16_t bitsPerSample)
+void Sound::load(const void* data, size_t size, uint32_t sampleRate, uint16_t channelCount, uint16_t bitsPerSample)
 {
+	this->samplesCount  = size / (bitsPerSample / 8);
 	this->sampleRate    = sampleRate;
-	this->channelCount  = channels;
+	this->channelCount  = channelCount;
 	this->bitsPerSample = bitsPerSample;
 
-	alBufferData(handle, GetALFormat(channelCount, bitsPerSample), data, size, sampleRate);
+	alBufferData(handle, GetALFormat(channelCount, bitsPerSample), data, static_cast<ALsizei>(size), sampleRate);
 }
 
 } // namespace audio

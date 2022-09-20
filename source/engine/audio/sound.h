@@ -36,38 +36,33 @@ public:
 	 * @param channels      通道数.
 	 * @param bitsPerSample .
 	 */
-	void load(const void* data, size_t size, uint32_t sampleRate, uint16_t channels, uint16_t bitsPerSample);
+	void load(const void* data, size_t size, uint32_t sampleRate, uint16_t channelCount, uint16_t bitsPerSample);
 
 	/**
 	 * @brief 获取声音总长度, 单位: 秒.
 	 */
-	float getDuration() const { return (float)samples.size() / channelCount / sampleRate; }
-
-	/**
-	 * @brief 获取样本.
-	 */
-	auto getSamples() const { return samples; }
+	float getDuration() const { return (float)samplesCount / channelCount / sampleRate; }
 
 	/**
 	 * @brief 获取样本数.
 	 */
-	auto getSampleCount() const { return samples.size() / (bitsPerSample / 8); }
+	auto getSampleCount() const { return samplesCount / (bitsPerSample / 8); }
 
 	/**
 	 * @brief 获取通道数.
 	 */
-	auto getChannelCount() const { return channelCount; }
+	auto getChannelCount() const noexcept { return channelCount; }
 
 	/**
 	 * @brief 获取 OpenAL 句柄.
 	 */
-	auto getHandle() const { return handle; }
+	auto getHandle() const noexcept { return handle; }
 
 private:
-	std::vector<uint8_t> samples;
-	uint32_t             sampleRate    = 0;
-	uint16_t             channelCount  = 0;
-	uint16_t             bitsPerSample = 0;
+	uint32_t samplesCount  = 0;
+	uint32_t sampleRate    = 0;
+	uint16_t channelCount  = 0;
+	uint16_t bitsPerSample = 0;
 
 	unsigned int handle;
 };
