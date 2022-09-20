@@ -16,7 +16,7 @@
 #if defined(_WIN32)
 	#define TARGET_OS OS_WIN
 #elif defined(__unix__) || defined(unix) || defined(__unix)
-    #define TARGET_OS OS_UNIX
+	#define TARGET_OS OS_UNIX
 #elif defined(__linux__) && !defined(__ANDROID__)
 	#define TARGET_OS OS_LINUX
 #elif defined(__APPLE__)
@@ -38,8 +38,12 @@
 #endif
 
 #if TARGET_OS == OS_WIN
-	#define WIN32_LEAN_AND_MEAN
-	#define NOMINMAX
+	#ifndef WIN32_LEAN_AND_MEAN
+		#define WIN32_LEAN_AND_MEAN
+	#endif
+	#ifndef NOMINMAX
+		#define NOMINMAX
+	#endif
 
 	#define _WIN32_WINDOWS 0x0A00 // Windows 10
 	#define _WINSOCK_DEPRECATED_NO_WARNINGS
