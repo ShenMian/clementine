@@ -76,8 +76,8 @@ void Device::init()
 		auto name = names;
 		while(*name != '\0')
 		{
-			outputDevices.emplace_back(alcOpenDevice(name));
-			name += strlen(name) + 1;
+		    outputDevices.emplace_back(alcOpenDevice(name));
+		    name += strlen(name) + 1;
 		}
 	}
 
