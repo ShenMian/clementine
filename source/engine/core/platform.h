@@ -48,6 +48,8 @@
 	#define _WIN32_WINDOWS 0x0A00 // Windows 10
 	#define _WINSOCK_DEPRECATED_NO_WARNINGS
 	#include <windows.h>
+	#undef near
+	#undef far
 #endif
 
 // Compiler
