@@ -11,14 +11,14 @@ target_compile_definitions(clementine PUBLIC ${CLEMENTINE_DEFINES})
 target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/source/engine")
 
 # Math
-target_include_directories(clementine PUBLIC
-	"${PROJECT_SOURCE_DIR}/deps/Math"
-	"${PROJECT_SOURCE_DIR}/deps/Math/deps/gcem/include")
+add_subdirectory("${PROJECT_SOURCE_DIR}/deps/Math" "Math")
+target_link_libraries(clementine PUBLIC math)
 
 # fmt
 target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/deps/fmt/include")
 
 # Graphics
+set(BUILD_EXAMPLES OFF CACHE BOOL "Build examples")
 add_subdirectory("${PROJECT_SOURCE_DIR}/deps/Graphics" "Graphics")
 target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/deps/Graphics")
 target_link_libraries(clementine PUBLIC graphics)
