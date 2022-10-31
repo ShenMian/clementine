@@ -3,7 +3,9 @@
 
 #include "Sound.h"
 #include <AL/al.h>
+#include <algorithm>
 #include <fstream>
+#include <optional>
 #include <stdexcept>
 
 #include <libnyquist/Decoders.h>
@@ -13,26 +15,23 @@ namespace fs = std::filesystem;
 namespace
 {
 
-ALenum GetALFormat(int channelCount, int bitsPerSample)
+std::optional<ALenum> GetALFormat(int channelCount, int bitsPerSample)
 {
-	int format = -1;
 	if(channelCount == 1)
 	{
 		if(bitsPerSample == 8)
-			format = AL_FORMAT_MONO8;
-		else if(bitsPerSample == 16)
-			format = AL_FORMAT_MONO16;
+			return AL_FORMAT_MONO8;
+		if(bitsPerSample == 16)
+			return AL_FORMAT_MONO16;
 	}
 	else if(channelCount == 2)
 	{
 		if(bitsPerSample == 8)
-			format = AL_FORMAT_STEREO8;
-		else if(bitsPerSample == 16)
-			format = AL_FORMAT_STEREO16;
+			return AL_FORMAT_STEREO8;
+		if(bitsPerSample == 16)
+			return AL_FORMAT_STEREO16;
 	}
-	if(format == -1)
-		throw std::runtime_error("unknown audio format");
-	return format;
+	return std::nullopt;
 }
 
 struct RiffHeader
@@ -60,8 +59,8 @@ struct WaveData
 	int32_t size;
 };
 
-void readWav(const fs::path& path, std::vector<uint8_t>& samples, uint32_t& sampleRate, uint16_t& channelCount,
-             uint16_t& bitsPerSample)
+[[deprecated]] void readWav(const fs::path& path, std::vector<uint8_t>& samples, uint32_t& sampleRate,
+                            uint16_t& channelCount, uint16_t& bitsPerSample)
 {
 	if(!fs::exists(path))
 		throw std::runtime_error("no such file");
@@ -143,15 +142,15 @@ void Sound::load(const fs::path& path)
 	if(bitsPerSample == 8)
 	{
 		std::vector<uint8_t> buf(data.samples.size());
-		std::transform(data.samples.begin(), data.samples.end(), buf.begin(),
-		               [](float x) { return static_cast<uint8_t>((x * 127.f) + 128.f); });
+		std::ranges::transform(data.samples, buf.begin(),
+		                       [](float x) { return static_cast<uint8_t>((x * 127.f) + 128.f); });
 		load(buf.data(), buf.size(), data.sampleRate, data.channelCount, bitsPerSample);
 	}
 	else if(bitsPerSample == 16)
 	{
 		std::vector<int16_t> buf(data.samples.size());
-		std::transform(data.samples.begin(), data.samples.end(), buf.begin(),
-		               [](float x) { return static_cast<int16_t>(x * std::numeric_limits<int16_t>::max()); });
+		std::ranges::transform(data.samples, buf.begin(),
+		                       [](float x) { return static_cast<int16_t>(x * std::numeric_limits<int16_t>::max()); });
 		load(buf.data(), buf.size() * sizeof(int16_t), data.sampleRate, data.channelCount, bitsPerSample);
 	}
 	else
@@ -165,7 +164,10 @@ void Sound::load(const void* data, size_t size, uint32_t sampleRate, uint16_t ch
 	this->channelCount  = channelCount;
 	this->bitsPerSample = bitsPerSample;
 
-	alBufferData(handle, GetALFormat(channelCount, bitsPerSample), data, static_cast<ALsizei>(size), sampleRate);
+	const auto format = GetALFormat(channelCount, bitsPerSample);
+	if(!format.has_value())
+		throw std::runtime_error("unknown audio format");
+	alBufferData(handle, format.value(), data, static_cast<ALsizei>(size), sampleRate);
 }
 
 } // namespace audio
