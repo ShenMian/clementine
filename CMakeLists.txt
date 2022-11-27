@@ -50,5 +50,5 @@ if(UNIX)
     add_link_options("-ldl" "-lpthread")
 endif()
 
-add_subdirectory(source/engine)
-add_subdirectory(source/editor)
+add_subdirectory(src/engine)
+add_subdirectory(src/editor)
