@@ -10,12 +10,12 @@ target_compile_features(clementine PRIVATE cxx_std_20)
 target_compile_definitions(clementine PUBLIC ${CLEMENTINE_DEFINES})
 target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/src/engine")
 
+# fmt
+target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/deps/fmt/include")
+
 # Math
 add_subdirectory("${PROJECT_SOURCE_DIR}/deps/Math" "Math")
 target_link_libraries(clementine PUBLIC math)
-
-# fmt
-target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/deps/fmt/include")
 
 # Graphics
 set(BUILD_EXAMPLES OFF CACHE BOOL "Build examples")
@@ -33,3 +33,7 @@ target_link_libraries(clementine PUBLIC OpenAL)
 add_subdirectory("${PROJECT_SOURCE_DIR}/deps/libnyquist" "libnyquist")
 target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/deps/libnyquist/include")
 target_link_libraries(clementine PUBLIC libnyquist)
+
+# EASTL
+# find_package(eastl)
+# target_link_libraries(clementine PUBLIC eastl::eastl)
