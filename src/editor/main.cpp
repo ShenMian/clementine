@@ -1,33 +1,73 @@
-// Copyright 2022 ShenMian
+﻿// Copyright 2022 ShenMian
 // License(Apache-2.0)
 
-#include "audio/device.h"
+#include "app/application.hpp"
+#include "app/engine.hpp"
+#include "app/system/default_system.hpp"
+
+#include "misc/progress_spinner.hpp"
+
 #include <Graphics.h>
+#include <fmt/color.h>
+#include <fmt/format.h>
 
-int main()
+#include "audio/device.h"
+#include "audio/listener.h"
+#include "audio/sound.h"
+#include "audio/source.h"
+
+// #include "ecs/array.hpp"
+
+#include "net/linking_context.h"
+
+#include "core/memory_stream.hpp"
+
+namespace fs = std::filesystem;
+
+struct MatricesBuffer
 {
-	Renderer::setAPI(Renderer::API::OpenGL);
-	Window::init();
-	audio::Device::init();
+	Matrix4 view;
+	Matrix4 proj;
+	Matrix4 model;
+};
 
+class Editor : public Application
+{
+public:
+	Editor() : Application(Config{.window = {.title = "Editor"}}) {}
+
+	void update(float dt) override {}
+	void init() override {}
+	void deinit() override {}
+
+private:
+	Model loadModel(const fs::path& path)
 	{
-		Window window("Editor", {960, 540});
-		Renderer::init(window);
-		UI::init(window);
+		ProgressSpinner spinner("Loading model");
 
-		window.setVisible(true);
-
-		while(true)
-		{
-			window.update();
-		}
-
-		UI::deinit();
-		Renderer::deinit();
+		ModelImporter importer;
+		auto          model = importer.load(path, [&](float prog) { spinner.setProgress(prog); });
+		spinner.markAsComplete();
+		fmt::print(fmt::fg(fmt::color::green), "✔ Loading succeeded \n");
+		return model;
 	}
+};
 
-	audio::Device::deinit();
-	Window::deinit();
+int main(int argc, const char* argv[])
+{
+	std::vector<std::string_view> args;
+	for(int i = 0; i < argc; i++)
+		args.emplace_back(argv[i]);
+
+	Engine engine;
+	engine.addSystem<DefaultSystem>();
+	// engine.addSystem<WindowSystem>();
+	engine.init(args);
+
+	auto app = new Editor;
+	engine.run(*app);
+	delete app;
+	engine.deinit();
 
 	return 0;
 }
