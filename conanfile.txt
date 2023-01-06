@@ -1,0 +1,7 @@
+﻿[requires]
+fmt/9.0.0
+gainput/1.0.0
+# eastl/3.18.00
+
+[generators]
+cmake
