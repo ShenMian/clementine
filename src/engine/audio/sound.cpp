@@ -1,9 +1,10 @@
 // Copyright 2022 ShenMian
 // License(Apache-2.0)
 
-#include "Sound.h"
+#include "sound.hpp"
 #include <AL/al.h>
 #include <algorithm>
+#include <cstring>
 #include <fstream>
 #include <libnyquist/Decoders.h>
 #include <optional>
@@ -13,25 +14,6 @@ namespace fs = std::filesystem;
 
 namespace
 {
-
-std::optional<ALenum> GetALFormat(int channelCount, int bitsPerSample)
-{
-	if(channelCount == 1)
-	{
-		if(bitsPerSample == 8)
-			return AL_FORMAT_MONO8;
-		if(bitsPerSample == 16)
-			return AL_FORMAT_MONO16;
-	}
-	else if(channelCount == 2)
-	{
-		if(bitsPerSample == 8)
-			return AL_FORMAT_STEREO8;
-		if(bitsPerSample == 16)
-			return AL_FORMAT_STEREO16;
-	}
-	return std::nullopt;
-}
 
 struct RiffHeader
 {

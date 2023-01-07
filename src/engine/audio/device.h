@@ -24,8 +24,8 @@ public:
 
 	int getSampleRate() const;
 
-	static const std::vector<Device>& getOutputDevices();
-	static const std::vector<Device>& getInputDevices();
+	// static const std::vector<Device>& getOutputDevices();
+	// static const std::vector<Device>& getInputDevices();
 
 	static void init();
 	static void deinit();
@@ -33,8 +33,8 @@ public:
 private:
 	ALCdevice* handle;
 
-	inline static std::vector<Device> outputDevices;
-	inline static std::vector<Device> inputDevices;
+	// inline static std::vector<Device> outputDevices;
+	// inline static std::vector<Device> inputDevices;
 };
 
 } // namespace audio

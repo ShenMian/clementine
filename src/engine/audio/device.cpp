@@ -1,10 +1,11 @@
 // Copyright 2022 ShenMian
 // License(Apache-2.0)
 
-#include "Device.h"
-#include "al_check.h"
+#include "device.h"
+#include "al_check.hpp"
 #include <AL/al.h>
 #include <AL/alc.h>
+#include <cstring>
 #include <stdexcept>
 
 namespace
@@ -47,6 +48,7 @@ int Device::getSampleRate() const
 	return frequency;
 }
 
+/*
 const std::vector<Device>& Device::getOutputDevices()
 {
 	return outputDevices;
@@ -56,6 +58,7 @@ const std::vector<Device>& Device::getInputDevices()
 {
 	return inputDevices;
 }
+*/
 
 void Device::init()
 {
@@ -76,8 +79,8 @@ void Device::init()
 		auto name = names;
 		while(*name != '\0')
 		{
-		    outputDevices.emplace_back(alcOpenDevice(name));
-		    name += strlen(name) + 1;
+		    // outputDevices.emplace_back(alcOpenDevice(name));
+		    name += std::strlen(name) + 1;
 		}
 	}
 
@@ -94,7 +97,7 @@ void Device::init()
 		while(*name != '\0')
 		{
 			// inputDevices.emplace_back(alcCaptureOpenDevice(name, 44100, AL_FORMAT_STEREO16, 44100));
-			name += strlen(name) + 1;
+			name += std::strlen(name) + 1;
 		}
 	}
 }

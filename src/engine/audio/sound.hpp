@@ -11,6 +11,30 @@
 #include <optional>
 #include <stdexcept>
 
+namespace
+{
+
+std::optional<ALenum> GetALFormat(int channelCount, int bitsPerSample)
+{
+	if(channelCount == 1)
+	{
+		if(bitsPerSample == 8)
+			return AL_FORMAT_MONO8;
+		if(bitsPerSample == 16)
+			return AL_FORMAT_MONO16;
+	}
+	else if(channelCount == 2)
+	{
+		if(bitsPerSample == 8)
+			return AL_FORMAT_STEREO8;
+		if(bitsPerSample == 16)
+			return AL_FORMAT_STEREO16;
+	}
+	return std::nullopt;
+}
+
+}
+
 namespace audio
 {
 
@@ -24,7 +48,7 @@ class Sound
 public:
 	Sound() = default;
 
-	Sound(const std::filesystem::path& path);
+	Sound(const std::filesystem::path& path)
 	{
 		alGenBuffers(1, &handle);
 		load(path);
