@@ -10,6 +10,9 @@ CMakeSettings.json
 # Visual Studio Code
 .vscode
 
+# IDEA
+.idea
+
 # Doxygen
 /docs/html
 /docs/man
