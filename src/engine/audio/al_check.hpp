@@ -1,7 +1,8 @@
 // Copyright 2022 ShenMian
 // License(Apache-2.0)
 
-#include "al_check.h"
+#pragma once
+
 #include <AL/al.h>
 #include <stdexcept>
 #include <string>
@@ -73,5 +74,17 @@ void ALClearError()
 	while(alGetError() != AL_NO_ERROR)
 		;
 }
+
+#if 1
+	#define ALCall(func)                                                                                               \
+		do                                                                                                             \
+		{                                                                                                              \
+			ALClearError();                                                                                            \
+			func;                                                                                                      \
+			ALCheckError();                                                                                            \
+		} while(false)
+#else
+	#define ALCall(func) func
+#endif
 
 } // namespace audio
