@@ -1,7 +1,6 @@
 // Copyright 2022 ShenMian
 // License(Apache-2.0)
 
-#include "sound.hpp"
 #include <AL/al.h>
 #include <algorithm>
 #include <cstring>
