@@ -33,7 +33,7 @@ std::optional<ALenum> GetALFormat(int channelCount, int bitsPerSample)
 	return std::nullopt;
 }
 
-}
+} // namespace
 
 namespace audio
 {
