@@ -1,8 +1,8 @@
 [submodule "deps/Graphics"]
-	path = deps/Graphics
+	path = deps/graphics
 	url = https://github.com/ShenMian/Graphics
 [submodule "deps/Math"]
-	path = deps/Math
+	path = deps/math
 	url = https://github.com/ShenMian/Math
 [submodule "deps/openal-soft"]
 	path = deps/openal-soft
