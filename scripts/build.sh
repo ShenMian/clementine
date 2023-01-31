@@ -30,8 +30,7 @@ cd .. || exit
 
 mkdir $build_dir 2>/dev/null
 
-echo "=== Installing dependencies..."
-./install_dependencies.sh $build_type $compiler $compiler_version
+./scripts/install_dependencies.sh $build_type $compiler $compiler_version || exit 1
 
 echo "=== Generating CMake cache..."
 cmake -Wno-dev $cmake_args -B $build_dir >/dev/null || {
