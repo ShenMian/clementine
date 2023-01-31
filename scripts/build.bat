@@ -2,7 +2,7 @@
 REM Copyright 2022 ShenMian
 REM License(Apache-2.0)
 
-set "BUILD_DIR=build"
+set "BUILD_DIR=target"
 
 cmake --version >nul 2>&1 || (
     echo === Need cmake.

@@ -2,7 +2,7 @@
 # Copyright 2022 ShenMian
 # License(Apache-2.0)
 
-build_dir=build
+build_dir=target
 
 build_type=$1
 compiler=$2 # 编译器只能是 clang/gcc
@@ -31,11 +31,7 @@ cd .. || exit
 mkdir $build_dir 2>/dev/null
 
 echo "=== Installing dependencies..."
-export CONAN_SYSREQUIRES_MODE=enabled
-conan install . --build=missing -if $build_dir -of $build_dir $conan_args -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True >/dev/null || {
-  echo "=== Failed to install."
-  exit 1
-}
+./install_dependencies.sh $build_type $compiler $compiler_version
 
 echo "=== Generating CMake cache..."
 cmake -Wno-dev $cmake_args -B $build_dir >/dev/null || {
