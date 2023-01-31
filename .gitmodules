@@ -13,3 +13,9 @@
 [submodule "deps/libnyquist"]
 	path = deps/libnyquist
 	url = https://github.com/ddiakopoulos/libnyquist
+[submodule "deps/math"]
+	path = deps/math
+	url = https://github.com/ShenMian/math
+[submodule "deps/graphics"]
+	path = deps/graphics
+	url = https://github.com/ShenMian/graphics
