@@ -2,26 +2,31 @@
 # Copyright 2022 ShenMian
 # License(Apache-2.0)
 
-build_dir=target
-
 build_type=$1
 compiler=$2
-# compiler_version=$3
+compiler_version=$3
 shift
 shift
 shift
 
-if [ -z "${build_type}" ]; then
+if ! hash "conan" &>/dev/null; then
+    echo "=== Need conan."
+    exit 1
+fi
+
+if [ -z "$build_type" ]; then
     build_type=Debug
 fi
-if [ -z "${compiler}" ]; then
+if [ -z "$compiler" ]; then
     compiler=clang
 fi
-if [ -z "${compiler_version}" ]; then
+if [ -z "$compiler_version" ]; then
     compiler_version=$(clang --version | head -n1 | cut -d' ' -f3 | cut -d'.' -f1)
 fi
 
-if [ "${compiler}" = "clang" ]; then
+build_path=target/$build_type
+
+if [ "$compiler" = "clang" ]; then
     export CC=/usr/bin/clang
     export CXX=/usr/bin/clang++
 else
@@ -31,7 +36,11 @@ fi
 
 echo "=== Installing dependencies..."
 export CONAN_SYSREQUIRES_MODE=enabled
-conan install . -pr:b=default --build=missing -if $build_dir -of $build_dir -s build_type=$build_type -s compiler=${compiler} -s compiler.version=${compiler_version} -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True || {
+conan install . -pr:b=default --build=missing -if $build_path -of $build_path -s build_type=$build_type -s compiler=${compiler} -s compiler.version=${compiler_version} -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True || {
+    echo "=== Failed to install."
+    exit 1
+}
+conan install ./deps/graphics -pr:b=default --build=missing -if $build_path -of $build_path -s build_type=$build_type -s compiler=${compiler} -s compiler.version=${compiler_version} -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True || {
     echo "=== Failed to install."
     exit 1
 }
