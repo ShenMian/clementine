@@ -27,8 +27,8 @@ public:
 		this->data.resize(this->data.size() - size);
 	}
 
-	// void writeBits(uint8_t data, uint8_t count);
-	// void readBits();
+	// void write_bits(uint8_t data, uint8_t count);
+	// void read_bits();
 
 	template <typename T>
 	    requires std::is_arithmetic_v<T>
@@ -37,8 +37,8 @@ public:
 		write(&data, sizeof(T));
 	}
 
-	size_t sizeBytes() const;
-	size_t sizeBits() const;
+	size_t size_bytes() const;
+	size_t size_bits() const;
 
 private:
 	std::vector<uint8_t> data;
