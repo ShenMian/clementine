@@ -1,4 +1,4 @@
-﻿@echo off
+@echo off
 REM Copyright 2022 ShenMian
 REM License(Apache-2.0)
 
