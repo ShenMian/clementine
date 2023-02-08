@@ -1,4 +1,4 @@
-﻿// Copyright 2021 ShenMian
+// Copyright 2021 ShenMian
 // License(Apache-2.0)
 
 #pragma once
@@ -12,7 +12,7 @@ namespace ecs
 {
 
 /**
- * @brief 无缝动态数组.
+ * @brief 动态无缝数组.
  *
  * @tparam T 要存放的数据类型.
  *
@@ -72,7 +72,7 @@ public:
 	/**
 	 * @brief 获取最大存放的元素个数.
 	 */
-	auto maxSize() const noexcept { return std::min(index_.max_size(), data_.max_size()); }
+	auto max_size() const noexcept { return std::min(index_.max_size(), data_.max_size()); }
 
 	/**
 	 * @brief 获取预留存放的元素个数.
@@ -93,7 +93,7 @@ public:
 	/**
 	 * @brief 释放未使用的内存.
 	 */
-	void shrinkToFit() { data_.resize(index_.size()); }
+	void shrink_to_fit() { data_.resize(index_.size()); }
 
 private:
 	std::vector<T>                     data_;

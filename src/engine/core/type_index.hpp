@@ -8,9 +8,6 @@
 #include <typeindex>
 #include <xhash>
 
-namespace core
-{
-
 // TODO: 在有 RTTI 的情况下将包含 typeid 的实现隐藏到 TypeIndex 中, 而不是 Typeid
 
 // #define CLEM_USE_RTTI
@@ -87,7 +84,5 @@ TypeIndex Typeid()
 }
 
 #endif
-
-} // namespace core
 
 MAKE_HASHABLE(core::TypeIndex, t.hash_code())

@@ -8,7 +8,7 @@
 namespace ecs
 {
 
-class Registry;
+class Manager;
 
 /**
  * @brief 实体.
@@ -20,22 +20,19 @@ public:
 	using version_type = uint32_t;
 
 	Entity() = default;
-	Entity(id_type id, version_type ver, Registry& reg) : id_(id), version_(ver), registry(reg) {}
+	Entity(id_type id, version_type ver, Manager& reg) : id_(id), version_(ver), registry(reg) {}
 
 	auto id() const noexcept { return id_; }
 	auto version() const noexcept { return version_; }
 
-	bool operator==(const Entity& rhs) const
-	{
-		return id_ == rhs.id_ && version_ == rhs.version_ && &registry == &rhs.registry;
-	};
+	bool operator==(const Entity& rhs) const = default;
 
 private:
 	id_type      id_;
 	version_type version_;
-	Registry&    registry;
+	Manager&    registry;
 
-	friend class Registry;
+	friend class Manager;
 };
 
 } // namespace ecs

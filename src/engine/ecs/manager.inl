@@ -4,23 +4,23 @@
 namespace ecs
 {
 
-inline Entity Registry::create()
+inline Entity Manager::create()
 {
-	return entities_[allocateId()];
+	return entities_[allocate_id()];
 }
 
-inline void Registry::destroy(const Entity& entity)
+inline void Manager::destroy(const Entity& entity)
 {
 	if(valid(entity))
-		deallocateId(entity.id());
+		deallocate_id(entity.id());
 }
 
-inline bool Registry::valid(const Entity& entity) const noexcept
+inline bool Manager::valid(const Entity& entity) const noexcept
 {
 	return entity.id() < entities_.size() && entity == entities_[entity.id()];
 }
 
-inline Entity::id_type Registry::allocateId()
+inline Entity::id_type Manager::allocate_id()
 {
 	if(freeIds_.empty())
 	{
@@ -33,7 +33,7 @@ inline Entity::id_type Registry::allocateId()
 	return id;
 }
 
-inline void Registry::deallocateId(Entity::id_type id)
+inline void Manager::deallocate_id(Entity::id_type id)
 {
 	freeIds_.push_back(id);
 	entities_[id].version_++;

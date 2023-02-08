@@ -30,9 +30,12 @@ public:
 		}
 	}
 
-	bool anyOf(const Archetype& other) const noexcept { return (signature & other.signature).any(); }
-	bool allOf(const Archetype& other) const noexcept { return (signature & other.signature) == signature; }
-	bool noneOf(const Archetype& other) const noexcept { return !anyOf(other); }
+	bool any_of(const Archetype& other) const noexcept { return (signature & other.signature).any(); }
+	bool all_of(const Archetype& other) const noexcept { return (signature & other.signature) == signature; }
+	bool none_of(const Archetype& other) const noexcept { return !anyOf(other); }
+
+	Archetype& operator+=(const Archetype& rhs) { signature += rhs.signature; }
+	Archetype& operator-=(const Archetype& rhs) { signature -= rhs.signature; }
 
 private:
 	std::bitset<max_component_size> signature;
