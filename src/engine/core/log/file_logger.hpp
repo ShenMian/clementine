@@ -27,22 +27,26 @@ public:
 
 	void info(std::string_view msg) override
 	{
-		file_ << std::chrono::system_clock::now() << name_ << " [INFO] " << msg << '\n';
+		// TODO
+		// file_ << std::chrono::system_clock::now() << name_ << " [INFO] " << msg << '\n';
 	}
 
 	void good(std::string_view msg) override
 	{
-		file_ << std::chrono::system_clock::now() << name_ << " [GOOD] " << msg << '\n';
+		// TODO
+		// file_ << std::chrono::system_clock::now() << name_ << " [GOOD] " << msg << '\n';
 	}
 
 	void error(std::string_view msg) override
 	{
-		file_ << std::chrono::system_clock::now() << name_ << " [ERR ] " << msg << '\n';
+		// TODO
+		// file_ << std::chrono::system_clock::now() << name_ << " [ERR ] " << msg << '\n';
 	}
 
 	void warn(std::string_view msg) override
 	{
-		file_ << std::chrono::system_clock::now() << name_ << " [WARN] " << msg << '\n';
+		// TODO
+		// file_ << std::chrono::system_clock::now() << name_ << " [WARN] " << msg << '\n';
 	}
 
 	void flush() override { file_.flush(); }

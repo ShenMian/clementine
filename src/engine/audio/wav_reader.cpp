@@ -4,6 +4,7 @@
 #include <AL/al.h>
 #include <algorithm>
 #include <cstring>
+#include <filesystem>
 #include <fstream>
 #include <libnyquist/Decoders.h>
 #include <optional>

@@ -12,9 +12,9 @@
 #include <fmt/format.h>
 
 #include "audio/device.h"
-#include "audio/listener.h"
-#include "audio/sound.h"
-#include "audio/source.h"
+#include "audio/listener.hpp"
+#include "audio/sound.hpp"
+#include "audio/source.hpp"
 
 // #include "ecs/array.hpp"
 

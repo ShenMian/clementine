@@ -12,11 +12,10 @@ namespace net
 {
 
 template <typename T>
-concept Syncable = requires(T t)
-{
-	Typeid<T>();
-	t->create();
-};
+concept Syncable = requires(T t) {
+	                   Typeid<T>();
+	                   t->create();
+                   };
 
 class LinkingContext
 {
@@ -49,9 +48,9 @@ public:
 
 private:
 	id_type createId() { return static_cast<id_type>(objectToId.size()); }
-	void*   createObject(core::TypeIndex index) { return functions[index](); }
+	void*   createObject(TypeIndex index) { return functions[index](); }
 
-	std::unordered_map<core::TypeIndex, std::function<void*()>> functions;
+	std::unordered_map<TypeIndex, std::function<void*()>> functions;
 
 	std::unordered_map<id_type, void*> idToObject;
 	std::unordered_map<void*, id_type> objectToId;

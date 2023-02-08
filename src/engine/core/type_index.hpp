@@ -6,7 +6,6 @@
 #include "core/hash.hpp"
 #include <cstdint>
 #include <typeindex>
-#include <xhash>
 
 // TODO: 在有 RTTI 的情况下将包含 typeid 的实现隐藏到 TypeIndex 中, 而不是 Typeid
 
@@ -14,7 +13,7 @@
 
 #ifdef CLEM_USE_RTTI
 
-using TypeIndex = std::type_index;
+// using TypeIndex = std::type_index;
 
 class TypeIndex
 {
@@ -85,4 +84,4 @@ TypeIndex Typeid()
 
 #endif
 
-MAKE_HASHABLE(core::TypeIndex, t.hash_code())
+MAKE_HASHABLE(TypeIndex, t.hash_code())

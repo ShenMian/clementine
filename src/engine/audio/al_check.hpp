@@ -63,13 +63,13 @@ std::string_view ALGetErrorDescString(ALenum error)
 namespace audio
 {
 
-void ALCheckError()
+inline void ALCheckError()
 {
 	while(const auto error = alGetError())
 		throw std::runtime_error(ALGetErrorString(error).data());
 }
 
-void ALClearError()
+inline void ALClearError()
 {
 	while(alGetError() != AL_NO_ERROR)
 		;

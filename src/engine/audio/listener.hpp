@@ -4,8 +4,8 @@
 #pragma once
 
 #include <AL/al.h>
-#include <Math/Math.hpp>
 #include <cassert>
+#include <math/math.hpp>
 
 namespace audio
 {

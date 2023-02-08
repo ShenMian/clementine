@@ -41,7 +41,7 @@ public:
 	}
 
 	template <typename T>
-	requires std::derived_from<T, System>
+	    requires std::derived_from<T, System>
 	void addSystem()
 	{
 		check(!hasSystem<T>());
@@ -49,8 +49,8 @@ public:
 	}
 
 	template <typename T>
-	requires std::derived_from<T, System>
-	bool hasSystem() const
+	    requires std::derived_from<T, System> bool
+	hasSystem() const
 	{
 		return std::ranges::find_if(systems_, [](const auto& sys) { return sys->id() == T().id(); }) != systems_.end();
 	}
@@ -77,8 +77,10 @@ public:
 
 	void deinit()
 	{
-		for(auto& sys : systems_ | std::views::reverse)
+		// for(auto& sys : systems_ | std::views::reverse)
+		for(size_t i = systems_.size() - 1; i >= 0; i--)
 		{
+			auto& sys = systems_[i];
 			CLEM_LOG_INFO("engine", fmt::format("deinit system '{}'", sys->id()));
 			sys->deinit(*this);
 			check(sys.use_count() == 1);
@@ -87,15 +89,9 @@ public:
 		delete core::Logger::get("engine");
 	}
 
-	std::shared_ptr<Window> window() const
-	{
-		return window_;
-	}
+	std::shared_ptr<Window> window() const { return window_; }
 
-	void window(std::shared_ptr<Window> win)
-	{
-		window_ = win;
-	}
+	void window(std::shared_ptr<Window> win) { window_ = win; }
 
 private:
 	void parseArgs(const std::vector<std::string_view>& args)

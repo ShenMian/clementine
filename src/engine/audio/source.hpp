@@ -3,11 +3,11 @@
 
 #pragma once
 
-#include "Sound.h"
-#include "al_check.h"
+#include "al_check.hpp"
+#include "sound.hpp"
 #include <AL/al.h>
-#include <Math/Math.hpp>
 #include <cassert>
+#include <math/math.hpp>
 
 namespace audio
 {

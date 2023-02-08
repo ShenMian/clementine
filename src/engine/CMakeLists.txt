@@ -14,12 +14,12 @@ target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/src/engine")
 target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/deps/fmt/include")
 
 # Math
-add_subdirectory("${PROJECT_SOURCE_DIR}/deps/Math" "Math")
+add_subdirectory("${PROJECT_SOURCE_DIR}/deps/math" "math")
 target_link_libraries(clementine PUBLIC math)
 
 # Graphics
 set(BUILD_EXAMPLES OFF CACHE BOOL "Build examples")
-add_subdirectory("${PROJECT_SOURCE_DIR}/deps/Graphics" "Graphics")
+add_subdirectory("${PROJECT_SOURCE_DIR}/deps/graphics" "graphics")
 target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/deps/Graphics")
 target_link_libraries(clementine PUBLIC graphics)
 
