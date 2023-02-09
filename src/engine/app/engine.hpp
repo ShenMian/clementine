@@ -36,6 +36,9 @@ public:
 			timer.restart();
 
 			app.update(dt);
+
+			// TODO: debug
+			requestExit = true;
 		}
 
 		app.deinit();
@@ -80,8 +83,10 @@ public:
 
 	void deinit()
 	{
+		window_ = nullptr;
+
 		// for(auto& sys : systems_ | std::views::reverse)
-		for(size_t i = systems_.size() - 1; i >= 0; i--)
+		for(ssize_t i = systems_.size() - 1; i >= 0; i--)
 		{
 			auto& sys = systems_[i];
 			CLEM_LOG_INFO("engine", fmt::format("deinit system '{}'", sys->id()));
