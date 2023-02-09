@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "core/hash.hpp"
 #include "core/type_index.hpp"
 #include <bitset>
 #include <set>
@@ -44,6 +45,10 @@ public:
 	bool all_of(const Archetype& other) const noexcept { return (signature_ & other.signature_) == signature_; }
 	bool none_of(const Archetype& other) const noexcept { return !any_of(other); }
 
+	bool operator==(const Archetype& rhs) const noexcept = default;
+
+	constexpr size_t hash_code() const noexcept { return std::hash<std::bitset<max_component_size>>{}(signature_); }
+
 	Archetype operator+(const Archetype& rhs) { return Archetype(*this) += rhs; }
 	Archetype operator-(const Archetype& rhs) { return Archetype(*this) -= rhs; }
 
@@ -65,3 +70,5 @@ private:
 };
 
 } // namespace ecs
+
+MAKE_HASHABLE(ecs::Archetype, t.hash_code());

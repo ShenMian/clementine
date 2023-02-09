@@ -19,8 +19,10 @@ public:
 	using id_type      = uint32_t;
 	using version_type = uint32_t;
 
-	Entity() = default;
-	Entity(id_type id, version_type version, Manager& manager) : id_(id), version_(version), manager_(manager) {}
+	Entity()              = default;
+	Entity(const Entity&) = default;
+	Entity(id_type id, version_type version, Manager& manager) : id_(id), version_(version) {}
+	// Entity(id_type id, version_type version, Manager& manager) : id_(id), version_(version), manager_(manager) {}
 
 	auto id() const noexcept { return id_; }
 	auto version() const noexcept { return version_; }
@@ -30,7 +32,7 @@ public:
 private:
 	id_type      id_;
 	version_type version_;
-	Manager&     manager_;
+	// Manager&     manager_;
 
 	friend class Manager;
 };

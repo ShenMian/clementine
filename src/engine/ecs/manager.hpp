@@ -47,14 +47,20 @@ public:
 		if(!arrays_.contains(Typeid<T>()))
 			arrays_.insert({Typeid<T>(), std::make_shared<Array<T>>()});
 
-		archetypes_[entity.id()] += Archetype({Typeid<T>()});
+		remove_from_group(archetypes_[entity.id()], entity);
+		archetypes_[entity.id()] += Archetype::create<T>();
+		add_to_group(archetypes_[entity.id()], entity);
+
 		return (*get_array<T>())[entity.id()];
 	}
 
 	template <typename T>
 	void remove_component(const Entity& entity)
 	{
-		archetypes_[entity.id()] -= Archetype({Typeid<T>()});
+		remove_from_group(archetypes_[entity.id()], entity);
+		archetypes_[entity.id()] -= Archetype::create<T>();
+		add_to_group(archetypes_[entity.id()], entity);
+
 		get_array<T>()->remove(entity.id());
 	}
 
@@ -66,9 +72,10 @@ public:
 
 	void add_group(const Archetype& archetype)
 	{
-		check(!groups_.contains(archetype));
-		auto& entities = groups_.insert({archetype, {}}).second;
-		for(entity : entities_)
+		core::check(!groups_.contains(archetype));
+		groups_.insert({archetype, {}});
+		auto& entities = groups_[archetype];
+		for(auto& entity : entities_)
 		{
 			if(archetypes_[entity.id()] == archetype)
 				entities.emplace_back(entity);
@@ -77,19 +84,33 @@ public:
 
 	void remove_group(const Archetype& archetype)
 	{
-		check(groups_.contains(archetype));
+		core::check(groups_.contains(archetype));
 		groups_.erase(archetype);
 	}
 
 	std::vector<Entity>& get_group(const Archetype& archetype)
 	{
-		check(groups_.contains(archetype));
+		core::check(groups_.contains(archetype));
 		return groups_[archetype];
 	}
 
 private:
 	Entity::id_type allocate_id();
 	void            deallocate_id(Entity::id_type id);
+
+	void add_to_group(const Archetype& archetype, const Entity& entity)
+	{
+		auto it = groups_.find(archetype);
+		if(it != groups_.end())
+			it->second.emplace_back(entity);
+	}
+
+	void remove_from_group(const Archetype& archetype, const Entity& entity)
+	{
+		auto it = groups_.find(archetype);
+		if(it != groups_.end())
+			it->second.erase(std::ranges::find(it->second, entity));
+	}
 
 	template <typename T>
 	std::shared_ptr<Array<T>> get_array() const
