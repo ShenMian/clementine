@@ -25,12 +25,12 @@ public:
 	auto id() const noexcept { return id_; }
 	auto version() const noexcept { return version_; }
 
-	bool operator==(const Entity& rhs) const = default;
+	bool operator==(const Entity& rhs) const { return id_ == rhs.id_ && version_ == rhs.version_; }
 
 private:
 	id_type      id_;
 	version_type version_;
-	Manager&    registry;
+	Manager&     registry;
 
 	friend class Manager;
 };

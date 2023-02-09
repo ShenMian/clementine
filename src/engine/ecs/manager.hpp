@@ -4,6 +4,7 @@
 #pragma once
 
 #include "archetype.hpp"
+#include "array.hpp"
 #include "entity.hpp"
 #include <numeric>
 #include <vector>
@@ -33,7 +34,7 @@ public:
 
 	/**
 	 * @brief 判断实体是否有效.
-	 * 
+	 *
 	 * 被销毁的实体会失效.
 	 */
 	bool valid(const Entity& entity) const noexcept;
@@ -42,14 +43,14 @@ public:
 	T& add_component(const Entity& entity)
 	{
 		archetypes_[entity.id()] += Archetype(Typeid<T>());
-		return arrays_[Typeid<T>()][entity.id()];
+		return *(arrays_[Typeid<T>()])[entity.id()];
 	}
 
 	template <typename T>
 	void remove_component(const Entity& entity)
 	{
 		archetypes_[entity.id()] -= Archetype(Typeid<T>());
-		arrays_[Typeid<T>()].remove(entity.id());
+		arrays_[Typeid<T>()]->remove(entity.id());
 	}
 
 private:
@@ -60,7 +61,7 @@ private:
 	std::vector<Entity::id_type> freeIds_;
 	std::vector<Archetype>       archetypes_;
 
-	std::unordered_map<TypeIndex, Array> arrays_;
+	std::unordered_map<TypeIndex, ArrayBase*> arrays_;
 };
 
 static_assert(std::numeric_limits<Entity::id_type>::max() < std::numeric_limits<size_t>::max());

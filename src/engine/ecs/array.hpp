@@ -5,11 +5,16 @@
 
 #include "core/check.hpp"
 #include <algorithm>
+#include <numeric>
 #include <unordered_map>
 #include <vector>
 
 namespace ecs
 {
+
+class ArrayBase
+{
+};
 
 /**
  * @brief 动态无缝数组.
@@ -19,7 +24,7 @@ namespace ecs
  * 无缝是为了使其 cache 友好, 提高遍历数组元素的效率.
  */
 template <typename T>
-class Array
+class Array : public ArrayBase
 {
 public:
 	using size_type = size_t;
@@ -46,8 +51,8 @@ public:
 	 */
 	const T& operator[](size_type index) const
 	{
-		check(index_.contains(index));
-		return data_[index_[index]];
+		core::check(index_.contains(index));
+		return data_[index_.at(index)];
 	}
 
 	/**
@@ -57,7 +62,7 @@ public:
 	 */
 	void remove(size_type index)
 	{
-		check(index_.contains(index));
+		core::check(index_.contains(index));
 		const auto i = index_[index];
 		if(i < size() - 1)
 			data_[i] = data_[size() - 1];
