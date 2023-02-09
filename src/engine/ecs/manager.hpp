@@ -5,6 +5,7 @@
 
 #include "archetype.hpp"
 #include "array.hpp"
+#include "core/check.hpp"
 #include "entity.hpp"
 #include <memory>
 #include <numeric>
@@ -63,21 +64,45 @@ public:
 		return (*get_array<T>())[entity.id()];
 	}
 
-	template <typename T>
-	std::shared_ptr<Array<T>> get_array() const
+	void add_group(const Archetype& archetype)
 	{
-		return std::static_pointer_cast<Array<T>>(arrays_.at(Typeid<T>()));
+		check(!groups_.contains(archetype));
+		auto& entities = groups_.insert({archetype, {}}).second;
+		for(entity : entities_)
+		{
+			if(archetypes_[entity.id()] == archetype)
+				entities.emplace_back(entity);
+		}
+	}
+
+	void remove_group(const Archetype& archetype)
+	{
+		check(groups_.contains(archetype));
+		groups_.erase(archetype);
+	}
+
+	std::vector<Entity>& get_group(const Archetype& archetype)
+	{
+		check(groups_.contains(archetype));
+		return groups_[archetype];
 	}
 
 private:
 	Entity::id_type allocate_id();
 	void            deallocate_id(Entity::id_type id);
 
+	template <typename T>
+	std::shared_ptr<Array<T>> get_array() const
+	{
+		return std::static_pointer_cast<Array<T>>(arrays_.at(Typeid<T>()));
+	}
+
 	std::vector<Entity>          entities_;
 	std::vector<Entity::id_type> freeIds_;
 	std::vector<Archetype>       archetypes_;
 
 	std::unordered_map<TypeIndex, std::shared_ptr<ArrayBase>> arrays_;
+	std::unordered_map<Archetype, std::vector<Entity>>        groups_;
 };
 
 static_assert(std::numeric_limits<Entity::id_type>::max() < std::numeric_limits<size_t>::max());

@@ -20,6 +20,15 @@ constexpr size_t max_component_size = 128;
 class Archetype
 {
 public:
+	template <typename T, typename... Ts>
+	static Archetype create()
+	{
+		if constexpr(sizeof...(Ts) > 0)
+			return Archetype({Typeid<T>()}) + create<Ts...>();
+		else
+			return Archetype({Typeid<T>()});
+	}
+
 	Archetype() = default;
 	Archetype(const std::initializer_list<TypeIndex>& types)
 	{
@@ -34,6 +43,9 @@ public:
 	bool any_of(const Archetype& other) const noexcept { return (signature_ & other.signature_).any(); }
 	bool all_of(const Archetype& other) const noexcept { return (signature_ & other.signature_) == signature_; }
 	bool none_of(const Archetype& other) const noexcept { return !any_of(other); }
+
+	Archetype operator+(const Archetype& rhs) { return Archetype(*this) += rhs; }
+	Archetype operator-(const Archetype& rhs) { return Archetype(*this) -= rhs; }
 
 	Archetype& operator+=(const Archetype& rhs)
 	{
