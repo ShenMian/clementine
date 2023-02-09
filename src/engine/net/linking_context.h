@@ -30,6 +30,7 @@ public:
 		const auto id = static_cast<id_type>(objectToId.size());
 		objectToId.insert({obj, id});
 		idToObject.insert({id, obj});
+		return id;
 	}
 
 	void* get(id_type id)
