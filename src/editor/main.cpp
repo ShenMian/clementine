@@ -16,7 +16,7 @@
 #include "audio/sound.hpp"
 #include "audio/source.hpp"
 
-// #include "ecs/array.hpp"
+#include "ecs/manager.hpp"
 
 #include "net/linking_context.h"
 
