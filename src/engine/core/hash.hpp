@@ -23,14 +23,14 @@ inline constexpr void hash_combine(std::size_t& seed, const T& v, Ts... rest)
 		hash_combine(seed, rest...);
 }
 
-#define MAKE_HASHABLE(type, ...)                                                                                       \
+#define MAKE_HASHABLE(T, ...)                                                                                          \
 	template <>                                                                                                        \
-	struct std::hash<type>                                                                                             \
+	struct std::hash<T>                                                                                                \
 	{                                                                                                                  \
-		std::size_t operator()(const type& t) const                                                                    \
+		std::size_t operator()(const T& t) const                                                                       \
 		{                                                                                                              \
 			std::size_t ret = 0;                                                                                       \
-			hash_combine(ret, __VA_ARGS__);                                                                            \
+			::core::hash_combine(ret, __VA_ARGS__);                                                                    \
 			return ret;                                                                                                \
 		}                                                                                                              \
 	};
