@@ -16,7 +16,7 @@ namespace core
 class Timer
 {
 public:
-	Timer() : start(std::chrono::high_resolution_clock::now()) {}
+	Timer() : start_(std::chrono::high_resolution_clock::now()) {}
 
 	/**
 	 * @brief 获取经过的秒数.
@@ -33,12 +33,12 @@ public:
 	 */
 	double getMicroseconds() const
 	{
-		return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start)
+		return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start_)
 		    .count();
 	}
 
 private:
-	std::chrono::high_resolution_clock::time_point start;
+	std::chrono::high_resolution_clock::time_point start_;
 };
 
 } // namespace core
