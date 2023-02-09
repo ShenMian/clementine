@@ -58,6 +58,12 @@ public:
 	}
 
 	template <typename T>
+	T& get_component(const Entity& entity)
+	{
+		return (*get_array<T>())[entity.id()];
+	}
+
+	template <typename T>
 	std::shared_ptr<Array<T>> get_array() const
 	{
 		return std::static_pointer_cast<Array<T>>(arrays_.at(Typeid<T>()));
