@@ -7,6 +7,7 @@
 #include "core/log/std_logger.hpp"
 
 #include "core/emitter.hpp"
+#include "core/timer.hpp"
 
 #include "app/application.hpp"
 #include "app/system/system.hpp"
@@ -70,8 +71,10 @@ public:
 
 		for(size_t i = 0; i < systems_.size(); i++)
 		{
-			CLEM_LOG_INFO("engine", fmt::format("init system '{}'", systems_[i]->id()));
+			Timer timer;
 			systems_[i]->init(*this);
+			CLEM_LOG_INFO("engine", fmt::format("system '{}' init completed ({} ms)'", systems_[i]->id(),
+			                                    timer.getMilliseconds()));
 		}
 	}
 
