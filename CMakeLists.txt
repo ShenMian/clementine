@@ -13,7 +13,7 @@ if(NOT DEFINED CMAKE_EXPORT_COMPILE_COMMANDS)
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 endif()
 
-project(Clementine
+project(clementine
     VERSION      0.0.0
     DESCRIPTION  "A simple game engine."
     HOMEPAGE_URL "https://github.com/ShenMian/Clementine"
@@ -21,6 +21,12 @@ project(Clementine
 
 # 选项
 option(USE_CONAN "Use conan" ON)
+
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    add_compile_options (-fdiagnostics-color=always)
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    add_compile_options (-fcolor-diagnostics)
+endif()
 
 include(scripts/display_info.cmake)
 
