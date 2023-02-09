@@ -20,17 +20,17 @@ public:
 	using version_type = uint32_t;
 
 	Entity() = default;
-	Entity(id_type id, version_type ver, Manager& reg) : id_(id), version_(ver), registry(reg) {}
+	Entity(id_type id, version_type version, Manager& manager) : id_(id), version_(version), manager_(manager) {}
 
 	auto id() const noexcept { return id_; }
 	auto version() const noexcept { return version_; }
 
-	bool operator==(const Entity& rhs) const { return id_ == rhs.id_ && version_ == rhs.version_; }
+	bool operator==(const Entity& rhs) const noexcept { return id_ == rhs.id_ && version_ == rhs.version_; }
 
 private:
 	id_type      id_;
 	version_type version_;
-	Manager&     registry;
+	Manager&     manager_;
 
 	friend class Manager;
 };

@@ -6,6 +6,7 @@
 #include "archetype.hpp"
 #include "array.hpp"
 #include "entity.hpp"
+#include <memory>
 #include <numeric>
 #include <vector>
 
@@ -42,15 +43,24 @@ public:
 	template <typename T>
 	T& add_component(const Entity& entity)
 	{
-		archetypes_[entity.id()] += Archetype(Typeid<T>());
-		return *(arrays_[Typeid<T>()])[entity.id()];
+		if(!arrays_.contains(Typeid<T>()))
+			arrays_.insert({Typeid<T>(), std::make_shared<Array<T>>()});
+
+		archetypes_[entity.id()] += Archetype({Typeid<T>()});
+		return (*get_array<T>())[entity.id()];
 	}
 
 	template <typename T>
 	void remove_component(const Entity& entity)
 	{
-		archetypes_[entity.id()] -= Archetype(Typeid<T>());
-		arrays_[Typeid<T>()]->remove(entity.id());
+		archetypes_[entity.id()] -= Archetype({Typeid<T>()});
+		get_array<T>()->remove(entity.id());
+	}
+
+	template <typename T>
+	std::shared_ptr<Array<T>> get_array() const
+	{
+		return std::static_pointer_cast<Array<T>>(arrays_.at(Typeid<T>()));
 	}
 
 private:
@@ -61,7 +71,7 @@ private:
 	std::vector<Entity::id_type> freeIds_;
 	std::vector<Archetype>       archetypes_;
 
-	std::unordered_map<TypeIndex, ArrayBase*> arrays_;
+	std::unordered_map<TypeIndex, std::shared_ptr<ArrayBase>> arrays_;
 };
 
 static_assert(std::numeric_limits<Entity::id_type>::max() < std::numeric_limits<size_t>::max());

@@ -72,7 +72,7 @@ private:
 
 	#define DECLARE_TYPE                                                                                               \
 	public:                                                                                                            \
-		inline static ::core::detal::TypeRegistry __type_registry;
+		inline static ::detal::TypeRegistry __type_registry;
 
 } // namespace detal
 

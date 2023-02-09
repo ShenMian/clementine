@@ -28,7 +28,8 @@ class Array : public ArrayBase
 {
 public:
 	using size_type = size_t;
-	static_assert(std::numeric_limits<size_type>::max() >= std::vector<T>::size_type);
+	static_assert(std::numeric_limits<size_type>::max() >=
+	              std::numeric_limits<typename std::vector<T>::size_type>::max());
 
 	/**
 	 * @brief 获取元素.
