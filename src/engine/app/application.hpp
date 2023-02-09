@@ -23,14 +23,7 @@ public:
 		} window;
 	};
 
-	Application(const Config& config) : config_(config)
-	{
-		/*
-		Renderer::init(window_);
-		UI::init(window_);
-		Input::setWindow(window_);
-		*/
-	}
+	Application(const Config& config) : config_(config) {}
 
 	virtual void update(float dt) = 0;
 	virtual void init()           = 0;
