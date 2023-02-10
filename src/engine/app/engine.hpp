@@ -38,23 +38,21 @@ public:
 			app.update(dt);
 
 			// TODO: debug
-			requestExit = true;
+			// requestExit = true;
 		}
 
 		app.deinit();
 	}
 
-	template <typename T>
-	    requires std::derived_from<T, System>
+	template <std::derived_from<System> T>
 	void addSystem()
 	{
 		check(!hasSystem<T>());
 		systems_.push_back(std::make_shared<T>());
 	}
 
-	template <typename T>
-	    requires std::derived_from<T, System> bool
-	hasSystem() const
+	template <std::derived_from<System> T>
+	bool hasSystem() const
 	{
 		return std::ranges::find_if(systems_, [](const auto& sys) { return sys->id() == T().id(); }) != systems_.end();
 	}
