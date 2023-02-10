@@ -141,8 +141,6 @@ private:
 	std::unordered_map<Archetype, std::vector<Entity>>        groups_;
 };
 
-static_assert(std::numeric_limits<Entity::id_type>::max() < std::numeric_limits<size_t>::max());
-
 } // namespace ecs
 
 #include "manager.inl"
