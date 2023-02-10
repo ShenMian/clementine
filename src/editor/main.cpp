@@ -17,10 +17,12 @@
 #include "audio/source.hpp"
 
 #include "ecs/manager.hpp"
+#include "ecs/view.hpp"
 
 #include "net/linking_context.h"
 
 #include "core/memory_stream.hpp"
+#include "core/thread_pool.hpp"
 
 namespace fs = std::filesystem;
 
@@ -31,13 +33,82 @@ struct MatricesBuffer
 	Matrix4 model;
 };
 
+struct Tag
+{
+	DECLARE_TYPE
+
+	std::string name;
+};
+
+struct Vel
+{
+	DECLARE_TYPE
+
+	float value;
+};
+
+struct Acc
+{
+	DECLARE_TYPE
+
+	float value;
+};
+
+struct AAA
+{
+	DECLARE_TYPE
+
+	float value;
+};
+
 class Editor : public Application
 {
 public:
 	Editor() : Application(Config{.window = {.title = "Editor"}}) {}
 
-	void update(float dt) override {}
-	void init() override {}
+	ecs::Manager             manager;
+	std::vector<ecs::Entity> entities;
+	core::ThreadPool         thread_pool;
+
+	void update(float dt) override
+	{
+		// for(auto& e : entities)
+		// 	std::cout << "name: " << manager.get_component<Tag>(e).name
+		// 	          << "\tvel: " << manager.get_component<Vel>(e).value
+		// 	          << "\tacc: " << manager.get_component<Acc>(e).value << "\n";
+		auto view = ecs::View<Tag, Vel, Acc>(manager.get_group(ecs::Archetype::create<Tag, Vel, Acc>()));
+		for(auto [tag, vel, acc] : view)
+		{
+			std::cout << "name: " << tag.name << "\tvel: " << vel.value << "\tacc: " << acc.value << "\n";
+		}
+		std::cout << "=========================\n";
+
+		for(auto& e : manager.get_group(ecs::Archetype::create<Tag, Vel, Acc>()))
+		{
+			auto& vel = manager.get_component<Vel>(e).value;
+			auto& acc = manager.get_component<Acc>(e).value;
+			vel += acc * dt;
+		}
+	}
+
+	void init() override
+	{
+		for(int i = 0; i < 3; i++)
+			entities.push_back(manager.create());
+
+		manager.add_component<Tag>(entities[0]).name = "A";
+		manager.add_component<Vel>(entities[0]);
+		manager.add_component<Acc>(entities[0]).value = 1.f;
+		manager.add_component<Tag>(entities[1]).name  = "B";
+		manager.add_component<Vel>(entities[1]).value = 1.f;
+		manager.add_component<Acc>(entities[1]);
+		manager.add_component<Tag>(entities[2]).name = "C";
+		manager.add_component<Vel>(entities[2]);
+		manager.add_component<AAA>(entities[2]);
+
+		manager.add_group(ecs::Archetype::create<Tag, Vel, Acc>());
+	}
+
 	void deinit() override {}
 
 private:
