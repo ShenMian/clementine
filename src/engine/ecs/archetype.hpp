@@ -13,7 +13,7 @@
 namespace ecs
 {
 
-constexpr size_t max_component_size = 128;
+constexpr size_t max_component_size = 256;
 
 /**
  * @brief 原型.
