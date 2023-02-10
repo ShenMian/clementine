@@ -41,6 +41,11 @@ public:
 	 */
 	bool valid(const Entity& entity) const noexcept;
 
+	/**
+	 * @brief 向实体添加组件.
+	 *
+	 * @param entity 要添加组件的实体.
+	 */
 	template <typename T>
 	T& add_component(const Entity& entity)
 	{
@@ -54,6 +59,11 @@ public:
 		return (*get_array<T>())[entity.id()];
 	}
 
+	/**
+	 * @brief 从实体移除组件.
+	 *
+	 * @param entity 要移除组件的实体.
+	 */
 	template <typename T>
 	void remove_component(const Entity& entity)
 	{
@@ -64,6 +74,11 @@ public:
 		get_array<T>()->remove(entity.id());
 	}
 
+	/**
+	 * @brief 从实体获取组件.
+	 *
+	 * @param entity 要获取组件的实体.
+	 */
 	template <typename T>
 	T& get_component(const Entity& entity)
 	{
