@@ -13,7 +13,7 @@ set "build_path=target/%build_type%"
 
 cd %~dp0\.. || exit /b 1
 
-mkdir build 2>nul
+mkdir %build_path% 2>nul
 
 call .\scripts\install_dependencies.bat %build_type% || exit /b 1
 
