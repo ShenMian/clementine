@@ -13,19 +13,21 @@ namespace core
 class Time
 {
 public:
+	constexpr Time() {};
+
 	/**
 	 * @brief 以秒为单位创建时间.
 	 */
 	constexpr static Time seconds(float sec)
 	{
-		check(sec < 0, "time cannot be negative");
-		return Time(static_cast<uint64_t>(sec) * 1000000);
+		check(sec >= 0.f, "time cannot be negative");
+		return Time(sec * 1000000);
 	}
 
 	/**
 	 * @brief 以毫秒为单位创建时间.
 	 */
-	constexpr static Time milliseconds(uint32_t ms) { return Time(static_cast<uint64_t>(ms) * 1000); }
+	constexpr static Time milliseconds(uint64_t ms) { return Time(ms * 1000); }
 
 	/**
 	 * @brief 以微秒为单位创建时间.
@@ -35,7 +37,7 @@ public:
 	/**
 	 * @brief 获取以秒为单位的时间.
 	 */
-	constexpr auto get_seconds() const { return us_ / 1000000.f; }
+	constexpr auto get_seconds() const { return us_ / 1000000.0; }
 
 	/**
 	 * @brief 获取以毫秒为单位的时间.
@@ -62,7 +64,7 @@ public:
 private:
 	constexpr Time(uint64_t us) : us_(us) {}
 
-	uint64_t us_;
+	uint64_t us_ = 0;
 };
 
 } // namespace core

@@ -72,6 +72,8 @@ public:
 
 	void update(core::Time dt) override
 	{
+		return;
+
 		auto view = ecs::View<Tag, Vel, Acc>(manager.get_group(ecs::Archetype::create<Tag, Vel, Acc>()), manager);
 		for(auto [tag, vel, acc] : view)
 		{

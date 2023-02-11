@@ -17,7 +17,9 @@
 #include <concepts>
 #include <fmt/format.h>
 #include <memory>
+#include <numeric>
 #include <ranges>
+#include <ratio>
 #include <thread>
 
 class Engine
@@ -25,27 +27,27 @@ class Engine
 public:
 	void run(Application& app)
 	{
-		core::Timer timer;
-		const auto  dt = timer.get_time();
-
 		app.init();
 
-		bool requestExit = false;
+		bool request_exit = false;
 
-		while(!requestExit)
+		core::Timer timer;
+		while(!request_exit)
 		{
 			const auto dt = timer.get_time();
 			timer.restart();
 
 			app.update(dt);
 
-			const core::Time min_dt = core::Time::milliseconds(std::round(1000 / max_frame_rate_));
-			std::cout << "min_dt: " << min_dt.get_milliseconds() << '\n';
-			if(dt < min_dt)
-				std::this_thread::sleep_for(std::chrono::milliseconds((min_dt - dt).get_milliseconds()));
+			const core::Time min_dt = core::Time::microseconds(std::round(1000000 / max_frame_rate_));
+			// if(dt < min_dt)
+			// 	std::this_thread::sleep_for(std::chrono::microseconds((min_dt - dt).get_microseconds()));
+			while(timer.get_time() < min_dt)
+				std::this_thread::sleep_for(std::chrono::microseconds(1));
 
-			// TODO: debug
-			// requestExit = true;
+			update_average_fps();
+
+			std::cout << average_frame_rate() << '\n';
 		}
 
 		app.deinit();
@@ -105,6 +107,13 @@ public:
 	std::shared_ptr<Window> window() const { return window_; }
 	void                    window(std::shared_ptr<Window> win) { window_ = win; }
 
+	/**
+	 * @brief 获取平均帧速率.
+	 *
+	 * @return float 平均帧速率.
+	 */
+	float average_frame_rate() const noexcept { return avg_fps_; }
+
 private:
 	void parse_args(const std::vector<std::string_view>& args)
 	{
@@ -115,8 +124,26 @@ private:
 		}*/
 	}
 
+	void update_average_fps()
+	{
+		frames_counter++;
+		if(frame_rate_counter_timer.get_time() >= avg_fps_update_interval_)
+		{
+			frame_rate_counter_timer.restart();
+			const float alpha = 0.9f;
+			avg_fps_ = alpha * avg_fps_ + (1.0 - alpha) * (frames_counter / avg_fps_update_interval_.get_seconds());
+			frames_counter = 0;
+		}
+	}
+
+	core::Emitter                        emitter_;
 	std::vector<std::shared_ptr<System>> systems_;
 	std::shared_ptr<Window>              window_;
-	core::Emitter                        emitter_;
-	float                                max_frame_rate_ = 500.f;
+
+	float max_frame_rate_ = 144.f;
+
+	core::Time  avg_fps_update_interval_ = core::Time::seconds(1);
+	float       avg_fps_                 = max_frame_rate_;
+	size_t      frames_counter           = 0;
+	core::Timer frame_rate_counter_timer;
 };

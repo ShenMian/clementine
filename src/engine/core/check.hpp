@@ -4,84 +4,87 @@
 #pragma once
 
 #include <cstdio>
-#include <string_view>
 #include <exception>
+#include <string_view>
 // #include <source_location>
-// TODO: 等待 apple-clang 支持 std::source_location. 
-
-#if _MSC_VER
-#define breakpoint() __debugbreak()
-#else
-#define breakpoint() __builtin_trap()
-#endif
+// TODO: 等待 apple-clang 支持 std::source_location.
 
 namespace core
 {
 
-/**
- * @brief 断言.
- *
- * @param condition 条件.
- */
-constexpr void check(bool condition)
+void breakpoint()
 {
-	if(condition)
-		return;
-
-	breakpoint(); // debug
-	// terminate(); // release
+#if _MSC_VER
+	__debugbreak();
+#else
+	__builtin_trap();
+#endif
 }
 
 /**
  * @brief 断言.
  *
- * @param condition 条件.
- * @param message   描述.
+ * @param cond 条件.
  */
-constexpr void check(bool condition, std::string_view message)
+constexpr void check(bool cond)
 {
-	if(condition)
+	if(cond)
 		return;
 
-	std::puts(message.data());
 	breakpoint(); // debug
-	// terminate(); // release
+	              // terminate(); // release
 }
- 
+
 /**
  * @brief 断言.
  *
- * @param condition 条件.
+ * @param cond 条件.
+ * @param msg  描述.
+ */
+constexpr void check(bool cond, std::string_view msg)
+{
+	if(cond)
+		return;
+
+	std::puts(msg.data());
+	breakpoint(); // debug
+	              // terminate(); // release
+}
+
+/**
+ * @brief 断言.
+ *
+ * @param cond 条件.
  */
 /*
-inline void check(bool condition, const std::source_location& loc = std::source_location::current())
+inline void check(bool cond, const std::source_location& loc = std::source_location::current())
 {
-	if(condition)
-		return;
+    if(cond)
+        return;
 
-	std::printf("Assertion failed %s:%s(%u:%u)\n", loc.file_name(), loc.function_name(), loc.line(), loc.column());
-	breakpoint(); // debug
-	// terminate(); // release
+    std::printf("Assertion failed %s:%s(%u:%u)\n", loc.file_name(), loc.function_name(), loc.line(), loc.column());
+    breakpoint(); // debug
+    // terminate(); // release
 }
 */
 
 /**
  * @brief 断言.
  *
- * @param condition 条件.
- * @param message   描述.
+ * @param cond 条件.
+ * @param msg  描述.
  */
 /*
-inline void check(bool condition, std::string_view message,
+inline void check(bool cond, std::string_view msg,
                   const std::source_location& loc = std::source_location::current())
 {
-	if(condition)
-		return;
+    if(cond)
+        return;
 
-	std::printf("Assertion failed %s:%s(%u:%u): %s\n", loc.file_name(), loc.function_name(), loc.line(), loc.column(),
-	            message.data());
-	breakpoint(); // debug
-	// terminate(); // release
+    std::printf("Assertion failed %s:%s(%u:%u): %s\n", loc.file_name(), loc.function_name(), loc.line(), loc.column(),
+                msg.data());
+    breakpoint(); // debug
+    // terminate(); // release
 }
 */
 
