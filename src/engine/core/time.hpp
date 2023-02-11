@@ -16,7 +16,7 @@ public:
 	/**
 	 * @brief 以秒为单位创建时间.
 	 */
-	static Time seconds(float sec)
+	constexpr static Time seconds(float sec)
 	{
 		check(sec < 0, "cannot be negative");
 		check(sec <= std::numeric_limits<uint64_t>::max() / 1000000, "overflow");
@@ -26,30 +26,42 @@ public:
 	/**
 	 * @brief 以毫秒为单位创建时间.
 	 */
-	static Time milliseconds(uint32_t ms) { return Time(static_cast<uint64_t>(ms) * 1000); }
+	constexpr static Time milliseconds(uint32_t ms) { return Time(static_cast<uint64_t>(ms) * 1000); }
 
 	/**
 	 * @brief 以微秒为单位创建时间.
 	 */
-	static Time microseconds(uint64_t us) { return Time(us); }
+	constexpr static Time microseconds(uint64_t us) { return Time(us); }
+
 	/**
 	 * @brief 获取以秒为单位的时间.
 	 */
-
-	auto get_seconds() const { return us_ / 1000000.f; }
+	constexpr auto get_seconds() const { return us_ / 1000000.f; }
 
 	/**
 	 * @brief 获取以毫秒为单位的时间.
 	 */
-	auto get_milliseconds() const { return us_ / 1000; }
+	constexpr auto get_milliseconds() const { return us_ / 1000; }
 
 	/**
 	 * @brief 获取以微秒为单位的时间.
 	 */
-	auto get_microseconds() const { return us_; }
+	constexpr auto get_microseconds() const { return us_; }
+
+	constexpr auto operator<=>(const Time& rhs) const noexcept = default;
+	constexpr Time operator+=(const Time& rhs) noexcept { return us_ += rhs.us_; }
+
+	constexpr Time operator-=(const Time& rhs) noexcept
+	{
+		check(us_ >= rhs.us_);
+		return us_ -= rhs.us_;
+	}
+
+	constexpr Time operator+(const Time& rhs) const noexcept { return Time(us_) += rhs; }
+	constexpr Time operator-(const Time& rhs) const noexcept { return Time(us_) -= rhs; }
 
 private:
-	Time(uint64_t us) : us_(us) {}
+	constexpr Time(uint64_t us) : us_(us) {}
 
 	uint64_t us_;
 };

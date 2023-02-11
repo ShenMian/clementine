@@ -13,10 +13,12 @@
 #include "app/system/system.hpp"
 
 #include <Graphics.h>
+#include <chrono>
 #include <concepts>
 #include <fmt/format.h>
 #include <memory>
 #include <ranges>
+#include <thread>
 
 class Engine
 {
@@ -37,6 +39,11 @@ public:
 
 			app.update(dt);
 
+			const core::Time min_dt = core::Time::milliseconds(std::round(1000 / max_frame_rate_));
+			std::cout << "min_dt: " << min_dt.get_milliseconds() << '\n';
+			if(dt < min_dt)
+				std::this_thread::sleep_for(std::chrono::milliseconds((min_dt - dt).get_milliseconds()));
+
 			// TODO: debug
 			// requestExit = true;
 		}
@@ -45,14 +52,14 @@ public:
 	}
 
 	template <std::derived_from<System> T>
-	void addSystem()
+	void add_system()
 	{
-		check(!hasSystem<T>());
+		check(!has_system<T>());
 		systems_.push_back(std::make_shared<T>());
 	}
 
 	template <std::derived_from<System> T>
-	bool hasSystem() const
+	bool has_system() const
 	{
 		return std::ranges::find_if(systems_, [](const auto& sys) { return sys->id() == T().id(); }) != systems_.end();
 	}
@@ -66,7 +73,7 @@ public:
 		new core::StdLogger("engine");
 		CLEM_LOG_INFO("engine", "engine init begin");
 
-		parseArgs(args);
+		parse_args(args);
 
 		Renderer::setAPI(Renderer::API::OpenGL);
 
@@ -100,7 +107,7 @@ public:
 	void window(std::shared_ptr<Window> win) { window_ = win; }
 
 private:
-	void parseArgs(const std::vector<std::string_view>& args)
+	void parse_args(const std::vector<std::string_view>& args)
 	{
 		/*for(auto arg : args)
 		{
@@ -112,4 +119,5 @@ private:
 	std::vector<std::shared_ptr<System>> systems_;
 	std::shared_ptr<Window>              window_;
 	core::Emitter                        emitter_;
+	float                                max_frame_rate_ = 144.f;
 };

@@ -19,10 +19,10 @@
 #include "ecs/manager.hpp"
 #include "ecs/view.hpp"
 
-#include "net/linking_context.h"
-
 #include "core/memory_stream.hpp"
 #include "core/thread_pool.hpp"
+
+#include "net/linking_context.h"
 
 namespace fs = std::filesystem;
 
@@ -126,7 +126,7 @@ int main(int argc, const char* argv[])
 		args.emplace_back(argv[i]);
 
 	Engine engine;
-	engine.addSystem<DefaultSystem>();
+	engine.add_system<DefaultSystem>();
 	// engine.addSystem<WindowSystem>();
 	engine.init(args);
 

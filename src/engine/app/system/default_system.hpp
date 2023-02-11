@@ -18,14 +18,14 @@ public:
 
 	void init(Engine& engine) override
 	{
-		if(!engine.hasSystem<WindowSystem>())
-			engine.addSystem<WindowSystem>();
-		if(!engine.hasSystem<RenderSystem>())
-			engine.addSystem<RenderSystem>();
-		if(!engine.hasSystem<AudioSystem>())
-			engine.addSystem<AudioSystem>();
-		if(!engine.hasSystem<FontSystem>())
-			engine.addSystem<FontSystem>();
+		if(!engine.has_system<WindowSystem>())
+			engine.add_system<WindowSystem>();
+		if(!engine.has_system<RenderSystem>())
+			engine.add_system<RenderSystem>();
+		if(!engine.has_system<AudioSystem>())
+			engine.add_system<AudioSystem>();
+		if(!engine.has_system<FontSystem>())
+			engine.add_system<FontSystem>();
 	}
 	void deinit(Engine& engine) override {}
 };
