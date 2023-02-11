@@ -1,6 +1,7 @@
 // Copyright 2022 SMS
 // License(Apache-2.0)
 
+#include "core/time.hpp"
 #include <Graphics.h>
 #include <string>
 
@@ -25,9 +26,9 @@ public:
 
 	Application(const Config& config) : config_(config) {}
 
-	virtual void update(float dt) = 0;
-	virtual void init()           = 0;
-	virtual void deinit()         = 0;
+	virtual void update(core::Time dt) = 0;
+	virtual void init()                = 0;
+	virtual void deinit()              = 0;
 
 private:
 	Config config_;

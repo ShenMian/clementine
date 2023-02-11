@@ -70,13 +70,9 @@ public:
 	std::vector<ecs::Entity> entities;
 	core::ThreadPool         thread_pool;
 
-	void update(float dt) override
+	void update(core::Time dt) override
 	{
-		// for(auto& e : entities)
-		// 	std::cout << "name: " << manager.get_component<Tag>(e).name
-		// 	          << "\tvel: " << manager.get_component<Vel>(e).value
-		// 	          << "\tacc: " << manager.get_component<Acc>(e).value << "\n";
-		auto view = ecs::View<Tag, Vel, Acc>(manager.get_group(ecs::Archetype::create<Tag, Vel, Acc>()));
+		auto view = ecs::View<Tag, Vel, Acc>(manager.get_group(ecs::Archetype::create<Tag, Vel, Acc>()), manager);
 		for(auto [tag, vel, acc] : view)
 		{
 			std::cout << "name: " << tag.name << "\tvel: " << vel.value << "\tacc: " << acc.value << "\n";
@@ -85,9 +81,8 @@ public:
 
 		for(auto& e : manager.get_group(ecs::Archetype::create<Tag, Vel, Acc>()))
 		{
-			auto& vel = manager.get_component<Vel>(e).value;
-			auto& acc = manager.get_component<Acc>(e).value;
-			vel += acc * dt;
+			auto [vel, acc] = manager.get_components<Vel, Acc>(e);
+			vel.value += acc.value * dt.get_seconds();
 		}
 	}
 

@@ -23,8 +23,8 @@ class Engine
 public:
 	void run(Application& app)
 	{
-		Timer       timer;
-		const float dt = timer.getSeconds();
+		core::Timer timer;
+		const auto  dt = timer.get_time();
 
 		app.init();
 
@@ -32,7 +32,7 @@ public:
 
 		while(!requestExit)
 		{
-			const auto dt = static_cast<float>(timer.getSeconds());
+			const auto dt = timer.get_time();
 			timer.restart();
 
 			app.update(dt);
