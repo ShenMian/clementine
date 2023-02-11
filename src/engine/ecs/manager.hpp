@@ -9,6 +9,7 @@
 #include "entity.hpp"
 #include <memory>
 #include <numeric>
+#include <tuple>
 #include <vector>
 
 namespace ecs
@@ -85,6 +86,12 @@ public:
 		return (*get_array<T>())[entity.id()];
 	}
 
+	template <typename... Ts>
+	std::tuple<Ts&...> get_components(const Entity& entity)
+	{
+		return {get_component<Ts>(entity)...};
+	}
+
 	void add_group(const Archetype& archetype)
 	{
 		core::check(!groups_.contains(archetype));
@@ -128,7 +135,7 @@ private:
 	}
 
 	template <typename T>
-	std::shared_ptr<Array<T>> get_array() const
+	std::shared_ptr<Array<T>> get_array()
 	{
 		return std::static_pointer_cast<Array<T>>(arrays_.at(Typeid<T>()));
 	}

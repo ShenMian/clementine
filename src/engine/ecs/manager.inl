@@ -25,7 +25,7 @@ inline Entity::id_type Manager::allocate_id()
 	if(freeIds_.empty())
 	{
 		const auto id = entities_.size();
-		entities_.emplace_back(static_cast<Entity::id_type>(id), 0, *this);
+		entities_.emplace_back(static_cast<Entity::id_type>(id), 0);
 		archetypes_.emplace_back();
 		return id;
 	}
