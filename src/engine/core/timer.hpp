@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "time.hpp"
 #include <chrono>
 
 namespace core
@@ -10,35 +11,34 @@ namespace core
 
 /**
  * @brief 计时器.
- *
- * 构造时开始计时, 调用成员函数来获取经过的时间.
  */
 class Timer
 {
 public:
-	Timer() : start_(std::chrono::high_resolution_clock::now()) {}
+	using clock = std::chrono::high_resolution_clock;
 
 	/**
-	 * @brief 获取经过的秒数.
+	 * @brief 构造函数.
+	 *
+	 * 开始计时.
 	 */
-	double getSeconds() const { return getMilliseconds() / 1000.0; }
+	Timer() : start_(clock::now()) {}
 
 	/**
-	 * @brief 获取经过的毫秒数.
+	 * @brief 重新开始计时.
 	 */
-	double getMilliseconds() const { return getMilliseconds() / 1000.0; }
+	void restart() noexcept { start_ = clock::now(); }
 
 	/**
-	 * @brief 获取经过的微秒数.
+	 * @brief 获取已经过的时间.
 	 */
-	double getMicroseconds() const
+	Time get_time()
 	{
-		return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start_)
-		    .count();
+		return Time::microseconds(std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start_).count());
 	}
 
 private:
-	std::chrono::high_resolution_clock::time_point start_;
+	clock::time_point start_;
 };
 
 } // namespace core

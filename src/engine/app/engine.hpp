@@ -72,10 +72,10 @@ public:
 
 		for(size_t i = 0; i < systems_.size(); i++)
 		{
-			Timer timer;
+			core::Timer timer;
 			systems_[i]->init(*this);
 			CLEM_LOG_INFO("engine", fmt::format("system '{}' init completed ({} ms)'", systems_[i]->id(),
-			                                    timer.getMilliseconds()));
+			                                    timer.get_time().get_milliseconds()));
 		}
 	}
 
