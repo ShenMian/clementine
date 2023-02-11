@@ -18,8 +18,7 @@ public:
 	 */
 	constexpr static Time seconds(float sec)
 	{
-		check(sec < 0, "cannot be negative");
-		check(sec <= std::numeric_limits<uint64_t>::max() / 1000000, "overflow");
+		check(sec < 0, "time cannot be negative");
 		return Time(static_cast<uint64_t>(sec) * 1000000);
 	}
 
@@ -53,7 +52,7 @@ public:
 
 	constexpr Time operator-=(const Time& rhs) noexcept
 	{
-		check(us_ >= rhs.us_);
+		check(us_ >= rhs.us_, "time cannot be negative");
 		return us_ -= rhs.us_;
 	}
 
