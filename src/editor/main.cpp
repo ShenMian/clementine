@@ -127,7 +127,6 @@ int main(int argc, const char* argv[])
 
 	Engine engine;
 	engine.add_system<DefaultSystem>();
-	// engine.addSystem<WindowSystem>();
 	engine.init(args);
 
 	auto app = new Editor;

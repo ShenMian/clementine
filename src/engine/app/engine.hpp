@@ -103,8 +103,7 @@ public:
 	}
 
 	std::shared_ptr<Window> window() const { return window_; }
-
-	void window(std::shared_ptr<Window> win) { window_ = win; }
+	void                    window(std::shared_ptr<Window> win) { window_ = win; }
 
 private:
 	void parse_args(const std::vector<std::string_view>& args)
@@ -119,5 +118,5 @@ private:
 	std::vector<std::shared_ptr<System>> systems_;
 	std::shared_ptr<Window>              window_;
 	core::Emitter                        emitter_;
-	float                                max_frame_rate_ = 144.f;
+	float                                max_frame_rate_ = 500.f;
 };
