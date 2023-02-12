@@ -106,7 +106,7 @@ public:
 	void deinit() override {}
 
 private:
-	Model loadModel(const fs::path& path)
+	Model load_model(const fs::path& path)
 	{
 		ProgressSpinner spinner("Loading model");
 

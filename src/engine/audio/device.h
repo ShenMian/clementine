@@ -20,9 +20,9 @@ public:
 	Device(ALCdevice* handle);
 	virtual ~Device();
 
-	std::string_view getName() const;
+	std::string_view get_name() const;
 
-	int getSampleRate() const;
+	int get_sample_rate() const;
 
 	// static const std::vector<Device>& getOutputDevices();
 	// static const std::vector<Device>& getInputDevices();

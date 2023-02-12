@@ -33,7 +33,7 @@ Device::~Device()
 	alcCloseDevice(handle);
 }
 
-std::string_view Device::getName() const
+std::string_view Device::get_name() const
 {
 	if(alcIsExtensionPresent(handle, "ALC_ENUMERATE_ALL_EXT"))
 		return alcGetString(handle, ALC_ALL_DEVICES_SPECIFIER);
@@ -41,7 +41,7 @@ std::string_view Device::getName() const
 		return alcGetString(handle, ALC_DEVICE_SPECIFIER);
 }
 
-int Device::getSampleRate() const
+int Device::get_sample_rate() const
 {
 	int frequency;
 	alcGetIntegerv(handle, ALC_FREQUENCY, 1, &frequency);
@@ -51,12 +51,12 @@ int Device::getSampleRate() const
 /*
 const std::vector<Device>& Device::getOutputDevices()
 {
-	return outputDevices;
+    return outputDevices;
 }
 
 const std::vector<Device>& Device::getInputDevices()
 {
-	return inputDevices;
+    return inputDevices;
 }
 */
 
@@ -79,8 +79,8 @@ void Device::init()
 		auto name = names;
 		while(*name != '\0')
 		{
-		    // outputDevices.emplace_back(alcOpenDevice(name));
-		    name += std::strlen(name) + 1;
+			// outputDevices.emplace_back(alcOpenDevice(name));
+			name += std::strlen(name) + 1;
 		}
 	}
 
