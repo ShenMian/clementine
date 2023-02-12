@@ -40,8 +40,6 @@ public:
 			app.update(dt);
 
 			const core::Time min_dt = core::Time::microseconds(std::round(1000000 / max_frame_rate_));
-			// if(dt < min_dt)
-			// 	std::this_thread::sleep_for(std::chrono::microseconds((min_dt - dt).get_microseconds()));
 			while(timer.get_time() < min_dt)
 				std::this_thread::sleep_for(std::chrono::microseconds(1));
 
