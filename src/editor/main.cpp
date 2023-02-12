@@ -72,13 +72,11 @@ public:
 
 	void update(core::Time dt) override
 	{
-		for(auto [tag, vel, acc] :
-		    ecs::View<Tag, Vel, Acc>(manager.get_group(ecs::Archetype::create<Tag, Vel, Acc>()), manager))
+		for(auto [tag, vel, acc] : ecs::View<Tag, Vel, Acc>(manager.get_group<Tag, Vel, Acc>(), manager))
 		{
 			vel.value += acc.value * dt.get_seconds();
 		}
-		for(auto [tag, vel, acc] :
-		    ecs::View<Tag, Vel, Acc>(manager.get_group(ecs::Archetype::create<Tag, Vel, Acc>()), manager))
+		for(auto [tag, vel, acc] : ecs::View<Tag, Vel, Acc>(manager.get_group<Tag, Vel, Acc>(), manager))
 		{
 			std::cout << "name: " << tag.name << "\tvel: " << vel.value << "\tacc: " << acc.value << "\n";
 		}

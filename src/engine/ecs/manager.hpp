@@ -104,16 +104,34 @@ public:
 		}
 	}
 
+	template <typename... Ts>
+	void add_group()
+	{
+		add_group(Archetype::create<Ts...>());
+	}
+
 	void remove_group(const Archetype& archetype)
 	{
 		core::check(groups_.contains(archetype));
 		groups_.erase(archetype);
 	}
 
+	template <typename... ts>
+	void remove_group()
+	{
+		remove_group(Archetype::create<ts...>());
+	}
+
 	std::vector<Entity>& get_group(const Archetype& archetype)
 	{
 		core::check(groups_.contains(archetype));
 		return groups_[archetype];
+	}
+
+	template <typename... ts>
+	std::vector<Entity>& get_group()
+	{
+		return get_group(Archetype::create<ts...>());
 	}
 
 	// template <typename... Ts>

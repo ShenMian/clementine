@@ -20,7 +20,7 @@ public:
 	class Iterator
 	{
 	public:
-		Iterator(std::vector<Entity>::iterator it, Manager& manager) : iterator_(it), manager_(manager) {}
+		Iterator(std::vector<Entity>::iterator it, Manager& mgr) : iterator_(it), manager_(mgr) {}
 
 		std::tuple<Ts&...> operator*() { return manager_.get_components<Ts...>(*iterator_); }
 
