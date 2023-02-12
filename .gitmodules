@@ -19,3 +19,6 @@
 [submodule "deps/graphics"]
 	path = deps/graphics
 	url = https://github.com/ShenMian/graphics
+[submodule "deps/stb"]
+	path = deps/stb
+	url = https://github.com/nothings/stb.git

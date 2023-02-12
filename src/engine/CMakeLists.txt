@@ -13,15 +13,18 @@ target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/src/engine")
 # fmt
 target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/deps/fmt/include")
 
-# Math
+# math
 add_subdirectory("${PROJECT_SOURCE_DIR}/deps/math" "math")
 target_link_libraries(clementine PUBLIC math)
 
-# Graphics
+# graphics
 set(BUILD_EXAMPLES OFF CACHE BOOL "Build examples")
 add_subdirectory("${PROJECT_SOURCE_DIR}/deps/graphics" "graphics")
-target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/deps/Graphics")
+target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/deps/graphics")
 target_link_libraries(clementine PUBLIC graphics)
+
+# stb
+target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/deps/stb")
 
 # OpenAL
 set(LIBTYPE STATIC)

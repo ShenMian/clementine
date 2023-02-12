@@ -2,6 +2,7 @@
 fmt/9.1.0
 eastl/3.18.00
 gainput/1.0.0
+stb/cci.20220909
 
 # openal/1.22.2 # https://github.com/conan-io/conan-center-index/issues/13772 
 

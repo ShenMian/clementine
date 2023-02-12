@@ -23,6 +23,8 @@
 #include "core/memory_stream.hpp"
 #include "core/thread_pool.hpp"
 
+#include "res/image_loader.h"
+
 #include "net/linking_context.h"
 
 namespace fs = std::filesystem;
