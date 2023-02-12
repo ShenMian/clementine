@@ -1,4 +1,4 @@
-// Copyright 2022 ShenMian
+// Copyright 2023 ShenMian
 // License(Apache-2.0)
 
 #pragma once
@@ -115,6 +115,14 @@ public:
 		core::check(groups_.contains(archetype));
 		return groups_[archetype];
 	}
+
+	// template <typename... Ts>
+	// View<Ts...> get_group()
+	// {
+	// 	const auto archetype = Archetype::create<Ts...>();
+	// 	core::check(groups_.contains(archetype));
+	// 	return {groups_[archetype], *this};
+	// }
 
 private:
 	Entity::id_type allocate_id();

@@ -44,8 +44,6 @@ public:
 				std::this_thread::sleep_for(std::chrono::microseconds(1));
 
 			update_average_fps();
-
-			std::cout << average_frame_rate() << '\n';
 		}
 
 		app.deinit();

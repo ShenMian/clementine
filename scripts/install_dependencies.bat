@@ -1,5 +1,5 @@
 @echo off
-REM Copyright 2022 ShenMian
+REM Copyright 2023 ShenMian
 REM License(Apache-2.0)
 
 conan --version >nul 2>&1 || (

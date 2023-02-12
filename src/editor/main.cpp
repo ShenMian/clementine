@@ -1,4 +1,4 @@
-﻿// Copyright 2022 ShenMian
+﻿// Copyright 2023 ShenMian
 // License(Apache-2.0)
 
 #include "app/application.hpp"
@@ -72,20 +72,17 @@ public:
 
 	void update(core::Time dt) override
 	{
-		return;
-
-		auto view = ecs::View<Tag, Vel, Acc>(manager.get_group(ecs::Archetype::create<Tag, Vel, Acc>()), manager);
-		for(auto [tag, vel, acc] : view)
+		for(auto [tag, vel, acc] :
+		    ecs::View<Tag, Vel, Acc>(manager.get_group(ecs::Archetype::create<Tag, Vel, Acc>()), manager))
+		{
+			vel.value += acc.value * dt.get_seconds();
+		}
+		for(auto [tag, vel, acc] :
+		    ecs::View<Tag, Vel, Acc>(manager.get_group(ecs::Archetype::create<Tag, Vel, Acc>()), manager))
 		{
 			std::cout << "name: " << tag.name << "\tvel: " << vel.value << "\tacc: " << acc.value << "\n";
 		}
 		std::cout << "=========================\n";
-
-		for(auto& e : manager.get_group(ecs::Archetype::create<Tag, Vel, Acc>()))
-		{
-			auto [vel, acc] = manager.get_components<Vel, Acc>(e);
-			vel.value += acc.value * dt.get_seconds();
-		}
 	}
 
 	void init() override

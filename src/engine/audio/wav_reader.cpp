@@ -1,4 +1,4 @@
-// Copyright 2022 ShenMian
+// Copyright 2023 ShenMian
 // License(Apache-2.0)
 
 #include <AL/al.h>

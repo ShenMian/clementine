@@ -1,3 +1,8 @@
+// Copyright 2023 ShenMian
+// License(Apache-2.0)
+
+#pragma once
+
 #include "entity.hpp"
 #include "manager.hpp"
 #include <tuple>
