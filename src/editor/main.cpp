@@ -122,7 +122,7 @@ int main(int argc, const char* argv[])
 	for(int i = 0; i < argc; i++)
 		args.emplace_back(argv[i]);
 
-	Engine engine;
+	auto& engine = Engine::get_instance();
 	engine.add_system<DefaultSystem>();
 	engine.init(args);
 

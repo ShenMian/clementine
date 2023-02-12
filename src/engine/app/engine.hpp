@@ -25,6 +25,12 @@
 class Engine
 {
 public:
+	static Engine& get_instance()
+	{
+		static Engine engine;
+		return engine;
+	}
+
 	void run(Application& app)
 	{
 		app.init();
@@ -100,8 +106,10 @@ public:
 		delete core::Logger::get("engine");
 	}
 
-	std::shared_ptr<Window> window() const { return window_; }
+	std::shared_ptr<Window> window() { return window_; }
 	void                    window(std::shared_ptr<Window> win) { window_ = win; }
+
+	core::Emitter& emitter() { return emitter_; }
 
 	/**
 	 * @brief 获取平均帧速率.
@@ -111,6 +119,8 @@ public:
 	float average_frame_rate() const noexcept { return avg_fps_; }
 
 private:
+	Engine() = default;
+
 	void parse_args(const std::vector<std::string_view>& args)
 	{
 		/*for(auto arg : args)
