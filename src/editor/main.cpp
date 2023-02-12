@@ -94,7 +94,7 @@ public:
 		manager.add_component<Tag>(entities[2]).name = "C";
 		manager.add_component<Vel>(entities[2]);
 
-		manager.add_group(ecs::Archetype::create<Tag, Vel, Acc>());
+		manager.add_group<Tag, Vel, Acc>();
 	}
 
 	void deinit() override {}
