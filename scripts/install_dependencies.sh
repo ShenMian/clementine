@@ -35,6 +35,13 @@ else
 fi
 
 echo "=== Installing dependencies..."
+# vcpkg
+if [ ! -e "./deps/vcpkg/vcpkg" ]; then
+    ./deps/vcpkg/bootstrap-vcpkg.sh
+fi
+./deps/vcpkg/vcpkg install
+
+# conan
 export CONAN_SYSREQUIRES_MODE=enabled
 conan install . -pr:b=default --build=missing -if $build_path -of $build_path -s build_type=$build_type -s compiler=${compiler} -s compiler.version=${compiler_version} -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True || {
     echo "=== Failed to install."

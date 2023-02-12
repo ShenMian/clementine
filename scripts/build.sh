@@ -18,16 +18,12 @@ if [ -z "$build_type" ]; then
   build_type="Debug"
 fi
 if [ -z "$compiler" ]; then
-    compiler=clang
+    # compiler=clang
     export CC=/usr/bin/clang
     export CXX=/usr/bin/clang++
 fi
 
 build_path=target/$build_type
-
-if [ -n "$compiler" ] && [ -n "$compiler_version" ]; then
-  cmake_args="-DCMAKE_BUILD_TYPE=$build_type -DCMAKE_C_COMPILER=$compiler -DCMAKE_CXX_COMPILER=$compiler++"
-fi
 
 cd "$( cd "$( dirname "$0"  )" && pwd  )" || exit
 cd .. || exit
@@ -36,8 +32,15 @@ mkdir $build_path 2>/dev/null
 
 ./scripts/install_dependencies.sh $build_type $compiler $compiler_version || exit 1
 
+# if [ -n "$compiler" ] && [ -n "$compiler_version" ]; then
+#   cmake_args="$cmake_args -DCMAKE_C_COMPILER=$compiler -DCMAKE_CXX_COMPILER=$compiler++"
+# fi
+if [ -d "./vcpkg_installed" ]; then
+  cmake_args="$cmake_args -DCMAKE_TOOLCHAIN_FILE=./deps/vcpkg/scripts/buildsystems/vcpkg.cmake"
+fi
+
 echo "=== Generating CMake cache..."
-cmake -B $build_path -Wno-dev -G Ninja $cmake_args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON >/dev/null || {
+cmake -B $build_path -Wno-dev -G Ninja -DCMAKE_BUILD_TYPE=$build_type -DCMAKE_EXPORT_COMPILE_COMMANDS=ON $cmake_args >/dev/null || {
   echo "=== Failed to generate CMake cache."
   exit 1
 }

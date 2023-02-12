@@ -18,7 +18,7 @@ mkdir %build_path% 2>nul
 call .\scripts\install_dependencies.bat %build_type% || exit /b 1
 
 echo === Generating CMake cache...
-cmake -B %build_path% -Wno-dev -G Ninja -DCMAKE_build_type=%BUILD_TYPE% -DCMAKE_EXPORT_COMPILE_COMMANDS=ON >nul || (
+cmake -B %build_path% -Wno-dev -G Ninja -DCMAKE_BUILD_TYPE=%build_type% -DCMAKE_EXPORT_COMPILE_COMMANDS=ON >nul || (
     echo === Failed to generate CMake cache.
     exit /b 1
 )
