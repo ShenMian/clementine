@@ -8,6 +8,7 @@
 #include "misc/progress_spinner.hpp"
 
 #include <Graphics.h>
+#include <execution>
 #include <fmt/color.h>
 #include <fmt/format.h>
 
@@ -65,11 +66,12 @@ public:
 
 	void update(core::Time dt) override
 	{
-		for(auto [tag, vel, acc] : ecs::View<Tag, Vel, Acc>(manager.get_group<Tag, Vel, Acc>(), manager))
+		auto view = ecs::View<Tag, Vel, Acc>(manager.get_group<Tag, Vel, Acc>(), manager);
+		for(auto [entity, tag, vel, acc] : view)
 		{
 			vel.value += acc.value * dt.get_seconds();
 		}
-		for(auto [tag, vel, acc] : ecs::View<Tag, Vel, Acc>(manager.get_group<Tag, Vel, Acc>(), manager))
+		for(auto [entity, tag, vel, acc] : view)
 		{
 			std::cout << "name: " << tag.name << "\tvel: " << vel.value << "\tacc: " << acc.value << '\n';
 		}

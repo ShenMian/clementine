@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "core/log/file_logger.hpp"
-#include "core/log/std_logger.hpp"
+#include "core/logger/file_logger.hpp"
+#include "core/logger/std_logger.hpp"
 
 #include "core/emitter.hpp"
 #include "core/timer.hpp"

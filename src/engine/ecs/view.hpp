@@ -22,7 +22,10 @@ public:
 	public:
 		Iterator(std::vector<Entity>::iterator it, Manager& mgr) : iterator_(it), manager_(mgr) {}
 
-		std::tuple<Ts&...> operator*() { return manager_.get_components<Ts...>(*iterator_); }
+		std::tuple<const Entity&, Ts&...> operator*()
+		{
+			return std::tuple_cat(std::make_tuple(*iterator_), manager_.get_components<Ts...>(*iterator_));
+		}
 
 		Iterator& operator++() noexcept
 		{
