@@ -33,28 +33,21 @@ struct MatricesBuffer
 	Matrix4 model;
 };
 
-struct Tag
+struct Tag : public ecs::Component
 {
 	DECLARE_TYPE
 
 	std::string name;
 };
 
-struct Vel
+struct Vel : public ecs::Component
 {
 	DECLARE_TYPE
 
 	float value;
 };
 
-struct Acc
-{
-	DECLARE_TYPE
-
-	float value;
-};
-
-struct AAA
+struct Acc : public ecs::Component
 {
 	DECLARE_TYPE
 
@@ -78,7 +71,7 @@ public:
 		}
 		for(auto [tag, vel, acc] : ecs::View<Tag, Vel, Acc>(manager.get_group<Tag, Vel, Acc>(), manager))
 		{
-			std::cout << "name: " << tag.name << "\tvel: " << vel.value << "\tacc: " << acc.value << "\n";
+			std::cout << "name: " << tag.name << "\tvel: " << vel.value << "\tacc: " << acc.value << '\n';
 		}
 		std::cout << "=========================\n";
 	}
@@ -96,7 +89,6 @@ public:
 		manager.add_component<Acc>(entities[1]);
 		manager.add_component<Tag>(entities[2]).name = "C";
 		manager.add_component<Vel>(entities[2]);
-		manager.add_component<AAA>(entities[2]);
 
 		manager.add_group(ecs::Archetype::create<Tag, Vel, Acc>());
 	}

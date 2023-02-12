@@ -5,8 +5,10 @@
 
 #include "archetype.hpp"
 #include "array.hpp"
+#include "component.hpp"
 #include "core/check.hpp"
 #include "entity.hpp"
+#include <concepts>
 #include <memory>
 #include <numeric>
 #include <tuple>
@@ -47,7 +49,7 @@ public:
 	 *
 	 * @param entity 要添加组件的实体.
 	 */
-	template <typename T>
+	template <std::derived_from<Component> T>
 	T& add_component(const Entity& entity)
 	{
 		if(!arrays_.contains(Typeid<T>()))
@@ -65,7 +67,7 @@ public:
 	 *
 	 * @param entity 要移除组件的实体.
 	 */
-	template <typename T>
+	template <std::derived_from<Component> T>
 	void remove_component(const Entity& entity)
 	{
 		remove_from_group(archetypes_[entity.id()], entity);
@@ -80,13 +82,13 @@ public:
 	 *
 	 * @param entity 要获取组件的实体.
 	 */
-	template <typename T>
+	template <std::derived_from<Component> T>
 	T& get_component(const Entity& entity)
 	{
 		return (*get_array<T>())[entity.id()];
 	}
 
-	template <typename... Ts>
+	template <std::derived_from<Component>... Ts>
 	std::tuple<Ts&...> get_components(const Entity& entity)
 	{
 		return {get_component<Ts>(entity)...};
@@ -104,7 +106,7 @@ public:
 		}
 	}
 
-	template <typename... Ts>
+	template <std::derived_from<Component>... Ts>
 	void add_group()
 	{
 		add_group(Archetype::create<Ts...>());
@@ -116,10 +118,10 @@ public:
 		groups_.erase(archetype);
 	}
 
-	template <typename... ts>
+	template <std::derived_from<Component>... Ts>
 	void remove_group()
 	{
-		remove_group(Archetype::create<ts...>());
+		remove_group(Archetype::create<Ts...>());
 	}
 
 	std::vector<Entity>& get_group(const Archetype& archetype)
@@ -128,10 +130,10 @@ public:
 		return groups_[archetype];
 	}
 
-	template <typename... ts>
+	template <std::derived_from<Component>... Ts>
 	std::vector<Entity>& get_group()
 	{
-		return get_group(Archetype::create<ts...>());
+		return get_group(Archetype::create<Ts...>());
 	}
 
 	// template <typename... Ts>
