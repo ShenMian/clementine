@@ -76,16 +76,16 @@ public:
 	 *
 	 * @param sound 声音.
 	 */
-	void setSound(Sound& sound)
+	void set_sound(Sound& sound)
 	{
-		alSourcei(handle, AL_BUFFER, sound.getHandle());
+		alSourcei(handle, AL_BUFFER, sound.get_handle());
 		ALCheckError();
 	}
 
 	/**
 	 * @brief 获取声音播放状态.
 	 */
-	Status getStatus() const
+	Status get_status() const
 	{
 		ALint status;
 		alGetSourcei(handle, AL_SOURCE_STATE, &status);
@@ -109,7 +109,7 @@ public:
 	 *
 	 * @param volume 音量. 范围: [0.0, 1.0].
 	 */
-	void setVolume(float volume)
+	void set_volume(float volume)
 	{
 		assert(0 <= volume && volume <= 1);
 		alSourcef(handle, AL_GAIN, volume);
@@ -118,7 +118,7 @@ public:
 	/**
 	 * @brief 获取音量.
 	 */
-	float getVolume() const
+	float get_volume() const
 	{
 		ALfloat volume;
 		alGetSourcef(handle, AL_GAIN, &volume);
@@ -130,7 +130,7 @@ public:
 	 *
 	 * @param pitch 速率. 范围: [0.5, 2.0]
 	 */
-	void setPitch(float pitch)
+	void set_pitch(float pitch)
 	{
 		assert(0.5f <= pitch && pitch <= 2.f);
 		alSourcef(handle, AL_PITCH, pitch);
@@ -139,7 +139,7 @@ public:
 	/**
 	 * @brief 获取速率.
 	 */
-	float getPitch() const
+	float get_pitch() const
 	{
 		ALfloat pitch;
 		alGetSourcef(handle, AL_PITCH, &pitch);
@@ -149,19 +149,19 @@ public:
 	/**
 	 * @brief 设置是否循环播放.
 	 */
-	void setLoop(bool enable) { alSourcei(handle, AL_LOOPING, enable); }
+	void set_loop(bool enable) { alSourcei(handle, AL_LOOPING, enable); }
 
 	/**
 	 * @brief 设置声源位置.
 	 *
 	 * @param pos 声源的坐标.
 	 */
-	void setPosition(const Vector3f& pos) { alSource3f(handle, AL_POSITION, pos.x, pos.y, pos.z); }
+	void set_position(const Vector3f& pos) { alSource3f(handle, AL_POSITION, pos.x, pos.y, pos.z); }
 
 	/**
 	 * @brief 获取声源位置.
 	 */
-	Vector3f getPosition() const
+	Vector3f get_position() const
 	{
 		ALfloat x, y, z;
 		alGetSource3f(handle, AL_POSITION, &x, &y, &z);
@@ -173,14 +173,14 @@ public:
 	 *
 	 * @param v 声源速度.
 	 */
-	void setVelocity(const Vector3f& v) { alSource3f(handle, AL_VELOCITY, v.x, v.y, v.z); }
+	void set_velocity(const Vector3f& v) { alSource3f(handle, AL_VELOCITY, v.x, v.y, v.z); }
 
 	/**
 	 * @brief 获取声源速度.
 	 *
 	 * @return 声源速度.
 	 */
-	Vector3f getVelocity() const
+	Vector3f get_velocity() const
 	{
 		ALfloat x, y, z;
 		alGetSource3f(handle, AL_VELOCITY, &x, &y, &z);
@@ -192,7 +192,7 @@ public:
 	 *
 	 * @param attenuation 衰减因子.
 	 */
-	void setAttenuation(float attenuation) { alSourcef(handle, AL_ROLLOFF_FACTOR, attenuation); }
+	void set_attenuation(float attenuation) { alSourcef(handle, AL_ROLLOFF_FACTOR, attenuation); }
 
 	/**
 	 * @brief 获取衰减因子.

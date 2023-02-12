@@ -124,22 +124,22 @@ public:
 	/**
 	 * @brief 获取声音总长度, 单位: 秒.
 	 */
-	float getDuration() const { return (float)samplesCount / channelCount / sampleRate; }
+	float get_duration() const { return (float)samplesCount / channelCount / sampleRate; }
 
 	/**
 	 * @brief 获取样本数.
 	 */
-	auto getSampleCount() const { return samplesCount / (bitsPerSample / 8); }
+	auto get_sample_count() const { return samplesCount / (bitsPerSample / 8); }
 
 	/**
 	 * @brief 获取通道数.
 	 */
-	auto getChannelCount() const noexcept { return channelCount; }
+	auto get_channel_count() const noexcept { return channelCount; }
 
 	/**
 	 * @brief 获取 OpenAL 句柄.
 	 */
-	auto getHandle() const noexcept { return handle; }
+	auto get_handle() const noexcept { return handle; }
 
 private:
 	uint32_t samplesCount  = 0;
