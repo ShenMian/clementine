@@ -4,6 +4,7 @@
 #pragma once
 
 #include "core/time.hpp"
+#include "ecs/components/transform.hpp"
 #include "ecs/manager.hpp"
 #include "ecs/view.hpp"
 #include "rigidbody_component.hpp"
@@ -16,7 +17,8 @@ class PhysicsSystem
 public:
 	void update(core::Time dt, ecs::Manager& mgr)
 	{
-		for(auto [body] : ecs::View<Rigidbody>(mgr.get_group<Rigidbody>(), mgr))
+		for(auto [entity, trans, body] :
+		    ecs::View<ecs::Transform, Rigidbody>(mgr.get_group<ecs::Transform, Rigidbody>(), mgr))
 		{
 		}
 	}

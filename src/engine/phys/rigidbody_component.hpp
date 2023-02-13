@@ -3,15 +3,17 @@
 
 #pragma once
 
+#include "core/type_index.hpp"
 #include "ecs/component.hpp"
 #include <math/math.hpp>
 
 namespace phys
 {
 
-class Rigidbody : public ecs::Component
+struct Rigidbody : public ecs::Component
 {
-public:
+	DECLARE_TYPE
+
 	enum class Type
 	{
 		Static,

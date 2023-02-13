@@ -23,7 +23,8 @@
 #include "core/memory_stream.hpp"
 #include "core/thread_pool.hpp"
 
-#include "res/image_loader.h"
+#include "phys/physics_system.hpp"
+#include "phys/sphere_collider.hpp"
 
 #include "net/linking_context.h"
 
@@ -93,6 +94,7 @@ public:
 		manager.add_component<Acc>(entities[1]);
 		manager.add_component<Tag>(entities[2]).name = "C";
 		manager.add_component<Vel>(entities[2]);
+		manager.add_component<phys::SphereCollider>(entities[2]);
 
 		manager.add_group<Tag, Vel, Acc>();
 	}
