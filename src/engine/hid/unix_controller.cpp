@@ -2,36 +2,52 @@
 // License(Apache-2.0)
 
 #include "unix_controller.hpp"
+#include "core/check.hpp"
 #include "core/platform.hpp"
-#include <fcntl.h>
-#include <linux/joystick.h>
+#include <filesystem>
 #include <stdexcept>
-#include <unistd.h>
+
+#include <fmt/color.h>
+#include <fmt/format.h>
+
+#if TARGET_OS == OS_UNIX
+
+	#include <fcntl.h>
+	#include <linux/joystick.h>
+
+	#define BITS_TO_LONGS(x) (((x) + 8 * sizeof(unsigned long) - 1) / (8 * sizeof(unsigned long)))
 
 namespace hid
 {
 
-using File = std::unique_ptr<int, decltype([](auto file) { close(file); })>;
-
-#if TARGET_OS == OS_UNIX
-
 UnixController::UnixController()
 {
-	file_ = (open("/dev/input/js1", O_RDONLY | O_NONBLOCK));
-	if(file_.get() < 0)
+	int index = 1;
+	input_.reset(new int(open(fmt::format("/dev/input/js{}", index).c_str(), O_RDONLY | O_NONBLOCK)));
+	if(*input_.get() < 0)
 		throw std::runtime_error("failed to open file");
 
 	unsigned char axis_count   = 0;
 	unsigned char button_count = 0;
 	// ioctl(fd_, JSIOCGVERSION, &version);
-	ioctl(file_.get(), JSIOCGAXES, &axis_count);
-	ioctl(file_.get(), JSIOCGBUTTONS, &button_count);
+	ioctl(*input_.get(), JSIOCGAXES, &axis_count);
+	ioctl(*input_.get(), JSIOCGBUTTONS, &button_count);
+
+	for(int i = 0; i <= 99; i++)
+	{
+		if(std::filesystem::exists(fmt::format("/sys/class/input/js{}/device/event{}", index, i)))
+		{
+			output_.reset(new int(open(fmt::format("/dev/input/event{}", i).c_str(), O_RDWR)));
+			break;
+		}
+	}
+	core::check(output_.get() != nullptr && *output_.get() >= 0);
 }
 
 void UnixController::update()
 {
 	js_event event;
-	read(file_.get(), &event, sizeof(event));
+	read(*input_.get(), &event, sizeof(event));
 	event.type &= ~JS_EVENT_INIT;
 	switch(event.type)
 	{
@@ -40,7 +56,7 @@ void UnixController::update()
 		break;
 
 	case JS_EVENT_AXIS:
-		axis_[event.number] = event.value;
+		axes_[event.number] = event.value;
 		break;
 	}
 }
@@ -48,7 +64,7 @@ void UnixController::update()
 std::string UnixController::name() const
 {
 	char name[128];
-	ioctl(file_.get(), JSIOCGNAME(std::size(name), name);
+	ioctl(*input_.get(), JSIOCGNAME(std::size(name)), name);
 	return name;
 }
 
@@ -59,16 +75,50 @@ bool UnixController::connected() const
 
 void UnixController::vibration(float strong_speed, float weak_speed)
 {
-	core::check(0 <= strong_speed && strong_speed <= 1);
-	core::check(0 <= weak_speed && weak_speed <= 1);
+	core::check(0.f <= strong_speed && strong_speed <= 1.f);
+	core::check(0.f <= weak_speed && weak_speed <= 1.f);
+
+	unsigned long features[BITS_TO_LONGS(FF_CNT)];
+	if(ioctl(*output_.get(), EVIOCGBIT(EV_FF, sizeof(features)), features) == -1)
+		throw std::runtime_error("failed to get features");
+
+	if(playing_)
+	{
+		// FIXME
+		input_event stop_event;
+		stop_event.type  = EV_FF;
+		stop_event.code  = -1;
+		stop_event.value = 1;
+		if(write(*output_.get(), &stop_event, sizeof(stop_event)) == -1)
+			throw std::runtime_error("failed to stop effect");
+
+		if(ioctl(*output_.get(), EVIOCRMFF, 0) == -1) // FIXME: effect.id
+			throw std::runtime_error("failed to remove effect");
+
+		playing_ = false;
+	}
+
+	if(strong_speed == 0 && weak_speed == 0)
+		return;
 
 	ff_effect effect;
 	effect.type                      = FF_RUMBLE;
 	effect.u.rumble.strong_magnitude = strong_speed * std::numeric_limits<uint16_t>::max();
 	effect.u.rumble.weak_magnitude   = weak_speed * std::numeric_limits<uint16_t>::max();
-	effect.replay.length             = 1000;
+	effect.replay.length             = -1;
 	effect.replay.delay              = 0;
 	effect.id                        = -1;
+	if(ioctl(*output_.get(), EVIOCSFF, &effect) == -1)
+		throw std::runtime_error("failed to upload effect");
+
+	input_event play_event;
+	play_event.type  = EV_FF;
+	play_event.code  = effect.id;
+	play_event.value = 1;
+	if(write(*output_.get(), &play_event, sizeof(play_event)) == -1)
+		throw std::runtime_error("failed to play effect");
+
+	playing_ = true;
 }
 
 #endif

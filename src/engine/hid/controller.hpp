@@ -14,9 +14,54 @@ namespace hid
 class Controller
 {
 public:
-	enum class Thumb : uint8_t;
-	enum class Trigger : uint8_t;
-	enum class Button : uint8_t;
+	/**
+	 * @brief 手柄摇杆.
+	 */
+	enum class Thumb : uint8_t
+	{
+		left  = 0,
+		right = 2
+	};
+
+	/**
+	 * @brief 手柄线性按键.
+	 */
+	enum class Trigger : uint8_t
+	{
+		left  = 4, ///< 左侧线性按键, 即 LT.
+		right = 5  ///< 右侧线性按键, 即 RT.
+	};
+
+	/**
+	 * @brief 手柄按键.
+	 */
+	enum class Button : uint8_t
+	{
+		A = 0,
+		B = 1,
+		X = 2,
+		Y = 3,
+
+		LeftBumper  = 4,
+		RightBumper = 5,
+
+		Back  = 6,
+		Start = 7,
+		Guide = 8,
+
+		LeftThumb = 9,
+		RighThumb = 10,
+
+		DPAD_Up    = 11,
+		DPAD_Right = 12,
+		DPAD_Down  = 13,
+		DPAD_Left  = 14,
+
+		Cross    = A,
+		Circle   = B,
+		Square   = X,
+		Triangle = Y
+	};
 
 	virtual void update() = 0;
 
@@ -79,7 +124,7 @@ public:
 	 */
 	Vector2f get_raw(Thumb thumb) const noexcept
 	{
-		return {axis_[static_cast<uint8_t>(thumb)], axis_[static_cast<uint8_t>(thumb) + 1]};
+		return {axes_[static_cast<uint8_t>(thumb)], axes_[static_cast<uint8_t>(thumb) + 1]};
 	}
 
 	/**
@@ -109,7 +154,7 @@ public:
 	 *
 	 * @warning 不建议直接使用.
 	 */
-	float get_raw(Trigger trigger) const noexcept { return axis_[static_cast<uint8_t>(trigger)]; }
+	float get_raw(Trigger trigger) const noexcept { return axes_[static_cast<uint8_t>(trigger)]; }
 
 	/**
 	 * @brief 获取按键状态.
@@ -120,62 +165,13 @@ public:
 	 */
 	bool get(Button button) const noexcept { return buttons_[static_cast<uint8_t>(button)]; }
 
-private:
+protected:
 	std::bitset<15> buttons_;
 	float           axes_[6] = {};
 
 	float leftThumbDeadzone_  = 0.1f;
 	float rightThumbDeadzone_ = 0.1f;
 	float triggerThreshold_   = 0.01f;
-};
-
-/**
- * @brief 手柄摇杆.
- */
-enum class Gamepad::Thumb : uint8_t
-{
-	left  = 0,
-	right = 2
-};
-
-/**
- * @brief 手柄线性按键.
- */
-enum class Gamepad::Trigger : uint8_t
-{
-	left  = 4, ///< 左侧线性按键, 即 LT.
-	right = 5  ///< 右侧线性按键, 即 RT.
-};
-
-/**
- * @brief 手柄按键.
- */
-enum class Gamepad::Button : uint8_t
-{
-	A = 0,
-	B = 1,
-	X = 2,
-	Y = 3,
-
-	LeftBumper  = 4,
-	RightBumper = 5,
-
-	Back  = 6,
-	Start = 7,
-	Guide = 8,
-
-	LeftThumb  = 9,
-	RightThumb = 10,
-
-	DPAD_Up    = 11,
-	DPAD_Right = 12,
-	DPAD_Down  = 13,
-	DPAD_Left  = 14,
-
-	Cross    = A,
-	Circle   = B,
-	Square   = X,
-	Triangle = Y
 };
 
 } // namespace hid

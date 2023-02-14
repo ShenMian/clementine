@@ -23,6 +23,8 @@
 #include "core/memory_stream.hpp"
 #include "core/thread_pool.hpp"
 
+#include "hid/unix_controller.hpp"
+
 #include "phys/physics_system.hpp"
 #include "phys/sphere_collider.hpp"
 
@@ -69,16 +71,25 @@ public:
 
 	void update(core::Time dt) override
 	{
-		auto view = ecs::View<Tag, Vel, Acc>(manager.get_group<Tag, Vel, Acc>(), manager);
-		for(auto [entity, tag, vel, acc] : view)
+		// auto view = ecs::View<Tag, Vel, Acc>(manager.get_group<Tag, Vel, Acc>(), manager);
+		// for(auto [entity, tag, vel, acc] : view)
+		// {
+		// 	vel.value += acc.value * dt.get_seconds();
+		// }
+		// for(auto [entity, tag, vel, acc] : view)
+		// {
+		// 	std::cout << "name: " << tag.name << "\tvel: " << vel.value << "\tacc: " << acc.value << '\n';
+		// }
+		// std::cout << "=========================\n";
+
+		std::shared_ptr<hid::Controller> controller = std::make_shared<hid::UnixController>();
+		while(true)
 		{
-			vel.value += acc.value * dt.get_seconds();
+			controller->update();
+			controller->vibration(0.05, 0.05);
+			if(controller->get(hid::Controller::Button::A))
+				std::cout << "A is pressed\n";
 		}
-		for(auto [entity, tag, vel, acc] : view)
-		{
-			std::cout << "name: " << tag.name << "\tvel: " << vel.value << "\tacc: " << acc.value << '\n';
-		}
-		std::cout << "=========================\n";
 	}
 
 	void init() override

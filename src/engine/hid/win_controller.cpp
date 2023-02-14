@@ -4,15 +4,16 @@
 #include "win_controller.hpp"
 #include "controller.hpp"
 #include "core/platform.hpp"
-#include <Windows.h>
-#include <Xinput.h>
 #include <optional>
 #include <stdexcept>
 
+#if TARGET_OS == OS_WIN
+
+	#include <Windows.h>
+	#include <Xinput.h>
+
 namespace hid
 {
-
-#if TARGET_OS == OS_WIN
 
 std::optional<XINPUT_CAPABILITIES> GetCapabilities(DWORD index)
 {
@@ -32,13 +33,13 @@ void WinController::update()
 
 	buttons_ = state.Gamepad.wButtons;
 
-	axis_[static_cast<uint8_t>(Thumb::left)]      = state.Gamepad.sThumbLX;
-	axis_[static_cast<uint8_t>(Thumb::left) + 1]  = state.Gamepad.sThumbLY;
-	axis_[static_cast<uint8_t>(Thumb::right)]     = state.Gamepad.sThumbRX;
-	axis_[static_cast<uint8_t>(Thumb::right) + 1] = state.Gamepad.sThumbRY;
+	axes_[static_cast<uint8_t>(Thumb::left)]      = state.Gamepad.sThumbLX;
+	axes_[static_cast<uint8_t>(Thumb::left) + 1]  = state.Gamepad.sThumbLY;
+	axes_[static_cast<uint8_t>(Thumb::right)]     = state.Gamepad.sThumbRX;
+	axes_[static_cast<uint8_t>(Thumb::right) + 1] = state.Gamepad.sThumbRY;
 
-	axis_[static_cast<uint8_t>(Trigger::left)]  = state.Gamepad.bLeftTrigger;
-	axis_[static_cast<uint8_t>(Trigger::right)] = state.Gamepad.bRightTrigger;
+	axes_[static_cast<uint8_t>(Trigger::left)]  = state.Gamepad.bLeftTrigger;
+	axes_[static_cast<uint8_t>(Trigger::right)] = state.Gamepad.bRightTrigger;
 }
 
 std::string WinController::name() const
@@ -54,8 +55,8 @@ bool WinController::connected() const
 
 void WinController::vibration(float strong_speed, float weak_speed)
 {
-	core::check(0 <= strong_speed && strong_speed <= 1);
-	core::check(0 <= weak_speed && weak_speed <= 1);
+	core::check(0.f <= strong_speed && strong_speed <= 1.f);
+	core::check(0.f <= weak_speed && weak_speed <= 1.f);
 
 	if(!is_connected())
 		return;
@@ -67,6 +68,6 @@ void WinController::vibration(float strong_speed, float weak_speed)
 		throw std::runtime_error("failed to set vibration");
 }
 
-#endif
-
 } // namespace hid
+
+#endif

@@ -4,9 +4,18 @@
 #pragma once
 
 #include "controller.hpp"
+#include <memory>
+
+#if TARGET_OS == OS_UNIX
+	#include <unistd.h>
+#endif
 
 namespace hid
 {
+
+#if TARGET_OS == OS_UNIX
+using File = std::unique_ptr<int, decltype([](auto file) { close(*file); })>;
+#endif
 
 class UnixController : public Controller
 {
@@ -19,7 +28,9 @@ public:
 	void        vibration(float strong_speed, float weak_speed) override;
 
 private:
-	// int file_;
+	File input_;
+	File output_;
+	bool playing_ = false;
 };
 
 } // namespace hid
