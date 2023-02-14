@@ -10,10 +10,7 @@ target_compile_features(clementine PRIVATE cxx_std_20)
 target_compile_definitions(clementine PUBLIC ${CLEMENTINE_DEFINES})
 target_include_directories(clementine PUBLIC "${PROJECT_SOURCE_DIR}/src/engine")
 
-#
-# vcpkg
-#
-if(FALSE)
+if(USE_VCPKG)
     # fmt
     find_package(fmt CONFIG REQUIRED)
     target_link_libraries(clementine PRIVATE fmt::fmt-header-only)
