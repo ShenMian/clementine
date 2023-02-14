@@ -20,7 +20,7 @@ using File = std::unique_ptr<int, decltype([](auto file) { close(*file); })>;
 class UnixController : public Controller
 {
 public:
-	UnixController();
+	UnixController(int index = 0);
 
 	void        update() override;
 	std::string name() const override;
@@ -28,9 +28,10 @@ public:
 	void        vibration(float strong_speed, float weak_speed) override;
 
 private:
-	File input_;
-	File output_;
-	bool playing_ = false;
+	int          index_;
+	mutable File input_;
+	File         output_;
+	bool         playing_ = false;
 };
 
 } // namespace hid

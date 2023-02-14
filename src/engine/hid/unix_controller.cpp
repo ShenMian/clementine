@@ -20,11 +20,10 @@
 namespace hid
 {
 
-UnixController::UnixController()
+UnixController::UnixController(int index) : index_(index)
 {
-	int index = 1;
-	input_.reset(new int(open(fmt::format("/dev/input/js{}", index).c_str(), O_RDONLY | O_NONBLOCK)));
-	if(*input_.get() < 0)
+	input_.reset(new int(open(fmt::format("/dev/input/js{}", index_).c_str(), O_RDONLY | O_NONBLOCK)));
+	if(*input_.get() == -1)
 		throw std::runtime_error("failed to open file");
 
 	unsigned char axis_count   = 0;
@@ -35,13 +34,13 @@ UnixController::UnixController()
 
 	for(int i = 0; i <= 99; i++)
 	{
-		if(std::filesystem::exists(fmt::format("/sys/class/input/js{}/device/event{}", index, i)))
+		if(std::filesystem::exists(fmt::format("/sys/class/input/js{}/device/event{}", index_, i)))
 		{
 			output_.reset(new int(open(fmt::format("/dev/input/event{}", i).c_str(), O_RDWR)));
 			break;
 		}
 	}
-	core::check(output_.get() != nullptr && *output_.get() >= 0);
+	core::check(output_.get() != nullptr && *output_.get() != -1);
 }
 
 void UnixController::update()
@@ -70,7 +69,8 @@ std::string UnixController::name() const
 
 bool UnixController::connected() const
 {
-	return false; // TODO
+	input_.reset(new int(open(fmt::format("/dev/input/js{}", index_).c_str(), O_RDONLY | O_NONBLOCK)));
+	return *input_.get() != -1;
 }
 
 void UnixController::vibration(float strong_speed, float weak_speed)

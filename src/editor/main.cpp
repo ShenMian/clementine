@@ -65,9 +65,10 @@ class Editor : public Application
 public:
 	Editor() : Application(Config{.window = {.title = "Editor"}}) {}
 
-	ecs::Manager             manager;
-	std::vector<ecs::Entity> entities;
-	core::ThreadPool         thread_pool;
+	ecs::Manager                     manager;
+	std::vector<ecs::Entity>         entities;
+	core::ThreadPool                 thread_pool;
+	std::shared_ptr<hid::Controller> controller = std::make_shared<hid::UnixController>(1);
 
 	void update(core::Time dt) override
 	{
@@ -82,11 +83,10 @@ public:
 		// }
 		// std::cout << "=========================\n";
 
-		std::shared_ptr<hid::Controller> controller = std::make_shared<hid::UnixController>();
-		while(true)
+		while(controller->connected())
 		{
 			controller->update();
-			controller->vibration(0.05, 0.05);
+			// controller->vibration(0.05, 0.05);
 			if(controller->get(hid::Controller::Button::A))
 				std::cout << "A is pressed\n";
 		}
