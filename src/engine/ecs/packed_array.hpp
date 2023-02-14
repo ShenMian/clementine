@@ -92,7 +92,7 @@ public:
 	 */
 	void reserve(size_type size)
 	{
-		return data_.resize(size);
+		data_.resize(size);
 		index_map_.reserve(size);
 	}
 
