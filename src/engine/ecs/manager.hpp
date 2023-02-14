@@ -4,10 +4,10 @@
 #pragma once
 
 #include "archetype.hpp"
-#include "array.hpp"
 #include "component.hpp"
 #include "core/check.hpp"
 #include "entity.hpp"
+#include "packed_array.hpp"
 #include <concepts>
 #include <memory>
 #include <numeric>
@@ -53,7 +53,7 @@ public:
 	T& add_component(const Entity& entity)
 	{
 		if(!arrays_.contains(Typeid<T>()))
-			arrays_.insert({Typeid<T>(), std::make_shared<Array<T>>()});
+			arrays_.insert({Typeid<T>(), std::make_shared<PackedArray<T>>()});
 
 		remove_from_group(archetypes_[entity.id()], entity);
 		archetypes_[entity.id()] += Archetype::create<T>();
@@ -163,17 +163,17 @@ private:
 	}
 
 	template <typename T>
-	std::shared_ptr<Array<T>> get_array()
+	std::shared_ptr<PackedArray<T>> get_array()
 	{
-		return std::static_pointer_cast<Array<T>>(arrays_.at(Typeid<T>()));
+		return std::static_pointer_cast<PackedArray<T>>(arrays_.at(Typeid<T>()));
 	}
 
 	std::vector<Entity>          entities_;
 	std::vector<Entity::id_type> freeIds_;
 	std::vector<Archetype>       archetypes_;
 
-	std::unordered_map<TypeIndex, std::shared_ptr<ArrayBase>> arrays_;
-	std::unordered_map<Archetype, std::vector<Entity>>        groups_;
+	std::unordered_map<TypeIndex, std::shared_ptr<PackedArrayBase>> arrays_;
+	std::unordered_map<Archetype, std::vector<Entity>>              groups_;
 };
 
 } // namespace ecs
