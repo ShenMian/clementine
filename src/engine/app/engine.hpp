@@ -136,8 +136,8 @@ private:
 		if(frame_rate_counter_timer.get_time() >= avg_fps_update_interval_)
 		{
 			frame_rate_counter_timer.restart();
-			const float alpha = 0.9f;
-			avg_fps_ = alpha * avg_fps_ + (1.0 - alpha) * (frames_counter / avg_fps_update_interval_.get_seconds());
+			const float factor = 0.9f;
+			avg_fps_ = factor * avg_fps_ + (1.0 - factor) * (frames_counter / avg_fps_update_interval_.get_seconds());
 			frames_counter = 0;
 		}
 	}

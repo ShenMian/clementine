@@ -1,70 +1,181 @@
+﻿// Copyright 2023 ShenMian
+// License(Apache-2.0)
+
+#pragma once
+
+#include <bitset>
 #include <cstdint>
-#include <filesystem>
-#include <fstream>
+#include <math/math.hpp>
 #include <string>
 
-#include <fcntl.h>
-#include <linux/joystick.h>
-#include <unistd.h>
-
-#include <iostream>
+namespace hid
+{
 
 class Controller
 {
 public:
-	Controller()
+	enum class Thumb : uint8_t;
+	enum class Trigger : uint8_t;
+	enum class Button : uint8_t;
+
+	virtual void update() = 0;
+
+	/**
+	 * @brief 获取设备名称. 人类可读的, UTF-8 编码.
+	 */
+	virtual std::string name() const = 0;
+
+	/**
+	 * @brief 检查手柄是否处于连接状态.
+	 *
+	 * @return 是否已连接.
+	 */
+	virtual bool connected() const = 0;
+
+	/**
+	 * @brief 设置震动反馈.
+	 *
+	 * @param strong_speed 强马达转速.
+	 * @param weak_speed   弱马达转速.
+	 */
+	virtual void vibration(float strong_speed, float weak_speed) = 0;
+
+	/**
+	 * @brief 获取摇杆数据.
+	 *
+	 * @param thumb 摇杆.
+	 *
+	 * @return 范围: [-1, 1]
+	 */
+	Vector2f get(Thumb thumb) const noexcept
 	{
-		if((file_ = open("/dev/input/js1", O_RDONLY | O_NONBLOCK)) < 0)
+		Vector2f value = get_raw(thumb);
+
+		float deadzone;
+		if(thumb == Thumb::left)
+			deadzone = leftThumbDeadzone_;
+		else
+			deadzone = rightThumbDeadzone_;
+
+		const float factor = 1.f / (1.f - deadzone);
+
+		if(value.normSq() > deadzone * deadzone)
 		{
-			return;
+			const float magnitude = std::min(value.norm(), 1.f);
+			return value.normalized() * ((magnitude - deadzone) * factor);
 		}
-
-		char          name[128];
-		unsigned char axis_count   = 0;
-		unsigned char button_count = 0;
-		// ioctl(fd_, JSIOCGVERSION, &version);
-		ioctl(file_, JSIOCGAXES, &axis_count);
-		ioctl(file_, JSIOCGBUTTONS, &button_count);
-		ioctl(file_, JSIOCGNAME(128), name);
-
-		std::cout << "name        : " << name << '\n';
-		std::cout << "axis count  : " << (int)axis_count << '\n';
-		std::cout << "button count: " << (int)button_count << '\n';
+		else
+			return Vector2f::zero;
 	}
 
-	virtual ~Controller() { close(file_); }
-
-	void update()
+	/**
+	 * @brief 获取原始摇杆数据.
+	 *
+	 * @param thumb 摇杆.
+	 *
+	 * @return 范围: [-1, 1]
+	 *
+	 * @warning 不建议直接使用.
+	 */
+	Vector2f get_raw(Thumb thumb) const noexcept
 	{
-		js_event event;
-		read(file_, &event, sizeof(event));
-		switch(event.type)
-		{
-		case JS_EVENT_BUTTON:
-			std::cout << "button event\n";
-			break;
-
-		case JS_EVENT_AXIS:
-			std::cout << "axis event\n";
-			break;
-
-		case JS_EVENT_INIT:
-			std::cout << "init event\n";
-			break;
-		}
+		return {axis_[static_cast<uint8_t>(thumb)], axis_[static_cast<uint8_t>(thumb) + 1]};
 	}
 
-	void vibration(uint16_t strong, uint16_t weak)
+	/**
+	 * @brief 获取线性按键力度.
+	 *
+	 * @param trigger 线性按键.
+	 *
+	 * @return 0 表示没有按下, 范围: [0, 1]
+	 */
+	float get(Trigger trigger) const noexcept
 	{
-		ff_effect effect;
-		effect.type                      = FF_RUMBLE;
-		effect.u.rumble.strong_magnitude = 65535;
-		effect.u.rumble.weak_magnitude   = 65535;
-		effect.replay.length             = 1000;
-		effect.replay.delay              = 0;
-		effect.id                        = -1;
+		const float value  = get_raw(trigger);
+		const float factor = 1.f / (1.f - triggerThreshold_);
+
+		if(value > triggerThreshold_)
+			return (value - triggerThreshold_) * factor;
+		else
+			return 0;
 	}
+
+	/**
+	 * @brief 获取原始线性按键数据.
+	 *
+	 * @param trigger 线性按键.
+	 *
+	 * @return 0 表示没有按下, 范围: [0, 1]
+	 *
+	 * @warning 不建议直接使用.
+	 */
+	float get_raw(Trigger trigger) const noexcept { return axis_[static_cast<uint8_t>(trigger)]; }
+
+	/**
+	 * @brief 获取按键状态.
+	 *
+	 * @param  button 按键.
+	 *
+	 * @return 按键是否按下.
+	 */
+	bool get(Button button) const noexcept { return buttons_[static_cast<uint8_t>(button)]; }
 
 private:
-	int file_;
+	std::bitset<15> buttons_;
+	float           axes_[6] = {};
+
+	float leftThumbDeadzone_  = 0.1f;
+	float rightThumbDeadzone_ = 0.1f;
+	float triggerThreshold_   = 0.01f;
 };
+
+/**
+ * @brief 手柄摇杆.
+ */
+enum class Gamepad::Thumb : uint8_t
+{
+	left  = 0,
+	right = 2
+};
+
+/**
+ * @brief 手柄线性按键.
+ */
+enum class Gamepad::Trigger : uint8_t
+{
+	left  = 4, ///< 左侧线性按键, 即 LT.
+	right = 5  ///< 右侧线性按键, 即 RT.
+};
+
+/**
+ * @brief 手柄按键.
+ */
+enum class Gamepad::Button : uint8_t
+{
+	A = 0,
+	B = 1,
+	X = 2,
+	Y = 3,
+
+	LeftBumper  = 4,
+	RightBumper = 5,
+
+	Back  = 6,
+	Start = 7,
+	Guide = 8,
+
+	LeftThumb  = 9,
+	RightThumb = 10,
+
+	DPAD_Up    = 11,
+	DPAD_Right = 12,
+	DPAD_Down  = 13,
+	DPAD_Left  = 14,
+
+	Cross    = A,
+	Circle   = B,
+	Square   = X,
+	Triangle = Y
+};
+
+} // namespace hid
