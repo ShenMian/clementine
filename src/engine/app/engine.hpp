@@ -37,7 +37,7 @@ public:
 
 		bool request_exit = false;
 
-		core::Timer timer;
+		core::Timer<std::chrono::steady_clock> timer;
 		while(!request_exit)
 		{
 			const auto dt = timer.get_time();
@@ -83,7 +83,7 @@ public:
 
 		for(size_t i = 0; i < systems_.size(); i++)
 		{
-			core::Timer timer;
+			core::Timer<> timer;
 			systems_[i]->init(*this);
 			CLEM_LOG_INFO("engine", fmt::format("system '{}' init completed ({} ms)'", systems_[i]->id(),
 			                                    timer.get_time().get_milliseconds()));

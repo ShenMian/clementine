@@ -11,10 +11,12 @@ if(NOT DEFINED CMAKE_EXPORT_COMPILE_COMMANDS)
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 endif()
 
+# SET(CMAKE_CXX_COMPILER_WORKS 1)
+
 project(clementine
     VERSION      0.0.0
     DESCRIPTION  "A simple game engine."
-    HOMEPAGE_URL "https://github.com/ShenMian/Clementine"
+    HOMEPAGE_URL "https://github.com/ShenMian/clementine"
     LANGUAGES    CXX C)
 
 option(USE_CONAN "Use conan" ON)

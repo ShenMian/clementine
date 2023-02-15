@@ -11,11 +11,14 @@
 namespace hid
 {
 
+/**
+ * @brief 控制器.
+ */
 class Controller
 {
 public:
 	/**
-	 * @brief 手柄摇杆.
+	 * @brief 摇杆.
 	 */
 	enum class Thumb : uint8_t
 	{
@@ -24,7 +27,7 @@ public:
 	};
 
 	/**
-	 * @brief 手柄线性按键.
+	 * @brief 线性按键.
 	 */
 	enum class Trigger : uint8_t
 	{
@@ -33,7 +36,7 @@ public:
 	};
 
 	/**
-	 * @brief 手柄按键.
+	 * @brief 按键.
 	 */
 	enum class Button : uint8_t
 	{

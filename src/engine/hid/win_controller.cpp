@@ -4,6 +4,7 @@
 #include "win_controller.hpp"
 #include "controller.hpp"
 #include "core/platform.hpp"
+#include "core/check.hpp"
 #include <optional>
 #include <stdexcept>
 
@@ -23,13 +24,19 @@ std::optional<XINPUT_CAPABILITIES> GetCapabilities(DWORD index)
 	return capabilities;
 }
 
-void WinController::update()
+std::optional<XINPUT_STATE> GetState(int index)
 {
 	XINPUT_STATE state;
 	ZeroMemory(&state, sizeof(XINPUT_STATE));
 
-	if(XInputGetState(i, &state) != ERROR_SUCCESS)
-		return;
+	if(XInputGetState(index, &state) != ERROR_SUCCESS)
+		return std::nullopt;
+	return state;
+}
+
+void WinController::update()
+{
+	const auto state = GetState(index_).value();
 
 	buttons_ = state.Gamepad.wButtons;
 
@@ -44,13 +51,13 @@ void WinController::update()
 
 std::string WinController::name() const
 {
-	return std::string(); // TODO
+	return std::string(); // TODO: https://gist.github.com/DJm00n/0f0563702f6cf01e8812ebc760a78cf1
 }
 
 bool WinController::connected() const
 {
 	XINPUT_STATE state;
-	return XInputGetState(i, &state) == ERROR_SUCCESS;
+	return XInputGetState(index_, &state) == ERROR_SUCCESS;
 }
 
 void WinController::vibration(float strong_speed, float weak_speed)
@@ -58,13 +65,13 @@ void WinController::vibration(float strong_speed, float weak_speed)
 	core::check(0.f <= strong_speed && strong_speed <= 1.f);
 	core::check(0.f <= weak_speed && weak_speed <= 1.f);
 
-	if(!is_connected())
+	if(!connected())
 		return;
 
 	XINPUT_VIBRATION state = {};
 	state.wLeftMotorSpeed  = strong_speed * std::numeric_limits<WORD>::max();
 	state.wRightMotorSpeed = weak_speed * std::numeric_limits<WORD>::max();
-	if(XInputSetState(handle, &state) != ERROR_SUCCESS && is_connected())
+	if(XInputSetState(index_, &state) != ERROR_SUCCESS && connected())
 		throw std::runtime_error("failed to set vibration");
 }
 

@@ -16,8 +16,9 @@ set "build_path=target/%build_type%"
 
 echo === Installing dependencies...
 REM vcpkg
-if exist "./deps/vcpkg/vcpkg" call ./deps/vcpkg/bootstrap-vcpkg.bat
-./deps/vcpkg/vcpkg install
+REM if exist "./deps/vcpkg/vcpkg" call deps/vcpkg/bootstrap-vcpkg.bat
+REM deps/vcpkg/vcpkg install
+vcpkg install
 
 REM conan
 set "CONAN_SYSREQUIRES_MODE=enabled"

@@ -12,10 +12,11 @@ namespace core
 /**
  * @brief 计时器.
  */
+template <typename Clock = std::chrono::high_resolution_clock>
 class Timer
 {
 public:
-	using clock = std::chrono::high_resolution_clock;
+	using clock = Clock;
 
 	/**
 	 * @brief 构造函数.
