@@ -39,7 +39,7 @@ public:
 	}
 
 private:
-	clock::time_point start_;
+	typename clock::time_point start_;
 };
 
 } // namespace core

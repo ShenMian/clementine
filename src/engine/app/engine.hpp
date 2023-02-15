@@ -148,8 +148,8 @@ private:
 
 	float max_frame_rate_ = 144.f;
 
-	core::Time  avg_fps_update_interval_ = core::Time::seconds(1);
-	float       avg_fps_                 = max_frame_rate_;
-	size_t      frames_counter           = 0;
-	core::Timer frame_rate_counter_timer;
+	core::Time                             avg_fps_update_interval_ = core::Time::seconds(1);
+	float                                  avg_fps_                 = max_frame_rate_;
+	size_t                                 frames_counter           = 0;
+	core::Timer<std::chrono::steady_clock> frame_rate_counter_timer;
 };
