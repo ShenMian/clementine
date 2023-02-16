@@ -25,3 +25,9 @@
 [submodule "deps/vcpkg"]
 	path = deps/vcpkg
 	url = https://github.com/microsoft/vcpkg
+[submodule "deps/nanobench"]
+	path = deps/nanobench
+	url = https://github.com/martinus/nanobench.git
+[submodule "deps/doctest"]
+	path = deps/doctest
+	url = https://github.com/doctest/doctest
