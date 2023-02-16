@@ -19,8 +19,9 @@ project(clementine
     HOMEPAGE_URL "https://github.com/ShenMian/clementine"
     LANGUAGES    CXX C)
 
-option(USE_CONAN "Use conan" ON)
-option(USE_VCPKG "Use vcpkg" OFF)
+option(USE_CONAN   "Use conan" ON)
+option(USE_VCPKG   "Use vcpkg" OFF)
+option(BUILD_TESTS "Build tests" ON)
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     add_compile_options (-fdiagnostics-color=always)
@@ -57,3 +58,6 @@ endif()
 
 add_subdirectory(src/engine)
 add_subdirectory(src/editor)
+if(BUILD_TESTS )
+    add_subdirectory(tests)
+endif()
