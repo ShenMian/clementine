@@ -27,7 +27,7 @@ public:
 	 */
 	static void volume(float volume)
 	{
-		core::check(0 <= volume && volume <= 1);
+		debug_check(0 <= volume && volume <= 1);
 		alListenerf(AL_GAIN, volume);
 	}
 

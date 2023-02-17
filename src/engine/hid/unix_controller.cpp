@@ -40,7 +40,7 @@ UnixController::UnixController(int index) : index_(index)
 			break;
 		}
 	}
-	core::check(output_.get() != nullptr && *output_.get() != -1);
+	debug_check(output_.get() != nullptr && *output_.get() != -1);
 }
 
 void UnixController::update()
@@ -75,8 +75,8 @@ bool UnixController::connected() const
 
 void UnixController::vibration(float strong_speed, float weak_speed)
 {
-	core::check(0.f <= strong_speed && strong_speed <= 1.f);
-	core::check(0.f <= weak_speed && weak_speed <= 1.f);
+	debug_check(0.f <= strong_speed && strong_speed <= 1.f);
+	debug_check(0.f <= weak_speed && weak_speed <= 1.f);
 
 	unsigned long features[BITS_TO_LONGS(FF_CNT)];
 	if(ioctl(*output_.get(), EVIOCGBIT(EV_FF, sizeof(features)), features) == -1)

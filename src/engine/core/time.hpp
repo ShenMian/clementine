@@ -13,14 +13,14 @@ namespace core
 class Time
 {
 public:
-	constexpr Time() {};
+	constexpr Time(){};
 
 	/**
 	 * @brief 以秒为单位创建时间.
 	 */
 	constexpr static Time seconds(float sec)
 	{
-		check(sec >= 0.f, "time cannot be negative");
+		debug_check(sec >= 0.f, "time cannot be negative");
 		return Time(sec * 1000000);
 	}
 
@@ -54,7 +54,7 @@ public:
 
 	constexpr Time operator-=(const Time& rhs) noexcept
 	{
-		check(us_ >= rhs.us_, "time cannot be negative");
+		debug_check(us_ >= rhs.us_, "time cannot be negative");
 		return us_ -= rhs.us_;
 	}
 

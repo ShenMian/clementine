@@ -115,7 +115,7 @@ public:
 	 */
 	void load(const void* data, size_t size, uint32_t sample_rate, uint16_t channels, uint16_t bits_per_sample)
 	{
-		core::check(sample_rate_ > 0 && channels_ > 0);
+		debug_check(sample_rate_ > 0 && channels_ > 0);
 
 		sample_count_    = size / (bits_per_sample / 8);
 		sample_rate_     = sample_rate;

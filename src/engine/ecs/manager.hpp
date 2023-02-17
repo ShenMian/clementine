@@ -59,7 +59,7 @@ public:
 		archetypes_[entity.id()] += Archetype::create<T>();
 		add_to_group(archetypes_[entity.id()], entity);
 
-		return (*get_array<T>())[entity.id()];
+		return get_array<T>()->insert(entity.id());
 	}
 
 	/**
@@ -96,7 +96,7 @@ public:
 
 	void add_group(const Archetype& archetype)
 	{
-		core::check(!groups_.contains(archetype));
+		debug_check(!groups_.contains(archetype));
 		groups_.insert({archetype, {}});
 		auto& entities = groups_[archetype];
 		for(auto& entity : entities_)
@@ -114,7 +114,7 @@ public:
 
 	void remove_group(const Archetype& archetype)
 	{
-		core::check(groups_.contains(archetype));
+		debug_check(groups_.contains(archetype));
 		groups_.erase(archetype);
 	}
 
@@ -126,7 +126,7 @@ public:
 
 	std::vector<Entity>& get_group(const Archetype& archetype)
 	{
-		core::check(groups_.contains(archetype));
+		debug_check(groups_.contains(archetype));
 		return groups_[archetype];
 	}
 
@@ -140,7 +140,7 @@ public:
 	// View<Ts...> get_group()
 	// {
 	// 	const auto archetype = Archetype::create<Ts...>();
-	// 	core::check(groups_.contains(archetype));
+	// 	debug_check(groups_.contains(archetype));
 	// 	return {groups_[archetype], *this};
 	// }
 

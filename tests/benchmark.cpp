@@ -8,10 +8,8 @@
 #include <doctest/doctest.h>
 #include <nanobench.h>
 
+#include <cassert>
 #include <iostream>
-
-#include <cmath>
-#include <ranges>
 
 using namespace ankerl;
 
@@ -35,12 +33,14 @@ TEST_CASE("PackedArray add component" * doctest::skip(true))
 {
 	nanobench::Bench bench;
 	// TODO: std::views::iota(4) | std::views::transform([](auto i) { return std::pow(2, i); }) | std::views::take(12);
-	for(const auto size : {16, 64, 256, 1 * 1000, 4 * 1000, 16 * 1000, 65 * 1000, 262 * 1000, 1000 * 1000})
+	for(const auto size :
+	    {16, 64, 256, 1 * 1000, 4 * 1000, 16 * 1000, 65 * 1000, 262 * 1000, 1000 * 1000, 2 * 1000 * 1000})
 	{
-		ecs::PackedArray<AComponent> array;
 		bench.complexityN(size).run("create " + std::to_string(size) + " elements in the packed array", [&] {
+			ecs::PackedArray<AComponent> array;
 			for(size_t i = 0; i < size; i++)
-				array[i].value = i;
+				// nanobench::doNotOptimizeAway(array[i]);
+				array.insert(i);
 		});
 	}
 	// std::cout << bench.complexityBigO() << std::endl;
@@ -49,7 +49,8 @@ TEST_CASE("PackedArray add component" * doctest::skip(true))
 TEST_CASE("PackedArray get component" * doctest::skip(true))
 {
 	nanobench::Bench bench;
-	for(const auto size : {16, 64, 256, 1 * 1000, 4 * 1000, 16 * 1000, 65 * 1000, 262 * 1000, 1000 * 1000})
+	for(const auto size :
+	    {16, 64, 256, 1 * 1000, 4 * 1000, 16 * 1000, 65 * 1000, 262 * 1000, 1000 * 1000, 2 * 1000 * 1000})
 	{
 		ecs::PackedArray<AComponent> array;
 		for(size_t i = 0; i < size; i++)
@@ -65,7 +66,8 @@ TEST_CASE("PackedArray get component" * doctest::skip(true))
 TEST_CASE("PackedArray remove component" * doctest::skip(true))
 {
 	nanobench::Bench bench;
-	for(const auto size : {16, 64, 256, 1 * 1000, 4 * 1000, 16 * 1000, 65 * 1000, 262 * 1000, 1000 * 1000})
+	for(const auto size :
+	    {16, 64, 256, 1 * 1000, 4 * 1000, 16 * 1000, 65 * 1000, 262 * 1000, 1000 * 1000, 2 * 1000 * 1000})
 	{
 		ecs::PackedArray<AComponent> array;
 		for(size_t i = 0; i < size; i++)
@@ -83,7 +85,8 @@ TEST_CASE("PackedArray remove component" * doctest::skip(true))
 TEST_CASE("create entities" * doctest::skip(true))
 {
 	nanobench::Bench bench;
-	for(const auto size : {16, 64, 256, 1 * 1000, 4 * 1000, 16 * 1000, 65 * 1000, 262 * 1000, 1000 * 1000})
+	for(const auto size :
+	    {16, 64, 256, 1 * 1000, 4 * 1000, 16 * 1000, 65 * 1000, 262 * 1000, 1000 * 1000, 2 * 1000 * 1000})
 	{
 		bench.complexityN(size).run("create " + std::to_string(size) + " entities with 2 components", [&] {
 			ecs::Manager manager;
@@ -101,7 +104,8 @@ TEST_CASE("create entities" * doctest::skip(true))
 TEST_CASE("destroy entities" * doctest::skip(true))
 {
 	nanobench::Bench bench;
-	for(const auto size : {16, 64, 256, 1 * 1000, 4 * 1000, 16 * 1000, 65 * 1000, 262 * 1000, 1000 * 1000})
+	for(const auto size :
+	    {16, 64, 256, 1 * 1000, 4 * 1000, 16 * 1000, 65 * 1000, 262 * 1000, 1000 * 1000, 2 * 1000 * 1000})
 	{
 		ecs::Manager manager;
 		for(size_t i = 0; i < size; i++)
@@ -121,7 +125,8 @@ TEST_CASE("destroy entities" * doctest::skip(true))
 TEST_CASE("destroy entities" * doctest::skip(true))
 {
 	nanobench::Bench bench;
-	for(const auto size : {16, 64, 256, 1 * 1000, 4 * 1000, 16 * 1000, 65 * 1000, 262 * 1000, 1000 * 1000})
+	for(const auto size :
+	    {16, 64, 256, 1 * 1000, 4 * 1000, 16 * 1000, 65 * 1000, 262 * 1000, 1000 * 1000, 2 * 1000 * 1000})
 	{
 		ecs::Manager manager;
 		for(size_t i = 0; i < size; i++)

@@ -12,7 +12,7 @@
 namespace core
 {
 
-void breakpoint()
+inline void breakpoint()
 {
 #if _MSC_VER
 	__debugbreak();
@@ -21,12 +21,22 @@ void breakpoint()
 #endif
 }
 
+[[noreturn]] inline void unreachable()
+{
+#if _MSC_VER
+	__assume(false);
+#else
+	__builtin_unreachable();
+#endif
+}
+
 /**
  * @brief 断言.
  *
  * @param cond 条件.
  */
-constexpr void check(bool cond)
+template <typename T>
+constexpr void check(T&& cond)
 {
 	if(cond)
 		return;
@@ -41,7 +51,8 @@ constexpr void check(bool cond)
  * @param cond 条件.
  * @param msg  描述.
  */
-constexpr void check(bool cond, std::string_view msg)
+template <typename T>
+constexpr void check(T&& cond, std::string_view msg)
 {
 	if(cond)
 		return;
@@ -87,5 +98,17 @@ inline void check(bool cond, std::string_view msg,
     // terminate(); // release
 }
 */
+
+#define ENABLE_CHECK !NDEBUG
+
+#if ENABLE_CHECK
+
+	#define debug_check(...) ::core::check(__VA_ARGS__)
+
+#else
+
+	#define debug_check(...) (static_cast<void>(0))
+
+#endif
 
 } // namespace core

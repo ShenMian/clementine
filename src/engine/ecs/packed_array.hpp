@@ -32,9 +32,18 @@ public:
 	              std::numeric_limits<typename std::vector<T>::size_type>::max());
 
 	/**
-	 * @brief 获取元素.
+	 * @brief 创建元素.
+	 */
+	T& insert(size_type index)
+	{
+		debug_check(!index_map_.contains(index));
+		return (*this)[index];
+	}
+
+	/**
+	 * @brief 获取已有元素或创建并返回元素.
 	 *
-	 * @param 要获取元素的下标.
+	 * @param 元素的下标.
 	 */
 	T& operator[](size_type index)
 	{
@@ -52,7 +61,7 @@ public:
 	 */
 	const T& operator[](size_type index) const
 	{
-		core::check(index_map_.contains(index));
+		debug_check(index_map_.contains(index));
 		return data_[index_map_.at(index)];
 	}
 
@@ -63,7 +72,7 @@ public:
 	 */
 	void remove(size_type index)
 	{
-		core::check(index_map_.contains(index));
+		debug_check(index_map_.contains(index));
 		const auto i = index_map_[index];
 		if(i < size() - 1)
 			data_[i] = data_[size() - 1];
