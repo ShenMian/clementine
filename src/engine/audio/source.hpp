@@ -102,7 +102,7 @@ public:
 			return Status::Playing;
 
 		default:
-			debug_check(false);
+			DEBUG_CHECK(false);
 			return Status::Stopped;
 		}
 	}
@@ -114,7 +114,7 @@ public:
 	 */
 	void volume(float volume)
 	{
-		debug_check(0 <= volume && volume <= 1);
+		DEBUG_CHECK(0 <= volume && volume <= 1);
 		alSourcef(handle, AL_GAIN, volume);
 	}
 
@@ -135,7 +135,7 @@ public:
 	 */
 	void pitch(float pitch)
 	{
-		debug_check(0.5f <= pitch && pitch <= 2.f);
+		DEBUG_CHECK(0.5f <= pitch && pitch <= 2.f);
 		alSourcef(handle, AL_PITCH, pitch);
 	}
 

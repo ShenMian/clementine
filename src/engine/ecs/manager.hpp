@@ -96,7 +96,7 @@ public:
 
 	void add_group(const Archetype& archetype)
 	{
-		debug_check(!groups_.contains(archetype));
+		DEBUG_CHECK(!groups_.contains(archetype));
 		groups_.insert({archetype, {}});
 		auto& entities = groups_[archetype];
 		for(auto& entity : entities_)
@@ -114,7 +114,7 @@ public:
 
 	void remove_group(const Archetype& archetype)
 	{
-		debug_check(groups_.contains(archetype));
+		DEBUG_CHECK(groups_.contains(archetype));
 		groups_.erase(archetype);
 	}
 
@@ -126,7 +126,7 @@ public:
 
 	std::vector<Entity>& get_group(const Archetype& archetype)
 	{
-		debug_check(groups_.contains(archetype));
+		DEBUG_CHECK(groups_.contains(archetype));
 		return groups_[archetype];
 	}
 
@@ -140,7 +140,7 @@ public:
 	// View<Ts...> get_group()
 	// {
 	// 	const auto archetype = Archetype::create<Ts...>();
-	// 	debug_check(groups_.contains(archetype));
+	// 	DEBUG_CHECK(groups_.contains(archetype));
 	// 	return {groups_[archetype], *this};
 	// }
 

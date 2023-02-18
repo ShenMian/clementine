@@ -103,11 +103,11 @@ inline void check(bool cond, std::string_view msg,
 
 #if ENABLE_CHECK
 
-	#define debug_check(...) ::core::check(__VA_ARGS__)
+	#define DEBUG_CHECK(...) ::core::check(__VA_ARGS__)
 
 #else
 
-	#define debug_check(...) (static_cast<void>(0))
+	#define DEBUG_CHECK(...) (static_cast<void>(0))
 
 #endif
 

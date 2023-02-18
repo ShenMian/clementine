@@ -20,7 +20,7 @@ public:
 	 */
 	constexpr static Time seconds(float sec)
 	{
-		debug_check(sec >= 0.f, "time cannot be negative");
+		DEBUG_CHECK(sec >= 0.f, "time cannot be negative");
 		return Time(sec * 1000000);
 	}
 
@@ -54,7 +54,7 @@ public:
 
 	constexpr Time operator-=(const Time& rhs) noexcept
 	{
-		debug_check(us_ >= rhs.us_, "time cannot be negative");
+		DEBUG_CHECK(us_ >= rhs.us_, "time cannot be negative");
 		return us_ -= rhs.us_;
 	}
 

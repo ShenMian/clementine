@@ -62,8 +62,8 @@ bool WinController::connected() const
 
 void WinController::vibration(float strong_speed, float weak_speed)
 {
-	debug_check(0.f <= strong_speed && strong_speed <= 1.f);
-	debug_check(0.f <= weak_speed && weak_speed <= 1.f);
+	DEBUG_CHECK(0.f <= strong_speed && strong_speed <= 1.f);
+	DEBUG_CHECK(0.f <= weak_speed && weak_speed <= 1.f);
 
 	if(!connected())
 		return;
