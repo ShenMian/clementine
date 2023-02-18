@@ -13,8 +13,6 @@
 
 using namespace ankerl;
 
-TEST_SUITE_BEGIN("benchmark");
-
 struct AComponent : public ecs::Component
 {
 	DECLARE_TYPE
@@ -28,6 +26,8 @@ struct BComponent : public ecs::Component
 
 	uint32_t value;
 };
+
+TEST_SUITE_BEGIN("benchmark");
 
 TEST_CASE("PackedArray add component" * doctest::skip(true))
 {
@@ -91,11 +91,7 @@ TEST_CASE("create entities" * doctest::skip(true))
 		bench.complexityN(size).run("create " + std::to_string(size) + " entities with 2 components", [&] {
 			ecs::Manager manager;
 			for(size_t i = 0; i < size; i++)
-			{
-				auto entity = manager.create();
-				manager.add_component<AComponent>(entity);
-				manager.add_component<BComponent>(entity);
-			}
+				manager.add_components<AComponent, BComponent>(manager.create());
 		});
 	}
 	// std::cout << bench.complexityBigO() << std::endl;
@@ -109,11 +105,7 @@ TEST_CASE("destroy entities" * doctest::skip(true))
 	{
 		ecs::Manager manager;
 		for(size_t i = 0; i < size; i++)
-		{
-			auto entity = manager.create();
-			manager.add_component<AComponent>(entity);
-			manager.add_component<BComponent>(entity);
-		}
+			manager.add_components<AComponent, BComponent>(manager.create());
 		bench.complexityN(size).run("destroy " + std::to_string(size) + " entities with 2 components", [&] {
 			for(size_t i = 0; i < size; i++)
 				manager.destroy(ecs::Entity(i, 1));
@@ -130,11 +122,7 @@ TEST_CASE("destroy entities" * doctest::skip(true))
 	{
 		ecs::Manager manager;
 		for(size_t i = 0; i < size; i++)
-		{
-			auto entity = manager.create();
-			manager.add_component<AComponent>(entity);
-			manager.add_component<BComponent>(entity);
-		}
+			manager.add_components<AComponent, BComponent>(manager.create());
 		manager.add_group<AComponent, BComponent>();
 		bench.complexityN(size).run("unpack two components in " + std::to_string(size) + " entities", [&] {
 			auto view = ecs::View<AComponent, BComponent>(manager.get_group<AComponent, BComponent>(), manager);

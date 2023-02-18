@@ -52,14 +52,20 @@ public:
 	template <std::derived_from<Component> T>
 	T& add_component(const Entity& entity)
 	{
-		if(!arrays_.contains(Typeid<T>()))
-			arrays_.insert({Typeid<T>(), std::make_shared<PackedArray<T>>()});
+		if(!component_arrays_.contains(Typeid<T>()))
+			component_arrays_.insert({Typeid<T>(), std::make_shared<PackedArray<T>>()});
 
 		remove_from_group(archetypes_[entity.id()], entity);
 		archetypes_[entity.id()] += Archetype::create<T>();
 		add_to_group(archetypes_[entity.id()], entity);
 
-		return get_array<T>()->insert(entity.id());
+		return get_component_array<T>()->insert(entity.id());
+	}
+
+	template <std::derived_from<Component>... Ts>
+	std::tuple<Ts&...> add_components(const Entity& entity)
+	{
+		return {add_component<Ts>(entity)...};
 	}
 
 	/**
@@ -74,7 +80,7 @@ public:
 		archetypes_[entity.id()] -= Archetype::create<T>();
 		add_to_group(archetypes_[entity.id()], entity);
 
-		get_array<T>()->remove(entity.id());
+		get_component_array<T>()->remove(entity.id());
 	}
 
 	/**
@@ -85,7 +91,7 @@ public:
 	template <std::derived_from<Component> T>
 	T& get_component(const Entity& entity)
 	{
-		return (*get_array<T>())[entity.id()];
+		return (*get_component_array<T>())[entity.id()];
 	}
 
 	template <std::derived_from<Component>... Ts>
@@ -157,23 +163,24 @@ private:
 
 	void remove_from_group(const Archetype& archetype, const Entity& entity)
 	{
-		auto it = groups_.find(archetype);
+		const auto it = groups_.find(archetype);
 		if(it != groups_.end())
 			it->second.erase(std::ranges::find(it->second, entity));
 	}
 
 	template <typename T>
-	std::shared_ptr<PackedArray<T>> get_array()
+	std::shared_ptr<PackedArray<T>> get_component_array()
 	{
-		return std::static_pointer_cast<PackedArray<T>>(arrays_.at(Typeid<T>()));
+		return std::static_pointer_cast<PackedArray<T>>(component_arrays_.at(Typeid<T>()));
 	}
 
-	std::vector<Entity>          entities_;
-	std::vector<Entity::id_type> freeIds_;
-	std::vector<Archetype>       archetypes_;
+	std::vector<Entity>                                             entities_;
+	std::vector<Archetype>                                          archetypes_;
+	std::unordered_map<TypeIndex, std::shared_ptr<PackedArrayBase>> component_arrays_;
 
-	std::unordered_map<TypeIndex, std::shared_ptr<PackedArrayBase>> arrays_;
-	std::unordered_map<Archetype, std::vector<Entity>>              groups_;
+	std::unordered_map<Archetype, std::vector<Entity>> groups_;
+
+	std::vector<Entity::id_type> freeIds_;
 };
 
 } // namespace ecs
