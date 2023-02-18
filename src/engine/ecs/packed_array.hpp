@@ -50,7 +50,8 @@ public:
 		if(index_map_.contains(index))
 			return data_[index_map_[index]];
 
-		index_map_.insert({index, index_map_.size()});
+		DEBUG_CHECK(index_map_.size() == data_.size());
+		index_map_.insert({index, size()});
 		return data_.emplace_back();
 	}
 
