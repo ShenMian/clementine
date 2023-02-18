@@ -22,11 +22,11 @@ vcpkg install
 
 REM conan
 set "CONAN_SYSREQUIRES_MODE=enabled"
-conan install . -pr:b=default --build=missing -if %build_path% -of %build_path% -s build_type=%build_type% -s compiler.runtime=%msvc_args% || (
+conan install . -pr:b=default --build=missing -if "%build_path%" -of "%build_path%" -s build_type=%build_type% -s compiler.runtime=%msvc_args% || (
     echo === Failed to install.
     exit /b 1
 )
-conan install ./deps/graphics -pr:b=default --build=missing -if %build_path% -of %build_path% -s build_type=%build_type% -s compiler.runtime=%msvc_args% || (
+conan install ./deps/graphics -pr:b=default --build=missing -if "%build_path%" -of "%build_path%" -s build_type=%build_type% -s compiler.runtime=%msvc_args% || (
     echo === Failed to install.
     exit /b 1
 )
