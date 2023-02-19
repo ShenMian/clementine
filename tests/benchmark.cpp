@@ -114,7 +114,7 @@ TEST_CASE("destroy entities" * doctest::skip(true))
 	// std::cout << bench.complexityBigO() << std::endl;
 }
 
-TEST_CASE("destroy entities" * doctest::skip(true))
+TEST_CASE("unpack components" * doctest::skip(true))
 {
 	nanobench::Bench bench;
 	for(const auto size :
@@ -126,6 +126,28 @@ TEST_CASE("destroy entities" * doctest::skip(true))
 		manager.add_group<AComponent, BComponent>();
 		bench.complexityN(size).run("unpack two components in " + std::to_string(size) + " entities", [&] {
 			auto view = ecs::View<AComponent, BComponent>(manager.get_group<AComponent, BComponent>(), manager);
+			for(auto [e, a, b] : view)
+			{
+				nanobench::doNotOptimizeAway(a);
+				nanobench::doNotOptimizeAway(b);
+			}
+		});
+	}
+	// std::cout << bench.complexityBigO() << std::endl;
+}
+
+TEST_CASE("unpack components (const)" * doctest::skip(true))
+{
+	nanobench::Bench bench;
+	for(const auto size :
+	    {16, 64, 256, 1 * 1000, 4 * 1000, 16 * 1000, 65 * 1000, 262 * 1000, 1000 * 1000, 2 * 1000 * 1000})
+	{
+		ecs::Manager manager;
+		for(size_t i = 0; i < size; i++)
+			manager.add_components<AComponent, BComponent>(manager.create());
+		manager.add_group<AComponent, BComponent>();
+		bench.complexityN(size).run("unpack two components in " + std::to_string(size) + " entities", [&] {
+			const auto view = ecs::View<AComponent, BComponent>(manager.get_group<AComponent, BComponent>(), manager);
 			for(auto [e, a, b] : view)
 			{
 				nanobench::doNotOptimizeAway(a);

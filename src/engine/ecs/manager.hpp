@@ -94,6 +94,12 @@ public:
 		return (*get_component_array<T>())[entity.id()];
 	}
 
+	template <std::derived_from<Component> T>
+	const T& get_component(const Entity& entity) const
+	{
+		return (*get_component_array<T>())[entity.id()];
+	}
+
 	template <std::derived_from<Component>... Ts>
 	std::tuple<Ts&...> get_components(const Entity& entity)
 	{

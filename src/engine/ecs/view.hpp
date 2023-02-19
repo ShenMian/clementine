@@ -18,6 +18,9 @@ public:
 	class Iterator
 	{
 	public:
+		using iterator_category = std::forward_iterator_tag;
+		using value_type        = std::tuple<const Entity&, Ts&...>;
+
 		Iterator(std::vector<Entity>::iterator it, Manager& mgr) : iterator_(it), manager_(mgr) {}
 
 		std::tuple<const Entity&, Ts&...> operator*()
@@ -50,6 +53,9 @@ public:
 
 	Iterator begin() noexcept { return {entities_.begin(), manager_}; };
 	Iterator end() noexcept { return {entities_.end(), manager_}; };
+
+	const Iterator begin() const noexcept { return {entities_.begin(), manager_}; };
+	const Iterator end() const noexcept { return {entities_.end(), manager_}; };
 
 private:
 	std::vector<Entity>& entities_;
