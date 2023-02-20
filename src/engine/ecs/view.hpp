@@ -79,17 +79,23 @@ public:
 		bool operator!=(const ConstIterator& rhs) const noexcept { return iterator_ != rhs.iterator_; };
 
 	private:
-		mutable std::vector<Entity>::iterator iterator_;
-		Manager&                              manager_;
+		std::vector<Entity>::iterator iterator_;
+		Manager&                      manager_;
 	};
+
+	using iterator       = Iterator;
+	using const_iterator = ConstIterator;
 
 	View(std::vector<Entity>& entities, Manager& manager) : entities_(entities), manager_(manager) {}
 
-	Iterator begin() noexcept { return {entities_.begin(), manager_}; };
-	Iterator end() noexcept { return {entities_.end(), manager_}; };
+	iterator begin() noexcept { return {entities_.begin(), manager_}; };
+	iterator end() noexcept { return {entities_.end(), manager_}; };
 
-	ConstIterator begin() const noexcept { return {entities_.begin(), manager_}; };
-	ConstIterator end() const noexcept { return {entities_.end(), manager_}; };
+	iterator begin() const noexcept { return {entities_.begin(), manager_}; };
+	iterator end() const noexcept { return {entities_.end(), manager_}; };
+
+	const_iterator cbegin() const noexcept { return {entities_.begin(), manager_}; };
+	const_iterator cend() const noexcept { return {entities_.end(), manager_}; };
 
 private:
 	std::vector<Entity>& entities_;
