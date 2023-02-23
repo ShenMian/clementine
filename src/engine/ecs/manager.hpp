@@ -28,21 +28,28 @@ public:
 	/**
 	 * @brief 创建实体.
 	 */
-	Entity create();
+	Entity create() { return entities_[allocate_id()]; }
 
 	/**
 	 * @brief 销毁实体.
 	 *
 	 * @param entity 要销毁的实体.
 	 */
-	void destroy(const Entity& entity);
+	void destroy(const Entity& entity)
+	{
+		if(valid(entity))
+			deallocate_id(entity.id());
+	}
 
 	/**
 	 * @brief 判断实体是否有效.
 	 *
 	 * 被销毁的实体会失效.
 	 */
-	bool valid(const Entity& entity) const noexcept;
+	bool valid(const Entity& entity) const noexcept
+	{
+		return entity.id() < entities_.size() && entity == entities_[entity.id()];
+	}
 
 	/**
 	 * @brief 向实体添加组件.
@@ -157,8 +164,25 @@ public:
 	// }
 
 private:
-	Entity::id_type allocate_id();
-	void            deallocate_id(Entity::id_type id);
+	Entity::id_type allocate_id()
+	{
+		if(freeIds_.empty())
+		{
+			const auto id = entities_.size();
+			entities_.emplace_back(static_cast<Entity::id_type>(id), 0);
+			archetypes_.emplace_back();
+			return id;
+		}
+		const auto id = freeIds_.back();
+		freeIds_.pop_back();
+		return id;
+	}
+
+	void deallocate_id(Entity::id_type id)
+	{
+		freeIds_.push_back(id);
+		entities_[id].version_++;
+	}
 
 	void add_to_group(const Archetype& archetype, const Entity& entity)
 	{
@@ -190,5 +214,3 @@ private:
 };
 
 } // namespace ecs
-
-#include "manager.inl"
