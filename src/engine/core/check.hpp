@@ -41,6 +41,7 @@ constexpr void check(T&& cond)
 	if(cond)
 		return;
 
+	std::puts("Assertion failed");
 	breakpoint(); // debug
 	              // terminate(); // release
 }
@@ -57,7 +58,7 @@ constexpr void check(T&& cond, std::string_view msg)
 	if(cond)
 		return;
 
-	std::puts(msg.data());
+	std::printf("Assertion failed: %s\n", msg.data());
 	breakpoint(); // debug
 	              // terminate(); // release
 }
