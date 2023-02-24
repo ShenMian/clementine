@@ -58,7 +58,7 @@ public:
 	template <std::derived_from<System> T>
 	void add_system()
 	{
-		check(!has_system<T>());
+		DEBUG_CHECK(!has_system<T>());
 		systems_.push_back(std::make_shared<T>());
 	}
 
@@ -100,7 +100,7 @@ public:
 			auto& sys = systems_[i];
 			CLEM_LOG_INFO("engine", fmt::format("deinit system '{}'", sys->id()));
 			sys->deinit(*this);
-			check(sys.use_count() == 1);
+			DEBUG_CHECK(sys.use_count() == 1);
 		}
 
 		delete core::Logger::get("engine");
