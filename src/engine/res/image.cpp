@@ -34,11 +34,11 @@ void Image::load(const std::filesystem::path& path)
 
 	Vector2i  size;
 	int       channels;
-	StbiImage pixels(stbi_load(path.string().c_str(), &size.x, &size.y, &channels, 0));
+	StbiImage pixels(stbi_load(path.string().c_str(), &size.x(), &size.y(), &channels, 0));
 	if(pixels == nullptr)
 		throw std::runtime_error(fmt::format("failed load image from file: {}", path));
 
-	load({pixels.get(), size.x * size.y * channels * sizeof(float)}, size, channels);
+	load({pixels.get(), size.x() * size.y() * channels * sizeof(float)}, size, channels);
 }
 
 void Image::load(std::span<uint8_t> data, const Vector2i& size, int channels)

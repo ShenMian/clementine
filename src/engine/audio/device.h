@@ -31,7 +31,7 @@ public:
 	static void deinit();
 
 private:
-	ALCdevice* handle;
+	ALCdevice* handle_;
 
 	// inline static std::vector<Device> outputDevices;
 	// inline static std::vector<Device> inputDevices;

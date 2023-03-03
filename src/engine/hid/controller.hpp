@@ -107,13 +107,13 @@ public:
 
 		const float factor = 1.f / (1.f - deadzone);
 
-		if(value.normSq() > deadzone * deadzone)
+		if(value.norm_sq() > deadzone * deadzone)
 		{
 			const float magnitude = std::min(value.norm(), 1.f);
 			return value.normalized() * ((magnitude - deadzone) * factor);
 		}
 		else
-			return Vector2f::zero;
+			return Vector2f(0.f);
 	}
 
 	/**

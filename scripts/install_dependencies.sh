@@ -43,11 +43,13 @@ fi
 
 # conan
 export CONAN_SYSREQUIRES_MODE=enabled
-conan install . -pr:b=default --build=missing -if "$build_path" -of "$build_path" -s build_type=$build_type -s compiler=${compiler} -s compiler.version=${compiler_version} -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True || {
+# pushd "$build_path" || exit 1
+conan install . -pr:b=default --build=missing --output-folder "$build_path" -s build_type=$build_type -s compiler=${compiler} -s compiler.version=${compiler_version} -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True || {
     echo "=== Failed to install."
     exit 1
 }
-conan install ./deps/graphics -pr:b=default --build=missing -if "$build_path" -of "$build_path" -s build_type=$build_type -s compiler=${compiler} -s compiler.version=${compiler_version} -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True || {
+conan install ./deps/graphics -pr:b=default --build=missing --output-folder "$build_path" -s build_type=$build_type -s compiler=${compiler} -s compiler.version=${compiler_version} -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True || {
     echo "=== Failed to install."
     exit 1
 }
+# popd || exit 1

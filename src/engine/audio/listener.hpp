@@ -46,7 +46,7 @@ public:
 	 *
 	 * @param pos 听者的坐标.
 	 */
-	static void position(const Vector3f& pos) { alListener3f(AL_POSITION, pos.x, pos.y, pos.z); }
+	static void position(const Vector3f& pos) { alListener3f(AL_POSITION, pos.x(), pos.y(), pos.z()); }
 
 	/**
 	 * @brief 获取听者位置.
@@ -63,7 +63,7 @@ public:
 	 *
 	 * @param v 听者速度.
 	 */
-	static void velocity(const Vector3f& v) { alListener3f(AL_VELOCITY, v.x, v.y, v.z); }
+	static void velocity(const Vector3f& v) { alListener3f(AL_VELOCITY, v.x(), v.y(), v.z()); }
 
 	/**
 	 * @brief 获取听者速度.

@@ -161,7 +161,7 @@ public:
 	 *
 	 * @param pos 声源的坐标.
 	 */
-	void position(const Vector3f& pos) { alSource3f(handle, AL_POSITION, pos.x, pos.y, pos.z); }
+	void position(const Vector3f& pos) { alSource3f(handle, AL_POSITION, pos.x(), pos.y(), pos.z()); }
 
 	/**
 	 * @brief 获取声源位置.
@@ -178,7 +178,7 @@ public:
 	 *
 	 * @param v 声源速度.
 	 */
-	void velocity(const Vector3f& v) { alSource3f(handle, AL_VELOCITY, v.x, v.y, v.z); }
+	void velocity(const Vector3f& v) { alSource3f(handle, AL_VELOCITY, v.x(), v.y(), v.z()); }
 
 	/**
 	 * @brief 获取声源速度.

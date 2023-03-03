@@ -9,6 +9,7 @@
 
 #include <Graphics.h>
 #include <execution>
+#include <filesystem>
 #include <fmt/color.h>
 #include <fmt/format.h>
 
@@ -65,10 +66,10 @@ class Editor : public Application
 public:
 	Editor() : Application(Config{.window = {.title = "Editor"}}) {}
 
-	ecs::Manager                     manager;
-	std::vector<ecs::Entity>         entities;
-	core::ThreadPool                 thread_pool;
-	std::shared_ptr<hid::Controller> controller = std::make_shared<hid::UnixController>(1);
+	ecs::Manager             manager;
+	std::vector<ecs::Entity> entities;
+	core::ThreadPool         thread_pool;
+	// std::shared_ptr<hid::Controller> controller = std::make_shared<hid::UnixController>(1);
 
 	void update(core::Time dt) override
 	{
@@ -83,13 +84,13 @@ public:
 		// }
 		// std::cout << "=========================\n";
 
-		while(controller->connected())
-		{
-			controller->update();
-			// controller->vibration(0.05, 0.05);
-			if(controller->get(hid::Controller::Button::A))
-				std::cout << "A is pressed\n";
-		}
+		// while(controller->connected())
+		// {
+		// 	controller->update();
+		// 	// controller->vibration(0.05, 0.05);
+		// 	if(controller->get(hid::Controller::Button::A))
+		// 		std::cout << "A is pressed\n";
+		// }
 	}
 
 	void init() override
@@ -108,6 +109,12 @@ public:
 		manager.add_component<phys::SphereCollider>(entities[2]);
 
 		manager.add_group<Tag, Vel, Acc>();
+
+		std::string model_path;
+		std::cout << "Input 3D model path: ";
+		std::cin >> model_path;
+		auto model = load_model(model_path);
+		std::cout << "Model name: " << model.name;
 	}
 
 	void deinit() override {}

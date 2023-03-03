@@ -27,7 +27,7 @@ public:
 
 	ViewIterator& operator++() noexcept
 	{
-		iterator_++;
+		++iterator_;
 		return *this;
 	}
 

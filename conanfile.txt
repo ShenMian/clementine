@@ -7,4 +7,5 @@ stb/cci.20220909
 # openal/1.22.2 # https://github.com/conan-io/conan-center-index/issues/13772 
 
 [generators]
-cmake
+CMakeDeps
+CMakeToolchain

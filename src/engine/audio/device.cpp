@@ -22,29 +22,30 @@ Device::Device(ALCdevice* handle)
 {
 	if(handle == nullptr)
 		throw std::runtime_error("failed to open audio device");
+	handle_ = handle;
 
-	context = alcCreateContext(handle, nullptr);
+	context = alcCreateContext(handle_, nullptr);
 	if(!alcMakeContextCurrent(context))
 		throw std::runtime_error("failed to make current context");
 }
 
 Device::~Device()
 {
-	alcCloseDevice(handle);
+	alcCloseDevice(handle_);
 }
 
 std::string_view Device::get_name() const
 {
-	if(alcIsExtensionPresent(handle, "ALC_ENUMERATE_ALL_EXT"))
-		return alcGetString(handle, ALC_ALL_DEVICES_SPECIFIER);
+	if(alcIsExtensionPresent(handle_, "ALC_ENUMERATE_ALL_EXT"))
+		return alcGetString(handle_, ALC_ALL_DEVICES_SPECIFIER);
 	else
-		return alcGetString(handle, ALC_DEVICE_SPECIFIER);
+		return alcGetString(handle_, ALC_DEVICE_SPECIFIER);
 }
 
 int Device::get_sample_rate() const
 {
 	int frequency;
-	alcGetIntegerv(handle, ALC_FREQUENCY, 1, &frequency);
+	alcGetIntegerv(handle_, ALC_FREQUENCY, 1, &frequency);
 	return frequency;
 }
 
