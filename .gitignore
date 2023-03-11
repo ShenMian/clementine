@@ -4,6 +4,9 @@
 [Ll]ib
 [Bb]uild
 
+# Conan
+CMakeUserPresets.json
+
 # Visual Studio
 CMakeSettings.json
 
