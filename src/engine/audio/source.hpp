@@ -102,7 +102,7 @@ public:
 			return Status::Playing;
 
 		default:
-			DEBUG_CHECK(false);
+			CLEM_DEBUG_CHECK(false);
 			return Status::Stopped;
 		}
 	}
@@ -114,7 +114,7 @@ public:
 	 */
 	void volume(float volume)
 	{
-		DEBUG_CHECK(0 <= volume && volume <= 1);
+		CLEM_DEBUG_CHECK(0 <= volume && volume <= 1);
 		alSourcef(handle, AL_GAIN, volume);
 	}
 
@@ -135,7 +135,7 @@ public:
 	 */
 	void pitch(float pitch)
 	{
-		DEBUG_CHECK(0.5f <= pitch && pitch <= 2.f);
+		CLEM_DEBUG_CHECK(0.5f <= pitch && pitch <= 2.f);
 		alSourcef(handle, AL_PITCH, pitch);
 	}
 

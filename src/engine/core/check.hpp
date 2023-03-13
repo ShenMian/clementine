@@ -63,6 +63,12 @@ constexpr void check(T&& cond, std::string_view msg)
 	              // terminate(); // release
 }
 
+inline void todo()
+{
+	std::puts("not yet implemented");
+	exit(1);
+}
+
 /**
  * @brief 断言.
  *
@@ -104,12 +110,14 @@ inline void check(bool cond, std::string_view msg,
 
 #if ENABLE_CHECK
 
-	#define DEBUG_CHECK(...) ::core::check(__VA_ARGS__)
+	#define CLEM_DEBUG_CHECK(...) ::core::check(__VA_ARGS__)
 
 #else
 
-	#define DEBUG_CHECK(...) (static_cast<void>(0))
+	#define CLEM_DEBUG_CHECK(...) (static_cast<void>(0))
 
 #endif
+
+#define CLEM_TODO() ::core::todo()
 
 } // namespace core

@@ -21,6 +21,7 @@
 #include <ranges>
 #include <ratio>
 #include <thread>
+#include <vcruntime.h>
 
 class Engine
 {
@@ -58,7 +59,7 @@ public:
 	template <std::derived_from<System> T>
 	void add_system()
 	{
-		DEBUG_CHECK(!has_system<T>());
+		CLEM_DEBUG_CHECK(!has_system<T>());
 		systems_.push_back(std::make_shared<T>());
 	}
 
@@ -95,12 +96,12 @@ public:
 		window_ = nullptr;
 
 		// for(auto& sys : systems_ | std::views::reverse)
-		for(ssize_t i = systems_.size() - 1; i >= 0; i--)
+		for(ptrdiff_t i = systems_.size() - 1; i >= 0; i--)
 		{
 			auto& sys = systems_[i];
 			CLEM_LOG_INFO("engine", fmt::format("deinit system '{}'", sys->id()));
 			sys->deinit(*this);
-			DEBUG_CHECK(sys.use_count() == 1);
+			CLEM_DEBUG_CHECK(sys.use_count() == 1);
 		}
 
 		delete core::Logger::get("engine");

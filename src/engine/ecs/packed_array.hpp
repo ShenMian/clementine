@@ -36,7 +36,7 @@ public:
 	 */
 	T& insert(size_type index)
 	{
-		DEBUG_CHECK(!index_map_.contains(index));
+		CLEM_DEBUG_CHECK(!index_map_.contains(index));
 		return (*this)[index];
 	}
 
@@ -50,7 +50,7 @@ public:
 		if(index_map_.contains(index))
 			return data_[index_map_[index]];
 
-		DEBUG_CHECK(index_map_.size() == data_.size());
+		CLEM_DEBUG_CHECK(index_map_.size() == data_.size());
 		index_map_.insert({index, size()});
 		return data_.emplace_back();
 	}
@@ -62,7 +62,7 @@ public:
 	 */
 	const T& operator[](size_type index) const
 	{
-		DEBUG_CHECK(index_map_.contains(index));
+		CLEM_DEBUG_CHECK(index_map_.contains(index));
 		return data_[index_map_.at(index)];
 	}
 
@@ -73,7 +73,7 @@ public:
 	 */
 	void remove(size_type index)
 	{
-		DEBUG_CHECK(index_map_.contains(index));
+		CLEM_DEBUG_CHECK(index_map_.contains(index));
 		const auto i = index_map_[index];
 		if(i < size() - 1)
 			data_[i] = data_[size() - 1];

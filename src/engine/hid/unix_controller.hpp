@@ -4,18 +4,16 @@
 #pragma once
 
 #include "controller.hpp"
+#include "core/platform.hpp"
 #include <memory>
 
 #if TARGET_OS == OS_UNIX
 	#include <unistd.h>
-#endif
 
 namespace hid
 {
 
-#if TARGET_OS == OS_UNIX
 using File = std::unique_ptr<int, decltype([](auto file) { close(*file); })>;
-#endif
 
 class UnixController : public Controller
 {
@@ -35,3 +33,5 @@ private:
 };
 
 } // namespace hid
+
+#endif

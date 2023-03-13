@@ -47,7 +47,7 @@ public:
 
 	bool operator==(const Archetype& rhs) const noexcept = default;
 
-	constexpr size_t hash_code() const noexcept { return std::hash<std::bitset<max_component_size>>{}(signature_); }
+	size_t hash_code() const noexcept { return std::hash<std::bitset<max_component_size>>{}(signature_); }
 
 	Archetype operator+(const Archetype& rhs) { return Archetype(*this) += rhs; }
 	Archetype operator-(const Archetype& rhs) { return Archetype(*this) -= rhs; }

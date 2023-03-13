@@ -27,7 +27,7 @@ public:
 	 */
 	static void volume(float volume)
 	{
-		DEBUG_CHECK(0 <= volume && volume <= 1);
+		CLEM_DEBUG_CHECK(0 <= volume && volume <= 1);
 		alListenerf(AL_GAIN, volume);
 	}
 

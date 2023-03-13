@@ -11,6 +11,7 @@
 #include <queue>
 #include <stdexcept>
 #include <thread>
+#include <type_traits>
 #include <vector>
 
 namespace core
@@ -23,7 +24,7 @@ public:
 	~ThreadPool();
 
 	template <class F, class... Args>
-	auto submit(F&& f, Args&&... args) -> std::future<typename std::result_of<F(Args...)>::type>;
+	auto submit(F&& f, Args&&... args) -> std::future<std::invoke_result_t<F, Args...>>;
 
 private:
 	// need to keep track of threads so we can join them
@@ -63,9 +64,9 @@ inline ThreadPool::ThreadPool(size_t threads) : stop(false)
 
 // add new work item to the pool
 template <class F, class... Args>
-auto ThreadPool::submit(F&& f, Args&&... args) -> std::future<typename std::result_of<F(Args...)>::type>
+auto ThreadPool::submit(F&& f, Args&&... args) -> std::future<std::invoke_result_t<F, Args...>>
 {
-	using return_type = typename std::result_of<F(Args...)>::type;
+	using return_type = std::invoke_result_t<F, Args...>;
 
 	auto task =
 	    std::make_shared<std::packaged_task<return_type()>>(std::bind(std::forward<F>(f), std::forward<Args>(args)...));
