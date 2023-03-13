@@ -80,14 +80,14 @@ public:
 	 */
 	void flipHorizontally() noexcept
 	{
-		const auto rowSize = size_.x * channels_;
+		const auto rowSize = size_.x() * channels_;
 
-		for(size_t y = 0; y < size_.y; y++)
+		for(size_t y = 0; y < size_.y(); y++)
 		{
 			auto left  = data_.begin() + y * rowSize;
 			auto right = data_.begin() + (y + 1) * rowSize - channels_;
 
-			for(size_t x = 0; x < size_.x / 2; x++)
+			for(size_t x = 0; x < size_.x() / 2; x++)
 			{
 				std::swap_ranges(left, left + channels_, right);
 				left += channels_;
@@ -101,12 +101,12 @@ public:
 	 */
 	void flipVertically() noexcept
 	{
-		const auto rowSize = size_.x * channels_;
+		const auto rowSize = size_.x() * channels_;
 
 		auto top    = data_.begin();
 		auto bottom = data_.end() - rowSize;
 
-		for(size_t y = 0; y < size_.y / 2; y++)
+		for(size_t y = 0; y < size_.y() / 2; y++)
 		{
 			std::swap_ranges(top, top + rowSize, bottom);
 			top += rowSize;

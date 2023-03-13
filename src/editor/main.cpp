@@ -1,6 +1,8 @@
 ﻿// Copyright 2023 ShenMian
 // License(Apache-2.0)
 
+#define FMT_HEADER_ONLY
+
 #include "app/application.hpp"
 #include "app/engine.hpp"
 #include "app/system/default_system.hpp"
@@ -109,12 +111,6 @@ public:
 		manager.add_component<phys::SphereCollider>(entities[2]);
 
 		manager.add_group<Tag, Vel, Acc>();
-
-		std::string model_path;
-		std::cout << "Input 3D model path: ";
-		std::cin >> model_path;
-		auto model = load_model(model_path);
-		std::cout << "Model name: " << model.name;
 	}
 
 	void deinit() override {}
