@@ -63,10 +63,10 @@ constexpr void check(T&& cond, std::string_view msg)
 	              // terminate(); // release
 }
 
-inline void todo()
+inline void todo() noexcept
 {
 	std::puts("not yet implemented");
-	exit(1);
+	std::terminate();
 }
 
 /**

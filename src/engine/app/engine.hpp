@@ -15,13 +15,13 @@
 #include <Graphics.h>
 #include <chrono>
 #include <concepts>
+#include <csignal>
 #include <fmt/format.h>
 #include <memory>
 #include <numeric>
 #include <ranges>
 #include <ratio>
 #include <thread>
-#include <vcruntime.h>
 
 class Engine
 {
@@ -36,10 +36,8 @@ public:
 	{
 		app.init();
 
-		bool request_exit = false;
-
 		core::Timer<std::chrono::steady_clock> timer;
-		while(!request_exit)
+		while(!request_exit_)
 		{
 			const auto dt = timer.get_time();
 			timer.restart();
@@ -89,6 +87,8 @@ public:
 			CLEM_LOG_INFO("engine", fmt::format("system '{}' init completed ({} ms)'", systems_[i]->id(),
 			                                    timer.get_time().get_milliseconds()));
 		}
+
+		std::signal(SIGINT, handle_signal);
 	}
 
 	void deinit()
@@ -119,6 +119,8 @@ public:
 	 */
 	float average_frame_rate() const noexcept { return avg_fps_; }
 
+	void request_exit() { request_exit_ = true; }
+
 private:
 	Engine() = default;
 
@@ -143,10 +145,13 @@ private:
 		}
 	}
 
+	static void handle_signal(int signal) { Engine::get_instance().request_exit(); }
+
 	core::Emitter                        emitter_;
 	std::vector<std::shared_ptr<System>> systems_;
 	std::shared_ptr<Window>              window_;
 
+	bool  request_exit_   = false;
 	float max_frame_rate_ = 144.f;
 
 	core::Time                             avg_fps_update_interval_ = core::Time::seconds(1);
