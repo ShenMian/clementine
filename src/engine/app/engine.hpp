@@ -119,6 +119,9 @@ public:
 	 */
 	float average_frame_rate() const noexcept { return avg_fps_; }
 
+	/**
+	 * @brief 请求退出.
+	 */
 	void request_exit() { request_exit_ = true; }
 
 private:
@@ -145,7 +148,34 @@ private:
 		}
 	}
 
-	static void handle_signal(int signal) { Engine::get_instance().request_exit(); }
+	static void handle_signal(int signal)
+	{
+		auto to_string = [](int signal) -> std::optional<std::string_view> {
+			switch(signal)
+			{
+			case SIGABRT:
+				return "SIGABRT";
+
+			case SIGFPE:
+				return "SIGFPE";
+
+			case SIGILL:
+				return "SIGILL";
+
+			case SIGINT:
+				return "SIGINT";
+
+			case SIGSEGV:
+				return "SIGSEGV";
+
+			case SIGTERM:
+				return "SIGTERM";
+			}
+			return std::nullopt;
+		};
+		CLEM_LOG_WARN("engine", fmt::format("signal received: '{}'", to_string(signal).value()));
+		Engine::get_instance().request_exit();
+	}
 
 	core::Emitter                        emitter_;
 	std::vector<std::shared_ptr<System>> systems_;

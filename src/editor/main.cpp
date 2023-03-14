@@ -75,17 +75,6 @@ public:
 
 	void update(core::Time dt) override
 	{
-		// auto view = ecs::View<Tag, Vel, Acc>(manager.get_group<Tag, Vel, Acc>(), manager);
-		// for(auto [entity, tag, vel, acc] : view)
-		// {
-		// 	vel.value += acc.value * dt.get_seconds();
-		// }
-		// for(auto [entity, tag, vel, acc] : view)
-		// {
-		// 	std::cout << "name: " << tag.name << "\tvel: " << vel.value << "\tacc: " << acc.value << '\n';
-		// }
-		// std::cout << "=========================\n";
-
 		// while(controller->connected())
 		// {
 		// 	controller->update();
@@ -95,23 +84,7 @@ public:
 		// }
 	}
 
-	void init() override
-	{
-		for(int i = 0; i < 3; i++)
-			entities.push_back(manager.create());
-
-		manager.add_component<Tag>(entities[0]).name = "A";
-		manager.add_component<Vel>(entities[0]);
-		manager.add_component<Acc>(entities[0]).value = 1.f;
-		manager.add_component<Tag>(entities[1]).name  = "B";
-		manager.add_component<Vel>(entities[1]).value = 1.f;
-		manager.add_component<Acc>(entities[1]);
-		manager.add_component<Tag>(entities[2]).name = "C";
-		manager.add_component<Vel>(entities[2]);
-		manager.add_component<phys::SphereCollider>(entities[2]);
-
-		manager.add_group<Tag, Vel, Acc>();
-	}
+	void init() override {}
 
 	void deinit() override {}
 
