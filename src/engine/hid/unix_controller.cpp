@@ -45,17 +45,19 @@ UnixController::UnixController(int index) : index_(index)
 void UnixController::update()
 {
 	js_event event;
-	read(*input_.get(), &event, sizeof(event));
-	event.type &= ~JS_EVENT_INIT;
-	switch(event.type)
+	while(read(*input_.get(), &event, sizeof(event)) > 0)
 	{
-	case JS_EVENT_BUTTON:
-		buttons_[event.number] = event.value;
-		break;
+		event.type &= ~JS_EVENT_INIT;
+		switch(event.type)
+		{
+		case JS_EVENT_BUTTON:
+			buttons_[event.number] = event.value;
+			break;
 
-	case JS_EVENT_AXIS:
-		axes_[event.number] = event.value;
-		break;
+		case JS_EVENT_AXIS:
+			axes_[event.number] = event.value;
+			break;
+		}
 	}
 }
 
@@ -77,24 +79,20 @@ void UnixController::vibration(float strong_speed, float weak_speed)
 	CLEM_DEBUG_CHECK(0.f <= strong_speed && strong_speed <= 1.f);
 	CLEM_DEBUG_CHECK(0.f <= weak_speed && weak_speed <= 1.f);
 
+	/*
 	unsigned long features[BITS_TO_LONGS(FF_CNT)];
 	if(ioctl(*output_.get(), EVIOCGBIT(EV_FF, sizeof(features)), features) == -1)
-		throw std::runtime_error("failed to get features");
+	    throw std::runtime_error("failed to get features");
+	*/
 
 	if(playing_)
 	{
-		// FIXME
-		input_event stop_event;
-		stop_event.type  = EV_FF;
-		stop_event.code  = -1;
-		stop_event.value = 1;
-		if(write(*output_.get(), &stop_event, sizeof(stop_event)) == -1)
-			throw std::runtime_error("failed to stop effect");
-
 		if(ioctl(*output_.get(), EVIOCRMFF, 0) == -1) // FIXME: effect.id
-			throw std::runtime_error("failed to remove effect");
+			return;
+		// throw std::runtime_error("failed to remove effect");
 
 		playing_ = false;
+		return;
 	}
 
 	if(strong_speed == 0 && weak_speed == 0)
@@ -102,13 +100,14 @@ void UnixController::vibration(float strong_speed, float weak_speed)
 
 	ff_effect effect;
 	effect.type                      = FF_RUMBLE;
+	effect.id                        = -1;
 	effect.u.rumble.strong_magnitude = strong_speed * std::numeric_limits<uint16_t>::max();
 	effect.u.rumble.weak_magnitude   = weak_speed * std::numeric_limits<uint16_t>::max();
 	effect.replay.length             = -1;
 	effect.replay.delay              = 0;
-	effect.id                        = -1;
 	if(ioctl(*output_.get(), EVIOCSFF, &effect) == -1)
-		throw std::runtime_error("failed to upload effect");
+		return;
+	// throw std::runtime_error("failed to upload effect");
 
 	input_event play_event;
 	play_event.type  = EV_FF;
