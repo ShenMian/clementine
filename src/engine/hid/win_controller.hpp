@@ -11,7 +11,7 @@ namespace hid
 class WinController : public Controller
 {
 public:
-	WinController();
+	WinController(int index = 0);
 
 	void        update() override;
 	std::string name() const override;

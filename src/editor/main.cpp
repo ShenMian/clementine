@@ -27,6 +27,7 @@
 #include "core/thread_pool.hpp"
 
 #include "hid/unix_controller.hpp"
+#include "hid/win_controller.hpp"
 
 #include "phys/physics_system.hpp"
 #include "phys/sphere_collider.hpp"
@@ -71,17 +72,17 @@ public:
 	ecs::Manager             manager;
 	std::vector<ecs::Entity> entities;
 	core::ThreadPool         thread_pool;
-	// std::shared_ptr<hid::Controller> controller = std::make_shared<hid::UnixController>(1);
+	std::shared_ptr<hid::Controller> controller = std::make_shared<hid::WinController>(0);
 
 	void update(core::Time dt) override
 	{
-		// while(controller->connected())
-		// {
-		// 	controller->update();
-		// 	// controller->vibration(0.05, 0.05);
-		// 	if(controller->get(hid::Controller::Button::A))
-		// 		std::cout << "A is pressed\n";
-		// }
+		while(controller->connected())
+		{
+			controller->update();
+			// controller->vibration(0.05, 0.05);
+			if(controller->get(hid::Controller::Button::A))
+				std::cout << "A is pressed\n";
+		}
 	}
 
 	void init() override {}
@@ -89,6 +90,7 @@ public:
 	void deinit() override {}
 
 private:
+	/*
 	Model load_model(const fs::path& path)
 	{
 		ProgressSpinner spinner("Loading model");
@@ -99,6 +101,7 @@ private:
 		fmt::print(fmt::fg(fmt::color::green), "✔ Loading succeeded \n");
 		return model;
 	}
+	*/
 };
 
 int main(int argc, const char* argv[])

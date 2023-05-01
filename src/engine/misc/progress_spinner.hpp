@@ -9,6 +9,7 @@
 #include <thread>
 #include <vector>
 
+/*
 class ProgressSpinner
 {
 public:
@@ -54,3 +55,4 @@ private:
 	float                    progress_ = 0.f;
 	std::jthread             thread_;
 };
+*/

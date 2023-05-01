@@ -22,6 +22,11 @@ public:
 	 */
 	enum class Thumb : uint8_t
 	{
+		leftX = 0,
+		leftY,
+		rightX,
+		rightY,
+
 		left  = 0,
 		right = 2
 	};
